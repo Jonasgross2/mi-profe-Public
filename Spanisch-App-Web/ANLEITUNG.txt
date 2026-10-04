@@ -1,0 +1,34 @@
+Mi profe als App auf iPhone & Mac (kostenlos über GitHub Pages)
+================================================================
+
+EINMALIG EINRICHTEN (ca. 10 Minuten)
+1. Auf github.com einen kostenlosen Account anlegen (oder einloggen).
+2. Oben rechts "+" -> "New repository".
+   Name: mi-profe   ·   "Public" auswählen   ·   "Create repository".
+3. Auf der neuen Seite: "uploading an existing file" anklicken.
+   Alle Dateien aus diesem Ordner hineinziehen (index.html, sw.js,
+   manifest.webmanifest, die drei .png-Dateien). -> "Commit changes".
+4. Im Repository: "Settings" -> links "Pages".
+   Unter "Branch": "main" und "/ (root)" wählen -> "Save".
+5. Nach 1–2 Minuten ist die App online unter:
+   https://DEIN-GITHUB-NAME.github.io/mi-profe/
+
+AUF DEM IPHONE
+- Den Link in Safari öffnen -> Teilen-Symbol -> "Zum Home-Bildschirm".
+- Dann hat die App ein eigenes Icon, startet im Vollbild und läuft auch offline.
+
+AUF DEM MAC
+- Safari: Link öffnen -> Menü "Ablage" -> "Zum Dock hinzufügen".
+  (oder Chrome: Adressleiste -> Installieren-Symbol)
+
+UPDATES
+- Wenn Claude dir eine neue Version schickt: im Repository "Add file" ->
+  "Upload files" -> die neue index.html (und sw.js) hochladen -> Commit.
+  Die App lädt die neue Version beim nächsten Öffnen mit Internet automatisch.
+
+WICHTIG
+- Dein Fortschritt wird pro Gerät gespeichert (iPhone und Mac getrennt).
+  Übertragen: Einstellungen -> "Backup herunterladen" auf dem einen Gerät,
+  Datei per AirDrop schicken, auf dem anderen "Backup laden".
+- Den Gemini-Key musst du auf jedem Gerät einmal eintragen. Er liegt nur
+  lokal auf deinem Gerät, nicht im Repository.
