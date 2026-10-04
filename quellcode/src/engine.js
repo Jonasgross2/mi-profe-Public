@@ -1,0 +1,725 @@
+/* ===== Spanisch-Lehrer · Engine ===== */
+(function(){
+'use strict';
+const KEY='espanol-lehrer-v1';
+const _ap=Element.prototype.append;Element.prototype.append=function(...k){return _ap.apply(this,k.flat().filter(x=>x!=null&&x!==false));};
+const INTERVALS=[0,1,3,7,14,30,60,120];
+const DEFAULT={placement:null,lessons:{},srs:{},streak:{last:null,count:0},stats:{answers:0,correct:0,days:{}},
+  settings:{rate:0.9,voice:'',geminiKey:'',geminiModel:'gemini-flash-latest',theme:'auto',showTr:true,ghToken:'',gistId:''},mistakes:[]};
+let S;
+function load(){try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
+  S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),S);S.settings=Object.assign({},DEFAULT.settings,S.settings||{});if(!S.settings.geminiModel||S.settings.geminiModel==='gemini-2.5-flash')S.settings.geminiModel='gemini-flash-latest';}
+function save(noSync){S.updated=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(!noSync&&window.__sync)window.__sync.schedule();}
+load();
+
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const h=(tag,attrs={},...kids)=>{const e=document.createElement(tag);
+  if((tag==='input'&&(!attrs||!attrs.type||attrs.type==='text'||attrs.type==='password'))||tag==='textarea'){e.setAttribute('autocorrect','off');e.setAttribute('autocapitalize','off');e.setAttribute('autocomplete','off');e.setAttribute('spellcheck','false');}
+  for(const[k,v]of Object.entries(attrs||{})){if(v==null||v===false)continue;
+    if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v===true?'':v);}
+  for(const k of kids.flat()){if(k==null||k===false)continue;e.append(k.nodeType?k:document.createTextNode(String(k)));}return e;};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const addDays=(ds,n)=>{const d=new Date(ds+'T12:00:00');d.setDate(d.getDate()+n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+function toast(t){const e=h('div',{class:'toast'},t);document.body.append(e);setTimeout(()=>e.remove(),2200);}
+
+/* ---------- answer checking ---------- */
+const PRON=/^(yo|tu|tú|el|él|ella|usted|nosotros|nosotras|vosotros|vosotras|ellos|ellas|ustedes)\s+/;
+function norm(s){return String(s).toLowerCase().replace(/[¿?¡!.,;:"“”'«»()…\-–]/g,' ').replace(/\s+/g,' ').trim();}
+function strip(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'');}
+function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;let p=Array.from({length:n+1},(_,i)=>i);
+  for(let i=1;i<=m;i++){const c=[i];for(let j=1;j<=n;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c;}return p[n];}
+/* returns {status:'ok'|'near'|'bad', right, note}. Typo tolerance only for long words with identical ending (grammar endings must be exact) */
+function wordCmp(c,x,typo){ // c,x normalized strings
+  if(c===x)return 0;const A=c.split(' '),B=x.split(' ');if(A.length!==B.length)return 3;let worst=0;
+  for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(a===b)continue;
+    if(strip(a)===strip(b)){worst=Math.max(worst,1);continue;}
+    const sa=strip(a),sb=strip(b);
+    if(typo&&sb.length>=6&&lev(sa,sb)===1&&sa.slice(-2)===sb.slice(-2)){worst=Math.max(worst,2);continue;}
+    return 3;}
+  return worst;}
+function compare(input,answers,opts={}){
+  answers=[].concat(answers).flatMap(a=>String(a).split('|'));const typo=opts.typo!==false;
+  const inp=norm(input);if(!inp)return{status:'bad',right:answers[0],note:'Keine Antwort.'};
+  const cands=[inp];if(opts.pron!==false&&PRON.test(inp))cands.push(inp.replace(PRON,''));
+  let best=null;
+  for(const a of answers){const na=norm(a);const nas=[na];if(opts.pron!==false&&PRON.test(na))nas.push(na.replace(PRON,''));
+    for(const c of cands)for(const x of nas){const r=wordCmp(c,x,typo);
+      if(r===0)return{status:'ok',right:a,note:c!==inp?'Das Subjektpronomen kann man weglassen – meistens sagt man es nur zur Betonung.':''};
+      if(r===1&&(!best||best.rank>1))best={status:'near',right:a,rank:1,note:'Fast! Achte auf Akzente / ñ – sie können die Bedeutung ändern (esta ≠ está).'};
+      if(r===2&&!best)best={status:'near',right:a,rank:2,note:'Kleiner Tippfehler – fast richtig.'};
+    }}
+  return best||{status:'bad',right:answers[0],note:''};
+}
+function diffHtml(your,right){ // word level diff
+  const a=String(your).trim().split(/\s+/),b=String(right).trim().split(/\s+/);
+  const out=[];let i=0,j=0;
+  while(j<b.length){if(i<a.length&&norm(a[i])===norm(b[j])){out.push(esc(b[j]));i++;j++;}
+    else if(i<a.length&&strip(norm(a[i]))===strip(norm(b[j]))){out.push('<del>'+esc(a[i])+'</del> <ins>'+esc(b[j])+'</ins>');i++;j++;}
+    else if(i<a.length&&b.slice(j+1).some(w=>norm(w)===norm(a[i]))){out.push('<ins>'+esc(b[j])+'</ins>');j++;}
+    else if(i<a.length){out.push('<del>'+esc(a[i])+'</del> <ins>'+esc(b[j])+'</ins>');i++;j++;}
+    else{out.push('<ins>'+esc(b[j])+'</ins>');j++;}}
+  while(i<a.length){out.push('<del>'+esc(a[i])+'</del>');i++;}
+  return '<span class="diff es-t">'+out.join(' ')+'</span>';
+}
+
+/* ---------- speech ---------- */
+let voices=[];function loadVoices(){voices=(window.speechSynthesis?speechSynthesis.getVoices():[]).filter(v=>/^es/i.test(v.lang));}
+if(window.speechSynthesis){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
+function pickVoice(){if(!voices.length)loadVoices();
+  return voices.find(v=>v.name===S.settings.voice)||voices.find(v=>/es[-_]ES/i.test(v.lang)&&/m[oó]nica|jorge|paulina|google/i.test(v.name))||voices.find(v=>/es[-_]ES/i.test(v.lang))||voices[0];}
+const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+/* iOS: Ton auch bei Stummschalter – Audio-Session auf "playback" + stilles Audio als Türöffner */
+let audioUnlocked=false;
+function unlockAudio(){if(audioUnlocked)return;audioUnlocked=true;
+  try{if(navigator.audioSession)navigator.audioSession.type='playback';}catch(e){}
+  try{const a=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');a.setAttribute('playsinline','');a.volume=0.01;a.play().catch(()=>{});}catch(e){}}
+document.addEventListener('touchend',unlockAudio,{once:true,passive:true});document.addEventListener('click',unlockAudio,{once:true});
+function mkUtt(t,rate){const u=new SpeechSynthesisUtterance(t);u.lang='es-ES';const v=pickVoice();if(v)u.voice=v;u.rate=rate;return u;}
+function say(text,rate){if(!window.speechSynthesis)return toast('Sprachausgabe wird von diesem Browser nicht unterstützt');
+  unlockAudio();speechSynthesis.cancel();const t=String(text).replace(/___/g,'…');const r=rate||S.settings.rate;
+  if(rate&&rate<=0.7){ // langsam: zusätzlich Wort für Wort mit kleinen Pausen – hörbar langsamer, auch auf dem iPhone
+    const words=t.split(/\s+/).filter(Boolean);
+    if(words.length>1&&IS_IOS){words.forEach(w=>speechSynthesis.speak(mkUtt(w,0.8)));return;}
+    speechSynthesis.speak(mkUtt(t,IS_IOS?Math.max(0.3,r*0.75):r));return;}
+  speechSynthesis.speak(mkUtt(t,r));}
+const spk=(text,big)=>h('button',{class:'speak'+(big?' big':''),title:'Vorlesen',onclick:e=>{e.stopPropagation();say(text,big==='slow'?0.55:undefined)}},'🔊');
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+
+/* ---------- KI: Claude (im claude.ai-Artifact, über dein Abo) oder Gemini ---------- */
+let SAMPLE=null;
+const AIN=()=>useClaude()?'Claude':'Gemini';
+const useClaude=()=>!!SAMPLE&&S.settings.aiProvider!=='gemini';
+if(window.claude&&window.claude.use){window.claude.use('sample').then(sm=>{SAMPLE=sm||null;
+  if(SAMPLE){const r=curRoute().split('/')[0];if(['home','settings','unit','chat'].includes(r))route();}}).catch(()=>{});}
+const CL_ERR={not_granted:'Du hast der Seite die Nutzung von Claude nicht erlaubt (neu laden, um erneut gefragt zu werden).',rate_limited:'Claude-Limit erreicht – bitte später noch einmal probieren.',session_expired:'Bitte bei claude.ai neu anmelden.',sampling_disabled:'Claude ist für dein Konto hier nicht verfügbar.',invalid_json:'Antwort nicht lesbar – bitte noch einmal versuchen.',refused:'Claude hat die Anfrage abgelehnt.'};
+async function claudeAsk(prompt,{json,history}){
+  let input=prompt;
+  if(history){input=[{role:'user',content:prompt}];for(const t of history){const c=(t.parts||[]).map(p=>p.text).join('');if(c)input.push({role:t.role==='model'?'assistant':'user',content:c});}
+    if(input[input.length-1].role!=='user')input.push({role:'user',content:'(weiter)'});}
+  try{const opt={modelTier:'quick'};if(history)opt.cache=false;
+    if(json)return await SAMPLE.json(input,opt);return (await SAMPLE(input,opt)).text;}
+  catch(e){throw new Error(CL_ERR[e&&e.code]||('Claude: '+((e&&e.message)||e&&e.code||'Fehler')));}}
+/* ---------- gemini ---------- */
+async function gemini(prompt,{json=true,history=null}={}){
+  if(useClaude())return claudeAsk(prompt,{json,history});
+  const key=S.settings.geminiKey;if(!key)throw new Error('Kein Gemini-API-Key hinterlegt (Einstellungen).');
+  const tried=[S.settings.geminiModel||'gemini-flash-latest'];for(const f of FALLBACK)if(!tried.includes(f))tried.push(f);
+  let lastErr;
+  for(const model of tried){try{const out=await geminiCall(model,key,prompt,{json,history});if(model!==S.settings.geminiModel){S.settings.geminiModel=model;save();}return out;}
+    catch(e){lastErr=e;if(!e.modelProblem)throw e;}}
+  throw lastErr;}
+const FALLBACK=['gemini-flash-latest','gemini-flash-lite-latest','gemini-3-flash-preview','gemini-3.1-flash-lite'];
+
+/* Netzwerk: zuerst "einfache" Anfrage ohne CORS-Preflight (Key in der URL, text/plain) – funktioniert auch aus lokalen Dateien
+   und in Safari zuverlässiger. Falls das scheitert, klassische Variante mit Header. */
+let GMODE=null;
+async function gfetch(url,key,bodyStr){
+  const variants=[
+    ()=>fetch(url+'?key='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:bodyStr}),
+    ()=>fetch(url,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body:bodyStr})];
+  const order=GMODE===1?[1,0]:[0,1];let last;
+  for(const i of order){const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),45000);
+    try{const r=await variants[i]().finally(()=>clearTimeout(to));
+      if(i===0&&(r.status===400||r.status===415)&&order.length>1&&order[order.length-1]!==0){const t=await r.clone().text();if(/content.?type|payload|json|parse/i.test(t)&&!/api key/i.test(t)){last=new Error(t.slice(0,120));continue;}}
+      GMODE=i;return r;}catch(e){last=e;}}
+  const e=new Error(netHelp(last));e.network=true;throw e;}
+function netHelp(e){
+  return 'Keine Verbindung zu Gemini ('+(e&&e.name==='AbortError'?'Zeitüberschreitung':(e&&e.message)||'Netzwerkfehler')+'). Mögliche Ursachen: kein Internet / VPN, ein Werbe- oder Tracking-Blocker (z. B. uBlock, Ghostery, Safari-Inhaltsblocker) blockiert googleapis.com, oder der Browser blockiert Anfragen aus lokalen Dateien. Tipp: In Chrome öffnen oder die Web-App-Version (GitHub Pages) nutzen.';}
+async function geminiCall(model,key,prompt,{json,history}){
+  const body={contents:history||[{role:'user',parts:[{text:prompt}]}],generationConfig:{temperature:0.4}};
+  if(history&&prompt)body.systemInstruction={parts:[{text:prompt}]};
+  if(json)body.generationConfig.responseMimeType='application/json';
+  const base='https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent';
+  const r=await gfetch(base,key,JSON.stringify(body));
+  const j=await r.json().catch(()=>({}));
+  if(!r.ok){const e=new Error((j.error&&j.error.message)||('HTTP '+r.status));e.modelProblem=r.status===404||/no longer available|not found|not supported|deprecated/i.test(e.message);throw e;}
+  const t=(((j.candidates||[])[0]||{}).content||{}).parts?.map(p=>p.text||'').join('')||'';
+  if(!json)return t;
+  try{return JSON.parse(t.replace(/^```json\s*|```\s*$/g,''));}catch(e){throw new Error('Antwort von Gemini nicht lesbar.');}
+}
+const hasAI=()=>useClaude()||!!S.settings.geminiKey;
+const TEACHER='Du bist ein geduldiger, motivierender Spanischlehrer für Jonas, einen deutschen Muttersprachler (Niveau A1–A2, lernt mit dem Kursbuch "Meta profesional", lebt in Barcelona). Erklärungen IMMER auf Deutsch, kurz und konkret, auf A1/A2-Niveau. Korrigiere nur echte Fehler, keine Stilfragen. Spanisch aus Spanien (vosotros) ist Standard.';
+
+/* ---------- progress ---------- */
+function bumpDay(correct){const d=today();S.stats.answers++;if(correct)S.stats.correct++;S.stats.days[d]=(S.stats.days[d]||0)+1;
+  if(S.streak.last!==d){S.streak.count=(S.streak.last===addDays(d,-1))?S.streak.count+1:1;S.streak.last=d;}save();}
+function streakNow(){const d=today();return(S.streak.last===d||S.streak.last===addDays(d,-1))?S.streak.count:0;}
+function vkey(es){return es;}
+function addVocab(items,unit){let n=0;for(const[es,de]of items){const k=vkey(es);if(!S.srs[k]){S.srs[k]={es,de,unit,box:0,due:today(),t:Date.now()};n++;}}if(n)save();return n;}
+function dueCards(){const d=today();return Object.values(S.srs).filter(c=>c.due<=d);}
+function grade(card,status){const c=S.srs[vkey(card.es)];if(!c)return;c.t=Date.now();
+  if(status==='ok'){c.box=Math.min(c.box+1,INTERVALS.length-1);c.due=addDays(today(),INTERVALS[c.box]);}
+  else if(status==='near'){c.due=addDays(today(),1);}
+  else{c.box=0;c.due=today();}save();}
+function unitById(id){return COURSE.units.find(u=>u.id===id);}
+function lessonPct(u){const L=(u.lessons||[]).filter(l=>!l.ab);if(!L.length)return 0;return L.filter(l=>S.lessons[u.id+'.'+l.id]?.done).length/L.length;}
+function unitStatus(u){const p=S.placement?.results?.[u.id];if(p==null)return null;return p>=0.8?'sicher':p>=0.5?'auffrischen':'neu';}
+function nextLesson(){for(const u of COURSE.units){if(u.status==='soon')continue;
+  const st=unitStatus(u);if(st==='sicher'&&lessonPct(u)<1&&S.placement)continue;
+  for(const l of u.lessons)if(!l.ab&&!S.lessons[u.id+'.'+l.id]?.done)return{u,l};}
+  for(const u of COURSE.units){if(u.status==='soon')continue;for(const l of u.lessons)if(!l.ab&&!S.lessons[u.id+'.'+l.id]?.done)return{u,l};}
+  return null;}
+function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.ref!==ref);S.mistakes.unshift({ref,your:String(your||'').slice(0,200),date:today()});S.mistakes=S.mistakes.slice(0,150);save();}
+function resolveRef(ref){const[uid,lid,i]=ref.split('|');if(uid==='P')return PLACEMENT[+i];const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);return l?.steps[+i];}
+
+/* ---------- layout ---------- */
+const NAV=[['home','🏠','Start'],['units','📚','Unidades'],['vocab','🗂️','Vokabeltrainer'],['mistakes','✏️','Fehlerheft'],['placement','🎯','Einstufungstest'],['settings','⚙️','Einstellungen']];
+function shell(){
+  document.documentElement.dataset.theme=S.settings.theme==='auto'?'':S.settings.theme;
+  const route=curRoute().split('/')[0];
+  const due=dueCards().length;
+  const nav=h('div',{class:'nav'},NAV.map(([r,ic,l])=>h('button',{class:route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words'].includes(route))?'active':'',onclick:()=>go(r)},ic,' ',l,r==='vocab'&&due?h('span',{class:'badge'},due):null)));
+  const SHORT={home:'Start',units:'Kurs',vocab:'Vokabeln',mistakes:'Fehler',placement:'Test',settings:'Mehr'};
+  const mnav=h('nav',{class:'mobile-nav'},NAV.map(([r,ic,l])=>h('button',{class:(route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words'].includes(route)))?'active':'',onclick:()=>go(r),'aria-label':l},h('span',{class:'mi'},ic),h('span',{class:'ml'},SHORT[r]),r==='vocab'&&due?h('span',{class:'mbadge'},due):null)));
+  const main=h('main',{class:'main',id:'main'});
+  const app=h('div',{class:'app'},h('aside',{class:'side'},h('div',{class:'brand'},h('i',{class:'dot'}),h('span',{},'Mi profe')),nav,
+    h('div',{class:'foot'},'🔥 '+streakNow()+' Tage Serie',h('br'),h('span',{id:'syncstat'},syncLabel()))),h('div',{},mnav,main));
+  document.body.innerHTML='';document.body.append(app);return main;}
+const IN_ARTIFACT=!!(window.claude&&window.claude.use);
+let CUR=null;
+function curRoute(){if(IN_ARTIFACT)return CUR||'home';return location.hash.slice(1)||'home';}
+function go(r){if(IN_ARTIFACT){CUR=r;route();return;}if(location.hash==='#'+r)route();else location.hash=r;}
+if(!IN_ARTIFACT)window.addEventListener('hashchange',route);
+function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{class:'overlay'});const close=v=>{ov.remove();res(v);};
+  ov.append(h('div',{class:'card',style:'max-width:380px;width:100%'},h('p',{style:'margin-top:0;font-weight:600'},text),h('div',{class:'row',style:'justify-content:flex-end'},h('button',{class:'btn',onclick:()=>close(false)},'Abbrechen'),h('button',{class:'btn primary',onclick:()=>close(true)},okLabel||'OK'))));
+  ov.onclick=e=>{if(e.target===ov)close(false);};document.body.append(ov);});}
+function route(){if(window.speechSynthesis)speechSynthesis.cancel();const parts=curRoute().split('/');const m=shell();
+  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
+  v(m,...parts.slice(1));window.scrollTo(0,0);}
+
+/* ---------- views ---------- */
+function vHome(m){
+  const nx=nextLesson();const due=dueCards().length;const done=Object.values(S.lessons).filter(x=>x.done).length;
+  const acc=S.stats.answers?Math.round(100*S.stats.correct/S.stats.answers):0;
+  const hr=new Date().getHours();const greet=hr<14?'¡Buenos días':hr<20?'¡Buenas tardes':'¡Buenas noches';
+  m.append(h('h1',{},greet+', Jonas!'),h('p',{class:'sub'},'Dein persönlicher Spanischlehrer – aufgebaut nach „Meta profesional“, ergänzt um Alltag in Barcelona.'));
+  if(!S.placement){m.append(h('div',{class:'card',style:'border-color:var(--accent);margin-bottom:16px'},
+    h('div',{class:'kind'},'Erster Schritt'),h('h2',{style:'margin-top:0'},'Einstufungstest machen'),
+    h('p',{},'Ca. 12–15 Minuten, Fragen zu El primer día bis Unidad 10. Danach weiß ich, was du sicher kannst, was wir auffrischen und wo wir neu einsteigen.'),
+    h('button',{class:'btn primary',onclick:()=>go('placement')},'Test starten →')));}
+  m.append(h('div',{class:'grid g4',style:'margin-bottom:16px'},
+    stat(streakNow()+' 🔥','Tage in Folge'),stat(due,'Vokabeln fällig'),stat(done,'Lektionen fertig'),stat(acc+'%','Trefferquote')));
+  const doneN=Object.values(S.lessons).filter(x=>x.done).length;const todayN=S.stats.days[today()]||0;
+  m.append(h('div',{class:'card',style:'margin-bottom:14px'},h('div',{class:'kind'},'Dein Plan für heute (ca. 20 Min.)'),
+    h('div',{class:'grid',style:'gap:6px'},
+      planRow(due===0&&Object.keys(S.srs).length>0,'1. Vokabeln wiederholen',due?due+' fällig':Object.keys(S.srs).length?'erledigt':'noch keine – kommen mit der ersten Lektion','vocab'),
+      planRow(false,'2. Eine neue Lektion',nx?'Unidad '+nx.u.n+' · '+nx.l.title:'alles fertig',nx?'lesson/'+nx.u.id+'/'+nx.l.id:'units'),
+      doneN>=2?planRow(S.lastMix===today(),'3. Gemischte Wiederholung',S.lastMix===today()?'erledigt':'15 Aufgaben quer durch alles','mix'):null,
+      planRow(false,'4. Bonus: Shadowing oder Gespräch','Aussprache & Sprechen',nx?'shadow/'+nx.u.id:'units'))));
+  const row=h('div',{class:'grid g2'});
+  if(nx)row.append(h('div',{class:'card'},h('div',{class:'kind'},'Weiter lernen'),h('h3',{style:'margin-top:0;font-family:var(--serif);font-size:20px'},'Unidad '+nx.u.n+' · '+nx.l.title),
+    h('p',{class:'muted small'},nx.l.desc),h('button',{class:'btn primary',onclick:()=>go('lesson/'+nx.u.id+'/'+nx.l.id)},'Lektion starten →')));
+  row.append(h('div',{class:'card'},h('div',{class:'kind'},'Vokabeln'),h('h3',{style:'margin-top:0;font-family:var(--serif);font-size:20px'},due?due+' Karten warten auf dich':'Alles wiederholt ✓'),
+    h('p',{class:'muted small'},'Neue Wörter landen automatisch hier, wenn du sie in einer Lektion siehst. Wiederholung nach Lernkurve: 1 → 3 → 7 → 14 → 30 Tage.'),
+    h('button',{class:'btn'+(due?' primary':''),onclick:()=>go('vocab')},due?'Jetzt wiederholen':'Zum Trainer')));
+  m.append(row);
+  if(S.mistakes.length)m.append(h('div',{class:'card',style:'margin-top:14px'},h('div',{class:'row'},h('div',{},h('div',{class:'kind'},'Fehlerheft'),h('div',{},S.mistakes.length+' Aufgaben, die du noch mal üben solltest.')),h('div',{class:'spacer'}),h('button',{class:'btn',onclick:()=>go('mistakes')},'Fehler üben'))));
+  m.append(h('p',{class:'muted small',style:'margin-top:24px'},'Tipp: Am besten täglich 15–20 Minuten – erst Vokabeln, dann eine Lektion. ',hasAI()?AIN()+'-Korrektur ist aktiv ✓':'Für freie Texte & Gespräche kannst du in den Einstellungen einen kostenlosen Gemini-Key hinterlegen.'));
+}
+const planRow=(done,t,d,r)=>h('div',{class:'lesson'+(done?' done':''),onclick:()=>go(r)},h('div',{class:'ic'},done?'✓':'→'),h('div',{style:'flex:1'},h('div',{class:'lt'},t),h('div',{class:'ld'},d)));
+const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
+
+function vUnits(m){
+  m.append(h('h1',{},'Unidades'),h('p',{class:'sub'},'Reihenfolge wie im Kursbuch Meta profesional. '+(S.placement?'Markierungen kommen aus deinem Einstufungstest.':'Mach zuerst den Einstufungstest, dann markiere ich, was du schon kannst.')));
+  const g=h('div',{class:'grid'});
+  for(const u of COURSE.units){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.status==='soon';
+    g.append(h('div',{class:'card unit'+(soon?' locked':''),onclick:()=>{if(!soon)go('unit/'+u.id)}},
+      h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'row'},h('span',{class:'t'},u.title),
+        st?h('span',{class:'pill '+(st==='sicher'?'ok':st==='auffrischen'?'warn':'new')},st==='sicher'?'sitzt ✓':st==='auffrischen'?'auffrischen':'neu lernen'):null,
+        soon?h('span',{class:'pill'},'kommt als Nächstes'):null),
+        h('div',{class:'d'},u.sub),soon?null:h('div',{class:'bar',style:'margin-top:8px'},h('i',{style:'width:'+Math.round(pct*100)+'%'}))),
+      soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%')));}
+  m.append(g);
+}
+function vUnit(m,id){const u=unitById(id);if(!u)return vUnits(m);
+  m.append(h('button',{class:'btn ghost small',onclick:()=>go('units')},'← Alle Unidades'),
+    h('h1',{},'Unidad '+u.n+' · '+u.title),h('p',{class:'sub'},u.sub));
+  const st=unitStatus(u);
+  if(st)m.append(h('div',{class:'fb '+(st==='sicher'?'ok':st==='auffrischen'?'warn':'ai'),style:'margin:0 0 16px'},
+    st==='sicher'?'Laut Einstufungstest sitzt diese Unidad. Du kannst sie überspringen oder nur die Wiederholung & das Gespräch machen.':
+    st==='auffrischen'?'Laut Einstufungstest: auffrischen. Die Grundlagen sind da – geh die Lektionen zügig durch, die Erklärungen kannst du überfliegen.':'Laut Einstufungstest: neu lernen. Nimm dir Zeit für die Erklärungen.'));
+  m.append(h('div',{class:'card',style:'margin-bottom:18px'},h('div',{class:'kind'},'Das lernst du'),h('div',{},u.goals.join(' · '))));
+  const L=h('div',{class:'grid'});const AB=h('div',{class:'grid'});let n=0;
+  u.lessons.forEach((l)=>{const r=S.lessons[u.id+'.'+l.id];const i=l.ab?'📎':n++;const TGT=l.ab?AB:L;
+    TGT.append(h('div',{class:'lesson'+(r?.done?' done':''),onclick:()=>go('lesson/'+u.id+'/'+l.id)},h('div',{class:'ic'},r?.done?'✓':(typeof i==='number'?i+1:i)),
+      h('div',{style:'flex:1'},h('div',{class:'lt'},l.title),h('div',{class:'ld'},l.desc)),r?.done?h('span',{class:'pill ok'},Math.round(r.best*100)+'%'):h('span',{class:'pill'},l.steps.length+' Schritte')));});
+  m.append(L);
+  if(AB.children.length)m.append(h('h2',{},'Übungsblätter aus deinem Kurs'),h('p',{class:'muted small',style:'margin-top:-6px'},'Deine Arbeitsblätter aus dem DHBW-Kurs als interaktive Übungen – freiwillig, zum Vertiefen.'),AB);
+  m.append(h('h2',{},'Extras'),h('div',{class:'grid g2'},
+    h('div',{class:'card lesson',onclick:()=>go('resumen/'+u.id)},h('div',{class:'ic'},'📄'),h('div',{},h('div',{class:'lt'},'Resumen'),h('div',{class:'ld'},'Alles auf einen Blick'))),
+    h('div',{class:'card lesson',onclick:()=>go('words/'+u.id)},h('div',{class:'ic'},'🗂️'),h('div',{},h('div',{class:'lt'},'Wortschatz'),h('div',{class:'ld'},'Alle Wörter der Unidad'))),
+    h('div',{class:'card lesson',onclick:()=>go('shadow/'+u.id)},h('div',{class:'ic'},'🎧'),h('div',{},h('div',{class:'lt'},'Shadowing'),h('div',{class:'ld'},'Sätze nachsprechen wie ein Echo'))),
+    u.situacion?h('div',{class:'card lesson',onclick:()=>go('chat/'+u.id)},h('div',{class:'ic'},'💬'),h('div',{},h('div',{class:'lt'},'Situación: Gespräch'),h('div',{class:'ld'},u.situacion.title+(hasAI()?'':' · braucht KI')))):null));
+}
+function vResumen(m,id){const u=unitById(id);m.append(h('button',{class:'btn ghost small',onclick:()=>go('unit/'+id)},'← Unidad '+u.n),
+  h('h1',{},'Resumen · Unidad '+u.n),h('div',{class:'card info resumen',html:u.resumen}));
+  m.querySelectorAll('.resumen .es-t, .resumen td.es').forEach(addSpeakTo);}
+function addSpeakTo(el){const t=el.textContent;if(!t.trim())return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}
+function allUnitWords(u){const w=[];for(const l of u.lessons)for(const s of l.steps)if(s.t==='vocab')w.push(...s.items);return w;}
+function vWords(m,id){const u=unitById(id);const w=allUnitWords(u);
+  m.append(h('button',{class:'btn ghost small',onclick:()=>go('unit/'+id)},'← Unidad '+u.n),h('h1',{},'Wortschatz · Unidad '+u.n),
+    h('p',{class:'sub'},w.length+' Wörter & Ausdrücke. '),h('div',{class:'row',style:'margin-bottom:14px'},
+      h('button',{class:'btn primary',onclick:()=>{const n=addVocab(w,u.id);toast(n?n+' Wörter zum Trainer hinzugefügt':'Schon alle im Trainer');}},'Alle in den Vokabeltrainer'),
+      h('button',{class:'btn',onclick:()=>startCram(w,u)},'Jetzt abfragen')),
+    h('div',{class:'vlist'},w.map(([es,de])=>h('div',{class:'vrow'},spk(es),h('span',{class:'es'},es),h('span',{class:'de'},de)))));}
+
+/* ---------- lesson player ---------- */
+function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l)return vUnits(m);
+  const steps=l.steps.map((s,i)=>({s,ref:uid+'|'+lid+'|'+i}));
+  play(m,{title:'Unidad '+u.n+' · '+l.title,steps,unit:u,onBack:()=>go('unit/'+uid),
+    onDone:(res)=>{const k=uid+'.'+lid;const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};save();
+      const idx=u.lessons.indexOf(l);const nl=u.lessons[idx+1];
+      return nl?{label:'Nächste Lektion →',fn:()=>go('lesson/'+uid+'/'+nl.id)}:{label:'Zur Unidad →',fn:()=>go('unit/'+uid)};}});}
+
+function play(m,cfg){
+  const queue=cfg.steps.slice();let pos=0;const firstTry=new Map();let retried=new Set();const gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
+  const top=h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:async()=>{if(await askConfirm('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.','Abbrechen & zurück'))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),h('span',{class:'muted small',id:'pcount'}));
+  const stage=h('div',{class:'step'});
+  m.append(h('div',{class:'player'},h('div',{class:'muted small',style:'margin-bottom:6px'},cfg.title),top,stage));
+  function upd(){$('.ptop .bar i').style.width=Math.round(100*pos/queue.length)+'%';$('#pcount').textContent=Math.min(pos+1,queue.length)+' / '+queue.length;}
+  function next(){pos++;if(pos>=queue.length)return finish();show();}
+  function show(){upd();stage.innerHTML='';stage.className='step';void stage.offsetWidth;stage.className='step';
+    const it=queue[pos];const isRetry=retried.has(it)&&firstTry.has(it.ref);
+    if(isRetry)stage.append(h('div',{class:'pill acc',style:'margin-bottom:10px'},'↻ Noch mal – das war vorhin falsch'));
+    window.__cur=it;const R=RENDER[it.s.t];if(!R){stage.append('Unbekannter Schritt '+it.s.t);return next();}
+    R(stage,it.s,{unit:cfg.unit,ref:it.ref,noPrompt:!!cfg.noPrompt,done:(status,your)=>{
+      if(GRADED.has(it.s.t)){if(!firstTry.has(it.ref)){firstTry.set(it.ref,status);bumpDay(status!=='bad');}
+        if(status==='bad'){logMistake(it.ref,your);if(!cfg.noRetry&&!retried.has(it)){retried.add(it);queue.push(it);}}
+        else if(cfg.mistakeMode){S.mistakes=S.mistakes.filter(x=>x.ref!==it.ref);save();}}
+      if(cfg.onAnswer)cfg.onAnswer(it,status);},next});}
+  function finish(){$('.ptop .bar i').style.width='100%';
+    const vals=[...firstTry.values()];const score=gradeable?vals.filter(v=>v!=='bad').length/Math.max(gradeable,vals.length||1):1;
+    const after=cfg.onDone?cfg.onDone({score,firstTry}):null;stage.innerHTML='';
+    const pct=Math.round(score*100);
+    stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:48px'},pct>=90?'🏆':pct>=70?'🎉':'💪'),
+      h('h1',{},pct>=90?'¡Excelente!':pct>=70?'¡Muy bien!':'¡Sigue así!'),
+      gradeable?h('p',{class:'sub'},pct+'% beim ersten Versuch richtig'):h('p',{class:'sub'},'Lektion abgeschlossen'),
+      cfg.extraEnd?cfg.extraEnd({score,firstTry}):null,
+      h('div',{class:'row',style:'justify-content:center;margin-top:10px'},h('button',{class:'btn',onclick:()=>cfg.onBack()},'Zurück'),
+        after?h('button',{class:'btn primary',onclick:after.fn},after.label):null)));}
+  show();
+}
+
+/* step UI helpers */
+const GRADED=new Set(['mc','gap','tr','conj','order','match','listen','dialog']);
+function kind(t){return h('div',{class:'kind'},t);}
+let SHIFT=false;
+function keys(target){const k=h('div',{class:'keys'});const L=['á','é','í','ó','ú','ñ','ü','¿','?','¡','!'];const btns=[];
+  const ins=c=>{const el=target();if(!el)return;const s=el.selectionStart??el.value.length;el.value=el.value.slice(0,s)+c+el.value.slice(el.selectionEnd??s);el.focus();try{el.setSelectionRange(s+c.length,s+c.length);}catch(e){}el.dispatchEvent(new Event('input'));};
+  const sh=h('button',{type:'button',tabindex:'-1',class:'kshift',title:'Großbuchstaben',onmousedown:e=>e.preventDefault(),onclick:()=>{SHIFT=!SHIFT;draw();}},'⇧');
+  const draw=()=>{sh.classList.toggle('on',SHIFT);btns.forEach(([b,c])=>b.textContent=SHIFT?c.toUpperCase():c);};
+  for(const c of L){const b=h('button',{type:'button',tabindex:'-1',onmousedown:e=>e.preventDefault(),onclick:()=>{ins(SHIFT?c.toUpperCase():c);if(SHIFT){SHIFT=false;draw();}}},c);btns.push([b,c]);k.append(b);}
+  k.append(sh);draw();return k;}
+let lastInput=null;document.addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input.inp,textarea.inp'))lastInput=e.target;});
+function actionBar(onCheck,ctx,opts={}){
+  const btn=h('button',{class:'btn primary'},opts.label||'Prüfen');const bar=h('div',{class:'actions'},btn,opts.extra||null,h('span',{class:'spacer'}),h('span',{class:'muted small'},h('span',{class:'kbd'},'Enter')));
+  let state='check';
+  btn.onclick=()=>{if(state==='next'){cleanup();ctx.next();return;}const r=onCheck();if(r===false)return;state='next';btn.textContent='Weiter →';btn.focus();};
+  const kh=e=>{if(!btn.isConnected)return cleanup();if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing&&document.activeElement?.tagName!=='TEXTAREA'){e.preventDefault();btn.click();}};
+  document.addEventListener('keydown',kh);const cleanup=()=>document.removeEventListener('keydown',kh);
+  window.__cleanupStep&&window.__cleanupStep();window.__cleanupStep=cleanup;
+  bar.setNext=()=>{state='next';btn.textContent='Weiter →';};
+  return bar;}
+function feedback(el,res,step,your,ctx){
+  const box=h('div',{class:'fb '+(res.status==='ok'?'ok':res.status==='near'?'warn':'bad')});
+  if(res.status==='ok')box.append(h('b',{class:'h'},pick(['¡Correcto! ✓','¡Muy bien! ✓','¡Perfecto! ✓','¡Eso es! ✓'])));
+  else if(res.status==='near')box.append(h('b',{class:'h'},'Fast richtig'),h('div',{html:'Richtig: '+(your?diffHtml(your,res.right):'<span class="es-t">'+esc(res.right)+'</span>')}));
+  else box.append(h('b',{class:'h'},'Nicht ganz'),h('div',{html:'Richtig: <b class="es-t">'+esc(res.right)+'</b>'+(your?'<br><span class="small muted">Deine Antwort: </span>'+diffHtml(your,res.right):'')}));
+  if(res.note)box.append(h('div',{class:'small',style:'margin-top:4px'},res.note));
+  if(step.why&&res.status!=='ok')box.append(h('div',{style:'margin-top:6px'},'💡 ',h('span',{html:step.why})));
+  if(res.right&&step.t!=='mc')box.append(h('div',{style:'margin-top:6px'},spk(res.right),' ',h('span',{class:'small muted'},'anhören')));
+  if(res.status==='bad'&&hasAI()&&your&&ctx){const ab=h('button',{class:'btn small',style:'margin-top:10px'},'🤖 '+AIN()+': Ist meine Antwort auch richtig? / Warum?');
+    ab.onclick=async()=>{ab.disabled=true;ab.textContent=AIN()+' denkt nach…';
+      try{const q=step.q||step.de||step.es||'';const r=await gemini(TEACHER+`\n\nAufgabe (Typ ${step.t}): ${q}\nMusterlösung(en): ${[].concat(step.a||res.right).join(' / ')}\nAntwort von Jonas: ${your}\n\nIst die Antwort von Jonas ebenfalls korrekt und passend (auch wenn sie von der Musterlösung abweicht)? Antworte als JSON: {"korrekt": true|false, "erklaerung": "kurze Erklärung auf Deutsch, was falsch ist und warum (max. 3 Sätze)", "korrigiert": "Jonas' Satz korrigiert"}`);
+        const ai=h('div',{class:'fb ai'},h('b',{class:'h'},r.korrekt?'🤖 '+AIN()+': Deine Antwort ist auch richtig!':'🤖 '+AIN()+' erklärt'),h('div',{},r.erklaerung||''),r.korrigiert&&!r.korrekt?h('div',{class:'es-t',style:'margin-top:4px'},'→ '+r.korrigiert):null);
+        ab.replaceWith(ai);if(r.korrekt&&ctx.upgrade)ctx.upgrade();}
+      catch(e){ab.disabled=false;ab.textContent='Fehler: '+e.message;}};box.append(h('div',{},ab));}
+  el.append(box);return box;}
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function retryBox(el,title,hint){$('.retry',el)?.remove();const b=h('div',{class:'fb warn retry'},h('b',{class:'h'},'↻ '+title),hint?h('div',{class:'small'},'💡 ',h('span',{html:hint})):null);
+  const bar=el.querySelector('.actions');bar?bar.after(b):el.append(b);}
+function trHint(your,s){const answers=[].concat(s.a).flatMap(a=>a.split('|'));
+  const best=answers.map(a=>({a,d:lev(strip(norm(a)),strip(norm(your)))})).sort((x,y)=>x.d-y.d)[0].a;
+  const A=strip(norm(your)).split(' '),B=strip(norm(best)).split(' ');
+  const wrong=norm(your).split(' ').filter((w,i)=>!B.includes(strip(w)));
+  let msg='';
+  if(wrong.length)msg='Diese Wörter passen nicht: <b class="es-t">'+wrong.slice(0,4).map(esc).join(', ')+'</b>. ';
+  else if(A.length===B.length)msg='Alle Wörter passen – aber die <b>Reihenfolge</b> stimmt noch nicht. ';
+  if(B.length>A.length)msg+='Es fehlt noch mindestens ein Wort. ';
+  if(!msg)msg='Prüfe Endungen und Akzente. ';
+  if(s.hint)msg+='Hinweis: '+s.hint;
+  return msg;}
+
+
+/* ---------- renderers ---------- */
+const RENDER={
+info(el,s,ctx){el.append(kind(s.kind||'Erklärung'),h('h2',{style:'margin-top:0'},s.title),h('div',{class:'info',html:s.html}));
+  el.querySelectorAll('.info .es-t').forEach(addSpeakTo);el.append(actionBar(()=>{ctx.next();return false;},ctx,{label:'Verstanden →'}));},
+vocab(el,s,ctx){const n=addVocab(s.items,ctx.unit?.id);
+  el.append(kind('Neue Wörter'),h('h2',{style:'margin-top:0'},s.title||'Wortschatz'),s.note?h('p',{class:'muted'},s.note):null,
+    h('div',{class:'vlist'},s.items.map(([es,de])=>h('div',{class:'vrow'},spk(es),h('span',{class:'es'},es),h('span',{class:'de'},de)))),
+    h('p',{class:'muted small'},n?'✓ '+n+' neue Wörter im Vokabeltrainer gespeichert.':'Diese Wörter sind schon im Vokabeltrainer.'));
+  el.append(actionBar(()=>{ctx.next();return false;},ctx,{label:'Weiter →'}));},
+mc(el,s,ctx){let sel=null;const all=s.opts.map((o,i)=>[o,i]);const opts=s.keep?all:s.keepLast?shuffle(all.slice(0,-1)).concat([all[all.length-1]]):shuffle(all);
+  el.append(kind(s.kind||'Auswählen'),h('p',{class:'q'},h('span',{html:s.q}),s.say?[' ',spk(s.say)]:null));
+  const box=h('div',{class:'opts'});const btns=opts.map(([o,i],k)=>{const b=h('button',{class:'opt'},h('span',{class:'muted small'},(k+1)+'  '),h('span',{class:/[áéíóúñ¿¡]|^[a-z]/i.test(o)?'es-t':''},o));
+    b.onclick=()=>{if(box.dataset.done)return;btns.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=i;};return b;});box.append(...btns);el.append(box);
+  const nk=e=>{if(!box.isConnected)return document.removeEventListener('keydown',nk);if(document.activeElement?.tagName==='INPUT')return;const k=+e.key;if(k>=1&&k<=btns.length&&!box.dataset.done)btns[k-1].click();};document.addEventListener('keydown',nk);
+  el.append(actionBar(()=>{if(sel==null){toast('Wähle eine Antwort');return false;}box.dataset.done=1;document.removeEventListener('keydown',nk);
+    const ok=sel===s.a;btns.forEach((b,k)=>{if(opts[k][1]===s.a)b.classList.add('right');else if(opts[k][1]===sel)b.classList.add('wrong');});
+    feedback(el,{status:ok?'ok':'bad',right:s.opts[s.a]},s,null,null);ctx.done(ok?'ok':'bad',s.opts[sel]);},ctx));},
+gap(el,s,ctx){el.append(kind(s.kind||'Lücke füllen'),s.task?h('p',{class:'muted'},s.task):null);
+  const parts=s.q.split('___');const inputs=[];const q=h('div',{class:'gapq'});
+  parts.forEach((p,i)=>{q.append(h('span',{html:p}));if(i<parts.length-1){const w=Math.max(6,...String(s.a[i]).split('|').map(x=>x.length));const inp=h('input',{class:'inp gapi',style:'width:'+(w*0.75+2)+'em',autocomplete:'off',autocapitalize:'off',spellcheck:'false'});inputs.push(inp);q.append(inp);}});
+  el.append(q,s.hint?h('p',{class:'muted small'},'Hinweis: ',h('span',{html:s.hint})):null,keys(()=>lastInput));setTimeout(()=>inputs[0]?.focus(),50);
+  let attempt=1;
+  el.append(actionBar(()=>{let worst='ok';const yours=[],rights=[];const res=inputs.map((inp,i)=>compare(inp.value,s.a[i],{pron:false,typo:false}));
+    if(attempt===1&&!ctx.noPrompt&&res.some(r=>r.status==='bad')&&inputs.some(i=>i.value.trim())){attempt=2;
+      inputs.forEach((inp,i)=>{inp.classList.remove('wrong','right');if(res[i].status==='bad'){inp.classList.add('wrong');}else{inp.classList.add('right');inp.readOnly=true;}});
+      retryBox(el,inputs.length>1?'Die rot markierte Lücke stimmt noch nicht – versuch es noch einmal.':'Noch nicht ganz – versuch es noch einmal.',s.prompt||s.hint||'Achte auf Person (wer?), Endung, Singular/Plural und männlich/weiblich.');
+      inputs.find(i=>!i.readOnly)?.focus();return false;}
+    $('.retry',el)?.remove();
+    inputs.forEach((inp,i)=>{const r=res[i];inp.classList.remove('wrong','right');inp.classList.add(r.status==='bad'?'wrong':'right');inp.readOnly=true;yours.push(inp.value);rights.push(r.right);
+      if(r.status==='bad')worst='bad';else if(r.status==='near'&&worst==='ok')worst='near';});
+    if(attempt===2&&worst==='ok')worst='near';
+    const full=s.q.split('___').reduce((a,p,i)=>a+p.replace(/<[^>]+>/g,'')+(rights[i]??''),'');
+    feedback(el,{status:worst,right:full.trim(),note:attempt===2&&worst!=='bad'?'Selbst korrigiert 👍 – genau so lernt man am meisten.':worst==='near'?'Fast! Achte auf die Akzente.':''},s,null,null);
+    ctx.done(worst,yours.join(' / '));},ctx));},
+tr(el,s,ctx){el.append(kind(s.kind||'Übersetze ins Spanische'),h('p',{class:'q'},s.de),s.hint?h('p',{class:'muted small'},'Hinweis: ',h('span',{html:s.hint})):null);
+  const inp=h('input',{class:'inp',autocomplete:'off',spellcheck:'false',placeholder:'Auf Spanisch…'});el.append(inp,keys(()=>inp));setTimeout(()=>inp.focus(),50);
+  let attempt=1;
+  el.append(actionBar(()=>{let r=compare(inp.value,s.a);
+    if(r.status==='bad'&&attempt===1&&!ctx.noPrompt&&inp.value.trim()){attempt=2;inp.classList.add('wrong');retryBox(el,'Noch nicht ganz – versuch es noch einmal.',trHint(inp.value,s));inp.focus();inp.oninput=()=>inp.classList.remove('wrong');return false;}
+    $('.retry',el)?.remove();
+    if(attempt===2&&r.status==='ok'){r=Object.assign({},r,{status:'near',note:'Selbst korrigiert 👍'});}
+    inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
+    feedback(el,r,s,inp.value,{upgrade:()=>{toast('Als richtig gewertet ✓');}});const alts=[].concat(s.a).flatMap(a=>a.split('|')).filter(a=>norm(a)!==norm(r.right));if(r.status!=='bad'&&alts.length)el.append(h('p',{class:'muted small'},'Auch möglich: ',h('span',{class:'es-t'},alts.slice(0,3).join(' · '))));
+    ctx.done(r.status,inp.value);},ctx));},
+conj(el,s,ctx){const P=['yo','tú','él / ella / usted','nosotros/-as','vosotros/-as','ellos / ellas / ustedes'];
+  el.append(kind('Konjugieren'),h('p',{class:'q'},h('span',{class:'es-t'},s.verb),s.de?h('span',{class:'muted',style:'font-weight:400'},' – '+s.de):null,s.tense?h('span',{class:'pill',style:'margin-left:8px'},s.tense):null));
+  const inputs=[];const t=h('div',{class:'grid',style:'grid-template-columns:auto 1fr;align-items:center;gap:8px 14px;max-width:460px'});
+  P.forEach((p,i)=>{if(s.forms[i]==null)return;const inp=h('input',{class:'inp',style:'font-size:17px;padding:8px 12px;flex:1;min-width:0',autocomplete:'off',spellcheck:'false'});inputs.push([inp,i]);t.append(h('span',{class:'muted'},p),h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px'},inp));});
+  el.append(t,keys(()=>lastInput));setTimeout(()=>inputs[0][0].focus(),50);
+  let attempt=1;
+  el.append(actionBar(()=>{let worst='ok';const res=inputs.map(([inp,i])=>compare(inp.value,s.forms[i],{pron:false,typo:false}));
+    if(attempt===1&&!ctx.noPrompt&&res.some(r=>r.status==='bad')&&inputs.some(([i])=>i.value.trim())){attempt=2;
+      inputs.forEach(([inp],k)=>{inp.classList.remove('wrong','right');if(res[k].status==='bad')inp.classList.add('wrong');else{inp.classList.add('right');inp.readOnly=true;}});
+      retryBox(el,'Die rot markierten Formen stimmen noch nicht – versuch es noch einmal.',s.prompt||'Tipp: Stamm + Endung. Unregelmäßig? Schau, ob sich der Stammvokal ändert (o→ue, e→ie) – bei nosotros/vosotros meist nicht.');
+      inputs.find(([i])=>!i.readOnly)?.[0].focus();return false;}
+    $('.retry',el)?.remove();
+    inputs.forEach(([inp,i],k)=>{const r=res[k];inp.readOnly=true;inp.classList.remove('wrong','right');inp.classList.add(r.status==='bad'?'wrong':'right');
+      if(r.status!=='ok'){const sp=h('span',{class:'small',style:'color:var(--ok);white-space:nowrap;font-weight:600'},'→ '+s.forms[i]);inp.after(sp);}
+      if(r.status==='bad')worst='bad';else if(r.status==='near'&&worst==='ok')worst='near';});
+    if(attempt===2&&worst==='ok')worst='near';
+    feedback(el,{status:worst,right:s.forms.filter(Boolean).join(', '),note:attempt===2&&worst!=='bad'?'Selbst korrigiert 👍':''},s,null,null);ctx.done(worst,'');},ctx));},
+order(el,s,ctx){const words=s.es.replace(/([¿¡])\s*/g,'$1').split(/\s+/);const pool=shuffle(words.map((w,i)=>({w,i})));
+  el.append(kind('Satz bauen'),h('p',{class:'q'},s.de||'Bring die Wörter in die richtige Reihenfolge.'));
+  const ans=h('div',{class:'tiles'}),src=h('div',{class:'tiles',style:'border-style:solid;background:var(--surface2)'});let picked=[];let locked=false;
+  function draw(){ans.innerHTML='';src.innerHTML='';picked.forEach((p,k)=>ans.append(h('button',{class:'tile',onclick:()=>{if(locked)return;picked.splice(k,1);draw();}},p.w)));
+    pool.filter(p=>!picked.includes(p)).forEach(p=>src.append(h('button',{class:'tile',onclick:()=>{if(locked)return;picked.push(p);draw();}},p.w)));}
+  draw();el.append(ans,src);
+  el.append(actionBar(()=>{if(picked.length<words.length){toast('Benutze alle Wörter');return false;}locked=true;
+    const your=picked.map(p=>p.w).join(' ');const r=compare(your,[s.es].concat(s.alt||[]),{pron:false});feedback(el,r,s,your,null);ctx.done(r.status==='near'?'ok':r.status,your);},ctx));},
+match(el,s,ctx){el.append(kind('Zuordnen'),h('p',{class:'q'},s.q||'Was gehört zusammen?'));
+  const L=shuffle(s.pairs.map((p,i)=>({t:p[0],i}))),Rr=shuffle(s.pairs.map((p,i)=>({t:p[1],i})));let selL=null,selR=null,errors=0,left=s.pairs.length;
+  const grid=h('div',{class:'match'});const colL=h('div',{class:'opts'}),colR=h('div',{class:'opts'});grid.append(colL,colR);
+  const mk=(x,side)=>{const b=h('button',{class:'opt'},x.t);b.onclick=()=>{if(b.classList.contains('done'))return;
+    if(side==='L'){colL.querySelectorAll('.sel').forEach(y=>y.classList.remove('sel'));selL={x,b};if(/[a-zñáéíóú]/i.test(x.t)&&s.sayLeft)say(x.t);}else{colR.querySelectorAll('.sel').forEach(y=>y.classList.remove('sel'));selR={x,b};}
+    b.classList.add('sel');if(selL&&selR){if(selL.x.i===selR.x.i){selL.b.classList.add('done');selR.b.classList.add('done');selL.b.classList.remove('sel');selR.b.classList.remove('sel');left--;}
+      else{errors++;const a=selL.b,c=selR.b;a.classList.add('wrong');c.classList.add('wrong');setTimeout(()=>{a.classList.remove('wrong','sel');c.classList.remove('wrong','sel');},500);}
+      selL=selR=null;if(!left){const st=errors===0?'ok':errors<=2?'near':'bad';el.append(h('div',{class:'fb '+(st==='ok'?'ok':st==='near'?'warn':'bad')},st==='ok'?'¡Perfecto! Alles beim ersten Versuch.':errors+' Fehlversuch(e) – '+(st==='near'?'gut gemacht.':'schau dir die Paare noch mal an.')));ctx.done(st,'');bar.setNext();}}};return b;};
+  L.forEach(x=>colL.append(mk(x,'L')));Rr.forEach(x=>colR.append(mk(x,'R')));el.append(grid);
+  const bar=actionBar(()=>{if(left){toast('Ordne zuerst alle Paare zu');return false;}},ctx,{label:'Weiter →'});el.append(bar);},
+read(el,s,ctx){const plain=s.text.replace(/\{([^|}]+)\|[^}]+\}/g,'$1');
+  const html=esc(s.text).replace(/\{([^|}]+)\|([^}]+)\}/g,(m,w,t)=>'<span class="gl" data-t="'+t+'">'+w+'</span>').replace(/\n\n/g,'</p><p>');
+  const tr=h('div',{class:'fb ai hide',style:'margin-top:12px'},h('b',{class:'h'},'Übersetzung'),h('div',{html:esc(s.de||'').replace(/\n\n/g,'<br><br>')}));
+  const pop=h('div',{class:'glpop hide'});
+  el.append(kind(s.kind||'Lesen & Hören'),h('h2',{style:'margin-top:0'},s.title),s.intro?h('p',{class:'muted'},s.intro):null,
+    h('div',{class:'row',style:'margin-bottom:10px'},h('button',{class:'btn small',onclick:()=>say(plain)},'🔊 Vorlesen'),h('button',{class:'btn small',onclick:()=>say(plain,0.7)},'🐢 Langsam'),h('button',{class:'btn small',onclick:()=>speechSynthesis.cancel()},'⏹'),
+      s.de?h('button',{class:'btn small ghost',onclick:()=>tr.classList.toggle('hide')},'Übersetzung'):null),
+    h('div',{class:'card reading es-t',html:'<p>'+html+'</p>'}),h('p',{class:'muted small'},'Tipp: Tippe auf unterstrichene Wörter für die Bedeutung. Lies erst ohne Übersetzung – du verstehst mehr, als du denkst.'),tr,pop);
+  el.querySelectorAll('.gl').forEach(g=>g.onclick=e=>{e.stopPropagation();pop.textContent=g.textContent+' = '+g.dataset.t;pop.classList.remove('hide');const r=g.getBoundingClientRect();pop.style.left=Math.max(8,r.left)+'px';pop.style.top=(r.bottom+6)+'px';say(g.textContent);});
+  if(!window.__glh){window.__glh=1;document.addEventListener('click',()=>document.querySelectorAll('.glpop').forEach(p=>p.classList.add('hide')));}
+  el.append(actionBar(()=>{speechSynthesis.cancel();ctx.next();return false;},ctx,{label:'Weiter zu den Fragen →'}));},
+listen(el,s,ctx){el.append(kind('Hören & schreiben'),h('p',{class:'q'},s.task||'Hör zu und schreib, was du hörst.'));
+  const inp=h('input',{class:'inp',autocomplete:'off',spellcheck:'false',placeholder:'Was hörst du?'});
+  el.append(h('div',{class:'row',style:'margin-bottom:14px'},spk(s.es,true),h('button',{class:'btn small',onclick:()=>say(s.es,0.55)},'🐢 Langsam')),inp,keys(()=>inp));
+  setTimeout(()=>{say(s.es);inp.focus();},300);
+  el.append(actionBar(()=>{const r=compare(inp.value,[s.es].concat(s.alt||[]),{pron:false});inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
+    feedback(el,r,Object.assign({},s,{why:s.why||(s.de?'Bedeutung: '+s.de:'')}),inp.value,null);if(r.status==='ok'&&s.de)el.append(h('p',{class:'muted small'},'Bedeutung: '+s.de));ctx.done(r.status,inp.value);},ctx));},
+speak(el,s,ctx){el.append(kind('Nachsprechen'),h('p',{class:'q'},h('span',{class:'es-t',style:'font-size:24px'},s.es)),s.de?h('p',{class:'muted'},s.de):null,s.tip?h('p',{class:'small'},'🗣️ ',h('span',{html:s.tip})):null);
+  const out=h('div',{});el.append(h('div',{class:'row'},spk(s.es,true),h('button',{class:'btn small',onclick:()=>say(s.es,0.55)},'🐢 Langsam')));
+  if(SR){const mic=h('button',{class:'btn',style:'margin-top:14px'},'🎙️ Jetzt sprechen');mic.onclick=()=>{const r=new SR();r.lang='es-ES';r.interimResults=false;r.maxAlternatives=3;mic.textContent='… ich höre zu';mic.disabled=true;
+      r.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);const best=alts.map(a=>({a,d:lev(strip(norm(a)),strip(norm(s.es)))})).sort((x,y)=>x.d-y.d)[0];
+        const sim=1-best.d/Math.max(norm(s.es).length,1);out.innerHTML='';out.append(h('div',{class:'fb '+(sim>0.85?'ok':sim>0.6?'warn':'bad')},h('b',{class:'h'},sim>0.85?'¡Muy bien! Gut verständlich.':sim>0.6?'Fast – noch mal probieren?':'Das habe ich anders verstanden.'),h('div',{class:'small'},'Erkannt: „'+best.a+'“')));};
+      r.onerror=e=>{out.innerHTML='';out.append(h('div',{class:'fb warn'},'Spracherkennung nicht möglich ('+e.error+'). Nutze das Diktat-Feld unten (🎙 auf der Tastatur).'));};
+      r.onend=()=>{mic.textContent='🎙️ Noch mal sprechen';mic.disabled=false;};r.start();};el.append(mic);}
+  {const di=h('input',{class:'inp',placeholder:IS_IOS?'Oder: hier tippen → 🎙 auf der Tastatur → Satz sprechen':'Oder: per Diktat hier hineinsprechen',style:'margin-top:12px;font-size:16px'});
+    const chk=h('button',{class:'btn small',style:'margin-top:8px'},'Aussprache prüfen');
+    chk.onclick=()=>{if(!di.value.trim())return toast('Zuerst sprechen/diktieren');const d=lev(strip(norm(di.value)),strip(norm(s.es)));const sim=1-d/Math.max(norm(s.es).length,1);out.innerHTML='';out.append(h('div',{class:'fb '+(sim>0.85?'ok':sim>0.6?'warn':'bad')},h('b',{class:'h'},sim>0.85?'¡Muy bien! Gut verständlich.':sim>0.6?'Fast – noch mal probieren?':'Das wurde anders verstanden.'),h('div',{class:'small'},'Erkannt: „'+di.value+'“')));};
+    el.append(h('p',{class:'muted small',style:'margin:12px 0 0'},SR?'':'Spracherkennung gibt es in dieser Ansicht nicht – nutze stattdessen die Diktierfunktion deiner Tastatur (mit spanischer Tastatur aktiv).'),di,chk);}
+  el.append(out,actionBar(()=>{ctx.next();return false;},ctx,{label:'Weiter →'}));setTimeout(()=>say(s.es),300);},
+dialog(el,s,ctx){el.append(kind('Dialog · '+(s.place||'Situación')),h('h2',{style:'margin-top:0'},s.title),s.scene?h('div',{class:'scene',html:'🎬 '+s.scene}):null);
+  const chat=h('div',{class:'chat'});const zone=h('div',{});el.append(chat,zone);let i=0,errors=0;const bar=actionBar(()=>{if(i<s.lines.length){toast('Führe zuerst den Dialog zu Ende');return false;}},ctx,{label:'Weiter →'});
+  function npc(L){const tr=h('div',{class:'tr'+(S.settings.showTr?'':' hide')},L.de||'');chat.append(h('div',{class:'msg'},h('div',{class:'who'},L.n),h('div',{class:'row',style:'gap:8px;flex-wrap:nowrap'},spk(L.es),h('span',{class:'es-t'},L.es)),tr,
+      !S.settings.showTr&&L.de?h('button',{class:'btn ghost small',style:'padding:2px 0',onclick:e=>{tr.classList.remove('hide');e.target.remove();}},'Übersetzung'):null));say(L.es);}
+  function step(){zone.innerHTML='';if(i>=s.lines.length){const st=errors===0?'ok':errors<=1?'near':'bad';zone.append(h('div',{class:'fb '+(st==='ok'?'ok':'warn')},st==='ok'?'¡Genial! Dialog fehlerfrei gemeistert.':'Dialog geschafft – mit '+errors+' Fehlversuch(en).'));ctx.done(st==='bad'?'bad':st,'');bar.setNext();return;}
+    const L=s.lines[i];if(!L.you){npc(L);i++;setTimeout(step,250);return;}
+    zone.append(h('p',{class:'muted small',style:'margin:4px 0 8px'},L.prompt?'👉 '+L.prompt:'👉 Was antwortest du?'));
+    const box=h('div',{class:'opts'});shuffle(L.opts).forEach(o=>{const b=h('button',{class:'opt es-t'},o.es);b.onclick=()=>{if(o.ok){chat.append(h('div',{class:'msg me'},h('div',{class:'who'},'Du'),h('span',{class:'es-t'},o.es)));say(o.es);i++;setTimeout(step,500);}
+      else{errors++;b.classList.add('wrong');b.disabled=true;zone.querySelector('.fb')?.remove();zone.append(h('div',{class:'fb bad'},'💡 ',h('span',{html:o.why||'Passt hier nicht ganz.'})));}};box.append(b);});zone.append(box);}
+  el.append(bar);step();},
+free(el,s,ctx){el.append(kind('Freies Schreiben'),h('p',{class:'q'},s.task),s.hint?h('p',{class:'muted small'},'💡 ',h('span',{html:s.hint})):null);
+  const ta=h('textarea',{class:'inp',spellcheck:'false',placeholder:'Schreib auf Spanisch…'});el.append(ta,keys(()=>ta));const out=h('div');el.append(out);
+  const ai=h('button',{class:'btn primary'},hasAI()?'🤖 Von '+AIN()+' korrigieren lassen':'Musterlösung zeigen');
+  ai.onclick=async()=>{if(!ta.value.trim()){toast('Schreib zuerst etwas');return;}
+    if(!hasAI()){out.innerHTML='';out.append(h('div',{class:'fb ai'},h('b',{class:'h'},'Musterlösung'),h('div',{class:'es-t'},s.model),h('p',{class:'small muted'},'Vergleiche selbst. Mit einem Gemini-Key (Einstellungen) bekommst du hier eine echte Korrektur.')));return;}
+    ai.disabled=true;ai.textContent=AIN()+' korrigiert…';
+    try{const r=await gemini(TEACHER+`\n\nAufgabe: ${s.task}\nLernziel/Grammatik dieser Lektion: ${s.focus||''}\nText von Jonas:\n"""${ta.value}"""\n\nKorrigiere den Text. Antworte als JSON: {"note": Zahl 1-10, "lob": "1 kurzer Satz, was gut ist", "korrigiert": "vollständig korrigierter Text", "fehler": [{"falsch":"...","richtig":"...","erklaerung":"kurz auf Deutsch"}], "tipp": "1 Tipp zum Weiterlernen"}`);
+      out.innerHTML='';out.append(h('div',{class:'fb ai'},h('b',{class:'h'},'🤖 Note: '+r.note+'/10 · '+(r.lob||'')),
+        h('div',{class:'es-t',style:'margin:6px 0'},diffHtmlLong(ta.value,r.korrigiert||'')),
+        (r.fehler||[]).length?h('ul',{style:'margin:6px 0;padding-left:18px'},(r.fehler||[]).map(f=>h('li',{},h('span',{class:'es-t'},h('del',{style:'color:var(--bad)'},f.falsch),' → ',h('b',{style:'color:var(--ok)'},f.richtig)),' – ',f.erklaerung))):h('div',{},'Keine Fehler gefunden 🎉'),
+        r.tipp?h('div',{class:'small',style:'margin-top:6px'},'💡 '+r.tipp):null,h('details',{style:'margin-top:8px'},h('summary',{class:'small'},'Musterlösung aus dem Kurs'),h('div',{class:'es-t'},s.model))));}
+    catch(e){out.innerHTML='';out.append(h('div',{class:'fb bad'},AIN()+'-Fehler: '+e.message),h('div',{class:'fb ai'},h('b',{class:'h'},'Musterlösung'),h('div',{class:'es-t'},s.model)));}
+    ai.disabled=false;ai.textContent='🤖 Erneut korrigieren';};
+  el.append(h('div',{class:'actions'},ai,h('span',{class:'spacer'}),h('button',{class:'btn',onclick:()=>{window.__cleanupStep&&window.__cleanupStep();ctx.next();}},'Weiter →')));}
+};
+function diffHtmlLong(a,b){return norm(a)===norm(b)?esc(b):diffHtml(a,b);}
+
+
+/* ---------- shadowing ---------- */
+function unitSentences(u){const out=[];const seen=new Set();const add=(es,de)=>{const k=norm(es);if(es&&!seen.has(k)&&es.split(' ').length>=2){seen.add(k);out.push({es,de:de||''});}};
+  for(const l of u.lessons)for(const st of l.steps){if(st.t==='dialog')st.lines.forEach(L=>{if(!L.you)add(L.es,L.de);else{const o=L.opts.find(x=>x.ok);if(o)add(o.es,'');}});
+    if(st.t==='listen'||st.t==='speak')add(st.es,st.de);if(st.t==='tr')add(String([].concat(st.a)[0]).split('|')[0],st.de);}
+  return out;}
+function vShadow(m,id){const u=unitById(id);const list=unitSentences(u);let i=0,phase=0;let rec=null,chunks=[],audioUrl=null;
+  m.append(h('button',{class:'btn ghost small',onclick:()=>go('unit/'+id)},'← Unidad '+u.n),h('h1',{},'🎧 Shadowing · Unidad '+u.n),
+    h('p',{class:'sub'},'Hören → mitlesen & gleichzeitig mitsprechen → ohne Text nachsprechen. Trainiert Aussprache, Sprechtempo und Satzmelodie. Am besten laut und mit Kopfhörern.'));
+  const box=h('div');m.append(box);
+  const phases=['1 · Anhören','2 · Mitlesen & mitsprechen','3 · Ohne Text'];
+  function draw(){const c=list[i];box.innerHTML='';
+    const es=h('div',{class:'es'+(phase===2?' blur':'')},c.es);if(phase===2)es.onclick=()=>es.classList.remove('blur');
+    const card=h('div',{class:'card shadowcard'},h('div',{class:'phase'},phases.map((p,k)=>h('span',{class:k===phase?'on':''},p))),
+      h('div',{class:'muted small'},'Satz '+(i+1)+' / '+list.length),es,h('div',{class:'muted'},phase===0||phase===1?c.de:'(antippen zum Aufdecken)'),
+      h('div',{class:'row',style:'justify-content:center;margin-top:14px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.6)},'🐢 Langsam'),h('button',{class:'btn small',onclick:()=>{say(c.es);setTimeout(()=>say(c.es),400+c.es.length*85);}},'🔁 2×')));
+    const recRow=h('div',{class:'row',style:'justify-content:center;margin-top:12px'});
+    if(navigator.mediaDevices&&window.MediaRecorder){const rb=h('button',{class:'btn small'},rec?'⏹ Stopp':'🎙️ Mich aufnehmen');
+      rb.onclick=async()=>{if(rec){rec.stop();return;}try{const st=await navigator.mediaDevices.getUserMedia({audio:true});chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
+        rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());audioUrl=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();};rec.start();rb.textContent='⏹ Stopp';}catch(e){toast('Mikrofon nicht verfügbar');}};
+      recRow.append(rb);if(audioUrl)recRow.append(h('button',{class:'btn small',onclick:()=>new Audio(audioUrl).play()},'▶ Meine Aufnahme'),h('button',{class:'btn small',onclick:()=>{const a=new Audio(audioUrl);a.onended=()=>say(c.es);a.play();}},'⚖️ Vergleichen'));}
+    card.append(recRow);
+    box.append(card,h('div',{class:'actions'},h('button',{class:'btn',disabled:i===0&&phase===0,onclick:()=>{if(phase>0)phase--;else{i--;phase=2;}audioUrl=null;draw();}},'← Zurück'),h('span',{class:'spacer'}),
+      h('button',{class:'btn primary',onclick:()=>{if(phase<2)phase++;else{if(i<list.length-1){i++;phase=0;}else{toast('¡Terminado! Alle Sätze geschafft 🎉');go('unit/'+id);return;}}audioUrl=null;draw();setTimeout(()=>say(list[i].es),150);}},phase<2?'Nächste Phase →':'Nächster Satz →')));}
+  if(!list.length){box.append(h('div',{class:'card'},'Keine Sätze vorhanden.'));return;}
+  draw();setTimeout(()=>say(list[0].es),300);}
+
+/* ---------- interleaved review ---------- */
+function mixSteps(n){const pool=[];for(const u of COURSE.units)for(const l of u.lessons||[]){const r=S.lessons[u.id+'.'+l.id];if(!r?.done)continue;
+  const age=Math.max(1,(Date.now()-new Date(r.date+'T12:00:00'))/864e5);
+  l.steps.forEach((st,i)=>{if(['mc','gap','tr','conj','order','listen'].includes(st.t))pool.push({s:st,ref:u.id+'|'+l.id+'|'+i,unit:u,w:Math.random()*Math.log(1+age)+Math.random()});});}
+  return pool.sort((a,b)=>b.w-a.w).slice(0,n);}
+function vMix(m){const steps=mixSteps(15);
+  if(steps.length<5){m.append(h('h1',{},'Gemischte Wiederholung'),h('div',{class:'card'},'Schließ zuerst ein paar Lektionen ab – dann mische ich hier Aufgaben aus allen bisherigen Lektionen durcheinander.'));return;}
+  play(m,{title:'Gemischte Wiederholung · 15 Aufgaben aus allen Unidades',steps,onBack:()=>go('home'),onDone:()=>{S.lastMix=today();save();return{label:'Zur Startseite',fn:()=>go('home')};}});}
+
+/* ---------- vocab trainer ---------- */
+function vVocab(m){const due=dueCards();const total=Object.keys(S.srs).length;
+  const boxes=[0,0,0,0];Object.values(S.srs).forEach(c=>{boxes[c.box>=5?3:c.box>=3?2:c.box>=1?1:0]++;});
+  m.append(h('h1',{},'Vokabeltrainer'),h('p',{class:'sub'},'Wiederholung nach Lernkurve – was du gut kannst, kommt seltener.'));
+  m.append(h('div',{class:'grid g4',style:'margin-bottom:16px'},stat(due.length,'heute fällig'),stat(boxes[0]+boxes[1],'in Arbeit'),stat(boxes[2],'gefestigt'),stat(boxes[3],'sitzt sicher')));
+  if(!total){m.append(h('div',{class:'card'},'Noch keine Vokabeln. Sie kommen automatisch dazu, sobald du in einer Lektion neue Wörter siehst – oder du fügst bei einer Unidad unter „Wortschatz“ alle auf einmal hinzu.'));return;}
+  m.append(h('div',{class:'card'},h('div',{class:'row'},h('div',{},h('b',{},due.length?due.length+' Karten fällig':'Für heute alles erledigt ✓'),h('div',{class:'muted small'},'Modus wählen:')),h('span',{class:'spacer'}),
+    h('button',{class:'btn'+(due.length?' primary':''),disabled:!due.length,onclick:()=>runVocab(shuffle(due).slice(0,25),'type',true)},'✍️ Tippen (DE → ES)'),
+    h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(shuffle(due).slice(0,25),'flip',true)},'🃏 Karteikarten'),
+    h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(shuffle(due).slice(0,25),'listen',true)},'🎧 Hören'))));
+  m.append(h('h2',{},'Extra üben (nach Unidad)'),h('div',{class:'row'},COURSE.units.filter(u=>u.status!=='soon').map(u=>{const w=Object.values(S.srs).filter(c=>c.unit===u.id);return h('button',{class:'btn small',disabled:!w.length,onclick:()=>runVocab(shuffle(w).slice(0,20),'type',false)},'Unidad '+u.n+' ('+w.length+')');})));
+}
+function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es,de])=>({es,de}))).slice(0,20),'type',false);}
+function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
+  const stage=h('div',{class:'step'});m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>go('vocab')},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),h('span',{class:'muted small',id:'pc'})),stage));
+  function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;}
+  function res(c,st){if(!seen.has(c.es)){seen.add(c.es);if(st!=='bad')okc++;if(srs)grade(c,st);bumpDay(st!=='bad');}else if(srs&&st==='ok'){/* relearned */}
+    if(st==='bad')q.push(c);}
+  function nxt(){i++;if(i>=q.length)return end();show();}
+  function show(){upd();stage.innerHTML='';const c=q[i];
+    if(mode==='flip'){let shown=false;const card=h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},c.de));
+      stage.append(kind('Was bedeutet das?'),card);setTimeout(()=>say(c.es),200);
+      const row=h('div',{class:'actions'});const reveal=h('button',{class:'btn primary'},'Aufdecken');
+      reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';row.innerHTML='';row.append(
+        h('button',{class:'btn',style:'border-color:var(--bad)',onclick:()=>{res(c,'bad');nxt();}},'✗ Wusste ich nicht'),
+        h('button',{class:'btn',style:'border-color:var(--gold)',onclick:()=>{res(c,'near');nxt();}},'~ Unsicher'),
+        h('button',{class:'btn primary',onclick:()=>{res(c,'ok');nxt();}},'✓ Gewusst'));};row.append(reveal);stage.append(row);
+      const kh=e=>{if(!stage.isConnected)return document.removeEventListener('keydown',kh);if(e.key===' '||e.key==='Enter'){e.preventDefault();if(!shown)reveal.click();}else if(shown&&['1','2','3'].includes(e.key)){document.removeEventListener('keydown',kh);row.children[+e.key-1].click();}};
+      document.addEventListener('keydown',kh);return;}
+    const inp=h('input',{class:'inp',autocomplete:'off',spellcheck:'false',placeholder:'Auf Spanisch…'});
+    if(mode==='listen'){stage.append(kind('Hör zu und schreib das Wort'),h('div',{class:'row',style:'margin-bottom:14px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.55)},'🐢 Langsam')),inp,keys(()=>inp));setTimeout(()=>say(c.es),200);}
+    else stage.append(kind('Wie heißt das auf Spanisch?'),h('p',{class:'q',style:'font-size:26px'},c.de),inp,keys(()=>inp));
+    setTimeout(()=>inp.focus(),50);
+    stage.append(actionBar(()=>{const r=compare(inp.value,c.es,{pron:false});inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
+      feedback(stage,r,{t:'v'},inp.value,null);if(mode==='listen')stage.append(h('p',{class:'muted'},'= '+c.de));if(r.status!=='bad')say(c.es);res(c,r.status);},{next:nxt}));}
+  function end(){stage.innerHTML='';const pct=Math.round(100*okc/Math.max(seen.size,1));
+    stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:44px'},'🗂️'),h('h1',{},'¡Hecho!'),h('p',{class:'sub'},pct+'% gewusst · '+seen.size+' Karten'),
+      h('button',{class:'btn primary',onclick:()=>go('vocab')},'Zurück zum Trainer')));}
+  show();}
+
+/* ---------- placement ---------- */
+function vPlacement(m){
+  if(S.placement&&!m.dataset.restart){m.append(h('h1',{},'Einstufungstest'),h('p',{class:'sub'},'Gemacht am '+S.placement.date+'.'),placementTable(),
+    h('div',{class:'row',style:'margin-top:16px'},h('button',{class:'btn',onclick:()=>{m.innerHTML='';m.dataset.restart=1;vPlacement(m);}},'Neuen Test machen (andere Fragen)'),h('button',{class:'btn primary',onclick:()=>go('units')},'Zu den Unidades →')));return;}
+  m.append(h('h1',{},'Einstufungstest'),h('p',{class:'sub'},(COURSE.units.length*4)+' Fragen von „El primer día“ bis Unidad 10 – bei jedem Durchgang zufällig neu gemischt. Kein Stress: Wenn du etwas nicht weißt, wähl „Weiß ich nicht“ bzw. lass die Lücke leer – das hilft der Einstufung mehr als Raten.'),
+    h('button',{class:'btn primary',onclick:()=>{m.innerHTML='';
+      const byU={};PLACEMENT.forEach((s,i)=>{(byU[s.u]=byU[s.u]||[]).push(i);});
+      const chosen=COURSE.units.flatMap(u=>shuffle(byU[u.id]||[]).slice(0,4));
+      const steps=chosen.map(i=>{const s=PLACEMENT[i];return{s:s.t==='mc'&&!s.opts.includes('Weiß ich nicht')?Object.assign({},s,{opts:s.opts.concat(['Weiß ich nicht']),keepLast:true}):s,ref:'P||'+i,unit:s.u};});
+      const per={};
+      play(m,{title:'Einstufungstest',steps,noRetry:true,noPrompt:true,onBack:()=>go('home'),
+        onAnswer:(it,st)=>{const u=it.unit;per[u]=per[u]||{n:0,ok:0};per[u].n++;if(st!=='bad')per[u].ok++;},
+        onDone:()=>{const results={};for(const u of COURSE.units){const p=per[u.id];if(p)results[u.id]=p.ok/p.n;}S.placement={date:today(),results,ts:Date.now()};save();
+          return{label:'Ergebnis ansehen →',fn:()=>go('placement')};},
+        extraEnd:()=>placementTable()});}},'Test starten →'));}
+function placementTable(){const r=S.placement?.results||{};const t=h('div',{class:'card'});
+  let rec=null;for(const u of COURSE.units){const p=r[u.id];if(p!=null&&p<0.8&&!rec)rec=u;}
+  t.append(h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>r[u.id]!=null).map(u=>{const p=r[u.id];const st=unitStatus(u);
+    return h('div',{class:'row'},h('span',{style:'width:90px',class:'muted'},'Unidad '+u.n),h('span',{style:'flex:1'},u.title),h('div',{class:'bar',style:'width:120px'},h('i',{style:'width:'+Math.round(p*100)+'%;background:'+(st==='sicher'?'var(--ok)':st==='auffrischen'?'var(--gold)':'var(--info)')})),
+      h('span',{class:'pill '+(st==='sicher'?'ok':st==='auffrischen'?'warn':'new'),style:'width:100px;text-align:center'},st==='sicher'?'sitzt ✓':st==='auffrischen'?'auffrischen':'neu lernen'));})));
+  if(rec)t.append(h('p',{style:'margin:16px 0 0'},'👉 Empfehlung: Starte bei ',h('b',{},'Unidad '+rec.n+' · '+rec.title),rec.status==='soon'?' – diese Unidad baue ich als Nächstes. Bis dahin: Wiederholung der fertigen Unidades.':'. Was davor „sitzt“, kannst du überspringen – „auffrischen“ heißt: zügig durchgehen.'));
+  return t;}
+
+/* ---------- mistakes ---------- */
+function vMistakes(m){m.append(h('h1',{},'Fehlerheft'),h('p',{class:'sub'},'Jede falsch beantwortete Aufgabe landet hier. Richtig beantwortet beim Üben → sie verschwindet.'));
+  const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
+  if(!list.length){m.append(h('div',{class:'card'},'Keine offenen Fehler. ¡Muy bien! 🎉'));return;}
+  m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:'Fehler üben',mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>({label:'Zum Fehlerheft',fn:()=>go('mistakes')})});}},'Fehler üben ('+Math.min(list.length,20)+')'));
+  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?'Einstufungstest':'Unidad '+(unitById(x.ref.split('|')[0])?.n??'')+' · '+x.date),
+    h('div',{html:(s.q||s.de||s.es||s.verb||s.title||'').replace(/___/g,'_____')}),x.your?h('div',{class:'small'},'Deine Antwort: ',h('span',{style:'color:var(--bad)'},x.your)):null))));}
+
+/* ---------- gemini chat ---------- */
+function vChat(m,id){const u=unitById(id);const sit=u.situacion;
+  m.append(h('button',{class:'btn ghost small',onclick:()=>go('unit/'+id)},'← Unidad '+u.n),h('h1',{},'💬 '+sit.title),h('div',{class:'scene',html:'🎬 '+sit.scene+'<br><b>Dein Ziel:</b> '+sit.goal}));
+  if(!hasAI()){m.append(h('div',{class:'card'},h('p',{},'Für freie Gespräche brauchst du KI: entweder diese App über den claude.ai-Link öffnen (nutzt dein Claude-Abo) oder einen kostenlosen Gemini-Key in den Einstellungen. Alles andere funktioniert ohne.'),h('button',{class:'btn primary',onclick:()=>go('settings')},'Zu den Einstellungen')));return;}
+  const chat=h('div',{class:'chat'});const hist=[];const sys=TEACHER+`\n\nROLLENSPIEL: ${sit.role}\nSzene: ${sit.scene}\nZiel von Jonas: ${sit.goal}\nWortschatz/Grammatik bis Unidad ${u.n}: ${u.goals.join(', ')}.\nRegeln: Spiele deine Rolle auf Spanisch, natürlich aber einfach (A1/A2), 1–3 kurze Sätze pro Antwort, stelle Rückfragen, damit das Gespräch weitergeht. Wenn Jonas einen Fehler macht, gib eine kurze Korrektur auf Deutsch im Feld "korrektur" (sonst null). Wenn das Ziel erreicht ist, beende das Gespräch freundlich und setze "fertig": true.\nAntworte NUR als JSON: {"antwort_es":"...","antwort_de":"deutsche Übersetzung","korrektur":null oder {"richtig":"korrigierter Satz von Jonas","erklaerung":"kurz"},"fertig":false}`;
+  const inp=h('input',{class:'inp',placeholder:'Deine Antwort auf Spanisch…',autocomplete:'off',spellcheck:'false'});const send=h('button',{class:'btn primary'},'Senden');
+  m.append(chat,h('div',{class:'row',style:'flex-wrap:nowrap'},inp,send),keys(()=>inp),h('p',{class:'muted small'},'Tipp: Wenn du nicht weiterweißt, schreib auf Deutsch „Hilfe: …“ – der Lehrer hilft dir.'));
+  function bubble(me,es,de,corr){const b=h('div',{class:'msg'+(me?' me':'')},h('div',{class:'who'},me?'Du':sit.npc||'Profe'),h('div',{class:'row',style:'gap:8px;flex-wrap:nowrap'},me?null:spk(es),h('span',{class:'es-t'},es)),de?h('div',{class:'tr'},de):null);chat.append(b);
+    if(corr)chat.append(h('div',{class:'fb warn',style:'align-self:flex-end;max-width:82%;margin:0'},'✏️ ',h('span',{class:'es-t'},corr.richtig),h('div',{class:'small'},corr.erklaerung)));b.scrollIntoView({behavior:'smooth',block:'end'});}
+  async function turn(text){if(text){bubble(true,text);hist.push({role:'user',parts:[{text}]});}
+    else hist.push({role:'user',parts:[{text:'(Beginne das Gespräch mit deiner ersten Zeile.)'}]});
+    send.disabled=true;send.textContent='…';
+    try{const r=await gemini(sys,{history:hist});hist.push({role:'model',parts:[{text:JSON.stringify(r)}]});bubble(false,r.antwort_es,r.antwort_de,null);
+      if(r.korrektur&&chat.children.length>1){const last=[...chat.querySelectorAll('.msg.me')].pop();if(last)last.after(h('div',{class:'fb warn',style:'align-self:flex-end;max-width:82%;margin:0'},'✏️ ',h('span',{class:'es-t'},r.korrektur.richtig),h('div',{class:'small'},r.korrektur.erklaerung)));}
+      say(r.antwort_es);if(r.fertig)chat.append(h('div',{class:'fb ok'},'🎉 Ziel erreicht! ¡Muy bien!'));}
+    catch(e){chat.append(h('div',{class:'fb bad'},AIN()+'-Fehler: '+e.message));}
+    send.disabled=false;send.textContent='Senden';inp.focus();}
+  send.onclick=()=>{const t=inp.value.trim();if(!t)return;inp.value='';turn(t);};inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();send.click();}};
+  turn(null);}
+
+/* ---------- settings ---------- */
+function vSettings(m){const st=S.settings;
+  m.append(h('h1',{},'Einstellungen'));
+  const voiceSel=h('select',{class:'inp',style:'font-size:15px'});const fillV=()=>{loadVoices();voiceSel.innerHTML='';voiceSel.append(h('option',{value:''},'Automatisch (beste spanische Stimme)'));voices.forEach(v=>voiceSel.append(h('option',{value:v.name,selected:v.name===st.voice},v.name+' ('+v.lang+')')));};fillV();setTimeout(fillV,500);
+  voiceSel.onchange=()=>{st.voice=voiceSel.value;save();say('Hola, soy tu profesora de español.');};
+  const rate=h('input',{type:'range',min:'0.5',max:'1.2',step:'0.05',value:st.rate});rate.oninput=()=>{st.rate=+rate.value;save();};rate.onchange=()=>say('¿Qué tal? Me llamo Lucía.');
+  const theme=h('select',{class:'inp',style:'font-size:15px'},[['auto','Wie System'],['light','Hell'],['dark','Dunkel']].map(([v,l])=>h('option',{value:v,selected:st.theme===v},l)));theme.onchange=()=>{st.theme=theme.value;save();route();};
+  const tr=h('input',{type:'checkbox',checked:st.showTr});tr.onchange=()=>{st.showTr=tr.checked;save();};
+  m.append(h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},'🔊 Aussprache'),
+    h('div',{class:'field'},h('label',{},'Stimme'),voiceSel,h('span',{class:'muted small'},'Auf dem Mac klingen „Mónica“ bzw. Stimmen mit „(Premium)“/„(Erweitert)“ am besten. Mehr Stimmen: Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Spanisch (Spanien).')),
+    h('div',{class:'field'},h('label',{},'Sprechtempo'),rate),
+    h('label',{class:'row'},tr,'Übersetzungen in Dialogen sofort zeigen'),
+    h('div',{class:'field',style:'margin-top:12px'},h('label',{},'Darstellung'),theme)));
+  const key=h('input',{class:'inp',type:'password',value:st.geminiKey,placeholder:'AIza…',style:'font-size:15px'});
+  const model=h('input',{class:'inp',value:st.geminiModel,style:'font-size:15px'});const out=h('div');
+  const test=h('button',{class:'btn'},'Verbindung testen');
+  test.onclick=async()=>{st.geminiKey=key.value.trim();st.geminiModel=model.value.trim()||'gemini-flash-latest';save();out.innerHTML='';test.disabled=true;test.textContent='Teste…';
+    try{const r=await gemini('Antworte als JSON {"ok":true,"saludo":"ein kurzer spanischer Gruß"}');model.value=st.geminiModel;out.append(h('div',{class:'fb ok'},'✓ Funktioniert ('+st.geminiModel+')! Gemini sagt: ',h('span',{class:'es-t'},r.saludo||'')));}
+    catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));
+      try{const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=100&key='+encodeURIComponent(st.geminiKey));const j=await r.json();
+        const ms=(j.models||[]).filter(x=>(x.supportedGenerationMethods||[]).includes('generateContent')&&/flash/.test(x.name)&&!/image|tts|audio|live|embed/.test(x.name)).map(x=>x.name.replace('models/',''));
+        if(ms.length)out.append(h('div',{class:'fb ai'},'Verfügbare Modelle (klicken zum Übernehmen): ',h('div',{class:'row',style:'margin-top:6px'},ms.slice(0,12).map(n=>h('button',{class:'btn small',onclick:()=>{model.value=n;test.click();}},n)))));}catch(_){}}
+    test.disabled=false;test.textContent='Verbindung testen';};
+  if(SAMPLE){const sel=h('select',{class:'inp',style:'font-size:15px'},[['claude','Claude (über dein Claude-Abo, schnellstes Modell)'],['gemini','Gemini (eigener API-Key)']].map(([v,l])=>h('option',{value:v,selected:(st.aiProvider||'claude')===v},l)));sel.onchange=()=>{st.aiProvider=sel.value;save();toast('Gespeichert');};
+    m.append(h('div',{class:'card',style:'margin-bottom:16px;border-color:var(--ok)'},h('h2',{style:'margin-top:0'},'🤖 KI-Lehrer: Claude ist aktiv'),h('p',{class:'muted'},'Du nutzt die App über claude.ai. Korrekturen, Erklärungen und Gespräche laufen über dein Claude-Abo mit dem schnellsten, sparsamsten Modell. Beim ersten Mal fragt claude.ai, ob die Seite Claude nutzen darf.'),h('div',{class:'field'},h('label',{},'KI-Anbieter'),sel)));}
+  m.append(h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},'🤖 Gemini (optional)'),
+    h('p',{class:'muted'},'Nur für freie Texte, Gespräche und „Warum?“-Erklärungen. Alles andere läuft offline ohne KI. Der Key wird nur hier in deinem Browser gespeichert und direkt an Google geschickt.'),
+    h('ol',{class:'small',style:'padding-left:18px'},h('li',{},'Öffne ',h('a',{href:'https://aistudio.google.com/apikey',target:'_blank'},'aistudio.google.com/apikey'),' und melde dich mit deinem Google-Konto an.'),h('li',{},'„API-Schlüssel erstellen“ → Schlüssel kopieren.'),h('li',{},'Hier einfügen und „Verbindung testen“ klicken.')),
+    h('div',{class:'field'},h('label',{},'API-Key'),key),h('div',{class:'field'},h('label',{},'Modell'),model,h('span',{class:'muted small'},'Standard: gemini-flash-latest (zeigt automatisch immer auf das aktuelle Flash-Modell). Wenn ein Modell nicht mehr verfügbar ist, wechselt die App automatisch.')),
+    h('div',{class:'row'},test,h('button',{class:'btn ghost',onclick:()=>{key.value='';st.geminiKey='';save();toast('Key entfernt');}},'Key entfernen')),out));
+  {const tok=h('input',{class:'inp',type:'password',value:st.ghToken||'',placeholder:'ghp_… oder github_pat_…',style:'font-size:15px'});const sout=h('div');
+    const con=h('button',{class:'btn primary'},st.ghToken?'Jetzt synchronisieren':'Verbinden & synchronisieren');
+    con.onclick=async()=>{const v=tok.value.trim();if(!v){toast('Zuerst den Schlüssel einfügen');return;}if(v!==st.ghToken){st.ghToken=v;st.gistId='';save(true);}
+      con.disabled=true;con.textContent='Synchronisiere…';sout.innerHTML='';
+      try{await syncNow({throw:true,quiet:true});sout.append(h('div',{class:'fb ok'},'✓ Synchronisiert. Auf deinen anderen Geräten denselben Schlüssel eintragen – dann haben alle denselben Stand.'));}
+      catch(e){sout.append(h('div',{class:'fb bad'},'✗ '+e.message));}
+      con.disabled=false;con.textContent='Jetzt synchronisieren';};
+    m.append(h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},'☁️ Geräte synchronisieren (GitHub)'),
+      h('p',{class:'muted'},'Damit Mac, PC und iPhone denselben Stand haben. Dein Fortschritt wird als private Datei (Secret Gist) in deinem GitHub-Account gespeichert und automatisch abgeglichen: beim Öffnen, nach dem Lernen und wenn du zur App zurückkehrst. Der Gemini-Key wird dabei nicht übertragen.'),
+      h('ol',{class:'small',style:'padding-left:18px'},
+        h('li',{},'Bei GitHub anmelden und ',h('a',{href:'https://github.com/settings/tokens/new?scopes=gist&description=Mi%20profe%20Sync',target:'_blank'},'diesen Link öffnen'),' (Token-Seite, Häkchen „gist“ ist schon gesetzt).'),
+        h('li',{},'Bei „Expiration“ am besten „No expiration“ oder 1 Jahr wählen → ganz unten „Generate token“.'),
+        h('li',{},'Den Schlüssel kopieren, hier einfügen, „Verbinden“ klicken – und auf jedem Gerät dasselbe tun.')),
+      h('div',{class:'field'},h('label',{},'GitHub-Zugangsschlüssel (nur Berechtigung „gist“)'),tok),
+      h('div',{class:'row'},con,st.ghToken?h('button',{class:'btn ghost',onclick:()=>{st.ghToken='';st.gistId='';save(true);toast('Sync auf diesem Gerät beendet');route();}},'Sync beenden'):null,h('span',{class:'muted small'},syncLabel())),sout));}
+  const file=h('input',{type:'file',accept:'.json',class:'hide'});file.onchange=async()=>{try{const d=JSON.parse(await file.files[0].text());if(!d.srs&&!d.lessons)throw 0;const k=S.settings.geminiKey,gt=S.settings.ghToken,gi=S.settings.gistId;S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),d);S.settings=Object.assign({},DEFAULT.settings,d.settings||{});if(!S.settings.geminiKey)S.settings.geminiKey=k;S.settings.ghToken=gt;S.settings.gistId=gi;save();toast('Backup geladen ✓');route();}catch(e){toast('Datei ungültig');}};
+  m.append(h('div',{class:'card'},h('h2',{style:'margin-top:0'},'💾 Fortschritt sichern'),h('p',{class:'muted'},'Dein Fortschritt liegt im Browser. Wenn du Browser-Daten löschst oder den Browser wechselst, ist er weg – also ab und zu ein Backup machen. Auch nützlich, wenn ich dir eine neue Version der App schicke (die übernimmt den Fortschritt aber normalerweise automatisch, solange du denselben Browser nutzt).'),
+    h('div',{class:'row'},h('button',{class:'btn',onclick:async()=>{const d=JSON.parse(JSON.stringify(S));d.settings.geminiKey='';d.settings.ghToken='';d.settings.gistId='';const txt=JSON.stringify(d,null,1);const fn='spanisch-fortschritt-'+today()+'.json';
+        if(IN_ARTIFACT){const dl=await window.claude.use('downloads').catch(()=>null);if(!dl){toast('Download hier nicht verfügbar');return;}try{await dl.save({filename:fn,data:txt});}catch(e){toast('Download abgebrochen');}return;}
+        const a=h('a',{href:URL.createObjectURL(new Blob([txt],{type:'application/json'})),download:fn});document.body.append(a);a.click();a.remove();}},'⬇️ Backup herunterladen'),
+      h('button',{class:'btn',onclick:()=>file.click()},'⬆️ Backup laden'),file,h('span',{class:'spacer'}),
+      h('button',{class:'btn ghost',style:'color:var(--bad)',onclick:async()=>{if(await askConfirm('Wirklich den ganzen Fortschritt zurücksetzen?','Zurücksetzen')){const k=S.settings;S=JSON.parse(JSON.stringify(DEFAULT));S.settings=k;save(true);if(k.ghToken&&k.gistId){gh('/gists/'+k.gistId,{method:'PATCH',body:JSON.stringify({files:{[GIST_FILE]:{content:JSON.stringify(payload())}}})}).catch(()=>{});}route();}}},'Alles zurücksetzen'))));
+}
+
+
+/* ---------- Sync über GitHub Gist ---------- */
+const GIST_FILE='mi-profe-fortschritt.json',GIST_DESC='Mi profe – Spanisch-Fortschritt (Sync)';
+let syncState={status:'',at:null},syncTimer=null,syncBusy=false;
+function syncLabel(){const st=S.settings;if(!st.ghToken)return 'Fortschritt nur auf diesem Gerät';
+  if(syncState.status==='busy')return '☁️ synchronisiere…';if(syncState.status==='error')return '⚠️ Sync-Fehler (offline?)';
+  return syncState.at?'☁️ synchronisiert '+new Date(syncState.at).toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'}):'☁️ Sync aktiv';}
+function setSync(st){syncState.status=st;if(st==='ok')syncState.at=Date.now();const e=document.getElementById('syncstat');if(e)e.textContent=syncLabel();}
+function payload(){const d=JSON.parse(JSON.stringify(S));delete d.settings;return d;}
+function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verloren
+  const o=JSON.parse(JSON.stringify(a));
+  o.lessons=Object.assign({},b.lessons||{});for(const[k,v]of Object.entries(a.lessons||{})){const r=o.lessons[k];
+    o.lessons[k]=r?{done:!!(v.done||r.done),best:Math.max(v.best||0,r.best||0),date:(v.date||'')>(r.date||'')?v.date:r.date}:v;}
+  o.srs=Object.assign({},b.srs||{});for(const[k,v]of Object.entries(a.srs||{})){const r=o.srs[k];
+    if(!r)o.srs[k]=v;else if((v.t||0)>(r.t||0)||(!v.t&&!r.t&&(v.box||0)>(r.box||0)))o.srs[k]=v;}
+  const pa=a.placement,pb=b.placement;o.placement=!pa?pb||null:!pb?pa:((pa.ts||0)>=(pb.ts||0)?pa:pb);
+  const sa=a.stats||{},sb=b.stats||{};o.stats={answers:Math.max(sa.answers||0,sb.answers||0),correct:Math.max(sa.correct||0,sb.correct||0),days:Object.assign({},sb.days||{})};
+  for(const[d,n]of Object.entries(sa.days||{}))o.stats.days[d]=Math.max(n,o.stats.days[d]||0);
+  const ta=a.streak||{},tb=b.streak||{};o.streak=(ta.last||'')>(tb.last||'')?ta:(tb.last||'')>(ta.last||'')?tb:((ta.count||0)>=(tb.count||0)?ta:tb);
+  o.mistakes=((a.updated||0)>=(b.updated||0)?a.mistakes:b.mistakes)||[];
+  o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
+  o.updated=Math.max(a.updated||0,b.updated||0);return o;}
+async function gh(path,opt={}){const r=await fetch('https://api.github.com'+path,Object.assign({},opt,{headers:Object.assign({'Accept':'application/vnd.github+json','Authorization':'Bearer '+S.settings.ghToken},opt.body?{'Content-Type':'application/json'}:{})}));
+  if(r.status===401)throw new Error('Zugangsschlüssel ungültig oder abgelaufen.');if(!r.ok)throw new Error('GitHub-Fehler '+r.status);return r.status===204?null:r.json();}
+async function findOrCreateGist(){
+  for(let page=1;page<=5;page++){const list=await gh('/gists?per_page=100&page='+page);const g=list.find(x=>x.files&&x.files[GIST_FILE]);if(g)return g.id;if(list.length<100)break;}
+  const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:GIST_DESC,public:false,files:{[GIST_FILE]:{content:JSON.stringify(payload())}}})});return g.id;}
+async function syncNow(opts={}){const st=S.settings;if(!st.ghToken||syncBusy)return false;syncBusy=true;setSync('busy');
+  try{if(!st.gistId){st.gistId=await findOrCreateGist();save(true);}
+    const g=await gh('/gists/'+st.gistId);let remote={};const f=g.files&&g.files[GIST_FILE];
+    if(f){let txt=f.content;if(f.truncated&&f.raw_url)txt=await (await fetch(f.raw_url)).text();try{remote=JSON.parse(txt||'{}');}catch(e){remote={};}}
+    const before=JSON.stringify(payload());const settings=S.settings;
+    const merged=mergeState(payload(),remote);S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),merged);S.settings=settings;
+    try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
+    const after=JSON.stringify(payload());
+    if(after!==JSON.stringify(remote))await gh('/gists/'+st.gistId,{method:'PATCH',body:JSON.stringify({files:{[GIST_FILE]:{content:after}}})});
+    setSync('ok');
+    if(before!==after&&!opts.quiet){const r=curRoute().split('/')[0];if(['home','units','unit','vocab','mistakes','placement','settings','words','resumen'].includes(r))route();}
+    return true;}
+  catch(e){setSync('error');console.warn('Sync',e);if(opts.throw)throw e;return false;}
+  finally{syncBusy=false;}}
+window.__sync={schedule(){if(!S.settings.ghToken)return;clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow({quiet:true}),4000);}};
+window.addEventListener('focus',()=>{if(S.settings.ghToken)syncNow();});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&S.settings.ghToken){clearTimeout(syncTimer);syncNow({quiet:true});}});
+
+window.__app={S:()=>S,compare,route,mergeState};
+/* App-Gefühl: kein Pinch-/Doppeltipp-Zoom */
+['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
+document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
+setTimeout(()=>{if(S.settings.ghToken)syncNow();},300);
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)&&window.PWA){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+route();
+})();
