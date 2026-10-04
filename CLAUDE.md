@@ -1,10 +1,14 @@
 # Mi profe – Spanisch-Lern-App von Jonas
 
-Persönliche Lern-App (Deutsch-Oberfläche) nach dem Kursbuch „Meta profesional Plus A1–A2“, Unidad 0–10, plus Übungsblätter aus Jonas' DHBW-Kurs.
+Persönliche Lern-App (Deutsch-Oberfläche), Kurs von A1 bis B1:
+- A1 + A2 Teil 1: Unidad 0–10 nach dem Kursbuch „Meta profesional Plus A1–A2“, plus Übungsblätter aus Jonas' DHBW-Kurs.
+- A2 Teil 2 (Unidad 11–15) und B1 (Unidad 16–18): eigene Inhalte nach dem Plan Curricular des Instituto Cervantes. Keine Inhalte aus Büchern von Schattenbibliotheken (Anna's Archive o. Ä.) übernehmen.
 Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pages, Branch main, Root).
 
 ## Aufbau
-- `quellcode/src/` – Quelltext: `engine.js` (App-Logik), `app.css`, Inhalte `c_*.js`, `placement.js` (Einstufungstest)
+- `quellcode/src/` – Quelltext: `engine.js` (App-Logik), `app.css`, Inhalte `c_*.js` (`c_a2b.js` = A2 Teil 2, `c_b1.js` = B1), `placement.js` (Einstufungsfragen U0–10), `levels.js` (Stufen `LEVELS`, Zuordnung `LEVEL_OF`, Emoji-Bilder `EMOJI`)
+- Neue Unidades: `level:'A2b'|'B1'` setzen, Einstufungsfragen als `placement:[…]` direkt in der Unidad (mind. 3, besser 6). Vokabeln können als 3. Element ein Emoji haben: `['la manzana','der Apfel','🍎']`. Neue Content-Dateien in `build.py` (beide Listen) vor `placement.js` eintragen.
+- Einstufungstest läuft in Etappen (eine pro Eintrag in `LEVELS`, 3 Fragen pro Unidad, Abbruch unter 60 %). Unidades mit „sitzt“ bekommen einen kurzen Check (`#check/<id>`, Ergebnis in `S.checks`).
 - `quellcode/build.py` – baut alles zu EINER Datei:
   - `Spanisch-App-Web/index.html` + `sw.js` + `manifest.webmanifest` (die Web-App, die live ist)
   - `quellcode/dist/Spanisch-Lehrer.html` (Offline-Einzeldatei für den Mac)

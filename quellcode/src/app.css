@@ -178,3 +178,10 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .phase span{padding:3px 10px;border-radius:99px;font-size:12px;background:var(--surface2);color:var(--muted)}
 .phase span.on{background:var(--accent);color:var(--accent-ink)}
 .overlay{position:fixed;inset:0;background:rgba(20,12,8,.45);display:grid;place-items:center;padding:16px;z-index:100}
+
+/* Stufen & Bilder */
+.lvhead{display:flex;align-items:center;gap:12px;margin:30px 0 12px}
+.lvhead h2{margin:0}
+.lvbadge{background:var(--accent);color:var(--accent-ink);font-weight:800;border-radius:10px;padding:6px 10px;font-family:var(--serif);font-size:18px;flex:none}
+.pic{font-size:22px;line-height:1;width:30px;text-align:center;flex:none}
+.qpic{display:block;font-size:56px;line-height:1;margin:2px 0 6px}
