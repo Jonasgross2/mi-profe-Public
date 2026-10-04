@@ -177,7 +177,7 @@ function shell(){
   const main=h('main',{class:'main',id:'main'});
   const app=h('div',{class:'app'},h('aside',{class:'side'},h('div',{class:'brand'},h('i',{class:'dot'}),h('span',{},'Mi profe')),nav,
     h('div',{class:'foot'},'🔥 '+streakNow()+' Tage Serie',h('br'),h('span',{id:'syncstat'},syncLabel()))),h('div',{},mnav,main));
-  document.body.innerHTML='';document.body.append(app);return main;}
+  document.body.innerHTML='';document.body.classList.remove('typing');document.body.append(app);return main;}
 const IN_ARTIFACT=!!(window.claude&&window.claude.use);
 let CUR=null;
 function curRoute(){if(IN_ARTIFACT)return CUR||'home';return location.hash.slice(1)||'home';}
@@ -314,6 +314,9 @@ function keys(target){const k=h('div',{class:'keys'});const L=['á','é','í','�
   for(const c of L){const b=h('button',{type:'button',tabindex:'-1',onmousedown:e=>e.preventDefault(),onclick:()=>{ins(SHIFT?c.toUpperCase():c);if(SHIFT){SHIFT=false;draw();}}},c);btns.push([b,c]);k.append(b);}
   k.append(sh);draw();return k;}
 let lastInput=null;document.addEventListener('focusin',e=>{if(e.target.matches&&e.target.matches('input.inp,textarea.inp'))lastInput=e.target;});
+const isField=t=>t&&t.matches&&t.matches('input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select');
+document.addEventListener('focusin',e=>{if(isField(e.target))document.body.classList.add('typing');});
+document.addEventListener('focusout',e=>{if(isField(e.target))setTimeout(()=>{if(!isField(document.activeElement))document.body.classList.remove('typing');},50);});
 function actionBar(onCheck,ctx,opts={}){
   const btn=h('button',{class:'btn primary'},opts.label||'Prüfen');const bar=h('div',{class:'actions'},btn,opts.extra||null,h('span',{class:'spacer'}),h('span',{class:'muted small'},h('span',{class:'kbd'},'Enter')));
   let state='check';
