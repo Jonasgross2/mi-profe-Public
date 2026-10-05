@@ -222,36 +222,28 @@ function vHome(m){
   const nx=nextLesson();const due=dueCards().length;const done=Object.values(S.lessons).filter(x=>x.done).length;
   const acc=S.stats.answers?Math.round(100*S.stats.correct/S.stats.answers):0;
   const hr=new Date().getHours();const greet=hr<14?'¡Buenos días':hr<20?'¡Buenas tardes':'¡Buenas noches';
-  m.append(h('h1',{},greet+', Jonas!'),h('p',{class:'sub'},'Dein persönlicher Spanischlehrer – von A1 bis B1, aufgebaut nach „Meta profesional“, ergänzt um Alltag in Barcelona.'));
-  if(!S.placement){m.append(h('div',{class:'card',style:'border-color:var(--accent);margin-bottom:16px'},
-    h('div',{class:'kind'},'Erster Schritt'),h('h2',{style:'margin-top:0'},'Einstufungstest machen'),
-    h('p',{},'In Etappen von A1 bis B1, je ca. 5 Minuten. Danach weiß ich, was du sicher kannst, was wir auffrischen und wo wir neu einsteigen – Bekanntes hakst du mit dem Abschlusstest ab.'),
-    h('button',{class:'btn primary',onclick:()=>go('placement')},'Test starten →')));}
-  m.append(h('div',{class:'grid g4',style:'margin-bottom:16px'},
-    stat(streakNow()+' 🔥','Tage in Folge'),stat(due,'Vokabeln fällig'),stat(done,'Lektionen fertig'),stat(acc+'%','Trefferquote')));
-  const doneN=Object.values(S.lessons).filter(x=>x.done).length;const todayN=S.stats.days[today()]||0;
-  m.append(h('div',{class:'card',style:'margin-bottom:14px'},h('div',{class:'kind'},'Dein Plan für heute (ca. 20 Min.)'),
-    h('div',{class:'grid',style:'gap:6px'},
-      planRow(due===0&&Object.keys(S.srs).length>0,'1. Vokabeln wiederholen',due?due+' fällig':Object.keys(S.srs).length?'erledigt':'noch keine – kommen mit der ersten Lektion','vocab'),
-      planRow(false,nx?.check||nx?.test?'2. '+'Abschlusstest':nx?.n>1?'2. '+RN[nx.n]:'2. Eine neue Lektion',nx?nxTitle(nx):'alles fertig',nx?nxRoute(nx):'units'),
-      doneN>=2?planRow(S.lastMix===today(),'3. Gemischte Wiederholung',S.lastMix===today()?'erledigt':'15 Aufgaben quer durch alles','mix'):null,
-      (()=>{const ns=nextStory();return ns?planRow(false,'4. Geschichte lesen & hören',ns.title+' · ca. 5 Min.','story/'+ns.id):null;})(),
-      planRow(false,'5. Bonus: Shadowing oder Gespräch','Aussprache & Sprechen',nx?'shadow/'+nx.u.id:'units'))));
+  m.append(h('h1',{},greet+', Jonas!'),h('p',{class:'sub'},'🔥 '+streakNow()+' '+(streakNow()===1?'Tag':'Tage')+' in Folge'+(nx?' · '+levelOf(nx.u).title:'')));
+  /* alle Aufgaben von heute in Lern-Reihenfolge – die erste offene wird groß angezeigt, der Rest klein darunter */
+  const ns=nextStory();
+  const items=[
+    due?{ic:'🗂️',t:'Vokabeln wiederholen',d:due+' Karten sind fällig – zuerst wiederholen, dann Neues.',r:'vocab',b:'Wiederholen →'}:null,
+    nx?{ic:nx.check||nx.test?'🏆':'📚',t:nxTitle(nx),d:nxDesc(nx),r:nxRoute(nx),b:nx.check||nx.test?'Test starten →':'Los geht’s →'}:null,
+    done>=2&&S.lastMix!==today()?{ic:'🔀',t:'Gemischte Wiederholung',d:'15 Aufgaben quer durch alles, was du schon gelernt hast.',r:'mix',b:'Starten →'}:null,
+    ns?{ic:'📖',t:'Geschichte: '+ns.title,d:'Erst hören, dann lesen – ca. 5 Minuten.',r:'story/'+ns.id,b:'Lesen →'}:null,
+    S.mistakes.length?{ic:'✏️',t:'Fehler üben',d:S.mistakes.length+' Aufgaben aus dem Fehlerheft.',r:'mistakes',b:'Üben →'}:null,
+    nx?{ic:'🎧',t:'Aussprache & Sprechen',d:'Shadowing oder Gespräch zur aktuellen Unidad.',r:'shadow/'+nx.u.id,b:'Starten →'}:null].filter(Boolean);
+  if(!S.placement)items.unshift({ic:'🎯',t:'Einstufungstest machen',d:'In Etappen von A1 bis B1, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.',r:'placement',b:'Test starten →'});
+  const [hero,...rest]=items;
+  if(hero)m.append(h('div',{class:'card hero',onclick:()=>go(hero.r)},h('div',{class:'kind'},'Als Nächstes'),
+    h('div',{class:'row',style:'flex-wrap:nowrap;align-items:flex-start'},h('div',{class:'hic'},hero.ic),h('div',{style:'flex:1;min-width:0'},h('h2',{style:'margin:0 0 4px'},hero.t),h('p',{class:'muted',style:'margin:0 0 14px'},hero.d),
+      h('button',{class:'btn primary',onclick:e=>{e.stopPropagation();go(hero.r);}},hero.b)))));
+  else m.append(h('div',{class:'card hero'},h('h2',{style:'margin:0'},'Für heute alles erledigt ✓'),h('p',{class:'muted',style:'margin:6px 0 0'},'¡Muy bien! Morgen geht es weiter.')));
+  if(rest.length)m.append(h('div',{class:'kind',style:'margin:18px 0 8px'},'Danach, wenn du Lust hast'),h('div',{class:'chips'},rest.map(x=>h('button',{class:'chip',onclick:()=>go(x.r)},h('span',{},x.ic),h('span',{},x.t)))));
   const days=[...Array(7)].map((_,i)=>addDays(today(),i-6));const mx=Math.max(10,...days.map(d=>S.stats.days[d]||0));
-  m.append(h('div',{class:'card',style:'margin-bottom:14px'},h('div',{class:'kind'},'Deine Woche'),h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
-    return h('div',{class:'wd'+(d===today()?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},['So','Mo','Di','Mi','Do','Fr','Sa'][new Date(d+'T12:00:00').getDay()]),h('div',{class:'small'},v||''));})),
-    h('div',{class:'muted small'},'Beantwortete Aufgaben pro Tag – lieber jeden Tag ein bisschen als einmal viel.')));
-  const row=h('div',{class:'grid g2'});
-  if(nx)row.append(h('div',{class:'card'},h('div',{class:'kind'},'Weiter lernen · '+levelOf(nx.u).title),h('h3',{style:'margin-top:0;font-family:var(--serif);font-size:20px'},nxTitle(nx)),
-    h('p',{class:'muted small'},nxDesc(nx)),h('button',{class:'btn primary',onclick:()=>go(nxRoute(nx))},nx.check||nx.test?'Test starten →':'Los geht’s →')));
-  row.append(h('div',{class:'card'},h('div',{class:'kind'},'Vokabeln'),h('h3',{style:'margin-top:0;font-family:var(--serif);font-size:20px'},due?due+' Karten warten auf dich':'Alles wiederholt ✓'),
-    h('p',{class:'muted small'},'Neue Wörter landen automatisch hier, wenn du sie in einer Lektion siehst. Wiederholung nach Lernkurve: 1 → 3 → 7 → 14 → 30 Tage.'),
-    h('button',{class:'btn'+(due?' primary':''),onclick:()=>go('vocab')},due?'Jetzt wiederholen':'Zum Trainer')));
-  m.append(row);
-  if(S.mistakes.length)m.append(h('div',{class:'card',style:'margin-top:14px'},h('div',{class:'row'},h('div',{},h('div',{class:'kind'},'Fehlerheft'),h('div',{},S.mistakes.length+' Aufgaben, die du noch mal üben solltest.')),h('div',{class:'spacer'}),h('button',{class:'btn',onclick:()=>go('mistakes')},'Fehler üben'))));
-  m.append(h('p',{class:'muted small',style:'margin-top:24px'},'Tipp: Am besten täglich 15–20 Minuten – erst Vokabeln, dann eine Lektion. ',hasAI()?AIN()+'-Korrektur ist aktiv ✓':'Für freie Texte & Gespräche kannst du in den Einstellungen einen kostenlosen Gemini-Key hinterlegen.'));
+  m.append(h('div',{class:'card',style:'margin-top:22px'},h('div',{class:'row'},h('div',{class:'kind',style:'flex:1;margin:0'},'Deine Woche'),h('span',{class:'muted small'},done+(done===1?' Lektion':' Lektionen')+' · '+acc+' % richtig')),
+    h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
+      return h('div',{class:'wd'+(d===today()?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},['So','Mo','Di','Mi','Do','Fr','Sa'][new Date(d+'T12:00:00').getDay()]),h('div',{class:'small'},v||''));}))));
 }
-const planRow=(done,t,d,r)=>h('div',{class:'lesson'+(done?' done':''),onclick:()=>go(r)},h('div',{class:'ic'},done?'✓':'→'),h('div',{style:'flex:1'},h('div',{class:'lt'},t),h('div',{class:'ld'},d)));
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 
 function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.status==='soon';const ck=S.checks[u.id];
