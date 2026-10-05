@@ -284,3 +284,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 @media (min-width:1024px){html,body{height:100%;overflow:hidden}.app{height:100vh;height:100dvh;min-height:0}.side{height:100%}
   .app>div{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.main{padding-bottom:40px}}
 @media (min-width:1024px) and (max-height:900px){.main{padding-top:20px;padding-bottom:20px}.lrow .ld{display:none}.lrow{padding:10px 14px}.lrow .rounds{margin-top:5px}.unit{padding:12px 16px}.unit .d{font-size:13px}.main h1{margin-bottom:6px}}
+.mtile.soon{opacity:.5}
+.brand .flag{font-size:18px}
+.app.mini .brand .bt{display:none}

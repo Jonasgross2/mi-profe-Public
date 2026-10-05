@@ -50,5 +50,5 @@ currículum:'📄','carta de presentación':'✉️',puesto:'💼','oferta de tr
 botella:'🍾',lata:'🥫',paquete:'📦',bolsa:'🛍️','barra de pan':'🥖'};
 window.picOf=function(es,explicit){if(explicit)return explicit;
   let k=String(es).toLowerCase().replace(/[¿?¡!]/g,'').replace(/\(.*?\)/g,'').split(' / ')[0].replace(/\s*….*$/,'').trim();
-  if(EMOJI[k])return EMOJI[k];k=k.replace(/^(el|la|los|las|un|una)\s+/,'').trim();
+  if(EMOJI[k])return EMOJI[k];k=k.replace(window.LANG&&LANG.articles||/^(el|la|los|las|un|una)\s+/,'').trim();
   return EMOJI[k]||'';};
