@@ -17,7 +17,7 @@ lessons:[
  {t:'match',q:'Indefinido → Imperfecto de subjuntivo',pairs:[['hicieron','hiciera'],['dijeron','dijera'],['pudieron','pudiera'],['estuvieron','estuviera'],['supieron','supiera']]},
  {t:'gap',q:'(nosotros, vivir) → ___',a:['viviéramos']},
  {t:'gap',q:'(ellos, ser) → ___',a:['fueran']},
- {t:'mc',q:'Welche Form ist richtig? (yo, poner)',opts:['pusiera','ponera','pusiese a'],a:0},
+ {t:'mc',q:'Welche Form ist richtig? (yo, poner)',opts:['pusiera','ponera','ponería'],a:0},
  {t:'gap',q:'(tú, venir) → ___',a:['vinieras']}]},
 {id:'l2',title:'Wenn ich … hätte',desc:'si tuviera, viajaría',steps:[
  {t:'info',title:'Irreale Bedingung in der Gegenwart',html:`<table><tr><th>Bedingung</th><th>möglich (B1)</th><th>irreal / unwahrscheinlich (B2)</th></tr>

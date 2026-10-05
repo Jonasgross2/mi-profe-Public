@@ -237,8 +237,8 @@ lessons:[
  <div class="ex">Die Präposition steht <b>vor</b> dem Relativwort – nie am Satzende wie im Englischen.</div>`},
  {t:'mc',q:'La compañera ___ comparto despacho es muy simpática.',opts:['con la que','que','la que con'],a:0},
  {t:'mc',q:'El hotel ___ dormimos estaba muy limpio.',opts:['en el que','el que','que en'],a:0},
- {t:'gap',q:'Es la persona en ___ más confío. (Person: quien)',a:['quien']},
- {t:'gap',q:'Ese es el tema de ___ quería hablar contigo. (Sache: lo que)',a:['lo que']},
+ {t:'gap',q:'Es la persona en ___ más confío. (Person: quien)',a:['quien','la que']},
+ {t:'gap',q:'Eso es de ___ quería hablar contigo. (das, worüber)',a:['lo que']},
  {t:'tr',de:'Der Freund, mit dem ich wohne, kommt aus Sevilla.',a:['El amigo con el que vivo es de Sevilla.','El amigo con quien vivo es de Sevilla.']}]},
 {id:'l3',title:'Gesucht: jemand, der …',desc:'busco un piso que tenga',steps:[
  {t:'info',title:'Gibt es das schon – oder suche ich es?',html:`<table><tr><th>bekannt / existiert: Indikativ</th><th>gesucht / unbekannt: Subjuntivo</th></tr>
@@ -275,7 +275,7 @@ Buscamos a una persona que sea ordenada, que no fume y que tenga ganas de compar
 placement:[
  {t:'mc',q:'No entiendo ___ dices.',opts:['lo que','que','donde'],a:0},
  {t:'mc',q:'Busco un piso que ___ terraza.',opts:['tenga','tiene','tendrá'],a:0},
- {t:'gap',q:'La empresa en ___ trabajo es alemana.',a:['la que']},
+ {t:'gap',q:'La empresa en ___ trabajo es alemana.',a:['la que','la cual']},
  {t:'mc',q:'„Ich lebe seit zwei Jahren hier.“',opts:['Llevo dos años viviendo aquí.','Sigo dos años viviendo aquí.','Vuelvo dos años a vivir aquí.'],a:0},
  {t:'gap',q:'Tengo un amigo que ___ (hablar) japonés.',a:['habla']},
  {t:'gap',q:'Pablo ha dejado ___ fumar.',a:['de']}],
