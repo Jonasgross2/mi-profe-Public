@@ -220,7 +220,7 @@ function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{cla
   ov.onclick=e=>{if(e.target===ov)close(false);};document.body.append(ov);});}
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();const parts=curRoute().split('/');const m=shell();
   const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
-  v(m,...parts.slice(1));window.scrollTo(0,0);}
+  v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
 /* ---------- views ---------- */
 function vHome(m){
@@ -720,7 +720,7 @@ function vPlacement(m){
     h('div',{class:'card',style:'margin-bottom:16px'},h('p',{style:'margin:0'},'Nach jeder Etappe siehst du dein Zwischenergebnis. Liegt eine Etappe unter 60 %, höre ich dort auf – alles danach lernst du neu. Was „sitzt“, hakst du später mit dem Abschlusstest ab.'),
       h('p',{class:'muted small',style:'margin:8px 0 0'},'Kein Stress: Wenn du etwas nicht weißt, wähl „Weiß ich nicht“ bzw. lass die Lücke leer – das hilft der Einstufung mehr als Raten.')),
     h('button',{class:'btn primary',onclick:()=>runStage(m,0,{})},'Test starten →'));}
-function runStage(m,li,results){const L=LEVELS[li];m.innerHTML='';window.scrollTo(0,0);
+function runStage(m,li,results){const L=LEVELS[li];m.innerHTML='';window.scrollTo(0,0);m.scrollTop=0;
   const byU={};PLACEMENT.forEach((s,i)=>{(byU[s.u]=byU[s.u]||[]).push(i);});
   const units=levelUnits(L.id).filter(u=>byU[u.id]);
   const steps=units.flatMap(u=>shuffle(byU[u.id]).slice(0,3)).map(i=>{const s=PLACEMENT[i];return{s:s.t==='mc'&&!s.opts.includes('Weiß ich nicht')?Object.assign({},s,{opts:s.opts.concat(['Weiß ich nicht']),keepLast:true}):s,ref:'P||'+i,unit:s.u};});
