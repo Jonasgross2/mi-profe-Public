@@ -644,11 +644,17 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(tab==='g'){m.append(levelSeg(lv,'ref/g',L=>COURSE.units.filter(u=>unitLevel(u)===L.id).length+' Unid.'),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>unitLevel(u)===lv&&u.resumen).map(u=>
       h('div',{class:'lesson lrow',onclick:()=>go('resumen/'+u.id)},h('div',{class:'ic'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},u.title),h('div',{class:'ld'},u.goals.join(' · ')))))));return;}
   const all=[];const seen=new Set();for(const u of COURSE.units)for(const w of allUnitWords(u))if(!seen.has(w[0])){seen.add(w[0]);all.push([w,u]);}
-  const inp=h('input',{class:'inp',placeholder:'Spanisch oder Deutsch suchen …',autocomplete:'off',spellcheck:'false'});const out=h('div',{class:'vlist'});
-  const draw=()=>{const q=strip(inp.value.toLowerCase().trim());out.innerHTML='';const hits=all.filter(([w])=>!q||strip((w[0]+' '+w[1]).toLowerCase()).includes(q)).slice(0,80);
-    out.append(...hits.map(([w,u])=>h('div',{class:'vrow'},spk(w[0]),picEl(w[0],w[2]),h('span',{class:'es'},w[0]),h('span',{class:'de',style:'flex:1'},w[1]),h('span',{class:'pill'},'U'+u.n))));
-    if(!hits.length)out.append(h('p',{class:'muted'},'Nichts gefunden.'));};
-  inp.oninput=draw;m.append(inp,keys(()=>inp),h('p',{class:'muted small'},all.length+' Wörter & Ausdrücke im Kurs'),out);draw();}
+  let mine=!!S.settings.dictMine;
+  const inp=h('input',{class:'inp',type:'search',placeholder:'Suchen – Spanisch oder Deutsch',autocomplete:'off',spellcheck:'false',autocorrect:'off',autocapitalize:'off'});
+  const tog=h('button',{class:'chip'+(mine?' on':''),onclick:()=>{mine=!mine;S.settings.dictMine=mine;save(true);tog.classList.toggle('on',mine);draw();}},h('span',{},'⭐'),h('span',{},'Nur meine Wörter'));
+  const info=h('div',{class:'muted small',style:'margin:8px 0'});const out=h('div',{class:'vlist'});
+  const draw=()=>{const q=strip(inp.value.toLowerCase().trim());out.innerHTML='';
+    const hits=all.filter(([w,u])=>(q?strip((w[0]+' '+w[1]).toLowerCase()).includes(q):unitLevel(u)===lv)&&(!mine||S.srs[w[0]]));
+    info.textContent=(q?hits.length+' Treffer in allen Stufen':hits.length+' Wörter in '+LEVELS.find(L=>L.id===lv).title)+(mine?' · nur gesammelte':'');
+    out.append(...hits.slice(0,300).map(([w,u])=>h('div',{class:'vrow drow'},spk(w[0]),picEl(w[0],w[2])||h('span',{class:'pic'}),h('div',{class:'dw'},h('div',{class:'es'},w[0]),h('div',{class:'de'},w[1])),h('span',{class:'pill'},'U'+u.n))));
+    if(!hits.length)out.append(h('p',{class:'muted'},mine?'Noch keine gesammelten Wörter hier – sie kommen mit den Lektionen.':'Nichts gefunden.'));};
+  inp.oninput=draw;
+  m.append(inp,levelSeg(lv,'ref/w',L=>{const n=all.filter(([,u])=>unitLevel(u)===L.id).length;return n+' W.';}),h('div',{class:'row'},tog),info,out);draw();}
 function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'s');const u=storyFor(st);
   if(!storyOpen(st))m.append(h('div',{class:'fb warn',style:'margin-bottom:12px'},'Diese Geschichte passt ab Unidad '+u.n+' – vielleicht kommt dir noch nicht alles bekannt vor. Lies sie trotzdem, wenn du magst!'));
   const steps=[{s:{t:'read',kind:'Geschichte · '+levelOf(u).title,title:st.title,intro:'Tipp: Hör sie dir zuerst einmal ohne Text an (🔊 Vorlesen, Augen zu) – dann lies mit.',text:st.text,de:st.de},ref:'S|'+st.id+'|r'}]
