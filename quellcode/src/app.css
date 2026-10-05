@@ -293,19 +293,18 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .howto{margin:0 0 12px}.howto summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;margin-bottom:6px}
 .card h2{font-size:18px}
 /* Unidad-Karten: Status-Pillen rechtsbündig */
-.unit .utop{display:flex;align-items:center;gap:8px}
-.unit .utop .t{flex:1;min-width:0}
-.unit .ubar{margin-top:8px}
-.unit .upill{flex:none;width:112px;display:flex}
-.unit .upill .pill{width:100%;box-sizing:border-box;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.unit .upct{flex:none;width:38px;text-align:right;align-self:center}
+.unit .ugrid{flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 112px;column-gap:12px;row-gap:6px;align-items:center}
+.unit .ugrid .d{grid-column:1/-1;grid-row:2}
+.unit .ugrid .ubar,.unit .ugrid .upct{grid-row:3}
+.unit .ugrid .ubar{margin:0}
+.unit .upill{display:flex;justify-content:flex-end}
+.unit .upill .pill{width:100%;box-sizing:border-box;text-align:center;white-space:nowrap}
+.unit .upct{text-align:right}
 /* Kachel-Seiten (Mehr, Bibliothek, Vokabeln) am Handy/iPad: Kacheln füllen den Platz, Versionszeile unten */
 @media (max-width:1023px){
   .main:has(>.mtiles){display:flex;flex-direction:column}
   .main>.mtiles .mtile{min-height:128px}
   .main>.verline{margin-top:auto;padding-top:14px}
 }
-@media (max-width:700px){.unit .upill{width:92px}.unit .upill .pill{font-size:11px;padding:2px 6px}}
 .mtiles:has(>:nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
-@media (max-width:700px){.unit{padding:9px 14px}.grid:has(>.unit){gap:6px!important}.unit .ubar{margin-top:6px}}
-@media (max-width:700px){.unit{gap:10px;padding:9px 12px}.unit .num{width:32px;height:32px;font-size:16px}.unit .t{font-size:15px}.unit .upill{width:78px}.unit .upill .pill{font-size:10.5px;padding:2px 4px}.unit .upct{width:32px}.unit .utop{gap:6px}}
+@media (max-width:700px){.unit{padding:9px 14px}.grid:has(>.unit){gap:6px!important}.unit .ugrid{grid-template-columns:minmax(0,1fr) 96px;column-gap:10px;row-gap:5px}.unit .upill .pill{font-size:11px;padding:2px 6px}.unit .ugrid .ubar,.unit .ugrid .upct{grid-row:2}}

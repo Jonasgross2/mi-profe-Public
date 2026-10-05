@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261005-1701";</script>
+<script>window.PWA=true;window.APP_VERSION="20261005-1705";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -305,22 +305,21 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .howto{margin:0 0 12px}.howto summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;margin-bottom:6px}
 .card h2{font-size:18px}
 /* Unidad-Karten: Status-Pillen rechtsbündig */
-.unit .utop{display:flex;align-items:center;gap:8px}
-.unit .utop .t{flex:1;min-width:0}
-.unit .ubar{margin-top:8px}
-.unit .upill{flex:none;width:112px;display:flex}
-.unit .upill .pill{width:100%;box-sizing:border-box;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.unit .upct{flex:none;width:38px;text-align:right;align-self:center}
+.unit .ugrid{flex:1;min-width:0;display:grid;grid-template-columns:minmax(0,1fr) 112px;column-gap:12px;row-gap:6px;align-items:center}
+.unit .ugrid .d{grid-column:1/-1;grid-row:2}
+.unit .ugrid .ubar,.unit .ugrid .upct{grid-row:3}
+.unit .ugrid .ubar{margin:0}
+.unit .upill{display:flex;justify-content:flex-end}
+.unit .upill .pill{width:100%;box-sizing:border-box;text-align:center;white-space:nowrap}
+.unit .upct{text-align:right}
 /* Kachel-Seiten (Mehr, Bibliothek, Vokabeln) am Handy/iPad: Kacheln füllen den Platz, Versionszeile unten */
 @media (max-width:1023px){
   .main:has(>.mtiles){display:flex;flex-direction:column}
   .main>.mtiles .mtile{min-height:128px}
   .main>.verline{margin-top:auto;padding-top:14px}
 }
-@media (max-width:700px){.unit .upill{width:92px}.unit .upill .pill{font-size:11px;padding:2px 6px}}
 .mtiles:has(>:nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
-@media (max-width:700px){.unit{padding:9px 14px}.grid:has(>.unit){gap:6px!important}.unit .ubar{margin-top:6px}}
-@media (max-width:700px){.unit{gap:10px;padding:9px 12px}.unit .num{width:32px;height:32px;font-size:16px}.unit .t{font-size:15px}.unit .upill{width:78px}.unit .upill .pill{font-size:10.5px;padding:2px 4px}.unit .upct{width:32px}.unit .utop{gap:6px}}
+@media (max-width:700px){.unit{padding:9px 14px}.grid:has(>.unit){gap:6px!important}.unit .ugrid{grid-template-columns:minmax(0,1fr) 96px;column-gap:10px;row-gap:5px}.unit .upill .pill{font-size:11px;padding:2px 6px}.unit .ugrid .ubar,.unit .ugrid .upct{grid-row:2}}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -4773,11 +4772,11 @@ const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{cl
 
 function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.status==='soon';const ck=S.checks[u.id];
   const pill=ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt ✓')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):soon?h('span',{class:'pill'},T('kommt als Nächstes')):null;
-  /* Zeile 1: Titel | Status-Pille, Zeile 2: Balken – Prozent rechts senkrecht mittig */
+  /* Raster: Titel | Status-Pille, Balken | Prozent – Pille und Prozent rechtsbündig untereinander */
   return h('div',{class:'card unit'+(soon?' locked':''),onclick:()=>{if(!soon)go('unit/'+u.id)}},
-    h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'utop'},h('span',{class:'t'},u.title),pill?h('span',{class:'upill'},pill):null),
-      h('div',{class:'d'},u.sub),soon?null:h('div',{class:'bar ubar'},h('i',{style:'width:'+Math.round(pct*100)+'%'}))),
-    h('span',{class:'muted small upct'},soon?'':Math.round(pct*100)+'%'));}
+    h('div',{class:'num'},u.n),h('div',{class:'ugrid'},h('span',{class:'t'},u.title),h('span',{class:'upill'},pill),
+      h('div',{class:'d'},u.sub),soon?h('span'):h('div',{class:'bar ubar'},h('i',{style:'width:'+Math.round(pct*100)+'%'})),
+      h('span',{class:'muted small upct'},soon?'':Math.round(pct*100)+'%')));}
 let lastLv=null;/* zuletzt angesehene Stufe – beim Zurückkommen auf „Kurs“ wieder dort, beim App-Start dort, wo es weitergeht */
 function vUnits(m,lv){
   const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):T('A1'));lastLv=lv;
