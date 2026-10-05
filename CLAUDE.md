@@ -47,11 +47,11 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - Alle Oberflächentexte in `engine.js` stehen in `T('deutscher Text')`; Übersetzungen in `ui_tr.js` (`UI_TR.en/es/pt`, Schlüssel = deutscher Text). Fehlt ein Eintrag, erscheint Deutsch. Platzhalter über `fmt()`: `{L}` Sprachname, `{INTO}` „ins Spanische“, `{ON}` „auf Spanisch“.
 - Neue UI-Texte immer mit `T('…')` schreiben und in `ui_tr.js` für en/es/pt ergänzen.
 - Auswahl: Mehr → Sprache → „Sprache der App“ und Flaggen auf der Willkommensseite (`setUI`, gespeichert als `ui` in `mi-profe-shared`). Neue Nutzer: automatisch nach Gerätesprache; bestehende ohne `ui`: Deutsch.
-- Kursinhalte (Erklärungen, Übersetzungen) sind weiterhin nur Deutsch. Gemini bekommt bei UI ≠ de die Anweisung, in der UI-Sprache zu erklären.
+- Kursinhalte folgen NICHT der App-Sprache, sondern der **Erklärsprache** `EX` (Mehr → Sprache → „Spanisch lernen mit“, gespeichert als `ex` in `mi-profe-shared`, nur wenn bewusst gewählt). Auswahl = Deutsch + alle `COURSE_TR[Lernsprache]`-Sprachen, nie die Lernsprache selbst (also z. B. App auf Spanisch, Erklärungen auf Deutsch). Ohne Wahl: = App-Sprache, falls verfügbar; sonst neue Nutzer Englisch, bestehende Deutsch. Flaggen auf der Willkommensseite setzen die Wahl zurück. Gemini erklärt in der Erklärsprache. Platzhalter `{EX}` in `fmt()` = Name der Erklärsprache.
 
 ## Kursinhalte übersetzen (z. B. Spanischkurs mit englischen Erklärungen)
 - `quellcode/i18n/course_de.json`: alle deutschen Texte der Kursinhalte, gruppiert nach Abschnitt (`u0`…`u20` = Anzeige-Nummer, `stories`, `test`). Neu erzeugen mit `jsc i18n/extract.js -- src > i18n/course_de.json` (jsc: /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc).
 - Übersetzungen: `i18n/<lern>_<ui>/<abschnitt>.py` mit `EN=[…]` in derselben Reihenfolge. `python3 i18n/gen.py` erzeugt `src/tr_<lern>_<ui>.js` (`COURSE_TR`), `build.py` bindet alle `src/tr_*.js` automatisch ein.
-- Die Engine übersetzt beim Laden (`trContent`), wenn die App-Sprache ≠ Deutsch ist; fehlende Texte bleiben Deutsch. `role` (KI-Anweisung) bleibt immer Deutsch.
+- Die Engine übersetzt beim Laden (`trContent`), wenn die Erklärsprache ≠ Deutsch ist (Titel „Lesen: …“ bekommen automatisch „Reading: …“ usw.); fehlende Texte bleiben Deutsch. `role` (KI-Anweisung) bleibt immer Deutsch.
 - Stand: es→en komplett (alle Unidades, Geschichten, Einstufungstest, `x_all` = Texte aus `course_de_extra.json`). es→pt noch nicht begonnen.
 - Zweiter Suchlauf: `jsc i18n/extract_extra.js -- src i18n/course_de.json > i18n/course_de_extra.json` findet Texte, die der erste übersieht (Titel ohne Füllwörter). Einträge `""` in einer Übersetzungsliste = unverändert lassen.
