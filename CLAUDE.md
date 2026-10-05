@@ -33,6 +33,7 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - Bibliothek `#ref/s`: Geschichten-Serie „Nuevo en Barcelona“ (`c_stories.js`, `STORIES`, `after` = ab welcher Unidad, Fortschritt in `S.stories`, Fehler-Ref `S|id|i`), `#story/<id>`.
 - `#ref/w` Wörterbuch (Suche über alle Vokabeln), `#ref/g` Grammatik-Übersicht (alle Resumen), `#verbs` Verben-Trainer (alle conj-Schritte angefangener Unidades).
 - Desktop-Seitenleiste einklappbar (`S.settings.side='mini'`).
+- Zurück-Navigation: `NAVSTACK` (Verlauf, `trackNav` in `route()`), `backTo(label, standard)` / `goBack(standard)` führen zur vorherigen Seite und zeigen deren Namen (`navLabel`); Reiterwechsel auf derselben Seite ersetzen den Eintrag (`pageKey`), Tipp auf die Leiste setzt den Verlauf zurück. Neue Zurück-Knöpfe immer mit `backTo`/`goBack` bauen, nie fest `go('…')`.
 - Achtung in `shell()`: lokale Variable `route` überschattet die Funktion `route()` – dort `go(curRoute())` benutzen.
 - Navigation nach dem Prinzip „kein Scrollen am Handy“: Mehr (`#settings`, Unterseiten `#settings/stimme|ki|sync|backup`), Vokabeln (`#vocab`, `#vocab/units`) und Bibliothek (`#ref`) sind Kachel-Menüs (`mtile`/`tiles`). Kurs (`#units/<Stufe>`), Geschichten und Grammatik haben Stufen-Reiter (`seg`/`levelSeg`). Unidad-Seite: Reiter Lektionen | Extras (`#unit/<id>/x`), Übungsblätter `#unit/<id>/ab`.
 - Startseite: Tagesplan mit „x von y erledigt · noch ca. N Min.“, erste offene Aufgabe groß, Rest als Chips.

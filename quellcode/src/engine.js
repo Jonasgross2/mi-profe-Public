@@ -230,7 +230,22 @@ function unitStatus(u){const p=S.placement?.results?.[u.id];if(p==null)return nu
 /* Kachel-Menüs (jede Kachel öffnet eine eigene Seite) */
 const mtile=(ic,t,d,fn,badge)=>h('button',{class:'mtile',onclick:fn},h('span',{class:'mi2'},ic),h('span',{class:'mt'},t),d?h('span',{class:'md'},d):null,badge?h('span',{class:'mb'},badge):null);
 const tiles=(...k)=>h('div',{class:'mtiles'},...k);
-const backTo=(label,r)=>h('button',{class:'btn ghost small',style:'margin-bottom:6px',onclick:()=>go(r)},'← '+label);
+/* Zurück-Navigation: Verlauf der besuchten Seiten. „Zurück“ führt dorthin, wo man herkam (sonst zur Standardseite r).
+   Reiterwechsel auf derselben Seite (Stufe, Lektionen/Extras) ersetzen den Eintrag; ein Tipp auf die Leiste startet neu. */
+let NAVSTACK=[],NAVRESET=false;
+const pageKey=r=>{const p=r.split('/');return p[0]==='units'?'units':p[0]==='unit'?'unit/'+p[1]:p[0]==='ref'&&p[1]?'ref/'+p[1]:p[0]==='ref'?'ref':r;};
+function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NAVSTACK.length;
+  if(n>=2&&pageKey(NAVSTACK[n-2])===pageKey(r))NAVSTACK.pop();
+  if(NAVSTACK.length&&pageKey(NAVSTACK[NAVSTACK.length-1])===pageKey(r))NAVSTACK[NAVSTACK.length-1]=r;else NAVSTACK.push(r);
+  if(NAVSTACK.length>40)NAVSTACK.shift();}
+const prevRoute=()=>NAVSTACK.length>=2?NAVSTACK[NAVSTACK.length-2]:null;
+function navLabel(r){const p=r.split('/');const u=p[1]&&unitById(p[1]);
+  return p[0]==='home'?T('Start'):p[0]==='units'?T('Kurs'):p[0]==='unit'&&u?UW+' '+u.n:p[0]==='resumen'&&u?T('Resumen · ')+UW+' '+u.n:p[0]==='words'&&u?T('Wortschatz · ')+UW+' '+u.n:
+    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?T('Vokabeln'):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
+    p[0]==='settings'?T('Mehr'):p[0]==='lang'?T('Sprache & Profil'):p[0]==='placement'?T('Einstufungstest'):null;}
+function goBack(r){const pr=prevRoute();go(pr&&pr!==curRoute()?pr:r);}
+const backLabel=label=>{const pr=prevRoute();return(pr&&navLabel(pr))||label;};
+const backTo=(label,r)=>h('button',{class:'btn ghost small',style:'margin-bottom:6px',onclick:()=>goBack(r)},'← '+backLabel(label));
 const curUnit=()=>nextLesson()?.u||COURSE.units[0];
 const unitLevel=u=>u.level||LEVEL_OF[u.id]||T('A1');
 const levelOf=u=>LEVELS.find(L=>L.id===unitLevel(u))||LEVELS[0];
@@ -268,9 +283,9 @@ function shell(){
   const route=curRoute().split('/')[0];
   const due=dueCards().length;
   const NAVD=NAV;const mini=S.settings.side==='mini';
-  const nav=h('div',{class:'nav'},NAVD.map(([r,ic,l])=>h('button',{class:route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round','placement'].includes(route))||(r==='ref'&&['verbs','story'].includes(route))?'active':'',title:l,onclick:()=>go(r)},h('span',{class:'ni'},ic),h('span',{class:'nl'},l),r==='vocab'&&due?h('span',{class:'badge'},due):null)));
+  const nav=h('div',{class:'nav'},NAVD.map(([r,ic,l])=>h('button',{class:route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round','placement'].includes(route))||(r==='ref'&&['verbs','story'].includes(route))?'active':'',title:l,onclick:()=>{NAVRESET=true;go(r);}},h('span',{class:'ni'},ic),h('span',{class:'nl'},l),r==='vocab'&&due?h('span',{class:'badge'},due):null)));
   const SHORT={home:T('Start'),units:T('Kurs'),vocab:T('Vokabeln'),ref:T('Bibliothek'),mistakes:T('Fehler'),settings:T('Mehr')};
-  const mnav=h('nav',{class:'mobile-nav'},NAV.map(([r,ic,l])=>h('button',{class:(route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round','placement'].includes(route))||(r==='ref'&&['verbs','story'].includes(route)))?'active':'',onclick:()=>go(r),'aria-label':l},h('span',{class:'mi'},ic),h('span',{class:'ml'},SHORT[r]),r==='vocab'&&due?h('span',{class:'mbadge'},due):null)));
+  const mnav=h('nav',{class:'mobile-nav'},NAV.map(([r,ic,l])=>h('button',{class:(route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round','placement'].includes(route))||(r==='ref'&&['verbs','story'].includes(route)))?'active':'',onclick:()=>{NAVRESET=true;go(r);},'aria-label':l},h('span',{class:'mi'},ic),h('span',{class:'ml'},SHORT[r]),r==='vocab'&&due?h('span',{class:'mbadge'},due):null)));
   const main=h('main',{class:'main',id:'main'});
   const tog=h('button',{class:'sidetog',title:mini?T('Leiste ausklappen'):T('Leiste einklappen'),'aria-label':mini?T('Leiste ausklappen'):T('Leiste einklappen'),onclick:()=>{S.settings.side=mini?'':'mini';save(true);go(curRoute());}},mini?'»':'«');
   const app=h('div',{class:'app'+(mini?' mini':'')},h('aside',{class:'side'},h('div',{class:'brand'},h('span',{class:'bt'},T('Mi profe '),h('span',{class:'flag'},LANG.flag)),tog),nav,
@@ -299,7 +314,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
     h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?T('Speichern'):T('Los geht’s →')),
     again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('lang')},T('Abbrechen')):null)));
   setTimeout(()=>inp.focus(),80);}
-function route(){if(window.speechSynthesis)speechSynthesis.cancel();const parts=curRoute().split('/');
+function route(){if(window.speechSynthesis)speechSynthesis.cancel();trackNav(curRoute());const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
   const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
@@ -356,7 +371,7 @@ function vUnits(m,lv){
 }
 function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
   const st=unitStatus(u);const ck=S.checks[u.id];const LS=u.lessons.filter(l=>!l.ab),AB=u.lessons.filter(l=>l.ab);const ust=STORIES.filter(x=>x.after===u.id);
-  m.append(h('div',{class:'row',style:'margin-bottom:4px'},h('button',{class:'btn ghost small',onclick:()=>go('units/'+unitLevel(u))},T('← Kurs')),h('span',{class:'pill acc'},levelOf(u).title)),
+  m.append(h('div',{class:'row',style:'margin-bottom:4px'},h('button',{class:'btn ghost small',onclick:()=>goBack('units/'+unitLevel(u))},'← '+backLabel(T('Kurs'))),h('span',{class:'pill acc'},levelOf(u).title)),
     h('h1',{style:'margin-bottom:4px'},''+UW+' '+u.n+' · '+u.title),
     h('div',{class:'seg two'},h('button',{class:tab!=='x'?'on':'',onclick:()=>go('unit/'+u.id)},h('b',{},T('Lektionen')),h('span',{},Math.round(lessonPct(u)*100)+'%')),
       h('button',{class:tab==='x'?'on':'',onclick:()=>go('unit/'+u.id+'/x')},h('b',{},T('Extras')),h('span',{},(ust.length?T('Geschichte · '):'')+T('Wörter · Sprechen')))));
@@ -384,7 +399,7 @@ function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
     h('div',{class:'muted small'},ck?.pass?T('Bestanden mit ')+Math.round(ck.score*100)+T(' % – gemeistert.'):ck?T('Letztes Mal ')+Math.round(ck.score*100)+T(' % – ab 80 % bestanden.'):T('Ca. 15 Aufgaben, ab 80 % gemeistert – geht jederzeit.'))),
     h('button',{class:'btn'+(sug&&!ck?.pass?' primary':''),onclick:()=>go('check/'+u.id)},ck?.pass?T('Wiederholen'):T('Starten')))));
 }
-function vResumen(m,id){const u=unitById(id);m.append(h('button',{class:'btn ghost small',onclick:()=>go('unit/'+id)},'← '+UW+' '+u.n),
+function vResumen(m,id){const u=unitById(id);m.append(backTo(UW+' '+u.n,'unit/'+id),
   h('h1',{},T('Resumen · ')+UW+' '+u.n),h('div',{class:'card info resumen',html:u.resumen}));
   m.querySelectorAll('.resumen .es-t, .resumen td.es').forEach(addSpeakTo);}
 function addSpeakTo(el){const t=el.textContent;if(!t.trim())return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}
@@ -397,7 +412,7 @@ function vocabStep(u,mode,es,de,em){const p=pic(es,em);
 const vocabItem=(u,w,mode)=>({s:vocabStep(u,mode,w[0],w[1],w[2]),ref:T('W|')+u.id+'|'+mode+'|'+w[0]});
 function allUnitWords(u){const w=[];for(const l of u.lessons)for(const s of l.steps)if(s.t==='vocab')w.push(...s.items);return w;}
 function vWords(m,id){const u=unitById(id);const w=allUnitWords(u);
-  m.append(h('button',{class:'btn ghost small',onclick:()=>go('unit/'+id)},'← '+UW+' '+u.n),h('h1',{},T('Wortschatz · ')+UW+' '+u.n),
+  m.append(backTo(UW+' '+u.n,'unit/'+id),h('h1',{},T('Wortschatz · ')+UW+' '+u.n),
     h('p',{class:'sub'},w.length+T(' Wörter & Ausdrücke. ')),h('div',{class:'row',style:'margin-bottom:14px'},
       h('button',{class:'btn primary',onclick:()=>{const n=addVocab(w,u.id);toast(n?n+T(' Wörter zum Trainer hinzugefügt'):T('Schon alle im Trainer'));}},T('Alle in den Vokabeltrainer')),
       h('button',{class:'btn',onclick:()=>startCram(w,u)},T('Jetzt abfragen'))),
@@ -411,7 +426,7 @@ function vCheck(m,id){const u=unitById(id);if(!u)return vUnits(m);
   const steps=per.map(a=>a[0]).filter(Boolean);for(const a of per)if(steps.length<11&&a[1])steps.push(a[1]);for(const a of per)if(steps.length<11&&a[2])steps.push(a[2]);
   const words=shuffle(u.lessons.filter(l=>!l.ab).flatMap(lessonWords)).slice(0,4);
   const res={};let weak=[],score=0,pass=false;
-  play(m,{title:T('Abschlusstest · ')+UW+' '+u.n+' · '+u.title,steps:shuffle(steps.concat(words.map(w=>vocabItem(u,w,'tr')))),unit:u,noRetry:true,onBack:()=>go('unit/'+u.id),
+  play(m,{title:T('Abschlusstest · ')+UW+' '+u.n+' · '+u.title,steps:shuffle(steps.concat(words.map(w=>vocabItem(u,w,'tr')))),unit:u,noRetry:true,onBack:()=>goBack('unit/'+u.id),
     onAnswer:(it,st)=>{if(it.lid)res[it.lid]=(res[it.lid]??true)&&st!=='bad';},
     onDone:(r)=>{score=r.score;pass=score>=0.8;weak=[];
       for(const l of u.lessons){if(l.ab)continue;const k=u.id+'.'+l.id;if(res[l.id]===false){weak.push(l);if(!pass&&rnd(k)>=3){S.lessons[k].r=2;S.lessons[k].d2=today();}}else if(pass)setRound(k,3,1);}
@@ -427,7 +442,7 @@ function vCheck(m,id){const u=unitById(id);if(!u)return vUnits(m);
 /* ---------- lesson player ---------- */
 function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l)return vUnits(m);
   const steps=l.steps.map((s,i)=>({s,ref:uid+'|'+lid+'|'+i}));
-  play(m,{title:''+UW+' '+u.n+' · '+l.title,steps,unit:u,onBack:()=>go('unit/'+uid),
+  play(m,{title:''+UW+' '+u.n+' · '+l.title,steps,unit:u,onBack:()=>goBack('unit/'+uid),
     onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};save();return{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)};}
       const was=rnd(k);setRound(k,1,res.score);
       if(was<2&&(res.score>=0.9||shortLesson(l))){setRound(k,shortLesson(l)?3:2,res.score);}
@@ -441,7 +456,7 @@ function roundSteps(u,l,n){const G=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+
   return shuffle(ex.concat(words.slice(0,5).map((w,i)=>vocabItem(u,w,i%2?'listen':'tr'))));}
 function vRound(m,uid,lid,n){n=+n;const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l||!(n===2||n===3))return vUnits(m);
   const k=uid+'.'+lid;let ok=false,fb='';
-  play(m,{title:''+UW+' '+u.n+' · '+l.title+T(' · Runde ')+n+T(' von 3: ')+RN[n],steps:roundSteps(u,l,n),unit:u,onBack:()=>go('unit/'+uid),
+  play(m,{title:''+UW+' '+u.n+' · '+l.title+T(' · Runde ')+n+T(' von 3: ')+RN[n],steps:roundSteps(u,l,n),unit:u,onBack:()=>goBack('unit/'+uid),
     onDone:(res)=>{ok=res.score>=(n===3?0.8:0.6);fb='';
       if(ok)setRound(k,n,res.score);
       else if(n===3&&res.score>=0.6){S.lessons[k].d2=today();save();fb='fast';}
@@ -678,7 +693,7 @@ function unitSentences(u){const out=[];const seen=new Set();const add=(es,de)=>{
     if(st.t==='listen'||st.t==='speak')add(st.es,st.de);if(st.t==='tr')add(String([].concat(st.a)[0]).split('|')[0],st.de);}
   return out;}
 function vShadow(m,id){const u=unitById(id);const list=unitSentences(u);let i=0,phase=0;let rec=null,chunks=[],audioUrl=null;
-  m.append(h('button',{class:'btn ghost small',onclick:()=>go('unit/'+id)},'← '+UW+' '+u.n),h('h1',{},T('🎧 Shadowing · ')+UW+' '+u.n),
+  m.append(backTo(UW+' '+u.n,'unit/'+id),h('h1',{},T('🎧 Shadowing · ')+UW+' '+u.n),
     h('p',{class:'sub'},T('Hören → mitlesen & gleichzeitig mitsprechen → ohne Text nachsprechen. Trainiert Aussprache, Sprechtempo und Satzmelodie. Am besten laut und mit Kopfhörern.')));
   const box=h('div');m.append(box);
   const phases=[T('1 · Anhören'),T('2 · Mitlesen & mitsprechen'),T('3 · Ohne Text')];
@@ -742,7 +757,7 @@ function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'
   if(!storyOpen(st))m.append(h('div',{class:'fb warn',style:'margin-bottom:12px'},T('Diese Geschichte passt ab ')+UW+' '+u.n+T(' – vielleicht kommt dir noch nicht alles bekannt vor. Lies sie trotzdem, wenn du magst!')));
   const steps=[{s:{t:'read',kind:T('Geschichte · ')+levelOf(u).title,title:st.title,intro:T('Tipp: Hör sie dir zuerst einmal ohne Text an (🔊 Vorlesen, Augen zu) – dann lies mit.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}]
     .concat(st.qs.map((q,i)=>({s:{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a},ref:T('S|')+st.id+'|'+i})));
-  play(m,{title:T('Geschichte · ')+st.title,steps,onBack:()=>go('ref/s'),
+  play(m,{title:T('Geschichte · ')+st.title,steps,onBack:()=>goBack('ref/s'),
     onDone:(r)=>{S.stories=S.stories||{};const p=S.stories[st.id];S.stories[st.id]={date:today(),score:Math.max(p?.score||0,r.score)};save();const nx=nextStory();
       return nx?{label:T('Nächste Geschichte →'),fn:()=>go('story/'+nx.id)}:{label:T('Zur Bibliothek →'),fn:()=>go('ref/s')};}});}
 /* ---------- Verben-Trainer: Konjugationen aus allen '+UWS+', die du schon angefangen hast ---------- */
@@ -837,7 +852,7 @@ function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')),h('p',{class:'sub'},T(
 
 /* ---------- gemini chat ---------- */
 function vChat(m,id){const u=unitById(id);const sit=u.situacion;
-  m.append(h('button',{class:'btn ghost small',onclick:()=>go('unit/'+id)},'← '+UW+' '+u.n),h('h1',{},'💬 '+sit.title),h('div',{class:'scene',html:'🎬 '+sit.scene+T('<br><b>Dein Ziel:</b> ')+sit.goal}));
+  m.append(backTo(UW+' '+u.n,'unit/'+id),h('h1',{},'💬 '+sit.title),h('div',{class:'scene',html:'🎬 '+sit.scene+T('<br><b>Dein Ziel:</b> ')+sit.goal}));
   if(!hasAI()){m.append(h('div',{class:'card'},h('p',{},T('Für freie Gespräche brauchst du KI: entweder diese App über den claude.ai-Link öffnen (nutzt dein Claude-Abo) oder einen kostenlosen Gemini-Key in den Einstellungen. Alles andere funktioniert ohne.')),h('button',{class:'btn primary',onclick:()=>go('settings')},T('Zu den Einstellungen'))));return;}
   const chat=h('div',{class:'chat'});const hist=[];const sys=TEACHER+`\n\nROLLENSPIEL: ${sit.role}\nSzene: ${sit.scene}\nZiel von Jonas: ${sit.goal}\nWortschatz/Grammatik bis ${UW} ${u.n}: ${u.goals.join(', ')}.\nRegeln: Spiele deine Rolle auf Spanisch, natürlich aber einfach (A1/A2), 1–3 kurze Sätze pro Antwort, stelle Rückfragen, damit das Gespräch weitergeht. Wenn Jonas einen Fehler macht, gib eine kurze Korrektur auf Deutsch im Feld "korrektur" (sonst null). Wenn das Ziel erreicht ist, beende das Gespräch freundlich und setze "fertig": true.\nAntworte NUR als JSON: {"antwort_es":"...","antwort_de":"deutsche Übersetzung","korrektur":null oder {"richtig":"korrigierter Satz von Jonas","erklaerung":"kurz"},"fertig":false}`;
   const inp=h('input',{class:'inp',placeholder:fmt(T('Deine Antwort {ON} …')),autocomplete:'off',spellcheck:'false'});const send=h('button',{class:'btn primary'},T('Senden'));
