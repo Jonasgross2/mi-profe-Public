@@ -42,7 +42,7 @@ lessons:[
  <div class="ojo">Wenn du dich freust, jemanden kennenzulernen: Männer sagen <span class="es-t">encantado</span>, Frauen <span class="es-t">encantada</span> – es richtet sich nach dem/der <b>Sprechenden</b>.</div>`},
  {t:'vocab',title:'Verabschieden',items:[['adiós','tschüss / auf Wiedersehen'],['hasta luego','bis später / tschüss'],['hasta pronto','bis bald'],['hasta mañana','bis morgen'],['hasta la próxima','bis zum nächsten Mal'],['hasta la vista','auf Wiedersehen'],['chao','ciao (umgangssprachlich)']]},
  {t:'match',q:'Begrüßung oder Verabschiedung? Ordne die Bedeutung zu.',pairs:[['Hasta luego','bis später'],['¿Qué tal?','wie geht’s?'],['Hasta mañana','bis morgen'],['Encantada','freut mich (w)'],['Buenas noches','guten Abend']]},
- {t:'mc',q:'Jonas trifft Laia. Er sagt: „Encantado“. Laia antwortet:',opts:['Encantada.','Encantado.','Encantados.'],a:0,why:'Laia ist eine Frau → <i>encantada</i>. Die Form richtet sich nach der Person, die spricht.'},
+ {t:'mc',q:'Pablo trifft Laia. Er sagt: „Encantado“. Laia antwortet:',opts:['Encantada.','Encantado.','Encantados.'],a:0,why:'Laia ist eine Frau → <i>encantada</i>. Die Form richtet sich nach der Person, die spricht.'},
  {t:'gap',q:'– ¿Qué tal? – Muy ___, gracias. ¿Y ___?',a:['bien','tú|tu'],why:'<i>bien</i> = gut; <i>¿y tú?</i> = und du?'},
  {t:'mc',q:'Du gehst um 18 Uhr aus der Uni und siehst deine Kommilitonen morgen wieder. Was sagst du?',opts:['¡Hasta mañana!','¡Buenos días!','¡Mucho gusto!'],a:0},
  {t:'dialog',place:'Secretaría de la FIB',title:'Im Studierendensekretariat',scene:'Du gehst zur Secretaría, um deine Unterlagen abzugeben. Eine ältere Mitarbeiterin begrüßt dich. Hier ist <b>usted</b> angebracht.',lines:[

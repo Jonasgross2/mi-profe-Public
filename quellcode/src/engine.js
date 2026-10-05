@@ -16,6 +16,18 @@ const NAME=()=>S.name||'';
 function personalize(o){if(typeof o==='string')return o.replace(/\bJonas\b/g,S.name);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=personalize(o[i]);return o;}
   if(o&&typeof o==='object'){for(const k of Object.keys(o))o[k]=personalize(o[k]);}return o;}
 if(S.name&&S.name!=='Jonas'){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);}
+/* Ansprache: Bei „weiblich“ werden Sätze über die lernende Person selbst (estoy/soy … , ¡Encantado!) in die weibliche Form gesetzt
+   und beim Prüfen beide Formen akzeptiert. Vokabeln bleiben unverändert (sie sind Schlüssel im Vokabeltrainer). */
+const FEMO=/^(cansad|encantad|content|preocupad|resfriad|maread|nervios|ocupad|aburrid|enfadad|casad|divorciad|solter|interesad|acostumbrad|dispuest|list|segur|hart|perdid|sorprendid|emocionad|tranquil|alt|baj|delgad|moren|rubi|simpátic|antipátic|tímid|ordenad|caótic|vag|ingenier|informátic|médic|alumn|abogad|sentad|levantad|duchad|vestid|nacid|mudad|graduad|enamorad|invitad|equivocad|despiert|obligad|encargad|guap|gord|delgad|abiert|cansad)o(s?)$/i;
+const FEMX={'alemán':'alemana','inglés':'inglesa','francés':'francesa','español':'española','trabajador':'trabajadora','programador':'programadora','diseñador':'diseñadora','consultor':'consultora','auditor':'auditora','profesor':'profesora','director':'directora','alemanes':'alemanas'};
+const femWord=w=>FEMO.test(w)?w.replace(/o(s?)$/,'a$1'):FEMX[w.toLowerCase()]?(w[0]===w[0].toUpperCase()?FEMX[w.toLowerCase()][0].toUpperCase()+FEMX[w.toLowerCase()].slice(1):FEMX[w.toLowerCase()]):w;
+const femFirst=s=>String(s).replace(/\b(estoy|soy|me siento|me encuentro|sigo|quedo)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w));
+const isF=()=>S.gender==='f';
+function femCourse(o,inVocab){if(typeof o==='string')return femFirst(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=femCourse(o[i],inVocab);return o;}
+  if(o&&typeof o==='object'){if(o.t==='vocab')return o;if(o.you&&o.opts)o.opts.forEach(x=>{x.es=femFirst(x.es).replace(/\b([Ee])ncantado\b/g,'$1ncantada');});
+    if(o.t==='speak'&&o.es)o.es=o.es.replace(/\b([Ee])ncantado\b/g,'$1ncantada');for(const k of Object.keys(o))if(k!=='items')o[k]=femCourse(o[k]);}return o;}
+if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}
+
 
 /* ---------- helpers ---------- */
 const $=(s,r=document)=>r.querySelector(s);
@@ -46,7 +58,8 @@ function wordCmp(c,x,typo){ // c,x normalized strings
     return 3;}
   return worst;}
 function compare(input,answers,opts={}){
-  answers=[].concat(answers).flatMap(a=>String(a).split('|'));const typo=opts.typo!==false;
+  answers=[].concat(answers).flatMap(a=>String(a).split('|'));
+  if(isF())answers=answers.flatMap(a=>{const f=a.includes(' ')?femFirst(a):femWord(a);return f===a?[a]:a.includes(' ')?[f,a]:[a,f];});const typo=opts.typo!==false;
   const inp=norm(input);if(!inp)return{status:'bad',right:answers[0],note:'Keine Antwort.'};
   const cands=[inp];if(opts.pron!==false&&PRON.test(inp))cands.push(inp.replace(PRON,''));
   let best=null;
@@ -112,7 +125,7 @@ async function claudeAsk(prompt,{json,history}){
     if(json)return await SAMPLE.json(input,opt);return (await SAMPLE(input,opt)).text;}
   catch(e){throw new Error(CL_ERR[e&&e.code]||('Claude: '+((e&&e.message)||e&&e.code||'Fehler')));}}
 /* ---------- gemini ---------- */
-async function gemini(prompt,{json=true,history=null}={}){if(S.name)prompt=String(prompt).replace(/\bJonas\b/g,S.name);
+async function gemini(prompt,{json=true,history=null}={}){if(S.name)prompt=String(prompt).replace(/\bJonas\b/g,S.name);if(S.gender)prompt+=S.gender==='f'?'\n\nWICHTIG: '+(S.name||'Die lernende Person')+' ist eine Frau. Sprich sie mit weiblichen Formen an (z. B. „estás cansada“, „bienvenida“) und erwarte von ihr weibliche Formen, wenn sie über sich spricht. Im Deutschen: „sie/ihr“ statt „er/ihm“.':'\n\n'+(S.name||'Die lernende Person')+' ist ein Mann – männliche Formen verwenden.';
   if(useClaude())return claudeAsk(prompt,{json,history});
   const key=S.settings.geminiKey;if(!key)throw new Error('Kein Gemini-API-Key hinterlegt (Einstellungen).');
   const tried=[S.settings.geminiModel||'gemini-flash-latest'];for(const f of FALLBACK)if(!tried.includes(f))tried.push(f);
@@ -224,18 +237,20 @@ function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{cla
   ov.append(h('div',{class:'card',style:'max-width:380px;width:100%'},h('p',{style:'margin-top:0;font-weight:600'},text),h('div',{class:'row',style:'justify-content:flex-end'},h('button',{class:'btn',onclick:()=>close(false)},'Abbrechen'),h('button',{class:'btn primary',onclick:()=>close(true)},okLabel||'OK'))));
   ov.onclick=e=>{if(e.target===ov)close(false);};document.body.append(ov);});}
 function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'inp',placeholder:'Dein Vorname',value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
-  const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast('Gib deinen Namen ein');return;}const changed=v!==S.name;S.name=v;save();
+  let g=S.gender||'';const gb=[['m','👨 männlich','cansado'],['f','👩 weiblich','cansada']].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('b',{},l),h('span',{},'Estoy '+ex));return b;});
+  const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast('Gib deinen Namen ein');return;}if(!g){toast('Wähl noch, wie ich dich ansprechen soll');return;}const changed=v!==S.name||g!==S.gender;S.name=v;S.gender=g;save();
     if(IN_ARTIFACT)CUR='home';else history.replaceState(null,'','#home');
-    if(changed&&!IN_ARTIFACT)location.reload();else{if(changed)personalize(COURSE),personalize(PLACEMENT),personalize(STORIES);route();}};
+    if(changed&&!IN_ARTIFACT)location.reload();else{if(changed){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}}route();}};
   inp.onkeydown=e=>{if(e.key==='Enter')ok();};
   document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
     h('div',{style:'font-size:48px;margin-bottom:6px'},'👋'),h('h1',{style:'margin:0 0 6px'},again?'Name ändern':'¡Hola!'),
     h('p',{class:'muted',style:'margin:0 0 18px'},again?'So begrüße ich dich und so heißt du in den Übungen.':'Ich bin dein Spanischlehrer. Wie heißt du?'),
-    inp,h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?'Speichern':'Los geht’s →'),
+    inp,h('p',{class:'muted small',style:'margin:16px 0 8px'},'Wie soll ich dich ansprechen? (wichtig für spanische Endungen)'),h('div',{class:'gsel'},gb),
+    h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?'Speichern':'Los geht’s →'),
     again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('settings')},'Abbrechen'):null)));
   setTimeout(()=>inp.focus(),80);}
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();const parts=curRoute().split('/');
-  if(!S.name||parts[0]==='name')return vWelcome(!!S.name);const m=shell();
+  if(!S.name||!S.gender&&S.name!=='Jonas'||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
   const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
@@ -856,7 +871,7 @@ function vSettings(m,sec){
     const html=await (await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'})).text();const v=(html.match(/APP_VERSION="([^"]+)"/)||[])[1];
     if(v&&v!==window.APP_VERSION){toast('Neue Version gefunden – lade neu …');if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>location.reload(),600);}else toast('Du hast schon die neueste Version ✓');}catch(e){toast('Keine Verbindung – später noch mal versuchen');}};
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):'Offline-Datei';
-  m.append(h('h1',{},'Mehr'),tiles(mtile('👤','Dein Name',S.name,()=>go('name')),mtile('🎯','Einstufungstest',S.placement?'Gemacht am '+S.placement.date:'Noch nicht gemacht',()=>go('placement')),
+  m.append(h('h1',{},'Mehr'),tiles(mtile('👤','Name & Ansprache',S.name+(S.gender==='f'?' · weiblich':S.gender==='m'?' · männlich':''),()=>go('name')),mtile('🎯','Einstufungstest',S.placement?'Gemacht am '+S.placement.date:'Noch nicht gemacht',()=>go('placement')),
     mtile('🎧','Aussprache üben','Shadowing · Unidad '+curUnit().n,()=>go('shadow/'+curUnit().id)),
     ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0]))),
     window.PWA?mtile('🔄','Nach Update suchen','Version '+ver,upd):null));}
@@ -881,7 +896,7 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   const ta=a.streak||{},tb=b.streak||{};o.streak=(ta.last||'')>(tb.last||'')?ta:(tb.last||'')>(ta.last||'')?tb:((ta.count||0)>=(tb.count||0)?ta:tb);
   o.mistakes=((a.updated||0)>=(b.updated||0)?a.mistakes:b.mistakes)||[];
   o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
-  o.name=a.name||b.name;
+  o.name=a.name||b.name;o.gender=a.gender||b.gender;
   o.stories=Object.assign({},b.stories||{});for(const[k,v]of Object.entries(a.stories||{})){const r=o.stories[k];o.stories[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.checks=Object.assign({},b.checks||{});for(const[k,v]of Object.entries(a.checks||{})){const r=o.checks[k];o.checks[k]=!r?v:{date:(v.date>r.date?v.date:r.date),score:Math.max(v.score||0,r.score||0),pass:!!(v.pass||r.pass)};}
   o.updated=Math.max(a.updated||0,b.updated||0);return o;}

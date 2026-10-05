@@ -12,7 +12,7 @@ lessons:[
  <div class="ojo">Gemischte Gruppe → männliche Form: <span class="es-t">Estos son Laia y Marc.</span></div>`},
  {t:'mc',q:'Du stellst deine Mitbewohnerin Núria vor:',opts:['Esta es Núria.','Este es Núria.','Estas son Núria.'],a:0},
  {t:'mc',q:'Du stellst zwei Kommilitonen vor, Marc und Laia:',opts:['Estos son Marc y Laia.','Estas son Marc y Laia.','Este es Marc y Laia.'],a:0,why:'Gemischte Gruppe → <i>estos</i>.'},
- {t:'gap',q:'– Marta, ___ es Jonas, un compañero del máster. – Encantad___.',a:['este','a'],why:'Jonas ist ein Mann → <i>este</i>. Marta spricht → <i>encantada</i>.'},
+ {t:'gap',q:'– Marta, ___ es Pablo, un compañero del máster. – Encantad___.',a:['este','a'],why:'Pablo ist ein Mann → <i>este</i>. Marta spricht → <i>encantada</i>.'},
  {t:'info',title:'Das Alphabet & buchstabieren',html:`<table><tr><td>a <span class="es-t">a</span></td><td>b <span class="es-t">be</span></td><td>c <span class="es-t">ce</span></td><td>d <span class="es-t">de</span></td><td>e <span class="es-t">e</span></td><td>f <span class="es-t">efe</span></td><td>g <span class="es-t">ge</span></td></tr>
  <tr><td>h <span class="es-t">hache</span></td><td>i <span class="es-t">i</span></td><td>j <span class="es-t">jota</span></td><td>k <span class="es-t">ka</span></td><td>l <span class="es-t">ele</span></td><td>m <span class="es-t">eme</span></td><td>n <span class="es-t">ene</span></td></tr>
  <tr><td>ñ <span class="es-t">eñe</span></td><td>o <span class="es-t">o</span></td><td>p <span class="es-t">pe</span></td><td>q <span class="es-t">cu</span></td><td>r <span class="es-t">erre</span></td><td>s <span class="es-t">ese</span></td><td>t <span class="es-t">te</span></td></tr>
