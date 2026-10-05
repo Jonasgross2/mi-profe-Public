@@ -6,6 +6,10 @@ Achtung: Dann verschieben sich ggf. Indizes – neue/geänderte Texte erscheinen
 import json,pathlib,runpy,sys
 base=pathlib.Path(__file__).resolve().parent
 de=json.load(open(base/'course_de.json'))
+# zweiter Suchlauf (extract_extra.js): fehlende Texte, zusammen als Abschnitt 'x_all' übersetzbar
+if (base/'course_de_extra.json').exists():
+    ex=json.load(open(base/'course_de_extra.json'));de.update(ex)
+    de['x_all']=[s for k in ex for s in ex[k]]
 for d in sorted(p for p in base.iterdir() if p.is_dir() and '_' in p.name):
     lern,ui=d.name.split('_');out={};n=0
     for f in sorted(d.glob('*.py')):
