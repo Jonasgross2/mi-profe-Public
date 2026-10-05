@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261005-1819";</script>
+<script>window.PWA=true;window.APP_VERSION="20261005-1823";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -3744,7 +3744,7 @@ lessons:[
  {t:'mc',q:'Formell: „Wenn auch die Ergebnisse positiv sind, …“',opts:['Si bien los resultados son positivos, …','Y eso que los resultados son positivos, …','Por muy positivos los resultados, …'],a:0},
  {t:'gap',q:'Aun ___ (saber) la respuesta, no dijo nada. (Gerundium)',a:['sabiendo']},
  {t:'gap',q:'___ a las críticas, el proyecto siguió adelante. (formell: trotz)',a:['Pese']},
- {t:'vocab',title:'Wissenschaft & Technik',items:[['la investigación','die Forschung','🔬'],['el/la investigador/a','der/die Forscher/in','🧑‍🔬'],['el avance','der Fortschritt','📈'],['los datos','die Daten','📊'],['el algoritmo','der Algorithmus','🧮'],['automatizar','automatisieren','🤖'],['el puesto de trabajo','der Arbeitsplatz','💼'],['la ética','die Ethik','⚖️'],['el sesgo','die Verzerrung, der Bias','🎯'],['la privacidad','die Privatsphäre','🔒'],['regular','regulieren','📜'],['a costa de','auf Kosten von','💸']]},
+ {t:'vocab',title:'Wissenschaft & Technik',items:[['la investigación','die Forschung','🔬'],['el/la investigador/a','der/die Forscher/in','🧑‍🔬'],['el avance','der Fortschritt','📈'],['los datos','die Daten','📊'],['el algoritmo','der Algorithmus','🧮'],['automatizar','automatisieren','🤖'],['el puesto de trabajo','der Arbeitsplatz','💼'],['la ética','die Ethik','⚖️'],['el sesgo','die Verzerrung, der Bias','🎯'],['la privacidad','die Privatsphäre','🔒'],['regular por ley','gesetzlich regeln','📜'],['a costa de','auf Kosten von','💸']]},
  {t:'tr',de:'Er hat die Prüfung bestanden, obwohl er doch kaum gelernt hat.',a:['Aprobó el examen, y eso que apenas estudió.','Aprobó el examen, y eso que casi no estudió.']}]},
 {id:'l3',title:'So …, dass … / Daher …',desc:'tan … que · de ahí que · con lo que',steps:[
  {t:'info',title:'Folgen ausdrücken',html:`<table><tr><th>Struktur</th><th>Modus</th><th>Beispiel</th></tr>
@@ -4112,6 +4112,149 @@ placement:[
 resumen:`<h3>Reformulieren</h3><p class="es-t">es decir · o sea · dicho de otro modo · en otras palabras · o lo que es lo mismo · mejor dicho · a saber · en pocas palabras · en síntesis</p>
 <h3>Übersetzungsfallen</h3><p class="es-t">tener sentido (nicht hacer) · estar hecho polvo (erschöpft) · tener ganas de (sich freuen auf) · quizás (eventuell) · embarazada ≠ verlegen</p>
 <h3>Vermitteln</h3><p class="es-t">Dicen que … · Lo que vienen a decir es que … · suavizar · matizar · captar el sentido</p>`});
+</script>
+<script>/* ===== Wortschatz-Plus: pro Unidad ab B1 eine Extra-Lektion mit thematischem Wortschatz (Ziel: Wortschatz passend zur Stufe) =====
+   Format: W('unit-id','Thema','Kurzbeschreibung',[ [es,de], … ]) → Lektion 'lw' mit Vokabel-Schritten à 10 Wörtern + Zuordnung. */
+{
+const W=(id,topic,desc,items)=>{const u=COURSE.units.find(x=>x.id===id);if(!u)return;const steps=[];
+  for(let i=0;i<items.length;i+=10)steps.push({t:'vocab',title:topic+(items.length>10?' ('+(i/10+1)+')':''),items:items.slice(i,i+10)});
+  const pick=items.filter((_,i)=>i%6===2).slice(0,5);if(pick.length>=4)steps.push({t:'match',q:'Was bedeutet …?',pairs:pick.map(([es,de])=>[es,de])});
+  u.lessons.push({id:'lw',title:'Wortschatz: '+topic,desc:desc,steps});};
+
+/* ---------- B1 ---------- */
+W('u16','Stadt & Reisen','Sehenswürdigkeiten, Unterkunft, unterwegs',[
+['el alojamiento','die Unterkunft'],['la visita guiada','die Führung'],['el casco histórico','die Altstadt'],['el mirador','der Aussichtspunkt'],['la entrada','die Eintrittskarte'],['hacer cola','Schlange stehen'],['el carterista','der Taschendieb'],['la consigna','die Gepäckaufbewahrung'],['el horario de apertura','die Öffnungszeiten'],['reservar con antelación','im Voraus buchen'],
+['el barrio de moda','das Szeneviertel'],['la tasa turística','die Touristensteuer'],['el recorrido','die Route, der Rundgang'],['merecer la pena','sich lohnen'],['estar abarrotado','überfüllt sein'],['el paseo marítimo','die Strandpromenade'],['alquilar una bici','ein Fahrrad mieten'],['perderse','sich verlaufen'],['el plano','der Stadtplan'],['la temporada alta','die Hochsaison'],
+['el folleto','der Prospekt'],['la oficina de turismo','das Touristenbüro'],['la postal','die Postkarte'],['probar la comida local','die lokale Küche probieren'],['madrugar','früh aufstehen'],['el atardecer','der Sonnenuntergang'],['de camino','auf dem Weg'],['imprescindible','unverzichtbar'],['el bullicio','das Getümmel'],['callejear','durch die Straßen bummeln']]);
+
+W('u17','Ereignisse & Erzählen','Zeitangaben, Missgeschicke, Reaktionen',[
+['de repente','plötzlich'],['al principio','am Anfang'],['al final','am Ende'],['mientras tanto','währenddessen'],['de pronto','auf einmal'],['por casualidad','zufällig'],['menos mal','zum Glück'],['el susto','der Schreck'],['darse cuenta de','merken'],['ocurrir','passieren, geschehen'],
+['el malentendido','das Missverständnis'],['quedarse en blanco','ein Blackout haben'],['equivocarse de','sich vertun (bei)'],['olvidarse de','vergessen'],['tener mala suerte','Pech haben'],['por suerte','glücklicherweise'],['la anécdota','die Anekdote'],['el recuerdo','die Erinnerung'],['acordarse de','sich erinnern an'],['contar','erzählen'],
+['¡Qué fuerte!','Krass!'],['¡No me digas!','Was du nicht sagst!'],['¡Qué vergüenza!','Wie peinlich!'],['¡Qué mala pata!','So ein Pech!'],['pasarlo fatal','eine schlimme Zeit haben'],['pasarlo genial','viel Spaß haben'],['de golpe','auf einen Schlag'],['a la mañana siguiente','am nächsten Morgen'],['aquella noche','in jener Nacht'],['hace años','vor Jahren']]);
+
+W('u18','Wohnen & Haushalt','Wohnung, Reparaturen, Nachbarn',[
+['el casero / la casera','der Vermieter / die Vermieterin'],['el contrato de alquiler','der Mietvertrag'],['la comunidad de vecinos','die Hausgemeinschaft'],['el portero automático','die Gegensprechanlage'],['la gotera','das undichte Dach (Tropfen)'],['estar estropeado','kaputt sein'],['el fontanero','der Klempner'],['el electricista','der Elektriker'],['la avería','die Panne, der Defekt'],['arreglar','reparieren'],
+['la lavadora','die Waschmaschine'],['el lavavajillas','die Spülmaschine'],['tender la ropa','Wäsche aufhängen'],['planchar','bügeln'],['barrer','fegen'],['fregar el suelo','den Boden wischen'],['pasar la aspiradora','staubsaugen'],['hacer la compra','einkaufen'],['el trastero','der Abstellraum'],['la azotea','die Dachterrasse'],
+['el recibo de la luz','die Stromrechnung'],['los gastos','die Nebenkosten'],['compartir gastos','Kosten teilen'],['el ruido','der Lärm'],['la humedad','die Feuchtigkeit'],['la calefacción central','die Zentralheizung'],['mudarse','umziehen'],['la mudanza','der Umzug'],['amueblar','möblieren'],['el inquilino','der Mieter']]);
+
+W('u19','Medien & Gesellschaft','Nachrichten, Debatten, Probleme der Stadt',[
+['la prensa','die Presse'],['el diario','die Tageszeitung'],['la portada','die Titelseite'],['el artículo de opinión','der Meinungsartikel'],['la encuesta','die Umfrage'],['la mayoría','die Mehrheit'],['la minoría','die Minderheit'],['el debate','die Debatte'],['el tema','das Thema'],['polémico','umstritten'],
+['la vivienda','der Wohnraum'],['el desempleo','die Arbeitslosigkeit'],['la desigualdad','die Ungleichheit'],['la gentrificación','die Gentrifizierung'],['el ayuntamiento','das Rathaus, die Stadtverwaltung'],['el alcalde / la alcaldesa','der/die Bürgermeister/in'],['los ciudadanos','die Bürger'],['protestar','protestieren'],['la manifestación','die Demonstration'],['la medida','die Maßnahme'],
+['a favor de','dafür'],['en contra de','dagegen'],['defender','verteidigen'],['criticar','kritisieren'],['proponer','vorschlagen'],['la propuesta','der Vorschlag'],['el inconveniente','der Nachteil'],['la ventaja','der Vorteil'],['estar harto de','die Nase voll haben von'],['convencer','überzeugen']]);
+
+W('u20','Reisen & Behörden','Flughafen, Umzug ins Ausland, Papiere',[
+['la tarjeta de embarque','die Bordkarte'],['facturar la maleta','den Koffer aufgeben'],['el equipaje de mano','das Handgepäck'],['la puerta de embarque','das Gate'],['el control de seguridad','die Sicherheitskontrolle'],['el retraso','die Verspätung'],['cancelar','stornieren, absagen'],['hacer escala','zwischenlanden'],['el vuelo directo','der Direktflug'],['aterrizar','landen'],
+['despegar','abheben'],['el pasaporte','der Reisepass'],['el DNI','der Personalausweis'],['el NIE','die Ausländer-Identifikationsnummer'],['la cita previa','der Termin (beim Amt)'],['el trámite','der Behördengang'],['rellenar un formulario','ein Formular ausfüllen'],['el certificado','die Bescheinigung'],['la firma','die Unterschrift'],['caducar','ablaufen (Dokument)'],
+['renovar','verlängern, erneuern'],['la beca','das Stipendium'],['el intercambio','der Austausch'],['despedirse','sich verabschieden'],['echar de menos','vermissen'],['la nostalgia','das Heimweh, die Nostalgie'],['volver a casa','nach Hause zurückkehren'],['el billete de ida y vuelta','das Hin- und Rückfahrticket'],['el aeropuerto','der Flughafen'],['la llegada','die Ankunft']]);
+
+W('u21','Kommunikation & Handy','Telefonieren, Nachrichten, soziale Netzwerke',[
+['el mensaje','die Nachricht'],['el audio','die Sprachnachricht'],['la llamada perdida','der verpasste Anruf'],['colgar','auflegen'],['no hay cobertura','kein Empfang'],['quedarse sin batería','keinen Akku mehr haben'],['el cargador','das Ladegerät'],['reenviar','weiterleiten'],['bloquear','blockieren'],['silenciar','stummschalten'],
+['la red social','das soziale Netzwerk'],['publicar','posten, veröffentlichen'],['el seguidor','der Follower'],['dar like','liken'],['compartir','teilen'],['la captura de pantalla','der Screenshot'],['el grupo de WhatsApp','die WhatsApp-Gruppe'],['estar en línea','online sein'],['la contraseña','das Passwort'],['descargar','herunterladen'],
+['el chisme / el cotilleo','der Klatsch'],['enterarse de','erfahren'],['avisar','Bescheid sagen'],['comentar','erwähnen, kommentieren'],['explicar','erklären'],['contestar','antworten'],['quejarse','sich beschweren'],['insistir','darauf bestehen'],['prometer','versprechen'],['recordar algo a alguien','jemanden an etwas erinnern']]);
+
+W('u22','Wohnungssuche & Charakter','Anzeigen, Mitbewohner, Eigenschaften',[
+['el anuncio','die Anzeige'],['el piso compartido','die WG'],['la habitación individual','das Einzelzimmer'],['exterior / interior','zur Straße / zum Hof'],['luminoso','hell'],['amplio','geräumig'],['reformado','renoviert'],['bien comunicado','gut angebunden'],['la fianza','die Kaution'],['el mes por adelantado','die Monatsmiete im Voraus'],
+['la visita','die Besichtigung'],['el requisito','die Voraussetzung'],['responsable','verantwortungsbewusst'],['tranquilo','ruhig'],['sociable','gesellig'],['limpio','sauber'],['desordenado','unordentlich'],['puntual','pünktlich'],['respetuoso','respektvoll'],['flexible','flexibel'],
+['tolerante','tolerant'],['convivir','zusammenleben'],['la convivencia','das Zusammenleben'],['repartir las tareas','die Aufgaben verteilen'],['las normas de la casa','die Hausregeln'],['la mascota','das Haustier'],['fumar','rauchen'],['traer visitas','Besuch mitbringen'],['llevarse bien','sich gut verstehen'],['el compañero de piso','der Mitbewohner']]);
+
+W('u23','Natur & Klima','Natur, Wetterextreme, Nachhaltigkeit',[
+['la naturaleza','die Natur'],['el bosque','der Wald'],['el río','der Fluss'],['la costa','die Küste'],['la ola de calor','die Hitzewelle'],['el incendio forestal','der Waldbrand'],['la inundación','die Überschwemmung'],['la tormenta','das Gewitter, der Sturm'],['la temperatura','die Temperatur'],['el calentamiento global','die Erderwärmung'],
+['las emisiones','die Emissionen'],['el combustible','der Treibstoff'],['el coche eléctrico','das Elektroauto'],['la placa solar','die Solaranlage'],['el aerogenerador','das Windrad'],['el consumo','der Verbrauch'],['malgastar','verschwenden'],['reutilizar','wiederverwenden'],['el envase','die Verpackung'],['el contenedor','der Container'],
+['la especie','die Art'],['en peligro de extinción','vom Aussterben bedroht'],['proteger','schützen'],['contaminar','verschmutzen'],['el reciclaje','das Recycling'],['los productos de temporada','saisonale Produkte'],['el comercio local','der lokale Handel'],['la huella de carbono','der CO₂-Fußabdruck'],['concienciar','sensibilisieren'],['el futuro','die Zukunft']]);
+
+/* ---------- B2 ---------- */
+W('u24','Geld & Lebenspläne','Finanzen, Sparen, Träume',[
+['ahorrar','sparen'],['los ahorros','die Ersparnisse'],['la cuenta corriente','das Girokonto'],['la hipoteca','die Hypothek'],['el préstamo','der Kredit'],['pedir un préstamo','einen Kredit aufnehmen'],['la deuda','die Schuld (Geld)'],['invertir','investieren'],['la inversión','die Investition'],['el presupuesto','das Budget'],
+['llegar a fin de mes','über die Runden kommen'],['el sueldo','das Gehalt'],['subir el sueldo','das Gehalt erhöhen'],['la jubilación','die Rente, der Ruhestand'],['jubilarse','in Rente gehen'],['la herencia','das Erbe'],['tocar la lotería','im Lotto gewinnen'],['derrochar','verschwenden (Geld)'],['tacaño','geizig'],['generoso','großzügig'],
+['el capricho','die Laune, der Luxuswunsch'],['darse un capricho','sich etwas gönnen'],['independizarse','selbstständig werden, ausziehen'],['formar una familia','eine Familie gründen'],['emprender','unternehmen, gründen'],['el emprendedor','der Gründer'],['arriesgar','riskieren'],['la estabilidad','die Stabilität'],['la incertidumbre','die Ungewissheit'],['cumplir un sueño','einen Traum erfüllen']]);
+
+W('u25','Arbeitswelt','Büro, Team, Karriere',[
+['la plantilla','die Belegschaft'],['el departamento','die Abteilung'],['el/la responsable','der/die Verantwortliche'],['el/la superior','der/die Vorgesetzte'],['el equipo','das Team'],['la reunión','die Besprechung'],['el plazo de entrega','die Abgabefrist'],['cumplir un plazo','eine Frist einhalten'],['delegar','delegieren'],['coordinar','koordinieren'],
+['el ascenso','die Beförderung'],['ascender','befördert werden'],['despedir','entlassen'],['el despido','die Kündigung, Entlassung'],['dimitir','zurücktreten, kündigen'],['las horas extra','die Überstunden'],['el convenio','der Tarifvertrag'],['la baja por enfermedad','die Krankmeldung'],['estar de baja','krankgeschrieben sein'],['la conciliación','die Vereinbarkeit (Familie/Beruf)'],
+['el rendimiento','die Leistung'],['la productividad','die Produktivität'],['el reto','die Herausforderung'],['la competencia','die Konkurrenz; die Kompetenz'],['el sindicato','die Gewerkschaft'],['la entrevista de trabajo','das Vorstellungsgespräch'],['el perfil','das Profil'],['la experiencia laboral','die Berufserfahrung'],['el puesto','die Stelle'],['estar en paro','arbeitslos sein']]);
+
+W('u26','Gesundheit & Körper','Beschwerden, Arzt, Prävention',[
+['el síntoma','das Symptom'],['el dolor de cabeza','die Kopfschmerzen'],['la fiebre','das Fieber'],['marearse','schwindlig werden'],['el mareo','der Schwindel'],['la tos','der Husten'],['estornudar','niesen'],['la alergia','die Allergie'],['torcerse el tobillo','sich den Knöchel verstauchen'],['la herida','die Wunde'],
+['la consulta','die Sprechstunde, Praxis'],['el centro de salud','das Gesundheitszentrum'],['la receta','das Rezept (ärztlich)'],['recetar','verschreiben'],['el análisis de sangre','die Blutuntersuchung'],['la radiografía','das Röntgenbild'],['la urgencia','die Notaufnahme'],['el seguro médico','die Krankenversicherung'],['vacunarse','sich impfen lassen'],['el tratamiento','die Behandlung'],
+['la prevención','die Vorbeugung'],['la dieta equilibrada','die ausgewogene Ernährung'],['engordar','zunehmen'],['adelgazar','abnehmen'],['el insomnio','die Schlaflosigkeit'],['agotado','erschöpft'],['recuperarse','sich erholen'],['la salud mental','die psychische Gesundheit'],['el estrés crónico','der chronische Stress'],['el músculo','der Muskel']]);
+
+W('u27','Politik & Nachrichten','Staat, Wahlen, Justiz',[
+['el gobierno','die Regierung'],['el parlamento','das Parlament'],['el partido','die Partei'],['las elecciones','die Wahlen'],['votar','wählen, abstimmen'],['el voto','die Stimme'],['el candidato','der Kandidat'],['la campaña electoral','der Wahlkampf'],['la oposición','die Opposition'],['el ministerio','das Ministerium'],
+['la ley','das Gesetz'],['aprobar una ley','ein Gesetz verabschieden'],['el juicio','der Prozess (Gericht)'],['el juez / la jueza','der Richter / die Richterin'],['condenar','verurteilen'],['la corrupción','die Korruption'],['el escándalo','der Skandal'],['el escaño','der Parlamentssitz'],['la reforma','die Reform'],['los impuestos','die Steuern'],
+['la comunidad autónoma','die autonome Gemeinschaft'],['el Estado','der Staat'],['la Unión Europea','die Europäische Union'],['el acuerdo','das Abkommen'],['negociar','verhandeln'],['el portavoz','der Sprecher'],['la rueda de prensa','die Pressekonferenz'],['desmentir','dementieren'],['filtrar','durchsickern lassen'],['la fuente oficial','die offizielle Quelle']]);
+
+W('u28','Lebensereignisse & Beziehungen','Entscheidungen, Liebe, Familie',[
+['la etapa','die Lebensphase'],['el punto de inflexión','der Wendepunkt'],['casarse','heiraten'],['la boda','die Hochzeit'],['divorciarse','sich scheiden lassen'],['separarse','sich trennen'],['romper con alguien','mit jemandem Schluss machen'],['la pareja de hecho','die eingetragene Partnerschaft'],['tener hijos','Kinder bekommen'],['criar','großziehen'],
+['emanciparse','unabhängig werden'],['la crisis','die Krise'],['superar','überwinden'],['el duelo','die Trauer'],['fallecer','versterben'],['el nacimiento','die Geburt'],['el aniversario','der Jahrestag'],['comprometerse','sich verloben; sich verpflichten'],['el compromiso','die Verlobung; die Verpflichtung'],['la confianza','das Vertrauen'],
+['los celos','die Eifersucht'],['celoso','eifersüchtig'],['engañar','betrügen, täuschen'],['perdonar','verzeihen'],['reconciliarse','sich versöhnen'],['la añoranza','die Sehnsucht'],['arrepentirse','bereuen'],['la oportunidad perdida','die verpasste Chance'],['el destino','das Schicksal'],['el reencuentro','das Wiedersehen']]);
+
+W('u29','Konsum & Verbraucherrechte','Einkaufen, Bank, Reklamation',[
+['el consumidor','der Verbraucher'],['los derechos del consumidor','die Verbraucherrechte'],['el ticket de compra','der Kassenbon'],['la factura','die Rechnung'],['el plazo de devolución','die Rückgabefrist'],['la garantía','die Garantie'],['el reembolso','die Rückerstattung'],['las rebajas','der Schlussverkauf'],['el descuento','der Rabatt'],['la oferta','das Angebot'],
+['comprar a plazos','in Raten kaufen'],['la transferencia','die Überweisung'],['la domiciliación','die Lastschrift'],['la comisión','die Gebühr'],['el cajero automático','der Geldautomat'],['sacar dinero','Geld abheben'],['la tarjeta de crédito','die Kreditkarte'],['el cargo','die Belastung (Konto)'],['el fraude','der Betrug'],['la estafa','der Schwindel, Betrug'],
+['la tienda online','der Onlineshop'],['el envío','der Versand'],['el paquete','das Paket'],['el seguimiento del pedido','die Sendungsverfolgung'],['defectuoso','fehlerhaft'],['la reclamación','die Reklamation'],['presentar una queja','eine Beschwerde einreichen'],['la atención al cliente','der Kundenservice'],['la suscripción','das Abonnement'],['darse de baja','kündigen (Abo)']]);
+
+W('u30','Gefühle & Charakter','Nuancierte Eigenschaften und Stimmungen',[
+['ilusionado','voller Vorfreude'],['decepcionado','enttäuscht'],['agobiado','überfordert, gestresst'],['emocionado','gerührt; aufgeregt'],['avergonzado','beschämt'],['orgulloso','stolz'],['envidioso','neidisch'],['resentido','verbittert, nachtragend'],['aliviado','erleichtert'],['indignado','empört'],
+['ingenuo','naiv'],['astuto','schlau, gerissen'],['terco','stur'],['sensato','vernünftig'],['despistado','zerstreut'],['maniático','pingelig'],['quisquilloso','kleinlich'],['entrañable','liebenswert'],['cariñoso','liebevoll'],['borde','unfreundlich (ugs.)'],
+['tener mal genio','jähzornig sein'],['tener paciencia','Geduld haben'],['la autoestima','das Selbstwertgefühl'],['la empatía','die Empathie'],['la inseguridad','die Unsicherheit'],['la madurez','die Reife'],['el carácter','der Charakter'],['el temperamento','das Temperament'],['la personalidad','die Persönlichkeit'],['los defectos','die Schwächen']]);
+
+W('u31','Bildung & Gesellschaft','Schule, Uni, gesellschaftliche Themen',[
+['la enseñanza pública','das staatliche Bildungswesen'],['la escuela concertada','die staatlich geförderte Privatschule'],['la selectividad','die Hochschulzugangsprüfung'],['la carrera','das Studium'],['el grado universitario','der Bachelor'],['el máster','der Master'],['la matrícula','die Einschreibung, Studiengebühr'],['el abandono escolar','der Schulabbruch'],['la formación profesional','die Berufsausbildung'],['el profesorado','die Lehrerschaft'],
+['la igualdad de oportunidades','die Chancengleichheit'],['la brecha digital','die digitale Kluft'],['la inmigración','die Einwanderung'],['la integración','die Integration'],['la diversidad','die Vielfalt'],['el envejecimiento','die Alterung'],['la natalidad','die Geburtenrate'],['la precariedad','die Prekarität'],['el bienestar','das Wohlergehen'],['la sociedad de consumo','die Konsumgesellschaft'],
+['el argumento de peso','das gewichtige Argument'],['la tesis','die These'],['la postura','die Position'],['rebatir','widerlegen'],['matizar','präzisieren, einschränken'],['plantear','aufwerfen'],['el punto de vista','der Standpunkt'],['la conclusión','die Schlussfolgerung'],['a largo plazo','langfristig'],['a corto plazo','kurzfristig']]);
+
+/* ---------- C1 ---------- */
+W('u32','Psychologie & Kommunikation','Wahrnehmung, Konflikte, Gesprächsführung',[
+['la percepción','die Wahrnehmung'],['el prejuicio','das Vorurteil'],['el estereotipo','das Klischee'],['el lenguaje no verbal','die Körpersprache'],['el tono','der Tonfall'],['sobrentender','stillschweigend voraussetzen'],['insinuar','andeuten'],['la insinuación','die Andeutung'],['reprochar','vorwerfen'],['el reproche','der Vorwurf'],
+['la susceptibilidad','die Empfindlichkeit'],['susceptible','empfindlich, leicht gekränkt'],['ofenderse','beleidigt sein'],['disculparse','sich entschuldigen'],['la disculpa','die Entschuldigung'],['el rencor','der Groll'],['ceder','nachgeben'],['mediar','vermitteln'],['el/la mediador/a','der/die Vermittler/in'],['la escucha activa','das aktive Zuhören'],
+['asertivo','selbstsicher (kommunizierend)'],['la asertividad','die Durchsetzungsfähigkeit'],['eludir','umgehen, ausweichen'],['tergiversar','verdrehen (Worte)'],['sacar de contexto','aus dem Zusammenhang reißen'],['la complicidad','das Einvernehmen'],['el desencuentro','die Unstimmigkeit'],['zanjar un tema','ein Thema abschließen'],['ir al grano','zur Sache kommen'],['andarse con rodeos','um den heißen Brei reden']]);
+
+W('u33','Umgangssprache: Alltag','Essen, Ausgehen, Gefühle – wie man wirklich redet',[
+['el finde','das Wochenende (ugs.)'],['quedar','sich verabreden'],['ir de cañas','auf ein Bier gehen'],['ir de tapas','Tapas essen gehen'],['el chiringuito','die Strandbar'],['el botellón','Trinken im Freien'],['estar de resaca','verkatert sein'],['pegarse un atracón','sich vollstopfen'],['estar como una cuba','sternhagelvoll sein'],['estar pelado','pleite sein'],
+['ser un pringado','ein armer Tropf sein'],['currarse algo','sich Mühe geben mit'],['pasarse','übertreiben'],['¡Te has pasado!','Du hast übertrieben!'],['ligar','flirten, anbandeln'],['el ligue','der Flirt'],['ser un plasta','eine Nervensäge sein'],['dar la lata','nerven'],['flipar en colores','total ausflippen'],['estar de bajón','down sein'],
+['estar a tope','voll dabei sein'],['molar mazo','voll cool sein'],['ni de coña','auf keinen Fall'],['¡Qué morro!','So eine Frechheit!'],['tener morro','dreist sein'],['el colega','der Kumpel'],['el pibón','die Granate (attraktiv, ugs.)'],['cutre','schäbig'],['chungo','übel, mies'],['guay del Paraguay','supercool (scherzhaft)']]);
+
+W('u34','Wirtschaft & Unternehmen','Märkte, Verträge, Unternehmensführung',[
+['la empresa emergente','das Start-up'],['el/la socio/a','der/die Geschäftspartner/in'],['la facturación','der Umsatz'],['los beneficios','der Gewinn'],['las pérdidas','die Verluste'],['la rentabilidad','die Rentabilität'],['rentable','rentabel'],['la financiación','die Finanzierung'],['el inversor','der Investor'],['la ronda de financiación','die Finanzierungsrunde'],
+['la cuota de mercado','der Marktanteil'],['la libre competencia','der freie Wettbewerb'],['la cláusula','die Klausel'],['rescindir un contrato','einen Vertrag kündigen'],['la indemnización','die Abfindung, Entschädigung'],['el incumplimiento','die Nichterfüllung'],['la negociación','die Verhandlung'],['el margen','die Marge, der Spielraum'],['la oferta y la demanda','Angebot und Nachfrage'],['la subcontratación','das Outsourcing'],
+['la quiebra','die Insolvenz'],['quebrar','pleitegehen'],['la fusión','die Fusion'],['la adquisición','die Übernahme'],['la estrategia','die Strategie'],['el balance','die Bilanz'],['el IVA','die Mehrwertsteuer'],['el/la autónomo/a','der/die Selbstständige'],['darse de alta como autónomo','sich selbstständig melden'],['el plan de negocio','der Businessplan']]);
+
+W('u35','Kunst & Kultur','Malerei, Musik, Literatur, Bühne',[
+['la pintura','die Malerei'],['el lienzo','die Leinwand'],['el retrato','das Porträt'],['el paisaje','die Landschaft'],['el bodegón','das Stillleben'],['la obra maestra','das Meisterwerk'],['la vanguardia','die Avantgarde'],['el surrealismo','der Surrealismus'],['la instalación','die Installation'],['la galería','die Galerie'],
+['la novela','der Roman'],['el relato','die Erzählung'],['el ensayo','der Essay'],['la poesía','die Lyrik'],['el verso','der Vers'],['el/la protagonista','der/die Hauptfigur'],['la trama','die Handlung'],['el desenlace','das Ende, die Auflösung'],['la obra de teatro','das Theaterstück'],['el escenario','die Bühne'],
+['el estreno','die Premiere'],['la crítica','die Kritik'],['el/la director/a','der/die Regisseur/in'],['la banda sonora','der Soundtrack'],['la orquesta','das Orchester'],['el compás','der Takt'],['la letra','der Liedtext'],['el patrimonio cultural','das Kulturerbe'],['restaurar','restaurieren'],['la exposición temporal','die Wechselausstellung']]);
+
+W('u36','Wissenschaft & Technik','Forschung, Digitales, Ethik',[
+['el estudio','die Studie'],['la hipótesis','die Hypothese'],['el experimento','das Experiment'],['la muestra','die Stichprobe'],['los resultados','die Ergebnisse'],['demostrar','beweisen'],['refutar','widerlegen'],['el hallazgo','der Fund, die Entdeckung'],['la evidencia científica','die wissenschaftliche Evidenz'],['la revista científica','die Fachzeitschrift'],
+['el/la científico/a','der/die Wissenschaftler/in'],['el laboratorio','das Labor'],['la genética','die Genetik'],['el ADN','die DNA'],['la vacuna','der Impfstoff'],['el aprendizaje automático','das maschinelle Lernen'],['la ciberseguridad','die Cybersicherheit'],['el hackeo','der Hackerangriff'],['la nube','die Cloud'],['los datos personales','die personenbezogenen Daten'],
+['la vigilancia','die Überwachung'],['el dilema ético','das ethische Dilemma'],['la responsabilidad','die Verantwortung'],['la transparencia','die Transparenz'],['el impacto','die Auswirkung'],['innovador','innovativ'],['obsoleto','veraltet'],['pionero','bahnbrechend'],['la patente','das Patent'],['el avance tecnológico','der technologische Fortschritt']]);
+
+W('u37','Akademische Sprache','Verben des Sagens, Textarbeit, Recht',[
+['afirmar','behaupten'],['sostener','vertreten (These)'],['señalar','hinweisen'],['subrayar','unterstreichen'],['destacar','hervorheben'],['advertir','warnen; bemerken'],['aludir a','anspielen auf'],['cuestionar','infrage stellen'],['matizar','nuancieren'],['concluir','folgern'],
+['el planteamiento','der Ansatz'],['el enfoque','die Herangehensweise'],['el marco teórico','der theoretische Rahmen'],['la cita textual','das Zitat'],['citar','zitieren'],['la bibliografía','das Literaturverzeichnis'],['el resumen','die Zusammenfassung'],['el apartado','der Abschnitt'],['la nota a pie de página','die Fußnote'],['el plagio','das Plagiat'],
+['la normativa','die Vorschriften'],['el reglamento','die Verordnung'],['vigente','geltend'],['entrar en vigor','in Kraft treten'],['derogar','aufheben (Gesetz)'],['el decreto','der Erlass'],['el ámbito','der Bereich'],['la índole','die Art, Natur'],['el fenómeno','das Phänomen'],['la tendencia','die Tendenz']]);
+
+/* ---------- C2 ---------- */
+W('u38','Humor & Zwischentöne','Witz, Ironie, Körpersprache',[
+['el chiste','der Witz'],['contar un chiste','einen Witz erzählen'],['la broma','der Scherz'],['gastar una broma','einen Streich spielen'],['la ironía','die Ironie'],['el sarcasmo','der Sarkasmus'],['el doble sentido','die Doppeldeutigkeit'],['el juego de palabras','das Wortspiel'],['la ocurrencia','der Einfall, Gag'],['ocurrente','witzig, schlagfertig'],
+['la retranca','der hintergründige Humor'],['el retintín','der spitze Unterton'],['soltar una pulla','einen Seitenhieb verteilen'],['el guiño','das Augenzwinkern; die Anspielung'],['guiñar un ojo','zwinkern'],['encogerse de hombros','mit den Schultern zucken'],['fruncir el ceño','die Stirn runzeln'],['poner los ojos en blanco','die Augen verdrehen'],['morderse la lengua','sich auf die Zunge beißen'],['carcajearse','schallend lachen'],
+['la carcajada','das schallende Gelächter'],['partirse de risa','sich kaputtlachen'],['tener gracia','witzig sein'],['sin gracia','unlustig'],['el humor negro','der schwarze Humor'],['la sátira','die Satire'],['burlarse de','sich lustig machen über'],['la burla','der Spott'],['picarse','beleidigt sein (ugs.)'],['seguir la corriente','mitspielen, zustimmen']]);
+
+W('u39','Feste, Geschichte & Glaube','Traditionen, Geschichte, Religion',[
+['la tradición','die Tradition'],['la costumbre','der Brauch'],['el folclore','die Volkskultur'],['la procesión','die Prozession'],['la romería','die Wallfahrt (Volksfest)'],['el santo','der Namenstag; der Heilige'],['la Nochebuena','der Heiligabend'],['la Nochevieja','Silvester'],['el turrón','der Turrón (Süßigkeit)'],['los fuegos artificiales','das Feuerwerk'],
+['la Edad Media','das Mittelalter'],['la Reconquista','die Reconquista'],['el Siglo de Oro','das Goldene Zeitalter'],['la Guerra Civil','der Bürgerkrieg'],['la dictadura','die Diktatur'],['la Transición','der Übergang zur Demokratie'],['la monarquía','die Monarchie'],['el imperio','das Reich'],['la conquista','die Eroberung'],['el legado','das Erbe, Vermächtnis'],
+['la fe','der Glaube'],['creyente','gläubig'],['ateo','atheistisch'],['laico','weltlich'],['la iglesia','die Kirche'],['la mezquita','die Moschee'],['la sinagoga','die Synagoge'],['el peregrino','der Pilger'],['el Camino de Santiago','der Jakobsweg'],['la superstición','der Aberglaube']]);
+
+W('u40','Recht & Literatur','Gericht, Verwaltung, literarische Sprache',[
+['el tribunal','das Gericht'],['la sentencia','das Urteil'],['el/la abogado/a','der/die Anwalt/Anwältin'],['el/la fiscal','der/die Staatsanwalt/-anwältin'],['el acusado','der Angeklagte'],['la demanda','die Klage'],['demandar','verklagen'],['el recurso','die Berufung, der Einspruch'],['absolver','freisprechen'],['la prueba','der Beweis'],
+['el testigo','der Zeuge'],['declarar','aussagen'],['el delito','die Straftat'],['la multa','die Geldstrafe'],['prescribir','verjähren'],['el boletín oficial','das Amtsblatt'],['la instancia','der Antrag (formell)'],['el expediente','die Akte'],['la notificación','der Bescheid'],['el plazo','die Frist'],
+['el narrador','der Erzähler'],['la metáfora','die Metapher'],['el símbolo','das Symbol'],['evocar','heraufbeschwören'],['el matiz','die Nuance'],['sombrío','düster'],['melancólico','melancholisch'],['efímero','vergänglich'],['inefable','unbeschreiblich'],['el ocaso','der Niedergang; Sonnenuntergang']]);
+
+W('u41','Präzise Verben & Nuancen','Synonyme für C2: genauer sagen, was man meint',[
+['acarrear','mit sich bringen (Folgen)'],['conllevar','mit sich bringen'],['suponer','bedeuten, darstellen'],['desencadenar','auslösen'],['propiciar','begünstigen'],['agravar','verschlimmern'],['paliar','lindern'],['subsanar','beheben'],['soslayar','umgehen'],['acotar','eingrenzen'],
+['vislumbrar','erahnen'],['entrever','durchblicken lassen'],['aducir','anführen (Gründe)'],['esgrimir','ins Feld führen (Argument)'],['recalcar','betonen'],['abogar por','sich einsetzen für'],['desdeñar','verschmähen'],['menospreciar','geringschätzen'],['ensalzar','preisen'],['enaltecer','verherrlichen'],
+['ostensible','offensichtlich'],['fehaciente','glaubwürdig, beweiskräftig'],['ineludible','unumgänglich'],['exhaustivo','erschöpfend'],['somero','oberflächlich, knapp'],['ambiguo','mehrdeutig'],['tácito','stillschweigend'],['pertinente','angebracht, relevant'],['ecuánime','ausgeglichen, unparteiisch'],['perspicaz','scharfsinnig']]);
+}
 </script>
 <script>/* ================= GESCHICHTEN: „Nuevo en Barcelona“ – Serie zum Lesen & Hören =================
    Ben, ein deutscher Student, zieht nach Barcelona. Jede Geschichte nutzt nur Grammatik bis zur Unidad in `after`.
