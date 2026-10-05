@@ -29,15 +29,23 @@ let S;
 function load(){try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
   let sh=null;try{sh=JSON.parse(localStorage.getItem(SHARED));}catch(e){}
   if(!sh){let es={};try{es=JSON.parse(localStorage.getItem(LANGS.es.key))||{};}catch(e){}sh={name:es.name,gender:es.gender,settings:es.settings};}
-  if(sh.name)S.name=sh.name;if(sh.gender)S.gender=sh.gender;if(sh.settings)S.settings=sh.settings;
+  if(sh.name)S.name=sh.name;if(sh.surname)S.surname=sh.surname;else if(sh.name)delete S.surname;if(sh.gender)S.gender=sh.gender;if(sh.settings)S.settings=sh.settings;
   S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),S);S.settings=Object.assign({},DEFAULT.settings,S.settings||{});if(!S.settings.geminiModel||S.settings.geminiModel==='gemini-2.5-flash')S.settings.geminiModel='gemini-flash-latest';}
-function saveShared(){try{localStorage.setItem(SHARED,JSON.stringify({lang:LANG.code,ui:UI,ex:EX_SET,name:S.name,gender:S.gender,settings:S.settings}));}catch(e){}}
+function saveShared(){try{localStorage.setItem(SHARED,JSON.stringify({lang:LANG.code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}}
 function save(noSync){S.updated=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}saveShared();if(!noSync&&window.__sync)window.__sync.schedule();}
 load();
 document.title=fmt(T('Mi profe · {L} lernen'));
 /* Name: wird beim ersten Öffnen abgefragt. Die Inhalte sind für „Jonas“ geschrieben – für andere Namen wird er überall ersetzt. */
 const NAME=()=>S.name||'';
-function personalize(o){if(typeof o==='string')return o.replace(/\bJonas\b/g,S.name);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=personalize(o[i]);return o;}
+/* Nachname: steht nie fest im Kurs. „Jonas Gross“ / „señor Gross“ / Buchstabieren werden aus S.name + optional S.surname gebaut. */
+const SPELL={a:'a',b:'be',c:'ce',d:'de',e:'e',f:'efe',g:'ge',h:'hache',i:'i',j:'jota',k:'ka',l:'ele',m:'eme',n:'ene','ñ':'eñe',o:'o',p:'pe',q:'cu',r:'erre',s:'ese',t:'te',u:'u',v:'uve',w:'uve doble',x:'equis',y:'i griega',z:'zeta','ä':'a con diéresis','ö':'o con diéresis','ü':'u con diéresis','ß':'doble ese','á':'a con tilde','é':'e con tilde','í':'i con tilde','ó':'o con tilde','ú':'u con tilde'};
+const spellName=w=>[...w.toLowerCase()].filter(c=>SPELL[c]).map(c=>SPELL[c]).join(', ');
+function persStr(t){if(!/Jonas|Gross/.test(t))return t;const sur=S.surname||'',f=S.gender==='f',nm=S.name||'Jonas',sp=sur||nm.split(' ')[0];
+  return t.replace(/„Gross“ – du sagst, dass man das Doppel-S mit zwei S schreibt\./,'Ein Doppel-S buchstabierst du „dos eses“.').replace(/“Gross” – you say that the double S is written with two S's\./,'You spell a double S as “dos eses”.')
+   .replace(/^Gross: [a-zñ, ]+\.$/,sp+': '+spellName(sp)+'.').replace('Deinen Nachnamen buchstabieren',sur?'Deinen Nachnamen buchstabieren':'Deinen Namen buchstabieren').replace('Spelling your surname',sur?'Spelling your surname':'Spelling your name')
+   .replace(/\bJonas Gross\b/g,nm+(sur?' '+sur:'')).replace(/, señor Gross/g,', '+(f?'señora':'señor')+(sur?' '+sur:''))
+   .replace(/, (Herr|Mr) Gross/g,(m,w)=>sur?', '+(w==='Herr'?(f?'Frau':'Herr'):(f?'Ms':'Mr'))+' '+sur:'').replace(/\bJonas\b/g,nm);}
+function personalize(o){if(typeof o==='string')return persStr(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=personalize(o[i]);return o;}
   if(o&&typeof o==='object'){for(const k of Object.keys(o))o[k]=personalize(o[k]);}return o;}
 /* Kursinhalte in der Erklärsprache: COURSE_TR[Lernsprache][EX] = {deutscher Text: Übersetzung}. Fehlt etwas, bleibt Deutsch. */
 const CT=EX!=='de'&&window.COURSE_TR&&COURSE_TR[LANG.code]&&COURSE_TR[LANG.code][EX]||null;
@@ -46,7 +54,7 @@ const trc=s=>!CT||s==null?s:CT[s]!=null?CT[s]:LESEN&&typeof s==='string'&&s.star
 function trContent(o){if(typeof o==='string')return trc(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=trContent(o[i]);return o;}
   if(o&&typeof o==='object'){for(const k of Object.keys(o))if(k!=='role'&&k!=='id')o[k]=trContent(o[k]);}return o;}
 if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);}
-if(S.name&&S.name!==T('Jonas')){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);}
+personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);
 /* Ansprache: Bei „weiblich“ werden Sätze über die lernende Person selbst (estoy/soy … , ¡Encantado!) in die weibliche Form gesetzt
    und beim Prüfen beide Formen akzeptiert. Vokabeln bleiben unverändert (sie sind Schlüssel im Vokabeltrainer). */
 const FEMO=/^(cansad|encantad|content|preocupad|resfriad|maread|nervios|ocupad|aburrid|enfadad|casad|divorciad|solter|interesad|acostumbrad|dispuest|list|segur|hart|perdid|sorprendid|emocionad|tranquil|alt|baj|delgad|moren|rubi|simpátic|antipátic|tímid|ordenad|caótic|vag|ingenier|informátic|médic|alumn|abogad|sentad|levantad|duchad|vestid|nacid|mudad|graduad|enamorad|invitad|equivocad|despiert|obligad|encargad|guap|gord|delgad|abiert|cansad)o(s?)$/i;
@@ -277,16 +285,17 @@ function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{cla
   ov.append(h('div',{class:'card',style:'max-width:380px;width:100%'},h('p',{style:'margin-top:0;font-weight:600'},text),h('div',{class:'row',style:'justify-content:flex-end'},h('button',{class:'btn',onclick:()=>close(false)},T('Abbrechen')),h('button',{class:'btn primary',onclick:()=>close(true)},okLabel||'OK'))));
   ov.onclick=e=>{if(e.target===ov)close(false);};document.body.append(ov);});}
 function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
+  const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
   let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('b',{},l),ex?h('span',{},ex):null);return b;});
-  const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const changed=v!==S.name||g!==S.gender;S.name=v;S.gender=g;save();
+  const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const v2=inp2.value.trim().replace(/\s+/g,' ').slice(0,40);const changed=v!==S.name||g!==S.gender||v2!==(S.surname||'');S.name=v;S.gender=g;if(v2)S.surname=v2;else delete S.surname;save();
     const back=again?'lang':'home';if(IN_ARTIFACT)CUR=back;else history.replaceState(null,'','#'+back);
     if(changed&&!IN_ARTIFACT)location.reload();else{if(changed){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}}route();}};
-  inp.onkeydown=e=>{if(e.key==='Enter')ok();};
+  inp.onkeydown=inp2.onkeydown=e=>{if(e.key==='Enter')ok();};
   document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
     UI_LANGS.length>1?h('div',{class:'uisel'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',title:n,onclick:()=>{if(c!==UI)setUI(c,true);}},f))):null,
     h('div',{style:'font-size:48px;margin-bottom:6px'},'👋'),h('h1',{style:'margin:0 0 6px'},again?T('Name ändern'):T('¡Hola!')),
     h('p',{class:'muted',style:'margin:0 0 18px'},again?T('So begrüße ich dich und so heißt du in den Übungen.'):fmt(T('Ich bin dein Lehrer für {L}. Wie heißt du?'))),
-    inp,h('p',{class:'muted small',style:'margin:16px 0 8px'},T('Wie soll ich dich ansprechen? (wichtig für die Endungen)')),LANG.genderEx?h('div',{class:'gsel'},gb):null,
+    inp,inp2,h('p',{class:'muted small',style:'margin:16px 0 8px'},T('Wie soll ich dich ansprechen? (wichtig für die Endungen)')),LANG.genderEx?h('div',{class:'gsel'},gb):null,
     h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?T('Speichern'):T('Los geht’s →')),
     again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('lang')},T('Abbrechen')):null)));
   setTimeout(()=>inp.focus(),80);}
@@ -902,7 +911,7 @@ function vSettingsAll(m){const st=S.settings;
 
 function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & Profil')));
   const avail=Object.values(LANGS).filter(L=>L.course&&L.course.units.length);const planned=LANG_PLANNED.filter(([c])=>!avail.some(L=>L.code===c));
-  const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,ex:EX_SET,name:S.name,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';location.reload();};
+  const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';location.reload();};
   m.append(h('div',{class:'kind',style:'margin-top:8px'},T('Ich lerne')),h('div',{class:'chips'},
     ...avail.map(L=>h('button',{class:'chip'+(L.code===LANG.code?' on':''),onclick:()=>pick(L.code)},h('span',{},L.flag),h('span',{},T(L.name)))),
     ...planned.map(([c,n,f])=>h('button',{class:'chip soon',onclick:()=>toast(T(n)+T(' ist noch in Arbeit'))},h('span',{},f),h('span',{},T(n)+T(' · bald'))))),
@@ -912,7 +921,7 @@ function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & P
   m.append(h('div',{class:'kind',style:'margin-top:20px'},fmt(T('{L} lernen mit'))),h('div',{class:'chips'},EX_LANGS.map(c=>h('button',{class:'chip'+(c===EX?' on':''),onclick:()=>{if(c!==EX){if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}setEX(c);}}},h('span',{},EX_FLAGS[c]||''),h('span',{},fmt(T(EX_NAMES[c]||c)))))),
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Erklärungen, Übersetzungen und Wortbedeutungen im Kurs – unabhängig von der Sprache der App.')));
   m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Name & Ansprache')),h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'row',style:'flex-wrap:nowrap'},
-    h('div',{style:'flex:1;min-width:0;font-weight:600'},'👤 '+S.name+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):'')),h('button',{class:'btn small',onclick:()=>go('name')},T('Ändern')))));}
+    h('div',{style:'flex:1;min-width:0;font-weight:600'},'👤 '+S.name+(S.surname?' '+S.surname:'')+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):'')),h('button',{class:'btn small',onclick:()=>go('name')},T('Ändern')))));}
 /* Unterseiten von „Mehr“: welche Karten aus vSettingsAll gezeigt werden (Erkennung über die – ggf. übersetzte – Überschrift) */
 const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),['🔊 Aussprache']],
   ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 Gemini (optional)']],
