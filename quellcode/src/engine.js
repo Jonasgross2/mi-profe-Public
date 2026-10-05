@@ -370,16 +370,17 @@ function vUnits(m,lv){
   m.append(h('p',{class:'muted small',style:'margin:10px 0 12px'},L.sub),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>unitLevel(u)===lv).map(unitCard)));
 }
 function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
-  const st=unitStatus(u);const ck=S.checks[u.id];const LS=u.lessons.filter(l=>!l.ab),AB=u.lessons.filter(l=>l.ab);const ust=STORIES.filter(x=>x.after===u.id);
+  const st=unitStatus(u);const ck=S.checks[u.id];const LS=u.lessons.filter(l=>!l.ab),AB=u.lessons.filter(l=>l.ab&&!l.freq),FQ=u.lessons.find(l=>l.freq);const ust=STORIES.filter(x=>x.after===u.id);
   m.append(h('div',{class:'row',style:'margin-bottom:4px'},h('button',{class:'btn ghost small',onclick:()=>goBack('units/'+unitLevel(u))},'← '+backLabel(T('Kurs'))),h('span',{class:'pill acc'},levelOf(u).title)),
-    h('h1',{style:'margin-bottom:4px'},''+UW+' '+u.n+' · '+u.title),
+    h('h1',{class:'uh1',style:'margin-bottom:4px'},''+UW+' '+u.n+' · '+u.title),
     h('div',{class:'seg two'},h('button',{class:tab!=='x'?'on':'',onclick:()=>go('unit/'+u.id)},h('b',{},T('Lektionen')),h('span',{},Math.round(lessonPct(u)*100)+'%')),
       h('button',{class:tab==='x'?'on':'',onclick:()=>go('unit/'+u.id+'/x')},h('b',{},T('Extras')),h('span',{},(ust.length?T('Geschichte · '):'')+T('Wörter · Sprechen')))));
   if(tab==='x'){
-    m.append(h('p',{class:'muted small',style:'margin:12px 0 0'},T('Das lernst du: ')+u.goals.join(' · ')),
+    m.append(h('p',{class:'muted small xgoals',style:'margin:12px 0 0'},T('Das lernst du: ')+u.goals.join(' · ')),
       tiles(...ust.map(x=>mtile('📖',T('Geschichte'),x.title,()=>go('story/'+x.id),S.stories?.[x.id]?'✓':T('neu'))),
         mtile('📄',T('Resumen'),T('Alles auf einen Blick'),()=>go('resumen/'+u.id)),mtile('🗂️',T('Wortschatz'),allUnitWords(u).length+T(' Wörter'),()=>go('words/'+u.id)),
         mtile('🎧',T('Shadowing'),T('Sätze nachsprechen'),()=>go('shadow/'+u.id)),
+        FQ?mtile('📚',T('Häufige Wörter'),T('30 Alltagswörter'),()=>go('lesson/'+u.id+'/'+FQ.id),S.lessons[u.id+'.'+FQ.id]?.done?'✓':null):null,
         u.situacion?mtile('💬',T('Gespräch'),u.situacion.title+(hasAI()?'':T(' · braucht KI')),()=>go('chat/'+u.id)):null,
         AB.length?mtile('📎',T('Übungsblätter'),AB.length+T(' aus deinem DHBW-Kurs'),()=>go('unit/'+u.id+'/ab')):null));return;}
   if(tab==='ab'){m.innerHTML='';m.append(backTo(''+UW+' '+u.n,'unit/'+u.id),h('h1',{},T('Übungsblätter')),h('p',{class:'sub'},T('Deine Arbeitsblätter aus dem DHBW-Kurs – freiwillig, zum Vertiefen.')),
@@ -752,7 +753,7 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
     out.append(...hits.slice(0,300).map(([w,u])=>h('div',{class:'vrow drow'},spk(w[0]),picEl(w[0],w[2])||h('span',{class:'pic'}),h('div',{class:'dw'},h('div',{class:'es'},w[0]),h('div',{class:'de'},w[1])),h('span',{class:'pill'},'U'+u.n))));
     if(!hits.length)out.append(h('p',{class:'muted'},mine?T('Noch keine gesammelten Wörter hier – sie kommen mit den Lektionen.'):T('Nichts gefunden.')));};
   inp.oninput=draw;
-  m.append(inp,levelSeg(lv,'ref/w',L=>{const n=all.filter(([,u])=>unitLevel(u)===L.id).length;return n+T(' W.');}),h('div',{class:'row'},tog),info,out);draw();}
+  m.append(inp,levelSeg(lv,'ref/w',L=>{const n=all.filter(([,u])=>unitLevel(u)===L.id).length;return n+T(' W.');}),h('div',{class:'row'},tog),info,out,h('p',{class:'muted small',style:'margin-top:16px'},T('Lektionen „Häufige Wörter“: Häufigkeit aus FrequencyWords (OpenSubtitles, CC BY-SA 4.0), Übersetzungen aus WikDict/Wiktionary (CC BY-SA 3.0), bearbeitet.')));draw();}
 function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'s');const u=storyFor(st);
   if(!storyOpen(st))m.append(h('div',{class:'fb warn',style:'margin-bottom:12px'},T('Diese Geschichte passt ab ')+UW+' '+u.n+T(' – vielleicht kommt dir noch nicht alles bekannt vor. Lies sie trotzdem, wenn du magst!')));
   const steps=[{s:{t:'read',kind:T('Geschichte · ')+levelOf(u).title,title:st.title,intro:T('Tipp: Hör sie dir zuerst einmal ohne Text an (🔊 Vorlesen, Augen zu) – dann lies mit.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}]
