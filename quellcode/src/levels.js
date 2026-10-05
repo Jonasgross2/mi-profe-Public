@@ -9,7 +9,8 @@ window.LEVELS=[
   {id:'B2',label:'B2',title:'B2 · Teil 1',sub:'Imperfecto de subjuntivo, irreale Bedingungen, Zeitenfolge, Konzessivsätze, Passiv & Nachrichten.'},
   {id:'B2b',label:'B2',title:'B2 · Teil 2',sub:'Irreale Vergangenheit, formelles Register, Verben der Veränderung, Argumentieren – B2 komplett.'},
   {id:'C1',label:'C1',title:'C1 · Teil 1',sub:'Subjuntivo-Nuancen, Umgangssprache & Redewendungen, Bedingungen ohne si.'},
-  {id:'C1b',label:'C1',title:'C1 · Teil 2',sub:'Hervorheben, starke Konzessiv- und Folgesätze, Essays schreiben – C1 komplett.'}];
+  {id:'C1b',label:'C1',title:'C1 · Teil 2',sub:'Hervorheben, starke Konzessiv- und Folgesätze, Essays schreiben – C1 komplett.'},
+  {id:'C2',label:'C2',title:'C2 · Meisterschaft',sub:'Ironie & Andeutungen, Sprichwörter, gehobene und Behördensprache, Sprachmittlung – Kurs komplett.'}];
 window.LEVEL_OF={u0:'A1',u1:'A1',u2:'A1',u3:'A1',u4:'A1',u5:'A1',u6:'A2a',u7:'A2a',u8:'A2a',u9:'A2a',u10:'A2a'};
 
 /* Einstufungsfragen, die direkt in einer Unidad stehen (u.placement), in den gemeinsamen Pool hängen.

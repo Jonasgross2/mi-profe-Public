@@ -1,9 +1,9 @@
 # Mi profe – Spanisch-Lern-App von Jonas
 
-Persönliche Lern-App (Deutsch-Oberfläche), Kurs von A1 bis B1:
+Persönliche Lern-App (Deutsch-Oberfläche), Kurs von A1 bis C2 (44 Unidades, 15 Geschichten):
 - A1 + A2 Teil 1: Unidad 0–10 nach dem Kursbuch „Meta profesional Plus A1–A2“, plus Übungsblätter aus Jonas' DHBW-Kurs.
 - A2 Teil 2: Unidad 11–12 (`c_gaps.js`, ids g1/g2: Grammatik-Lücken aus der „Systematischen Grammatik“ des Kursbuchs, S. 121) und Unidad 13–17 (ids u11–u15); B1: Unidad 18–20 (ids u16–u18). Anzeige-Nummer `n` ≠ id!
-- A2/B1 (B1 Teil 1: Unidad 18–21, ids u16–u19; B1 Teil 2: Unidad 22–25, ids u20–u23, `c_b1b.js`), B2 (Teil 1: Unidad 26–29, ids u24–u27, `c_b2.js`; Teil 2: Unidad 30–33, ids u28–u31, `c_b2b.js`), C1 (Teil 1: Unidad 34–36, ids u32–u34, `c_c1.js`; Teil 2: Unidad 37–39, ids u35–u37, `c_c1b.js`) und weitere Stufen: eigene Inhalte nach dem Plan Curricular des Instituto Cervantes (Grammatik-/Themen-Inventare je Stufe). Keine Inhalte aus Büchern von Schattenbibliotheken (Anna's Archive o. Ä.) übernehmen.
+- A2/B1 (B1 Teil 1: Unidad 18–21, ids u16–u19; B1 Teil 2: Unidad 22–25, ids u20–u23, `c_b1b.js`), B2 (Teil 1: Unidad 26–29, ids u24–u27, `c_b2.js`; Teil 2: Unidad 30–33, ids u28–u31, `c_b2b.js`), C1 (Teil 1: Unidad 34–36, ids u32–u34, `c_c1.js`; Teil 2: Unidad 37–39, ids u35–u37, `c_c1b.js`) und C2 (Unidad 40–43, ids u38–u41, `c_c2.js`): eigene Inhalte nach dem Plan Curricular des Instituto Cervantes (Grammatik-/Themen-Inventare je Stufe). Keine Inhalte aus Büchern von Schattenbibliotheken (Anna's Archive o. Ä.) übernehmen.
 Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pages, Branch main, Root).
 
 ## Aufbau
@@ -54,5 +54,5 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - `quellcode/i18n/course_de.json`: alle deutschen Texte der Kursinhalte, gruppiert nach Abschnitt (`u0`…`u20` = Anzeige-Nummer, `stories`, `test`). Neu erzeugen mit `jsc i18n/extract.js -- src > i18n/course_de.json` (jsc: /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc).
 - Übersetzungen: `i18n/<lern>_<ui>/<abschnitt>.py` mit `EN=[…]` in derselben Reihenfolge. `python3 i18n/gen.py` erzeugt `src/tr_<lern>_<ui>.js` (`COURSE_TR`), `build.py` bindet alle `src/tr_*.js` automatisch ein.
 - Die Engine übersetzt beim Laden (`trContent`), wenn die Erklärsprache ≠ Deutsch ist (Titel „Lesen: …“ bekommen automatisch „Reading: …“ usw.); fehlende Texte bleiben Deutsch. `role` (KI-Anweisung) bleibt immer Deutsch.
-- Stand: es→en komplett (alle Unidades, Geschichten, Einstufungstest, `x_all` = Texte aus `course_de_extra.json`). es→pt noch nicht begonnen.
+- Stand: es→en komplett bis Unidad 20 + Geschichten 1–12 + Einstufungstest der alten Unidades. **Noch nicht übersetzt:** Unidad 21–43 (B1-Rest bis C2, Okt. 2026) und Geschichten 13–15 – dafür `course_de.json` neu erzeugen (extract.js) und Abschnitte `u21`…`u43` ergänzen. es→pt noch nicht begonnen.
 - Zweiter Suchlauf: `jsc i18n/extract_extra.js -- src i18n/course_de.json > i18n/course_de_extra.json` findet Texte, die der erste übersieht (Titel ohne Füllwörter). Einträge `""` in einer Übersetzungsliste = unverändert lassen.
