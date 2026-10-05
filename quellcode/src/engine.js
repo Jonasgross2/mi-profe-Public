@@ -323,11 +323,11 @@ const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{cl
 
 function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.status==='soon';const ck=S.checks[u.id];
   return h('div',{class:'card unit'+(soon?' locked':''),onclick:()=>{if(!soon)go('unit/'+u.id)}},
-    h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'row'},h('span',{class:'t'},u.title),
-      ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt – Abschlusstest')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):null,
-      soon?h('span',{class:'pill'},T('kommt als Nächstes')):null),
+    h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'row'},h('span',{class:'t'},u.title)),
       h('div',{class:'d'},u.sub),soon?null:h('div',{class:'bar',style:'margin-top:8px'},h('i',{style:'width:'+Math.round(pct*100)+'%'}))),
-    soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%'));}
+    h('div',{class:'uright'},ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt ✓')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):null,
+      soon?h('span',{class:'pill'},T('kommt als Nächstes')):null,
+      soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%')));}
 function vUnits(m,lv){
   const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:(cur?unitLevel(cur.u):T('A1'));
   m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},T('Kurs')),h('button',{class:'btn small',onclick:()=>go('placement')},T('🎯 Test')),h('button',{class:'btn small',onclick:()=>go('ref/g')},T('📄 Grammatik'))));

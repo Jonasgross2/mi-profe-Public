@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261005-1613";</script>
+<script>window.PWA=true;window.APP_VERSION="20261005-1623";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -304,6 +304,19 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .chip.soon{opacity:.5}
 .howto{margin:0 0 12px}.howto summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;margin-bottom:6px}
 .card h2{font-size:18px}
+/* Unidad-Karten: Status-Pillen rechtsbündig */
+.unit .uright{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none;width:112px;text-align:right}
+.unit .uright .pill{width:100%;box-sizing:border-box;text-align:center;line-height:1.35}
+/* Kachel-Seiten (Mehr, Bibliothek, Vokabeln) am Handy/iPad: Kacheln füllen den Platz, Versionszeile unten */
+@media (max-width:1023px){
+  .main:has(>.mtiles){display:flex;flex-direction:column}
+  .main>.mtiles{flex:1;min-height:0;grid-auto-rows:minmax(104px,230px);align-content:stretch}
+  .main>.mtiles .mtile .mi2{margin-bottom:auto}
+  .main>.mtiles .mtile .mi2{font-size:34px}
+  .main>.verline{margin-top:auto;padding-top:14px}
+}
+@media (max-width:700px){.unit .uright{width:92px}.unit .uright .pill{font-size:11px;padding:2px 6px}}
+.mtiles:has(>:nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -4756,11 +4769,11 @@ const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{cl
 
 function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.status==='soon';const ck=S.checks[u.id];
   return h('div',{class:'card unit'+(soon?' locked':''),onclick:()=>{if(!soon)go('unit/'+u.id)}},
-    h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'row'},h('span',{class:'t'},u.title),
-      ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt – Abschlusstest')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):null,
-      soon?h('span',{class:'pill'},T('kommt als Nächstes')):null),
+    h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'row'},h('span',{class:'t'},u.title)),
       h('div',{class:'d'},u.sub),soon?null:h('div',{class:'bar',style:'margin-top:8px'},h('i',{style:'width:'+Math.round(pct*100)+'%'}))),
-    soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%'));}
+    h('div',{class:'uright'},ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt ✓')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):null,
+      soon?h('span',{class:'pill'},T('kommt als Nächstes')):null,
+      soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%')));}
 function vUnits(m,lv){
   const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:(cur?unitLevel(cur.u):T('A1'));
   m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},T('Kurs')),h('button',{class:'btn small',onclick:()=>go('placement')},T('🎯 Test')),h('button',{class:'btn small',onclick:()=>go('ref/g')},T('📄 Grammatik'))));

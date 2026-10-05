@@ -292,3 +292,16 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .chip.soon{opacity:.5}
 .howto{margin:0 0 12px}.howto summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;margin-bottom:6px}
 .card h2{font-size:18px}
+/* Unidad-Karten: Status-Pillen rechtsbündig */
+.unit .uright{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none;width:112px;text-align:right}
+.unit .uright .pill{width:100%;box-sizing:border-box;text-align:center;line-height:1.35}
+/* Kachel-Seiten (Mehr, Bibliothek, Vokabeln) am Handy/iPad: Kacheln füllen den Platz, Versionszeile unten */
+@media (max-width:1023px){
+  .main:has(>.mtiles){display:flex;flex-direction:column}
+  .main>.mtiles{flex:1;min-height:0;grid-auto-rows:minmax(104px,230px);align-content:stretch}
+  .main>.mtiles .mtile .mi2{margin-bottom:auto}
+  .main>.mtiles .mtile .mi2{font-size:34px}
+  .main>.verline{margin-top:auto;padding-top:14px}
+}
+@media (max-width:700px){.unit .uright{width:92px}.unit .uright .pill{font-size:11px;padding:2px 6px}}
+.mtiles:has(>:nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
