@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261005-1209";</script>
+<script>window.PWA=true;window.APP_VERSION="20261005-1220";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -284,6 +284,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
   .mobile-nav{position:static;order:2;flex:none}
   .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
+.welcome{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:16px}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -2786,6 +2787,11 @@ function load(){try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
   S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),S);S.settings=Object.assign({},DEFAULT.settings,S.settings||{});if(!S.settings.geminiModel||S.settings.geminiModel==='gemini-2.5-flash')S.settings.geminiModel='gemini-flash-latest';}
 function save(noSync){S.updated=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(!noSync&&window.__sync)window.__sync.schedule();}
 load();
+/* Name: wird beim ersten Öffnen abgefragt. Die Inhalte sind für „Jonas“ geschrieben – für andere Namen wird er überall ersetzt. */
+const NAME=()=>S.name||'';
+function personalize(o){if(typeof o==='string')return o.replace(/\bJonas\b/g,S.name);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=personalize(o[i]);return o;}
+  if(o&&typeof o==='object'){for(const k of Object.keys(o))o[k]=personalize(o[k]);}return o;}
+if(S.name&&S.name!=='Jonas'){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);}
 
 /* ---------- helpers ---------- */
 const $=(s,r=document)=>r.querySelector(s);
@@ -2882,7 +2888,7 @@ async function claudeAsk(prompt,{json,history}){
     if(json)return await SAMPLE.json(input,opt);return (await SAMPLE(input,opt)).text;}
   catch(e){throw new Error(CL_ERR[e&&e.code]||('Claude: '+((e&&e.message)||e&&e.code||'Fehler')));}}
 /* ---------- gemini ---------- */
-async function gemini(prompt,{json=true,history=null}={}){
+async function gemini(prompt,{json=true,history=null}={}){if(S.name)prompt=String(prompt).replace(/\bJonas\b/g,S.name);
   if(useClaude())return claudeAsk(prompt,{json,history});
   const key=S.settings.geminiKey;if(!key)throw new Error('Kein Gemini-API-Key hinterlegt (Einstellungen).');
   const tried=[S.settings.geminiModel||'gemini-flash-latest'];for(const f of FALLBACK)if(!tried.includes(f))tried.push(f);
@@ -2993,7 +2999,19 @@ if(!IN_ARTIFACT)window.addEventListener('hashchange',route);
 function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{class:'overlay'});const close=v=>{ov.remove();res(v);};
   ov.append(h('div',{class:'card',style:'max-width:380px;width:100%'},h('p',{style:'margin-top:0;font-weight:600'},text),h('div',{class:'row',style:'justify-content:flex-end'},h('button',{class:'btn',onclick:()=>close(false)},'Abbrechen'),h('button',{class:'btn primary',onclick:()=>close(true)},okLabel||'OK'))));
   ov.onclick=e=>{if(e.target===ov)close(false);};document.body.append(ov);});}
-function route(){if(window.speechSynthesis)speechSynthesis.cancel();const parts=curRoute().split('/');const m=shell();
+function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'inp',placeholder:'Dein Vorname',value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
+  const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast('Gib deinen Namen ein');return;}const changed=v!==S.name;S.name=v;save();
+    if(IN_ARTIFACT)CUR='home';else history.replaceState(null,'','#home');
+    if(changed&&!IN_ARTIFACT)location.reload();else{if(changed)personalize(COURSE),personalize(PLACEMENT),personalize(STORIES);route();}};
+  inp.onkeydown=e=>{if(e.key==='Enter')ok();};
+  document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
+    h('div',{style:'font-size:48px;margin-bottom:6px'},'👋'),h('h1',{style:'margin:0 0 6px'},again?'Name ändern':'¡Hola!'),
+    h('p',{class:'muted',style:'margin:0 0 18px'},again?'So begrüße ich dich und so heißt du in den Übungen.':'Ich bin dein Spanischlehrer. Wie heißt du?'),
+    inp,h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?'Speichern':'Los geht’s →'),
+    again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('settings')},'Abbrechen'):null)));
+  setTimeout(()=>inp.focus(),80);}
+function route(){if(window.speechSynthesis)speechSynthesis.cancel();const parts=curRoute().split('/');
+  if(!S.name||parts[0]==='name')return vWelcome(!!S.name);const m=shell();
   const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
@@ -3002,7 +3020,7 @@ function vHome(m){
   const nx=nextLesson();const due=dueCards().length;const done=Object.values(S.lessons).filter(x=>x.done).length;
   const acc=S.stats.answers?Math.round(100*S.stats.correct/S.stats.answers):0;const td=today();
   const hr=new Date().getHours();const greet=hr<14?'¡Buenos días':hr<20?'¡Buenas tardes':'¡Buenas noches';
-  m.append(h('h1',{},greet+', Jonas!'));
+  m.append(h('h1',{},greet+', '+S.name+'!'));
   /* Tagesplan: feste Bausteine mit Zeitschätzung, die erste offene Aufgabe wird groß angezeigt */
   const ns=nextStory();const storyToday=Object.entries(S.stories||{}).find(([,v])=>v.date===td);
   const plan=[
@@ -3614,7 +3632,7 @@ function vSettings(m,sec){
     const html=await (await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'})).text();const v=(html.match(/APP_VERSION="([^"]+)"/)||[])[1];
     if(v&&v!==window.APP_VERSION){toast('Neue Version gefunden – lade neu …');if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>location.reload(),600);}else toast('Du hast schon die neueste Version ✓');}catch(e){toast('Keine Verbindung – später noch mal versuchen');}};
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):'Offline-Datei';
-  m.append(h('h1',{},'Mehr'),tiles(mtile('🎯','Einstufungstest',S.placement?'Gemacht am '+S.placement.date:'Noch nicht gemacht',()=>go('placement')),
+  m.append(h('h1',{},'Mehr'),tiles(mtile('👤','Dein Name',S.name,()=>go('name')),mtile('🎯','Einstufungstest',S.placement?'Gemacht am '+S.placement.date:'Noch nicht gemacht',()=>go('placement')),
     mtile('🎧','Aussprache üben','Shadowing · Unidad '+curUnit().n,()=>go('shadow/'+curUnit().id)),
     ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0]))),
     window.PWA?mtile('🔄','Nach Update suchen','Version '+ver,upd):null));}
@@ -3639,6 +3657,7 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   const ta=a.streak||{},tb=b.streak||{};o.streak=(ta.last||'')>(tb.last||'')?ta:(tb.last||'')>(ta.last||'')?tb:((ta.count||0)>=(tb.count||0)?ta:tb);
   o.mistakes=((a.updated||0)>=(b.updated||0)?a.mistakes:b.mistakes)||[];
   o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
+  o.name=a.name||b.name;
   o.stories=Object.assign({},b.stories||{});for(const[k,v]of Object.entries(a.stories||{})){const r=o.stories[k];o.stories[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.checks=Object.assign({},b.checks||{});for(const[k,v]of Object.entries(a.checks||{})){const r=o.checks[k];o.checks[k]=!r?v:{date:(v.date>r.date?v.date:r.date),score:Math.max(v.score||0,r.score||0),pass:!!(v.pass||r.pass)};}
   o.updated=Math.max(a.updated||0,b.updated||0);return o;}

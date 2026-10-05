@@ -272,3 +272,4 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
   .mobile-nav{position:static;order:2;flex:none}
   .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
 }
+.welcome{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:16px}
