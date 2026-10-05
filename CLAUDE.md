@@ -32,3 +32,5 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - `#ref/w` Wörterbuch (Suche über alle Vokabeln), `#ref/g` Grammatik-Übersicht (alle Resumen), `#verbs` Verben-Trainer (alle conj-Schritte angefangener Unidades).
 - Desktop-Seitenleiste einklappbar (`S.settings.side='mini'`).
 - Achtung in `shell()`: lokale Variable `route` überschattet die Funktion `route()` – dort `go(curRoute())` benutzen.
+- Navigation nach dem Prinzip „kein Scrollen am Handy“: Mehr (`#settings`, Unterseiten `#settings/stimme|ki|sync|backup`), Vokabeln (`#vocab`, `#vocab/units`) und Bibliothek (`#ref`) sind Kachel-Menüs (`mtile`/`tiles`). Kurs (`#units/<Stufe>`), Geschichten und Grammatik haben Stufen-Reiter (`seg`/`levelSeg`). Unidad-Seite: Reiter Lektionen | Extras (`#unit/<id>/x`), Übungsblätter `#unit/<id>/ab`.
+- Startseite: Tagesplan mit „x von y erledigt · noch ca. N Min.“, erste offene Aufgabe groß, Rest als Chips.
