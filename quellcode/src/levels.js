@@ -5,7 +5,9 @@ window.LEVELS=[
   {id:'A2a',label:'A2',title:'A2 · Teil 1',sub:'Kursbuch Meta profesional, Unidad 6–10: Perfekt, Alltag, Pläne, Imperfekt, Indefinido.'},
   {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Grammatik-Lücken aus dem Kursbuch schließen, dann Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
   {id:'B1',label:'B1',title:'B1 · Teil 1',sub:'Subjuntivo, Geschichten erzählen, Bedingungen, Meinung & Zweifel.'},
-  {id:'B1b',label:'B1',title:'B1 · Teil 2',sub:'Zeit- und Zwecksätze, indirekte Rede, Relativsätze, Gefühle & Bewertungen – B1 komplett.'}];
+  {id:'B1b',label:'B1',title:'B1 · Teil 2',sub:'Zeit- und Zwecksätze, indirekte Rede, Relativsätze, Gefühle & Bewertungen – B1 komplett.'},
+  {id:'B2',label:'B2',title:'B2 · Teil 1',sub:'Imperfecto de subjuntivo, irreale Bedingungen, Zeitenfolge, Konzessivsätze, Passiv & Nachrichten.'},
+  {id:'B2b',label:'B2',title:'B2 · Teil 2',sub:'Irreale Vergangenheit, formelles Register, Verben der Veränderung, Argumentieren – B2 komplett.'}];
 window.LEVEL_OF={u0:'A1',u1:'A1',u2:'A1',u3:'A1',u4:'A1',u5:'A1',u6:'A2a',u7:'A2a',u8:'A2a',u9:'A2a',u10:'A2a'};
 
 /* Einstufungsfragen, die direkt in einer Unidad stehen (u.placement), in den gemeinsamen Pool hängen.
