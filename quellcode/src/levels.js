@@ -1,10 +1,11 @@
-/* ===== Stufen (A1 → A2 → B1) & Bilder zu Vokabeln ===== */
+/* ===== Stufen (A1 → C2) & Bilder zu Vokabeln ===== */
 /* Abschnitte des Kurses. Der Einstufungstest läuft in dieser Reihenfolge, Etappe für Etappe. */
 window.LEVELS=[
   {id:'A1',label:'A1',title:'A1 · Einstieg',sub:'Kursbuch Meta profesional, Unidad 0–5: dich vorstellen, Familie, Essen, Stadt, Freizeit.'},
   {id:'A2a',label:'A2',title:'A2 · Teil 1',sub:'Kursbuch Meta profesional, Unidad 6–10: Perfekt, Alltag, Pläne, Imperfekt, Indefinido.'},
   {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Grammatik-Lücken aus dem Kursbuch schließen, dann Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
-  {id:'B1',label:'B1',title:'B1 · Erste Schritte',sub:'Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.'}];
+  {id:'B1',label:'B1',title:'B1 · Teil 1',sub:'Subjuntivo, Geschichten erzählen, Bedingungen, Meinung & Zweifel.'},
+  {id:'B1b',label:'B1',title:'B1 · Teil 2',sub:'Zeit- und Zwecksätze, indirekte Rede, Relativsätze, Gefühle & Bewertungen – B1 komplett.'}];
 window.LEVEL_OF={u0:'A1',u1:'A1',u2:'A1',u3:'A1',u4:'A1',u5:'A1',u6:'A2a',u7:'A2a',u8:'A2a',u9:'A2a',u10:'A2a'};
 
 /* Einstufungsfragen, die direkt in einer Unidad stehen (u.placement), in den gemeinsamen Pool hängen.

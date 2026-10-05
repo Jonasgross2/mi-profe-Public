@@ -308,3 +308,4 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 }
 .mtiles:has(>:nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
 @media (max-width:700px){.unit{padding:9px 14px}.grid:has(>.unit){gap:6px!important}.unit .ugrid{grid-template-columns:minmax(0,1fr) 96px;column-gap:10px;row-gap:5px}.unit .upill .pill{font-size:11px;padding:2px 6px}.unit .ugrid .ubar,.unit .ugrid .upct{grid-row:2}}
+.seg.sub{margin-top:6px;padding:3px}.seg.sub button{padding:4px 0;flex-direction:row;justify-content:center;gap:6px}.seg.sub button b{font-size:13px}

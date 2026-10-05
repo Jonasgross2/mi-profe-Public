@@ -226,6 +226,14 @@ const backTo=(label,r)=>h('button',{class:'btn ghost small',style:'margin-bottom
 const curUnit=()=>nextLesson()?.u||COURSE.units[0];
 const unitLevel=u=>u.level||LEVEL_OF[u.id]||T('A1');
 const levelOf=u=>LEVELS.find(L=>L.id===unitLevel(u))||LEVELS[0];
+/* Stufen-Reiter: oben A1 … C2 (GER-Stufe = L.label), darunter „Teil 1 | Teil 2“, wenn eine Stufe mehrere Teile hat. cnt(Liste von Teilstufen) → Text unter dem Namen */
+const LGROUPS=[...new Set(LEVELS.map(L=>L.label))];
+const lastPart={};
+function levelTabs(cur,base,cnt){const C=LEVELS.find(L=>L.id===cur)||LEVELS[0];const parts=LEVELS.filter(L=>L.label===C.label);lastPart[C.label]=C.id;
+  const top=h('div',{class:'seg',style:'grid-template-columns:repeat('+LGROUPS.length+',1fr)'},LGROUPS.map(g=>{const Ls=LEVELS.filter(L=>L.label===g);
+    return h('button',{class:g===C.label?'on':'',onclick:()=>go(base+'/'+(lastPart[g]||Ls[0].id))},h('b',{},g),h('span',{},cnt(Ls)));}));
+  if(parts.length<2)return top;
+  return h('div',{},top,h('div',{class:'seg sub',style:'grid-template-columns:repeat('+parts.length+',1fr)'},parts.map((L,i)=>h('button',{class:L.id===cur?'on':'',onclick:()=>go(base+'/'+L.id)},h('b',{},T('Teil ')+(i+1)),h('span',{},cnt([L]))))));}
 const levelUnits=lv=>COURSE.units.filter(u=>unitLevel(u)===lv&&u.status!=='soon');
 const pic=(es,em)=>picOf(es,em);
 const picEl=(es,em,cls)=>{const p=pic(es,em);return p?h('span',{class:cls||'pic','aria-hidden':'true'},p):null;};
@@ -332,8 +340,8 @@ let lastLv=null;/* zuletzt angesehene Stufe – beim Zurückkommen auf „Kurs�
 function vUnits(m,lv){
   const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):T('A1'));lastLv=lv;
   m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},T('Kurs')),h('button',{class:'btn small',onclick:()=>go('placement')},T('🎯 Test')),h('button',{class:'btn small',onclick:()=>go('ref/g')},T('📄 Grammatik'))));
-  m.append(h('div',{class:'seg'},LEVELS.map(L=>{const us=COURSE.units.filter(u=>unitLevel(u)===L.id&&u.status!=='soon');const pct=us.length?us.reduce((a,u)=>a+lessonPct(u),0)/us.length:0;
-    return h('button',{class:L.id===lv?'on':'',onclick:()=>go('units/'+L.id)},h('b',{},L.id===T('A2a')?T('A2·1'):L.id===T('A2b')?T('A2·2'):L.label),h('span',{},Math.round(pct*100)+'%'));})));
+  const pctOf=Ls=>{const us=COURSE.units.filter(u=>Ls.some(L=>L.id===unitLevel(u))&&u.status!=='soon');return Math.round((us.length?us.reduce((a,u)=>a+lessonPct(u),0)/us.length:0)*100)+'%';};
+  m.append(levelTabs(lv,'units',pctOf));
   const L=LEVELS.find(x=>x.id===lv);
   m.append(h('p',{class:'muted small',style:'margin:10px 0 12px'},L.sub),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>unitLevel(u)===lv).map(unitCard)));
 }
@@ -694,7 +702,7 @@ function vMix(m){const steps=mixSteps(15);
 const storyFor=st=>unitById(st.after);
 const storyOpen=st=>{const u=storyFor(st);return !u||lessonPct(u)>0||S.checks[u.id]?.pass||(unitStatus(u)&&unitStatus(u)!==T('neu'));};
 function nextStory(){return STORIES.find(st=>storyOpen(st)&&!S.stories?.[st.id]);}
-const levelSeg=(cur,base,cnt)=>h('div',{class:'seg',style:'margin:4px 0 12px'},LEVELS.map(L=>h('button',{class:L.id===cur?'on':'',onclick:()=>go(base+'/'+L.id)},h('b',{},L.id===T('A2a')?T('A2·1'):L.id===T('A2b')?T('A2·2'):L.label),h('span',{},cnt(L)))));
+const levelSeg=(cur,base,cnt)=>h('div',{style:'margin:4px 0 12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,'')));
 const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):T('A1');};
 function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
