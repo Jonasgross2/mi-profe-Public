@@ -27,6 +27,8 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - Sprache der Oberfläche: Deutsch; Erklärungen auf A1/A2-Niveau.
 
 ## Weitere Bereiche
+- Leiste (Mac & Handy gleich, 6 Punkte): Start, Kurs, Vokabeln, Bibliothek, Fehler, Mehr. Einstufungstest über die Kurs-Seite/Einstellungen.
+- Bibliothek `#ref/s`: Geschichten-Serie „Nuevo en Barcelona“ (`c_stories.js`, `STORIES`, `after` = ab welcher Unidad, Fortschritt in `S.stories`, Fehler-Ref `S|id|i`), `#story/<id>`.
 - `#ref/w` Wörterbuch (Suche über alle Vokabeln), `#ref/g` Grammatik-Übersicht (alle Resumen), `#verbs` Verben-Trainer (alle conj-Schritte angefangener Unidades).
 - Desktop-Seitenleiste einklappbar (`S.settings.side='mini'`).
 - Achtung in `shell()`: lokale Variable `route` überschattet die Funktion `route()` – dort `go(curRoute())` benutzen.
