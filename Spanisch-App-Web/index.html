@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261005-1304";</script>
+<script>window.PWA=true;window.APP_VERSION="20261005-1310";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -300,6 +300,10 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .brand .flag{font-size:18px}
 .app.mini .brand .bt{display:none}
 .uisel{display:flex;justify-content:center;gap:6px;margin:-12px 0 10px}.uisel button{border:1px solid var(--line);background:none;border-radius:8px;font-size:20px;padding:2px 8px;cursor:pointer;opacity:.55}.uisel button.on{opacity:1;border-color:var(--accent)}
+.verline{justify-content:space-between;margin-top:14px}
+.chip.soon{opacity:.5}
+.howto{margin:0 0 12px}.howto summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;margin-bottom:6px}
+.card h2{font-size:18px}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -3346,7 +3350,15 @@ window.UI_TR={
 "B1 · Erste Schritte": "B1 · First steps",
 "Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.": "Subjunctive, telling stories, conditions. More units to come.",
 "Mi profe · {L} lernen": "Mi profe · Learn {L}",
-"{ON} …": "{ON} …"
+"{ON} …": "{ON} …",
+"Sprache & Profil": "Language & profile",
+"Ich lerne": "I am learning",
+" · bald": " · soon",
+"Jede Sprache hat ihren eigenen Fortschritt.": "Each language has its own progress.",
+"Ändern": "Change",
+"Sync & Backup": "Sync & backup",
+"Geräte abgleichen & sichern": "Sync & back up devices",
+"Anleitung & Infos": "Instructions & info"
 },
 "es": {
 "Keine Antwort.": "Sin respuesta.",
@@ -3868,7 +3880,15 @@ window.UI_TR={
 "B1 · Erste Schritte": "B1 · Primeros pasos",
 "Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.": "Subjuntivo, contar historias, condiciones. Vendrán más unidades.",
 "Mi profe · {L} lernen": "Mi profe · Aprende {L}",
-"{ON} …": "{ON} …"
+"{ON} …": "{ON} …",
+"Sprache & Profil": "Idioma y perfil",
+"Ich lerne": "Estoy aprendiendo",
+" · bald": " · pronto",
+"Jede Sprache hat ihren eigenen Fortschritt.": "Cada idioma tiene su propio progreso.",
+"Ändern": "Cambiar",
+"Sync & Backup": "Sincronizar y copia",
+"Geräte abgleichen & sichern": "Sincronizar y guardar",
+"Anleitung & Infos": "Instrucciones e info"
 },
 "pt": {
 "Keine Antwort.": "Sem resposta.",
@@ -4390,7 +4410,15 @@ window.UI_TR={
 "B1 · Erste Schritte": "B1 · Primeiros passos",
 "Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.": "Subjuntivo, contar histórias, condições. Mais unidades virão.",
 "Mi profe · {L} lernen": "Mi profe · Aprenda {L}",
-"{ON} …": "{ON} …"
+"{ON} …": "{ON} …",
+"Sprache & Profil": "Idioma e perfil",
+"Ich lerne": "Estou aprendendo",
+" · bald": " · em breve",
+"Jede Sprache hat ihren eigenen Fortschritt.": "Cada idioma tem seu próprio progresso.",
+"Ändern": "Alterar",
+"Sync & Backup": "Sincronizar e backup",
+"Geräte abgleichen & sichern": "Sincronizar e salvar",
+"Anleitung & Infos": "Instruções e informações"
 }
 };
 </script>
@@ -5272,26 +5300,36 @@ function vSettingsAll(m){const st=S.settings;
 }
 
 
-function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache')),h('p',{class:'sub'},T('Welche Sprache möchtest du lernen? Jede Sprache hat ihren eigenen Fortschritt – Name, Ansprache und Einstellungen gelten für alle.')));
+function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & Profil')));
   const avail=Object.values(LANGS).filter(L=>L.course&&L.course.units.length);const planned=LANG_PLANNED.filter(([c])=>!avail.some(L=>L.code===c));
   const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,name:S.name,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';location.reload();};
-  m.append(tiles(...avail.map(L=>{let n=0;try{const d=JSON.parse(localStorage.getItem(L.key)||'{}');n=Object.values(d.lessons||{}).filter(x=>x.done).length;}catch(e){}
-      return mtile(L.flag,T(L.name),(L.code===LANG.code?T('aktiv · '):'')+(n?n+T(' Lektionen gemacht'):T('noch nicht begonnen')),()=>pick(L.code),L.code===LANG.code?'✓':null);}),
-    ...planned.map(([c,n,f])=>{n=T(n);const t=mtile(f,n,T('kommt bald'),()=>toast(n+T(' ist noch in Arbeit')));t.classList.add('soon');return t;})));
-  m.append(h('h2',{},T('Sprache der App')),h('p',{class:'muted small',style:'margin-top:-4px'},T('Knöpfe, Menüs und Hinweise. Die Kursinhalte (Erklärungen, Übersetzungen) sind bisher auf Deutsch.')),
-    tiles(...UI_LANGS.map(([c,f,n])=>mtile(f,n,c===UI?T('aktiv'):'',()=>{if(c!==UI)setUI(c);},c===UI?'✓':null))));}
-const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),/Aussprache/],['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),/Gemini|KI-Lehrer/],['sync','☁️',T('Geräte-Sync'),T('Mac & iPhone abgleichen'),/Geräte/],['backup','💾',T('Backup'),T('Sichern & wiederherstellen'),/Fortschritt sichern/]];
+  m.append(h('div',{class:'kind',style:'margin-top:8px'},T('Ich lerne')),h('div',{class:'chips'},
+    ...avail.map(L=>h('button',{class:'chip'+(L.code===LANG.code?' on':''),onclick:()=>pick(L.code)},h('span',{},L.flag),h('span',{},T(L.name)))),
+    ...planned.map(([c,n,f])=>h('button',{class:'chip soon',onclick:()=>toast(T(n)+T(' ist noch in Arbeit'))},h('span',{},f),h('span',{},T(n)+T(' · bald'))))),
+    h('p',{class:'muted small',style:'margin:6px 0 0'},T('Jede Sprache hat ihren eigenen Fortschritt.')));
+  m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Sprache der App')),h('div',{class:'seg'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',onclick:()=>{if(c!==UI)setUI(c);}},h('b',{},f),h('span',{},n)))),
+    h('p',{class:'muted small',style:'margin:6px 0 0'},T('Knöpfe, Menüs und Hinweise. Die Kursinhalte (Erklärungen, Übersetzungen) sind bisher auf Deutsch.')));
+  m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Name & Ansprache')),h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'row',style:'flex-wrap:nowrap'},
+    h('div',{style:'flex:1;min-width:0;font-weight:600'},'👤 '+S.name+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):'')),h('button',{class:'btn small',onclick:()=>go('name')},T('Ändern')))));}
+/* Unterseiten von „Mehr“: welche Karten aus vSettingsAll gezeigt werden (Erkennung über die – ggf. übersetzte – Überschrift) */
+const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),['🔊 Aussprache']],
+  ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 Gemini (optional)']],
+  ['sync','☁️',T('Sync & Backup'),T('Geräte abgleichen & sichern'),['☁️ Geräte synchronisieren (GitHub)','💾 Fortschritt sichern']]];
 function vSettings(m,sec){
   const s=SETSEC.find(x=>x[0]===sec);
-  if(s){const tmp=h('div');vSettingsAll(tmp);m.append(backTo(T('Mehr'),'settings'),h('h1',{},s[2]),...[...tmp.children].filter(el=>s[4].test(el.querySelector('h2')?.textContent||'')).map(el=>{el.querySelector('h2')?.remove();return el;}));return;}
+  if(s){const tmp=h('div');vSettingsAll(tmp);const want=s[4].map(x=>T(x));const cards=[...tmp.children].filter(el=>want.includes(el.querySelector('h2')?.textContent||''));
+    /* lange Erklärtexte einklappen, damit die Seite ohne Scrollen auskommt */
+    cards.forEach(el=>{const info=[...el.children].filter(x=>x.matches('p.muted,ol'));if(!info.length)return;const d=h('details',{class:'howto'},h('summary',{},T('Anleitung & Infos')));info[0].before(d);d.append(...info);});
+    m.append(backTo(T('Mehr'),'settings'),h('h1',{},s[2]),...cards.map(el=>{if(cards.length===1)el.querySelector('h2')?.remove();return el;}));return;}
   const upd=async()=>{toast(T('Suche nach Update …'));try{const r=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(r)await r.update();
     const html=await (await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'})).text();const v=(html.match(/APP_VERSION="([^"]+)"/)||[])[1];
     if(v&&v!==window.APP_VERSION){toast(T('Neue Version gefunden – lade neu …'));if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>location.reload(),600);}else toast(T('Du hast schon die neueste Version ✓'));}catch(e){toast(T('Keine Verbindung – später noch mal versuchen'));}};
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):T('Offline-Datei');
-  m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache'),LANG.flag+' '+T(LANG.name),()=>go('lang')),mtile('👤',T('Name & Ansprache'),S.name+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):''),()=>go('name')),mtile('🎯',T('Einstufungstest'),S.placement?T('Gemacht am ')+S.placement.date:T('Noch nicht gemacht'),()=>go('placement')),
+  m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),
+    mtile('🎯',T('Einstufungstest'),S.placement?T('Gemacht am ')+S.placement.date:T('Noch nicht gemacht'),()=>go('placement')),
     mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),
-    ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0]))),
-    window.PWA?mtile('🔄',T('Nach Update suchen'),T('Version ')+ver,upd):null));}
+    ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0])))),
+    h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
 
 /* ---------- Sync über GitHub Gist ---------- */
 const GIST_FILE=LANG.gist,GIST_DESC=T('Mi profe – Lernfortschritt (Sync)');

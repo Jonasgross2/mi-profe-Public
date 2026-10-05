@@ -521,7 +521,15 @@ window.UI_TR={
 "B1 · Erste Schritte": "B1 · First steps",
 "Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.": "Subjunctive, telling stories, conditions. More units to come.",
 "Mi profe · {L} lernen": "Mi profe · Learn {L}",
-"{ON} …": "{ON} …"
+"{ON} …": "{ON} …",
+"Sprache & Profil": "Language & profile",
+"Ich lerne": "I am learning",
+" · bald": " · soon",
+"Jede Sprache hat ihren eigenen Fortschritt.": "Each language has its own progress.",
+"Ändern": "Change",
+"Sync & Backup": "Sync & backup",
+"Geräte abgleichen & sichern": "Sync & back up devices",
+"Anleitung & Infos": "Instructions & info"
 },
 "es": {
 "Keine Antwort.": "Sin respuesta.",
@@ -1043,7 +1051,15 @@ window.UI_TR={
 "B1 · Erste Schritte": "B1 · Primeros pasos",
 "Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.": "Subjuntivo, contar historias, condiciones. Vendrán más unidades.",
 "Mi profe · {L} lernen": "Mi profe · Aprende {L}",
-"{ON} …": "{ON} …"
+"{ON} …": "{ON} …",
+"Sprache & Profil": "Idioma y perfil",
+"Ich lerne": "Estoy aprendiendo",
+" · bald": " · pronto",
+"Jede Sprache hat ihren eigenen Fortschritt.": "Cada idioma tiene su propio progreso.",
+"Ändern": "Cambiar",
+"Sync & Backup": "Sincronizar y copia",
+"Geräte abgleichen & sichern": "Sincronizar y guardar",
+"Anleitung & Infos": "Instrucciones e info"
 },
 "pt": {
 "Keine Antwort.": "Sem resposta.",
@@ -1565,6 +1581,14 @@ window.UI_TR={
 "B1 · Erste Schritte": "B1 · Primeiros passos",
 "Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.": "Subjuntivo, contar histórias, condições. Mais unidades virão.",
 "Mi profe · {L} lernen": "Mi profe · Aprenda {L}",
-"{ON} …": "{ON} …"
+"{ON} …": "{ON} …",
+"Sprache & Profil": "Idioma e perfil",
+"Ich lerne": "Estou aprendendo",
+" · bald": " · em breve",
+"Jede Sprache hat ihren eigenen Fortschritt.": "Cada idioma tem seu próprio progresso.",
+"Ändern": "Alterar",
+"Sync & Backup": "Sincronizar e backup",
+"Geräte abgleichen & sichern": "Sincronizar e salvar",
+"Anleitung & Infos": "Instruções e informações"
 }
 };
