@@ -217,7 +217,7 @@ const r3ready=k=>rnd(k)>=2&&!(S.lessons[k].d2&&S.lessons[k].d2>=today());
 /* Lektionen mit wenig Übungsmaterial (z. B. reine Lese-Lektionen) brauchen keine Extra-Runden */
 const shortLesson=l=>l.steps.filter(s=>['gap','tr','conj','order','listen'].includes(s.t)).length+l.steps.filter(s=>s.t==='vocab').length<3;
 function setRound(k,n,score){const p=S.lessons[k]||{};S.lessons[k]=Object.assign(p,{done:true,r:Math.max(rnd(k),n),best:Math.max(p.best||0,score||0),date:today()});if(n===2)S.lessons[k].d2=today();save();}
-function lessonPct(u){const L=(u.lessons||[]).filter(l=>!l.ab);if(!L.length)return 0;return L.reduce((a,l)=>a+Math.min(3,rnd(u.id+'.'+l.id)),0)/(3*L.length);}
+function lessonPct(u){if(S.checks[u.id]?.pass)return 1;/* Abschlusstest bestanden = Unidad gemeistert */const L=(u.lessons||[]).filter(l=>!l.ab);if(!L.length)return 0;return L.reduce((a,l)=>a+Math.min(3,rnd(u.id+'.'+l.id)),0)/(3*L.length);}
 function unitStatus(u){const p=S.placement?.results?.[u.id];if(p==null)return null;return p>=0.8?'sicher':p>=0.5?T('auffrischen'):T('neu');}
 /* Kachel-Menüs (jede Kachel öffnet eine eigene Seite) */
 const mtile=(ic,t,d,fn,badge)=>h('button',{class:'mtile',onclick:fn},h('span',{class:'mi2'},ic),h('span',{class:'mt'},t),d?h('span',{class:'md'},d):null,badge?h('span',{class:'mb'},badge):null);
@@ -747,7 +747,7 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(shuffle(due).slice(0,25),'flip',true)},T('🃏 Karten')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(shuffle(due).slice(0,25),'listen',true)},T('🎧 Hören')))));
   m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter einer ')+UW+T(' üben'),()=>go('vocab/units')),mtile('🔁',T('Verben'),T('Konjugieren üben'),()=>go('verbs')),
-    mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),mtile('✏️',T('Fehlerheft'),S.mistakes.length?S.mistakes.length+T(' offene Fehler'):T('keine offenen Fehler'),()=>go('mistakes'))));
+    mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✏️',T('Fehlerheft'),S.mistakes.length?S.mistakes.length+T(' offene Fehler'):T('keine offenen Fehler'),()=>go('mistakes'))));
 }
 function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es,de,em])=>({es,de,em}))).slice(0,20),'type',false);}
 function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
@@ -900,7 +900,7 @@ function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & P
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Jede Sprache hat ihren eigenen Fortschritt.')));
   m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Sprache der App')),h('div',{class:'seg'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',onclick:()=>{if(c!==UI)setUI(c);}},h('b',{},f),h('span',{},n)))),
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Knöpfe, Menüs und Hinweise.')));
-  m.append(h('div',{class:'kind',style:'margin-top:20px'},fmt(T('{L} lernen mit'))),h('div',{class:'seg'},EX_LANGS.map(c=>h('button',{class:c===EX?'on':'',onclick:()=>{if(c!==EX){if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}setEX(c);}}},h('b',{},EX_FLAGS[c]||''),h('span',{},fmt(T(EX_NAMES[c]||c)))))),
+  m.append(h('div',{class:'kind',style:'margin-top:20px'},fmt(T('{L} lernen mit'))),h('div',{class:'chips'},EX_LANGS.map(c=>h('button',{class:'chip'+(c===EX?' on':''),onclick:()=>{if(c!==EX){if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}setEX(c);}}},h('span',{},EX_FLAGS[c]||''),h('span',{},fmt(T(EX_NAMES[c]||c)))))),
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Erklärungen, Übersetzungen und Wortbedeutungen im Kurs – unabhängig von der Sprache der App.')));
   m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Name & Ansprache')),h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'row',style:'flex-wrap:nowrap'},
     h('div',{style:'flex:1;min-width:0;font-weight:600'},'👤 '+S.name+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):'')),h('button',{class:'btn small',onclick:()=>go('name')},T('Ändern')))));}
@@ -919,8 +919,6 @@ function vSettings(m,sec){
     if(v&&v!==window.APP_VERSION){toast(T('Neue Version gefunden – lade neu …'));if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>location.reload(),600);}else toast(T('Du hast schon die neueste Version ✓'));}catch(e){toast(T('Keine Verbindung – später noch mal versuchen'));}};
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):T('Offline-Datei');
   m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),
-    mtile('🎯',T('Einstufungstest'),S.placement?T('Gemacht am ')+S.placement.date:T('Noch nicht gemacht'),()=>go('placement')),
-    mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),
     ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0])))),
     h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
 
