@@ -3,13 +3,14 @@
 window.LEVELS=[
   {id:'A1',label:'A1',title:'A1 · Einstieg',sub:'Kursbuch Meta profesional, Unidad 0–5: dich vorstellen, Familie, Essen, Stadt, Freizeit.'},
   {id:'A2a',label:'A2',title:'A2 · Teil 1',sub:'Kursbuch Meta profesional, Unidad 6–10: Perfekt, Alltag, Pläne, Imperfekt, Indefinido.'},
-  {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
+  {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Grammatik-Lücken aus dem Kursbuch schließen, dann Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
   {id:'B1',label:'B1',title:'B1 · Erste Schritte',sub:'Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.'}];
 window.LEVEL_OF={u0:'A1',u1:'A1',u2:'A1',u3:'A1',u4:'A1',u5:'A1',u6:'A2a',u7:'A2a',u8:'A2a',u9:'A2a',u10:'A2a'};
 
 /* Einstufungsfragen, die direkt in einer Unidad stehen (u.placement), in den gemeinsamen Pool hängen.
    Reihenfolge bleibt stabil → Verweise 'P||i' im Fehlerheft bleiben gültig. */
-for(const u of COURSE.units)for(const q of u.placement||[])PLACEMENT.push(Object.assign({u:u.id},q));
+/* nachträglich eingefügte Unidades (id g…) hinten anhängen, damit ältere Verweise stabil bleiben */
+for(const u of COURSE.units.filter(u=>!u.id.startsWith('g')).concat(COURSE.units.filter(u=>u.id.startsWith('g'))))for(const q of u.placement||[])PLACEMENT.push(Object.assign({u:u.id},q));
 
 /* Bild (Emoji) zu einem Wort. Eigene Vokabeln können als 3. Element ein Emoji mitbringen: ['la manzana','der Apfel','🍎'] */
 window.EMOJI={

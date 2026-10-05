@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261005-1028";</script>
+<script>window.PWA=true;window.APP_VERSION="20261005-1047";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -46,7 +46,7 @@ a{color:var(--accent)}
 .side{background:var(--surface);border-right:1px solid var(--line);padding:20px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
 .brand{font-family:var(--serif);font-size:22px;font-weight:700;padding:4px 10px 16px;display:flex;align-items:center;gap:8px}
 .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:14px 0 0 var(--gold)}
-.brand .logo{font-size:12px;font-weight:800;font-family:var(--sans,inherit);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:3px 7px;letter-spacing:.02em}
+
 .nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border:0;background:none;border-radius:10px;cursor:pointer;color:var(--ink)}
 .nav button:hover{background:var(--surface2)}
 .nav button.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
@@ -203,6 +203,26 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .rounds .rd{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:600;cursor:pointer}
 .rounds .rd.on{background:var(--ok-soft);color:var(--ok);border-color:transparent}
 .rounds .rd:hover{border-color:var(--accent)}
+
+/* einklappbare Seitenleiste */
+.brand{justify-content:space-between}
+.sidetog{border:1px solid var(--line);background:none;color:var(--muted);border-radius:8px;width:28px;height:28px;cursor:pointer;font-size:15px;line-height:1;flex:none}
+.sidetog:hover{color:var(--accent);border-color:var(--accent)}
+.nav .ni{width:22px;text-align:center;flex:none}
+.app{transition:grid-template-columns .15s}
+.app.mini{grid-template-columns:72px 1fr}
+.app.mini .side{padding:20px 8px;align-items:center}
+.app.mini .brand{padding:4px 0 16px;justify-content:center}
+.app.mini .brand .bt,.app.mini .nav .nl{display:none}
+.app.mini .nav{width:100%}
+.app.mini .nav button{justify-content:center;padding:10px 0;position:relative}
+.app.mini .nav .badge{position:absolute;top:2px;right:4px;font-size:10px;padding:0 5px}
+.app.mini .foot{padding:8px 0;text-align:center}
+/* Woche */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:6px 0 8px;text-align:center}
+.wb{height:56px;background:var(--surface2);border-radius:8px;display:flex;align-items:flex-end;overflow:hidden;margin-bottom:4px}
+.wb i{display:block;width:100%;background:var(--accent);border-radius:8px 8px 0 0;min-height:0}
+.wd.now .small.muted{color:var(--accent);font-weight:700}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -1656,10 +1676,174 @@ add('u8',{id:'ab1',title:'📎 Übungsblatt: ¿Cuándo quedamos?',desc:'Aus dein
 ]});
 })();
 </script>
+<script>/* ================= A2 · TEIL 2: Lücken aus der „Systematischen Grammatik“ des Kursbuchs schließen ================= */
+
+/* ================= UNIDAD 11 · PEQUEÑAS PALABRAS ================= */
+COURSE.units.push({id:'g1',n:'11',level:'A2b',title:'Pequeñas palabras',sub:'Kleine Wörter, große Wirkung: alguien/nadie, algo/nada, algún/ningún · Kurzformen (buen, gran, primer) · Superlativ · conmigo/contigo · qué oder cuál',
+goals:['algo / nada · alguien / nadie','alguno / ninguno (algún, ningún)','doppelte Verneinung: No hay nadie.','Kurzformen: buen, mal, gran, primer, tercer','Superlativ: el más … de · -ísimo','Pronomen nach Präposition: para mí, conmigo','qué oder cuál?'],
+situacion:{title:'Verlorene Sachen im Coworking',npc:'Recepción',scene:'Du hast im Coworking-Space in Poblenou deine Jacke und dein Ladekabel liegen lassen. Du fragst am Empfang.',role:'Du bist Marta vom Empfang eines Coworking-Space in Barcelona, freundlich, du duzt Jonas. Er sucht verlorene Sachen. Benutze viele Indefinitpronomen: ¿Has dejado algo? No ha llegado nada. ¿Alguien te ha visto? No hay ningún cargador… Frag nach Details (¿Cuál es tu chaqueta, la negra o la azul? ¿Qué marca es?).',goal:'Frag, ob jemand etwas abgegeben hat (¿Alguien ha dejado…? ¿Hay algún…?), beschreib deine Sachen, und benutze einmal qué und einmal cuál.'},
+lessons:[
+{id:'l1',title:'Etwas & nichts, jemand & niemand',desc:'algo · nada · alguien · nadie',steps:[
+ {t:'vocab',title:'Unbestimmte Wörter',items:[['algo','etwas','✨'],['nada','nichts','🚫'],['alguien','jemand','🧑'],['nadie','niemand','👻'],['siempre','immer','🔁'],['nunca','nie','⛔'],['también','auch','➕'],['tampoco','auch nicht','➖'],['todo','alles','🌐'],['otro / otra','ein anderer / eine andere','🔀']]},
+ {t:'info',title:'Doppelt verneinen ist richtig!',html:`<table><tr><th>positiv</th><th>negativ</th></tr>
+ <tr><td class="es-t">¿Quieres algo?</td><td class="es-t">No quiero nada.</td></tr>
+ <tr><td class="es-t">¿Hay alguien en casa?</td><td class="es-t">No hay nadie.</td></tr>
+ <tr><td class="es-t">Siempre llego tarde.</td><td class="es-t">No llego nunca tarde. / Nunca llego tarde.</td></tr></table>
+ <div class="ex">Im Deutschen falsch, im Spanischen Pflicht: Steht <i>nada, nadie, nunca</i> <b>nach</b> dem Verb, braucht man <b>no</b> davor: <span class="es-t">No veo nada.</span> Steht es <b>vor</b> dem Verb, kein <i>no</i>: <span class="es-t">Nadie lo sabe.</span></div>
+ <p><b>Achtung:</b> <span class="es-t">otro</span> nie mit <i>un</i>: <span class="es-t">otro café</span> (nicht <s>un otro café</s>).</p>`},
+ {t:'mc',q:'– ¿Hay alguien en la oficina? – No, no hay ___.',opts:['nadie','alguien','nada'],a:0},
+ {t:'mc',q:'– ¿Quieres algo de beber? – No, gracias, no quiero ___.',opts:['nada','algo','nadie'],a:0},
+ {t:'mc',q:'„Noch einen Kaffee, bitte.“',opts:['Otro café, por favor.','Un otro café, por favor.','Uno más otro café, por favor.'],a:0},
+ {t:'gap',q:'___ sabe dónde están las llaves. (niemand)',a:['Nadie']},
+ {t:'gap',q:'No he comido ___ en todo el día. (nichts)',a:['nada']},
+ {t:'tr',de:'Ich sehe niemanden.',a:['No veo a nadie.','No veo nadie.']},
+ {t:'tr',de:'Hat jemand angerufen?',a:['¿Ha llamado alguien?','¿Alguien ha llamado?']},
+ {t:'listen',es:'No hay nadie en la recepción.',de:'Es ist niemand am Empfang.'}]},
+{id:'l2',title:'algún & ningún',desc:'¿Hay algún banco cerca? – No, ninguno.',steps:[
+ {t:'info',title:'alguno / ninguno – vor Nomen verkürzt',html:`<table><tr><th></th><th>männlich</th><th>weiblich</th></tr>
+ <tr><td>irgendein(e)</td><td class="es-t">algún banco · alguno</td><td class="es-t">alguna farmacia</td></tr>
+ <tr><td>kein(e)</td><td class="es-t">ningún problema · ninguno</td><td class="es-t">ninguna idea</td></tr></table>
+ <p>Vor einem <b>männlichen Nomen</b> fällt das <b>-o</b> weg: <span class="es-t">algún día · ningún problema</span>. Allein stehend: <span class="es-t">– ¿Tienes algún libro en español? – No, no tengo ninguno.</span></p>
+ <div class="ex"><i>ninguno</i> steht fast immer im Singular: <span class="es-t">No tengo ningún amigo aquí.</span> (nicht <s>ningunos amigos</s>)</div>`},
+ {t:'mc',q:'¿Hay ___ supermercado cerca de aquí?',opts:['algún','alguno','alguna'],a:0},
+ {t:'mc',q:'No hay ___ problema.',opts:['ningún','ninguno','ninguna'],a:0},
+ {t:'gap',q:'– ¿Tienes alguna pregunta? – No, no tengo ___.',a:['ninguna']},
+ {t:'gap',q:'___ día quiero vivir en Barcelona. (irgendwann)',a:['Algún']},
+ {t:'tr',de:'Ich habe keine Idee.',a:['No tengo ninguna idea.','No tengo ni idea.']},
+ {t:'dialog',place:'Coworking en Poblenou',title:'Verlorene Sachen',scene:'Du suchst deine Jacke und dein Ladekabel.',lines:[
+  {n:'Marta',es:'¡Hola! ¿Necesitas algo?',de:'Hallo! Brauchst du etwas?'},
+  {you:true,opts:[{es:'Sí, ayer dejé mi chaqueta aquí. ¿Alguien ha traído una chaqueta negra?',ok:true},{es:'Sí, ayer dejé mi chaqueta aquí. ¿Nadie ha traído una chaqueta negra?',ok:false,why:'Bei einer offenen Frage: <b>alguien</b> (jemand).'}]},
+  {n:'Marta',es:'Mmm, hay dos chaquetas negras. ¿Cuál es la tuya?',de:'Hm, es gibt zwei schwarze Jacken. Welche ist deine?'},
+  {you:true,opts:[{es:'La de cuero. ¿Y hay algún cargador de portátil?',ok:true},{es:'La de cuero. ¿Y hay alguno cargador de portátil?',ok:false,why:'Vor einem männlichen Nomen: <b>algún</b> cargador.'}]},
+  {n:'Marta',es:'No, lo siento, no hay ninguno.',de:'Nein, tut mir leid, es gibt keins.'},
+  {you:true,opts:[{es:'Vale, no pasa nada. ¡Gracias!',ok:true},{es:'Vale, pasa nada. ¡Gracias!',ok:false,why:'Doppelte Verneinung: <b>no</b> pasa nada.'}]}]}]},
+{id:'l3',title:'buen, gran, primer & der Superlativ',desc:'un buen día · el más alto de · carísimo',steps:[
+ {t:'info',title:'Kurzformen vor männlichen Nomen',html:`<table><tr><th>normal</th><th>vor männl. Nomen (Sg.)</th></tr>
+ <tr><td class="es-t">bueno</td><td class="es-t">un buen trabajo</td></tr>
+ <tr><td class="es-t">malo</td><td class="es-t">un mal día</td></tr>
+ <tr><td class="es-t">primero / tercero</td><td class="es-t">el primer / tercer piso</td></tr>
+ <tr><td class="es-t">grande</td><td class="es-t">una gran ciudad (vor <b>jedem</b> Nomen!)</td></tr></table>
+ <div class="ex"><b>gran</b> vor dem Nomen = großartig: <span class="es-t">un gran hombre</span>. <b>grande</b> nach dem Nomen = groß (Größe): <span class="es-t">un hombre grande</span>.</div>`},
+ {t:'mc',q:'Hoy hace ___ tiempo.',opts:['buen','bueno','buena'],a:0},
+ {t:'mc',q:'Vivo en el ___ piso.',opts:['tercer','tercero','tres'],a:0},
+ {t:'mc',q:'Barcelona es una ___ ciudad.',opts:['gran','grande de','grano'],a:0},
+ {t:'info',title:'Der Superlativ',html:`<p><b>der/die/das …ste</b>: <span class="es-t">el / la / los / las + más + Adjektiv + de</span></p>
+ <p class="es-t">La Sagrada Familia es el edificio más famoso de Barcelona.</p>
+ <p>Unregelmäßig: <span class="es-t">el mejor (beste) · el peor (schlechteste) · el mayor (älteste) · el menor (jüngste)</span></p>
+ <p><b>Sehr, sehr …</b>: <span class="es-t">-ísimo</span> → <span class="es-t">caro → carísimo · bueno → buenísimo · fácil → facilísimo · rico → riquísimo</span></p>`},
+ {t:'mc',q:'Es el restaurante ___ caro ___ la ciudad.',opts:['más … de','más … que','muy … de'],a:0},
+ {t:'gap',q:'Mi hermano es el ___ de la familia. (der Jüngste)',a:['menor|más joven']},
+ {t:'gap',q:'Este piso es muy, muy caro: es ___. (-ísimo)',a:['carísimo']},
+ {t:'tr',de:'Das ist das beste Café des Viertels.',a:['Es el mejor café del barrio.','Este es el mejor café del barrio.','Es la mejor cafetería del barrio.']},
+ {t:'listen',es:'La paella de mi abuela está buenísima.',de:'Die Paella meiner Oma ist superlecker.'}]},
+{id:'l4',title:'conmigo & qué oder cuál',desc:'para mí · contigo · ¿Cuál prefieres?',steps:[
+ {t:'info',title:'Pronomen nach Präpositionen',html:`<p>Nach <i>para, de, a, sin, en …</i> benutzt man <span class="es-t">mí, ti, él, ella, usted, nosotros, vosotros, ellos</span>:</p>
+ <p class="es-t">Este regalo es para ti. · ¿Vienes sin mí? · Hablamos de ella.</p>
+ <p><b>Sonderformen mit con:</b> <span class="es-t">conmigo</span> (mit mir) · <span class="es-t">contigo</span> (mit dir) – sonst normal: <span class="es-t">con él, con nosotros</span>.</p>
+ <div class="ex"><i>mí</i> mit Akzent (mich/mir) ≠ <i>mi</i> ohne Akzent (mein). <i>ti</i> hat nie einen Akzent.</div>`},
+ {t:'mc',q:'¿Quieres venir al cine ___?',opts:['conmigo','con mí','con me'],a:0},
+ {t:'mc',q:'Este café es para ___.',opts:['ti','tú','te'],a:0},
+ {t:'gap',q:'– ¿Puedo ir ___? (mit dir) – ¡Claro!',a:['contigo']},
+ {t:'info',title:'¿Qué? oder ¿Cuál?',html:`<table><tr><th>¿Qué …?</th><th>¿Cuál / Cuáles …?</th></tr>
+ <tr><td>vor einem Nomen: <span class="es-t">¿Qué libro lees?</span></td><td>Auswahl aus einer Gruppe: <span class="es-t">¿Cuál prefieres, el rojo o el azul?</span></td></tr>
+ <tr><td>Definition: <span class="es-t">¿Qué es la Diada?</span></td><td>mit ser + Info: <span class="es-t">¿Cuál es tu número? ¿Cuál es la capital?</span></td></tr></table>
+ <div class="ex">Typischer Fehler: „Was ist deine Adresse?“ = <span class="es-t">¿Cuál es tu dirección?</span> (nicht <s>¿Qué es tu dirección?</s>)</div>`},
+ {t:'mc',q:'¿___ es tu número de teléfono?',opts:['Cuál','Qué'],a:0,keep:true},
+ {t:'mc',q:'¿___ películas te gustan?',opts:['Qué','Cuál'],a:0,keep:true},
+ {t:'mc',q:'Hay dos camisetas. ¿___ te gusta más?',opts:['Cuál','Qué'],a:0,keep:true},
+ {t:'gap',q:'¿___ es una „calçotada“? – Es una fiesta catalana con cebollas a la brasa.',a:['Qué']},
+ {t:'tr',de:'Was ist deine E-Mail-Adresse?',a:['¿Cuál es tu correo electrónico?','¿Cuál es tu dirección de correo electrónico?','¿Cuál es tu email?','¿Cuál es tu e-mail?']}]}
+],
+placement:[
+ {t:'mc',q:'– ¿Hay alguien en casa? – No, no hay ___.',opts:['nadie','alguien','nada'],a:0},
+ {t:'mc',q:'No hay ___ problema.',opts:['ningún','ninguno','ninguna'],a:0},
+ {t:'mc',q:'¿Quieres venir ___?',opts:['conmigo','con mí','con me'],a:0},
+ {t:'mc',q:'¿___ es tu dirección?',opts:['Cuál','Qué'],a:0},
+ {t:'gap',q:'Es el edificio ___ alto ___ la ciudad.',a:['más','de']},
+ {t:'mc',q:'Vivo en el ___ piso.',opts:['tercer','tercero','tres'],a:0}],
+resumen:`<h3>Unbestimmte Wörter</h3><p class="es-t">algo ↔ nada · alguien ↔ nadie · siempre ↔ nunca · algún/alguna ↔ ningún/ninguna</p><p class="es-t">No hay nadie. · No quiero nada. · Nadie lo sabe. · otro café (ohne un!)</p>
+<h3>Kurzformen</h3><p class="es-t">un buen día · un mal momento · el primer / tercer piso · una gran ciudad</p>
+<h3>Superlativ</h3><p class="es-t">el más famoso de … · el mejor / el peor / el mayor / el menor · carísimo · buenísimo</p>
+<h3>Nach Präposition</h3><p class="es-t">para mí / ti / él … · conmigo · contigo</p>
+<h3>qué / cuál</h3><p class="es-t">¿Qué libro? · ¿Qué es …? (Definition) — ¿Cuál prefieres? · ¿Cuál es tu número?</p>`});
+
+/* ================= UNIDAD 12 · FECHAS, ACENTOS Y ACCIONES ================= */
+COURSE.units.push({id:'g2',n:'12',level:'A2b',title:'Fechas y acciones',sub:'Monate & Datum · Akzentregeln (wann schreibt man á?) · Verb + Infinitiv/Gerundium: acabar de, volver a, dejar de, empezar a, seguir + -ando',
+goals:['Monate, Jahreszeiten, Datum sagen & schreiben','Jahreszahlen (dos mil veinticinco)','Betonungsregeln & wann ein Akzent nötig ist','acabar de + Infinitiv (gerade getan haben)','volver a / dejar de / empezar a + Infinitiv','seguir + Gerundium · llevar + Zeit + Gerundium'],
+situacion:{title:'Termine beim Sprachkurs',npc:'Secretaría',scene:'Du meldest dich im Sprachenzentrum der UPC für einen neuen Spanischkurs an und klärst Termine.',role:'Du bist die Sekretärin im Servei de Llengües der UPC, freundlich und effizient. Du siezt Jonas. Frag nach Geburtsdatum (¿Cuál es su fecha de nacimiento?), seit wann er Spanisch lernt (¿Cuánto tiempo lleva estudiando español?), ob er schon einmal einen Kurs gemacht hat. Nenne Kursdaten (del 15 de enero al 30 de marzo) und das Datum des Einstufungstests.',goal:'Nenne dein Geburtsdatum, sag, wie lange du schon Spanisch lernst (llevo … estudiando), und frag nach Anfangs- und Enddatum des Kurses.'},
+lessons:[
+{id:'l1',title:'Monate & Datum',desc:'el 5 de octubre de 2026',steps:[
+ {t:'vocab',title:'Monate & Jahreszeiten',items:[['enero','Januar','❄️'],['febrero','Februar','❄️'],['marzo','März','🌱'],['abril','April','🌷'],['mayo','Mai','🌸'],['junio','Juni','☀️'],['julio','Juli','🏖️'],['agosto','August','🏖️'],['septiembre','September','🍂'],['octubre','Oktober','🍂'],['noviembre','November','🌧️'],['diciembre','Dezember','🎄'],['la primavera','der Frühling','🌷'],['el verano','der Sommer','☀️'],['el otoño','der Herbst','🍁'],['el invierno','der Winter','⛄']]},
+ {t:'info',title:'So sagt man das Datum',html:`<p class="es-t" style="font-size:18px">Hoy es (el) cinco de octubre de dos mil veintiséis.</p>
+ <table><tr><td>Datum</td><td class="es-t">el + Zahl + de + Monat (+ de + Jahr)</td></tr>
+ <tr><td>am 1.</td><td class="es-t">el uno / el primero de mayo</td></tr>
+ <tr><td>Welches Datum ist heute?</td><td class="es-t">¿Qué fecha es hoy? · ¿A qué día estamos?</td></tr>
+ <tr><td>im Mai</td><td class="es-t">en mayo</td></tr>
+ <tr><td>Jahreszahl</td><td class="es-t">1998 = mil novecientos noventa y ocho · 2026 = dos mil veintiséis</td></tr></table>
+ <div class="ex">Monate schreibt man <b>klein</b>: <i>octubre</i>, nicht <i>Octubre</i>. Und Datum ohne Punkt-Zahl: <span class="es-t">el 5 de octubre</span>, nicht „el 5. de octubre“.</div>`},
+ {t:'mc',q:'„am 12. Oktober“',opts:['el doce de octubre','en doce octubre','el doceavo de octubre'],a:0},
+ {t:'mc',q:'2026 =',opts:['dos mil veintiséis','veinte veintiséis','dos mil y veintiséis'],a:0},
+ {t:'gap',q:'Mi cumpleaños es ___ ___ de marzo. (am 3.)',a:['el','tres']},
+ {t:'gap',q:'En España las vacaciones de verano son en julio y ___. (August)',a:['agosto']},
+ {t:'tr',de:'Ich bin am 7. Juni geboren.',a:['Nací el siete de junio.']},
+ {t:'listen',es:'El curso empieza el quince de enero.',de:'Der Kurs beginnt am 15. Januar.'},
+ {t:'speak',es:'Hoy es lunes, cinco de octubre de dos mil veintiséis.',de:'Heute ist Montag, der 5. Oktober 2026.'}]},
+{id:'l2',title:'Akzente: wann á, é, í?',desc:'Betonung & Akzentregeln',steps:[
+ {t:'info',title:'Drei Regeln für die Betonung',html:`<p><b>1.</b> Endet ein Wort auf <b>Vokal, -n oder -s</b> → Betonung auf der <b>vorletzten</b> Silbe: <span class="es-t">ca<b>sa</b> · ha<b>blan</b> · <b>li</b>bros</span></p>
+ <p><b>2.</b> Endet es auf einen <b>anderen Konsonanten</b> → Betonung auf der <b>letzten</b> Silbe: <span class="es-t">ha<b>blar</b> · ciu<b>dad</b> · espa<b>ñol</b></span></p>
+ <p><b>3.</b> Wird ein Wort <b>anders</b> betont → <b>Akzent</b>: <span class="es-t">ca<b>fé</b> · in<b>glés</b> · <b>fá</b>cil · <b>mú</b>sica · ha<b>bló</b></span></p>
+ <div class="ex">Wörter, die auf der drittletzten Silbe betont sind, haben <b>immer</b> einen Akzent: <span class="es-t">teléfono · rápido · miércoles · América</span>.</div>
+ <p><b>Akzent unterscheidet Wörter:</b> <span class="es-t">tú (du) / tu (dein) · él (er) / el (der) · sí (ja) / si (wenn) · mí / mi · más / mas</span>. Fragewörter immer mit Akzent: <span class="es-t">qué, cómo, dónde, cuándo</span>.</p>`},
+ {t:'mc',q:'„Telefon“ – Betonung auf der drittletzten Silbe (te-<b>lé</b>-fo-no). Wie schreibt man es?',opts:['teléfono','telefono','telefóno'],a:0,keep:true,why:'Drittletzte Silbe betont → <b>immer</b> Akzent.'},
+ {t:'mc',q:'„Er kommt aus Spanien.“',opts:['Él es de España.','El es de España.'],a:0,keep:true},
+ {t:'mc',q:'„Ist das dein Buch?“',opts:['¿Es tu libro?','¿Es tú libro?'],a:0,keep:true},
+ {t:'mc',q:'Welche Schreibung ist richtig? (Betonung auf der ersten Silbe)',opts:['música','musica','musíca'],a:0},
+ {t:'match',q:'Mit oder ohne Akzent?',pairs:[['ja','sí'],['wenn','si'],['du','tú'],['dein','tu'],['er','él']]},
+ {t:'gap',q:'¿___ vives? – En Barcelona. (Wo?)',a:['Dónde']},
+ {t:'tr',de:'Ja, ich trinke gern Kaffee.',a:['Sí, me gusta tomar café.','Sí, me gusta el café.','Sí, me gusta beber café.']}]},
+{id:'l3',title:'Gerade, wieder, nicht mehr',desc:'acabar de · volver a · dejar de · empezar a',steps:[
+ {t:'info',title:'Verb + Präposition + Infinitiv',html:`<table><tr><th>Ausdruck</th><th>Bedeutung</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">acabar de + Inf.</td><td>gerade etwas getan haben</td><td class="es-t">Acabo de llegar.</td></tr>
+ <tr><td class="es-t">volver a + Inf.</td><td>etwas wieder tun</td><td class="es-t">Vuelvo a llamarte luego.</td></tr>
+ <tr><td class="es-t">dejar de + Inf.</td><td>mit etwas aufhören</td><td class="es-t">He dejado de fumar.</td></tr>
+ <tr><td class="es-t">empezar a + Inf.</td><td>anfangen, etwas zu tun</td><td class="es-t">Empecé a estudiar español en 2024.</td></tr>
+ <tr><td class="es-t">tener que + Inf.</td><td>müssen</td><td class="es-t">Tengo que irme.</td></tr></table>`},
+ {t:'mc',q:'„Ich bin gerade angekommen.“',opts:['Acabo de llegar.','Acabo llegar.','He acabado a llegar.'],a:0},
+ {t:'mc',q:'„Ich habe aufgehört, Fleisch zu essen.“',opts:['He dejado de comer carne.','He dejado comer carne.','He parado a comer carne.'],a:0},
+ {t:'gap',q:'Mañana vuelvo ___ intentarlo.',a:['a']},
+ {t:'gap',q:'¿Cuándo empezaste ___ trabajar en EY?',a:['a']},
+ {t:'gap',q:'El tren acaba ___ salir. ¡Qué mala suerte!',a:['de']},
+ {t:'tr',de:'Ich habe gerade gegessen.',a:['Acabo de comer.']},
+ {t:'listen',es:'Acabo de terminar el informe, ahora vuelvo a revisarlo.',de:'Ich habe gerade den Bericht fertig gemacht, jetzt prüfe ich ihn noch mal.'}]},
+{id:'l4',title:'Seit wann? – llevar & seguir',desc:'llevo dos años estudiando · sigo viviendo aquí',steps:[
+ {t:'info',title:'Dauer & Fortsetzung mit dem Gerundium',html:`<table><tr><td class="es-t">llevar + Zeit + Gerundium</td><td>etwas seit … tun</td><td class="es-t">Llevo dos años estudiando español.</td></tr>
+ <tr><td class="es-t">seguir + Gerundium</td><td>immer noch / weiterhin</td><td class="es-t">Sigo viviendo en Gràcia.</td></tr>
+ <tr><td class="es-t">estar + Gerundium</td><td>gerade dabei sein</td><td class="es-t">Estoy leyendo.</td></tr></table>
+ <div class="ex">Drei Wege für „seit“: <span class="es-t">Llevo dos años aquí. = Vivo aquí desde hace dos años. = Hace dos años que vivo aquí.</span></div>`},
+ {t:'conj',verb:'llevar',de:'(Dauer) – Präsens',forms:['llevo','llevas','lleva','llevamos','lleváis','llevan']},
+ {t:'mc',q:'„Ich lerne seit drei Monaten Spanisch.“',opts:['Llevo tres meses estudiando español.','Llevo tres meses estudiar español.','Estoy tres meses estudiando español.'],a:0},
+ {t:'mc',q:'„Wohnst du immer noch in Mannheim?“',opts:['¿Sigues viviendo en Mannheim?','¿Sigues vivir en Mannheim?','¿Sigues a vivir en Mannheim?'],a:0},
+ {t:'gap',q:'Mi hermana ___ (seguir) trabajando en el mismo banco.',a:['sigue']},
+ {t:'gap',q:'¿Cuánto tiempo ___ (tú, llevar) esperando?',a:['llevas']},
+ {t:'tr',de:'Ich wohne seit einem Monat in Barcelona.',a:['Llevo un mes viviendo en Barcelona.','Vivo en Barcelona desde hace un mes.','Hace un mes que vivo en Barcelona.','Llevo un mes en Barcelona.']},
+ {t:'free',task:'Stell dich der Sekretärin im Sprachenzentrum vor (4–5 Sätze): Geburtsdatum, seit wann du in Barcelona bist, seit wann du Spanisch lernst, was du gerade erst gemacht hast.',hint:'Nací el … · Llevo … en Barcelona · Llevo … estudiando español · Acabo de …',focus:'Datum, llevar + Gerundium, acabar de',model:'Me llamo Jonas Gross y nací el … de … de … . Llevo un mes viviendo en Barcelona. Empecé a estudiar español en la universidad en Alemania, así que llevo unos dos años estudiándolo. Acabo de terminar el curso A2 y ahora quiero seguir aprendiendo.'}]}
+],
+placement:[
+ {t:'mc',q:'„am 12. Oktober“',opts:['el doce de octubre','en doce octubre','el doceavo de octubre'],a:0},
+ {t:'mc',q:'„Ich bin gerade angekommen.“',opts:['Acabo de llegar.','Acabo llegar.','He acabado a llegar.'],a:0},
+ {t:'mc',q:'„Ich lerne seit drei Monaten Spanisch.“',opts:['Llevo tres meses estudiando español.','Llevo tres meses estudiar español.','Estoy tres meses estudiando español.'],a:0},
+ {t:'mc',q:'„Er kommt aus Spanien.“',opts:['Él es de España.','El es de España.'],a:0},
+ {t:'gap',q:'He dejado ___ fumar.',a:['de']},
+ {t:'mc',q:'„Wohnst du immer noch hier?“',opts:['¿Sigues viviendo aquí?','¿Sigues vivir aquí?','¿Sigues a vivir aquí?'],a:0}],
+resumen:`<h3>Datum</h3><p class="es-t">el cinco de octubre de dos mil veintiséis · ¿Qué fecha es hoy? · en mayo · enero, febrero, marzo …</p>
+<h3>Akzentregeln</h3><p>Vokal/-n/-s → vorletzte Silbe · anderer Konsonant → letzte Silbe · sonst Akzent. <span class="es-t">tú/tu · él/el · sí/si · mí/mi</span></p>
+<h3>Verb + Infinitiv</h3><p class="es-t">acabar de · volver a · dejar de · empezar a · tener que</p>
+<h3>Verb + Gerundium</h3><p class="es-t">Llevo dos años estudiando. · Sigo viviendo aquí. · Estoy leyendo.</p>`});
+</script>
 <script>/* ================= A2 · TEIL 2 (eigene Unidades nach dem Plan Curricular des Instituto Cervantes) ================= */
 
 /* ================= UNIDAD 11 · ¿QUÉ TE PASA? ================= */
-COURSE.units.push({id:'u11',n:'11',level:'A2b',title:'¿Qué te pasa?',sub:'Körper & Gesundheit · Schmerzen beschreiben (me duele) · beim Arzt & in der Apotheke · Ratschläge geben · Imperativ',
+COURSE.units.push({id:'u11',n:'13',level:'A2b',title:'¿Qué te pasa?',sub:'Körper & Gesundheit · Schmerzen beschreiben (me duele) · beim Arzt & in der Apotheke · Ratschläge geben · Imperativ',
 goals:['Körperteile','me duele / me duelen','Symptome: tengo fiebre, estoy resfriado','beim Arzt & in der Apotheke','Ratschläge: deberías / tienes que / es mejor','Imperativ tú & usted (bejahend)'],
 situacion:{title:'In der Apotheke in Gràcia',npc:'Farmacéutica',scene:'Du hast seit zwei Tagen Halsschmerzen und leichtes Fieber. Du gehst in eine Apotheke in der Calle Verdi.',role:'Du bist eine freundliche Apothekerin in Barcelona. Du siezt Jonas nicht, du duzt ihn (in Spanien üblich). Frag nach Symptomen (¿Qué te pasa? ¿Desde cuándo? ¿Tienes fiebre? ¿Eres alérgico a algo?), empfiehl etwas (Ibuprofeno, pastillas para la garganta) und gib Ratschläge im Imperativ (Toma una pastilla cada ocho horas, bebe mucha agua, descansa). Wenn es nicht besser wird: Ve al médico.',goal:'Beschreib deine Symptome (me duele…, tengo…, desde hace…), frag, wie oft du das Medikament nehmen sollst und was es kostet.'},
 lessons:[
@@ -1706,7 +1890,7 @@ lessons:[
  <tr><td class="es-t">tienes que + Infinitiv</td><td class="es-t">Tienes que beber mucha agua.</td></tr>
  <tr><td class="es-t">es mejor + Infinitiv</td><td class="es-t">Es mejor no salir hoy.</td></tr>
  <tr><td class="es-t">¿Por qué no + Präsens?</td><td class="es-t">¿Por qué no vas al médico?</td></tr></table>
- <div class="ex"><i>deberías</i> (du solltest) ist freundlicher als <i>tienes que</i> (du musst). <i>Deberías</i> ist eine Form von <i>deber</i> im Konditional – die lernst du in Unidad 15 genauer.</div>`},
+ <div class="ex"><i>deberías</i> (du solltest) ist freundlicher als <i>tienes que</i> (du musst). <i>Deberías</i> ist eine Form von <i>deber</i> im Konditional – die lernst du in Unidad 17 genauer.</div>`},
  {t:'vocab',title:'Beim Arzt & in der Apotheke',items:[['el médico de cabecera','der Hausarzt','🧑‍⚕️'],['el centro de salud','das Gesundheitszentrum (CAP)','🏥'],['la farmacia','die Apotheke','💊'],['la receta','das Rezept','📝'],['la pastilla','die Tablette','💊'],['el jarabe','der Hustensaft','🧴'],['la tarjeta sanitaria','die Krankenversicherungskarte','💳'],['pedir cita','einen Termin ausmachen','📅'],['descansar','sich ausruhen','🛌'],['tres veces al día','dreimal am Tag','🕒']]},
  {t:'mc',q:'Me duele la cabeza. – ___ tomar un ibuprofeno.',opts:['Deberías','Debes que','Tienes'],a:0},
  {t:'mc',q:'¿Por qué no ___ al médico?',opts:['vas','ir','vayas'],a:0},
@@ -1752,7 +1936,7 @@ resumen:`<h3>Schmerzen</h3><table><tr><td class="es-t">Me duele la cabeza / la e
 <p class="es-t">ven · ve · haz · pon · ten · di · sal · sé</p>`});
 
 /* ================= UNIDAD 12 · DE VIAJE ================= */
-COURSE.units.push({id:'u12',n:'12',level:'A2b',title:'De viaje',sub:'Von einer Reise erzählen · Indefinido & Imperfekt im Wechsel · estaba + Gerundium · Probleme am Flughafen · reagieren',
+COURSE.units.push({id:'u12',n:'14',level:'A2b',title:'De viaje',sub:'Von einer Reise erzählen · Indefinido & Imperfekt im Wechsel · estaba + Gerundium · Probleme am Flughafen · reagieren',
 goals:['Reise-Wortschatz: Flughafen, Gepäck, Unterkunft','Indefinido + Imperfekt: Handlung vs. Hintergrund','estaba + Gerundium (gerade dabei sein)','Zeitangaben: aquel día, al día siguiente, de repente','Reagieren: ¡Qué bien! ¡Qué mala suerte!','ser/estar/ir/tener im Indefinido wiederholen'],
 situacion:{title:'Reise-Erzählung im Kurs',npc:'Profesora Marta',scene:'Nach den Ferien fragt deine Spanischlehrerin in Barcelona, wie deine Reise war. Sie will viele Details hören.',role:'Du bist Marta, Spanischlehrerin an der UPC, neugierig und herzlich. Du duzt Jonas. Frag nach seiner letzten Reise: ¿Adónde fuiste? ¿Con quién? ¿Qué tal el viaje? ¿Qué tiempo hacía? ¿Qué hiciste? ¿Pasó algo curioso? Reagiere mit ¡Qué bien!, ¡Qué mala suerte!, ¿De verdad?. Wenn er Indefinido und Imperfekt verwechselt, korrigiere sanft.',goal:'Erzähl von einer Reise: wohin, mit wem, wie das Wetter war (Imperfekt), was du gemacht hast (Indefinido) und eine kleine Panne.'},
 lessons:[
@@ -1822,7 +2006,7 @@ resumen:`<h3>Reisen</h3><p class="es-t">el vuelo · la maleta · facturar · la 
 <h3>Erzählen & reagieren</h3><p class="es-t">aquel día · al día siguiente · de repente · al final · por suerte · ¡Qué bien! · ¡Qué mala suerte! · ¿De verdad?</p>`});
 
 /* ================= UNIDAD 13 · EN LA COCINA ================= */
-COURSE.units.push({id:'u13',n:'13',level:'A2b',title:'En la cocina',sub:'Rezepte verstehen & erklären · unpersönliches se (se corta, se añade) · Mengen · Objektpronomen beim Imperativ (córtalo)',
+COURSE.units.push({id:'u13',n:'15',level:'A2b',title:'En la cocina',sub:'Rezepte verstehen & erklären · unpersönliches se (se corta, se añade) · Mengen · Objektpronomen beim Imperativ (córtalo)',
 goals:['Küche & Zubereitung: cortar, freír, añadir …','Mengen: un kilo de, una cucharada de, un poco de','se + Verb: so macht man das','Objektpronomen lo/la/los/las wiederholen','Imperativ + Pronomen: córtalo, échalas','Im Markt einkaufen'],
 situacion:{title:'Tortilla mit deiner Mitbewohnerin',npc:'Nuria',scene:'Deine Mitbewohnerin Nuria aus Valencia zeigt dir, wie man eine echte tortilla de patatas macht. Du hilfst in der Küche.',role:'Du bist Nuria, 25, Mitbewohnerin von Jonas, lustig und ein bisschen streng beim Kochen. Du duzt ihn. Erklär Schritt für Schritt, wie man eine Tortilla macht, mit Imperativ + Pronomen (Pela las patatas… córtalas… échalas en la sartén…). Frag ihn, ob er die Tortilla mit oder ohne Zwiebel will (gran debate). Lass ihn auch fragen, wie viel von etwas man braucht.',goal:'Frag nach Zutaten und Mengen (¿Cuántos huevos…? ¿Cuánto aceite…?), bestätige Anweisungen mit Pronomen (¿Las corto ya? – Sí, córtalas) und sag deine Meinung zur Zwiebel.'},
 lessons:[
@@ -1904,7 +2088,7 @@ resumen:`<h3>Mengen</h3><p class="es-t">un kilo de · medio kilo de · cien gram
 <h3>Imperativ + Pronomen</h3><p class="es-t">córtalo · pélala · bátelos · échalas · dale la vuelta</p><p class="es-t">Aber: Las corto ahora. · Ya los he batido.</p>`});
 
 /* ================= UNIDAD 14 · REGALOS Y FAVORES ================= */
-COURSE.units.push({id:'u14',n:'14',level:'A2b',title:'Regalos y favores',sub:'Feste & Geschenke · indirekte Objektpronomen (le, les) · se lo / se la · um Gefallen bitten · Erlaubnis fragen',
+COURSE.units.push({id:'u14',n:'16',level:'A2b',title:'Regalos y favores',sub:'Feste & Geschenke · indirekte Objektpronomen (le, les) · se lo / se la · um Gefallen bitten · Erlaubnis fragen',
 goals:['Feste: cumpleaños, boda, Navidad …','Glückwünsche: ¡Felicidades! ¡Enhorabuena!','me/te/le/nos/os/les (wem?)','Doppelte Pronomen: me lo, te la, se lo','um einen Gefallen bitten: ¿Me prestas …? ¿Te importa …?','Erlaubnis: ¿Puedo …? ¿Te importa si …?'],
 situacion:{title:'Geburtstagsgeschenk für Laia',npc:'Marc',scene:'Eure Freundin Laia hat am Samstag Geburtstag. Du und Marc, ein Kommilitone, überlegt, was ihr ihr schenkt, und organisiert die Party.',role:'Du bist Marc, ein katalanischer Kommilitone von Jonas, entspannt und hilfsbereit. Ihr duzt euch. Diskutiert ein Geschenk für Laia (¿Qué le regalamos? ¿Le compramos…? Ya se lo regaló su hermana…). Bitte Jonas um Gefallen (¿Me prestas…? ¿Puedes traer…?) und benutze Pronomen wie se lo.',goal:'Schlag Geschenke vor (¿Por qué no le regalamos…?), bitte Marc um einen Gefallen und reagiere auf seine Bitten (Sí, claro, te lo traigo / Lo siento, es que…).'},
 lessons:[
@@ -1979,7 +2163,7 @@ resumen:`<h3>Glückwünsche</h3><p class="es-t">¡Felicidades! · ¡Feliz cumple
 <h3>Bitten</h3><p class="es-t">¿Me prestas …? · ¿Puedes …? · ¿Te importa + Inf.? · ¿Te importa si …? · ¿Podría …? — Sí, claro. · Lo siento, es que …</p>`});
 
 /* ================= UNIDAD 15 · EL FUTURO ================= */
-COURSE.units.push({id:'u15',n:'15',level:'A2b',title:'El futuro',sub:'Futur (trabajaré, tendré) · Vorhersagen & Pläne · Meinung äußern · Konditional der Höflichkeit (me gustaría, podría) · por & para',
+COURSE.units.push({id:'u15',n:'17',level:'A2b',title:'El futuro',sub:'Futur (trabajaré, tendré) · Vorhersagen & Pläne · Meinung äußern · Konditional der Höflichkeit (me gustaría, podría) · por & para',
 goals:['Futur: regelmäßige Formen','Futur: tendré, haré, podré, saldré …','Vorhersagen: Creo que mañana lloverá','Meinung: creo que, para mí, (no) estoy de acuerdo','Wünsche & Höflichkeit: me gustaría, podría, debería','por vs. para (Grundregeln)'],
 situacion:{title:'Zukunftsgespräch mit deiner Tutorin',npc:'Dra. Vidal',scene:'Du hast ein Gespräch mit deiner Master-Tutorin an der UPC über deine Pläne nach dem Auslandssemester.',role:'Du bist Dra. Vidal, Tutorin an der UPC (FIB), sachlich und freundlich. Du siezt Jonas am Anfang, bietest dann das Du an. Frag nach seinen Plänen (¿Qué harás cuando termines el máster? ¿Te gustaría trabajar en España?), nach seiner Meinung (¿Crees que la inteligencia artificial cambiará el trabajo?) und gib Ratschläge mit deberías / podrías.',goal:'Sprich über deine Pläne im Futur (trabajaré, viviré…), äußere deine Meinung (creo que…, para mí…), und benutze me gustaría / podría.'},
 lessons:[
@@ -2067,7 +2251,7 @@ resumen:`<h3>Futur</h3><p class="es-t">trabajaré · trabajarás · trabajará �
 <script>/* ================= B1 · ERSTE SCHRITTE ================= */
 
 /* ================= UNIDAD 16 · OJALÁ ================= */
-COURSE.units.push({id:'u16',n:'16',level:'B1',title:'Ojalá',sub:'Subjuntivo Präsens: Formen · Wünsche (quiero que, espero que, ojalá) · Ratschläge (te recomiendo que) · verneinter Imperativ',
+COURSE.units.push({id:'u16',n:'18',level:'B1',title:'Ojalá',sub:'Subjuntivo Präsens: Formen · Wünsche (quiero que, espero que, ojalá) · Ratschläge (te recomiendo que) · verneinter Imperativ',
 goals:['Wann braucht man den Subjuntivo? (WEIRDO-Idee)','Formen: regelmäßig (hable, coma, viva)','Formen: unregelmäßig (tenga, haga, sea, vaya, esté)','quiero que / espero que / ojalá','te recomiendo que / es importante que','Verneinter Imperativ: no hables, no vayas'],
 situacion:{title:'Ein Freund kommt nach Barcelona',npc:'Lukas',scene:'Dein Freund Lukas aus Mannheim (er lernt auch Spanisch) besucht dich nächste Woche zum ersten Mal in Barcelona. Ihr telefoniert auf Spanisch zum Üben.',role:'Du bist Lukas, ein Freund von Jonas aus Mannheim, Spanisch-Niveau A2, neugierig, etwas chaotisch. Ihr duzt euch. Frag Jonas nach Tipps für Barcelona (¿Qué me recomiendas? ¿Qué no debo hacer?). Mach selbst einfache Fehler, damit Jonas dich korrigieren kann. Benutze ab und zu Subjuntivo-Sätze (Espero que haga buen tiempo, Ojalá podamos ir a la playa).',goal:'Gib Lukas Tipps mit te recomiendo que / es importante que + Subjuntivo, sag, was er nicht tun soll (No vayas…, No dejes…), und äußere Wünsche (Espero que…, Ojalá…).'},
 lessons:[
@@ -2086,7 +2270,7 @@ lessons:[
  <tr><td>nosotros</td><td class="es-t">hablemos</td><td class="es-t">comamos</td><td class="es-t">vivamos</td></tr>
  <tr><td>vosotros</td><td class="es-t">habléis</td><td class="es-t">comáis</td><td class="es-t">viváis</td></tr>
  <tr><td>ellos / ustedes</td><td class="es-t">hablen</td><td class="es-t">coman</td><td class="es-t">vivan</td></tr></table>
- <div class="ex">Kennst du schon! Der <i>usted</i>-Imperativ aus Unidad 11 (<i>tome, beba</i>) ist genau diese Form.</div>`},
+ <div class="ex">Kennst du schon! Der <i>usted</i>-Imperativ aus Unidad 13 (<i>tome, beba</i>) ist genau diese Form.</div>`},
  {t:'conj',verb:'trabajar',de:'arbeiten',tense:'Subjuntivo',forms:['trabaje','trabajes','trabaje','trabajemos','trabajéis','trabajen']},
  {t:'conj',verb:'escribir',de:'schreiben',tense:'Subjuntivo',forms:['escriba','escribas','escriba','escribamos','escribáis','escriban']},
  {t:'mc',q:'Quiero que tú ___ más despacio.',opts:['hables','hablas','hablar'],a:0},
@@ -2155,7 +2339,7 @@ resumen:`<h3>Subjuntivo: Formen</h3><table><tr><th>hablar</th><th>comer</th><th>
 <h3>Verneinter Imperativ</h3><p class="es-t">no hables · no vayas · no lo hagas · ¡No te preocupes!</p>`});
 
 /* ================= UNIDAD 17 · HISTORIAS ================= */
-COURSE.units.push({id:'u17',n:'17',level:'B1',title:'Historias',sub:'Plusquamperfekt (había hecho) · alle vier Vergangenheitszeiten im Zusammenspiel · Erzähl-Konnektoren · Anekdoten erzählen & reagieren',
+COURSE.units.push({id:'u17',n:'19',level:'B1',title:'Historias',sub:'Plusquamperfekt (había hecho) · alle vier Vergangenheitszeiten im Zusammenspiel · Erzähl-Konnektoren · Anekdoten erzählen & reagieren',
 goals:['Plusquamperfekt: había + Partizip','Vorvergangenheit: Das war schon passiert, als …','Perfekt, Indefinido, Imperfekt, Plusquamperfekt unterscheiden','Konnektoren: mientras, en cuanto, de repente, resulta que …','Spannend erzählen & reagieren','Wiederholung unregelmäßiger Partizipien'],
 situacion:{title:'Anekdoten in der Bar',npc:'Sergio',scene:'Freitagabend in einer Bar im Born. Sergio, ein Kumpel aus dem Master, erzählt gern Geschichten – und will auch deine hören.',role:'Du bist Sergio, 27, aus Zaragoza, Master-Kommilitone von Jonas, lustig und neugierig. Ihr duzt euch. Erzähl eine kurze peinliche Anekdote (mit Plusquamperfekt: cuando llegué, el tren ya había salido…). Frag dann Jonas nach seiner peinlichsten oder lustigsten Geschichte und reagiere lebhaft (¿En serio? ¡Qué fuerte! ¿Y qué pasó después?). Hilf ihm mit Konnektoren.',goal:'Erzähl eine Anekdote mit allen Vergangenheitszeiten, insbesondere einmal mit había + Partizip, und benutze Konnektoren (resulta que, de repente, al final).'},
 lessons:[
@@ -2223,7 +2407,7 @@ resumen:`<h3>Plusquamperfekt</h3><p class="es-t">había / habías / había / hab
 <h3>Erzählen</h3><p class="es-t">resulta que · un día · mientras · en cuanto · de repente · sin embargo · así que · al final</p><p class="es-t">¿En serio? · ¡Qué fuerte! · ¿Y qué pasó después? · ¡Qué vergüenza!</p>`});
 
 /* ================= UNIDAD 18 · SI TENGO TIEMPO ================= */
-COURSE.units.push({id:'u18',n:'18',level:'B1',title:'Si tengo tiempo…',sub:'Bedingungen (si + Präsens) · Konditional (haría, tendría) · Ratschläge: yo en tu lugar … · Hypothesen über die Gegenwart',
+COURSE.units.push({id:'u18',n:'20',level:'B1',title:'Si tengo tiempo…',sub:'Bedingungen (si + Präsens) · Konditional (haría, tendría) · Ratschläge: yo en tu lugar … · Hypothesen über die Gegenwart',
 goals:['si + Präsens → Präsens / Futur / Imperativ','Konditional: regelmäßig (trabajaría)','Konditional: unregelmäßig (tendría, haría, podría, diría)','Yo en tu lugar … / Yo que tú …','Höfliche Bitten & Vorschläge','Wohnungs- & WG-Probleme lösen'],
 situacion:{title:'WG-Krisensitzung',npc:'Nuria',scene:'In eurer WG gibt es Ärger: Die Küche ist nie sauber und es ist nachts laut. Nuria will das mit dir besprechen.',role:'Du bist Nuria, Mitbewohnerin von Jonas, direkt aber fair. Ihr duzt euch. Sprich die Probleme an (la cocina siempre está sucia, Pablo pone música hasta las dos…). Mach Vorschläge mit Bedingungen (Si cada uno limpia una semana, …) und frag Jonas nach seiner Meinung (¿Tú qué harías?). Benutze Konditional (Yo en tu lugar hablaría con Pablo).',goal:'Schlag Lösungen mit si + Präsens vor, gib Ratschläge mit „Yo en tu lugar / Yo que tú + Konditional“ und reagiere höflich auf Nurias Vorschläge.'},
 lessons:[
@@ -2245,7 +2429,7 @@ lessons:[
  {t:'info',title:'Konditional: Infinitiv + -ía',html:`<table><tr><th></th><th>viajar</th></tr>
  <tr><td>yo</td><td class="es-t">viajar<b>ía</b></td></tr><tr><td>tú</td><td class="es-t">viajar<b>ías</b></td></tr><tr><td>él / ella / usted</td><td class="es-t">viajar<b>ía</b></td></tr>
  <tr><td>nosotros</td><td class="es-t">viajar<b>íamos</b></td></tr><tr><td>vosotros</td><td class="es-t">viajar<b>íais</b></td></tr><tr><td>ellos / ustedes</td><td class="es-t">viajar<b>ían</b></td></tr></table>
- <p><b>Unregelmäßig</b> – gleiche Stämme wie beim Futur (Unidad 15):</p>
+ <p><b>Unregelmäßig</b> – gleiche Stämme wie beim Futur (Unidad 17):</p>
  <p class="es-t">tendría · pondría · saldría · vendría · podría · sabría · haría · diría · querría · habría</p>
  <div class="ex">Konditional = „würde“: <span class="es-t">Con más dinero viajaría más.</span> – Mit mehr Geld würde ich mehr reisen.</div>`},
  {t:'conj',verb:'hacer',de:'machen',tense:'Konditional',forms:['haría','harías','haría','haríamos','haríais','harían']},
@@ -2377,13 +2561,14 @@ resumen:`<h3>Reale Bedingung</h3><p class="es-t">Si llueve, nos quedamos en casa
 window.LEVELS=[
   {id:'A1',label:'A1',title:'A1 · Einstieg',sub:'Kursbuch Meta profesional, Unidad 0–5: dich vorstellen, Familie, Essen, Stadt, Freizeit.'},
   {id:'A2a',label:'A2',title:'A2 · Teil 1',sub:'Kursbuch Meta profesional, Unidad 6–10: Perfekt, Alltag, Pläne, Imperfekt, Indefinido.'},
-  {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
+  {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Grammatik-Lücken aus dem Kursbuch schließen, dann Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
   {id:'B1',label:'B1',title:'B1 · Erste Schritte',sub:'Subjuntivo, Geschichten erzählen, Bedingungen. Weitere Unidades folgen.'}];
 window.LEVEL_OF={u0:'A1',u1:'A1',u2:'A1',u3:'A1',u4:'A1',u5:'A1',u6:'A2a',u7:'A2a',u8:'A2a',u9:'A2a',u10:'A2a'};
 
 /* Einstufungsfragen, die direkt in einer Unidad stehen (u.placement), in den gemeinsamen Pool hängen.
    Reihenfolge bleibt stabil → Verweise 'P||i' im Fehlerheft bleiben gültig. */
-for(const u of COURSE.units)for(const q of u.placement||[])PLACEMENT.push(Object.assign({u:u.id},q));
+/* nachträglich eingefügte Unidades (id g…) hinten anhängen, damit ältere Verweise stabil bleiben */
+for(const u of COURSE.units.filter(u=>!u.id.startsWith('g')).concat(COURSE.units.filter(u=>u.id.startsWith('g'))))for(const q of u.placement||[])PLACEMENT.push(Object.assign({u:u.id},q));
 
 /* Bild (Emoji) zu einem Wort. Eigene Vokabeln können als 3. Element ein Emoji mitbringen: ['la manzana','der Apfel','🍎'] */
 window.EMOJI={
@@ -2592,6 +2777,8 @@ const RN=['','Lernen','Üben','Festigen'];
 const legacyR=x=>!x?0:x.r??(x.done?(x.check?3:1):0);
 const rnd=k=>legacyR(S.lessons[k]);
 const r3ready=k=>rnd(k)>=2&&!(S.lessons[k].d2&&S.lessons[k].d2>=today());
+/* Lektionen mit wenig Übungsmaterial (z. B. reine Lese-Lektionen) brauchen keine Extra-Runden */
+const shortLesson=l=>l.steps.filter(s=>['gap','tr','conj','order','listen'].includes(s.t)).length+l.steps.filter(s=>s.t==='vocab').length<3;
 function setRound(k,n,score){const p=S.lessons[k]||{};S.lessons[k]=Object.assign(p,{done:true,r:Math.max(rnd(k),n),best:Math.max(p.best||0,score||0),date:today()});if(n===2)S.lessons[k].d2=today();save();}
 function lessonPct(u){const L=(u.lessons||[]).filter(l=>!l.ab);if(!L.length)return 0;return L.reduce((a,l)=>a+Math.min(3,rnd(u.id+'.'+l.id)),0)/(3*L.length);}
 function unitStatus(u){const p=S.placement?.results?.[u.id];if(p==null)return null;return p>=0.8?'sicher':p>=0.5?'auffrischen':'neu';}
@@ -2621,12 +2808,14 @@ function shell(){
   document.documentElement.dataset.theme=S.settings.theme==='auto'?'':S.settings.theme;
   const route=curRoute().split('/')[0];
   const due=dueCards().length;
-  const nav=h('div',{class:'nav'},NAV.map(([r,ic,l])=>h('button',{class:route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round'].includes(route))?'active':'',onclick:()=>go(r)},ic,' ',l,r==='vocab'&&due?h('span',{class:'badge'},due):null)));
+  const NAVD=NAV.slice(0,3).concat([['ref','📖','Nachschlagen']],NAV.slice(3));const mini=S.settings.side==='mini';
+  const nav=h('div',{class:'nav'},NAVD.map(([r,ic,l])=>h('button',{class:route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round'].includes(route))||(r==='ref'&&route==='verbs')?'active':'',title:l,onclick:()=>go(r)},h('span',{class:'ni'},ic),h('span',{class:'nl'},l),r==='vocab'&&due?h('span',{class:'badge'},due):null)));
   const SHORT={home:'Start',units:'Kurs',vocab:'Vokabeln',mistakes:'Fehler',placement:'Test',settings:'Mehr'};
   const mnav=h('nav',{class:'mobile-nav'},NAV.map(([r,ic,l])=>h('button',{class:(route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round'].includes(route)))?'active':'',onclick:()=>go(r),'aria-label':l},h('span',{class:'mi'},ic),h('span',{class:'ml'},SHORT[r]),r==='vocab'&&due?h('span',{class:'mbadge'},due):null)));
   const main=h('main',{class:'main',id:'main'});
-  const app=h('div',{class:'app'},h('aside',{class:'side'},h('div',{class:'brand'},h('span',{class:'logo'},'¡Hola!'),h('span',{},'Mi profe')),nav,
-    h('div',{class:'foot'},'🔥 '+streakNow()+' Tage Serie',h('br'),h('span',{id:'syncstat'},syncLabel()))),h('div',{},mnav,main));
+  const tog=h('button',{class:'sidetog',title:mini?'Leiste ausklappen':'Leiste einklappen','aria-label':mini?'Leiste ausklappen':'Leiste einklappen',onclick:()=>{S.settings.side=mini?'':'mini';save(true);go(curRoute());}},mini?'»':'«');
+  const app=h('div',{class:'app'+(mini?' mini':'')},h('aside',{class:'side'},h('div',{class:'brand'},h('span',{class:'bt'},'Mi profe'),tog),nav,
+    h('div',{class:'foot'},mini?'🔥 '+streakNow():['🔥 '+streakNow()+' Tage Serie',h('br'),h('span',{id:'syncstat'},syncLabel())])),h('div',{},mnav,main));
   document.body.innerHTML='';document.body.classList.remove('typing');document.body.append(app);return main;}
 const IN_ARTIFACT=!!(window.claude&&window.claude.use);
 let CUR=null;
@@ -2637,7 +2826,7 @@ function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{cla
   ov.append(h('div',{class:'card',style:'max-width:380px;width:100%'},h('p',{style:'margin-top:0;font-weight:600'},text),h('div',{class:'row',style:'justify-content:flex-end'},h('button',{class:'btn',onclick:()=>close(false)},'Abbrechen'),h('button',{class:'btn primary',onclick:()=>close(true)},okLabel||'OK'))));
   ov.onclick=e=>{if(e.target===ov)close(false);};document.body.append(ov);});}
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();const parts=curRoute().split('/');const m=shell();
-  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,check:vCheck,round:vRound,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
+  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
   v(m,...parts.slice(1));window.scrollTo(0,0);}
 
 /* ---------- views ---------- */
@@ -2659,6 +2848,10 @@ function vHome(m){
       planRow(false,nx?.check||nx?.test?'2. '+(nx.test?'Abschlusstest':'Kurzer Check'):nx?.n>1?'2. '+RN[nx.n]:'2. Eine neue Lektion',nx?nxTitle(nx):'alles fertig',nx?nxRoute(nx):'units'),
       doneN>=2?planRow(S.lastMix===today(),'3. Gemischte Wiederholung',S.lastMix===today()?'erledigt':'15 Aufgaben quer durch alles','mix'):null,
       planRow(false,'4. Bonus: Shadowing oder Gespräch','Aussprache & Sprechen',nx?'shadow/'+nx.u.id:'units'))));
+  const days=[...Array(7)].map((_,i)=>addDays(today(),i-6));const mx=Math.max(10,...days.map(d=>S.stats.days[d]||0));
+  m.append(h('div',{class:'card',style:'margin-bottom:14px'},h('div',{class:'kind'},'Deine Woche'),h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
+    return h('div',{class:'wd'+(d===today()?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},['So','Mo','Di','Mi','Do','Fr','Sa'][new Date(d+'T12:00:00').getDay()]),h('div',{class:'small'},v||''));})),
+    h('div',{class:'muted small'},'Beantwortete Aufgaben pro Tag – lieber jeden Tag ein bisschen als einmal viel.')));
   const row=h('div',{class:'grid g2'});
   if(nx)row.append(h('div',{class:'card'},h('div',{class:'kind'},'Weiter lernen · '+levelOf(nx.u).title),h('h3',{style:'margin-top:0;font-family:var(--serif);font-size:20px'},nxTitle(nx)),
     h('p',{class:'muted small'},nxDesc(nx)),h('button',{class:'btn primary',onclick:()=>go(nxRoute(nx))},nx.check||nx.test?'Test starten →':'Los geht’s →')));
@@ -2680,7 +2873,7 @@ function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.
       h('div',{class:'d'},u.sub),soon?null:h('div',{class:'bar',style:'margin-top:8px'},h('i',{style:'width:'+Math.round(pct*100)+'%'}))),
     soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%'));}
 function vUnits(m){
-  m.append(h('h1',{},'Kurs'),h('p',{class:'sub'},'Von A1 bis B1, Stufe für Stufe von oben nach unten. '+(S.placement?'Die Markierungen kommen aus deinem Einstufungstest – was sitzt, hakst du mit einem kurzen Check ab.':'Mach zuerst den Einstufungstest, dann weiß ich, was du überspringen kannst.')));
+  m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},'Kurs'),h('button',{class:'btn small',onclick:()=>go('ref/g')},'📄 Grammatik'),h('button',{class:'btn small',onclick:()=>go('ref/w')},'🔎 Wörter')),h('p',{class:'sub'},'Von A1 bis B1, Stufe für Stufe von oben nach unten. '+(S.placement?'Die Markierungen kommen aus deinem Einstufungstest – was sitzt, hakst du mit einem kurzen Check ab.':'Mach zuerst den Einstufungstest, dann weiß ich, was du überspringen kannst.')));
   for(const L of LEVELS){const us=COURSE.units.filter(u=>unitLevel(u)===L.id);if(!us.length)continue;
     const act=us.filter(u=>u.status!=='soon');const pct=act.length?act.reduce((a,u)=>a+lessonPct(u),0)/act.length:0;
     m.append(h('div',{class:'lvhead'},h('span',{class:'lvbadge'},L.label),h('div',{style:'flex:1;min-width:0'},h('h2',{},L.title),h('div',{class:'muted small'},L.sub)),h('div',{class:'muted small'},Math.round(pct*100)+'%')),
@@ -2750,7 +2943,7 @@ function vCheck(m,id){const u=unitById(id);if(!u)return vUnits(m);
   play(m,{title:'Abschlusstest · Unidad '+u.n+' · '+u.title,steps:shuffle(steps.concat(words.map(w=>vocabItem(u,w,'tr')))),unit:u,noRetry:true,onBack:()=>go('unit/'+u.id),
     onAnswer:(it,st)=>{if(it.lid)res[it.lid]=(res[it.lid]??true)&&st!=='bad';},
     onDone:(r)=>{score=r.score;pass=score>=0.8;weak=[];
-      for(const l of u.lessons){if(l.ab)continue;if(res[l.id]===false)weak.push(l);else if(pass)setRound(u.id+'.'+l.id,3,1);}
+      for(const l of u.lessons){if(l.ab)continue;const k=u.id+'.'+l.id;if(res[l.id]===false){weak.push(l);if(!pass&&rnd(k)>=3){S.lessons[k].r=2;S.lessons[k].d2=today();}}else if(pass)setRound(k,3,1);}
       const prev=S.checks[u.id];S.checks[u.id]={date:today(),score,pass:pass||!!prev?.pass};save();
       if(weak.length)return{label:'Lektion „'+weak[0].title+'“ üben →',fn:()=>go((rnd(u.id+'.'+weak[0].id)>=1?'round/':'lesson/')+u.id+'/'+weak[0].id+(rnd(u.id+'.'+weak[0].id)>=1?'/2':''))};
       return{label:'Weiter →',fn:()=>go('home')};},
@@ -2764,18 +2957,28 @@ function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.i
   const steps=l.steps.map((s,i)=>({s,ref:uid+'|'+lid+'|'+i}));
   play(m,{title:'Unidad '+u.n+' · '+l.title,steps,unit:u,onBack:()=>go('unit/'+uid),
     onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};save();return{label:'Zur Unidad →',fn:()=>go('unit/'+uid)};}
-      setRound(k,1,res.score);return{label:'Runde 2: Üben →',fn:()=>go('round/'+uid+'/'+lid+'/2')};}});}
+      const was=rnd(k);setRound(k,1,res.score);
+      if(was<2&&(res.score>=0.9||shortLesson(l))){setRound(k,shortLesson(l)?3:2,res.score);}
+      const nx=nextLesson();const r=rnd(k);
+      return r>=2?(nx?{label:'Weiter: '+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:'Zur Unidad →',fn:()=>go('unit/'+uid)}):{label:'Runde 2: Üben →',fn:()=>go('round/'+uid+'/'+lid+'/2')};},
+    extraEnd:(res)=>{const r=rnd(uid+'.'+lid);return l.ab?null:shortLesson(l)?h('div',{class:'fb ok'},'Diese Lektion braucht keine Extra-Runden – erledigt ✓'):res.score>=0.9&&r===2&&S.lessons[uid+'.'+lid].d2===today()?h('div',{class:'fb ok'},'Stark! Über 90 % – „Üben“ überspringst du. „Festigen“ wird morgen frei.'):null;}});}
 function roundSteps(u,l,n){const G=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+i}));const words=shuffle(lessonWords(l));
   if(n===2){const ex=shuffle(G.filter(x=>['mc','gap','tr','conj','order','match','listen'].includes(x.s.t))).slice(0,8);
     return shuffle(ex.concat(words.slice(0,6).map((w,i)=>vocabItem(u,w,['mc','tr','listen'][i%3]))));}
   const ex=shuffle(G.filter(x=>['gap','tr','conj','order','listen'].includes(x.s.t))).slice(0,7);
   return shuffle(ex.concat(words.slice(0,5).map((w,i)=>vocabItem(u,w,i%2?'listen':'tr'))));}
 function vRound(m,uid,lid,n){n=+n;const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l||!(n===2||n===3))return vUnits(m);
-  const k=uid+'.'+lid;let ok=false;
+  const k=uid+'.'+lid;let ok=false,fb='';
   play(m,{title:'Unidad '+u.n+' · '+l.title+' · Runde '+n+' von 3: '+RN[n],steps:roundSteps(u,l,n),unit:u,onBack:()=>go('unit/'+uid),
-    onDone:(res)=>{ok=res.score>=0.6;if(ok)setRound(k,n,res.score);const nx=nextLesson();
-      return !ok?{label:'Noch mal →',fn:()=>{m.innerHTML='';vRound(m,uid,lid,n);}}:nx?{label:'Weiter: '+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:'Zur Unidad →',fn:()=>go('unit/'+uid)};},
-    extraEnd:()=>!ok?h('div',{class:'fb warn'},'Unter 60 % – die Runde zählt noch nicht. Versuch es noch einmal oder schau dir die Lektion vorher kurz an.')
+    onDone:(res)=>{ok=res.score>=(n===3?0.8:0.6);fb='';
+      if(ok)setRound(k,n,res.score);
+      else if(n===3&&res.score>=0.6){S.lessons[k].d2=today();save();fb='fast';}
+      else if(n===3){S.lessons[k].r=1;S.lessons[k].d2=today();save();fb='back';}
+      const nx=nextLesson();
+      return fb?(nx?{label:'Weiter: '+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:'Zur Unidad →',fn:()=>go('unit/'+uid)}):!ok?{label:'Noch mal →',fn:()=>{m.innerHTML='';vRound(m,uid,lid,n);}}:nx?{label:'Weiter: '+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:'Zur Unidad →',fn:()=>go('unit/'+uid)};},
+    extraEnd:()=>fb==='fast'?h('div',{class:'fb warn'},'Knapp unter 80 % – morgen kommt noch eine Runde „Festigen“. Wiederholung mit Abstand ist genau das, was hilft.')
+      :fb==='back'?h('div',{class:'fb warn'},'Das sitzt noch nicht – ich schicke dich zurück zu „Üben“. Danach morgen noch mal „Festigen“.')
+      :!ok?h('div',{class:'fb warn'},'Unter 60 % – die Runde zählt noch nicht. Versuch es noch einmal oder schau dir die Lektion vorher kurz an.')
       :n===2?h('div',{class:'fb ok'},'Runde „Festigen“ wird morgen frei – mit etwas Abstand wiederholen bringt am meisten.'):h('div',{class:'fb ok'},'Lektion gemeistert ✓')});}
 
 function play(m,cfg){
@@ -3032,6 +3235,25 @@ function vMix(m){const steps=mixSteps(15);
   if(steps.length<5){m.append(h('h1',{},'Gemischte Wiederholung'),h('div',{class:'card'},'Schließ zuerst ein paar Lektionen ab – dann mische ich hier Aufgaben aus allen bisherigen Lektionen durcheinander.'));return;}
   play(m,{title:'Gemischte Wiederholung · 15 Aufgaben aus allen Unidades',steps,onBack:()=>go('home'),onDone:()=>{S.lastMix=today();save();return{label:'Zur Startseite',fn:()=>go('home')};}});}
 
+/* ---------- Nachschlagen: Wörterbuch & Grammatik ---------- */
+function vRef(m,tab){tab=tab||'w';
+  m.append(h('h1',{},'Nachschlagen'),h('p',{class:'sub'},'Alle Wörter und Grammatik-Zusammenfassungen aus dem Kurs an einem Ort.'),
+    h('div',{class:'row',style:'margin-bottom:16px'},h('button',{class:'btn'+(tab==='w'?' primary':''),onclick:()=>go('ref/w')},'🔎 Wörterbuch'),h('button',{class:'btn'+(tab==='g'?' primary':''),onclick:()=>go('ref/g')},'📄 Grammatik'),h('button',{class:'btn',onclick:()=>go('verbs')},'🔁 Verben-Trainer')));
+  if(tab==='g'){m.append(h('div',{class:'grid',style:'gap:8px'},LEVELS.flatMap(L=>[h('div',{class:'kind',style:'margin-top:12px'},L.title)].concat(COURSE.units.filter(u=>unitLevel(u)===L.id&&u.resumen).map(u=>
+      h('div',{class:'lesson',onclick:()=>go('resumen/'+u.id)},h('div',{class:'ic'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},u.title),h('div',{class:'ld'},u.goals.join(' · ')))))))));return;}
+  const all=[];const seen=new Set();for(const u of COURSE.units)for(const w of allUnitWords(u))if(!seen.has(w[0])){seen.add(w[0]);all.push([w,u]);}
+  const inp=h('input',{class:'inp',placeholder:'Spanisch oder Deutsch suchen …',autocomplete:'off',spellcheck:'false'});const out=h('div',{class:'vlist'});
+  const draw=()=>{const q=strip(inp.value.toLowerCase().trim());out.innerHTML='';const hits=all.filter(([w])=>!q||strip((w[0]+' '+w[1]).toLowerCase()).includes(q)).slice(0,80);
+    out.append(...hits.map(([w,u])=>h('div',{class:'vrow'},spk(w[0]),picEl(w[0],w[2]),h('span',{class:'es'},w[0]),h('span',{class:'de',style:'flex:1'},w[1]),h('span',{class:'pill'},'U'+u.n))));
+    if(!hits.length)out.append(h('p',{class:'muted'},'Nichts gefunden.'));};
+  inp.oninput=draw;m.append(inp,keys(()=>inp),h('p',{class:'muted small'},all.length+' Wörter & Ausdrücke im Kurs'),out);draw();}
+/* ---------- Verben-Trainer: Konjugationen aus allen Unidades, die du schon angefangen hast ---------- */
+function vVerbs(m){const pool=[];for(const u of COURSE.units){const started=u.lessons.some(l=>rnd(u.id+'.'+l.id)>=1)||S.checks[u.id]?.pass;
+    u.lessons.forEach(l=>l.steps.forEach((s,i)=>{if(s.t==='conj')pool.push({s,ref:u.id+'|'+l.id+'|'+i,unit:u,started});}));}
+  const mine=pool.filter(x=>x.started);const use=mine.length>=4?mine:pool.filter(x=>unitLevel(x.unit)==='A1');
+  m.append(h('h1',{},'Verben-Trainer'),h('p',{class:'sub'},(mine.length>=4?'Konjugationen aus den Unidades, die du schon angefangen hast':'Sobald du mehr Lektionen gemacht hast, kommen deine Verben dazu – bis dahin A1-Verben')+' ('+use.length+' Tabellen, alle Zeiten gemischt).'),
+    h('button',{class:'btn primary',onclick:()=>{m.innerHTML='';play(m,{title:'Verben-Trainer · 8 Verben',steps:shuffle(use).slice(0,8),onBack:()=>go('ref'),onDone:()=>({label:'Noch 8 Verben →',fn:()=>{m.innerHTML='';vVerbs(m);}})});}},'8 Verben üben →'));}
+
 /* ---------- vocab trainer ---------- */
 function vVocab(m){const due=dueCards();const total=Object.keys(S.srs).length;
   const boxes=[0,0,0,0];Object.values(S.srs).forEach(c=>{boxes[c.box>=5?3:c.box>=3?2:c.box>=1?1:0]++;});
@@ -3042,6 +3264,7 @@ function vVocab(m){const due=dueCards();const total=Object.keys(S.srs).length;
     h('button',{class:'btn'+(due.length?' primary':''),disabled:!due.length,onclick:()=>runVocab(shuffle(due).slice(0,25),'type',true)},'✍️ Tippen (DE → ES)'),
     h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(shuffle(due).slice(0,25),'flip',true)},'🃏 Karteikarten'),
     h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(shuffle(due).slice(0,25),'listen',true)},'🎧 Hören'))));
+  m.append(h('div',{class:'row',style:'margin-top:14px'},h('button',{class:'btn',onclick:()=>go('verbs')},'🔁 Verben konjugieren'),h('button',{class:'btn',onclick:()=>go('ref/w')},'🔎 Wörterbuch')));
   m.append(h('h2',{},'Extra üben (nach Unidad)'),h('div',{class:'row'},COURSE.units.filter(u=>u.status!=='soon').map(u=>{const w=Object.values(S.srs).filter(c=>c.unit===u.id);return h('button',{class:'btn small',disabled:!w.length,onclick:()=>runVocab(shuffle(w).slice(0,20),'type',false)},'Unidad '+u.n+' ('+w.length+')');})));
 }
 function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es,de,em])=>({es,de,em}))).slice(0,20),'type',false);}
@@ -3134,7 +3357,7 @@ function vChat(m,id){const u=unitById(id);const sit=u.situacion;
 
 /* ---------- settings ---------- */
 function vSettings(m){const st=S.settings;
-  m.append(h('h1',{},'Einstellungen'));
+  m.append(h('h1',{},'Einstellungen'),h('div',{class:'row',style:'margin-bottom:16px'},h('button',{class:'btn',onclick:()=>go('ref/w')},'🔎 Wörterbuch'),h('button',{class:'btn',onclick:()=>go('ref/g')},'📄 Grammatik'),h('button',{class:'btn',onclick:()=>go('verbs')},'🔁 Verben-Trainer')));
   const voiceSel=h('select',{class:'inp',style:'font-size:15px'});const fillV=()=>{loadVoices();voiceSel.innerHTML='';voiceSel.append(h('option',{value:''},'Automatisch (beste spanische Stimme)'));voices.forEach(v=>voiceSel.append(h('option',{value:v.name,selected:v.name===st.voice},v.name+' ('+v.lang+')')));};fillV();setTimeout(fillV,500);
   voiceSel.onchange=()=>{st.voice=voiceSel.value;save();say('Hola, soy tu profesora de español.');};
   const rate=h('input',{type:'range',min:'0.5',max:'1.2',step:'0.05',value:st.rate});rate.oninput=()=>{st.rate=+rate.value;save();};rate.onchange=()=>say('¿Qué tal? Me llamo Lucía.');

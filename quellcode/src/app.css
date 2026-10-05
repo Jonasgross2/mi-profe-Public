@@ -34,7 +34,7 @@ a{color:var(--accent)}
 .side{background:var(--surface);border-right:1px solid var(--line);padding:20px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
 .brand{font-family:var(--serif);font-size:22px;font-weight:700;padding:4px 10px 16px;display:flex;align-items:center;gap:8px}
 .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:14px 0 0 var(--gold)}
-.brand .logo{font-size:12px;font-weight:800;font-family:var(--sans,inherit);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:3px 7px;letter-spacing:.02em}
+
 .nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border:0;background:none;border-radius:10px;cursor:pointer;color:var(--ink)}
 .nav button:hover{background:var(--surface2)}
 .nav button.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
@@ -191,3 +191,23 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .rounds .rd{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:600;cursor:pointer}
 .rounds .rd.on{background:var(--ok-soft);color:var(--ok);border-color:transparent}
 .rounds .rd:hover{border-color:var(--accent)}
+
+/* einklappbare Seitenleiste */
+.brand{justify-content:space-between}
+.sidetog{border:1px solid var(--line);background:none;color:var(--muted);border-radius:8px;width:28px;height:28px;cursor:pointer;font-size:15px;line-height:1;flex:none}
+.sidetog:hover{color:var(--accent);border-color:var(--accent)}
+.nav .ni{width:22px;text-align:center;flex:none}
+.app{transition:grid-template-columns .15s}
+.app.mini{grid-template-columns:72px 1fr}
+.app.mini .side{padding:20px 8px;align-items:center}
+.app.mini .brand{padding:4px 0 16px;justify-content:center}
+.app.mini .brand .bt,.app.mini .nav .nl{display:none}
+.app.mini .nav{width:100%}
+.app.mini .nav button{justify-content:center;padding:10px 0;position:relative}
+.app.mini .nav .badge{position:absolute;top:2px;right:4px;font-size:10px;padding:0 5px}
+.app.mini .foot{padding:8px 0;text-align:center}
+/* Woche */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:6px 0 8px;text-align:center}
+.wb{height:56px;background:var(--surface2);border-radius:8px;display:flex;align-items:flex-end;overflow:hidden;margin-bottom:4px}
+.wb i{display:block;width:100%;background:var(--accent);border-radius:8px 8px 0 0;min-height:0}
+.wd.now .small.muted{color:var(--accent);font-weight:700}

@@ -1,7 +1,7 @@
 /* ================= B1 · ERSTE SCHRITTE ================= */
 
 /* ================= UNIDAD 16 · OJALÁ ================= */
-COURSE.units.push({id:'u16',n:'16',level:'B1',title:'Ojalá',sub:'Subjuntivo Präsens: Formen · Wünsche (quiero que, espero que, ojalá) · Ratschläge (te recomiendo que) · verneinter Imperativ',
+COURSE.units.push({id:'u16',n:'18',level:'B1',title:'Ojalá',sub:'Subjuntivo Präsens: Formen · Wünsche (quiero que, espero que, ojalá) · Ratschläge (te recomiendo que) · verneinter Imperativ',
 goals:['Wann braucht man den Subjuntivo? (WEIRDO-Idee)','Formen: regelmäßig (hable, coma, viva)','Formen: unregelmäßig (tenga, haga, sea, vaya, esté)','quiero que / espero que / ojalá','te recomiendo que / es importante que','Verneinter Imperativ: no hables, no vayas'],
 situacion:{title:'Ein Freund kommt nach Barcelona',npc:'Lukas',scene:'Dein Freund Lukas aus Mannheim (er lernt auch Spanisch) besucht dich nächste Woche zum ersten Mal in Barcelona. Ihr telefoniert auf Spanisch zum Üben.',role:'Du bist Lukas, ein Freund von Jonas aus Mannheim, Spanisch-Niveau A2, neugierig, etwas chaotisch. Ihr duzt euch. Frag Jonas nach Tipps für Barcelona (¿Qué me recomiendas? ¿Qué no debo hacer?). Mach selbst einfache Fehler, damit Jonas dich korrigieren kann. Benutze ab und zu Subjuntivo-Sätze (Espero que haga buen tiempo, Ojalá podamos ir a la playa).',goal:'Gib Lukas Tipps mit te recomiendo que / es importante que + Subjuntivo, sag, was er nicht tun soll (No vayas…, No dejes…), und äußere Wünsche (Espero que…, Ojalá…).'},
 lessons:[
@@ -20,7 +20,7 @@ lessons:[
  <tr><td>nosotros</td><td class="es-t">hablemos</td><td class="es-t">comamos</td><td class="es-t">vivamos</td></tr>
  <tr><td>vosotros</td><td class="es-t">habléis</td><td class="es-t">comáis</td><td class="es-t">viváis</td></tr>
  <tr><td>ellos / ustedes</td><td class="es-t">hablen</td><td class="es-t">coman</td><td class="es-t">vivan</td></tr></table>
- <div class="ex">Kennst du schon! Der <i>usted</i>-Imperativ aus Unidad 11 (<i>tome, beba</i>) ist genau diese Form.</div>`},
+ <div class="ex">Kennst du schon! Der <i>usted</i>-Imperativ aus Unidad 13 (<i>tome, beba</i>) ist genau diese Form.</div>`},
  {t:'conj',verb:'trabajar',de:'arbeiten',tense:'Subjuntivo',forms:['trabaje','trabajes','trabaje','trabajemos','trabajéis','trabajen']},
  {t:'conj',verb:'escribir',de:'schreiben',tense:'Subjuntivo',forms:['escriba','escribas','escriba','escribamos','escribáis','escriban']},
  {t:'mc',q:'Quiero que tú ___ más despacio.',opts:['hables','hablas','hablar'],a:0},
@@ -89,7 +89,7 @@ resumen:`<h3>Subjuntivo: Formen</h3><table><tr><th>hablar</th><th>comer</th><th>
 <h3>Verneinter Imperativ</h3><p class="es-t">no hables · no vayas · no lo hagas · ¡No te preocupes!</p>`});
 
 /* ================= UNIDAD 17 · HISTORIAS ================= */
-COURSE.units.push({id:'u17',n:'17',level:'B1',title:'Historias',sub:'Plusquamperfekt (había hecho) · alle vier Vergangenheitszeiten im Zusammenspiel · Erzähl-Konnektoren · Anekdoten erzählen & reagieren',
+COURSE.units.push({id:'u17',n:'19',level:'B1',title:'Historias',sub:'Plusquamperfekt (había hecho) · alle vier Vergangenheitszeiten im Zusammenspiel · Erzähl-Konnektoren · Anekdoten erzählen & reagieren',
 goals:['Plusquamperfekt: había + Partizip','Vorvergangenheit: Das war schon passiert, als …','Perfekt, Indefinido, Imperfekt, Plusquamperfekt unterscheiden','Konnektoren: mientras, en cuanto, de repente, resulta que …','Spannend erzählen & reagieren','Wiederholung unregelmäßiger Partizipien'],
 situacion:{title:'Anekdoten in der Bar',npc:'Sergio',scene:'Freitagabend in einer Bar im Born. Sergio, ein Kumpel aus dem Master, erzählt gern Geschichten – und will auch deine hören.',role:'Du bist Sergio, 27, aus Zaragoza, Master-Kommilitone von Jonas, lustig und neugierig. Ihr duzt euch. Erzähl eine kurze peinliche Anekdote (mit Plusquamperfekt: cuando llegué, el tren ya había salido…). Frag dann Jonas nach seiner peinlichsten oder lustigsten Geschichte und reagiere lebhaft (¿En serio? ¡Qué fuerte! ¿Y qué pasó después?). Hilf ihm mit Konnektoren.',goal:'Erzähl eine Anekdote mit allen Vergangenheitszeiten, insbesondere einmal mit había + Partizip, und benutze Konnektoren (resulta que, de repente, al final).'},
 lessons:[
@@ -157,7 +157,7 @@ resumen:`<h3>Plusquamperfekt</h3><p class="es-t">había / habías / había / hab
 <h3>Erzählen</h3><p class="es-t">resulta que · un día · mientras · en cuanto · de repente · sin embargo · así que · al final</p><p class="es-t">¿En serio? · ¡Qué fuerte! · ¿Y qué pasó después? · ¡Qué vergüenza!</p>`});
 
 /* ================= UNIDAD 18 · SI TENGO TIEMPO ================= */
-COURSE.units.push({id:'u18',n:'18',level:'B1',title:'Si tengo tiempo…',sub:'Bedingungen (si + Präsens) · Konditional (haría, tendría) · Ratschläge: yo en tu lugar … · Hypothesen über die Gegenwart',
+COURSE.units.push({id:'u18',n:'20',level:'B1',title:'Si tengo tiempo…',sub:'Bedingungen (si + Präsens) · Konditional (haría, tendría) · Ratschläge: yo en tu lugar … · Hypothesen über die Gegenwart',
 goals:['si + Präsens → Präsens / Futur / Imperativ','Konditional: regelmäßig (trabajaría)','Konditional: unregelmäßig (tendría, haría, podría, diría)','Yo en tu lugar … / Yo que tú …','Höfliche Bitten & Vorschläge','Wohnungs- & WG-Probleme lösen'],
 situacion:{title:'WG-Krisensitzung',npc:'Nuria',scene:'In eurer WG gibt es Ärger: Die Küche ist nie sauber und es ist nachts laut. Nuria will das mit dir besprechen.',role:'Du bist Nuria, Mitbewohnerin von Jonas, direkt aber fair. Ihr duzt euch. Sprich die Probleme an (la cocina siempre está sucia, Pablo pone música hasta las dos…). Mach Vorschläge mit Bedingungen (Si cada uno limpia una semana, …) und frag Jonas nach seiner Meinung (¿Tú qué harías?). Benutze Konditional (Yo en tu lugar hablaría con Pablo).',goal:'Schlag Lösungen mit si + Präsens vor, gib Ratschläge mit „Yo en tu lugar / Yo que tú + Konditional“ und reagiere höflich auf Nurias Vorschläge.'},
 lessons:[
@@ -179,7 +179,7 @@ lessons:[
  {t:'info',title:'Konditional: Infinitiv + -ía',html:`<table><tr><th></th><th>viajar</th></tr>
  <tr><td>yo</td><td class="es-t">viajar<b>ía</b></td></tr><tr><td>tú</td><td class="es-t">viajar<b>ías</b></td></tr><tr><td>él / ella / usted</td><td class="es-t">viajar<b>ía</b></td></tr>
  <tr><td>nosotros</td><td class="es-t">viajar<b>íamos</b></td></tr><tr><td>vosotros</td><td class="es-t">viajar<b>íais</b></td></tr><tr><td>ellos / ustedes</td><td class="es-t">viajar<b>ían</b></td></tr></table>
- <p><b>Unregelmäßig</b> – gleiche Stämme wie beim Futur (Unidad 15):</p>
+ <p><b>Unregelmäßig</b> – gleiche Stämme wie beim Futur (Unidad 17):</p>
  <p class="es-t">tendría · pondría · saldría · vendría · podría · sabría · haría · diría · querría · habría</p>
  <div class="ex">Konditional = „würde“: <span class="es-t">Con más dinero viajaría más.</span> – Mit mehr Geld würde ich mehr reisen.</div>`},
  {t:'conj',verb:'hacer',de:'machen',tense:'Konditional',forms:['haría','harías','haría','haríamos','haríais','harían']},

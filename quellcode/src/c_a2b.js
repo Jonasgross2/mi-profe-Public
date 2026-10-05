@@ -1,7 +1,7 @@
 /* ================= A2 · TEIL 2 (eigene Unidades nach dem Plan Curricular des Instituto Cervantes) ================= */
 
 /* ================= UNIDAD 11 · ¿QUÉ TE PASA? ================= */
-COURSE.units.push({id:'u11',n:'11',level:'A2b',title:'¿Qué te pasa?',sub:'Körper & Gesundheit · Schmerzen beschreiben (me duele) · beim Arzt & in der Apotheke · Ratschläge geben · Imperativ',
+COURSE.units.push({id:'u11',n:'13',level:'A2b',title:'¿Qué te pasa?',sub:'Körper & Gesundheit · Schmerzen beschreiben (me duele) · beim Arzt & in der Apotheke · Ratschläge geben · Imperativ',
 goals:['Körperteile','me duele / me duelen','Symptome: tengo fiebre, estoy resfriado','beim Arzt & in der Apotheke','Ratschläge: deberías / tienes que / es mejor','Imperativ tú & usted (bejahend)'],
 situacion:{title:'In der Apotheke in Gràcia',npc:'Farmacéutica',scene:'Du hast seit zwei Tagen Halsschmerzen und leichtes Fieber. Du gehst in eine Apotheke in der Calle Verdi.',role:'Du bist eine freundliche Apothekerin in Barcelona. Du siezt Jonas nicht, du duzt ihn (in Spanien üblich). Frag nach Symptomen (¿Qué te pasa? ¿Desde cuándo? ¿Tienes fiebre? ¿Eres alérgico a algo?), empfiehl etwas (Ibuprofeno, pastillas para la garganta) und gib Ratschläge im Imperativ (Toma una pastilla cada ocho horas, bebe mucha agua, descansa). Wenn es nicht besser wird: Ve al médico.',goal:'Beschreib deine Symptome (me duele…, tengo…, desde hace…), frag, wie oft du das Medikament nehmen sollst und was es kostet.'},
 lessons:[
@@ -48,7 +48,7 @@ lessons:[
  <tr><td class="es-t">tienes que + Infinitiv</td><td class="es-t">Tienes que beber mucha agua.</td></tr>
  <tr><td class="es-t">es mejor + Infinitiv</td><td class="es-t">Es mejor no salir hoy.</td></tr>
  <tr><td class="es-t">¿Por qué no + Präsens?</td><td class="es-t">¿Por qué no vas al médico?</td></tr></table>
- <div class="ex"><i>deberías</i> (du solltest) ist freundlicher als <i>tienes que</i> (du musst). <i>Deberías</i> ist eine Form von <i>deber</i> im Konditional – die lernst du in Unidad 15 genauer.</div>`},
+ <div class="ex"><i>deberías</i> (du solltest) ist freundlicher als <i>tienes que</i> (du musst). <i>Deberías</i> ist eine Form von <i>deber</i> im Konditional – die lernst du in Unidad 17 genauer.</div>`},
  {t:'vocab',title:'Beim Arzt & in der Apotheke',items:[['el médico de cabecera','der Hausarzt','🧑‍⚕️'],['el centro de salud','das Gesundheitszentrum (CAP)','🏥'],['la farmacia','die Apotheke','💊'],['la receta','das Rezept','📝'],['la pastilla','die Tablette','💊'],['el jarabe','der Hustensaft','🧴'],['la tarjeta sanitaria','die Krankenversicherungskarte','💳'],['pedir cita','einen Termin ausmachen','📅'],['descansar','sich ausruhen','🛌'],['tres veces al día','dreimal am Tag','🕒']]},
  {t:'mc',q:'Me duele la cabeza. – ___ tomar un ibuprofeno.',opts:['Deberías','Debes que','Tienes'],a:0},
  {t:'mc',q:'¿Por qué no ___ al médico?',opts:['vas','ir','vayas'],a:0},
@@ -94,7 +94,7 @@ resumen:`<h3>Schmerzen</h3><table><tr><td class="es-t">Me duele la cabeza / la e
 <p class="es-t">ven · ve · haz · pon · ten · di · sal · sé</p>`});
 
 /* ================= UNIDAD 12 · DE VIAJE ================= */
-COURSE.units.push({id:'u12',n:'12',level:'A2b',title:'De viaje',sub:'Von einer Reise erzählen · Indefinido & Imperfekt im Wechsel · estaba + Gerundium · Probleme am Flughafen · reagieren',
+COURSE.units.push({id:'u12',n:'14',level:'A2b',title:'De viaje',sub:'Von einer Reise erzählen · Indefinido & Imperfekt im Wechsel · estaba + Gerundium · Probleme am Flughafen · reagieren',
 goals:['Reise-Wortschatz: Flughafen, Gepäck, Unterkunft','Indefinido + Imperfekt: Handlung vs. Hintergrund','estaba + Gerundium (gerade dabei sein)','Zeitangaben: aquel día, al día siguiente, de repente','Reagieren: ¡Qué bien! ¡Qué mala suerte!','ser/estar/ir/tener im Indefinido wiederholen'],
 situacion:{title:'Reise-Erzählung im Kurs',npc:'Profesora Marta',scene:'Nach den Ferien fragt deine Spanischlehrerin in Barcelona, wie deine Reise war. Sie will viele Details hören.',role:'Du bist Marta, Spanischlehrerin an der UPC, neugierig und herzlich. Du duzt Jonas. Frag nach seiner letzten Reise: ¿Adónde fuiste? ¿Con quién? ¿Qué tal el viaje? ¿Qué tiempo hacía? ¿Qué hiciste? ¿Pasó algo curioso? Reagiere mit ¡Qué bien!, ¡Qué mala suerte!, ¿De verdad?. Wenn er Indefinido und Imperfekt verwechselt, korrigiere sanft.',goal:'Erzähl von einer Reise: wohin, mit wem, wie das Wetter war (Imperfekt), was du gemacht hast (Indefinido) und eine kleine Panne.'},
 lessons:[
@@ -164,7 +164,7 @@ resumen:`<h3>Reisen</h3><p class="es-t">el vuelo · la maleta · facturar · la 
 <h3>Erzählen & reagieren</h3><p class="es-t">aquel día · al día siguiente · de repente · al final · por suerte · ¡Qué bien! · ¡Qué mala suerte! · ¿De verdad?</p>`});
 
 /* ================= UNIDAD 13 · EN LA COCINA ================= */
-COURSE.units.push({id:'u13',n:'13',level:'A2b',title:'En la cocina',sub:'Rezepte verstehen & erklären · unpersönliches se (se corta, se añade) · Mengen · Objektpronomen beim Imperativ (córtalo)',
+COURSE.units.push({id:'u13',n:'15',level:'A2b',title:'En la cocina',sub:'Rezepte verstehen & erklären · unpersönliches se (se corta, se añade) · Mengen · Objektpronomen beim Imperativ (córtalo)',
 goals:['Küche & Zubereitung: cortar, freír, añadir …','Mengen: un kilo de, una cucharada de, un poco de','se + Verb: so macht man das','Objektpronomen lo/la/los/las wiederholen','Imperativ + Pronomen: córtalo, échalas','Im Markt einkaufen'],
 situacion:{title:'Tortilla mit deiner Mitbewohnerin',npc:'Nuria',scene:'Deine Mitbewohnerin Nuria aus Valencia zeigt dir, wie man eine echte tortilla de patatas macht. Du hilfst in der Küche.',role:'Du bist Nuria, 25, Mitbewohnerin von Jonas, lustig und ein bisschen streng beim Kochen. Du duzt ihn. Erklär Schritt für Schritt, wie man eine Tortilla macht, mit Imperativ + Pronomen (Pela las patatas… córtalas… échalas en la sartén…). Frag ihn, ob er die Tortilla mit oder ohne Zwiebel will (gran debate). Lass ihn auch fragen, wie viel von etwas man braucht.',goal:'Frag nach Zutaten und Mengen (¿Cuántos huevos…? ¿Cuánto aceite…?), bestätige Anweisungen mit Pronomen (¿Las corto ya? – Sí, córtalas) und sag deine Meinung zur Zwiebel.'},
 lessons:[
@@ -246,7 +246,7 @@ resumen:`<h3>Mengen</h3><p class="es-t">un kilo de · medio kilo de · cien gram
 <h3>Imperativ + Pronomen</h3><p class="es-t">córtalo · pélala · bátelos · échalas · dale la vuelta</p><p class="es-t">Aber: Las corto ahora. · Ya los he batido.</p>`});
 
 /* ================= UNIDAD 14 · REGALOS Y FAVORES ================= */
-COURSE.units.push({id:'u14',n:'14',level:'A2b',title:'Regalos y favores',sub:'Feste & Geschenke · indirekte Objektpronomen (le, les) · se lo / se la · um Gefallen bitten · Erlaubnis fragen',
+COURSE.units.push({id:'u14',n:'16',level:'A2b',title:'Regalos y favores',sub:'Feste & Geschenke · indirekte Objektpronomen (le, les) · se lo / se la · um Gefallen bitten · Erlaubnis fragen',
 goals:['Feste: cumpleaños, boda, Navidad …','Glückwünsche: ¡Felicidades! ¡Enhorabuena!','me/te/le/nos/os/les (wem?)','Doppelte Pronomen: me lo, te la, se lo','um einen Gefallen bitten: ¿Me prestas …? ¿Te importa …?','Erlaubnis: ¿Puedo …? ¿Te importa si …?'],
 situacion:{title:'Geburtstagsgeschenk für Laia',npc:'Marc',scene:'Eure Freundin Laia hat am Samstag Geburtstag. Du und Marc, ein Kommilitone, überlegt, was ihr ihr schenkt, und organisiert die Party.',role:'Du bist Marc, ein katalanischer Kommilitone von Jonas, entspannt und hilfsbereit. Ihr duzt euch. Diskutiert ein Geschenk für Laia (¿Qué le regalamos? ¿Le compramos…? Ya se lo regaló su hermana…). Bitte Jonas um Gefallen (¿Me prestas…? ¿Puedes traer…?) und benutze Pronomen wie se lo.',goal:'Schlag Geschenke vor (¿Por qué no le regalamos…?), bitte Marc um einen Gefallen und reagiere auf seine Bitten (Sí, claro, te lo traigo / Lo siento, es que…).'},
 lessons:[
@@ -321,7 +321,7 @@ resumen:`<h3>Glückwünsche</h3><p class="es-t">¡Felicidades! · ¡Feliz cumple
 <h3>Bitten</h3><p class="es-t">¿Me prestas …? · ¿Puedes …? · ¿Te importa + Inf.? · ¿Te importa si …? · ¿Podría …? — Sí, claro. · Lo siento, es que …</p>`});
 
 /* ================= UNIDAD 15 · EL FUTURO ================= */
-COURSE.units.push({id:'u15',n:'15',level:'A2b',title:'El futuro',sub:'Futur (trabajaré, tendré) · Vorhersagen & Pläne · Meinung äußern · Konditional der Höflichkeit (me gustaría, podría) · por & para',
+COURSE.units.push({id:'u15',n:'17',level:'A2b',title:'El futuro',sub:'Futur (trabajaré, tendré) · Vorhersagen & Pläne · Meinung äußern · Konditional der Höflichkeit (me gustaría, podría) · por & para',
 goals:['Futur: regelmäßige Formen','Futur: tendré, haré, podré, saldré …','Vorhersagen: Creo que mañana lloverá','Meinung: creo que, para mí, (no) estoy de acuerdo','Wünsche & Höflichkeit: me gustaría, podría, debería','por vs. para (Grundregeln)'],
 situacion:{title:'Zukunftsgespräch mit deiner Tutorin',npc:'Dra. Vidal',scene:'Du hast ein Gespräch mit deiner Master-Tutorin an der UPC über deine Pläne nach dem Auslandssemester.',role:'Du bist Dra. Vidal, Tutorin an der UPC (FIB), sachlich und freundlich. Du siezt Jonas am Anfang, bietest dann das Du an. Frag nach seinen Plänen (¿Qué harás cuando termines el máster? ¿Te gustaría trabajar en España?), nach seiner Meinung (¿Crees que la inteligencia artificial cambiará el trabajo?) und gib Ratschläge mit deberías / podrías.',goal:'Sprich über deine Pläne im Futur (trabajaré, viviré…), äußere deine Meinung (creo que…, para mí…), und benutze me gustaría / podría.'},
 lessons:[
