@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261005-1123";</script>
+<script>window.PWA=true;window.APP_VERSION="20261005-1127";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -3477,7 +3477,11 @@ function vChat(m,id){const u=unitById(id);const sit=u.situacion;
 
 /* ---------- settings ---------- */
 function vSettings(m){const st=S.settings;
-  m.append(h('h1',{},'Einstellungen'),h('div',{class:'row',style:'margin-bottom:16px'},h('button',{class:'btn',onclick:()=>go('placement')},'🎯 Einstufungstest'),h('button',{class:'btn',onclick:()=>go('ref/s')},'📚 Geschichten'),h('button',{class:'btn',onclick:()=>go('ref/w')},'🔎 Wörterbuch')));
+  const upd=async()=>{toast('Suche nach Update …');try{const r=window.navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(r)await r.update();
+    const html=await (await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'})).text();const v=(html.match(/APP_VERSION="([^"]+)"/)||[])[1];
+    if(v&&v!==window.APP_VERSION){toast('Neue Version gefunden – lade neu …');if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>location.reload(),600);}else toast('Du hast schon die neueste Version ✓');}catch(e){toast('Keine Verbindung – später noch mal versuchen');}};
+  m.append(h('h1',{},'Einstellungen'),h('div',{class:'card',style:'margin-bottom:16px'},h('div',{class:'row'},h('div',{style:'flex:1;min-width:180px'},h('div',{class:'kind'},'App-Version'),h('div',{},window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5 Uhr'):'Offline-Datei')),
+    window.PWA?h('button',{class:'btn',onclick:upd},'🔄 Nach Update suchen'):null)),h('div',{class:'row',style:'margin-bottom:16px'},h('button',{class:'btn',onclick:()=>go('placement')},'🎯 Einstufungstest'),h('button',{class:'btn',onclick:()=>go('ref/s')},'📚 Geschichten'),h('button',{class:'btn',onclick:()=>go('ref/w')},'🔎 Wörterbuch')));
   const voiceSel=h('select',{class:'inp',style:'font-size:15px'});const fillV=()=>{loadVoices();voiceSel.innerHTML='';voiceSel.append(h('option',{value:''},'Automatisch (beste spanische Stimme)'));voices.forEach(v=>voiceSel.append(h('option',{value:v.name,selected:v.name===st.voice},v.name+' ('+v.lang+')')));};fillV();setTimeout(fillV,500);
   voiceSel.onchange=()=>{st.voice=voiceSel.value;save();say('Hola, soy tu profesora de español.');};
   const rate=h('input',{type:'range',min:'0.5',max:'1.2',step:'0.05',value:st.rate});rate.oninput=()=>{st.rate=+rate.value;save();};rate.onchange=()=>say('¿Qué tal? Me llamo Lucía.');
