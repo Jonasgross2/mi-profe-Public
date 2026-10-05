@@ -31,6 +31,12 @@ document.title=fmt(T('Mi profe · {L} lernen'));
 const NAME=()=>S.name||'';
 function personalize(o){if(typeof o==='string')return o.replace(/\bJonas\b/g,S.name);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=personalize(o[i]);return o;}
   if(o&&typeof o==='object'){for(const k of Object.keys(o))o[k]=personalize(o[k]);}return o;}
+/* Kursinhalte in der App-Sprache: COURSE_TR[Lernsprache][App-Sprache] = {deutscher Text: Übersetzung}. Fehlt etwas, bleibt Deutsch. */
+const CT=UI!=='de'&&window.COURSE_TR&&COURSE_TR[LANG.code]&&COURSE_TR[LANG.code][UI]||null;
+const trc=s=>CT&&s!=null&&CT[s]!=null?CT[s]:s;
+function trContent(o){if(typeof o==='string')return trc(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=trContent(o[i]);return o;}
+  if(o&&typeof o==='object'){for(const k of Object.keys(o))if(k!=='role'&&k!=='id')o[k]=trContent(o[k]);}return o;}
+if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);}
 if(S.name&&S.name!==T('Jonas')){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);}
 /* Ansprache: Bei „weiblich“ werden Sätze über die lernende Person selbst (estoy/soy … , ¡Encantado!) in die weibliche Form gesetzt
    und beim Prüfen beide Formen akzeptiert. Vokabeln bleiben unverändert (sie sind Schlüssel im Vokabeltrainer). */
@@ -742,7 +748,7 @@ function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,ok
     if(st==='bad')q.push(c);}
   function nxt(){i++;if(i>=q.length)return end();show();}
   function show(){upd();stage.innerHTML='';const c=q[i];
-    if(mode==='flip'){let shown=false;const card=h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+c.de));
+    if(mode==='flip'){let shown=false;const card=h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
       stage.append(kind(T('Was bedeutet das?')),card);setTimeout(()=>say(c.es),200);
       const row=h('div',{class:'actions'});const reveal=h('button',{class:'btn primary'},T('Aufdecken'));
       reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';row.innerHTML='';row.append(
@@ -753,10 +759,10 @@ function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,ok
       document.addEventListener('keydown',kh);return;}
     const inp=h('input',{class:'inp',autocomplete:'off',spellcheck:'false',placeholder:fmt(T('{ON} …'))});
     if(mode==='listen'){stage.append(kind(T('Hör zu und schreib das Wort')),h('div',{class:'row',style:'margin-bottom:14px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.55)},T('🐢 Langsam'))),inp,keys(()=>inp));setTimeout(()=>say(c.es),200);}
-    else stage.append(kind(fmt(T('Wie heißt das {ON}?'))),picEl(c.es,c.em,'qpic'),h('p',{class:'q',style:'font-size:26px'},c.de),inp,keys(()=>inp));
+    else stage.append(kind(fmt(T('Wie heißt das {ON}?'))),picEl(c.es,c.em,'qpic'),h('p',{class:'q',style:'font-size:26px'},trc(c.de)),inp,keys(()=>inp));
     setTimeout(()=>inp.focus(),50);
     stage.append(actionBar(()=>{const r=compare(inp.value,c.es,{pron:false});inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
-      feedback(stage,r,{t:'v'},inp.value,null);if(mode==='listen')stage.append(h('p',{class:'muted'},'= '+c.de));if(r.status!=='bad')say(c.es);res(c,r.status);},{next:nxt}));}
+      feedback(stage,r,{t:'v'},inp.value,null);if(mode==='listen')stage.append(h('p',{class:'muted'},'= '+trc(c.de)));if(r.status!=='bad')say(c.es);res(c,r.status);},{next:nxt}));}
   function end(){stage.innerHTML='';const pct=Math.round(100*okc/Math.max(seen.size,1));
     stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:44px'},'🗂️'),h('h1',{},T('¡Hecho!')),h('p',{class:'sub'},pct+T('% gewusst · ')+seen.size+T(' Karten')),
       h('button',{class:'btn primary',onclick:()=>go('vocab')},T('Zurück zum Trainer'))));}

@@ -48,3 +48,9 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - Neue UI-Texte immer mit `T('…')` schreiben und in `ui_tr.js` für en/es/pt ergänzen.
 - Auswahl: Mehr → Sprache → „Sprache der App“ und Flaggen auf der Willkommensseite (`setUI`, gespeichert als `ui` in `mi-profe-shared`). Neue Nutzer: automatisch nach Gerätesprache; bestehende ohne `ui`: Deutsch.
 - Kursinhalte (Erklärungen, Übersetzungen) sind weiterhin nur Deutsch. Gemini bekommt bei UI ≠ de die Anweisung, in der UI-Sprache zu erklären.
+
+## Kursinhalte übersetzen (z. B. Spanischkurs mit englischen Erklärungen)
+- `quellcode/i18n/course_de.json`: alle deutschen Texte der Kursinhalte, gruppiert nach Abschnitt (`u0`…`u20` = Anzeige-Nummer, `stories`, `test`). Neu erzeugen mit `jsc i18n/extract.js -- src > i18n/course_de.json` (jsc: /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc).
+- Übersetzungen: `i18n/<lern>_<ui>/<abschnitt>.py` mit `EN=[…]` in derselben Reihenfolge. `python3 i18n/gen.py` erzeugt `src/tr_<lern>_<ui>.js` (`COURSE_TR`), `build.py` bindet alle `src/tr_*.js` automatisch ein.
+- Die Engine übersetzt beim Laden (`trContent`), wenn die App-Sprache ≠ Deutsch ist; fehlende Texte bleiben Deutsch. `role` (KI-Anweisung) bleibt immer Deutsch.
+- Stand: es→en Unidad 0 fertig, Rest folgt; es→pt noch nicht begonnen.
