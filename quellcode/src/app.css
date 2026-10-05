@@ -34,7 +34,7 @@ a{color:var(--accent)}
 .side{background:var(--surface);border-right:1px solid var(--line);padding:20px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
 .brand{font-family:var(--serif);font-size:22px;font-weight:700;padding:4px 10px 16px;display:flex;align-items:center;gap:8px}
 .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:14px 0 0 var(--gold)}
-.brand span{margin-left:16px}
+.brand .logo{font-size:12px;font-weight:800;font-family:var(--sans,inherit);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:3px 7px;letter-spacing:.02em}
 .nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border:0;background:none;border-radius:10px;cursor:pointer;color:var(--ink)}
 .nav button:hover{background:var(--surface2)}
 .nav button.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
@@ -185,3 +185,9 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .lvbadge{background:var(--accent);color:var(--accent-ink);font-weight:800;border-radius:10px;padding:6px 10px;font-family:var(--serif);font-size:18px;flex:none}
 .pic{font-size:22px;line-height:1;width:30px;text-align:center;flex:none}
 .qpic{display:block;font-size:56px;line-height:1;margin:2px 0 6px}
+
+/* Runden pro Lektion */
+.rounds{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.rounds .rd{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:600;cursor:pointer}
+.rounds .rd.on{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.rounds .rd:hover{border-color:var(--accent)}

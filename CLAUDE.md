@@ -8,6 +8,7 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 ## Aufbau
 - `quellcode/src/` – Quelltext: `engine.js` (App-Logik), `app.css`, Inhalte `c_*.js` (`c_a2b.js` = A2 Teil 2, `c_b1.js` = B1), `placement.js` (Einstufungsfragen U0–10), `levels.js` (Stufen `LEVELS`, Zuordnung `LEVEL_OF`, Emoji-Bilder `EMOJI`)
 - Neue Unidades: `level:'A2b'|'B1'` setzen, Einstufungsfragen als `placement:[…]` direkt in der Unidad (mind. 3, besser 6). Vokabeln können als 3. Element ein Emoji haben: `['la manzana','der Apfel','🍎']`. Neue Content-Dateien in `build.py` (beide Listen) vor `placement.js` eintragen.
+- Jede Lektion hat 3 Runden (`S.lessons[k].r`): 1 Lernen (die Lektion selbst), 2 Üben (`#round/u/l/2`, gemischt + generierte Vokabelaufgaben, Ref `W|unit|modus|wort`), 3 Festigen (`#round/u/l/3`, nur Produktion, frühestens am Tag nach Runde 2, `d2`). Danach Abschlusstest der Unidad (`#check/<id>`, ab 80 % = gemeistert, `S.checks`). Alte Stände ohne `r`: done → Runde 1, check → Runde 3.
 - Einstufungstest läuft in Etappen (eine pro Eintrag in `LEVELS`, 3 Fragen pro Unidad, Abbruch unter 60 %). Unidades mit „sitzt“ bekommen einen kurzen Check (`#check/<id>`, Ergebnis in `S.checks`).
 - `quellcode/build.py` – baut alles zu EINER Datei:
   - `Spanisch-App-Web/index.html` + `sw.js` + `manifest.webmanifest` (die Web-App, die live ist)
