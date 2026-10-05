@@ -262,7 +262,7 @@ function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{cla
 function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('b',{},l),ex?h('span',{},ex):null);return b;});
   const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const changed=v!==S.name||g!==S.gender;S.name=v;S.gender=g;save();
-    if(IN_ARTIFACT)CUR='home';else history.replaceState(null,'','#home');
+    const back=again?'lang':'home';if(IN_ARTIFACT)CUR=back;else history.replaceState(null,'','#'+back);
     if(changed&&!IN_ARTIFACT)location.reload();else{if(changed){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}}route();}};
   inp.onkeydown=e=>{if(e.key==='Enter')ok();};
   document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
@@ -271,7 +271,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
     h('p',{class:'muted',style:'margin:0 0 18px'},again?T('So begrüße ich dich und so heißt du in den Übungen.'):fmt(T('Ich bin dein Lehrer für {L}. Wie heißt du?'))),
     inp,h('p',{class:'muted small',style:'margin:16px 0 8px'},T('Wie soll ich dich ansprechen? (wichtig für die Endungen)')),LANG.genderEx?h('div',{class:'gsel'},gb):null,
     h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?T('Speichern'):T('Los geht’s →')),
-    again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('settings')},T('Abbrechen')):null)));
+    again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('lang')},T('Abbrechen')):null)));
   setTimeout(()=>inp.focus(),80);}
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
