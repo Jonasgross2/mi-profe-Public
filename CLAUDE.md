@@ -53,4 +53,5 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - `quellcode/i18n/course_de.json`: alle deutschen Texte der Kursinhalte, gruppiert nach Abschnitt (`u0`…`u20` = Anzeige-Nummer, `stories`, `test`). Neu erzeugen mit `jsc i18n/extract.js -- src > i18n/course_de.json` (jsc: /System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc).
 - Übersetzungen: `i18n/<lern>_<ui>/<abschnitt>.py` mit `EN=[…]` in derselben Reihenfolge. `python3 i18n/gen.py` erzeugt `src/tr_<lern>_<ui>.js` (`COURSE_TR`), `build.py` bindet alle `src/tr_*.js` automatisch ein.
 - Die Engine übersetzt beim Laden (`trContent`), wenn die App-Sprache ≠ Deutsch ist; fehlende Texte bleiben Deutsch. `role` (KI-Anweisung) bleibt immer Deutsch.
-- Stand: es→en Unidad 0 fertig, Rest folgt; es→pt noch nicht begonnen.
+- Stand: es→en komplett (alle Unidades, Geschichten, Einstufungstest, `x_all` = Texte aus `course_de_extra.json`). es→pt noch nicht begonnen.
+- Zweiter Suchlauf: `jsc i18n/extract_extra.js -- src i18n/course_de.json > i18n/course_de_extra.json` findet Texte, die der erste übersieht (Titel ohne Füllwörter). Einträge `""` in einer Übersetzungsliste = unverändert lassen.
