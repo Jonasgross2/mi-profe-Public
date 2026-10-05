@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261005-1623";</script>
+<script>window.PWA=true;window.APP_VERSION="20261005-1629";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -305,18 +305,20 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .howto{margin:0 0 12px}.howto summary{cursor:pointer;color:var(--accent);font-weight:600;font-size:14px;margin-bottom:6px}
 .card h2{font-size:18px}
 /* Unidad-Karten: Status-Pillen rechtsbündig */
-.unit .uright{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none;width:112px;text-align:right}
-.unit .uright .pill{width:100%;box-sizing:border-box;text-align:center;line-height:1.35}
+.unit .ubar{display:flex;align-items:center;gap:10px;margin-top:6px}
+.unit .ubar .bar{flex:1;margin:0}
+.unit .upill{flex:none;width:112px;display:flex}
+.unit .upill .pill{width:100%;box-sizing:border-box;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.unit .upct{flex:none;width:38px;text-align:right}
 /* Kachel-Seiten (Mehr, Bibliothek, Vokabeln) am Handy/iPad: Kacheln füllen den Platz, Versionszeile unten */
 @media (max-width:1023px){
   .main:has(>.mtiles){display:flex;flex-direction:column}
-  .main>.mtiles{flex:1;min-height:0;grid-auto-rows:minmax(104px,230px);align-content:stretch}
-  .main>.mtiles .mtile .mi2{margin-bottom:auto}
-  .main>.mtiles .mtile .mi2{font-size:34px}
+  .main>.mtiles .mtile{min-height:128px}
   .main>.verline{margin-top:auto;padding-top:14px}
 }
-@media (max-width:700px){.unit .uright{width:92px}.unit .uright .pill{font-size:11px;padding:2px 6px}}
+@media (max-width:700px){.unit .upill{width:92px}.unit .upill .pill{font-size:11px;padding:2px 6px}}
 .mtiles:has(>:nth-child(4):last-child){grid-template-columns:repeat(2,1fr)}
+@media (max-width:700px){.unit{padding:9px 14px}.grid:has(>.unit){gap:6px!important}.unit .ubar{margin-top:4px}}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -4770,12 +4772,13 @@ const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{cl
 function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.status==='soon';const ck=S.checks[u.id];
   return h('div',{class:'card unit'+(soon?' locked':''),onclick:()=>{if(!soon)go('unit/'+u.id)}},
     h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'row'},h('span',{class:'t'},u.title)),
-      h('div',{class:'d'},u.sub),soon?null:h('div',{class:'bar',style:'margin-top:8px'},h('i',{style:'width:'+Math.round(pct*100)+'%'}))),
-    h('div',{class:'uright'},ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt ✓')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):null,
-      soon?h('span',{class:'pill'},T('kommt als Nächstes')):null,
-      soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%')));}
+      h('div',{class:'d'},u.sub),h('div',{class:'ubar'},soon?h('span',{style:'flex:1'}):h('div',{class:'bar'},h('i',{style:'width:'+Math.round(pct*100)+'%'})),
+    h('span',{class:'upill'},ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt ✓')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):null,
+      soon?h('span',{class:'pill'},T('kommt als Nächstes')):null),
+      h('span',{class:'muted small upct'},soon?'':Math.round(pct*100)+'%'))));}
+let lastLv=null;/* zuletzt angesehene Stufe – beim Zurückkommen auf „Kurs“ wieder dort, beim App-Start dort, wo es weitergeht */
 function vUnits(m,lv){
-  const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:(cur?unitLevel(cur.u):T('A1'));
+  const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):T('A1'));lastLv=lv;
   m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},T('Kurs')),h('button',{class:'btn small',onclick:()=>go('placement')},T('🎯 Test')),h('button',{class:'btn small',onclick:()=>go('ref/g')},T('📄 Grammatik'))));
   m.append(h('div',{class:'seg'},LEVELS.map(L=>{const us=COURSE.units.filter(u=>unitLevel(u)===L.id&&u.status!=='soon');const pct=us.length?us.reduce((a,u)=>a+lessonPct(u),0)/us.length:0;
     return h('button',{class:L.id===lv?'on':'',onclick:()=>go('units/'+L.id)},h('b',{},L.id===T('A2a')?T('A2·1'):L.id===T('A2b')?T('A2·2'):L.label),h('span',{},Math.round(pct*100)+'%'));})));

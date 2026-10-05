@@ -324,12 +324,13 @@ const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{cl
 function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.status==='soon';const ck=S.checks[u.id];
   return h('div',{class:'card unit'+(soon?' locked':''),onclick:()=>{if(!soon)go('unit/'+u.id)}},
     h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'row'},h('span',{class:'t'},u.title)),
-      h('div',{class:'d'},u.sub),soon?null:h('div',{class:'bar',style:'margin-top:8px'},h('i',{style:'width:'+Math.round(pct*100)+'%'}))),
-    h('div',{class:'uright'},ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt ✓')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):null,
-      soon?h('span',{class:'pill'},T('kommt als Nächstes')):null,
-      soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%')));}
+      h('div',{class:'d'},u.sub),h('div',{class:'ubar'},soon?h('span',{style:'flex:1'}):h('div',{class:'bar'},h('i',{style:'width:'+Math.round(pct*100)+'%'})),
+    h('span',{class:'upill'},ck?.pass?h('span',{class:'pill ok'},T('gemeistert 🏆')):pct>=1?h('span',{class:'pill acc'},T('Abschlusstest offen')):st?h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new')},st==='sicher'?(ck?T('Test gemacht'):T('sitzt ✓')):st===T('auffrischen')?T('auffrischen'):T('neu lernen')):null,
+      soon?h('span',{class:'pill'},T('kommt als Nächstes')):null),
+      h('span',{class:'muted small upct'},soon?'':Math.round(pct*100)+'%'))));}
+let lastLv=null;/* zuletzt angesehene Stufe – beim Zurückkommen auf „Kurs“ wieder dort, beim App-Start dort, wo es weitergeht */
 function vUnits(m,lv){
-  const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:(cur?unitLevel(cur.u):T('A1'));
+  const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):T('A1'));lastLv=lv;
   m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},T('Kurs')),h('button',{class:'btn small',onclick:()=>go('placement')},T('🎯 Test')),h('button',{class:'btn small',onclick:()=>go('ref/g')},T('📄 Grammatik'))));
   m.append(h('div',{class:'seg'},LEVELS.map(L=>{const us=COURSE.units.filter(u=>unitLevel(u)===L.id&&u.status!=='soon');const pct=us.length?us.reduce((a,u)=>a+lessonPct(u),0)/us.length:0;
     return h('button',{class:L.id===lv?'on':'',onclick:()=>go('units/'+L.id)},h('b',{},L.id===T('A2a')?T('A2·1'):L.id===T('A2b')?T('A2·2'):L.label),h('span',{},Math.round(pct*100)+'%'));})));
