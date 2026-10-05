@@ -182,7 +182,7 @@ function nextLesson(){for(const u of COURSE.units){if(u.status==='soon'||S.check
   for(const l of L)if(rnd(K(l))<3&&r3ready(K(l)))return{u,l,n:3};
   if(L.every(l=>rnd(K(l))>=3)&&!S.checks[u.id]?.pass)return{u,test:true};}
   return null;}
-const nxTitle=nx=>nx.check?'Unidad '+nx.u.n+' · Kurzer Check':nx.test?'Unidad '+nx.u.n+' · Abschlusstest':'Unidad '+nx.u.n+' · '+nx.l.title+(nx.n>1?' · '+RN[nx.n]:'');
+const nxTitle=nx=>nx.check?'Unidad '+nx.u.n+' · Abschlusstest':nx.test?'Unidad '+nx.u.n+' · Abschlusstest':'Unidad '+nx.u.n+' · '+nx.l.title+(nx.n>1?' · '+RN[nx.n]:'');
 const nxDesc=nx=>nx.check?'Laut Test sitzt '+nx.u.title+' – bestehst du den Abschlusstest, ist sie abgehakt.':nx.test?'Alle Lektionen gefestigt – zeig, dass du die Unidad kannst (ab 80 % bestanden).':nx.n===2?'Runde 2 von 3: dieselben Inhalte, neu gemischt und mit Vokabelübungen.':nx.n===3?'Runde 3 von 3: nur selbst schreiben & hören – mit einem Tag Abstand.':nx.l.desc;
 const nxRoute=nx=>nx.check||nx.test?'check/'+nx.u.id:nx.n>1?'round/'+nx.u.id+'/'+nx.l.id+'/'+nx.n:'lesson/'+nx.u.id+'/'+nx.l.id;
 function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.ref!==ref);S.mistakes.unshift({ref,your:String(your||'').slice(0,200),date:today()});S.mistakes=S.mistakes.slice(0,150);save();}
@@ -225,7 +225,7 @@ function vHome(m){
   m.append(h('h1',{},greet+', Jonas!'),h('p',{class:'sub'},'Dein persönlicher Spanischlehrer – von A1 bis B1, aufgebaut nach „Meta profesional“, ergänzt um Alltag in Barcelona.'));
   if(!S.placement){m.append(h('div',{class:'card',style:'border-color:var(--accent);margin-bottom:16px'},
     h('div',{class:'kind'},'Erster Schritt'),h('h2',{style:'margin-top:0'},'Einstufungstest machen'),
-    h('p',{},'In Etappen von A1 bis B1, je ca. 5 Minuten. Danach weiß ich, was du sicher kannst, was wir auffrischen und wo wir neu einsteigen – Bekanntes hakst du mit einem kurzen Check ab.'),
+    h('p',{},'In Etappen von A1 bis B1, je ca. 5 Minuten. Danach weiß ich, was du sicher kannst, was wir auffrischen und wo wir neu einsteigen – Bekanntes hakst du mit dem Abschlusstest ab.'),
     h('button',{class:'btn primary',onclick:()=>go('placement')},'Test starten →')));}
   m.append(h('div',{class:'grid g4',style:'margin-bottom:16px'},
     stat(streakNow()+' 🔥','Tage in Folge'),stat(due,'Vokabeln fällig'),stat(done,'Lektionen fertig'),stat(acc+'%','Trefferquote')));
@@ -233,7 +233,7 @@ function vHome(m){
   m.append(h('div',{class:'card',style:'margin-bottom:14px'},h('div',{class:'kind'},'Dein Plan für heute (ca. 20 Min.)'),
     h('div',{class:'grid',style:'gap:6px'},
       planRow(due===0&&Object.keys(S.srs).length>0,'1. Vokabeln wiederholen',due?due+' fällig':Object.keys(S.srs).length?'erledigt':'noch keine – kommen mit der ersten Lektion','vocab'),
-      planRow(false,nx?.check||nx?.test?'2. '+(nx.test?'Abschlusstest':'Kurzer Check'):nx?.n>1?'2. '+RN[nx.n]:'2. Eine neue Lektion',nx?nxTitle(nx):'alles fertig',nx?nxRoute(nx):'units'),
+      planRow(false,nx?.check||nx?.test?'2. '+'Abschlusstest':nx?.n>1?'2. '+RN[nx.n]:'2. Eine neue Lektion',nx?nxTitle(nx):'alles fertig',nx?nxRoute(nx):'units'),
       doneN>=2?planRow(S.lastMix===today(),'3. Gemischte Wiederholung',S.lastMix===today()?'erledigt':'15 Aufgaben quer durch alles','mix'):null,
       (()=>{const ns=nextStory();return ns?planRow(false,'4. Geschichte lesen & hören',ns.title+' · ca. 5 Min.','story/'+ns.id):null;})(),
       planRow(false,'5. Bonus: Shadowing oder Gespräch','Aussprache & Sprechen',nx?'shadow/'+nx.u.id:'units'))));
@@ -257,12 +257,12 @@ const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{cl
 function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.status==='soon';const ck=S.checks[u.id];
   return h('div',{class:'card unit'+(soon?' locked':''),onclick:()=>{if(!soon)go('unit/'+u.id)}},
     h('div',{class:'num'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'row'},h('span',{class:'t'},u.title),
-      ck?.pass?h('span',{class:'pill ok'},'gemeistert 🏆'):pct>=1?h('span',{class:'pill acc'},'Abschlusstest offen'):st?h('span',{class:'pill '+(st==='sicher'?'ok':st==='auffrischen'?'warn':'new')},st==='sicher'?(ck?'Test gemacht':'sitzt – kurzer Check'):st==='auffrischen'?'auffrischen':'neu lernen'):null,
+      ck?.pass?h('span',{class:'pill ok'},'gemeistert 🏆'):pct>=1?h('span',{class:'pill acc'},'Abschlusstest offen'):st?h('span',{class:'pill '+(st==='sicher'?'ok':st==='auffrischen'?'warn':'new')},st==='sicher'?(ck?'Test gemacht':'sitzt – Abschlusstest'):st==='auffrischen'?'auffrischen':'neu lernen'):null,
       soon?h('span',{class:'pill'},'kommt als Nächstes'):null),
       h('div',{class:'d'},u.sub),soon?null:h('div',{class:'bar',style:'margin-top:8px'},h('i',{style:'width:'+Math.round(pct*100)+'%'}))),
     soon?null:h('div',{class:'muted small'},Math.round(pct*100)+'%'));}
 function vUnits(m){
-  m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},'Kurs'),h('button',{class:'btn small',onclick:()=>go('placement')},'🎯 Einstufungstest'),h('button',{class:'btn small',onclick:()=>go('ref/g')},'📄 Grammatik')),h('p',{class:'sub'},'Von A1 bis B1, Stufe für Stufe von oben nach unten. '+(S.placement?'Die Markierungen kommen aus deinem Einstufungstest – was sitzt, hakst du mit einem kurzen Check ab.':'Mach zuerst den Einstufungstest, dann weiß ich, was du überspringen kannst.')));
+  m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},'Kurs'),h('button',{class:'btn small',onclick:()=>go('placement')},'🎯 Einstufungstest'),h('button',{class:'btn small',onclick:()=>go('ref/g')},'📄 Grammatik')),h('p',{class:'sub'},'Von A1 bis B1, Stufe für Stufe von oben nach unten. '+(S.placement?'Die Markierungen kommen aus deinem Einstufungstest – was sitzt, hakst du mit dem Abschlusstest ab.':'Mach zuerst den Einstufungstest, dann weiß ich, was du überspringen kannst.')));
   for(const L of LEVELS){const us=COURSE.units.filter(u=>unitLevel(u)===L.id);if(!us.length)continue;
     const act=us.filter(u=>u.status!=='soon');const pct=act.length?act.reduce((a,u)=>a+lessonPct(u),0)/act.length:0;
     m.append(h('div',{class:'lvhead'},h('span',{class:'lvbadge'},L.label),h('div',{style:'flex:1;min-width:0'},h('h2',{},L.title),h('div',{class:'muted small'},L.sub)),h('div',{class:'muted small'},Math.round(pct*100)+'%')),
@@ -276,7 +276,7 @@ function vUnit(m,id){const u=unitById(id);if(!u)return vUnits(m);
     st==='sicher'?'Laut Einstufungstest sitzt diese Unidad. Mach direkt den Abschlusstest – dann hake ich ab, was du kannst.':
     st==='auffrischen'?'Laut Einstufungstest: auffrischen. Die Grundlagen sind da – geh die Lektionen zügig durch, die Erklärungen kannst du überfliegen.':'Laut Einstufungstest: neu lernen. Nimm dir Zeit für die Erklärungen.'));
   const ck=S.checks[u.id];
-  if(S.placement&&(st==='sicher'||st==='auffrischen')&&!ck?.pass&&lessonPct(u)<1)m.append(h('div',{class:'card',style:'margin-bottom:16px;border-color:var(--accent)'},h('div',{class:'kind'},'Kurzer Check'),
+  if(S.placement&&(st==='sicher'||st==='auffrischen')&&!ck?.pass&&lessonPct(u)<1)m.append(h('div',{class:'card',style:'margin-bottom:16px;border-color:var(--accent)'},h('div',{class:'kind'},'Abschlusstest statt aller Runden'),
     h('p',{style:'margin-top:0'},ck?'Letzter Test am '+ck.date+': '+Math.round(ck.score*100)+' %.'+(ck.pass?'':' Mach die Runden bei den Lektionen, die noch offen sind.'):'Statt alle Runden durchzugehen: Mach direkt den Abschlusstest (ca. 15 Aufgaben). Ab 80 % ist die Unidad gemeistert – sonst siehst du, welche Lektionen du noch üben solltest.'),
     h('button',{class:'btn'+(ck?'':' primary'),onclick:()=>go('check/'+u.id)},ck?'Test wiederholen':'Abschlusstest starten →')));
   m.append(h('div',{class:'card',style:'margin-bottom:18px'},h('div',{class:'kind'},'Das lernst du'),h('div',{},u.goals.join(' · '))));
@@ -705,7 +705,7 @@ function vPlacement(m){
   if(S.placement&&!m.dataset.restart){m.append(h('h1',{},'Einstufungstest'),h('p',{class:'sub'},'Gemacht am '+S.placement.date+'.'),placementTable(),
     h('div',{class:'row',style:'margin-top:16px'},h('button',{class:'btn',onclick:()=>{m.innerHTML='';m.dataset.restart=1;vPlacement(m);}},'Neuen Test machen (andere Fragen)'),h('button',{class:'btn primary',onclick:()=>go('units')},'Zum Kurs →')));return;}
   m.append(h('h1',{},'Einstufungstest'),h('p',{class:'sub'},'Der Test läuft in Etappen: '+LEVELS.map(L=>L.title).join(' → ')+'. Pro Unidad 3 Fragen, jede Etappe dauert ca. 5 Minuten, bei jedem Durchgang neu gemischt.'),
-    h('div',{class:'card',style:'margin-bottom:16px'},h('p',{style:'margin:0'},'Nach jeder Etappe siehst du dein Zwischenergebnis. Liegt eine Etappe unter 60 %, höre ich dort auf – alles danach lernst du neu. Was „sitzt“, hakst du später mit einem kurzen Check ab.'),
+    h('div',{class:'card',style:'margin-bottom:16px'},h('p',{style:'margin:0'},'Nach jeder Etappe siehst du dein Zwischenergebnis. Liegt eine Etappe unter 60 %, höre ich dort auf – alles danach lernst du neu. Was „sitzt“, hakst du später mit dem Abschlusstest ab.'),
       h('p',{class:'muted small',style:'margin:8px 0 0'},'Kein Stress: Wenn du etwas nicht weißt, wähl „Weiß ich nicht“ bzw. lass die Lücke leer – das hilft der Einstufung mehr als Raten.')),
     h('button',{class:'btn primary',onclick:()=>runStage(m,0,{})},'Test starten →'));}
 function runStage(m,li,results){const L=LEVELS[li];m.innerHTML='';window.scrollTo(0,0);
@@ -729,7 +729,7 @@ function placementTable(){const r=S.placement?.results||{};const t=h('div',{clas
   const untested=LEVELS.filter(L=>levelUnits(L.id).length&&!levelUnits(L.id).some(u=>r[u.id]!=null));
   if(untested.length&&Object.keys(r).length)t.append(h('p',{class:'muted small',style:'margin:14px 0 0'},'Nicht mehr getestet: '+untested.map(L=>L.title).join(', ')+' – das lernst du neu.'));
   const rec=COURSE.units.find(u=>u.status!=='soon'&&(r[u.id]==null||r[u.id]<0.8));
-  if(rec&&Object.keys(r).length)t.append(h('p',{style:'margin:16px 0 0'},'👉 Empfehlung: Neu einsteigen bei ',h('b',{},'Unidad '+rec.n+' · '+rec.title),'. Was davor „sitzt“, hakst du mit einem kurzen Check ab (ca. 8 Fragen pro Unidad) – „auffrischen“ heißt: zügig durchgehen.'));
+  if(rec&&Object.keys(r).length)t.append(h('p',{style:'margin:16px 0 0'},'👉 Empfehlung: Neu einsteigen bei ',h('b',{},'Unidad '+rec.n+' · '+rec.title),'. Was davor „sitzt“, hakst du mit dem Abschlusstest ab (ca. 15 Aufgaben) – „auffrischen“ heißt: zügig durchgehen.'));
   return t;}
 
 /* ---------- mistakes ---------- */
