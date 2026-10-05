@@ -42,3 +42,9 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - Fortschritt pro Sprache in eigenem localStorage-Key (`LANG.key`, Spanisch bleibt `espanol-lehrer-v1`) und eigener Gist-Datei (`LANG.gist`) im selben Gist. Gemeinsam für alle Sprachen: `mi-profe-shared` = {lang, name, gender, settings}.
 - Sprachwechsel: Mehr → Sprache (`#lang`), lädt die Seite neu.
 - **Neue Sprache hinzufügen:** Datei(en) `c_<code>_*.js` mit `defineLang('<code>',{name,flag,into:'ins Italienische',onLang:'auf Italienisch',adj:'italienisch',voice:'it-IT',keys:[…],pron:/^(io|tu|…)\s+/,persons:[…],conjTip,unit:'Unità',units:'Unità',genderEx:['Sono stanco','Sono stanca'] (oder weglassen),greet:[morgens,nachmittags,abends],teacher:'…',sampleSay:[…],voiceHint,storySeries,storyIntro,articles:/^(il|lo|la|…)\s*/,levels:[{id,label,title,sub}],levelOf:{},emoji:{wort:'🐱'},stories:[…]})` und `LANGS.<code>.course.units.push({...,level:'A1',placement:[…]})` (gleiches Format wie Spanisch). In `build.py` (beide Listen) NACH `lang.js` und VOR `engine.js` eintragen. Männlich/weiblich-Umformung (`femCourse`) gibt es bisher nur für Spanisch.
+
+## Oberflächensprache
+- Alle Oberflächentexte in `engine.js` stehen in `T('deutscher Text')`; Übersetzungen in `ui_tr.js` (`UI_TR.en/es/pt`, Schlüssel = deutscher Text). Fehlt ein Eintrag, erscheint Deutsch. Platzhalter über `fmt()`: `{L}` Sprachname, `{INTO}` „ins Spanische“, `{ON}` „auf Spanisch“.
+- Neue UI-Texte immer mit `T('…')` schreiben und in `ui_tr.js` für en/es/pt ergänzen.
+- Auswahl: Mehr → Sprache → „Sprache der App“ und Flaggen auf der Willkommensseite (`setUI`, gespeichert als `ui` in `mi-profe-shared`). Neue Nutzer: automatisch nach Gerätesprache; bestehende ohne `ui`: Deutsch.
+- Kursinhalte (Erklärungen, Übersetzungen) sind weiterhin nur Deutsch. Gemini bekommt bei UI ≠ de die Anweisung, in der UI-Sprache zu erklären.

@@ -287,3 +287,4 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .mtile.soon{opacity:.5}
 .brand .flag{font-size:18px}
 .app.mini .brand .bt{display:none}
+.uisel{display:flex;justify-content:center;gap:6px;margin:-12px 0 10px}.uisel button{border:1px solid var(--line);background:none;border-radius:8px;font-size:20px;padding:2px 8px;cursor:pointer;opacity:.55}.uisel button.on{opacity:1;border-color:var(--accent)}
