@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261006-1243";</script>
+<script>window.PWA=true;window.APP_VERSION="20261006-1248";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -342,6 +342,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .rates{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
 .btn.rate{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border:1.5px solid var(--line);background:var(--surface);min-width:0}.btn.rate b{font-size:15px}.btn.rate span{font-size:11.5px;color:var(--muted);font-weight:400}
 .goalsel{font:inherit;font-size:14px;padding:3px 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+.linkbtn{background:none;border:0;padding:0;color:var(--accent);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -6660,6 +6661,9 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"gleich nochmal": "again now",
+" ✓ – weitere Runden freiwillig": " ✓ – more rounds optional",
+"ändern": "change",
 "Tagesziel: ": "Daily goal: ",
 " Karten · ": " cards · ",
 " fällig": " due",
@@ -7245,6 +7249,9 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"gleich nochmal": "otra vez ahora",
+" ✓ – weitere Runden freiwillig": " ✓ – más rondas opcionales",
+"ändern": "cambiar",
 "Tagesziel: ": "Objetivo diario: ",
 " Karten · ": " tarjetas · ",
 " fällig": " pendientes",
@@ -7830,6 +7837,9 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"gleich nochmal": "de novo já",
+" ✓ – weitere Runden freiwillig": " ✓ – mais rodadas opcionais",
+"ändern": "mudar",
 "Tagesziel: ": "Meta diária: ",
 " Karten · ": " cartões · ",
 " fällig": " pendentes",
@@ -8172,13 +8182,14 @@ function dueCards(){const d=today();return Object.values(S.srs).filter(c=>c.due<
    Alte Karten (nur box) werden beim ersten Bewerten übernommen. box bleibt als grobe Stufe für Statistik & Sync. */
 const RATE={bad:'again',near:'hard',ok:'good'};
 function srsInit(c){if(c.ease==null){c.ease=2.5;c.ivl=c.box?INTERVALS[Math.min(c.box,INTERVALS.length-1)]:0;}return c;}
-/* vier immer verschiedene Abstände: neu 1 / 2 / 3 / 5 Tage, danach ×1 / ×1,2 / ×ease / ×ease×1,3 (jeweils mindestens +1 Tag zum vorigen Knopf) */
-function nextIvl(c,r){srsInit(c);const i=c.ivl||0;if(r==='again')return 1;
-  const hard=i?Math.max(i+1,Math.round(i*1.2)):2,good=i?Math.max(hard+1,Math.round(i*c.ease)):3,easy=i?Math.max(good+1,Math.round(i*c.ease*1.3)):5;
+/* Nochmal = ans Ende der Runde (Termin erst bei der nächsten Bewertung, dann wie neu). Abstände: neu Schwer 1 / Gut 3 / Leicht 5 Tage, danach ×1 / ×1,2 / ×ease / ×ease×1,3 (jeweils mindestens +1 Tag zum vorigen Knopf) */
+function nextIvl(c,r){srsInit(c);const i=c.ivl||0;if(r==='again')return 0;
+  const hard=i?Math.max(i+1,Math.round(i*1.2)):1,good=i?Math.max(hard+1,Math.round(i*c.ease)):3,easy=i?Math.max(good+1,Math.round(i*c.ease*1.3)):5;
   return r==='hard'?hard:r==='good'?good:easy;}
 function grade(card,status,rating){const c=S.srs[vkey(card.es)];if(!c)return;srsInit(c);c.t=Date.now();const r=rating||RATE[status]||'again';
-  const ivl=nextIvl(c,r);if(r==='again'){c.lapses=(c.lapses||0)+1;c.ease=2.5;}else if(r==='hard')c.ease=Math.max(1.3,c.ease-0.15);else if(r==='easy')c.ease=Math.min(3.5,c.ease+0.15);
-  c.ivl=r==='again'?0:ivl;c.due=addDays(today(),ivl);/* nach Fehler: ivl 0 → nächstes „Gut“ = 2 Tage wie bei neuen Wörtern */c.reps=(c.reps||0)+1;c.box=ivl>=60?6:ivl>=21?5:ivl>=7?3:ivl>=2?1:0;
+  if(r==='again'){if(c.ivl)c.lapses=(c.lapses||0)+1;c.ivl=0;c.ease=2.5;c.due=today();c.box=0;save();return;}/* kommt in dieser Runde gleich wieder */
+  const ivl=nextIvl(c,r);if(r==='hard')c.ease=Math.max(1.3,c.ease-0.15);else if(r==='easy')c.ease=Math.min(3.5,c.ease+0.15);
+  c.ivl=ivl;c.due=addDays(today(),ivl);c.reps=(c.reps||0)+1;c.box=ivl>=60?6:ivl>=21?5:ivl>=7?3:ivl>=2?1:0;
   const td=today();if(!S.vocabCount||S.vocabCount.d!==td)S.vocabCount={d:td,n:0};S.vocabCount.n++;save();}
 const vocabGoal=()=>S.settings.vocabGoal||20;
 const vocabToday=()=>S.vocabCount&&S.vocabCount.d===today()?S.vocabCount.n:0;
@@ -8808,9 +8819,9 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
     if(!all.length)m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return;}
   m.append(h('h1',{},T('Vokabeln')),h('p',{class:'sub'},total?total+T(' Wörter gesammelt · ')+boxes[3]+T(' sitzen sicher · ')+(boxes[0]+boxes[1])+T(' in Arbeit'):T('Wörter kommen automatisch dazu, sobald du sie in einer Lektion siehst.')));
   m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 4px'},due.length?due.length+T(' Karten fällig'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
-    total?h('div',{class:'row',style:'margin:0 0 12px;gap:6px;align-items:center'},h('span',{class:'muted small'},T('Tagesziel: ')+Math.min(vocabToday(),vocabGoal())+' / '),
-      (()=>{const sel=h('select',{class:'goalsel',onchange:e=>{S.settings.vocabGoal=+e.target.value;save();route();}},[10,20,30,50,100].map(n=>h('option',{value:n},n+'')));sel.value=String(vocabGoal());return sel;})(),
-      h('span',{class:'muted small'},vocabToday()>=vocabGoal()?T('✓ erreicht – weitere Runden sind freiwillig'):T('Karten'))):null,
+    total?(()=>{const pick=h('div',{class:'chips hide',style:'margin:2px 0 10px'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.settings.vocabGoal=n;save();route();}},n+'')));
+      return h('div',{},h('div',{class:'row',style:'margin:0 0 10px;gap:6px;align-items:center'},h('span',{class:'muted small'},T('Tagesziel: ')+Math.min(vocabToday(),vocabGoal())+' / '+vocabGoal()+(vocabToday()>=vocabGoal()?T(' ✓ – weitere Runden freiwillig'):'')),
+        h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('ändern'))),pick);})():null,
     h('div',{class:'row'},h('button',{class:'btn'+(due.length?' primary':''),disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true)},T('🃏 Karten')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true)},T('🎧 Hören')))));
@@ -8821,8 +8832,10 @@ function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es
 function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
   const stage=h('div',{class:'step'});m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>go('vocab')},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),h('span',{class:'muted small',id:'pc'})),stage));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;}
-  function res(c,st,rating){if(!seen.has(c.es)){seen.add(c.es);if(st!=='bad')okc++;if(srs)grade(c,st,rating);bumpDay(st!=='bad');}else if(srs&&st==='ok'){/* relearned */}
-    if(st==='bad')q.push(c);}
+  const failed=new Set();
+  function res(c,st,rating){const first=!seen.has(c.es);if(first){seen.add(c.es);if(st!=='bad')okc++;bumpDay(st!=='bad');}
+    if(srs){const r=rating||(st==='bad'?'again':failed.has(c.es)?'hard':RATE[st]);grade(c,st,r);}
+    if(st==='bad'||rating==='again'){failed.add(c.es);q.push(c);}}
   function nxt(){i++;if(i>=q.length)return end();show();}
   function show(){upd();stage.innerHTML='';const c=q[i];
     if(mode==='flip'){let shown=false;const card=h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
@@ -8830,8 +8843,8 @@ function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,ok
       const row=h('div',{class:'actions'});const reveal=h('button',{class:'btn primary'},T('Aufdecken'));
       reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';row.innerHTML='';row.className='rates';row.append(
         ...[['again','bad',T('Nochmal'),'var(--bad)'],['hard','near',T('Schwer'),'var(--gold)'],['good','ok',T('Gut'),'var(--accent)'],['easy','ok',T('Leicht'),'var(--ok)']].map(([r,st,l,col])=>{
-          const sc=srs&&S.srs[vkey(c.es)];const d=sc?nextIvl(Object.assign({},sc),r):null;
-          return h('button',{class:'btn rate',style:'color:'+col,onclick:()=>{res(c,st,r);nxt();}},h('b',{},l),d?h('span',{},d===1?T('morgen'):d+T(' Tage')):null);}));};row.append(reveal);stage.append(row);
+          const sc=srs&&S.srs[vkey(c.es)];const d=sc?nextIvl(Object.assign({},sc),r):(r==='hard'?1:r==='good'?3:5);
+          return h('button',{class:'btn rate',style:'color:'+col,onclick:()=>{res(c,st,r);nxt();}},h('b',{},l),h('span',{},r==='again'?T('gleich nochmal'):d===1?T('morgen'):d+T(' Tage')));}));};row.append(reveal);stage.append(row);
       const kh=e=>{if(!stage.isConnected)return document.removeEventListener('keydown',kh);if(e.key===' '||e.key==='Enter'){e.preventDefault();if(!shown)reveal.click();}else if(shown&&['1','2','3'].includes(e.key)){document.removeEventListener('keydown',kh);row.children[+e.key-1].click();}};
       document.addEventListener('keydown',kh);return;}
     const inp=h('input',{class:'inp',autocomplete:'off',spellcheck:'false',placeholder:fmt(T('{ON} …'))});
