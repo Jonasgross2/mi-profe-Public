@@ -331,3 +331,4 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .btn.rate{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border:1.5px solid var(--line);background:var(--surface);min-width:0}.btn.rate b{font-size:15px}.btn.rate span{font-size:11.5px;color:var(--muted);font-weight:400}
 .goalsel{font:inherit;font-size:14px;padding:3px 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .linkbtn{background:none;border:0;padding:0;color:var(--accent);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.goalrow{margin-top:16px;padding-top:10px;border-top:1px solid var(--line)}.goalrow .linkbtn{text-decoration:none;color:var(--muted);font-size:12.5px;white-space:nowrap}

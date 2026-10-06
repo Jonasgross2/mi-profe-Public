@@ -853,13 +853,14 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
       return h('div',{},h('div',{class:'kind',style:'margin:8px 0 6px'},L.title),h('div',{class:'chips'},us.map(u=>{const w=all.filter(c=>c.unit===u.id);return h('button',{class:'chip',onclick:()=>runVocab(shuffle(w).slice(0,20),'type',false)},h('span',{},'U'+u.n),h('span',{},u.title+' ('+w.length+')'));})));})));
     if(!all.length)m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return;}
   m.append(h('h1',{},T('Vokabeln')),h('p',{class:'sub'},total?total+T(' Wörter gesammelt · ')+boxes[3]+T(' sitzen sicher · ')+(boxes[0]+boxes[1])+T(' in Arbeit'):T('Wörter kommen automatisch dazu, sobald du sie in einer Lektion siehst.')));
-  m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 4px'},due.length?due.length+T(' Karten fällig'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
-    total?(()=>{const pick=h('div',{class:'chips hide',style:'margin:2px 0 10px'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.settings.vocabGoal=n;save();route();}},n+'')));
-      return h('div',{},h('div',{class:'row',style:'margin:0 0 10px;gap:6px;align-items:center'},h('span',{class:'muted small'},T('Tagesziel: ')+Math.min(vocabToday(),vocabGoal())+' / '+vocabGoal()+(vocabToday()>=vocabGoal()?T(' ✓ – weitere Runden freiwillig'):'')),
-        h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('ändern'))),pick);})():null,
+  m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 12px'},due.length?due.length+T(' Karten fällig'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
+
     h('div',{class:'row'},h('button',{class:'btn'+(due.length?' primary':''),disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true)},T('🃏 Karten')),
-      h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true)},T('🎧 Hören')))));
+      h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true)},T('🎧 Hören'))),
+    total?(()=>{const pick=h('div',{class:'chips hide',style:'margin:8px 0 0;justify-content:flex-end'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.settings.vocabGoal=n;save();route();}},n+'')));
+      return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},h('span',{class:'muted small'},T('Tagesziel: ')+Math.min(vocabToday(),vocabGoal())+' / '+vocabGoal()+(vocabToday()>=vocabGoal()?T(' ✓ – weitere Runden freiwillig'):'')),
+        h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('⚙ Ziel ändern'))),pick);})():null));
   m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter einer ')+UW+T(' üben'),()=>go('vocab/units')),mtile('🔁',T('Verben'),T('Konjugieren üben'),()=>go('verbs')),
     mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✏️',T('Fehlerheft'),S.mistakes.length?S.mistakes.length+T(' offene Fehler'):T('keine offenen Fehler'),()=>go('mistakes'))));
 }
