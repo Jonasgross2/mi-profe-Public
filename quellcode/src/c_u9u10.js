@@ -25,7 +25,7 @@ lessons:[
  <tr><td>nosotros/-as</td><td class="es-t">buscábamos</td><td class="es-t">teníamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">buscabais</td><td class="es-t">teníais</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">buscaban</td><td class="es-t">tenían</td></tr></table>
  <p><b>Nur drei Ausnahmen:</b></p>
  <table><tr><th>ser</th><th>ir</th><th>ver</th></tr><tr><td class="es-t">era, eras, era, éramos, erais, eran</td><td class="es-t">iba, ibas, iba, íbamos, ibais, iban</td><td class="es-t">veía, veías, veía, veíamos, veíais, veían</td></tr></table>
- <div class="ex"><span class="es-t">hay → había</span> (es gab). Und gute Nachricht: Im Imperfekt gibt es <b>keinen</b> Stammwechsel – <span class="es-t">podía, quería, dormía</span>.</div>`},
+ <div class="ex"><span class="es-t">hay → había</span>. Und gute Nachricht: Im Imperfekt gibt es <b>keinen</b> Stammwechsel – <span class="es-t">podía, quería, dormía</span>.</div>`},
  {t:'conj',verb:'trabajar',de:'arbeiten',tense:'Imperfekt',forms:['trabajaba','trabajabas','trabajaba','trabajábamos','trabajabais','trabajaban']},
  {t:'conj',verb:'vivir',de:'wohnen',tense:'Imperfekt',forms:['vivía','vivías','vivía','vivíamos','vivíais','vivían']},
  {t:'conj',verb:'ser',de:'sein',tense:'Imperfekt',forms:['era','eras','era','éramos','erais','eran']},

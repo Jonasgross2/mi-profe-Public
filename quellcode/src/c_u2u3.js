@@ -200,7 +200,7 @@ lessons:[
  <table><tr><th>Person</th><th>Singular / Infinitiv</th><th>Plural</th></tr>
  <tr><td>(a mí) <b>me</b></td><td rowspan="6" class="es-t">gusta la música<br>gusta viajar</td><td rowspan="6" class="es-t">gustan los idiomas<br>gustan las fiestas</td></tr>
  <tr><td>(a ti) <b>te</b></td></tr><tr><td>(a él / ella / usted) <b>le</b></td></tr><tr><td>(a nosotros/-as) <b>nos</b></td></tr><tr><td>(a vosotros/-as) <b>os</b></td></tr><tr><td>(a ellos / ellas / ustedes) <b>les</b></td></tr></table>
- <p>Genauso: <span class="es-t">interesar</span> (interessieren), <span class="es-t">molestar</span> (stören).</p>
+ <p>Genauso: <span class="es-t">interesar</span>, <span class="es-t">molestar</span>.</p>
  <div class="ojo">Nach diesen Verben steht der Artikel: <span class="es-t">Me gusta <b>la</b> música</span> (nicht „me gusta música“).</div>
  <table><tr><td class="es-t">¿Te gusta la rutina?</td><td class="es-t">Sí, mucho. / Sí, bastante. / No, nada.</td></tr><tr><td class="es-t">¿Le interesa viajar?</td><td class="es-t">No mucho.</td></tr><tr><td class="es-t">¿Te molestan las discusiones?</td><td class="es-t">Un poco.</td></tr></table>`},
  {t:'mc',q:'Me ___ los idiomas.',opts:['gustan','gusta','gusto'],a:0,keep:true,why:'<i>los idiomas</i> ist Plural → <i>gustan</i>.'},

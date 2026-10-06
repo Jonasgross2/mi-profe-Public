@@ -11,7 +11,7 @@ lessons:[
  <tr><td class="es-t">Laia habla español.</td><td class="es-t">Quiero que Laia hable español.</td></tr>
  <tr><td class="es-t">Hace sol.</td><td class="es-t">Ojalá haga sol.</td></tr></table>
  <p>Typisch: <b>zwei verschiedene Personen</b> – ich will, dass <b>du</b> …: <span class="es-t">Quiero que (tú) vengas.</span></p>
- <div class="ex">Gleiche Person → Infinitiv: <span class="es-t">Quiero venir.</span> (ich will kommen) – nicht <s>quiero que venga</s>.</div>`},
+ <div class="ex">Gleiche Person → Infinitiv: <span class="es-t">Quiero venir.</span> – nicht <s>quiero que venga</s>.</div>`},
  {t:'info',title:'Regelmäßige Formen: Endung tauschen',html:`<p>Nimm die <b>yo-Form</b> im Präsens, streich das <b>-o</b>, und tausch den Vokal: -ar → <b>e</b>, -er/-ir → <b>a</b>.</p>
  <table><tr><th></th><th>hablar</th><th>comer</th><th>vivir</th></tr>
  <tr><td>yo</td><td class="es-t">hable</td><td class="es-t">coma</td><td class="es-t">viva</td></tr>

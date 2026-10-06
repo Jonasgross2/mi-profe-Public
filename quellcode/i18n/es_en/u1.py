@@ -113,7 +113,7 @@ EN = [
 "Where do you work?",
 "I need Spanish to talk to my colleagues.",
 "Yo también · Yo tampoco · Yo sí · Yo no",
-"<table><tr><th>Statement</th><th>same opinion</th><th>different opinion</th></tr>\n <tr><td class=\"es-t\">Hablo español.</td><td class=\"es-t\">Yo también. <span class=\"muted\">(me too)</span></td><td class=\"es-t\">Yo no. <span class=\"muted\">(I don't)</span></td></tr>\n <tr><td class=\"es-t\">No hablo francés.</td><td class=\"es-t\">Yo tampoco. <span class=\"muted\">(me neither)</span></td><td class=\"es-t\">Yo sí. <span class=\"muted\">(I do)</span></td></tr></table>\n <div class=\"ex\">Trick: after a <b>positive</b> statement → <i>también / no</i>. After a <b>negative</b> statement → <i>tampoco / sí</i>.</div>\n <p>In a sentence: <span class=\"es-t\">Lucas y Sarah no practican deporte, pero yo sí.</span></p>",
+"<table><tr><th>Statement</th><th>same opinion</th><th>different opinion</th></tr>\n <tr><td class=\"es-t\">Hablo español.</td><td class=\"es-t\">Yo también.</td><td class=\"es-t\">Yo no.</td></tr>\n <tr><td class=\"es-t\">No hablo francés.</td><td class=\"es-t\">Yo tampoco.</td><td class=\"es-t\">Yo sí.</td></tr></table>\n <div class=\"ex\">Trick: after a <b>positive</b> statement → <i>también / no</i>. After a <b>negative</b> statement → <i>tampoco / sí</i>.</div>\n <p>In a sentence: <span class=\"es-t\">Lucas y Sarah no practican deporte, pero yo sí.</span></p>",
 "– Trabajo en una empresa. – (You work too.)",
 "– No hablo chino. – (You don't speak Chinese either.)",
 "Negative statement + same opinion → <i>tampoco</i>.",

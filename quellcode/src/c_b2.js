@@ -140,7 +140,7 @@ lessons:[
  <tr><td>Indikativ</td><td>„obwohl“ – Tatsache, neue Info</td><td class="es-t">Aunque <b>llueve</b>, salgo. (Es regnet, ich gehe trotzdem.)</td></tr>
  <tr><td>Subjuntivo</td><td>„auch wenn“ – vielleicht / egal</td><td class="es-t">Aunque <b>llueva</b>, saldré. (Ob es regnet oder nicht.)</td></tr>
  <tr><td>Subjuntivo</td><td>bekannte Tatsache, die mir egal ist</td><td class="es-t">Aunque <b>sea</b> tu jefe, no tiene razón.</td></tr></table>
- <div class="ex">Ähnlich: <span class="es-t">a pesar de + Inf./Nomen</span> (trotz) · <span class="es-t">a pesar de que</span> (wie aunque) · <span class="es-t">por mucho que + Subj.</span> (so sehr … auch).</div>`},
+ <div class="ex">Ähnlich: <span class="es-t">a pesar de + Inf./Nomen</span> · <span class="es-t">a pesar de que</span> (wie aunque) · <span class="es-t">por mucho que + Subj.</span>.</div>`},
  {t:'mc',q:'Aunque ___ cansado, fui al gimnasio. (Ich war wirklich müde.)',opts:['estaba','estuviera','esté'],a:0},
  {t:'mc',q:'Aunque mañana ___, iremos de excursión. (Wir wissen es noch nicht.)',opts:['llueva','llueve','lloverá'],a:0},
  {t:'mc',q:'A pesar ___ dolor, terminó la maratón.',opts:['del','de que','que'],a:0},

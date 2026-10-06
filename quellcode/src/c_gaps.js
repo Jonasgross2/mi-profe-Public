@@ -61,7 +61,7 @@ lessons:[
 {id:'l4',title:'conmigo & qué oder cuál',desc:'para mí · contigo · ¿Cuál prefieres?',steps:[
  {t:'info',title:'Pronomen nach Präpositionen',html:`<p>Nach <i>para, de, a, sin, en …</i> benutzt man <span class="es-t">mí, ti, él, ella, usted, nosotros, vosotros, ellos</span>:</p>
  <p class="es-t">Este regalo es para ti. · ¿Vienes sin mí? · Hablamos de ella.</p>
- <p><b>Sonderformen mit con:</b> <span class="es-t">conmigo</span> (mit mir) · <span class="es-t">contigo</span> (mit dir) – sonst normal: <span class="es-t">con él, con nosotros</span>.</p>
+ <p><b>Sonderformen mit con:</b> <span class="es-t">conmigo</span> · <span class="es-t">contigo</span> – sonst normal: <span class="es-t">con él, con nosotros</span>.</p>
  <div class="ex"><i>mí</i> mit Akzent (mich/mir) ≠ <i>mi</i> ohne Akzent (mein). <i>ti</i> hat nie einen Akzent.</div>`},
  {t:'mc',q:'¿Quieres venir al cine ___?',opts:['conmigo','con mí','con me'],a:0},
  {t:'mc',q:'Este café es para ___.',opts:['ti','tú','te'],a:0},

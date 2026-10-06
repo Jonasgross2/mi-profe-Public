@@ -62,7 +62,7 @@ add('u3',{id:'ab1',title:'📎 Übungsblatt: La familia de Marta',desc:'Aus dein
  {t:'gap',q:'José es el ___ de Marta.',a:['abuelo']},
  {t:'gap',q:'Roberto es el ___ de Alberto y Ana.',a:['hijo']},
  {t:'gap',q:'Ana es la ___ de Marta.',a:['madre']},
- {t:'info',kind:'Übungsblatt',title:'Familienbeziehungen erklären',html:`<p>Neue Wörter: <span class="es-t">el yerno</span> (Schwiegersohn), <span class="es-t">la nuera</span> (Schwiegertochter), <span class="es-t">el suegro / la suegra</span> (Schwiegervater / -mutter), <span class="es-t">el cuñado / la cuñada</span> (Schwager / Schwägerin), <span class="es-t">el nieto</span> (Enkel).</p>`},
+ {t:'info',kind:'Übungsblatt',title:'Familienbeziehungen erklären',html:`<p>Neue Wörter: <span class="es-t">el yerno</span>, <span class="es-t">la nuera</span>, <span class="es-t">el suegro / la suegra</span>, <span class="es-t">el cuñado / la cuñada</span>, <span class="es-t">el nieto</span>.</p>`},
  {t:'gap',q:'La mujer de mi padre es mi ___.',a:['madre']},
  {t:'gap',q:'El hijo de mi hermana es mi ___.',a:['sobrino']},
  {t:'gap',q:'La hermana de mi mujer es mi ___.',a:['cuñada']},

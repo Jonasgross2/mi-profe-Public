@@ -193,8 +193,8 @@ lessons:[
 ]},
 {id:'l5',title:'Zustimmen & widersprechen',desc:'Yo también · Yo tampoco · Yo sí · Yo no',steps:[
  {t:'info',title:'también, tampoco, sí, no',html:`<table><tr><th>Aussage</th><th>gleiche Meinung</th><th>andere Meinung</th></tr>
- <tr><td class="es-t">Hablo español.</td><td class="es-t">Yo también. <span class="muted">(ich auch)</span></td><td class="es-t">Yo no. <span class="muted">(ich nicht)</span></td></tr>
- <tr><td class="es-t">No hablo francés.</td><td class="es-t">Yo tampoco. <span class="muted">(ich auch nicht)</span></td><td class="es-t">Yo sí. <span class="muted">(ich schon)</span></td></tr></table>
+ <tr><td class="es-t">Hablo español.</td><td class="es-t">Yo también.</td><td class="es-t">Yo no.</td></tr>
+ <tr><td class="es-t">No hablo francés.</td><td class="es-t">Yo tampoco.</td><td class="es-t">Yo sí.</td></tr></table>
  <div class="ex">Trick: Bei einer <b>positiven</b> Aussage → <i>también / no</i>. Bei einer <b>negativen</b> Aussage → <i>tampoco / sí</i>.</div>
  <p>Im Satz: <span class="es-t">Lucas y Sarah no practican deporte, pero yo sí.</span></p>`},
  {t:'mc',q:'– Trabajo en una empresa. – (Du arbeitest auch.)',opts:['Yo también.','Yo tampoco.','Yo sí.'],a:0},
