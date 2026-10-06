@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261006-2347";</script>
+<script>window.PWA=true;window.APP_VERSION="20261006-2351";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -6059,6 +6059,159 @@ de:`Vor einem Jahr, um diese Zeit, landete ich in El Prat mit zwei Koffern und e
 qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
 ];
 </script>
+<script>/* ================= LESETEXTE C1/C2 (Bibliothek → Lesetexte) =================
+   Eigene Texte, verschiedene Textsorten. after = ab welcher Unidad (id) passend.
+   text: {Wort|Übersetzung} = antippbar. qs wie bei den Geschichten: mc {q,opts,a} · tf {t:'tf',q,a} · gap {t:'gap',q,a:['…|…']} */
+window.READINGS=[
+{id:'r1',level:'C1',after:'u32',kind:'Reportage',title:'El silencio de la oficina abierta',sub:'Großraumbüro, Kopfhörer & Konzentration',
+text:`Hace veinte años, las empresas derribaron las paredes con una promesa: si todos compartíamos el mismo espacio, hablaríamos más, colaboraríamos mejor y las ideas circularían solas. Hoy, en muchas oficinas abiertas de Madrid o Barcelona, lo que más se oye es... nada. Decenas de personas trabajan en silencio, con los {auriculares|Kopfhörer} puestos, y se escriben por chat aunque estén sentadas a dos metros.
+
+El hecho de que la gente se aísle no debería sorprendernos, explica la psicóloga laboral Marta Ibáñez. «Cuando no hay paredes, cada uno construye las suyas. Los auriculares son la puerta que la arquitectura nos quitó». Según varios estudios, en los espacios abiertos las conversaciones cara a cara no aumentan, sino que disminuyen, porque nadie quiere que todo el equipo escuche lo que dice.
+
+Algunas empresas han empezado a {rectificar|umsteuern}. En una consultora de Valencia han creado «zonas de biblioteca», donde está prohibido hablar, y salas pequeñas para llamadas. «Que la gente pueda elegir dónde trabaja según la tarea es lo que de verdad ha cambiado el ambiente», cuenta su directora. Otras, en cambio, han optado por el modelo híbrido: a la oficina se va a reunirse; a concentrarse, a casa.
+
+Ibáñez, sin embargo, advierte de que el problema no es solo de espacio. «Comprendo que las empresas quieran ahorrar metros cuadrados, pero si no se respeta el tiempo de concentración, da igual que haya paredes o no». Su consejo es sencillo: acordar en equipo cuándo se puede interrumpir y cuándo no.`,
+de:`Vor zwanzig Jahren rissen die Firmen die Wände ein, mit einem Versprechen: Wenn wir alle denselben Raum teilen, würden wir mehr reden, besser zusammenarbeiten, und die Ideen würden von selbst fließen. Heute hört man in vielen Großraumbüros in Madrid oder Barcelona vor allem … nichts. Dutzende Menschen arbeiten schweigend, mit aufgesetzten Kopfhörern, und schreiben sich per Chat, obwohl sie zwei Meter voneinander entfernt sitzen.\n\nDass sich die Leute abschotten, sollte uns nicht überraschen, erklärt die Arbeitspsychologin Marta Ibáñez. „Wenn es keine Wände gibt, baut sich jeder seine eigenen. Die Kopfhörer sind die Tür, die uns die Architektur genommen hat.“ Mehreren Studien zufolge nehmen in offenen Räumen die persönlichen Gespräche nicht zu, sondern ab, weil niemand will, dass das ganze Team mithört.\n\nEinige Firmen haben begonnen umzusteuern. In einer Beratungsfirma in Valencia hat man „Bibliothekszonen“ eingerichtet, in denen Reden verboten ist, und kleine Räume für Telefonate. „Dass die Leute je nach Aufgabe wählen können, wo sie arbeiten, hat die Atmosphäre wirklich verändert“, erzählt die Leiterin. Andere haben sich dagegen für das Hybridmodell entschieden: Ins Büro geht man, um sich zu treffen; zum Konzentrieren nach Hause.\n\nIbáñez warnt jedoch, dass das Problem nicht nur eines des Raums ist. „Ich verstehe, dass die Firmen Quadratmeter sparen wollen, aber wenn die Konzentrationszeit nicht respektiert wird, ist es egal, ob es Wände gibt oder nicht.“ Ihr Rat ist einfach: im Team vereinbaren, wann man stören darf und wann nicht.`,
+qs:[{q:'¿Qué se esperaba de las oficinas abiertas?',opts:['más comunicación y colaboración','más silencio','menos gastos de luz'],a:0},
+ {q:'Según los estudios citados, ¿qué pasa con las conversaciones cara a cara?',opts:['Disminuyen.','Aumentan mucho.','No cambian.'],a:0},
+ {t:'tf',q:'Para Ibáñez, los auriculares sustituyen las paredes que ya no existen.',a:true},
+ {t:'tf',q:'La consultora de Valencia ha vuelto a construir despachos individuales para todos.',a:false},
+ {t:'gap',q:'El hecho de que la gente ___ (aislarse) no debería sorprendernos.',a:['se aísle']},
+ {t:'gap',q:'Comprendo que las empresas ___ (querer) ahorrar metros cuadrados.',a:['quieran']}]},
+
+{id:'r2',level:'C1',after:'u33',kind:'Interview',title:'«El humor es lo último que se aprende»',sub:'Ein Comedian über Witze in der Fremdsprache',
+text:`Tomás Achterberg nació en Utrecht, lleva doce años en Sevilla y desde hace tres hace monólogos en bares y pequeños teatros. Hablamos con él antes de una actuación.
+
+—¿Cómo se le ocurre a un holandés hacer humor en español?
+—Pues metiendo la pata. Al principio me reía de mis propios errores: el día que le dije a mi suegra que estaba «embarazado» en vez de «avergonzado», por ejemplo. La gente se partía de risa y pensé: aquí hay material.
+
+—¿Es más difícil hacer reír en otro idioma?
+—Muchísimo. Puedes dominar la gramática y aun así no pillar un chiste. El humor depende del ritmo, de las referencias, de saber qué se puede decir y qué no. Eso no viene en ningún libro. Yo tardé años en entender por qué todo el mundo se reía cuando alguien decía «{¡que te den morcilla!|etwa: Rutsch mir den Buckel runter!}».
+
+—¿Cambia de registro según el público?
+—Claro. En un bar de barrio puedo soltar un par de tacos y nadie se escandaliza; en un festival con familias, me corto un poco. Lo que nunca hago es reírme de la gente del público. Me río de mí mismo, que es más barato y no ofende a nadie.
+
+—¿Algún consejo para quien aprende español?
+—Que no se agobie si no entiende las bromas. Es normal. Yo digo que el humor es como el {acento|Akzent}: lo último que se aprende y lo primero que te delata. Y que se {atreva|sich trauen} a equivocarse en voz alta, que de los errores salen los mejores chistes.`,
+de:`Tomás Achterberg wurde in Utrecht geboren, lebt seit zwölf Jahren in Sevilla und tritt seit drei Jahren mit Stand-up-Comedy in Bars und kleinen Theatern auf. Wir sprechen vor einem Auftritt mit ihm.\n\n– Wie kommt ein Niederländer auf die Idee, auf Spanisch Comedy zu machen?\n– Indem er ins Fettnäpfchen tritt. Am Anfang habe ich über meine eigenen Fehler gelacht: zum Beispiel an dem Tag, an dem ich meiner Schwiegermutter sagte, ich sei „schwanger“ statt „beschämt“. Die Leute haben sich kaputtgelacht, und ich dachte: Hier gibt es Material.\n\n– Ist es schwieriger, in einer anderen Sprache zum Lachen zu bringen?\n– Viel schwieriger. Du kannst die Grammatik beherrschen und trotzdem einen Witz nicht kapieren. Humor hängt vom Rhythmus ab, von den Anspielungen, davon zu wissen, was man sagen darf und was nicht. Das steht in keinem Buch. Ich habe Jahre gebraucht, um zu verstehen, warum alle lachten, wenn jemand „¡que te den morcilla!“ sagte.\n\n– Wechseln Sie das Register je nach Publikum?\n– Klar. In einer Kneipe im Viertel kann ich ein paar Schimpfwörter raushauen, und niemand regt sich auf; auf einem Festival mit Familien halte ich mich etwas zurück. Was ich nie tue: mich über Leute im Publikum lustig machen. Ich lache über mich selbst, das ist billiger und beleidigt niemanden.\n\n– Ein Rat für alle, die Spanisch lernen?\n– Sich nicht stressen lassen, wenn man die Witze nicht versteht. Das ist normal. Ich sage immer: Humor ist wie der Akzent – das Letzte, was man lernt, und das Erste, was einen verrät. Und sich trauen, laut Fehler zu machen, denn aus Fehlern entstehen die besten Witze.`,
+qs:[{q:'¿Cómo empezó Tomás a hacer humor?',opts:['riéndose de sus propios errores con el idioma','imitando a cómicos famosos','estudiando teatro en Sevilla'],a:0},
+ {q:'¿Por qué, según él, es difícil entender chistes en otro idioma?',opts:['porque dependen del ritmo, las referencias y lo que se puede decir','porque la gramática es muy complicada','porque los sevillanos hablan muy rápido'],a:0},
+ {t:'tf',q:'En los festivales con familias usa más tacos que en los bares.',a:false},
+ {t:'tf',q:'Tomás evita burlarse de las personas del público.',a:true},
+ {t:'gap',q:'«Meter la ___» significa cometer un error o decir algo inoportuno.',a:['pata']},
+ {t:'gap',q:'Le recomienda a quien aprende español que no se ___ (agobiar) si no entiende las bromas.',a:['agobie']}]},
+
+{id:'r3',level:'C1',after:'u34',kind:'Leserbrief',title:'Carril bici, sí, pero no así',sub:'Leserbrief an eine Lokalzeitung',
+text:`Señor director:
+
+Leo con interés que el Ayuntamiento pretende construir un nuevo carril bici en la avenida principal de nuestro barrio. Vaya por delante que soy ciclista: voy al trabajo en bici desde hace ocho años, llueva o haga sol. Precisamente por eso me permito hacer algunas observaciones.
+
+Apoyaré el proyecto siempre que el carril esté separado físicamente del tráfico. Una simple línea pintada en el suelo no protege a nadie; solo sirve para que las autoridades puedan decir que «han hecho algo». Tampoco tengo nada en contra de que se eliminen plazas de aparcamiento, con tal de que se informe a los comerciantes con tiempo y se habiliten zonas de carga y descarga.
+
+Lo que no entiendo es el trazado. Según los planos publicados, el carril se interrumpe dos veces y obliga a los ciclistas a cruzar una rotonda sin semáforo. A no ser que alguien me demuestre lo contrario, eso es una {invitación|Einladung} al accidente. En caso de que el proyecto siga adelante tal y como está, me temo que muchos vecinos seguirán prefiriendo el coche, y con razón.
+
+Por último, pido que se escuche a quienes usamos la bici a diario. De haber consultado a las asociaciones de ciclistas, el Ayuntamiento se habría ahorrado más de un error. No se trata de estar a favor o en contra de la bici, sino de hacer las cosas bien.
+
+Atentamente,
+Lucía Ferrer Molina (Zaragoza)`,
+de:`Sehr geehrter Herr Chefredakteur,\n\nmit Interesse lese ich, dass die Stadtverwaltung einen neuen Radweg auf der Hauptstraße unseres Viertels bauen will. Vorweg: Ich bin Radfahrerin; ich fahre seit acht Jahren mit dem Rad zur Arbeit, bei Regen wie bei Sonne. Gerade deshalb erlaube ich mir einige Anmerkungen.\n\nIch werde das Projekt unterstützen, sofern der Radweg baulich vom Verkehr getrennt ist. Eine bloße aufgemalte Linie schützt niemanden; sie dient nur dazu, dass die Behörden sagen können, sie hätten „etwas getan“. Ich habe auch nichts dagegen, dass Parkplätze wegfallen, vorausgesetzt, die Geschäftsleute werden rechtzeitig informiert und es werden Lieferzonen eingerichtet.\n\nWas ich nicht verstehe, ist die Streckenführung. Laut den veröffentlichten Plänen wird der Radweg zweimal unterbrochen und zwingt die Radfahrer, einen Kreisverkehr ohne Ampel zu überqueren. Solange mir niemand das Gegenteil beweist, ist das eine Einladung zum Unfall. Falls das Projekt so umgesetzt wird, wie es ist, fürchte ich, dass viele Nachbarn weiterhin das Auto vorziehen werden – und zwar zu Recht.\n\nSchließlich bitte ich darum, dass man diejenigen anhört, die täglich mit dem Rad fahren. Hätte die Stadt die Radfahrverbände befragt, hätte sie sich mehr als einen Fehler erspart. Es geht nicht darum, für oder gegen das Rad zu sein, sondern darum, die Dinge richtig zu machen.\n\nMit freundlichen Grüßen\nLucía Ferrer Molina (Saragossa)`,
+qs:[{q:'¿Cuál es la postura de la autora sobre el carril bici?',opts:['Lo apoya, pero con condiciones.','Está totalmente en contra.','Le da igual.'],a:0},
+ {q:'¿Qué critica del trazado?',opts:['que se interrumpe y obliga a cruzar una rotonda sin semáforo','que es demasiado ancho','que pasa por delante de un colegio'],a:0},
+ {t:'tf',q:'La autora se opone a que se eliminen plazas de aparcamiento en cualquier caso.',a:false},
+ {t:'tf',q:'Según ella, una línea pintada en el suelo no es suficiente protección.',a:true},
+ {t:'gap',q:'Apoyaré el proyecto siempre que el carril ___ (estar) separado del tráfico.',a:['esté']},
+ {t:'gap',q:'De ___ consultado a las asociaciones, se habría ahorrado errores.',a:['haber']}]},
+
+{id:'r4',level:'C1',after:'u35',kind:'Rezension',title:'Reseña: «La casa de las persianas bajadas»',sub:'Buchkritik zu einem (erfundenen) Familienroman',
+text:`Hay novelas que se leen de un tirón y otras que piden ir despacio. La segunda obra de la gallega Iria Castro, «La casa de las persianas bajadas», pertenece claramente al segundo grupo, y eso, lejos de ser un defecto, es su mayor virtud.
+
+La historia es sencilla: tras la muerte de su madre, tres hermanos que llevan años sin hablarse vuelven a la casa familiar de Lugo para vaciarla. Durante una semana de lluvia, entre cajas, fotos y facturas antiguas, van saliendo a la luz los {rencores|Groll} de siempre y algún secreto que nadie esperaba. Lo interesante no es tanto lo que pasa como lo que no se dice: Castro construye la tensión a base de silencios, frases a medias y miradas que el lector tiene que interpretar.
+
+Lo mejor del libro es, sin duda, el retrato de los personajes. Ninguno es del todo bueno ni del todo malo; los tres resultan tan {entrañables|liebenswert} como irritantes, igual que los hermanos de verdad. Ahora bien, la novela no está exenta de problemas. El ritmo del tercio central decae, y algunos capítulos dedicados a la infancia de la madre, aunque bien escritos, parecen pertenecer a otro libro.
+
+En lo que respecta al estilo, Castro escribe con una prosa limpia, sin adornos innecesarios, en la que de vez en cuando se cuela alguna palabra en gallego que da color al conjunto. Dicho esto, quien busque giros {argumentales|der Handlung} espectaculares saldrá decepcionado.
+
+En resumen: una novela sobria y honesta sobre lo difícil que es hablar con quienes más queremos. No es para todos los públicos, pero quien tenga paciencia encontrará en ella mucho más de lo que promete su discreta portada.`,
+de:`Es gibt Romane, die man in einem Zug liest, und andere, die verlangen, dass man langsam vorgeht. Das zweite Werk der Galicierin Iria Castro, „Das Haus mit den heruntergelassenen Rollläden“, gehört eindeutig zur zweiten Gruppe – und das ist weit davon entfernt, ein Makel zu sein, es ist seine größte Stärke.\n\nDie Geschichte ist einfach: Nach dem Tod ihrer Mutter kehren drei Geschwister, die seit Jahren nicht miteinander sprechen, in das Elternhaus in Lugo zurück, um es auszuräumen. Eine regnerische Woche lang kommen zwischen Kisten, Fotos und alten Rechnungen der altbekannte Groll und ein Geheimnis ans Licht, mit dem niemand gerechnet hat. Interessant ist weniger, was passiert, als das, was nicht gesagt wird: Castro baut die Spannung aus Schweigen, halben Sätzen und Blicken auf, die der Leser deuten muss.\n\nDas Beste an dem Buch ist zweifellos die Zeichnung der Figuren. Keine ist ganz gut oder ganz schlecht; alle drei sind so liebenswert wie nervig – genau wie echte Geschwister. Allerdings ist der Roman nicht frei von Schwächen. Im mittleren Drittel lässt das Tempo nach, und einige Kapitel über die Kindheit der Mutter wirken, obwohl gut geschrieben, als gehörten sie zu einem anderen Buch.\n\nWas den Stil angeht, schreibt Castro eine klare Prosa ohne unnötigen Schmuck, in die sich ab und zu ein galicisches Wort schleicht, das dem Ganzen Farbe gibt. Allerdings wird enttäuscht sein, wer spektakuläre Wendungen der Handlung sucht.\n\nFazit: ein nüchterner, ehrlicher Roman darüber, wie schwer es ist, mit den Menschen zu reden, die wir am meisten lieben. Er ist nicht für jedes Publikum, aber wer Geduld hat, findet darin viel mehr, als das unauffällige Cover verspricht.`,
+qs:[{q:'¿De qué trata la novela?',opts:['de tres hermanos que vacían la casa de su madre muerta','de una familia que se muda a Galicia','de una madre que busca a sus hijos'],a:0},
+ {q:'¿Qué es lo que más valora el crítico?',opts:['el retrato de los personajes','los giros espectaculares','la portada'],a:0},
+ {q:'¿Qué punto débil señala?',opts:['El ritmo decae en la parte central.','El final es demasiado largo.','Hay demasiados personajes.'],a:0},
+ {t:'tf',q:'El crítico recomienda la novela sobre todo a quien busca acción y sorpresas.',a:false},
+ {t:'gap',q:'Lo interesante no es tanto lo que pasa ___ lo que no se dice.',a:['como']},
+ {t:'gap',q:'___ bien, la novela no está exenta de problemas. (= Allerdings)',a:['Ahora']}]},
+
+{id:'r5',level:'C2',after:'u38',kind:'Kolumne',title:'Elogio de la reunión',sub:'Ironische Kolumne über das Büroleben',
+text:`Quería yo dedicar esta columna a un invento injustamente {denostado|geschmäht}: la reunión. Se la acusa de robar tiempo, de no servir para nada y de haber podido ser un correo electrónico. Calumnias. Quien así habla no ha sabido apreciar sus muchas virtudes.
+
+Pensemos, sin ir más lejos, en la reunión de los lunes a las nueve. ¿Qué otra actividad permite a doce personas descubrir, al mismo tiempo y en directo, que nadie ha leído el documento adjunto? Ninguna. Y, sin embargo, ahí estamos todos, asintiendo con gravedad, como si el {orden del día|Tagesordnung} fuera un texto sagrado.
+
+Admiremos también la creatividad lingüística que florece en estas citas. Solo en una reunión se puede «poner en valor», «bajar a tierra» y «tener una visión de trescientos sesenta grados» antes del primer café. Solo en una reunión «lo vemos» significa «no lo haremos nunca» y «buena pregunta» quiere decir «no tengo ni idea».
+
+Pero su mayor mérito es otro: la reunión nos enseña humildad. Uno llega convencido de que su trabajo es urgente y sale, dos horas después, comprendiendo que lo verdaderamente urgente era convocar otra reunión para la semana que viene. ¿Será posible mayor lección de {desapego|Gelassenheit, Loslassen}?
+
+Por eso propongo que se declare la reunión patrimonio inmaterial de la humanidad. Eso sí, que alguien convoque antes una reunión para decidir quién redacta la propuesta. Yo, lamentablemente, no podré asistir: tengo otra a la misma hora.`,
+de:`Ich wollte diese Kolumne einer zu Unrecht geschmähten Erfindung widmen: der Besprechung. Man wirft ihr vor, Zeit zu stehlen, zu nichts zu taugen und eigentlich eine E-Mail sein zu können. Verleumdungen! Wer so redet, hat ihre vielen Vorzüge nicht zu schätzen gewusst.\n\nDenken wir nur an die Montagsbesprechung um neun. Welche andere Tätigkeit erlaubt es zwölf Menschen, gleichzeitig und live festzustellen, dass niemand das angehängte Dokument gelesen hat? Keine. Und trotzdem sitzen wir alle da und nicken ernst, als wäre die Tagesordnung ein heiliger Text.\n\nBewundern wir auch die sprachliche Kreativität, die bei diesen Terminen aufblüht. Nur in einer Besprechung kann man vor dem ersten Kaffee „in Wert setzen“, „auf den Boden bringen“ und „einen 360-Grad-Blick haben“. Nur in einer Besprechung heißt „wir schauen mal“ „wir werden es nie machen“, und „gute Frage“ bedeutet „ich habe keine Ahnung“.\n\nIhr größtes Verdienst ist aber ein anderes: Die Besprechung lehrt uns Demut. Man kommt hinein, überzeugt davon, dass die eigene Arbeit dringend ist, und geht zwei Stunden später hinaus mit der Erkenntnis, dass das wirklich Dringende war, eine weitere Besprechung für nächste Woche einzuberufen. Kann es eine größere Lektion in Gelassenheit geben?\n\nDeshalb schlage ich vor, die Besprechung zum immateriellen Kulturerbe der Menschheit zu erklären. Allerdings sollte vorher jemand eine Besprechung einberufen, um zu entscheiden, wer den Antrag schreibt. Ich kann leider nicht teilnehmen: Ich habe zur selben Zeit eine andere.`,
+qs:[{q:'¿Qué opina realmente el autor de las reuniones?',opts:['Las critica usando la ironía.','Le parecen el mejor invento de la oficina.','No tiene una opinión clara.'],a:0},
+ {q:'Según el texto, ¿qué significa «lo vemos» en una reunión?',opts:['que no se hará nunca','que se hará enseguida','que hay que leer el documento'],a:0},
+ {t:'tf',q:'En la reunión de los lunes todos han leído el documento adjunto.',a:false},
+ {t:'tf',q:'El final del texto es irónico: el autor no irá porque tiene otra reunión.',a:true},
+ {t:'gap',q:'«___ yo dedicar esta columna…» (Höflichkeits-Imperfekt von querer)',a:['Quería']},
+ {t:'gap',q:'¿___ (ser) posible mayor lección de desapego? (Futur des Staunens)',a:['Será']}]},
+
+{id:'r6',level:'C2',after:'u39',kind:'Podcast',title:'La siesta: mito y realidad',sub:'Mitschrift einer Podcastfolge (gekürzt)',
+text:`—Bienvenidos a «Ciencia en la sobremesa». Hoy toca un tema que, dicho sea de paso, nos persigue a los españoles allá donde vamos: la siesta. Conmigo está la investigadora del sueño Carmen Lozano. Carmen, ¿es verdad que en España todo el mundo duerme la siesta?
+—Ni mucho menos. Es uno de esos tópicos que se repiten hasta la saciedad. Las encuestas indican que solo una minoría la duerme a diario, sobre todo jubilados y gente que trabaja en turnos. La mayoría, entre semana, no tiene ni tiempo ni sitio donde echarse un rato.
+—O sea, que nos han colgado el {sambenito|(fig.) Etikett, schlechter Ruf}.
+—Exacto. Ahora bien, eso no quita que la siesta tenga una base biológica. Después de comer, y no solo por la comida, nuestro reloj interno provoca una bajada natural de la atención. Ocurre en todas partes; lo que pasa es que en otros países se aguanta con café.
+—¿Y es buena o mala para la salud?
+—Depende de cómo se haga. Una siesta corta, de veinte minutos como mucho, mejora la memoria y el estado de ánimo. Si te pasas de la media hora, entras en sueño profundo y te levantas hecho polvo, peor que antes. Por no hablar de que luego te cuesta dormirte por la noche.
+—Entonces, la famosa «siesta de pijama y orinal»...
+—...es una mala idea, por mucho que nos guste el nombre. Mi consejo: corta, a primera hora de la tarde y, a ser posible, sin sentirse culpable. Más vale una cabezada a tiempo que una tarde entera bostezando.`,
+de:`– Willkommen bei „Wissenschaft am Nachmittagstisch“. Heute geht es um ein Thema, das uns Spanier, nebenbei bemerkt, überallhin verfolgt: die Siesta. Bei mir ist die Schlafforscherin Carmen Lozano. Carmen, stimmt es, dass in Spanien alle Siesta halten?\n– Bei Weitem nicht. Das ist eines dieser Klischees, die bis zum Überdruss wiederholt werden. Umfragen zeigen, dass nur eine Minderheit täglich Siesta hält, vor allem Rentner und Leute, die im Schichtdienst arbeiten. Die meisten haben unter der Woche weder Zeit noch einen Ort, um sich kurz hinzulegen.\n– Man hat uns also ein Etikett angehängt.\n– Genau. Allerdings ändert das nichts daran, dass die Siesta eine biologische Grundlage hat. Nach dem Essen – und nicht nur wegen des Essens – sorgt unsere innere Uhr für einen natürlichen Aufmerksamkeitsabfall. Das passiert überall; nur hält man in anderen Ländern mit Kaffee durch.\n– Und ist sie gut oder schlecht für die Gesundheit?\n– Das hängt davon ab, wie man sie macht. Ein kurzes Nickerchen von höchstens zwanzig Minuten verbessert das Gedächtnis und die Stimmung. Wenn man über eine halbe Stunde hinausgeht, kommt man in den Tiefschlaf und steht wie gerädert auf, schlechter als vorher. Ganz zu schweigen davon, dass man dann nachts schwer einschläft.\n– Dann ist die berühmte „Siesta mit Schlafanzug und Nachttopf“ …\n– … eine schlechte Idee, so sehr uns der Name auch gefällt. Mein Rat: kurz, am frühen Nachmittag und möglichst ohne schlechtes Gewissen. Lieber rechtzeitig ein Nickerchen als einen ganzen Nachmittag lang gähnen.`,
+qs:[{q:'Según la investigadora, ¿quién duerme la siesta a diario en España?',opts:['una minoría, sobre todo jubilados y trabajadores por turnos','casi todo el mundo','solo los niños'],a:0},
+ {q:'¿Por qué tenemos sueño después de comer?',opts:['sobre todo por nuestro reloj interno','solo porque comemos demasiado','por el calor del verano'],a:0},
+ {t:'tf',q:'Una siesta de más de media hora es la más recomendable.',a:false},
+ {t:'tf',q:'La bajada de atención por la tarde ocurre también en otros países.',a:true},
+ {t:'gap',q:'Si duermes demasiado, te levantas «hecho ___» (= agotado).',a:['polvo']},
+ {t:'gap',q:'«Más ___ una cabezada a tiempo que una tarde entera bostezando.»',a:['vale']}]},
+
+{id:'r7',level:'C2',after:'u40',kind:'Kurzgeschichte',title:'El faro',sub:'Erzählung in gehobener Sprache',
+text:`Dicen en el pueblo que el viejo Anselmo subió al faro la noche en que se fue la luz en toda la costa, y que no volvió a bajar hasta el amanecer. Nadie le había pedido nada; hacía veinte años que el faro funcionaba solo, gobernado por una máquina que alguien vigilaba desde una oficina en La Coruña.
+
+Aquella noche, sin embargo, la máquina calló. El mar golpeaba las rocas con una rabia antigua y, a lo lejos, un pesquero buscaba el puerto a ciegas. Anselmo, que había sido farero durante cuarenta años, no lo dudó. Cogió el {farol|Laterne} de aceite que guardaba en el desván, subió los ciento doce peldaños que se sabía de memoria y, con las manos temblorosas, encendió la vieja lámpara de reserva.
+
+Quien hubiere visto aquella luz desde el mar —escribiría después el patrón del pesquero en una carta al periódico— no la habría confundido con ninguna otra. Era débil, irregular, casi humana. Pero bastó.
+
+Al día siguiente, los técnicos de la capital llegaron con sus coches y sus informes. Revisaron cables, culparon a la tormenta y se marcharon sin preguntar quién había encendido la lámpara. Anselmo tampoco se lo contó a nadie. Sea como fuere, desde entonces los pescadores, al pasar frente al cabo, levantan la mano hacia la torre, por si acaso alguien sigue allí arriba, velando.
+
+Dondequiera que vayan los barcos del pueblo, dicen, llevan consigo un poco de aquella luz.`,
+de:`Im Dorf erzählt man, dass der alte Anselmo in der Nacht, in der an der ganzen Küste der Strom ausfiel, auf den Leuchtturm stieg und erst im Morgengrauen wieder herunterkam. Niemand hatte ihn um etwas gebeten; seit zwanzig Jahren lief der Leuchtturm von allein, gesteuert von einer Maschine, die jemand von einem Büro in La Coruña aus überwachte.\n\nIn jener Nacht jedoch verstummte die Maschine. Das Meer schlug mit uralter Wut gegen die Felsen, und in der Ferne suchte ein Fischkutter blind den Hafen. Anselmo, der vierzig Jahre lang Leuchtturmwärter gewesen war, zögerte nicht. Er nahm die Öllaterne, die er auf dem Dachboden aufbewahrte, stieg die hundertzwölf Stufen hinauf, die er auswendig kannte, und zündete mit zitternden Händen die alte Reservelampe an.\n\nWer immer jenes Licht vom Meer aus gesehen habe – schrieb später der Kapitän des Kutters in einem Brief an die Zeitung –, hätte es mit keinem anderen verwechselt. Es war schwach, unregelmäßig, fast menschlich. Aber es genügte.\n\nAm nächsten Tag kamen die Techniker aus der Hauptstadt mit ihren Autos und ihren Berichten. Sie prüften Kabel, gaben dem Sturm die Schuld und fuhren wieder, ohne zu fragen, wer die Lampe angezündet hatte. Anselmo erzählte es auch niemandem. Wie dem auch sei: Seitdem heben die Fischer, wenn sie am Kap vorbeifahren, die Hand zum Turm, für den Fall, dass dort oben noch jemand wacht.\n\nWohin die Boote des Dorfes auch fahren, sagt man, tragen sie ein wenig von jenem Licht mit sich.`,
+qs:[{q:'¿Por qué subió Anselmo al faro?',opts:['porque la máquina dejó de funcionar durante un apagón','porque se lo pidieron los técnicos','porque quería ver la tormenta'],a:0},
+ {q:'¿Cómo era la luz que encendió?',opts:['débil e irregular, pero suficiente','muy potente y moderna','de color rojo'],a:0},
+ {t:'tf',q:'Los técnicos le dieron las gracias a Anselmo.',a:false},
+ {t:'tf',q:'Hoy los pescadores saludan a la torre al pasar.',a:true},
+ {t:'gap',q:'Quien ___ visto aquella luz no la habría confundido. (Futuro de subjuntivo compuesto)',a:['hubiere']},
+ {t:'gap',q:'___ como fuere, desde entonces los pescadores levantan la mano.',a:['Sea']}]},
+
+{id:'r8',level:'C2',after:'u41',kind:'Sachtext',title:'Por qué olvidamos (y por qué es bueno)',sub:'Populärwissenschaft – passt gut zum Vokabellernen',
+text:`Solemos pensar en el olvido como en un fallo: la memoria sería un archivo y olvidar, perder documentos. La neurociencia actual propone una imagen bien distinta. Olvidar, dicho de otro modo, no es un error del sistema, sino una de sus funciones.
+
+Ya a finales del siglo XIX, el psicólogo alemán Hermann Ebbinghaus se aprendió de memoria listas de sílabas sin sentido y midió cuánto recordaba con el paso del tiempo. El resultado, conocido como «curva del olvido», es tan sencillo como {demoledor|niederschmetternd}: la mayor parte de lo aprendido se pierde en las primeras horas y días, a no ser que se repase.
+
+Ahora bien, Ebbinghaus descubrió también la otra cara de la moneda. Cada vez que repasaba una lista justo cuando estaba a punto de olvidarla, la curva se volvía más plana; o lo que es lo mismo, el recuerdo duraba más. En ese principio se basan hoy las aplicaciones de repaso espaciado: no se trata de repetir mucho, sino de repetir en el momento oportuno.
+
+¿Y por qué olvida el cerebro con tanta facilidad? Porque recordarlo todo sería, paradójicamente, un estorbo. Un cerebro que guardara cada detalle —cada número de teléfono, cada conversación banal— tendría muchas más dificultades para quedarse con lo importante y para {generalizar|verallgemeinern}. El olvido actúa como un filtro: descarta lo que no usamos para dejar sitio a lo que sí.
+
+En suma, quien aprende un idioma no debería desesperarse cuando una palabra se le escapa. Mejor dicho: debería alegrarse. Ese pequeño esfuerzo por recuperarla es, precisamente, lo que hará que la próxima vez se quede.`,
+de:`Wir stellen uns das Vergessen meist als Fehler vor: Das Gedächtnis wäre ein Archiv, und vergessen hieße, Dokumente zu verlieren. Die heutige Neurowissenschaft schlägt ein ganz anderes Bild vor. Vergessen ist, anders gesagt, kein Fehler des Systems, sondern eine seiner Funktionen.\n\nSchon Ende des 19. Jahrhunderts lernte der deutsche Psychologe Hermann Ebbinghaus Listen sinnloser Silben auswendig und maß, wie viel er im Lauf der Zeit noch wusste. Das Ergebnis, bekannt als „Vergessenskurve“, ist so einfach wie niederschmetternd: Der größte Teil des Gelernten geht in den ersten Stunden und Tagen verloren, es sei denn, man wiederholt es.\n\nAllerdings entdeckte Ebbinghaus auch die andere Seite der Medaille. Jedes Mal, wenn er eine Liste genau dann wiederholte, als er sie gerade zu vergessen drohte, wurde die Kurve flacher – oder, was dasselbe ist: Die Erinnerung hielt länger. Auf diesem Prinzip beruhen heute die Apps mit verteilter Wiederholung: Es geht nicht darum, viel zu wiederholen, sondern im richtigen Moment.\n\nUnd warum vergisst das Gehirn so leicht? Weil es paradoxerweise ein Hindernis wäre, sich alles zu merken. Ein Gehirn, das jedes Detail speicherte – jede Telefonnummer, jedes belanglose Gespräch –, hätte viel mehr Mühe, das Wichtige zu behalten und zu verallgemeinern. Das Vergessen wirkt wie ein Filter: Es verwirft, was wir nicht benutzen, um Platz für das zu schaffen, was wir benutzen.\n\nKurz: Wer eine Sprache lernt, sollte nicht verzweifeln, wenn ihm ein Wort entfällt. Besser gesagt: Er sollte sich freuen. Genau diese kleine Anstrengung, es wieder hervorzuholen, sorgt dafür, dass es beim nächsten Mal bleibt.`,
+qs:[{q:'¿Qué idea defiende el texto?',opts:['que olvidar es una función útil del cerebro','que olvidar es siempre un fallo','que la memoria es un archivo perfecto'],a:0},
+ {q:'¿Qué descubrió Ebbinghaus sobre el repaso?',opts:['que repasar justo antes de olvidar hace que el recuerdo dure más','que hay que repetir muchas veces seguidas','que repasar no sirve de nada'],a:0},
+ {t:'tf',q:'Según la curva del olvido, perdemos la mayor parte de lo aprendido en los primeros días.',a:true},
+ {t:'tf',q:'Un cerebro que lo recordara todo generalizaría mejor.',a:false},
+ {t:'gap',q:'Olvidar, ___ de otro modo, no es un error, sino una función.',a:['dicho']},
+ {t:'gap',q:'Un cerebro que ___ (guardar) cada detalle tendría más dificultades.',a:['guardara|guardase']}]}
+];
+</script>
 <script>window.PLACEMENT=[
 /* u0 */
 {u:'u0',t:'mc',q:'Es 9:00 Uhr morgens. Du begrüßt die Professorin:',opts:['Buenos días.','Buenas tardes.','Buenas noches.'],a:0},
@@ -6703,6 +6856,22 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+" Texte": " texts",
+"C1 & C2 · ": "C1 & C2 · ",
+"Lesetext · ": "Reading · ",
+"Lesetext": "Reading",
+"Lesetexte": "Readings",
+"Nächster Text →": "Next text →",
+"Zu den Lesetexten →": "To the readings →",
+"Verschiedene Textsorten – mit antippbaren Wörtern, Vorleser, Übersetzung und Fragen.": "Different text types – with tappable words, read-aloud, translation and questions.",
+"Reportage": "Feature",
+"Interview": "Interview",
+"Leserbrief": "Letter to the editor",
+"Rezension": "Review",
+"Kolumne": "Column",
+"Podcast": "Podcast",
+"Kurzgeschichte": "Short story",
+"Sachtext": "Non-fiction",
 " bewertet": " reviewed",
 " pro Tag": " per day",
 "Abstand: lernend < 7 Tage · gefestigt 7–20 · sicher ≥ 21": "Interval: learning < 7 days · consolidated 7–20 · solid ≥ 21",
@@ -7433,6 +7602,22 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+" Texte": " textos",
+"C1 & C2 · ": "C1 y C2 · ",
+"Lesetext · ": "Lectura · ",
+"Lesetext": "Lectura",
+"Lesetexte": "Lecturas",
+"Nächster Text →": "Siguiente texto →",
+"Zu den Lesetexten →": "A las lecturas →",
+"Verschiedene Textsorten – mit antippbaren Wörtern, Vorleser, Übersetzung und Fragen.": "Distintos tipos de texto, con palabras que se pueden tocar, lectura en voz alta, traducción y preguntas.",
+"Reportage": "Reportaje",
+"Interview": "Entrevista",
+"Leserbrief": "Carta al director",
+"Rezension": "Reseña",
+"Kolumne": "Columna",
+"Podcast": "Pódcast",
+"Kurzgeschichte": "Relato",
+"Sachtext": "Divulgación",
 " bewertet": " valoradas",
 " pro Tag": " al día",
 "Abstand: lernend < 7 Tage · gefestigt 7–20 · sicher ≥ 21": "Intervalo: aprendiendo < 7 días · afianzadas 7–20 · seguras ≥ 21",
@@ -8163,6 +8348,22 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+" Texte": " textos",
+"C1 & C2 · ": "C1 e C2 · ",
+"Lesetext · ": "Leitura · ",
+"Lesetext": "Leitura",
+"Lesetexte": "Leituras",
+"Nächster Text →": "Próximo texto →",
+"Zu den Lesetexten →": "Às leituras →",
+"Verschiedene Textsorten – mit antippbaren Wörtern, Vorleser, Übersetzung und Fragen.": "Vários tipos de texto, com palavras para tocar, leitura em voz alta, tradução e perguntas.",
+"Reportage": "Reportagem",
+"Interview": "Entrevista",
+"Leserbrief": "Carta do leitor",
+"Rezension": "Crítica",
+"Kolumne": "Crónica",
+"Podcast": "Podcast",
+"Kurzgeschichte": "Conto",
+"Sachtext": "Divulgação",
 " bewertet": " avaliadas",
 " pro Tag": " por dia",
 "Abstand: lernend < 7 Tage · gefestigt 7–20 · sicher ≥ 21": "Intervalo: a aprender < 7 dias · consolidadas 7–20 · seguras ≥ 21",
@@ -8734,7 +8935,7 @@ const tiles=(...k)=>h('div',{class:'mtiles'},...k);
 /* Zurück-Navigation: Verlauf der besuchten Seiten. „Zurück“ führt dorthin, wo man herkam (sonst zur Standardseite r).
    Reiterwechsel auf derselben Seite (Stufe, Lektionen/Extras) ersetzen den Eintrag; ein Tipp auf die Leiste startet neu. */
 let NAVSTACK=[],NAVRESET=false;
-const PLAYR=['lesson','round','check','mix','num'];
+const PLAYR=['lesson','round','check','mix','num','reading'];
 const pageKey=r=>{const p=r.split('/');return PLAYR.includes(p[0])?'play':p[0]==='units'?'units':p[0]==='unit'?'unit/'+p[1]:p[0]==='ref'&&p[1]?'ref/'+p[1]:p[0]==='ref'?'ref':r;};
 function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NAVSTACK.length;
   if(n>=2&&pageKey(NAVSTACK[n-2])===pageKey(r))NAVSTACK.pop();
@@ -8743,7 +8944,7 @@ function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NA
 const prevRoute=()=>{for(let i=NAVSTACK.length-2;i>=0;i--)if(pageKey(NAVSTACK[i])!=='play')return NAVSTACK[i];return null;};
 function navLabel(r){const p=r.split('/');const u=p[1]&&unitById(p[1]);
   return p[0]==='home'?T('Start'):p[0]==='units'?T('Kurs'):p[0]==='unit'&&u?UW+' '+u.n:p[0]==='resumen'&&u?T('Resumen · ')+UW+' '+u.n:p[0]==='words'&&u?T('Wortschatz · ')+UW+' '+u.n:
-    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?T('Vokabeln'):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
+    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch'),r:T('Lesetexte')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?T('Vokabeln'):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
     p[0]==='settings'?T('Mehr'):p[0]==='lang'?T('Sprache & Profil'):p[0]==='placement'?T('Einstufungstest'):null;}
 function goBack(r){const pr=prevRoute();go(pr&&pr!==curRoute()?pr:r);}
 const backLabel=label=>{const pr=prevRoute();return(pr&&navLabel(pr))||label;};
@@ -8778,7 +8979,8 @@ function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.r
 function storyQ(q){if(q.t==='tf')return{t:'mc',kind:T('Richtig oder falsch?'),q:q.q,opts:['Verdadero','Falso'],a:q.a?0:1,keep:true};
   if(q.t==='gap')return{t:'gap',kind:T('Ergänze'),q:q.q,a:q.a};
   return{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a};}
-function resolveRef(ref){if(ref.startsWith('N|')){const[,k,v]=ref.split('|');try{return numStep(k,v);}catch(e){return null;}}
+function resolveRef(ref){if(ref.startsWith('R|')){const[,rid,i]=ref.split('|');const q=(window.READINGS||[]).find(x=>x.id===rid)?.qs[+i];return q?storyQ(q):null;}
+  if(ref.startsWith('N|')){const[,k,v]=ref.split('|');try{return numStep(k,v);}catch(e){return null;}}
   if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
   if(ref.startsWith(T('W|'))){const[,uid,mode,...rest]=ref.split('|');const es=rest.join('|');const u=unitById(uid);const w=u&&allUnitWords(u).find(x=>x[0]===es);return w?vocabStep(u,mode,w[0],w[1],w[2]):null;}
   const[uid,lid,i]=ref.split('|');if(uid==='P')return PLACEMENT[+i];const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);return l?.steps[+i];}
@@ -8823,7 +9025,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
   setTimeout(()=>inp.focus(),80);}
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=false;trackNav(curRoute());const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
-  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum}[parts[0]]||vHome;
+  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum,reading:vReading}[parts[0]]||vHome;
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
 /* ---------- views ---------- */
@@ -9374,12 +9576,18 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
       tiles(mtile('📖',T('Geschichten'),T('Serie „')+(LANG.storySeries||'')+'“',()=>go('ref/s'),nNew?nNew+T(' neu'):null),mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
-        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')),mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num'))));return;}
-  m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik')}[tab]||T('Bibliothek')));
+        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')),mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num')),mtile('📰',T('Lesetexte'),T('C1 & C2 · ')+(window.READINGS||[]).length+T(' Texte'),()=>go('ref/r'))));return;}
+  m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik'),r:T('Lesetexte')}[tab]||T('Bibliothek')));
   if(tab==='s'){const S2=S.stories||{};
     m.append(h('p',{class:'sub'},'„'+(LANG.storySeries||'')+'“ – '+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik bis zur angegebenen ')+UW+T('. Tipp: erst nur hören, dann lesen.')));
     m.append(levelSeg(lv,'ref/s',L=>STORIES.filter(st=>unitLevel(storyFor(st))===L.id).length+T(' Gesch.')),h('div',{class:'grid',style:'gap:8px'},STORIES.filter(st=>unitLevel(storyFor(st))===lv).map(st=>{const done=S2[st.id];const open=storyOpen(st);
         return h('div',{class:'lesson'+(done?' done':''),onclick:()=>go('story/'+st.id)},h('div',{class:'ic'},done?'✓':'📖'),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},st.title),h('div',{class:'ld'},st.sub+T(' · ab ')+UW+' '+storyFor(st).n)),
+          done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
+  if(tab==='r'){const D=S.readings||{};const L=lv==='C2'?'C2':'C1';const R=(window.READINGS||[]).filter(r=>r.level===L);
+    m.append(h('p',{class:'sub'},T('Verschiedene Textsorten – mit antippbaren Wörtern, Vorleser, Übersetzung und Fragen.')),
+      h('div',{class:'seg two'},['C1','C2'].map(x=>h('button',{class:x===L?'on':'',onclick:()=>go('ref/r/'+x)},h('b',{},x),h('span',{},(window.READINGS||[]).filter(r=>r.level===x).length+T(' Texte'))))),
+      h('div',{class:'grid',style:'gap:8px;margin-top:12px'},R.map(r=>{const u=unitById(r.after);const done=D[r.id];const open=!u||lessonPct(u)>0||S.checks[u.id]?.pass||(unitStatus(u)&&unitStatus(u)!==T('neu'));
+        return h('div',{class:'lesson'+(done?' done':''),onclick:()=>go('reading/'+r.id)},h('div',{class:'ic'},done?'✓':r.level),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},r.title),h('div',{class:'ld'},T(r.kind)+(u?T(' · ab ')+UW+' '+u.n:''))),
           done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
   if(tab==='g'){m.append(levelSeg(lv,'ref/g',L=>COURSE.units.filter(u=>unitLevel(u)===L.id).length+T(' Unid.')),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>unitLevel(u)===lv&&u.resumen).map(u=>
       h('div',{class:'lesson lrow',onclick:()=>go('resumen/'+u.id)},h('div',{class:'ic'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},u.title),h('div',{class:'ld'},u.goals.join(' · ')))))));return;}
@@ -9411,6 +9619,12 @@ function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'
       return{label:T('Mit Text anhören & ')+wrong.length+T(' Fragen wiederholen →'),fn:()=>{m.innerHTML='';
         play(m,{title:T('Geschichte · ')+st.title+T(' · mit Text'),steps:[{s:{t:'read',kind:T('Jetzt mit Text'),title:st.title,intro:T('Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}].concat(qsteps(wrong,false)),
           mistakeMode:true,onBack:()=>goBack('ref/s'),onDone:()=>finish(first)});}};}});}
+/* Lesetext C1/C2: lesen (mit Vorleser, antippbaren Wörtern, Übersetzung) → Fragen; Fehler-Ref R|id|i */
+function vReading(m,id){const r=(window.READINGS||[]).find(x=>x.id===id);if(!r)return vRef(m,'r');
+  const steps=[{s:{t:'read',kind:T(r.kind)+' · '+r.level,title:r.title,intro:r.sub,text:r.text,de:r.de},ref:'R|'+r.id+'|r'}].concat(shuffle(r.qs.map((q,i)=>({s:storyQ(q),ref:'R|'+r.id+'|'+i}))));
+  play(m,{title:T('Lesetext · ')+r.title,steps,onBack:()=>goBack('ref/r'),
+    onDone:(res)=>{S.readings=S.readings||{};const p=S.readings[r.id];S.readings[r.id]={date:today(),score:Math.max(p?.score||0,res.score)};save();
+      const R=window.READINGS||[];const nx=R.find(x=>!S.readings[x.id]);return nx?{label:T('Nächster Text →'),fn:()=>go('reading/'+nx.id)}:{label:T('Zu den Lesetexten →'),fn:()=>go('ref/r')};}});}
 /* ---------- Verben-Trainer: Konjugationen aus allen '+UWS+', die du schon angefangen hast ---------- */
 function vVerbs(m){m.append(backTo(T('Bibliothek'),'ref'));const pool=[];for(const u of COURSE.units){const started=u.lessons.some(l=>rnd(u.id+'.'+l.id)>=1)||S.checks[u.id]?.pass;
     u.lessons.forEach(l=>l.steps.forEach((s,i)=>{if(s.t==='conj')pool.push({s,ref:u.id+'|'+l.id+'|'+i,unit:u,started});}));}
@@ -9529,7 +9743,7 @@ function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')),h('p',{class:'sub'},T(
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
   m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
-  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):x.ref.startsWith('N|')?T('Zahlen & Uhrzeit'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
+  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):x.ref.startsWith('N|')?T('Zahlen & Uhrzeit'):x.ref.startsWith('R|')?T('Lesetext'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
     h('div',{html:(s.q||s.de||s.es||s.verb||s.title||'').replace(/___/g,'_____')}),x.your?h('div',{class:'small'},T('Deine Antwort: '),h('span',{style:'color:var(--bad)'},x.your)):null))));}
 
 /* ---------- gemini chat ---------- */
@@ -9687,6 +9901,7 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
   o.origin=a.origin||b.origin;
   o.name=a.name||b.name;o.gender=a.gender||b.gender;
+  o.readings=Object.assign({},b.readings||{});for(const[k,v]of Object.entries(a.readings||{})){const r=o.readings[k];o.readings[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.stories=Object.assign({},b.stories||{});for(const[k,v]of Object.entries(a.stories||{})){const r=o.stories[k];o.stories[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.checks=Object.assign({},b.checks||{});for(const[k,v]of Object.entries(a.checks||{})){const r=o.checks[k];o.checks[k]=!r?v:{date:(v.date>r.date?v.date:r.date),score:Math.max(v.score||0,r.score||0),pass:!!(v.pass||r.pass)};}
   o.updated=Math.max(a.updated||0,b.updated||0);return o;}

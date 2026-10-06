@@ -300,7 +300,7 @@ const tiles=(...k)=>h('div',{class:'mtiles'},...k);
 /* Zurück-Navigation: Verlauf der besuchten Seiten. „Zurück“ führt dorthin, wo man herkam (sonst zur Standardseite r).
    Reiterwechsel auf derselben Seite (Stufe, Lektionen/Extras) ersetzen den Eintrag; ein Tipp auf die Leiste startet neu. */
 let NAVSTACK=[],NAVRESET=false;
-const PLAYR=['lesson','round','check','mix','num'];
+const PLAYR=['lesson','round','check','mix','num','reading'];
 const pageKey=r=>{const p=r.split('/');return PLAYR.includes(p[0])?'play':p[0]==='units'?'units':p[0]==='unit'?'unit/'+p[1]:p[0]==='ref'&&p[1]?'ref/'+p[1]:p[0]==='ref'?'ref':r;};
 function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NAVSTACK.length;
   if(n>=2&&pageKey(NAVSTACK[n-2])===pageKey(r))NAVSTACK.pop();
@@ -309,7 +309,7 @@ function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NA
 const prevRoute=()=>{for(let i=NAVSTACK.length-2;i>=0;i--)if(pageKey(NAVSTACK[i])!=='play')return NAVSTACK[i];return null;};
 function navLabel(r){const p=r.split('/');const u=p[1]&&unitById(p[1]);
   return p[0]==='home'?T('Start'):p[0]==='units'?T('Kurs'):p[0]==='unit'&&u?UW+' '+u.n:p[0]==='resumen'&&u?T('Resumen · ')+UW+' '+u.n:p[0]==='words'&&u?T('Wortschatz · ')+UW+' '+u.n:
-    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?T('Vokabeln'):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
+    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch'),r:T('Lesetexte')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?T('Vokabeln'):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
     p[0]==='settings'?T('Mehr'):p[0]==='lang'?T('Sprache & Profil'):p[0]==='placement'?T('Einstufungstest'):null;}
 function goBack(r){const pr=prevRoute();go(pr&&pr!==curRoute()?pr:r);}
 const backLabel=label=>{const pr=prevRoute();return(pr&&navLabel(pr))||label;};
@@ -344,7 +344,8 @@ function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.r
 function storyQ(q){if(q.t==='tf')return{t:'mc',kind:T('Richtig oder falsch?'),q:q.q,opts:['Verdadero','Falso'],a:q.a?0:1,keep:true};
   if(q.t==='gap')return{t:'gap',kind:T('Ergänze'),q:q.q,a:q.a};
   return{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a};}
-function resolveRef(ref){if(ref.startsWith('N|')){const[,k,v]=ref.split('|');try{return numStep(k,v);}catch(e){return null;}}
+function resolveRef(ref){if(ref.startsWith('R|')){const[,rid,i]=ref.split('|');const q=(window.READINGS||[]).find(x=>x.id===rid)?.qs[+i];return q?storyQ(q):null;}
+  if(ref.startsWith('N|')){const[,k,v]=ref.split('|');try{return numStep(k,v);}catch(e){return null;}}
   if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
   if(ref.startsWith(T('W|'))){const[,uid,mode,...rest]=ref.split('|');const es=rest.join('|');const u=unitById(uid);const w=u&&allUnitWords(u).find(x=>x[0]===es);return w?vocabStep(u,mode,w[0],w[1],w[2]):null;}
   const[uid,lid,i]=ref.split('|');if(uid==='P')return PLACEMENT[+i];const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);return l?.steps[+i];}
@@ -389,7 +390,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
   setTimeout(()=>inp.focus(),80);}
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=false;trackNav(curRoute());const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
-  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum}[parts[0]]||vHome;
+  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum,reading:vReading}[parts[0]]||vHome;
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
 /* ---------- views ---------- */
@@ -940,12 +941,18 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
       tiles(mtile('📖',T('Geschichten'),T('Serie „')+(LANG.storySeries||'')+'“',()=>go('ref/s'),nNew?nNew+T(' neu'):null),mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
-        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')),mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num'))));return;}
-  m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik')}[tab]||T('Bibliothek')));
+        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')),mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num')),mtile('📰',T('Lesetexte'),T('C1 & C2 · ')+(window.READINGS||[]).length+T(' Texte'),()=>go('ref/r'))));return;}
+  m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik'),r:T('Lesetexte')}[tab]||T('Bibliothek')));
   if(tab==='s'){const S2=S.stories||{};
     m.append(h('p',{class:'sub'},'„'+(LANG.storySeries||'')+'“ – '+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik bis zur angegebenen ')+UW+T('. Tipp: erst nur hören, dann lesen.')));
     m.append(levelSeg(lv,'ref/s',L=>STORIES.filter(st=>unitLevel(storyFor(st))===L.id).length+T(' Gesch.')),h('div',{class:'grid',style:'gap:8px'},STORIES.filter(st=>unitLevel(storyFor(st))===lv).map(st=>{const done=S2[st.id];const open=storyOpen(st);
         return h('div',{class:'lesson'+(done?' done':''),onclick:()=>go('story/'+st.id)},h('div',{class:'ic'},done?'✓':'📖'),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},st.title),h('div',{class:'ld'},st.sub+T(' · ab ')+UW+' '+storyFor(st).n)),
+          done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
+  if(tab==='r'){const D=S.readings||{};const L=lv==='C2'?'C2':'C1';const R=(window.READINGS||[]).filter(r=>r.level===L);
+    m.append(h('p',{class:'sub'},T('Verschiedene Textsorten – mit antippbaren Wörtern, Vorleser, Übersetzung und Fragen.')),
+      h('div',{class:'seg two'},['C1','C2'].map(x=>h('button',{class:x===L?'on':'',onclick:()=>go('ref/r/'+x)},h('b',{},x),h('span',{},(window.READINGS||[]).filter(r=>r.level===x).length+T(' Texte'))))),
+      h('div',{class:'grid',style:'gap:8px;margin-top:12px'},R.map(r=>{const u=unitById(r.after);const done=D[r.id];const open=!u||lessonPct(u)>0||S.checks[u.id]?.pass||(unitStatus(u)&&unitStatus(u)!==T('neu'));
+        return h('div',{class:'lesson'+(done?' done':''),onclick:()=>go('reading/'+r.id)},h('div',{class:'ic'},done?'✓':r.level),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},r.title),h('div',{class:'ld'},T(r.kind)+(u?T(' · ab ')+UW+' '+u.n:''))),
           done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
   if(tab==='g'){m.append(levelSeg(lv,'ref/g',L=>COURSE.units.filter(u=>unitLevel(u)===L.id).length+T(' Unid.')),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>unitLevel(u)===lv&&u.resumen).map(u=>
       h('div',{class:'lesson lrow',onclick:()=>go('resumen/'+u.id)},h('div',{class:'ic'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},u.title),h('div',{class:'ld'},u.goals.join(' · ')))))));return;}
@@ -977,6 +984,12 @@ function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'
       return{label:T('Mit Text anhören & ')+wrong.length+T(' Fragen wiederholen →'),fn:()=>{m.innerHTML='';
         play(m,{title:T('Geschichte · ')+st.title+T(' · mit Text'),steps:[{s:{t:'read',kind:T('Jetzt mit Text'),title:st.title,intro:T('Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}].concat(qsteps(wrong,false)),
           mistakeMode:true,onBack:()=>goBack('ref/s'),onDone:()=>finish(first)});}};}});}
+/* Lesetext C1/C2: lesen (mit Vorleser, antippbaren Wörtern, Übersetzung) → Fragen; Fehler-Ref R|id|i */
+function vReading(m,id){const r=(window.READINGS||[]).find(x=>x.id===id);if(!r)return vRef(m,'r');
+  const steps=[{s:{t:'read',kind:T(r.kind)+' · '+r.level,title:r.title,intro:r.sub,text:r.text,de:r.de},ref:'R|'+r.id+'|r'}].concat(shuffle(r.qs.map((q,i)=>({s:storyQ(q),ref:'R|'+r.id+'|'+i}))));
+  play(m,{title:T('Lesetext · ')+r.title,steps,onBack:()=>goBack('ref/r'),
+    onDone:(res)=>{S.readings=S.readings||{};const p=S.readings[r.id];S.readings[r.id]={date:today(),score:Math.max(p?.score||0,res.score)};save();
+      const R=window.READINGS||[];const nx=R.find(x=>!S.readings[x.id]);return nx?{label:T('Nächster Text →'),fn:()=>go('reading/'+nx.id)}:{label:T('Zu den Lesetexten →'),fn:()=>go('ref/r')};}});}
 /* ---------- Verben-Trainer: Konjugationen aus allen '+UWS+', die du schon angefangen hast ---------- */
 function vVerbs(m){m.append(backTo(T('Bibliothek'),'ref'));const pool=[];for(const u of COURSE.units){const started=u.lessons.some(l=>rnd(u.id+'.'+l.id)>=1)||S.checks[u.id]?.pass;
     u.lessons.forEach(l=>l.steps.forEach((s,i)=>{if(s.t==='conj')pool.push({s,ref:u.id+'|'+l.id+'|'+i,unit:u,started});}));}
@@ -1095,7 +1108,7 @@ function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')),h('p',{class:'sub'},T(
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
   m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
-  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):x.ref.startsWith('N|')?T('Zahlen & Uhrzeit'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
+  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):x.ref.startsWith('N|')?T('Zahlen & Uhrzeit'):x.ref.startsWith('R|')?T('Lesetext'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
     h('div',{html:(s.q||s.de||s.es||s.verb||s.title||'').replace(/___/g,'_____')}),x.your?h('div',{class:'small'},T('Deine Antwort: '),h('span',{style:'color:var(--bad)'},x.your)):null))));}
 
 /* ---------- gemini chat ---------- */
@@ -1253,6 +1266,7 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
   o.origin=a.origin||b.origin;
   o.name=a.name||b.name;o.gender=a.gender||b.gender;
+  o.readings=Object.assign({},b.readings||{});for(const[k,v]of Object.entries(a.readings||{})){const r=o.readings[k];o.readings[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.stories=Object.assign({},b.stories||{});for(const[k,v]of Object.entries(a.stories||{})){const r=o.stories[k];o.stories[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.checks=Object.assign({},b.checks||{});for(const[k,v]of Object.entries(a.checks||{})){const r=o.checks[k];o.checks[k]=!r?v:{date:(v.date>r.date?v.date:r.date),score:Math.max(v.score||0,r.score||0),pass:!!(v.pass||r.pass)};}
   o.updated=Math.max(a.updated||0,b.updated||0);return o;}
