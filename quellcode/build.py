@@ -3,13 +3,15 @@ base=pathlib.Path(__file__).resolve().parent
 s=base/'src'
 VERSION=time.strftime('%Y%m%d-%H%M')
 # ===== Pakete: die Web-App lädt nur, was gebraucht wird (Lernsprache + ggf. Erklärsprache); die Mac-Einzeldateien enthalten alles =====
-# Neue Lernsprache: Eintrag hier (Dateien in Ladereihenfolge, Definition defineLang zuletzt). Erklärsprachen: automatisch aus src/tr_<lern>_<ex>.js
-PACKS={'es':{'name':'Spanisch','flag':'🇪🇸','files':['c_u0u1.js','c_u2u3.js','c_read03.js','c_u4u5.js','c_u6u8.js','c_u9u10.js','c_extra.js','c_gaps.js','c_a2b.js','c_b1.js','c_b1b.js','c_b2.js','c_b2b.js','c_c1.js','c_c1b.js','c_c2.js','c_vocab_plus.js','c_vocab_freq.js','c_info_tr.js','c_stories.js','c_reading.js','placement.js','levels.js','lang_es.js']}}
-TRS=sorted(f.name for f in s.glob('tr_*.js'))   # tr_es_en.js → Erklärsprache en für Lernsprache es
+# Ordner: src/core/ = gemeinsam (Logik, Design, Register, Oberflächentexte) · src/<lern>/ = Inhalte einer Lernsprache · src/<lern>/tr_<ex>.js = Erklärsprache
+# Neue Lernsprache: Ordner src/<code>/ + Eintrag hier (Dateien in Ladereihenfolge, Definition defineLang zuletzt). Erklärsprachen: automatisch aus src/<lern>/tr_<ex>.js
+PACKS={'es':{'name':'Spanisch','flag':'🇪🇸','files':['es/c_u0u1.js','es/c_u2u3.js','es/c_read03.js','es/c_u4u5.js','es/c_u6u8.js','es/c_u9u10.js','es/c_extra.js','es/c_gaps.js','es/c_a2b.js','es/c_b1.js','es/c_b1b.js','es/c_b2.js','es/c_b2b.js','es/c_c1.js','es/c_c1b.js','es/c_c2.js','es/c_vocab_plus.js','es/c_vocab_freq.js','es/c_info_tr.js','es/c_stories.js','es/c_reading.js','es/placement.js','es/levels.js','es/lang_es.js']}}
+TRS=[]   # (Pfad, Lernsprache, Erklärsprache) – src/es/tr_en.js → Erklärsprache en für Lernsprache es
+for k in PACKS:
+    for f in sorted((s/k).glob('tr_*.js')):TRS.append((f'{k}/{f.name}',k,f.stem[3:]))
 EXMAP={}
-for f in TRS:
-    _,ln,ex=f[:-3].split('_');EXMAP.setdefault(ln,[]).append(ex)
-ALL=['lang.js']+[f for k in PACKS for f in PACKS[k]['files']]+['ui_tr.js']+TRS+['engine.js']
+for _,ln,ex in TRS:EXMAP.setdefault(ln,[]).append(ex)
+ALL=['core/lang.js']+[f for k in PACKS for f in PACKS[k]['files']]+['core/ui_tr.js']+[t[0] for t in TRS]+['core/engine.js']
 import json as _json
 MANIFEST='window.PACKS='+_json.dumps({'learn':[{'code':k,'name':v['name'],'flag':v['flag']} for k,v in PACKS.items()],'ex':EXMAP},ensure_ascii=False)+';'
 LOADER='''<script>'''+MANIFEST+'''
@@ -43,12 +45,12 @@ def page(pwa):
 <link rel="icon" href="icon-192.png">
 <script>window.PWA=true;window.APP_VERSION="'''+VERSION+'''";</script>''' if pwa else '''<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇸</text></svg>">'''
     inl=lambda fs:'\n'.join(f'<script>{(s/f).read_text()}</script>' for f in fs)
-    scripts=inl(['lang.js'])+'\n'+LOADER+inl(['ui_tr.js','engine.js']) if pwa else inl(ALL)
+    scripts=inl(['core/lang.js'])+'\n'+LOADER+inl(['core/ui_tr.js','core/engine.js']) if pwa else inl(ALL)
     return f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Mi profe · Spanisch lernen</title>
 {head_pwa}
-<style>{(s/'app.css').read_text()}</style></head>
+<style>{(s/'core'/'app.css').read_text()}</style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <div id="boot"><div class="bootlogo">🇪🇸</div><div class="bootspin"></div></div>
 {GUARD}{scripts}
@@ -65,8 +67,8 @@ for old in pk.glob('*.js'):old.unlink()
 PACKFILES=[]
 for k,v in PACKS.items():
     (pk/f'{k}.js').write_text(';\n'.join((s/f).read_text() for f in v['files']));PACKFILES.append(f'p/{k}.js')
-for f in TRS:
-    _,ln,ex=f[:-3].split('_');(pk/f'tr-{ln}-{ex}.js').write_text((s/f).read_text());PACKFILES.append(f'p/tr-{ln}-{ex}.js')
+for f,ln,ex in TRS:
+    (pk/f'tr-{ln}-{ex}.js').write_text((s/f).read_text());PACKFILES.append(f'p/tr-{ln}-{ex}.js')
 (w/'manifest.webmanifest').write_text('''{
   "name": "Mi profe – Sprachen lernen",
   "short_name": "Mi profe",
@@ -92,6 +94,6 @@ self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.me
   e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});
 ''')
 files=ALL
-art='<title>Mi profe</title>\n<style>'+(s/'app.css').read_text().replace('.mobile-nav{display:flex;position:sticky;top:0;','.mobile-nav{display:flex;position:sticky;top:env(safe-area-inset-top,0px);')+'</style>\n'+'\n'.join(f'<script>{(s/f).read_text()}</script>' for f in files)
+art='<title>Mi profe</title>\n<style>'+(s/'core'/'app.css').read_text().replace('.mobile-nav{display:flex;position:sticky;top:0;','.mobile-nav{display:flex;position:sticky;top:env(safe-area-inset-top,0px);')+'</style>\n'+'\n'.join(f'<script>{(s/f).read_text()}</script>' for f in files)
 (d/'mi-profe.html').write_text(art)
 print('built',VERSION)

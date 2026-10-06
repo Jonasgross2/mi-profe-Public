@@ -1,6 +1,6 @@
 """Hilfsskript: deutsche Klammern in Erklärungen (info-html) auflisten – python3 quellcode/list_paren.py"""
 import re,glob,pathlib
-src=pathlib.Path(__file__).parent/'src'
+src=pathlib.Path(__file__).parent/'src'/'es'
 DE=re.compile(r'[äöüßÄÖÜ]|\b(ich|du|er|sie|es|wir|ihr|mit|mir|dir|und|nicht|kein|gibt|ist|bin|bist|sind|hat|habe|wird|war|wäre|der|die|das|den|dem|ein|eine|zu|auf|aus|von|für|wenn|dass|ob|man|so|sehr|auch|noch|schon|wie|was|wo|wer|warum)\b')
 n=0
 for f in sorted(src.glob('c_*.js')):

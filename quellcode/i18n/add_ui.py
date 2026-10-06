@@ -1,7 +1,7 @@
 """Neue Oberflächentexte in ui_tr.js eintragen: python3 i18n/add_ui.py datei.json
 datei.json = {"deutscher Text": ["English", "Español", "Português"], …} – vorhandene Schlüssel werden ersetzt."""
 import json, re, sys, pathlib
-p = pathlib.Path(__file__).resolve().parent.parent / 'src' / 'ui_tr.js'
+p = pathlib.Path(__file__).resolve().parent.parent / 'src' / 'core' / 'ui_tr.js'
 new = json.load(open(sys.argv[1], encoding='utf-8'))
 out, k = [], 0
 for ln in p.read_text(encoding='utf-8').split('\n'):

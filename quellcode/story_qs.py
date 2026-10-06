@@ -36,7 +36,7 @@ QS={
 's15':[MC('¿Qué todavía no le sale bien a Ben?',['pelar gambas sin mancharse','usar el metro','entender los refranes']),MC('¿Dónde vive Pablo ahora?',['en Madrid','en Sevilla','en Gràcia']),
   TF('Ben todavía duda sobre dónde quiere vivir.',False),TF('Ahora Ben presta atención a lo que la gente no dice.',True),GAP('Laia dice que Ben es «más ___ que el mar».','mediterráneo'),GAP('«Más vale tarde que ___».','nunca')],
 }
-p=pathlib.Path(__file__).parent/'src'/'c_stories.js'
+p=pathlib.Path(__file__).parent/'src'/'es'/'c_stories.js'
 out=[];cur=None;n=0
 for ln in p.read_text(encoding='utf-8').split('\n'):
     m=re.match(r"^\{id:'(s\d+)'",ln)

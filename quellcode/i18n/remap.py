@@ -4,7 +4,7 @@
                                         fehlende = None) und i18n/todo/<abschnitt>.json mit den fehlenden deutschen Texten
   3) Übersetzungen als i18n/todo/<abschnitt>.en.json (Liste, gleiche Reihenfolge wie <abschnitt>.json) ablegen
   4) python3 i18n/remap.py fill      → trägt sie ein; None bleibt Deutsch ("" = absichtlich unverändert)
-  5) python3 i18n/gen.py              → src/tr_es_en.js
+  5) python3 i18n/gen.py              → src/es/tr_en.js
 Läuft im Ordner quellcode/."""
 import json, pathlib, runpy, subprocess, sys
 B = pathlib.Path(__file__).resolve().parent
@@ -38,7 +38,7 @@ cmd = sys.argv[1] if len(sys.argv) > 1 else ''
 if cmd == 'extract':
     TODO.mkdir(exist_ok=True)
     m = oldmap(); OLDMAP.write_text(json.dumps(m, ensure_ascii=False), encoding='utf-8')
-    src = str(B.parent / 'src')
+    src = str(B.parent / 'src' / 'es')
     out = subprocess.run([JSC, str(B / 'extract.js'), '--', src], capture_output=True, text=True, check=True).stdout
     (B / 'course_de.json').write_text(out, encoding='utf-8')
     out = subprocess.run([JSC, str(B / 'extract_extra.js'), '--', src, str(B / 'course_de.json')], capture_output=True, text=True, check=True).stdout
