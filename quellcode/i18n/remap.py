@@ -65,5 +65,16 @@ elif cmd == 'fill':
         lst = [tr.get(t, x) if x is None else x for t, x in zip(de[sec], lst)]
         write_py(sec, lst); n += len(en)
     print('eingetragen:', n)
+elif cmd == 'put':
+    # python3 i18n/remap.py put <abschnitt> <datei.py mit EN=[…]> – prüft Anzahl, HTML-Tags und {Wort|…}-Glossen
+    import re
+    sec, f = sys.argv[2], sys.argv[3]
+    missing = json.load(open(TODO / f'{sec}.json')); en = runpy.run_path(f)['EN']
+    if len(missing) != len(en): sys.exit(f'{sec}: {len(en)} Übersetzungen für {len(missing)} Texte')
+    tags = lambda t: re.findall(r'<(/?[a-z0-9]+)', t); gl = lambda t: re.findall(r'\{([^|}]+)\|', t)
+    bad = [(i, m[:60]) for i, (m, e) in enumerate(zip(missing, en)) if tags(m) != tags(e) or gl(m) != gl(e)]
+    for b in bad: print('  !! Tags/Glossen weichen ab:', b)
+    if bad: sys.exit(1)
+    (TODO / f'{sec}.en.json').write_text(json.dumps(en, ensure_ascii=False), encoding='utf-8'); print(sec, 'ok', len(en))
 else:
     print(__doc__)
