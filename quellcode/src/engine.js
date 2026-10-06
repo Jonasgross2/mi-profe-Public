@@ -1110,12 +1110,23 @@ function placementTable(){const r=S.placement?.results||{};const t=h('div',{clas
   return t;}
 
 /* ---------- mistakes ---------- */
-function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')),h('p',{class:'sub'},T('Jede falsch beantwortete Aufgabe landet hier. Richtig beantwortet beim Üben → sie verschwindet.')));
+/* Fehlerheft: oben Übungs-Karte, darunter kompakte Zeilen (Herkunft + Frage); Antippen zeigt deine Antwort und die Lösung */
+function mistakeSrc(ref){return ref.startsWith('P')?T('Test'):ref.startsWith('N|')?T('Zahlen'):ref.startsWith('R|')?T('Lesetext'):ref.startsWith(T('S|'))?T('Geschichte'):'U'+(unitById(ref.split('|')[ref.startsWith(T('W|'))?1:0])?.n??'');}
+function rightOf(s){const first=a=>String([].concat(a)[0]||'').split('|')[0];
+  if(s.t==='mc')return s.opts?s.opts[s.a]:'';if(s.t==='gap'){const a=[].concat(s.a);let k=0;return String(s.q||'').replace(/<[^>]+>/g,'').replace(/___/g,()=>first(a[k++]));}
+  if(s.t==='tr')return first(s.a);if(s.t==='conj')return s.verb+': '+(s.forms||[]).join(', ');if(s.t==='order'||s.t==='listen')return s.es||'';
+  if(s.t==='match')return(s.pairs||[]).map(p=>p[0]+' = '+p[1]).join(' · ');return '';}
+function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')));
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
-  m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
-  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):x.ref.startsWith('N|')?T('Zahlen & Uhrzeit'):x.ref.startsWith('R|')?T('Lesetext'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
-    h('div',{html:(s.q||s.de||s.es||s.verb||s.title||'').replace(/___/g,'_____')}),x.your?h('div',{class:'small'},T('Deine Antwort: '),h('span',{style:'color:var(--bad)'},x.your)):null))));}
+  const n=Math.min(list.length,20);
+  m.append(h('div',{class:'card mistakehead'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},h('b',{},list.length+(list.length===1?T(' offener Fehler'):T(' offene Fehler'))),h('span',{class:'muted small'},T('richtig geübt = weg'))),
+    h('button',{class:'btn primary',style:'width:100%;margin-top:10px;min-height:46px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben')+(list.length>20?' ('+n+')':'')+' →')));
+  m.append(h('div',{class:'mlist'},list.map(({x,s})=>{const q=String(s.t==='conj'?s.verb+' ('+(s.de||'')+')':s.q||s.de||s.es||s.verb||s.title||'').replace(/<[^>]+>/g,'').replace(/___/g,'_____');const r=rightOf(s);
+    const det=h('div',{class:'mdet hide'},x.your?h('div',{},h('span',{class:'mx'},'✗ '),T('Deine Antwort: '),h('span',{class:'es-t',style:'color:var(--bad)'},x.your)):null,
+      r?h('div',{},h('span',{class:'mok'},'✓ '),T('Richtig: '),h('span',{class:'es-t',style:'color:var(--ok);font-weight:600'},r)):null,h('div',{class:'muted small'},String(x.date||'').split('-').reverse().join('.')));
+    const row=h('button',{class:'mrow'},h('span',{class:'msrc'},mistakeSrc(x.ref)),h('span',{class:'mq'},q),h('span',{class:'mch'},'›'));
+    const wrap=h('div',{class:'mitem'},row,det);row.onclick=()=>{det.classList.toggle('hide');wrap.classList.toggle('open');};return wrap;})));}
 
 /* ---------- gemini chat ---------- */
 function vChat(m,id){const u=unitById(id);const sit=u.situacion;

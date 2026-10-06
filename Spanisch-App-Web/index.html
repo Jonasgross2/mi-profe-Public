@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261007-0028";</script>
+<script>window.PWA=true;window.APP_VERSION="20261007-0034";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -388,6 +388,17 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .hardrow:first-child{border-top:0}.hardrow .es{font-weight:600}.hardrow .muted{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .updbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:200;background:var(--accent);color:var(--accent-ink);border:0;border-radius:99px;padding:10px 18px;font-weight:600;font-size:14px;box-shadow:0 4px 16px rgba(0,0,0,.2);white-space:nowrap}
 .homecompact .chips .chip{padding:4px 11px}.homecompact .chips{gap:6px}.homecompact .kind{margin-top:8px!important;margin-bottom:4px!important}.homecompact .hero{padding:12px 16px}.homecompact .today{margin-bottom:8px}
+/* Fehlerheft: kompakte Liste */
+.mistakehead{padding:14px 16px;margin-bottom:12px}
+.mlist{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.mitem+.mitem{border-top:1px solid var(--line)}
+.mrow{display:flex;align-items:center;gap:10px;width:100%;padding:11px 14px;background:none;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.msrc{flex:none;font-size:11.5px;font-weight:600;color:var(--muted);background:var(--surface2);border-radius:6px;padding:2px 7px;min-width:34px;text-align:center}
+.mq{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
+.mitem.open .mq{white-space:normal}
+.mch{flex:none;color:var(--muted);transition:transform .15s}.mitem.open .mch{transform:rotate(90deg)}
+.mdet{padding:0 14px 12px 58px;font-size:14px;display:flex;flex-direction:column;gap:3px}
+.mx{color:var(--bad);font-weight:700}.mok{color:var(--ok);font-weight:700}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt schwarzem Bildschirm eine Meldung mit Neu-laden/Update-Knopf. Fortschritt im localStorage bleibt unberührt. */
@@ -6864,6 +6875,9 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+" offener Fehler": " open mistake",
+"Test": "Test",
+"richtig geübt = weg": "answered right = gone",
 "✨ Neue Version – tippen zum Laden": "✨ New version – tap to load",
 "Statistik": "Statistics",
 "Morgen fällig: ": "Due tomorrow: ",
@@ -7613,6 +7627,9 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+" offener Fehler": " error pendiente",
+"Test": "Test",
+"richtig geübt = weg": "acertado = eliminado",
 "✨ Neue Version – tippen zum Laden": "✨ Nueva versión: toca para cargar",
 "Statistik": "Estadísticas",
 "Morgen fällig: ": "Para mañana: ",
@@ -8362,6 +8379,9 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+" offener Fehler": " erro pendente",
+"Test": "Teste",
+"richtig geübt = weg": "acertado = eliminado",
 "✨ Neue Version – tippen zum Laden": "✨ Nova versão – toca para carregar",
 "Statistik": "Estatísticas",
 "Morgen fällig: ": "Para amanhã: ",
@@ -9763,12 +9783,23 @@ function placementTable(){const r=S.placement?.results||{};const t=h('div',{clas
   return t;}
 
 /* ---------- mistakes ---------- */
-function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')),h('p',{class:'sub'},T('Jede falsch beantwortete Aufgabe landet hier. Richtig beantwortet beim Üben → sie verschwindet.')));
+/* Fehlerheft: oben Übungs-Karte, darunter kompakte Zeilen (Herkunft + Frage); Antippen zeigt deine Antwort und die Lösung */
+function mistakeSrc(ref){return ref.startsWith('P')?T('Test'):ref.startsWith('N|')?T('Zahlen'):ref.startsWith('R|')?T('Lesetext'):ref.startsWith(T('S|'))?T('Geschichte'):'U'+(unitById(ref.split('|')[ref.startsWith(T('W|'))?1:0])?.n??'');}
+function rightOf(s){const first=a=>String([].concat(a)[0]||'').split('|')[0];
+  if(s.t==='mc')return s.opts?s.opts[s.a]:'';if(s.t==='gap'){const a=[].concat(s.a);let k=0;return String(s.q||'').replace(/<[^>]+>/g,'').replace(/___/g,()=>first(a[k++]));}
+  if(s.t==='tr')return first(s.a);if(s.t==='conj')return s.verb+': '+(s.forms||[]).join(', ');if(s.t==='order'||s.t==='listen')return s.es||'';
+  if(s.t==='match')return(s.pairs||[]).map(p=>p[0]+' = '+p[1]).join(' · ');return '';}
+function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')));
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
-  m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
-  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):x.ref.startsWith('N|')?T('Zahlen & Uhrzeit'):x.ref.startsWith('R|')?T('Lesetext'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
-    h('div',{html:(s.q||s.de||s.es||s.verb||s.title||'').replace(/___/g,'_____')}),x.your?h('div',{class:'small'},T('Deine Antwort: '),h('span',{style:'color:var(--bad)'},x.your)):null))));}
+  const n=Math.min(list.length,20);
+  m.append(h('div',{class:'card mistakehead'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},h('b',{},list.length+(list.length===1?T(' offener Fehler'):T(' offene Fehler'))),h('span',{class:'muted small'},T('richtig geübt = weg'))),
+    h('button',{class:'btn primary',style:'width:100%;margin-top:10px;min-height:46px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben')+(list.length>20?' ('+n+')':'')+' →')));
+  m.append(h('div',{class:'mlist'},list.map(({x,s})=>{const q=String(s.t==='conj'?s.verb+' ('+(s.de||'')+')':s.q||s.de||s.es||s.verb||s.title||'').replace(/<[^>]+>/g,'').replace(/___/g,'_____');const r=rightOf(s);
+    const det=h('div',{class:'mdet hide'},x.your?h('div',{},h('span',{class:'mx'},'✗ '),T('Deine Antwort: '),h('span',{class:'es-t',style:'color:var(--bad)'},x.your)):null,
+      r?h('div',{},h('span',{class:'mok'},'✓ '),T('Richtig: '),h('span',{class:'es-t',style:'color:var(--ok);font-weight:600'},r)):null,h('div',{class:'muted small'},String(x.date||'').split('-').reverse().join('.')));
+    const row=h('button',{class:'mrow'},h('span',{class:'msrc'},mistakeSrc(x.ref)),h('span',{class:'mq'},q),h('span',{class:'mch'},'›'));
+    const wrap=h('div',{class:'mitem'},row,det);row.onclick=()=>{det.classList.toggle('hide');wrap.classList.toggle('open');};return wrap;})));}
 
 /* ---------- gemini chat ---------- */
 function vChat(m,id){const u=unitById(id);const sit=u.situacion;

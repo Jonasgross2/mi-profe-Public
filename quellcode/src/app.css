@@ -376,3 +376,14 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .hardrow:first-child{border-top:0}.hardrow .es{font-weight:600}.hardrow .muted{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .updbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:200;background:var(--accent);color:var(--accent-ink);border:0;border-radius:99px;padding:10px 18px;font-weight:600;font-size:14px;box-shadow:0 4px 16px rgba(0,0,0,.2);white-space:nowrap}
 .homecompact .chips .chip{padding:4px 11px}.homecompact .chips{gap:6px}.homecompact .kind{margin-top:8px!important;margin-bottom:4px!important}.homecompact .hero{padding:12px 16px}.homecompact .today{margin-bottom:8px}
+/* Fehlerheft: kompakte Liste */
+.mistakehead{padding:14px 16px;margin-bottom:12px}
+.mlist{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.mitem+.mitem{border-top:1px solid var(--line)}
+.mrow{display:flex;align-items:center;gap:10px;width:100%;padding:11px 14px;background:none;border:0;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.msrc{flex:none;font-size:11.5px;font-weight:600;color:var(--muted);background:var(--surface2);border-radius:6px;padding:2px 7px;min-width:34px;text-align:center}
+.mq{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}
+.mitem.open .mq{white-space:normal}
+.mch{flex:none;color:var(--muted);transition:transform .15s}.mitem.open .mch{transform:rotate(90deg)}
+.mdet{padding:0 14px 12px 58px;font-size:14px;display:flex;flex-direction:column;gap:3px}
+.mx{color:var(--bad);font-weight:700}.mok{color:var(--ok);font-weight:700}
