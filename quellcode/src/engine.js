@@ -192,7 +192,6 @@ function say(text,rate){if(!window.speechSynthesis)return toast(T('Sprachausgabe
     speechSynthesis.speak(mkUtt(t,IS_IOS?Math.max(0.3,r*0.75):r));return;}
   speechSynthesis.speak(mkUtt(t,r));}
 const spk=(text,big)=>h('button',{class:'speak'+(big?' big':''),title:T('Vorlesen'),onclick:e=>{e.stopPropagation();say(text,big==='slow'?0.55:undefined)}},'🔊');
-const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 
 /* ---------- KI: Claude (im claude.ai-Artifact, über dein Abo) oder Gemini ---------- */
 let SAMPLE=null;
@@ -781,15 +780,7 @@ listen(el,s,ctx){el.append(kind(T('Hören & schreiben')),h('p',{class:'q'},s.tas
     feedback(el,r,Object.assign({},s,{why:s.why||(s.de?T('Bedeutung: ')+s.de:'')}),inp.value,null);if(r.status==='ok'&&s.de)el.append(h('p',{class:'muted small'},T('Bedeutung: ')+s.de));ctx.done(r.status,inp.value);},ctx));},
 speak(el,s,ctx){el.append(kind(T('Nachsprechen')),h('p',{class:'q'},h('span',{class:'es-t',style:'font-size:24px'},s.es)),s.de?h('p',{class:'muted'},s.de):null,s.tip?h('p',{class:'small'},'🗣️ ',h('span',{html:s.tip})):null);
   const out=h('div',{});el.append(h('div',{class:'row'},spk(s.es,true),h('button',{class:'btn small',onclick:()=>say(s.es,0.55)},T('🐢 Langsam'))));
-  if(SR){const mic=h('button',{class:'btn',style:'margin-top:14px'},T('🎙️ Jetzt sprechen'));mic.onclick=()=>{const r=new SR();r.lang=LANG.voice;r.interimResults=false;r.maxAlternatives=3;mic.textContent=T('… ich höre zu');mic.disabled=true;
-      r.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);const best=alts.map(a=>({a,d:lev(strip(norm(a)),strip(norm(s.es)))})).sort((x,y)=>x.d-y.d)[0];
-        const sim=1-best.d/Math.max(norm(s.es).length,1);out.innerHTML='';out.append(h('div',{class:'fb '+(sim>0.85?'ok':sim>0.6?'warn':'bad')},h('b',{class:'h'},sim>0.85?T('¡Muy bien! Gut verständlich.'):sim>0.6?T('Fast – noch mal probieren?'):T('Das habe ich anders verstanden.')),h('div',{class:'small'},T('Erkannt: „')+best.a+'“')));};
-      r.onerror=e=>{out.innerHTML='';out.append(h('div',{class:'fb warn'},T('Spracherkennung nicht möglich (')+e.error+T('). Nutze das Diktat-Feld unten (🎙 auf der Tastatur).')));};
-      r.onend=()=>{mic.textContent=T('🎙️ Noch mal sprechen');mic.disabled=false;};r.start();};el.append(mic);}
-  {const di=h('input',{class:'inp',placeholder:IS_IOS?T('Oder: hier tippen → 🎙 auf der Tastatur → Satz sprechen'):T('Oder: per Diktat hier hineinsprechen'),style:'margin-top:12px;font-size:16px'});
-    const chk=h('button',{class:'btn small',style:'margin-top:8px'},T('Aussprache prüfen'));
-    chk.onclick=()=>{if(!di.value.trim())return toast(T('Zuerst sprechen/diktieren'));const d=lev(strip(norm(di.value)),strip(norm(s.es)));const sim=1-d/Math.max(norm(s.es).length,1);out.innerHTML='';out.append(h('div',{class:'fb '+(sim>0.85?'ok':sim>0.6?'warn':'bad')},h('b',{class:'h'},sim>0.85?T('¡Muy bien! Gut verständlich.'):sim>0.6?T('Fast – noch mal probieren?'):T('Das wurde anders verstanden.')),h('div',{class:'small'},T('Erkannt: „')+di.value+'“')));};
-    el.append(h('p',{class:'muted small',style:'margin:12px 0 0'},SR?'':T('Spracherkennung gibt es in dieser Ansicht nicht – nutze stattdessen die Diktierfunktion deiner Tastatur (mit passender Tastatur).')),di,chk);}
+  el.append(recCompare(s.es));
   el.append(out,actionBar(()=>{ctx.next();return false;},ctx,{label:T('Weiter →')}));setTimeout(()=>say(s.es),300);},
 dialog(el,s,ctx){el.append(kind(T('Dialog · ')+(s.place||T('Situación'))),h('h2',{style:'margin-top:0'},s.title),s.scene?h('div',{class:'scene',html:'🎬 '+s.scene}):null);
   const chat=h('div',{class:'chat'});const zone=h('div',{});el.append(chat,zone);let i=0,errors=0;const bar=actionBar(()=>{if(i<s.lines.length){toast(T('Führe zuerst den Dialog zu Ende'));return false;}},ctx,{label:T('Weiter →')});
@@ -824,49 +815,49 @@ function unitSentences(u){const out=[];const seen=new Set();const add=(es,de)=>{
   for(const l of u.lessons)for(const st of l.steps){if(st.t==='dialog')st.lines.forEach(L=>{if(!L.you)add(L.es,L.de);else{const o=L.opts.find(x=>x.ok);if(o)add(o.es,'');}});
     if(st.t==='listen'||st.t==='speak')add(st.es,st.de);if(st.t==='tr')add(String([].concat(st.a)[0]).split('|')[0],st.de);}
   return out;}
-/* Shadowing: Runden à 7 Sätze (Fortschritt pro Unidad in S.shadow), eine Ansicht pro Satz,
-   Aussprache-Check per Spracherkennung (oder Tastatur-Diktat) mit Wort-für-Wort-Rückmeldung */
-function wordCheck(target,heard){const tw=target.split(/\s+/).filter(Boolean);const hs=new Set(strip(norm(heard)).split(/\s+/));
-  let ok=0;const spans=tw.map(w=>{const k=strip(norm(w));const hit=!k||hs.has(k);if(hit)ok++;return h('span',{class:hit?'wok':'wbad'},w+' ');});
-  return{pct:Math.round(100*ok/Math.max(tw.length,1)),spans};}
+/* Aufnehmen & vergleichen (ohne Spracherkennung): Original vorlesen, danach die eigene Aufnahme */
+function recCompare(es){const wrap=h('div',{class:'shadowact'});let rec=null,url=null;
+  if(!(navigator.mediaDevices&&window.MediaRecorder)){wrap.append(h('p',{class:'muted small',style:'margin:0'},T('Sprich den Satz laut nach – am besten gleichzeitig mit der Stimme.')));return wrap;}
+  const play=()=>{if(!url)return;speechSynthesis.cancel();unlockAudio();const a=new Audio(url);a.setAttribute('playsinline','');const ut=mkUtt(es,S.settings.rate);ut.onend=()=>setTimeout(()=>a.play().catch(()=>{}),350);speechSynthesis.speak(ut);};
+  const draw=()=>{wrap.innerHTML='';const rb=h('button',{class:'btn'+(url?'':' primary')+(rec?' recording':'')},rec?T('⏹ Stopp'):url?T('🎙 Neu'):T('🎙 Aufnehmen'));
+    rb.onclick=async()=>{if(rec){rec.stop();return;}speechSynthesis.cancel();try{recMode();const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
+      rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());setAudioMode();url=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();play();};rec.start();draw();}catch(e){setAudioMode();rec=null;toast(T('Mikrofon nicht verfügbar'));}};
+    if(url)wrap.append(h('div',{class:'two'},rb,h('button',{class:'btn primary',onclick:play},T('▶ Vergleichen'))));else wrap.append(rb);};
+  draw();return wrap;}
+/* Shadowing: Runden à 7 Sätze (Fortschritt pro Unidad in S.shadow), eine Ansicht pro Satz:
+   anhören → aufnehmen → Original + eigene Aufnahme hintereinander → Selbsteinschätzung (iOS blockiert Spracherkennung in Web-Apps) */
 function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7;
   m.append(backTo(UW+' '+u.n,'unit/'+id),h('h1',{},T('🎧 Shadowing · ')+UW+' '+u.n),
-    h('p',{class:'sub'},T('Erst nur hören, dann nachsprechen und prüfen lassen. Den Text kannst du jederzeit einblenden.')));
+    h('p',{class:'sub'},T('Anhören, selbst aufnehmen, dann Original und dich direkt hintereinander vergleichen.')));
   const box=h('div');m.append(box);
   if(!all.length){box.append(h('div',{class:'card'},T('Keine Sätze vorhanden.')));return;}
   S.shadow=S.shadow||{};let start=(S.shadow[id]||0)%all.length;let list=all.slice(start,start+N);if(list.length<N)list=list.concat(all.slice(0,N-list.length));
-  let i=0,hide=true,rec=null,audioUrl=null;const scores=[];
-  function feedback(out,heard,c){const r=wordCheck(c.es,heard);scores[i]=Math.max(scores[i]||0,r.pct);out.innerHTML='';
-    out.append(h('div',{class:'fb '+(r.pct>=85?'ok':r.pct>=60?'warn':'bad')},h('b',{class:'h'},r.pct>=85?T('¡Muy bien! ')+r.pct+'%':r.pct>=60?T('Fast! ')+r.pct+'%':T('Noch mal probieren – ')+r.pct+'%'),
-      h('div',{class:'es-t',style:'margin-top:4px'},r.spans),h('div',{class:'small muted'},T('Erkannt: „')+heard+'“')));}
-  function draw(){const c=list[i];box.innerHTML='';audioUrl=audioUrl;
+  let i=0,hide=true,rec=null,audioUrl=null;const scores=[];const canRec=!!(navigator.mediaDevices&&window.MediaRecorder);
+  /* Original vorlesen, danach die eigene Aufnahme abspielen */
+  const compare=c=>{if(!audioUrl)return;speechSynthesis.cancel();unlockAudio();const a=new Audio(audioUrl);a.setAttribute('playsinline','');
+    const ut=mkUtt(c.es,S.settings.rate);ut.onend=()=>setTimeout(()=>a.play().catch(()=>{}),350);speechSynthesis.speak(ut);};
+  function draw(){const c=list[i];box.innerHTML='';
     const es=h('div',{class:'es'+(hide?' blur':'')},c.es);es.onclick=()=>es.classList.toggle('blur');
-    const out=h('div',{style:'margin-top:12px'});
     const card=h('div',{class:'card shadowcard'},h('div',{class:'row',style:'justify-content:space-between'},h('span',{class:'muted small'},T('Satz ')+(i+1)+' / '+list.length),
         h('button',{class:'btn small tog'+(hide?' on':''),onclick:()=>{hide=!hide;draw();}},hide?T('👁 Text zeigen'):T('🙈 Text ausblenden'))),
       es,h('div',{class:'muted'},hide?T('(antippen zum Aufdecken)'):c.de),
       h('div',{class:'row',style:'justify-content:center;margin-top:12px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.6)},T('🐢 Langsam')),h('button',{class:'btn small',onclick:()=>{say(c.es);setTimeout(()=>say(c.es),400+c.es.length*85);}},'🔁 2×')));
-    const act=h('div',{class:'row',style:'justify-content:center;margin-top:12px'});
-    /* Ersatz ohne Spracherkennung: Diktierfunktion der Tastatur */
-    const dict=()=>{const di=h('input',{class:'inp',placeholder:IS_IOS?T('Tippen → 🎙 → Satz sprechen'):T('Per Diktat hier hineinsprechen'),style:'font-size:16px'});
-      const chk=h('button',{class:'btn primary small',style:'margin-top:8px'},T('Aussprache prüfen'));chk.onclick=()=>{if(!di.value.trim())return toast(T('Zuerst sprechen/diktieren'));feedback(out,di.value,c);};
-      return h('div',{style:'width:100%'},di,chk);};
-    if(SR){const mic=h('button',{class:'btn primary'},T('🎙️ Nachsprechen & prüfen'));mic.onclick=()=>{speechSynthesis.cancel();recMode();const r=new SR();r.lang=LANG.voice;r.interimResults=false;r.maxAlternatives=3;mic.textContent=T('… ich höre zu');mic.disabled=true;
-        r.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);const best=alts.map(a=>({a,p:wordCheck(c.es,a).pct})).sort((x,y)=>y.p-x.p)[0];feedback(out,best.a,c);};
-        r.onerror=e=>{setAudioMode();out.innerHTML='';const standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
-          out.append(h('div',{class:'fb warn'},T('Spracherkennung nicht möglich (')+e.error+')'+(IS_IOS&&standalone?T(' – in der App vom Home-Bildschirm blockiert iOS sie oft. Nutze das Diktat-Feld oder öffne die Seite in Safari.'):T(' – nutze das Diktat-Feld.'))),dict());};
-        r.onend=()=>{mic.textContent=T('🎙️ Noch mal');mic.disabled=false;setAudioMode();};r.start();};act.append(mic);}
-    else act.append(dict());
-    if(navigator.mediaDevices&&window.MediaRecorder){const rb=h('button',{class:'btn small ghost'},rec?T('⏹ Stopp'):T('⏺ Aufnahme zum Anhören'));
-      rb.onclick=async()=>{if(rec){rec.stop();return;}try{recMode();const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
-        rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());setAudioMode();audioUrl=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();};rec.start();rb.textContent=T('⏹ Stopp');}catch(e){toast(T('Mikrofon nicht verfügbar'));}};
-      act.append(rb);if(audioUrl)act.append(h('button',{class:'btn small ghost',onclick:()=>new Audio(audioUrl).play()},T('▶ Meine Aufnahme')));}
-    card.append(act,out);
-    box.append(card,h('div',{class:'actions'},h('button',{class:'btn',disabled:i===0,onclick:()=>{i--;audioUrl=null;draw();}},T('← Zurück')),
-      h('button',{class:'btn primary',onclick:()=>{audioUrl=null;if(i<list.length-1){i++;draw();setTimeout(()=>say(list[i].es),150);}else finish();}},i<list.length-1?T('Nächster Satz →'):T('Runde beenden ✓'))));}
-  function finish(){S.shadow[id]=(start+list.length)%all.length;markDay('shadow');const sc=scores.filter(x=>x!=null);const avg=sc.length?Math.round(sc.reduce((a,b)=>a+b,0)/sc.length):null;box.innerHTML='';
+    const act=h('div',{class:'shadowact'});
+    if(canRec){const rb=h('button',{class:'btn'+(audioUrl?'':' primary')+(rec?' recording':'')},rec?T('⏹ Stopp'):audioUrl?T('🎙 Neu'):T('🎙 Aufnehmen'));
+      rb.onclick=async()=>{if(rec){rec.stop();return;}speechSynthesis.cancel();try{recMode();const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
+        rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());setAudioMode();audioUrl=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();compare(c);};rec.start();draw();}catch(e){setAudioMode();rec=null;toast(T('Mikrofon nicht verfügbar'));}};
+      if(audioUrl)act.append(h('div',{class:'two'},rb,h('button',{class:'btn primary',onclick:()=>compare(c)},T('▶ Vergleichen'))));else act.append(rb);}
+    else act.append(h('p',{class:'muted small',style:'margin:0'},T('Sprich den Satz laut nach – am besten gleichzeitig mit der Stimme.')));
+    /* Selbsteinschätzung: weiter zum nächsten Satz (Nochmal bleibt beim Satz) */
+    const rate=(v)=>{scores[i]=v;if(v===0){audioUrl=null;draw();setTimeout(()=>say(c.es),150);return;}audioUrl=null;if(i<list.length-1){i++;draw();setTimeout(()=>say(list[i].es),150);}else finish();};
+    const rates=(audioUrl||!canRec)?h('div',{},h('div',{class:'muted small',style:'margin:10px 0 6px'},T('Wie war’s?')),h('div',{class:'rates three'},
+      [[0,T('Nochmal'),'var(--bad)'],[60,T('Fast'),'var(--gold)'],[100,T('Passt ✓'),'var(--ok)']].map(([v,l,col])=>h('button',{class:'btn rate',style:'color:'+col,onclick:()=>rate(v)},h('b',{},l))))):null;
+    card.append(act,rates);
+    box.append(card,rates?null:h('div',{class:'actions'},h('button',{class:'btn',disabled:i===0,onclick:()=>{i--;audioUrl=null;draw();}},T('← Zurück')),
+      h('button',{class:'btn',onclick:()=>{audioUrl=null;if(i<list.length-1){i++;draw();setTimeout(()=>say(list[i].es),150);}else finish();}},i<list.length-1?T('Überspringen →'):T('Runde beenden ✓'))));}
+  function finish(){S.shadow[id]=(start+list.length)%all.length;markDay('shadow');const sc=scores.filter(x=>x!=null);const good=sc.filter(x=>x===100).length;box.innerHTML='';
     box.append(h('div',{class:'card',style:'text-align:center;padding:30px'},h('div',{style:'font-size:44px'},'🎧'),h('h1',{},T('¡Bien hecho!')),
-      h('p',{class:'sub'},list.length+T(' Sätze geübt')+(avg!=null?T(' · Aussprache im Schnitt ')+avg+'%':'')),
+      h('p',{class:'sub'},list.length+T(' Sätze geübt')+(sc.length?T(' · ')+good+T(' klangen gleich'):'')),
       h('div',{class:'endbtns'},h('button',{class:'btn primary',onclick:()=>{box.innerHTML='';m.innerHTML='';vShadow(m,id);}},T('Nächste 7 Sätze →')),h('button',{class:'btn ghost',onclick:()=>goBack('unit/'+id)},T('Fertig')))));}
   draw();setTimeout(()=>say(list[0].es),300);}
 
