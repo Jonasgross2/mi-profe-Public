@@ -1,8 +1,8 @@
 /* Neustart (Sprachwechsel, Update …): erst Startbildschirm mit Drehsymbol zeigen, dann neu laden – sonst wirkt die App kurz eingefroren */
 function bootScreen(){let b=document.getElementById('boot');if(!b){b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">🇪🇸</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
-/* Startbildschirm ruhig ausblenden: mindestens 2 s ab dem Öffnen und 1 s nach dem Aufbau sichtbar, dann 0,4 s weiches Ausblenden (kein Flackern) */
+/* Startbildschirm ruhig ausblenden: mindestens 1 s ab dem Öffnen (länger, wenn die App länger braucht) und 0,3 s nach dem Aufbau, dann 0,4 s weiches Ausblenden */
 let bootHiding=false,HOMEFIT=null,HOMESTATE=null; /* HOMESTATE: Kompakt-Stufe der Startseite (0–3), einmal pro Sitzung entschieden */function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
-  setTimeout(()=>{if(HOMEFIT)HOMEFIT();bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(1000,2000-(Date.now()-(window.__t0||Date.now()))));} /* eigene Stoppuhr (__t0 im Sicherheitsnetz) – performance.now() startet auf iOS zu früh */ 
+  setTimeout(()=>{if(HOMEFIT)HOMEFIT();bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(300,1000-(Date.now()-(window.__t0||Date.now()))));} /* eigene Stoppuhr (__t0 im Sicherheitsnetz) – performance.now() startet auf iOS zu früh */ 
 function reloadApp(){bootScreen();setTimeout(()=>location.reload(),60);}
 /* ===== Mi profe · Engine (sprachunabhängig – alles Sprachspezifische steht im Paket LANG, siehe lang.js) ===== */
 (function(){
