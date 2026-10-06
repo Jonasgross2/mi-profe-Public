@@ -300,7 +300,7 @@ const tiles=(...k)=>h('div',{class:'mtiles'},...k);
 /* Zurück-Navigation: Verlauf der besuchten Seiten. „Zurück“ führt dorthin, wo man herkam (sonst zur Standardseite r).
    Reiterwechsel auf derselben Seite (Stufe, Lektionen/Extras) ersetzen den Eintrag; ein Tipp auf die Leiste startet neu. */
 let NAVSTACK=[],NAVRESET=false;
-const PLAYR=['lesson','round','check','mix'];
+const PLAYR=['lesson','round','check','mix','num'];
 const pageKey=r=>{const p=r.split('/');return PLAYR.includes(p[0])?'play':p[0]==='units'?'units':p[0]==='unit'?'unit/'+p[1]:p[0]==='ref'&&p[1]?'ref/'+p[1]:p[0]==='ref'?'ref':r;};
 function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NAVSTACK.length;
   if(n>=2&&pageKey(NAVSTACK[n-2])===pageKey(r))NAVSTACK.pop();
@@ -344,7 +344,8 @@ function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.r
 function storyQ(q){if(q.t==='tf')return{t:'mc',kind:T('Richtig oder falsch?'),q:q.q,opts:['Verdadero','Falso'],a:q.a?0:1,keep:true};
   if(q.t==='gap')return{t:'gap',kind:T('Ergänze'),q:q.q,a:q.a};
   return{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a};}
-function resolveRef(ref){if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
+function resolveRef(ref){if(ref.startsWith('N|')){const[,k,v]=ref.split('|');try{return numStep(k,v);}catch(e){return null;}}
+  if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
   if(ref.startsWith(T('W|'))){const[,uid,mode,...rest]=ref.split('|');const es=rest.join('|');const u=unitById(uid);const w=u&&allUnitWords(u).find(x=>x[0]===es);return w?vocabStep(u,mode,w[0],w[1],w[2]):null;}
   const[uid,lid,i]=ref.split('|');if(uid==='P')return PLACEMENT[+i];const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);return l?.steps[+i];}
 
@@ -388,7 +389,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
   setTimeout(()=>inp.focus(),80);}
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=false;trackNav(curRoute());const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
-  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
+  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum}[parts[0]]||vHome;
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
 /* ---------- views ---------- */
@@ -700,6 +701,7 @@ vocab(el,s,ctx){const n=addVocab(s.items,ctx.unit?.id);
   el.append(actionBar(()=>{ctx.next();return false;},ctx,{label:T('Weiter →')}));},
 mc(el,s,ctx){let sel=null;const all=s.opts.map((o,i)=>[o,i]);const opts=s.keep?all:s.keepLast?shuffle(all.slice(0,-1)).concat([all[all.length-1]]):shuffle(all);
   el.append(kind(s.kind||T('Auswählen')),h('p',{class:'q'},h('span',{html:s.q}),s.say?[' ',spk(s.say)]:null));
+  if(s.autoSay)setTimeout(()=>say(s.say),300);
   const box=h('div',{class:'opts'});const btns=opts.map(([o,i],k)=>{const b=h('button',{class:'opt'},h('span',{class:'muted small'},(k+1)+'  '),h('span',{class:/[áéíóúñ¿¡]|^[a-z]/i.test(o)?'es-t':''},o));
     b.onclick=()=>{if(box.dataset.done)return;btns.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=i;};return b;});box.append(...btns);el.append(box);
   const nk=e=>{if(!box.isConnected)return document.removeEventListener('keydown',nk);if(document.activeElement?.tagName==='INPUT')return;const k=+e.key;if(k>=1&&k<=btns.length&&!box.dataset.done)btns[k-1].click();};document.addEventListener('keydown',nk);
@@ -872,6 +874,46 @@ function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7
   draw();setTimeout(()=>say(list[0].es),300);}
 
 /* ---------- interleaved review ---------- */
+/* ---------- Zahlen, Uhrzeit, Datum, Preise: jedes Mal neue Werte (Ref N|typ|wert → im Fehlerheft wiederholbar) ---------- */
+const NUM_U=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+const NUM_T=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+const NUM_H=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
+function numEs(n){if(n<30)return NUM_U[n];if(n<100)return NUM_T[Math.floor(n/10)]+(n%10?' y '+NUM_U[n%10]:'');
+  if(n<1000)return n===100?'cien':NUM_H[Math.floor(n/100)]+(n%100?' '+numEs(n%100):'');
+  const k=Math.floor(n/1000);return(k===1?'mil':numEs(k).replace(/uno$/,'ún').replace(/veintiún$/,'veintiún')+' mil').replace(/^ún mil/,'un mil')+(n%1000?' '+numEs(n%1000):'');}
+const numUn=n=>numEs(n).replace(/veintiuno$/,'veintiún').replace(/uno$/,'un'); /* vor Nomen: un euro, veintiún euros */
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function horaEs(hh,mm){let h=hh%12||12,m=mm,pre='';const hw=x=>x===1?'una':numEs(x);
+  if(m>30){h=h%12+1;m=60-m;const t=(h===1?'Es la ':'Son las ')+hw(h)+' menos '+(m===15?'cuarto':numEs(m));return[t];}
+  const base=(h===1?'Es la ':'Son las ')+hw(h);
+  if(m===0)return[base+' en punto',base];if(m===15)return[base+' y cuarto',base+' y quince'];if(m===30)return[base+' y media',base+' y treinta'];return[base+' y '+numEs(m)];}
+const rint=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+/* freigeschaltet nach Kursfortschritt: Zahlen ab U1, große Zahlen ab U2 L3, Uhrzeit & Preise ab U4, Datum ab U6 */
+function numKinds(){const st=id=>Object.keys(S.lessons).some(k=>k.startsWith(id+'.'));const K=[];
+  if(st('u1')||st('u2'))K.push('numw','numl');if(S.lessons['u2.l3']?.done||st('u3'))K.push('bigw','bigl');if(st('u4'))K.push('time','timel','price');if(st('u6'))K.push('date');return K;}
+function numVal(kind){if(kind==='numw'||kind==='numl')return rint(0,20)+'';if(kind==='bigw'||kind==='bigl')return(Math.random()<.5?rint(21,99):Math.random()<.6?rint(100,999):rint(1000,2100))+'';
+  if(kind==='time'||kind==='timel')return rint(0,23)+':'+String(rint(0,11)*5).padStart(2,'0');if(kind==='date')return rint(1,28)+'.'+rint(1,12);
+  return rint(1,40)+','+String(rint(0,19)*5).padStart(2,'0');}
+const near=(n,max)=>{const c=new Set([n+10,n-10,n+1,n-1,+String(n).split('').reverse().join(''),n%10===6?n+1:n%10===7?n-1:n+20]);if(Math.floor(n/10)===6)c.add(n+10);if(Math.floor(n/10)===7)c.add(n-10);
+  return shuffle([...c].filter(x=>x>=0&&x<=max&&x!==n)).slice(0,2);};
+function numStep(kind,v){
+  if(kind==='numw'||kind==='bigw')return{t:'tr',kind:T('Zahlen'),de:T('Schreib die Zahl auf Spanisch: ')+v,a:[numEs(+v)]};
+  if(kind==='numl'||kind==='bigl'){const n=+v;return{t:'mc',kind:T('Zahlen hören'),q:T('Welche Zahl hörst du?'),say:numEs(n),autoSay:true,opts:[v,...near(n,n<21?20:2100).map(String)],a:0};}
+  const[hh,mm]=v.split(':').map(Number);
+  if(kind==='time')return{t:'tr',kind:T('Uhrzeit'),de:T('Wie spät ist es? 🕒 ')+v,a:[horaEs(hh,mm).join('|')]};
+  if(kind==='timel'){const o=new Set([v]);while(o.size<3){const d=rint(-1,1)*60+rint(-2,2)*15;const t=((hh*60+mm+d)%1440+1440)%1440;o.add(Math.floor(t/60)+':'+String(t%60).padStart(2,'0'));}
+    return{t:'mc',kind:T('Uhrzeit hören'),q:T('Wie spät ist es?'),say:horaEs(hh,mm)[0]+'.',autoSay:true,opts:[...o].map(x=>x.replace(/^(\d+):/,(a,b)=>(+b%12||12)+':')),a:0};}
+  if(kind==='date'){const[d,mo]=v.split('.').map(Number);return{t:'tr',kind:T('Datum'),de:T('Wie sagt man das Datum? 📅 ')+d+'. '+[T('Januar'),T('Februar'),T('März'),T('April'),T('Mai'),T('Juni'),T('Juli'),T('August'),T('September'),T('Oktober'),T('November'),T('Dezember')][mo-1],
+    a:['el '+numEs(d)+' de '+MESES[mo-1]+'|'+numEs(d)+' de '+MESES[mo-1]+(d===1?'|el primero de '+MESES[mo-1]:'')]};}
+  const[e,c]=v.split(',').map(Number);const say=(e===1?'Un euro':numUn(e).replace(/^./,x=>x.toUpperCase())+' euros')+(c?' con '+numEs(c):'')+'.';
+  const fmtP=(E,C)=>E+','+String(C).padStart(2,'0')+' €';const o=new Set([fmtP(e,c)]);
+  for(const[E,C]of shuffle([[e,(c+50)%100],[e+10,c],[Math.max(1,e-10),c],[e,c===0?5:0],[+String(e).split('').reverse().join('')||e+2,c]]))if(o.size<3)o.add(fmtP(E,C));
+  return{t:'mc',kind:T('Preise hören'),q:T('Wie viel kostet es?'),say,autoSay:true,opts:[...o],a:0};}
+function numItems(n){const K=numKinds();if(!K.length)return[];return[...Array(n)].map(()=>{const k=K[Math.floor(Math.random()*K.length)];const v=numVal(k);return{s:numStep(k,v),ref:'N|'+k+'|'+v};});}
+function vNum(m){const steps=numItems(15);
+  if(!steps.length){m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},T('Zahlen & Uhrzeit')),h('div',{class:'card'},T('Zahlen kommen in Unidad 1 – fang dort an, dann geht es hier los.')));return;}
+  play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps,onBack:()=>goBack('ref'),onDone:()=>({label:T('Noch eine Runde →'),fn:()=>{m.innerHTML='';vNum(m);}})});}
+
 /* Gemischte Wiederholung: Aufgaben der letzten 3 Runden werden gemieden (S.mixSeen), dazu ein paar frisch erzeugte Vokabelaufgaben */
 function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
   for(const u of COURSE.units)for(const l of u.lessons||[]){const r=S.lessons[u.id+'.'+l.id];if(!r?.done||l.freq)continue;
@@ -881,7 +923,7 @@ function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
   const nv=pool.length?Math.min(Math.round(n/5),words.length):Math.min(n,words.length);
   const ex=pool.sort((a,b)=>b.w-a.w).slice(0,n-nv);
   const voc=shuffle(words).filter(([u,w])=>!seen.has(T('W|')+u.id+'|'+w[0])).concat(shuffle(words)).slice(0,nv).map(([u,w])=>{const it=vocabItem(u,w,['mc','mcde','tr','listen'][Math.floor(Math.random()*4)]);it.unit=u;return it;});
-  const out=shuffle(ex.concat(voc));
+  const out=shuffle(ex.concat(voc).slice(0,n-Math.min(2,numKinds().length?2:0)).concat(numItems(2)));
   S.mixSeen=out.map(x=>x.ref.startsWith(T('W|'))?x.ref.split('|').slice(0,2).concat(x.ref.split('|').slice(3)).join('|'):x.ref).concat(S.mixSeen||[]).slice(0,3*n);
   return out;}
 function vMix(m){const steps=mixSteps(15);
@@ -898,7 +940,7 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
       tiles(mtile('📖',T('Geschichten'),T('Serie „')+(LANG.storySeries||'')+'“',()=>go('ref/s'),nNew?nNew+T(' neu'):null),mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
-        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs'))));return;}
+        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')),mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num'))));return;}
   m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik')}[tab]||T('Bibliothek')));
   if(tab==='s'){const S2=S.stories||{};
     m.append(h('p',{class:'sub'},'„'+(LANG.storySeries||'')+'“ – '+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik bis zur angegebenen ')+UW+T('. Tipp: erst nur hören, dann lesen.')));
@@ -1033,7 +1075,7 @@ function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')),h('p',{class:'sub'},T(
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
   m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
-  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
+  m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):x.ref.startsWith('N|')?T('Zahlen & Uhrzeit'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
     h('div',{html:(s.q||s.de||s.es||s.verb||s.title||'').replace(/___/g,'_____')}),x.your?h('div',{class:'small'},T('Deine Antwort: '),h('span',{style:'color:var(--bad)'},x.your)):null))));}
 
 /* ---------- gemini chat ---------- */
@@ -1216,7 +1258,7 @@ window.__sync={schedule(){if(!S.settings.ghToken)return;clearTimeout(syncTimer);
 window.addEventListener('focus',()=>{if(S.settings.ghToken)syncNow();});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&S.settings.ghToken){clearTimeout(syncTimer);syncNow({quiet:true});}});
 
-window.__app={S:()=>S,compare,route,mergeState,RENDER};
+window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,numItems};
 /* App-Gefühl: kein Pinch-/Doppeltipp-Zoom */
 ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
 document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
