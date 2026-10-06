@@ -33,5 +33,5 @@ EN = [
 "“Half of the students …”",
 "Preterite of “hacer” (él):",
 "Hoy ___ mucho. (today – not over yet)",
-"“I'm willing to travel.”",
+"“I'm willing to travel.”"
 ]

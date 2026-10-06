@@ -53,7 +53,7 @@ const LESEN={en:'Reading: ',pt:'Leitura: ',es:'Lectura: '}[EX];
 const trc=s=>!CT||s==null?s:CT[s]!=null?CT[s]:LESEN&&typeof s==='string'&&s.startsWith('Lesen: ')?LESEN+s.slice(7):s;
 function trContent(o){if(typeof o==='string')return trc(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=trContent(o[i]);return o;}
   if(o&&typeof o==='object'){for(const k of Object.keys(o))if(k!=='role'&&k!=='id')o[k]=trContent(o[k]);}return o;}
-if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);}
+if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);if(window.READINGS)trContent(window.READINGS);}
 personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);
 /* Ansprache: Bei „weiblich“ werden Sätze über die lernende Person selbst (estoy/soy … , ¡Encantado!) in die weibliche Form gesetzt
    und beim Prüfen beide Formen akzeptiert. Vokabeln bleiben unverändert (sie sind Schlüssel im Vokabeltrainer). */
