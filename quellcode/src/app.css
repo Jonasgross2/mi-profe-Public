@@ -112,6 +112,9 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .fb.ai{background:var(--info-soft);border:1px solid var(--info)}
 .fb b.h{display:block;margin-bottom:4px}
 .actions{display:flex;gap:10px;margin-top:22px;align-items:center}
+/* Hauptknopf über die ganze Breite, feste Höhe – nichts verrutscht beim Wechsel Prüfen → Weiter */
+.actions>.btn{min-height:48px}
+.actions>.btn.primary{flex:1}
 .speak{border:0;background:var(--accent-soft);color:var(--accent);border-radius:50%;width:30px;height:30px;cursor:pointer;display:inline-grid;place-items:center;vertical-align:middle;flex:none;font-size:14px}
 .speak:hover{filter:brightness(.95)}
 .speak.big{width:64px;height:64px;font-size:26px}
@@ -332,3 +335,11 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .goalsel{font:inherit;font-size:14px;padding:3px 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .linkbtn{background:none;border:0;padding:0;color:var(--accent);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .goalrow{margin-top:16px;padding-top:10px;border-top:1px solid var(--line)}.goalrow .linkbtn{text-decoration:none;color:var(--muted);font-size:12.5px;white-space:nowrap}
+
+/* Endseiten: Knöpfe untereinander, volle Breite, gleiche Höhe */
+.endbtns{display:flex;flex-direction:column;gap:10px;margin:18px auto 0;max-width:420px}
+.endbtns .btn{min-height:48px;width:100%;text-align:center}
+.picklist{display:flex;flex-direction:column;gap:8px}
+.btn.pickopt{justify-content:flex-start;text-align:left;gap:12px;padding:12px 14px;min-height:60px}
+.pickopt .pt{flex:1;display:flex;flex-direction:column;gap:2px;font-weight:400}
+.pickopt .pic{font-size:24px}
