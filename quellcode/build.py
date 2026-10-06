@@ -24,7 +24,7 @@ if(exl.indexOf(ex)<0)ex=exl.indexOf(ui)>=0?ui:(ui!=='de'&&!old&&exl.indexOf('en'
 var v='?v='+window.APP_VERSION;document.write('<script src="p/'+lang+'.js'+v+'"><\/script>');if(ex!=='de')document.write('<script src="p/tr-'+lang+'-'+ex+'.js'+v+'"><\/script>');})();</script>
 '''
 GUARD=r'''<script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt leerem Bildschirm eine Meldung mit Fehlertext, Neu-laden- und Sprache-zurück-Knopf. Fortschritt bleibt unberührt. */
-(function(){var err='';window.addEventListener('error',function(e){if(!err)err=((e&&e.message)||'')+(e&&e.lineno?' (Zeile '+e.lineno+':'+e.colno+')':'');});
+window.__t0=Date.now();(function(){var err='';window.addEventListener('error',function(e){if(!err)err=((e&&e.message)||'')+(e&&e.lineno?' (Zeile '+e.lineno+':'+e.colno+')':'');});
 function fix(){try{if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister();});});if(window.caches)caches.keys().then(function(k){k.forEach(function(x){caches.delete(x);});});}catch(e){}setTimeout(function(){location.reload();},800);}
 function de(){try{var sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}');sh.ui='de';sh.ex='de';localStorage.setItem('mi-profe-shared',JSON.stringify(sh));}catch(e){}location.hash='';location.reload();}
 function btn(t,f,bg){var b=document.createElement('button');b.textContent=t;b.style.cssText='display:block;width:100%;font-size:17px;padding:13px;margin-top:10px;border-radius:10px;border:0;background:'+bg+';color:#fff';b.onclick=f;return b;}

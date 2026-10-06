@@ -1,8 +1,8 @@
 /* Neustart (Sprachwechsel, Update …): erst Startbildschirm mit Drehsymbol zeigen, dann neu laden – sonst wirkt die App kurz eingefroren */
 function bootScreen(){let b=document.getElementById('boot');if(!b){b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">🇪🇸</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
 /* Startbildschirm ruhig ausblenden: mindestens 2 s ab dem Öffnen und 1 s nach dem Aufbau sichtbar, dann 0,4 s weiches Ausblenden (kein Flackern) */
-let bootHiding=false,HOMEFIT=null;function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
-  setTimeout(()=>{if(HOMEFIT)HOMEFIT();bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(1000,2000-performance.now()));} 
+let bootHiding=false,HOMEFIT=null,HOMESTATE=null; /* HOMESTATE: Kompakt-Stufe der Startseite (0–3), einmal pro Sitzung entschieden */function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
+  setTimeout(()=>{if(HOMEFIT)HOMEFIT();bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(1000,2000-(Date.now()-(window.__t0||Date.now()))));} /* eigene Stoppuhr (__t0 im Sicherheitsnetz) – performance.now() startet auf iOS zu früh */ 
 function reloadApp(){bootScreen();setTimeout(()=>location.reload(),60);}
 /* ===== Mi profe · Engine (sprachunabhängig – alles Sprachspezifische steht im Paket LANG, siehe lang.js) ===== */
 (function(){
@@ -370,7 +370,8 @@ function shell(){
   const tog=h('button',{class:'sidetog',title:mini?T('Leiste ausklappen'):T('Leiste einklappen'),'aria-label':mini?T('Leiste ausklappen'):T('Leiste einklappen'),onclick:()=>{S.settings.side=mini?'':'mini';save(true);go(curRoute());}},mini?'»':'«');
   const app=h('div',{class:'app'+(mini?' mini':'')},h('aside',{class:'side'},h('div',{class:'brand'},h('span',{class:'bt'},T('Mi profe '),h('span',{class:'flag'},LANG.flag)),tog),nav,
     h('div',{class:'foot'},mini?'🔥 '+streakNow():['🔥 '+streakNow()+T(' Tage Serie'),h('br'),h('span',{id:'syncstat'},syncLabel())])),h('div',{},mnav,main));
-  document.body.innerHTML='';document.body.classList.remove('typing');document.body.append(app);return main;}
+  const bt=document.getElementById('boot'); /* Startbildschirm überlebt den Seitenaufbau, hideBoot() blendet ihn aus */
+  document.body.innerHTML='';document.body.classList.remove('typing');document.body.append(app);if(bt)document.body.append(bt);return main;}
 const IN_ARTIFACT=!!(window.claude&&window.claude.use);
 let CUR=null;
 function curRoute(){if(IN_ARTIFACT)return CUR||'home';return location.hash.slice(1)||'home';}
@@ -379,7 +380,7 @@ if(!IN_ARTIFACT)window.addEventListener('hashchange',route);
 function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{class:'overlay'});const close=v=>{ov.remove();res(v);};
   ov.append(h('div',{class:'card',style:'max-width:380px;width:100%'},h('p',{style:'margin-top:0;font-weight:600'},text),h('div',{class:'row',style:'justify-content:flex-end'},h('button',{class:'btn',onclick:()=>close(false)},T('Abbrechen')),h('button',{class:'btn primary',onclick:()=>close(true)},okLabel||'OK'))));
   ov.onclick=e=>{if(e.target===ov)close(false);};document.body.append(ov);});}
-function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
+function vWelcome(again){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
   let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('b',{},l),ex?h('span',{},ex):null);return b;});
   const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const v2=inp2.value.trim().replace(/\s+/g,' ').slice(0,40);const changed=v!==S.name||g!==S.gender||v2!==(S.surname||'');S.name=v;S.gender=g;if(v2)S.surname=v2;else delete S.surname;save();
@@ -457,10 +458,13 @@ function vHome(m){
   /* Startseite ohne Scrollen: sofort (vor dem ersten Bild) messen; spätere Prüfungen machen nur noch kompakter, nie wieder größer (kein Springen) */
   const fit=reset=>{const mn=m.closest('main')||m,wc=m.querySelector('.weekcard');if(!wc||!wc.isConnected)return;const over=()=>mn.scrollHeight>mn.clientHeight;
     if(reset){m.classList.remove('homecompact');wc.classList.remove('tight');wc.style.display='';}
-    if(!over())return;if(!wc.classList.contains('tight')){wc.classList.add('tight');if(!over())return;}if(wc.style.display!=='none'){wc.style.display='none';if(!over())return;}m.classList.add('homecompact');};
-  /* sofort messen (beim Wechsel auf die Startseite, vor dem ersten Bild); beim App-Start misst hideBoot() kurz vor dem Ausblenden noch einmal endgültig –
-     iOS meldet in den ersten Momenten eine zu kleine Höhe. Danach nur noch beim Drehen (Breite ändert sich). */
-  fit(true);HOMEFIT=()=>{if(m.isConnected)fit(true);};const w0=innerWidth;const onRs=()=>{if(!m.isConnected)return window.removeEventListener('resize',onRs);if(innerWidth!==w0||document.getElementById('boot'))fit(true);};window.addEventListener('resize',onRs);
+    let st=0;if(over()){wc.classList.add('tight');st=1;if(over()){wc.style.display='none';st=2;if(over()){m.classList.add('homecompact');st=3;}}}return st;};
+  const apply=st=>{const wc=m.querySelector('.weekcard');if(!wc)return;wc.classList.toggle('tight',st>=1);wc.style.display=st>=2?'none':'';m.classList.toggle('homecompact',st>=3);};
+  /* Beim App-Start (Startbildschirm sichtbar) vorläufig messen; endgültig kurz vor dem Ausblenden (HOMEFIT) – dann gilt die Stufe für die ganze Sitzung,
+     auch beim Zurückwechseln auf die Startseite (iOS meldet beim Aufbau zeitweise falsche Höhen). Neu nur beim Drehen (Breite ändert sich). */
+  if(HOMESTATE!=null)apply(HOMESTATE);else fit(true);
+  HOMEFIT=()=>{if(m.isConnected)HOMESTATE=fit(true);};const w0=innerWidth;
+  const onRs=()=>{if(!m.isConnected){if(innerWidth!==w0)HOMESTATE=null;return window.removeEventListener('resize',onRs);}if(innerWidth!==w0)HOMESTATE=fit(true);else if(document.getElementById('boot'))fit(true);};window.addEventListener('resize',onRs);
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 
