@@ -854,8 +854,8 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
       return h('div',{},h('div',{class:'kind',style:'margin:8px 0 6px'},L.title),h('div',{class:'chips'},us.map(u=>{const w=all.filter(c=>c.unit===u.id);return h('button',{class:'chip',onclick:()=>runVocab(shuffle(w).slice(0,20),'type',false)},h('span',{},'U'+u.n),h('span',{},u.title+' ('+w.length+')'));})));})));
     if(!all.length)m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return;}
   m.append(h('h1',{},T('Vokabeln')),h('p',{class:'sub'},total?total+T(' Wörter gesammelt · ')+boxes[3]+T(' sitzen sicher · ')+(boxes[0]+boxes[1])+T(' in Arbeit'):T('Wörter kommen automatisch dazu, sobald du sie in einer Lektion siehst.')));
-  m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 '+(vocabLeft()||!due.length?'12px':'4px')},vocabLeft()?T('Heute noch ')+vocabLeft()+T(' Karten'):due.length?T('Tagesziel erreicht ✓'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
-    !vocabLeft()&&due.length?h('p',{class:'muted small',style:'margin:0 0 12px'},due.length+T(' weitere Karten sind fällig – freiwillig, sonst kommen sie an den nächsten Tagen.')):null,
+  m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 '+(due.length>vocabLeft()?'4px':'12px')},vocabLeft()?T('Heute noch ')+vocabLeft()+T(' Karten'):due.length?T('Tagesziel erreicht ✓'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
+    due.length>vocabLeft()?h('p',{class:'muted small',style:'margin:0 0 12px'},vocabLeft()?due.length+T(' fällig insgesamt · ')+(due.length-vocabLeft())+T(' davon freiwillig'):due.length+T(' weitere Karten sind fällig – freiwillig, sonst kommen sie an den nächsten Tagen.')):null,
 
     h('div',{class:'row'},h('button',{class:'btn'+(vocabLeft()?' primary':''),disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true)},T('🃏 Karten')),
