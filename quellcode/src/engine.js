@@ -178,12 +178,19 @@ let audioUnlocked=false;
    „playback“: App auch bei Stummschalter hörbar, iOS pausiert dann aber andere Musik. */
 /* Mikrofon (Spracherkennung/Aufnahme) geht auf iOS nur im Modus „play-and-record“ – davor umschalten, danach setAudioMode() */
 function recMode(){try{if(navigator.audioSession)navigator.audioSession.type='play-and-record';}catch(e){}}
-function setAudioMode(){try{if(navigator.audioSession)navigator.audioSession.type=S.settings.loudAudio?'playback':'ambient';}catch(e){}}
+/* Ruhezustand „ambient“ (Musik anderer Apps läuft), nur während die App spricht/abspielt „playback“ (hörbar trotz Stummschalter).
+   S.settings.mixOnly = nie umschalten → Musik wird nie unterbrochen, App dann nur mit Ton-Schalter hörbar. */
+function setAudioMode(){try{if(navigator.audioSession)navigator.audioSession.type='ambient';}catch(e){}}
+let idleT=null,AUDIO_BUSY=0;
+function loudNow(){clearTimeout(idleT);if(S.settings.mixOnly)return;try{if(navigator.audioSession&&navigator.audioSession.type!=='play-and-record')navigator.audioSession.type='playback';}catch(e){}}
+function idleSoon(){clearTimeout(idleT);idleT=setTimeout(()=>{if(window.speechSynthesis&&speechSynthesis.speaking||AUDIO_BUSY>0)return idleSoon();try{if(navigator.audioSession&&navigator.audioSession.type==='playback')setAudioMode();}catch(e){}},700);}
+/* eigene Aufnahme abspielen (auch hörbar trotz Stummschalter) */
+function playRec(url){loudNow();const a=new Audio(url);a.setAttribute('playsinline','');AUDIO_BUSY++;const done=()=>{AUDIO_BUSY=Math.max(0,AUDIO_BUSY-1);idleSoon();};a.onended=a.onerror=done;a.play().catch(done);return a;}
 function unlockAudio(){if(audioUnlocked)return;audioUnlocked=true;
   setAudioMode();
   try{const a=new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=');a.setAttribute('playsinline','');a.volume=0.01;a.play().catch(()=>{});}catch(e){}}
 document.addEventListener('touchend',unlockAudio,{once:true,passive:true});document.addEventListener('click',unlockAudio,{once:true});
-function mkUtt(t,rate){const u=new SpeechSynthesisUtterance(t);u.lang=LANG.voice;const v=pickVoice();if(v)u.voice=v;u.rate=rate;return u;}
+function mkUtt(t,rate){loudNow();const u=new SpeechSynthesisUtterance(t);u.lang=LANG.voice;const v=pickVoice();if(v)u.voice=v;u.rate=rate;u.addEventListener('end',idleSoon);u.addEventListener('error',idleSoon);return u;}
 function say(text,rate){if(!window.speechSynthesis)return toast(T('Sprachausgabe wird von diesem Browser nicht unterstützt'));
   unlockAudio();speechSynthesis.cancel();const t=String(text).replace(/___/g,'…');const r=rate||S.settings.rate;
   if(rate&&rate<=0.7){ // langsam: zusätzlich Wort für Wort mit kleinen Pausen – hörbar langsamer, auch auf dem iPhone
@@ -818,7 +825,7 @@ function unitSentences(u){const out=[];const seen=new Set();const add=(es,de)=>{
 /* Aufnehmen & vergleichen (ohne Spracherkennung): Original vorlesen, danach die eigene Aufnahme */
 function recCompare(es){const wrap=h('div',{class:'shadowact'});let rec=null,url=null;
   if(!(navigator.mediaDevices&&window.MediaRecorder)){wrap.append(h('p',{class:'muted small',style:'margin:0'},T('Sprich den Satz laut nach – am besten gleichzeitig mit der Stimme.')));return wrap;}
-  const play=()=>{if(!url)return;speechSynthesis.cancel();unlockAudio();const a=new Audio(url);a.setAttribute('playsinline','');const ut=mkUtt(es,S.settings.rate);ut.onend=()=>setTimeout(()=>a.play().catch(()=>{}),350);speechSynthesis.speak(ut);};
+  const play=()=>{if(!url)return;speechSynthesis.cancel();unlockAudio();const ut=mkUtt(es,S.settings.rate);ut.onend=()=>setTimeout(()=>playRec(url),350);speechSynthesis.speak(ut);};
   const draw=()=>{wrap.innerHTML='';const rb=h('button',{class:'btn'+(url?'':' primary')+(rec?' recording':'')},rec?T('⏹ Stopp'):url?T('🎙 Neu'):T('🎙 Aufnehmen'));
     rb.onclick=async()=>{if(rec){rec.stop();return;}speechSynthesis.cancel();try{recMode();const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
       rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());setAudioMode();url=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();play();};rec.start();draw();}catch(e){setAudioMode();rec=null;toast(T('Mikrofon nicht verfügbar'));}};
@@ -834,8 +841,8 @@ function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7
   S.shadow=S.shadow||{};let start=(S.shadow[id]||0)%all.length;let list=all.slice(start,start+N);if(list.length<N)list=list.concat(all.slice(0,N-list.length));
   let i=0,hide=true,rec=null,audioUrl=null;const scores=[];const canRec=!!(navigator.mediaDevices&&window.MediaRecorder);
   /* Original vorlesen, danach die eigene Aufnahme abspielen */
-  const compare=c=>{if(!audioUrl)return;speechSynthesis.cancel();unlockAudio();const a=new Audio(audioUrl);a.setAttribute('playsinline','');
-    const ut=mkUtt(c.es,S.settings.rate);ut.onend=()=>setTimeout(()=>a.play().catch(()=>{}),350);speechSynthesis.speak(ut);};
+  const compare=c=>{if(!audioUrl)return;speechSynthesis.cancel();unlockAudio();
+    const ut=mkUtt(c.es,S.settings.rate);ut.onend=()=>setTimeout(()=>playRec(audioUrl),350);speechSynthesis.speak(ut);};
   function draw(){const c=list[i];box.innerHTML='';
     const es=h('div',{class:'es'+(hide?' blur':'')},c.es);es.onclick=()=>es.classList.toggle('blur');
     const card=h('div',{class:'card shadowcard'},h('div',{class:'row',style:'justify-content:space-between'},h('span',{class:'muted small'},T('Satz ')+(i+1)+' / '+list.length),
@@ -1053,13 +1060,13 @@ function vSettingsAll(m){const st=S.settings;
   const rate=h('input',{type:'range',min:'0.5',max:'1.2',step:'0.05',value:st.rate});rate.oninput=()=>{st.rate=+rate.value;save();};rate.onchange=()=>say((LANG.sampleSay||[T('Hola')])[1]||(LANG.sampleSay||[T('Hola')])[0]);
   const theme=h('select',{class:'inp',style:'font-size:15px'},[['auto',T('Wie System')],['light',T('Hell')],['dark',T('Dunkel')]].map(([v,l])=>h('option',{value:v,selected:st.theme===v},l)));theme.onchange=()=>{st.theme=theme.value;save();route();};
   const tr=h('input',{type:'checkbox',checked:st.showTr});tr.onchange=()=>{st.showTr=tr.checked;save();};
-  const mix=h('input',{type:'checkbox',checked:!st.loudAudio});mix.onchange=()=>{st.loudAudio=!mix.checked;save();setAudioMode();};
+  const mix=h('input',{type:'checkbox',checked:!!st.mixOnly});mix.onchange=()=>{st.mixOnly=mix.checked;save();setAudioMode();};
   m.append(h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},T('🔊 Aussprache')),
     h('div',{class:'field'},h('label',{},T('Stimme')),voiceSel,h('span',{class:'muted small'},(T(LANG.voiceHint||'')||''))),
     h('div',{class:'field'},h('label',{},T('Sprechtempo')),rate),
     h('label',{class:'row'},tr,T('Übersetzungen in Dialogen sofort zeigen')),
-    IS_IOS?h('label',{class:'row',style:'margin-top:8px'},mix,T('Musik anderer Apps weiterlaufen lassen')):null,
-    IS_IOS?h('span',{class:'muted small'},T('An: Spotify & Co. laufen weiter, die App ist bei Stummschalter aber still. Aus: App immer hörbar, andere Musik wird pausiert.')):null,
+    IS_IOS?h('label',{class:'row',style:'margin-top:8px'},mix,T('Musik anderer Apps nie unterbrechen')):null,
+    IS_IOS?h('span',{class:'muted small'},T('Aus (Standard): App immer hörbar, auch stumm geschaltet – Musik pausiert nur, solange die App spricht. An: Musik läuft immer weiter, die App ist dann nur mit Ton-Schalter hörbar.')):null,
     h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Darstellung')),theme)));
   const key=h('input',{class:'inp',type:'password',value:st.geminiKey,placeholder:T('AIza…'),style:'font-size:15px'});
   const model=h('input',{class:'inp',value:st.geminiModel,style:'font-size:15px'});const out=h('div');
