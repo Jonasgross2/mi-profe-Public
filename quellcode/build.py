@@ -7,7 +7,7 @@ GUARD=r'''<script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt le
 function fix(){try{if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister();});});if(window.caches)caches.keys().then(function(k){k.forEach(function(x){caches.delete(x);});});}catch(e){}setTimeout(function(){location.reload();},800);}
 function de(){try{var sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}');sh.ui='de';sh.ex='de';localStorage.setItem('mi-profe-shared',JSON.stringify(sh));}catch(e){}location.hash='';location.reload();}
 function btn(t,f,bg){var b=document.createElement('button');b.textContent=t;b.style.cssText='display:block;width:100%;font-size:17px;padding:13px;margin-top:10px;border-radius:10px;border:0;background:'+bg+';color:#fff';b.onclick=f;return b;}
-var shown=false;function check(){if(shown)return;if(document.readyState!=='complete')return setTimeout(check,1000);var vis=[].some.call(document.body.children,function(e){return!/^(SCRIPT|NOSCRIPT)$/.test(e.tagName);});if(vis)return;
+var shown=false;function check(){if(shown)return;if(document.readyState!=='complete')return setTimeout(check,1000);var vis=[].some.call(document.body.children,function(e){return!/^(SCRIPT|NOSCRIPT)$/.test(e.tagName)&&e.id!=='boot';});if(vis)return;var bt=document.getElementById('boot');if(bt)bt.parentNode.removeChild(bt);
 var d=document.createElement('div');d.style.cssText='font:16px -apple-system,sans-serif;padding:48px 24px;color:#222;background:#fff;min-height:100vh;box-sizing:border-box';
 d.innerHTML='<h2 style="margin-top:0">Mi profe startet gerade nicht</h2><p>Dein Fortschritt ist sicher gespeichert.</p><p style="background:#f4f0ea;padding:10px;border-radius:8px;font:13px ui-monospace,Menlo,monospace;word-break:break-word">Fehler: '+(String(err).replace(/</g,'&lt;')||'(keine Meldung)')+'<br>Version: '+(window.APP_VERSION||'?')+'<br>'+navigator.userAgent.replace(/</g,'&lt;')+'</p><p style="font-size:14px;color:#666">Bitte mach einen Screenshot davon.</p>';
 d.appendChild(btn('Neueste Version laden',fix,'#c0472f'));d.appendChild(btn('Sprache auf Deutsch zurückstellen',de,'#555'));shown=true;document.body.appendChild(d);}
@@ -31,6 +31,7 @@ def page(pwa):
 {head_pwa}
 <style>{(s/'app.css').read_text()}</style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
+<div id="boot"><div class="bootlogo">🇪🇸</div><div class="bootspin"></div></div>
 {GUARD}{scripts}
 </body></html>'''
 d=base/'dist';d.mkdir(exist_ok=True)

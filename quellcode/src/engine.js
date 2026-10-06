@@ -1,3 +1,6 @@
+/* Neustart (Sprachwechsel, Update …): erst Startbildschirm mit Drehsymbol zeigen, dann neu laden – sonst wirkt die App kurz eingefroren */
+function bootScreen(){let b=document.getElementById('boot');if(!b){b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">🇪🇸</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
+function reloadApp(){bootScreen();setTimeout(()=>location.reload(),60);}
 /* ===== Mi profe · Engine (sprachunabhängig – alles Sprachspezifische steht im Paket LANG, siehe lang.js) ===== */
 (function(){
 'use strict';
@@ -9,7 +12,7 @@ if(UI!=='de'&&!(window.UI_TR&&UI_TR[UI]))UI='de';document.documentElement.lang=U
 const TR=UI==='de'?null:UI_TR[UI];const T=s=>TR&&TR[s]!=null?TR[s]:s;
 for(const L of LEVELS){L.title=T(L.title);L.sub=T(L.sub);}
 const UI_LANGS=[['de','🇩🇪','Deutsch'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['pt','🇧🇷','Português']].filter(([c])=>c==='de'||window.UI_TR&&UI_TR[c]);
-function setUI(code,withEx){let sh={};try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}')||{};}catch(e){}sh.ui=code;if(withEx)delete sh.ex;try{localStorage.setItem('mi-profe-shared',JSON.stringify(sh));}catch(e){}location.reload();}
+function setUI(code,withEx){let sh={};try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}')||{};}catch(e){}sh.ui=code;if(withEx)delete sh.ex;try{localStorage.setItem('mi-profe-shared',JSON.stringify(sh));}catch(e){}reloadApp();}
 const fmt=s=>{const r=String(s).replace(/\{L\}/g,T(LANG.name)).replace(/\{INTO\}/g,T(LANG.into||'')).replace(/\{ON\}/g,T(LANG.onLang||'')).replace(/\{EX\}/g,T(EX_NAMES[EX]||EX));return r.charAt(0).toUpperCase()+r.slice(1);};
 const KEY=LANG.key;const SHARED='mi-profe-shared';
 /* Erklärsprache (unabhängig von der App-Sprache): Sprache der Erklärungen & Übersetzungen im Kurs. Deutsch + alle Sprachen mit COURSE_TR[Lernsprache], nie die Lernsprache selbst. */
@@ -19,7 +22,7 @@ const EX_LANGS=['de'].concat(Object.keys(window.COURSE_TR&&COURSE_TR[LANG.code]|
 let EX=null,EX_SET,exOld=false;try{const sh=JSON.parse(localStorage.getItem(SHARED)||'null');if(sh){EX=EX_SET=sh.ex;exOld=!!sh.name;}}catch(e){}
 /* ohne Wahl: wie die App-Sprache; sonst bei neuen Nutzern Englisch, bei bestehenden (bisher immer Deutsch) Deutsch */
 if(!EX_LANGS.includes(EX))EX=EX_LANGS.includes(UI)?UI:UI!=='de'&&!exOld&&EX_LANGS.includes('en')?'en':'de';
-function setEX(code){let sh={};try{sh=JSON.parse(localStorage.getItem(SHARED)||'{}')||{};}catch(e){}sh.ex=code;try{localStorage.setItem(SHARED,JSON.stringify(sh));}catch(e){}location.reload();}
+function setEX(code){let sh={};try{sh=JSON.parse(localStorage.getItem(SHARED)||'{}')||{};}catch(e){}sh.ex=code;try{localStorage.setItem(SHARED,JSON.stringify(sh));}catch(e){}reloadApp();}
 const UW=LANG.unit,UWS=LANG.units;
 const _ap=Element.prototype.append;Element.prototype.append=function(...k){return _ap.apply(this,k.flat().filter(x=>x!=null&&x!==false));};
 const INTERVALS=[0,1,3,7,14,30,60,120];
@@ -378,7 +381,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
   let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('b',{},l),ex?h('span',{},ex):null);return b;});
   const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const v2=inp2.value.trim().replace(/\s+/g,' ').slice(0,40);const changed=v!==S.name||g!==S.gender||v2!==(S.surname||'');S.name=v;S.gender=g;if(v2)S.surname=v2;else delete S.surname;save();
     const back=again?'lang':'home';if(IN_ARTIFACT)CUR=back;else history.replaceState(null,'','#'+back);
-    if(changed&&!IN_ARTIFACT)location.reload();else{if(changed){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}}route();}};
+    if(changed&&!IN_ARTIFACT)reloadApp();else{if(changed){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}}route();}};
   inp.onkeydown=inp2.onkeydown=e=>{if(e.key==='Enter')ok();};
   document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
     UI_LANGS.length>1?h('div',{class:'uisel'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',title:n,onclick:()=>{if(c!==UI)setUI(c,true);}},f))):null,
@@ -391,7 +394,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=false;trackNav(curRoute());const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
   const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum,reading:vReading}[parts[0]]||vHome;
-  v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
+  v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;const bt=document.getElementById('boot');if(bt)bt.remove();}
 
 /* ---------- views ---------- */
 /* Tagesplan: Bausteine mit id; welche täglich dazugehören, stellt man unter Mehr → Mein Tagesplan ein (S.plan, synchronisiert über planT) */
@@ -1207,7 +1210,7 @@ function vSettingsAll(m){const st=S.settings;
 
 function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & Profil')));
   const avail=Object.values(LANGS).filter(L=>L.course&&L.course.units.length);const planned=LANG_PLANNED.filter(([c])=>!avail.some(L=>L.code===c));
-  const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';location.reload();};
+  const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';reloadApp();};
   m.append(h('div',{class:'kind',style:'margin-top:8px'},T('Ich lerne')),h('div',{class:'chips'},
     ...avail.map(L=>h('button',{class:'chip'+(L.code===LANG.code?' on':''),onclick:()=>pick(L.code)},h('span',{},L.flag),h('span',{},T(L.name)))),
     ...planned.map(([c,n,f])=>h('button',{class:'chip soon',onclick:()=>toast(T(n)+T(' ist noch in Arbeit'))},h('span',{},f),h('span',{},T(n)+T(' · bald'))))),
@@ -1229,7 +1232,7 @@ function vOrigin(m){const o=Object.assign({c:'DE',city:'',other:''},S.origin||{}
   m.append(backTo(T('Sprache & Profil'),'lang'),h('h1',{},T('Herkunft')),h('p',{class:'sub'},T('Woher kommst du? Übungen wie „Soy de …“ und „¿De dónde eres?“ passen sich daran an.')),
     h('div',{class:'kind',style:'margin-top:4px'},T('Land')),chips,other,h('div',{class:'kind',style:'margin-top:16px'},T('Stadt')),city,
     h('button',{class:'btn primary',style:'margin-top:16px',onclick:()=>{const v=sel==='XX'?{c:'',other:other.value.trim().slice(0,40),city:city.value.trim().slice(0,40)}:{c:sel,other:'',city:city.value.trim().slice(0,40)};
-      if(sel==='XX'&&!v.other)return toast(T('Gib dein Land ein'));S.origin=v;save();if(IN_ARTIFACT){toast(T('Gespeichert'));return;}location.hash='lang';location.reload();}},T('Speichern')));}
+      if(sel==='XX'&&!v.other)return toast(T('Gib dein Land ein'));S.origin=v;save();if(IN_ARTIFACT){toast(T('Gespeichert'));return;}location.hash='lang';reloadApp();}},T('Speichern')));}
 /* Unterseiten von „Mehr“: welche Karten aus vSettingsAll gezeigt werden (Erkennung über die – ggf. übersetzte – Überschrift) */
 const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),['🔊 Aussprache']],
   ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 Gemini (optional)']],
@@ -1250,7 +1253,7 @@ function vSettings(m,sec){
     m.append(backTo(T('Mehr'),'settings'),h('h1',{},s[2]),...cards.map(el=>{if(cards.length===1)el.querySelector('h2')?.remove();return el;}));return;}
   const upd=async()=>{toast(T('Suche nach Update …'));try{const r=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(r)await r.update();
     const html=await (await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'})).text();const v=(html.match(/APP_VERSION="([^"]+)"/)||[])[1];
-    if(v&&v!==window.APP_VERSION){toast(T('Neue Version gefunden – lade neu …'));if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>location.reload(),600);}else toast(T('Du hast schon die neueste Version ✓'));}catch(e){toast(T('Keine Verbindung – später noch mal versuchen'));}};
+    if(v&&v!==window.APP_VERSION){toast(T('Neue Version gefunden – lade neu …'));if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>reloadApp(),600);}else toast(T('Du hast schon die neueste Version ✓'));}catch(e){toast(T('Keine Verbindung – später noch mal versuchen'));}};
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):T('Offline-Datei');
   m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),mtile('📅',T('Mein Tagesplan'),T('Was täglich dran ist'),()=>go('settings/plan')),
     ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0])))),
@@ -1320,6 +1323,6 @@ setTimeout(()=>{if(S.settings.ghToken)syncNow();},300);
 if(T('serviceWorker') in navigator&&/^https?:/.test(location.protocol)&&window.PWA){const hadCtl=!!navigator.serviceWorker.controller;
   navigator.serviceWorker.register('sw.js').then(r=>{const chk=()=>r.update().catch(()=>{});setTimeout(chk,3000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')chk();});}).catch(()=>{});
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||document.getElementById('updbar'))return;
-    document.body.append(h('button',{id:'updbar',class:'updbar',onclick:()=>location.reload()},T('✨ Neue Version – tippen zum Laden')));});}
+    document.body.append(h('button',{id:'updbar',class:'updbar',onclick:()=>reloadApp()},T('✨ Neue Version – tippen zum Laden')));});}
 route();
 })();
