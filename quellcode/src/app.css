@@ -334,7 +334,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .btn.rate{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border:1.5px solid var(--line);background:var(--surface);min-width:0}.btn.rate b{font-size:15px}.btn.rate span{font-size:11.5px;color:var(--muted);font-weight:400}
 .goalsel{font:inherit;font-size:14px;padding:3px 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .linkbtn{background:none;border:0;padding:0;color:var(--accent);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.goalrow{margin-top:16px;padding-top:10px;border-top:1px solid var(--line)}.goalrow .linkbtn{text-decoration:none;color:var(--muted);font-size:12.5px;white-space:nowrap}
+.goalrow{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}.goalrow .linkbtn{text-decoration:none;color:var(--muted);font-size:12.5px;white-space:nowrap}
 
 /* Endseiten: Knöpfe untereinander, volle Breite, gleiche Höhe */
 .endbtns{display:flex;flex-direction:column;gap:10px;margin:18px auto 0;max-width:420px}
@@ -349,3 +349,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .planrow:last-child{border-bottom:0}
 .planrow input{width:20px;height:20px;accent-color:var(--accent);flex:none}
 .hidetext{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:180px;text-align:center}
+.goalpick{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}.goalpick.hide{display:none}.goalpick .chip{justify-content:center;padding:6px 0}
+@media (max-width:700px){.hero p.muted{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
+.weekcard.tight{padding:8px 12px}.weekcard.tight .wb{height:14px;margin-bottom:2px}.weekcard.tight .wd .small:last-child{display:none}.weekcard.tight .week{margin-top:2px}

@@ -432,12 +432,13 @@ function vHome(m){
   const chip=x=>h('button',{class:'chip'+(x.done?' done':''),onclick:()=>planGo(x)},h('span',{},x.done?'✓':x.ic),h('span',{},x.t));
   const rest=plan.filter(x=>x!==hero),extra=planItems().filter(x=>!planOn(x.id));
   if(rest.length)m.append(h('div',{class:'kind',style:'margin:12px 0 6px'},T('Heute')),h('div',{class:'chips'},rest.map(chip)));
-  m.append(h('div',{class:'row',style:'justify-content:space-between;margin:10px 0 6px'},h('div',{class:'kind',style:'margin:0'},T('Extras')),h('button',{class:'linkbtn',onclick:()=>go('settings/plan')},T('⚙ Plan anpassen'))),
-    extra.length?h('div',{class:'chips'},extra.map(chip)):h('p',{class:'muted small',style:'margin:0'},T('Alles ist schon im Tagesplan.')));
+  if(extra.length)m.append(h('div',{class:'kind',style:'margin:12px 0 6px'},T('Extras')),h('div',{class:'chips'},extra.map(chip)));
   const days=[...Array(7)].map((_,i)=>addDays(td,i-6));const mx=Math.max(10,...days.map(d=>S.stats.days[d]||0));
   m.append(h('div',{class:'card weekcard',style:'margin-top:12px'},h('div',{class:'row'},h('div',{class:'kind',style:'flex:1;margin:0'},T('Deine Woche')),h('span',{class:'muted small'},done+(done===1?T(' Lektion'):T(' Lektionen'))+' · '+acc+T(' % richtig'))),
     h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
       return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+T('T12:00:00')).getDay()]),h('div',{class:'small'},v||''));}))));
+  /* passt es am Handy nicht ganz, wird „Deine Woche“ kompakter (kein Scrollen) */
+  setTimeout(()=>{const mn=m.closest('main')||m;if(mn.scrollHeight>mn.clientHeight+2)m.querySelector('.weekcard')?.classList.add('tight');},0);
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 
@@ -952,8 +953,8 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
     h('div',{class:'row'},h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true)},T('🃏 Karten')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true)},T('🎧 Hören'))),
-    total?(()=>{const pick=h('div',{class:'chips hide',style:'margin:8px 0 0;justify-content:flex-end'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.vocabGoal=n;S.vocabGoalT=Date.now();save();route();}},n+'')));
-      return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},h('span',{class:'muted small'},T('Tagesziel: ')+Math.min(vocabToday(),vocabGoal())+' / '+vocabGoal()+(vocabToday()>=vocabGoal()?T(' ✓ – weitere Runden freiwillig'):'')),
+    total?(()=>{const pick=h('div',{class:'goalpick hide'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.vocabGoal=n;S.vocabGoalT=Date.now();save();route();}},n+'')));
+      return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},vocabToday()>=vocabGoal()?h('span',{class:'small',style:'color:var(--ok);font-weight:600'},T('Tagesziel ')+vocabGoal()+' / '+vocabGoal()+' ✓'):h('span',{class:'muted small'},T('Tagesziel ')+vocabToday()+' / '+vocabGoal()),
         h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('⚙ Ziel ändern'))),pick);})():null));
   m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter einer ')+UW+T(' üben'),()=>go('vocab/units')),mtile('🔁',T('Verben'),T('Konjugieren üben'),()=>go('verbs')),
     mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✏️',T('Fehlerheft'),S.mistakes.length?S.mistakes.length+T(' offene Fehler'):T('keine offenen Fehler'),()=>go('mistakes'))));

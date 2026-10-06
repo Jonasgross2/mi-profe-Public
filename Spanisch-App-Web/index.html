@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261006-1829";</script>
+<script>window.PWA=true;window.APP_VERSION="20261006-1840";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -346,7 +346,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .btn.rate{display:flex;flex-direction:column;align-items:center;gap:2px;padding:9px 4px;border:1.5px solid var(--line);background:var(--surface);min-width:0}.btn.rate b{font-size:15px}.btn.rate span{font-size:11.5px;color:var(--muted);font-weight:400}
 .goalsel{font:inherit;font-size:14px;padding:3px 6px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
 .linkbtn{background:none;border:0;padding:0;color:var(--accent);font:inherit;font-size:13px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.goalrow{margin-top:16px;padding-top:10px;border-top:1px solid var(--line)}.goalrow .linkbtn{text-decoration:none;color:var(--muted);font-size:12.5px;white-space:nowrap}
+.goalrow{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}.goalrow .linkbtn{text-decoration:none;color:var(--muted);font-size:12.5px;white-space:nowrap}
 
 /* Endseiten: Knöpfe untereinander, volle Breite, gleiche Höhe */
 .endbtns{display:flex;flex-direction:column;gap:10px;margin:18px auto 0;max-width:420px}
@@ -361,6 +361,9 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .planrow:last-child{border-bottom:0}
 .planrow input{width:20px;height:20px;accent-color:var(--accent);flex:none}
 .hidetext{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:180px;text-align:center}
+.goalpick{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}.goalpick.hide{display:none}.goalpick .chip{justify-content:center;padding:6px 0}
+@media (max-width:700px){.hero p.muted{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
+.weekcard.tight{padding:8px 12px}.weekcard.tight .wb{height:14px;margin-bottom:2px}.weekcard.tight .wd .small:last-child{display:none}.weekcard.tight .week{margin-top:2px}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -6678,6 +6681,7 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Tagesziel ": "Daily goal ",
 " Fragen wiederholen →": " questions again →",
 " · mit Text": " · with text",
 "15 Aufgaben aus allem Gelernten": "15 tasks from everything you've learned",
@@ -7344,6 +7348,7 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Tagesziel ": "Objetivo diario ",
 " Fragen wiederholen →": " preguntas otra vez →",
 " · mit Text": " · con texto",
 "15 Aufgaben aus allem Gelernten": "15 ejercicios de todo lo aprendido",
@@ -8010,6 +8015,7 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Tagesziel ": "Objetivo diário ",
 " Fragen wiederholen →": " perguntas outra vez →",
 " · mit Text": " · com texto",
 "15 Aufgaben aus allem Gelernten": "15 exercícios de tudo o que aprendeste",
@@ -8649,12 +8655,13 @@ function vHome(m){
   const chip=x=>h('button',{class:'chip'+(x.done?' done':''),onclick:()=>planGo(x)},h('span',{},x.done?'✓':x.ic),h('span',{},x.t));
   const rest=plan.filter(x=>x!==hero),extra=planItems().filter(x=>!planOn(x.id));
   if(rest.length)m.append(h('div',{class:'kind',style:'margin:12px 0 6px'},T('Heute')),h('div',{class:'chips'},rest.map(chip)));
-  m.append(h('div',{class:'row',style:'justify-content:space-between;margin:10px 0 6px'},h('div',{class:'kind',style:'margin:0'},T('Extras')),h('button',{class:'linkbtn',onclick:()=>go('settings/plan')},T('⚙ Plan anpassen'))),
-    extra.length?h('div',{class:'chips'},extra.map(chip)):h('p',{class:'muted small',style:'margin:0'},T('Alles ist schon im Tagesplan.')));
+  if(extra.length)m.append(h('div',{class:'kind',style:'margin:12px 0 6px'},T('Extras')),h('div',{class:'chips'},extra.map(chip)));
   const days=[...Array(7)].map((_,i)=>addDays(td,i-6));const mx=Math.max(10,...days.map(d=>S.stats.days[d]||0));
   m.append(h('div',{class:'card weekcard',style:'margin-top:12px'},h('div',{class:'row'},h('div',{class:'kind',style:'flex:1;margin:0'},T('Deine Woche')),h('span',{class:'muted small'},done+(done===1?T(' Lektion'):T(' Lektionen'))+' · '+acc+T(' % richtig'))),
     h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
       return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+T('T12:00:00')).getDay()]),h('div',{class:'small'},v||''));}))));
+  /* passt es am Handy nicht ganz, wird „Deine Woche“ kompakter (kein Scrollen) */
+  setTimeout(()=>{const mn=m.closest('main')||m;if(mn.scrollHeight>mn.clientHeight+2)m.querySelector('.weekcard')?.classList.add('tight');},0);
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 
@@ -9169,8 +9176,8 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
     h('div',{class:'row'},h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true)},T('🃏 Karten')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true)},T('🎧 Hören'))),
-    total?(()=>{const pick=h('div',{class:'chips hide',style:'margin:8px 0 0;justify-content:flex-end'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.vocabGoal=n;S.vocabGoalT=Date.now();save();route();}},n+'')));
-      return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},h('span',{class:'muted small'},T('Tagesziel: ')+Math.min(vocabToday(),vocabGoal())+' / '+vocabGoal()+(vocabToday()>=vocabGoal()?T(' ✓ – weitere Runden freiwillig'):'')),
+    total?(()=>{const pick=h('div',{class:'goalpick hide'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.vocabGoal=n;S.vocabGoalT=Date.now();save();route();}},n+'')));
+      return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},vocabToday()>=vocabGoal()?h('span',{class:'small',style:'color:var(--ok);font-weight:600'},T('Tagesziel ')+vocabGoal()+' / '+vocabGoal()+' ✓'):h('span',{class:'muted small'},T('Tagesziel ')+vocabToday()+' / '+vocabGoal()),
         h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('⚙ Ziel ändern'))),pick);})():null));
   m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter einer ')+UW+T(' üben'),()=>go('vocab/units')),mtile('🔁',T('Verben'),T('Konjugieren üben'),()=>go('verbs')),
     mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✏️',T('Fehlerheft'),S.mistakes.length?S.mistakes.length+T(' offene Fehler'):T('keine offenen Fehler'),()=>go('mistakes'))));
