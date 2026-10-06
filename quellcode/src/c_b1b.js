@@ -200,7 +200,7 @@ Más tarde, Jonas habla con Pablo: «Me ha llamado Sergio. Dice que el jueves es
  {t:'free',task:'Deine Freundin hat dir diese Nachricht geschickt: «No puedo ir al cine hoy, estoy enferma. ¿Podemos ir el sábado? Dile a Marc que le devolveré su libro mañana.» Erzähl einem Freund, was sie geschrieben hat. (4–5 Sätze)',hint:'Me ha escrito que … · Dice que … · Me pregunta si … · Me pide que le digas …',focus:'indirekte Rede, preguntar si, pedir que + Subj.',model:'Me ha escrito Laura. Dice que hoy no puede ir al cine porque está enferma. Me pregunta si podemos ir el sábado. Ah, y me pide que te diga que mañana te devolverá tu libro, Marc.'}]}
 ],
 placement:[
- {t:'mc',q:'Marc: «Estoy cansado.» → Marc me dijo que ___ cansado.',opts:['estaba','está','estará'],a:0},
+ {t:'mc',q:'Laia: «Estoy cansada.» → Laia me dijo que ___ cansada.',opts:['estaba','está','estará'],a:0},
  {t:'mc',q:'«¿Vienes mañana?» → Me preguntó ___ iba al día siguiente.',opts:['si','que','cuándo'],a:0},
  {t:'gap',q:'Laia: «Te llamaré.» → Laia dijo que me ___.',a:['llamaría']},
  {t:'gap',q:'Mi jefe me pide que ___ (yo, enviar) el informe hoy.',a:['envíe']},

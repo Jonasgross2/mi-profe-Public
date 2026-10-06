@@ -57,12 +57,12 @@ if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);}
 personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);
 /* Ansprache: Bei „weiblich“ werden Sätze über die lernende Person selbst (estoy/soy … , ¡Encantado!) in die weibliche Form gesetzt
    und beim Prüfen beide Formen akzeptiert. Vokabeln bleiben unverändert (sie sind Schlüssel im Vokabeltrainer). */
-const FEMO=/^(cansad|encantad|content|preocupad|resfriad|maread|nervios|ocupad|aburrid|enfadad|casad|divorciad|solter|interesad|acostumbrad|dispuest|list|segur|hart|perdid|sorprendid|emocionad|tranquil|alt|baj|delgad|moren|rubi|simpátic|antipátic|tímid|ordenad|caótic|vag|ingenier|informátic|médic|alumn|abogad|sentad|levantad|duchad|vestid|nacid|mudad|graduad|enamorad|invitad|equivocad|despiert|obligad|encargad|guap|gord|delgad|abiert|cansad)o(s?)$/i;
+const FEMO=/^(cansad|encantad|content|preocupad|resfriad|maread|nervios|ocupad|aburrid|enfadad|casad|divorciad|solter|interesad|acostumbrad|dispuest|list|segur|hart|perdid|sorprendid|emocionad|tranquil|alt|baj|delgad|moren|rubi|simpátic|antipátic|tímid|ordenad|caótic|vag|ingenier|informátic|médic|alumn|abogad|sentad|levantad|duchad|vestid|nacid|mudad|graduad|enamorad|invitad|equivocad|despiert|obligad|encargad|guap|gord|delgad|abiert|cansad|enferm|agotad|orgullos|preparad|convencid|embarazad|relajad|estresad|agradecid|decepcionad|ilusionad|agobiad)o(s?)$/i;
 const FEMX={'alemán':'alemana','inglés':'inglesa','francés':'francesa','español':T('española'),'trabajador':'trabajadora','programador':'programadora','diseñador':T('diseñadora'),'consultor':'consultora','auditor':'auditora','profesor':'profesora','director':'directora','alemanes':'alemanas'};
 const femWord=w=>FEMO.test(w)?w.replace(/o(s?)$/,'a$1'):FEMX[w.toLowerCase()]?(w[0]===w[0].toUpperCase()?FEMX[w.toLowerCase()][0].toUpperCase()+FEMX[w.toLowerCase()].slice(1):FEMX[w.toLowerCase()]):w;
-const femFirst=s=>String(s).replace(/\b(estoy|soy|me siento|me encuentro|sigo|quedo)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w));
+const femFirst=s=>String(s).replace(/\b(estoy|soy|me siento|me encuentro|sigo|quedo|estuve|he estado|me he vuelto|me volví|me quedé|me he quedado|me puse)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w));
 const isF=()=>S.gender==='f'&&LANG.code==='es';
-function femCourse(o,inVocab){if(typeof o==='string')return femFirst(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=femCourse(o[i],inVocab);return o;}
+function femCourse(o,inVocab){if(typeof o==='string'){let t=femFirst(o);if(S.name){const n=S.name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');t=t.replace(new RegExp('\\bQuerido ('+n+')\\b','g'),'Querida $1').replace(new RegExp('\\bdel ('+n+') que\\b','g'),'de la $1 que');}return t;}if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=femCourse(o[i],inVocab);return o;}
   if(o&&typeof o==='object'){if(o.t==='vocab')return o;if(o.you&&o.opts)o.opts.forEach(x=>{x.es=femFirst(x.es).replace(/\b([Ee])ncantado\b/g,'$1ncantada');});
     if(o.t==='speak'&&o.es)o.es=o.es.replace(/\b([Ee])ncantado\b/g,'$1ncantada');for(const k of Object.keys(o))if(k!=='items')o[k]=femCourse(o[k]);}return o;}
 if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}
@@ -225,9 +225,10 @@ function grade(card,status,rating){const c=S.srs[vkey(card.es)];if(!c)return;srs
   if(r==='again'){if(c.ivl)c.lapses=(c.lapses||0)+1;c.ivl=0;c.ease=2.5;c.due=today();c.box=0;save();return;}/* kommt in dieser Runde gleich wieder */
   const ivl=nextIvl(c,r);if(r==='hard')c.ease=Math.max(1.3,c.ease-0.15);else if(r==='easy')c.ease=Math.min(3.5,c.ease+0.15);
   c.ivl=ivl;c.due=addDays(today(),ivl);c.reps=(c.reps||0)+1;c.box=ivl>=60?6:ivl>=21?5:ivl>=7?3:ivl>=2?1:0;
-  const td=today();if(!S.vocabCount||S.vocabCount.d!==td)S.vocabCount={d:td,n:0};S.vocabCount.n++;save();}
-const vocabGoal=()=>S.settings.vocabGoal||20;
-const vocabToday=()=>S.vocabCount&&S.vocabCount.d===today()?S.vocabCount.n:0;
+  c.lr=today();save();}
+const vocabGoal=()=>S.vocabGoal||S.settings.vocabGoal||20;
+/* heute bewertete Karten: aus den (synchronisierten) Karten selbst gezählt → stimmt auch über mehrere Geräte */
+const vocabToday=()=>{const td=today();let n=0;for(const k in S.srs)if(S.srs[k].lr===td)n++;return n;};
 const vocabLeft=()=>Math.max(0,Math.min(dueCards().length,vocabGoal()-vocabToday()));/* heute noch fürs Ziel */
 /* Karten für eine Runde: überfällige Wiederholungen zuerst, dann neue; Größe = Rest bis zum Tagesziel (danach freiwillig 20) */
 function reviewSet(){const due=dueCards();const rest=vocabGoal()-vocabToday();const n=rest>0?rest:20;
@@ -345,7 +346,7 @@ function dayPlan(){const nx=nextLesson();const due=dueCards().length;const done=
     nx||Object.values(S.lessons).some(x=>x.date===td)?{ic:nx&&(nx.check||nx.test)?'🏆':'📚',t:nx?nxTitle(nx):T('Lektion'),d:nx?nxDesc(nx):T('Alles fertig!'),r:nx?nxRoute(nx):'units',b:nx&&(nx.check||nx.test)?T('Test starten →'):T('Los geht’s →'),min:10,done:Object.values(S.lessons).some(x=>x.date===td)}:null,
     done>=2?{ic:'🔀',t:T('Gemischte Wiederholung'),d:T('15 Aufgaben quer durch alles, was du schon gelernt hast.'),r:'mix',b:T('Starten →'),min:5,done:S.lastMix===td}:null,
     ns||storyToday?{ic:'📖',t:ns&&!storyToday?T('Geschichte: ')+ns.title:T('Geschichte lesen'),d:T('Erst hören, dann lesen – ca. 5 Minuten.'),r:ns?'story/'+ns.id:'ref/s',b:T('Lesen →'),min:5,done:!!storyToday}:null].filter(Boolean);
-  if(!S.placement)plan.unshift({ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis B1, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.'),r:'placement',b:T('Test starten →'),min:15,done:false});
+  if(!S.placement)plan.unshift({ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis C2, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.'),r:'placement',b:T('Test starten →'),min:15,done:false});
   return plan;}
 function vHome(m){
   const nx=nextLesson();const due=dueCards().length;const done=Object.values(S.lessons).filter(x=>x.done).length;
@@ -860,7 +861,7 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
     h('div',{class:'row'},h('button',{class:'btn'+(vocabLeft()?' primary':''),disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true)},T('🃏 Karten')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true)},T('🎧 Hören'))),
-    total?(()=>{const pick=h('div',{class:'chips hide',style:'margin:8px 0 0;justify-content:flex-end'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.settings.vocabGoal=n;save();route();}},n+'')));
+    total?(()=>{const pick=h('div',{class:'chips hide',style:'margin:8px 0 0;justify-content:flex-end'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.vocabGoal=n;S.vocabGoalT=Date.now();save();route();}},n+'')));
       return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},h('span',{class:'muted small'},T('Tagesziel: ')+Math.min(vocabToday(),vocabGoal())+' / '+vocabGoal()+(vocabToday()>=vocabGoal()?T(' ✓ – weitere Runden freiwillig'):'')),
         h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('⚙ Ziel ändern'))),pick);})():null));
   m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter einer ')+UW+T(' üben'),()=>go('vocab/units')),mtile('🔁',T('Verben'),T('Konjugieren üben'),()=>go('verbs')),
@@ -1061,6 +1062,8 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   const ta=a.streak||{},tb=b.streak||{};o.streak=(ta.last||'')>(tb.last||'')?ta:(tb.last||'')>(ta.last||'')?tb:((ta.count||0)>=(tb.count||0)?ta:tb);
   o.mistakes=((a.updated||0)>=(b.updated||0)?a.mistakes:b.mistakes)||[];
   o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
+  if((b.vocabGoalT||0)>(a.vocabGoalT||0)){o.vocabGoal=b.vocabGoal;o.vocabGoalT=b.vocabGoalT;}
+  o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
   o.name=a.name||b.name;o.gender=a.gender||b.gender;
   o.stories=Object.assign({},b.stories||{});for(const[k,v]of Object.entries(a.stories||{})){const r=o.stories[k];o.stories[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.checks=Object.assign({},b.checks||{});for(const[k,v]of Object.entries(a.checks||{})){const r=o.checks[k];o.checks[k]=!r?v:{date:(v.date>r.date?v.date:r.date),score:Math.max(v.score||0,r.score||0),pass:!!(v.pass||r.pass)};}
