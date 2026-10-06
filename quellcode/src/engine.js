@@ -270,7 +270,7 @@ function srsInit(c){if(c.ease==null){c.ease=2.5;c.ivl=c.box?INTERVALS[Math.min(c
 function nextIvl(c,r){srsInit(c);const i=c.ivl||0;if(r==='again')return 0;
   const hard=i?Math.max(i+1,Math.round(i*1.2)):1,good=i?Math.max(hard+1,Math.round(i*c.ease)):3,easy=i?Math.max(good+1,Math.round(i*c.ease*1.3)):5;
   return r==='hard'?hard:r==='good'?good:easy;}
-function grade(card,status,rating){const c=S.srs[vkey(card.es)];if(!c)return;srsInit(c);c.t=Date.now();const r=rating||RATE[status]||'again';
+function grade(card,status,rating){const c=S.srs[vkey(card.es)];if(!c)return;srsInit(c);c.t=Date.now();S.vlog=S.vlog||{};S.vlog[today()]=(S.vlog[today()]||0)+1;const r=rating||RATE[status]||'again';
   if(r==='again'){if(c.ivl)c.lapses=(c.lapses||0)+1;c.ivl=0;c.ease=2.5;c.due=today();c.box=0;save();return;}/* kommt in dieser Runde gleich wieder */
   const ivl=nextIvl(c,r);if(r==='hard')c.ease=Math.max(1.3,c.ease-0.15);else if(r==='easy')c.ease=Math.min(3.5,c.ease+0.15);
   c.ivl=ivl;c.due=addDays(today(),ivl);c.reps=(c.reps||0)+1;c.box=ivl>=60?6:ivl>=21?5:ivl>=7?3:ivl>=2?1:0;
@@ -985,13 +985,33 @@ function vVerbs(m){m.append(backTo(T('Bibliothek'),'ref'));const pool=[];for(con
     h('button',{class:'btn primary',onclick:()=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:shuffle(use).slice(0,8),onBack:()=>go('verbs'),onDone:()=>({label:T('Noch 8 Verben →'),fn:()=>{m.innerHTML='';vVerbs(m);}})});}},T('8 Verben üben →')));}
 
 /* ---------- vocab trainer ---------- */
+/* Stand einer Karte: 0 neu · 1 lernend (< 7 Tage) · 2 gefestigt (7–20) · 3 sicher (≥ 21 Tage Abstand) */
+const cardStage=c=>{srsInit(c);const iv=c.ivl||0;return!(c.reps||c.box)?0:iv<7?1:iv<21?2:3;};
+/* Vokabel-Statistik: fällig in den nächsten 7 Tagen, Stand der Karten, Verlauf (S.vlog), schwierigste Wörter */
+function vVocabStats(m,all){const td=today();m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Vokabel-Statistik')));
+  if(!all.length){m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return;}
+  const wdn=d=>[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+'T12:00:00').getDay()];
+  const bars=(rows,title,note)=>{const mx=Math.max(1,...rows.map(r=>r.v));
+    return h('div',{class:'card statcard'},h('div',{class:'row',style:'justify-content:space-between'},h('div',{class:'kind',style:'margin:0'},title),note?h('span',{class:'muted small'},note):null),
+      h('div',{class:'sbars',style:'grid-template-columns:repeat('+rows.length+',1fr)'},rows.map(r=>h('div',{class:'sbar'+(r.now?' now':''),title:r.tip},h('span',{class:'sv'},r.v||''),h('div',{class:'sb'},h('i',{style:'height:'+Math.round(100*r.v/mx)+'%'})),h('span',{class:'sl'},r.l)))));};
+  const due7=[...Array(7)].map((_,i)=>{const d=addDays(td,i);const v=all.filter(c=>i===0?c.due<=d:c.due===d).length;return{v,l:i===0?T('heute'):i===1?T('morgen'):wdn(d),now:i===0,tip:(i===0?T('heute (inkl. überfällig)'):d)+': '+v+T(' Karten')};});
+  const log=S.vlog||{};const days=[...Array(14)].map((_,i)=>addDays(td,i-13));const hist=days.map((d,i)=>({v:log[d]||0,l:i%2===1?wdn(d):'',now:d===td,tip:d+': '+(log[d]||0)+T(' bewertet')}));
+  const st=[0,0,0,0];all.forEach(c=>{st[cardStage(c)]++;});
+  const hard=all.filter(c=>(c.lapses||0)>0).sort((a,b)=>(b.lapses-a.lapses)||((a.ease||2.5)-(b.ease||2.5))).slice(0,4);
+  m.append(bars(due7,T('Fällig – nächste 7 Tage'),T('Summe: ')+due7.reduce((a,r)=>a+r.v,0)),
+    h('div',{class:'stattiles'},[[st[0],T('neu')],[st[1],T('lernend')],[st[2],T('gefestigt')],[st[3],T('sicher')]].map(([n,l])=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l)))),
+    h('p',{class:'muted small',style:'margin:4px 2px 12px'},T('Abstand: lernend < 7 Tage · gefestigt 7–20 · sicher ≥ 21')),
+    Object.keys(log).length?bars(hist,T('Wiederholt – letzte 14 Tage'),T('Ø ')+Math.round(hist.reduce((a,r)=>a+r.v,0)/14)+T(' pro Tag')):null,
+    hard.length?h('div',{class:'card statcard'},h('div',{class:'kind',style:'margin:0 0 6px'},T('Schwierigste Wörter')),
+      h('div',{class:'hardlist'},hard.map(c=>h('div',{class:'hardrow'},spk(c.es),h('span',{class:'es'},c.es),h('span',{class:'muted small'},trc(c.de)),h('span',{class:'pill warn'},c.lapses+'× '+T('vergessen')))))):null);}
 function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const total=all.length;
-  const boxes=[0,0,0,0];all.forEach(c=>{boxes[c.box>=5?3:c.box>=3?2:c.box>=1?1:0]++;});
+  const boxes=[0,0,0,0];all.forEach(c=>{boxes[cardStage(c)]++;});
+  if(sub==='stats')return vVocabStats(m,all);
   if(sub==='units'){m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Nach ')+UW+T(' üben')),h('p',{class:'sub'},T('Wörter einer ')+UW+T(' abfragen – zählt nicht für die Wiederholungsplanung.')),
     h('div',{class:'grid',style:'gap:8px'},LEVELS.map(L=>{const us=COURSE.units.filter(u=>unitLevel(u)===L.id&&all.some(c=>c.unit===u.id));if(!us.length)return null;
       return h('div',{},h('div',{class:'kind',style:'margin:8px 0 6px'},L.title),h('div',{class:'chips'},us.map(u=>{const w=all.filter(c=>c.unit===u.id);return h('button',{class:'chip',onclick:()=>runVocab(shuffle(w).slice(0,20),'type',false)},h('span',{},'U'+u.n),h('span',{},u.title+' ('+w.length+')'));})));})));
     if(!all.length)m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return;}
-  m.append(h('h1',{},T('Vokabeln')),h('p',{class:'sub'},total?total+T(' Wörter gesammelt · ')+boxes[3]+T(' sitzen sicher · ')+(boxes[0]+boxes[1])+T(' in Arbeit'):T('Wörter kommen automatisch dazu, sobald du sie in einer Lektion siehst.')));
+  m.append(h('div',{class:'row',style:'justify-content:space-between;align-items:baseline;flex-wrap:nowrap'},h('h1',{},T('Vokabeln')),total?h('button',{class:'linkbtn',style:'text-decoration:none;white-space:nowrap',onclick:()=>go('vocab/stats')},T('📊 Statistik')):null),h('p',{class:'sub'},total?total+T(' Wörter gesammelt · ')+boxes[3]+T(' sitzen sicher · ')+(boxes[0]+boxes[1])+T(' in Arbeit'):T('Wörter kommen automatisch dazu, sobald du sie in einer Lektion siehst.')));
   m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 '+(due.length>vocabLeft()?'4px':'12px')},vocabLeft()?T('Heute noch ')+vocabLeft()+T(' Karten'):due.length?T('Tagesziel erreicht ✓'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
     due.length>vocabLeft()?h('p',{class:'muted small',style:'margin:0 0 12px'},vocabLeft()?due.length+T(' fällig insgesamt · ')+(due.length-vocabLeft())+T(' davon freiwillig'):due.length+T(' weitere Karten sind fällig – freiwillig, sonst kommen sie an den nächsten Tagen.')):null,
 
@@ -1228,6 +1248,7 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
   if((b.vocabGoalT||0)>(a.vocabGoalT||0)){o.vocabGoal=b.vocabGoal;o.vocabGoalT=b.vocabGoalT;}
   if((b.planT||0)>(a.planT||0)){o.plan=b.plan;o.planT=b.planT;}
+  o.vlog=Object.assign({},b.vlog||{});for(const[k,v]of Object.entries(a.vlog||{}))o.vlog[k]=Math.max(v,o.vlog[k]||0);
   o.day=Object.assign({},b.day||{});for(const[k,v]of Object.entries(a.day||{}))if(v>(o.day[k]||''))o.day[k]=v;
   o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
   o.origin=a.origin||b.origin;
