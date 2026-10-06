@@ -447,7 +447,10 @@ function vHome(m){
     h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
       return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+T('T12:00:00')).getDay()]),h('div',{class:'small'},v||''));}))));
   /* passt es am Handy nicht ganz, wird „Deine Woche“ kompakter (kein Scrollen) */
-  setTimeout(()=>{const mn=m.closest('main')||m;if(mn.scrollHeight>mn.clientHeight+2)m.querySelector('.weekcard')?.classList.add('tight');},0);
+  /* passt es am Handy nicht ganz (auch 1 px), wird „Deine Woche“ schrittweise kompakter: flach → ganz ausblenden. Mehrfach prüfen (iOS legt Ränder/Höhen verzögert fest) */
+  const fit=()=>{const mn=m.closest('main')||m,wc=m.querySelector('.weekcard');if(!wc||!wc.isConnected)return;const over=()=>mn.scrollHeight>mn.clientHeight;
+    m.classList.remove('homecompact');wc.classList.remove('tight');wc.style.display='';if(!over())return;wc.classList.add('tight');if(!over())return;wc.style.display='none';if(over())m.classList.add('homecompact');};
+  [0,250,800].forEach(t=>setTimeout(fit,t));window.addEventListener('resize',fit,{once:true});
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261007-0025";</script>
+<script>window.PWA=true;window.APP_VERSION="20261007-0028";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -387,6 +387,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .hardrow{display:grid;grid-template-columns:auto auto 1fr auto;gap:8px;align-items:center;padding:5px 0;border-top:1px solid var(--line)}
 .hardrow:first-child{border-top:0}.hardrow .es{font-weight:600}.hardrow .muted{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .updbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:200;background:var(--accent);color:var(--accent-ink);border:0;border-radius:99px;padding:10px 18px;font-weight:600;font-size:14px;box-shadow:0 4px 16px rgba(0,0,0,.2);white-space:nowrap}
+.homecompact .chips .chip{padding:4px 11px}.homecompact .chips{gap:6px}.homecompact .kind{margin-top:8px!important;margin-bottom:4px!important}.homecompact .hero{padding:12px 16px}.homecompact .today{margin-bottom:8px}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt schwarzem Bildschirm eine Meldung mit Neu-laden/Update-Knopf. Fortschritt im localStorage bleibt unberührt. */
@@ -9099,7 +9100,10 @@ function vHome(m){
     h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
       return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+T('T12:00:00')).getDay()]),h('div',{class:'small'},v||''));}))));
   /* passt es am Handy nicht ganz, wird „Deine Woche“ kompakter (kein Scrollen) */
-  setTimeout(()=>{const mn=m.closest('main')||m;if(mn.scrollHeight>mn.clientHeight+2)m.querySelector('.weekcard')?.classList.add('tight');},0);
+  /* passt es am Handy nicht ganz (auch 1 px), wird „Deine Woche“ schrittweise kompakter: flach → ganz ausblenden. Mehrfach prüfen (iOS legt Ränder/Höhen verzögert fest) */
+  const fit=()=>{const mn=m.closest('main')||m,wc=m.querySelector('.weekcard');if(!wc||!wc.isConnected)return;const over=()=>mn.scrollHeight>mn.clientHeight;
+    m.classList.remove('homecompact');wc.classList.remove('tight');wc.style.display='';if(!over())return;wc.classList.add('tight');if(!over())return;wc.style.display='none';if(over())m.classList.add('homecompact');};
+  [0,250,800].forEach(t=>setTimeout(fit,t));window.addEventListener('resize',fit,{once:true});
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 
