@@ -515,7 +515,8 @@ function trToggle(box){const TRI=EX==='de'&&window.INFO_TR||null;if(!TRI)return 
     bind(e,d);});
   return null;}
 /* Vorlesbarer Teil eines Beispiels: ohne (Klammern), „= Übersetzung“, „+ Präsens“-Angaben, ✓ und deutsche Teile nach „–“ */
-const looksDe=t=>/[äöß]|(?<!g)ü|\b(ich|du|er|wir|ihr|und|der|die|das|ist|bin|nicht|auch|mit|für|oder|aber|doch|sollen|können|Kontext)\b/.test(t);
+/* nicht vorlesen: deutsche oder englische Erklärteile (Erklärsprache) */
+const looksDe=t=>/[äöß]|(?<!g)ü|(?<!\p{L})(ich|du|er|wir|ihr|und|der|die|das|ist|bin|nicht|auch|mit|für|oder|aber|doch|sollen|können|Kontext|the|you|your|have|had|should|could|would|only|with|and|is|are|was|of|to|it|that|this|what|when|where|why|how|I)(?!\p{L})/u.test(t);
 function speakable(t){t=t.replace(/\s*\([^)]*\)/g,'').replace(/\s*=\s*[^·]*/g,' ').replace(/\s*\+\s*[A-ZÄÖÜ][\wäöüß]*\.?(\s+[A-ZÄÖÜ][\wäöüß]*\.?)*/g,'').replace(/✓/g,'');
   t=t.split(/\s+–\s+/).filter(x=>!looksDe(x)).join(' – ').replace(/\s*\+\s*/g,', ');return t.replace(/\s+·\s*$/,'').replace(/\s{2,}/g,' ').trim();}
 function addSpeakTo(el){const t=speakable(el.textContent);if(!t||looksDe(t))return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}
