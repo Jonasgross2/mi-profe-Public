@@ -1,8 +1,8 @@
 /* Neustart (Sprachwechsel, Update …): erst Startbildschirm mit Drehsymbol zeigen, dann neu laden – sonst wirkt die App kurz eingefroren */
 function bootScreen(){let b=document.getElementById('boot');if(!b){b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">🇪🇸</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
-/* Startbildschirm ruhig ausblenden: mindestens 1,5 s ab dem Öffnen sichtbar, dann 0,4 s weiches Ausblenden (kein Flackern) */
-let bootHiding=false;function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
-  setTimeout(()=>{bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(900,1500-performance.now()));} /* mind. 0,9 s nach dem Aufbau, damit Nachkorrekturen (Startseite) unsichtbar bleiben */
+/* Startbildschirm ruhig ausblenden: mindestens 2 s ab dem Öffnen und 1 s nach dem Aufbau sichtbar, dann 0,4 s weiches Ausblenden (kein Flackern) */
+let bootHiding=false,HOMEFIT=null;function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
+  setTimeout(()=>{if(HOMEFIT)HOMEFIT();bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(1000,2000-performance.now()));} 
 function reloadApp(){bootScreen();setTimeout(()=>location.reload(),60);}
 /* ===== Mi profe · Engine (sprachunabhängig – alles Sprachspezifische steht im Paket LANG, siehe lang.js) ===== */
 (function(){
@@ -458,7 +458,9 @@ function vHome(m){
   const fit=reset=>{const mn=m.closest('main')||m,wc=m.querySelector('.weekcard');if(!wc||!wc.isConnected)return;const over=()=>mn.scrollHeight>mn.clientHeight;
     if(reset){m.classList.remove('homecompact');wc.classList.remove('tight');wc.style.display='';}
     if(!over())return;if(!wc.classList.contains('tight')){wc.classList.add('tight');if(!over())return;}if(wc.style.display!=='none'){wc.style.display='none';if(!over())return;}m.classList.add('homecompact');};
-  fit(true);[250,800].forEach(t=>setTimeout(()=>fit(false),t));const w0=innerWidth;window.addEventListener('resize',()=>{if(innerWidth!==w0)fit(true);else fit(false);},{once:true}); /* nur beim Drehen zurücksetzen – iOS meldet sonst kleine Höhenänderungen */
+  /* sofort messen (beim Wechsel auf die Startseite, vor dem ersten Bild); beim App-Start misst hideBoot() kurz vor dem Ausblenden noch einmal endgültig –
+     iOS meldet in den ersten Momenten eine zu kleine Höhe. Danach nur noch beim Drehen (Breite ändert sich). */
+  fit(true);HOMEFIT=()=>{if(m.isConnected)fit(true);};const w0=innerWidth;const onRs=()=>{if(!m.isConnected)return window.removeEventListener('resize',onRs);if(innerWidth!==w0||document.getElementById('boot'))fit(true);};window.addEventListener('resize',onRs);
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 
