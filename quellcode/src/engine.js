@@ -2,7 +2,7 @@
 function bootScreen(){let b=document.getElementById('boot');if(!b){b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">🇪🇸</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
 /* Startbildschirm ruhig ausblenden: mindestens 1,5 s ab dem Öffnen sichtbar, dann 0,4 s weiches Ausblenden (kein Flackern) */
 let bootHiding=false;function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
-  setTimeout(()=>{bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(0,1500-performance.now()));}
+  setTimeout(()=>{bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(900,1500-performance.now()));} /* mind. 0,9 s nach dem Aufbau, damit Nachkorrekturen (Startseite) unsichtbar bleiben */
 function reloadApp(){bootScreen();setTimeout(()=>location.reload(),60);}
 /* ===== Mi profe · Engine (sprachunabhängig – alles Sprachspezifische steht im Paket LANG, siehe lang.js) ===== */
 (function(){
@@ -21,7 +21,7 @@ const KEY=LANG.key;const SHARED='mi-profe-shared';
 /* Erklärsprache (unabhängig von der App-Sprache): Sprache der Erklärungen & Übersetzungen im Kurs. Deutsch + alle Sprachen mit COURSE_TR[Lernsprache], nie die Lernsprache selbst. */
 const EX_NAMES={de:'Deutsch',en:'Englisch',pt:'Portugiesisch',es:'Spanisch',it:'Italienisch',fr:'Französisch'};
 const EX_FLAGS={de:'🇩🇪',en:'🇬🇧',pt:'🇧🇷',es:'🇪🇸',it:'🇮🇹',fr:'🇫🇷'};
-const EX_LANGS=['de'].concat(Object.keys(window.COURSE_TR&&COURSE_TR[LANG.code]||{})).filter((c,i,a)=>c!==LANG.code&&a.indexOf(c)===i);
+const EX_LANGS=['de'].concat(window.PACKS&&PACKS.ex[LANG.code]||Object.keys(window.COURSE_TR&&COURSE_TR[LANG.code]||{})).filter((c,i,a)=>c!==LANG.code&&a.indexOf(c)===i);
 let EX=null,EX_SET,exOld=false;try{const sh=JSON.parse(localStorage.getItem(SHARED)||'null');if(sh){EX=EX_SET=sh.ex;exOld=!!sh.name;}}catch(e){}
 /* ohne Wahl: wie die App-Sprache; sonst bei neuen Nutzern Englisch, bei bestehenden (bisher immer Deutsch) Deutsch */
 if(!EX_LANGS.includes(EX))EX=EX_LANGS.includes(UI)?UI:UI!=='de'&&!exOld&&EX_LANGS.includes('en')?'en':'de';
@@ -34,7 +34,7 @@ const DEFAULT={placement:null,lessons:{},srs:{},streak:{last:null,count:0},stats
 let S;
 function load(){try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
   let sh=null;try{sh=JSON.parse(localStorage.getItem(SHARED));}catch(e){}
-  if(!sh){let es={};try{es=JSON.parse(localStorage.getItem(LANGS.es.key))||{};}catch(e){}sh={name:es.name,gender:es.gender,settings:es.settings};}
+  if(!sh){let es={};try{es=JSON.parse(localStorage.getItem(LANGS.es&&LANGS.es.key||'espanol-lehrer-v1'))||{};}catch(e){}sh={name:es.name,gender:es.gender,settings:es.settings};}
   if(sh.name)S.name=sh.name;if(sh.surname)S.surname=sh.surname;else if(sh.name)delete S.surname;if(sh.gender)S.gender=sh.gender;if(sh.settings)S.settings=sh.settings;
   S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),S);S.settings=Object.assign({},DEFAULT.settings,S.settings||{});if(!S.settings.geminiModel||S.settings.geminiModel==='gemini-2.5-flash')S.settings.geminiModel='gemini-flash-latest';}
 function saveShared(){try{localStorage.setItem(SHARED,JSON.stringify({lang:LANG.code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}}
@@ -458,7 +458,7 @@ function vHome(m){
   const fit=reset=>{const mn=m.closest('main')||m,wc=m.querySelector('.weekcard');if(!wc||!wc.isConnected)return;const over=()=>mn.scrollHeight>mn.clientHeight;
     if(reset){m.classList.remove('homecompact');wc.classList.remove('tight');wc.style.display='';}
     if(!over())return;if(!wc.classList.contains('tight')){wc.classList.add('tight');if(!over())return;}if(wc.style.display!=='none'){wc.style.display='none';if(!over())return;}m.classList.add('homecompact');};
-  fit(true);[250,800].forEach(t=>setTimeout(()=>fit(false),t));window.addEventListener('resize',()=>fit(true),{once:true});
+  fit(true);[250,800].forEach(t=>setTimeout(()=>fit(false),t));const w0=innerWidth;window.addEventListener('resize',()=>{if(innerWidth!==w0)fit(true);else fit(false);},{once:true}); /* nur beim Drehen zurücksetzen – iOS meldet sonst kleine Höhenänderungen */
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 
@@ -1214,7 +1214,8 @@ function vSettingsAll(m){const st=S.settings;
 
 
 function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & Profil')));
-  const avail=Object.values(LANGS).filter(L=>L.course&&L.course.units.length);const planned=LANG_PLANNED.filter(([c])=>!avail.some(L=>L.code===c));
+  /* Lernsprachen aus dem Verzeichnis PACKS (auch nicht geladene Pakete); ohne Verzeichnis (Einzeldatei) aus dem Register */
+  const avail=window.PACKS?PACKS.learn:Object.values(LANGS).filter(L=>L.course&&L.course.units.length).map(L=>({code:L.code,name:L.name,flag:L.flag}));const planned=LANG_PLANNED.filter(([c])=>!avail.some(L=>L.code===c));
   const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';reloadApp();};
   m.append(h('div',{class:'kind',style:'margin-top:8px'},T('Ich lerne')),h('div',{class:'chips'},
     ...avail.map(L=>h('button',{class:'chip'+(L.code===LANG.code?' on':''),onclick:()=>pick(L.code)},h('span',{},L.flag),h('span',{},T(L.name)))),

@@ -1,0 +1,5980 @@
+window.COURSE={units:[]};
+/* ================= UNIDAD 0 · EL PRIMER DÍA ================= */
+COURSE.units.push({id:'u0',n:'0',title:'El primer día',sub:'Begrüßen · sich vorstellen · nach dem Befinden fragen · Aussprache',
+goals:['Hola, buenos días …','¿Cómo te llamas? / ¿Cómo se llama usted?','¿Qué tal? – Bien, ¿y tú?','tú vs. usted','Verabschiedungen','Aussprache: c, ch, g, h, j, ll, ñ, qu, r/rr, v, y, z'],
+situacion:{title:'Erster Tag an der FIB',npc:'Laia',scene:'Erster Tag im MIRI an der FIB (Campus Nord, UPC). Vor dem Hörsaal A5 spricht dich eine Kommilitonin an.',role:'Du bist Laia, 24, Masterstudentin aus Girona, freundlich und neugierig. Du duzt Jonas.',goal:'Begrüße Laia, stell dich vor (Name), frag, wie es ihr geht, und verabschiede dich passend.'},
+lessons:[
+{id:'l1',title:'Begrüßen & vorstellen',desc:'Hola, buenos días, ¿cómo te llamas?',steps:[
+ {t:'info',title:'Begrüßung nach Tageszeit',html:`<p>Im Spanischen hängt die Begrüßung von der Uhrzeit ab – und Spanier essen spät, deshalb verschieben sich die Grenzen:</p>
+ <table><tr><th>Begrüßung</th><th>Wann?</th><th>Deutsch</th></tr>
+ <tr><td class="es-t">Buenos días</td><td>ca. 6:00 – 14:00</td><td>Guten Morgen / Tag</td></tr>
+ <tr><td class="es-t">Buenas tardes</td><td>ca. 14:00 – 20:00</td><td>Guten Tag / Abend</td></tr>
+ <tr><td class="es-t">Buenas noches</td><td>ab ca. 20:00</td><td>Guten Abend / Gute Nacht</td></tr>
+ <tr><td class="es-t">Hola</td><td>immer</td><td>Hallo</td></tr></table>
+ <div class="ex">Sehr typisch: <span class="es-t">¡Hola, buenos días!</span> – beides kombiniert.</div>
+ <div class="ojo">„Buenas tardes“ sagt man in Spanien bis ca. 20–21 Uhr – also auch um 19 Uhr, wo wir „Guten Abend“ sagen würden.</div>`},
+ {t:'vocab',title:'Begrüßen & vorstellen',items:[['hola','hallo'],['buenos días','guten Morgen / guten Tag'],['buenas tardes','guten Tag (nachmittags)'],['buenas noches','guten Abend / gute Nacht'],['¿Cómo te llamas?','Wie heißt du?'],['¿Cómo se llama usted?','Wie heißen Sie?'],['me llamo …','ich heiße …'],['soy …','ich bin …'],['¿y tú?','und du?'],['¿y usted?','und Sie?']]},
+ {t:'info',title:'Sich vorstellen: tú oder usted?',html:`<table><tr><th></th><th>informell (tú)</th><th>formell (usted)</th></tr>
+ <tr><td>Name erfragen</td><td class="es-t">¿Cómo te llamas?</td><td class="es-t">¿Cómo se llama usted?</td></tr>
+ <tr><td>Antwort</td><td class="es-t">Me llamo Jonas. ¿Y tú?</td><td class="es-t">Soy Jonas Gross. ¿Y usted?</td></tr></table>
+ <p><b>tú</b> = du, <b>usted</b> = Sie. Spanier duzen sehr schnell – unter Studierenden, Kollegen und oft sogar mit Chefs. <b>usted</b> benutzt du bei älteren Menschen, in Behörden oder sehr formellen Situationen.</p>
+ <div class="ojo"><span class="es-t">usted</span> verwendet die Verbform der 3. Person (wie „er/sie“): <span class="es-t">¿Cómo se llama usted?</span></div>`},
+ {t:'mc',q:'Es ist 16:00 Uhr. Wie begrüßt du deine neue Kollegin?',opts:['Buenas tardes','Buenos días','Buenas noches'],a:0,why:'Zwischen ca. 14:00 und 20:00 Uhr sagt man <i>buenas tardes</i>.'},
+ {t:'mc',q:'Wie fragst du deinen Kommilitonen nach seinem Namen?',opts:['¿Cómo te llamas?','¿Cómo se llama usted?','¿Cómo me llamo?'],a:0,why:'Unter Studierenden duzt man sich: <i>¿Cómo te llamas?</i>'},
+ {t:'gap',q:'Hola, me ___ Jonas. ¿Y tú?',a:['llamo'],hint:'llamarse = heißen'},
+ {t:'gap',q:'Buenos días, ¿cómo se ___ usted?',a:['llama'],why:'Bei <i>usted</i> nimmt man die 3. Person: <i>se llama</i>.'},
+ {t:'order',es:'¿Cómo te llamas?',de:'Wie heißt du?'},
+ {t:'dialog',place:'FIB, Campus Nord',title:'Der erste Kurstag',scene:'Du kommst in den Seminarraum. Ein Student setzt sich neben dich.',lines:[
+  {n:'Marc',es:'¡Hola! Soy Marc. ¿Y tú? ¿Cómo te llamas?',de:'Hallo! Ich bin Marc. Und du? Wie heißt du?'},
+  {you:true,opts:[{es:'Hola, me llamo Jonas.',ok:true},{es:'Buenas noches, me llamo Jonas.',ok:false,why:'Es ist morgens im Seminar – <i>buenas noches</i> passt erst ab ca. 20 Uhr.'},{es:'¿Cómo se llama usted?',ok:false,why:'Marc hat nach <b>deinem</b> Namen gefragt – und unter Studierenden duzt man sich.'}]},
+  {n:'Marc',es:'Encantado, Jonas.',de:'Freut mich, Jonas.'}]},
+ {t:'tr',de:'Hallo, ich heiße Jonas. Und du?',a:['Hola, me llamo Jonas. ¿Y tú?','Hola, soy Jonas. ¿Y tú?'],hint:'¿Y tú?'},
+ {t:'tr',de:'Guten Tag (morgens), wie heißen Sie?',a:['Buenos días, ¿cómo se llama usted?','Buenos días, ¿cómo se llama?'],why:'Formell: <i>¿Cómo se llama usted?</i> – morgens <i>buenos días</i>.'},
+ {t:'speak',es:'Hola, buenos días. Me llamo Jonas.',de:'Hallo, guten Morgen. Ich heiße Jonas.',tip:'Das <b>ll</b> in <i>llamo</i> spricht man wie ein deutsches <b>j</b> („jamo“).'}
+]},
+{id:'l2',title:'Wie geht’s? & Verabschieden',desc:'¿Qué tal? · Adiós · Hasta luego',steps:[
+ {t:'vocab',title:'Nach dem Befinden fragen',items:[['¿Qué tal?','Wie geht’s?'],['¿Cómo estás?','Wie geht es dir?'],['¿Cómo está usted?','Wie geht es Ihnen?'],['bien','gut'],['muy bien','sehr gut'],['regular','so lala'],['mal','schlecht'],['gracias','danke'],['encantado / encantada','freut mich (m / w)'],['mucho gusto','sehr erfreut']]},
+ {t:'info',title:'¿Qué tal? – Bien, ¿y tú?',html:`<table><tr><th>Frage</th><th>Antwort</th></tr>
+ <tr><td class="es-t">¿Qué tal?</td><td class="es-t">Bien, ¿y tú?</td></tr>
+ <tr><td class="es-t">¿Cómo estás? <span class="muted">(tú)</span></td><td class="es-t">Muy bien, gracias. ¿Y tú?</td></tr>
+ <tr><td class="es-t">¿Cómo está usted? <span class="muted">(usted)</span></td><td class="es-t">Bien, gracias. ¿Y usted?</td></tr></table>
+ <div class="ex"><b>¿Qué tal?</b> passt immer – formell und informell. Oft ist es nur ein Gruß, keine echte Frage: <span class="es-t">¡Hola! ¿Qué tal?</span></div>
+ <div class="ojo">Wenn du dich freust, jemanden kennenzulernen: Männer sagen <span class="es-t">encantado</span>, Frauen <span class="es-t">encantada</span> – es richtet sich nach dem/der <b>Sprechenden</b>.</div>`},
+ {t:'vocab',title:'Verabschieden',items:[['adiós','tschüss / auf Wiedersehen'],['hasta luego','bis später / tschüss'],['hasta pronto','bis bald'],['hasta mañana','bis morgen'],['hasta la próxima','bis zum nächsten Mal'],['hasta la vista','auf Wiedersehen'],['chao','ciao (umgangssprachlich)']]},
+ {t:'match',q:'Begrüßung oder Verabschiedung? Ordne die Bedeutung zu.',pairs:[['Hasta luego','bis später'],['¿Qué tal?','wie geht’s?'],['Hasta mañana','bis morgen'],['Encantada','freut mich (w)'],['Buenas noches','guten Abend']]},
+ {t:'mc',q:'Pablo trifft Laia. Er sagt: „Encantado“. Laia antwortet:',opts:['Encantada.','Encantado.','Encantados.'],a:0,why:'Laia ist eine Frau → <i>encantada</i>. Die Form richtet sich nach der Person, die spricht.'},
+ {t:'gap',q:'– ¿Qué tal? – Muy ___, gracias. ¿Y ___?',a:['bien','tú|tu'],why:'<i>bien</i> = gut; <i>¿y tú?</i> = und du?'},
+ {t:'mc',q:'Du gehst um 18 Uhr aus der Uni und siehst deine Kommilitonen morgen wieder. Was sagst du?',opts:['¡Hasta mañana!','¡Buenos días!','¡Mucho gusto!'],a:0},
+ {t:'dialog',place:'Secretaría de la FIB',title:'Im Studierendensekretariat',scene:'Du gehst zur Secretaría, um deine Unterlagen abzugeben. Eine ältere Mitarbeiterin begrüßt dich. Hier ist <b>usted</b> angebracht.',lines:[
+  {n:'Sra. Pujol',es:'Buenos días. ¿Cómo se llama usted?',de:'Guten Morgen. Wie heißen Sie?'},
+  {you:true,opts:[{es:'Buenos días. Me llamo Jonas Gross.',ok:true},{es:'Buenas noches. Me llamo Jonas Gross.',ok:false,why:'Sie hat <i>buenos días</i> gesagt – es ist Vormittag.'},{es:'Bien, ¿y tú?',ok:false,why:'Das ist eine Antwort auf <i>¿Qué tal?</i>, nicht auf die Frage nach dem Namen.'}]},
+  {n:'Sra. Pujol',es:'Muy bien, señor Gross. ¿Cómo está usted?',de:'Sehr gut, Herr Gross. Wie geht es Ihnen?'},
+  {you:true,opts:[{es:'Muy bien, gracias. ¿Y usted?',ok:true},{es:'Muy bien, gracias. ¿Y tú?',ok:false,why:'Sie siezt dich – also antwortest du mit <i>¿y usted?</i>'},{es:'Hasta luego.',ok:false,why:'Du willst dich noch nicht verabschieden 😉'}]},
+  {n:'Sra. Pujol',es:'Bien, gracias. Un momento, por favor.',de:'Gut, danke. Einen Moment, bitte.'},
+  {n:'Sra. Pujol',es:'Ya está. ¡Hasta luego!',de:'Fertig. Auf Wiedersehen!'},
+  {you:true,opts:[{es:'¡Gracias! ¡Adiós!',ok:true},{es:'¡Encantado! ¿Qué tal?',ok:false,why:'Sie verabschiedet sich – du auch: <i>Adiós / Hasta luego</i>.'}]}]},
+ {t:'tr',de:'Wie geht es Ihnen?',a:['¿Cómo está usted?','¿Cómo está?','¿Qué tal?'],why:'formell: <i>¿Cómo está usted?</i>'},
+ {t:'tr',de:'Gut, danke. Und dir?',a:['Bien, gracias. ¿Y tú?','Bien, gracias, ¿y tú?'],hint:'„und dir?“ = ¿y tú?'},
+ {t:'listen',es:'Hasta luego',de:'bis später'},
+ {t:'listen',es:'Muy bien, gracias',de:'sehr gut, danke'}
+]},
+{id:'l3',title:'Aussprache',desc:'Die Buchstaben, die anders klingen als im Deutschen',steps:[
+ {t:'info',title:'So klingt Spanisch',html:`<table><tr><th>Buchstabe</th><th>Beispiel</th><th>Aussprache</th></tr>
+ <tr><td><b>c</b> + a, o, u</td><td class="es-t">Cataluña</td><td>wie <b>k</b></td></tr>
+ <tr><td><b>c</b> + e, i / <b>z</b></td><td class="es-t">cinco, Zara</td><td>gelispelt wie engl. <i>th</i> (in Lateinamerika wie <b>s</b>)</td></tr>
+ <tr><td><b>ch</b></td><td class="es-t">Chupa Chups</td><td>wie <b>tsch</b></td></tr>
+ <tr><td><b>g</b> + a, o, u</td><td class="es-t">gracias, gol</td><td>wie <b>g</b> – bei <b>gue, gui</b> ist das u stumm: <span class="es-t">Miguel</span></td></tr>
+ <tr><td><b>g</b> + e, i / <b>j</b></td><td class="es-t">Argentina, jamón</td><td>wie <b>ch</b> in „Sache“</td></tr>
+ <tr><td><b>h</b></td><td class="es-t">hotel, hola</td><td>stumm!</td></tr>
+ <tr><td><b>ll</b> / <b>y</b></td><td class="es-t">llamo, playa</td><td>wie <b>j</b> in „Junge“ – <b>y</b> am Wortende wie <b>i</b>: <span class="es-t">Uruguay</span></td></tr>
+ <tr><td><b>ñ</b></td><td class="es-t">España</td><td>wie <b>gn</b> in „Champagner“</td></tr>
+ <tr><td><b>qu</b></td><td class="es-t">queso</td><td>wie <b>k</b>, das u ist stumm</td></tr>
+ <tr><td><b>r</b> / <b>rr</b></td><td class="es-t">Barcelona / Renfe, perro</td><td>einfach gerollt / am Wortanfang & <b>rr</b> stark gerollt</td></tr>
+ <tr><td><b>v</b></td><td class="es-t">Valencia</td><td>wie <b>b</b> – kein Unterschied zu b</td></tr></table>
+ <div class="ojo">In Barcelona hörst du auch Katalanisch – das klingt anders (z. B. <i>Bon dia</i>). Hier lernen wir castellano.</div>`},
+ {t:'mc',q:'Wie spricht man das <b>h</b> in <span class="es-t">hotel</span>?',say:'hotel',opts:['gar nicht','wie deutsches h','wie ch in Sache'],a:0},
+ {t:'mc',q:'Welches Wort hat den „ch“-Laut wie in <i>Sache</i>?',opts:['jamón','chico','queso','gracias'],a:0,why:'<b>j</b> (und g vor e/i) klingt wie ch in „Sache“. <b>ch</b> in <i>chico</i> klingt wie „tsch“.'},
+ {t:'mc',q:'Bei welchem Wort wird das <b>u</b> NICHT gesprochen?',opts:['Miguel','Uruguay','ciudad'],a:0,why:'In <b>gue/gui</b> und <b>que/qui</b> ist das u stumm.'},
+ {t:'listen',es:'Barcelona',task:'Hör zu und schreib den Städtenamen.'},
+ {t:'listen',es:'España',why:'Das <b>ñ</b> – auf dem Mac: <span class="kbd">⌥ n</span>, dann <span class="kbd">n</span>. Oder die Taste unter dem Eingabefeld.'},
+ {t:'listen',es:'gracias'},
+ {t:'listen',es:'Valencia',why:'v klingt wie b, c vor e/i gelispelt.'},
+ {t:'speak',es:'Erre que erre ruedan las ruedas de Renfe.',de:'Zungenbrecher mit rr (Renfe = spanische Bahn)',tip:'r am Wortanfang und rr stark rollen!'},
+ {t:'speak',es:'Jamás comerás un jamón como el jamón de Jabugo.',de:'Zungenbrecher mit j',tip:'j = ch wie in „Sache“.'},
+ {t:'speak',es:'Zapatos Zapata para el cine, la cena y la plaza.',de:'Zungenbrecher mit z/c',tip:'z und c vor e/i: Zungenspitze zwischen die Zähne (wie engl. th).'}
+]}],
+resumen:`<h3>Begrüßen</h3><table><tr><td class="es-t">Hola</td><td>Hallo</td></tr><tr><td class="es-t">Buenos días</td><td>bis ca. 14 Uhr</td></tr><tr><td class="es-t">Buenas tardes</td><td>14–20 Uhr</td></tr><tr><td class="es-t">Buenas noches</td><td>ab 20 Uhr</td></tr></table>
+<h3>Sich vorstellen</h3><table><tr><th>informell (tú)</th><th>formell (usted)</th></tr><tr><td class="es-t">¿Cómo te llamas?</td><td class="es-t">¿Cómo se llama usted?</td></tr><tr><td class="es-t">Soy … / Me llamo … ¿Y tú?</td><td class="es-t">Soy … / Me llamo … ¿Y usted?</td></tr></table>
+<h3>Nach dem Befinden fragen</h3><table><tr><td class="es-t">¿Qué tal? / ¿Cómo estás?</td><td class="es-t">Bien / Muy bien / Regular, ¿y tú?</td></tr><tr><td class="es-t">¿Cómo está usted?</td><td class="es-t">Muy bien, gracias. ¿Y usted?</td></tr></table>
+<h3>Verabschieden</h3><p class="es-t">Adiós · Hasta luego · Hasta pronto · Hasta mañana · Hasta la próxima</p>
+<h3>Aussprache</h3><p>h stumm · j / ge, gi = ch (Sache) · ll, y = j · ñ = gn · qu = k · c (e, i), z = th · v = b · rr gerollt</p>`});
+
+/* ================= UNIDAD 1 · MIS METAS ================= */
+COURSE.units.push({id:'u1',n:'1',title:'Mis metas',sub:'Nach der Bedeutung fragen · Zahlen bis 10 · Herkunft · Fragen stellen · warum man Spanisch lernt · Zustimmung & Widerspruch',
+goals:['Substantive: Genus & Plural','el/la/los/las · un/una','Zahlen 0–10','¿Qué significa …?','ser + Subjektpronomen','¿De dónde eres?','Verben auf -ar','Fragewörter','no · también · tampoco'],
+situacion:{title:'Intercambio de idiomas in Gràcia',npc:'Pau',scene:'Ein Sprach-Tandem-Abend in einer Bar in Gràcia. Ein Spanier setzt sich zu dir an den Tisch.',role:'Du bist Pau, 27, aus Barcelona, arbeitest in einer Tech-Firma und lernst Deutsch. Du duzt Jonas.',goal:'Stell dich vor, sag, woher du kommst, welche Sprachen du sprichst und warum du Spanisch lernst. Frag Pau dasselbe.'},
+lessons:[
+{id:'l1',title:'Substantive & Artikel',desc:'el producto, la empresa, los hoteles',steps:[
+ {t:'info',title:'Männlich oder weiblich?',html:`<p>Im Spanischen gibt es nur <b>zwei</b> Geschlechter – kein „das“.</p>
+ <table><tr><th>Endung</th><th>meist …</th><th>Beispiele</th></tr>
+ <tr><td><b>-o</b></td><td>männlich (el)</td><td class="es-t">el producto, el equipo</td></tr>
+ <tr><td><b>-a, -dad, -ción</b></td><td>weiblich (la)</td><td class="es-t">la empresa, la ciudad, la exposición</td></tr>
+ <tr><td><b>-e</b> / Konsonant</td><td>beides möglich → mit Artikel lernen!</td><td class="es-t">el hotel, la imagen, el arte</td></tr></table>
+ <div class="ojo">Ausnahmen: <span class="es-t">el día</span>, <span class="es-t">el programa</span>, <span class="es-t">la foto</span>, <span class="es-t">la mano</span>.</div>`},
+ {t:'info',title:'Artikel & Plural',html:`<table><tr><th></th><th>männlich</th><th>weiblich</th></tr>
+ <tr><td>bestimmt Sg.</td><td class="es-t">el producto</td><td class="es-t">la página</td></tr>
+ <tr><td>bestimmt Pl.</td><td class="es-t">los productos</td><td class="es-t">las páginas</td></tr>
+ <tr><td>unbestimmt Sg.</td><td class="es-t">un producto</td><td class="es-t">una página</td></tr>
+ <tr><td>unbestimmt Pl.</td><td class="es-t">unos productos</td><td class="es-t">unas páginas</td></tr></table>
+ <p><b>Plural:</b> Vokal + <b>-s</b> (<span class="es-t">equipo → equipos</span>), Konsonant + <b>-es</b> (<span class="es-t">hotel → hoteles</span>, <span class="es-t">ciudad → ciudades</span>).</p>
+ <div class="ojo">Akzent auf der letzten Silbe fällt im Plural weg: <span class="es-t">exposición → exposiciones</span>, <span class="es-t">jamón → jamones</span>.</div>
+ <p><span class="es-t">unos / unas</span> heißt „einige“.</p>`},
+ {t:'vocab',title:'Wichtige Wörter',items:[['la empresa','das Unternehmen'],['el producto','das Produkt'],['el hotel','das Hotel'],['la ciudad','die Stadt'],['el país','das Land'],['la comida','das Essen'],['el deporte','der Sport'],['la tecnología','die Technologie'],['la red social','das soziale Netzwerk'],['la publicidad','die Werbung'],['el éxito','der Erfolg'],['la feria','die Messe'],['el turismo','der Tourismus'],['la fiesta','das Fest / die Party']]},
+ {t:'mc',q:'Welcher Artikel? ___ ciudad',opts:['la','el'],a:0,keep:true,why:'Wörter auf <b>-dad</b> sind weiblich.'},
+ {t:'mc',q:'Welcher Artikel? ___ problema',opts:['el','la'],a:0,keep:true,why:'Ausnahme! Viele Wörter auf <b>-ma</b> aus dem Griechischen sind männlich: <i>el problema, el programa, el sistema</i>.'},
+ {t:'mc',q:'Welcher Artikel? ___ información',opts:['la','el'],a:0,keep:true,why:'Wörter auf <b>-ción</b> sind weiblich.'},
+ {t:'gap',task:'Setz den Plural ein.',q:'el hotel → los ___',a:['hoteles'],why:'Konsonant + -es.'},
+ {t:'gap',task:'Setz den Plural ein.',q:'la exposición → las ___',a:['exposiciones'],why:'Konsonant + -es, und der Akzent fällt weg.'},
+ {t:'gap',task:'Ergänze den unbestimmten Artikel (un / una).',q:'Zara es ___ empresa y la paella es ___ comida.',a:['una','una']},
+ {t:'match',q:'Singular und Plural',pairs:[['el equipo','los equipos'],['la ciudad','las ciudades'],['el jamón','los jamones'],['la red','las redes'],['el país','los países']]},
+ {t:'tr',de:'die Unternehmen (Plural)',a:['las empresas']},
+ {t:'tr',de:'ein Hotel',a:['un hotel']}
+]},
+{id:'l2',title:'Zahlen 0–10 & ¿Qué significa?',desc:'Im Unterricht nach Wörtern fragen',steps:[
+ {t:'vocab',title:'Zahlen 0–10',items:[['cero','0'],['uno','1'],['dos','2'],['tres','3'],['cuatro','4'],['cinco','5'],['seis','6'],['siete','7'],['ocho','8'],['nueve','9'],['diez','10']]},
+ {t:'listen',es:'siete',task:'Welche Zahl hörst du? Schreib sie als Wort.'},
+ {t:'listen',es:'cuatro',task:'Welche Zahl hörst du? Schreib sie als Wort.'},
+ {t:'listen',es:'nueve',task:'Welche Zahl hörst du? Schreib sie als Wort.'},
+ {t:'gap',q:'tres + cinco = ___',a:['ocho']},
+ {t:'gap',q:'diez – cuatro = ___',a:['seis']},
+ {t:'info',title:'Im Unterricht nachfragen',html:`<table><tr><th>Frage</th><th>Antwort</th></tr>
+ <tr><td class="es-t">¿Qué significa «red social»?</td><td class="es-t">Creo que significa …</td></tr>
+ <tr><td class="es-t">¿«Red» significa «Netz»?</td><td class="es-t">Sí. / No. / No sé.</td></tr>
+ <tr><td class="es-t">¿Cómo se dice «Messe» en español?</td><td class="es-t">Se dice «feria».</td></tr>
+ <tr><td class="es-t">¿Puedes repetir, por favor?</td><td>Kannst du das wiederholen?</td></tr>
+ <tr><td class="es-t">Más despacio, por favor.</td><td>Langsamer, bitte.</td></tr></table>`},
+ {t:'vocab',title:'Sätze für den Unterricht',items:[['¿Qué significa …?','Was bedeutet …?'],['creo que significa …','ich glaube, es bedeutet …'],['no sé','ich weiß nicht'],['¿Cómo se dice … en español?','Wie sagt man … auf Spanisch?'],['¿Puedes repetir, por favor?','Kannst du das wiederholen, bitte?'],['más despacio, por favor','langsamer, bitte']]},
+ {t:'mc',q:'Du verstehst das Wort „sostenibilidad“ nicht. Was fragst du?',opts:['¿Qué significa «sostenibilidad»?','¿Cómo te llamas «sostenibilidad»?','¿Qué tal «sostenibilidad»?'],a:0},
+ {t:'tr',de:'Wie sagt man „Werbung“ auf Spanisch?',a:['¿Cómo se dice «Werbung» en español?','¿Cómo se dice Werbung en español?']},
+ {t:'tr',de:'Ich weiß nicht.',a:['No sé','Yo no sé']}
+]},
+{id:'l3',title:'ser & Herkunft',desc:'¿De dónde eres? – Soy de Alemania.',steps:[
+ {t:'info',title:'Das Verb ser (sein)',html:`<table><tr><th>Pronomen</th><th>ser</th></tr>
+ <tr><td>yo</td><td class="es-t">soy</td></tr><tr><td>tú</td><td class="es-t">eres</td></tr><tr><td>él / ella / usted</td><td class="es-t">es</td></tr>
+ <tr><td>nosotros / nosotras</td><td class="es-t">somos</td></tr><tr><td>vosotros / vosotras</td><td class="es-t">sois</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">son</td></tr></table>
+ <div class="ex"><b>Subjektpronomen</b> (yo, tú …) lässt man normalerweise weg – die Verbform zeigt schon, wer gemeint ist: <span class="es-t">Soy de Alemania.</span><br>Man benutzt sie nur zur Betonung oder Unterscheidung: <span class="es-t">Yo soy de Mannheim y ella es de Girona.</span></div>
+ <div class="ojo">In Lateinamerika sagt man <span class="es-t">ustedes</span> statt <span class="es-t">vosotros</span> – auch beim Duzen.</div>`},
+ {t:'conj',verb:'ser',de:'sein',forms:['soy','eres','es','somos','sois','son']},
+ {t:'info',title:'Woher kommst du?',html:`<table><tr><th>Frage</th><th>Antwort</th></tr>
+ <tr><td class="es-t">¿De dónde eres?</td><td class="es-t">Soy de Alemania.</td></tr>
+ <tr><td class="es-t">¿De dónde es usted?</td><td class="es-t">Soy de Holanda.</td></tr>
+ <tr><td class="es-t">¿Eres de España?</td><td class="es-t">No, soy de Chile.</td></tr>
+ <tr><td class="es-t">¿Sois de Colombia?</td><td class="es-t">Sí, de Bogotá.</td></tr>
+ <tr><td class="es-t">¿Son ustedes de Madrid?</td><td class="es-t">No, somos de Vigo.</td></tr></table>
+ <p><b>Verneinung:</b> <span class="es-t">no</span> steht immer <b>vor dem Verb</b>: <span class="es-t">Messi no es de Barcelona.</span> In der Antwort oft doppelt: <span class="es-t">No, no soy de Madrid.</span></p>`},
+ {t:'vocab',title:'Länder',items:[['Alemania','Deutschland'],['España','Spanien'],['Austria','Österreich'],['Suiza','die Schweiz'],['Holanda','die Niederlande'],['Francia','Frankreich'],['Italia','Italien'],['Inglaterra','England'],['Estados Unidos','die USA'],['México','Mexiko'],['Argentina','Argentinien'],['Colombia','Kolumbien'],['Perú','Peru'],['Chile','Chile']]},
+ {t:'gap',q:'– ¿De dónde ___? – ___ de Alemania, de Mannheim.',a:['eres','soy'],why:'tú → <i>eres</i>, yo → <i>soy</i>.'},
+ {t:'gap',q:'Laia y Marc ___ de Cataluña.',a:['son']},
+ {t:'gap',q:'Nosotros ___ estudiantes de la UPC.',a:['somos']},
+ {t:'mc',q:'Wähle den richtigen Satz:',opts:['Messi no es de Barcelona, es de Argentina.','Messi es no de Barcelona, es de Argentina.','No Messi es de Barcelona.'],a:0,why:'<b>no</b> steht direkt vor dem Verb.'},
+ {t:'order',es:'¿De dónde es usted?',de:'Woher kommen Sie?'},
+ {t:'tr',de:'Ich bin aus Deutschland, aus Mannheim.',a:['Soy de Alemania, de Mannheim.']},
+ {t:'tr',de:'Seid ihr aus Spanien?',a:['¿Sois de España?','¿Vosotros sois de España?']},
+ {t:'tr',de:'Nein, ich bin nicht aus Madrid.',a:['No, no soy de Madrid.','No, yo no soy de Madrid.','No soy de Madrid.']}
+]},
+{id:'l4',title:'Verben auf -ar & Fragewörter',desc:'hablar, estudiar, trabajar · ¿Quién? ¿Dónde? ¿Para qué?',steps:[
+ {t:'info',title:'Regelmäßige Verben auf -ar',html:`<p>Man streicht <b>-ar</b> und hängt die Endungen an:</p>
+ <table><tr><th></th><th>hablar (sprechen)</th><th>Endung</th></tr>
+ <tr><td>yo</td><td class="es-t">hablo</td><td>-o</td></tr><tr><td>tú</td><td class="es-t">hablas</td><td>-as</td></tr><tr><td>él / ella / usted</td><td class="es-t">habla</td><td>-a</td></tr>
+ <tr><td>nosotros/-as</td><td class="es-t">hablamos</td><td>-amos</td></tr><tr><td>vosotros/-as</td><td class="es-t">habláis</td><td>-áis</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">hablan</td><td>-an</td></tr></table>
+ <p>Genauso: <span class="es-t">estudiar, trabajar, buscar, necesitar, usar, practicar, viajar, escuchar, tocar</span>.</p>
+ <div class="ex">Betonung auf dem Stamm (<b>ha</b>blo, <b>ha</b>blan) – außer bei nosotros / vosotros (habl<b>a</b>mos, habl<b>áis</b>).</div>`},
+ {t:'vocab',title:'Verben auf -ar',items:[['hablar','sprechen'],['estudiar','studieren / lernen'],['trabajar','arbeiten'],['buscar','suchen'],['necesitar','brauchen'],['usar','benutzen'],['practicar','üben / betreiben (Sport)'],['viajar','reisen'],['escuchar','hören / zuhören'],['tocar un instrumento','ein Instrument spielen']]},
+ {t:'conj',verb:'trabajar',de:'arbeiten',forms:['trabajo','trabajas','trabaja','trabajamos','trabajáis','trabajan']},
+ {t:'conj',verb:'estudiar',de:'studieren',forms:['estudio','estudias','estudia','estudiamos','estudiáis','estudian']},
+ {t:'vocab',title:'Sprachen',items:[['el español / el castellano','Spanisch'],['el alemán','Deutsch'],['el inglés','Englisch'],['el francés','Französisch'],['el catalán','Katalanisch'],['el italiano','Italienisch'],['el chino','Chinesisch']]},
+ {t:'info',title:'Fragewörter',html:`<table><tr><td class="es-t">¿Qué?</td><td>Was? / Welche?</td><td class="es-t">¿Qué idiomas hablas?</td></tr>
+ <tr><td class="es-t">¿Quién? / ¿Quiénes?</td><td>Wer? (Sg. / Pl.)</td><td class="es-t">¿Quiénes estudian chino?</td></tr>
+ <tr><td class="es-t">¿Dónde?</td><td>Wo?</td><td class="es-t">¿Dónde trabajas?</td></tr>
+ <tr><td class="es-t">¿De dónde?</td><td>Woher?</td><td class="es-t">¿De dónde es Marco?</td></tr>
+ <tr><td class="es-t">¿Para qué?</td><td>Wozu?</td><td class="es-t">¿Para qué estudias español?</td></tr>
+ <tr><td class="es-t">¿Cómo?</td><td>Wie?</td><td class="es-t">¿Cómo te llamas?</td></tr></table>
+ <div class="ojo">Fragewörter tragen <b>immer</b> einen Akzent. Und Fragen beginnen mit <b>¿</b> (Mac: <span class="kbd">⌥ ⇧ ß</span>).</div>`},
+ {t:'gap',q:'Yo ___ (hablar) inglés y alemán.',a:['hablo']},
+ {t:'gap',q:'¿Tú ___ (trabajar) en una empresa?',a:['trabajas']},
+ {t:'gap',q:'Mis compañeros ___ (estudiar) en la FIB.',a:['estudian']},
+ {t:'gap',q:'¿Vosotros ___ (buscar) unas prácticas?',a:['buscáis'],why:'vosotros → <b>-áis</b> (mit Akzent).'},
+ {t:'mc',q:'___ estudias español? – Para trabajar en España.',opts:['¿Para qué','¿Dónde','¿Quién'],a:0},
+ {t:'mc',q:'___ trabajas? – En un banco.',opts:['¿Dónde','¿De dónde','¿Qué'],a:0},
+ {t:'order',es:'¿Qué idiomas hablas?',de:'Welche Sprachen sprichst du?'},
+ {t:'tr',de:'Ich lerne Spanisch, um in Barcelona zu arbeiten.',a:['Estudio español para trabajar en Barcelona.','Aprendo español para trabajar en Barcelona.'],hint:'„um … zu“ = para + Infinitiv'},
+ {t:'tr',de:'Wo arbeitest du?',a:['¿Dónde trabajas?']},
+ {t:'listen',es:'Necesito español para hablar con mis colegas.',de:'Ich brauche Spanisch, um mit meinen Kollegen zu sprechen.'}
+]},
+{id:'l5',title:'Zustimmen & widersprechen',desc:'Yo también · Yo tampoco · Yo sí · Yo no',steps:[
+ {t:'info',title:'también, tampoco, sí, no',html:`<table><tr><th>Aussage</th><th>gleiche Meinung</th><th>andere Meinung</th></tr>
+ <tr><td class="es-t">Hablo español.</td><td class="es-t">Yo también.</td><td class="es-t">Yo no.</td></tr>
+ <tr><td class="es-t">No hablo francés.</td><td class="es-t">Yo tampoco.</td><td class="es-t">Yo sí.</td></tr></table>
+ <div class="ex">Trick: Bei einer <b>positiven</b> Aussage → <i>también / no</i>. Bei einer <b>negativen</b> Aussage → <i>tampoco / sí</i>.</div>
+ <p>Im Satz: <span class="es-t">Lucas y Sarah no practican deporte, pero yo sí.</span></p>`},
+ {t:'mc',q:'– Trabajo en una empresa. – (Du arbeitest auch.)',opts:['Yo también.','Yo tampoco.','Yo sí.'],a:0},
+ {t:'mc',q:'– No hablo chino. – (Du sprichst auch kein Chinesisch.)',opts:['Yo tampoco.','Yo también.','Yo no.'],a:0,why:'Negative Aussage + gleiche Meinung → <i>tampoco</i>.'},
+ {t:'mc',q:'– No practico deporte. – (Du schon!)',opts:['Yo sí.','Yo también.','Yo no.'],a:0},
+ {t:'mc',q:'– Escucho música en español. – (Du nicht.)',opts:['Yo no.','Yo tampoco.','Yo sí.'],a:0},
+ {t:'dialog',place:'Bar en Gràcia',title:'Intercambio de idiomas',scene:'Sprach-Tandem in einer Bar in Gràcia. Du sitzt mit Carla an einem Tisch.',lines:[
+  {n:'Carla',es:'¡Hola! ¿Qué tal? Soy Carla. ¿De dónde eres?',de:'Hallo! Wie geht’s? Ich bin Carla. Woher kommst du?'},
+  {you:true,opts:[{es:'Bien. Soy Jonas, de Alemania.',ok:true},{es:'Bien. Estoy de Alemania.',ok:false,why:'Herkunft immer mit <b>ser</b>: <i>soy de …</i>'},{es:'Bien. Soy Jonas, en Alemania.',ok:false,why:'Herkunft: <b>de</b> (aus), nicht <i>en</i> (in).'}]},
+  {n:'Carla',es:'¡Qué bien! Yo soy de aquí, de Barcelona. ¿Qué idiomas hablas?',de:'Wie schön! Ich bin von hier, aus Barcelona. Welche Sprachen sprichst du?'},
+  {you:true,opts:[{es:'Hablo alemán, inglés y un poco de español.',ok:true},{es:'Hablas alemán, inglés y un poco de español.',ok:false,why:'Du sprichst über dich: <i>yo hablo</i>.'},{es:'Hablo Alemania e Inglaterra.',ok:false,why:'Das sind Länder – die Sprachen heißen <i>alemán, inglés</i>.'}]},
+  {n:'Carla',es:'Yo hablo catalán, castellano e inglés. No hablo alemán.',de:'Ich spreche Katalanisch, Spanisch und Englisch. Ich spreche kein Deutsch.'},
+  {you:true,prompt:'Du sprichst kein Katalanisch. Reagiere auf etwas, das ihr gemeinsam habt …',opts:[{es:'¡Yo tampoco hablo catalán!',ok:true},{es:'Yo también hablo catalán.',ok:false,why:'Du sprichst ja kein Katalanisch 😉'},{es:'Yo sí.',ok:false,why:'„Yo sí“ hieße: Ich spreche schon Deutsch – stimmt zwar, aber du willst über Katalanisch sprechen.'}]},
+  {n:'Carla',es:'¡Ja, ja! ¿Y para qué estudias español?',de:'Haha! Und wozu lernst du Spanisch?'},
+  {you:true,opts:[{es:'Para estudiar un máster en la UPC.',ok:true},{es:'Porque estudiar un máster.',ok:false,why:'„Um zu“ = <b>para</b> + Infinitiv.'},{es:'Para estudio un máster.',ok:false,why:'Nach <b>para</b> kommt der Infinitiv: <i>para estudiar</i>.'}]},
+  {n:'Carla',es:'¡Genial! Bienvenido a Barcelona.',de:'Super! Willkommen in Barcelona.'}]},
+ {t:'tr',de:'Ich spreche kein Französisch. – Ich auch nicht.',a:['No hablo francés. – Yo tampoco.','No hablo francés. Yo tampoco.','Yo no hablo francés. Yo tampoco.']},
+ {t:'tr',de:'Sie arbeiten, aber ich nicht.',a:['Ellos trabajan, pero yo no.','Trabajan, pero yo no.','Ellas trabajan, pero yo no.']},
+ {t:'free',task:'Stell dich in 4–6 Sätzen vor: Name, Herkunft, Wohnort, Sprachen, wozu du Spanisch lernst, was du (nicht) machst.',hint:'Me llamo … Soy de … Hablo … Estudio español para … No practico … pero …',focus:'ser, Verben auf -ar, para + Infinitiv, no/también/tampoco',model:'Hola, me llamo Jonas. Soy de Alemania, pero ahora vivo en Barcelona. Hablo alemán, inglés y un poco de español. Estudio un máster en la UPC. Estudio español para hablar con mis compañeros y para trabajar en España. Practico deporte, pero no toco un instrumento.'}
+]}],
+resumen:`<h3>Substantive & Artikel</h3><table><tr><th></th><th>männlich</th><th>weiblich</th></tr><tr><td>Sg.</td><td class="es-t">el / un producto</td><td class="es-t">la / una empresa</td></tr><tr><td>Pl.</td><td class="es-t">los / unos productos</td><td class="es-t">las / unas empresas</td></tr></table>
+<p>-o → meist m · -a, -dad, -ción → meist w · Ausnahmen: el día, el programa, la foto. Plural: Vokal + s, Konsonant + es.</p>
+<h3>ser</h3><table><tr><td>soy · eres · es</td><td>somos · sois · son</td></tr></table>
+<h3>Verben auf -ar (hablar)</h3><table><tr><td>hablo · hablas · habla</td><td>hablamos · habláis · hablan</td></tr></table>
+<h3>Herkunft</h3><table><tr><td class="es-t">¿De dónde eres?</td><td class="es-t">Soy de Alemania.</td></tr><tr><td class="es-t">¿Eres de España?</td><td class="es-t">No, soy de Chile.</td></tr></table>
+<h3>Fragewörter</h3><p class="es-t">¿Qué? · ¿Quién/es? · ¿Dónde? · ¿De dónde? · ¿Para qué? · ¿Cómo?</p>
+<h3>Zustimmung & Widerspruch</h3><table><tr><td class="es-t">Hablo español.</td><td class="es-t">Yo también. / Yo no.</td></tr><tr><td class="es-t">No hablo francés.</td><td class="es-t">Yo tampoco. / Yo sí.</td></tr></table>
+<h3>Zahlen 0–10</h3><p class="es-t">cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez</p>`});
+;
+/* ================= UNIDAD 2 · METAS PROFESIONALES ================= */
+COURSE.units.push({id:'u2',n:'2',title:'Metas profesionales',sub:'Jemanden vorstellen · buchstabieren · Alter · Telefon & E-Mail · Studium & Beruf · Tätigkeiten beschreiben',
+goals:['este / esta / estos / estas','encantado/-a','Alphabet & buchstabieren','Berufe (m/w)','Zahlen ab 11','tener + Alter','Telefon, E-Mail, Adresse','Verben auf -er / -ir','de + el = del'],
+situacion:{title:'Networking auf einer Tech-Messe',npc:'Sra. Ruiz',scene:'Du bist auf einer Tech-Messe in der Fira de Barcelona (Montjuïc) und suchst ein Praktikum. Am Stand einer Firma spricht dich eine Recruiterin an.',role:'Du bist Elena Ruiz, Recruiterin bei einer Software-Firma in Barcelona (Poblenou). Du siezt Jonas zuerst, bietest dann aber das Du an. Du fragst nach Studium, Alter, Erfahrung, Sprachen und Kontaktdaten (móvil, correo).',goal:'Stell dich vor, sag, was du studierst und wo du gearbeitet hast (EY, Wirtschaftsprüfung/IT), und gib deine Handynummer und E-Mail-Adresse (buchstabieren!) an.'},
+lessons:[
+{id:'l1',title:'Jemanden vorstellen',desc:'Este es Marc · Encantado · Mucho gusto',steps:[
+ {t:'info',title:'Este, esta, estos, estas',html:`<p>Um jemanden vorzustellen, benutzt man <b>Demonstrativpronomen</b> (dies/das ist …):</p>
+ <table><tr><th></th><th>männlich</th><th>weiblich</th></tr>
+ <tr><td>Singular</td><td class="es-t">Este es el señor Vega.</td><td class="es-t">Esta es Paula Díaz.</td></tr>
+ <tr><td>Plural</td><td class="es-t">Estos son Andrés y Pablo.</td><td class="es-t">Estas son Ana y Elena.</td></tr></table>
+ <p>Antwort: <span class="es-t">Encantado</span> (Mann spricht) / <span class="es-t">Encantada</span> (Frau spricht) / <span class="es-t">Mucho gusto</span> (alle).</p>
+ <div class="ojo">Gemischte Gruppe → männliche Form: <span class="es-t">Estos son Laia y Marc.</span></div>`},
+ {t:'mc',q:'Du stellst deine Mitbewohnerin Núria vor:',opts:['Esta es Núria.','Este es Núria.','Estas son Núria.'],a:0},
+ {t:'mc',q:'Du stellst zwei Kommilitonen vor, Marc und Laia:',opts:['Estos son Marc y Laia.','Estas son Marc y Laia.','Este es Marc y Laia.'],a:0,why:'Gemischte Gruppe → <i>estos</i>.'},
+ {t:'gap',q:'– Marta, ___ es Pablo, un compañero del máster. – Encantad___.',a:['este','a'],why:'Pablo ist ein Mann → <i>este</i>. Marta spricht → <i>encantada</i>.'},
+ {t:'info',title:'Das Alphabet & buchstabieren',html:`<table><tr><td>a <span class="es-t">a</span></td><td>b <span class="es-t">be</span></td><td>c <span class="es-t">ce</span></td><td>d <span class="es-t">de</span></td><td>e <span class="es-t">e</span></td><td>f <span class="es-t">efe</span></td><td>g <span class="es-t">ge</span></td></tr>
+ <tr><td>h <span class="es-t">hache</span></td><td>i <span class="es-t">i</span></td><td>j <span class="es-t">jota</span></td><td>k <span class="es-t">ka</span></td><td>l <span class="es-t">ele</span></td><td>m <span class="es-t">eme</span></td><td>n <span class="es-t">ene</span></td></tr>
+ <tr><td>ñ <span class="es-t">eñe</span></td><td>o <span class="es-t">o</span></td><td>p <span class="es-t">pe</span></td><td>q <span class="es-t">cu</span></td><td>r <span class="es-t">erre</span></td><td>s <span class="es-t">ese</span></td><td>t <span class="es-t">te</span></td></tr>
+ <tr><td>u <span class="es-t">u</span></td><td>v <span class="es-t">uve</span></td><td>w <span class="es-t">uve doble</span></td><td>x <span class="es-t">equis</span></td><td>y <span class="es-t">i griega</span></td><td>z <span class="es-t">zeta</span></td><td></td></tr></table>
+ <table><tr><td class="es-t">¿Cómo se escribe?</td><td>Wie schreibt man das?</td></tr><tr><td class="es-t">¿Se escribe con hache?</td><td>Schreibt man das mit h?</td></tr>
+ <tr><td class="es-t">¿Con acento o sin acento?</td><td>Mit oder ohne Akzent?</td></tr><tr><td class="es-t">¿Con mayúscula?</td><td>Groß geschrieben?</td></tr></table>`},
+ {t:'vocab',title:'Vorstellen & buchstabieren',items:[['este / esta es …','das ist … (m / w)'],['encantado / encantada','freut mich'],['mucho gusto','sehr erfreut'],['¿Cómo se escribe?','Wie schreibt man das?'],['el apellido','der Nachname'],['el nombre','der Vorname / Name'],['con / sin acento','mit / ohne Akzent'],['la mayúscula / la minúscula','Groß- / Kleinbuchstabe']]},
+ {t:'listen',es:'jota, o, ene, a, ese',task:'Hör zu: Welcher Name wird buchstabiert? Schreib die Buchstabennamen ab (z. B. „jota, o, …“).',alt:['jota o ene a ese'],why:'J-O-N-A-S'},
+ {t:'mc',q:'Wie buchstabiert man „G“ auf Spanisch?',say:'ge',opts:['ge','je','gue'],a:0,why:'G = <i>ge</i> (gesprochen wie „che“), J = <i>jota</i>.'},
+ {t:'mc',q:'„Gross“ – du sagst, dass man das Doppel-S mit zwei S schreibt. Wie heißt der Buchstabe S?',opts:['ese','es','sé'],a:0},
+ {t:'tr',de:'Wie schreibt man deinen Nachnamen?',a:['¿Cómo se escribe tu apellido?']},
+ {t:'speak',es:'Gross: ge, erre, o, ese, ese.',de:'Deinen Nachnamen buchstabieren'}
+]},
+{id:'l2',title:'Berufe',desc:'ingeniero, ingeniera, analista …',steps:[
+ {t:'info',title:'Berufsbezeichnungen: männlich & weiblich',html:`<table><tr><th>Regel</th><th>männlich</th><th>weiblich</th></tr>
+ <tr><td>-o → -a</td><td class="es-t">ingeniero, médico, informático</td><td class="es-t">ingeniera, médica, informática</td></tr>
+ <tr><td>-or → -ora</td><td class="es-t">profesor, programador, diseñador</td><td class="es-t">profesora, programadora, diseñadora</td></tr>
+ <tr><td>-e, -ista, Konsonant: gleich</td><td class="es-t">el estudiante, el analista</td><td class="es-t">la estudiante, la analista</td></tr></table>
+ <div class="ojo"><span class="es-t">el jefe / la jefa</span> – Ausnahme. Und: Bei Berufen <b>kein Artikel</b>: <span class="es-t">Soy ingeniero.</span> (nicht „soy un ingeniero“)</div>`},
+ {t:'vocab',title:'Berufe',items:[['el ingeniero / la ingeniera','Ingenieur/in'],['el informático / la informática','Informatiker/in'],['el programador / la programadora','Programmierer/in'],['el analista / la analista','Analyst/in'],['el auditor / la auditora','Wirtschaftsprüfer/in'],['el consultor / la consultora','Berater/in'],['el / la estudiante','Student/in'],['el profesor / la profesora','Lehrer/in, Dozent/in'],['el médico / la médica','Arzt / Ärztin'],['el diseñador / la diseñadora','Designer/in'],['el / la recepcionista','Rezeptionist/in'],['el jefe / la jefa','Chef/in']]},
+ {t:'gap',task:'Weibliche Form:',q:'el programador → la ___',a:['programadora']},
+ {t:'gap',task:'Weibliche Form:',q:'el analista → la ___',a:['analista'],why:'-ista bleibt gleich.'},
+ {t:'gap',task:'Weibliche Form:',q:'el informático → la ___',a:['informática']},
+ {t:'mc',q:'Wie sagst du „Ich bin Student“?',opts:['Soy estudiante.','Soy un estudiante.','Estoy estudiante.'],a:0,why:'Beruf: <b>ser</b> ohne Artikel.'},
+ {t:'match',q:'Wer macht was?',pairs:[['el programador','escribe código'],['la profesora','trabaja en una universidad'],['el auditor','revisa las cuentas'],['la recepcionista','trabaja en un hotel'],['el médico','trabaja en un hospital']]},
+ {t:'tr',de:'Laia ist Ingenieurin.',a:['Laia es ingeniera.']},
+ {t:'tr',de:'Ich bin Informatiker.',a:['Soy informático.']}
+]},
+{id:'l3',title:'Zahlen, Telefon, E-Mail & Alter',desc:'once … mil · arroba · ¿Cuántos años tienes?',steps:[
+ {t:'vocab',title:'Zahlen 11–20',items:[['once','11'],['doce','12'],['trece','13'],['catorce','14'],['quince','15'],['dieciséis','16'],['diecisiete','17'],['dieciocho','18'],['diecinueve','19'],['veinte','20']]},
+ {t:'info',title:'Zahlen ab 21',html:`<table><tr><td class="es-t">21 veintiuno</td><td class="es-t">22 veintidós</td><td class="es-t">23 veintitrés</td><td class="es-t">29 veintinueve</td></tr>
+ <tr><td class="es-t">30 treinta</td><td class="es-t">31 treinta y uno</td><td class="es-t">40 cuarenta</td><td class="es-t">50 cincuenta</td></tr>
+ <tr><td class="es-t">60 sesenta</td><td class="es-t">70 setenta</td><td class="es-t">80 ochenta</td><td class="es-t">90 noventa</td></tr>
+ <tr><td class="es-t">100 cien</td><td class="es-t">101 ciento uno</td><td class="es-t">200 doscientos</td><td class="es-t">500 quinientos</td></tr>
+ <tr><td class="es-t">1000 mil</td><td class="es-t">2000 dos mil</td><td class="es-t">2026 dos mil veintiséis</td><td></td></tr></table>
+ <div class="ex">Bis 29 in einem Wort (veinti…), ab 31 mit <b>y</b>: <span class="es-t">treinta y cinco</span>. Genau 100 = <span class="es-t">cien</span>, danach <span class="es-t">ciento</span>.</div>`},
+ {t:'vocab',title:'Zehner & Hunderter',items:[['veinte','20'],['treinta','30'],['cuarenta','40'],['cincuenta','50'],['sesenta','60'],['setenta','70'],['ochenta','80'],['noventa','90'],['cien','100'],['mil','1000']]},
+ {t:'listen',es:'veintitrés',task:'Schreib die Zahl als Wort.'},
+ {t:'listen',es:'cuarenta y ocho',task:'Schreib die Zahl als Wort.'},
+ {t:'gap',q:'15 = ___ · 16 = ___',a:['quince','dieciséis']},
+ {t:'gap',q:'67 = ___',a:['sesenta y siete']},
+ {t:'info',title:'Alter mit tener',html:`<table><tr><th>tener (haben)</th><th></th></tr><tr><td>yo</td><td class="es-t">tengo</td></tr><tr><td>tú</td><td class="es-t">tienes</td></tr><tr><td>él / ella / usted</td><td class="es-t">tiene</td></tr><tr><td>nosotros/-as</td><td class="es-t">tenemos</td></tr><tr><td>vosotros/-as</td><td class="es-t">tenéis</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">tienen</td></tr></table>
+ <div class="ojo">Das Alter „hat“ man: <span class="es-t">Tengo 23 años.</span> – nicht „soy 23“! Frage: <span class="es-t">¿Cuántos años tienes?</span></div>`},
+ {t:'conj',verb:'tener',de:'haben',forms:['tengo','tienes','tiene','tenemos','tenéis','tienen']},
+ {t:'info',title:'Telefon, E-Mail, Adresse',html:`<table><tr><td class="es-t">¿Cuál es tu (número de) móvil?</td><td class="es-t">Es el 612 34 56 78.</td></tr>
+ <tr><td class="es-t">¿Cuál es tu correo electrónico?</td><td class="es-t">Es pablo.ruiz@correo.es</td></tr>
+ <tr><td class="es-t">¿Cuál es tu dirección?</td><td class="es-t">Calle Mallorca, número 40.</td></tr></table>
+ <table><tr><td><b>@</b> <span class="es-t">arroba</span></td><td><b>.</b> <span class="es-t">punto</span></td><td><b>-</b> <span class="es-t">guion</span></td><td><b>_</b> <span class="es-t">guion bajo</span></td></tr>
+ <tr><td><span class="es-t">c/</span> = calle</td><td><span class="es-t">av.</span> = avenida</td><td><span class="es-t">pl.</span> = plaza</td><td><span class="es-t">n.º</span> = número</td></tr></table>
+ <div class="ex">Telefonnummern liest man in Spanien meist in Paaren oder Dreiergruppen: <span class="es-t">seis uno dos, treinta y cuatro, cincuenta y seis, setenta y ocho</span>.</div>`},
+ {t:'vocab',title:'Kontaktdaten',items:[['el móvil','das Handy'],['el correo electrónico','die E-Mail'],['la dirección','die Adresse'],['la calle','die Straße'],['arroba','@'],['punto','Punkt'],['guion','Bindestrich'],['¿Cuántos años tienes?','Wie alt bist du?']]},
+ {t:'gap',q:'– ¿Cuántos años ___? – ___ 24 años.',a:['tienes','tengo']},
+ {t:'mc',q:'Wie liest man „laia_p@gmail.com“?',opts:['laia guion bajo pe arroba gmail punto com','laia guion pe a gmail punto com','laia guion bajo pe arroba gmail coma com'],a:0},
+ {t:'tr',de:'Ich bin 24 Jahre alt.',a:['Tengo 24 años.','Tengo veinticuatro años.']},
+ {t:'tr',de:'Wie ist deine Handynummer?',a:['¿Cuál es tu móvil?','¿Cuál es tu número de móvil?','¿Cuál es tu número de teléfono?','¿Cuál es tu teléfono?']}
+]},
+{id:'l4',title:'Verben auf -er/-ir · Studium & Beruf',desc:'aprender, vivir · ¿Qué haces? · ¿Dónde trabajas?',steps:[
+ {t:'info',title:'Regelmäßige Verben auf -er und -ir',html:`<table><tr><th></th><th>aprender (lernen)</th><th>vivir (leben, wohnen)</th></tr>
+ <tr><td>yo</td><td class="es-t">aprendo</td><td class="es-t">vivo</td></tr><tr><td>tú</td><td class="es-t">aprendes</td><td class="es-t">vives</td></tr><tr><td>él / ella / usted</td><td class="es-t">aprende</td><td class="es-t">vive</td></tr>
+ <tr><td>nosotros/-as</td><td class="es-t">aprendemos</td><td class="es-t">vivimos</td></tr><tr><td>vosotros/-as</td><td class="es-t">aprendéis</td><td class="es-t">vivís</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">aprenden</td><td class="es-t">viven</td></tr></table>
+ <div class="ex">-er und -ir unterscheiden sich nur bei <b>nosotros</b> (-emos / -imos) und <b>vosotros</b> (-éis / -ís).</div>
+ <p>Genauso: <span class="es-t">leer, comer, beber, responder · escribir, asistir, abrir</span>.</p>`},
+ {t:'conj',verb:'vivir',de:'wohnen, leben',forms:['vivo','vives','vive','vivimos','vivís','viven']},
+ {t:'conj',verb:'aprender',de:'lernen',forms:['aprendo','aprendes','aprende','aprendemos','aprendéis','aprenden']},
+ {t:'info',title:'Über Studium und Beruf sprechen',html:`<table><tr><td class="es-t">¿Qué haces? / ¿A qué te dedicas?</td><td class="es-t">Soy estudiante. / Trabajo como analista.</td></tr>
+ <tr><td class="es-t">¿Dónde trabajas?</td><td class="es-t">Trabajo en un banco / en una consultora.</td></tr>
+ <tr><td class="es-t">¿Qué estudias?</td><td class="es-t">Estudio Informática.</td></tr>
+ <tr><td class="es-t">¿Dónde estudias?</td><td class="es-t">En la Universidad Politécnica de Cataluña.</td></tr>
+ <tr><td class="es-t">¿Dónde vives?</td><td class="es-t">Vivo en Barcelona, en el barrio de Gràcia.</td></tr></table>
+ <div class="ex">Formell: <span class="es-t">¿Qué hace usted? ¿Dónde trabaja usted?</span></div>`},
+ {t:'vocab',title:'Studium & Arbeit',items:[['¿Qué haces?','Was machst du (beruflich)?'],['trabajar como …','als … arbeiten'],['la consultora','die Beratungsfirma'],['el banco','die Bank'],['la universidad','die Universität'],['el máster','der Master'],['las prácticas','das Praktikum'],['vivir','wohnen, leben'],['aprender','lernen'],['escribir','schreiben'],['leer','lesen'],['el barrio','das Stadtviertel']]},
+ {t:'gap',q:'Yo ___ (vivir) en Barcelona y mis padres ___ (vivir) en Alemania.',a:['vivo','viven']},
+ {t:'gap',q:'Nosotros ___ (aprender) español en la universidad.',a:['aprendemos']},
+ {t:'gap',q:'¿Vosotros ___ (escribir) muchos correos?',a:['escribís'],why:'-ir, vosotros → <b>-ís</b>.'},
+ {t:'gap',q:'Marc ___ (leer) el periódico.',a:['lee']},
+ {t:'order',es:'Trabajo como auditor en una empresa internacional.',de:'Ich arbeite als Prüfer in einem internationalen Unternehmen.'},
+ {t:'dialog',place:'Gimnasio en el Eixample',title:'Anmeldung im Fitnessstudio',scene:'Du meldest dich in einem Fitnessstudio an. Der Mitarbeiter füllt ein Formular aus.',lines:[
+  {n:'Recepción',es:'Hola, buenas tardes. ¿Tu nombre, por favor?',de:'Hallo, guten Tag. Dein Name, bitte?'},
+  {you:true,opts:[{es:'Jonas Gross.',ok:true},{es:'Tengo Jonas Gross.',ok:false,why:'Name: <i>Soy / Me llamo …</i> oder einfach nur der Name.'}]},
+  {n:'Recepción',es:'¿Cómo se escribe tu apellido?',de:'Wie schreibt man deinen Nachnamen?'},
+  {you:true,opts:[{es:'Ge, erre, o, ese, ese.',ok:true},{es:'Je, erre, o, es, es.',ok:false,why:'G = <i>ge</i>, S = <i>ese</i>.'}]},
+  {n:'Recepción',es:'Perfecto. ¿Cuántos años tienes?',de:'Perfekt. Wie alt bist du?'},
+  {you:true,opts:[{es:'Tengo veinticuatro años.',ok:true},{es:'Soy veinticuatro años.',ok:false,why:'Alter immer mit <b>tener</b>: <i>tengo … años</i>.'},{es:'Tienes veinticuatro años.',ok:false,why:'Über dich selbst: <i>tengo</i>.'}]},
+  {n:'Recepción',es:'¿Y a qué te dedicas?',de:'Und was machst du beruflich?'},
+  {you:true,opts:[{es:'Soy estudiante. Estudio un máster en la UPC.',ok:true},{es:'Soy un estudiante. Estudio un máster en la UPC.',ok:false,why:'Bei Berufen kein Artikel: <i>Soy estudiante</i>.'}]},
+  {n:'Recepción',es:'¡Ah! Tenemos descuento para estudiantes. ¿Y tu correo electrónico?',de:'Ah! Wir haben Studentenrabatt. Und deine E-Mail?'},
+  {you:true,opts:[{es:'Jonas punto gross arroba web punto de.',ok:true},{es:'Jonas coma gross a web coma de.',ok:false,why:'„.“ = <i>punto</i>, „@“ = <i>arroba</i>.'}]},
+  {n:'Recepción',es:'Muy bien. ¡Bienvenido!',de:'Sehr gut. Willkommen!'}]},
+ {t:'tr',de:'Wo wohnst du?',a:['¿Dónde vives?']},
+ {t:'tr',de:'Ich studiere Informatik in Barcelona.',a:['Estudio Informática en Barcelona.','Estudio informática en Barcelona.']}
+]},
+{id:'l5',title:'Tätigkeiten beschreiben',desc:'Llevo la agenda · Soy responsable de …',steps:[
+ {t:'vocab',title:'Tätigkeiten im Job',items:[['llevar la contabilidad','die Buchhaltung führen'],['llevar la agenda','den Terminkalender führen'],['organizar seminarios','Seminare organisieren'],['asistir a ferias y congresos','Messen und Kongresse besuchen'],['responder a los correos','die E-Mails beantworten'],['ser responsable de …','verantwortlich sein für …'],['contactar con clientes','Kunden kontaktieren'],['el cliente / la clienta','der Kunde / die Kundin'],['el departamento','die Abteilung'],['revisar','prüfen, überprüfen']]},
+ {t:'info',title:'de + el = del',html:`<p>Wenn <b>de</b> und <b>el</b> zusammentreffen, verschmelzen sie zu <b>del</b> (ähnlich wie „von dem“ → „vom“):</p>
+ <table><tr><td class="es-t">Es responsable del contacto con clientes.</td><td>de + el</td></tr>
+ <tr><td class="es-t">Es responsable de la agenda.</td><td>bleibt</td></tr>
+ <tr><td class="es-t">Es responsable de los empleados.</td><td>bleibt</td></tr>
+ <tr><td class="es-t">Es responsable de las empresas.</td><td>bleibt</td></tr></table>
+ <div class="ojo">Nur <b>de + el</b> verschmilzt. Später lernst du auch <b>a + el = al</b>.</div>`},
+ {t:'gap',q:'Ana es responsable ___ departamento de marketing.',a:['del']},
+ {t:'gap',q:'Soy responsable ___ página web.',a:['de la']},
+ {t:'gap',q:'Mi jefe ___ (asistir) a muchas ferias.',a:['asiste']},
+ {t:'gap',q:'Yo ___ (responder) a los correos de los clientes.',a:['respondo']},
+ {t:'mc',q:'Was macht jemand, der „lleva la contabilidad“?',opts:['die Buchhaltung','den Terminkalender','die Webseite'],a:0},
+ {t:'tr',de:'Ich bin verantwortlich für den Kontakt mit Kunden.',a:['Soy responsable del contacto con clientes.','Soy responsable del contacto con los clientes.']},
+ {t:'free',task:'Beschreibe in 4–6 Sätzen deine Arbeit bei EY (oder einen Job, den du dir wünschst): Was machst du, wo, wofür bist du verantwortlich, mit wem sprichst du?',hint:'Trabajo como … en … · Soy responsable de/del … · Reviso … · Hablo con clientes · Escribo …',focus:'Verben auf -ar/-er/-ir, Berufe, ser responsable de, del',model:'Trabajo como auditor de IT en EY, una empresa internacional en Mannheim. Reviso los sistemas informáticos de los clientes. Soy responsable del contacto con algunos clientes. Escribo informes y respondo a muchos correos. A veces asisto a reuniones con el equipo.'}
+]}],
+resumen:`<h3>Jemanden vorstellen</h3><table><tr><td class="es-t">Este es el señor Vega. / Esta es Paula.</td><td class="es-t">Encantado / Encantada / Mucho gusto.</td></tr><tr><td class="es-t">Estos son Andrés y Pablo. / Estas son Ana y Elena.</td><td></td></tr></table>
+<h3>Buchstabieren</h3><p class="es-t">¿Cómo se escribe …? · ¿Con hache? · ¿Con acento o sin acento? · ¿Con mayúscula?</p>
+<h3>Beruf & Studium</h3><table><tr><td class="es-t">¿Qué haces?</td><td class="es-t">Soy ingeniera. / Trabajo como analista.</td></tr><tr><td class="es-t">¿Dónde trabajas?</td><td class="es-t">En un banco.</td></tr><tr><td class="es-t">¿Qué estudias? ¿Dónde?</td><td class="es-t">Informática, en la UPC.</td></tr></table>
+<h3>Berufe</h3><p>-o/-a (ingeniero/-a) · -or/-ora (profesor/-a) · gleich: -e, -ista (estudiante, analista) · el jefe / la jefa · <b>kein Artikel</b>: Soy estudiante.</p>
+<h3>Alter, Telefon, E-Mail</h3><table><tr><td class="es-t">¿Cuántos años tienes?</td><td class="es-t">Tengo 24 años.</td></tr><tr><td class="es-t">¿Cuál es tu móvil / correo?</td><td class="es-t">@ arroba · . punto · - guion · _ guion bajo</td></tr></table>
+<h3>Verben</h3><table><tr><th>tener</th><th>aprender</th><th>vivir</th></tr><tr><td>tengo, tienes, tiene, tenemos, tenéis, tienen</td><td>aprendo, -es, -e, -emos, -éis, -en</td><td>vivo, -es, -e, -imos, -ís, -en</td></tr></table>
+<h3>de + el = del</h3><p class="es-t">Es responsable del contacto con clientes / de la agenda.</p>
+<h3>Zahlen</h3><p>11 once · 12 doce · 15 quince · 16 dieciséis · 20 veinte · 21 veintiuno · 30 treinta · 31 treinta y uno · 100 cien · 101 ciento uno · 1000 mil</p>`});
+
+/* ================= UNIDAD 3 · FAMILIA Y COMPAÑÍA ================= */
+COURSE.units.push({id:'u3',n:'3',title:'Familia y compañía',sub:'Familie · Aussehen & Charakter · nach der Anzahl fragen · über eine Firma sprechen · Gefallen & Interesse',
+goals:['Familie','mi / tu / su …','Adjektive & Angleichung','muy · bastante · un poco','estar','ser oder estar?','gustar, interesar, molestar','¿Cuánto/-a/-os/-as?'],
+situacion:{title:'Abendessen mit den Mitbewohnern',npc:'Clara',scene:'Erster Abend in deiner WG in Sants. Deine Mitbewohnerin Clara kocht und fragt dich über deine Familie und deine Interessen aus.',role:'Du bist Clara, 26, aus Valencia, Krankenpflegerin, lebst seit 2 Jahren in der WG. Du duzt Jonas, bist herzlich und erzählst auch von deiner eigenen Familie (zwei Schwestern, Eltern in Valencia).',goal:'Erzähl von deiner Familie (wer, wie alt, wie sie sind, wo sie wohnen) und sag, was dir gefällt und was dich stört. Frag Clara auch nach ihrer Familie.'},
+lessons:[
+{id:'l1',title:'Die Familie & Possessivbegleiter',desc:'mi hermano, tus padres, su tía',steps:[
+ {t:'vocab',title:'Familie',items:[['el padre / la madre','Vater / Mutter'],['los padres','die Eltern'],['el hermano / la hermana','Bruder / Schwester'],['los hermanos','die Geschwister / Brüder'],['el hijo / la hija','Sohn / Tochter'],['el abuelo / la abuela','Großvater / Großmutter'],['el nieto / la nieta','Enkel / Enkelin'],['el tío / la tía','Onkel / Tante'],['el primo / la prima','Cousin / Cousine'],['la pareja','der/die Partner/in'],['el novio / la novia','fester Freund / feste Freundin']]},
+ {t:'info',title:'Männliche Mehrzahl = gemischte Gruppe',html:`<table><tr><td class="es-t">el padre + la madre</td><td>=</td><td class="es-t">los padres</td></tr><tr><td class="es-t">el hermano + la hermana</td><td>=</td><td class="es-t">los hermanos</td></tr></table>
+ <div class="ex"><span class="es-t">¿Tienes hermanos?</span> fragt also nach Geschwistern allgemein. Antwort z. B.: <span class="es-t">Sí, tengo un hermano.</span> / <span class="es-t">No, soy hijo único.</span> (Einzelkind)</div>`},
+ {t:'info',title:'Possessivbegleiter (mein, dein, sein …)',html:`<table><tr><th></th><th>Singular</th><th>Plural</th></tr>
+ <tr><td>mein</td><td class="es-t">mi tío / tía</td><td class="es-t">mis tíos / tías</td></tr>
+ <tr><td>dein</td><td class="es-t">tu tío / tía</td><td class="es-t">tus tíos / tías</td></tr>
+ <tr><td>sein / ihr / Ihr</td><td class="es-t">su tío / tía</td><td class="es-t">sus tíos / tías</td></tr>
+ <tr><td>unser</td><td class="es-t">nuestro tío / nuestra tía</td><td class="es-t">nuestros tíos / nuestras tías</td></tr>
+ <tr><td>euer</td><td class="es-t">vuestro tío / vuestra tía</td><td class="es-t">vuestros tíos / vuestras tías</td></tr>
+ <tr><td>ihr (Pl.) / Ihr</td><td class="es-t">su tío / tía</td><td class="es-t">sus tíos / tías</td></tr></table>
+ <div class="ojo">Der Begleiter richtet sich nach dem <b>Besitz</b>, nicht nach dem Besitzer: <span class="es-t">mis padres</span> (Plural, weil Eltern Plural). <b>su/sus</b> kann sein / ihr / Ihr / ihr (Pl.) heißen – der Kontext entscheidet.</div>`},
+ {t:'gap',q:'Me llamo Jonas. ___ hermano se llama Lukas y ___ padres viven en Alemania.',a:['mi','mis']},
+ {t:'gap',q:'Clara, ¿cómo se llama ___ hermana?',a:['tu']},
+ {t:'gap',q:'Nosotros vivimos con ___ abuela.',a:['nuestra'],why:'abuela ist weiblich → <i>nuestra</i>.'},
+ {t:'mc',q:'Der Vater meiner Mutter ist mein …',opts:['abuelo','tío','primo'],a:0},
+ {t:'mc',q:'Die Tochter meines Onkels ist meine …',opts:['prima','tía','nieta'],a:0},
+ {t:'mc',q:'„Marta y su hermano“ – wessen Bruder?',opts:['Martas Bruder','dein Bruder','unser Bruder'],a:0,why:'<i>su</i> bezieht sich hier auf Marta.'},
+ {t:'tr',de:'Ich habe einen Bruder und zwei Cousinen.',a:['Tengo un hermano y dos primas.']},
+ {t:'tr',de:'Hast du Geschwister?',a:['¿Tienes hermanos?']}
+]},
+{id:'l2',title:'Aussehen & Charakter',desc:'alto, simpático, trabajadora …',steps:[
+ {t:'info',title:'Adjektive passen sich an',html:`<table><tr><th></th><th>männlich</th><th>weiblich</th></tr>
+ <tr><td>-o / -a</td><td class="es-t">un hombre delgado</td><td class="es-t">una mujer delgada</td></tr>
+ <tr><td>-e / Konsonant: gleich</td><td class="es-t">un niño alegre / un producto especial</td><td class="es-t">una niña alegre / una persona especial</td></tr>
+ <tr><td>Plural</td><td class="es-t">hombres delgados</td><td class="es-t">mujeres delgadas</td></tr></table>
+ <p>Das Adjektiv steht normalerweise <b>nach</b> dem Substantiv.</p>
+ <h3>Abstufen</h3><table><tr><td class="es-t">Es muy alto.</td><td>sehr</td></tr><tr><td class="es-t">Es bastante alto.</td><td>ziemlich</td></tr><tr><td class="es-t">Es un poco vago.</td><td>ein bisschen (meist bei Negativem)</td></tr></table>
+ <div class="ojo"><span class="es-t">muy, bastante, un poco</span> verändern sich nicht.</div>`},
+ {t:'vocab',title:'Aussehen',items:[['alto / alta','groß'],['bajo / baja','klein'],['delgado / delgada','schlank'],['gordo / gorda','dick'],['guapo / guapa','hübsch, gutaussehend'],['joven','jung'],['mayor','älter, alt'],['moreno / morena','dunkelhaarig'],['rubio / rubia','blond'],['tiene el pelo largo / corto','hat lange / kurze Haare']]},
+ {t:'vocab',title:'Charakter',items:[['simpático / simpática','sympathisch, nett'],['antipático / antipática','unsympathisch'],['trabajador / trabajadora','fleißig'],['vago / vaga','faul'],['ordenado / ordenada','ordentlich'],['caótico / caótica','chaotisch'],['optimista','optimistisch'],['pesimista','pessimistisch'],['alegre','fröhlich'],['triste','traurig'],['tímido / tímida','schüchtern'],['abierto / abierta','offen']]},
+ {t:'match',q:'Finde das Gegenteil',pairs:[['alto','bajo'],['simpático','antipático'],['trabajador','vago'],['ordenado','caótico'],['alegre','triste'],['joven','mayor']]},
+ {t:'gap',q:'Mi hermana es muy ___ (simpático) y bastante ___ (alto).',a:['simpática','alta']},
+ {t:'gap',q:'Mis primos son ___ (trabajador) y ___ (optimista).',a:['trabajadores','optimistas']},
+ {t:'gap',q:'Clara es una persona ___ (alegre) y ___ (ordenado).',a:['alegre','ordenada']},
+ {t:'mc',q:'Was klingt höflicher, wenn jemand faul ist?',opts:['Es un poco vago.','Es muy vago.','Es bastante vago.'],a:0,why:'<i>un poco</i> schwächt negative Eigenschaften ab.'},
+ {t:'tr',de:'Mein Vater ist groß und ein bisschen chaotisch.',a:['Mi padre es alto y un poco caótico.']},
+ {t:'tr',de:'Meine Schwestern sind sehr sympathisch.',a:['Mis hermanas son muy simpáticas.']},
+ {t:'listen',es:'Mi madre es baja, morena y muy alegre.',de:'Meine Mutter ist klein, dunkelhaarig und sehr fröhlich.'}
+]},
+{id:'l3',title:'estar · ser oder estar?',desc:'Estoy en Barcelona · Es de Cádiz',steps:[
+ {t:'info',title:'Das Verb estar',html:`<table><tr><th></th><th>estar</th></tr><tr><td>yo</td><td class="es-t">estoy</td></tr><tr><td>tú</td><td class="es-t">estás</td></tr><tr><td>él / ella / usted</td><td class="es-t">está</td></tr><tr><td>nosotros/-as</td><td class="es-t">estamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">estáis</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">están</td></tr></table>`},
+ {t:'conj',verb:'estar',de:'sein (Ort, Befinden)',forms:['estoy','estás','está','estamos','estáis','están']},
+ {t:'info',title:'ser oder estar?',html:`<p>Beide heißen „sein“ – aber:</p>
+ <table><tr><th>ser – Wer/Was ist es?</th><th>estar – Wo? Wie geht’s?</th></tr>
+ <tr><td class="es-t">Es Juan. <span class="muted">(Name)</span></td><td class="es-t">Estoy en Barcelona. <span class="muted">(Ort)</span></td></tr>
+ <tr><td class="es-t">Es ingeniera. <span class="muted">(Beruf)</span></td><td class="es-t">La FIB está en Campus Nord. <span class="muted">(Ort)</span></td></tr>
+ <tr><td class="es-t">Es de Cádiz. <span class="muted">(Herkunft)</span></td><td class="es-t">¿Cómo estás? – Estoy bien. <span class="muted">(Befinden)</span></td></tr>
+ <tr><td class="es-t">Es alto y simpático. <span class="muted">(Eigenschaft)</span></td><td class="es-t">Estoy cansado. <span class="muted">(Zustand gerade)</span></td></tr></table>
+ <div class="ex">Merkhilfe: <b>ser</b> = was jemand/etwas <b>ist</b> (Identität). <b>estar</b> = wo/wie jemand <b>sich befindet</b>.</div>`},
+ {t:'mc',q:'Barcelona ___ en Cataluña.',opts:['está','es'],a:0,keep:true,why:'Ort → <b>estar</b>.'},
+ {t:'mc',q:'Mi hermano ___ informático.',opts:['es','está'],a:0,keep:true,why:'Beruf → <b>ser</b>.'},
+ {t:'mc',q:'Hoy ___ muy cansado.',opts:['estoy','soy'],a:0,keep:true,why:'Momentaner Zustand → <b>estar</b>.'},
+ {t:'mc',q:'Clara ___ de Valencia.',opts:['es','está'],a:0,keep:true,why:'Herkunft → <b>ser</b>.'},
+ {t:'mc',q:'Mis padres ___ muy simpáticos.',opts:['son','están'],a:0,keep:true,why:'Charaktereigenschaft → <b>ser</b>.'},
+ {t:'mc',q:'¿Dónde ___ la Sagrada Família?',opts:['está','es'],a:0,keep:true},
+ {t:'gap',q:'– ¿Cómo ___ (tú)? – ___ bien, gracias.',a:['estás','estoy']},
+ {t:'gap',q:'Nosotros ___ en la biblioteca y ___ estudiantes de la UPC.',a:['estamos','somos']},
+ {t:'tr',de:'Meine Eltern sind in Mannheim.',a:['Mis padres están en Mannheim.']},
+ {t:'tr',de:'Wie geht es euch?',a:['¿Cómo estáis?','¿Qué tal estáis?']}
+]},
+{id:'l4',title:'gustar, interesar, molestar',desc:'Me gusta la rutina · Le interesan los idiomas',steps:[
+ {t:'info',title:'Me gusta … – „es gefällt mir“',html:`<p><b>gustar</b> funktioniert anders als im Deutschen: Wörtlich heißt es „etwas gefällt mir“. Das Verb richtet sich nach der Sache, die gefällt:</p>
+ <table><tr><th>Person</th><th>Singular / Infinitiv</th><th>Plural</th></tr>
+ <tr><td>(a mí) <b>me</b></td><td rowspan="6" class="es-t">gusta la música<br>gusta viajar</td><td rowspan="6" class="es-t">gustan los idiomas<br>gustan las fiestas</td></tr>
+ <tr><td>(a ti) <b>te</b></td></tr><tr><td>(a él / ella / usted) <b>le</b></td></tr><tr><td>(a nosotros/-as) <b>nos</b></td></tr><tr><td>(a vosotros/-as) <b>os</b></td></tr><tr><td>(a ellos / ellas / ustedes) <b>les</b></td></tr></table>
+ <p>Genauso: <span class="es-t">interesar</span>, <span class="es-t">molestar</span>.</p>
+ <div class="ojo">Nach diesen Verben steht der Artikel: <span class="es-t">Me gusta <b>la</b> música</span> (nicht „me gusta música“).</div>
+ <table><tr><td class="es-t">¿Te gusta la rutina?</td><td class="es-t">Sí, mucho. / Sí, bastante. / No, nada.</td></tr><tr><td class="es-t">¿Le interesa viajar?</td><td class="es-t">No mucho.</td></tr><tr><td class="es-t">¿Te molestan las discusiones?</td><td class="es-t">Un poco.</td></tr></table>`},
+ {t:'mc',q:'Me ___ los idiomas.',opts:['gustan','gusta','gusto'],a:0,keep:true,why:'<i>los idiomas</i> ist Plural → <i>gustan</i>.'},
+ {t:'mc',q:'Me ___ trabajar en equipo.',opts:['gusta','gustan','gusto'],a:0,keep:true,why:'Infinitiv → immer Singular: <i>gusta</i>.'},
+ {t:'mc',q:'A mi hermano ___ interesa la política.',opts:['le','me','te'],a:0,keep:true},
+ {t:'gap',q:'¿A ti ___ ___ (molestar) los ruidos?',a:['te','molestan']},
+ {t:'gap',q:'A nosotros ___ ___ (gustar) la comida catalana.',a:['nos','gusta']},
+ {t:'gap',q:'A mis padres ___ ___ (interesar) los museos.',a:['les','interesan']},
+ {t:'tr',de:'Mir gefällt Barcelona sehr.',a:['Me gusta mucho Barcelona.','Me gusta Barcelona mucho.','A mí me gusta mucho Barcelona.']},
+ {t:'tr',de:'Mich stört der Lärm.',a:['Me molesta el ruido.','A mí me molesta el ruido.']},
+ {t:'dialog',place:'Piso compartido en Sants',title:'Was magst du?',scene:'In der WG-Küche. Dein Mitbewohner Óscar fragt dich aus.',lines:[
+  {n:'Óscar',es:'Oye, Jonas, ¿te gusta cocinar?',de:'Hey, Jonas, kochst du gern?'},
+  {you:true,opts:[{es:'Sí, bastante. Me gusta mucho la comida italiana.',ok:true},{es:'Sí, bastante. Me gustan mucho la comida italiana.',ok:false,why:'<i>la comida</i> ist Singular → <i>gusta</i>.'},{es:'Sí, yo gusto cocinar.',ok:false,why:'Man sagt <i>me gusta cocinar</i> – nicht „yo gusto“.'}]},
+  {n:'Óscar',es:'¡A mí también! ¿Y te interesa el fútbol?',de:'Mir auch! Und interessierst du dich für Fußball?'},
+  {you:true,prompt:'Du interessierst dich nicht für Fußball.',opts:[{es:'No mucho. Me interesan más los deportes de montaña.',ok:true},{es:'No, no me interesan el fútbol.',ok:false,why:'<i>el fútbol</i> ist Singular → <i>no me interesa</i>.'},{es:'Yo tampoco.',ok:false,why:'Óscar hat nichts Negatives gesagt – „yo tampoco“ passt nicht.'}]},
+  {n:'Óscar',es:'Vale. ¿Y qué te molesta en un piso compartido?',de:'Okay. Und was stört dich in einer WG?'},
+  {you:true,opts:[{es:'Me molestan los platos sucios en la cocina.',ok:true},{es:'Me molesta los platos sucios en la cocina.',ok:false,why:'<i>los platos</i> ist Plural → <i>molestan</i>.'}]},
+  {n:'Óscar',es:'¡Ja, ja! A mí también. Somos buenos compañeros de piso.',de:'Haha! Mich auch. Wir sind gute Mitbewohner.'}]}
+]},
+{id:'l5',title:'Über eine Firma sprechen · ¿cuánto?',desc:'¿Cuántos empleados tiene? · Es una empresa familiar',steps:[
+ {t:'info',title:'¿Cuánto? – nach der Anzahl fragen',html:`<p><b>cuánto</b> richtet sich nach dem Substantiv:</p>
+ <table><tr><td class="es-t">¿Cuánto tiempo pasas con tu familia?</td><td>m. Sg.</td></tr>
+ <tr><td class="es-t">¿Cuánta gente trabaja aquí?</td><td>w. Sg.</td></tr>
+ <tr><td class="es-t">¿Cuántos años tienes?</td><td>m. Pl.</td></tr>
+ <tr><td class="es-t">¿Cuántas horas trabajas?</td><td>w. Pl.</td></tr></table>`},
+ {t:'vocab',title:'Über eine Firma sprechen',items:[['la empresa familiar','das Familienunternehmen'],['el fundador / la fundadora','der/die Gründer/in'],['el sector','die Branche'],['los empleados','die Angestellten'],['exportar','exportieren'],['vender','verkaufen'],['el producto','das Produkt'],['tiene … años de historia','hat … Jahre Geschichte'],['líder del mercado','Marktführer'],['la sede','der Hauptsitz']]},
+ {t:'gap',q:'¿___ empleados tiene la empresa?',a:['Cuántos']},
+ {t:'gap',q:'¿___ horas trabajas al día?',a:['Cuántas']},
+ {t:'gap',q:'¿___ gente vive en Barcelona?',a:['Cuánta'],why:'<i>la gente</i> ist weiblich Singular.'},
+ {t:'listen',es:'La empresa tiene casi cien años de historia.',de:'Das Unternehmen hat fast hundert Jahre Geschichte.'},
+ {t:'order',es:'Es una empresa familiar del sector de la moda.',de:'Es ist ein Familienunternehmen aus der Modebranche.'},
+ {t:'tr',de:'Wie viele Geschwister hast du?',a:['¿Cuántos hermanos tienes?']},
+ {t:'free',task:'Beschreibe deine Familie in 5–7 Sätzen: Wer gehört dazu? Wie alt sind sie, wo wohnen sie, wie sind sie (Aussehen/Charakter), was gefällt ihnen?',hint:'Tengo un hermano, se llama … · Tiene … años · Vive en … · Es alto y muy … · Le gusta/n …',focus:'Familie, Possessivbegleiter, Adjektivangleichung, ser/estar, gustar',model:'Mi familia no es muy grande. Mis padres viven en Alemania, cerca de Mannheim. Mi madre es profesora y es muy alegre. Mi padre es alto y un poco caótico. Tengo un hermano. Es muy simpático y le gusta mucho el deporte. Ahora yo estoy en Barcelona, pero hablo con mi familia todas las semanas.'}
+]}],
+resumen:`<h3>Familie</h3><p class="es-t">el padre · la madre · los padres · el hermano · la hermana · el hijo · la hija · el abuelo · la abuela · el tío · la tía · el primo · la prima</p>
+<h3>Possessivbegleiter</h3><table><tr><td>mi / mis</td><td>tu / tus</td><td>su / sus</td></tr><tr><td>nuestro/-a/-os/-as</td><td>vuestro/-a/-os/-as</td><td>su / sus</td></tr></table>
+<h3>Adjektive</h3><p>-o/-a: alto/alta · -e & Konsonant gleich: alegre, especial · Plural +s/+es · <b>muy</b> (sehr), <b>bastante</b> (ziemlich), <b>un poco</b> (ein bisschen) bleiben gleich.</p>
+<h3>estar</h3><p>estoy · estás · está · estamos · estáis · están</p>
+<h3>ser oder estar?</h3><table><tr><th>ser</th><th>estar</th></tr><tr><td>Name, Beruf, Herkunft, Eigenschaft</td><td>Ort, Befinden, momentaner Zustand</td></tr><tr><td class="es-t">Es cocinero. Es de Cádiz.</td><td class="es-t">Está en Novelda. ¿Cómo estás?</td></tr></table>
+<h3>gustar & Co.</h3><table><tr><td>me · te · le · nos · os · les</td><td class="es-t">gusta + Sg. / Infinitiv · gustan + Pl.</td></tr><tr><td colspan="2" class="es-t">Me gusta la rutina. Te molesta trabajar con estrés. Le interesan las discusiones.</td></tr></table>
+<h3>¿Cuánto?</h3><p class="es-t">¿Cuánto tiempo? · ¿Cuánta gente? · ¿Cuántos años? · ¿Cuántas horas?</p>`});
+
+/* ================= Kommende Unidades (werden in c_u9u10 ersetzt) ================= */
+window.SOON=[['u9','9','Momento de cambios','Wohnung & Büro beschreiben · Imperfekt · über Veränderungen sprechen'],
+ ['u10','10','Llegar a la meta','Biografie · Indefinido · Bewerbung & Vorstellungsgespräch']];
+;
+/* Lese-Lektionen für Unidad 1–3 (Comprehensible Input) */
+(function(){
+const U=id=>COURSE.units.find(u=>u.id===id);
+U('u1').lessons.push({id:'lr',title:'Lesen: Bolsa de intercambio',desc:'Kurze Profile verstehen',steps:[
+ {t:'read',title:'Bolsa de intercambio – Barcelona',intro:'Profile auf einer Tandem-Plattform. Lies erst ohne Übersetzung.',text:`Hola, me llamo Núria. Soy de Barcelona y {estudio|ich studiere} Ingeniería Informática en la UPC. Hablo catalán, castellano e inglés. Ahora estudio alemán porque {busco|ich suche} unas prácticas en una empresa de Múnich. Busco una persona para practicar alemán. ¡Yo te ayudo con el español!
+
+Me llamo Tom y soy de Inglaterra. {Trabajo|ich arbeite} en una empresa de turismo en Barcelona. Hablo inglés, francés y un poco de español. Necesito español para hablar por teléfono con los clientes. No hablo catalán, pero quiero aprender un poco.
+
+Somos Ana y Marco, de Italia. Somos estudiantes {de intercambio|Austausch-} en la Universidad de Barcelona. Hablamos italiano e inglés. Buscamos personas para practicar español los {fines de semana|Wochenenden}. También {tocamos|wir spielen} la guitarra.`,
+ de:`Hallo, ich heiße Núria. Ich bin aus Barcelona und studiere Informatik an der UPC. Ich spreche Katalanisch, Spanisch und Englisch. Jetzt lerne ich Deutsch, weil ich ein Praktikum in einer Firma in München suche. Ich suche jemanden, um Deutsch zu üben. Ich helfe dir mit dem Spanischen!\n\nIch heiße Tom und komme aus England. Ich arbeite bei einer Tourismusfirma in Barcelona. Ich spreche Englisch, Französisch und ein bisschen Spanisch. Ich brauche Spanisch, um mit den Kunden zu telefonieren. Ich spreche kein Katalanisch, aber ich will ein bisschen lernen.\n\nWir sind Ana und Marco aus Italien. Wir sind Austauschstudenten an der Universität Barcelona. Wir sprechen Italienisch und Englisch. Wir suchen Leute, um am Wochenende Spanisch zu üben. Wir spielen auch Gitarre.`},
+ {t:'mc',q:'¿Por qué estudia alemán Núria?',opts:['Porque busca unas prácticas en Múnich.','Porque trabaja en una empresa de turismo.','Porque es de Alemania.'],a:0},
+ {t:'mc',q:'¿Quién no habla catalán?',opts:['Tom','Núria','Nadie'],a:0},
+ {t:'mc',q:'¿De dónde son Ana y Marco?',opts:['de Italia','de Inglaterra','de Barcelona'],a:0},
+ {t:'mc',q:'Für wen wäre Jonas der perfekte Tandempartner?',opts:['Núria – sie lernt Deutsch.','Tom – er lernt Französisch.','Ana y Marco – tocan la guitarra.'],a:0},
+ {t:'free',task:'Schreib dein eigenes Profil für die Bolsa de intercambio (4–5 Sätze).',hint:'Hola, me llamo … Soy de … Estudio … Hablo … Busco una persona para …',focus:'ser, -ar-Verben, para + Infinitiv',model:'Hola, me llamo Jonas y soy de Alemania. Estudio un máster en la UPC. Hablo alemán, inglés y un poco de español. Busco una persona para practicar español. ¡Yo te ayudo con el alemán!'}
+]});
+U('u2').lessons.push({id:'lr',title:'Lesen: Perfil profesional',desc:'Ein berufliches Profil verstehen',steps:[
+ {t:'read',title:'Perfil profesional',intro:'Ein Profil auf einem beruflichen Netzwerk.',text:`Me llamo Marta Vidal Roca y tengo 29 años. Vivo en Barcelona, en el barrio de Poblenou. Soy ingeniera {informática|Informatik-} y trabajo como {analista de ciberseguridad|Cybersecurity-Analystin} en una consultora internacional.
+
+En mi trabajo {reviso|ich prüfe} los sistemas de los clientes y escribo {informes|Berichte}. Soy responsable del contacto con dos clientes del sector bancario. También organizo seminarios para los nuevos empleados y a veces asisto a congresos.
+
+Hablo catalán, castellano, inglés y un poco de francés. Ahora aprendo alemán porque mi empresa tiene {una sede|einen Standort} en Fráncfort. Mi correo electrónico es marta.vidal arroba consultora punto es.`,
+ de:`Ich heiße Marta Vidal Roca und bin 29 Jahre alt. Ich wohne in Barcelona, im Viertel Poblenou. Ich bin Informatik-Ingenieurin und arbeite als Cybersecurity-Analystin bei einer internationalen Beratung.\n\nIn meiner Arbeit prüfe ich die Systeme der Kunden und schreibe Berichte. Ich bin verantwortlich für den Kontakt mit zwei Kunden aus dem Bankensektor. Ich organisiere auch Seminare für die neuen Angestellten und besuche manchmal Kongresse.\n\nIch spreche Katalanisch, Spanisch, Englisch und ein bisschen Französisch. Jetzt lerne ich Deutsch, weil meine Firma einen Standort in Frankfurt hat. Meine E-Mail-Adresse ist marta.vidal@consultora.es.`},
+ {t:'mc',q:'¿Cuántos años tiene Marta?',opts:['29','19','39'],a:0},
+ {t:'mc',q:'¿De qué es responsable Marta?',opts:['Del contacto con dos clientes.','De la contabilidad.','De la página web.'],a:0},
+ {t:'gap',task:'Schreib Martas E-Mail-Adresse.',q:'___',a:['marta.vidal@consultora.es']},
+ {t:'mc',q:'¿Por qué aprende alemán?',opts:['Porque su empresa tiene una sede en Fráncfort.','Porque vive en Alemania.','Porque su novio es alemán.'],a:0}
+]});
+U('u3').lessons.push({id:'lr',title:'Lesen: Una empresa familiar',desc:'Über eine Firma & eine Familie lesen',steps:[
+ {t:'read',title:'Turrones Navarro: una empresa familiar',text:`Turrones Navarro es una empresa familiar de Xixona, un pueblo cerca de Alicante. Su {fundador|Gründer} es Jesús Navarro y tiene casi cien años de historia. La empresa {fabrica|stellt her} turrón, un dulce típico de Navidad hecho con {almendras|Mandeln} y miel.
+
+Hoy la directora es Carmen Navarro, la nieta del fundador. Carmen tiene 45 años, es muy trabajadora y bastante {exigente|anspruchsvoll}. Su hermano Pablo es el responsable de las ventas: es simpático, muy abierto y un poco caótico. «Somos muy diferentes, pero trabajamos muy bien juntos», dice Carmen.
+
+En la empresa trabajan 120 personas. Exportan a toda Europa y venden muchos productos en Alemania. A Carmen le gusta mucho su trabajo, pero le molesta una cosa: «En diciembre trabajamos {demasiado|zu viel}. ¡No tengo tiempo para mi familia!»`,
+ de:`Turrones Navarro ist ein Familienunternehmen aus Xixona, einem Dorf bei Alicante. Sein Gründer ist Jesús Navarro und es hat fast hundert Jahre Geschichte. Die Firma stellt Turrón her, eine typische Weihnachtssüßigkeit aus Mandeln und Honig.\n\nHeute ist die Direktorin Carmen Navarro, die Enkelin des Gründers. Carmen ist 45, sehr fleißig und ziemlich anspruchsvoll. Ihr Bruder Pablo ist für den Verkauf verantwortlich: Er ist sympathisch, sehr offen und ein bisschen chaotisch. „Wir sind sehr verschieden, aber wir arbeiten sehr gut zusammen“, sagt Carmen.\n\nIn der Firma arbeiten 120 Personen. Sie exportieren in ganz Europa und verkaufen viele Produkte in Deutschland. Carmen mag ihre Arbeit sehr, aber eine Sache stört sie: „Im Dezember arbeiten wir zu viel. Ich habe keine Zeit für meine Familie!“`},
+ {t:'mc',q:'¿Quién es Carmen?',opts:['La nieta del fundador.','La hija del fundador.','La hermana del fundador.'],a:0},
+ {t:'mc',q:'¿Cómo es Pablo?',opts:['Simpático, abierto y un poco caótico.','Muy exigente y trabajador.','Tímido y ordenado.'],a:0},
+ {t:'mc',q:'¿Qué le molesta a Carmen?',opts:['Trabajar demasiado en diciembre.','Su hermano.','Exportar a Alemania.'],a:0},
+ {t:'gap',q:'En la empresa ___ (arbeiten) 120 personas y ___ (sie exportieren) a toda Europa.',a:['trabajan','exportan']}
+]});
+})();
+;
+/* ================= UNIDAD 4 · COMIDA DE TRABAJO ================= */
+COURSE.units.push({id:'u4',n:'4',title:'Comida de trabajo',sub:'Essgewohnheiten · Häufigkeit · Uhrzeit · Tisch reservieren · im Restaurant bestellen · einen Vorschlag machen',
+goals:['Lebensmittel & Mahlzeiten','Wochentage','Häufigkeit (siempre, a veces, nunca …)','poder, querer, preferir (o→ue, e→ie)','Uhrzeit','direkte Objektpronomen lo/la/los/las','se + 3. Person','Mengenangaben','Nationalitäten'],
+situacion:{title:'Menú del día in der Barceloneta',npc:'Camarero',scene:'Mittagspause mit einer Kollegin in einem kleinen Restaurant in der Barceloneta. Es gibt ein Menú del día für 14 €: drei Vorspeisen, drei Hauptgerichte, Dessert, Getränk.',role:'Du bist Toni, Kellner in einem traditionellen Restaurant in der Barceloneta. Du siezt Jonas höflich (oder duzt ihn, wenn er dich duzt). Du stellst das Menú del día vor (primeros: ensalada mixta, sopa de pescado, gazpacho; segundos: paella de marisco, pollo al ajillo, merluza a la plancha; postres: crema catalana, fruta, flan) und fragst nach Getränken. Am Ende fragst du, ob er mit Karte zahlen will.',goal:'Bestelle ein komplettes Menú del día (primero, segundo, postre, bebida), frag nach, was in einem Gericht drin ist, und bitte um die Rechnung.'},
+lessons:[
+{id:'l1',title:'Essen & Häufigkeit',desc:'Desayuno todos los días · Nunca tomo pescado',steps:[
+ {t:'info',title:'Essenszeiten in Spanien',html:`<table><tr><th>Mahlzeit</th><th>Verb</th><th>typische Uhrzeit</th></tr>
+ <tr><td class="es-t">el desayuno</td><td class="es-t">desayunar</td><td>7:30 – 9:00 (oft nur Kaffee + Toast)</td></tr>
+ <tr><td class="es-t">el almuerzo</td><td class="es-t">almorzar</td><td>ca. 11:00 (kleiner Snack, z. B. bocadillo)</td></tr>
+ <tr><td class="es-t">la comida</td><td class="es-t">comer</td><td>14:00 – 15:30 – Hauptmahlzeit!</td></tr>
+ <tr><td class="es-t">la merienda</td><td class="es-t">merendar</td><td>ca. 18:00</td></tr>
+ <tr><td class="es-t">la cena</td><td class="es-t">cenar</td><td>21:00 – 22:30</td></tr></table>
+ <div class="ojo"><span class="es-t">comer</span> heißt „essen“ allgemein, aber auch speziell „zu Mittag essen“: <span class="es-t">¿Dónde comes hoy?</span></div>`},
+ {t:'vocab',title:'Lebensmittel & Getränke',items:[['el pan','das Brot'],['la fruta','das Obst'],['la verdura','das Gemüse'],['la carne','das Fleisch'],['el pescado','der Fisch'],['el marisco','die Meeresfrüchte'],['el pollo','das Hähnchen'],['los huevos','die Eier'],['el queso','der Käse'],['el jamón','der Schinken'],['el arroz','der Reis'],['la leche','die Milch'],['el agua (con / sin gas)','das Wasser (mit / ohne Kohlensäure)'],['el zumo','der Saft'],['el vino','der Wein'],['la cerveza','das Bier'],['tomar','nehmen; essen/trinken']]},
+ {t:'vocab',title:'Wochentage',items:[['el lunes','Montag'],['el martes','Dienstag'],['el miércoles','Mittwoch'],['el jueves','Donnerstag'],['el viernes','Freitag'],['el sábado','Samstag'],['el domingo','Sonntag'],['el fin de semana','das Wochenende']]},
+ {t:'info',title:'Häufigkeit & Wochentage',html:`<table><tr><td class="es-t">siempre</td><td>immer</td></tr><tr><td class="es-t">todos los días</td><td>jeden Tag</td></tr><tr><td class="es-t">muchas veces</td><td>oft</td></tr><tr><td class="es-t">a veces</td><td>manchmal</td></tr><tr><td class="es-t">pocas veces</td><td>selten</td></tr><tr><td class="es-t">nunca</td><td>nie</td></tr><tr><td class="es-t">dos veces a la semana</td><td>zweimal pro Woche</td></tr><tr><td class="es-t">cinco veces al día</td><td>fünfmal am Tag</td></tr></table>
+ <div class="ojo">Steht <b>nunca</b> nach dem Verb, braucht man zusätzlich <b>no</b>: <span class="es-t">Nunca tomo pescado.</span> = <span class="es-t">No tomo nunca pescado.</span></div>
+ <p>Wochentage mit Artikel: <span class="es-t">el lunes</span> = am Montag (diesen), <span class="es-t">los lunes</span> = montags (jeden). <span class="es-t">De lunes a viernes</span> = Montag bis Freitag.</p>`},
+ {t:'match',q:'Wie oft?',pairs:[['siempre','immer'],['a veces','manchmal'],['nunca','nie'],['pocas veces','selten'],['todos los días','jeden Tag']]},
+ {t:'mc',q:'„Montags habe ich Spanischkurs.“',opts:['Los lunes tengo clase de español.','El lunes tengo clase de español.','En lunes tengo clase de español.'],a:0,why:'Regelmäßig → <i>los lunes</i> (Plural).'},
+ {t:'gap',q:'No ___ (desayunar) nunca, solo tomo un café.',a:['desayuno']},
+ {t:'gap',q:'En España la gente ___ (cenar) muy tarde, a las diez.',a:['cena']},
+ {t:'tr',de:'Ich esse nie Fleisch.',a:['Nunca como carne.','No como nunca carne.','No como carne nunca.']},
+ {t:'tr',de:'Ich trinke manchmal Wein.',a:['A veces tomo vino.','A veces bebo vino.','Tomo vino a veces.','Bebo vino a veces.']},
+ {t:'listen',es:'Desayuno todos los días a las ocho.',de:'Ich frühstücke jeden Tag um acht.'}
+]},
+{id:'l2',title:'poder, querer, preferir',desc:'Stammwechsel o→ue und e→ie',steps:[
+ {t:'info',title:'Verben mit Stammwechsel',html:`<p>Bei manchen Verben ändert sich der betonte Stammvokal – aber <b>nicht</b> bei nosotros und vosotros:</p>
+ <table><tr><th></th><th>poder (o→ue)<br><span class="muted">können</span></th><th>querer (e→ie)<br><span class="muted">wollen, mögen</span></th><th>preferir (e→ie)<br><span class="muted">vorziehen</span></th></tr>
+ <tr><td>yo</td><td class="es-t">puedo</td><td class="es-t">quiero</td><td class="es-t">prefiero</td></tr>
+ <tr><td>tú</td><td class="es-t">puedes</td><td class="es-t">quieres</td><td class="es-t">prefieres</td></tr>
+ <tr><td>él / ella / usted</td><td class="es-t">puede</td><td class="es-t">quiere</td><td class="es-t">prefiere</td></tr>
+ <tr><td>nosotros/-as</td><td class="es-t">podemos</td><td class="es-t">queremos</td><td class="es-t">preferimos</td></tr>
+ <tr><td>vosotros/-as</td><td class="es-t">podéis</td><td class="es-t">queréis</td><td class="es-t">preferís</td></tr>
+ <tr><td>ellos / ellas / ustedes</td><td class="es-t">pueden</td><td class="es-t">quieren</td><td class="es-t">prefieren</td></tr></table>
+ <div class="ex">Merkbild „Stiefel“: Die Formen yo, tú, él, ellos (Stiefelform in der Tabelle) wechseln – nosotros/vosotros nicht.</div>
+ <p>Genauso: <span class="es-t">almorzar (almuerzo), costar (cuesta), volver (vuelvo), empezar (empiezo), pensar (pienso)</span>.</p>`},
+ {t:'conj',verb:'poder',de:'können',forms:['puedo','puedes','puede','podemos','podéis','pueden']},
+ {t:'conj',verb:'querer',de:'wollen',forms:['quiero','quieres','quiere','queremos','queréis','quieren']},
+ {t:'gap',q:'No ___ (yo, poder) beber alcohol, conduzco.',a:['puedo']},
+ {t:'gap',q:'¿___ (vosotros, querer) un café?',a:['Queréis'],why:'vosotros → kein Stammwechsel: <i>queréis</i>.'},
+ {t:'gap',q:'Yo ___ (preferir) el café sin leche.',a:['prefiero']},
+ {t:'gap',q:'¿Cuánto ___ (costar) el menú?',a:['cuesta']},
+ {t:'mc',q:'Nosotros ___ comer a las dos.',opts:['queremos','quieremos','quiremos'],a:0},
+ {t:'tr',de:'Willst du Wasser oder Wein?',a:['¿Quieres agua o vino?']},
+ {t:'tr',de:'Ich bin allergisch gegen Milch.',a:['Soy alérgico a la leche.','Soy alérgica a la leche.']}
+]},
+{id:'l3',title:'Die Uhrzeit',desc:'¿Qué hora es? · ¿A qué hora …?',steps:[
+ {t:'info',title:'¿Qué hora es?',html:`<table><tr><td>13:00</td><td class="es-t">Es la una.</td></tr><tr><td>14:00</td><td class="es-t">Son las dos.</td></tr><tr><td>14:15</td><td class="es-t">Son las dos y cuarto.</td></tr><tr><td>14:30</td><td class="es-t">Son las dos y media.</td></tr><tr><td>14:45</td><td class="es-t">Son las tres menos cuarto.</td></tr><tr><td>14:50</td><td class="es-t">Son las tres menos diez.</td></tr><tr><td>14:10</td><td class="es-t">Son las dos y diez.</td></tr></table>
+ <div class="ojo">Nur bei 1 Uhr: <b>es la</b> una. Sonst: <b>son las</b> …</div>
+ <h3>Wann? – a las …</h3><table><tr><td class="es-t">¿A qué hora comes?</td><td class="es-t">A las dos y media.</td></tr><tr><td class="es-t">El martes por la tarde tengo una reunión.</td><td>am Dienstagnachmittag</td></tr><tr><td class="es-t">a las nueve de la mañana / de la noche</td><td>um 9 Uhr morgens / abends</td></tr><tr><td class="es-t">de dos a diez</td><td>von zwei bis zehn</td></tr></table>
+ <p><span class="es-t">por la mañana / por la tarde / por la noche</span> – ohne Uhrzeit. Mit Uhrzeit: <span class="es-t">de la mañana</span>.</p>`},
+ {t:'mc',q:'Es ist 15:30.',opts:['Son las tres y media.','Es la tres y media.','Son las tres y cuarto.'],a:0},
+ {t:'mc',q:'Es ist 13:15.',opts:['Es la una y cuarto.','Son las una y cuarto.','Es la uno y cuarto.'],a:0},
+ {t:'mc',q:'Es ist 19:45.',opts:['Son las ocho menos cuarto.','Son las siete menos cuarto.','Son las siete y tres cuartos.'],a:0},
+ {t:'gap',q:'– ¿___ qué hora empieza la clase? – ___ las nueve.',a:['A','A']},
+ {t:'gap',task:'Schreib die Uhrzeit aus: 10:20',q:'Son las ___.',a:['diez y veinte']},
+ {t:'listen',es:'Son las cinco menos diez.',task:'Hör zu und schreib den Satz.',alt:['las cinco menos diez','cinco menos diez'],de:'16:50 / 4:50'},
+ {t:'listen',es:'La reunión es a las once y media.',de:'Die Besprechung ist um halb zwölf.'},
+ {t:'tr',de:'Am Montagmorgen habe ich eine Besprechung.',a:['El lunes por la mañana tengo una reunión.','Tengo una reunión el lunes por la mañana.']}
+]},
+{id:'l4',title:'Reservieren & bestellen',desc:'¿Para cuántas personas? · De primero, …',steps:[
+ {t:'vocab',title:'Im Restaurant',items:[['reservar una mesa','einen Tisch reservieren'],['¿Para cuántas personas?','Für wie viele Personen?'],['¿A nombre de quién?','Auf welchen Namen?'],['está lleno','es ist voll'],['el menú del día','das Tagesmenü'],['de primero / de segundo','als Vorspeise / als Hauptgericht'],['el postre','der Nachtisch'],['¿Y para beber?','Und zu trinken?'],['la cuenta, por favor','die Rechnung, bitte'],['pagar con tarjeta','mit Karte zahlen'],['el camarero / la camarera','Kellner/in'],['¿Qué lleva …?','Was ist in … drin?']]},
+ {t:'info',title:'Direkte Objektpronomen & se',html:`<p>Ein schon genanntes Objekt (Akkusativ) ersetzt man durch <b>lo, la, los, las</b>:</p>
+ <table><tr><th></th><th>männlich</th><th>weiblich</th></tr><tr><td>Sg.</td><td class="es-t">lo</td><td class="es-t">la</td></tr><tr><td>Pl.</td><td class="es-t">los</td><td class="es-t">las</td></tr></table>
+ <div class="ex"><span class="es-t">¿Quién compra la carne? – La compro yo.</span><br><span class="es-t">¿Tomas el café con leche? – No, lo tomo solo.</span></div>
+ <div class="ojo">Das Pronomen steht <b>vor</b> dem konjugierten Verb, <b>no</b> steht davor: <span class="es-t">No las compro.</span></div>
+ <h3>se + 3. Person = „man“</h3><table><tr><td class="es-t">Se puede pagar con tarjeta.</td><td>Man kann mit Karte zahlen.</td></tr><tr><td class="es-t">El gazpacho se come frío.</td><td>Gazpacho isst man kalt.</td></tr><tr><td class="es-t">Aquí se beben vinos italianos.</td><td>Plural-Substantiv → Verb im Plural</td></tr></table>`},
+ {t:'gap',q:'– ¿Dónde compras el pan? – ___ compro en la panadería.',a:['Lo']},
+ {t:'gap',q:'– ¿Tomas las tapas aquí? – Sí, ___ tomo aquí.',a:['las']},
+ {t:'mc',q:'„Man kann hier mit Karte zahlen.“',opts:['Aquí se puede pagar con tarjeta.','Aquí puede pagar con tarjeta se.','Aquí se pueden pagar con tarjeta.'],a:0},
+ {t:'gap',q:'En Cataluña ___ ___ (comer) mucho pan con tomate.',a:['se','come']},
+ {t:'dialog',place:'Teléfono',title:'Einen Tisch reservieren',scene:'Du rufst im Restaurant „Can Solé“ an, um für Freitag einen Tisch für ein Teamessen zu reservieren.',lines:[
+  {n:'Restaurante',es:'Can Solé, buenas tardes. ¿Dígame?',de:'Can Solé, guten Tag. Ja, bitte?'},
+  {you:true,opts:[{es:'Buenas tardes. ¿Hay mesas libres para el viernes?',ok:true},{es:'Buenas tardes. ¿Están mesas libres para el viernes?',ok:false,why:'„Gibt es …?“ = <b>hay</b>.'}]},
+  {n:'Restaurante',es:'Sí. ¿Para cuántas personas?',de:'Ja. Für wie viele Personen?'},
+  {you:true,opts:[{es:'Para seis personas, a las dos y media.',ok:true},{es:'Para seis personas, en las dos y media.',ok:false,why:'Uhrzeit: <b>a</b> las …'}]},
+  {n:'Restaurante',es:'Perfecto. ¿A nombre de quién?',de:'Perfekt. Auf welchen Namen?'},
+  {you:true,opts:[{es:'A nombre de Jonas Gross.',ok:true},{es:'De nombre Jonas Gross.',ok:false,why:'Die Wendung lautet <i>a nombre de</i>.'}]},
+  {n:'Restaurante',es:'Muy bien. Hasta el viernes.',de:'Sehr gut. Bis Freitag.'}]},
+ {t:'dialog',place:'Restaurante en la Barceloneta',title:'Bestellen',scene:'Du bist mit einer Kollegin beim Mittagessen. Der Kellner kommt.',lines:[
+  {n:'Camarero',es:'Hola, buenas. ¿Qué quieren de primero?',de:'Hallo. Was möchten Sie als Vorspeise?'},
+  {you:true,opts:[{es:'Para mí, el gazpacho, por favor.',ok:true},{es:'Por mí, el gazpacho, por favor.',ok:false,why:'„Für mich“ = <b>para mí</b>.'}]},
+  {n:'Camarero',es:'¿Y de segundo?',de:'Und als Hauptgericht?'},
+  {you:true,opts:[{es:'¿Qué lleva el pollo al ajillo?',ok:true},{es:'¿Qué llevan el pollo al ajillo?',ok:false,why:'<i>el pollo</i> ist Singular → <i>lleva</i>.'}]},
+  {n:'Camarero',es:'Lleva ajo, aceite de oliva y un poco de vino blanco.',de:'Knoblauch, Olivenöl und ein bisschen Weißwein.'},
+  {you:true,opts:[{es:'Vale, lo quiero.',ok:true},{es:'Vale, la quiero.',ok:false,why:'<i>el pollo</i> ist männlich → <b>lo</b>.'}]},
+  {n:'Camarero',es:'¿Y para beber?',de:'Und zu trinken?'},
+  {you:true,opts:[{es:'Agua sin gas, por favor.',ok:true},{es:'Agua sin gasolina, por favor.',ok:false,why:'😄 <i>gasolina</i> = Benzin. Stilles Wasser: <i>agua sin gas</i>.'}]},
+  {n:'Camarero',es:'Muy bien. Ahora mismo.',de:'Sehr gut. Kommt sofort.'}]},
+ {t:'info',title:'Mengenangaben',html:`<table><tr><td>1 kg</td><td class="es-t">un kilo de patatas</td></tr><tr><td>100 g</td><td class="es-t">cien gramos de jamón</td></tr><tr><td>½ l</td><td class="es-t">medio litro de zumo</td></tr><tr><td>1½ kg</td><td class="es-t">un kilo y medio de carne</td></tr><tr><td></td><td class="es-t">una botella de agua · una lata de cerveza · un paquete de café</td></tr></table>
+ <div class="ojo">Zwischen Menge und Produkt steht immer <b>de</b>.</div>`},
+ {t:'tr',de:'ein halber Liter Milch',a:['medio litro de leche']},
+ {t:'tr',de:'Die Rechnung, bitte.',a:['La cuenta, por favor.']}
+]},
+{id:'l5',title:'Lesen: El menú del día',desc:'Text verstehen · Nationalitäten · eigene Gewohnheiten',steps:[
+ {t:'read',title:'El menú del día',text:`En España, muchas personas que {trabajan|arbeiten} en la oficina comen fuera de casa. Una opción muy {popular|beliebt} es el «menú del día». Por un {precio fijo|Festpreis} – normalmente entre 12 y 16 euros – tienes un primer plato, un segundo plato, el postre o un café, pan y una {bebida|Getränk}.
+
+Los primeros platos son muchas veces {ensaladas|Salate}, sopas o verduras. De segundo hay carne o pescado. En Barcelona, por ejemplo, es típico el {arroz|Reis} negro o la {butifarra|katalanische Bratwurst} con judías.
+
+La comida es la {comida principal|Hauptmahlzeit} del día y la gente no come {deprisa|schnell}: una comida de trabajo puede {durar|dauern} dos horas. Por eso, la cena es más {ligera|leicht} y muy tarde, a las nueve o a las diez de la noche.`,
+ de:`In Spanien essen viele Menschen, die im Büro arbeiten, außer Haus. Eine sehr beliebte Option ist das „Tagesmenü“. Zu einem Festpreis – normalerweise zwischen 12 und 16 Euro – bekommst du eine Vorspeise, ein Hauptgericht, Nachtisch oder Kaffee, Brot und ein Getränk.\n\nDie Vorspeisen sind oft Salate, Suppen oder Gemüse. Als Hauptgericht gibt es Fleisch oder Fisch. In Barcelona ist z. B. schwarzer Reis oder Butifarra mit Bohnen typisch.\n\nDas Mittagessen ist die Hauptmahlzeit des Tages und man isst nicht schnell: Ein Geschäftsessen kann zwei Stunden dauern. Deshalb ist das Abendessen leichter und sehr spät, um neun oder zehn Uhr abends.`},
+ {t:'mc',q:'¿Qué incluye normalmente el menú del día?',opts:['Primero, segundo, postre o café, pan y bebida','Solo un plato y una bebida','Tapas y vino'],a:0},
+ {t:'mc',q:'¿Por qué la cena es ligera?',opts:['Porque la comida es la comida principal.','Porque es muy cara.','Porque la gente no cena.'],a:0},
+ {t:'mc',q:'¿Cuánto cuesta normalmente un menú del día, según el texto?',opts:['entre 12 y 16 euros','entre 2 y 6 euros','más de 30 euros'],a:0},
+ {t:'info',title:'Nationalitäten',html:`<table><tr><th>-o / -a</th><th>Konsonant + -a</th><th>eine Form</th></tr>
+ <tr><td class="es-t">suizo / suiza</td><td class="es-t">español / española</td><td class="es-t">belga</td></tr>
+ <tr><td class="es-t">argentino / argentina</td><td class="es-t">alemán / alemana</td><td class="es-t">marroquí</td></tr>
+ <tr><td class="es-t">italiano / italiana</td><td class="es-t">inglés / inglesa</td><td class="es-t">estadounidense</td></tr>
+ <tr><td class="es-t">austriaco / austriaca</td><td class="es-t">francés / francesa</td><td class="es-t">canadiense</td></tr></table>
+ <div class="ojo">Nationalitäten werden klein geschrieben. Der Akzent fällt bei der weiblichen Form weg: <span class="es-t">alemán → alemana</span>.</div>`},
+ {t:'gap',q:'Laia es ___ (spanisch) y su novio es ___ (französisch).',a:['española','francés']},
+ {t:'gap',q:'Mi compañera de piso es ___ (deutsch).',a:['alemana']},
+ {t:'free',task:'Beschreibe deine Essgewohnheiten in 5–6 Sätzen: Wann und was isst du? Was isst du nie / oft? Was kannst du nicht essen? Was isst man in Deutschland anders als in Spanien?',hint:'Desayuno a las … · Normalmente como … · Nunca tomo … · Prefiero … · En Alemania se cena …',focus:'Häufigkeit, poder/querer/preferir, Uhrzeit, se + 3. Person',model:'Normalmente desayuno a las ocho: tomo un café con leche y pan con queso. Como a la una y media en la universidad. Muchas veces como pasta o arroz. Nunca tomo pescado porque no me gusta. En Alemania se cena muy pronto, a las seis o las siete, pero aquí en Barcelona prefiero cenar a las nueve.'}
+]}],
+resumen:`<h3>Essgewohnheiten</h3><p class="es-t">Desayuno todos los días. · Como de todo. · Soy vegetariano/-a. · No puedo beber alcohol. · Prefiero el café sin leche.</p>
+<h3>Häufigkeit</h3><p class="es-t">siempre · todos los días · muchas veces · a veces · pocas veces · nunca · dos veces a la semana</p>
+<h3>Wochentage</h3><p class="es-t">lunes · martes · miércoles · jueves · viernes · sábado · domingo — el lunes (diesen) / los lunes (jeden)</p>
+<h3>poder · querer · preferir</h3><table><tr><td>puedo, puedes, puede, podemos, podéis, pueden</td></tr><tr><td>quiero, quieres, quiere, queremos, queréis, quieren</td></tr><tr><td>prefiero, prefieres, prefiere, preferimos, preferís, prefieren</td></tr></table>
+<h3>Uhrzeit</h3><table><tr><td class="es-t">Es la una. · Son las dos y cuarto / y media / menos cuarto.</td></tr><tr><td class="es-t">¿A qué hora …? – A las tres. · por la mañana / tarde / noche</td></tr></table>
+<h3>Restaurant</h3><table><tr><td class="es-t">¿Hay mesas libres? · ¿Para cuántas personas? · ¿A nombre de quién?</td></tr><tr><td class="es-t">De primero … · De segundo … · ¿Y para beber? · La cuenta, por favor.</td></tr></table>
+<h3>Objektpronomen & se</h3><p><b>lo, la, los, las</b> vor dem Verb: <span class="es-t">La compro yo. No lo tomo.</span> · <span class="es-t">Se puede pagar con tarjeta.</span></p>
+<h3>Mengen</h3><p class="es-t">un kilo de · cien gramos de · medio litro de · una botella de</p>`});
+
+/* ================= UNIDAD 5 · POR LA CIUDAD ================= */
+COURSE.units.push({id:'u5',n:'5',title:'Por la ciudad',sub:'Eine Stadt beschreiben · Verkehrsmittel · den Weg beschreiben · Reihenfolge · Ortsangaben',
+goals:['hay vs. estar','muy vs. mucho','ir & a + el = al','Verkehrsmittel (en metro, a pie)','tener que + Infinitiv','seguir (e→i)','Weg beschreiben','Ortsangaben (cerca de, al lado de …)','porque · pero · por eso'],
+situacion:{title:'Verlaufen in der Ciutat Vella',npc:'Señora',scene:'Du kommst am Liceu aus der Metro (L3) und willst zum Mercado de Santa Caterina, wo du einen Freund triffst. Du fragst eine ältere Dame nach dem Weg.',role:'Du bist eine freundliche ältere Barcelonesa. Du erklärst den Weg vom Liceu zum Mercado de Santa Caterina: Las Ramblas hinunter? Nein – erst die Calle Ferran bis Plaça Sant Jaume, dann geradeaus durch die Calle Jaume I bis zur Via Laietana, über die Straße, dann links, die Avenida Francesc Cambó, der Markt ist rechts, ca. 15 Minuten zu Fuß. Benutze einfache Wegbeschreibungen (sigue todo recto, gira a la derecha, cruza la calle). Siez ihn erst, dann duz ihn, wenn er dich duzt.',goal:'Frag höflich nach dem Weg, frag, ob es weit ist und ob man zu Fuß gehen kann, wiederhole die Beschreibung und bedanke dich.'},
+lessons:[
+{id:'l1',title:'Eine Stadt beschreiben',desc:'Hay muchos parques · La catedral está en el centro',steps:[
+ {t:'vocab',title:'In der Stadt',items:[['el barrio','das Viertel'],['el centro','das Zentrum'],['el parque','der Park'],['la plaza','der Platz'],['la calle','die Straße'],['el museo','das Museum'],['la catedral','die Kathedrale'],['el edificio','das Gebäude'],['el mercado','der Markt'],['la playa','der Strand'],['el tráfico','der Verkehr'],['la feria','die Messe'],['el casco antiguo','die Altstadt'],['el ambiente','die Atmosphäre']]},
+ {t:'info',title:'hay oder estar?',html:`<table><tr><th>hay = es gibt</th><th>estar = sich befinden</th></tr>
+ <tr><td class="es-t">En Barcelona hay una catedral famosa.</td><td class="es-t">La Sagrada Família está en el Eixample.</td></tr>
+ <tr><td class="es-t">Hay muchos bares y restaurantes.</td><td class="es-t">Mi hotel está en el casco antiguo.</td></tr>
+ <tr><td class="es-t">Hay más de 300 ferias al año.</td><td class="es-t">Los servicios están al lado del restaurante.</td></tr></table>
+ <div class="ex"><b>hay</b> + unbestimmter Artikel / Zahl / Menge / ohne Artikel (etwas Unbekanntes).<br><b>está/están</b> + bestimmter Artikel / Name (etwas Bestimmtes – wo ist es?).</div>
+ <div class="ojo"><b>hay</b> hat nur eine Form – auch im Plural: <span class="es-t">hay dos parques</span>.</div>`},
+ {t:'mc',q:'En mi barrio ___ un mercado muy bonito.',opts:['hay','está','es'],a:0,keep:true},
+ {t:'mc',q:'El mercado de la Boqueria ___ en las Ramblas.',opts:['está','hay','es'],a:0,keep:true},
+ {t:'mc',q:'¿Dónde ___ los servicios, por favor?',opts:['están','hay','son'],a:0,keep:true},
+ {t:'gap',q:'En Barcelona ___ mucho turismo y la playa ___ muy cerca del centro.',a:['hay','está']},
+ {t:'info',title:'muy oder mucho?',html:`<table><tr><th>mucho/-a/-os/-as + Substantiv (veränderlich)</th><th>muy + Adjektiv/Adverb</th></tr>
+ <tr><td class="es-t">mucho tráfico · mucha gente · muchos trenes · muchas obras</td><td class="es-t">Es muy difícil llegar. · Está muy cerca.</td></tr></table>
+ <p>Nach dem Verb: <span class="es-t">mucho</span> (unveränderlich): <span class="es-t">No uso mucho la bicicleta. ¿Te gusta? – Sí, mucho.</span></p>`},
+ {t:'gap',q:'En el centro hay ___ (viel) gente y ___ (viele) turistas.',a:['mucha','muchos']},
+ {t:'gap',q:'El metro es ___ (sehr) rápido y trabajo ___ (viel).',a:['muy','mucho']},
+ {t:'tr',de:'In meinem Viertel gibt es viele Parks.',a:['En mi barrio hay muchos parques.']},
+ {t:'tr',de:'Die Universität ist sehr weit weg.',a:['La universidad está muy lejos.']}
+]},
+{id:'l2',title:'Verkehrsmittel',desc:'Voy en metro · ir a / ir en',steps:[
+ {t:'info',title:'Das Verb ir (gehen, fahren)',html:`<table><tr><td>yo</td><td class="es-t">voy</td></tr><tr><td>tú</td><td class="es-t">vas</td></tr><tr><td>él / ella / usted</td><td class="es-t">va</td></tr><tr><td>nosotros/-as</td><td class="es-t">vamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">vais</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">van</td></tr></table>
+ <table><tr><td><b>a</b> = Richtung (wohin?)</td><td class="es-t">Voy a Guadalajara. · Vamos a la oficina.</td></tr><tr><td><b>en</b> = Verkehrsmittel</td><td class="es-t">Voy en metro / en tren / en coche / en bici / en avión</td></tr><tr><td>zu Fuß</td><td class="es-t">Voy a pie / andando.</td></tr></table>
+ <div class="ojo"><b>a + el = al</b>: <span class="es-t">Voy al aeropuerto.</span> (aber: <span class="es-t">a la estación</span>)</div>`},
+ {t:'conj',verb:'ir',de:'gehen, fahren',forms:['voy','vas','va','vamos','vais','van']},
+ {t:'vocab',title:'Verkehrsmittel',items:[['el metro','die U-Bahn'],['el autobús','der Bus'],['el tren','der Zug'],['el coche','das Auto'],['la bici(cleta)','das Fahrrad'],['el avión','das Flugzeug'],['a pie / andando','zu Fuß'],['la línea','die Linie'],['la parada','die Haltestelle'],['la estación','der Bahnhof / die Station'],['cambiar (de línea)','umsteigen'],['bajar (del metro)','aussteigen'],['tomar / coger','nehmen (Verkehrsmittel)']]},
+ {t:'gap',q:'Normalmente ___ (yo, ir) a la universidad ___ metro.',a:['voy','en']},
+ {t:'gap',q:'¿Vamos ___ aeropuerto en tren o en taxi?',a:['al']},
+ {t:'gap',q:'Mis compañeros ___ (ir) a pie porque viven muy cerca.',a:['van']},
+ {t:'mc',q:'„Ich fahre mit dem Fahrrad.“',opts:['Voy en bici.','Voy con bici.','Voy a bici.'],a:0},
+ {t:'info',title:'seguir (e→i) & tener que',html:`<table><tr><th>seguir (weitergehen, folgen)</th></tr><tr><td class="es-t">sigo · sigues · sigue · seguimos · seguís · siguen</td></tr></table>
+ <div class="ojo">yo <b>sigo</b> – ohne u, damit die Aussprache „g“ bleibt.</div>
+ <p><b>tener que + Infinitiv</b> = müssen: <span class="es-t">Tienes que tomar el autobús. Tenéis que bajar en la próxima parada.</span></p>`},
+ {t:'gap',q:'Para ir a la feria ___ ___ tomar la línea 1. (du musst)',a:['tienes','que']},
+ {t:'tr',de:'Du musst in Plaça Catalunya umsteigen.',a:['Tienes que cambiar en Plaça Catalunya.','Tienes que cambiar en Plaza Cataluña.','Tienes que cambiar de línea en Plaça Catalunya.']},
+ {t:'listen',es:'Toma el metro número tres y baja en Liceu.',de:'Nimm die Metro Linie 3 und steig am Liceu aus.'}
+]},
+{id:'l3',title:'Den Weg beschreiben',desc:'Sigue todo recto · Gira a la izquierda',steps:[
+ {t:'vocab',title:'Wegbeschreibung',items:[['¿Sabe dónde está …?','Wissen Sie, wo … ist?'],['¿Hay un … cerca de aquí?','Gibt es ein … hier in der Nähe?'],['seguir todo recto','geradeaus gehen'],['girar a la derecha','rechts abbiegen'],['girar a la izquierda','links abbiegen'],['cruzar la calle','die Straße überqueren'],['hasta el final','bis zum Ende'],['la primera / segunda calle','die erste / zweite Straße'],['cerca (de)','in der Nähe (von)'],['lejos (de)','weit weg (von)'],['enfrente (de)','gegenüber (von)'],['al lado (de)','neben'],['delante (de) / detrás (de)','vor / hinter'],['entre … y …','zwischen … und …']]},
+ {t:'info',title:'Reihenfolge & Ortsangaben',html:`<p><b>Reihenfolge:</b> <span class="es-t">primero … después … luego … al final …</span></p>
+ <div class="ex"><span class="es-t">Primero sigue todo recto. Después gira a la derecha. Luego cruza la plaza y al final está el museo, a la izquierda.</span></div>
+ <table><tr><td class="es-t">cerca de ↔ lejos de</td><td class="es-t">delante de ↔ detrás de</td></tr><tr><td class="es-t">a la izquierda de ↔ a la derecha de</td><td class="es-t">al lado de · enfrente de · entre … y …</td></tr></table>
+ <div class="ojo"><b>de + el = del</b>: <span class="es-t">al lado del hotel</span>, <span class="es-t">cerca del metro</span>.</div>`},
+ {t:'match',q:'Gegenteile',pairs:[['cerca','lejos'],['delante','detrás'],['a la derecha','a la izquierda'],['primero','al final']]},
+ {t:'gap',q:'El banco está al lado ___ supermercado.',a:['del']},
+ {t:'gap',q:'La farmacia está ___ el banco ___ la panadería. (zwischen … und …)',a:['entre','y']},
+ {t:'mc',q:'Höflich nach dem Weg fragen:',opts:['Perdone, ¿sabe dónde está la estación?','Oye, ¿dónde hay la estación?','Perdone, ¿dónde es la estación?'],a:0},
+ {t:'dialog',place:'Plaça de Catalunya',title:'Wo ist der Bahnhof?',scene:'Du suchst den Weg zur Metro. Du sprichst einen Passanten an.',lines:[
+  {you:true,prompt:'Sprich den Passanten höflich an.',opts:[{es:'Perdone, ¿hay una estación de metro cerca de aquí?',ok:true},{es:'Perdone, ¿está una estación de metro cerca de aquí?',ok:false,why:'Unbestimmt (eine Station) → <b>hay</b>.'}]},
+  {n:'Señor',es:'Sí, está muy cerca. Sigue todo recto y gira la segunda calle a la izquierda.',de:'Ja, ganz nah. Geh geradeaus und bieg in die zweite Straße links ab.'},
+  {you:true,prompt:'Wiederhole zur Sicherheit.',opts:[{es:'Todo recto y la segunda a la izquierda, ¿no?',ok:true},{es:'Todo recto y la segunda a la derecha, ¿no?',ok:false,why:'Er hat <i>izquierda</i> (links) gesagt.'}]},
+  {n:'Señor',es:'Eso es. La estación está enfrente de un banco.',de:'Genau. Die Station ist gegenüber von einer Bank.'},
+  {you:true,opts:[{es:'¡Muchas gracias!',ok:true},{es:'¡De nada!',ok:false,why:'<i>De nada</i> sagt man, wenn sich jemand bei <b>dir</b> bedankt.'}]},
+  {n:'Señor',es:'De nada. ¡Que vaya bien!',de:'Gern geschehen. Alles Gute!'}]},
+ {t:'listen',es:'Gira a la derecha y sigue hasta el final de la calle.',de:'Bieg rechts ab und geh bis zum Ende der Straße.'},
+ {t:'tr',de:'Zuerst geradeaus, dann links abbiegen.',a:['Primero todo recto, después gira a la izquierda.','Primero sigue todo recto y después gira a la izquierda.','Primero todo recto y luego a la izquierda.','Primero todo recto, luego gira a la izquierda.','Primero sigue todo recto, luego gira a la izquierda.']},
+ {t:'tr',de:'Das Hotel ist neben dem Museum.',a:['El hotel está al lado del museo.']}
+]},
+{id:'l4',title:'Lesen: Barcelona & Konnektoren',desc:'porque · pero · por eso',steps:[
+ {t:'read',title:'Barcelona, ciudad de negocios',text:`Barcelona es una ciudad muy {atractiva|attraktiv} para hacer negocios. Tiene un {puerto|Hafen} muy importante, un aeropuerto internacional y más de 300 {ferias|Messen} y congresos al año, como el Mobile World Congress.
+
+La ciudad tiene unas 2500 horas de sol al año. Por eso muchas personas {extranjeras|ausländisch} quieren vivir aquí. En el centro hay edificios de todos los estilos: {góticos|gotisch} en el Barri Gòtic y {modernistas|im Jugendstil} en el Eixample, como la Casa Batlló.
+
+Moverse por la ciudad es fácil porque el metro es rápido y barato. Pero en {hora punta|Stoßzeit} hay mucha gente y mucho tráfico. Muchos barceloneses prefieren ir en bici: hay más de 300 kilómetros de {carril bici|Radweg}.`,
+ de:`Barcelona ist eine sehr attraktive Stadt, um Geschäfte zu machen. Sie hat einen sehr wichtigen Hafen, einen internationalen Flughafen und mehr als 300 Messen und Kongresse pro Jahr, wie den Mobile World Congress.\n\nDie Stadt hat etwa 2500 Sonnenstunden im Jahr. Deshalb wollen viele Ausländer hier leben. Im Zentrum gibt es Gebäude aller Stilrichtungen: gotische im Barri Gòtic und Jugendstil-Bauten im Eixample, wie die Casa Batlló.\n\nSich in der Stadt fortzubewegen ist einfach, weil die Metro schnell und günstig ist. Aber zur Stoßzeit gibt es viele Leute und viel Verkehr. Viele Barcelonesen fahren lieber Fahrrad: Es gibt mehr als 300 Kilometer Radwege.`},
+ {t:'mc',q:'¿Por qué quieren vivir en Barcelona muchos extranjeros, según el texto?',opts:['Porque hay mucho sol.','Porque el metro es caro.','Porque hay poco tráfico.'],a:0},
+ {t:'mc',q:'¿Qué problema tiene el metro?',opts:['En hora punta hay mucha gente.','Es muy lento.','Es muy caro.'],a:0},
+ {t:'info',title:'Konnektoren',html:`<table><tr><td class="es-t">porque</td><td>weil (Grund)</td><td class="es-t">Es fácil llegar porque está cerca del aeropuerto.</td></tr>
+ <tr><td class="es-t">por eso</td><td>deshalb (Folge)</td><td class="es-t">Está cerca del aeropuerto, por eso es fácil llegar.</td></tr>
+ <tr><td class="es-t">pero</td><td>aber</td><td class="es-t">El metro es rápido, pero hay mucha gente.</td></tr>
+ <tr><td class="es-t">y / también</td><td>und / auch</td><td class="es-t">Hay parques y también playas.</td></tr></table>
+ <div class="ojo"><b>¿Por qué?</b> (warum?, getrennt + Akzent) – <b>porque</b> (weil, zusammen).</div>`},
+ {t:'gap',q:'Voy en bici ___ es más rápido. (weil)',a:['porque']},
+ {t:'gap',q:'Vivo lejos de la universidad, ___ ___ voy en metro. (deshalb)',a:['por','eso']},
+ {t:'gap',q:'El piso es bonito, ___ es muy caro.',a:['pero']},
+ {t:'free',task:'Beschreibe deinen Weg zur Uni (oder zu einem Lieblingsort in Barcelona) und dein Viertel in 5–7 Sätzen.',hint:'Vivo en … · En mi barrio hay … · Para ir a la FIB tomo … · Primero …, después … · porque / pero / por eso',focus:'hay/estar, ir + en/a, tener que, Wegbeschreibung, Konnektoren',model:'Vivo en Sants, un barrio tranquilo cerca de la estación. En mi barrio hay muchos bares y un mercado muy bonito. Para ir a la FIB, primero voy a pie a la parada de metro. Después tomo la línea 3 y bajo en Palau Reial. Luego tengo que ir andando unos diez minutos. El metro es rápido, pero por la mañana hay mucha gente. Por eso a veces voy en bici.'}
+]}],
+resumen:`<h3>Stadt beschreiben</h3><p class="es-t">Barcelona es una ciudad atractiva. Hay muchos bares y restaurantes. La catedral está en el casco antiguo.</p>
+<h3>hay / estar</h3><table><tr><td><b>hay</b> + unbestimmt (un/una, Zahl, mucho …)</td><td class="es-t">Hay una catedral famosa.</td></tr><tr><td><b>está/n</b> + bestimmt (el/la, Name)</td><td class="es-t">¿Dónde está la Sagrada Família?</td></tr></table>
+<h3>muy / mucho</h3><p class="es-t">mucho tráfico, mucha gente, muchos trenes · Es muy fácil. · Trabajo mucho.</p>
+<h3>ir · seguir</h3><table><tr><td>voy, vas, va, vamos, vais, van</td><td>sigo, sigues, sigue, seguimos, seguís, siguen</td></tr></table>
+<p><b>a</b> + Ziel (a + el = <b>al</b>) · <b>en</b> + Verkehrsmittel · <b>a pie</b> · <b>tener que</b> + Infinitiv</p>
+<h3>Weg beschreiben</h3><p class="es-t">Perdone, ¿sabe dónde está …? · Sigue todo recto. · Gira a la derecha / izquierda. · Cruza la calle. · Primero … después … luego … al final …</p>
+<h3>Ortsangaben</h3><p class="es-t">cerca de / lejos de · delante de / detrás de · a la derecha de / a la izquierda de · al lado de · enfrente de · entre … y …</p>
+<h3>Konnektoren</h3><p class="es-t">porque (weil) · por eso (deshalb) · pero (aber)</p>`});
+;
+/* ================= UNIDAD 6 · VIAJES ================= */
+COURSE.units.push({id:'u6',n:'6',title:'Viajes',sub:'Freizeit & Vorlieben · Zustimmung & Widerspruch · Hotelzimmer reservieren · ein Problem benennen · sich entschuldigen · über Erfahrungen sprechen',
+goals:['encantar, interesar, molestar + betonte Pronomen','A mí también / tampoco / sí / no','Hotelausstattung','Verben mit -g- (hago, pongo, salgo …)','jugar (u→ue)','Perfekt (he hablado)','unregelmäßige Partizipien','neutrales lo'],
+situacion:{title:'Problem im Hotel in Sevilla',npc:'Recepción',scene:'Du bist für ein verlängertes Wochenende in einem Hotel in Sevilla. Abends funktioniert die Klimaanlage in deinem Zimmer nicht, und es fehlen Handtücher. Du rufst an der Rezeption an.',role:'Du bist Rezeptionist/in in einem Hotel in Sevilla, sehr höflich, du siezt den Gast. Entschuldige dich für die Probleme, frag nach Details (Zimmernummer, was genau nicht funktioniert), biete Lösungen an (Techniker schicken, anderes Zimmer, Handtücher bringen). Frag am Ende, was er schon in Sevilla gemacht hat (Perfekt!).',goal:'Benenne die Probleme (no funciona …, faltan …), nenne deine Zimmernummer, akzeptiere eine Lösung und erzähl im Perfekt, was du heute schon gemacht hast.'},
+lessons:[
+{id:'l1',title:'Freizeit & Vorlieben',desc:'Me encanta la naturaleza · A mí también',steps:[
+ {t:'vocab',title:'Freizeit',items:[['el tiempo libre','die Freizeit'],['hacer deporte','Sport treiben'],['ir al gimnasio','ins Fitnessstudio gehen'],['nadar','schwimmen'],['jugar al tenis / al fútbol','Tennis / Fußball spielen'],['salir con amigos','mit Freunden ausgehen'],['leer un libro','ein Buch lesen'],['ir de excursión','einen Ausflug machen'],['la montaña','die Berge'],['la naturaleza','die Natur'],['encantar','sehr gefallen, lieben'],['casi nunca','fast nie']]},
+ {t:'info',title:'encantar & betonte Pronomen',html:`<p><b>encantar</b> funktioniert wie <i>gustar</i>, ist aber stärker („lieben“): <span class="es-t">Me encanta la naturaleza. Me encantan los museos.</span></p>
+ <table><tr><th>betont (optional)</th><th>unbetont (Pflicht)</th><th></th></tr>
+ <tr><td class="es-t">(A mí)</td><td class="es-t">me</td><td rowspan="6" class="es-t">encanta jugar al tenis.<br>gustan los museos.<br>interesa la cultura.<br>molesta el ruido.</td></tr>
+ <tr><td class="es-t">(A ti)</td><td class="es-t">te</td></tr><tr><td class="es-t">(A él / ella / usted)</td><td class="es-t">le</td></tr><tr><td class="es-t">(A nosotros/-as)</td><td class="es-t">nos</td></tr><tr><td class="es-t">(A vosotros/-as)</td><td class="es-t">os</td></tr><tr><td class="es-t">(A ellos / ellas / ustedes)</td><td class="es-t">les</td></tr></table>
+ <div class="ex">Die betonten Formen braucht man zur Hervorhebung: <span class="es-t">A él le gustan los bares, pero a mí me molesta el ruido.</span></div>
+ <div class="ojo">Mit Namen: <span class="es-t">A Miguel <b>le</b> gusta la música.</span> – das <i>le</i> bleibt!</div>`},
+ {t:'info',title:'Zustimmen & widersprechen bei gustar',html:`<table><tr><th>Aussage</th><th>gleich</th><th>anders</th></tr>
+ <tr><td class="es-t">Me gusta nadar.</td><td class="es-t">A mí también. 🙂</td><td class="es-t">A mí no. 🙁</td></tr>
+ <tr><td class="es-t">No me gusta la playa.</td><td class="es-t">A mí tampoco.</td><td class="es-t">A mí sí.</td></tr></table>
+ <div class="ojo">Bei <i>gustar/encantar/interesar</i>: <b>A mí</b> también – nicht „yo también“ (das ist für normale Verben: <span class="es-t">Hablo inglés. – Yo también.</span>).</div>`},
+ {t:'mc',q:'– Me encantan los museos. – (Dir auch.)',opts:['A mí también.','Yo también.','A mí tampoco.'],a:0},
+ {t:'mc',q:'– No me gusta el fútbol. – (Dir schon!)',opts:['A mí sí.','A mí también.','Yo sí.'],a:0},
+ {t:'mc',q:'– Juego al tenis los sábados. – (Du auch.)',opts:['Yo también.','A mí también.','Me también.'],a:0,why:'<i>jugar</i> ist ein normales Verb → <i>yo también</i>.'},
+ {t:'gap',q:'A mi hermana ___ ___ (encantar) las montañas.',a:['le','encantan']},
+ {t:'gap',q:'¿A vosotros ___ ___ (interesar) la historia?',a:['os','interesa']},
+ {t:'info',title:'Verben mit -g- & jugar',html:`<p>Einige Verben haben in der 1. Person Singular ein <b>-g-</b>:</p>
+ <table><tr><td class="es-t">hacer → hago</td><td class="es-t">poner → pongo</td><td class="es-t">salir → salgo</td></tr><tr><td class="es-t">tener → tengo (tienes)</td><td class="es-t">venir → vengo (vienes)</td><td class="es-t">decir → digo (dices)</td></tr></table>
+ <p><b>jugar</b> (u→ue): <span class="es-t">juego, juegas, juega, jugamos, jugáis, juegan</span> – Sport immer mit <b>al</b>: <span class="es-t">juego al tenis</span>.</p>`},
+ {t:'gap',q:'Los fines de semana ___ (yo, salir) con mis amigos y ___ (hacer) deporte.',a:['salgo','hago']},
+ {t:'conj',verb:'jugar',de:'spielen',forms:['juego','juegas','juega','jugamos','jugáis','juegan']},
+ {t:'tr',de:'Ich liebe die Natur, aber der Lärm stört mich.',a:['Me encanta la naturaleza, pero me molesta el ruido.']}
+]},
+{id:'l2',title:'Ein Hotelzimmer reservieren',desc:'Quería reservar una habitación doble',steps:[
+ {t:'vocab',title:'Im Hotel',items:[['la habitación doble / individual','das Doppel- / Einzelzimmer'],['exterior / interior','zur Straße / zum Innenhof'],['tranquila / ruidosa','ruhig / laut'],['con ducha / con baño','mit Dusche / mit Bad'],['el aire acondicionado','die Klimaanlage'],['la calefacción','die Heizung'],['la piscina','das Schwimmbad'],['el desayuno incluido','Frühstück inklusive'],['la recepción','die Rezeption'],['la ubicación','die Lage'],['el precio','der Preis'],['quería …','ich hätte gern / ich wollte …']]},
+ {t:'info',title:'Höflich reservieren',html:`<table><tr><td class="es-t">Buenos días, ¿en qué puedo ayudarle?</td><td>Rezeption</td></tr><tr><td class="es-t">Quería reservar una habitación doble.</td><td>du (höflich: <b>quería</b>)</td></tr>
+ <tr><td class="es-t">¿Para qué fechas?</td><td class="es-t">Del 20 al 23 de mayo.</td></tr><tr><td class="es-t">¿Para cuántas personas?</td><td class="es-t">Para dos.</td></tr>
+ <tr><td class="es-t">¿Está incluido el desayuno?</td><td class="es-t">Sí, está incluido. / No, son 12 € más.</td></tr><tr><td class="es-t">¿Me puede decir si hay …?</td><td>Können Sie mir sagen, ob es … gibt?</td></tr></table>
+ <div class="ex">Datum: <span class="es-t">el 3 de octubre</span> · <span class="es-t">del 20 al 23 de mayo</span> (de + el = del, a + el = al)</div>`},
+ {t:'dialog',place:'Hotel en Sevilla (por teléfono)',title:'Reservierung',scene:'Du willst für ein langes Wochenende ein Zimmer in Sevilla reservieren.',lines:[
+  {n:'Recepción',es:'Hotel Giralda, buenos días. ¿En qué puedo ayudarle?',de:'Hotel Giralda, guten Morgen. Wie kann ich Ihnen helfen?'},
+  {you:true,opts:[{es:'Buenos días. Quería reservar una habitación individual.',ok:true},{es:'Buenos días. Quiero que reservar una habitación individual.',ok:false,why:'<i>querer</i> + Infinitiv – ohne <i>que</i>. Höflicher: <i>quería</i>.'}]},
+  {n:'Recepción',es:'¿Para qué fechas?',de:'Für welche Daten?'},
+  {you:true,opts:[{es:'Del diez al trece de octubre.',ok:true},{es:'De el diez a el trece de octubre.',ok:false,why:'de + el = <b>del</b>, a + el = <b>al</b>.'}]},
+  {n:'Recepción',es:'Tenemos una habitación exterior con baño por 85 euros la noche.',de:'Wir haben ein Zimmer zur Straße mit Bad für 85 € pro Nacht.'},
+  {you:true,opts:[{es:'¿Está incluido el desayuno?',ok:true},{es:'¿Es incluida el desayuno?',ok:false,why:'<i>el desayuno</i> ist männlich; man sagt <i>está incluido</i>.'}]},
+  {n:'Recepción',es:'Sí, está incluido. ¿Prefiere una habitación tranquila?',de:'Ja. Möchten Sie lieber ein ruhiges Zimmer?'},
+  {you:true,opts:[{es:'Sí, prefiero una habitación interior, por favor.',ok:true},{es:'Sí, prefiero una habitación ruidosa, por favor.',ok:false,why:'<i>ruidosa</i> = laut 😉'}]},
+  {n:'Recepción',es:'Perfecto. ¿A nombre de quién?',de:'Perfekt. Auf welchen Namen?'},
+  {you:true,opts:[{es:'A nombre de Jonas Gross.',ok:true}]}]},
+ {t:'gap',q:'Quería una habitación ___ (Doppel-) con ___ (Dusche).',a:['doble','ducha']},
+ {t:'tr',de:'Ich hätte gern ein ruhiges Einzelzimmer.',a:['Quería una habitación individual tranquila.','Quería una habitación individual y tranquila.']},
+ {t:'tr',de:'vom 5. bis 8. Juni',a:['del cinco al ocho de junio','del 5 al 8 de junio']},
+ {t:'listen',es:'¿Está incluido el desayuno en el precio?',de:'Ist das Frühstück im Preis inbegriffen?'}
+]},
+{id:'l3',title:'Das Perfekt',desc:'He estado · Hemos tenido muchos problemas',steps:[
+ {t:'info',title:'Perfekt = haber + Partizip',html:`<table><tr><th>haber</th><th>Partizip (unveränderlich)</th></tr>
+ <tr><td class="es-t">he · has · ha · hemos · habéis · han</td><td class="es-t">-ar → -ado (estado)<br>-er / -ir → -ido (podido, elegido)</td></tr></table>
+ <div class="ex"><span class="es-t">Esta semana he trabajado mucho.</span> · <span class="es-t">¿Has estado alguna vez en México?</span> · <span class="es-t">Todavía no he recibido respuesta.</span></div>
+ <p><b>Wann?</b> Für Handlungen in einem <b>noch nicht abgeschlossenen Zeitraum</b> (<span class="es-t">hoy, esta semana, este año</span>) oder wenn der Zeitpunkt egal ist (<span class="es-t">alguna vez, ya, todavía no, nunca, últimamente</span>).</p>
+ <div class="ojo">haber und Partizip stehen immer zusammen – nichts dazwischen: <span class="es-t">No lo he visto</span> (nicht „he no lo visto“).</div>`},
+ {t:'conj',verb:'haber',de:'(Hilfsverb)',forms:['he','has','ha','hemos','habéis','han']},
+ {t:'gap',q:'Hoy ___ ___ (yo, trabajar) ocho horas.',a:['he','trabajado']},
+ {t:'gap',q:'¿___ ___ (tú, comer) ya?',a:['Has','comido']},
+ {t:'gap',q:'Esta semana ___ ___ (nosotros, tener) muchas reuniones.',a:['hemos','tenido']},
+ {t:'info',title:'Unregelmäßige Partizipien',html:`<table><tr><td class="es-t">decir → dicho</td><td class="es-t">hacer → hecho</td><td class="es-t">ir → ido</td></tr><tr><td class="es-t">abrir → abierto</td><td class="es-t">escribir → escrito</td><td class="es-t">poner → puesto</td></tr><tr><td class="es-t">ver → visto</td><td class="es-t">volver → vuelto</td><td class="es-t">romper → roto</td></tr></table>`},
+ {t:'match',q:'Infinitiv und Partizip',pairs:[['hacer','hecho'],['ver','visto'],['escribir','escrito'],['volver','vuelto'],['decir','dicho'],['poner','puesto']]},
+ {t:'gap',q:'¿Qué ___ ___ (tú, hacer) este fin de semana?',a:['has','hecho']},
+ {t:'gap',q:'Todavía no ___ ___ (yo, ver) la Sagrada Família.',a:['he','visto']},
+ {t:'mc',q:'Welcher Satz ist richtig?',opts:['Nunca he estado en Sevilla.','He nunca estado en Sevilla.','Nunca estado he en Sevilla.'],a:0},
+ {t:'tr',de:'Warst du schon einmal in Madrid?',a:['¿Has estado alguna vez en Madrid?','¿Has estado en Madrid alguna vez?','¿Ya has estado en Madrid?','¿Has estado ya en Madrid?']},
+ {t:'tr',de:'Heute habe ich viele E-Mails geschrieben.',a:['Hoy he escrito muchos correos.','Hoy he escrito muchos emails.','Hoy he escrito muchos e-mails.']}
+]},
+{id:'l4',title:'Ein Problem benennen',desc:'No funciona … · Faltan toallas · ¡Cuánto lo siento!',steps:[
+ {t:'vocab',title:'Probleme & Entschuldigungen',items:[['no funciona …','… funktioniert nicht'],['faltan toallas','es fehlen Handtücher'],['la toalla','das Handtuch'],['está sucio / sucia','ist schmutzig'],['hay mucho ruido','es ist sehr laut'],['el técnico','der Techniker'],['enseguida','sofort'],['perdón por las molestias','entschuldigen Sie die Unannehmlichkeiten'],['disculpe','entschuldigen Sie'],['¡Cuánto lo siento!','Das tut mir so leid!'],['la queja','die Beschwerde']]},
+ {t:'info',title:'Ein Problem benennen & reagieren',html:`<table><tr><th>Gast</th><th>Hotel</th></tr><tr><td class="es-t">Tenemos un problema con la habitación.</td><td class="es-t">Enseguida le mando al técnico.</td></tr>
+ <tr><td class="es-t">Mire, es que no funciona el aire acondicionado.</td><td class="es-t">Perdón por las molestias.</td></tr><tr><td class="es-t">En la habitación faltan toallas.</td><td class="es-t">Disculpe. ¡Cuánto lo siento!</td></tr></table>
+ <div class="ojo"><b>faltar</b> funktioniert wie <i>gustar</i>: <span class="es-t">Falta una toalla. Faltan toallas.</span></div>
+ <h3>Das neutrale lo</h3><p><b>lo</b> bezieht sich auf einen ganzen Sachverhalt: <span class="es-t">– No funciona la calefacción. – ¡Cuánto lo siento!</span> · <span class="es-t">Si lo desea, puedo ofrecerle otra habitación.</span></p>`},
+ {t:'gap',q:'En el baño ___ (fehlen) toallas y no ___ (funktioniert) la ducha.',a:['faltan','funciona']},
+ {t:'mc',q:'Der Gast beschwert sich. Wie reagiert die Rezeption höflich?',opts:['Perdón por las molestias. Enseguida lo solucionamos.','¡Qué bien!','No es mi problema.'],a:0},
+ {t:'dialog',place:'Recepción del hotel',title:'Die Klimaanlage',scene:'Es ist 32 Grad in Sevilla. Du gehst zur Rezeption.',lines:[
+  {n:'Recepción',es:'Buenas noches. ¿Qué desea?',de:'Guten Abend. Was wünschen Sie?'},
+  {you:true,opts:[{es:'Mire, tengo un problema: no funciona el aire acondicionado.',ok:true},{es:'Mire, tengo un problema: no funcionan el aire acondicionado.',ok:false,why:'<i>el aire acondicionado</i> ist Singular → <i>funciona</i>.'}]},
+  {n:'Recepción',es:'¡Cuánto lo siento! ¿Qué número de habitación tiene?',de:'Das tut mir so leid! Welche Zimmernummer haben Sie?'},
+  {you:true,opts:[{es:'La 214. Y también faltan toallas.',ok:true},{es:'La 214. Y también falta toallas.',ok:false,why:'<i>toallas</i> Plural → <i>faltan</i>.'}]},
+  {n:'Recepción',es:'Perdón por las molestias. Si lo desea, puedo ofrecerle otra habitación.',de:'Entschuldigen Sie. Wenn Sie möchten, kann ich Ihnen ein anderes Zimmer anbieten.'},
+  {you:true,opts:[{es:'Sí, perfecto. Muchas gracias.',ok:true},{es:'Sí, perfecto. De nada.',ok:false,why:'<i>De nada</i> antwortet man auf <i>gracias</i>.'}]}]},
+ {t:'tr',de:'Die Heizung funktioniert nicht.',a:['No funciona la calefacción.','La calefacción no funciona.']},
+ {t:'tr',de:'Wir hatten viele Probleme. (Perfekt)',a:['Hemos tenido muchos problemas.']}
+]},
+{id:'l5',title:'Lesen: Mi fin de semana en Sevilla',desc:'Erfahrungen im Perfekt',steps:[
+ {t:'read',title:'Mi fin de semana en Sevilla',text:`¡Hola a todos! Este fin de semana he estado en Sevilla con mi amiga Laia. Hemos ido en {AVE|spanischer Schnellzug} desde Barcelona: ¡solo cinco horas y media!
+
+El sábado por la mañana hemos visitado la catedral y hemos subido a la Giralda. Las {vistas|Aussicht} son increíbles. Después hemos comido tapas en el barrio de Triana. ¡Me encanta el {salmorejo|kalte Tomatencreme aus Córdoba}!
+
+El hotel ha estado bien, pero hemos tenido un problema: el primer día no ha funcionado el aire acondicionado y en Sevilla hace mucho calor, ¡38 grados en octubre! El personal ha sido muy amable y nos ha dado otra habitación.
+
+Todavía no he visto el Alcázar. Por eso quiero volver pronto. ¿Habéis estado alguna vez en Andalucía?`,
+ de:`Hallo zusammen! Dieses Wochenende war ich mit meiner Freundin Laia in Sevilla. Wir sind mit dem AVE von Barcelona gefahren: nur fünfeinhalb Stunden!\n\nAm Samstagmorgen haben wir die Kathedrale besichtigt und sind auf die Giralda gestiegen. Die Aussicht ist unglaublich. Danach haben wir im Viertel Triana Tapas gegessen. Ich liebe Salmorejo!\n\nDas Hotel war gut, aber wir hatten ein Problem: Am ersten Tag hat die Klimaanlage nicht funktioniert, und in Sevilla ist es sehr heiß – 38 Grad im Oktober! Das Personal war sehr nett und hat uns ein anderes Zimmer gegeben.\n\nDen Alcázar habe ich noch nicht gesehen. Deshalb will ich bald wiederkommen. Wart ihr schon einmal in Andalusien?`},
+ {t:'mc',q:'¿Cómo han viajado a Sevilla?',opts:['En tren','En avión','En coche'],a:0},
+ {t:'mc',q:'¿Qué problema han tenido en el hotel?',opts:['No ha funcionado el aire acondicionado.','Han faltado toallas.','La habitación ha sido muy ruidosa.'],a:0},
+ {t:'mc',q:'¿Por qué quiere volver?',opts:['Porque todavía no ha visto el Alcázar.','Porque el hotel ha sido muy barato.','Porque no le gusta Barcelona.'],a:0},
+ {t:'order',es:'Este fin de semana hemos visitado la catedral.',de:'Dieses Wochenende haben wir die Kathedrale besichtigt.'},
+ {t:'free',task:'Erzähl im Perfekt in 5–7 Sätzen, was du diese Woche gemacht hast (Uni, Freizeit, Barcelona) – und was du noch nicht gemacht hast.',hint:'Esta semana he … · El martes he ido … · He conocido a … · Todavía no he … · Me ha encantado …',focus:'Perfekt (haber + Partizip), unregelmäßige Partizipien, encantar/gustar',model:'Esta semana ha sido muy intensa. He tenido muchas clases en la FIB y he escrito un informe para la asignatura de redes. El miércoles he ido al gimnasio con un compañero. El sábado hemos visitado el Park Güell y me ha encantado. Todavía no he visto el Camp Nou, pero quiero ir pronto.'}
+]}],
+resumen:`<h3>Vorlieben</h3><table><tr><td class="es-t">(A mí) me encanta / gusta / interesa / molesta + Sg.</td><td class="es-t">… encantan / gustan + Pl.</td></tr><tr><td colspan="2" class="es-t">A él le gustan los bares, pero a mí me molesta el ruido.</td></tr></table>
+<h3>Zustimmung (gustar-Verben)</h3><table><tr><td class="es-t">Me gusta nadar.</td><td class="es-t">A mí también. / A mí no.</td></tr><tr><td class="es-t">No me gusta la playa.</td><td class="es-t">A mí tampoco. / A mí sí.</td></tr></table>
+<h3>Verben mit -g-</h3><p class="es-t">hago · pongo · salgo · tengo · vengo · digo — jugar: juego, juegas, juega, jugamos, jugáis, juegan</p>
+<h3>Hotel</h3><p class="es-t">Quería reservar una habitación doble. · ¿Para qué fechas? – Del 20 al 23 de mayo. · ¿Está incluido el desayuno?</p>
+<h3>Probleme</h3><p class="es-t">No funciona la calefacción. · Faltan toallas. — Perdón por las molestias. · ¡Cuánto lo siento! · Enseguida le mando al técnico.</p>
+<h3>Perfekt</h3><table><tr><td>he, has, ha, hemos, habéis, han + -ado / -ido</td></tr><tr><td>hoy, esta semana, ya, todavía no, alguna vez, nunca, últimamente</td></tr><tr><td class="es-t">dicho · hecho · ido · abierto · escrito · puesto · visto · vuelto</td></tr></table>`});
+
+/* ================= UNIDAD 7 · ENTORNO LABORAL ================= */
+COURSE.units.push({id:'u7',n:'7',title:'Entorno laboral',sub:'Arbeitsbedingungen · Fähigkeiten · Vergleiche · Tagesablauf · etwas zeitlich einordnen · einen Vorgang beschreiben · sich rechtfertigen',
+goals:['Arbeitsbedingungen','saber vs. poder','Vergleiche (más/menos … que, tan … como)','mejor, peor, mayor, menor','reflexive Verben','antes de / después de + Infinitiv','estar + Gerundium','Relativsätze mit que','Lo siento, es que …'],
+situacion:{title:'Bewerbungsgespräch für ein Praktikum',npc:'Marta',scene:'Online-Gespräch mit Marta von einer Cybersecurity-Firma in Barcelona (22@-Viertel). Sie suchen eine/n Praktikant/in für IT-Audit.',role:'Du bist Marta, Teamleiterin IT-Audit bei einer Firma in Barcelona. Du duzt Jonas. Frag ihn nach seinen Fähigkeiten (¿Sabes …? Sprachen, Programme, Tools), seinem typischen Arbeitstag bei EY, was ihm an einem Job wichtig ist (horarios flexibles, teletrabajo, salario) und vergleiche (¿Qué prefieres: trabajar en equipo o solo?). Benutze Gegenwart und Perfekt, keine komplizierten Zeiten.',goal:'Sag, was du kannst (sé / no sé …), beschreibe deinen typischen Arbeitstag (reflexive Verben, antes de / después de) und vergleiche zwei Arbeitsweisen.'},
+lessons:[
+{id:'l1',title:'Arbeit & Fähigkeiten',desc:'Es un trabajo creativo · ¿Sabes francés?',steps:[
+ {t:'vocab',title:'Arbeitsbedingungen',items:[['el sueldo / el salario','das Gehalt'],['alto / bajo','hoch / niedrig'],['el horario flexible','die flexible Arbeitszeit'],['el teletrabajo','das Homeoffice'],['la jornada','die Arbeitszeit, der Arbeitstag'],['creativo / creativa','kreativ'],['estresante','stressig'],['el ambiente de trabajo','das Arbeitsklima'],['el compañero / la compañera','Kollege / Kollegin'],['la empresa','das Unternehmen'],['las vacaciones','der Urlaub'],['la reunión','die Besprechung']]},
+ {t:'info',title:'saber oder poder?',html:`<table><tr><th>saber = Fähigkeit, Wissen</th><th>poder = Möglichkeit</th><th>poder = Erlaubnis</th></tr>
+ <tr><td class="es-t">¿Sabes chino?<br>No sé usar este programa.</td><td class="es-t">Puedo ir a pie al trabajo.<br>¿Puedes llevar los documentos?</td><td class="es-t">¿Puedo abrir la ventana?<br>¿Se puede usar el móvil aquí?</td></tr></table>
+ <p>saber: <span class="es-t">sé · sabes · sabe · sabemos · sabéis · saben</span></p>
+ <div class="ojo">Gelernte Fähigkeiten (schwimmen, Auto fahren, programmieren, Sprachen) → <b>saber</b>: <span class="es-t">Sé nadar.</span></div>`},
+ {t:'mc',q:'„Kannst du Python programmieren?“ (gelernt)',opts:['¿Sabes programar en Python?','¿Puedes programar en Python?','¿Conoces programar en Python?'],a:0},
+ {t:'mc',q:'„Kann ich das Fenster aufmachen?“ (Erlaubnis)',opts:['¿Puedo abrir la ventana?','¿Sé abrir la ventana?','¿Sabo abrir la ventana?'],a:0},
+ {t:'mc',q:'„Heute kann ich nicht, ich habe eine Besprechung.“',opts:['Hoy no puedo, tengo una reunión.','Hoy no sé, tengo una reunión.','Hoy no podo, tengo una reunión.'],a:0},
+ {t:'gap',q:'No ___ (yo, saber) hablar francés, pero lo entiendo.',a:['sé']},
+ {t:'tr',de:'Mein Job ist kreativ und ich habe flexible Arbeitszeiten.',a:['Mi trabajo es creativo y tengo un horario flexible.','Mi trabajo es creativo y mis horarios son flexibles.','Mi trabajo es creativo y tengo horarios flexibles.']},
+ {t:'tr',de:'Weißt du, wie man dieses Programm benutzt?',a:['¿Sabes usar este programa?']}
+]},
+{id:'l2',title:'Vergleiche',desc:'más … que · tan … como · el más …',steps:[
+ {t:'info',title:'Vergleichen',html:`<table><tr><td>+</td><td class="es-t">Lucas es más joven que Carlos.</td></tr><tr><td>–</td><td class="es-t">Valentina gana menos que Lucas.</td></tr>
+ <tr><td>= (Adjektiv)</td><td class="es-t">Lucas es tan joven como Valentina.</td></tr><tr><td>= (Verb)</td><td class="es-t">Lucas trabaja tanto como Carlos.</td></tr>
+ <tr><td>= (Substantiv)</td><td class="es-t">Lucas trabaja tantas horas como Carlos.</td></tr><tr><td>++</td><td class="es-t">Jan es el más deportista de la clase.</td></tr></table>
+ <h3>Unregelmäßig</h3><table><tr><td class="es-t">bueno → mejor</td><td>besser</td></tr><tr><td class="es-t">malo → peor</td><td>schlechter</td></tr><tr><td class="es-t">grande → mayor / más grande</td><td>älter / größer</td></tr><tr><td class="es-t">pequeño → menor / más pequeño</td><td>jünger / kleiner</td></tr></table>
+ <div class="ojo">Bei Zahlen: <b>más de / menos de</b>: <span class="es-t">Gano más de 2000 €.</span> · <b>tanto</b> passt sich an: tanto trabajo, tanta gente, tantos días, tantas horas.</div>`},
+ {t:'gap',q:'El metro es ___ rápido ___ el autobús. (schneller als)',a:['más','que']},
+ {t:'gap',q:'Mi hermano es ___ alto ___ yo. (genauso groß wie)',a:['tan','como']},
+ {t:'gap',q:'No tengo ___ vacaciones ___ tú. (so viel Urlaub wie)',a:['tantas','como'],why:'<i>las vacaciones</i> ist weiblich Plural → <i>tantas</i>.'},
+ {t:'mc',q:'Este restaurante es ___ que el otro. (besser)',opts:['mejor','más bueno','más mejor'],a:0},
+ {t:'mc',q:'En esta empresa trabajan ___ 500 personas.',opts:['más de','más que','tanto como'],a:0},
+ {t:'gap',q:'Ana es la ___ trabajadora del equipo. (die fleißigste)',a:['más']},
+ {t:'tr',de:'Barcelona ist größer als Mannheim.',a:['Barcelona es más grande que Mannheim.','Barcelona es mayor que Mannheim.']},
+ {t:'tr',de:'Ich arbeite weniger als mein Chef.',a:['Trabajo menos que mi jefe.','Yo trabajo menos que mi jefe.']}
+]},
+{id:'l3',title:'Der Tagesablauf',desc:'Me levanto a las seis · Antes de desayunar …',steps:[
+ {t:'info',title:'Reflexive Verben',html:`<table><tr><th></th><th>levantarse (aufstehen)</th></tr><tr><td>yo</td><td class="es-t">me levanto</td></tr><tr><td>tú</td><td class="es-t">te levantas</td></tr><tr><td>él / ella / usted</td><td class="es-t">se levanta</td></tr><tr><td>nosotros/-as</td><td class="es-t">nos levantamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">os levantáis</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">se levantan</td></tr></table>
+ <p>Das Pronomen steht <b>vor</b> dem konjugierten Verb: <span class="es-t">No me levanto tarde.</span> Beim Infinitiv kann es angehängt werden: <span class="es-t">Me quiero duchar = Quiero ducharme.</span></p>
+ <p>Weitere: <span class="es-t">ducharse, acostarse (o→ue: me acuesto), vestirse (e→i: me visto), reunirse (me reúno), despertarse (e→ie: me despierto)</span>.</p>`},
+ {t:'vocab',title:'Tagesablauf',items:[['levantarse','aufstehen'],['despertarse','aufwachen'],['ducharse','duschen'],['vestirse','sich anziehen'],['acostarse','ins Bett gehen'],['reunirse','sich treffen (Besprechung)'],['normalmente','normalerweise'],['primero / después','zuerst / danach'],['antes de + Inf.','bevor …'],['después de + Inf.','nachdem …']]},
+ {t:'conj',verb:'levantarse',de:'aufstehen',forms:['me levanto','te levantas','se levanta','nos levantamos','os levantáis','se levantan']},
+ {t:'gap',q:'Normalmente ___ ___ (yo, levantarse) a las siete.',a:['me','levanto']},
+ {t:'gap',q:'Mis compañeros ___ ___ (reunirse) los lunes a las nueve.',a:['se','reúnen']},
+ {t:'gap',q:'¿A qué hora ___ ___ (tú, acostarse)?',a:['te','acuestas'],why:'acostarse: o→ue → <i>te acuestas</i>.'},
+ {t:'info',title:'antes de / después de + Infinitiv',html:`<table><tr><td class="es-t">Me ducho antes de desayunar.</td><td>Ich dusche, bevor ich frühstücke.</td></tr><tr><td class="es-t">Después del trabajo ceno con la familia.</td><td>+ Substantiv</td></tr><tr><td class="es-t">Después de estudiar voy al gimnasio.</td><td>+ Infinitiv</td></tr></table>
+ <div class="ojo">Im Deutschen ein Nebensatz – im Spanischen einfach <b>Präposition + Infinitiv</b>.</div>`},
+ {t:'tr',de:'Bevor ich arbeite, trinke ich einen Kaffee.',a:['Antes de trabajar tomo un café.','Antes de trabajar bebo un café.','Tomo un café antes de trabajar.','Bebo un café antes de trabajar.']},
+ {t:'tr',de:'Nach dem Unterricht gehe ich ins Fitnessstudio.',a:['Después de clase voy al gimnasio.','Después de la clase voy al gimnasio.','Después de las clases voy al gimnasio.','Voy al gimnasio después de clase.']},
+ {t:'listen',es:'Me levanto a las seis y media y me ducho antes de desayunar.',de:'Ich stehe um halb sieben auf und dusche vor dem Frühstück.'}
+]},
+{id:'l4',title:'Was machst du gerade?',desc:'Estoy escribiendo un informe · la chica que está hablando',steps:[
+ {t:'info',title:'estar + Gerundium',html:`<p>Für Handlungen, die <b>gerade jetzt</b> passieren:</p>
+ <table><tr><td>-ar → <b>-ando</b></td><td class="es-t">buscar → Estoy buscando los precios.</td></tr><tr><td>-er / -ir → <b>-iendo</b></td><td class="es-t">hacer → ¿Qué estás haciendo? · escribir → escribiendo</td></tr></table>
+ <table><tr><td class="es-t">leer → leyendo</td><td class="es-t">ir → yendo</td><td class="es-t">decir → diciendo</td></tr><tr><td class="es-t">pedir → pidiendo</td><td class="es-t">venir → viniendo</td><td class="es-t">dormir → durmiendo</td></tr></table>
+ <div class="ojo">Pronomen: <span class="es-t">Me estoy duchando = Estoy duchándome</span> (dann mit Akzent!).</div>`},
+ {t:'gap',q:'– ¿Qué estás ___ (hacer)? – Estoy ___ (preparar) una presentación.',a:['haciendo','preparando']},
+ {t:'gap',q:'Marc está ___ (leer) el periódico.',a:['leyendo']},
+ {t:'gap',q:'Ahora mismo ___ ___ (nosotros, comer).',a:['estamos','comiendo']},
+ {t:'mc',q:'„Sie telefoniert gerade.“',opts:['Está hablando por teléfono.','Es hablando por teléfono.','Está hablado por teléfono.'],a:0},
+ {t:'info',title:'Relativsätze mit que & sich rechtfertigen',html:`<p><b>que</b> (der, die, das) ist unveränderlich – für Personen und Sachen:</p>
+ <table><tr><td class="es-t">Ana es la chica morena que está pagando.</td></tr><tr><td class="es-t">Es la traducción que me has pedido.</td></tr></table>
+ <h3>Sich rechtfertigen / absagen</h3><table><tr><td class="es-t">Lo siento (mucho), es que …</td><td>Es tut mir (sehr) leid, aber …</td></tr><tr><td class="es-t">Perdón, pero ahora no puedo.</td><td>Entschuldigung, aber jetzt kann ich nicht.</td></tr><tr><td class="es-t">Gracias, pero (es que) …</td><td>Danke, aber …</td></tr></table>`},
+ {t:'gap',q:'El señor ___ está a la derecha es mi jefe.',a:['que']},
+ {t:'dialog',place:'Oficina',title:'Hast du kurz Zeit?',scene:'Eine Kollegin kommt an deinen Schreibtisch.',lines:[
+  {n:'Núria',es:'Jonas, ¿tienes un momento? ¿Qué estás haciendo?',de:'Jonas, hast du kurz Zeit? Was machst du gerade?'},
+  {you:true,opts:[{es:'Estoy terminando un informe para un cliente.',ok:true},{es:'Soy terminando un informe para un cliente.',ok:false,why:'Verlaufsform: <b>estar</b> + Gerundium.'},{es:'Estoy terminado un informe para un cliente.',ok:false,why:'Gerundium: <i>terminando</i> (nicht Partizip <i>terminado</i>).'}]},
+  {n:'Núria',es:'¿Puedes venir a la reunión de las once?',de:'Kannst du zur Besprechung um elf kommen?'},
+  {you:true,prompt:'Sag höflich ab und begründe.',opts:[{es:'Lo siento, es que tengo que enviar el informe antes de las doce.',ok:true},{es:'No sé, es que tengo que enviar el informe.',ok:false,why:'Es geht um Möglichkeit, nicht Wissen. Höflich absagen: <i>Lo siento, es que …</i>'}]},
+  {n:'Núria',es:'Vale, no pasa nada. Después te cuento.',de:'Okay, kein Problem. Ich erzähl dir später davon.'}]},
+ {t:'tr',de:'Was machst du gerade?',a:['¿Qué estás haciendo?','¿Qué haces ahora?']}
+]},
+{id:'l5',title:'Lesen: Teletrabajo en Barcelona',desc:'Text · eigener Tagesablauf',steps:[
+ {t:'read',title:'Un día de teletrabajo',text:`Sergi tiene 31 años y es programador en una {start-up|Start-up} del distrito 22@ de Barcelona. Trabaja tres días en casa y dos en la oficina.
+
+«Los días de teletrabajo me levanto más tarde que los días de oficina, a las ocho. Antes de empezar a trabajar, salgo a correr por la playa. Me ducho, desayuno y a las nueve y media me conecto. Por la mañana normalmente estoy programando y a las once me reúno con mi equipo por videollamada.
+
+Para mí, el teletrabajo es mejor que trabajar en la oficina: no pierdo tiempo en el metro y mis horarios son más {flexibles|flexibel}. Pero también tiene {desventajas|Nachteile}: a veces me siento solo y trabajo más horas que en la oficina. Por eso los martes y los jueves voy a la oficina: allí veo a mis compañeros y comemos juntos.»`,
+ de:`Sergi ist 31 Jahre alt und Programmierer bei einem Start-up im Viertel 22@ in Barcelona. Er arbeitet drei Tage zu Hause und zwei im Büro.\n\n„An Homeoffice-Tagen stehe ich später auf als an Bürotagen, um acht. Bevor ich anfange zu arbeiten, gehe ich am Strand joggen. Ich dusche, frühstücke und um halb zehn logge ich mich ein. Vormittags programmiere ich normalerweise und um elf treffe ich mich per Videocall mit meinem Team.\n\nFür mich ist Homeoffice besser als im Büro zu arbeiten: Ich verliere keine Zeit in der Metro und meine Arbeitszeiten sind flexibler. Aber es hat auch Nachteile: Manchmal fühle ich mich allein und arbeite mehr Stunden als im Büro. Deshalb gehe ich dienstags und donnerstags ins Büro: Dort sehe ich meine Kollegen und wir essen zusammen.“`},
+ {t:'mc',q:'¿Qué hace Sergi antes de empezar a trabajar?',opts:['Sale a correr.','Va a la oficina.','Se reúne con su equipo.'],a:0},
+ {t:'mc',q:'¿Qué desventaja tiene el teletrabajo para Sergi?',opts:['A veces se siente solo.','Pierde mucho tiempo en el metro.','Sus horarios no son flexibles.'],a:0},
+ {t:'mc',q:'¿Cuántos días va Sergi a la oficina?',opts:['dos','tres','cinco'],a:0},
+ {t:'free',task:'Beschreibe deinen typischen Tag als Masterstudent in Barcelona (oder einen Arbeitstag bei EY) in 6–8 Sätzen. Vergleiche am Ende: Was ist besser – Uni oder Arbeit?',hint:'Me levanto a las … · Antes de … · Después de … · Por la tarde … · Me acuesto … · La universidad es más … que …',focus:'reflexive Verben, antes de/después de + Infinitiv, Vergleiche, saber/poder',model:'Normalmente me levanto a las siete y media. Me ducho y desayuno en casa antes de ir a la universidad. Voy en metro y llego a la FIB a las nueve. Por la mañana tengo clases y a las dos como con mis compañeros. Después de comer estudio en la biblioteca. Por la noche ceno tarde y me acuesto a las doce. La vida de estudiante es más flexible que el trabajo en EY, pero también es más estresante antes de los exámenes.'}
+]}],
+resumen:`<h3>Arbeitsbedingungen</h3><p class="es-t">Es un trabajo creativo. · Mis horarios son flexibles. · Tengo un salario alto / bajo.</p>
+<h3>saber / poder</h3><table><tr><td><b>saber</b>: Fähigkeit, Wissen</td><td class="es-t">¿Sabes chino? · No sé usar este programa.</td></tr><tr><td><b>poder</b>: Möglichkeit / Erlaubnis</td><td class="es-t">Puedo ir a pie. · ¿Puedo abrir la ventana?</td></tr></table>
+<h3>Vergleich</h3><table><tr><td class="es-t">más / menos … que · tan … como · tanto/-a/-os/-as … como · el más …</td></tr><tr><td class="es-t">mejor · peor · mayor · menor · más / menos de + Zahl</td></tr></table>
+<h3>Reflexive Verben</h3><p class="es-t">me levanto · te levantas · se levanta · nos levantamos · os levantáis · se levantan — Quiero ducharme = Me quiero duchar.</p>
+<h3>Zeitlich einordnen</h3><p class="es-t">antes de / después de + Infinitiv: Me ducho antes de desayunar.</p>
+<h3>estar + Gerundium</h3><p class="es-t">-ando / -iendo: Estoy escribiendo un informe. · leyendo · yendo · diciendo · pidiendo · durmiendo</p>
+<h3>Relativsatz & Rechtfertigen</h3><p class="es-t">La mujer que está hablando es mi compañera. · Lo siento, es que … · Perdón, pero ahora no puedo.</p>`});
+
+/* ================= UNIDAD 8 · MI AGENDA ================= */
+COURSE.units.push({id:'u8',n:'8',title:'Mi agenda',sub:'Einen Termin vereinbaren · über Pläne sprechen · Kleidung & Farben · Ratschläge · Wetter · Smalltalk',
+goals:['Vorschlagen, annehmen, ablehnen','ir a + Infinitiv','Kleidung, Muster, Material','Farben (Angleichung)','este / ese / aquel','conocer, ofrecer (-zc-)','direktes Objekt mit a (Personen)','Wetter','Ausrufe: ¡Qué …! ¡Cómo …!'],
+situacion:{title:'Planes para el fin de semana',npc:'Laia',scene:'Freitagmittag in der Mensa der FIB. Laia, deine Kommilitonin, will am Wochenende etwas mit dir unternehmen.',role:'Du bist Laia, Kommilitonin aus Girona. Du duzt Jonas. Schlag Aktivitäten fürs Wochenende vor (Bunkers del Carmel bei Sonnenuntergang, Montjuïc, Strand, Mercat de Sant Antoni am Sonntag, ein Konzert). Erzähl vom Wetter (am Samstag Sonne, am Sonntag soll es regnen). Lehne einen Termin ab und schlag einen anderen vor, damit Jonas verhandeln muss. Benutze ir a + Infinitiv.',goal:'Vereinbare einen Treffpunkt und eine Uhrzeit fürs Wochenende: Mach selbst einen Vorschlag, lehne einen Vorschlag höflich ab, sprich übers Wetter und darüber, was du anziehst.'},
+lessons:[
+{id:'l1',title:'Einen Termin vereinbaren',desc:'¿Por qué no quedamos el lunes? · Vale · Es que …',steps:[
+ {t:'info',title:'Vorschlagen, annehmen, ablehnen',html:`<table><tr><th>Vorschlagen</th><th>Annehmen</th><th>Ablehnen</th></tr>
+ <tr><td class="es-t">¿Tienes ganas de tomar un café?</td><td class="es-t">¡Vale!</td><td class="es-t">Justo el sábado no puedo.</td></tr>
+ <tr><td class="es-t">¿Por qué no quedamos el lunes?</td><td class="es-t">De acuerdo.</td><td class="es-t">Lo siento, pero no puedo.</td></tr>
+ <tr><td class="es-t">¿Qué te / le parece si nos vemos …?</td><td class="es-t">Muy bien. / Perfecto.</td><td class="es-t">Es que tengo otra reunión.</td></tr>
+ <tr><td class="es-t">¿Cuándo / Dónde podemos vernos?</td><td class="es-t">A las 10 es posible.</td><td class="es-t">Gracias, pero es que …</td></tr>
+ <tr><td class="es-t">¿Qué tal si quedamos a las 10?</td><td></td><td class="es-t">Mejor el viernes.</td></tr></table>
+ <div class="ex"><span class="es-t">quedar</span> = sich verabreden: <span class="es-t">¿Quedamos a las ocho delante del cine?</span></div>`},
+ {t:'vocab',title:'Termine',items:[['quedar (con alguien)','sich verabreden (mit jdm.)'],['¿Tienes ganas de …?','Hast du Lust, … zu …?'],['¿Qué te parece si …?','Was hältst du davon, wenn …?'],['¿Qué tal si …?','Wie wäre es, wenn …?'],['vale / de acuerdo','okay / einverstanden'],['es que …','es ist nur so, dass …'],['justo …','ausgerechnet …'],['mejor …','lieber …'],['la cita','der Termin, das Date'],['la agenda','der Terminkalender']]},
+ {t:'mc',q:'Du willst eine Freundin auf einen Kaffee einladen:',opts:['¿Tienes ganas de tomar un café?','¿Tienes hambre de tomar un café?','¿Quedas un café?'],a:0},
+ {t:'mc',q:'Höflich ablehnen:',opts:['Lo siento, es que tengo otra cita.','Vale, de acuerdo.','No, no quiero.'],a:0},
+ {t:'gap',q:'¿Qué te ___ si ___ (nosotros, quedar) a las ocho?',a:['parece','quedamos']},
+ {t:'dialog',place:'Teléfono',title:'Einen Termin finden',scene:'Ein Kunde ruft dich an, um einen Termin zu vereinbaren.',lines:[
+  {n:'Sr. Torres',es:'Hola, Jonas, soy Luis Torres. ¿Cuándo podemos vernos para hablar del proyecto?',de:'Hallo Jonas, hier ist Luis Torres. Wann können wir uns treffen, um über das Projekt zu sprechen?'},
+  {you:true,opts:[{es:'¿Qué le parece el martes a las diez?',ok:true},{es:'¿Qué le parece en el martes en las diez?',ok:false,why:'Wochentag mit <i>el</i>, Uhrzeit mit <i>a las</i>.'}]},
+  {n:'Sr. Torres',es:'Justo el martes no puedo, tengo un viaje. ¿El miércoles?',de:'Ausgerechnet Dienstag kann ich nicht, ich bin auf Reisen. Mittwoch?'},
+  {you:true,opts:[{es:'El miércoles por la mañana es posible. ¿A las once?',ok:true},{es:'El miércoles por la mañana es posible. ¿En las once?',ok:false,why:'Uhrzeit: <b>a</b> las once.'}]},
+  {n:'Sr. Torres',es:'Perfecto. ¿Dónde quedamos?',de:'Perfekt. Wo treffen wir uns?'},
+  {you:true,opts:[{es:'En nuestra oficina, si le parece bien.',ok:true},{es:'En nuestra oficina, si te parezco bien.',ok:false,why:'Er siezt dich → <i>si le parece bien</i>.'}]}]},
+ {t:'tr',de:'Wie wäre es, wenn wir uns am Freitag treffen?',a:['¿Qué tal si quedamos el viernes?','¿Qué te parece si quedamos el viernes?','¿Por qué no quedamos el viernes?','¿Qué tal si nos vemos el viernes?','¿Qué te parece si nos vemos el viernes?']},
+ {t:'tr',de:'Ausgerechnet am Samstag kann ich nicht.',a:['Justo el sábado no puedo.']}
+]},
+{id:'l2',title:'Pläne: ir a + Infinitiv',desc:'Voy a visitar a un cliente',steps:[
+ {t:'info',title:'Das „futuro próximo“',html:`<p>Für Pläne und nahe Zukunft: <b>ir</b> (konjugiert) + <b>a</b> + Infinitiv.</p>
+ <table><tr><td class="es-t">voy</td><td rowspan="6" class="es-t">a</td><td rowspan="6" class="es-t">comer con una amiga.<br>quedar con Pablo a las 3.<br>ir al gimnasio el lunes.<br>hacer un viaje mañana.</td></tr><tr><td class="es-t">vas</td></tr><tr><td class="es-t">va</td></tr><tr><td class="es-t">vamos</td></tr><tr><td class="es-t">vais</td></tr><tr><td class="es-t">van</td></tr></table>
+ <p>Zeitangaben: <span class="es-t">mañana, pasado mañana, el próximo lunes, la semana que viene, este fin de semana, el 22 de octubre</span>.</p>`},
+ {t:'gap',q:'El lunes ___ ___ ver a un cliente.',a:['voy','a']},
+ {t:'gap',q:'Carlos ___ ___ estar en Valencia el día 22.',a:['va','a']},
+ {t:'gap',q:'¿Qué ___ ___ hacer (vosotros) este fin de semana?',a:['vais','a']},
+ {t:'mc',q:'„Morgen werden wir ins Museum gehen.“',opts:['Mañana vamos a ir al museo.','Mañana vamos ir al museo.','Mañana vamos a el museo ir.'],a:0},
+ {t:'info',title:'Das direkte Objekt mit a',html:`<p>Ist das direkte Objekt eine <b>Person</b>, steht davor ein <b>a</b>:</p>
+ <table><tr><td class="es-t">¿Conoces a la fundadora de la empresa?</td><td>Person → a</td></tr><tr><td class="es-t">Voy a ver a María el martes.</td><td>Person → a</td></tr><tr><td class="es-t">¿Conoces una tienda de segunda mano?</td><td>Sache → kein a</td></tr></table>
+ <div class="ojo">Bei <i>tener</i> kein a: <span class="es-t">Tengo un hermano.</span></div>
+ <p><b>conocer</b> (kennen) & <b>ofrecer</b> (anbieten): <span class="es-t">conozco, conoces, conoce … · ofrezco, ofreces, ofrece …</span></p>`},
+ {t:'mc',q:'¿Conoces ___ mi compañera de piso?',opts:['a','—','en'],a:0,keep:true},
+ {t:'mc',q:'No veo ___ las llaves.',opts:['— (nichts)','a','de'],a:0,keep:true,why:'Sachen → kein <i>a</i>.'},
+ {t:'gap',q:'Yo no ___ (conocer) Madrid, pero ___ (conocer) bien Barcelona.',a:['conozco','conozco']},
+ {t:'tr',de:'Am Samstag werde ich meine Freunde besuchen.',a:['El sábado voy a visitar a mis amigos.','El sábado voy a ver a mis amigos.']},
+ {t:'tr',de:'Nächste Woche werde ich viel lernen.',a:['La semana que viene voy a estudiar mucho.','La próxima semana voy a estudiar mucho.']}
+]},
+{id:'l3',title:'Kleidung & Farben',desc:'una camisa a rayas · este jersey / esa falda',steps:[
+ {t:'vocab',title:'Kleidung',items:[['la camiseta','das T-Shirt'],['la camisa','das Hemd'],['la blusa','die Bluse'],['el jersey','der Pullover'],['los pantalones','die Hose'],['los vaqueros','die Jeans'],['la falda','der Rock'],['el vestido','das Kleid'],['el traje','der Anzug'],['la chaqueta','die Jacke'],['el abrigo','der Mantel'],['los zapatos','die Schuhe'],['las botas','die Stiefel'],['a rayas / a cuadros','gestreift / kariert'],['de algodón / de lana / de cuero','aus Baumwolle / Wolle / Leder']]},
+ {t:'info',title:'Farben',html:`<table><tr><th>-o/-a (4 Formen)</th><th>eine Form m/f (+s im Plural)</th></tr>
+ <tr><td class="es-t">blanco/-a · negro/-a · rojo/-a · amarillo/-a</td><td class="es-t">azul · verde · gris · marrón</td></tr></table>
+ <div class="ojo"><span class="es-t">rosa</span> und <span class="es-t">naranja</span> (eigentlich Substantive) bleiben oft unverändert, werden aber auch im Plural verwendet: <span class="es-t">zapatos rosa / rosas</span>.</div>
+ <div class="ex"><span class="es-t">una camisa blanca · unos pantalones negros · una chaqueta azul · unas botas marrones</span></div>`},
+ {t:'gap',q:'Llevo una camisa ___ (weiß) y unos pantalones ___ (grau).',a:['blanca','grises']},
+ {t:'gap',q:'Me gustan esas botas ___ (rot).',a:['rojas']},
+ {t:'info',title:'este · ese · aquel',html:`<table><tr><th></th><th>männlich</th><th>weiblich</th><th>Bedeutung</th></tr>
+ <tr><td>hier (bei mir)</td><td class="es-t">este / estos</td><td class="es-t">esta / estas</td><td>dieser hier</td></tr>
+ <tr><td>da (bei dir)</td><td class="es-t">ese / esos</td><td class="es-t">esa / esas</td><td>der da</td></tr>
+ <tr><td>dort (weit weg)</td><td class="es-t">aquel / aquellos</td><td class="es-t">aquella / aquellas</td><td>der dort</td></tr></table>
+ <p>Neutral (für Unbekanntes): <span class="es-t">esto, eso, aquello</span> – <span class="es-t">¿Qué es eso?</span></p>`},
+ {t:'mc',q:'Du zeigst auf eine Jacke weit hinten im Laden:',opts:['aquella chaqueta','esta chaqueta','aquel chaqueta'],a:0},
+ {t:'mc',q:'Du hältst Schuhe in der Hand:',opts:['estos zapatos','esos zapatos','estas zapatos'],a:0},
+ {t:'listen',es:'¿Cuánto cuesta esa chaqueta de cuero?',de:'Wie viel kostet die Lederjacke da?'},
+ {t:'tr',de:'Diese blaue Hose gefällt mir.',a:['Me gustan estos pantalones azules.']}
+]},
+{id:'l4',title:'Wetter & Smalltalk',desc:'Hace calor · ¡Qué frío hace! · ¿Verdad?',steps:[
+ {t:'info',title:'Über das Wetter sprechen',html:`<table><tr><td class="es-t">Hace calor / frío / sol / viento.</td><td>Es ist heiß / kalt / sonnig / windig.</td></tr>
+ <tr><td class="es-t">Hace buen / mal tiempo.</td><td>Das Wetter ist gut / schlecht.</td></tr>
+ <tr><td class="es-t">Llueve. / Nieva.</td><td>Es regnet. / Es schneit.</td></tr>
+ <tr><td class="es-t">Hay niebla.</td><td>Es ist neblig.</td></tr>
+ <tr><td class="es-t">Estamos a 25 grados.</td><td>Wir haben 25 Grad.</td></tr></table>
+ <h3>Ausrufe</h3><table><tr><td class="es-t">¡Qué calor hace!</td><td class="es-t">¡Qué camiseta tan original!</td><td class="es-t">¡Qué simpático es!</td></tr><tr><td class="es-t">¡Cómo llueve!</td><td class="es-t">¡Cuánto lo siento!</td><td></td></tr></table>`},
+ {t:'vocab',title:'Wetter',items:[['hace calor','es ist heiß'],['hace frío','es ist kalt'],['hace sol','die Sonne scheint'],['hace viento','es ist windig'],['llueve','es regnet'],['nieva','es schneit'],['hay niebla','es ist neblig'],['el tiempo','das Wetter / die Zeit'],['el grado','das Grad'],['¿Verdad?','Nicht wahr?']]},
+ {t:'mc',q:'„Es ist kalt.“',opts:['Hace frío.','Es frío.','Está frío.'],a:0},
+ {t:'mc',q:'„Es regnet.“',opts:['Llueve.','Hace lluvia.','Es lluvia.'],a:0},
+ {t:'gap',q:'¡Qué calor ___! Estamos ___ 35 grados.',a:['hace','a']},
+ {t:'info',title:'Smalltalk',html:`<table><tr><td class="es-t">¡Qué agradable es este hotel! ¿Verdad?</td></tr><tr><td class="es-t">¡Qué simpático es el profesor del curso! ¿No?</td></tr><tr><td class="es-t">¿Ha visto el último partido del Barça?</td></tr><tr><td class="es-t">¿Ha leído algún libro interesante últimamente?</td></tr><tr><td class="es-t">¿Qué puedo comprar como recuerdo de aquí?</td></tr></table>
+ <div class="ex">Smalltalk-Themen in Spanien: Wetter, Essen, Fußball, Reisen. Lieber nicht: Politik, Geld – und in Barcelona vorsichtig beim Thema Unabhängigkeit.</div>`},
+ {t:'dialog',place:'Pausa del café',title:'Smalltalk in der Kaffeepause',scene:'Auf einer Konferenz im CCIB. Du stehst neben einer Teilnehmerin an der Kaffeemaschine.',lines:[
+  {n:'Teresa',es:'¡Qué calor hace hoy! ¿Verdad?',de:'Wie heiß es heute ist! Oder?'},
+  {you:true,opts:[{es:'Sí, ¡y estamos en octubre! En Alemania ahora hace frío.',ok:true},{es:'Sí, ¡y estamos en octubre! En Alemania ahora es frío.',ok:false,why:'Wetter mit <b>hacer</b>: <i>hace frío</i>.'}]},
+  {n:'Teresa',es:'¿Eres alemán? ¿Y qué tal en Barcelona?',de:'Du bist Deutscher? Und wie gefällt’s dir in Barcelona?'},
+  {you:true,opts:[{es:'Me encanta. ¡Qué ciudad tan bonita!',ok:true},{es:'Me encanta. ¡Cómo ciudad tan bonita!',ok:false,why:'Ausruf mit Substantiv: <b>¡Qué</b> + Substantiv + tan + Adjektiv!'}]},
+  {n:'Teresa',es:'¿Y vas a ir a la cena de esta noche?',de:'Und gehst du heute Abend zum Abendessen?'},
+  {you:true,opts:[{es:'Sí, voy a ir con unos compañeros.',ok:true},{es:'Sí, voy ir con unos compañeros.',ok:false,why:'ir <b>a</b> + Infinitiv.'}]},
+  {n:'Teresa',es:'¡Genial! Nos vemos allí.',de:'Super! Wir sehen uns dort.'}]},
+ {t:'tr',de:'Wie es regnet!',a:['¡Cómo llueve!']},
+ {t:'tr',de:'Heute ist das Wetter schlecht.',a:['Hoy hace mal tiempo.']}
+]},
+{id:'l5',title:'Lesen: La agenda de Laia',desc:'Pläne lesen · eigenes Wochenende planen',steps:[
+ {t:'read',title:'Un mensaje de Laia',text:`¡Hola, Jonas! ¿Qué tal la semana? Te escribo porque este fin de semana va a hacer muy buen tiempo: el sábado van a estar a 24 grados y va a hacer sol. ¿Tienes ganas de hacer algo?
+
+Yo el sábado por la mañana voy a ir al mercado de Sant Antoni con mi hermana. Por la tarde estoy libre. ¿Qué te parece si subimos a los {Bunkers del Carmel|Aussichtspunkt in Barcelona} para ver la {puesta de sol|Sonnenuntergang}? Desde allí se ve toda la ciudad. Después podemos cenar en Gràcia, conozco un sitio muy bueno y no muy caro.
+
+El domingo dicen que va a llover, así que mejor no hacemos planes al aire libre. ¡Ah! Lleva una chaqueta: por la noche en los Bunkers hace viento y puede hacer un poco de frío.
+
+¿Quedamos a las seis en la parada de metro de El Carmel? ¡Dime algo! Un beso, Laia`,
+ de:`Hallo Jonas! Wie war die Woche? Ich schreibe dir, weil dieses Wochenende sehr gutes Wetter wird: Am Samstag soll es 24 Grad haben und sonnig sein. Hast du Lust, etwas zu unternehmen?\n\nIch gehe am Samstagvormittag mit meiner Schwester auf den Markt von Sant Antoni. Nachmittags habe ich frei. Was hältst du davon, wenn wir zu den Bunkers del Carmel hochgehen, um den Sonnenuntergang zu sehen? Von dort sieht man die ganze Stadt. Danach können wir in Gràcia zu Abend essen, ich kenne ein sehr gutes und nicht sehr teures Lokal.\n\nAm Sonntag soll es regnen, also machen wir lieber keine Pläne draußen. Ah! Nimm eine Jacke mit: Abends ist es an den Bunkers windig und es kann etwas kalt werden.\n\nTreffen wir uns um sechs an der Metrostation El Carmel? Sag mir Bescheid! Kuss, Laia`},
+ {t:'mc',q:'¿Qué va a hacer Laia el sábado por la mañana?',opts:['Va a ir al mercado con su hermana.','Va a subir a los Bunkers.','Va a trabajar.'],a:0},
+ {t:'mc',q:'¿Qué tiempo va a hacer el domingo?',opts:['Va a llover.','Va a hacer sol.','Va a nevar.'],a:0},
+ {t:'mc',q:'¿Por qué Jonas tiene que llevar una chaqueta?',opts:['Porque por la noche hace viento y puede hacer frío.','Porque van a un restaurante elegante.','Porque va a llover el sábado.'],a:0},
+ {t:'free',task:'Antworte Laia (5–7 Sätze): Nimm den Vorschlag an oder schlag eine andere Uhrzeit vor, erzähl, was du am Wochenende sonst noch vorhast (ir a + Infinitiv), und was du anziehen wirst.',hint:'¡Hola, Laia! ¡Qué buena idea! · El sábado por la mañana voy a … · ¿Qué tal si quedamos a las …? · Voy a llevar …',focus:'ir a + Infinitiv, Termine vereinbaren, Wetter, Kleidung',model:'¡Hola, Laia! ¡Qué buena idea! El sábado por la mañana voy a estudiar un poco para el examen de redes, pero por la tarde estoy libre. ¿Qué tal si quedamos a las seis y media? Es que antes voy a ir al gimnasio. Voy a llevar unos vaqueros y una chaqueta, porque no me gusta tener frío. Y el domingo, si llueve, ¿por qué no vamos al cine? ¡Hasta el sábado!'}
+]}],
+resumen:`<h3>Termin vereinbaren</h3><table><tr><th>vorschlagen</th><th>annehmen</th><th>ablehnen</th></tr><tr><td class="es-t">¿Tienes ganas de …? · ¿Por qué no quedamos …? · ¿Qué te parece si …? · ¿Qué tal si …?</td><td class="es-t">Vale. · De acuerdo. · Perfecto. · A las 10 es posible.</td><td class="es-t">Justo el sábado no puedo. · Es que … · Mejor el viernes.</td></tr></table>
+<h3>ir a + Infinitiv</h3><p class="es-t">voy / vas / va / vamos / vais / van + a + Infinitiv: El lunes voy a ver a un cliente.</p>
+<h3>Kleidung & Farben</h3><p class="es-t">la camiseta, la camisa, el jersey, los pantalones, la falda, la chaqueta, el traje, los zapatos · a rayas, a cuadros · de algodón, de lana, de cuero</p><p>blanco/-a, negro/-a, rojo/-a, amarillo/-a · azul, verde, gris, marrón (+es) · rosa, naranja</p>
+<h3>Demonstrativ</h3><p class="es-t">este/esta/estos/estas · ese/esa/esos/esas · aquel/aquella/aquellos/aquellas · esto, eso, aquello</p>
+<h3>Direktes Objekt mit a</h3><p class="es-t">¿Conoces a la fundadora? — aber: ¿Conoces una tienda …? · Tengo un hermano.</p>
+<h3>Wetter</h3><p class="es-t">Hace calor / frío / sol / viento / buen tiempo / mal tiempo · Llueve · Nieva · Hay niebla · Estamos a 25 grados</p>
+<h3>Ausrufe</h3><p class="es-t">¡Qué calor hace! · ¡Qué camiseta tan original! · ¡Cómo llueve! · ¡Cuánto lo siento!</p>`});
+
+
+;
+/* ================= UNIDAD 9 · MOMENTO DE CAMBIOS ================= */
+COURSE.units.push({id:'u9',n:'9',title:'Momento de cambios',sub:'Häuser & Büros beschreiben · Notwendigkeit ausdrücken · über Gewohnheiten in der Vergangenheit sprechen · Veränderungen · Mengen',
+goals:['Wohnung & Büro: Räume, Möbel, Stockwerke','Zustand & Lage beschreiben','Imperfekt (buscaba, tenía)','ser, ir, ver im Imperfekt','antes / cuando era … / a los … años','Mengenangaben (la mitad, la mayoría …)','Ordnungszahlen','hay que / tener que + Infinitiv'],
+situacion:{title:'Wohnungsbesichtigung in Gràcia',npc:'Sr. Puig',scene:'Du besichtigst ein Zimmer bzw. eine kleine Wohnung in Gràcia. Der Vermieter, Sr. Puig, zeigt dir alles.',role:'Du bist Sr. Puig, ein älterer Vermieter aus Barcelona, freundlich und gesprächig. Du siezt Jonas. Du beschreibst die Wohnung (3. Stock, kein Aufzug, hell, renoviert, Küche ausgestattet, Balkon, nah an der Metro Fontana, 850 € + Nebenkosten, 2 Monatsmieten Kaution). Erzähl auch nostalgisch, wie das Viertel früher war (Imperfekt: antes había…, la gente…, yo vivía…).',goal:'Frag nach Lage, Stockwerk, Zustand, Preis und Kaution (¿Hay que pagar fianza?), und reagiere auf seine Erzählung über früher, indem du erzählst, wie es früher bei dir war (Imperfekt).'},
+lessons:[
+{id:'l1',title:'Wohnung & Büro beschreiben',desc:'la planta baja · está reformado · es luminoso',steps:[
+ {t:'vocab',title:'Räume & Teile',items:[['la habitación','das Zimmer'],['el despacho','das Büro (Raum)'],['la cocina','die Küche'],['el baño / el servicio','das Bad / die Toilette'],['la recepción','der Empfang'],['la puerta','die Tür'],['la ventana','das Fenster'],['la pared','die Wand'],['la terraza','die Terrasse'],['el balcón','der Balkon'],['el ascensor','der Aufzug'],['la planta baja','das Erdgeschoss'],['la primera / segunda planta','der erste / zweite Stock']]},
+ {t:'vocab',title:'Möbel',items:[['el escritorio','der Schreibtisch'],['la mesa','der Tisch'],['la silla','der Stuhl'],['la estantería','das Regal'],['el armario','der Schrank'],['la lámpara','die Lampe'],['el sofá','das Sofa'],['la cama','das Bett']]},
+ {t:'info',title:'Beschreiben: ser oder estar?',html:`<table><tr><th>ser – Eigenschaft</th><th>estar – Zustand</th><th>estar – Lage</th></tr>
+ <tr><td class="es-t">Es moderno / antiguo.</td><td class="es-t">Está en buen estado.</td><td class="es-t">Está en un edificio de oficinas.</td></tr>
+ <tr><td class="es-t">Es tranquilo / luminoso.</td><td class="es-t">Está reformado.</td><td class="es-t">Está en la zona comercial.</td></tr>
+ <tr><td class="es-t">Es exterior / interior.</td><td class="es-t">Está amueblado.</td><td class="es-t">Está cerca de la estación.</td></tr>
+ <tr><td class="es-t">Es barato / caro.</td><td class="es-t">Está limpio.</td><td class="es-t">Está bien comunicado.</td></tr></table>
+ <div class="ex">Gleiches Adjektiv, andere Bedeutung: <span class="es-t">El piso es limpio</span> klingt komisch – Sauberkeit ist ein Zustand: <span class="es-t">El piso está limpio.</span></div>`},
+ {t:'mc',q:'El piso ___ muy luminoso.',opts:['es','está'],a:0,keep:true,why:'Eigenschaft der Wohnung → <b>ser</b>.'},
+ {t:'mc',q:'La cocina ___ equipada.',opts:['está','es'],a:0,keep:true,why:'Zustand (ausgestattet) → <b>estar</b>.'},
+ {t:'mc',q:'La oficina ___ cerca de la estación.',opts:['está','es','hay'],a:0,keep:true},
+ {t:'gap',q:'Mi habitación ___ exterior y ___ amueblada.',a:['es','está']},
+ {t:'match',q:'Wohin gehört das?',pairs:[['la cama','la habitación'],['el escritorio','el despacho'],['la ducha','el baño'],['el sofá','el salón'],['la nevera','la cocina']]},
+ {t:'tr',de:'Die Wohnung ist im dritten Stock und hat einen Balkon.',a:['El piso está en la tercera planta y tiene un balcón.','El piso está en el tercer piso y tiene un balcón.','El piso está en la tercera planta y tiene balcón.','El piso está en el tercer piso y tiene balcón.']}
+]},
+{id:'l2',title:'Das Imperfekt',desc:'buscaba · tenía · era · iba · veía',steps:[
+ {t:'info',title:'Imperfekt: Formen',html:`<table><tr><th></th><th>-ar (buscar)</th><th>-er / -ir (tener, vivir)</th></tr>
+ <tr><td>yo</td><td class="es-t">buscaba</td><td class="es-t">tenía</td></tr><tr><td>tú</td><td class="es-t">buscabas</td><td class="es-t">tenías</td></tr><tr><td>él / ella / usted</td><td class="es-t">buscaba</td><td class="es-t">tenía</td></tr>
+ <tr><td>nosotros/-as</td><td class="es-t">buscábamos</td><td class="es-t">teníamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">buscabais</td><td class="es-t">teníais</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">buscaban</td><td class="es-t">tenían</td></tr></table>
+ <p><b>Nur drei Ausnahmen:</b></p>
+ <table><tr><th>ser</th><th>ir</th><th>ver</th></tr><tr><td class="es-t">era, eras, era, éramos, erais, eran</td><td class="es-t">iba, ibas, iba, íbamos, ibais, iban</td><td class="es-t">veía, veías, veía, veíamos, veíais, veían</td></tr></table>
+ <div class="ex"><span class="es-t">hay → había</span>. Und gute Nachricht: Im Imperfekt gibt es <b>keinen</b> Stammwechsel – <span class="es-t">podía, quería, dormía</span>.</div>`},
+ {t:'conj',verb:'trabajar',de:'arbeiten',tense:'Imperfekt',forms:['trabajaba','trabajabas','trabajaba','trabajábamos','trabajabais','trabajaban']},
+ {t:'conj',verb:'vivir',de:'wohnen',tense:'Imperfekt',forms:['vivía','vivías','vivía','vivíamos','vivíais','vivían']},
+ {t:'conj',verb:'ser',de:'sein',tense:'Imperfekt',forms:['era','eras','era','éramos','erais','eran']},
+ {t:'conj',verb:'ir',de:'gehen',tense:'Imperfekt',forms:['iba','ibas','iba','íbamos','ibais','iban']},
+ {t:'gap',q:'Antes yo ___ (vivir) en Mannheim y ___ (trabajar) en EY.',a:['vivía','trabajaba']},
+ {t:'gap',q:'Cuando ___ (ser) niño, ___ (ir) al colegio en bicicleta.',a:['era','iba']},
+ {t:'gap',q:'En mi barrio antes ___ (haber) muchas tiendas pequeñas.',a:['había'],why:'hay → <b>había</b>.'},
+ {t:'gap',q:'Mis abuelos ___ (ver) la tele todas las noches.',a:['veían']},
+ {t:'mc',q:'Imperfekt von „poder“ (yo):',opts:['podía','puedía','pudía'],a:0,why:'Kein Stammwechsel im Imperfekt.'},
+ {t:'tr',de:'Früher hatte ich keine Zeit.',a:['Antes no tenía tiempo.','Antes yo no tenía tiempo.']}
+]},
+{id:'l3',title:'Früher & heute',desc:'Antes … ahora · Cuando era joven …',steps:[
+ {t:'info',title:'Gewohnheiten in der Vergangenheit',html:`<p>Das Imperfekt beschreibt, <b>wie etwas früher war</b> und was man <b>regelmäßig</b> gemacht hat – nicht einzelne, abgeschlossene Ereignisse.</p>
+ <table><tr><td class="es-t">antes</td><td class="es-t">Antes iba a comer con mis compañeras. Ahora como sola.</td></tr>
+ <tr><td class="es-t">cuando era / tenía …</td><td class="es-t">Cuando tenía 10 años, hacía mucho deporte.</td></tr>
+ <tr><td class="es-t">a los … años</td><td class="es-t">A los 15 años leía muchos libros.</td></tr>
+ <tr><td class="es-t">en los años 70</td><td class="es-t">En los años 70 la gente se quedaba mucho tiempo en la misma empresa.</td></tr></table>
+ <div class="ex">Typisch ist der Kontrast: <span class="es-t">Antes … – Ahora / Actualmente …</span></div>`},
+ {t:'vocab',title:'Veränderungen',items:[['antes','früher'],['ahora / actualmente','jetzt / heutzutage'],['cuando era joven','als ich jung war'],['de pequeño / de pequeña','als Kind'],['el ambiente de trabajo','das Arbeitsklima'],['la flexibilidad de horarios','flexible Arbeitszeiten'],['ergonómico / ergonómica','ergonomisch'],['teletrabajar','im Homeoffice arbeiten'],['cambiar','(sich) ändern'],['mudarse','umziehen']]},
+ {t:'gap',q:'Antes la gente no ___ (tener) flexibilidad de horarios. Ahora mucha gente ___ (teletrabajar).',a:['tenía','teletrabaja']},
+ {t:'gap',q:'De pequeño yo ___ (levantarse) a las siete.',a:['me levantaba']},
+ {t:'mc',q:'Welcher Satz beschreibt eine Gewohnheit von früher?',opts:['Cuando vivía en Mannheim, iba a trabajar en tren.','Ayer fui a trabajar en tren.','Mañana voy a ir en tren.'],a:0},
+ {t:'dialog',place:'Plaça del Sol, Gràcia',title:'Wie war Gràcia früher?',scene:'Du sitzt mit der Nachbarin Montse, 74, auf einer Bank und plauderst.',lines:[
+  {n:'Montse',es:'Antes este barrio era muy diferente, ¿sabes? No había tantos turistas.',de:'Früher war dieses Viertel ganz anders, weißt du? Es gab nicht so viele Touristen.'},
+  {you:true,opts:[{es:'¿Y qué había antes aquí?',ok:true},{es:'¿Y qué hay antes aquí?',ok:false,why:'Vergangenheit → <b>había</b>.'}]},
+  {n:'Montse',es:'Pequeñas tiendas, talleres… Todos nos conocíamos. Los niños jugaban en la calle.',de:'Kleine Läden, Werkstätten… Alle kannten sich. Die Kinder spielten auf der Straße.'},
+  {you:true,prompt:'Erzähl, wie es bei dir als Kind war.',opts:[{es:'Yo también jugaba mucho en la calle cuando era pequeño.',ok:true},{es:'Yo también juego mucho en la calle cuando era pequeño.',ok:false,why:'Gewohnheit in der Vergangenheit → Imperfekt: <i>jugaba</i>.'},{es:'Yo también jugaba mucho en la calle cuando soy pequeño.',ok:false,why:'„als ich klein war“ → <i>cuando era pequeño</i>.'}]},
+  {n:'Montse',es:'¿Y ahora? ¿Te gusta vivir aquí?',de:'Und jetzt? Wohnst du gern hier?'},
+  {you:true,opts:[{es:'Sí, me encanta. Antes vivía en una ciudad más tranquila, pero ahora prefiero Barcelona.',ok:true},{es:'Sí, me encanta. Antes viví en una ciudad más tranquila.',ok:false,why:'Ein Zustand über längere Zeit → Imperfekt <i>vivía</i>.'}]},
+  {n:'Montse',es:'¡Qué bien! Bienvenido al barrio.',de:'Wie schön! Willkommen im Viertel.'}]},
+ {t:'tr',de:'Als ich 15 war, spielte ich Fußball.',a:['Cuando tenía 15 años, jugaba al fútbol.','A los 15 años jugaba al fútbol.','Cuando tenía quince años, jugaba al fútbol.']},
+ {t:'tr',de:'Früher wohnte ich in Mannheim, jetzt wohne ich in Barcelona.',a:['Antes vivía en Mannheim, ahora vivo en Barcelona.','Antes vivía en Mannheim y ahora vivo en Barcelona.','Antes yo vivía en Mannheim, ahora vivo en Barcelona.']}
+]},
+{id:'l4',title:'Mengen, Ordnungszahlen & hay que',desc:'la mayoría · un tercio · primer piso · hay que pagar',steps:[
+ {t:'info',title:'Über Mengen sprechen',html:`<table><tr><td class="es-t">(casi) todos/-as</td><td>(fast) alle</td><td class="es-t">Casi todos prefieren trabajar en remoto.</td></tr>
+ <tr><td class="es-t">la mayoría (de)</td><td>die meisten</td><td class="es-t">La mayoría trabaja en una oficina.</td></tr>
+ <tr><td class="es-t">la mitad (de)</td><td>die Hälfte</td><td class="es-t">Más de la mitad se ha mudado una vez.</td></tr>
+ <tr><td class="es-t">un tercio (de)</td><td>ein Drittel</td><td class="es-t">Un tercio prefiere ir a la oficina.</td></tr>
+ <tr><td class="es-t">muchos/-as · algunos/-as · pocos/-as</td><td>viele · einige · wenige</td><td class="es-t">Pocos pueden separar la vida privada.</td></tr>
+ <tr><td class="es-t">uno/-a de cada diez</td><td>einer von zehn</td><td class="es-t">Solo una de cada diez españolas teletrabajaba.</td></tr>
+ <tr><td class="es-t">(casi) nadie</td><td>(fast) niemand</td><td class="es-t">Casi nadie tiene un espacio adecuado.</td></tr></table>
+ <div class="ojo">Prozentangaben mit Artikel: <span class="es-t">El 95 % de los trabajadores …</span> / <span class="es-t">Solo un 5 % …</span></div>
+ <h3>Ordnungszahlen</h3><p class="es-t">primero/-a · segundo/-a · tercero/-a · cuarto/-a · quinto/-a</p><div class="ojo">Vor männlichen Substantiven: <span class="es-t">el primer piso, el tercer piso</span>.</div>
+ <h3>Notwendigkeit</h3><table><tr><td class="es-t">tener que + Inf.</td><td>(ich) muss</td><td class="es-t">Tengo que trabajar mucho.</td></tr><tr><td class="es-t">hay que + Inf.</td><td>man muss</td><td class="es-t">¿Hay que pagar una fianza?</td></tr></table>`},
+ {t:'match',q:'Was bedeutet das?',pairs:[['la mitad','die Hälfte'],['la mayoría','die meisten'],['un tercio','ein Drittel'],['casi nadie','fast niemand'],['pocos','wenige']]},
+ {t:'gap',q:'Vivo en el ___ (3.) piso y mi oficina está en la ___ (1.) planta.',a:['tercer','primera']},
+ {t:'gap',q:'Para alquilar un piso ___ ___ pagar una fianza. (man muss)',a:['hay','que']},
+ {t:'mc',q:'„Die meisten Studierenden wohnen in einer WG.“',opts:['La mayoría de los estudiantes vive en un piso compartido.','La mayoría de estudiantes viven en un piso compartido mucho.','Mayoría de los estudiantes vive en un piso compartido.'],a:0},
+ {t:'tr',de:'Man muss die Kaution bezahlen.',a:['Hay que pagar la fianza.']},
+ {t:'listen',es:'Más de la mitad de los trabajadores prefiere el teletrabajo.',de:'Mehr als die Hälfte der Angestellten bevorzugt Homeoffice.'}
+]},
+{id:'l5',title:'Lesen: Nuevas formas de trabajo',desc:'Text · früher vs. heute',steps:[
+ {t:'read',title:'La oficina, antes y ahora',text:`Hace veinte años, la oficina era muy diferente. Casi todos los empleados trabajaban en la empresa de nueve a seis. Cada persona tenía su propio {escritorio|Schreibtisch} y el jefe estaba en un despacho cerrado. Las reuniones eran siempre {presenciales|vor Ort} y la gente usaba mucho el teléfono fijo.
+
+Ahora las cosas han cambiado. En muchas empresas de Barcelona los equipos trabajan en espacios abiertos y {compartidos|geteilt}. La mayoría de los trabajadores tiene horarios flexibles y más de la mitad teletrabaja uno o dos días a la semana.
+
+Pero no todo es mejor: algunas personas tienen problemas para {desconectar|abschalten} y pocos tienen en casa un espacio de trabajo adecuado. Por eso, muchas empresas buscan un {equilibrio|Gleichgewicht}: hay que estar en la oficina algunos días, pero también se puede trabajar desde casa.`,
+ de:`Vor zwanzig Jahren war das Büro ganz anders. Fast alle Angestellten arbeiteten von neun bis sechs in der Firma. Jede Person hatte ihren eigenen Schreibtisch und der Chef saß in einem geschlossenen Büro. Besprechungen waren immer vor Ort und man benutzte viel das Festnetztelefon.\n\nJetzt haben sich die Dinge geändert. In vielen Firmen in Barcelona arbeiten die Teams in offenen, geteilten Räumen. Die meisten Angestellten haben flexible Arbeitszeiten und mehr als die Hälfte arbeitet ein oder zwei Tage pro Woche im Homeoffice.\n\nAber nicht alles ist besser: Manche haben Probleme abzuschalten und wenige haben zu Hause einen geeigneten Arbeitsplatz. Deshalb suchen viele Firmen ein Gleichgewicht: Man muss an einigen Tagen im Büro sein, kann aber auch von zu Hause arbeiten.`},
+ {t:'mc',q:'¿Cómo eran las reuniones antes?',opts:['Siempre presenciales.','Por videollamada.','No había reuniones.'],a:0},
+ {t:'mc',q:'¿Qué problema tiene el teletrabajo según el texto?',opts:['Algunas personas no pueden desconectar.','Es muy caro.','Los jefes no lo permiten.'],a:0},
+ {t:'gap',q:'Antes cada persona ___ (tener) su propio escritorio.',a:['tenía']},
+ {t:'free',task:'Vergleiche in 5–7 Sätzen dein Leben früher (Mannheim, Bachelor, EY) mit jetzt in Barcelona. Benutze das Imperfekt für früher und das Präsens für jetzt.',hint:'Antes vivía en … · Cuando trabajaba en EY, … · Normalmente iba … · Ahora … · Actualmente …',focus:'Imperfekt (Gewohnheiten früher) vs. Präsens',model:'Antes vivía en Mannheim y estudiaba en la DHBW. Cuando trabajaba en EY, me levantaba muy temprano e iba a la oficina en tren. Los fines de semana visitaba a mi familia. Ahora vivo en Barcelona y estudio un máster en la UPC. Actualmente tengo más tiempo libre y voy mucho a la playa. Antes hablaba poco español, pero ahora lo hablo todos los días.'}
+]}],
+resumen:`<h3>Häuser & Büros</h3><p class="es-t">la oficina · el despacho · la recepción · la cocina · la puerta · la ventana · la terraza · el balcón · el escritorio · la silla · la estantería · el armario · el ascensor · la planta baja · la primera planta</p>
+<h3>Beschreiben</h3><table><tr><th>ser</th><th>estar (Zustand)</th><th>estar (Lage)</th></tr><tr><td class="es-t">moderno, tranquilo, luminoso, exterior, caro</td><td class="es-t">en buen estado, reformado, amueblado, limpio</td><td class="es-t">en la zona comercial, cerca de la estación, bien comunicado</td></tr></table>
+<h3>Imperfekt</h3><table><tr><td>-ar: -aba, -abas, -aba, -ábamos, -abais, -aban</td></tr><tr><td>-er/-ir: -ía, -ías, -ía, -íamos, -íais, -ían</td></tr><tr><td class="es-t">ser: era … · ir: iba … · ver: veía … · hay → había</td></tr></table>
+<p>Für Zustände & Gewohnheiten in der Vergangenheit: <span class="es-t">antes · cuando era joven · a los 15 años · en los años 70</span></p>
+<h3>Mengen</h3><p class="es-t">(casi) todos · la mayoría · la mitad · un tercio · muchos · algunos · pocos · uno de cada diez · (casi) nadie · el 95 % de …</p>
+<h3>Ordnungszahlen & Notwendigkeit</h3><p class="es-t">primer(o), segundo, tercer(o) · tener que + Inf. · hay que + Inf.</p>`});
+
+/* ================= UNIDAD 10 · LLEGAR A LA META ================= */
+COURSE.units.push({id:'u10',n:'10',title:'Llegar a la meta',sub:'Angaben zur Biografie · berufliche Fähigkeiten · Berufserfahrung · Bewerbung · Vorstellungsgespräch',
+goals:['Indefinido regelmäßig (trabajé, aprendí)','Indefinido unregelmäßig (fui, estuve, hice, tuve …)','Zeitangaben: ayer, el año pasado, hace dos años','Biografie erzählen','Perfekt oder Indefinido?','Fähigkeiten: ser / estar / tener / saber','Bewerbung & Vorstellungsgespräch'],
+situacion:{title:'Vorstellungsgespräch für ein Praktikum',npc:'Sra. Ferrer',scene:'Videointerview mit Sra. Ferrer, Personalleiterin einer Cybersecurity-Beratung in Barcelona, für ein Praktikum (prácticas) im Bereich IT-Audit.',role:'Du bist Laura Ferrer, Personalleiterin. Führe ein höfliches Vorstellungsgespräch (usted). Frag nach Ausbildung und Lebenslauf (¿Dónde estudió? ¿Cuándo terminó …?), Berufserfahrung (Indefinido & Perfekt: ¿Ha hecho prácticas alguna vez? ¿Qué hizo en EY?), Stärken, Sprachen und warum er bei euch arbeiten möchte. Stell auch eine Frage wie „¿Por qué quiere dejar su puesto actual?“ – wenn er sagt, er studiert, passe dich an.',goal:'Erzähl deinen Lebenslauf im Indefinido (Bachelor in Mannheim, EY seit 2023, Singapur 2025, Umzug nach Barcelona 2026), nenne deine Stärken und erkläre, warum du das Praktikum willst.'},
+lessons:[
+{id:'l1',title:'Indefinido: regelmäßig',desc:'trabajé · aprendí · viví',steps:[
+ {t:'info',title:'Das Indefinido',html:`<p>Das <b>Indefinido</b> erzählt <b>abgeschlossene Ereignisse</b> in einem abgeschlossenen Zeitraum der Vergangenheit – die Erzählzeit für Biografien.</p>
+ <table><tr><th></th><th>-ar (trabajar)</th><th>-er / -ir (aprender, vivir)</th></tr>
+ <tr><td>yo</td><td class="es-t">trabajé</td><td class="es-t">aprendí</td></tr><tr><td>tú</td><td class="es-t">trabajaste</td><td class="es-t">aprendiste</td></tr><tr><td>él / ella / usted</td><td class="es-t">trabajó</td><td class="es-t">aprendió</td></tr>
+ <tr><td>nosotros/-as</td><td class="es-t">trabajamos</td><td class="es-t">aprendimos</td></tr><tr><td>vosotros/-as</td><td class="es-t">trabajasteis</td><td class="es-t">aprendisteis</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">trabajaron</td><td class="es-t">aprendieron</td></tr></table>
+ <div class="ojo">Der Akzent ist wichtig: <span class="es-t">trabajo</span> (ich arbeite) ≠ <span class="es-t">trabajó</span> (er arbeitete).</div>
+ <p><b>Zeitangaben:</b> <span class="es-t">ayer · anoche · el año pasado · la semana pasada · en 2019 · hace dos años · en diciembre · por última vez</span></p>
+ <div class="ex">Schreibweise ändert sich, damit die Aussprache bleibt: <span class="es-t">buscar → busqué · empezar → empecé · llegar → llegué</span></div>`},
+ {t:'conj',verb:'trabajar',de:'arbeiten',tense:'Indefinido',forms:['trabajé','trabajaste','trabajó','trabajamos','trabajasteis','trabajaron']},
+ {t:'conj',verb:'vivir',de:'wohnen',tense:'Indefinido',forms:['viví','viviste','vivió','vivimos','vivisteis','vivieron']},
+ {t:'gap',q:'Ayer ___ (yo, trabajar) hasta las ocho.',a:['trabajé']},
+ {t:'gap',q:'El año pasado mis padres ___ (viajar) a México.',a:['viajaron']},
+ {t:'gap',q:'¿Cuándo ___ (tú, terminar) tus estudios?',a:['terminaste']},
+ {t:'gap',q:'En 2023 ___ (yo, empezar) a trabajar en EY.',a:['empecé'],why:'empezar → <b>empecé</b> (z → c vor e).'},
+ {t:'mc',q:'„Er lernte Spanisch in Granada.“',opts:['Aprendió español en Granada.','Aprendío español en Granada.','Aprendo español en Granada.'],a:0},
+ {t:'tr',de:'Ich wohnte drei Monate in Singapur.',a:['Viví tres meses en Singapur.','Yo viví tres meses en Singapur.','Viví en Singapur tres meses.']}
+]},
+{id:'l2',title:'Indefinido: unregelmäßig',desc:'fui · estuve · hice · tuve · pude',steps:[
+ {t:'info',title:'Die wichtigsten unregelmäßigen Formen',html:`<table><tr><th>ser / ir</th><th>estar</th><th>tener</th><th>hacer</th></tr>
+ <tr><td class="es-t">fui</td><td class="es-t">estuve</td><td class="es-t">tuve</td><td class="es-t">hice</td></tr>
+ <tr><td class="es-t">fuiste</td><td class="es-t">estuviste</td><td class="es-t">tuviste</td><td class="es-t">hiciste</td></tr>
+ <tr><td class="es-t">fue</td><td class="es-t">estuvo</td><td class="es-t">tuvo</td><td class="es-t">hizo</td></tr>
+ <tr><td class="es-t">fuimos</td><td class="es-t">estuvimos</td><td class="es-t">tuvimos</td><td class="es-t">hicimos</td></tr>
+ <tr><td class="es-t">fuisteis</td><td class="es-t">estuvisteis</td><td class="es-t">tuvisteis</td><td class="es-t">hicisteis</td></tr>
+ <tr><td class="es-t">fueron</td><td class="es-t">estuvieron</td><td class="es-t">tuvieron</td><td class="es-t">hicieron</td></tr></table>
+ <p><b>Gleiches Muster</b> (Stamm + -e, -iste, -o, -imos, -isteis, -ieron, <b>ohne Akzent</b>):</p>
+ <table><tr><td class="es-t">poder → pud-</td><td class="es-t">poner → pus-</td><td class="es-t">querer → quis-</td><td class="es-t">venir → vin-</td></tr><tr><td class="es-t">decir → dij- (dijeron)</td><td class="es-t">producir → produj-</td><td class="es-t">dar → di, diste, dio</td><td class="es-t">ver → vi, viste, vio</td></tr></table>
+ <div class="ojo"><b>ser</b> und <b>ir</b> haben im Indefinido die gleichen Formen – der Kontext entscheidet: <span class="es-t">Fue un día genial</span> (ser) / <span class="es-t">Fue a Madrid</span> (ir). <span class="es-t">hay → hubo</span>.</div>`},
+ {t:'conj',verb:'ser / ir',de:'sein / gehen',tense:'Indefinido',forms:['fui','fuiste','fue','fuimos','fuisteis','fueron']},
+ {t:'conj',verb:'tener',de:'haben',tense:'Indefinido',forms:['tuve','tuviste','tuvo','tuvimos','tuvisteis','tuvieron']},
+ {t:'conj',verb:'hacer',de:'machen',tense:'Indefinido',forms:['hice','hiciste','hizo','hicimos','hicisteis','hicieron']},
+ {t:'gap',q:'El verano pasado ___ (yo, estar) en Singapur y ___ (hacer) unas prácticas.',a:['estuve','hice']},
+ {t:'gap',q:'¿Qué ___ (tú, hacer) ayer? – ___ (ir) al cine con Laia.',a:['hiciste','Fui']},
+ {t:'gap',q:'No ___ (yo, poder) ir a la reunión porque ___ (tener) un problema.',a:['pude','tuve']},
+ {t:'gap',q:'Mis amigos ___ (venir) a Barcelona en octubre.',a:['vinieron']},
+ {t:'mc',q:'Indefinido von „decir“ (ellos):',opts:['dijeron','dijieron','decieron'],a:0,why:'Nach <b>j</b> fällt das i weg: <i>dijeron, produjeron</i>.'},
+ {t:'match',q:'Infinitiv und Form (yo)',pairs:[['poner','puse'],['querer','quise'],['dar','di'],['ver','vi'],['venir','vine'],['decir','dije']]},
+ {t:'tr',de:'Es war ein sehr schöner Tag.',a:['Fue un día muy bonito.']}
+]},
+{id:'l3',title:'Eine Biografie erzählen',desc:'Nací en … · A los 10 años … · Hace un mes …',steps:[
+ {t:'vocab',title:'Biografie',items:[['nacer (nací)','geboren werden (ich wurde geboren)'],['mudarse (nos mudamos)','umziehen (wir zogen um)'],['ir a la escuela / al colegio','zur Schule gehen'],['terminar el instituto','das Abitur machen / die Schule beenden'],['hacer un intercambio','einen Austausch machen'],['estudiar … en …','… in … studieren'],['empezar a trabajar','anfangen zu arbeiten'],['hace dos años','vor zwei Jahren'],['dos años después','zwei Jahre später'],['desde 2023','seit 2023']]},
+ {t:'info',title:'Biografie: typische Sätze',html:`<table><tr><td class="es-t">Nací en Cádiz en 1998.</td></tr><tr><td class="es-t">A los 10 años nos mudamos a Gijón.</td></tr><tr><td class="es-t">Fui a la escuela de 2004 a 2016.</td></tr><tr><td class="es-t">Hice un intercambio el año pasado.</td></tr><tr><td class="es-t">Terminé el instituto dos años después.</td></tr><tr><td class="es-t">Hace un mes empecé a trabajar.</td></tr><tr><td class="es-t">Desde 2023 trabajo en una agencia. <span class="muted">(dauert an → Präsens!)</span></td></tr></table>
+ <div class="ojo"><b>hace</b> + Zeitraum = vor: <span class="es-t">hace tres años</span>. <b>desde</b> = seit (mit Präsens, wenn es noch andauert).</div>`},
+ {t:'read',title:'Inés Rosales: una empresa con historia',text:`Inés Rosales {nació|wurde geboren} a finales del siglo XIX en un pueblo cerca de Sevilla. En 1910 empezó a hacer tortas de aceite en su cocina con una receta de su familia. Primero las vendió en la estación de trenes de Sevilla y pronto tuvo mucho éxito.
+
+Necesitó la ayuda de otras mujeres de su pueblo para fabricar y vender las tortas. En los años veinte, su empresa ya tenía unas diez empleadas. Los {viajeros|Reisende} llevaron las tortas a toda España.
+
+Inés murió muy joven, en 1934, y la empresa pasó a su familia. En 1985 su hijo la vendió a Juan Moreno, el actual presidente. En 2019 la empresa superó por primera vez los 15 millones de euros en ventas. Hoy {exporta|exportiert} a muchos países: después de España, su mercado principal es Estados Unidos.`,
+ de:`Inés Rosales wurde Ende des 19. Jahrhunderts in einem Dorf bei Sevilla geboren. 1910 begann sie, in ihrer Küche nach einem Familienrezept Ölkuchen zu backen. Zuerst verkaufte sie sie am Bahnhof von Sevilla und hatte bald großen Erfolg.\n\nSie brauchte die Hilfe anderer Frauen aus ihrem Dorf, um die Kuchen herzustellen und zu verkaufen. In den Zwanzigerjahren hatte ihre Firma schon etwa zehn Angestellte. Die Reisenden brachten die Kuchen in ganz Spanien bekannt.\n\nInés starb sehr jung, 1934, und die Firma ging an ihre Familie. 1985 verkaufte ihr Sohn sie an Juan Moreno, den heutigen Präsidenten. 2019 überstieg die Firma zum ersten Mal 15 Millionen Euro Umsatz. Heute exportiert sie in viele Länder: Nach Spanien ist der wichtigste Markt die USA.`},
+ {t:'match',q:'Ordne die Jahreszahlen zu',pairs:[['1910','Inés empezó a hacer tortas.'],['1934','Inés murió.'],['1985','Su hijo vendió la empresa.'],['2019','Superó los 15 millones en ventas.']]},
+ {t:'gap',q:'Inés ___ (empezar) en su cocina y ___ (vender) las tortas en la estación.',a:['empezó','vendió']},
+ {t:'order',es:'Hace tres años empecé a trabajar en una consultora.',de:'Vor drei Jahren habe ich angefangen, in einer Beratung zu arbeiten.'},
+ {t:'tr',de:'Ich wurde in Deutschland geboren.',a:['Nací en Alemania.','Yo nací en Alemania.']},
+ {t:'tr',de:'Vor einem Monat bin ich nach Barcelona gezogen.',a:['Hace un mes me mudé a Barcelona.','Me mudé a Barcelona hace un mes.']}
+]},
+{id:'l4',title:'Perfekt oder Indefinido?',desc:'He hecho … / Hice …',steps:[
+ {t:'info',title:'Perfekt oder Indefinido?',html:`<table><tr><th>Perfekt (he hecho)</th><th>Indefinido (hice)</th></tr>
+ <tr><td>Zeitraum <b>noch nicht abgeschlossen</b>: <span class="es-t">hoy, esta semana, este mes, este año</span></td><td>Zeitraum <b>abgeschlossen</b>: <span class="es-t">ayer, la semana pasada, en 2019, hace dos años</span></td></tr>
+ <tr><td>Zeitpunkt egal / Erfahrung: <span class="es-t">alguna vez, ya, todavía no, nunca, últimamente</span></td><td>konkreter Zeitpunkt: <span class="es-t">en diciembre, el lunes, por última vez</span></td></tr></table>
+ <div class="ex"><span class="es-t">– ¿Has hecho unas prácticas alguna vez? – Sí, hice unas prácticas en SEAT hace dos años.</span><br><span class="es-t">– ¿Cuándo hiciste una presentación por última vez? – Hice una la semana pasada. / He hecho una hoy por la mañana.</span></div>
+ <div class="ojo">In Lateinamerika (und Teilen Spaniens) verwendet man oft auch bei „hoy“ das Indefinido. Für den Kurs gilt die Regel oben.</div>`},
+ {t:'mc',q:'Hoy ___ mucho.',opts:['he trabajado','trabajé'],a:0,keep:true,why:'<i>hoy</i> = Zeitraum noch nicht vorbei → Perfekt.'},
+ {t:'mc',q:'Ayer ___ al médico.',opts:['fui','he ido'],a:0,keep:true,why:'<i>ayer</i> = abgeschlossen → Indefinido.'},
+ {t:'mc',q:'¿___ alguna vez en México?',opts:['Has estado','Estuviste'],a:0,keep:true,why:'Erfahrung ohne Zeitpunkt (<i>alguna vez</i>) → Perfekt.'},
+ {t:'mc',q:'En 2025 ___ tres meses en Singapur.',opts:['estuve','he estado'],a:0,keep:true},
+ {t:'mc',q:'Esta semana ___ dos exámenes.',opts:['he tenido','tuve'],a:0,keep:true},
+ {t:'mc',q:'La semana pasada ___ una película muy buena.',opts:['vi','he visto'],a:0,keep:true},
+ {t:'gap',q:'– ¿Has hecho prácticas alguna vez? – Sí, ___ (hacer) unas prácticas en EY hace tres años.',a:['hice']},
+ {t:'gap',q:'Todavía no ___ ___ (yo, ver) el Camp Nou.',a:['he','visto']},
+ {t:'tr',de:'Letztes Jahr habe ich meinen Bachelor abgeschlossen.',a:['El año pasado terminé mi grado.','El año pasado terminé el grado.','El año pasado terminé mis estudios.','El año pasado terminé mi bachelor.','El año pasado terminé la carrera.','El año pasado terminé mi carrera.']}
+]},
+{id:'l5',title:'Bewerbung & Vorstellungsgespräch',desc:'Soy organizado · Tengo experiencia en … · Sé trabajar en equipo',steps:[
+ {t:'vocab',title:'Bewerbung',items:[['el currículum (CV)','der Lebenslauf'],['la carta de presentación','das Anschreiben'],['el puesto','die Stelle'],['las prácticas','das Praktikum'],['la oferta de trabajo','das Stellenangebot'],['el proceso de selección','das Auswahlverfahren'],['la entrevista','das Vorstellungsgespräch'],['los puntos fuertes','die Stärken'],['estar acostumbrado/-a a …','an … gewöhnt sein'],['estar dispuesto/-a a …','bereit sein zu …'],['tener conocimientos de …','Kenntnisse in … haben'],['saber trabajar en equipo','im Team arbeiten können']]},
+ {t:'info',title:'Fähigkeiten beschreiben',html:`<table><tr><th>ser</th><th>estar</th><th>tener</th><th>saber</th></tr>
+ <tr><td class="es-t">amable · comunicativo/-a · organizado/-a · trabajador/-a · creativo/-a · capaz de …</td><td class="es-t">dispuesto/-a a viajar · acostumbrado/-a a … · interesado/-a en aprender</td><td class="es-t">mucha experiencia · nivel alto de inglés · conocimientos de …</td><td class="es-t">idiomas · trabajar en equipo · convencer</td></tr></table>
+ <h3>Im Anschreiben</h3><p class="es-t">En relación con la oferta publicada en … · Les envío mi currículum con el objetivo de participar en el proceso de selección. · Considero que mi experiencia es adecuada para el puesto. · Quedo a su disposición para una entrevista. · Atentamente,</p>
+ <h3>Im Gespräch</h3><table><tr><td class="es-t">¿Cuáles son sus puntos fuertes?</td><td class="es-t">Soy una persona organizada y acostumbrada a …</td></tr><tr><td class="es-t">¿Por qué quiere trabajar en nuestra empresa?</td><td class="es-t">Quiero ser parte de un buen equipo de trabajo.</td></tr></table>`},
+ {t:'mc',q:'Ich bin bereit zu reisen.',opts:['Estoy dispuesto a viajar.','Soy dispuesto a viajar.','Tengo dispuesto a viajar.'],a:0},
+ {t:'mc',q:'Ich habe Kenntnisse in Python.',opts:['Tengo conocimientos de Python.','Sé conocimientos de Python.','Estoy conocimientos de Python.'],a:0},
+ {t:'gap',q:'___ una persona muy organizada y ___ acostumbrado a trabajar en equipo.',a:['Soy','estoy']},
+ {t:'dialog',place:'Entrevista online',title:'Das Vorstellungsgespräch',scene:'Videointerview für ein Praktikum im Bereich IT-Audit in Barcelona.',lines:[
+  {n:'Sra. Ferrer',es:'Buenos días, señor Gross. Cuénteme un poco sobre su formación.',de:'Guten Morgen, Herr Gross. Erzählen Sie mir ein wenig über Ihre Ausbildung.'},
+  {you:true,opts:[{es:'Estudié Informática Empresarial en Mannheim y terminé el grado en 2026.',ok:true},{es:'Estudio Informática Empresarial en Mannheim y terminé el grado en 2026 hace.',ok:false,why:'Abgeschlossenes Studium → Indefinido <i>estudié</i>; „hace“ passt hier nicht.'},{es:'He estudiado Informática Empresarial en Mannheim en 2023.',ok:false,why:'Mit Jahreszahl (abgeschlossen) → Indefinido.'}]},
+  {n:'Sra. Ferrer',es:'¿Y tiene experiencia profesional?',de:'Und haben Sie Berufserfahrung?'},
+  {you:true,opts:[{es:'Sí, trabajé tres años en EY como auditor de IT. En 2025 estuve tres meses en Singapur.',ok:true},{es:'Sí, trabajaba tres años en EY. En 2025 estaba tres meses en Singapur.',ok:false,why:'Abgeschlossener Zeitraum mit Dauer (tres años, tres meses) → Indefinido: <i>trabajé, estuve</i>.'}]},
+  {n:'Sra. Ferrer',es:'Muy interesante. ¿Cuáles son sus puntos fuertes?',de:'Sehr interessant. Was sind Ihre Stärken?'},
+  {you:true,opts:[{es:'Soy organizado, sé trabajar en equipo y estoy acostumbrado a hablar con clientes.',ok:true},{es:'Estoy organizado, sé trabajar en equipo y soy acostumbrado a hablar con clientes.',ok:false,why:'Charakter → <i>soy organizado</i>; Gewohnheit → <i>estoy acostumbrado</i>.'}]},
+  {n:'Sra. Ferrer',es:'¿Y por qué quiere hacer las prácticas con nosotros?',de:'Und warum möchten Sie das Praktikum bei uns machen?'},
+  {you:true,opts:[{es:'Porque me interesa mucho la ciberseguridad y quiero ser parte de un buen equipo.',ok:true},{es:'Porque me interesan mucho la ciberseguridad.',ok:false,why:'<i>la ciberseguridad</i> ist Singular → <i>me interesa</i>.'}]},
+  {n:'Sra. Ferrer',es:'Perfecto. Le escribiremos la próxima semana. ¡Muchas gracias!',de:'Perfekt. Wir schreiben Ihnen nächste Woche. Vielen Dank!'}]},
+ {t:'free',task:'Schreib eine kurze Bewerbung (6–8 Sätze) für ein Praktikum bei einer Tech-Firma in Barcelona: wer du bist, was du studiert und gearbeitet hast (Indefinido), deine Stärken und warum du dich bewirbst.',hint:'Estimados señores: · En relación con la oferta publicada en … · Estudié … · De 2023 a 2026 trabajé … · Soy … / Estoy acostumbrado a … / Tengo conocimientos de … · Quedo a su disposición … · Atentamente, Jonas Gross',focus:'Indefinido, Fähigkeiten mit ser/estar/tener/saber, formelles Anschreiben',model:'Estimados señores: En relación con la oferta de prácticas publicada en su página web, les envío mi currículum. Estudié Informática Empresarial en la DHBW Mannheim y terminé el grado en septiembre de 2026. De 2023 a 2026 trabajé en EY como auditor de sistemas y en 2025 estuve tres meses en Singapur. Ahora estudio un máster en la UPC. Soy una persona organizada y comunicativa, sé trabajar en equipo y tengo conocimientos de redes y ciberseguridad. Considero que mi experiencia es adecuada para el puesto. Quedo a su disposición para una entrevista. Atentamente, Jonas Gross'}
+]}],
+resumen:`<h3>Biografie</h3><p class="es-t">Nací en … · A los 10 años nos mudamos a … · Fui a la escuela de … a … · Hice un intercambio el año pasado. · Terminé el instituto dos años después. · Hace un mes empecé a trabajar.</p>
+<h3>Indefinido – regelmäßig</h3><table><tr><td>-ar: -é, -aste, -ó, -amos, -asteis, -aron</td></tr><tr><td>-er/-ir: -í, -iste, -ió, -imos, -isteis, -ieron</td></tr></table>
+<h3>Indefinido – unregelmäßig</h3><table><tr><td class="es-t">ser/ir: fui, fuiste, fue, fuimos, fuisteis, fueron</td></tr><tr><td class="es-t">estar: estuve · tener: tuve · hacer: hice/hizo · poder: pude · poner: puse · querer: quise · venir: vine · decir: dije/dijeron · dar: di · ver: vi · hay → hubo</td></tr></table>
+<h3>Perfekt oder Indefinido?</h3><table><tr><td><b>Perfekt</b>: hoy, esta semana, este año · alguna vez, ya, todavía no, nunca</td></tr><tr><td><b>Indefinido</b>: ayer, la semana pasada, en 2019, hace dos años, en diciembre, por última vez</td></tr></table>
+<h3>Fähigkeiten</h3><p class="es-t">ser organizado/comunicativo · estar dispuesto a / acostumbrado a · tener experiencia / conocimientos de · saber idiomas / trabajar en equipo</p>
+<h3>Bewerbung</h3><p class="es-t">En relación con la oferta publicada en … · Les envío mi currículum … · Considero que mi experiencia es adecuada para el puesto. · Quedo a su disposición … · Atentamente,</p>`});
+;
+/* Übungsblätter aus Jonas' DHBW-Spanischkurs (Semester 3–6), als interaktive Übungen */
+(function(){
+const U=id=>COURSE.units.find(u=>u.id===id);
+const add=(id,lesson)=>U(id).lessons.push(Object.assign({ab:true},lesson));
+/* Analoge Uhr als SVG */
+function clock(hh,mm){const a=(mm/60)*360,b=((hh%12)+mm/60)/12*360;const hand=(deg,len,w,c)=>{const r=(deg-90)*Math.PI/180;return `<line x1="50" y1="50" x2="${(50+len*Math.cos(r)).toFixed(1)}" y2="${(50+len*Math.sin(r)).toFixed(1)}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;};
+  let ticks='';for(let i=0;i<12;i++){const r=(i*30-90)*Math.PI/180;ticks+=`<line x1="${(50+40*Math.cos(r)).toFixed(1)}" y1="${(50+40*Math.sin(r)).toFixed(1)}" x2="${(50+45*Math.cos(r)).toFixed(1)}" y2="${(50+45*Math.sin(r)).toFixed(1)}" stroke="currentColor" stroke-width="${i%3?1.5:3}"/>`;}
+  return `<svg viewBox="0 0 100 100" width="130" height="130" style="display:block;margin:6px 0;color:var(--ink)"><circle cx="50" cy="50" r="47" fill="var(--surface)" stroke="var(--accent)" stroke-width="4"/>${ticks}${hand(b,24,4.5,'currentColor')}${hand(a,36,2.5,'var(--accent)')}<circle cx="50" cy="50" r="3" fill="currentColor"/></svg>`;}
+
+/* ---------- Unidad 2 · Semester 3 ---------- */
+add('u2',{id:'ab1',title:'📎 Übungsblatt: ¿Qué hacen ahora?',desc:'Aus deinem Kurs (Semester 3) · Berufe, ser, Verben auf -ar/-er/-ir',steps:[
+ {t:'read',title:'Unos amigos del colegio',intro:'Alberto und Raúl schauen sich ein altes Klassenfoto an.',text:`Alberto: ¡Veinticinco años ya! ¿Y qué hacen ahora?
+Raúl: Pues, Ana trabaja en un {instituto|Gymnasium}, es profesora de inglés en Granada. José Luis vive aquí, en Barcelona. Es cocinero, pero ahora no tiene trabajo.
+
+Alberto: ¡Qué {lástima|schade}! Y Juan y tú, ¿trabajáis todavía en el Banco de Santander?
+Raúl: Yo sí, pero Juan trabaja ahora en el Banco Atlántico. Es jefe del departamento de créditos.
+
+Alberto: ¡Qué bien! Y Carmen, mi ex-novia, ¿qué hace?
+Raúl: Carmen vive en Toledo y es {ama de casa|Hausfrau}. Tiene tres hijos que estudian en la universidad.
+
+Alberto: ¡No me digas! Y Pepe también vive en Toledo, ¿verdad?
+Raúl: Sí, está {casado|verheiratet} con una colombiana. Los dos son médicos y trabajan en un hospital.`},
+ {t:'mc',q:'¿Qué hace Ana?',opts:['Es profesora de inglés.','Es cocinera.','Es médica.'],a:0},
+ {t:'mc',q:'¿Dónde trabaja Juan ahora?',opts:['En el Banco Atlántico.','En el Banco de Santander.','En un hospital.'],a:0},
+ {t:'mc',q:'¿Dónde vive Carmen?',opts:['En Toledo.','En Granada.','En Barcelona.'],a:0},
+ {t:'mc',q:'José Luis …',opts:['es cocinero, pero no tiene trabajo.','es jefe de departamento.','es profesor en Toledo.'],a:0},
+ {t:'info',kind:'Übungsblatt',title:'Dos turistas en Iguazú',html:`<p>Julia und Paul aus Köln sind im Urlaub in Argentinien und treffen einen Herrn aus Buenos Aires:</p>
+ <div class="ex"><span class="es-t">Señor: Perdón, ustedes no son argentinos, ¿verdad?</span><br><span class="es-t">Julia: No, no. Somos alemanes.</span><br><span class="es-t">Señor: ¿Aprenden español en Alemania?</span><br><span class="es-t">Julia: Sí, en la Universidad Popular.</span><br><span class="es-t">Paul: Yo trabajo en una empresa que vende tractores y ella escribe para un periódico.</span><br><span class="es-t">Señor: Yo vivo en Buenos Aires. Trabajo en una agencia de viajes.</span></div>`},
+ {t:'gap',q:'Julia y Paul ___ (vivir) en Alemania y ___ (aprender) español en la Universidad Popular.',a:['viven','aprenden']},
+ {t:'gap',q:'Ahora ___ (pasar, ellos) las vacaciones en Argentina.',a:['pasan']},
+ {t:'gap',q:'El señor ___ (vivir) en Buenos Aires y ___ (trabajar) en una agencia de viajes.',a:['vive','trabaja']},
+ {t:'info',kind:'Übungsblatt',title:'Señor, señora – mit oder ohne Artikel?',html:`<p>Wenn man <b>über</b> jemanden spricht, steht ein Artikel: <span class="es-t">El señor Garrido es cantante.</span></p><p>Wenn man jemanden <b>direkt anspricht</b>, steht <b>kein</b> Artikel: <span class="es-t">Un momento, señora Domínguez.</span></p>`},
+ {t:'mc',q:'___ señor Garrido es cantante.',opts:['El','— (kein Artikel)'],a:0,keep:true},
+ {t:'mc',q:'Un momento, ___ señora Domínguez.',opts:['— (kein Artikel)','la'],a:0,keep:true,why:'Direkte Anrede → ohne Artikel.'},
+ {t:'mc',q:'¿De dónde es ___ señorita Julia?',opts:['la','— (kein Artikel)'],a:0,keep:true},
+ {t:'mc',q:'Perdón, señora, ¿es usted ___ señora Aguilar?',opts:['la','— (kein Artikel)'],a:0,keep:true,why:'Bei „¿Es usted …?“ mit Namen steht der Artikel.'},
+ {t:'gap',task:'„estudiar“, „trabajar“ und „ser“',q:'– ¿Tú trabajas en un banco? – Sí, ___ en el Banco de Santander.',a:['trabajo']},
+ {t:'gap',q:'– ¿Vosotros ___ de Salamanca? – Patricia sí, pero yo ___ de Segovia.',a:['sois','soy']},
+ {t:'gap',q:'– ¿Ustedes ___ médicas? – No, ___ enfermeras, pero ___ Medicina en la universidad.',a:['son','somos','estudiamos']},
+ {t:'gap',q:'Juan y yo ___ (trabajar) en una empresa internacional.',a:['trabajamos']}
+]});
+add('u2',{id:'ab2',title:'📎 Übungsblatt: Identificación',desc:'Aus deinem Kurs (Semester 3) · Personalausweis lesen, persönliche Fragen',steps:[
+ {t:'info',kind:'Übungsblatt',title:'Documento Nacional de Identidad',html:`<table><tr><td>Nombre</td><td class="es-t">Juan</td></tr><tr><td>Apellidos</td><td class="es-t">García Fernández</td></tr><tr><td>Nacionalidad</td><td class="es-t">español</td></tr><tr><td>Fecha de nacimiento</td><td>30-11-1971</td></tr><tr><td>Lugar de nacimiento</td><td class="es-t">Málaga</td></tr><tr><td>Nombre del padre y de la madre</td><td class="es-t">José y Adela</td></tr><tr><td>Dirección</td><td class="es-t">calle Cisneros, n.º 80, 1.º, Málaga</td></tr></table>
+ <div class="ex">Spanier haben <b>zwei Nachnamen</b>: den ersten des Vaters (García) und den ersten der Mutter (Fernández).</div>`},
+ {t:'mc',q:'¿Cómo se llama?',opts:['Se llama Juan García Fernández.','Se llama José García.','Se llama Adela Fernández.'],a:0},
+ {t:'mc',q:'¿De dónde es?',opts:['Es de Málaga.','Es de Madrid.','Es de Granada.'],a:0},
+ {t:'mc',q:'¿Cuál es el primer apellido de su madre?',opts:['Fernández','García','Cisneros'],a:0,why:'Der zweite Nachname kommt von der Mutter.'},
+ {t:'match',q:'Frage und Antwort-Typ',pairs:[['¿Cómo te llamas?','Me llamo …'],['¿De dónde eres?','Soy de …'],['¿Qué estudias?','Estudio …'],['¿Dónde vives?','Vivo en …'],['¿A qué te dedicas?','Soy profesora.'],['¿Qué haces en tu tiempo libre?','Corro, cocino …']]},
+ {t:'tr',de:'Wie ist deine E-Mail-Adresse?',a:['¿Cuál es tu correo electrónico?','¿Cuál es tu dirección de correo electrónico?','¿Cuál es tu correo?','¿Cuál es tu email?']},
+ {t:'free',task:'Fülle deinen eigenen Ausweis auf Spanisch aus – in ganzen Sätzen: Name, Nationalität, Geburtsdatum und -ort, Namen der Eltern, Adresse.',hint:'Me llamo … · Soy alemán · Nací el … en … · Mis padres se llaman … · Mi dirección es …',focus:'persönliche Angaben, Zahlen, Datum',model:'Me llamo Jonas Gross. Soy alemán. Nací en Alemania. Mis padres se llaman … y … Ahora vivo en Barcelona. Mi dirección es calle …, número …, Barcelona.'}
+]});
+
+/* ---------- Unidad 3 · La familia de Marta ---------- */
+add('u3',{id:'ab1',title:'📎 Übungsblatt: La familia de Marta',desc:'Aus deinem Kurs (Semester 3) · Familienbeziehungen',steps:[
+ {t:'info',kind:'Übungsblatt',title:'La familia de Marta',html:`<table><tr><th>Abuelos</th><td class="es-t">José (el abuelo) y Amalia (la abuela)</td></tr><tr><th>Padres</th><td class="es-t">Alberto (el padre) y Ana (la madre)</td></tr><tr><th>Tíos</th><td class="es-t">Teresa (la tía, hija de José y Amalia) y Pepe (el tío)</td></tr><tr><th>Hijos</th><td class="es-t">Marta y Roberto (el hermano)</td></tr><tr><th>Primos</th><td class="es-t">Laura (la prima) y Lucas (el primo)</td></tr></table>
+ <div class="ex">Neu: <span class="es-t">el sobrino / la sobrina</span> = Neffe / Nichte · <span class="es-t">el marido / la mujer</span> = Ehemann / Ehefrau</div>`},
+ {t:'gap',task:'Löse das Kreuzworträtsel aus dem Übungsblatt:',q:'Amalia es la ___ de Marta.',a:['abuela']},
+ {t:'gap',q:'Teresa es la ___ de Marta.',a:['tía']},
+ {t:'gap',q:'Laura es la ___ de Marta.',a:['prima']},
+ {t:'gap',q:'Alberto es el ___ de Ana.',a:['marido']},
+ {t:'gap',q:'Marta es la ___ de Teresa y Pepe.',a:['sobrina']},
+ {t:'gap',q:'José es el ___ de Marta.',a:['abuelo']},
+ {t:'gap',q:'Roberto es el ___ de Alberto y Ana.',a:['hijo']},
+ {t:'gap',q:'Ana es la ___ de Marta.',a:['madre']},
+ {t:'info',kind:'Übungsblatt',title:'Familienbeziehungen erklären',html:`<p>Neue Wörter: <span class="es-t">el yerno</span>, <span class="es-t">la nuera</span>, <span class="es-t">el suegro / la suegra</span>, <span class="es-t">el cuñado / la cuñada</span>, <span class="es-t">el nieto</span>.</p>`},
+ {t:'gap',q:'La mujer de mi padre es mi ___.',a:['madre']},
+ {t:'gap',q:'El hijo de mi hermana es mi ___.',a:['sobrino']},
+ {t:'gap',q:'La hermana de mi mujer es mi ___.',a:['cuñada']},
+ {t:'gap',q:'El hijo de mi hija es mi ___.',a:['nieto']},
+ {t:'gap',q:'El padre de mi mujer es mi ___.',a:['suegro']},
+ {t:'gap',q:'El marido de mi hija es mi ___.',a:['yerno']},
+ {t:'gap',q:'La mujer de mi hijo es mi ___.',a:['nuera']},
+ {t:'gap',q:'La hermana de mi padre es mi ___.',a:['tía']}
+]});
+
+/* ---------- Unidad 4 · Semester 4 ---------- */
+add('u4',{id:'ab1',title:'📎 Übungsblatt: La hora',desc:'Aus deinem Kurs (Semester 4) · Uhren lesen',steps:[
+ {t:'info',kind:'Übungsblatt',title:'Vocabulario de la hora',html:`<table><tr><td class="es-t">en punto</td><td>:00</td><td class="es-t">y cinco / y diez</td><td>:05 / :10</td></tr><tr><td class="es-t">y cuarto</td><td>:15</td><td class="es-t">y veinte / y veinticinco</td><td>:20 / :25</td></tr><tr><td class="es-t">y media</td><td>:30</td><td class="es-t">menos veinticinco / menos veinte</td><td>:35 / :40</td></tr><tr><td class="es-t">menos cuarto</td><td>:45</td><td class="es-t">menos diez / menos cinco</td><td>:50 / :55</td></tr></table>`},
+ ...[[3,30,'las tres y media'],[1,45,'las dos menos cuarto'],[10,15,'las diez y cuarto'],[1,5,'la una y cinco'],[7,40,'las ocho menos veinte'],[2,10,'las dos y diez'],[5,25,'las cinco y veinticinco'],[9,0,'las nueve en punto|las nueve']].map(([hh,mm,ans])=>({t:'gap',kind:'Wie spät ist es?',task:'',q:clock(hh,mm)+(ans.startsWith('la una')?'Es ___.':'Son ___.'),a:[ans]})),
+ {t:'gap',q:'– Perdone, ¿tiene hora? – Sí, son las ___ y cuarto. (3:15)',a:['tres']},
+ {t:'gap',q:'– ¿A qué hora abre la biblioteca? – A las ___ en punto. (8:00)',a:['ocho']},
+ {t:'gap',q:'– ¿Sabes cuándo cierra la biblioteca? – Creo que a las ___ menos diez. (9:50)',a:['diez']}
+]});
+add('u4',{id:'ab2',title:'📎 Übungsblatt: ¿Algo más? · ¿Qué comen los españoles?',desc:'Aus deinem Kurs (Semester 4) · Verpackungen, Mengen, Essgewohnheiten, aunque',steps:[
+ {t:'vocab',title:'Verpackungen',items:[['la botella','die Flasche'],['la lata','die Dose'],['el paquete','die Packung'],['la bolsa','die Tüte'],['la barra de pan','das Baguette / Stangenbrot'],['las ofertas de la semana','die Wochenangebote'],['¿Algo más?','Sonst noch etwas?']]},
+ {t:'match',q:'Welche Verpackung passt?',pairs:[['una lata de','cerveza / sardinas'],['una botella de','aceite / vino'],['un paquete de','café / mantequilla'],['una bolsa de','magdalenas / croquetas'],['una barra de','pan']]},
+ {t:'tr',de:'eine Flasche Olivenöl und zwei Packungen Kaffee',a:['una botella de aceite de oliva y dos paquetes de café','una botella de aceite y dos paquetes de café']},
+ {t:'read',title:'Los españoles y el almuerzo',intro:'Zusammenfassung des Artikels aus deinem Übungsblatt.',text:`Según un estudio, la mayoría de los trabajadores españoles come el menú del día en un restaurante o en la {cantina|Kantine} de la empresa, porque no tienen tiempo para volver a casa. Cuanto más grande es la ciudad, más gente come fuera.
+
+Los jóvenes entre 18 y 35 años prefieren llevarse la {tartera|Brotdose} al trabajo. Entre 35 y 50 años eligen el restaurante o la cantina.
+
+Lo que comen depende del clima: en el norte prefieren las comidas de {cuchara|Löffelgerichte (Eintöpfe)}, en zonas más templadas como Valencia, las verduras. Para beber, cuatro de cada diez prefieren el agua; de las bebidas alcohólicas, la más pedida es la cerveza.`},
+ {t:'mc',q:'¿Qué prefieren los jóvenes?',opts:['Llevarse la comida al trabajo.','Comer en casa.','Comer en un restaurante caro.'],a:0},
+ {t:'mc',q:'¿Qué prefieren comer en el norte de España?',opts:['Comidas de cuchara (sopas).','Ensaladas.','Pescado crudo.'],a:0},
+ {t:'info',kind:'Übungsblatt',title:'Sätze verbinden mit aunque',html:`<p><b>aunque</b> = obwohl. Damit drückt man einen Gegensatz aus:</p><div class="ex"><span class="es-t">Normalmente como en la cantina, aunque prefiero comer en casa.</span></div>`},
+ {t:'tr',de:'Ich esse Fleisch, obwohl ich lieber Fisch esse.',a:['Como carne, aunque prefiero comer pescado.','Como carne aunque prefiero el pescado.','Como carne, aunque prefiero el pescado.','Como carne aunque prefiero comer pescado.']},
+ {t:'gap',q:'Yo como carne dos ___ a la semana.',a:['veces']}
+]});
+
+/* ---------- Unidad 5 · Explicar el camino ---------- */
+add('u5',{id:'ab1',title:'📎 Übungsblatt: Explicar el camino',desc:'Aus deinem Kurs (Semester 5) · hay oder está?',steps:[
+ {t:'info',kind:'Übungsblatt',title:'En la facultad',html:`<table><tr><th>Lage (bestimmt) → estar</th><th>Existenz (unbestimmt) → hay</th></tr><tr><td class="es-t">¿Sabe dónde está la biblioteca? – Sí, está …</td><td class="es-t">¿Sabe si hay algún correo aquí cerca? – Sí, hay uno …</td></tr><tr><td class="es-t">¿Sabe si la biblioteca está cerca de aquí?</td><td class="es-t">¿Hay algún café cerca de aquí? – No, no hay ninguno.</td></tr></table>`},
+ {t:'mc',q:'Perdón, ¿dónde ___ la oficina de turismo?',opts:['está','hay'],a:0,keep:true},
+ {t:'mc',q:'¿___ un centro comercial cerca de aquí?',opts:['Hay','Está'],a:0,keep:true},
+ {t:'mc',q:'Por favor, ¿dónde ___ el hospital Santa Ana?',opts:['está','hay'],a:0,keep:true},
+ {t:'mc',q:'¿Sabe usted dónde ___ un aparcamiento?',opts:['hay','está'],a:0,keep:true,why:'<i>un</i> aparcamiento = irgendeiner → <b>hay</b>.'},
+ {t:'mc',q:'¿___ muchas actividades culturales en el pueblo?',opts:['Hay','Están'],a:0,keep:true},
+ {t:'mc',q:'Perdón, ¿dónde ___ la calle Bolívar?',opts:['está','hay'],a:0,keep:true},
+ {t:'gap',task:'Präpositionen: a(l), de(l), en, por',q:'Para ir ___ museo, tienes que pasar ___ la plaza.',a:['al','por']},
+ {t:'gap',q:'La farmacia está al lado ___ banco.',a:['del']},
+ {t:'gap',q:'Vamos ___ metro hasta la parada de Liceu.',a:['en']}
+]});
+
+/* ---------- Unidad 6 · gustar & Perfekt ---------- */
+add('u6',{id:'ab1',title:'📎 Übungsblatt: A Lola le gusta bailar',desc:'Aus deinem Kurs (Semester 5) · normale Verben vs. gustar',steps:[
+ {t:'info',kind:'Übungsblatt',title:'Lola baila flamenco – A Lola le gusta bailar flamenco',html:`<table><tr><th>normales Verb (Subjekt = Person)</th><th>gustar & Co. (Subjekt = Sache)</th></tr>
+ <tr><td class="es-t">Yo toco la guitarra.</td><td class="es-t">(A mí) me gusta la guitarra.</td></tr><tr><td class="es-t">Tú practicas muchos deportes.</td><td class="es-t">(A ti) te gustan muchos deportes.</td></tr><tr><td class="es-t">Lola baila flamenco.</td><td class="es-t">(A Lola) le encanta bailar flamenco.</td></tr><tr><td class="es-t">Nosotros jugamos al fútbol.</td><td class="es-t">(A nosotros) nos encanta el fútbol.</td></tr><tr><td class="es-t">Mis compañeros estudian latín.</td><td class="es-t">A mis compañeros les interesa el latín.</td></tr></table>
+ <div class="ojo">Nach gustar steht ein Artikel – außer bei Eigennamen: <span class="es-t">Nos encanta Picasso. Me interesa mucho Perú.</span></div>`},
+ {t:'gap',q:'A mí me ___ (encantar) el surrealismo.',a:['encanta']},
+ {t:'gap',q:'¿A ti te ___ (gustar) ir a exposiciones de arte?',a:['gusta']},
+ {t:'gap',q:'A mi compañero no ___ ___ (interesar) el arte clásico.',a:['le','interesa']},
+ {t:'gap',q:'A mis padres ___ ___ (encantar) el teatro.',a:['les','encanta']},
+ {t:'gap',q:'A mí me ___ (interesar) mucho mis estudios.',a:['interesan']},
+ {t:'mc',q:'„Wir lieben Picasso.“',opts:['Nos encanta Picasso.','Nos encanta el Picasso.','Nosotros encantamos Picasso.'],a:0}
+]});
+add('u6',{id:'ab2',title:'📎 Übungsblatt: ¿Qué has hecho?',desc:'Aus deinem Kurs (Semester 6) · Perfekt, ya / todavía no, Präsens oder Perfekt',steps:[
+ {t:'match',q:'Verbinde die Satzteile',pairs:[['Hemos estado en un festival de música folk y …','hemos conocido al cantante.'],['No he podido salir porque …','he tenido que terminar un trabajo.'],['Hemos ido a un museo y …','hemos visto una exposición.'],['Esta semana he visto una película …','que me ha gustado mucho.'],['He estudiado mucho para el examen porque …','es muy difícil.']]},
+ {t:'info',kind:'Übungsblatt',title:'Ya o todavía no',html:`<p>Die Familie Martínez ist eine Woche in Madrid. ✔ = schon gemacht, ✗ = noch nicht:</p><p class="es-t">museo Reina Sofía ✔ · parque del Retiro ✔ · la Plaza Mayor ✔ · Noche flamenca ✔ · jamón de bellota ✗ · el Escorial ✗ · el Rastro ✗</p><div class="ex"><span class="es-t">Ya han visitado el museo Reina Sofía.</span> · <span class="es-t">Todavía no han ido al Rastro.</span></div>`},
+ {t:'gap',q:'Ya ___ ___ (pasear, ellos) por el parque del Retiro.',a:['han','paseado']},
+ {t:'gap',q:'Todavía no ___ ___ (probar, ellos) el jamón de bellota.',a:['han','probado']},
+ {t:'gap',q:'Ya ___ ___ (ver, ellos) una noche flamenca.',a:['han','visto']},
+ {t:'info',kind:'Übungsblatt',title:'¿Presente o Pretérito Perfecto?',html:`<p><b>Präsens</b> für Gewohnheiten (<span class="es-t">normalmente, generalmente</span>), <b>Perfekt</b> für heute/gerade abgeschlossene Handlungen (<span class="es-t">hoy, ya, este fin de semana</span>).</p>`},
+ {t:'gap',q:'– ¿Almuerzas con nosotros? – Lo siento, es que ya ___ ___ (almorzar). Normalmente ___ (almorzar) en la cantina, pero hoy ___ ___ (ir) a casa.',a:['he','almorzado','almuerzo','he','ido']},
+ {t:'gap',q:'Este fin de semana unos amigos y yo ___ ___ (estar) en las montañas. Normalmente yo no ___ (hacer) senderismo.',a:['hemos','estado','hago']},
+ {t:'gap',q:'¿___ ___ (tú, probar) alguna vez el arroz con leche?',a:['Has','probado']}
+]});
+
+/* ---------- Unidad 7 · Semester 5/6 ---------- */
+add('u7',{id:'ab1',title:'📎 Übungsblatt: Un día normal (Javier)',desc:'Aus deinem Kurs (Semester 5) · Tagesablauf, unregelmäßige Verben',steps:[
+ {t:'read',title:'Estudiantes españoles por el mundo',intro:'Javier Fernández, 24, aus Granada, ist Masterstudent an der UNAM in Mexiko-Stadt.',text:`Mi vida aquí en México D.F. es muy distinta a la de Granada, menos {relajada|entspannt} pero muy linda. Tengo clases por la mañana y, como aquí la {jornada|Arbeits-/Schultag} empieza más pronto, me levanto a las seis, me ducho y me visto rápidamente. Salgo de casa a las seis y media y voy a la uni a pie. Las clases empiezan a las siete y terminan a la una.
+
+Antes de salir de casa tomo solo un café, pero a las nueve desayuno en la cafetería de la universidad. Después de las clases, a eso de la una y media, almuerzo en el comedor universitario o vuelvo a casa y como con mis compañeros de piso.
+
+Por la tarde voy a la biblioteca para estudiar. Allí me quedo hasta las siete. Por la noche hago deporte, salgo con amigos o me quedo en casa y me conecto por Skype. Casi nunca me acuesto antes de las once. Los fines de semana duermo hasta las diez o las once.`},
+ {t:'mc',q:'¿A qué hora se levanta Javier?',opts:['A las seis.','A las siete.','A las nueve.'],a:0},
+ {t:'mc',q:'¿Dónde desayuna?',opts:['En la cafetería de la universidad.','En casa.','No desayuna.'],a:0},
+ {t:'conj',verb:'salir',de:'ausgehen, hinausgehen',forms:['salgo','sales','sale','salimos','salís','salen']},
+ {t:'conj',verb:'vestirse',de:'sich anziehen (e→i)',forms:['me visto','te vistes','se viste','nos vestimos','os vestís','se visten']},
+ {t:'conj',verb:'almorzar',de:'zu Mittag essen (o→ue)',forms:['almuerzo','almuerzas','almuerza','almorzamos','almorzáis','almuerzan']},
+ {t:'conj',verb:'empezar',de:'anfangen (e→ie)',forms:['empiezo','empiezas','empieza','empezamos','empezáis','empiezan']},
+ {t:'gap',task:'Javiers Wochenende – ergänze die Verben:',q:'Normalmente me ___ (despertarse) entre las nueve y las diez y me ___ (ducharse). Después, ___ (salir) de casa.',a:['despierto','ducho','salgo']},
+ {t:'gap',q:'Ya ___ (conocer) muchos lugares de México. Cuando voy a un restaurante, siempre ___ (pedir) comida típica.',a:['conozco','pido']},
+ {t:'gap',q:'Mis amigos y yo ___ (volver) por la noche a casa. Después, ___ (poner) la tele y me ___ (acostarse) sobre las once.',a:['volvemos','pongo','acuesto']},
+ {t:'info',kind:'Übungsblatt',title:'La rutina de Sara – was ist unlogisch?',html:`<div class="ex es-t">Me llamo Sara y soy enfermera en el Hospital Clínic de Barcelona. Me levanto a las once y media porque empiezo a trabajar a las cuatro de la tarde. […] A las cuatro menos cuarto salgo de casa. Si el metro va bien, necesito media hora para llegar al hospital. Soy una persona muy puntual y nunca llego tarde al trabajo.</div>`},
+ {t:'mc',q:'¿Qué es ilógico en el texto de Sara?',opts:['Sale a las 15:45, necesita 30 minutos y empieza a las 16:00 – llega tarde.','Se levanta a las once y media.','Trabaja en un hospital.'],a:0}
+]});
+add('u7',{id:'ab2',title:'📎 Übungsblatt: ¿Cuántas veces? · ¿Poder o saber?',desc:'Aus deinem Kurs (Semester 6) · Häufigkeit, poder/saber',steps:[
+ {t:'info',kind:'Übungsblatt',title:'Rosas Kalender',html:`<table><tr><th>Lu</th><th>Ma</th><th>Mi</th><th>Ju</th><th>Vi</th><th>Sá</th><th>Do</th></tr><tr><td>clases de chino</td><td>gimnasio</td><td>clases de chino</td><td>Skype / exposición / estudiar</td><td>tapas / cena / copas</td><td>piscina / tenis</td><td>comida con la familia</td></tr></table>
+ <p>Häufigkeit: <span class="es-t">siempre / todos los días · casi siempre / a menudo · (todos) los lunes · dos veces por semana · a veces · cada quince días · una vez al mes · casi nunca · nunca</span></p>`},
+ {t:'gap',q:'Todos los martes Rosa ___ al gimnasio.',a:['va']},
+ {t:'gap',q:'Dos ___ a la semana tiene clases de chino.',a:['veces']},
+ {t:'gap',q:'Todos los domingos ___ con la familia.',a:['come']},
+ {t:'info',kind:'Übungsblatt',title:'¿No sabes o no puedes?',html:`<div class="ex"><span class="es-t">– Hay que ir a buscar al Sr. Chaw al aeropuerto. – Yo no, no puedo.</span> <span class="muted">(Arm verletzt → keine Möglichkeit)</span><br><span class="es-t">– ¿Y tú? – Yo no sé conducir.</span> <span class="muted">(nie gelernt → Fähigkeit)</span></div>`},
+ {t:'mc',q:'¿___ tocar el piano? – Sí, he estudiado en el conservatorio.',opts:['Sabes','Puedes'],a:0,keep:true},
+ {t:'mc',q:'¿___ tocar el piano? – No, ahora no, estoy cansada.',opts:['Puedes','Sabes'],a:0,keep:true},
+ {t:'mc',q:'¿No ___ conducir? – No, es que he bebido vino.',opts:['puedes','sabes'],a:0,keep:true},
+ {t:'mc',q:'¿No ___ conducir? – No, no tengo el carné.',opts:['sabes','puedes'],a:0,keep:true},
+ {t:'gap',q:'¿Hoy ___ (tú) ir a buscar a Andrés a la escuela? Es que yo estoy ocupada.',a:['puedes']},
+ {t:'gap',q:'Sandra ___ tocar el piano, ha estudiado muchos años en el conservatorio.',a:['sabe']},
+ {t:'gap',q:'No ___ (yo) ir a natación hoy porque tengo mucho trabajo.',a:['puedo']},
+ {t:'gap',q:'Tomás ___ hacer pan. ¡Y es buenísimo!',a:['sabe']},
+ {t:'gap',q:'Noelia ___ bailar muy bien, te ___ dar clases de salsa.',a:['sabe','puede']},
+ {t:'gap',q:'No ___ (yo) tocar ningún instrumento, pero me gusta mucho la música.',a:['sé']}
+]});
+add('u7',{id:'ab3',title:'📎 Übungsblatt: Comparativos',desc:'Aus deinem Kurs (Semester 6) · Vergleiche',steps:[
+ {t:'tr',kind:'Sag dasselbe andersherum',de:'Cristina es más alta que yo. → (yo …)',a:['Yo soy más bajo que Cristina.','Soy más bajo que Cristina.','Yo soy más baja que Cristina.','Soy más baja que Cristina.']},
+ {t:'tr',kind:'Sag dasselbe andersherum',de:'Yo soy mayor que él. → (él …)',a:['Él es menor que yo.','Él es más joven que yo.']},
+ {t:'tr',kind:'Sag dasselbe andersherum',de:'El vino es más caro que la cerveza. → (la cerveza …)',a:['La cerveza es más barata que el vino.']},
+ {t:'tr',kind:'Sag dasselbe andersherum',de:'Esta película es peor que la otra. → (la otra …)',a:['La otra es mejor que esta.','La otra película es mejor que esta.','La otra es mejor que esta película.']},
+ {t:'gap',task:'tan / tanto / tanta / tantos / tantas … como',q:'Un BMW no es ___ caro ___ un Rolls-Royce.',a:['tan','como']},
+ {t:'gap',q:'Mis hijos comen ___ carne ___ yo.',a:['tanta','como']},
+ {t:'gap',q:'Yo no tengo ___ libros ___ mi padre.',a:['tantos','como']},
+ {t:'gap',q:'Yo no compro ___ cosas ___ tú.',a:['tantas','como']},
+ {t:'gap',q:'Yo no puedo correr ___ ___ un atleta.',a:['tanto','como']},
+ {t:'gap',task:'como oder que?',q:'Tú comes tanto ___ yo. · Tu habitación es más grande ___ la mía.',a:['como','que']},
+ {t:'info',kind:'Übungsblatt',title:'Belén und Antonio',html:`<table><tr><th></th><th>Belén</th><th>Antonio</th></tr><tr><td>Alter</td><td>32</td><td>36</td></tr><tr><td>Größe</td><td>1,60 m</td><td>1,65 m</td></tr><tr><td>Arbeit</td><td>4 h / día</td><td>8–15 h</td></tr><tr><td>Sprachen</td><td>inglés y francés</td><td>inglés</td></tr><tr><td>Geld</td><td>gana poco</td><td>gana bastante</td></tr></table>`},
+ {t:'tr',de:'Belén ist jünger als Antonio.',a:['Belén es más joven que Antonio.','Belén es menor que Antonio.']},
+ {t:'tr',de:'Antonio arbeitet mehr als Belén.',a:['Antonio trabaja más que Belén.','Antonio trabaja más horas que Belén.']},
+ {t:'tr',de:'Belén spricht mehr Sprachen als Antonio.',a:['Belén habla más idiomas que Antonio.','Belén habla más lenguas que Antonio.']}
+]});
+
+/* ---------- Unidad 8 · ¿Cuándo quedamos? ---------- */
+add('u8',{id:'ab1',title:'📎 Übungsblatt: ¿Cuándo quedamos?',desc:'Aus deinem Kurs (Semester 6) · Vorschläge, quedar / quedarse',steps:[
+ {t:'info',kind:'Übungsblatt',title:'quedar oder quedarse?',html:`<table><tr><td class="es-t">quedar (con alguien)</td><td>sich verabreden</td><td class="es-t">¿Quedamos a las ocho?</td></tr><tr><td class="es-t">quedarse</td><td>bleiben</td><td class="es-t">Hoy me quedo en casa.</td></tr></table>`},
+ {t:'mc',q:'¿A qué hora ___ mañana? (wir verabreden uns)',opts:['quedamos','nos quedamos'],a:0,keep:true},
+ {t:'mc',q:'Estoy cansado, hoy ___ en casa.',opts:['me quedo','quedo'],a:0,keep:true},
+ {t:'gap',task:'Präpositionen in Einladungen',q:'¿Quedamos ___ las ocho ___ la puerta del cine?',a:['a','en']},
+ {t:'gap',q:'¿Por qué no vamos ___ cine ___ sábado?',a:['al','el']},
+ {t:'dialog',place:'Teléfono',title:'Las citas de Maritere',scene:'Deine Freundin Maritere hat eine volle Agenda: Montag Zahnarzt, Mittwoch Englischkurs, Freitag frei. Du rufst sie an.',lines:[
+  {you:true,prompt:'Schlag ein Abendessen am Montag vor.',opts:[{es:'¿Tienes ganas de cenar conmigo el lunes?',ok:true},{es:'¿Tienes ganas cenar conmigo el lunes?',ok:false,why:'tener ganas <b>de</b> + Infinitiv.'}]},
+  {n:'Maritere',es:'Uy, justo el lunes no puedo, es que tengo dentista.',de:'Oh, ausgerechnet Montag kann ich nicht, ich habe Zahnarzt.'},
+  {you:true,opts:[{es:'Vale. ¿Y qué tal el viernes?',ok:true},{es:'Vale. ¿Y qué tal en viernes?',ok:false,why:'Wochentag mit Artikel: <i>el viernes</i>.'}]},
+  {n:'Maritere',es:'¡El viernes perfecto! ¿A qué hora quedamos?',de:'Freitag perfekt! Um wie viel Uhr treffen wir uns?'},
+  {you:true,opts:[{es:'¿Qué te parece a las nueve en la Plaza del Sol?',ok:true},{es:'¿Qué te parece en las nueve a la Plaza del Sol?',ok:false,why:'Uhrzeit mit <b>a</b>, Ort mit <b>en</b>.'}]},
+  {n:'Maritere',es:'De acuerdo. ¡Hasta el viernes!',de:'Einverstanden. Bis Freitag!'}]}
+]});
+})();
+;
+/* ================= A2 · TEIL 2: Lücken aus der „Systematischen Grammatik“ des Kursbuchs schließen ================= */
+
+/* ================= UNIDAD 11 · PEQUEÑAS PALABRAS ================= */
+COURSE.units.push({id:'g1',n:'11',level:'A2b',title:'Pequeñas palabras',sub:'Kleine Wörter, große Wirkung: alguien/nadie, algo/nada, algún/ningún · Kurzformen (buen, gran, primer) · Superlativ · conmigo/contigo · qué oder cuál',
+goals:['algo / nada · alguien / nadie','alguno / ninguno (algún, ningún)','doppelte Verneinung: No hay nadie.','Kurzformen: buen, mal, gran, primer, tercer','Superlativ: el más … de · -ísimo','Pronomen nach Präposition: para mí, conmigo','qué oder cuál?'],
+situacion:{title:'Verlorene Sachen im Coworking',npc:'Recepción',scene:'Du hast im Coworking-Space in Poblenou deine Jacke und dein Ladekabel liegen lassen. Du fragst am Empfang.',role:'Du bist Marta vom Empfang eines Coworking-Space in Barcelona, freundlich, du duzt Jonas. Er sucht verlorene Sachen. Benutze viele Indefinitpronomen: ¿Has dejado algo? No ha llegado nada. ¿Alguien te ha visto? No hay ningún cargador… Frag nach Details (¿Cuál es tu chaqueta, la negra o la azul? ¿Qué marca es?).',goal:'Frag, ob jemand etwas abgegeben hat (¿Alguien ha dejado…? ¿Hay algún…?), beschreib deine Sachen, und benutze einmal qué und einmal cuál.'},
+lessons:[
+{id:'l1',title:'Etwas & nichts, jemand & niemand',desc:'algo · nada · alguien · nadie',steps:[
+ {t:'vocab',title:'Unbestimmte Wörter',items:[['algo','etwas','✨'],['nada','nichts','🚫'],['alguien','jemand','🧑'],['nadie','niemand','👻'],['siempre','immer','🔁'],['nunca','nie','⛔'],['también','auch','➕'],['tampoco','auch nicht','➖'],['todo','alles','🌐'],['otro / otra','ein anderer / eine andere','🔀']]},
+ {t:'info',title:'Doppelt verneinen ist richtig!',html:`<table><tr><th>positiv</th><th>negativ</th></tr>
+ <tr><td class="es-t">¿Quieres algo?</td><td class="es-t">No quiero nada.</td></tr>
+ <tr><td class="es-t">¿Hay alguien en casa?</td><td class="es-t">No hay nadie.</td></tr>
+ <tr><td class="es-t">Siempre llego tarde.</td><td class="es-t">No llego nunca tarde. / Nunca llego tarde.</td></tr></table>
+ <div class="ex">Im Deutschen falsch, im Spanischen Pflicht: Steht <i>nada, nadie, nunca</i> <b>nach</b> dem Verb, braucht man <b>no</b> davor: <span class="es-t">No veo nada.</span> Steht es <b>vor</b> dem Verb, kein <i>no</i>: <span class="es-t">Nadie lo sabe.</span></div>
+ <p><b>Achtung:</b> <span class="es-t">otro</span> nie mit <i>un</i>: <span class="es-t">otro café</span> (nicht <s>un otro café</s>).</p>`},
+ {t:'mc',q:'– ¿Hay alguien en la oficina? – No, no hay ___.',opts:['nadie','alguien','nada'],a:0},
+ {t:'mc',q:'– ¿Quieres algo de beber? – No, gracias, no quiero ___.',opts:['nada','algo','nadie'],a:0},
+ {t:'mc',q:'„Noch einen Kaffee, bitte.“',opts:['Otro café, por favor.','Un otro café, por favor.','Uno más otro café, por favor.'],a:0},
+ {t:'gap',q:'___ sabe dónde están las llaves. (niemand)',a:['Nadie']},
+ {t:'gap',q:'No he comido ___ en todo el día. (nichts)',a:['nada']},
+ {t:'tr',de:'Ich sehe niemanden.',a:['No veo a nadie.','No veo nadie.']},
+ {t:'tr',de:'Hat jemand angerufen?',a:['¿Ha llamado alguien?','¿Alguien ha llamado?']},
+ {t:'listen',es:'No hay nadie en la recepción.',de:'Es ist niemand am Empfang.'}]},
+{id:'l2',title:'algún & ningún',desc:'¿Hay algún banco cerca? – No, ninguno.',steps:[
+ {t:'info',title:'alguno / ninguno – vor Nomen verkürzt',html:`<table><tr><th></th><th>männlich</th><th>weiblich</th></tr>
+ <tr><td>irgendein(e)</td><td class="es-t">algún banco · alguno</td><td class="es-t">alguna farmacia</td></tr>
+ <tr><td>kein(e)</td><td class="es-t">ningún problema · ninguno</td><td class="es-t">ninguna idea</td></tr></table>
+ <p>Vor einem <b>männlichen Nomen</b> fällt das <b>-o</b> weg: <span class="es-t">algún día · ningún problema</span>. Allein stehend: <span class="es-t">– ¿Tienes algún libro en español? – No, no tengo ninguno.</span></p>
+ <div class="ex"><i>ninguno</i> steht fast immer im Singular: <span class="es-t">No tengo ningún amigo aquí.</span> (nicht <s>ningunos amigos</s>)</div>`},
+ {t:'mc',q:'¿Hay ___ supermercado cerca de aquí?',opts:['algún','alguno','alguna'],a:0},
+ {t:'mc',q:'No hay ___ problema.',opts:['ningún','ninguno','ninguna'],a:0},
+ {t:'gap',q:'– ¿Tienes alguna pregunta? – No, no tengo ___.',a:['ninguna']},
+ {t:'gap',q:'___ día quiero vivir en Barcelona. (irgendwann)',a:['Algún']},
+ {t:'tr',de:'Ich habe keine Idee.',a:['No tengo ninguna idea.','No tengo ni idea.']},
+ {t:'dialog',place:'Coworking en Poblenou',title:'Verlorene Sachen',scene:'Du suchst deine Jacke und dein Ladekabel.',lines:[
+  {n:'Marta',es:'¡Hola! ¿Necesitas algo?',de:'Hallo! Brauchst du etwas?'},
+  {you:true,opts:[{es:'Sí, ayer dejé mi chaqueta aquí. ¿Alguien ha traído una chaqueta negra?',ok:true},{es:'Sí, ayer dejé mi chaqueta aquí. ¿Nadie ha traído una chaqueta negra?',ok:false,why:'Bei einer offenen Frage: <b>alguien</b> (jemand).'}]},
+  {n:'Marta',es:'Mmm, hay dos chaquetas negras. ¿Cuál es la tuya?',de:'Hm, es gibt zwei schwarze Jacken. Welche ist deine?'},
+  {you:true,opts:[{es:'La de cuero. ¿Y hay algún cargador de portátil?',ok:true},{es:'La de cuero. ¿Y hay alguno cargador de portátil?',ok:false,why:'Vor einem männlichen Nomen: <b>algún</b> cargador.'}]},
+  {n:'Marta',es:'No, lo siento, no hay ninguno.',de:'Nein, tut mir leid, es gibt keins.'},
+  {you:true,opts:[{es:'Vale, no pasa nada. ¡Gracias!',ok:true},{es:'Vale, pasa nada. ¡Gracias!',ok:false,why:'Doppelte Verneinung: <b>no</b> pasa nada.'}]}]}]},
+{id:'l3',title:'buen, gran, primer & der Superlativ',desc:'un buen día · el más alto de · carísimo',steps:[
+ {t:'info',title:'Kurzformen vor männlichen Nomen',html:`<table><tr><th>normal</th><th>vor männl. Nomen (Sg.)</th></tr>
+ <tr><td class="es-t">bueno</td><td class="es-t">un buen trabajo</td></tr>
+ <tr><td class="es-t">malo</td><td class="es-t">un mal día</td></tr>
+ <tr><td class="es-t">primero / tercero</td><td class="es-t">el primer / tercer piso</td></tr>
+ <tr><td class="es-t">grande</td><td class="es-t">una gran ciudad (vor <b>jedem</b> Nomen!)</td></tr></table>
+ <div class="ex"><b>gran</b> vor dem Nomen = großartig: <span class="es-t">un gran hombre</span>. <b>grande</b> nach dem Nomen = groß (Größe): <span class="es-t">un hombre grande</span>.</div>`},
+ {t:'mc',q:'Hoy hace ___ tiempo.',opts:['buen','bueno','buena'],a:0},
+ {t:'mc',q:'Vivo en el ___ piso.',opts:['tercer','tercero','tres'],a:0},
+ {t:'mc',q:'Barcelona es una ___ ciudad.',opts:['gran','grande de','grano'],a:0},
+ {t:'info',title:'Der Superlativ',html:`<p><b>der/die/das …ste</b>: <span class="es-t">el / la / los / las + más + Adjektiv + de</span></p>
+ <p class="es-t">La Sagrada Familia es el edificio más famoso de Barcelona.</p>
+ <p>Unregelmäßig: <span class="es-t">el mejor (beste) · el peor (schlechteste) · el mayor (älteste) · el menor (jüngste)</span></p>
+ <p><b>Sehr, sehr …</b>: <span class="es-t">-ísimo</span> → <span class="es-t">caro → carísimo · bueno → buenísimo · fácil → facilísimo · rico → riquísimo</span></p>`},
+ {t:'mc',q:'Es el restaurante ___ caro ___ la ciudad.',opts:['más … de','más … que','muy … de'],a:0},
+ {t:'gap',q:'Mi hermano es el ___ de la familia. (der Jüngste)',a:['menor|más joven']},
+ {t:'gap',q:'Este piso es muy, muy caro: es ___. (-ísimo)',a:['carísimo']},
+ {t:'tr',de:'Das ist das beste Café des Viertels.',a:['Es el mejor café del barrio.','Este es el mejor café del barrio.','Es la mejor cafetería del barrio.']},
+ {t:'listen',es:'La paella de mi abuela está buenísima.',de:'Die Paella meiner Oma ist superlecker.'}]},
+{id:'l4',title:'conmigo & qué oder cuál',desc:'para mí · contigo · ¿Cuál prefieres?',steps:[
+ {t:'info',title:'Pronomen nach Präpositionen',html:`<p>Nach <i>para, de, a, sin, en …</i> benutzt man <span class="es-t">mí, ti, él, ella, usted, nosotros, vosotros, ellos</span>:</p>
+ <p class="es-t">Este regalo es para ti. · ¿Vienes sin mí? · Hablamos de ella.</p>
+ <p><b>Sonderformen mit con:</b> <span class="es-t">conmigo</span> · <span class="es-t">contigo</span> – sonst normal: <span class="es-t">con él, con nosotros</span>.</p>
+ <div class="ex"><i>mí</i> mit Akzent (mich/mir) ≠ <i>mi</i> ohne Akzent (mein). <i>ti</i> hat nie einen Akzent.</div>`},
+ {t:'mc',q:'¿Quieres venir al cine ___?',opts:['conmigo','con mí','con me'],a:0},
+ {t:'mc',q:'Este café es para ___.',opts:['ti','tú','te'],a:0},
+ {t:'gap',q:'– ¿Puedo ir ___? (mit dir) – ¡Claro!',a:['contigo']},
+ {t:'info',title:'¿Qué? oder ¿Cuál?',html:`<table><tr><th>¿Qué …?</th><th>¿Cuál / Cuáles …?</th></tr>
+ <tr><td>vor einem Nomen: <span class="es-t">¿Qué libro lees?</span></td><td>Auswahl aus einer Gruppe: <span class="es-t">¿Cuál prefieres, el rojo o el azul?</span></td></tr>
+ <tr><td>Definition: <span class="es-t">¿Qué es la Diada?</span></td><td>mit ser + Info: <span class="es-t">¿Cuál es tu número? ¿Cuál es la capital?</span></td></tr></table>
+ <div class="ex">Typischer Fehler: „Was ist deine Adresse?“ = <span class="es-t">¿Cuál es tu dirección?</span> (nicht <s>¿Qué es tu dirección?</s>)</div>`},
+ {t:'mc',q:'¿___ es tu número de teléfono?',opts:['Cuál','Qué'],a:0,keep:true},
+ {t:'mc',q:'¿___ películas te gustan?',opts:['Qué','Cuál'],a:0,keep:true},
+ {t:'mc',q:'Hay dos camisetas. ¿___ te gusta más?',opts:['Cuál','Qué'],a:0,keep:true},
+ {t:'gap',q:'¿___ es una „calçotada“? – Es una fiesta catalana con cebollas a la brasa.',a:['Qué']},
+ {t:'tr',de:'Was ist deine E-Mail-Adresse?',a:['¿Cuál es tu correo electrónico?','¿Cuál es tu dirección de correo electrónico?','¿Cuál es tu email?','¿Cuál es tu e-mail?']}]}
+],
+placement:[
+ {t:'mc',q:'– ¿Hay alguien en casa? – No, no hay ___.',opts:['nadie','alguien','nada'],a:0},
+ {t:'mc',q:'No hay ___ problema.',opts:['ningún','ninguno','ninguna'],a:0},
+ {t:'mc',q:'¿Quieres venir ___?',opts:['conmigo','con mí','con me'],a:0},
+ {t:'mc',q:'¿___ es tu dirección?',opts:['Cuál','Qué'],a:0},
+ {t:'gap',q:'Es el edificio ___ alto ___ la ciudad.',a:['más','de']},
+ {t:'mc',q:'Vivo en el ___ piso.',opts:['tercer','tercero','tres'],a:0}],
+resumen:`<h3>Unbestimmte Wörter</h3><p class="es-t">algo ↔ nada · alguien ↔ nadie · siempre ↔ nunca · algún/alguna ↔ ningún/ninguna</p><p class="es-t">No hay nadie. · No quiero nada. · Nadie lo sabe. · otro café (ohne un!)</p>
+<h3>Kurzformen</h3><p class="es-t">un buen día · un mal momento · el primer / tercer piso · una gran ciudad</p>
+<h3>Superlativ</h3><p class="es-t">el más famoso de … · el mejor / el peor / el mayor / el menor · carísimo · buenísimo</p>
+<h3>Nach Präposition</h3><p class="es-t">para mí / ti / él … · conmigo · contigo</p>
+<h3>qué / cuál</h3><p class="es-t">¿Qué libro? · ¿Qué es …? (Definition) — ¿Cuál prefieres? · ¿Cuál es tu número?</p>`});
+
+/* ================= UNIDAD 12 · FECHAS, ACENTOS Y ACCIONES ================= */
+COURSE.units.push({id:'g2',n:'12',level:'A2b',title:'Fechas y acciones',sub:'Monate & Datum · Akzentregeln (wann schreibt man á?) · Verb + Infinitiv/Gerundium: acabar de, volver a, dejar de, empezar a, seguir + -ando',
+goals:['Monate, Jahreszeiten, Datum sagen & schreiben','Jahreszahlen (dos mil veinticinco)','Betonungsregeln & wann ein Akzent nötig ist','acabar de + Infinitiv (gerade getan haben)','volver a / dejar de / empezar a + Infinitiv','seguir + Gerundium · llevar + Zeit + Gerundium'],
+situacion:{title:'Termine beim Sprachkurs',npc:'Secretaría',scene:'Du meldest dich im Sprachenzentrum der UPC für einen neuen Spanischkurs an und klärst Termine.',role:'Du bist die Sekretärin im Servei de Llengües der UPC, freundlich und effizient. Du siezt Jonas. Frag nach Geburtsdatum (¿Cuál es su fecha de nacimiento?), seit wann er Spanisch lernt (¿Cuánto tiempo lleva estudiando español?), ob er schon einmal einen Kurs gemacht hat. Nenne Kursdaten (del 15 de enero al 30 de marzo) und das Datum des Einstufungstests.',goal:'Nenne dein Geburtsdatum, sag, wie lange du schon Spanisch lernst (llevo … estudiando), und frag nach Anfangs- und Enddatum des Kurses.'},
+lessons:[
+{id:'l1',title:'Monate & Datum',desc:'el 5 de octubre de 2026',steps:[
+ {t:'vocab',title:'Monate & Jahreszeiten',items:[['enero','Januar','❄️'],['febrero','Februar','❄️'],['marzo','März','🌱'],['abril','April','🌷'],['mayo','Mai','🌸'],['junio','Juni','☀️'],['julio','Juli','🏖️'],['agosto','August','🏖️'],['septiembre','September','🍂'],['octubre','Oktober','🍂'],['noviembre','November','🌧️'],['diciembre','Dezember','🎄'],['la primavera','der Frühling','🌷'],['el verano','der Sommer','☀️'],['el otoño','der Herbst','🍁'],['el invierno','der Winter','⛄']]},
+ {t:'info',title:'So sagt man das Datum',html:`<p class="es-t" style="font-size:18px">Hoy es (el) cinco de octubre de dos mil veintiséis.</p>
+ <table><tr><td>Datum</td><td class="es-t">el + Zahl + de + Monat (+ de + Jahr)</td></tr>
+ <tr><td>am 1.</td><td class="es-t">el uno / el primero de mayo</td></tr>
+ <tr><td>Welches Datum ist heute?</td><td class="es-t">¿Qué fecha es hoy? · ¿A qué día estamos?</td></tr>
+ <tr><td>im Mai</td><td class="es-t">en mayo</td></tr>
+ <tr><td>Jahreszahl</td><td class="es-t">1998 = mil novecientos noventa y ocho · 2026 = dos mil veintiséis</td></tr></table>
+ <div class="ex">Monate schreibt man <b>klein</b>: <i>octubre</i>, nicht <i>Octubre</i>. Und Datum ohne Punkt-Zahl: <span class="es-t">el 5 de octubre</span>, nicht „el 5. de octubre“.</div>`},
+ {t:'mc',q:'„am 12. Oktober“',opts:['el doce de octubre','en doce octubre','el doceavo de octubre'],a:0},
+ {t:'mc',q:'2026 =',opts:['dos mil veintiséis','veinte veintiséis','dos mil y veintiséis'],a:0},
+ {t:'gap',q:'Mi cumpleaños es ___ ___ de marzo. (am 3.)',a:['el','tres']},
+ {t:'gap',q:'En España las vacaciones de verano son en julio y ___. (August)',a:['agosto']},
+ {t:'tr',de:'Ich bin am 7. Juni geboren.',a:['Nací el siete de junio.']},
+ {t:'listen',es:'El curso empieza el quince de enero.',de:'Der Kurs beginnt am 15. Januar.'},
+ {t:'speak',es:'Hoy es lunes, cinco de octubre de dos mil veintiséis.',de:'Heute ist Montag, der 5. Oktober 2026.'}]},
+{id:'l2',title:'Akzente: wann á, é, í?',desc:'Betonung & Akzentregeln',steps:[
+ {t:'info',title:'Drei Regeln für die Betonung',html:`<p><b>1.</b> Endet ein Wort auf <b>Vokal, -n oder -s</b> → Betonung auf der <b>vorletzten</b> Silbe: <span class="es-t">ca<b>sa</b> · ha<b>blan</b> · <b>li</b>bros</span></p>
+ <p><b>2.</b> Endet es auf einen <b>anderen Konsonanten</b> → Betonung auf der <b>letzten</b> Silbe: <span class="es-t">ha<b>blar</b> · ciu<b>dad</b> · espa<b>ñol</b></span></p>
+ <p><b>3.</b> Wird ein Wort <b>anders</b> betont → <b>Akzent</b>: <span class="es-t">ca<b>fé</b> · in<b>glés</b> · <b>fá</b>cil · <b>mú</b>sica · ha<b>bló</b></span></p>
+ <div class="ex">Wörter, die auf der drittletzten Silbe betont sind, haben <b>immer</b> einen Akzent: <span class="es-t">teléfono · rápido · miércoles · América</span>.</div>
+ <p><b>Akzent unterscheidet Wörter:</b> <span class="es-t">tú (du) / tu (dein) · él (er) / el (der) · sí (ja) / si (wenn) · mí / mi · más / mas</span>. Fragewörter immer mit Akzent: <span class="es-t">qué, cómo, dónde, cuándo</span>.</p>`},
+ {t:'mc',q:'„Telefon“ – Betonung auf der drittletzten Silbe (te-<b>lé</b>-fo-no). Wie schreibt man es?',opts:['teléfono','telefono','telefóno'],a:0,keep:true,why:'Drittletzte Silbe betont → <b>immer</b> Akzent.'},
+ {t:'mc',q:'„Er kommt aus Spanien.“',opts:['Él es de España.','El es de España.'],a:0,keep:true},
+ {t:'mc',q:'„Ist das dein Buch?“',opts:['¿Es tu libro?','¿Es tú libro?'],a:0,keep:true},
+ {t:'mc',q:'Welche Schreibung ist richtig? (Betonung auf der ersten Silbe)',opts:['música','musica','musíca'],a:0},
+ {t:'match',q:'Mit oder ohne Akzent?',pairs:[['ja','sí'],['wenn','si'],['du','tú'],['dein','tu'],['er','él']]},
+ {t:'gap',q:'¿___ vives? – En Barcelona. (Wo?)',a:['Dónde']},
+ {t:'tr',de:'Ja, ich trinke gern Kaffee.',a:['Sí, me gusta tomar café.','Sí, me gusta el café.','Sí, me gusta beber café.']}]},
+{id:'l3',title:'Gerade, wieder, nicht mehr',desc:'acabar de · volver a · dejar de · empezar a',steps:[
+ {t:'info',title:'Verb + Präposition + Infinitiv',html:`<table><tr><th>Ausdruck</th><th>Bedeutung</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">acabar de + Inf.</td><td>gerade etwas getan haben</td><td class="es-t">Acabo de llegar.</td></tr>
+ <tr><td class="es-t">volver a + Inf.</td><td>etwas wieder tun</td><td class="es-t">Vuelvo a llamarte luego.</td></tr>
+ <tr><td class="es-t">dejar de + Inf.</td><td>mit etwas aufhören</td><td class="es-t">He dejado de fumar.</td></tr>
+ <tr><td class="es-t">empezar a + Inf.</td><td>anfangen, etwas zu tun</td><td class="es-t">Empecé a estudiar español en 2024.</td></tr>
+ <tr><td class="es-t">tener que + Inf.</td><td>müssen</td><td class="es-t">Tengo que irme.</td></tr></table>`},
+ {t:'mc',q:'„Ich bin gerade angekommen.“',opts:['Acabo de llegar.','Acabo llegar.','He acabado a llegar.'],a:0},
+ {t:'mc',q:'„Ich habe aufgehört, Fleisch zu essen.“',opts:['He dejado de comer carne.','He dejado comer carne.','He parado a comer carne.'],a:0},
+ {t:'gap',q:'Mañana vuelvo ___ intentarlo.',a:['a']},
+ {t:'gap',q:'¿Cuándo empezaste ___ trabajar en EY?',a:['a']},
+ {t:'gap',q:'El tren acaba ___ salir. ¡Qué mala suerte!',a:['de']},
+ {t:'tr',de:'Ich habe gerade gegessen.',a:['Acabo de comer.']},
+ {t:'listen',es:'Acabo de terminar el informe, ahora vuelvo a revisarlo.',de:'Ich habe gerade den Bericht fertig gemacht, jetzt prüfe ich ihn noch mal.'}]},
+{id:'l4',title:'Seit wann? – llevar & seguir',desc:'llevo dos años estudiando · sigo viviendo aquí',steps:[
+ {t:'info',title:'Dauer & Fortsetzung mit dem Gerundium',html:`<table><tr><td class="es-t">llevar + Zeit + Gerundium</td><td>etwas seit … tun</td><td class="es-t">Llevo dos años estudiando español.</td></tr>
+ <tr><td class="es-t">seguir + Gerundium</td><td>immer noch / weiterhin</td><td class="es-t">Sigo viviendo en Gràcia.</td></tr>
+ <tr><td class="es-t">estar + Gerundium</td><td>gerade dabei sein</td><td class="es-t">Estoy leyendo.</td></tr></table>
+ <div class="ex">Drei Wege für „seit“: <span class="es-t">Llevo dos años aquí. = Vivo aquí desde hace dos años. = Hace dos años que vivo aquí.</span></div>`},
+ {t:'conj',verb:'llevar',de:'(Dauer) – Präsens',forms:['llevo','llevas','lleva','llevamos','lleváis','llevan']},
+ {t:'mc',q:'„Ich lerne seit drei Monaten Spanisch.“',opts:['Llevo tres meses estudiando español.','Llevo tres meses estudiar español.','Estoy tres meses estudiando español.'],a:0},
+ {t:'mc',q:'„Wohnst du immer noch in Mannheim?“',opts:['¿Sigues viviendo en Mannheim?','¿Sigues vivir en Mannheim?','¿Sigues a vivir en Mannheim?'],a:0},
+ {t:'gap',q:'Mi hermana ___ (seguir) trabajando en el mismo banco.',a:['sigue']},
+ {t:'gap',q:'¿Cuánto tiempo ___ (tú, llevar) esperando?',a:['llevas']},
+ {t:'tr',de:'Ich wohne seit einem Monat in Barcelona.',a:['Llevo un mes viviendo en Barcelona.','Vivo en Barcelona desde hace un mes.','Hace un mes que vivo en Barcelona.','Llevo un mes en Barcelona.']},
+ {t:'free',task:'Stell dich der Sekretärin im Sprachenzentrum vor (4–5 Sätze): Geburtsdatum, seit wann du in Barcelona bist, seit wann du Spanisch lernst, was du gerade erst gemacht hast.',hint:'Nací el … · Llevo … en Barcelona · Llevo … estudiando español · Acabo de …',focus:'Datum, llevar + Gerundium, acabar de',model:'Me llamo Jonas Gross y nací el … de … de … . Llevo un mes viviendo en Barcelona. Empecé a estudiar español en la universidad en Alemania, así que llevo unos dos años estudiándolo. Acabo de terminar el curso A2 y ahora quiero seguir aprendiendo.'}]}
+],
+placement:[
+ {t:'mc',q:'„am 12. Oktober“',opts:['el doce de octubre','en doce octubre','el doceavo de octubre'],a:0},
+ {t:'mc',q:'„Ich bin gerade angekommen.“',opts:['Acabo de llegar.','Acabo llegar.','He acabado a llegar.'],a:0},
+ {t:'mc',q:'„Ich lerne seit drei Monaten Spanisch.“',opts:['Llevo tres meses estudiando español.','Llevo tres meses estudiar español.','Estoy tres meses estudiando español.'],a:0},
+ {t:'mc',q:'„Er kommt aus Spanien.“',opts:['Él es de España.','El es de España.'],a:0},
+ {t:'gap',q:'He dejado ___ fumar.',a:['de']},
+ {t:'mc',q:'„Wohnst du immer noch hier?“',opts:['¿Sigues viviendo aquí?','¿Sigues vivir aquí?','¿Sigues a vivir aquí?'],a:0}],
+resumen:`<h3>Datum</h3><p class="es-t">el cinco de octubre de dos mil veintiséis · ¿Qué fecha es hoy? · en mayo · enero, febrero, marzo …</p>
+<h3>Akzentregeln</h3><p>Vokal/-n/-s → vorletzte Silbe · anderer Konsonant → letzte Silbe · sonst Akzent. <span class="es-t">tú/tu · él/el · sí/si · mí/mi</span></p>
+<h3>Verb + Infinitiv</h3><p class="es-t">acabar de · volver a · dejar de · empezar a · tener que</p>
+<h3>Verb + Gerundium</h3><p class="es-t">Llevo dos años estudiando. · Sigo viviendo aquí. · Estoy leyendo.</p>`});
+;
+/* ================= A2 · TEIL 2 (eigene Unidades nach dem Plan Curricular des Instituto Cervantes) ================= */
+
+/* ================= UNIDAD 11 · ¿QUÉ TE PASA? ================= */
+COURSE.units.push({id:'u11',n:'13',level:'A2b',title:'¿Qué te pasa?',sub:'Körper & Gesundheit · Schmerzen beschreiben (me duele) · beim Arzt & in der Apotheke · Ratschläge geben · Imperativ',
+goals:['Körperteile','me duele / me duelen','Symptome: tengo fiebre, estoy resfriado','beim Arzt & in der Apotheke','Ratschläge: deberías / tienes que / es mejor','Imperativ tú & usted (bejahend)'],
+situacion:{title:'In der Apotheke in Gràcia',npc:'Farmacéutica',scene:'Du hast seit zwei Tagen Halsschmerzen und leichtes Fieber. Du gehst in eine Apotheke in der Calle Verdi.',role:'Du bist eine freundliche Apothekerin in Barcelona. Du siezt Jonas nicht, du duzt ihn (in Spanien üblich). Frag nach Symptomen (¿Qué te pasa? ¿Desde cuándo? ¿Tienes fiebre? ¿Eres alérgico a algo?), empfiehl etwas (Ibuprofeno, pastillas para la garganta) und gib Ratschläge im Imperativ (Toma una pastilla cada ocho horas, bebe mucha agua, descansa). Wenn es nicht besser wird: Ve al médico.',goal:'Beschreib deine Symptome (me duele…, tengo…, desde hace…), frag, wie oft du das Medikament nehmen sollst und was es kostet.'},
+lessons:[
+{id:'l1',title:'Der Körper',desc:'la cabeza · la espalda · me duele',steps:[
+ {t:'vocab',title:'Körperteile',items:[['la cabeza','der Kopf','🗣️'],['el ojo','das Auge','👁️'],['la oreja','das Ohr','👂'],['la nariz','die Nase','👃'],['la boca','der Mund','👄'],['el diente','der Zahn','🦷'],['la garganta','der Hals (innen)','🗣️'],['el cuello','der Hals / Nacken','🦒'],['la espalda','der Rücken','🧍'],['el brazo','der Arm','💪'],['la mano','die Hand','✋'],['el estómago','der Magen','🫃'],['la pierna','das Bein','🦵'],['el pie','der Fuß','🦶'],['la rodilla','das Knie','🦵']]},
+ {t:'info',title:'Me duele … – wie gustar',html:`<p>„Mir tut … weh“ funktioniert genau wie <span class="es-t">me gusta</span>: Das Verb richtet sich nach dem, <b>was</b> weh tut.</p>
+ <table><tr><th>Einzahl</th><th>Mehrzahl</th></tr>
+ <tr><td class="es-t">Me duele la cabeza.</td><td class="es-t">Me duelen los pies.</td></tr>
+ <tr><td class="es-t">¿Te duele la espalda?</td><td class="es-t">¿Te duelen los ojos?</td></tr>
+ <tr><td class="es-t">A Ana le duele el estómago.</td><td class="es-t">A mis padres les duelen las rodillas.</td></tr></table>
+ <div class="ex">Achtung: Im Spanischen sagt man <b>la</b> cabeza, nicht „mi cabeza“ – dass es dein Kopf ist, zeigt schon das <i>me</i>.</div>`},
+ {t:'mc',q:'Me ___ la cabeza.',opts:['duele','duelen','dolor'],a:0,keep:true},
+ {t:'mc',q:'¿Te ___ los pies después del partido?',opts:['duelen','duele','duelo'],a:0,keep:true},
+ {t:'gap',q:'A mi madre le ___ (doler) la espalda.',a:['duele']},
+ {t:'gap',q:'Después de diez horas en el ordenador me ___ (doler) los ojos.',a:['duelen']},
+ {t:'match',q:'Was tut weh?',pairs:[['Zahnschmerzen','me duelen las muelas'],['Bauchschmerzen','me duele el estómago'],['Kopfschmerzen','me duele la cabeza'],['Halsschmerzen','me duele la garganta']]},
+ {t:'tr',de:'Mir tut der Rücken weh.',a:['Me duele la espalda.']},
+ {t:'tr',de:'Tun dir die Beine weh?',a:['¿Te duelen las piernas?']},
+ {t:'listen',es:'Me duele mucho la garganta.',de:'Mir tut der Hals sehr weh.'}]},
+{id:'l2',title:'Was hast du?',desc:'tengo fiebre · estoy resfriado · desde hace',steps:[
+ {t:'vocab',title:'Symptome',items:[['tengo fiebre','ich habe Fieber','🤒'],['tengo tos','ich habe Husten','😷'],['tengo gripe','ich habe Grippe','🤧'],['estoy resfriado / resfriada','ich bin erkältet','🤧'],['estoy mareado / mareada','mir ist schwindelig','😵'],['estoy cansado / cansada','ich bin müde','🥱'],['me encuentro mal','ich fühle mich schlecht','🤢'],['me encuentro mejor','mir geht es besser','🙂'],['tengo alergia a …','ich bin allergisch gegen …','🌼'],['¿Qué te pasa?','Was ist los? / Was hast du?','❓'],['desde hace dos días','seit zwei Tagen','📅']]},
+ {t:'info',title:'tener, estar oder doler?',html:`<table><tr><th>tener + Nomen</th><th>estar + Adjektiv</th><th>doler</th></tr>
+ <tr><td class="es-t">Tengo fiebre.</td><td class="es-t">Estoy resfriado.</td><td class="es-t">Me duele la garganta.</td></tr>
+ <tr><td class="es-t">Tengo tos.</td><td class="es-t">Estoy cansada.</td><td class="es-t">Me duelen los oídos.</td></tr></table>
+ <p><b>Seit wann?</b> <span class="es-t">desde hace + Zeitraum</span> – <span class="es-t">Tengo tos desde hace una semana.</span> (Präsens, nicht Perfekt wie im Englischen!)</p>
+ <p><b>Seit einem Zeitpunkt:</b> <span class="es-t">desde el lunes</span>, <span class="es-t">desde ayer</span>.</p>`},
+ {t:'mc',q:'„Ich bin erkältet.“',opts:['Estoy resfriado.','Tengo resfriado.','Soy resfriado.'],a:0},
+ {t:'mc',q:'„Ich habe Fieber.“',opts:['Tengo fiebre.','Estoy fiebre.','Me duele fiebre.'],a:0},
+ {t:'gap',q:'Tengo tos ___ ___ tres días.',a:['desde','hace']},
+ {t:'gap',q:'No puedo ir a clase, ___ (yo, estar) muy cansado y ___ (tener) fiebre.',a:['estoy','tengo']},
+ {t:'tr',de:'Ich habe seit gestern Kopfschmerzen.',a:['Me duele la cabeza desde ayer.','Desde ayer me duele la cabeza.','Tengo dolor de cabeza desde ayer.']},
+ {t:'dialog',place:'Por WhatsApp',title:'Laia fragt nach',scene:'Du warst heute nicht im Kurs. Laia schreibt dir.',lines:[
+  {n:'Laia',es:'¡Hola! Hoy no has venido a clase. ¿Qué te pasa?',de:'Hi! Du warst heute nicht im Kurs. Was ist los?'},
+  {you:true,opts:[{es:'Estoy resfriado y me duele mucho la garganta.',ok:true},{es:'Tengo resfriado y me duelen mucho la garganta.',ok:false,why:'<i>estar resfriado</i>; und <i>la garganta</i> ist Einzahl → <b>duele</b>.'}]},
+  {n:'Laia',es:'¡Vaya! ¿Desde cuándo?',de:'Oh nein! Seit wann?'},
+  {you:true,opts:[{es:'Desde hace dos días.',ok:true},{es:'Hace dos días desde.',ok:false,why:'Reihenfolge: <b>desde hace</b> + Zeitraum.'}]},
+  {n:'Laia',es:'¿Y tienes fiebre?',de:'Und hast du Fieber?'},
+  {you:true,opts:[{es:'Un poco, 37,8. Pero hoy me encuentro mejor.',ok:true},{es:'Un poco, 37,8. Pero hoy estoy mejor encuentro.',ok:false,why:'<i>me encuentro mejor</i> oder <i>estoy mejor</i>.'}]},
+  {n:'Laia',es:'¡Que te mejores! Mañana te paso los apuntes.',de:'Gute Besserung! Morgen gebe ich dir die Mitschriften.'}]},
+ {t:'speak',es:'Me encuentro mal, tengo fiebre desde ayer.',de:'Mir geht es schlecht, ich habe seit gestern Fieber.'}]},
+{id:'l3',title:'Ratschläge geben',desc:'deberías · tienes que · es mejor',steps:[
+ {t:'info',title:'So gibst du Ratschläge',html:`<table><tr><th>Ausdruck</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">deberías + Infinitiv</td><td class="es-t">Deberías descansar.</td></tr>
+ <tr><td class="es-t">tienes que + Infinitiv</td><td class="es-t">Tienes que beber mucha agua.</td></tr>
+ <tr><td class="es-t">es mejor + Infinitiv</td><td class="es-t">Es mejor no salir hoy.</td></tr>
+ <tr><td class="es-t">¿Por qué no + Präsens?</td><td class="es-t">¿Por qué no vas al médico?</td></tr></table>
+ <div class="ex"><i>deberías</i> (du solltest) ist freundlicher als <i>tienes que</i> (du musst). <i>Deberías</i> ist eine Form von <i>deber</i> im Konditional – die lernst du in Unidad 17 genauer.</div>`},
+ {t:'vocab',title:'Beim Arzt & in der Apotheke',items:[['el médico de cabecera','der Hausarzt','🧑‍⚕️'],['el centro de salud','das Gesundheitszentrum (CAP)','🏥'],['la farmacia','die Apotheke','💊'],['la receta','das Rezept','📝'],['la pastilla','die Tablette','💊'],['el jarabe','der Hustensaft','🧴'],['la tarjeta sanitaria','die Krankenversicherungskarte','💳'],['pedir cita','einen Termin ausmachen','📅'],['descansar','sich ausruhen','🛌'],['tres veces al día','dreimal am Tag','🕒']]},
+ {t:'mc',q:'Me duele la cabeza. – ___ tomar un ibuprofeno.',opts:['Deberías','Debes que','Tienes'],a:0},
+ {t:'mc',q:'¿Por qué no ___ al médico?',opts:['vas','ir','vayas'],a:0},
+ {t:'gap',q:'Tienes fiebre: tienes ___ quedarte en casa.',a:['que']},
+ {t:'gap',q:'Estás muy cansado. Es ___ dormir un poco.',a:['mejor']},
+ {t:'order',es:'Deberías pedir cita en el centro de salud.',de:'Du solltest einen Termin im Gesundheitszentrum ausmachen.'},
+ {t:'tr',de:'Du solltest mehr Wasser trinken.',a:['Deberías beber más agua.','Deberías tomar más agua.']},
+ {t:'tr',de:'Warum gehst du nicht in die Apotheke?',a:['¿Por qué no vas a la farmacia?']},
+ {t:'free',task:'Dein Mitbewohner schläft schlecht und hat Rückenschmerzen. Gib ihm 3 Ratschläge.',hint:'Deberías … · Tienes que … · Es mejor … · ¿Por qué no …?',focus:'deberías / tienes que / es mejor + Infinitiv',model:'Deberías hacer un poco de deporte. Tienes que comprar una silla mejor para el escritorio. Es mejor no mirar el móvil en la cama. ¿Por qué no vas al fisioterapeuta?'}]},
+{id:'l4',title:'Imperativ: Nimm! Nehmen Sie!',desc:'toma · bebe · descanse',steps:[
+ {t:'info',title:'Der Imperativ (bejahend)',html:`<p><b>tú</b>: wie die 3. Person Singular Präsens. <b>usted</b>: Endung „tauschen“ (-ar → <b>-e</b>, -er/-ir → <b>-a</b>).</p>
+ <table><tr><th></th><th>tú</th><th>usted</th></tr>
+ <tr><td>tomar</td><td class="es-t">toma</td><td class="es-t">tome</td></tr>
+ <tr><td>beber</td><td class="es-t">bebe</td><td class="es-t">beba</td></tr>
+ <tr><td>abrir</td><td class="es-t">abre</td><td class="es-t">abra</td></tr>
+ <tr><td>descansar</td><td class="es-t">descansa</td><td class="es-t">descanse</td></tr></table>
+ <p><b>Unregelmäßig (tú):</b> <span class="es-t">ven (venir) · ve (ir) · haz (hacer) · pon (poner) · ten (tener) · di (decir) · sal (salir) · sé (ser)</span></p>
+ <p><b>usted</b> kommt von der yo-Form: <span class="es-t">tengo → tenga · hago → haga · vengo → venga</span>. Und: <span class="es-t">ir → vaya</span>.</p>
+ <div class="ex">Reflexiv: Pronomen hinten dran – <span class="es-t">¡Siéntate! · ¡Siéntese!</span> (der Akzent bleibt auf der gleichen Silbe).</div>`},
+ {t:'conj',verb:'tomar',de:'nehmen (Imperativ)',tense:'Imperativ',persons:['tú','usted','vosotros','ustedes'],forms:['toma','tome','tomad','tomen']},
+ {t:'mc',q:'Der Arzt zu dir (usted): „Nehmen Sie eine Tablette.“',opts:['Tome una pastilla.','Toma una pastilla.','Tomar una pastilla.'],a:0},
+ {t:'mc',q:'Zu deinem Freund: „Komm her!“',opts:['¡Ven aquí!','¡Viene aquí!','¡Venga aquí!'],a:0},
+ {t:'gap',q:'(tú) ___ (beber) mucha agua y ___ (descansar).',a:['bebe','descansa']},
+ {t:'gap',q:'(usted) ___ (abrir) la boca, por favor.',a:['abra']},
+ {t:'gap',q:'(tú) ___ (hacer) los deberes y luego ___ (ir) a la cama.',a:['haz','ve']},
+ {t:'match',q:'Infinitiv → Imperativ (tú)',pairs:[['tener','ten'],['poner','pon'],['salir','sal'],['decir','di'],['venir','ven']]},
+ {t:'listen',es:'Tome una pastilla cada ocho horas.',de:'Nehmen Sie alle acht Stunden eine Tablette.'},
+ {t:'read',title:'Consejos para el estrés de los exámenes',text:`Los exámenes son estresantes para todos. Aquí tienes cinco consejos. Primero, {organiza|organisiere} tu tiempo: haz un plan para cada día. Segundo, {duerme|schlafe} siete u ocho horas. Sin descanso no puedes aprender. Tercero, {come|iss} bien y bebe mucha agua; el café no es la solución. Cuarto, haz deporte: un {paseo|Spaziergang} de veinte minutos ayuda mucho. Y por último, {habla|sprich} con tus compañeros: no estás solo.`,de:'Prüfungen sind für alle stressig. Hier hast du fünf Tipps. Erstens: Organisiere deine Zeit, mach einen Plan für jeden Tag. Zweitens: Schlaf sieben oder acht Stunden. Ohne Erholung kannst du nicht lernen. Drittens: Iss gut und trink viel Wasser; Kaffee ist nicht die Lösung. Viertens: Mach Sport, ein Spaziergang von zwanzig Minuten hilft viel. Und zuletzt: Sprich mit deinen Kommilitonen, du bist nicht allein.'},
+ {t:'mc',q:'Laut Text: Was ist „nicht die Lösung“?',opts:['el café','el deporte','el agua'],a:0},
+ {t:'tr',de:'Schlaf acht Stunden und mach Sport.',a:['Duerme ocho horas y haz deporte.']}]}
+],
+placement:[
+ {t:'mc',q:'„Mir tun die Füße weh.“',opts:['Me duelen los pies.','Me duele los pies.','Tengo dolor los pies.'],a:0},
+ {t:'mc',q:'„Ich bin erkältet.“',opts:['Estoy resfriado.','Tengo resfriado.','Soy resfriado.'],a:0},
+ {t:'gap',q:'Tengo tos ___ ___ una semana. (seit)',a:['desde','hace']},
+ {t:'gap',q:'Imperativ (tú): ___ (hacer) los deberes.',a:['haz']},
+ {t:'mc',q:'Der Arzt (usted): „Nehmen Sie diese Tabletten.“',opts:['Tome estas pastillas.','Toma estas pastillas.','Tomas estas pastillas.'],a:0},
+ {t:'mc',q:'„Du solltest dich ausruhen.“',opts:['Deberías descansar.','Debes que descansar.','Tienes descansar.'],a:0}],
+resumen:`<h3>Schmerzen</h3><table><tr><td class="es-t">Me duele la cabeza / la espalda.</td><td class="es-t">Me duelen los pies / los ojos.</td></tr></table>
+<h3>Symptome</h3><p class="es-t">Tengo fiebre / tos / gripe. · Estoy resfriado / mareado / cansado. · Me encuentro mal / mejor. · desde hace dos días · desde ayer</p>
+<h3>Ratschläge</h3><p class="es-t">Deberías descansar. · Tienes que beber agua. · Es mejor no salir. · ¿Por qué no vas al médico?</p>
+<h3>Imperativ</h3><table><tr><th></th><th>tú</th><th>usted</th></tr><tr><td>tomar</td><td class="es-t">toma</td><td class="es-t">tome</td></tr><tr><td>beber</td><td class="es-t">bebe</td><td class="es-t">beba</td></tr><tr><td>abrir</td><td class="es-t">abre</td><td class="es-t">abra</td></tr></table>
+<p class="es-t">ven · ve · haz · pon · ten · di · sal · sé</p>`});
+
+/* ================= UNIDAD 12 · DE VIAJE ================= */
+COURSE.units.push({id:'u12',n:'14',level:'A2b',title:'De viaje',sub:'Von einer Reise erzählen · Indefinido & Imperfekt im Wechsel · estaba + Gerundium · Probleme am Flughafen · reagieren',
+goals:['Reise-Wortschatz: Flughafen, Gepäck, Unterkunft','Indefinido + Imperfekt: Handlung vs. Hintergrund','estaba + Gerundium (gerade dabei sein)','Zeitangaben: aquel día, al día siguiente, de repente','Reagieren: ¡Qué bien! ¡Qué mala suerte!','ser/estar/ir/tener im Indefinido wiederholen'],
+situacion:{title:'Reise-Erzählung im Kurs',npc:'Profesora Marta',scene:'Nach den Ferien fragt deine Spanischlehrerin in Barcelona, wie deine Reise war. Sie will viele Details hören.',role:'Du bist Marta, Spanischlehrerin an der UPC, neugierig und herzlich. Du duzt Jonas. Frag nach seiner letzten Reise: ¿Adónde fuiste? ¿Con quién? ¿Qué tal el viaje? ¿Qué tiempo hacía? ¿Qué hiciste? ¿Pasó algo curioso? Reagiere mit ¡Qué bien!, ¡Qué mala suerte!, ¿De verdad?. Wenn er Indefinido und Imperfekt verwechselt, korrigiere sanft.',goal:'Erzähl von einer Reise: wohin, mit wem, wie das Wetter war (Imperfekt), was du gemacht hast (Indefinido) und eine kleine Panne.'},
+lessons:[
+{id:'l1',title:'Am Flughafen',desc:'la maleta · el vuelo · perder',steps:[
+ {t:'vocab',title:'Reisen',items:[['el aeropuerto','der Flughafen','🛫'],['el vuelo','der Flug','✈️'],['la maleta','der Koffer','🧳'],['el equipaje de mano','das Handgepäck','🎒'],['la tarjeta de embarque','die Bordkarte','🎫'],['la puerta de embarque','das Gate','🚪'],['facturar','(Gepäck) aufgeben','🧳'],['el retraso','die Verspätung','⏳'],['cancelar','stornieren / absagen','❌'],['perder el vuelo','den Flug verpassen','🏃'],['el billete de ida y vuelta','das Hin- und Rückticket','🎟️'],['el alojamiento','die Unterkunft','🏠'],['el albergue','die Jugendherberge','🛏️']]},
+ {t:'mc',q:'„Ich habe den Flug verpasst.“',opts:['Perdí el vuelo.','Pasé el vuelo.','Falté el vuelo.'],a:0},
+ {t:'mc',q:'„Der Flug hat zwei Stunden Verspätung.“',opts:['El vuelo tiene dos horas de retraso.','El vuelo es dos horas tarde.','El vuelo tiene dos horas retrasado.'],a:0},
+ {t:'match',q:'Was passt?',pairs:[['facturar','la maleta'],['perder','el vuelo'],['reservar','el alojamiento'],['enseñar','la tarjeta de embarque']]},
+ {t:'dialog',place:'Aeropuerto del Prat',title:'Mein Koffer ist nicht da',scene:'Du landest in Barcelona, aber dein Koffer kommt nicht aufs Band.',lines:[
+  {n:'Empleada',es:'Buenas tardes, ¿en qué puedo ayudarle?',de:'Guten Tag, wie kann ich Ihnen helfen?'},
+  {you:true,opts:[{es:'Buenas tardes. Mi maleta no ha llegado.',ok:true},{es:'Buenas tardes. Mi maleta no es llegado.',ok:false,why:'Perfekt immer mit <b>haber</b>: <i>ha llegado</i>.'}]},
+  {n:'Empleada',es:'¿De dónde viene su vuelo?',de:'Woher kommt Ihr Flug?'},
+  {you:true,opts:[{es:'De Frankfurt. Es el vuelo IB3145.',ok:true},{es:'A Frankfurt. Es el vuelo IB3145.',ok:false,why:'Herkunft: <b>de</b> Frankfurt.'}]},
+  {n:'Empleada',es:'¿Cómo es la maleta?',de:'Wie sieht der Koffer aus?'},
+  {you:true,opts:[{es:'Es grande, negra y tiene una cinta roja.',ok:true},{es:'Está grande, negra y tiene una cinta roja.',ok:false,why:'Aussehen/Eigenschaft → <b>ser</b>.'}]},
+  {n:'Empleada',es:'Muy bien. Se la llevamos a su casa mañana.',de:'Sehr gut. Wir bringen ihn Ihnen morgen nach Hause.'}]},
+ {t:'listen',es:'El vuelo a Madrid tiene una hora de retraso.',de:'Der Flug nach Madrid hat eine Stunde Verspätung.'}]},
+{id:'l2',title:'Handlung oder Hintergrund?',desc:'fui · hacía · era',steps:[
+ {t:'info',title:'Indefinido + Imperfekt in einer Geschichte',html:`<p>Stell dir einen Film vor:</p>
+ <table><tr><th>Imperfekt = Kulisse</th><th>Indefinido = Handlung</th></tr>
+ <tr><td>Wie war es? Wetter, Ort, Gefühle, Uhrzeit</td><td>Was ist passiert? Abgeschlossene Ereignisse</td></tr>
+ <tr><td class="es-t">Hacía sol y había mucha gente.</td><td class="es-t">Fuimos a la playa.</td></tr>
+ <tr><td class="es-t">Era tarde y estaba cansado.</td><td class="es-t">Llegué al hotel a las once.</td></tr></table>
+ <div class="ex">Test-Frage: Kann ich „und dann?“ fragen? → Indefinido. Beschreibt es nur die Situation drumherum? → Imperfekt.</div>`},
+ {t:'mc',q:'El año pasado ___ a Sevilla con mis padres.',opts:['fui','iba'],a:0,keep:true,why:'Abgeschlossene Handlung → Indefinido.'},
+ {t:'mc',q:'___ mucho calor, 40 grados.',opts:['Hacía','Hizo'],a:0,keep:true,why:'Wetter als Hintergrund → Imperfekt.'},
+ {t:'mc',q:'El hotel ___ muy bonito y ___ al lado de la catedral.',opts:['era … estaba','fue … estuvo'],a:0,keep:true,why:'Beschreibung → Imperfekt.'},
+ {t:'gap',q:'Cuando ___ (nosotros, llegar) al hotel, ___ (ser) las doce de la noche.',a:['llegamos','eran']},
+ {t:'gap',q:'Como ___ (yo, estar) cansado, ___ (acostarse, yo) pronto.',a:['estaba','me acosté']},
+ {t:'gap',q:'El último día ___ (nosotros, visitar) la Alhambra. ___ (haber) muchos turistas.',a:['visitamos','había']},
+ {t:'order',es:'Hacía buen tiempo, así que fuimos a la playa.',de:'Es war schönes Wetter, also sind wir an den Strand gegangen.'},
+ {t:'tr',de:'Es war kalt, aber wir haben viele Fotos gemacht.',a:['Hacía frío, pero hicimos muchas fotos.','Hacía frío pero sacamos muchas fotos.','Hacía frío, pero sacamos muchas fotos.','Hacía frío pero hicimos muchas fotos.']}]},
+{id:'l3',title:'Gerade dabei, als …',desc:'estaba durmiendo cuando …',steps:[
+ {t:'info',title:'estaba + Gerundium',html:`<p>Für eine Handlung, die gerade lief, als etwas passierte:</p>
+ <p class="es-t" style="font-size:18px">Estaba durmiendo cuando sonó el teléfono.</p>
+ <p>= Ich schlief gerade (lief schon), als das Telefon klingelte (neues Ereignis).</p>
+ <table><tr><td>estaba</td><td>estábamos</td></tr><tr><td>estabas</td><td>estabais</td></tr><tr><td>estaba</td><td>estaban</td></tr></table>
+ <p>+ Gerundium: <span class="es-t">-ar → -ando, -er/-ir → -iendo</span> · <span class="es-t">leer → leyendo, dormir → durmiendo</span></p>`},
+ {t:'mc',q:'___ por el centro cuando empezó a llover.',opts:['Estábamos paseando','Paseamos','Estuvimos paseando'],a:0},
+ {t:'gap',q:'Cuando me llamaste, ___ ___ (yo, estar + ducharse).',a:['me estaba','duchando'],hint:'Reflexivpronomen davor: <i>me estaba duchando</i> (oder: <i>estaba duchándome</i>).'},
+ {t:'gap',q:'Los niños ___ ___ (estar + jugar) en la playa cuando vieron los delfines.',a:['estaban','jugando']},
+ {t:'vocab',title:'Erzählen',items:[['aquel día','an jenem Tag','📅'],['al día siguiente','am nächsten Tag','➡️'],['de repente','plötzlich','⚡'],['entonces','dann / da','👉'],['al final','am Ende','🏁'],['por suerte','zum Glück','🍀'],['por desgracia','leider','😞'],['¡Qué bien!','Wie schön!','😀'],['¡Qué mala suerte!','So ein Pech!','😩'],['¿De verdad?','Wirklich?','😮'],['¡No me digas!','Was du nicht sagst!','😲']]},
+ {t:'mc',q:'Dein Freund: „Perdí el móvil en el tren.“ – Du reagierst:',opts:['¡Qué mala suerte!','¡Qué bien!','¡Enhorabuena!'],a:0},
+ {t:'tr',de:'Ich las gerade ein Buch, als plötzlich das Licht ausging.',a:['Estaba leyendo un libro cuando de repente se fue la luz.','Estaba leyendo un libro cuando de repente se apagó la luz.']},
+ {t:'listen',es:'Estábamos cenando cuando de repente llegó mi hermano.',de:'Wir aßen gerade zu Abend, als plötzlich mein Bruder kam.'}]},
+{id:'l4',title:'Mi viaje a Granada',desc:'Lesen & selbst erzählen',steps:[
+ {t:'read',title:'Un fin de semana en Granada',text:`El mes pasado fui a Granada con mi amiga Clara. {Salimos|Wir fuhren los} de Barcelona un viernes por la mañana. El tren {tardó|brauchte} seis horas, pero el paisaje era precioso. Cuando llegamos, hacía mucho calor y las calles estaban llenas de gente. El {albergue|die Jugendherberge} estaba en el Albaicín, el barrio antiguo, y desde la terraza se veía la Alhambra.
+
+El sábado visitamos la Alhambra. Mientras estábamos haciendo fotos en los jardines, Clara {se dio cuenta|merkte} de que no tenía su cartera. ¡Qué susto! Volvimos a la entrada y, por suerte, alguien la había dejado allí. Por la noche cenamos tapas: en Granada las tapas son {gratis|kostenlos} con cada bebida. Al día siguiente volvimos a casa, cansados pero muy contentos.`,de:'Letzten Monat bin ich mit meiner Freundin Clara nach Granada gefahren. Wir fuhren an einem Freitagmorgen in Barcelona los. Der Zug brauchte sechs Stunden, aber die Landschaft war wunderschön. Als wir ankamen, war es sehr heiß und die Straßen waren voller Menschen. Die Jugendherberge war im Albaicín, dem alten Viertel, und von der Terrasse aus sah man die Alhambra.\n\nAm Samstag besichtigten wir die Alhambra. Während wir in den Gärten Fotos machten, merkte Clara, dass sie ihren Geldbeutel nicht hatte. Was für ein Schreck! Wir gingen zum Eingang zurück und zum Glück hatte ihn jemand dort abgegeben. Abends aßen wir Tapas: In Granada sind die Tapas zu jedem Getränk kostenlos. Am nächsten Tag fuhren wir nach Hause, müde, aber sehr zufrieden.'},
+ {t:'mc',q:'¿Cómo viajaron a Granada?',opts:['en tren','en avión','en coche'],a:0},
+ {t:'mc',q:'¿Qué problema tuvo Clara?',opts:['No tenía su cartera.','Perdió el tren.','Le dolía la cabeza.'],a:0},
+ {t:'mc',q:'„hacía mucho calor“ steht im Imperfekt, weil …',opts:['es una descripción (Hintergrund)','es una acción terminada','pasó una sola vez'],a:0},
+ {t:'gap',q:'Mientras ___ (nosotros, estar) haciendo fotos, Clara ___ (darse) cuenta de algo.',a:['estábamos','se dio']},
+ {t:'free',task:'Erzähl von deiner letzten Reise (5–6 Sätze): wohin, mit wem, wie war es (Imperfekt), was habt ihr gemacht (Indefinido), eine kleine Panne.',hint:'El verano pasado fui a … · Hacía … · El hotel era … · Un día … · De repente … · Al final …',focus:'Indefinido vs. Imperfekt, estaba + Gerundium',model:'El verano pasado fui a Lisboa con dos amigos. Hacía mucho sol y la ciudad era preciosa. Un día alquilamos bicicletas y fuimos a la playa. Mientras estábamos nadando, empezó a llover. ¡Qué mala suerte! Al final cenamos pescado en un restaurante pequeño y fue genial.'},
+ {t:'speak',es:'El año pasado fui a Granada. Hacía mucho calor, pero fue un viaje precioso.',de:'Letztes Jahr bin ich nach Granada gefahren. Es war sehr heiß, aber es war eine wunderschöne Reise.'}]}
+],
+placement:[
+ {t:'mc',q:'El año pasado ___ a Sevilla. (Reise abgeschlossen)',opts:['fui','iba','he ido'],a:0},
+ {t:'mc',q:'Cuando llegamos, ___ mucho calor.',opts:['hacía','hizo','ha hecho'],a:0},
+ {t:'gap',q:'___ (yo, estar) durmiendo cuando sonó el teléfono.',a:['estaba']},
+ {t:'mc',q:'Dein Freund hat seinen Koffer verloren. Du sagst:',opts:['¡Qué mala suerte!','¡Qué bien!','¡Enhorabuena!'],a:0},
+ {t:'gap',q:'„den Flug verpassen“ = ___ el vuelo',a:['perder']},
+ {t:'mc',q:'Como ___ cansado, me acosté pronto.',opts:['estaba','estuve','fui'],a:0}],
+resumen:`<h3>Reisen</h3><p class="es-t">el vuelo · la maleta · facturar · la tarjeta de embarque · el retraso · perder el vuelo · el alojamiento</p>
+<h3>Kulisse & Handlung</h3><table><tr><th>Imperfekt (Hintergrund)</th><th>Indefinido (Ereignis)</th></tr><tr><td class="es-t">Hacía sol. Era tarde. Estaba cansado.</td><td class="es-t">Fuimos a la playa. Llegué a las once.</td></tr></table>
+<h3>Gerade dabei</h3><p class="es-t">Estaba durmiendo cuando sonó el teléfono.</p>
+<h3>Erzählen & reagieren</h3><p class="es-t">aquel día · al día siguiente · de repente · al final · por suerte · ¡Qué bien! · ¡Qué mala suerte! · ¿De verdad?</p>`});
+
+/* ================= UNIDAD 13 · EN LA COCINA ================= */
+COURSE.units.push({id:'u13',n:'15',level:'A2b',title:'En la cocina',sub:'Rezepte verstehen & erklären · unpersönliches se (se corta, se añade) · Mengen · Objektpronomen beim Imperativ (córtalo)',
+goals:['Küche & Zubereitung: cortar, freír, añadir …','Mengen: un kilo de, una cucharada de, un poco de','se + Verb: so macht man das','Objektpronomen lo/la/los/las wiederholen','Imperativ + Pronomen: córtalo, échalas','Im Markt einkaufen'],
+situacion:{title:'Tortilla mit deiner Mitbewohnerin',npc:'Nuria',scene:'Deine Mitbewohnerin Nuria aus Valencia zeigt dir, wie man eine echte tortilla de patatas macht. Du hilfst in der Küche.',role:'Du bist Nuria, 25, Mitbewohnerin von Jonas, lustig und ein bisschen streng beim Kochen. Du duzt ihn. Erklär Schritt für Schritt, wie man eine Tortilla macht, mit Imperativ + Pronomen (Pela las patatas… córtalas… échalas en la sartén…). Frag ihn, ob er die Tortilla mit oder ohne Zwiebel will (gran debate). Lass ihn auch fragen, wie viel von etwas man braucht.',goal:'Frag nach Zutaten und Mengen (¿Cuántos huevos…? ¿Cuánto aceite…?), bestätige Anweisungen mit Pronomen (¿Las corto ya? – Sí, córtalas) und sag deine Meinung zur Zwiebel.'},
+lessons:[
+{id:'l1',title:'Zutaten & Mengen',desc:'un kilo de · una cucharada de',steps:[
+ {t:'vocab',title:'Zutaten',items:[['la patata','die Kartoffel','🥔'],['la cebolla','die Zwiebel','🧅'],['el ajo','der Knoblauch','🧄'],['el tomate','die Tomate','🍅'],['el pimiento','die Paprika','🫑'],['el aceite de oliva','das Olivenöl','🫒'],['la sal','das Salz','🧂'],['el azúcar','der Zucker','🍬'],['la harina','das Mehl','🌾'],['el limón','die Zitrone','🍋'],['la manzana','der Apfel','🍎'],['la naranja','die Orange','🍊']]},
+ {t:'vocab',title:'Mengen',items:[['un kilo de','ein Kilo','⚖️'],['medio kilo de','ein halbes Kilo','⚖️'],['cien gramos de','hundert Gramm','⚖️'],['un litro de','ein Liter','🥛'],['una docena de huevos','ein Dutzend Eier','🥚'],['una cucharada de','ein Esslöffel','🥄'],['una pizca de sal','eine Prise Salz','🧂'],['un poco de','ein bisschen','🤏'],['bastante','ziemlich viel / genug','👌'],['demasiado','zu viel','🙅']]},
+ {t:'info',title:'Mengen + de',html:`<p>Nach jeder Mengenangabe kommt <b>de</b> – ohne Artikel:</p>
+ <p class="es-t">un kilo <b>de</b> tomates · una botella <b>de</b> aceite · un poco <b>de</b> sal</p>
+ <p><b>¿Cuánto/-a/-os/-as?</b> passt sich an: <span class="es-t">¿Cuánta harina? ¿Cuántos huevos? ¿Cuánto aceite? ¿Cuántas patatas?</span></p>
+ <div class="ex"><i>demasiado</i> = zu viel (negativ!): <span class="es-t">Has puesto demasiada sal.</span></div>`},
+ {t:'mc',q:'¿___ huevos necesitamos?',opts:['Cuántos','Cuántas','Cuánto'],a:0},
+ {t:'mc',q:'¿___ harina hay que poner?',opts:['Cuánta','Cuántas','Cuánto'],a:0},
+ {t:'gap',q:'Póngame medio kilo ___ tomates, por favor.',a:['de']},
+ {t:'gap',q:'La sopa está muy salada: has puesto ___ sal.',a:['demasiada']},
+ {t:'dialog',place:'Mercado de la Boquería',title:'Am Gemüsestand',scene:'Du kaufst Zutaten für eine Tortilla.',lines:[
+  {n:'Vendedor',es:'¡Hola! ¿Qué te pongo?',de:'Hallo! Was darf es sein?'},
+  {you:true,opts:[{es:'Hola. Un kilo de patatas y dos cebollas, por favor.',ok:true},{es:'Hola. Un kilo patatas y dos cebollas, por favor.',ok:false,why:'Nach Mengen immer <b>de</b>: un kilo <b>de</b> patatas.'}]},
+  {n:'Vendedor',es:'Aquí tienes. ¿Algo más?',de:'Bitte schön. Sonst noch etwas?'},
+  {you:true,opts:[{es:'Sí, ¿tiene huevos? Necesito media docena.',ok:true},{es:'Sí, ¿tiene huevos? Necesito media de docena.',ok:false,why:'<i>media docena</i> – ohne <i>de</i> dazwischen.'}]},
+  {n:'Vendedor',es:'Claro. Son cuatro con veinte.',de:'Klar. Das macht 4,20 €.'}]},
+ {t:'listen',es:'Necesito un kilo de patatas y una docena de huevos.',de:'Ich brauche ein Kilo Kartoffeln und ein Dutzend Eier.'}]},
+{id:'l2',title:'So macht man das: se',desc:'se corta · se añade · se sirve',steps:[
+ {t:'vocab',title:'In der Küche',items:[['pelar','schälen','🔪'],['cortar','schneiden','🔪'],['freír','braten / frittieren','🍳'],['hervir','kochen (Wasser)','♨️'],['añadir','hinzufügen','➕'],['echar','hineingeben / -schütten','🫗'],['mezclar','mischen / verrühren','🥣'],['batir','schlagen (Eier)','🥚'],['dar la vuelta','umdrehen / wenden','🔄'],['servir','servieren','🍽️'],['la sartén','die Pfanne','🍳'],['la olla','der Kochtopf','🍲'],['el horno','der Backofen','🔥']]},
+ {t:'info',title:'Das unpersönliche se',html:`<p>In Rezepten sagt man nicht, <b>wer</b> etwas tut – sondern <b>wie man</b> es tut:</p>
+ <table><tr><th>se + 3. Person Sg.</th><th>se + 3. Person Pl.</th></tr>
+ <tr><td class="es-t">Se pela la cebolla.</td><td class="es-t">Se pelan las patatas.</td></tr>
+ <tr><td class="es-t">Se añade la sal.</td><td class="es-t">Se baten los huevos.</td></tr></table>
+ <p>Das Verb richtet sich nach dem Ding danach (Singular/Plural). Wie im Deutschen „man schält die Kartoffeln“.</p>
+ <div class="ex">Auch außerhalb der Küche: <span class="es-t">Aquí se habla catalán. · ¿Cómo se dice … en español? · Se alquila piso.</span></div>`},
+ {t:'mc',q:'Primero ___ las patatas.',opts:['se pelan','se pela','se pelamos'],a:0,keep:true},
+ {t:'mc',q:'Luego ___ la cebolla en trozos pequeños.',opts:['se corta','se cortan','se corto'],a:0,keep:true},
+ {t:'gap',q:'Después ___ ___ (se + batir) los huevos.',a:['se','baten']},
+ {t:'gap',q:'Aquí ___ ___ (se + vender) pan recién hecho.',a:['se','vende']},
+ {t:'order',es:'Se fríen las patatas en mucho aceite.',de:'Man brät die Kartoffeln in viel Öl.'},
+ {t:'tr',de:'Wie sagt man „Pfanne“ auf Spanisch?',a:['¿Cómo se dice „Pfanne“ en español?','¿Cómo se dice Pfanne en español?']},
+ {t:'read',title:'Receta: pan con tomate',text:`El pan con tomate es muy típico de Cataluña. Es fácil y rápido. Para cuatro personas se necesitan: un pan grande, dos tomates maduros, un {diente de ajo|eine Knoblauchzehe}, aceite de oliva y sal.
+
+Primero se corta el pan en {rebanadas|Scheiben} y se {tuesta|röstet} un poco. Después, si te gusta, se frota el ajo sobre el pan. Luego se cortan los tomates por la mitad y se frotan sobre el pan. Al final se echa un poco de aceite y una pizca de sal. Se sirve con jamón o queso. ¡Que aproveche!`,de:'Pan con tomate ist sehr typisch für Katalonien. Es ist einfach und schnell. Für vier Personen braucht man: ein großes Brot, zwei reife Tomaten, eine Knoblauchzehe, Olivenöl und Salz.\n\nZuerst schneidet man das Brot in Scheiben und röstet es ein bisschen. Danach reibt man, wenn man mag, den Knoblauch über das Brot. Dann schneidet man die Tomaten in der Mitte durch und reibt sie über das Brot. Zum Schluss gibt man etwas Öl und eine Prise Salz dazu. Man serviert es mit Schinken oder Käse. Guten Appetit!'},
+ {t:'mc',q:'¿Qué se hace con los tomates?',opts:['Se frotan sobre el pan.','Se fríen.','Se mezclan con los huevos.'],a:0}]},
+{id:'l3',title:'Schneid sie! – Imperativ + Pronomen',desc:'córtalo · échalas · no lo …',steps:[
+ {t:'info',title:'Pronomen hängen am Imperativ',html:`<p>Wiederholung: <span class="es-t">lo, la, los, las</span> ersetzen ein Ding. Beim <b>bejahenden Imperativ</b> hängen sie hinten dran:</p>
+ <table><tr><th>Ding</th><th>tú</th><th>usted</th></tr>
+ <tr><td class="es-t">el pan</td><td class="es-t">córtalo</td><td class="es-t">córtelo</td></tr>
+ <tr><td class="es-t">la cebolla</td><td class="es-t">pélala</td><td class="es-t">pélela</td></tr>
+ <tr><td class="es-t">los huevos</td><td class="es-t">bátelos</td><td class="es-t">bátalos</td></tr>
+ <tr><td class="es-t">las patatas</td><td class="es-t">échalas</td><td class="es-t">éch<b>e</b>las</td></tr></table>
+ <div class="ex">Akzent nicht vergessen: Die Betonung bleibt, wo sie war – <i>corta</i> → <i>có</i>rtalo.</div>
+ <p>In normalen Sätzen steht das Pronomen <b>vor</b> dem Verb: <span class="es-t">Las corto ahora.</span></p>`},
+ {t:'mc',q:'– ¿Corto la cebolla? – Sí, ___.',opts:['córtala','córtalo','la corta'],a:0},
+ {t:'mc',q:'– ¿Pongo los platos en la mesa? – Sí, ___, por favor.',opts:['ponlos','ponlas','los pon'],a:0},
+ {t:'gap',q:'– ¿Dónde echo las patatas? – ___ (echar + las) en la sartén.',a:['Échalas']},
+ {t:'gap',q:'– ¿Y el aceite? – ___ (añadir + lo) al final.',a:['Añádelo']},
+ {t:'gap',q:'– ¿Ya has batido los huevos? – Sí, ya ___ he batido.',a:['los']},
+ {t:'tr',de:'Die Tortilla? Dreh sie jetzt um!',a:['¿La tortilla? ¡Dale la vuelta ahora!','¿La tortilla? Dale la vuelta ahora.']},
+ {t:'listen',es:'Pela las patatas y córtalas en trozos pequeños.',de:'Schäl die Kartoffeln und schneide sie in kleine Stücke.'},
+ {t:'speak',es:'¿La cebolla? Córtala muy fina.',de:'Die Zwiebel? Schneide sie ganz fein.'}]},
+{id:'l4',title:'Dein Lieblingsrezept',desc:'Rezept verstehen & schreiben',steps:[
+ {t:'dialog',place:'En casa',title:'Nuria erklärt die Tortilla',scene:'Ihr kocht zusammen.',lines:[
+  {n:'Nuria',es:'Bueno, primero pela las patatas.',de:'Also, schäl zuerst die Kartoffeln.'},
+  {you:true,opts:[{es:'Vale. ¿Y luego las corto?',ok:true},{es:'Vale. ¿Y luego corto las?',ok:false,why:'Pronomen <b>vor</b> dem konjugierten Verb: <i>las corto</i>.'}]},
+  {n:'Nuria',es:'Sí, córtalas finas. ¿Te gusta la tortilla con cebolla?',de:'Ja, schneide sie dünn. Magst du die Tortilla mit Zwiebel?'},
+  {you:true,opts:[{es:'¡Sí, me encanta con cebolla!',ok:true},{es:'¡Sí, me encantan con cebolla!',ok:false,why:'<i>la tortilla</i> = Singular → <b>encanta</b>.'}]},
+  {n:'Nuria',es:'¡Bien! Ahora bate los huevos con un poco de sal.',de:'Gut! Jetzt schlag die Eier mit etwas Salz.'},
+  {you:true,opts:[{es:'¿Cuántos huevos echo?',ok:true},{es:'¿Cuántas huevos echo?',ok:false,why:'<i>el huevo</i> ist männlich → <b>cuántos</b>.'}]},
+  {n:'Nuria',es:'Seis. Y ahora lo más difícil: darle la vuelta. ¡Hazlo tú!',de:'Sechs. Und jetzt das Schwierigste: sie umdrehen. Mach du es!'}]},
+ {t:'match',q:'Rezept-Schritte',pairs:[['Primero','se pelan las patatas'],['Después','se fríen en aceite'],['Luego','se mezclan con los huevos'],['Al final','se le da la vuelta']]},
+ {t:'tr',de:'Man braucht vier Eier und ein bisschen Salz.',a:['Se necesitan cuatro huevos y un poco de sal.']},
+ {t:'free',task:'Erklär ein einfaches Gericht aus Deutschland (z. B. Kartoffelsalat oder Pfannkuchen) mit se + Verb: Zutaten und 4–5 Schritte.',hint:'Se necesitan … · Primero se … · Después se … · Luego se … · Al final se …',focus:'se + Verb, Mengenangaben, Reihenfolge',model:'Para hacer tortitas alemanas se necesitan 250 gramos de harina, tres huevos, medio litro de leche y una pizca de sal. Primero se mezclan la harina y la leche. Después se añaden los huevos y la sal. Luego se calienta un poco de aceite en la sartén. Al final se fríen las tortitas y se sirven con azúcar o con manzana.'}]}
+],
+placement:[
+ {t:'mc',q:'In Rezepten: „Man schält die Kartoffeln.“',opts:['Se pelan las patatas.','Se pela las patatas.','Pelan se las patatas.'],a:0},
+ {t:'gap',q:'Un kilo ___ tomates, por favor.',a:['de']},
+ {t:'mc',q:'– ¿Corto la cebolla? – Sí, ___.',opts:['córtala','córtalo','la corta'],a:0},
+ {t:'mc',q:'¿___ huevos necesitamos?',opts:['Cuántos','Cuántas','Cuánto'],a:0},
+ {t:'gap',q:'– ¿Y las patatas? – ___ (echar + las) en la sartén. (tú)',a:['Échalas']},
+ {t:'mc',q:'„Hier spricht man Katalanisch.“',opts:['Aquí se habla catalán.','Aquí habla se catalán.','Aquí hablan se catalán.'],a:0}],
+resumen:`<h3>Mengen</h3><p class="es-t">un kilo de · medio kilo de · cien gramos de · un litro de · una docena de · una cucharada de · una pizca de · un poco de · demasiado</p>
+<h3>So macht man das</h3><table><tr><td class="es-t">Se pela la cebolla.</td><td class="es-t">Se pelan las patatas.</td></tr></table>
+<h3>Imperativ + Pronomen</h3><p class="es-t">córtalo · pélala · bátelos · échalas · dale la vuelta</p><p class="es-t">Aber: Las corto ahora. · Ya los he batido.</p>`});
+
+/* ================= UNIDAD 14 · REGALOS Y FAVORES ================= */
+COURSE.units.push({id:'u14',n:'16',level:'A2b',title:'Regalos y favores',sub:'Feste & Geschenke · indirekte Objektpronomen (le, les) · se lo / se la · um Gefallen bitten · Erlaubnis fragen',
+goals:['Feste: cumpleaños, boda, Navidad …','Glückwünsche: ¡Felicidades! ¡Enhorabuena!','me/te/le/nos/os/les (wem?)','Doppelte Pronomen: me lo, te la, se lo','um einen Gefallen bitten: ¿Me prestas …? ¿Te importa …?','Erlaubnis: ¿Puedo …? ¿Te importa si …?'],
+situacion:{title:'Geburtstagsgeschenk für Laia',npc:'Marc',scene:'Eure Freundin Laia hat am Samstag Geburtstag. Du und Marc, ein Kommilitone, überlegt, was ihr ihr schenkt, und organisiert die Party.',role:'Du bist Marc, ein katalanischer Kommilitone von Jonas, entspannt und hilfsbereit. Ihr duzt euch. Diskutiert ein Geschenk für Laia (¿Qué le regalamos? ¿Le compramos…? Ya se lo regaló su hermana…). Bitte Jonas um Gefallen (¿Me prestas…? ¿Puedes traer…?) und benutze Pronomen wie se lo.',goal:'Schlag Geschenke vor (¿Por qué no le regalamos…?), bitte Marc um einen Gefallen und reagiere auf seine Bitten (Sí, claro, te lo traigo / Lo siento, es que…).'},
+lessons:[
+{id:'l1',title:'Feste & Glückwünsche',desc:'¡Felicidades! · regalar',steps:[
+ {t:'vocab',title:'Feste',items:[['el cumpleaños','der Geburtstag','🎂'],['la boda','die Hochzeit','💒'],['la Navidad','Weihnachten','🎄'],['Nochevieja','Silvester','🎆'],['la fiesta sorpresa','die Überraschungsparty','🎉'],['el regalo','das Geschenk','🎁'],['regalar','schenken','🎁'],['invitar','einladen','💌'],['celebrar','feiern','🥂'],['la tarta','die Torte','🎂'],['las flores','die Blumen','💐'],['¡Felicidades!','Herzlichen Glückwunsch!','🥳'],['¡Enhorabuena!','Glückwunsch! (zu einer Leistung)','🏅'],['¡Feliz Navidad!','Frohe Weihnachten!','🎄'],['¡Que lo pases bien!','Viel Spaß!','😄']]},
+ {t:'info',title:'Welcher Glückwunsch?',html:`<table><tr><th>Situation</th><th>Spanisch</th></tr>
+ <tr><td>Geburtstag</td><td class="es-t">¡Feliz cumpleaños! / ¡Felicidades!</td></tr>
+ <tr><td>Prüfung bestanden, neuer Job</td><td class="es-t">¡Enhorabuena!</td></tr>
+ <tr><td>Hochzeit</td><td class="es-t">¡Que seáis muy felices!</td></tr>
+ <tr><td>Reise, Party</td><td class="es-t">¡Buen viaje! · ¡Que lo pases bien!</td></tr>
+ <tr><td>Krankheit</td><td class="es-t">¡Que te mejores!</td></tr></table>
+ <div class="ex">In Spanien feiert man oft auch den <b>santo</b> (Namenstag). Und: Am 6. Januar bringen die <b>Reyes Magos</b> die Geschenke.</div>`},
+ {t:'mc',q:'Dein Freund hat die Masterprüfung bestanden:',opts:['¡Enhorabuena!','¡Que te mejores!','¡Buen provecho!'],a:0},
+ {t:'mc',q:'Deine Kollegin ist krank:',opts:['¡Que te mejores!','¡Felicidades!','¡Que aproveche!'],a:0},
+ {t:'mc',q:'Deine Mitbewohnerin geht heute Abend auf ein Konzert:',opts:['¡Que lo pases bien!','¡Enhorabuena!','¡Feliz Navidad!'],a:0},
+ {t:'listen',es:'¡Feliz cumpleaños! Te hemos traído un regalo.',de:'Alles Gute zum Geburtstag! Wir haben dir ein Geschenk mitgebracht.'}]},
+{id:'l2',title:'Wem? – le, les',desc:'le regalo · les escribo',steps:[
+ {t:'info',title:'Indirekte Objektpronomen',html:`<p>Sie sagen, <b>wem</b> etwas gegeben, geschenkt, gesagt … wird:</p>
+ <table><tr><th>wem?</th><th>Pronomen</th><th>Beispiel</th></tr>
+ <tr><td>mir</td><td class="es-t">me</td><td class="es-t">Mi madre me regala un libro.</td></tr>
+ <tr><td>dir</td><td class="es-t">te</td><td class="es-t">¿Te escribo mañana?</td></tr>
+ <tr><td>ihm / ihr / Ihnen</td><td class="es-t">le</td><td class="es-t">Le regalo flores a Laia.</td></tr>
+ <tr><td>uns</td><td class="es-t">nos</td><td class="es-t">Nos invitan a la boda.</td></tr>
+ <tr><td>euch</td><td class="es-t">os</td><td class="es-t">Os mando las fotos.</td></tr>
+ <tr><td>ihnen / Ihnen (Pl.)</td><td class="es-t">les</td><td class="es-t">Les escribo a mis padres.</td></tr></table>
+ <div class="ex">Typisch Spanisch: Pronomen <b>und</b> Person zusammen – <span class="es-t">Le regalo flores a Laia.</span> Das <i>le</i> ist nicht doppelt gemoppelt, sondern normal.</div>`},
+ {t:'mc',q:'¿Qué ___ regalamos a Laia?',opts:['le','la','les'],a:0},
+ {t:'mc',q:'Mañana ___ escribo a mis abuelos.',opts:['les','los','le'],a:0},
+ {t:'gap',q:'¿___ (dir) mando las fotos por WhatsApp?',a:['Te']},
+ {t:'gap',q:'Mis amigos ___ (uns) han invitado a su boda.',a:['nos']},
+ {t:'gap',q:'El profesor ___ (ihnen, Pl.) explica la gramática a los estudiantes.',a:['les']},
+ {t:'tr',de:'Ich schenke meiner Mutter Blumen.',a:['Le regalo flores a mi madre.','A mi madre le regalo flores.']},
+ {t:'order',es:'¿Qué le compramos a Marc para su cumpleaños?',de:'Was kaufen wir Marc zum Geburtstag?'}]},
+{id:'l3',title:'se lo · me la · te los',desc:'zwei Pronomen hintereinander',steps:[
+ {t:'info',title:'Zwei Pronomen: erst wem, dann was',html:`<p>Reihenfolge: <b>indirekt (wem) + direkt (was)</b> – beide vor dem Verb.</p>
+ <p class="es-t">¿El libro? Te lo presto. · ¿Las fotos? Me las mandas luego.</p>
+ <p><b>Wichtig:</b> <i>le</i> / <i>les</i> wird vor <i>lo, la, los, las</i> zu <b>se</b>:</p>
+ <table><tr><td class="es-t"><s>le lo</s> → se lo</td><td class="es-t">¿El regalo? Se lo doy a Laia mañana.</td></tr>
+ <tr><td class="es-t"><s>les las</s> → se las</td><td class="es-t">¿Las fotos? Se las mando a mis padres.</td></tr></table>
+ <div class="ex">Beim Imperativ hängen beide hinten dran: <span class="es-t">¡Dámelo! · ¡Dáselo!</span></div>`},
+ {t:'mc',q:'– ¿Me prestas tu bici? – Sí, claro, ___ presto.',opts:['te la','te lo','la te'],a:0},
+ {t:'mc',q:'– ¿Le has dado el regalo a Laia? – Sí, ya ___ he dado.',opts:['se lo','le lo','lo le'],a:0},
+ {t:'mc',q:'– ¿Nos mandas las fotos? – Sí, ___ mando esta noche.',opts:['os las','os los','las os'],a:0},
+ {t:'gap',q:'– ¿Le compras las flores a tu madre? – Sí, ___ ___ compro mañana.',a:['se','las']},
+ {t:'gap',q:'– ¿Me dejas el libro? – Sí, ___ ___ dejo.',a:['te','lo']},
+ {t:'tr',de:'Die Torte? Ich bringe sie dir morgen.',a:['¿La tarta? Te la traigo mañana.']},
+ {t:'listen',es:'¿Las llaves? Se las he dado a Marc.',de:'Die Schlüssel? Ich habe sie Marc gegeben.'}]},
+{id:'l4',title:'Um Gefallen bitten',desc:'¿Me prestas …? · ¿Te importa …?',steps:[
+ {t:'vocab',title:'Bitten & antworten',items:[['¿Me prestas …?','Leihst du mir …?','🤲'],['¿Me dejas …?','Lässt du mich … / Leihst du mir …?','🤲'],['¿Puedes …?','Kannst du …?','🙋'],['¿Te importa + Infinitiv?','Macht es dir etwas aus, …?','🙏'],['¿Te importa si …?','Stört es dich, wenn …?','🙏'],['¿Podría …?','Könnten Sie …? (höflich)','🎩'],['Sí, claro.','Ja, klar.','👍'],['¡Por supuesto!','Selbstverständlich!','👌'],['Lo siento, es que …','Tut mir leid, aber …','🙇'],['Ahora mismo no puedo.','Gerade kann ich nicht.','⏱️']]},
+ {t:'mc',q:'Höflich zur Professorin: „Könnten Sie das wiederholen?“',opts:['¿Podría repetirlo?','¿Me prestas repetirlo?','¿Repítelo?'],a:0},
+ {t:'mc',q:'„Stört es dich, wenn ich das Fenster aufmache?“',opts:['¿Te importa si abro la ventana?','¿Te importa abro la ventana?','¿Te molestas si abro la ventana?'],a:0},
+ {t:'dialog',place:'En el piso',title:'Ein Gefallen unter Mitbewohnern',scene:'Du brauchst heute Abend Nurias Laptop-Ladekabel.',lines:[
+  {you:true,opts:[{es:'Nuria, ¿me prestas tu cargador? El mío no funciona.',ok:true},{es:'Nuria, ¿te prestas mi cargador? El mío no funciona.',ok:false,why:'Du willst, dass sie <b>dir</b> leiht: <i>¿<b>me</b> prestas…?</i>'}]},
+  {n:'Nuria',es:'Sí, claro. Está en mi habitación, en la mesa.',de:'Ja klar. Es liegt in meinem Zimmer auf dem Tisch.'},
+  {you:true,opts:[{es:'Gracias. Te lo devuelvo mañana.',ok:true},{es:'Gracias. Lo te devuelvo mañana.',ok:false,why:'Reihenfolge: erst <i>te</i> (wem), dann <i>lo</i> (was): <b>te lo</b>.'}]},
+  {n:'Nuria',es:'Vale. Oye, ¿te importa bajar la basura?',de:'Okay. Hör mal, macht es dir was aus, den Müll runterzubringen?'},
+  {you:true,opts:[{es:'No, no me importa. La bajo ahora.',ok:true},{es:'No, no me importa. Lo bajo ahora.',ok:false,why:'<i>la basura</i> ist weiblich → <b>la</b> bajo.'}]}]},
+ {t:'tr',de:'Kannst du mir dein Buch leihen? – Ja klar, ich leihe es dir.',a:['¿Me prestas tu libro? – Sí, claro, te lo presto.','¿Puedes prestarme tu libro? – Sí, claro, te lo presto.','¿Me puedes prestar tu libro? – Sí, claro, te lo presto.']},
+ {t:'free',task:'Schreib eine WhatsApp an Marc: Du organisierst eine Überraschungsparty für Laia. Bitte ihn um zwei Gefallen und sag, was ihr ihr schenkt.',hint:'¡Hola Marc! El sábado … · ¿Puedes …? · ¿Te importa …? · Le regalamos … · ¿Se lo das tú?',focus:'le / se lo, ¿Puedes …? / ¿Te importa …?',model:'¡Hola Marc! El sábado hacemos una fiesta sorpresa para Laia en mi piso. ¿Puedes traer música? Y ¿te importa comprar la tarta? Le regalamos un libro de fotografía, porque le encanta. Lo tengo yo, pero ¿se lo das tú? ¡Gracias!'},
+ {t:'speak',es:'¿Te importa si cierro la ventana? Tengo un poco de frío.',de:'Stört es dich, wenn ich das Fenster zumache? Mir ist ein bisschen kalt.'}]}
+],
+placement:[
+ {t:'mc',q:'¿Qué ___ regalamos a Laia?',opts:['le','la','lo'],a:0},
+ {t:'mc',q:'– ¿Le has dado el regalo? – Sí, ya ___ he dado.',opts:['se lo','le lo','lo le'],a:0},
+ {t:'mc',q:'Dein Freund hat eine neue Stelle bekommen:',opts:['¡Enhorabuena!','¡Que te mejores!','¡Buen viaje!'],a:0},
+ {t:'gap',q:'– ¿Me prestas tu bici? – Sí, ___ ___ presto.',a:['te','la']},
+ {t:'mc',q:'„Stört es dich, wenn ich das Fenster öffne?“',opts:['¿Te importa si abro la ventana?','¿Te importa abro la ventana?','¿Te molesta abro la ventana?'],a:0},
+ {t:'gap',q:'Mañana ___ escribo a mis padres. (ihnen)',a:['les']}],
+resumen:`<h3>Glückwünsche</h3><p class="es-t">¡Felicidades! · ¡Feliz cumpleaños! · ¡Enhorabuena! · ¡Que te mejores! · ¡Que lo pases bien! · ¡Buen viaje!</p>
+<h3>Wem?</h3><p class="es-t">me · te · le · nos · os · les — Le regalo flores a Laia.</p>
+<h3>Zwei Pronomen</h3><p class="es-t">Te lo presto. · Me las mandas. · le/les + lo → <b>se lo</b>: Se lo doy a Laia.</p>
+<h3>Bitten</h3><p class="es-t">¿Me prestas …? · ¿Puedes …? · ¿Te importa + Inf.? · ¿Te importa si …? · ¿Podría …? — Sí, claro. · Lo siento, es que …</p>`});
+
+/* ================= UNIDAD 15 · EL FUTURO ================= */
+COURSE.units.push({id:'u15',n:'17',level:'A2b',title:'El futuro',sub:'Futur (trabajaré, tendré) · Vorhersagen & Pläne · Meinung äußern · Konditional der Höflichkeit (me gustaría, podría) · por & para',
+goals:['Futur: regelmäßige Formen','Futur: tendré, haré, podré, saldré …','Vorhersagen: Creo que mañana lloverá','Meinung: creo que, para mí, (no) estoy de acuerdo','Wünsche & Höflichkeit: me gustaría, podría, debería','por vs. para (Grundregeln)'],
+situacion:{title:'Zukunftsgespräch mit deiner Tutorin',npc:'Dra. Vidal',scene:'Du hast ein Gespräch mit deiner Master-Tutorin an der UPC über deine Pläne nach dem Auslandssemester.',role:'Du bist Dra. Vidal, Tutorin an der UPC (FIB), sachlich und freundlich. Du siezt Jonas am Anfang, bietest dann das Du an. Frag nach seinen Plänen (¿Qué harás cuando termines el máster? ¿Te gustaría trabajar en España?), nach seiner Meinung (¿Crees que la inteligencia artificial cambiará el trabajo?) und gib Ratschläge mit deberías / podrías.',goal:'Sprich über deine Pläne im Futur (trabajaré, viviré…), äußere deine Meinung (creo que…, para mí…), und benutze me gustaría / podría.'},
+lessons:[
+{id:'l1',title:'Das Futur',desc:'trabajaré · viviremos',steps:[
+ {t:'info',title:'Futur: einfach anhängen',html:`<p>Infinitiv + Endung – gleich für -ar, -er, -ir:</p>
+ <table><tr><th></th><th>trabajar</th></tr>
+ <tr><td>yo</td><td class="es-t">trabajar<b>é</b></td></tr><tr><td>tú</td><td class="es-t">trabajar<b>ás</b></td></tr><tr><td>él / ella / usted</td><td class="es-t">trabajar<b>á</b></td></tr>
+ <tr><td>nosotros</td><td class="es-t">trabajar<b>emos</b></td></tr><tr><td>vosotros</td><td class="es-t">trabajar<b>éis</b></td></tr><tr><td>ellos / ustedes</td><td class="es-t">trabajar<b>án</b></td></tr></table>
+ <div class="ex">Im Alltag sagt man für feste Pläne oft <i>ir a + Infinitiv</i> (Unidad 8). Das Futur klingt etwas ferner: Vorhersagen, Versprechen, Träume.</div>`},
+ {t:'conj',verb:'vivir',de:'leben / wohnen',tense:'Futur',forms:['viviré','vivirás','vivirá','viviremos','viviréis','vivirán']},
+ {t:'mc',q:'El año que viene ___ en Alemania. (yo, trabajar)',opts:['trabajaré','trabajeré','trabajo será'],a:0},
+ {t:'gap',q:'Mañana ___ (llover) en Barcelona.',a:['lloverá']},
+ {t:'gap',q:'En 2030 mis amigos y yo ___ (vivir) en otra ciudad.',a:['viviremos']},
+ {t:'gap',q:'¿___ (tú, venir) a la fiesta? – Sí, ___ (ir) seguro.',a:['Vendrás','iré'],hint:'<i>venir</i> ist unregelmäßig: vendr-.'},
+ {t:'tr',de:'Morgen werde ich viel lernen.',a:['Mañana estudiaré mucho.','Mañana aprenderé mucho.']},
+ {t:'listen',es:'El próximo verano viajaremos por Andalucía.',de:'Nächsten Sommer werden wir durch Andalusien reisen.'}]},
+{id:'l2',title:'Unregelmäßige Futurformen',desc:'tendré · haré · podré',steps:[
+ {t:'info',title:'Neuer Stamm, gleiche Endungen',html:`<table><tr><th>Infinitiv</th><th>Stamm</th><th>yo</th></tr>
+ <tr><td>tener</td><td class="es-t">tendr-</td><td class="es-t">tendré</td></tr>
+ <tr><td>poner</td><td class="es-t">pondr-</td><td class="es-t">pondré</td></tr>
+ <tr><td>salir</td><td class="es-t">saldr-</td><td class="es-t">saldré</td></tr>
+ <tr><td>venir</td><td class="es-t">vendr-</td><td class="es-t">vendré</td></tr>
+ <tr><td>poder</td><td class="es-t">podr-</td><td class="es-t">podré</td></tr>
+ <tr><td>saber</td><td class="es-t">sabr-</td><td class="es-t">sabré</td></tr>
+ <tr><td>hacer</td><td class="es-t">har-</td><td class="es-t">haré</td></tr>
+ <tr><td>decir</td><td class="es-t">dir-</td><td class="es-t">diré</td></tr>
+ <tr><td>querer</td><td class="es-t">querr-</td><td class="es-t">querré</td></tr>
+ <tr><td>haber (hay)</td><td class="es-t">habr-</td><td class="es-t">habrá</td></tr></table>`},
+ {t:'conj',verb:'tener',de:'haben',tense:'Futur',forms:['tendré','tendrás','tendrá','tendremos','tendréis','tendrán']},
+ {t:'match',q:'Infinitiv → Futur (yo)',pairs:[['hacer','haré'],['salir','saldré'],['poder','podré'],['decir','diré'],['saber','sabré']]},
+ {t:'gap',q:'Cuando termine el máster, ___ (yo, tener) más tiempo.',a:['tendré']},
+ {t:'gap',q:'¿Qué ___ (tú, hacer) el fin de semana?',a:['harás']},
+ {t:'gap',q:'Creo que mañana ___ (haber) mucho tráfico.',a:['habrá']},
+ {t:'mc',q:'No te preocupes, te lo ___ mañana. (decir)',opts:['diré','deciré','dicré'],a:0},
+ {t:'tr',de:'Nächstes Jahr werde ich mehr Geld haben.',a:['El año que viene tendré más dinero.','El próximo año tendré más dinero.']}]},
+{id:'l3',title:'Meinung & Vorhersagen',desc:'creo que · para mí · estoy de acuerdo',steps:[
+ {t:'vocab',title:'Meinung äußern',items:[['creo que …','ich glaube, dass …','💭'],['pienso que …','ich denke, dass …','💭'],['para mí, …','für mich …','🙋'],['en mi opinión, …','meiner Meinung nach …','🗨️'],['estoy de acuerdo','ich bin einverstanden','🤝'],['no estoy de acuerdo','ich bin nicht einverstanden','🙅'],['tienes razón','du hast recht','✅'],['depende','kommt darauf an','⚖️'],['seguramente','wahrscheinlich / sicher','🎯'],['quizás','vielleicht','🤔'],['dentro de diez años','in zehn Jahren','🔮'],['la inteligencia artificial','die künstliche Intelligenz','🤖']]},
+ {t:'info',title:'Vorhersagen mit Futur',html:`<p class="es-t">Creo que dentro de diez años trabajaremos menos.</p>
+ <p class="es-t">Seguramente habrá más coches eléctricos.</p>
+ <p class="es-t">Para mí, la inteligencia artificial cambiará muchas profesiones.</p>
+ <div class="ex"><i>Creo que</i> + Indikativ (also Futur oder Präsens). Bei <b>no creo que</b> braucht man den Subjuntivo – den lernst du in B1.</div>`},
+ {t:'mc',q:'– Creo que el teletrabajo es mejor. – Du siehst es genauso:',opts:['Estoy de acuerdo.','Soy de acuerdo.','Tengo acuerdo.'],a:0},
+ {t:'mc',q:'„Du hast recht.“',opts:['Tienes razón.','Eres razón.','Estás razón.'],a:0},
+ {t:'gap',q:'Creo que dentro de veinte años la gente ___ (viajar) menos en avión.',a:['viajará']},
+ {t:'read',title:'¿Cómo trabajaremos en 2040?',text:`Muchos expertos creen que el trabajo cambiará mucho en los próximos años. {Seguramente|Wahrscheinlich} trabajaremos menos horas, porque la inteligencia artificial hará muchas tareas {repetitivas|sich wiederholende}. Las oficinas serán más pequeñas y muchas personas trabajarán desde casa o desde otros países.
+
+Pero no todos están de acuerdo. Algunos piensan que habrá menos {puestos de trabajo|Arbeitsplätze} y que será más difícil encontrar empleo. Otros dicen que aparecerán profesiones nuevas que hoy no podemos imaginar. Lo que está claro es que tendremos que aprender toda la vida.`,de:'Viele Experten glauben, dass sich die Arbeit in den nächsten Jahren stark verändern wird. Wahrscheinlich werden wir weniger Stunden arbeiten, weil die künstliche Intelligenz viele sich wiederholende Aufgaben erledigen wird. Die Büros werden kleiner sein und viele Menschen werden von zu Hause oder aus anderen Ländern arbeiten.\n\nAber nicht alle sind einverstanden. Einige denken, dass es weniger Arbeitsplätze geben wird und dass es schwieriger sein wird, eine Stelle zu finden. Andere sagen, dass neue Berufe entstehen werden, die wir uns heute nicht vorstellen können. Klar ist: Wir werden ein Leben lang lernen müssen.'},
+ {t:'mc',q:'Laut Text: Was ist sicher?',opts:['Tendremos que aprender toda la vida.','Habrá menos trabajo.','Las oficinas serán más grandes.'],a:0},
+ {t:'free',task:'Wie wird dein Leben in 10 Jahren sein? 4–5 Sätze mit Futur und einer Meinung.',hint:'Dentro de diez años … · Creo que … · Seguramente … · Para mí …',focus:'Futur (regelmäßig & unregelmäßig), creo que',model:'Dentro de diez años viviré en Múnich o en Barcelona. Creo que trabajaré como consultor de IT y tendré un equipo pequeño. Seguramente hablaré español muy bien. Para mí, lo más importante será tener tiempo para mi familia y para viajar.'}]},
+{id:'l4',title:'Höflich & por/para',desc:'me gustaría · podría · por o para',steps:[
+ {t:'info',title:'Konditional der Höflichkeit',html:`<p>Infinitiv + <b>-ía</b>-Endungen (gleiche Stämme wie das Futur!):</p>
+ <table><tr><td class="es-t">gustar → me gustaría</td><td>ich hätte gern / ich würde gern</td></tr>
+ <tr><td class="es-t">poder → podría</td><td>ich könnte / könnten Sie</td></tr>
+ <tr><td class="es-t">deber → deberías</td><td>du solltest</td></tr>
+ <tr><td class="es-t">tener → tendría</td><td>ich hätte</td></tr></table>
+ <p class="es-t">Me gustaría trabajar en España. · ¿Podría ayudarme? · Deberías hablar con tu jefe.</p>`},
+ {t:'mc',q:'„Ich würde gern in Spanien arbeiten.“',opts:['Me gustaría trabajar en España.','Me gustará trabajar en España.','Me gusto trabajar en España.'],a:0},
+ {t:'gap',q:'¿___ (usted, poder) cerrar la puerta, por favor?',a:['Podría']},
+ {t:'info',title:'por oder para?',html:`<table><tr><th>para</th><th>por</th></tr>
+ <tr><td>Ziel, Zweck: <span class="es-t">Estudio para trabajar en España.</span></td><td>Grund: <span class="es-t">Gracias por tu ayuda.</span></td></tr>
+ <tr><td>Empfänger: <span class="es-t">El regalo es para Laia.</span></td><td>durch / entlang: <span class="es-t">Paseamos por el centro.</span></td></tr>
+ <tr><td>Frist: <span class="es-t">El informe es para el lunes.</span></td><td>Tageszeit: <span class="es-t">por la mañana</span></td></tr>
+ <tr><td>Richtung: <span class="es-t">Salgo para Madrid.</span></td><td>Mittel, Preis: <span class="es-t">por teléfono · por 10 euros</span></td></tr></table>`},
+ {t:'mc',q:'Este regalo es ___ ti.',opts:['para','por'],a:0,keep:true},
+ {t:'mc',q:'Gracias ___ todo.',opts:['por','para'],a:0,keep:true},
+ {t:'mc',q:'Estudio español ___ vivir en Barcelona.',opts:['para','por'],a:0,keep:true},
+ {t:'gap',q:'Te llamo ___ teléfono ___ la tarde.',a:['por','por']},
+ {t:'gap',q:'El trabajo es ___ el viernes.',a:['para']},
+ {t:'tr',de:'Danke für die Einladung! Ich würde gern kommen.',a:['¡Gracias por la invitación! Me gustaría ir.','¡Gracias por la invitación! Me gustaría venir.']},
+ {t:'speak',es:'Me gustaría trabajar en Barcelona durante un par de años.',de:'Ich würde gern ein paar Jahre in Barcelona arbeiten.'}]}
+],
+placement:[
+ {t:'gap',q:'El año que viene ___ (yo, tener) más tiempo.',a:['tendré']},
+ {t:'mc',q:'Creo que mañana ___ en Barcelona.',opts:['lloverá','llueverá','llovió mañana'],a:0},
+ {t:'mc',q:'„Ich würde gern in Spanien arbeiten.“',opts:['Me gustaría trabajar en España.','Me gustará trabajar en España.','Me gusto trabajar en España.'],a:0},
+ {t:'mc',q:'Gracias ___ tu ayuda.',opts:['por','para'],a:0},
+ {t:'gap',q:'¿Qué ___ (tú, hacer) el fin de semana? (Futur)',a:['harás']},
+ {t:'mc',q:'„Du hast recht.“',opts:['Tienes razón.','Eres razón.','Estás razón.'],a:0}],
+resumen:`<h3>Futur</h3><p class="es-t">trabajaré · trabajarás · trabajará · trabajaremos · trabajaréis · trabajarán</p>
+<p class="es-t">tendré · pondré · saldré · vendré · podré · sabré · haré · diré · querré · habrá</p>
+<h3>Meinung</h3><p class="es-t">Creo que … · Pienso que … · Para mí … · Estoy de acuerdo. · Tienes razón. · Depende.</p>
+<h3>Höflich</h3><p class="es-t">Me gustaría … · ¿Podría …? · Deberías …</p>
+<h3>por / para</h3><table><tr><td class="es-t">para: Ziel, Empfänger, Frist</td><td class="es-t">por: Grund, durch, Tageszeit, Mittel</td></tr></table>`});
+;
+/* ================= B1 · ERSTE SCHRITTE ================= */
+
+/* ================= UNIDAD 16 · OJALÁ ================= */
+COURSE.units.push({id:'u16',n:'18',level:'B1',title:'Ojalá',sub:'Subjuntivo Präsens: Formen · Wünsche (quiero que, espero que, ojalá) · Ratschläge (te recomiendo que) · verneinter Imperativ',
+goals:['Wann braucht man den Subjuntivo? (WEIRDO-Idee)','Formen: regelmäßig (hable, coma, viva)','Formen: unregelmäßig (tenga, haga, sea, vaya, esté)','quiero que / espero que / ojalá','te recomiendo que / es importante que','Verneinter Imperativ: no hables, no vayas'],
+situacion:{title:'Ein Freund kommt nach Barcelona',npc:'Lukas',scene:'Dein Freund Lukas aus Mannheim (er lernt auch Spanisch) besucht dich nächste Woche zum ersten Mal in Barcelona. Ihr telefoniert auf Spanisch zum Üben.',role:'Du bist Lukas, ein Freund von Jonas aus Mannheim, Spanisch-Niveau A2, neugierig, etwas chaotisch. Ihr duzt euch. Frag Jonas nach Tipps für Barcelona (¿Qué me recomiendas? ¿Qué no debo hacer?). Mach selbst einfache Fehler, damit Jonas dich korrigieren kann. Benutze ab und zu Subjuntivo-Sätze (Espero que haga buen tiempo, Ojalá podamos ir a la playa).',goal:'Gib Lukas Tipps mit te recomiendo que / es importante que + Subjuntivo, sag, was er nicht tun soll (No vayas…, No dejes…), und äußere Wünsche (Espero que…, Ojalá…).'},
+lessons:[
+{id:'l1',title:'Was ist der Subjuntivo?',desc:'hable · coma · viva',steps:[
+ {t:'info',title:'Eine neue Art, Verben zu benutzen',html:`<p>Der <b>Subjuntivo</b> ist keine Zeit, sondern ein <b>Modus</b>: Er drückt aus, dass etwas nicht als Tatsache gesagt wird, sondern <b>gewünscht, empfohlen, bezweifelt oder gefühlt</b> wird.</p>
+ <table><tr><th>Indikativ (Tatsache)</th><th>Subjuntivo (Wunsch)</th></tr>
+ <tr><td class="es-t">Laia habla español.</td><td class="es-t">Quiero que Laia hable español.</td></tr>
+ <tr><td class="es-t">Hace sol.</td><td class="es-t">Ojalá haga sol.</td></tr></table>
+ <p>Typisch: <b>zwei verschiedene Personen</b> – ich will, dass <b>du</b> …: <span class="es-t">Quiero que (tú) vengas.</span></p>
+ <div class="ex">Gleiche Person → Infinitiv: <span class="es-t">Quiero venir.</span> – nicht <s>quiero que venga</s>.</div>`},
+ {t:'info',title:'Regelmäßige Formen: Endung tauschen',html:`<p>Nimm die <b>yo-Form</b> im Präsens, streich das <b>-o</b>, und tausch den Vokal: -ar → <b>e</b>, -er/-ir → <b>a</b>.</p>
+ <table><tr><th></th><th>hablar</th><th>comer</th><th>vivir</th></tr>
+ <tr><td>yo</td><td class="es-t">hable</td><td class="es-t">coma</td><td class="es-t">viva</td></tr>
+ <tr><td>tú</td><td class="es-t">hables</td><td class="es-t">comas</td><td class="es-t">vivas</td></tr>
+ <tr><td>él / ella / usted</td><td class="es-t">hable</td><td class="es-t">coma</td><td class="es-t">viva</td></tr>
+ <tr><td>nosotros</td><td class="es-t">hablemos</td><td class="es-t">comamos</td><td class="es-t">vivamos</td></tr>
+ <tr><td>vosotros</td><td class="es-t">habléis</td><td class="es-t">comáis</td><td class="es-t">viváis</td></tr>
+ <tr><td>ellos / ustedes</td><td class="es-t">hablen</td><td class="es-t">coman</td><td class="es-t">vivan</td></tr></table>
+ <div class="ex">Kennst du schon! Der <i>usted</i>-Imperativ aus Unidad 13 (<i>tome, beba</i>) ist genau diese Form.</div>`},
+ {t:'conj',verb:'trabajar',de:'arbeiten',tense:'Subjuntivo',forms:['trabaje','trabajes','trabaje','trabajemos','trabajéis','trabajen']},
+ {t:'conj',verb:'escribir',de:'schreiben',tense:'Subjuntivo',forms:['escriba','escribas','escriba','escribamos','escribáis','escriban']},
+ {t:'mc',q:'Quiero que tú ___ más despacio.',opts:['hables','hablas','hablar'],a:0},
+ {t:'mc',q:'Quiero ___ en Barcelona. (ich selbst)',opts:['vivir','que viva','que vivo'],a:0,why:'Gleiche Person → Infinitiv.'},
+ {t:'gap',q:'Mi madre quiere que yo ___ (comer) más verdura.',a:['coma']},
+ {t:'gap',q:'Espero que mis amigos me ___ (escribir) pronto.',a:['escriban']}]},
+{id:'l2',title:'Unregelmäßige Formen',desc:'tenga · haga · sea · vaya',steps:[
+ {t:'info',title:'Von der yo-Form – und sechs Sonderfälle',html:`<p>Ist die yo-Form unregelmäßig, ist es auch der Subjuntivo – <b>in allen Personen</b>:</p>
+ <table><tr><th>yo (Präsens)</th><th>Subjuntivo</th></tr>
+ <tr><td class="es-t">tengo</td><td class="es-t">tenga, tengas …</td></tr>
+ <tr><td class="es-t">hago</td><td class="es-t">haga, hagas …</td></tr>
+ <tr><td class="es-t">vengo / salgo / pongo / digo</td><td class="es-t">venga / salga / ponga / diga</td></tr>
+ <tr><td class="es-t">puedo / quiero</td><td class="es-t">pueda / quiera (aber: podamos, queramos)</td></tr></table>
+ <p><b>Ganz eigene Formen:</b></p>
+ <p class="es-t">ser → sea · ir → vaya · estar → esté · haber → haya · saber → sepa · dar → dé</p>`},
+ {t:'conj',verb:'ir',de:'gehen',tense:'Subjuntivo',forms:['vaya','vayas','vaya','vayamos','vayáis','vayan']},
+ {t:'match',q:'Infinitiv → Subjuntivo (yo)',pairs:[['ser','sea'],['estar','esté'],['tener','tenga'],['hacer','haga'],['saber','sepa'],['haber','haya']]},
+ {t:'gap',q:'Ojalá ___ (hacer) buen tiempo el sábado.',a:['haga']},
+ {t:'gap',q:'Espero que ___ (tú, tener) suerte en el examen.',a:['tengas']},
+ {t:'gap',q:'Quiero que ___ (nosotros, ir) juntos a la playa.',a:['vayamos']},
+ {t:'gap',q:'Ojalá no ___ (haber) mucha gente en el museo.',a:['haya']},
+ {t:'mc',q:'Espero que la fiesta ___ divertida.',opts:['sea','es','esté'],a:0},
+ {t:'listen',es:'Ojalá podamos ir a la playa este fin de semana.',de:'Hoffentlich können wir dieses Wochenende an den Strand gehen.'}]},
+{id:'l3',title:'Wünsche & Empfehlungen',desc:'ojalá · espero que · te recomiendo que',steps:[
+ {t:'vocab',title:'Auslöser für den Subjuntivo',items:[['ojalá','hoffentlich','🤞'],['espero que …','ich hoffe, dass …','🙏'],['quiero que …','ich will, dass …','👉'],['prefiero que …','mir ist lieber, dass …','⚖️'],['te recomiendo que …','ich empfehle dir, dass …','💡'],['te aconsejo que …','ich rate dir, dass …','🧭'],['es importante que …','es ist wichtig, dass …','❗'],['es mejor que …','es ist besser, dass …','👍'],['¡Que te vaya bien!','Mach’s gut! / Viel Erfolg!','🍀'],['¡Que tengas un buen día!','Einen schönen Tag!','☀️'],['¡Que aproveche!','Guten Appetit!','🍽️']]},
+ {t:'info',title:'Kennst du schon: Que …!',html:`<p>Viele feste Wünsche sind Subjuntivo mit <b>que</b> am Anfang – du hast sie schon gelernt:</p>
+ <p class="es-t">¡Que te mejores! · ¡Que lo pases bien! · ¡Que aproveche! · ¡Que tengas suerte!</p>
+ <p>= „(Ich wünsche dir,) dass …“</p>`},
+ {t:'mc',q:'Te recomiendo que ___ el Park Güell temprano.',opts:['visites','visitas','visitar'],a:0},
+ {t:'mc',q:'Es importante que ___ las entradas online.',opts:['compres','compras','comprar'],a:0},
+ {t:'mc',q:'Es importante ___ agua cuando hace calor. (allgemein, keine Person)',opts:['beber','que bebas','que bebes'],a:0,why:'Ohne bestimmte Person → Infinitiv.'},
+ {t:'gap',q:'Te aconsejo que ___ (llevar) una chaqueta, por la noche hace fresco.',a:['lleves']},
+ {t:'gap',q:'Mis padres prefieren que ___ (yo, volver) a Alemania después del máster.',a:['vuelva']},
+ {t:'tr',de:'Hoffentlich regnet es morgen nicht.',a:['Ojalá no llueva mañana.','Ojalá mañana no llueva.']},
+ {t:'tr',de:'Ich empfehle dir, die Metro zu nehmen.',a:['Te recomiendo que tomes el metro.','Te recomiendo que cojas el metro.']},
+ {t:'speak',es:'Espero que te guste Barcelona tanto como a mí.',de:'Ich hoffe, dass dir Barcelona so gut gefällt wie mir.'}]},
+{id:'l4',title:'Mach das nicht!',desc:'no vayas · no dejes · no te preocupes',steps:[
+ {t:'info',title:'Verneinter Imperativ = no + Subjuntivo',html:`<table><tr><th></th><th>bejahend</th><th>verneint</th></tr>
+ <tr><td>tú</td><td class="es-t">habla</td><td class="es-t">no hables</td></tr>
+ <tr><td>tú</td><td class="es-t">ve</td><td class="es-t">no vayas</td></tr>
+ <tr><td>tú</td><td class="es-t">hazlo</td><td class="es-t">no lo hagas</td></tr>
+ <tr><td>usted</td><td class="es-t">venga</td><td class="es-t">no venga</td></tr>
+ <tr><td>vosotros</td><td class="es-t">comed</td><td class="es-t">no comáis</td></tr></table>
+ <div class="ex">Pronomen stehen beim verneinten Imperativ <b>vor</b> dem Verb: <span class="es-t">¡Cómpralo!</span> ↔ <span class="es-t">¡No lo compres!</span> · <span class="es-t">¡No te preocupes!</span></div>`},
+ {t:'mc',q:'„Mach dir keine Sorgen!“',opts:['¡No te preocupes!','¡No preocúpate!','¡No te preocupas!'],a:0},
+ {t:'mc',q:'„Geh nicht allein dorthin!“',opts:['¡No vayas solo!','¡No ve solo!','¡No vas solo!'],a:0},
+ {t:'gap',q:'No ___ (dejar) el móvil en la mesa de la terraza.',a:['dejes']},
+ {t:'gap',q:'¿El taxi? No ___ ___ (lo + tomar), es muy caro. Toma el metro.',a:['lo','tomes']},
+ {t:'read',title:'Consejos para tu primera visita a Barcelona',text:`Si vienes a Barcelona por primera vez, aquí tienes algunos consejos. {Primero que nada|Zuallererst}, te recomiendo que compres una tarjeta de transporte: es mucho más barata que los billetes {sueltos|einzeln}. No lleves la cartera en el bolsillo de atrás, sobre todo en el metro y en las Ramblas, porque hay muchos {carteristas|Taschendiebe}.
+
+Para comer, no vayas a los restaurantes con fotos en el menú; es mejor que busques un bar pequeño en Gràcia o en el Poble-sec. Y no te sorprendas si la gente cena a las diez de la noche. Por último, es importante que digas algunas palabras en catalán: un simple «bon dia» o «gràcies» le gusta a todo el mundo. ¡Que disfrutes de la ciudad!`,de:'Wenn du zum ersten Mal nach Barcelona kommst, hier ein paar Tipps. Zuallererst empfehle ich dir, eine Fahrkarte für den Nahverkehr zu kaufen: Sie ist viel günstiger als Einzeltickets. Trag deinen Geldbeutel nicht in der Gesäßtasche, vor allem in der Metro und auf den Ramblas, denn es gibt viele Taschendiebe.\n\nZum Essen: Geh nicht in Restaurants mit Fotos auf der Speisekarte; besser suchst du dir eine kleine Bar in Gràcia oder im Poble-sec. Und wundere dich nicht, wenn die Leute um zehn Uhr abends essen. Zuletzt ist es wichtig, dass du ein paar Wörter Katalanisch sagst: Ein einfaches „bon dia“ oder „gràcies“ mag jeder. Genieß die Stadt!'},
+ {t:'mc',q:'¿Qué NO debes hacer según el texto?',opts:['llevar la cartera en el bolsillo de atrás','comprar una tarjeta de transporte','decir «gràcies»'],a:0},
+ {t:'free',task:'Lukas kommt nächste Woche. Schreib ihm 5 Tipps für Barcelona: 3 Empfehlungen mit Subjuntivo und 2 Verbote.',hint:'Te recomiendo que … · Es importante que … · Es mejor que … · No vayas … · No dejes …',focus:'Subjuntivo nach Empfehlungen, verneinter Imperativ',model:'¡Hola Lukas! Te recomiendo que traigas ropa ligera, porque todavía hace calor. Es importante que compres la T-casual para el metro. Es mejor que visites la Sagrada Familia por la mañana. No vayas a cenar a las Ramblas, es muy caro. Y no dejes la mochila en la playa sin vigilar. ¡Ojalá tengamos buen tiempo!'}]}
+],
+placement:[
+ {t:'mc',q:'Quiero que tú ___ más despacio.',opts:['hables','hablas','hablar'],a:0},
+ {t:'gap',q:'Ojalá ___ (hacer) buen tiempo mañana.',a:['haga']},
+ {t:'mc',q:'„Mach dir keine Sorgen!“',opts:['¡No te preocupes!','¡No preocúpate!','¡No te preocupas!'],a:0},
+ {t:'mc',q:'Es importante que ___ las entradas online.',opts:['compres','compras','comprar'],a:0},
+ {t:'gap',q:'Espero que la fiesta ___ (ser) divertida.',a:['sea']},
+ {t:'mc',q:'Quiero ___ en Barcelona. (ich selbst)',opts:['vivir','que viva','que vivo'],a:0}],
+resumen:`<h3>Subjuntivo: Formen</h3><table><tr><th>hablar</th><th>comer</th><th>vivir</th></tr><tr><td class="es-t">hable, hables, hable, hablemos, habléis, hablen</td><td class="es-t">coma, comas …</td><td class="es-t">viva, vivas …</td></tr></table>
+<p class="es-t">tenga · haga · venga · salga · diga · pueda — sea · vaya · esté · haya · sepa · dé</p>
+<h3>Auslöser</h3><p class="es-t">ojalá · espero que · quiero que · prefiero que · te recomiendo que · es importante que · es mejor que</p>
+<p>Gleiche Person / allgemein → Infinitiv: <span class="es-t">Quiero vivir aquí. · Es importante beber agua.</span></p>
+<h3>Verneinter Imperativ</h3><p class="es-t">no hables · no vayas · no lo hagas · ¡No te preocupes!</p>`});
+
+/* ================= UNIDAD 17 · HISTORIAS ================= */
+COURSE.units.push({id:'u17',n:'19',level:'B1',title:'Historias',sub:'Plusquamperfekt (había hecho) · alle vier Vergangenheitszeiten im Zusammenspiel · Erzähl-Konnektoren · Anekdoten erzählen & reagieren',
+goals:['Plusquamperfekt: había + Partizip','Vorvergangenheit: Das war schon passiert, als …','Perfekt, Indefinido, Imperfekt, Plusquamperfekt unterscheiden','Konnektoren: mientras, en cuanto, de repente, resulta que …','Spannend erzählen & reagieren','Wiederholung unregelmäßiger Partizipien'],
+situacion:{title:'Anekdoten in der Bar',npc:'Sergio',scene:'Freitagabend in einer Bar im Born. Sergio, ein Kumpel aus dem Master, erzählt gern Geschichten – und will auch deine hören.',role:'Du bist Sergio, 27, aus Zaragoza, Master-Kommilitone von Jonas, lustig und neugierig. Ihr duzt euch. Erzähl eine kurze peinliche Anekdote (mit Plusquamperfekt: cuando llegué, el tren ya había salido…). Frag dann Jonas nach seiner peinlichsten oder lustigsten Geschichte und reagiere lebhaft (¿En serio? ¡Qué fuerte! ¿Y qué pasó después?). Hilf ihm mit Konnektoren.',goal:'Erzähl eine Anekdote mit allen Vergangenheitszeiten, insbesondere einmal mit había + Partizip, und benutze Konnektoren (resulta que, de repente, al final).'},
+lessons:[
+{id:'l1',title:'Das Plusquamperfekt',desc:'había salido · ya habían cerrado',steps:[
+ {t:'info',title:'Noch weiter zurück: había + Partizip',html:`<p>Für etwas, das <b>vor</b> einem anderen Ereignis in der Vergangenheit schon passiert war:</p>
+ <p class="es-t" style="font-size:18px">Cuando llegué a la estación, el tren ya <b>había salido</b>.</p>
+ <p>= Als ich am Bahnhof ankam, <b>war</b> der Zug schon <b>abgefahren</b>.</p>
+ <table><tr><td>yo</td><td class="es-t">había</td></tr><tr><td>tú</td><td class="es-t">habías</td></tr><tr><td>él / ella / usted</td><td class="es-t">había</td></tr><tr><td>nosotros</td><td class="es-t">habíamos</td></tr><tr><td>vosotros</td><td class="es-t">habíais</td></tr><tr><td>ellos / ustedes</td><td class="es-t">habían</td></tr></table>
+ <p>+ Partizip wie beim Perfekt: <span class="es-t">hablado, comido, vivido · hecho, visto, dicho, escrito, puesto, vuelto, roto, abierto</span></p>
+ <div class="ex">Genau wie im Deutschen: <i>war … abgefahren</i> = <i>había salido</i>. Oft mit <b>ya</b> (schon) oder <b>nunca antes</b> (noch nie zuvor).</div>`},
+ {t:'conj',verb:'ver',de:'sehen',tense:'Plusquamperfekt',forms:['había visto','habías visto','había visto','habíamos visto','habíais visto','habían visto']},
+ {t:'mc',q:'Cuando llegamos al cine, la película ya ___.',opts:['había empezado','ha empezado','empezaba'],a:0},
+ {t:'gap',q:'Nunca antes ___ ___ (yo, ver) el mar tan azul.',a:['había','visto']},
+ {t:'gap',q:'Cuando volví a casa, mis compañeros ya ___ ___ (hacer) la cena.',a:['habían','hecho']},
+ {t:'gap',q:'Me dijo que ya ___ ___ (escribir) el informe.',a:['había','escrito']},
+ {t:'tr',de:'Als ich ankam, war das Geschäft schon geschlossen.',a:['Cuando llegué, la tienda ya había cerrado.','Cuando llegué, la tienda ya estaba cerrada.']},
+ {t:'listen',es:'Cuando llegué al aeropuerto, el avión ya había despegado.',de:'Als ich am Flughafen ankam, war das Flugzeug schon gestartet.'}]},
+{id:'l2',title:'Vier Vergangenheiten',desc:'he ido · fui · iba · había ido',steps:[
+ {t:'info',title:'Welche Vergangenheit wofür?',html:`<table><tr><th>Zeit</th><th>wofür</th><th>Beispiel</th></tr>
+ <tr><td>Perfekt</td><td>Zeitraum bis jetzt (hoy, esta semana, nunca)</td><td class="es-t">Hoy he trabajado mucho.</td></tr>
+ <tr><td>Indefinido</td><td>abgeschlossenes Ereignis (ayer, en 2020)</td><td class="es-t">Ayer fui al cine.</td></tr>
+ <tr><td>Imperfekt</td><td>Beschreibung, Gewohnheit, Hintergrund</td><td class="es-t">Hacía frío. Antes iba a pie.</td></tr>
+ <tr><td>Plusquamperfekt</td><td>noch früher als ein anderes Ereignis</td><td class="es-t">Ya había comido.</td></tr></table>`},
+ {t:'mc',q:'Esta mañana ___ un café con Laia.',opts:['he tomado','tomaba','había tomado'],a:0,keep:true},
+ {t:'mc',q:'En 2019 ___ un intercambio en Lyon.',opts:['hice','he hecho','hacía'],a:0,keep:true},
+ {t:'mc',q:'De pequeño ___ al fútbol todos los domingos.',opts:['jugaba','jugué','he jugado'],a:0,keep:true},
+ {t:'mc',q:'No tenía hambre porque ya ___.',opts:['había comido','comí','he comido'],a:0,keep:true},
+ {t:'gap',q:'Ayer ___ (yo, ir) a un concierto. ___ (haber) mucha gente y la música ___ (ser) genial.',a:['fui','había','era']},
+ {t:'gap',q:'Cuando ___ (yo, llegar) a la fiesta, Marc ya se ___ ___ (ir).',a:['llegué','había','ido']},
+ {t:'order',es:'Cuando sonó la alarma, yo ya me había levantado.',de:'Als der Wecker klingelte, war ich schon aufgestanden.'},
+ {t:'tr',de:'Heute habe ich nichts gegessen, weil ich gestern zu viel gegessen hatte.',a:['Hoy no he comido nada porque ayer había comido demasiado.','Hoy no he comido nada porque ayer comí demasiado.']}]},
+{id:'l3',title:'Spannend erzählen',desc:'resulta que · de repente · en cuanto',steps:[
+ {t:'vocab',title:'Konnektoren & Reaktionen',items:[['resulta que …','also, die Sache ist die: …','📖'],['un día','eines Tages','📅'],['mientras','während','⏳'],['en cuanto','sobald','⏱️'],['de repente','plötzlich','⚡'],['en ese momento','in diesem Moment','📍'],['sin embargo','jedoch','↔️'],['así que','also / deshalb','➡️'],['al final','am Ende','🏁'],['¿En serio?','Im Ernst?','😮'],['¡Qué fuerte!','Krass!','😱'],['¿Y qué pasó después?','Und was passierte dann?','❓'],['¡Qué vergüenza!','Wie peinlich!','🙈']]},
+ {t:'mc',q:'Sergio: „Y entonces me di cuenta de que había entrado en el baño de mujeres.“ – Du:',opts:['¡Qué vergüenza!','¡Que aproveche!','¡Enhorabuena!'],a:0},
+ {t:'mc',q:'___ estaba cocinando, escuchaba la radio.',opts:['Mientras','En cuanto','Sin embargo'],a:0},
+ {t:'mc',q:'Perdí las llaves, ___ tuve que llamar a mi compañero de piso.',opts:['así que','mientras','resulta que'],a:0},
+ {t:'gap',q:'En ___ llegué a casa, me fui a dormir.',a:['cuanto']},
+ {t:'dialog',place:'Bar en el Born',title:'Sergios Geschichte',scene:'Sergio erzählt dir eine Anekdote.',lines:[
+  {n:'Sergio',es:'Tío, ¿sabes qué me pasó ayer? Resulta que tenía una entrevista de trabajo a las nueve.',de:'Alter, weißt du, was mir gestern passiert ist? Ich hatte um neun ein Vorstellungsgespräch.'},
+  {you:true,opts:[{es:'¿Y qué pasó?',ok:true},{es:'¿Y qué pasaba?',ok:false,why:'Gefragt ist nach dem Ereignis → Indefinido <b>pasó</b>.'}]},
+  {n:'Sergio',es:'Pues me levanté tardísimo porque no había puesto la alarma.',de:'Na ja, ich bin super spät aufgestanden, weil ich den Wecker nicht gestellt hatte.'},
+  {you:true,opts:[{es:'¡No me digas! ¿Y llegaste a tiempo?',ok:true},{es:'¡No me digas! ¿Y llegabas a tiempo?',ok:false,why:'Einmaliges Ereignis → <b>llegaste</b>.'}]},
+  {n:'Sergio',es:'¡Qué va! Cuando llegué, ya habían empezado con otro candidato. Pero al final me hicieron la entrevista igualmente.',de:'Ach was! Als ich ankam, hatten sie schon mit einem anderen Kandidaten angefangen. Aber am Ende haben sie das Gespräch trotzdem mit mir gemacht.'},
+  {you:true,opts:[{es:'¡Qué fuerte! Bueno, por suerte terminó bien.',ok:true},{es:'¡Qué fuerte! Bueno, por suerte terminaba bien.',ok:false,why:'Das Ende der Geschichte ist ein Ereignis → <b>terminó</b>.'}]}]},
+ {t:'listen',es:'Resulta que mientras estaba esperando el autobús, me encontré con mi antiguo profesor.',de:'Also, während ich auf den Bus wartete, traf ich meinen alten Lehrer.'}]},
+{id:'l4',title:'Deine Anekdote',desc:'Lesen & selbst erzählen',steps:[
+ {t:'read',title:'La llave equivocada',text:`El verano pasado, mi amiga Paula se mudó a un piso nuevo en Valencia. El primer día, {después de|nachdem} haber trabajado diez horas, volvió a casa muy cansada. Era medianoche y llovía mucho. Abrió la puerta del {portal|Hauseingang}, subió al tercer piso e intentó abrir la puerta, pero la llave no {funcionaba|funktionierte}.
+
+Lo intentó una y otra vez. De repente, la puerta se abrió y apareció un señor mayor en pijama. Paula no entendía nada. Resulta que se había equivocado de edificio: su piso estaba en el portal de al lado. ¡Qué vergüenza! El señor, sin embargo, fue muy amable y le ofreció un {paraguas|Regenschirm}. Ahora son buenos vecinos y, cada vez que se ven, se ríen de aquella noche.`,de:'Letzten Sommer zog meine Freundin Paula in eine neue Wohnung in Valencia. Am ersten Tag kam sie, nachdem sie zehn Stunden gearbeitet hatte, sehr müde nach Hause. Es war Mitternacht und es regnete stark. Sie öffnete die Haustür, ging in den dritten Stock und versuchte, die Tür aufzuschließen, aber der Schlüssel funktionierte nicht.\n\nSie versuchte es immer wieder. Plötzlich ging die Tür auf und ein älterer Herr im Schlafanzug erschien. Paula verstand gar nichts. Es stellte sich heraus, dass sie sich im Gebäude geirrt hatte: Ihre Wohnung war im Eingang nebenan. Wie peinlich! Der Herr war jedoch sehr freundlich und bot ihr einen Regenschirm an. Jetzt sind sie gute Nachbarn und jedes Mal, wenn sie sich sehen, lachen sie über jene Nacht.'},
+ {t:'mc',q:'¿Por qué no funcionaba la llave?',opts:['Paula se había equivocado de edificio.','La llave estaba rota.','El señor había cambiado la puerta.'],a:0},
+ {t:'mc',q:'„Era medianoche y llovía mucho“ – warum Imperfekt?',opts:['Es la descripción de la situación.','Son acciones nuevas en la historia.','Pasó antes de otra acción.'],a:0},
+ {t:'mc',q:'„se había equivocado“ – warum Plusquamperfekt?',opts:['Pasó antes del momento de la historia.','Es una costumbre.','Es una descripción del tiempo.'],a:0},
+ {t:'free',task:'Erzähl eine kleine Anekdote (lustig oder peinlich, 6–8 Sätze). Benutze Imperfekt, Indefinido und mindestens einmal das Plusquamperfekt, dazu 3 Konnektoren.',hint:'Resulta que … · Era … / Hacía … · Un día … · De repente … · Ya había … · Al final …',focus:'4 Vergangenheitszeiten, Konnektoren',model:'Resulta que el año pasado tenía un examen muy importante en la DHBW. Era invierno y hacía mucho frío. Aquella mañana salí de casa tarde porque no había oído la alarma. Mientras corría a la estación, empezó a nevar. Cuando llegué, el tren ya había salido, así que tomé un taxi. Al final llegué a tiempo, pero de repente me di cuenta de que había olvidado mi bolígrafo. ¡Qué vergüenza! Por suerte, una compañera me prestó uno.'},
+ {t:'speak',es:'Cuando llegué a la estación, el tren ya había salido.',de:'Als ich am Bahnhof ankam, war der Zug schon abgefahren.'}]}
+],
+placement:[
+ {t:'mc',q:'Cuando llegamos al cine, la película ya ___.',opts:['había empezado','ha empezado','empezaba'],a:0},
+ {t:'gap',q:'Nunca antes ___ ___ (yo, ver) algo así.',a:['había','visto']},
+ {t:'mc',q:'De pequeño ___ al fútbol todos los domingos.',opts:['jugaba','jugué','he jugado'],a:0},
+ {t:'mc',q:'___ estaba cocinando, escuchaba la radio.',opts:['Mientras','En cuanto','Así que'],a:0},
+ {t:'mc',q:'No tenía hambre porque ya ___.',opts:['había comido','comí','he comido'],a:0},
+ {t:'gap',q:'Cuando volví, mis compañeros ya ___ ___ (hacer) la cena.',a:['habían','hecho']}],
+resumen:`<h3>Plusquamperfekt</h3><p class="es-t">había / habías / había / habíamos / habíais / habían + Partizip</p><p class="es-t">Cuando llegué, el tren ya había salido.</p>
+<h3>Vier Vergangenheiten</h3><table><tr><td>Perfekt</td><td class="es-t">Hoy he trabajado mucho.</td></tr><tr><td>Indefinido</td><td class="es-t">Ayer fui al cine.</td></tr><tr><td>Imperfekt</td><td class="es-t">Hacía frío. Antes iba a pie.</td></tr><tr><td>Plusquamperfekt</td><td class="es-t">Ya había comido.</td></tr></table>
+<h3>Erzählen</h3><p class="es-t">resulta que · un día · mientras · en cuanto · de repente · sin embargo · así que · al final</p><p class="es-t">¿En serio? · ¡Qué fuerte! · ¿Y qué pasó después? · ¡Qué vergüenza!</p>`});
+
+/* ================= UNIDAD 18 · SI TENGO TIEMPO ================= */
+COURSE.units.push({id:'u18',n:'20',level:'B1',title:'Si tengo tiempo…',sub:'Bedingungen (si + Präsens) · Konditional (haría, tendría) · Ratschläge: yo en tu lugar … · Hypothesen über die Gegenwart',
+goals:['si + Präsens → Präsens / Futur / Imperativ','Konditional: regelmäßig (trabajaría)','Konditional: unregelmäßig (tendría, haría, podría, diría)','Yo en tu lugar … / Yo que tú …','Höfliche Bitten & Vorschläge','Wohnungs- & WG-Probleme lösen'],
+situacion:{title:'WG-Krisensitzung',npc:'Nuria',scene:'In eurer WG gibt es Ärger: Die Küche ist nie sauber und es ist nachts laut. Nuria will das mit dir besprechen.',role:'Du bist Nuria, Mitbewohnerin von Jonas, direkt aber fair. Ihr duzt euch. Sprich die Probleme an (la cocina siempre está sucia, Pablo pone música hasta las dos…). Mach Vorschläge mit Bedingungen (Si cada uno limpia una semana, …) und frag Jonas nach seiner Meinung (¿Tú qué harías?). Benutze Konditional (Yo en tu lugar hablaría con Pablo).',goal:'Schlag Lösungen mit si + Präsens vor, gib Ratschläge mit „Yo en tu lugar / Yo que tú + Konditional“ und reagiere höflich auf Nurias Vorschläge.'},
+lessons:[
+{id:'l1',title:'Wenn …, dann …',desc:'si llueve, nos quedamos',steps:[
+ {t:'info',title:'Reale Bedingungen: si + Präsens',html:`<p>Wenn etwas wirklich passieren kann:</p>
+ <table><tr><th>si + Präsens</th><th>Folge</th></tr>
+ <tr><td class="es-t">Si llueve,</td><td class="es-t">nos quedamos en casa. (Präsens)</td></tr>
+ <tr><td class="es-t">Si tengo tiempo,</td><td class="es-t">iré a la playa. (Futur)</td></tr>
+ <tr><td class="es-t">Si tienes hambre,</td><td class="es-t">come algo. (Imperativ)</td></tr></table>
+ <div class="ex">Nach <b>si</b> (wenn/falls) <b>nie</b> Futur: <s>si lloverá</s> → <b>si llueve</b>. Wie im Deutschen: „Wenn es regnet“, nicht „wenn es regnen wird“.</div>`},
+ {t:'mc',q:'Si ___ buen tiempo, iremos a Montjuïc.',opts:['hace','hará','haga'],a:0},
+ {t:'mc',q:'Si estás cansado, ___ un rato.',opts:['descansa','descansaste','descansabas'],a:0},
+ {t:'gap',q:'Si ___ (tú, venir) a Mannheim, te ___ (yo, enseñar) la ciudad. (Futur)',a:['vienes','enseñaré']},
+ {t:'gap',q:'Si no ___ (nosotros, salir) ahora, ___ (perder) el tren. (Futur)',a:['salimos','perderemos']},
+ {t:'order',es:'Si tengo tiempo este fin de semana, te llamo.',de:'Wenn ich dieses Wochenende Zeit habe, rufe ich dich an.'},
+ {t:'tr',de:'Wenn du Fragen hast, schreib mir.',a:['Si tienes preguntas, escríbeme.','Si tienes dudas, escríbeme.']},
+ {t:'listen',es:'Si llueve mañana, iremos al museo.',de:'Wenn es morgen regnet, gehen wir ins Museum.'}]},
+{id:'l2',title:'Der Konditional',desc:'trabajaría · tendría · haría',steps:[
+ {t:'info',title:'Konditional: Infinitiv + -ía',html:`<table><tr><th></th><th>viajar</th></tr>
+ <tr><td>yo</td><td class="es-t">viajar<b>ía</b></td></tr><tr><td>tú</td><td class="es-t">viajar<b>ías</b></td></tr><tr><td>él / ella / usted</td><td class="es-t">viajar<b>ía</b></td></tr>
+ <tr><td>nosotros</td><td class="es-t">viajar<b>íamos</b></td></tr><tr><td>vosotros</td><td class="es-t">viajar<b>íais</b></td></tr><tr><td>ellos / ustedes</td><td class="es-t">viajar<b>ían</b></td></tr></table>
+ <p><b>Unregelmäßig</b> – gleiche Stämme wie beim Futur (Unidad 17):</p>
+ <p class="es-t">tendría · pondría · saldría · vendría · podría · sabría · haría · diría · querría · habría</p>
+ <div class="ex">Konditional = „würde“: <span class="es-t">Con más dinero viajaría más.</span> – Mit mehr Geld würde ich mehr reisen.</div>`},
+ {t:'conj',verb:'hacer',de:'machen',tense:'Konditional',forms:['haría','harías','haría','haríamos','haríais','harían']},
+ {t:'match',q:'Futur ↔ Konditional',pairs:[['tendré','tendría'],['saldré','saldría'],['diré','diría'],['podré','podría'],['vendré','vendría']]},
+ {t:'gap',q:'Con más tiempo, ___ (yo, aprender) a tocar la guitarra.',a:['aprendería']},
+ {t:'gap',q:'¿Qué ___ (tú, hacer) con un millón de euros?',a:['harías']},
+ {t:'gap',q:'Nosotros ___ (vivir) en la playa, pero es muy caro.',a:['viviríamos']},
+ {t:'tr',de:'Ich würde gern mehr reisen, aber ich habe keine Zeit.',a:['Me gustaría viajar más, pero no tengo tiempo.','Viajaría más, pero no tengo tiempo.']}]},
+{id:'l3',title:'Ich an deiner Stelle …',desc:'yo en tu lugar · yo que tú',steps:[
+ {t:'vocab',title:'Rat geben & Probleme',items:[['yo en tu lugar …','ich an deiner Stelle …','🔄'],['yo que tú …','wenn ich du wäre …','🔄'],['¿Tú qué harías?','Was würdest du tun?','🤔'],['sería mejor + Inf.','es wäre besser, …','👍'],['podrías + Inf.','du könntest …','💡'],['el compañero de piso','der Mitbewohner','🧑‍🤝‍🧑'],['las tareas de casa','die Hausarbeit','🧹'],['fregar los platos','abspülen','🍽️'],['sacar la basura','den Müll rausbringen','🗑️'],['el ruido','der Lärm','🔊'],['quejarse (de)','sich beschweren (über)','😤'],['llegar a un acuerdo','sich einigen','🤝']]},
+ {t:'info',title:'Ratschläge mit Konditional',html:`<p class="es-t">Yo en tu lugar hablaría con él. · Yo que tú no diría nada.</p>
+ <p class="es-t">Podrías hacer un plan de limpieza. · Sería mejor llegar a un acuerdo.</p>
+ <div class="ex">Das ist weicher als <i>tienes que</i> und weniger direkt als der Imperativ. Perfekt für heikle Themen.</div>`},
+ {t:'mc',q:'Mein Mitbewohner macht nachts Lärm. – Yo en tu lugar ___ con él.',opts:['hablaría','hablaré','hable'],a:0},
+ {t:'mc',q:'„Was würdest du tun?“',opts:['¿Tú qué harías?','¿Tú qué harás?','¿Tú qué hacías?'],a:0},
+ {t:'gap',q:'Yo que tú no ___ (decir) nada todavía.',a:['diría']},
+ {t:'gap',q:'___ (tú, poder) hacer un plan para las tareas de casa.',a:['Podrías']},
+ {t:'dialog',place:'Cocina del piso',title:'WG-Krisensitzung',scene:'Nuria will über die Küche reden.',lines:[
+  {n:'Nuria',es:'Jonas, tenemos que hablar. La cocina siempre está sucia y nadie friega los platos.',de:'Jonas, wir müssen reden. Die Küche ist immer dreckig und niemand spült ab.'},
+  {you:true,opts:[{es:'Tienes razón. Podríamos hacer un plan de limpieza.',ok:true},{es:'Tienes razón. Podremos hacer un plan de limpieza si.',ok:false,why:'Vorschlag → Konditional <b>podríamos</b>.'}]},
+  {n:'Nuria',es:'Buena idea. ¿Y qué hacemos con Pablo y su música a las dos de la mañana?',de:'Gute Idee. Und was machen wir mit Pablo und seiner Musik um zwei Uhr morgens?'},
+  {you:true,opts:[{es:'Yo en tu lugar hablaría con él directamente.',ok:true},{es:'Yo en tu lugar hablaré con él directamente.',ok:false,why:'„An deiner Stelle würde ich …“ → Konditional <b>hablaría</b>.'}]},
+  {n:'Nuria',es:'¿Y si no cambia nada?',de:'Und wenn sich nichts ändert?'},
+  {you:true,opts:[{es:'Si no cambia nada, hablaremos con el casero.',ok:true},{es:'Si no cambiará nada, hablaremos con el casero.',ok:false,why:'Nach <b>si</b> kein Futur: <i>si no cambia</i>.'}]}]},
+ {t:'tr',de:'An deiner Stelle würde ich den Müll rausbringen.',a:['Yo en tu lugar sacaría la basura.','Yo que tú sacaría la basura.']},
+ {t:'speak',es:'Yo en tu lugar hablaría con él. Seguro que llegáis a un acuerdo.',de:'Ich an deiner Stelle würde mit ihm reden. Bestimmt einigt ihr euch.'}]},
+{id:'l4',title:'Consultorio',desc:'Ratgeber-Kolumne lesen & antworten',steps:[
+ {t:'read',title:'Consultorio: «Mi compañera de piso no limpia nunca»',text:`Hola, me llamo Andrea, tengo 23 años y vivo en Madrid con otras dos chicas. Mi problema es Carla: nunca limpia, deja la ropa por todas partes y {encima|obendrein} usa mis cosas sin preguntar. Ya le he dicho dos veces que me molesta, pero no cambia nada. ¿Qué haría usted?
+
+Querida Andrea: Entiendo que estés harta. Yo en tu lugar organizaría una reunión con las tres. Si habláis todas juntas, Carla verá que no es solo tu problema. Podríais hacer un plan con las tareas de cada semana y ponerlo en la {nevera|Kühlschrank}. Y si usa tus cosas, díselo en el momento, con calma. Si después de un mes todo sigue igual, sería mejor buscar otro piso: la {convivencia|das Zusammenleben} es muy importante para estar bien.`,de:'Hallo, ich heiße Andrea, bin 23 und wohne in Madrid mit zwei anderen Mädchen. Mein Problem ist Carla: Sie putzt nie, lässt ihre Klamotten überall liegen und benutzt obendrein meine Sachen, ohne zu fragen. Ich habe ihr schon zweimal gesagt, dass mich das stört, aber es ändert sich nichts. Was würden Sie tun?\n\nLiebe Andrea, ich verstehe, dass du es satt hast. Ich an deiner Stelle würde ein Treffen mit allen dreien organisieren. Wenn ihr alle zusammen redet, wird Carla sehen, dass es nicht nur dein Problem ist. Ihr könntet einen Plan mit den Aufgaben jeder Woche machen und ihn an den Kühlschrank hängen. Und wenn sie deine Sachen benutzt, sag es ihr sofort, ganz ruhig. Wenn nach einem Monat alles gleich ist, wäre es besser, eine andere Wohnung zu suchen: Das Zusammenleben ist sehr wichtig, um sich wohlzufühlen.'},
+ {t:'mc',q:'¿Qué le recomienda primero la consejera?',opts:['organizar una reunión con las tres','buscar otro piso','no decir nada'],a:0},
+ {t:'mc',q:'„Si habláis todas juntas, Carla verá …“ – welche Struktur?',opts:['si + Präsens → Futur','si + Futur → Präsens','si + Konditional → Futur'],a:0},
+ {t:'gap',q:'Si después de un mes todo ___ (seguir) igual, ___ (ser) mejor buscar otro piso.',a:['sigue','sería']},
+ {t:'free',task:'Antworte auf diesen Brief: „Mi jefe me escribe correos a las once de la noche y espera respuesta enseguida. ¿Qué haría usted?“ (5–6 Sätze)',hint:'Yo en tu lugar … · Podrías … · Si tu jefe … · Sería mejor …',focus:'Konditional, si + Präsens',model:'Querido amigo: Yo en tu lugar hablaría con tu jefe en una reunión tranquila. Podrías explicarle que necesitas descansar por la noche para trabajar bien. Si te escribe tarde, no contestes hasta el día siguiente. Yo que tú también miraría tu contrato. Si nada cambia, sería mejor hablar con recursos humanos.'}]}
+],
+placement:[
+ {t:'mc',q:'Si ___ buen tiempo, iremos a la playa.',opts:['hace','hará','haría'],a:0},
+ {t:'mc',q:'„Was würdest du tun?“',opts:['¿Tú qué harías?','¿Tú qué harás?','¿Tú qué hacías?'],a:0},
+ {t:'gap',q:'Yo en tu lugar ___ (hablar) con él.',a:['hablaría']},
+ {t:'gap',q:'Con más dinero ___ (yo, tener) un coche.',a:['tendría']},
+ {t:'mc',q:'Si tienes hambre, ___ algo.',opts:['come','comerías','comiste'],a:0},
+ {t:'gap',q:'Yo que tú no ___ (decir) nada.',a:['diría']}],
+resumen:`<h3>Reale Bedingung</h3><p class="es-t">Si llueve, nos quedamos en casa. · Si tengo tiempo, iré. · Si tienes hambre, come algo.</p><p>Nach <b>si</b> nie Futur!</p>
+<h3>Konditional</h3><p class="es-t">viajaría · viajarías · viajaría · viajaríamos · viajaríais · viajarían</p><p class="es-t">tendría · pondría · saldría · vendría · podría · sabría · haría · diría · querría · habría</p>
+<h3>Ratschläge</h3><p class="es-t">Yo en tu lugar … · Yo que tú … · Podrías … · Sería mejor … · ¿Tú qué harías?</p>`});
+;
+/* ===== B1 Teil 1 (Rest) & Teil 2: Unidad 21–25 – eigene Inhalte nach dem Plan Curricular (Instituto Cervantes) ===== */
+
+COURSE.units.push({id:'u19',n:'21',level:'B1',title:'¿Tú qué opinas?',sub:'Meinung sagen (creo que / no creo que) · Zweifel & Wahrscheinlichkeit (quizá, es posible que) · diskutieren & widersprechen',
+goals:['creo que + Indikativ / no creo que + Subjuntivo','me parece que / no me parece que','quizá, tal vez, puede que, es posible que','a lo mejor + Indikativ','es verdad que / no es verdad que','Diskutieren: zustimmen, widersprechen, abwägen'],
+situacion:{title:'Diskussion über Tourismus',npc:'Laia',scene:'Du sitzt mit Laia auf einer Terrasse in der Barceloneta. Überall Touristen. Laia hat eine klare Meinung zum Thema Tourismus in Barcelona – du sollst deine sagen.',role:'Du bist Laia, Studentin aus Barcelona, freundlich, aber meinungsstark. Ihr duzt euch. Du findest, dass es zu viele Touristen gibt (pisos turísticos, precios, ruido). Frag Jonas nach seiner Meinung (¿Tú qué opinas? ¿No crees que…?). Widersprich ihm manchmal höflich (No estoy de acuerdo, pero…), damit er argumentieren muss. Benutze creo que / no creo que + Subjuntivo, es posible que.',goal:'Sag deine Meinung mit creo que / no creo que, wäge ab (por un lado … por otro …) und widersprich Laia höflich mindestens einmal.'},
+lessons:[
+{id:'l1',title:'Ich glaube (nicht), dass …',desc:'creo que es · no creo que sea',steps:[
+ {t:'info',title:'Meinung: bejaht → Indikativ, verneint → Subjuntivo',html:`<table><tr><th>bejaht: Indikativ</th><th>verneint: Subjuntivo</th></tr>
+ <tr><td class="es-t">Creo que <b>es</b> caro.</td><td class="es-t">No creo que <b>sea</b> caro.</td></tr>
+ <tr><td class="es-t">Pienso que <b>tienes</b> razón.</td><td class="es-t">No pienso que <b>tengas</b> razón.</td></tr>
+ <tr><td class="es-t">Me parece que <b>va</b> a llover.</td><td class="es-t">No me parece que <b>vaya</b> a llover.</td></tr></table>
+ <div class="ex">Die Logik: Mit <i>creo que</i> sagst du, was du für wahr hältst → Indikativ. Mit <i>no creo que</i> stellst du es in Frage → Subjuntivo.</div>
+ <div class="ojo">Fragen mit <i>¿No crees que …?</i> bleiben meist im Indikativ: <span class="es-t">¿No crees que es demasiado caro?</span> – du erwartest ja ein „Doch!“.</div>`},
+ {t:'mc',q:'Creo que Barcelona ___ una ciudad muy cara.',opts:['es','sea','será'],a:0},
+ {t:'mc',q:'No creo que el metro ___ caro.',opts:['sea','es','está'],a:0},
+ {t:'gap',q:'No pienso que ___ (ellos, tener) razón.',a:['tengan']},
+ {t:'gap',q:'Me parece que Pablo ___ (estar) cansado.',a:['está']},
+ {t:'gap',q:'No me parece que ___ (ser) una buena idea.',a:['sea']},
+ {t:'order',es:'No creo que haya tantos turistas en invierno.',de:'Ich glaube nicht, dass es im Winter so viele Touristen gibt.'},
+ {t:'tr',de:'Ich glaube nicht, dass er heute kommt.',a:['No creo que venga hoy.','No creo que él venga hoy.']},
+ {t:'listen',es:'Creo que tienes razón, pero no creo que sea tan fácil.',de:'Ich glaube, du hast recht, aber ich glaube nicht, dass es so einfach ist.'}]},
+{id:'l2',title:'Vielleicht …',desc:'quizá · es posible que · a lo mejor',steps:[
+ {t:'info',title:'Wie sicher bist du?',html:`<table><tr><th>Ausdruck</th><th>Modus</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">quizá(s) / tal vez</td><td>meist Subj.</td><td class="es-t">Quizá llueva mañana.</td></tr>
+ <tr><td class="es-t">puede que</td><td>Subj.</td><td class="es-t">Puede que llegue tarde.</td></tr>
+ <tr><td class="es-t">es posible / probable que</td><td>Subj.</td><td class="es-t">Es posible que tengas razón.</td></tr>
+ <tr><td class="es-t">a lo mejor</td><td><b>immer Ind.</b></td><td class="es-t">A lo mejor viene Laia.</td></tr></table>
+ <div class="ex">Gewissheit → Indikativ: <span class="es-t">Es verdad que / Está claro que / Es seguro que</span> + Ind. Verneint (<span class="es-t">no es verdad que</span>) → Subjuntivo.</div>`},
+ {t:'mc',q:'A lo mejor ___ al cine esta noche.',opts:['vamos','vayamos','iremos a'],a:0},
+ {t:'mc',q:'Es posible que el museo ___ cerrado los lunes.',opts:['esté','está','es'],a:0},
+ {t:'mc',q:'Está claro que la ciudad ___ demasiados turistas.',opts:['tiene','tenga','tendría'],a:0},
+ {t:'gap',q:'Puede que ___ (nosotros, llegar) un poco tarde.',a:['lleguemos']},
+ {t:'gap',q:'No es verdad que los catalanes no ___ (hablar) español.',a:['hablen']},
+ {t:'match',q:'Was passt?',pairs:[['a lo mejor','+ Indikativ'],['puede que','+ Subjuntivo'],['es verdad que','+ Indikativ'],['no es verdad que','+ Subjuntivo']]},
+ {t:'tr',de:'Vielleicht hast du recht. (quizá)',a:['Quizá tengas razón.','Quizás tengas razón.','Tal vez tengas razón.']},
+ {t:'speak',es:'Es posible que tengas razón, pero a lo mejor hay otra solución.',de:'Es kann sein, dass du recht hast, aber vielleicht gibt es eine andere Lösung.'}]},
+{id:'l3',title:'Diskutieren',desc:'estar de acuerdo · por un lado …',steps:[
+ {t:'vocab',title:'Meinung & Diskussion',items:[['en mi opinión','meiner Meinung nach','💬'],['desde mi punto de vista','aus meiner Sicht','👁️'],['(no) estoy de acuerdo','ich bin (nicht) einverstanden','🤝'],['tienes razón','du hast recht','✅'],['depende','das kommt darauf an','⚖️'],['por un lado … por otro (lado)','einerseits … andererseits','⚖️'],['sin embargo','jedoch','↩️'],['además','außerdem','➕'],['el piso turístico','die Ferienwohnung','🏠'],['el alquiler','die Miete','💶'],['subir (los precios)','steigen','📈'],['el vecino','der Nachbar','🏘️']]},
+ {t:'info',title:'Höflich widersprechen',html:`<p class="es-t">Entiendo lo que dices, pero … · Sí, pero por otro lado … · No estoy del todo de acuerdo.</p>
+ <div class="ex">Spanier diskutieren gern lebhaft und unterbrechen sich auch mal – das ist nicht unhöflich. Ein <span class="es-t">¿no?</span> oder <span class="es-t">¿verdad?</span> am Satzende holt den anderen ins Boot.</div>`},
+ {t:'mc',q:'„Einerseits … andererseits …“',opts:['por un lado … por otro …','primero … después …','o … o …'],a:0},
+ {t:'gap',q:'No estoy ___ acuerdo contigo.',a:['de']},
+ {t:'dialog',place:'Terraza en la Barceloneta',title:'Zu viele Touristen?',scene:'Laia zeigt auf die vollen Straßen.',lines:[
+  {n:'Laia',es:'Mira, todo lleno de turistas. Creo que en Barcelona ya hay demasiados. ¿Tú qué opinas?',de:'Schau, alles voller Touristen. Ich glaube, in Barcelona gibt es schon zu viele. Was meinst du?'},
+  {you:true,opts:[{es:'Por un lado tienes razón, pero no creo que el turismo sea solo malo.',ok:true},{es:'Por un lado tienes razón, pero no creo que el turismo es solo malo.',ok:false,why:'Nach <b>no creo que</b> → Subjuntivo: <i>sea</i>.'}]},
+  {n:'Laia',es:'Ya, trae dinero. Pero los alquileres suben y los vecinos se van del centro.',de:'Klar, er bringt Geld. Aber die Mieten steigen und die Nachbarn ziehen aus dem Zentrum weg.'},
+  {you:true,opts:[{es:'Es verdad que los alquileres son muy caros. Quizá la ciudad deba controlar los pisos turísticos.',ok:true},{es:'Es verdad que los alquileres sean muy caros. Quizá la ciudad deba controlar los pisos turísticos.',ok:false,why:'<b>Es verdad que</b> (Gewissheit) → Indikativ: <i>son</i>.'}]},
+  {n:'Laia',es:'¡Exacto! Veo que estamos de acuerdo.',de:'Genau! Ich sehe, wir sind uns einig.'}]},
+ {t:'tr',de:'Meiner Meinung nach sind die Mieten zu hoch.',a:['En mi opinión, los alquileres son demasiado altos.','En mi opinión los alquileres son demasiado caros.','En mi opinión, los alquileres son demasiado caros.']},
+ {t:'speak',es:'Entiendo lo que dices, pero no estoy del todo de acuerdo.',de:'Ich verstehe, was du sagst, aber ich bin nicht ganz einverstanden.'}]},
+{id:'l4',title:'Lesen: ¿Demasiados turistas?',desc:'Zeitungsartikel · eigene Meinung',steps:[
+ {t:'read',title:'¿Demasiados turistas?',text:`Barcelona recibe cada año a millones de visitantes. Para muchos negocios, el turismo es {imprescindible|unverzichtbar}: hoteles, bares y tiendas viven de él. Sin embargo, cada vez más vecinos se quejan. En barrios como la Barceloneta o el Gòtic, muchos pisos se han convertido en pisos turísticos y los alquileres han subido tanto que las familias tienen que irse.
+
+«No creo que el problema sean los turistas», dice Marta, que tiene una pequeña librería en Gràcia. «El problema es que no hay {límites|Grenzen}». Otros piensan que la ciudad debería cobrar más impuestos a los visitantes. Es posible que la solución esté en un {equilibrio|Gleichgewicht}: un turismo que respete la vida de los barrios.`,de:`Barcelona empfängt jedes Jahr Millionen Besucher. Für viele Geschäfte ist der Tourismus unverzichtbar: Hotels, Bars und Läden leben davon. Trotzdem beschweren sich immer mehr Anwohner. In Vierteln wie der Barceloneta oder dem Gòtic sind viele Wohnungen zu Ferienwohnungen geworden, und die Mieten sind so stark gestiegen, dass Familien wegziehen müssen.\n\n„Ich glaube nicht, dass die Touristen das Problem sind“, sagt Marta, die einen kleinen Buchladen in Gràcia hat. „Das Problem ist, dass es keine Grenzen gibt.“ Andere meinen, die Stadt sollte von den Besuchern mehr Steuern verlangen. Es kann sein, dass die Lösung in einem Gleichgewicht liegt: einem Tourismus, der das Leben in den Vierteln respektiert.`},
+ {t:'mc',q:'¿Por qué se quejan los vecinos?',opts:['Porque los alquileres han subido mucho.','Porque no hay hoteles.','Porque los turistas no gastan dinero.'],a:0},
+ {t:'mc',q:'¿Qué piensa Marta?',opts:['Que el problema es la falta de límites.','Que hay que prohibir el turismo.','Que los turistas son el problema.'],a:0},
+ {t:'gap',q:'Es posible que la solución ___ (estar) en un equilibrio.',a:['esté']},
+ {t:'free',task:'¿Qué opinas del turismo en tu ciudad o en Barcelona? Escribe 5–6 frases.',hint:'En mi opinión … · Creo que … · No creo que … · Por un lado … por otro … · Es posible que …',focus:'creo que + Ind. / no creo que + Subj., Diskussionsmittel',model:'En mi opinión, el turismo es bueno para la economía de Barcelona. Por un lado, crea muchos trabajos. Por otro, no creo que sea bueno tener tantos pisos turísticos en el centro. Creo que la ciudad debería limitarlos. Es posible que así los alquileres bajen un poco. Además, a lo mejor los turistas pueden visitar también otros barrios.'}]}
+],
+placement:[
+ {t:'mc',q:'No creo que ___ tan difícil.',opts:['sea','es','será'],a:0},
+ {t:'mc',q:'A lo mejor ___ mañana.',opts:['llueve','llueva','lloviera'],a:0},
+ {t:'gap',q:'Creo que tú ___ (tener) razón.',a:['tienes']},
+ {t:'gap',q:'Es posible que ___ (ellos, venir) más tarde.',a:['vengan']},
+ {t:'mc',q:'„Einerseits … andererseits …“',opts:['por un lado … por otro …','sin embargo … además …','o sea … pues …'],a:0},
+ {t:'mc',q:'Está claro que el piso ___ caro.',opts:['es','sea','esté'],a:0}],
+resumen:`<h3>Meinung</h3><table><tr><th>Indikativ</th><th>Subjuntivo</th></tr><tr><td class="es-t">Creo que es · Pienso que tiene · Me parece que va</td><td class="es-t">No creo que sea · No pienso que tenga · No me parece que vaya</td></tr></table>
+<h3>Wahrscheinlichkeit</h3><p class="es-t">quizá / tal vez / puede que / es posible que + Subj. · a lo mejor + Ind.</p><p class="es-t">es verdad / está claro que + Ind. · no es verdad que + Subj.</p>
+<h3>Diskutieren</h3><p class="es-t">En mi opinión … · Desde mi punto de vista … · (No) estoy de acuerdo · Por un lado … por otro … · Sin embargo … · Entiendo lo que dices, pero …</p>`});
+
+COURSE.units.push({id:'u20',n:'22',level:'B1b',title:'Cuando llegues…',sub:'Zeitsätze mit Subjuntivo (cuando llegues, hasta que, antes de que) · Zweck (para que) · Pläne fürs Ende des Auslandssemesters',
+goals:['cuando + Subjuntivo (Zukunft) vs. cuando + Indikativ (Gewohnheit)','en cuanto, hasta que, antes de que, después de que','para + Infinitiv / para que + Subjuntivo','Pläne und Bedingungen in der Zukunft','Abschied & Kontakt halten'],
+situacion:{title:'Abschiedspläne',npc:'Marc',scene:'Dein Auslandssemester geht bald zu Ende. Marc, dein Kommilitone, will wissen, was du nach der Rückkehr nach Deutschland vorhast und wann ihr euch wiederseht.',role:'Du bist Marc, Student aus Barcelona, herzlich und neugierig. Ihr duzt euch. Frag Jonas nach seinen Plänen (¿Qué vas a hacer cuando vuelvas a Alemania?), wann er wiederkommt, und schlag vor, in Kontakt zu bleiben. Benutze cuando / en cuanto / antes de que + Subjuntivo und para que.',goal:'Erzähl von deinen Plänen mit cuando / en cuanto + Subjuntivo und erkläre mit para que, warum ihr in Kontakt bleiben solltet.'},
+lessons:[
+{id:'l1',title:'Wenn ich ankomme …',desc:'cuando llegue · cuando llego',steps:[
+ {t:'info',title:'cuando: Zukunft → Subjuntivo',html:`<table><tr><th>Bedeutung</th><th>Modus</th><th>Beispiel</th></tr>
+ <tr><td>Gewohnheit / immer</td><td>Indikativ</td><td class="es-t">Cuando <b>llego</b> a casa, me ducho.</td></tr>
+ <tr><td>Vergangenheit</td><td>Indikativ</td><td class="es-t">Cuando <b>llegué</b>, no había nadie.</td></tr>
+ <tr><td><b>Zukunft</b></td><td><b>Subjuntivo</b></td><td class="es-t">Cuando <b>llegues</b>, llámame.</td></tr></table>
+ <div class="ojo">Nie Futur nach <i>cuando</i>: <s>cuando llegarás</s> → <b>cuando llegues</b>. (Im Deutschen geht beides: „wenn du ankommst“.)</div>`},
+ {t:'mc',q:'Cuando ___ a Mannheim, te escribo.',opts:['vuelva','vuelvo','volveré'],a:0},
+ {t:'mc',q:'Normalmente, cuando ___ cansado, me acuesto pronto.',opts:['estoy','esté','estaré'],a:0},
+ {t:'mc',q:'Cuando ___ pequeño, vivía en Hamburgo.',opts:['era','sea','fuera a'],a:0},
+ {t:'gap',q:'Cuando ___ (tú, tener) tiempo, ven a verme.',a:['tengas']},
+ {t:'gap',q:'Cuando ___ (nosotros, terminar) el máster, buscaremos trabajo.',a:['terminemos']},
+ {t:'order',es:'Cuando sepa la fecha, te lo digo.',de:'Wenn ich das Datum weiß, sage ich es dir.'},
+ {t:'tr',de:'Wenn du in Berlin bist, ruf mich an.',a:['Cuando estés en Berlín, llámame.']},
+ {t:'listen',es:'Cuando llegues al aeropuerto, mándame un mensaje.',de:'Wenn du am Flughafen ankommst, schick mir eine Nachricht.'}]},
+{id:'l2',title:'Sobald, bis, bevor',desc:'en cuanto · hasta que · antes de que',steps:[
+ {t:'info',title:'Weitere Zeit-Konjunktionen',html:`<table><tr><th>Konjunktion</th><th>Bedeutung</th><th>Zukunft</th></tr>
+ <tr><td class="es-t">en cuanto</td><td>sobald</td><td class="es-t">En cuanto <b>pueda</b>, te ayudo.</td></tr>
+ <tr><td class="es-t">hasta que</td><td>bis</td><td class="es-t">Espera aquí hasta que <b>vuelva</b>.</td></tr>
+ <tr><td class="es-t">después de que</td><td>nachdem</td><td class="es-t">Después de que <b>se vayan</b>, limpiamos.</td></tr>
+ <tr><td class="es-t">antes de que</td><td>bevor</td><td class="es-t">Antes de que <b>te vayas</b>, … (<b>immer</b> Subj.)</td></tr></table>
+ <div class="ex">Gleiche Person in beiden Satzteilen → einfach Infinitiv: <span class="es-t">Antes de salir, cierro la ventana.</span> · <span class="es-t">Después de comer, descanso.</span></div>`},
+ {t:'mc',q:'En cuanto ___ el resultado, te aviso.',opts:['sepa','sé','sabré'],a:0},
+ {t:'mc',q:'Antes de que ___, quiero darte algo.',opts:['te vayas','te vas','irte'],a:0},
+ {t:'mc',q:'Antes de ___, apaga la luz.',opts:['salir','que salgas','sales'],a:0},
+ {t:'gap',q:'No me voy hasta que ___ (tú, terminar).',a:['termines']},
+ {t:'gap',q:'Después de que ___ (llegar) los invitados, abrimos el vino.',a:['lleguen']},
+ {t:'match',q:'Was bedeutet …?',pairs:[['en cuanto','sobald'],['hasta que','bis'],['antes de que','bevor'],['después de que','nachdem'],['mientras','während']]},
+ {t:'tr',de:'Sobald ich kann, besuche ich dich.',a:['En cuanto pueda, te visito.','En cuanto pueda, iré a verte.','En cuanto pueda, te visitaré.']}]},
+{id:'l3',title:'Damit …',desc:'para + Infinitiv · para que + Subjuntivo',steps:[
+ {t:'info',title:'Zweck: para / para que',html:`<table><tr><th>gleiche Person</th><th>andere Person</th></tr>
+ <tr><td class="es-t">Estudio español <b>para trabajar</b> en España.</td><td class="es-t">Te lo explico <b>para que lo entiendas</b>.</td></tr>
+ <tr><td>ich lerne – ich arbeite</td><td>ich erkläre – du verstehst</td></tr></table>
+ <div class="ex"><i>para que</i> steht <b>immer</b> mit Subjuntivo. Deutsch: „damit“.</div>`},
+ {t:'vocab',title:'Abschied & Kontakt',items:[['despedirse (de)','sich verabschieden (von)','👋'],['la despedida','der Abschied','🥲'],['echar de menos','vermissen','💭'],['mantener el contacto','in Kontakt bleiben','📱'],['volver a + Inf.','wieder … tun','🔁'],['la fiesta de despedida','die Abschiedsparty','🎉'],['hacer las maletas','die Koffer packen','🧳'],['el vuelo','der Flug','✈️'],['el recuerdo','die Erinnerung','📸'],['¡Que te vaya bien!','Mach’s gut!','🍀']]},
+ {t:'mc',q:'Te dejo mi número para que me ___.',opts:['llames','llamas','llamar'],a:0},
+ {t:'mc',q:'Ahorro dinero para ___ a Sudamérica.',opts:['viajar','que viaje','viajo'],a:0},
+ {t:'gap',q:'Hablo despacio para que todos me ___ (entender).',a:['entiendan']},
+ {t:'gap',q:'Te mando las fotos para que te ___ (acordar) de nosotros.',a:['acuerdes']},
+ {t:'tr',de:'Ich werde dich vermissen.',a:['Te voy a echar de menos.','Te echaré de menos.']},
+ {t:'speak',es:'Te dejo mi dirección para que vengas a visitarme a Alemania.',de:'Ich gebe dir meine Adresse, damit du mich in Deutschland besuchen kommst.'}]},
+{id:'l4',title:'Bevor ich gehe …',desc:'Dialog & Abschiedsnachricht',steps:[
+ {t:'dialog',place:'Bar de la facultad',title:'Abschiedspläne',scene:'Letzte Woche vor deinem Rückflug. Marc fragt nach deinen Plänen.',lines:[
+  {n:'Marc',es:'¿Y qué vas a hacer cuando vuelvas a Alemania?',de:'Und was machst du, wenn du nach Deutschland zurückkommst?'},
+  {you:true,opts:[{es:'Cuando vuelva, voy a terminar el máster y buscar trabajo.',ok:true},{es:'Cuando volveré, voy a terminar el máster y buscar trabajo.',ok:false,why:'Nach <b>cuando</b> mit Zukunftsbezug → Subjuntivo: <i>vuelva</i>.'}]},
+  {n:'Marc',es:'¿Y cuándo vienes otra vez a Barcelona?',de:'Und wann kommst du wieder nach Barcelona?'},
+  {you:true,opts:[{es:'En cuanto tenga vacaciones, vuelvo. ¡Te lo prometo!',ok:true},{es:'En cuanto tengo vacaciones, vuelvo. ¡Te lo prometo!',ok:false,why:'<b>En cuanto</b> + Zukunft → Subjuntivo: <i>tenga</i>.'}]},
+  {n:'Marc',es:'Vale. Antes de que te vayas, hacemos una fiesta de despedida.',de:'Okay. Bevor du gehst, machen wir eine Abschiedsparty.'},
+  {you:true,opts:[{es:'¡Genial! Y os dejo mi dirección para que me visitéis.',ok:true},{es:'¡Genial! Y os dejo mi dirección para que me visitáis.',ok:false,why:'<b>para que</b> → immer Subjuntivo: <i>visitéis</i>.'}]}]},
+ {t:'read',title:'Mensaje de Laia',text:`¡Hola, Jonas! Ya sé que el viernes es tu último día. No me lo puedo creer. Antes de que te vayas, quiero darte un pequeño regalo, así que no hagas planes para el jueves por la noche. Cuando estés en Alemania, mándame fotos de Mannheim para que vea dónde vives. Y en cuanto tengas vacaciones, vuelve, ¿vale? Aquí siempre tendrás un sofá. ¡Te vamos a echar mucho de menos! Un abrazo, Laia`,de:`Hallo, Jonas! Ich weiß schon, dass Freitag dein letzter Tag ist. Ich kann es nicht glauben. Bevor du gehst, will ich dir ein kleines Geschenk geben, also plan nichts für Donnerstagabend. Wenn du in Deutschland bist, schick mir Fotos von Mannheim, damit ich sehe, wo du wohnst. Und sobald du Urlaub hast, komm zurück, okay? Hier hast du immer ein Sofa. Wir werden dich sehr vermissen! Liebe Grüße, Laia`},
+ {t:'mc',q:'¿Qué quiere Laia antes de que Jonas se vaya?',opts:['darle un regalo','ir a Mannheim','hacer una fiesta el viernes'],a:0},
+ {t:'mc',q:'¿Para qué quiere Laia fotos de Mannheim?',opts:['para ver dónde vive Jonas','para un trabajo de la universidad','para su madre'],a:0},
+ {t:'free',task:'Antworte Laia: Bedank dich, erzähl, was du machst, wenn du zurück bist, und wann du wiederkommst. (5–6 Sätze)',hint:'Cuando vuelva … · En cuanto … · Antes de que … · para que …',focus:'cuando / en cuanto + Subj., para que',model:'¡Hola, Laia! Muchas gracias por tu mensaje, me ha emocionado. El jueves no hago planes, te lo prometo. Cuando vuelva a Alemania, voy a terminar el máster. En cuanto tenga vacaciones, vuelvo a Barcelona. Te mandaré muchas fotos para que veas Mannheim. ¡Os voy a echar mucho de menos! Un abrazo, Jonas'}]}
+],
+placement:[
+ {t:'mc',q:'Cuando ___ a casa, te llamo.',opts:['llegue','llego','llegaré'],a:0},
+ {t:'mc',q:'Te lo explico para que lo ___.',opts:['entiendas','entiendes','entender'],a:0},
+ {t:'gap',q:'Antes de que ___ (tú, irse), cena con nosotros.',a:['te vayas']},
+ {t:'gap',q:'En cuanto ___ (yo, saber) algo, te aviso.',a:['sepa']},
+ {t:'mc',q:'Cuando era niño, ___ mucho al fútbol.',opts:['jugaba','juegue','jugaré'],a:0},
+ {t:'gap',q:'Espera aquí hasta que ___ (yo, volver).',a:['vuelva']}],
+resumen:`<h3>Zeitsätze</h3><table><tr><th>Gewohnheit / Vergangenheit</th><th>Zukunft</th></tr><tr><td class="es-t">Cuando llego, … · Cuando llegué, …</td><td class="es-t">Cuando llegue, … (Subj.)</td></tr></table>
+<p class="es-t">en cuanto · hasta que · después de que + Subj. (Zukunft) · antes de que + immer Subj.</p><p>Gleiche Person: <span class="es-t">antes de / después de / hasta + Infinitiv</span></p>
+<h3>Zweck</h3><p class="es-t">para + Infinitiv (gleiche Person) · para que + Subjuntivo (andere Person)</p>
+<h3>Abschied</h3><p class="es-t">echar de menos · mantener el contacto · ¡Que te vaya bien!</p>`});
+
+COURSE.units.push({id:'u21',n:'23',level:'B1b',title:'Me ha dicho que…',sub:'Indirekte Rede (dice que / dijo que) · indirekte Fragen (si, qué, cuándo) · Bitten weitergeben (me pide que + Subj.) · Nachrichten & Klatsch',
+goals:['dice que + gleiche Zeit','dijo que: Präsens → Imperfekt, Futur → Konditional','Perfekt/Indefinido → Plusquamperfekt','indirekte Fragen: pregunta si / qué / dónde','Bitten & Befehle: me pide que / me dijo que + Subjuntivo','Personen, Orte und Zeiten anpassen (aquí → allí, mañana → al día siguiente)'],
+situacion:{title:'Neuigkeiten aus der WG',npc:'Pablo',scene:'Du kommst nach einem Wochenende in Valencia zurück in die WG. Pablo will wissen, was die anderen dir am Telefon erzählt haben – und du sollst ihm Nurias Nachricht weitergeben.',role:'Du bist Pablo, Mitbewohner von Jonas, neugierig und ein bisschen tratschig. Ihr duzt euch. Frag Jonas, was Nuria und Laia ihm gesagt haben (¿Qué te dijo Nuria? ¿Te preguntó si…?). Reagiere überrascht (¡No me digas!). Benutze indirekte Rede (Me dijo que…, Me pidió que…).',goal:'Gib Nachrichten in indirekter Rede weiter (Me dijo que… / Me preguntó si… / Me pidió que + Subjuntivo).'},
+lessons:[
+{id:'l1',title:'Sie sagt, dass …',desc:'dice que · ha dicho que',steps:[
+ {t:'info',title:'Indirekte Rede in der Gegenwart',html:`<p>Mit <b>dice que / ha dicho que</b> bleibt die Zeit gleich – nur Personen und Pronomen ändern sich:</p>
+ <table><tr><th>direkt</th><th>indirekt</th></tr>
+ <tr><td class="es-t">Nuria: «Estoy cansada.»</td><td class="es-t">Nuria dice que está cansada.</td></tr>
+ <tr><td class="es-t">Marc: «Mañana vengo a tu casa.»</td><td class="es-t">Marc dice que mañana viene a mi casa.</td></tr>
+ <tr><td class="es-t">Laia: «He perdido el móvil.»</td><td class="es-t">Laia ha dicho que ha perdido el móvil.</td></tr></table>
+ <div class="ojo">Im Spanischen steht <b>immer que</b>: <span class="es-t">Dice <b>que</b> viene.</span> (Nicht weglassen wie im Deutschen „Er sagt, er kommt.“)</div>`},
+ {t:'mc',q:'Pablo: «Tengo hambre.» → Pablo dice que ___ hambre.',opts:['tiene','tengo','tenga'],a:0},
+ {t:'mc',q:'Laia: «Os invito a mi casa.» → Laia dice que nos ___ a su casa.',opts:['invita','invito','invite'],a:0},
+ {t:'gap',q:'Marc: «Voy a llegar tarde.» → Marc dice que ___ a llegar tarde.',a:['va']},
+ {t:'gap',q:'Nuria: «He comprado pan.» → Nuria ha dicho que ___ comprado pan.',a:['ha']},
+ {t:'order',es:'Dice que no puede venir a la fiesta.',de:'Er sagt, dass er nicht zur Party kommen kann.'},
+ {t:'tr',de:'Sie sagt, dass sie morgen arbeitet.',a:['Dice que mañana trabaja.','Dice que trabaja mañana.','Ella dice que mañana trabaja.']},
+ {t:'listen',es:'Laia dice que el concierto empieza a las nueve.',de:'Laia sagt, dass das Konzert um neun anfängt.'}]},
+{id:'l2',title:'Sie sagte, dass …',desc:'dijo que estaba · dijo que vendría',steps:[
+ {t:'info',title:'Indirekte Rede in der Vergangenheit',html:`<p>Mit <b>dijo que / me contó que</b> rücken die Zeiten eine Stufe zurück:</p>
+ <table><tr><th>direkt</th><th>→</th><th>indirekt</th></tr>
+ <tr><td>Präsens <span class="es-t">estoy</span></td><td>→</td><td>Imperfekt <span class="es-t">estaba</span></td></tr>
+ <tr><td>Futur <span class="es-t">vendré</span></td><td>→</td><td>Konditional <span class="es-t">vendría</span></td></tr>
+ <tr><td>Perfekt / Indefinido <span class="es-t">he perdido / perdí</span></td><td>→</td><td>Plusquamperfekt <span class="es-t">había perdido</span></td></tr>
+ <tr><td><span class="es-t">voy a ir</span></td><td>→</td><td><span class="es-t">iba a ir</span></td></tr></table>
+ <div class="ex">Auch Wörter für Ort und Zeit passen sich an: <span class="es-t">hoy → ese día · mañana → al día siguiente · aquí → allí</span>.</div>`},
+ {t:'mc',q:'Nuria: «Estoy enferma.» → Nuria me dijo que ___ enferma.',opts:['estaba','está','estuviera'],a:0},
+ {t:'mc',q:'Marc: «Te llamaré.» → Marc me dijo que me ___.',opts:['llamaría','llamará','llamaba'],a:0},
+ {t:'mc',q:'Laia: «He perdido las llaves.» → Laia me contó que ___ las llaves.',opts:['había perdido','ha perdido','perdía'],a:0},
+ {t:'gap',q:'Pablo: «Voy a cocinar.» → Pablo dijo que ___ a cocinar.',a:['iba']},
+ {t:'gap',q:'Sergio: «Mañana no puedo.» → Sergio dijo que al día siguiente no ___.',a:['podía']},
+ {t:'match',q:'direkt → indirekt (Vergangenheit)',pairs:[['tengo','tenía'],['haré','haría'],['he visto','había visto'],['vamos a salir','íbamos a salir'],['aquí','allí']]},
+ {t:'tr',de:'Er hat mir gesagt, dass er keine Zeit hatte.',a:['Me dijo que no tenía tiempo.']}]},
+{id:'l3',title:'Fragen & Bitten weitergeben',desc:'me preguntó si · me pidió que',steps:[
+ {t:'info',title:'Indirekte Fragen und Bitten',html:`<table><tr><th>direkt</th><th>indirekt</th></tr>
+ <tr><td class="es-t">«¿Vienes?»</td><td class="es-t">Me pregunta <b>si</b> voy. / Me preguntó <b>si</b> iba.</td></tr>
+ <tr><td class="es-t">«¿Dónde vives?»</td><td class="es-t">Me preguntó <b>dónde</b> vivía.</td></tr>
+ <tr><td class="es-t">«¡Ayúdame!»</td><td class="es-t">Me pide <b>que</b> la <b>ayude</b>. / Me pidió que la <b>ayudara</b>*.</td></tr></table>
+ <div class="ex">Ja/Nein-Frage → <b>si</b> (ob). Fragewort bleibt mit Akzent: <i>qué, dónde, cuándo</i>.<br>Bitte/Befehl (Imperativ) → <b>que + Subjuntivo</b>.</div>
+ <div class="ojo">*Nach Vergangenheit kommt eigentlich der Subjuntivo der Vergangenheit (<i>ayudara</i>) – den lernst du in B2. Für jetzt reicht: <span class="es-t">Me pide que + Subj. Präsens</span>.</div>`},
+ {t:'mc',q:'«¿Tienes coche?» → Me pregunta ___ tengo coche.',opts:['si','que','qué'],a:0},
+ {t:'mc',q:'«¿Cuándo llegas?» → Me preguntó ___ llegaba.',opts:['cuándo','si','que'],a:0},
+ {t:'mc',q:'Nuria: «¡Compra leche!» → Nuria me pide que ___ leche.',opts:['compre','compro','comprar'],a:0},
+ {t:'gap',q:'Mi madre siempre me dice que ___ (yo, llevar) chaqueta.',a:['lleve']},
+ {t:'gap',q:'«¿Te gusta Barcelona?» → Me preguntó ___ me gustaba Barcelona.',a:['si']},
+ {t:'vocab',title:'Erzählen & reagieren',items:[['contar','erzählen','🗣️'],['preguntar','fragen','❓'],['pedir','bitten','🙏'],['avisar','Bescheid sagen','📢'],['el cotilleo','der Klatsch','🤫'],['¡No me digas!','Was du nicht sagst!','😮'],['¿En serio?','Echt jetzt?','🤨'],['el mensaje de voz','die Sprachnachricht','🎙️'],['por lo visto','anscheinend','👀'],['enterarse (de)','erfahren','💡']]},
+ {t:'tr',de:'Sie hat mich gefragt, ob ich Hunger habe.',a:['Me ha preguntado si tengo hambre.','Me preguntó si tenía hambre.']}]},
+{id:'l4',title:'Neuigkeiten aus der WG',desc:'Dialog & Nachricht weitergeben',steps:[
+ {t:'dialog',place:'Salón del piso',title:'Was hat Nuria gesagt?',scene:'Du kommst aus Valencia zurück. Pablo ist neugierig.',lines:[
+  {n:'Pablo',es:'¡Hola! Oye, ¿te llamó Nuria? ¿Qué te dijo?',de:'Hallo! Sag mal, hat Nuria dich angerufen? Was hat sie gesagt?'},
+  {you:true,opts:[{es:'Sí, me dijo que había conocido a alguien en el trabajo.',ok:true},{es:'Sí, me dijo que ha conocido a alguien ayer en el trabajo y que es simpática mañana.',ok:false,why:'Nach <b>me dijo que</b> rückt die Zeit zurück: <i>había conocido</i>.'}]},
+  {n:'Pablo',es:'¡No me digas! ¿Y te preguntó algo?',de:'Was du nicht sagst! Und hat sie dich was gefragt?'},
+  {you:true,opts:[{es:'Me preguntó si estaríamos en casa el sábado. Quiere presentárnoslo.',ok:true},{es:'Me preguntó que estaremos en casa el sábado. Quiere presentárnoslo.',ok:false,why:'Ja/Nein-Frage → <b>si</b>; Futur → Konditional: <i>si estaríamos</i>.'}]},
+  {n:'Pablo',es:'¡Qué fuerte! ¿Algo más?',de:'Krass! Noch was?'},
+  {you:true,opts:[{es:'Sí, te pide que limpies el baño antes del sábado.',ok:true},{es:'Sí, te pide que limpias el baño antes del sábado.',ok:false,why:'<b>pedir que</b> → Subjuntivo: <i>limpies</i>.'}]}]},
+ {t:'read',title:'Un mensaje de voz',text:`«Hola, Jonas, soy Sergio. Te llamo porque el jueves es el cumpleaños de Ana y vamos a hacerle una fiesta {sorpresa|Überraschungs-}. No le digas nada, ¿eh? Será en mi casa a las nueve. ¿Puedes traer algo de beber? Ah, y pregúntale a Pablo si quiere venir. ¡Hasta luego!»
+
+Más tarde, Jonas habla con Pablo: «Me ha llamado Sergio. Dice que el jueves es el cumpleaños de Ana y que van a hacerle una fiesta sorpresa en su casa. Me ha pedido que lleve algo de beber y quiere saber si tú también vienes. ¡Pero no le digas nada a Ana!»`,de:`„Hallo, Jonas, hier ist Sergio. Ich rufe an, weil Ana am Donnerstag Geburtstag hat und wir eine Überraschungsparty für sie machen. Sag ihr nichts, ja? Sie ist bei mir um neun. Kannst du was zu trinken mitbringen? Ach, und frag Pablo, ob er kommen will. Bis später!“\n\nSpäter spricht Jonas mit Pablo: „Sergio hat mich angerufen. Er sagt, dass Ana am Donnerstag Geburtstag hat und dass sie ihr eine Überraschungsparty bei ihm machen. Er hat mich gebeten, was zu trinken mitzubringen, und will wissen, ob du auch kommst. Aber sag Ana nichts!“`},
+ {t:'mc',q:'¿Qué le pide Sergio a Jonas?',opts:['que lleve algo de beber','que organice la fiesta','que llame a Ana'],a:0},
+ {t:'gap',q:'Sergio quiere saber ___ Pablo viene a la fiesta.',a:['si']},
+ {t:'free',task:'Deine Freundin hat dir diese Nachricht geschickt: «No puedo ir al cine hoy, estoy enferma. ¿Podemos ir el sábado? Dile a Marc que le devolveré su libro mañana.» Erzähl einem Freund, was sie geschrieben hat. (4–5 Sätze)',hint:'Me ha escrito que … · Dice que … · Me pregunta si … · Me pide que le digas …',focus:'indirekte Rede, preguntar si, pedir que + Subj.',model:'Me ha escrito Laura. Dice que hoy no puede ir al cine porque está enferma. Me pregunta si podemos ir el sábado. Ah, y me pide que te diga que mañana te devolverá tu libro, Marc.'}]}
+],
+placement:[
+ {t:'mc',q:'Laia: «Estoy cansada.» → Laia me dijo que ___ cansada.',opts:['estaba','está','estará'],a:0},
+ {t:'mc',q:'«¿Vienes mañana?» → Me preguntó ___ iba al día siguiente.',opts:['si','que','cuándo'],a:0},
+ {t:'gap',q:'Laia: «Te llamaré.» → Laia dijo que me ___.',a:['llamaría']},
+ {t:'gap',q:'Mi jefe me pide que ___ (yo, enviar) el informe hoy.',a:['envíe']},
+ {t:'mc',q:'Pablo: «He visto la película.» → Pablo dijo que ___ la película.',opts:['había visto','ha visto','veía'],a:0},
+ {t:'gap',q:'Nuria dice que hoy no ___ (cocinar) ella.',a:['cocina']}],
+resumen:`<h3>Indirekte Rede</h3><p class="es-t">Dice que está cansada. (gleiche Zeit)</p><table><tr><th>direkt</th><th>dijo que …</th></tr><tr><td class="es-t">estoy</td><td class="es-t">estaba</td></tr><tr><td class="es-t">vendré</td><td class="es-t">vendría</td></tr><tr><td class="es-t">he venido / vine</td><td class="es-t">había venido</td></tr><tr><td class="es-t">voy a venir</td><td class="es-t">iba a venir</td></tr></table>
+<h3>Fragen & Bitten</h3><p class="es-t">Me preguntó si … · Me preguntó dónde / cuándo … · Me pide que + Subjuntivo</p>
+<h3>Anpassen</h3><p class="es-t">hoy → ese día · mañana → al día siguiente · aquí → allí</p>`});
+
+COURSE.units.push({id:'u22',n:'24',level:'B1b',title:'Lo que busco',sub:'Relativsätze (que, donde, lo que, el que, quien) · Gesuchtes beschreiben (busco un piso que tenga…) · Verbalperiphrasen (seguir, dejar de, volver a, llevar + Gerundium)',
+goals:['que / donde / lo que','el que, la que, con quien','Bekanntes (Ind.) vs. Gesuchtes (Subj.): busco un piso que tiene / tenga','seguir + Gerundium, llevar + Zeit + Gerundium','dejar de, volver a, acabar de + Infinitiv','Anzeigen lesen & schreiben'],
+situacion:{title:'Neue Mitbewohnerin gesucht',npc:'Nuria',scene:'Pablo zieht aus. Du und Nuria sucht eine neue Person fürs WG-Zimmer und überlegt, was ihr in die Anzeige schreibt.',role:'Du bist Nuria, Mitbewohnerin von Jonas, praktisch und direkt. Ihr duzt euch. Überlegt zusammen, was für eine Person ihr sucht (Buscamos a alguien que sea…, que no fume…), beschreibt die Wohnung mit Relativsätzen (la habitación que da a la calle, el barrio donde…). Frag Jonas nach seiner Meinung.',goal:'Beschreibe die gesuchte Person mit que + Subjuntivo und die Wohnung mit Relativsätzen (que, donde, lo que).'},
+lessons:[
+{id:'l1',title:'Der Mann, der …',desc:'que · donde · lo que',steps:[
+ {t:'info',title:'Relativsätze: que, donde, lo que',html:`<table><tr><th>Relativwort</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">que (der/die/das)</td><td class="es-t">El chico <b>que</b> vive arriba es músico.</td></tr>
+ <tr><td class="es-t">donde (wo)</td><td class="es-t">El bar <b>donde</b> nos conocimos ya no existe.</td></tr>
+ <tr><td class="es-t">lo que (was)</td><td class="es-t">No entiendo <b>lo que</b> dices.</td></tr></table>
+ <div class="ex"><b>que</b> passt fast immer – für Personen und Sachen, Singular und Plural. <b>lo que</b> = „das, was“, bezieht sich auf eine ganze Idee.</div>`},
+ {t:'mc',q:'La chica ___ trabaja en la librería es de Girona.',opts:['que','donde','lo que'],a:0},
+ {t:'mc',q:'Este es el barrio ___ viví el primer año.',opts:['donde','que','lo que'],a:0},
+ {t:'mc',q:'___ más me gusta de Barcelona es el mar.',opts:['Lo que','Que','Donde'],a:0},
+ {t:'gap',q:'Haz ___ quieras.',a:['lo que']},
+ {t:'gap',q:'El libro ___ me recomendaste es buenísimo.',a:['que']},
+ {t:'order',es:'La ciudad donde nací es muy pequeña.',de:'Die Stadt, in der ich geboren bin, ist sehr klein.'},
+ {t:'tr',de:'Das ist die Wohnung, die ich gemietet habe.',a:['Este es el piso que he alquilado.','Es el piso que he alquilado.','Este es el piso que alquilé.']}]},
+{id:'l2',title:'Mit wem? Über was?',desc:'el que · con quien · en la que',steps:[
+ {t:'info',title:'Relativsätze mit Präposition',html:`<p>Steht eine Präposition davor, braucht <i>que</i> einen Artikel – oder man nimmt <i>quien</i> für Personen:</p>
+ <table><tr><th></th><th>Beispiel</th></tr>
+ <tr><td class="es-t">con el que / la que</td><td class="es-t">El amigo <b>con el que</b> viajé …</td></tr>
+ <tr><td class="es-t">con quien</td><td class="es-t">La chica <b>con quien</b> hablé …</td></tr>
+ <tr><td class="es-t">en el que / la que</td><td class="es-t">La empresa <b>en la que</b> trabajo …</td></tr>
+ <tr><td class="es-t">de lo que</td><td class="es-t">Eso es <b>de lo que</b> quería hablar.</td></tr></table>
+ <div class="ex">Die Präposition steht <b>vor</b> dem Relativwort – nie am Satzende wie im Englischen.</div>`},
+ {t:'mc',q:'La compañera ___ comparto despacho es muy simpática.',opts:['con la que','que','la que con'],a:0},
+ {t:'mc',q:'El hotel ___ dormimos estaba muy limpio.',opts:['en el que','el que','que en'],a:0},
+ {t:'gap',q:'Es la persona en ___ más confío. (Person: quien)',a:['quien','la que']},
+ {t:'gap',q:'Eso es de ___ quería hablar contigo. (das, worüber)',a:['lo que']},
+ {t:'tr',de:'Der Freund, mit dem ich wohne, kommt aus Sevilla.',a:['El amigo con el que vivo es de Sevilla.','El amigo con quien vivo es de Sevilla.']}]},
+{id:'l3',title:'Gesucht: jemand, der …',desc:'busco un piso que tenga',steps:[
+ {t:'info',title:'Gibt es das schon – oder suche ich es?',html:`<table><tr><th>bekannt / existiert: Indikativ</th><th>gesucht / unbekannt: Subjuntivo</th></tr>
+ <tr><td class="es-t">Tengo un piso que <b>tiene</b> terraza.</td><td class="es-t">Busco un piso que <b>tenga</b> terraza.</td></tr>
+ <tr><td class="es-t">Conozco a alguien que <b>habla</b> ruso.</td><td class="es-t">¿Conoces a alguien que <b>hable</b> ruso?</td></tr>
+ <tr><td class="es-t">Hay un bar que <b>abre</b> a las seis.</td><td class="es-t">No hay ningún bar que <b>abra</b> a las seis.</td></tr></table>
+ <div class="ex">Typisch in Anzeigen: <span class="es-t">Se busca persona que sea ordenada y que no fume.</span></div>`},
+ {t:'mc',q:'Busco un trabajo que ___ flexible.',opts:['sea','es','será'],a:0},
+ {t:'mc',q:'Tengo una compañera que ___ cinco idiomas.',opts:['habla','hable','hablara'],a:0},
+ {t:'mc',q:'No hay nadie que ___ la respuesta.',opts:['sepa','sabe','sabrá'],a:0},
+ {t:'gap',q:'Buscamos a alguien que ___ (tener) experiencia.',a:['tenga']},
+ {t:'gap',q:'¿Hay algún restaurante por aquí que ___ (estar) abierto ahora?',a:['esté']},
+ {t:'vocab',title:'WG & Anzeigen',items:[['se busca','gesucht','🔎'],['compartir piso','in einer WG wohnen','🏠'],['la habitación exterior','das Zimmer zur Straße','🪟'],['dar a (la calle)','gehen auf (die Straße)','🛣️'],['luminoso','hell','☀️'],['amueblado','möbliert','🛋️'],['los gastos incluidos','Nebenkosten inklusive','💡'],['la fianza','die Kaution','💶'],['fumador / no fumador','Raucher / Nichtraucher','🚭'],['ordenado','ordentlich','🗄️'],['la mascota','das Haustier','🐱']]},
+ {t:'tr',de:'Wir suchen jemanden, der nicht raucht.',a:['Buscamos a alguien que no fume.','Buscamos una persona que no fume.']}]},
+{id:'l4',title:'Immer noch, nicht mehr, wieder',desc:'seguir · dejar de · volver a · llevar',steps:[
+ {t:'info',title:'Verbalperiphrasen',html:`<table><tr><th>Form</th><th>Bedeutung</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">seguir + Gerundium</td><td>immer noch</td><td class="es-t">Sigo viviendo en Gràcia.</td></tr>
+ <tr><td class="es-t">llevar + Zeit + Gerundium</td><td>seit … (schon)</td><td class="es-t">Llevo dos años estudiando español.</td></tr>
+ <tr><td class="es-t">dejar de + Inf.</td><td>aufhören</td><td class="es-t">He dejado de fumar.</td></tr>
+ <tr><td class="es-t">volver a + Inf.</td><td>wieder tun</td><td class="es-t">No vuelvas a hacerlo.</td></tr>
+ <tr><td class="es-t">acabar de + Inf.</td><td>gerade erst</td><td class="es-t">Acabo de llegar.</td></tr></table>`},
+ {t:'mc',q:'„Ich lerne seit drei Jahren Spanisch.“',opts:['Llevo tres años estudiando español.','Sigo tres años estudiando español.','Acabo tres años de estudiar español.'],a:0},
+ {t:'mc',q:'Pablo ___ fumar el año pasado.',opts:['dejó de','volvió a','siguió'],a:0},
+ {t:'gap',q:'¿Todavía vives con Nuria? – Sí, ___ (yo, seguir) viviendo con ella.',a:['sigo']},
+ {t:'gap',q:'El tren ___ (acabar) de salir. Tenemos que esperar.',a:['acaba']},
+ {t:'read',title:'Anuncio: Se busca compañero/a de piso',text:`Somos dos estudiantes (Nuria, 24, y Jonas, 25) que llevamos un año compartiendo un piso en Gràcia. Pablo, el compañero con el que vivíamos, se ha ido a Madrid, así que buscamos a alguien que quiera vivir con nosotros.
+
+La habitación, que da a una calle tranquila, es luminosa y está amueblada. Cuesta 450 euros al mes, gastos incluidos. Lo que más nos gusta del piso es la terraza, donde cenamos en verano.
+
+Buscamos a una persona que sea ordenada, que no fume y que tenga ganas de compartir alguna cena. ¿Tienes una mascota? ¡No pasa nada! Escríbenos.`,de:`Wir sind zwei Studenten (Nuria, 24, und Jonas, 25), die seit einem Jahr eine Wohnung in Gràcia teilen. Pablo, der Mitbewohner, mit dem wir zusammengewohnt haben, ist nach Madrid gegangen, also suchen wir jemanden, der mit uns wohnen will.\n\nDas Zimmer, das zu einer ruhigen Straße geht, ist hell und möbliert. Es kostet 450 Euro im Monat, Nebenkosten inklusive. Was uns an der Wohnung am meisten gefällt, ist die Terrasse, auf der wir im Sommer zu Abend essen.\n\nWir suchen eine Person, die ordentlich ist, nicht raucht und Lust hat, ab und zu ein Abendessen zu teilen. Hast du ein Haustier? Kein Problem! Schreib uns.`},
+ {t:'mc',q:'¿Cuánto tiempo llevan Nuria y Jonas en el piso?',opts:['un año','dos años','seis meses'],a:0},
+ {t:'free',task:'Schreib eine Anzeige: Du suchst eine Wohnung oder einen Job in Barcelona. Beschreib, was du suchst. (5–6 Sätze)',hint:'Busco un piso / trabajo que … · Llevo … · Lo que más me importa es … · donde …',focus:'Relativsätze, que + Subjuntivo, llevar + Gerundium',model:'Hola, me llamo Jonas y llevo seis meses viviendo en Barcelona. Busco un piso que esté cerca de la universidad y que no sea muy caro. Lo que más me importa es que la habitación sea luminosa. Me gustaría vivir en un barrio donde haya bares y tiendas. Soy ordenado y no fumo. ¡Escríbeme si tienes algo!'}]}
+],
+placement:[
+ {t:'mc',q:'No entiendo ___ dices.',opts:['lo que','que','donde'],a:0},
+ {t:'mc',q:'Busco un piso que ___ terraza.',opts:['tenga','tiene','tendrá'],a:0},
+ {t:'gap',q:'La empresa en ___ trabajo es alemana.',a:['la que','la cual']},
+ {t:'mc',q:'„Ich lebe seit zwei Jahren hier.“',opts:['Llevo dos años viviendo aquí.','Sigo dos años viviendo aquí.','Vuelvo dos años a vivir aquí.'],a:0},
+ {t:'gap',q:'Tengo un amigo que ___ (hablar) japonés.',a:['habla']},
+ {t:'gap',q:'Pablo ha dejado ___ fumar.',a:['de']}],
+resumen:`<h3>Relativsätze</h3><p class="es-t">que (Personen & Sachen) · donde · lo que · con el que / la que · con quien</p>
+<h3>Bekannt ↔ gesucht</h3><p class="es-t">Tengo un piso que tiene terraza. ↔ Busco un piso que tenga terraza.</p><p class="es-t">No hay nadie que sepa … · ¿Conoces a alguien que hable …?</p>
+<h3>Periphrasen</h3><p class="es-t">seguir + Gerundium · llevar + Zeit + Gerundium · dejar de / volver a / acabar de + Infinitiv</p>`});
+
+COURSE.units.push({id:'u23',n:'25',level:'B1b',title:'Un mundo mejor',sub:'Gefühle (me alegra que, me molesta que) · Bewertungen (es importante que, es una pena que) · Umwelt & Nachhaltigkeit · B1 abschließen',
+goals:['Gefühle + Subjuntivo: me alegra / me molesta / me preocupa que','Bewertungen: es importante / necesario / normal / una pena que','gleiche Person → Infinitiv (me alegra verte)','Umwelt-Wortschatz','Sich beschweren & Vorschläge machen','B1-Wiederholung: Subjuntivo-Auslöser im Überblick'],
+situacion:{title:'Klimastreik an der Uni',npc:'Laia',scene:'An der UPC gibt es eine Versammlung zum Thema Nachhaltigkeit auf dem Campus. Laia ist im Organisationsteam und fragt dich, was dich stört und was du vorschlägst.',role:'Du bist Laia, engagierte Studentin, freundlich und begeistert. Ihr duzt euch. Frag Jonas, was ihn am Campus stört (¿Qué te molesta?), was er wichtig findet und was die Uni tun sollte. Benutze Gefühle und Bewertungen mit Subjuntivo (Me preocupa que…, Es importante que…, Es una pena que…).',goal:'Sag, was dich stört und freut, mit me molesta / me alegra que + Subj., und mach Vorschläge mit es importante / necesario que + Subj.'},
+lessons:[
+{id:'l1',title:'Mich freut, dass …',desc:'me alegra que · me molesta que',steps:[
+ {t:'info',title:'Gefühle + Subjuntivo',html:`<p>Bei Gefühlen über etwas, das <b>jemand anderes</b> tut, steht der Subjuntivo:</p>
+ <table><tr><th>Gefühl</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">me alegra que</td><td class="es-t">Me alegra que <b>vengas</b>.</td></tr>
+ <tr><td class="es-t">me molesta que</td><td class="es-t">Me molesta que la gente <b>tire</b> basura.</td></tr>
+ <tr><td class="es-t">me preocupa que</td><td class="es-t">Me preocupa que no <b>llueva</b>.</td></tr>
+ <tr><td class="es-t">me encanta / odio que</td><td class="es-t">Me encanta que <b>haga</b> sol.</td></tr></table>
+ <div class="ex">Gleiche Person → Infinitiv: <span class="es-t">Me alegra <b>verte</b>.</span> (Ich freue mich – ich sehe dich.) Aber: <span class="es-t">Me alegra que <b>me veas</b>.</span></div>`},
+ {t:'mc',q:'Me molesta que mis vecinos ___ música por la noche.',opts:['pongan','ponen','poner'],a:0},
+ {t:'mc',q:'Me encanta ___ en la playa.',opts:['pasear','que paseo','que pasee'],a:0},
+ {t:'gap',q:'Me alegra que ___ (tú, estar) mejor.',a:['estés']},
+ {t:'gap',q:'Nos preocupa que el agua ___ (ser) tan cara.',a:['sea']},
+ {t:'order',es:'Me molesta que no reciclen en la oficina.',de:'Mich stört, dass sie im Büro nicht recyceln.'},
+ {t:'tr',de:'Es freut mich, dass ihr gekommen seid. (dass ihr kommt)',a:['Me alegra que vengáis.','Me alegra que hayáis venido.']},
+ {t:'listen',es:'Me encanta que en Barcelona haya tantas bicis.',de:'Ich finde es toll, dass es in Barcelona so viele Fahrräder gibt.'}]},
+{id:'l2',title:'Es ist wichtig, dass …',desc:'es importante que · es una pena que',steps:[
+ {t:'info',title:'Bewertungen + Subjuntivo',html:`<table><tr><th>allgemein: Infinitiv</th><th>mit Person: que + Subj.</th></tr>
+ <tr><td class="es-t">Es importante reciclar.</td><td class="es-t">Es importante que <b>reciclemos</b>.</td></tr>
+ <tr><td class="es-t">Es necesario ahorrar agua.</td><td class="es-t">Es necesario que todos <b>ahorren</b> agua.</td></tr>
+ <tr><td class="es-t">Es una pena tirar comida.</td><td class="es-t">Es una pena que la gente <b>tire</b> comida.</td></tr></table>
+ <p class="es-t">Auch: es normal / lógico / increíble / mejor / fundamental que …</p>
+ <div class="ojo">Aber Tatsachen → Indikativ: <span class="es-t">Es verdad / Es obvio que hace calor.</span></div>`},
+ {t:'mc',q:'Es importante que ___ menos plástico.',opts:['usemos','usamos','usar'],a:0},
+ {t:'mc',q:'Es necesario ___ el transporte público.',opts:['usar','que usamos','usamos'],a:0},
+ {t:'mc',q:'Es obvio que el clima ___ cambiando.',opts:['está','esté','estar'],a:0},
+ {t:'gap',q:'Es una pena que no ___ (haber) más zonas verdes.',a:['haya']},
+ {t:'gap',q:'Es mejor que ___ (vosotros, ir) en bici.',a:['vayáis']},
+ {t:'tr',de:'Es ist schade, dass du nicht kommen kannst.',a:['Es una pena que no puedas venir.','Qué pena que no puedas venir.']}]},
+{id:'l3',title:'Umwelt',desc:'reciclar · el cambio climático',steps:[
+ {t:'vocab',title:'Umwelt & Nachhaltigkeit',items:[['el medio ambiente','die Umwelt','🌍'],['el cambio climático','der Klimawandel','🌡️'],['la contaminación','die Verschmutzung','🏭'],['reciclar','recyceln','♻️'],['la basura','der Müll','🗑️'],['el plástico','das Plastik','🧴'],['ahorrar energía / agua','Energie / Wasser sparen','💡'],['la sequía','die Dürre','🏜️'],['las energías renovables','erneuerbare Energien','☀️'],['el transporte público','der öffentliche Verkehr','🚇'],['los residuos','die Abfälle','🗑️'],['sostenible','nachhaltig','🌱']]},
+ {t:'match',q:'Was gehört zusammen?',pairs:[['ahorrar','agua'],['reciclar','plástico'],['energías','renovables'],['transporte','público'],['cambio','climático']]},
+ {t:'mc',q:'„die Dürre“',opts:['la sequía','la basura','la contaminación'],a:0},
+ {t:'dialog',place:'Asamblea en el campus',title:'Was stört dich?',scene:'Laia leitet die Versammlung und fragt dich direkt.',lines:[
+  {n:'Laia',es:'Jonas, tú que eres de Alemania, ¿qué te molesta aquí en el campus?',de:'Jonas, du kommst ja aus Deutschland – was stört dich hier auf dem Campus?'},
+  {you:true,opts:[{es:'Me molesta que no haya contenedores para reciclar en las aulas.',ok:true},{es:'Me molesta que no hay contenedores para reciclar en las aulas.',ok:false,why:'Gefühl + <b>que</b> → Subjuntivo: <i>haya</i>.'}]},
+  {n:'Laia',es:'Es verdad. ¿Y qué propones?',de:'Stimmt. Und was schlägst du vor?'},
+  {you:true,opts:[{es:'Es importante que la universidad ponga más contenedores y fuentes de agua.',ok:true},{es:'Es importante que la universidad pone más contenedores y fuentes de agua.',ok:false,why:'<b>Es importante que</b> → Subjuntivo: <i>ponga</i>.'}]},
+  {n:'Laia',es:'¡Me encanta la idea! Lo apunto.',de:'Super Idee! Ich schreibe es auf.'}]},
+ {t:'speak',es:'Es fundamental que todos ahorremos agua, sobre todo en verano.',de:'Es ist grundlegend, dass wir alle Wasser sparen, vor allem im Sommer.'}]},
+{id:'l4',title:'B1-Check: Wann Subjuntivo?',desc:'Überblick · Lesen · Schreiben',steps:[
+ {t:'info',title:'Die Subjuntivo-Auslöser aus B1',html:`<table><tr><th>Bereich</th><th>Auslöser</th></tr>
+ <tr><td>Wünsche & Rat</td><td class="es-t">quiero que, espero que, ojalá, te recomiendo que</td></tr>
+ <tr><td>Zweifel & verneinte Meinung</td><td class="es-t">no creo que, quizá, es posible que, puede que</td></tr>
+ <tr><td>Gefühle & Bewertung</td><td class="es-t">me alegra que, me molesta que, es importante que, es una pena que</td></tr>
+ <tr><td>Zeit (Zukunft) & Zweck</td><td class="es-t">cuando, en cuanto, hasta que, antes de que, para que</td></tr>
+ <tr><td>Gesuchtes</td><td class="es-t">busco un piso que, no hay nadie que</td></tr>
+ <tr><td>Bitten</td><td class="es-t">me pide que, te digo que (Befehl)</td></tr></table>
+ <div class="ex">Faustregel: Tatsache → Indikativ. Wunsch, Zweifel, Gefühl, Zukunft, Unbekanntes → Subjuntivo.</div>`},
+ {t:'mc',q:'Espero que ___ buen tiempo el sábado.',opts:['haga','hace','hará'],a:0},
+ {t:'mc',q:'Sé que ___ razón.',opts:['tienes','tengas','tener'],a:0},
+ {t:'mc',q:'Cuando ___ el máster, me mudaré.',opts:['termine','termino','terminaré'],a:0},
+ {t:'read',title:'Barcelona sin agua',text:`Este verano, Cataluña ha vivido una de las peores sequías de su historia. En muchos pueblos se ha prohibido llenar piscinas y regar los jardines. En Barcelona, las fuentes de los parques se han apagado.
+
+«Me preocupa que la gente no se tome en serio el problema», dice Jordi, un agricultor de la zona. «Es necesario que todos cambiemos nuestros hábitos: duchas más cortas, menos agua en el jardín». Los expertos creen que las sequías serán cada vez más frecuentes. Por eso, es importante que las ciudades {inviertan|investieren} en reciclar el agua. Lo bueno es que muchos jóvenes ya están {concienciados|sensibilisiert}: el consumo de agua en los hogares ha bajado un 10 %.`,de:`Diesen Sommer hat Katalonien eine der schlimmsten Dürren seiner Geschichte erlebt. In vielen Dörfern wurde verboten, Pools zu füllen und Gärten zu bewässern. In Barcelona wurden die Brunnen in den Parks abgestellt.\n\n„Mich besorgt, dass die Leute das Problem nicht ernst nehmen“, sagt Jordi, ein Landwirt aus der Gegend. „Es ist nötig, dass wir alle unsere Gewohnheiten ändern: kürzere Duschen, weniger Wasser im Garten.“ Die Experten glauben, dass Dürren immer häufiger werden. Deshalb ist es wichtig, dass die Städte in das Recycling von Wasser investieren. Das Gute ist, dass viele junge Leute schon sensibilisiert sind: Der Wasserverbrauch in den Haushalten ist um 10 % gesunken.`},
+ {t:'mc',q:'¿Qué le preocupa a Jordi?',opts:['que la gente no se tome en serio el problema','que no haya piscinas','que llueva demasiado'],a:0},
+ {t:'gap',q:'Es necesario que todos ___ (cambiar) nuestros hábitos.',a:['cambiemos']},
+ {t:'free',task:'Schreib einen kurzen Leserbrief (6–8 Sätze): Was stört dich in deiner Stadt in Sachen Umwelt, was freut dich, und was schlägst du vor?',hint:'Me molesta que … · Me alegra que … · Es importante que … · Es una pena que … · Creo que … / No creo que …',focus:'Gefühle & Bewertungen + Subjuntivo, Meinung',model:'Querida redacción: Vivo en Mannheim y me preocupa el medio ambiente. Me molesta que mucha gente use el coche para distancias cortas. Es una pena que no haya más carriles bici en el centro. Sin embargo, me alegra que la ciudad haya plantado más árboles este año. Creo que es importante que el transporte público sea más barato. No creo que la gente cambie si no hay alternativas. Un saludo, Jonas'}]}
+],
+placement:[
+ {t:'mc',q:'Me alegra que ___ aquí.',opts:['estés','estás','estar'],a:0},
+ {t:'mc',q:'Es importante que todos ___.',opts:['reciclemos','reciclamos','reciclar'],a:0},
+ {t:'gap',q:'Es una pena que no ___ (tú, poder) venir.',a:['puedas']},
+ {t:'mc',q:'Me encanta ___ en bici por la ciudad.',opts:['ir','que voy','que vaya'],a:0},
+ {t:'gap',q:'Es obvio que el clima ___ (estar) cambiando.',a:['está']},
+ {t:'mc',q:'„die Umwelt“',opts:['el medio ambiente','el ambiente medio','la naturaleza media'],a:0}],
+resumen:`<h3>Gefühle</h3><p class="es-t">me alegra / me molesta / me preocupa / me encanta que + Subj.</p><p>gleiche Person: <span class="es-t">Me alegra verte.</span></p>
+<h3>Bewertungen</h3><p class="es-t">es importante / necesario / mejor / una pena que + Subj. · es importante + Inf. (allgemein)</p><p>Tatsache: <span class="es-t">es verdad / obvio / está claro que + Ind.</span></p>
+<h3>Umwelt</h3><p class="es-t">el medio ambiente · el cambio climático · reciclar · ahorrar agua · la sequía · sostenible</p>`});
+;
+/* ===== B2 Teil 1: Unidad 26–29 – eigene Inhalte nach dem Plan Curricular (Instituto Cervantes) ===== */
+
+COURSE.units.push({id:'u24',n:'26',level:'B2',title:'Si tuviera tiempo…',sub:'Imperfecto de subjuntivo (tuviera, fuera, hiciera) · irreale Bedingungen (si tuviera…, haría…) · ojalá + Imperfecto · como si · Träume & Lebensentwürfe',
+goals:['Imperfecto de subjuntivo: Bildung aus der 3. Person Plural Indefinido','unregelmäßige Formen: tuviera, fuera, hiciera, pudiera, dijera','irreale Bedingung: si + Imperf. Subj. → Konditional','ojalá + Imperf. Subj. (unwahrscheinlicher Wunsch)','como si + Imperf. Subj.','über Träume und Alternativen im Leben sprechen'],
+situacion:{title:'Was wäre wenn …',npc:'Sergio',scene:'Spätabends auf einer Dachterrasse in Poble-sec. Sergio ist in philosophischer Stimmung und will wissen, was du anders machen würdest, wenn du könntest.',role:'Du bist Sergio, Master-Kommilitone von Jonas, nachdenklich und humorvoll. Ihr duzt euch. Stell hypothetische Fragen (¿Qué harías si te tocara la lotería? ¿Dónde vivirías si pudieras elegir?) und erzähl auch von deinen Träumen. Benutze si + Imperfecto de subjuntivo + Konditional, ojalá + Imperfecto, como si.',goal:'Beantworte hypothetische Fragen mit si + Imperfecto de subjuntivo und Konditional und sag mindestens einen Wunsch mit ojalá + Imperfecto.'},
+lessons:[
+{id:'l1',title:'Eine neue Form: tuviera',desc:'hablara · comiera · tuviera',steps:[
+ {t:'info',title:'Imperfecto de subjuntivo: so bildest du ihn',html:`<p>Nimm die <b>3. Person Plural Indefinido</b>, streich <b>-ron</b> und häng <b>-ra</b> an:</p>
+ <table><tr><th>Indefinido</th><th>→ Stamm</th><th>Imperf. Subj.</th></tr>
+ <tr><td class="es-t">habla<b>ron</b></td><td class="es-t">habla-</td><td class="es-t">hablara, hablaras, hablara, habláramos, hablarais, hablaran</td></tr>
+ <tr><td class="es-t">comie<b>ron</b></td><td class="es-t">comie-</td><td class="es-t">comiera, comieras …</td></tr>
+ <tr><td class="es-t">tuvie<b>ron</b></td><td class="es-t">tuvie-</td><td class="es-t">tuviera, tuvieras …</td></tr>
+ <tr><td class="es-t">fue<b>ron</b></td><td class="es-t">fue-</td><td class="es-t">fuera (ser <b>und</b> ir)</td></tr></table>
+ <div class="ex">Dadurch sind alle Unregelmäßigkeiten des Indefinido automatisch drin: <span class="es-t">hicieron → hiciera, dijeron → dijera, pudieron → pudiera, estuvieron → estuviera</span>.</div>
+ <div class="ojo">Es gibt auch Formen auf <b>-se</b> (<i>tuviese, hablase</i>) – gleiche Bedeutung, eher geschrieben. Du verstehst sie, benutzen reicht mit <b>-ra</b>.</div>`},
+ {t:'conj',verb:'tener',de:'haben',tense:'Imperfecto de subjuntivo',forms:['tuviera','tuvieras','tuviera','tuviéramos','tuvierais','tuvieran']},
+ {t:'match',q:'Indefinido → Imperfecto de subjuntivo',pairs:[['hicieron','hiciera'],['dijeron','dijera'],['pudieron','pudiera'],['estuvieron','estuviera'],['supieron','supiera']]},
+ {t:'gap',q:'(nosotros, vivir) → ___',a:['viviéramos']},
+ {t:'gap',q:'(ellos, ser) → ___',a:['fueran']},
+ {t:'mc',q:'Welche Form ist richtig? (yo, poner)',opts:['pusiera','ponera','ponería'],a:0},
+ {t:'gap',q:'(tú, venir) → ___',a:['vinieras']}]},
+{id:'l2',title:'Wenn ich … hätte',desc:'si tuviera, viajaría',steps:[
+ {t:'info',title:'Irreale Bedingung in der Gegenwart',html:`<table><tr><th>Bedingung</th><th>möglich (B1)</th><th>irreal / unwahrscheinlich (B2)</th></tr>
+ <tr><td></td><td class="es-t">Si <b>tengo</b> tiempo, <b>iré</b>.</td><td class="es-t">Si <b>tuviera</b> tiempo, <b>iría</b>.</td></tr>
+ <tr><td></td><td>Wenn ich Zeit habe, gehe ich.</td><td>Wenn ich Zeit hätte, würde ich gehen.</td></tr></table>
+ <div class="ex">Formel: <b>si + Imperfecto de subjuntivo → Konditional</b>. Die Reihenfolge kann man tauschen: <span class="es-t">Iría si tuviera tiempo.</span></div>
+ <div class="ojo">Nach <b>si</b> nie Konditional: <s>si tendría</s> → <b>si tuviera</b>. (Typischer Fehler auch bei Muttersprachlern aus manchen Regionen – aber falsch.)</div>`},
+ {t:'mc',q:'Si ___ más dinero, me compraría un piso.',opts:['tuviera','tendría','tengo'],a:0},
+ {t:'mc',q:'Si fuera tú, no ___ nada.',opts:['diría','dijera','digo'],a:0},
+ {t:'gap',q:'Si ___ (yo, saber) cocinar, invitaría a todos a cenar.',a:['supiera']},
+ {t:'gap',q:'¿Qué ___ (tú, hacer) si te tocara la lotería?',a:['harías']},
+ {t:'gap',q:'Si no ___ (llover), iríamos a la playa.',a:['lloviera']},
+ {t:'order',es:'Si viviera en la playa, nadaría todos los días.',de:'Wenn ich am Strand wohnen würde, würde ich jeden Tag schwimmen.'},
+ {t:'tr',de:'Wenn ich du wäre, würde ich das Angebot annehmen.',a:['Si yo fuera tú, aceptaría la oferta.','Si fuera tú, aceptaría la oferta.','Yo que tú aceptaría la oferta.']},
+ {t:'listen',es:'Si pudiera elegir, viviría en un pueblo cerca del mar.',de:'Wenn ich wählen könnte, würde ich in einem Dorf in der Nähe des Meeres leben.'}]},
+{id:'l3',title:'Ojalá & como si',desc:'ojalá pudiera · como si fuera',steps:[
+ {t:'info',title:'Wünsche und Vergleiche',html:`<table><tr><th></th><th>Beispiel</th><th>Bedeutung</th></tr>
+ <tr><td class="es-t">ojalá + Subj. Präsens</td><td class="es-t">Ojalá <b>venga</b>.</td><td>Hoffentlich kommt er. (möglich)</td></tr>
+ <tr><td class="es-t">ojalá + Imperf. Subj.</td><td class="es-t">Ojalá <b>viniera</b>.</td><td>Wenn er doch käme! (unwahrscheinlich)</td></tr>
+ <tr><td class="es-t">como si + Imperf. Subj.</td><td class="es-t">Habla como si <b>fuera</b> el jefe.</td><td>Er redet, als ob er der Chef wäre.</td></tr>
+ <tr><td class="es-t">me gustaría que + Imperf. Subj.</td><td class="es-t">Me gustaría que <b>vinieras</b>.</td><td>Ich hätte gern, dass du kommst.</td></tr></table>
+ <div class="ex"><i>como si</i> steht <b>immer</b> mit Imperfecto (oder Pluscuamperfecto) de subjuntivo – nie mit Präsens.</div>`},
+ {t:'mc',q:'Me mira como si no me ___.',opts:['conociera','conoce','conozca'],a:0},
+ {t:'mc',q:'„Wenn ich doch nur besser singen könnte!“',opts:['¡Ojalá pudiera cantar mejor!','¡Ojalá puedo cantar mejor!','¡Ojalá podría cantar mejor!'],a:0},
+ {t:'gap',q:'Me gustaría que ___ (vosotros, conocer) a mi familia.',a:['conocierais']},
+ {t:'gap',q:'Gasta dinero como si ___ (ser) millonario.',a:['fuera']},
+ {t:'vocab',title:'Träume & Lebensentwürfe',items:[['tocar la lotería','im Lotto gewinnen','🎰'],['dar la vuelta al mundo','eine Weltreise machen','🌍'],['montar un negocio','ein Geschäft gründen','🏪'],['cambiar de vida','sein Leben ändern','🔄'],['echar raíces','Wurzeln schlagen','🌳'],['el sueño','der Traum','💭'],['la meta','das Ziel','🎯'],['arriesgarse','etwas riskieren','🎲'],['arrepentirse (de)','bereuen','😔'],['valer la pena','sich lohnen','✅']]},
+ {t:'tr',de:'Wenn ich im Lotto gewinnen würde, würde ich eine Weltreise machen.',a:['Si me tocara la lotería, daría la vuelta al mundo.']},
+ {t:'speak',es:'Ojalá tuviera más tiempo para viajar, pero ahora tengo que trabajar.',de:'Wenn ich doch mehr Zeit zum Reisen hätte, aber jetzt muss ich arbeiten.'}]},
+{id:'l4',title:'Lesen: Otra vida',desc:'Kolumne · eigener Text',steps:[
+ {t:'read',title:'Si pudiera empezar de nuevo',text:`A veces me pregunto qué haría si pudiera empezar de nuevo. Quizá estudiaría música en lugar de {Derecho|Jura}, o me iría a vivir a Lisboa, donde siempre me he sentido en casa. Si no tuviera hipoteca ni hijos, seguramente me arriesgaría más.
+
+Pero luego pienso en lo que tengo: un trabajo que me gusta, amigos que me conocen desde hace veinte años y un barrio donde todo el mundo me saluda. Si cambiara de vida, perdería muchas de esas cosas. Ojalá pudiéramos vivir dos vidas a la vez, una tranquila y otra llena de aventuras. Como no es posible, intento meter un poco de aventura en la vida tranquila: este año, por ejemplo, me he apuntado a clases de {guitarra|Gitarre}. Nunca es tarde.`,de:`Manchmal frage ich mich, was ich tun würde, wenn ich neu anfangen könnte. Vielleicht würde ich Musik statt Jura studieren oder nach Lissabon ziehen, wo ich mich immer zu Hause gefühlt habe. Wenn ich keine Hypothek und keine Kinder hätte, würde ich sicher mehr riskieren.\n\nAber dann denke ich an das, was ich habe: eine Arbeit, die mir gefällt, Freunde, die mich seit zwanzig Jahren kennen, und ein Viertel, in dem mich alle grüßen. Wenn ich mein Leben ändern würde, würde ich viele dieser Dinge verlieren. Wenn wir doch zwei Leben gleichzeitig leben könnten, ein ruhiges und eins voller Abenteuer. Da das nicht geht, versuche ich, ein bisschen Abenteuer ins ruhige Leben zu bringen: Dieses Jahr habe ich mich zum Beispiel für Gitarrenunterricht angemeldet. Es ist nie zu spät.`},
+ {t:'mc',q:'¿Por qué no cambia de vida el autor?',opts:['Porque perdería muchas cosas que valora.','Porque no le gusta Lisboa.','Porque no sabe tocar la guitarra.'],a:0},
+ {t:'mc',q:'„Ojalá pudiéramos vivir dos vidas“ bedeutet …',opts:['Er hält es für unmöglich, wünscht es sich aber.','Er plant, zwei Leben zu leben.','Er hofft, dass es morgen passiert.'],a:0},
+ {t:'gap',q:'Si no ___ (tener) hipoteca, me arriesgaría más.',a:['tuviera']},
+ {t:'free',task:'¿Qué harías si pudieras cambiar una cosa de tu vida? Escribe 6–8 frases.',hint:'Si pudiera … · Si tuviera … · Me gustaría que … · Ojalá … · Pero también …',focus:'si + Imperf. Subj. → Konditional, ojalá, me gustaría que',model:'Si pudiera cambiar una cosa de mi vida, viviría más cerca del mar. Si tuviera más tiempo, aprendería a surfear. Me gustaría que mis amigos de Mannheim vivieran también en Barcelona. Ojalá no tuviera que elegir entre los dos países. Pero también sé que si me fuera para siempre, echaría mucho de menos a mi familia. Por eso, de momento, intento disfrutar de lo que tengo.'}]}
+],
+placement:[
+ {t:'mc',q:'Si ___ tiempo, iría contigo.',opts:['tuviera','tendría','tengo'],a:0},
+ {t:'mc',q:'Habla como si lo ___ todo.',opts:['supiera','sabe','sepa'],a:0},
+ {t:'gap',q:'Si yo ___ (ser) tú, no lo haría.',a:['fuera']},
+ {t:'gap',q:'¿Qué ___ (tú, hacer) si ganaras un millón?',a:['harías']},
+ {t:'mc',q:'Me gustaría que ___ a la fiesta.',opts:['vinieras','vienes','vendrías'],a:0},
+ {t:'gap',q:'(ellos, decir) → Imperfecto de subjuntivo: ___',a:['dijeran']}],
+resumen:`<h3>Imperfecto de subjuntivo</h3><p>3. Pl. Indefinido − <b>ron</b> + <b>ra</b>: <span class="es-t">hablaron → hablara · tuvieron → tuviera · fueron → fuera · hicieron → hiciera</span></p><p class="es-t">-ra, -ras, -ra, -ramos (mit Akzent: habláramos), -rais, -ran</p>
+<h3>Irreale Bedingung</h3><p class="es-t">Si tuviera tiempo, iría. (si + Imperf. Subj. → Konditional)</p>
+<h3>Wünsche & Vergleiche</h3><p class="es-t">Ojalá viniera. · Me gustaría que vinieras. · Habla como si fuera el jefe.</p>`});
+
+COURSE.units.push({id:'u25',n:'27',level:'B2',title:'Quería que vinieras',sub:'Zeitenfolge: Vergangenheit im Hauptsatz → Imperfecto de subjuntivo · Bitten, Wünsche, Gefühle in der Vergangenheit · Erwartungen an Praktikum & Job',
+goals:['quería que / me pidió que + Imperf. Subj.','me sorprendió / me molestó que + Imperf. Subj.','era importante / necesario que + Imperf. Subj.','no creía que + Imperf. Subj.','Zeitenfolge: Präsens → Subj. Präsens, Vergangenheit → Imperf. Subj.','über Erwartungen und Enttäuschungen im Job erzählen'],
+situacion:{title:'Feedback zum Praktikum',npc:'Carmen',scene:'Dein Praktikum bei einer Softwarefirma in Barcelona ist vorbei. Carmen aus der Personalabteilung führt ein Abschlussgespräch und will wissen, was du erwartet hattest und wie es war.',role:'Du bist Carmen, Personalreferentin, freundlich und professionell. Ihr sprecht mit „tú“, aber in professionellem Ton. Frag Jonas, was er vom Praktikum erwartet hatte (¿Qué esperabas que…?), was ihn überrascht hat, was ihn gestört hat, und was die Firma besser machen könnte. Benutze Vergangenheit + Imperfecto de subjuntivo.',goal:'Erzähl von deinen Erwartungen und Überraschungen mit esperaba que / me sorprendió que / me habría gustado que + Imperfecto de subjuntivo.'},
+lessons:[
+{id:'l1',title:'Sie wollte, dass ich …',desc:'quería que · me pidió que',steps:[
+ {t:'info',title:'Zeitenfolge mit Subjuntivo',html:`<table><tr><th>Hauptsatz</th><th>Nebensatz</th></tr>
+ <tr><td>Präsens / Futur / Imperativ</td><td>Subj. Präsens</td></tr>
+ <tr><td class="es-t">Quiero que <b>vengas</b>.</td><td></td></tr>
+ <tr><td>Vergangenheit / Konditional</td><td>Imperf. Subj.</td></tr>
+ <tr><td class="es-t">Quería / Quise / Querría que <b>vinieras</b>.</td><td></td></tr></table>
+ <div class="ex">Das Prinzip kennst du von der indirekten Rede: Die Vergangenheit „zieht“ den Nebensatz mit. <span class="es-t">Me pide que llame → Me pidió que llamara.</span></div>`},
+ {t:'mc',q:'Mi jefa me pidió que ___ el informe.',opts:['terminara','termine','terminaba'],a:0},
+ {t:'mc',q:'Mi jefa me pide que ___ el informe.',opts:['termine','terminara','termino'],a:0},
+ {t:'gap',q:'Mis padres querían que ___ (yo, estudiar) Medicina.',a:['estudiara']},
+ {t:'gap',q:'El profesor nos dijo que ___ (nosotros, leer) el capítulo 3. (Aufforderung)',a:['leyéramos']},
+ {t:'gap',q:'Te recomendé que no ___ (tú, ir) en agosto.',a:['fueras']},
+ {t:'order',es:'Le pedí que me ayudara con la mudanza.',de:'Ich bat ihn, mir beim Umzug zu helfen.'},
+ {t:'tr',de:'Sie wollte, dass wir früher kommen.',a:['Quería que viniéramos antes.','Quería que llegáramos antes.','Ella quería que viniéramos antes.']}]},
+{id:'l2',title:'Es überraschte mich, dass …',desc:'me sorprendió que · era normal que',steps:[
+ {t:'info',title:'Gefühle, Bewertungen, Zweifel – in der Vergangenheit',html:`<table><tr><th>Präsens</th><th>Vergangenheit</th></tr>
+ <tr><td class="es-t">Me sorprende que <b>sea</b> tan fácil.</td><td class="es-t">Me sorprendió que <b>fuera</b> tan fácil.</td></tr>
+ <tr><td class="es-t">Es normal que <b>estés</b> nervioso.</td><td class="es-t">Era normal que <b>estuvieras</b> nervioso.</td></tr>
+ <tr><td class="es-t">No creo que <b>venga</b>.</td><td class="es-t">No creía que <b>viniera</b>.</td></tr>
+ <tr><td class="es-t">Busco a alguien que <b>sepa</b> …</td><td class="es-t">Buscaba a alguien que <b>supiera</b> …</td></tr></table>`},
+ {t:'mc',q:'Me molestó que nadie me ___ las gracias.',opts:['diera','dé','daba'],a:0},
+ {t:'mc',q:'No creía que el proyecto ___ tan difícil.',opts:['fuera','es','sea'],a:0},
+ {t:'gap',q:'Era importante que todos ___ (llegar) puntuales.',a:['llegaran']},
+ {t:'gap',q:'Nos sorprendió que el jefe ___ (hablar) alemán.',a:['hablara']},
+ {t:'gap',q:'Buscábamos un piso que ___ (estar) cerca del trabajo.',a:['estuviera']},
+ {t:'match',q:'Präsens → Vergangenheit',pairs:[['quiero que vengas','quería que vinieras'],['es raro que llueva','era raro que lloviera'],['dudo que lo sepa','dudaba que lo supiera'],['te pido que esperes','te pedí que esperaras']]},
+ {t:'listen',es:'Me sorprendió que en la empresa todos se tutearan, incluso con el director.',de:'Es überraschte mich, dass sich in der Firma alle duzten, sogar mit dem Direktor.'}]},
+{id:'l3',title:'Erwartungen',desc:'esperaba que · me habría gustado que',steps:[
+ {t:'vocab',title:'Arbeit & Praktikum',items:[['las prácticas','das Praktikum','💼'],['el/la becario/a','der/die Praktikant/in','🧑‍💻'],['el/la tutor/a','der/die Betreuer/in','🧑‍🏫'],['las expectativas','die Erwartungen','🔮'],['cumplir las expectativas','die Erwartungen erfüllen','✅'],['el ambiente de trabajo','das Arbeitsklima','🌤️'],['la jornada intensiva','die durchgehende Arbeitszeit','⏰'],['tutearse','sich duzen','🤝'],['la formación','die Ausbildung / Schulung','📚'],['valorar','schätzen, bewerten','⭐'],['decepcionar','enttäuschen','😞'],['la retroalimentación / el feedback','das Feedback','💬']]},
+ {t:'info',title:'Höflich Kritik üben',html:`<p class="es-t">Me habría gustado que <b>hubiera</b> más formación. · Habría estado bien que me <b>dieran</b> más feedback.</p>
+ <div class="ex"><i>me habría gustado que</i> / <i>me hubiera gustado que</i> + Imperf. Subj. = „ich hätte mir gewünscht, dass …“ – höflich und indirekt.</div>`},
+ {t:'mc',q:'„Ich hätte mir gewünscht, dass sie mir mehr erklären.“',opts:['Me habría gustado que me explicaran más.','Me habría gustado que me expliquen más.','Me gustó que me explicaran más.'],a:0},
+ {t:'dialog',place:'Oficina de recursos humanos',title:'Abschlussgespräch',scene:'Carmen hat einen Kaffee für dich und ihren Laptop vor sich.',lines:[
+  {n:'Carmen',es:'Bueno, Jonas, ¿qué esperabas de estas prácticas cuando empezaste?',de:'Also, Jonas, was hast du von diesem Praktikum erwartet, als du angefangen hast?'},
+  {you:true,opts:[{es:'Esperaba que me dieran tareas reales, y la verdad es que se cumplieron mis expectativas.',ok:true},{es:'Esperaba que me dan tareas reales, y la verdad es que se cumplieron mis expectativas.',ok:false,why:'<b>Esperaba que</b> (Vergangenheit) → Imperfecto de subjuntivo: <i>dieran</i>.'}]},
+  {n:'Carmen',es:'Me alegro. ¿Y hubo algo que te sorprendiera?',de:'Das freut mich. Und gab es etwas, das dich überrascht hat?'},
+  {you:true,opts:[{es:'Sí, me sorprendió que todo el mundo comiera a las dos y media.',ok:true},{es:'Sí, me sorprendió que todo el mundo come a las dos y media.',ok:false,why:'Gefühl in der Vergangenheit → <i>comiera</i>.'}]},
+  {n:'Carmen',es:'¡Ja, ja! Típico. ¿Y qué podríamos mejorar?',de:'Haha! Typisch. Und was könnten wir verbessern?'},
+  {you:true,opts:[{es:'Me habría gustado que mi tutor tuviera más tiempo para reuniones.',ok:true},{es:'Me habría gustado que mi tutor tiene más tiempo para reuniones.',ok:false,why:'<b>me habría gustado que</b> → <i>tuviera</i>.'}]}]},
+ {t:'tr',de:'Es hat mich überrascht, dass das Arbeitsklima so entspannt war.',a:['Me sorprendió que el ambiente de trabajo fuera tan relajado.','Me sorprendió que el ambiente de trabajo estuviera tan relajado.']}]},
+{id:'l4',title:'Lesen: Mi primer trabajo',desc:'Erfahrungsbericht · Bewertung schreiben',steps:[
+ {t:'read',title:'Mi primer trabajo en España',text:`Cuando empecé a trabajar en una agencia de marketing en Madrid, no sabía muy bien qué esperar. En Alemania me habían dicho que en España todo era más relajado, pero me sorprendió que la gente trabajara tantas horas. Mi jefa quería que estuviéramos disponibles hasta las ocho, aunque oficialmente salíamos a las seis.
+
+Al principio no me atrevía a decir nada. Era normal que los becarios se quedaran más tiempo, me explicó un compañero. Sin embargo, después de tres meses le pedí a mi jefa que habláramos del tema. Para mi sorpresa, me escuchó con atención y propuso que probáramos la jornada intensiva en verano. Fue la primera vez que sentí que mi opinión contaba. Aprendí que, a veces, es mejor hablar que esperar a que las cosas cambien solas.`,de:`Als ich anfing, in einer Marketingagentur in Madrid zu arbeiten, wusste ich nicht genau, was ich erwarten sollte. In Deutschland hatte man mir gesagt, dass in Spanien alles entspannter sei, aber es überraschte mich, dass die Leute so viele Stunden arbeiteten. Meine Chefin wollte, dass wir bis acht erreichbar waren, obwohl wir offiziell um sechs Feierabend hatten.\n\nAnfangs traute ich mich nicht, etwas zu sagen. Es sei normal, dass die Praktikanten länger blieben, erklärte mir ein Kollege. Nach drei Monaten bat ich meine Chefin jedoch, dass wir über das Thema sprechen. Zu meiner Überraschung hörte sie mir aufmerksam zu und schlug vor, dass wir im Sommer die durchgehende Arbeitszeit ausprobieren. Es war das erste Mal, dass ich spürte, dass meine Meinung zählte. Ich lernte, dass es manchmal besser ist zu reden, als darauf zu warten, dass sich die Dinge von allein ändern.`},
+ {t:'mc',q:'¿Qué le sorprendió al autor?',opts:['que la gente trabajara tantas horas','que todo fuera relajado','que su jefa hablara alemán'],a:0},
+ {t:'mc',q:'¿Qué propuso la jefa?',opts:['que probaran la jornada intensiva en verano','que el autor trabajara hasta las ocho','que contrataran más becarios'],a:0},
+ {t:'gap',q:'Mi jefa quería que ___ (nosotros, estar) disponibles hasta las ocho.',a:['estuviéramos']},
+ {t:'free',task:'Erzähl von einer Erfahrung (Job, Praktikum, Uni, Umzug), die anders war als erwartet. (6–8 Sätze)',hint:'Esperaba que … · Me sorprendió que … · Mis padres / mi jefe quería que … · No creía que … · Me habría gustado que …',focus:'Zeitenfolge: Vergangenheit + Imperfecto de subjuntivo',model:'Cuando llegué a Barcelona, esperaba que todo fuera fácil. Sin embargo, me sorprendió que fuera tan difícil encontrar piso. No creía que los alquileres fueran tan caros. Mi madre quería que buscara una residencia de estudiantes, pero yo prefería compartir piso. Al final, una amiga me pidió que la ayudara con su mudanza y así conocí a Nuria. Me habría gustado que alguien me avisara antes, pero ahora estoy muy contento.'}]}
+],
+placement:[
+ {t:'mc',q:'Mi jefe me pidió que ___ antes.',opts:['llegara','llegue','llegaba'],a:0},
+ {t:'mc',q:'Me sorprendió que nadie lo ___.',opts:['supiera','sabe','sepa'],a:0},
+ {t:'gap',q:'Mis padres querían que ___ (yo, ser) médico.',a:['fuera']},
+ {t:'gap',q:'No creía que ___ (vosotros, venir).',a:['vinierais']},
+ {t:'mc',q:'Te pido que me ___.',opts:['ayudes','ayudaras','ayudas'],a:0},
+ {t:'gap',q:'Era necesario que todos ___ (firmar) el contrato.',a:['firmaran']}],
+resumen:`<h3>Zeitenfolge</h3><table><tr><th>Hauptsatz</th><th>Nebensatz</th></tr><tr><td>Präsens, Futur, Imperativ</td><td class="es-t">Quiero que vengas.</td></tr><tr><td>Vergangenheit, Konditional</td><td class="es-t">Quería que vinieras.</td></tr></table>
+<p class="es-t">me pidió que + Imperf. Subj. · me sorprendió que … · era normal que … · no creía que … · buscaba a alguien que …</p>
+<h3>Höfliche Kritik</h3><p class="es-t">Me habría gustado que … · Habría estado bien que …</p>`});
+
+COURSE.units.push({id:'u26',n:'28',level:'B2',title:'Aunque cueste',sub:'Konzessiv (aunque + Ind./Subj., a pesar de, por mucho que) · Grund (como, ya que, puesto que) · Folge (así que, por lo tanto, de modo que) · Gesundheit & Lebensstil',
+goals:['aunque + Indikativ (Tatsache) / + Subjuntivo (Möglichkeit oder egal)','a pesar de + Inf./Nomen, a pesar de que','por mucho que + Subj.','Grund: como (am Satzanfang), ya que, puesto que, debido a','Folge: así que, por lo tanto, de modo que, por eso','über gesunde Gewohnheiten diskutieren'],
+situacion:{title:'Beim Physiotherapeuten',npc:'Álex',scene:'Du hast Rückenschmerzen vom vielen Sitzen. Álex, dein Physiotherapeut, will deine Gewohnheiten ändern – du hast für alles eine Ausrede.',role:'Du bist Álex, Physiotherapeut, motivierend und etwas streng. Ihr duzt euch. Frag Jonas nach seinen Gewohnheiten (¿Cuántas horas pasas sentado?), gib Ratschläge und reagiere auf Ausreden mit Konzessivsätzen (Aunque tengas poco tiempo, …; Por mucho que te cueste, …). Benutze auch como / ya que / así que.',goal:'Begründe deine Gewohnheiten mit como / ya que und reagiere auf Ratschläge mit aunque (+ Ind. oder Subj.) und a pesar de.'},
+lessons:[
+{id:'l1',title:'Obwohl … / Auch wenn …',desc:'aunque llueve · aunque llueva',steps:[
+ {t:'info',title:'aunque: Indikativ oder Subjuntivo?',html:`<table><tr><th>Modus</th><th>Bedeutung</th><th>Beispiel</th></tr>
+ <tr><td>Indikativ</td><td>„obwohl“ – Tatsache, neue Info</td><td class="es-t">Aunque <b>llueve</b>, salgo. (Es regnet, ich gehe trotzdem.)</td></tr>
+ <tr><td>Subjuntivo</td><td>„auch wenn“ – vielleicht / egal</td><td class="es-t">Aunque <b>llueva</b>, saldré. (Ob es regnet oder nicht.)</td></tr>
+ <tr><td>Subjuntivo</td><td>bekannte Tatsache, die mir egal ist</td><td class="es-t">Aunque <b>sea</b> tu jefe, no tiene razón.</td></tr></table>
+ <div class="ex">Ähnlich: <span class="es-t">a pesar de + Inf./Nomen</span> · <span class="es-t">a pesar de que</span> (wie aunque) · <span class="es-t">por mucho que + Subj.</span>.</div>`},
+ {t:'mc',q:'Aunque ___ cansado, fui al gimnasio. (Ich war wirklich müde.)',opts:['estaba','estuviera','esté'],a:0},
+ {t:'mc',q:'Aunque mañana ___, iremos de excursión. (Wir wissen es noch nicht.)',opts:['llueva','llueve','lloverá'],a:0},
+ {t:'mc',q:'A pesar ___ dolor, terminó la maratón.',opts:['del','de que','que'],a:0},
+ {t:'gap',q:'Por mucho que ___ (tú, insistir), no voy a cambiar de opinión.',a:['insistas']},
+ {t:'gap',q:'A pesar de ___ (dormir) ocho horas, estoy cansado.',a:['dormir']},
+ {t:'order',es:'Aunque no me guste correr, lo hago por mi salud.',de:'Auch wenn ich nicht gern laufe, tue ich es für meine Gesundheit.'},
+ {t:'tr',de:'Obwohl ich wenig Zeit habe, koche ich jeden Tag.',a:['Aunque tengo poco tiempo, cocino todos los días.','A pesar de que tengo poco tiempo, cocino todos los días.']}]},
+{id:'l2',title:'Weil & deshalb',desc:'como · ya que · así que',steps:[
+ {t:'info',title:'Grund und Folge – mehr als porque und por eso',html:`<table><tr><th>Grund</th><th>Position</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">como</td><td>immer am Satzanfang</td><td class="es-t">Como estaba enfermo, no fui.</td></tr>
+ <tr><td class="es-t">ya que / puesto que</td><td>beides möglich, eher formell</td><td class="es-t">No fui, ya que estaba enfermo.</td></tr>
+ <tr><td class="es-t">debido a + Nomen</td><td>formell</td><td class="es-t">Debido a la lluvia, se canceló el partido.</td></tr></table>
+ <table><tr><th>Folge</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">así que</td><td class="es-t">Estaba cansado, así que me acosté.</td></tr>
+ <tr><td class="es-t">por lo tanto / por consiguiente</td><td class="es-t">No hay datos; por lo tanto, no podemos decidir. (formell)</td></tr>
+ <tr><td class="es-t">de modo que / de manera que</td><td class="es-t">Habló claro, de modo que todos lo entendieron.</td></tr></table>
+ <div class="ojo"><b>como</b> = weil nur am Satzanfang. In der Mitte heißt es <i>wie</i>.</div>`},
+ {t:'mc',q:'___ no tenía hambre, no cené.',opts:['Como','Porque','Así que'],a:0},
+ {t:'mc',q:'Me duele la espalda, ___ voy al fisio.',opts:['así que','ya que','como'],a:0},
+ {t:'mc',q:'___ la huelga, no hay metro hoy.',opts:['Debido a','Ya que','Como'],a:0},
+ {t:'gap',q:'No puedo ir, ___ que tengo que trabajar. (formell: da)',a:['ya']},
+ {t:'gap',q:'Hacía mucho calor, ___ que nos quedamos en casa.',a:['así']},
+ {t:'match',q:'Grund oder Folge?',pairs:[['como','Grund'],['por lo tanto','Folge'],['ya que','Grund'],['de modo que','Folge'],['puesto que','Grund']]},
+ {t:'tr',de:'Da ich nicht schlafen konnte, habe ich ein Buch gelesen.',a:['Como no podía dormir, leí un libro.','Como no podía dormir, he leído un libro.']}]},
+{id:'l3',title:'Gesund leben',desc:'Wortschatz · Dialog',steps:[
+ {t:'vocab',title:'Gesundheit & Lebensstil',items:[['llevar una vida sana','gesund leben','🥗'],['el sedentarismo','der Bewegungsmangel','🪑'],['hacer ejercicio','Sport treiben','🏃'],['estirar','dehnen','🧘'],['la postura','die Haltung','🧍'],['tener dolor de espalda','Rückenschmerzen haben','🤕'],['el estrés','der Stress','😫'],['desconectar','abschalten','📴'],['dormir a pierna suelta','tief und fest schlafen','😴'],['picar entre horas','zwischendurch naschen','🍫'],['la alimentación','die Ernährung','🍎'],['el/la fisioterapeuta','der/die Physiotherapeut/in','💆']]},
+ {t:'dialog',place:'Consulta de fisioterapia',title:'Ausreden',scene:'Álex hat deinen Rücken untersucht.',lines:[
+  {n:'Álex',es:'Tienes la espalda muy cargada. ¿Cuántas horas pasas sentado al día?',de:'Dein Rücken ist sehr verspannt. Wie viele Stunden sitzt du am Tag?'},
+  {you:true,opts:[{es:'Unas diez. Como estoy escribiendo el TFM, no me levanto casi nunca.',ok:true},{es:'Unas diez. No me levanto casi nunca, como estoy escribiendo el TFM.',ok:false,why:'<b>como</b> (weil) steht am Satzanfang. In der Mitte: <i>ya que</i>.'}]},
+  {n:'Álex',es:'Pues aunque tengas mucho trabajo, tienes que levantarte cada hora.',de:'Na ja, auch wenn du viel Arbeit hast, musst du jede Stunde aufstehen.'},
+  {you:true,opts:[{es:'Vale, lo intentaré, aunque me cueste acordarme.',ok:true},{es:'Vale, lo intentaré, a pesar de que me cueste de acordarme.',ok:false,why:'<i>costar + Infinitiv</i> ohne <b>de</b>: <i>me cuesta acordarme</i>.'}]},
+  {n:'Álex',es:'Ponte una alarma en el móvil; así no tienes excusa.',de:'Stell dir einen Wecker im Handy, dann hast du keine Ausrede.'},
+  {you:true,opts:[{es:'De acuerdo. Y como no tengo tiempo para el gimnasio, iré andando a la uni.',ok:true},{es:'De acuerdo. Y ya que no tengo tiempo para el gimnasio, iré andando a la uni por lo tanto.',ok:false,why:'Doppelt gemoppelt: Grund (<i>ya que</i>) und Folge (<i>por lo tanto</i>) nicht im selben Satz.'}]}]},
+ {t:'speak',es:'Aunque tenga mucho trabajo, voy a intentar desconectar los fines de semana.',de:'Auch wenn ich viel Arbeit habe, werde ich versuchen, an den Wochenenden abzuschalten.'}]},
+{id:'l4',title:'Lesen: Sentados todo el día',desc:'Sachtext · Argumentieren',steps:[
+ {t:'read',title:'Sentados todo el día',text:`Pasamos una media de nueve horas sentados al día: en la oficina, en el coche y, por la noche, en el sofá. Aunque muchos hacen deporte dos o tres veces por semana, eso no basta para {compensar|ausgleichen} el sedentarismo, según varios estudios recientes.
+
+Como nuestro cuerpo no está hecho para estar quieto, aparecen dolores de espalda, problemas de circulación y cansancio. Por lo tanto, los expertos recomiendan pequeñas pausas: levantarse cada 45 minutos, subir por las escaleras o hacer reuniones de pie. Por mucho que nos cueste cambiar de hábitos, estos pequeños gestos tienen un gran efecto. A pesar de que algunas empresas ya ofrecen mesas regulables, todavía son una minoría. Así que, de momento, la responsabilidad es nuestra.`,de:`Wir sitzen im Durchschnitt neun Stunden am Tag: im Büro, im Auto und abends auf dem Sofa. Obwohl viele zwei- oder dreimal pro Woche Sport treiben, reicht das laut mehreren neueren Studien nicht aus, um den Bewegungsmangel auszugleichen.\n\nDa unser Körper nicht dafür gemacht ist, stillzusitzen, treten Rückenschmerzen, Kreislaufprobleme und Müdigkeit auf. Deshalb empfehlen Experten kleine Pausen: alle 45 Minuten aufstehen, die Treppe nehmen oder Besprechungen im Stehen abhalten. So schwer es uns auch fällt, Gewohnheiten zu ändern, diese kleinen Gesten haben eine große Wirkung. Obwohl einige Firmen schon höhenverstellbare Tische anbieten, sind sie noch eine Minderheit. Also liegt die Verantwortung vorerst bei uns.`},
+ {t:'mc',q:'Según el texto, ¿basta con hacer deporte dos o tres veces por semana?',opts:['No, no compensa el sedentarismo.','Sí, es suficiente.','El texto no lo dice.'],a:0},
+ {t:'mc',q:'„Por lo tanto“ im Text drückt aus …',opts:['eine Folge','einen Gegensatz','eine Bedingung'],a:0},
+ {t:'gap',q:'Por mucho que nos ___ (costar) cambiar de hábitos, merece la pena.',a:['cueste']},
+ {t:'free',task:'Schreib einen kurzen Meinungstext (6–8 Sätze): Sollten Firmen ihre Mitarbeiter zu mehr Bewegung verpflichten?',hint:'Aunque … · A pesar de … · Como … · ya que … · Por lo tanto … · Por mucho que …',focus:'Konzessiv-, Kausal- und Konsekutivkonnektoren',model:'Como pasamos tantas horas en el trabajo, las empresas tienen cierta responsabilidad. Sin embargo, no creo que deban obligar a nadie a hacer deporte. Aunque sea por nuestra salud, cada uno debe decidir. Lo que sí pueden hacer es facilitar el movimiento, ya que pequeños cambios tienen un gran efecto. Por ejemplo, podrían ofrecer mesas regulables o pausas activas. Por lo tanto, mi propuesta es motivar, no obligar. Por mucho que se intente, una obligación no cambia los hábitos.'}]}
+],
+placement:[
+ {t:'mc',q:'Aunque mañana ___, iremos.',opts:['llueva','llovería','llovió'],a:0},
+ {t:'mc',q:'___ estaba cansado, me acosté pronto.',opts:['Como','Así que','Aunque'],a:0},
+ {t:'gap',q:'A pesar ___ que hacía frío, fuimos a la playa.',a:['de']},
+ {t:'gap',q:'Por mucho que ___ (yo, estudiar), no lo entiendo.',a:['estudie']},
+ {t:'mc',q:'No había metro, ___ fuimos en taxi.',opts:['así que','ya que','como'],a:0},
+ {t:'mc',q:'„debido a“ bedeutet …',opts:['aufgrund','trotz','damit'],a:0}],
+resumen:`<h3>Konzessiv</h3><p class="es-t">aunque + Ind. (obwohl, Tatsache) · aunque + Subj. (auch wenn, egal) · a pesar de + Inf./Nomen · a pesar de que · por mucho que + Subj.</p>
+<h3>Grund</h3><p class="es-t">como (Satzanfang) · porque · ya que · puesto que · debido a</p>
+<h3>Folge</h3><p class="es-t">así que · por eso · por lo tanto · por consiguiente · de modo que</p>`});
+
+COURSE.units.push({id:'u27',n:'29',level:'B2',title:'Se dice que…',sub:'Passiv (ser + Partizip) · Zustand (estar + Partizip) · Passiv mit se · unpersönliches se · Nachrichten verstehen & wiedergeben',
+goals:['ser + Partizip: Vorgangspassiv (fue construido)','estar + Partizip: Zustand (está cerrado)','pasiva refleja: se venden pisos, se construyó','unpersönliches se: se dice que, se vive bien','Nachrichten-Sprache: según, al parecer, se calcula que','Nachrichten verstehen und weitererzählen'],
+situacion:{title:'Nachrichten beim Frühstück',npc:'Nuria',scene:'Samstagmorgen in der WG-Küche. Nuria liest auf dem Handy Nachrichten und will mit dir darüber reden.',role:'Du bist Nuria, Mitbewohnerin von Jonas, interessiert an Politik und Wissenschaft. Ihr duzt euch. Erzähl Jonas von Nachrichten (Se ha descubierto…, Según el periódico…, Al parecer…) und frag ihn, was er gelesen hat. Benutze Passiv (ser + Partizip) und se-Konstruktionen.',goal:'Gib eine Nachricht mit se + Verb, ser + Partizip und según / al parecer wieder und reagiere auf Nurias Nachrichten.'},
+lessons:[
+{id:'l1',title:'Wurde gebaut / ist geschlossen',desc:'fue construido · está cerrado',steps:[
+ {t:'info',title:'ser + Partizip vs. estar + Partizip',html:`<table><tr><th></th><th>Bedeutung</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">ser + Partizip</td><td>Vorgang (wurde …)</td><td class="es-t">La Sagrada Familia <b>fue diseñada</b> por Gaudí.</td></tr>
+ <tr><td class="es-t">estar + Partizip</td><td>Zustand (ist …)</td><td class="es-t">El museo <b>está cerrado</b> los lunes.</td></tr></table>
+ <div class="ex">Das Partizip passt sich an: <span class="es-t">la casa fue construid<b>a</b>, los pisos fueron vendid<b>os</b></span>. Wer es getan hat: <b>por</b>.</div>
+ <div class="ojo">Das ser-Passiv klingt im Spanischen formell (Nachrichten, Geschichte). Im Alltag nimmt man lieber <b>se</b> oder Aktiv.</div>`},
+ {t:'mc',q:'El Park Güell ___ diseñado por Gaudí.',opts:['fue','estuvo','era'],a:0},
+ {t:'mc',q:'Ya no puedes entrar: la puerta ___ cerrada.',opts:['está','es','fue'],a:0},
+ {t:'gap',q:'Las fotos fueron ___ (hacer) por un turista.',a:['hechas']},
+ {t:'gap',q:'El ladrón fue detenido ___ la policía.',a:['por']},
+ {t:'gap',q:'Las ventanas ___ (estar) abiertas cuando llegamos.',a:['estaban']},
+ {t:'tr',de:'Das Buch wurde 1605 geschrieben.',a:['El libro fue escrito en 1605.']}]},
+{id:'l2',title:'Hier spricht man …',desc:'se vende · se dice que',steps:[
+ {t:'info',title:'Passiv und Unpersönliches mit se',html:`<table><tr><th>Form</th><th>Beispiel</th><th>Deutsch</th></tr>
+ <tr><td>Passiv mit se (Verb passt sich an)</td><td class="es-t">Se <b>vende</b> piso. · Se <b>venden</b> pisos.</td><td>Wohnung(en) zu verkaufen</td></tr>
+ <tr><td></td><td class="es-t">Se construyeron tres hoteles.</td><td>Es wurden drei Hotels gebaut.</td></tr>
+ <tr><td>unpersönlich (immer 3. Sg.)</td><td class="es-t">Se vive bien aquí. · Se dice que …</td><td>Man lebt gut hier. Man sagt, dass …</td></tr>
+ <tr><td>bestimmte Person + a</td><td class="es-t">Se busca al responsable.</td><td>Der Verantwortliche wird gesucht.</td></tr></table>
+ <div class="ex">Faustregel: Steht ein Plural-Ding dabei, kommt das Verb in den Plural (<i>se venden coches</i>). Sonst Singular.</div>`},
+ {t:'mc',q:'En Cataluña ___ catalán y castellano.',opts:['se hablan','se habla','hablan se'],a:0},
+ {t:'mc',q:'___ que va a llover todo el fin de semana.',opts:['Se dice','Se dicen','Es dicho'],a:0},
+ {t:'gap',q:'Se ___ (alquilar) habitaciones para estudiantes.',a:['alquilan']},
+ {t:'gap',q:'En España se ___ (cenar) muy tarde.',a:['cena']},
+ {t:'gap',q:'El año pasado se ___ (vender) más bicis que coches. (Indefinido)',a:['vendieron']},
+ {t:'order',es:'Se calcula que la obra estará terminada en 2030.',de:'Man schätzt, dass das Bauwerk 2030 fertig sein wird.'},
+ {t:'tr',de:'Hier darf man nicht rauchen.',a:['Aquí no se puede fumar.','No se puede fumar aquí.']}]},
+{id:'l3',title:'Nachrichtensprache',desc:'según · al parecer · se calcula',steps:[
+ {t:'vocab',title:'Medien & Nachrichten',items:[['la noticia','die Nachricht','📰'],['el titular','die Schlagzeile','🗞️'],['el/la periodista','der/die Journalist/in','🎤'],['según','laut, nach','📌'],['al parecer','anscheinend','👀'],['se calcula que','man schätzt, dass','🔢'],['la fuente','die Quelle','🔗'],['el bulo / la noticia falsa','die Falschmeldung','🚫'],['investigar','untersuchen, forschen','🔬'],['el descubrimiento','die Entdeckung','💡'],['publicar','veröffentlichen','📤'],['la huelga','der Streik','✊']]},
+ {t:'info',title:'Distanziert berichten',html:`<p class="es-t">Según el periódico, … · Al parecer, … · Se calcula que … · Fuentes de la policía informan de que …</p>
+ <div class="ex">In Nachrichten steht oft der <b>Konditional</b>, wenn etwas nicht bestätigt ist: <span class="es-t">El ministro habría dimitido.</span> = Der Minister soll zurückgetreten sein.</div>`},
+ {t:'mc',q:'„Der Minister soll zurückgetreten sein.“ (unbestätigt)',opts:['El ministro habría dimitido.','El ministro ha dimitido.','El ministro dimitiera.'],a:0},
+ {t:'mc',q:'„laut der Polizei“',opts:['según la policía','por la policía','a la policía'],a:0},
+ {t:'dialog',place:'Cocina del piso',title:'Was gibt’s Neues?',scene:'Nuria scrollt durch die Nachrichten.',lines:[
+  {n:'Nuria',es:'¡Mira esto! Se ha descubierto un barco romano en el puerto de Barcelona.',de:'Schau mal! Im Hafen von Barcelona wurde ein römisches Schiff entdeckt.'},
+  {you:true,opts:[{es:'¡Qué interesante! ¿Y cuándo fue encontrado?',ok:true},{es:'¡Qué interesante! ¿Y cuándo estuvo encontrado?',ok:false,why:'Vorgang (wurde gefunden) → <b>ser</b>: <i>fue encontrado</i>.'}]},
+  {n:'Nuria',es:'La semana pasada, durante unas obras. Según el periódico, tiene casi dos mil años.',de:'Letzte Woche, bei Bauarbeiten. Laut der Zeitung ist es fast zweitausend Jahre alt.'},
+  {you:true,opts:[{es:'Al parecer, en Barcelona se encuentran restos romanos cada dos por tres.',ok:true},{es:'Al parecer, en Barcelona se encuentra restos romanos cada dos por tres.',ok:false,why:'Plural-Ding (<i>restos</i>) → Verb im Plural: <i>se encuentran</i>.'}]}]},
+ {t:'listen',es:'Según los expertos, se calcula que el barco fue construido en el siglo primero.',de:'Laut Experten wird geschätzt, dass das Schiff im ersten Jahrhundert gebaut wurde.'}]},
+{id:'l4',title:'Lesen: Una noticia',desc:'Zeitungsmeldung · eigene Meldung',steps:[
+ {t:'read',title:'Barcelona prohibirá los cruceros en el centro',text:`El Ayuntamiento de Barcelona anunció ayer que, a partir de 2027, no se permitirá que los grandes cruceros {atraquen|anlegen} en la terminal más cercana al centro. Según fuentes municipales, la medida fue aprobada después de meses de {quejas|Beschwerden} vecinales.
+
+Se calcula que cada año llegan a la ciudad más de tres millones de pasajeros de crucero, que en muchos casos solo pasan unas horas en la ciudad. Al parecer, las terminales serán trasladadas a una zona más alejada del puerto. Las navieras, por su parte, han criticado la decisión, que consideran «precipitada». Mientras tanto, en el barrio del Gòtic se respira cierto {alivio|Erleichterung}: «Por fin se escucha a los vecinos», comenta una comerciante.`,de:`Das Rathaus von Barcelona kündigte gestern an, dass ab 2027 große Kreuzfahrtschiffe nicht mehr am Terminal anlegen dürfen, das dem Zentrum am nächsten liegt. Laut städtischen Quellen wurde die Maßnahme nach monatelangen Beschwerden der Anwohner beschlossen.\n\nMan schätzt, dass jedes Jahr mehr als drei Millionen Kreuzfahrtpassagiere in die Stadt kommen, die oft nur ein paar Stunden bleiben. Anscheinend werden die Terminals in einen weiter entfernten Bereich des Hafens verlegt. Die Reedereien haben die Entscheidung ihrerseits kritisiert und halten sie für „übereilt“. Unterdessen herrscht im Gòtic eine gewisse Erleichterung: „Endlich hört man auf die Anwohner“, sagt eine Ladenbesitzerin.`},
+ {t:'mc',q:'¿Por qué fue aprobada la medida?',opts:['por las quejas de los vecinos','por un accidente','porque lo pidieron las navieras'],a:0},
+ {t:'mc',q:'„Las terminales serán trasladadas“ ist …',opts:['Passiv im Futur','Passiv mit se','Zustand mit estar'],a:0},
+ {t:'gap',q:'Se ___ (calcular) que llegan tres millones de pasajeros.',a:['calcula']},
+ {t:'free',task:'Schreib eine kurze Nachrichtenmeldung (5–7 Sätze) über etwas, das in deiner Stadt oder Uni passiert ist (echt oder erfunden).',hint:'Según … · Al parecer … · Se calcula que … · fue + Partizip · se ha + Partizip',focus:'Passiv mit ser und se, Nachrichtensprache',model:'La Universidad de Mannheim anunció ayer que se abrirá una nueva biblioteca en 2027. Según la rectora, el edificio fue diseñado por un equipo de arquitectos jóvenes. Se calcula que tendrá espacio para 800 estudiantes. Al parecer, también se instalarán paneles solares en el tejado. Los estudiantes han recibido la noticia con alegría, ya que la biblioteca actual siempre está llena.'}]}
+],
+placement:[
+ {t:'mc',q:'La catedral ___ construida en el siglo XIV.',opts:['fue','estuvo','era'],a:0},
+ {t:'mc',q:'Se ___ coches de segunda mano.',opts:['venden','vende','vendido'],a:0},
+ {t:'gap',q:'Cuando llegamos, la tienda ya ___ (estar) cerrada.',a:['estaba']},
+ {t:'gap',q:'En verano se ___ (comer) mucho gazpacho.',a:['come']},
+ {t:'mc',q:'„anscheinend“',opts:['al parecer','según','sin embargo'],a:0},
+ {t:'gap',q:'La novela fue ___ (escribir) por una autora chilena.',a:['escrita']}],
+resumen:`<h3>Passiv</h3><p class="es-t">ser + Partizip (Vorgang): fue construida por … · estar + Partizip (Zustand): está cerrado</p>
+<h3>se</h3><p class="es-t">Se vende piso. / Se venden pisos. (Passiv) · Se vive bien. Se dice que … (unpersönlich)</p>
+<h3>Nachrichten</h3><p class="es-t">según · al parecer · se calcula que · habría dimitido (unbestätigt)</p>`});
+;
+/* ===== B2 Teil 2: Unidad 30–33 – eigene Inhalte nach dem Plan Curricular (Instituto Cervantes) ===== */
+
+COURSE.units.push({id:'u28',n:'30',level:'B2b',title:'Si lo hubiera sabido',sub:'Pluscuamperfecto de subjuntivo (hubiera hecho) · irreale Vergangenheit (si hubiera…, habría…) · Bedauern & Vorwürfe (ojalá hubiera, deberías haber) · Entscheidungen',
+goals:['Pluscuamperfecto de subjuntivo: hubiera + Partizip','Konditional Perfekt: habría + Partizip','si + Plusc. Subj. → habría + Partizip (irreale Vergangenheit)','gemischte Bedingung: si hubiera…, ahora estaría…','Bedauern: ojalá hubiera, me arrepiento de','Vorwürfe: deberías haber / podrías haber + Partizip'],
+situacion:{title:'Verpasste Chancen',npc:'Marc',scene:'Marc hat ein tolles Jobangebot in Berlin abgelehnt und bereut es jetzt. Ihr redet darüber in einem Café in Sant Antoni.',role:'Du bist Marc, Freund von Jonas, etwas niedergeschlagen. Ihr duzt euch. Erzähl, dass du das Angebot in Berlin abgelehnt hast und es bereust (Si hubiera aceptado, ahora estaría…; Ojalá le hubiera dicho que sí). Frag Jonas, was er an deiner Stelle gemacht hätte und ob er auch etwas bereut.',goal:'Sag, was du an Marcs Stelle gemacht hättest (Yo habría…), tröste ihn mit einer irrealen Bedingung (Si te hubieras ido, …) und erzähl von etwas, das du selbst bereust.'},
+lessons:[
+{id:'l1',title:'Hätte ich doch …',desc:'hubiera hecho · habría hecho',steps:[
+ {t:'info',title:'Zwei neue Formen',html:`<table><tr><th>Pluscuamperfecto de subjuntivo</th><th>Konditional Perfekt</th></tr>
+ <tr><td class="es-t">hubiera, hubieras, hubiera, hubiéramos, hubierais, hubieran + Partizip</td><td class="es-t">habría, habrías, habría, habríamos, habríais, habrían + Partizip</td></tr>
+ <tr><td>„hätte … gemacht“ (im Nebensatz)</td><td>„hätte … gemacht / würde … gemacht haben“</td></tr></table>
+ <div class="ex">Irreale Vergangenheit: <span class="es-t">Si lo <b>hubiera sabido</b>, te lo <b>habría dicho</b>.</span> – Wenn ich es gewusst hätte, hätte ich es dir gesagt.</div>
+ <div class="ojo">Im gesprochenen Spanisch hört man oft auch zweimal <i>hubiera</i>: <span class="es-t">Si lo hubiera sabido, te lo hubiera dicho.</span> Das ist korrekt. Falsch ist nur <s>si lo habría sabido</s>.</div>`},
+ {t:'mc',q:'Si ___ antes, habríamos cogido el tren.',opts:['hubiéramos salido','habríamos salido','saliéramos'],a:0},
+ {t:'mc',q:'Si me lo hubieras pedido, te ___.',opts:['habría ayudado','hubiera ayudara','habías ayudado'],a:0},
+ {t:'gap',q:'Si ___ (yo, estudiar) más, habría aprobado.',a:['hubiera estudiado']},
+ {t:'gap',q:'Si no hubiera llovido, ___ (nosotros, ir) a la playa.',a:['habríamos ido','hubiéramos ido']},
+ {t:'gap',q:'Si ___ (tú, ver) su cara… ¡Fue increíble!',a:['hubieras visto']},
+ {t:'order',es:'Si hubiera sabido que venías, habría preparado algo.',de:'Wenn ich gewusst hätte, dass du kommst, hätte ich etwas vorbereitet.'},
+ {t:'tr',de:'Wenn du mich angerufen hättest, wäre ich gekommen.',a:['Si me hubieras llamado, habría venido.','Si me hubieras llamado, hubiera venido.']}]},
+{id:'l2',title:'Gemischte Bedingungen',desc:'si hubiera… ahora estaría',steps:[
+ {t:'info',title:'Vergangenheit → Folge heute',html:`<table><tr><th>Bedingung (Vergangenheit)</th><th>Folge (heute)</th></tr>
+ <tr><td class="es-t">Si <b>hubiera aceptado</b> el trabajo,</td><td class="es-t">ahora <b>viviría</b> en Berlín.</td></tr>
+ <tr><td class="es-t">Si no <b>hubiera venido</b> a Barcelona,</td><td class="es-t">no te <b>conocería</b>.</td></tr></table>
+ <table><tr><th>Bedingung (immer gültig)</th><th>Folge (Vergangenheit)</th></tr>
+ <tr><td class="es-t">Si <b>fuera</b> más valiente,</td><td class="es-t">se lo <b>habría dicho</b>.</td></tr></table>
+ <div class="ex">Frag dich bei jedem Teil: Wann gilt das? Vergangenheit → <i>hubiera / habría + Partizip</i>. Jetzt / immer → <i>Imperf. Subj. / Konditional</i>.</div>`},
+ {t:'mc',q:'Si hubiera dormido más, ahora no ___ tan cansado.',opts:['estaría','habría estado','estuviera'],a:0},
+ {t:'mc',q:'Si ___ más paciente, no habría discutido con él. (Ich bin generell ungeduldig.)',opts:['fuera','hubiera sido','sería'],a:0},
+ {t:'gap',q:'Si no ___ (yo, venir) a Barcelona, no ___ (hablar) español tan bien ahora.',a:['hubiera venido','hablaría']},
+ {t:'gap',q:'Si hubieras comprado las entradas, ahora ___ (nosotros, estar) en el concierto.',a:['estaríamos']},
+ {t:'tr',de:'Wenn ich Medizin studiert hätte, wäre ich jetzt Ärztin.',a:['Si hubiera estudiado Medicina, ahora sería médica.']},
+ {t:'listen',es:'Si no hubiera perdido el autobús aquel día, no te habría conocido.',de:'Wenn ich an jenem Tag nicht den Bus verpasst hätte, hätte ich dich nicht kennengelernt.'}]},
+{id:'l3',title:'Bedauern & Vorwürfe',desc:'ojalá hubiera · deberías haber',steps:[
+ {t:'info',title:'Was man bereut – und anderen vorwirft',html:`<table><tr><th>Ausdruck</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">ojalá + Plusc. Subj.</td><td class="es-t">¡Ojalá <b>hubiera ido</b>! – Wäre ich doch gegangen!</td></tr>
+ <tr><td class="es-t">me arrepiento de + Inf.</td><td class="es-t">Me arrepiento de no <b>haber</b> aceptado.</td></tr>
+ <tr><td class="es-t">deberías haber + Partizip</td><td class="es-t">Deberías haberme avisado. – Du hättest mir Bescheid sagen sollen.</td></tr>
+ <tr><td class="es-t">podrías haber + Partizip</td><td class="es-t">Podrías haber llamado. – Du hättest anrufen können.</td></tr>
+ <tr><td class="es-t">tendría que haber + Partizip</td><td class="es-t">Tendría que haber estudiado más.</td></tr></table>`},
+ {t:'mc',q:'„Du hättest mir Bescheid sagen sollen!“',opts:['¡Deberías haberme avisado!','¡Debías avisarme!','¡Deberías avisarme haber!'],a:0},
+ {t:'mc',q:'„Hätte ich das doch nicht gesagt!“',opts:['¡Ojalá no lo hubiera dicho!','¡Ojalá no lo diga!','¡Ojalá no lo habría dicho!'],a:0},
+ {t:'gap',q:'Me arrepiento de no ___ (aprender) a tocar el piano.',a:['haber aprendido']},
+ {t:'gap',q:'Podrías ___ (decir) algo antes.',a:['haber dicho']},
+ {t:'vocab',title:'Entscheidungen',items:[['tomar una decisión','eine Entscheidung treffen','🤔'],['rechazar una oferta','ein Angebot ablehnen','🙅'],['aceptar','annehmen','👍'],['arrepentirse (de)','bereuen','😔'],['dejar pasar una oportunidad','eine Chance verpassen','🚪'],['dar un paso','einen Schritt wagen','👣'],['el riesgo','das Risiko','🎲'],['equivocarse','sich irren','❌'],['no hay mal que por bien no venga','alles hat sein Gutes','🍀'],['a toro pasado','im Nachhinein','🔙']]},
+ {t:'dialog',place:'Café en Sant Antoni',title:'Marcs Entscheidung',scene:'Marc rührt lustlos in seinem Kaffee.',lines:[
+  {n:'Marc',es:'Al final rechacé la oferta de Berlín. Ahora me arrepiento.',de:'Am Ende habe ich das Angebot aus Berlin abgelehnt. Jetzt bereue ich es.'},
+  {you:true,opts:[{es:'Vaya… Yo en tu lugar la habría aceptado.',ok:true},{es:'Vaya… Yo en tu lugar la hubiera aceptada.',ok:false,why:'Das Partizip mit <i>haber</i> ist unveränderlich: <i>aceptado</i>.'}]},
+  {n:'Marc',es:'Ya… Si me hubiera ido, ahora tendría un sueldo mucho mejor.',de:'Ja … Wenn ich gegangen wäre, hätte ich jetzt ein viel besseres Gehalt.'},
+  {you:true,opts:[{es:'Pero si te hubieras ido, no estarías con Laia. No hay mal que por bien no venga.',ok:true},{es:'Pero si te habrías ido, no estarías con Laia. No hay mal que por bien no venga.',ok:false,why:'Nach <b>si</b> nie <i>habría</i>: <i>si te hubieras ido</i>.'}]},
+  {n:'Marc',es:'Tienes razón. ¿Y tú? ¿Te arrepientes de algo?',de:'Du hast recht. Und du? Bereust du etwas?'},
+  {you:true,opts:[{es:'Me arrepiento de no haber venido antes a Barcelona.',ok:true},{es:'Me arrepiento de no venir antes a Barcelona haber.',ok:false,why:'<i>arrepentirse de + haber + Partizip</i>: <i>de no haber venido</i>.'}]}]}]},
+{id:'l4',title:'Lesen: Puertas correderas',desc:'Erzählung · eigener Text',steps:[
+ {t:'read',title:'El día que perdí el avión',text:`Hace diez años perdí un avión a Londres. Iba a empezar unas prácticas en una empresa de publicidad y, si hubiera llegado a tiempo, probablemente ahora viviría allí. Pero el {atasco|Stau} de aquella mañana lo cambió todo.
+
+Mientras esperaba el siguiente vuelo, conocí a una mujer mayor que volvía a Valencia. Me habló de su escuela de idiomas y de que buscaba profesores. «Si te interesa, llámame», me dijo. No lo pensé mucho. Tres meses después, en lugar de diseñar anuncios en Londres, estaba enseñando inglés en Valencia.
+
+A veces me pregunto qué habría pasado si no hubiera perdido aquel avión. Quizá habría tenido éxito en publicidad, o quizá habría vuelto a los seis meses. Lo que sé es que, si no hubiera conocido a Amparo, no habría descubierto que me encanta enseñar. Y no habría conocido a mi mujer, que era alumna de la escuela. A toro pasado, aquel atasco fue lo mejor que me pasó.`,de:`Vor zehn Jahren habe ich einen Flug nach London verpasst. Ich wollte ein Praktikum in einer Werbeagentur anfangen, und wenn ich rechtzeitig angekommen wäre, würde ich wahrscheinlich jetzt dort leben. Aber der Stau an jenem Morgen hat alles verändert.\n\nWährend ich auf den nächsten Flug wartete, lernte ich eine ältere Frau kennen, die nach Valencia zurückflog. Sie erzählte mir von ihrer Sprachschule und dass sie Lehrer suchte. „Wenn es dich interessiert, ruf mich an“, sagte sie. Ich überlegte nicht lange. Drei Monate später unterrichtete ich, statt in London Werbung zu gestalten, Englisch in Valencia.\n\nManchmal frage ich mich, was passiert wäre, wenn ich den Flug nicht verpasst hätte. Vielleicht hätte ich in der Werbung Erfolg gehabt, oder vielleicht wäre ich nach sechs Monaten zurückgekommen. Was ich weiß: Wenn ich Amparo nicht kennengelernt hätte, hätte ich nicht entdeckt, dass ich gern unterrichte. Und ich hätte meine Frau nicht kennengelernt, die Schülerin an der Schule war. Im Nachhinein war dieser Stau das Beste, was mir passiert ist.`},
+ {t:'mc',q:'¿Qué habría pasado si el autor hubiera llegado a tiempo?',opts:['Probablemente ahora viviría en Londres.','Habría conocido antes a Amparo.','Habría enseñado inglés en Londres.'],a:0},
+ {t:'mc',q:'¿Cómo ve hoy el autor aquel atasco?',opts:['como lo mejor que le pasó','como un gran error','como algo sin importancia'],a:0},
+ {t:'gap',q:'Si no ___ (conocer) a Amparo, no habría descubierto que le encanta enseñar.',a:['hubiera conocido']},
+ {t:'free',task:'Erzähl von einem Moment, der dein Leben verändert hat. Was wäre passiert, wenn es anders gelaufen wäre? (7–9 Sätze)',hint:'Si no hubiera … , ahora … · habría … · Me arrepiento de … · Ojalá hubiera … · A toro pasado …',focus:'irreale Vergangenheit, gemischte Bedingungen, Bedauern',model:'Hace tres años, un profesor me recomendó que hiciera un Erasmus. Al principio no quería, porque me daba miedo dejar a mis amigos. Si no hubiera seguido su consejo, ahora no estaría en Barcelona. Tampoco habría aprendido español ni habría conocido a Nuria y a Pablo. Me arrepiento de no haber venido aún antes. Ojalá hubiera tenido el valor de decidirlo en el primer año. A toro pasado, fue la mejor decisión de mi vida.'}]}
+],
+placement:[
+ {t:'mc',q:'Si lo ___, te lo habría dicho.',opts:['hubiera sabido','habría sabido','sabría'],a:0},
+ {t:'mc',q:'„Du hättest anrufen können.“',opts:['Podrías haber llamado.','Podías llamar haber.','Pudieras haber llamado.'],a:0},
+ {t:'gap',q:'Si hubiera estudiado más, ___ (yo, aprobar).',a:['habría aprobado','hubiera aprobado']},
+ {t:'gap',q:'Si no hubiera venido a España, ahora no ___ (hablar) español.',a:['hablaría']},
+ {t:'mc',q:'¡Ojalá no ___ eso!',opts:['hubiera dicho','habría dicho','dijo'],a:0},
+ {t:'gap',q:'Me arrepiento de no ___ (aceptar) la oferta.',a:['haber aceptado']}],
+resumen:`<h3>Irreale Vergangenheit</h3><p class="es-t">Si lo hubiera sabido, te lo habría dicho. (si + hubiera + Partizip → habría / hubiera + Partizip)</p>
+<h3>Gemischt</h3><p class="es-t">Si hubiera aceptado, ahora viviría en Berlín. · Si fuera valiente, se lo habría dicho.</p>
+<h3>Bedauern & Vorwürfe</h3><p class="es-t">¡Ojalá hubiera ido! · Me arrepiento de no haber … · Deberías / Podrías / Tendría que haber + Partizip</p>`});
+
+COURSE.units.push({id:'u29',n:'31',level:'B2b',title:'Estimado señor…',sub:'Formelles Register (usted, Höflichkeitsformeln) · formelle E-Mails & Beschwerden · Relativsätze für Fortgeschrittene (el cual, cuyo, lo cual) · ser/estar mit Bedeutungswechsel',
+goals:['Formelle E-Mail: Anrede, Einleitung, Schluss','Höflichkeitsfloskeln: le agradecería que, quisiera, le ruego que','el cual / la cual / lo cual, cuyo/a','ser listo / estar listo, ser rico / estar rico …','Beschwerden & Reklamationen schreiben','zwischen formell und informell wechseln'],
+situacion:{title:'Reklamation am Telefon',npc:'Sra. Ortega',scene:'Dein neuer Laptop ist nach zwei Wochen kaputt. Du rufst beim Kundendienst des Elektronikgeschäfts an. Frau Ortega nimmt das Gespräch an.',role:'Du bist Sra. Ortega vom Kundendienst eines Elektronikgeschäfts, höflich und korrekt, aber zuerst etwas abwehrend. Ihr siezt euch (usted). Frag nach Bestellnummer, Problem und Kaufdatum, biete zuerst nur eine Reparatur an. Gib nach, wenn Jonas höflich, aber bestimmt bleibt. Benutze formelle Wendungen (¿En qué puedo ayudarle?, Lamentamos las molestias, Le ruego que…).',goal:'Reklamiere höflich, aber bestimmt im usted-Register (Quisiera…, Le agradecería que…), erkläre das Problem und erreiche einen Umtausch oder eine Erstattung.'},
+lessons:[
+{id:'l1',title:'Formell schreiben',desc:'Estimado/a · Le agradecería que',steps:[
+ {t:'info',title:'Aufbau einer formellen E-Mail',html:`<table><tr><th>Teil</th><th>Formeln</th></tr>
+ <tr><td>Anrede</td><td class="es-t">Estimado señor García: · Estimada señora: · Estimados señores:</td></tr>
+ <tr><td>Einleitung</td><td class="es-t">Me pongo en contacto con usted para … · Le escribo en relación con …</td></tr>
+ <tr><td>Bitte</td><td class="es-t">Le agradecería que me enviara … · Quisiera solicitar … · Le ruego que …</td></tr>
+ <tr><td>Schluss</td><td class="es-t">Quedo a la espera de su respuesta. · Atentamente, · Un cordial saludo,</td></tr></table>
+ <div class="ojo">Nach der Anrede steht im Spanischen ein <b>Doppelpunkt</b> (<i>Estimada señora:</i>), kein Komma.</div>
+ <div class="ex"><i>Le agradecería que</i> + <b>Imperf. Subj.</b> – weil Konditional im Hauptsatz (Zeitenfolge aus Unidad 27).</div>`},
+ {t:'mc',q:'Welche Anrede ist korrekt?',opts:['Estimada señora López:','Querida señora López,','Hola señora López:'],a:0},
+ {t:'mc',q:'Le agradecería que me ___ una factura.',opts:['enviara','envíe','enviaría'],a:0},
+ {t:'gap',q:'Me ___ en contacto con ustedes para solicitar información.',a:['pongo']},
+ {t:'gap',q:'Quedo a la ___ de su respuesta.',a:['espera']},
+ {t:'match',q:'informell → formell',pairs:[['Hola, Marta:','Estimada señora:'],['Te escribo porque …','Me pongo en contacto con usted para …'],['¿Me mandas …?','Le agradecería que me enviara …'],['Un beso,','Atentamente,']]},
+ {t:'tr',de:'Ich wäre Ihnen dankbar, wenn Sie mich anrufen würden.',a:['Le agradecería que me llamara.','Le agradecería que me llamase.']}]},
+{id:'l2',title:'Welcher, dessen …',desc:'el cual · cuyo · lo cual',steps:[
+ {t:'info',title:'Relativwörter für gehobene Sprache',html:`<table><tr><th>Form</th><th>Gebrauch</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">el cual, la cual, los cuales …</td><td>nach Präpositionen, formell</td><td class="es-t">El proyecto <b>en el cual</b> trabajo …</td></tr>
+ <tr><td class="es-t">lo cual</td><td>bezieht sich auf den ganzen Satz</td><td class="es-t">No contestó, <b>lo cual</b> me pareció raro.</td></tr>
+ <tr><td class="es-t">cuyo, cuya, cuyos, cuyas</td><td>dessen/deren – richtet sich nach dem <b>Besitz</b></td><td class="es-t">La autora, <b>cuya</b> novela leí, …</td></tr></table>
+ <div class="ex"><i>cuyo</i> stimmt mit dem Folgenden überein: <span class="es-t">el vecino cuy<b>a</b> hij<b>a</b> …</span> – die Tochter ist weiblich, egal ob der Nachbar männlich ist.</div>`},
+ {t:'mc',q:'El cliente, ___ pedido no llegó, ha llamado tres veces.',opts:['cuyo','cuya','el cual'],a:0},
+ {t:'mc',q:'Llegó tarde otra vez, ___ molestó a todos.',opts:['lo cual','el cual','cuyo'],a:0},
+ {t:'gap',q:'La empresa, ___ sede está en Bilbao, busca ingenieros. (deren Sitz)',a:['cuya']},
+ {t:'gap',q:'Es un tema sobre el ___ se ha escrito mucho.',a:['cual']},
+ {t:'tr',de:'Der Autor, dessen Bücher ich gelesen habe, kommt morgen.',a:['El autor, cuyos libros he leído, viene mañana.','El autor cuyos libros he leído viene mañana.']}]},
+{id:'l3',title:'ser oder estar? Bedeutung ändert sich',desc:'ser listo · estar listo',steps:[
+ {t:'info',title:'Adjektive mit zwei Bedeutungen',html:`<table><tr><th>Adjektiv</th><th>ser</th><th>estar</th></tr>
+ <tr><td class="es-t">listo</td><td>klug</td><td>fertig, bereit</td></tr>
+ <tr><td class="es-t">rico</td><td>reich</td><td>lecker</td></tr>
+ <tr><td class="es-t">malo</td><td>schlecht, böse</td><td>krank</td></tr>
+ <tr><td class="es-t">aburrido</td><td>langweilig</td><td>gelangweilt</td></tr>
+ <tr><td class="es-t">despierto</td><td>aufgeweckt</td><td>wach</td></tr>
+ <tr><td class="es-t">orgulloso</td><td>hochmütig</td><td>stolz (auf etwas)</td></tr></table>`},
+ {t:'mc',q:'„Die Paella ist lecker.“',opts:['La paella está rica.','La paella es rica.','La paella está rico.'],a:0},
+ {t:'mc',q:'„Bist du fertig? Wir gehen.“',opts:['¿Estás listo? Nos vamos.','¿Eres listo? Nos vamos.','¿Estás lista nos vamos?'],a:0},
+ {t:'gap',q:'Hoy no voy a clase, ___ malo. (ich bin krank)',a:['estoy']},
+ {t:'gap',q:'Esta película ___ muy aburrida. (sie ist langweilig)',a:['es']},
+ {t:'gap',q:'Mis padres ___ muy orgullosos de mí.',a:['están']}]},
+{id:'l4',title:'Eine Beschwerde',desc:'Telefon · Reklamation schreiben',steps:[
+ {t:'vocab',title:'Kundendienst & Reklamation',items:[['el servicio de atención al cliente','der Kundendienst','☎️'],['la reclamación','die Reklamation','📝'],['la hoja de reclamaciones','das Beschwerdeformular','📄'],['el número de pedido','die Bestellnummer','🔢'],['la garantía','die Garantie','🛡️'],['el reembolso','die Rückerstattung','💶'],['devolver','zurückgeben','↩️'],['cambiar (un producto)','umtauschen','🔄'],['estar en garantía','unter Garantie sein','✅'],['lamentar las molestias','die Unannehmlichkeiten bedauern','🙇'],['defectuoso','fehlerhaft','⚠️'],['el plazo','die Frist','⏳']]},
+ {t:'dialog',place:'Llamada al servicio de atención al cliente',title:'Der kaputte Laptop',scene:'Die Warteschleife ist endlich vorbei.',lines:[
+  {n:'Sra. Ortega',es:'Buenos días, le atiende Elena Ortega. ¿En qué puedo ayudarle?',de:'Guten Tag, Sie sprechen mit Elena Ortega. Wie kann ich Ihnen helfen?'},
+  {you:true,opts:[{es:'Buenos días. Le llamo porque el portátil que compré hace dos semanas no se enciende.',ok:true},{es:'Hola, ¿qué tal? Te llamo porque mi portátil no va.',ok:false,why:'Am Kundentelefon: <b>usted</b> (<i>Le llamo</i>) und neutral-höflich.'}]},
+  {n:'Sra. Ortega',es:'Lamentamos las molestias. Podemos enviarlo a reparar; tardaría unas tres semanas.',de:'Wir bedauern die Unannehmlichkeiten. Wir können ihn zur Reparatur schicken; das würde etwa drei Wochen dauern.'},
+  {you:true,opts:[{es:'Entiendo, pero le agradecería que me lo cambiaran por uno nuevo. Lo necesito para trabajar.',ok:true},{es:'Entiendo, pero le agradecería que me lo cambian por uno nuevo. Lo necesito para trabajar.',ok:false,why:'<b>le agradecería que</b> → Imperf. Subj.: <i>cambiaran</i>.'}]},
+  {n:'Sra. Ortega',es:'Como el producto está en garantía y es defectuoso, puede devolverlo en tienda y le daremos uno nuevo.',de:'Da das Produkt unter Garantie steht und fehlerhaft ist, können Sie es im Laden zurückgeben, und wir geben Ihnen ein neues.'},
+  {you:true,opts:[{es:'Muchísimas gracias por su ayuda. Que tenga un buen día.',ok:true},{es:'Vale, guay, gracias. ¡Chao!',ok:false,why:'Zu locker für ein formelles Gespräch. Besser: <i>Muchas gracias por su ayuda.</i>'}]}]},
+ {t:'free',task:'Schreib eine formelle Reklamations-E-Mail an ein Hotel (7–9 Sätze): Das Zimmer war schmutzig, die Klimaanlage kaputt, und niemand hat geholfen. Bitte um eine teilweise Erstattung.',hint:'Estimados señores: · Me pongo en contacto con ustedes para … · Durante mi estancia … · lo cual … · Le agradecería que … · Quedo a la espera de … · Atentamente,',focus:'formelles Register, le agradecería que + Imperf. Subj., lo cual',model:'Estimados señores: Me pongo en contacto con ustedes en relación con mi estancia en su hotel del 3 al 6 de agosto (reserva n.º 45821). Lamentablemente, la habitación estaba sucia cuando llegamos y el aire acondicionado no funcionaba, lo cual hizo imposible dormir con 35 grados. Lo comunicamos tres veces en recepción, pero nadie vino a solucionarlo. Teniendo en cuenta estas circunstancias, les agradecería que me devolvieran una parte del importe. Quedo a la espera de su respuesta. Atentamente, Jonas'}]}
+],
+placement:[
+ {t:'mc',q:'Le agradecería que me ___ la información.',opts:['enviara','envía','enviaría'],a:0},
+ {t:'mc',q:'„Die Suppe ist lecker.“',opts:['La sopa está rica.','La sopa es rica.','La sopa tiene rica.'],a:0},
+ {t:'gap',q:'El vecino, ___ perro ladra toda la noche, no está nunca. (dessen Hund)',a:['cuyo']},
+ {t:'gap',q:'No vino nadie, lo ___ me sorprendió.',a:['cual']},
+ {t:'mc',q:'Formeller Schluss einer E-Mail:',opts:['Atentamente,','¡Un besazo!','Venga, chao.'],a:0},
+ {t:'mc',q:'„Bist du fertig?“',opts:['¿Estás listo?','¿Eres listo?','¿Tienes listo?'],a:0}],
+resumen:`<h3>Formelle E-Mail</h3><p class="es-t">Estimado/a … : · Me pongo en contacto con usted para … · Le agradecería que + Imperf. Subj. · Quedo a la espera de su respuesta. · Atentamente,</p>
+<h3>Relativwörter</h3><p class="es-t">el / la cual (nach Präposition) · lo cual (ganzer Satz) · cuyo / cuya / cuyos / cuyas (dessen, deren)</p>
+<h3>ser ↔ estar</h3><p class="es-t">ser listo (klug) / estar listo (fertig) · ser rico (reich) / estar rico (lecker) · ser malo / estar malo (krank) · ser aburrido / estar aburrido</p>`});
+
+COURSE.units.push({id:'u30',n:'32',level:'B2b',title:'Ponerse, volverse, hacerse',sub:'Verben der Veränderung (ponerse, volverse, hacerse, quedarse, convertirse en) · Periphrasen (ponerse a, llegar a, acabar + Gerundium, estar a punto de) · Persönlichkeit & Beziehungen',
+goals:['ponerse + Adj.: kurze Veränderung (rot, nervös)','volverse + Adj.: tiefe Charakteränderung','hacerse + Nomen/Adj.: durch Anstrengung (hacerse rico, médico)','quedarse + Adj.: Ergebnis (quedarse sorprendido, sin trabajo)','convertirse en + Nomen','Periphrasen: ponerse a, llegar a, acabar + Gerundium, estar a punto de'],
+situacion:{title:'Klassentreffen',npc:'Lucía',scene:'Bei einer Feier triffst du Lucía, eine alte Freundin aus deinem ersten Erasmus-Semester vor fünf Jahren. Ihr erzählt, wie ihr euch und eure gemeinsamen Freunde verändert habt.',role:'Du bist Lucía, alte Freundin von Jonas, gesprächig und neugierig. Ihr duzt euch. Erzähl, wie sich eure Freunde verändert haben (Pedro se ha vuelto muy serio, Ana se hizo médica, Carlos se quedó sin trabajo…), und frag Jonas, wie er sich verändert hat. Benutze Verben der Veränderung und Periphrasen.',goal:'Beschreibe Veränderungen bei dir und anderen mit ponerse, volverse, hacerse, quedarse und convertirse en.'},
+lessons:[
+{id:'l1',title:'werden – aber wie?',desc:'ponerse · volverse · hacerse',steps:[
+ {t:'info',title:'Deutsch „werden“ = viele spanische Verben',html:`<table><tr><th>Verb</th><th>Art der Veränderung</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">ponerse + Adj.</td><td>plötzlich, vorübergehend</td><td class="es-t">Se puso rojo. Me pongo nervioso.</td></tr>
+ <tr><td class="es-t">volverse + Adj.</td><td>tief, oft unerwartet, Charakter</td><td class="es-t">Se ha vuelto muy egoísta.</td></tr>
+ <tr><td class="es-t">hacerse + Nomen/Adj.</td><td>durch eigene Anstrengung / allmählich</td><td class="es-t">Se hizo médica. Se hizo rico.</td></tr>
+ <tr><td class="es-t">quedarse + Adj.</td><td>Ergebnis, Endzustand</td><td class="es-t">Se quedó sorprendido. Me quedé sin batería.</td></tr>
+ <tr><td class="es-t">convertirse en + Nomen</td><td>Verwandlung</td><td class="es-t">El pueblo se convirtió en una ciudad.</td></tr>
+ <tr><td class="es-t">llegar a ser</td><td>nach langem Weg</td><td class="es-t">Llegó a ser ministra.</td></tr></table>`},
+ {t:'mc',q:'Cuando la vio, ___ rojo.',opts:['se puso','se volvió','se hizo'],a:0},
+ {t:'mc',q:'Desde que es famoso, ___ muy arrogante.',opts:['se ha vuelto','se ha puesto','se ha quedado'],a:0},
+ {t:'mc',q:'Estudió mucho y ___ abogada.',opts:['se hizo','se puso','se quedó'],a:0},
+ {t:'gap',q:'Con la noticia, todos nos ___ (quedarse) sin palabras.',a:['quedamos']},
+ {t:'gap',q:'La fábrica se ___ (convertir) en un museo. (Indefinido)',a:['convirtió']},
+ {t:'gap',q:'Me ___ (ponerse) muy nervioso antes de los exámenes. (immer)',a:['pongo']},
+ {t:'tr',de:'Er ist sehr ernst geworden.',a:['Se ha vuelto muy serio.']}]},
+{id:'l2',title:'anfangen, schaffen, am Ende …',desc:'ponerse a · llegar a · acabar + Gerundium',steps:[
+ {t:'info',title:'Periphrasen für Fortgeschrittene',html:`<table><tr><th>Form</th><th>Bedeutung</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">ponerse a + Inf.</td><td>(plötzlich) anfangen</td><td class="es-t">Se puso a llorar.</td></tr>
+ <tr><td class="es-t">echarse a + Inf.</td><td>losbrechen (reír, llorar, correr)</td><td class="es-t">Nos echamos a reír.</td></tr>
+ <tr><td class="es-t">llegar a + Inf.</td><td>sogar, so weit gehen</td><td class="es-t">Llegó a dormir en la oficina.</td></tr>
+ <tr><td class="es-t">acabar + Gerundium</td><td>am Ende (doch)</td><td class="es-t">Acabé aceptando el trabajo.</td></tr>
+ <tr><td class="es-t">estar a punto de + Inf.</td><td>kurz davor sein</td><td class="es-t">Estaba a punto de salir.</td></tr>
+ <tr><td class="es-t">tener + Partizip</td><td>(schon) erledigt haben</td><td class="es-t">Tengo hechos los deberes.</td></tr></table>`},
+ {t:'mc',q:'„Am Ende habe ich ihn geheiratet.“',opts:['Acabé casándome con él.','Acabé de casarme con él.','Llegué casándome con él.'],a:0},
+ {t:'mc',q:'„Der Zug fährt gleich ab.“',opts:['El tren está a punto de salir.','El tren acaba de salir.','El tren se pone a salir.'],a:0},
+ {t:'gap',q:'Cuando oyó el chiste, se ___ a reír. (losbrechen)',a:['echó']},
+ {t:'gap',q:'Trabajaba tanto que ___ (llegar) a dormir en la oficina. (Indefinido)',a:['llegó']},
+ {t:'gap',q:'De repente, el niño se ___ a cantar.',a:['puso']},
+ {t:'listen',es:'Estaba a punto de rendirme, pero al final acabé terminando la maratón.',de:'Ich war kurz davor aufzugeben, aber am Ende habe ich den Marathon doch zu Ende gelaufen.'}]},
+{id:'l3',title:'Menschen beschreiben',desc:'Persönlichkeit · Dialog',steps:[
+ {t:'vocab',title:'Charakter & Beziehungen',items:[['madurar','reifer werden','🌱'],['sensato','vernünftig','🧠'],['testarudo','stur','🐐'],['generoso','großzügig','🎁'],['egoísta','egoistisch','🙄'],['tener mucho carácter','eine starke Persönlichkeit haben','💪'],['llevarse bien / mal con','sich gut / schlecht verstehen mit','🤝'],['perder el contacto','den Kontakt verlieren','📵'],['reencontrarse','sich wiedersehen','🫂'],['echar una mano','helfen','🤲'],['caer bien / mal','sympathisch / unsympathisch sein','😊'],['enamorarse de','sich verlieben in','😍']]},
+ {t:'dialog',place:'Fiesta de antiguos alumnos',title:'Wie haben wir uns verändert?',scene:'Lucía erkennt dich sofort.',lines:[
+  {n:'Lucía',es:'¡Jonas! ¡Cuánto tiempo! Estás igual. ¿Te acuerdas de Pedro? Se ha vuelto superserio, trabaja en un banco.',de:'Jonas! Lange nicht gesehen! Du siehst aus wie immer. Erinnerst du dich an Pedro? Er ist superernst geworden, er arbeitet in einer Bank.'},
+  {you:true,opts:[{es:'¡No me lo puedo creer! Con lo loco que era… ¿Y Ana?',ok:true},{es:'¡No me lo puedo creer! ¿Y Ana se ha puesto?',ok:false,why:'Unvollständig: <i>ponerse</i> braucht ein Adjektiv.'}]},
+  {n:'Lucía',es:'Ana se hizo médica y ahora vive en Chile. ¿Y tú? ¿Has cambiado mucho?',de:'Ana ist Ärztin geworden und lebt jetzt in Chile. Und du? Hast du dich sehr verändert?'},
+  {you:true,opts:[{es:'Creo que me he vuelto más tranquilo. Antes me ponía nervioso por todo.',ok:true},{es:'Creo que me he puesto más tranquilo para siempre. Antes me volvía nervioso por todo.',ok:false,why:'Dauerhafte Charakteränderung → <i>volverse</i>; kurze Reaktion → <i>ponerse</i>.'}]},
+  {n:'Lucía',es:'Y Carlos… perdió el trabajo y estuvo a punto de volver a su pueblo.',de:'Und Carlos … hat seinen Job verloren und war kurz davor, in sein Dorf zurückzukehren.'},
+  {you:true,opts:[{es:'¡Vaya! ¿Y al final qué hizo?',ok:true},{es:'¡Vaya! ¿Y al final qué se hizo?',ok:false,why:'Hier ganz normal <i>hacer</i>: <i>¿qué hizo?</i> (was hat er gemacht?).'}]},
+  {n:'Lucía',es:'Acabó montando un bar en Gràcia. ¡Y le va genial!',de:'Am Ende hat er eine Bar in Gràcia aufgemacht. Und es läuft super!'}]},
+ {t:'speak',es:'Con los años me he vuelto más paciente, aunque todavía me pongo nervioso antes de hablar en público.',de:'Mit den Jahren bin ich geduldiger geworden, auch wenn ich immer noch nervös werde, bevor ich öffentlich spreche.'}]},
+{id:'l4',title:'Lesen: Diez años después',desc:'Porträt · eigener Text',steps:[
+ {t:'read',title:'Diez años después',text:`Cuando conocí a Raquel en la universidad, era la persona más tímida de la clase. Se ponía roja cada vez que el profesor le hacía una pregunta y nunca hablaba en grupo. Nadie habría dicho que diez años después se convertiría en una de las {periodistas|Journalistinnen} más conocidas de la radio.
+
+El cambio no fue de un día para otro. Empezó a trabajar como becaria en una emisora local, donde tuvo que hacer entrevistas en la calle. «Al principio estaba a punto de dejarlo cada semana», me contó. Pero poco a poco se fue haciendo más segura. Llegó a entrevistar a la presidenta del Gobierno en directo, y no se puso nerviosa ni un segundo.
+
+Lo curioso es que, en privado, sigue siendo bastante tímida. «En la radio me pongo otra piel», dice riendo. Yo me quedé sin palabras cuando la escuché por primera vez. Y, aunque nos vemos poco, siempre que coincidimos acabamos hablando hasta las tantas, como en los viejos tiempos.`,de:`Als ich Raquel an der Uni kennenlernte, war sie die schüchternste Person im Kurs. Sie wurde jedes Mal rot, wenn der Professor ihr eine Frage stellte, und sprach nie in der Gruppe. Niemand hätte gesagt, dass sie zehn Jahre später eine der bekanntesten Journalistinnen im Radio werden würde.\n\nDie Veränderung kam nicht von heute auf morgen. Sie fing als Praktikantin bei einem Lokalsender an, wo sie Straßeninterviews machen musste. „Am Anfang war ich jede Woche kurz davor aufzuhören“, erzählte sie mir. Aber nach und nach wurde sie sicherer. Sie interviewte sogar die Regierungschefin live und wurde keine Sekunde nervös.\n\nDas Kuriose ist, dass sie privat immer noch ziemlich schüchtern ist. „Im Radio schlüpfe ich in eine andere Haut“, sagt sie lachend. Ich war sprachlos, als ich sie das erste Mal hörte. Und obwohl wir uns selten sehen, reden wir immer, wenn wir uns treffen, bis spät in die Nacht – wie in alten Zeiten.`},
+ {t:'mc',q:'¿Cómo era Raquel en la universidad?',opts:['muy tímida','muy segura','muy habladora'],a:0},
+ {t:'mc',q:'„Llegó a entrevistar a la presidenta“ bedeutet …',opts:['Sie hat es sogar geschafft, die Präsidentin zu interviewen.','Sie kam an, um die Präsidentin zu interviewen.','Sie hat die Präsidentin fast interviewt.'],a:0},
+ {t:'gap',q:'Diez años después se ___ (convertir) en una periodista conocida. (Konditional)',a:['convertiría']},
+ {t:'free',task:'Beschreib eine Person (dich selbst oder jemand anderen), die sich stark verändert hat. (7–9 Sätze)',hint:'Antes … , pero con los años se ha vuelto … · Se hizo … · Se puso … · Se quedó … · Acabó + Gerundium · Llegó a …',focus:'Verben der Veränderung, Periphrasen',model:'Mi hermano Tim era un adolescente bastante caótico. Se ponía de mal humor si alguien le pedía ayuda en casa. Pero cuando cumplió veinte años, se fue a vivir solo y se volvió mucho más responsable. Empezó a cocinar y llegó a organizar cenas para diez personas. Después de la universidad se hizo profesor de primaria. Al principio no le gustaba, pero acabó enamorándose de su trabajo. Cuando lo veo con sus alumnos, me quedo sorprendido de lo paciente que es.'}]}
+],
+placement:[
+ {t:'mc',q:'Cuando le hicieron la pregunta, ___ rojo.',opts:['se puso','se hizo','se convirtió'],a:0},
+ {t:'mc',q:'Trabajó mucho y ___ rico.',opts:['se hizo','se puso','se quedó'],a:0},
+ {t:'gap',q:'El pueblo se ha ___ (convertir) en un destino turístico.',a:['convertido']},
+ {t:'mc',q:'„Ich war kurz davor zu gehen.“',opts:['Estaba a punto de irme.','Acababa de irme.','Me ponía a irme.'],a:0},
+ {t:'gap',q:'Al final ___ (yo, acabar) aceptando su propuesta. (Indefinido)',a:['acabé']},
+ {t:'mc',q:'Desde que gana tanto dinero, ___ muy arrogante.',opts:['se ha vuelto','se ha puesto','se ha hecho a'],a:0}],
+resumen:`<h3>„werden“</h3><p class="es-t">ponerse + Adj. (kurz: rojo, nervioso) · volverse + Adj. (Charakter) · hacerse + Nomen/Adj. (Anstrengung: médico, rico) · quedarse + Adj. (Ergebnis: sorprendido, sin trabajo) · convertirse en + Nomen · llegar a ser</p>
+<h3>Periphrasen</h3><p class="es-t">ponerse a / echarse a + Inf. · llegar a + Inf. · acabar + Gerundium · estar a punto de + Inf. · tener + Partizip</p>`});
+
+COURSE.units.push({id:'u31',n:'33',level:'B2b',title:'Argumentar',sub:'Diskursmarker (no obstante, en cambio, es decir, en definitiva) · Vermutungen (habrá llegado, serían las diez) · Argumentationstext · B2 abschließen',
+goals:['Gliedern: en primer lugar, por otra parte, por último','Gegensatz: no obstante, en cambio, sin embargo','Erklären: es decir, o sea, en otras palabras','Zusammenfassen: en definitiva, en resumen','Vermutung: Futur / Futur Perfekt / Konditional (estará, habrá llegado, serían)','Pro & Contra-Text schreiben'],
+situacion:{title:'Debatte im Seminar',npc:'Profesora Vidal',scene:'Im Seminar „Tecnología y sociedad“ an der UPC sollst du eine Position vertreten: Sollte künstliche Intelligenz an der Uni bei Prüfungen erlaubt sein? Profesora Vidal moderiert und hakt nach.',role:'Du bist Profesora Vidal, Dozentin an der UPC, sachlich und anspruchsvoll. Ihr siezt euch zuerst (usted), du kannst aber zum tú wechseln. Bitte Jonas, seine Position zu begründen, stell Gegenargumente vor (No obstante, hay quien dice que…) und bitte ihn am Ende um ein Fazit (¿Cuál sería su conclusión?). Benutze Diskursmarker.',goal:'Vertritt eine Position mit gegliederten Argumenten (en primer lugar, por otra parte, no obstante, es decir) und ziehe ein Fazit (en definitiva).'},
+lessons:[
+{id:'l1',title:'Gliedern & verbinden',desc:'en primer lugar · no obstante · es decir',steps:[
+ {t:'info',title:'Diskursmarker für Texte und Debatten',html:`<table><tr><th>Funktion</th><th>Marker</th></tr>
+ <tr><td>Aufzählen</td><td class="es-t">en primer lugar · en segundo lugar · por otra parte · además · por último</td></tr>
+ <tr><td>Gegensatz</td><td class="es-t">sin embargo · no obstante (formell) · en cambio (dagegen) · aun así</td></tr>
+ <tr><td>Erklären</td><td class="es-t">es decir · o sea · en otras palabras</td></tr>
+ <tr><td>Beispiel</td><td class="es-t">por ejemplo · tal es el caso de · sin ir más lejos</td></tr>
+ <tr><td>Fazit</td><td class="es-t">en definitiva · en resumen · en conclusión · en suma</td></tr></table>
+ <div class="ex"><i>en cambio</i> stellt zwei Dinge gegenüber (<span class="es-t">Yo trabajo mucho; mi hermano, en cambio, …</span>). <i>sin embargo / no obstante</i> = trotzdem, jedoch.</div>`},
+ {t:'mc',q:'Mi hermana es muy ordenada; yo, ___, soy un desastre.',opts:['en cambio','es decir','por último'],a:0},
+ {t:'mc',q:'El plan es caro; ___, creo que merece la pena.',opts:['no obstante','es decir','en primer lugar'],a:0},
+ {t:'mc',q:'Llegará el 15, ___, dentro de dos semanas.',opts:['es decir','en cambio','no obstante'],a:0},
+ {t:'gap',q:'En ___, la propuesta tiene más ventajas que inconvenientes. (Fazit)',a:['definitiva','resumen','conclusión']},
+ {t:'match',q:'Funktion zuordnen',pairs:[['en primer lugar','Aufzählen'],['no obstante','Gegensatz'],['o sea','Erklären'],['en suma','Fazit'],['sin ir más lejos','Beispiel']]},
+ {t:'tr',de:'Einerseits ist es praktisch; andererseits ist es teuer.',a:['Por un lado es práctico; por otro (lado), es caro.','Por una parte es práctico; por otra, es caro.']}]},
+{id:'l2',title:'Wahrscheinlich …',desc:'estará · habrá llegado · serían las diez',steps:[
+ {t:'info',title:'Vermutungen mit Zeitformen',html:`<table><tr><th>Vermutung über …</th><th>Form</th><th>Beispiel</th></tr>
+ <tr><td>jetzt</td><td>Futur</td><td class="es-t">¿Dónde está Pablo? – <b>Estará</b> en casa.</td></tr>
+ <tr><td>gerade eben (Perfekt)</td><td>Futur Perfekt</td><td class="es-t">No contesta. <b>Habrá salido</b>.</td></tr>
+ <tr><td>damals (Indef./Imperf.)</td><td>Konditional</td><td class="es-t">Cuando llegó <b>serían</b> las diez.</td></tr></table>
+ <div class="ex">Futur Perfekt = <span class="es-t">habré, habrás, habrá, habremos, habréis, habrán + Partizip</span>. Deutsch oft mit „wohl“: <i>Er wird wohl gegangen sein.</i></div>`},
+ {t:'mc',q:'Laia no ha venido. ___ enferma. (jetzt, Vermutung)',opts:['Estará','Estaría','Habrá estado a'],a:0},
+ {t:'mc',q:'¿Por qué no contestó ayer? – ___ ocupado.',opts:['Estaría','Estará','Esté'],a:0},
+ {t:'gap',q:'Las luces están apagadas. ___ (ellos, irse) ya. (Futur Perfekt)',a:['Se habrán ido']},
+ {t:'gap',q:'¿Cuántos años tenía cuando se casó? – ___ (tener) unos treinta.',a:['Tendría']},
+ {t:'gap',q:'Son las once y Marc no está. ___ (perder) el tren. (Futur Perfekt)',a:['Habrá perdido']},
+ {t:'listen',es:'No te preocupes, ya habrá llegado al aeropuerto. Estará buscando la puerta de embarque.',de:'Keine Sorge, sie wird wohl schon am Flughafen angekommen sein. Sie sucht wohl gerade das Gate.'}]},
+{id:'l3',title:'Debattieren',desc:'Wortschatz · Seminar-Dialog',steps:[
+ {t:'vocab',title:'Argumentieren & Technik',items:[['el argumento','das Argument','💬'],['las ventajas y los inconvenientes','Vor- und Nachteile','⚖️'],['a favor / en contra de','dafür / dagegen','👍'],['defender una postura','eine Position vertreten','🛡️'],['plantear','aufwerfen, vorschlagen','💡'],['la inteligencia artificial','die künstliche Intelligenz','🤖'],['la herramienta','das Werkzeug','🔧'],['hacer trampa','schummeln','🃏'],['fomentar','fördern','🌱'],['a largo plazo','langfristig','⏳'],['cabe destacar que','es ist hervorzuheben, dass','📌'],['hay quien opina que','manche meinen, dass','🗣️']]},
+ {t:'dialog',place:'Seminario en la UPC',title:'KI bei Prüfungen?',scene:'Profesora Vidal gibt dir das Wort.',lines:[
+  {n:'Prof. Vidal',es:'Jonas, ¿está usted a favor o en contra de permitir la IA en los exámenes?',de:'Jonas, sind Sie dafür oder dagegen, KI in Prüfungen zu erlauben?'},
+  {you:true,opts:[{es:'En principio, a favor. En primer lugar, porque es una herramienta que usaremos en el trabajo.',ok:true},{es:'En principio, a favor. En cambio, porque es una herramienta que usaremos en el trabajo.',ok:false,why:'Erstes Argument → <i>en primer lugar</i>. <i>en cambio</i> stellt etwas gegenüber.'}]},
+  {n:'Prof. Vidal',es:'No obstante, hay quien opina que así los estudiantes no aprenden a pensar.',de:'Dennoch meinen manche, dass die Studierenden so nicht denken lernen.'},
+  {you:true,opts:[{es:'Es cierto. Por eso, habría que cambiar el tipo de examen, es decir, evaluar más el razonamiento.',ok:true},{es:'Es cierto. Por eso, habría que cambiar el tipo de examen, en definitiva, evaluar más el razonamiento.',ok:false,why:'Erklärung/Umformulierung → <i>es decir</i>; <i>en definitiva</i> ist ein Fazit.'}]},
+  {n:'Prof. Vidal',es:'Interesante. ¿Y cuál sería su conclusión?',de:'Interessant. Und was wäre Ihr Fazit?'},
+  {you:true,opts:[{es:'En definitiva, no se trata de prohibir, sino de aprender a usarla bien.',ok:true},{es:'En primer lugar, no se trata de prohibir, sino de aprender a usarla bien.',ok:false,why:'Fazit → <i>en definitiva / en conclusión</i>.'}]}]},
+ {t:'speak',es:'Por una parte, la tecnología nos ayuda; por otra, puede hacernos más dependientes. En definitiva, depende de cómo la usemos.',de:'Einerseits hilft uns die Technologie; andererseits kann sie uns abhängiger machen. Letztlich hängt es davon ab, wie wir sie benutzen.'}]},
+{id:'l4',title:'B2-Check: Pro & Contra',desc:'Lesen · Argumentationstext',steps:[
+ {t:'read',title:'¿Semana laboral de cuatro días?',text:`En los últimos años, varias empresas españolas han probado la semana laboral de cuatro días. Los resultados, según sus defensores, son {prometedores|vielversprechend}: los empleados están menos estresados y, sin embargo, producen lo mismo o incluso más.
+
+No obstante, no todo el mundo está convencido. En primer lugar, no todos los sectores pueden reducir las horas: un hospital o un restaurante, por ejemplo, necesitan personal todos los días. En segundo lugar, hay quien teme que la jornada de los cuatro días restantes se vuelva más intensa, es decir, que se trabaje lo mismo en menos tiempo. Por otra parte, las pequeñas empresas dicen que no podrían permitírselo.
+
+Cabe destacar, en cambio, que en los países donde se ha probado, como Islandia, la mayoría de las empresas acabaron manteniendo el modelo. En definitiva, la semana de cuatro días no es una solución mágica, pero quizá sí sea el principio de una nueva forma de entender el trabajo.`,de:`In den letzten Jahren haben mehrere spanische Firmen die Viertagewoche ausprobiert. Die Ergebnisse sind laut ihren Befürwortern vielversprechend: Die Angestellten sind weniger gestresst und produzieren trotzdem genauso viel oder sogar mehr.\n\nDennoch ist nicht jeder überzeugt. Erstens können nicht alle Branchen die Stunden reduzieren: Ein Krankenhaus oder ein Restaurant zum Beispiel brauchen jeden Tag Personal. Zweitens befürchten manche, dass der Arbeitstag an den übrigen vier Tagen intensiver wird, das heißt, dass man in weniger Zeit genauso viel arbeitet. Außerdem sagen kleine Firmen, dass sie sich das nicht leisten könnten.\n\nHervorzuheben ist dagegen, dass in den Ländern, in denen es ausprobiert wurde, wie Island, die meisten Firmen das Modell am Ende beibehalten haben. Letztlich ist die Viertagewoche keine Wunderlösung, aber vielleicht der Anfang einer neuen Art, Arbeit zu verstehen.`},
+ {t:'mc',q:'Según el texto, ¿cuál es un argumento en contra?',opts:['No todos los sectores pueden reducir las horas.','Los empleados producen menos.','Islandia lo ha prohibido.'],a:0},
+ {t:'mc',q:'„es decir“ im zweiten Absatz …',opts:['erklärt den vorigen Gedanken genauer','leitet einen Gegensatz ein','zieht ein Fazit'],a:0},
+ {t:'mc',q:'B2-Mix: Si ___ cuatro días a la semana, tendría más tiempo libre.',opts:['trabajara','trabajo','trabajaría'],a:0},
+ {t:'mc',q:'B2-Mix: Me sorprendió que la empresa ___ el modelo.',opts:['mantuviera','mantiene','mantenga'],a:0},
+ {t:'free',task:'Schreib einen Argumentationstext (8–10 Sätze): ¿Deberían las universidades permitir la inteligencia artificial en los exámenes? Mit Einleitung, Pro, Contra und Fazit.',hint:'En primer lugar … · Además … · No obstante … · Hay quien opina que … · es decir … · Si … , … · En definitiva …',focus:'Diskursmarker, Konzessiv/Kausal, Subjuntivo, irreale Bedingungen',model:'La inteligencia artificial ha llegado a las aulas y plantea una pregunta difícil: ¿debería estar permitida en los exámenes? En primer lugar, es una herramienta que usaremos en nuestra vida profesional, así que tiene sentido aprender a usarla. Además, si se permitiera, los exámenes podrían centrarse más en el razonamiento. No obstante, hay quien opina que los estudiantes dejarían de pensar por sí mismos. Es cierto que existe el riesgo de que algunos hagan trampa. Por otra parte, prohibirla no impediría que la usen en casa. Por eso, en mi opinión, sería mejor cambiar el tipo de examen, es decir, evaluar más proyectos y presentaciones orales. En definitiva, no se trata de prohibir, sino de enseñar a usar la IA con responsabilidad.'}]}
+],
+placement:[
+ {t:'mc',q:'Mi hermano es muy alto; yo, ___, soy bajito.',opts:['en cambio','es decir','en definitiva'],a:0},
+ {t:'mc',q:'¿Dónde está Laia? – ___ en la biblioteca. (Vermutung)',opts:['Estará','Esté','Estaba a'],a:0},
+ {t:'gap',q:'No contesta. Se ___ (dormir). (Futur Perfekt)',a:['habrá dormido']},
+ {t:'mc',q:'„das heißt“',opts:['es decir','no obstante','por último'],a:0},
+ {t:'gap',q:'Cuando llegué ___ (ser) las diez. (Vermutung, damals)',a:['serían']},
+ {t:'mc',q:'Fazit-Marker:',opts:['en definitiva','en primer lugar','por ejemplo'],a:0}],
+resumen:`<h3>Diskursmarker</h3><p class="es-t">en primer lugar · además · por otra parte · por último · sin embargo · no obstante · en cambio · es decir · o sea · por ejemplo · en definitiva · en resumen</p>
+<h3>Vermutungen</h3><p class="es-t">Estará en casa. (jetzt) · Habrá salido. (gerade) · Serían las diez. (damals)</p>
+<h3>Argumentieren</h3><p class="es-t">a favor / en contra de · hay quien opina que … · cabe destacar que … · ventajas e inconvenientes</p>`});
+;
+/* ===== C1 Teil 1: Unidad 34–36 – eigene Inhalte nach dem Plan Curricular (Instituto Cervantes) ===== */
+
+COURSE.units.push({id:'u32',n:'34',level:'C1',title:'Matices',sub:'Subjuntivo mit Bedeutungswechsel (decir, sentir, comprender que) · el hecho de que · Que + Subj. am Satzanfang · Kommunikation & Missverständnisse',
+goals:['Verben mit zwei Bedeutungen: decir que + Ind. (mitteilen) / + Subj. (auffordern)','sentir que + Ind. (spüren) / + Subj. (bedauern)','comprender / entender que + Ind. (begreifen) / + Subj. (Verständnis haben)','el hecho de que + Subj. (meist)','Que + Subj. am Satzanfang: Que no venga no me extraña','Missverständnisse klären und Nuancen ausdrücken'],
+situacion:{title:'Ein Missverständnis klären',npc:'Laia',scene:'Laia ist sauer, weil du ihren Geburtstag vergessen hast – oder glaubt sie das nur? Ihr trefft euch, um das zu klären.',role:'Du bist Laia, gute Freundin von Jonas, verletzt, aber offen für ein Gespräch. Ihr duzt euch. Sag, was dich gestört hat (Me molestó que no dijeras nada…, El hecho de que no llamaras…), hör dir Jonas’ Erklärung an und reagiere differenziert (Entiendo que estuvieras ocupado, pero…; Siento que…). Benutze Verben mit Bedeutungswechsel.',goal:'Kläre das Missverständnis mit nuancierten Formulierungen: Siento que…, Entiendo que + Subj., El hecho de que…, Te digo que + Ind./Subj.'},
+lessons:[
+{id:'l1',title:'Gleiches Verb, andere Bedeutung',desc:'decir que · sentir que · comprender que',steps:[
+ {t:'info',title:'Der Modus verändert die Bedeutung',html:`<table><tr><th>Verb</th><th>+ Indikativ</th><th>+ Subjuntivo</th></tr>
+ <tr><td class="es-t">decir que</td><td>mitteilen: <span class="es-t">Dice que <b>viene</b>.</span></td><td>auffordern: <span class="es-t">Dice que <b>vengas</b>.</span></td></tr>
+ <tr><td class="es-t">sentir que</td><td>spüren: <span class="es-t">Siento que algo <b>va</b> mal.</span></td><td>bedauern: <span class="es-t">Siento que <b>estés</b> mal.</span></td></tr>
+ <tr><td class="es-t">comprender / entender que</td><td>begreifen: <span class="es-t">Entendí que no <b>había</b> plazas.</span></td><td>Verständnis haben: <span class="es-t">Entiendo que <b>estés</b> enfadada.</span></td></tr>
+ <tr><td class="es-t">temer(se) que</td><td>befürchten (eher sicher): <span class="es-t">Me temo que no <b>hay</b> solución.</span></td><td>Angst haben: <span class="es-t">Temo que no <b>haya</b> solución.</span></td></tr></table>
+ <div class="ex">Denk an die Grundlogik: Indikativ = Information, Tatsache. Subjuntivo = Wunsch, Bewertung, Gefühl.</div>`},
+ {t:'mc',q:'„Es tut mir leid, dass du krank bist.“',opts:['Siento que estés enferma.','Siento que estás enferma.','Siento estar enferma.'],a:0},
+ {t:'mc',q:'„Er sagt, du sollst ihn anrufen.“',opts:['Dice que lo llames.','Dice que lo llamas.','Dice llamarlo.'],a:0},
+ {t:'mc',q:'Leyendo el contrato, comprendí que me ___ engañado.',opts:['habían','hubieran','hayan'],a:0},
+ {t:'gap',q:'Entiendo que ___ (tú, estar) enfadada, pero déjame explicarte.',a:['estés']},
+ {t:'gap',q:'Siento que alguien me ___ (seguir). (Ich spüre es.)',a:['sigue']},
+ {t:'gap',q:'Me temo que no ___ (quedar) entradas para hoy.',a:['quedan']},
+ {t:'tr',de:'Ich habe dir gesagt, dass du nicht kommen sollst.',a:['Te dije que no vinieras.','Te he dicho que no vengas.']}]},
+{id:'l2',title:'Die Tatsache, dass …',desc:'el hecho de que · Que no venga…',steps:[
+ {t:'info',title:'Bekanntes bewerten',html:`<p>Wenn eine bekannte Tatsache zum <b>Thema</b> wird, steht meist der Subjuntivo:</p>
+ <table><tr><th>Struktur</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">el hecho de que + Subj.</td><td class="es-t">El hecho de que no <b>llamara</b> me dolió.</td></tr>
+ <tr><td class="es-t">Que + Subj. (am Satzanfang)</td><td class="es-t">Que no <b>quiera</b> venir no me extraña.</td></tr>
+ <tr><td class="es-t">lo de que / eso de que + Subj./Ind.</td><td class="es-t">Eso de que te <b>vayas</b> no me gusta nada.</td></tr></table>
+ <div class="ex">Gleiche Aussage, anderer Fokus: <span class="es-t">No me extraña que no quiera venir.</span> – Mit <i>que</i> vorne wird die Tatsache betont.</div>`},
+ {t:'mc',q:'El hecho de que nadie ___ nada es sospechoso.',opts:['dijera','dijo','diría'],a:0},
+ {t:'mc',q:'___ llegue tarde otra vez no me sorprende.',opts:['Que','El que de','Lo que'],a:0},
+ {t:'gap',q:'Que ___ (tú, tener) razón no significa que puedas gritar.',a:['tengas']},
+ {t:'gap',q:'El hecho de que ___ (ser) gratis no lo hace mejor.',a:['sea']},
+ {t:'order',es:'Que no me avisaras fue lo que más me molestó.',de:'Dass du mir nicht Bescheid gesagt hast, hat mich am meisten gestört.'},
+ {t:'tr',de:'Die Tatsache, dass er nicht gekommen ist, sagt viel.',a:['El hecho de que no haya venido dice mucho.','El hecho de que no viniera dice mucho.']}]},
+{id:'l3',title:'Nuancen im Gespräch',desc:'Wortschatz · Klärungsgespräch',steps:[
+ {t:'vocab',title:'Kommunikation & Gefühle',items:[['el malentendido','das Missverständnis','🤷'],['malinterpretar','missverstehen','🔀'],['sentirse dolido','gekränkt sein','💔'],['dar explicaciones','Erklärungen geben','🗣️'],['no era mi intención','das war nicht meine Absicht','🙏'],['ponerse en el lugar de alguien','sich in jemanden hineinversetzen','🔄'],['echar en cara','vorwerfen','👉'],['hacer las paces','sich versöhnen','🕊️'],['guardar rencor','nachtragend sein','😒'],['quitar hierro al asunto','die Sache entschärfen','🧯'],['a mi entender','meines Erachtens','🧠'],['dicho sea de paso','nebenbei bemerkt','💬']]},
+ {t:'dialog',place:'Terraza en Gràcia',title:'Der vergessene Geburtstag',scene:'Laia rührt in ihrem Café, ohne dich anzusehen.',lines:[
+  {n:'Laia',es:'No te voy a mentir: el hecho de que no me felicitaras me sentó fatal.',de:'Ich will nicht lügen: Dass du mir nicht gratuliert hast, hat mich echt getroffen.'},
+  {you:true,opts:[{es:'Lo siento mucho. Entiendo que te sintieras dolida; no era mi intención.',ok:true},{es:'Lo siento mucho. Entiendo que te sentiste dolida; no era mi intención.',ok:false,why:'Verständnis haben → <i>entiendo que</i> + Subj.: <i>te sintieras</i>.'}]},
+  {n:'Laia',es:'Ya, pero que ni siquiera me mandaras un mensaje…',de:'Schon, aber dass du mir nicht mal eine Nachricht geschickt hast …'},
+  {you:true,opts:[{es:'Te lo mandé, pero me temo que no te llegó: tenía el móvil sin cobertura en el Pirineo.',ok:true},{es:'Te lo mandé, pero me temo que no te llegara: tenía el móvil sin cobertura en el Pirineo.',ok:false,why:'Hier „leider ist es so“ (Info) → <i>me temo que</i> + Ind.: <i>no te llegó</i>.'}]},
+  {n:'Laia',es:'¿En serio? Pues siento que te lo haya echado en cara así.',de:'Echt? Dann tut es mir leid, dass ich es dir so vorgeworfen habe.'},
+  {you:true,opts:[{es:'No pasa nada. ¿Hacemos las paces con una cena? Invito yo.',ok:true},{es:'No pasa nada. ¿Hacemos la paz con una cena? Invito yo.',ok:false,why:'Feste Wendung: <i>hacer las paces</i>.'}]}]},
+ {t:'speak',es:'Entiendo que estés molesta, pero te digo que no fue a propósito.',de:'Ich verstehe, dass du verärgert bist, aber ich sage dir, dass es keine Absicht war.'}]},
+{id:'l4',title:'Lesen: Lo que no se dice',desc:'Essay · eigener Text',steps:[
+ {t:'read',title:'Lo que no se dice',text:`Los lingüistas calculan que buena parte de lo que comunicamos no está en las palabras, sino en cómo y cuándo las decimos. Que alguien tarde en contestar un mensaje, por ejemplo, puede interpretarse como desinterés, aunque la razón sea simplemente que estaba conduciendo.
+
+El hecho de que cada vez nos comuniquemos más por escrito ha multiplicado los malentendidos. En una conversación cara a cara, notamos enseguida si el otro está bromeando; en un chat, en cambio, un simple «vale» puede sonar frío o enfadado. Por eso hay quien sostiene que los emojis no son una moda infantil, sino una forma de {recuperar|zurückgewinnen} el tono que la escritura nos quita.
+
+A mi entender, el problema no es la tecnología, sino que olvidamos ponernos en el lugar del otro. Que alguien nos responda con una sola palabra no significa necesariamente que esté molesto. Quizá, antes de sentirnos dolidos, deberíamos preguntar.`,de:`Linguisten schätzen, dass ein großer Teil dessen, was wir mitteilen, nicht in den Worten liegt, sondern darin, wie und wann wir sie sagen. Dass jemand lange braucht, um auf eine Nachricht zu antworten, kann zum Beispiel als Desinteresse gedeutet werden, auch wenn der Grund einfach ist, dass er gerade Auto fuhr.\n\nDie Tatsache, dass wir immer mehr schriftlich kommunizieren, hat die Missverständnisse vervielfacht. Im Gespräch von Angesicht zu Angesicht merken wir sofort, ob der andere scherzt; im Chat dagegen kann ein einfaches „okay“ kalt oder verärgert klingen. Deshalb vertreten manche die Ansicht, dass Emojis keine kindische Mode sind, sondern eine Möglichkeit, den Ton zurückzugewinnen, den uns das Schreiben nimmt.\n\nMeines Erachtens ist das Problem nicht die Technik, sondern dass wir vergessen, uns in den anderen hineinzuversetzen. Dass uns jemand mit einem einzigen Wort antwortet, heißt nicht unbedingt, dass er verärgert ist. Vielleicht sollten wir nachfragen, bevor wir uns gekränkt fühlen.`},
+ {t:'mc',q:'Según el texto, ¿por qué han aumentado los malentendidos?',opts:['porque nos comunicamos más por escrito','porque usamos demasiados emojis','porque hablamos demasiado rápido'],a:0},
+ {t:'mc',q:'¿Qué opina el autor?',opts:['Que deberíamos ponernos en el lugar del otro.','Que la tecnología es el problema.','Que los emojis son infantiles.'],a:0},
+ {t:'gap',q:'Que alguien ___ (tardar) en contestar no significa que esté molesto.',a:['tarde']},
+ {t:'free',task:'Erzähl von einem Missverständnis, das du erlebt hast (persönlich oder schriftlich). Wie kam es dazu, wie wurde es geklärt? (8–10 Sätze)',hint:'El hecho de que … · Que … no significa que … · Entiendo que … · Siento que … · Me temo que … · Dicho sea de paso …',focus:'Subjuntivo mit Bedeutungswechsel, el hecho de que, Que + Subj.',model:'El año pasado tuve un malentendido con mi compañero de piso. Le escribí «Tenemos que hablar del baño» y él entendió que estaba muy enfadado. El hecho de que no pusiera ningún emoji le hizo pensar lo peor. Cuando llegué a casa, me esperaba con una lista de excusas. Le dije que solo quería que compráramos un espejo nuevo. Nos echamos a reír. Desde entonces, entiendo que un mensaje corto pueda sonar mucho más serio de lo que es. Dicho sea de paso, ahora uso muchos más emojis.'}]}
+],
+placement:[
+ {t:'mc',q:'„Es tut mir leid, dass du gehst.“',opts:['Siento que te vayas.','Siento que te vas.','Siento irte.'],a:0},
+ {t:'mc',q:'El hecho de que no ___ nadie fue una pena.',opts:['viniera','vino','vendría'],a:0},
+ {t:'gap',q:'Dile que me ___ (llamar) mañana. (Aufforderung)',a:['llame']},
+ {t:'gap',q:'Me temo que no ___ (tener) tiempo hoy.',a:['tengo']},
+ {t:'mc',q:'Que ___ cansado es normal después de tanto trabajo.',opts:['estés','estás','estarás'],a:0},
+ {t:'mc',q:'„Missverständnis“',opts:['el malentendido','el desentendido','el maloído'],a:0}],
+resumen:`<h3>Modus ändert Bedeutung</h3><p class="es-t">decir que + Ind. (mitteilen) / + Subj. (auffordern) · sentir que + Ind. (spüren) / + Subj. (bedauern) · entender que + Ind. (begreifen) / + Subj. (Verständnis) · me temo que + Ind.</p>
+<h3>Bekanntes als Thema</h3><p class="es-t">El hecho de que + Subj. · Que + Subj. … no me extraña · Eso de que …</p>`});
+
+COURSE.units.push({id:'u33',n:'35',level:'C1',title:'Hablando en plata',sub:'Umgangssprache & Redewendungen (meter la pata, estar hasta las narices) · Register wechseln · Abschwächen & Verstärken · Sprachvarietäten in Spanien',
+goals:['häufige Redewendungen verstehen und benutzen','Umgangssprache (mola, flipar, currar, tío) erkennen','Registerwechsel: umgangssprachlich ↔ neutral ↔ formell','Abschwächen: un poco, más bien, digamos, igual','Verstärken: súper-, -ísimo, de lo más, la mar de','Varietäten: Spanien, Lateinamerika, Kontakt mit Katalanisch'],
+situacion:{title:'Feierabend mit Kollegen',npc:'Dani',scene:'Freitagabend, After-Work-Bier mit Dani aus deinem Team. Dani redet sehr umgangssprachlich und erzählt vom chaotischen Arbeitstag.',role:'Du bist Dani, Kollege von Jonas, Ende 20, aus Madrid, sehr umgangssprachlich und lustig. Ihr duzt euch. Erzähl vom Tag mit vielen Redewendungen (estar hasta las narices, meter la pata, ser pan comido, tomar el pelo, currar, flipar, mola). Frag Jonas, ob er alles versteht, und erklär Ausdrücke, wenn er nachfragt.',goal:'Versteh Danis Umgangssprache, frag bei Unbekanntem nach und benutze selbst mindestens drei Redewendungen passend.'},
+lessons:[
+{id:'l1',title:'Redewendungen',desc:'meter la pata · ser pan comido',steps:[
+ {t:'vocab',title:'Häufige Redewendungen',items:[['meter la pata','ins Fettnäpfchen treten','🦶'],['ser pan comido','ein Kinderspiel sein','🍞'],['estar hasta las narices (de)','die Nase voll haben (von)','👃'],['tomar el pelo','jemanden auf den Arm nehmen','💇'],['costar un ojo de la cara','ein Vermögen kosten','👁️'],['no tener pelos en la lengua','kein Blatt vor den Mund nehmen','👅'],['estar en las nubes','geistig abwesend sein','☁️'],['echar una mano','helfen','🤲'],['ir al grano','zur Sache kommen','🌾'],['dar en el clavo','den Nagel auf den Kopf treffen','🔨'],['ponerse las pilas','sich ranhalten','🔋'],['tirar la toalla','das Handtuch werfen','🏳️']]},
+ {t:'match',q:'Was bedeutet …?',pairs:[['ir al grano','zur Sache kommen'],['tirar la toalla','aufgeben'],['estar en las nubes','unaufmerksam sein'],['dar en el clavo','genau richtig liegen'],['ponerse las pilas','sich anstrengen']]},
+ {t:'mc',q:'El examen fue fácil, ___.',opts:['pan comido','un ojo de la cara','hasta las narices'],a:0},
+ {t:'mc',q:'„Ich bin ins Fettnäpfchen getreten.“',opts:['He metido la pata.','He metido el pie.','He tomado el pelo.'],a:0},
+ {t:'gap',q:'Este piso cuesta un ojo de la ___.',a:['cara']},
+ {t:'gap',q:'¡No me tomes el ___! ¿De verdad te ha tocado la lotería?',a:['pelo']},
+ {t:'tr',de:'Ich habe die Nase voll von diesem Lärm.',a:['Estoy hasta las narices de este ruido.']}]},
+{id:'l2',title:'Umgangssprache',desc:'mola · flipar · currar',steps:[
+ {t:'info',title:'Wie junge Leute in Spanien reden',html:`<table><tr><th>umgangssprachlich</th><th>neutral</th><th>Deutsch</th></tr>
+ <tr><td class="es-t">currar / el curro</td><td class="es-t">trabajar / el trabajo</td><td>schuften / Job</td></tr>
+ <tr><td class="es-t">mola / no mola</td><td class="es-t">me gusta / es genial</td><td>ist cool</td></tr>
+ <tr><td class="es-t">flipar</td><td class="es-t">sorprenderse mucho</td><td>ausflippen, staunen</td></tr>
+ <tr><td class="es-t">tío / tía</td><td class="es-t">(Anrede unter Freunden)</td><td>Alter, Mann</td></tr>
+ <tr><td class="es-t">guay</td><td class="es-t">estupendo</td><td>cool</td></tr>
+ <tr><td class="es-t">la pasta</td><td class="es-t">el dinero</td><td>die Kohle</td></tr>
+ <tr><td class="es-t">estar rayado / rayarse</td><td class="es-t">estar preocupado</td><td>sich einen Kopf machen</td></tr>
+ <tr><td class="es-t">ser un rollo</td><td class="es-t">ser aburrido</td><td>öde sein</td></tr></table>
+ <div class="ojo">Super nützlich zum Verstehen – aber im Job-Gespräch oder in E-Mails weglassen.</div>`},
+ {t:'mc',q:'„Mi curro“ heißt …',opts:['mein Job','mein Auto','mein Freund'],a:0},
+ {t:'mc',q:'Neutral für „¡Cómo mola tu chaqueta!“:',opts:['¡Qué chaqueta tan bonita!','¡Qué chaqueta tan cara!','¡Qué chaqueta tan rara!'],a:0},
+ {t:'gap',q:'¡Flipé ___ colores cuando lo vi! (feste Wendung)',a:['en']},
+ {t:'match',q:'umgangssprachlich → neutral',pairs:[['la pasta','el dinero'],['currar','trabajar'],['ser un rollo','ser aburrido'],['guay','estupendo'],['rayarse','preocuparse']]},
+ {t:'listen',es:'Tío, no te rayes, que el curro nuevo mola un montón.',de:'Alter, mach dir keinen Kopf, der neue Job ist echt cool.'}]},
+{id:'l3',title:'Abschwächen & verstärken',desc:'más bien · de lo más · -ísimo',steps:[
+ {t:'info',title:'Ton regulieren',html:`<table><tr><th>abschwächen</th><th>verstärken</th></tr>
+ <tr><td class="es-t">un poco / algo · más bien · digamos que · igual (vielleicht) · ¿no te parece que …?</td><td class="es-t">súper- / requete- · -ísimo · de lo más + Adj. · la mar de · un montón · nada de nada</td></tr>
+ <tr><td class="es-t">Es más bien caro. · Igual llegamos tarde.</td><td class="es-t">Es carísimo. · Fue de lo más raro. · Estoy la mar de bien.</td></tr></table>
+ <div class="ex">Spanisch ist direkter als Deutsch bei Bitten (<i>Ponme un café</i>), aber bei Kritik wird gern abgeschwächt: <span class="es-t">No está mal, pero igual podríamos …</span></div>`},
+ {t:'mc',q:'Höflichere Kritik:',opts:['El informe está bien, aunque igual habría que revisar los datos.','El informe está fatal.','El informe es un rollo.'],a:0},
+ {t:'mc',q:'„Das war total seltsam.“',opts:['Fue de lo más raro.','Fue más bien raro.','Fue algo raro.'],a:0},
+ {t:'gap',q:'Estoy cansad___. (-ísimo, ich bin todmüde)',a:['ísimo']},
+ {t:'dialog',place:'Bar después del trabajo',title:'Danis Freitag',scene:'Dani bestellt zwei cañas und legt los.',lines:[
+  {n:'Dani',es:'Tío, estoy hasta las narices. El jefe me ha tenido currando hasta las siete.',de:'Alter, ich hab die Nase voll. Der Chef hat mich bis sieben schuften lassen.'},
+  {you:true,opts:[{es:'¡Qué rollo! ¿Y eso? ¿Metiste la pata con algo?',ok:true},{es:'¡Qué rollo! ¿Y eso? ¿Metiste el pie con algo?',ok:false,why:'Die Wendung lautet <i>meter la pata</i>.'}]},
+  {n:'Dani',es:'¡Qué va! El cliente cambió todo a última hora. Pero bueno, lo sacamos. Era pan comido, en realidad.',de:'Ach was! Der Kunde hat in letzter Minute alles geändert. Aber gut, wir haben es geschafft. Eigentlich ein Kinderspiel.'},
+  {you:true,opts:[{es:'Pues te has ganado la caña. ¡Invito yo!',ok:true},{es:'Pues te has ganado la caña. ¡Tomo el pelo yo!',ok:false,why:'<i>tomar el pelo</i> = jemanden veräppeln. Einladen: <i>invito yo</i>.'}]},
+  {n:'Dani',es:'¡Qué majo eres! Por cierto, ¿entiendes todo lo que digo o voy muy rápido?',de:'Wie nett von dir! Übrigens, verstehst du alles, was ich sage, oder bin ich zu schnell?'},
+  {you:true,opts:[{es:'Casi todo, aunque «majo» no sé muy bien qué significa.',ok:true},{es:'Casi todo, aunque «majo» no sepa muy bien qué significa.',ok:false,why:'Tatsache (ich weiß es wirklich nicht) → Indikativ: <i>no sé</i>.'}]},
+  {n:'Dani',es:'Majo es como simpático, buena gente. Muy de aquí… bueno, de Madrid.',de:'Majo ist so wie nett, ein guter Mensch. Sehr typisch hier … na ja, für Madrid.'}]}]},
+{id:'l4',title:'Lesen: ¿Cuántos españoles?',desc:'Sprachvarietäten · Register-Übung',steps:[
+ {t:'read',title:'Un idioma, muchas voces',text:`Cuando llegué a Barcelona, había estudiado un español «de manual» y pensaba que lo entendería todo. Error. En la universidad, mis compañeros mezclaban castellano y catalán en la misma frase: «Ens veiem luego, ¿vale?». En la radio, un locutor andaluz se comía la mitad de las {consonantes|Konsonanten}, y mi compañera de piso, que es de Sevilla, decía «quillo» cada dos por tres.
+
+Luego conocí a una argentina que usaba «vos» en lugar de «tú» y a un mexicano para quien «coger» el autobús sonaba fatal. Tardé meses en entender que no hay un español correcto y otros incorrectos, sino muchas variedades igual de válidas. Lo que sí hay son registros: no hablamos igual con un amigo en el bar que con un profesor en una tutoría.
+
+Hoy, más que «hablar bien», intento hablar de forma adecuada: saber cuándo puedo decir «tío, qué guay» y cuándo es mejor un «me parece estupendo». Y, dicho sea de paso, ya no me pierdo cuando alguien me dice «quillo».`,de:`Als ich nach Barcelona kam, hatte ich ein Spanisch „aus dem Lehrbuch“ gelernt und dachte, ich würde alles verstehen. Irrtum. An der Uni mischten meine Kommilitonen Spanisch und Katalanisch im selben Satz: „Ens veiem luego, ¿vale?“. Im Radio verschluckte ein andalusischer Moderator die Hälfte der Konsonanten, und meine Mitbewohnerin, die aus Sevilla ist, sagte alle naslang „quillo“.\n\nDann lernte ich eine Argentinierin kennen, die „vos“ statt „tú“ benutzte, und einen Mexikaner, für den „coger“ beim Bus furchtbar klang. Ich brauchte Monate, um zu verstehen, dass es nicht ein richtiges Spanisch und andere falsche gibt, sondern viele gleich gültige Varietäten. Was es aber gibt, sind Register: Wir sprechen mit einem Freund in der Bar nicht so wie mit einem Professor in der Sprechstunde.\n\nHeute versuche ich weniger, „gut“ zu sprechen, als angemessen zu sprechen: zu wissen, wann ich „tío, qué guay“ sagen kann und wann ein „me parece estupendo“ besser ist. Und nebenbei bemerkt verliere ich nicht mehr den Faden, wenn jemand „quillo“ zu mir sagt.`},
+ {t:'mc',q:'¿Qué aprendió el autor?',opts:['que hay muchas variedades válidas y distintos registros','que el español de manual es el único correcto','que en Barcelona solo se habla catalán'],a:0},
+ {t:'mc',q:'En México, el autor aprendió que …',opts:['«coger» puede sonar mal','«vos» se usa en lugar de «tú»','«quillo» es un saludo'],a:0},
+ {t:'free',task:'Schreib dieselbe Nachricht zweimal (je 3–4 Sätze): einmal umgangssprachlich an einen Freund, einmal formell an deine Professorin. Inhalt: Du kannst morgen nicht zum Treffen kommen, weil du krank bist, und schlägst einen neuen Termin vor.',hint:'informell: tío, no puedo, estoy fatal, ¿te va bien …? · formell: Estimada profesora: · Lamento comunicarle que … · ¿Le vendría bien …? · Un cordial saludo',focus:'Registerwechsel',model:'Informal: ¡Tío! Mañana no puedo ir, estoy fatal con fiebre. ¡Qué rollo! ¿Te va bien el jueves? Te invito a una caña para compensar.\n\nFormal: Estimada profesora Vidal: Lamento comunicarle que mañana no podré asistir a la tutoría, ya que me encuentro enfermo. ¿Le vendría bien el jueves a la misma hora? Un cordial saludo, Jonas'}]}
+],
+placement:[
+ {t:'mc',q:'„ein Kinderspiel sein“',opts:['ser pan comido','meter la pata','tirar la toalla'],a:0},
+ {t:'mc',q:'„Ich habe die Nase voll.“',opts:['Estoy hasta las narices.','Estoy en las nubes.','Estoy de lo más.'],a:0},
+ {t:'mc',q:'„currar“ bedeutet …',opts:['arbeiten','laufen','kochen'],a:0},
+ {t:'gap',q:'Me han tomado el ___: no había ningún examen. (veräppelt)',a:['pelo']},
+ {t:'mc',q:'Abgeschwächt: „Es ist eher teuer.“',opts:['Es más bien caro.','Es carísimo.','Es de lo más caro.'],a:0},
+ {t:'gap',q:'Esto cuesta un ojo de la ___.',a:['cara']}],
+resumen:`<h3>Redewendungen</h3><p class="es-t">meter la pata · ser pan comido · estar hasta las narices · tomar el pelo · costar un ojo de la cara · ir al grano · dar en el clavo · tirar la toalla · ponerse las pilas</p>
+<h3>Umgangssprache</h3><p class="es-t">currar · mola · flipar · tío/tía · guay · la pasta · rayarse · ser un rollo · majo</p>
+<h3>Ton</h3><p class="es-t">abschwächen: más bien, igual, digamos · verstärken: -ísimo, de lo más, la mar de, súper-</p>`});
+
+COURSE.units.push({id:'u34',n:'36',level:'C1',title:'Siempre que…',sub:'Bedingungen ohne si (siempre que, con tal de que, a no ser que, en caso de que) · de + Infinitiv (De haberlo sabido…) · como + Subj. als Drohung · Verträge & Verhandlungen',
+goals:['siempre que / con tal de que + Subj. (vorausgesetzt, dass)','a no ser que / salvo que + Subj. (es sei denn)','en caso de que + Subj. / en caso de + Inf.','de + Infinitiv: De tener tiempo, iría · De haberlo sabido, …','como + Subj.: Como no vengas, me enfado','in Verhandlungen Bedingungen stellen'],
+situacion:{title:'Gehaltsverhandlung',npc:'Sr. Ferrer',scene:'Die Firma aus München war nicht deine einzige Option: Ein Start-up in Barcelona will dich einstellen. Du verhandelst mit dem Gründer, Herrn Ferrer, über Gehalt, Homeoffice und Urlaub.',role:'Du bist Sr. Ferrer, Gründer eines Start-ups in Barcelona, freundlich, aber hart in Verhandlungen. Ihr siezt euch zuerst (usted), er kann zum tú wechseln. Mach ein Angebot, stell Bedingungen (siempre que…, a no ser que…, en caso de que…) und reagiere auf Jonas’ Gegenforderungen. Benutze auch de + Infinitiv.',goal:'Verhandle mit Bedingungen: Acepto siempre que…, Podría… con tal de que…, A no ser que…, En caso de que…'},
+lessons:[
+{id:'l1',title:'Vorausgesetzt, dass …',desc:'siempre que · con tal de que · a no ser que',steps:[
+ {t:'info',title:'Bedingungs-Konnektoren mit Subjuntivo',html:`<table><tr><th>Konnektor</th><th>Bedeutung</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">siempre que / siempre y cuando</td><td>vorausgesetzt, dass</td><td class="es-t">Te lo presto siempre que me lo <b>devuelvas</b>.</td></tr>
+ <tr><td class="es-t">con tal de que</td><td>sofern, Hauptsache</td><td class="es-t">Hago lo que sea con tal de que <b>estés</b> bien.</td></tr>
+ <tr><td class="es-t">a no ser que / salvo que</td><td>es sei denn</td><td class="es-t">Iremos, a no ser que <b>llueva</b>.</td></tr>
+ <tr><td class="es-t">en caso de que</td><td>falls</td><td class="es-t">En caso de que <b>haya</b> problemas, llámeme.</td></tr>
+ <tr><td class="es-t">solo si</td><td>nur wenn (+ Ind.!)</td><td class="es-t">Solo si <b>tengo</b> tiempo.</td></tr></table>
+ <div class="ojo"><i>siempre que</i> + <b>Ind.</b> = „immer wenn“: <span class="es-t">Siempre que vengo, llueve.</span> + <b>Subj.</b> = „vorausgesetzt“.</div>`},
+ {t:'mc',q:'Puedes usar mi coche siempre que lo ___ limpio.',opts:['dejes','dejas','dejarás'],a:0},
+ {t:'mc',q:'Siempre que ___ a Madrid, visito el Prado. (jedes Mal)',opts:['voy','vaya','iré'],a:0},
+ {t:'mc',q:'Saldremos a las ocho, a no ser que ___ tráfico.',opts:['haya','hay','habrá'],a:0},
+ {t:'gap',q:'En caso de que ___ (usted, necesitar) ayuda, pulse este botón.',a:['necesite']},
+ {t:'gap',q:'Te ayudo con la mudanza con tal de que me ___ (invitar) a cenar.',a:['invites']},
+ {t:'tr',de:'Wir kommen, es sei denn, es regnet.',a:['Vendremos, a no ser que llueva.','Iremos, a no ser que llueva.','Vendremos, salvo que llueva.']}]},
+{id:'l2',title:'De haberlo sabido …',desc:'de + Infinitiv · como + Subj.',steps:[
+ {t:'info',title:'Kompakte Bedingungen',html:`<table><tr><th>Form</th><th>= si …</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">de + Infinitiv</td><td>si + Imperf. Subj.</td><td class="es-t">De tener más tiempo, viajaría más.</td></tr>
+ <tr><td class="es-t">de + haber + Partizip</td><td>si + Plusc. Subj.</td><td class="es-t">De haberlo sabido, no habría venido.</td></tr>
+ <tr><td class="es-t">como + Subj.</td><td>Drohung / Warnung</td><td class="es-t">Como no estudies, suspenderás.</td></tr>
+ <tr><td class="es-t">Gerundium</td><td>wenn man so …</td><td class="es-t">Trabajando así, no acabarás nunca.</td></tr></table>
+ <div class="ex"><i>como</i> + Subj. klingt nach Drohung oder Warnung: <span class="es-t">¡Como lo vuelvas a hacer…!</span> – Wehe, du machst das noch mal!</div>`},
+ {t:'mc',q:'De ___ antes, habríamos cogido el tren.',opts:['haber salido','salir','salido'],a:0},
+ {t:'mc',q:'„Wehe, du kommst zu spät!“',opts:['¡Como llegues tarde…!','¡Como llegas tarde…!','¡Cuando llegues tarde…!'],a:0},
+ {t:'gap',q:'De ___ (saber) que estabas enfermo, te habría llamado.',a:['haber sabido']},
+ {t:'gap',q:'Como no te ___ (dar) prisa, perderemos el avión.',a:['des']},
+ {t:'gap',q:'De ___ (ser) tú, aceptaría la oferta. (= si fuera tú)',a:['ser']},
+ {t:'tr',de:'Hätte ich das gewusst, wäre ich nicht gekommen.',a:['De haberlo sabido, no habría venido.','Si lo hubiera sabido, no habría venido.']}]},
+{id:'l3',title:'Verhandeln',desc:'Wortschatz · Gehaltsgespräch',steps:[
+ {t:'vocab',title:'Arbeitsvertrag & Verhandlung',items:[['el contrato indefinido','der unbefristete Vertrag','📄'],['el sueldo bruto / neto','das Brutto-/Nettogehalt','💶'],['las pagas extra','die Sonderzahlungen','🎁'],['el periodo de prueba','die Probezeit','⏳'],['negociar','verhandeln','🤝'],['la contraoferta','das Gegenangebot','↔️'],['ceder','nachgeben','🫳'],['llegar a un acuerdo','sich einigen','✅'],['el teletrabajo','das Homeoffice','🏠'],['los días de vacaciones','die Urlaubstage','🌴'],['estar dispuesto a','bereit sein zu','🙋'],['la condición','die Bedingung','📌']]},
+ {t:'dialog',place:'Oficina de una start-up en el 22@',title:'Die Verhandlung',scene:'Herr Ferrer schiebt dir einen Vertragsentwurf hin.',lines:[
+  {n:'Sr. Ferrer',es:'Le ofrecemos 32.000 brutos al año, con seis meses de periodo de prueba.',de:'Wir bieten Ihnen 32.000 brutto im Jahr mit sechs Monaten Probezeit.'},
+  {you:true,opts:[{es:'Me interesa mucho. Estaría dispuesto a aceptar siempre que pudiera teletrabajar dos días por semana.',ok:true},{es:'Me interesa mucho. Estaría dispuesto a aceptar siempre que puedo teletrabajar dos días por semana.',ok:false,why:'„vorausgesetzt“ → <i>siempre que</i> + Subj. (hier Imperf., da Konditional davor): <i>pudiera</i>.'}]},
+  {n:'Sr. Ferrer',es:'Podría ser. Pero, en caso de que hubiera una reunión con clientes, tendría que venir.',de:'Das wäre möglich. Aber falls es ein Kundentreffen gäbe, müssten Sie kommen.'},
+  {you:true,opts:[{es:'Por supuesto, a no ser que me avisaran con muy poco tiempo.',ok:true},{es:'Por supuesto, a no ser que me avisaban con muy poco tiempo.',ok:false,why:'<i>a no ser que</i> → immer Subjuntivo: <i>avisaran</i>.'}]},
+  {n:'Sr. Ferrer',es:'Me parece razonable. ¿Algo más?',de:'Das klingt vernünftig. Sonst noch etwas?'},
+  {you:true,opts:[{es:'De ser posible, me gustaría reducir el periodo de prueba a tres meses.',ok:true},{es:'De sería posible, me gustaría reducir el periodo de prueba a tres meses.',ok:false,why:'<i>de</i> + <b>Infinitiv</b>: <i>de ser posible</i>.'}]}]},
+ {t:'speak',es:'Acepto la oferta siempre y cuando el contrato sea indefinido.',de:'Ich nehme das Angebot an, vorausgesetzt, der Vertrag ist unbefristet.'}]},
+{id:'l4',title:'Lesen: Letra pequeña',desc:'Vertragsklauseln · eigene Bedingungen',steps:[
+ {t:'read',title:'Condiciones de alquiler (extracto)',text:`Cláusula 4. El inquilino podrá tener animales de compañía siempre que no causen daños en la vivienda ni molestias a los vecinos. En caso de que se produzcan desperfectos, el importe de la reparación se descontará de la fianza.
+
+Cláusula 7. El contrato se renovará automáticamente cada año, a no ser que alguna de las partes comunique lo contrario con un mínimo de dos meses de antelación. De no recibirse dicha comunicación, se entenderá que ambas partes aceptan la renovación.
+
+Cláusula 9. El propietario no podrá entrar en la vivienda salvo que exista una emergencia o que el inquilino lo autorice expresamente. Asimismo, el inquilino se compromete a permitir las visitas necesarias para reparaciones, con tal de que se le avise con 48 horas de antelación.`,de:`Klausel 4. Der Mieter darf Haustiere halten, sofern diese keine Schäden an der Wohnung und keine Belästigung der Nachbarn verursachen. Falls Schäden entstehen, wird der Reparaturbetrag von der Kaution abgezogen.\n\nKlausel 7. Der Vertrag verlängert sich automatisch jedes Jahr, es sei denn, eine der Parteien teilt mit mindestens zwei Monaten Vorlauf etwas anderes mit. Geht keine solche Mitteilung ein, gilt, dass beide Parteien die Verlängerung akzeptieren.\n\nKlausel 9. Der Eigentümer darf die Wohnung nicht betreten, es sei denn, es liegt ein Notfall vor oder der Mieter erlaubt es ausdrücklich. Ebenso verpflichtet sich der Mieter, die für Reparaturen nötigen Besuche zuzulassen, sofern er 48 Stunden vorher benachrichtigt wird.`},
+ {t:'mc',q:'¿Cuándo puede entrar el propietario en el piso?',opts:['solo en una emergencia o con permiso del inquilino','cuando quiera','cada dos meses'],a:0},
+ {t:'mc',q:'„De no recibirse dicha comunicación“ = …',opts:['si no se recibe esa comunicación','aunque no se reciba','para que no se reciba'],a:0},
+ {t:'gap',q:'El inquilino puede tener mascotas siempre que no ___ (causar) daños.',a:['causen']},
+ {t:'free',task:'Du vermietest dein Zimmer für den Sommer unter. Schreib 5–6 Regeln/Bedingungen für deine Untermieterin.',hint:'Puedes … siempre que … · con tal de que … · a no ser que … · En caso de que … · De + Inf. …',focus:'Bedingungs-Konnektoren + Subjuntivo, de + Infinitiv',model:'Puedes usar la cocina siempre que la dejes limpia. Las fiestas están permitidas con tal de que terminen antes de medianoche. No cambies los muebles de sitio, a no ser que me preguntes antes. En caso de que se rompa algo, avísame enseguida. De necesitar algo urgente, puedes llamar a Nuria, mi compañera de piso. ¡Y riega las plantas, por favor!'}]}
+],
+placement:[
+ {t:'mc',q:'Te lo dejo siempre que me lo ___ mañana.',opts:['devuelvas','devuelves','devolverás'],a:0},
+ {t:'mc',q:'Iremos a la playa, a no ser que ___.',opts:['llueva','llueve','lloverá'],a:0},
+ {t:'gap',q:'De ___ (saber) la verdad, no habría dicho nada.',a:['haber sabido']},
+ {t:'gap',q:'En caso de que ___ (haber) un incendio, use las escaleras.',a:['haya']},
+ {t:'mc',q:'„Wehe, du sagst es ihm!“',opts:['¡Como se lo digas…!','¡Como se lo dices…!','¡Si se lo dirás…!'],a:0},
+ {t:'mc',q:'Siempre que ___ a casa de mi abuela, me da comida. (jedes Mal)',opts:['voy','vaya','fuera'],a:0}],
+resumen:`<h3>Bedingungen + Subjuntivo</h3><p class="es-t">siempre que / siempre y cuando · con tal de que · a no ser que / salvo que · en caso de que</p><p>Achtung: <span class="es-t">siempre que + Ind.</span> = immer wenn · <span class="es-t">solo si + Ind.</span></p>
+<h3>Kompakt</h3><p class="es-t">De tener tiempo, … (= si tuviera) · De haberlo sabido, … (= si lo hubiera sabido) · Como no vengas, … (Drohung)</p>`});
+;
+/* ===== C1 Teil 2: Unidad 37–39 – eigene Inhalte nach dem Plan Curricular (Instituto Cervantes) ===== */
+
+COURSE.units.push({id:'u35',n:'37',level:'C1b',title:'Lo que importa',sub:'Hervorheben: Spaltsätze (Fue Laia quien…, Es aquí donde…) · lo + Adjektiv (lo bueno, lo difícil) · lo + Adj. + que (lo caro que es) · Satzstellung & Dislokation · Kunst & Kultur',
+goals:['Spaltsätze: ser … quien / el que / donde / cuando / como','Lo que más me gusta es … / Lo que pasa es que …','lo + Adjektiv: lo bueno, lo peor, lo importante','lo + Adj./Adv. + que: No sabes lo cansado que estoy','Dislokation: El libro, ya lo he leído','über Kunst, Museen und Kultur sprechen'],
+situacion:{title:'Im Museum',npc:'Marta',scene:'Du besuchst mit Marta, die Kunstgeschichte studiert, das MNAC auf dem Montjuïc. Sie will wissen, was dich an den Werken beeindruckt.',role:'Du bist Marta, Kunstgeschichtsstudentin, begeistert und gesprächig. Ihr duzt euch. Erklär Jonas Werke (Fue en el siglo XII cuando…, Lo interesante es que…), frag ihn, was ihm am meisten gefällt und warum, und widersprich ihm gelegentlich. Benutze Spaltsätze und lo + Adjektiv.',goal:'Sag mit Spaltsätzen und lo + Adjektiv, was dich beeindruckt (Lo que más me impresiona es…, Es la luz lo que…, No sabía lo antiguo que era…).'},
+lessons:[
+{id:'l1',title:'Genau das!',desc:'Fue Laia quien … · Es aquí donde …',steps:[
+ {t:'info',title:'Spaltsätze: ein Element betonen',html:`<p>Mit <b>ser + Element + Relativwort</b> rückst du einen Teil des Satzes ins Rampenlicht:</p>
+ <table><tr><th>neutral</th><th>betont</th></tr>
+ <tr><td class="es-t">Laia organizó la fiesta.</td><td class="es-t">Fue Laia <b>quien</b> organizó la fiesta.</td></tr>
+ <tr><td class="es-t">Nos conocimos aquí.</td><td class="es-t">Es aquí <b>donde</b> nos conocimos.</td></tr>
+ <tr><td class="es-t">Me di cuenta en 2020.</td><td class="es-t">Fue en 2020 <b>cuando</b> me di cuenta.</td></tr>
+ <tr><td class="es-t">Lo hice así.</td><td class="es-t">Fue así <b>como</b> lo hice.</td></tr>
+ <tr><td class="es-t">Me preocupa el precio.</td><td class="es-t">Lo que me preocupa <b>es</b> el precio.</td></tr></table>
+ <div class="ex">Personen: <i>quien</i> oder <i>el/la que</i>. Ort: <i>donde</i>. Zeit: <i>cuando</i>. Art: <i>como</i>. Sachen: <i>lo que</i>.</div>`},
+ {t:'mc',q:'Fue Picasso ___ pintó el Guernica.',opts:['quien','donde','lo que'],a:0},
+ {t:'mc',q:'Es en Barcelona ___ vivió Picasso de joven.',opts:['donde','quien','como'],a:0},
+ {t:'mc',q:'___ más me sorprendió fue el silencio.',opts:['Lo que','El que','Quien'],a:0},
+ {t:'gap',q:'Fue en 1992 ___ se celebraron los Juegos Olímpicos en Barcelona.',a:['cuando']},
+ {t:'gap',q:'Fue así ___ aprendí a cocinar: mirando a mi abuela.',a:['como']},
+ {t:'order',es:'Lo que pasa es que no tengo tiempo.',de:'Die Sache ist die, dass ich keine Zeit habe.'},
+ {t:'tr',de:'Es war Nuria, die mir die Wohnung gezeigt hat.',a:['Fue Nuria quien me enseñó el piso.','Fue Nuria la que me enseñó el piso.']}]},
+{id:'l2',title:'Das Gute daran …',desc:'lo bueno · lo caro que es',steps:[
+ {t:'info',title:'lo + Adjektiv',html:`<table><tr><th>Form</th><th>Bedeutung</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">lo + Adj.</td><td>das …e (daran)</td><td class="es-t"><b>Lo bueno</b> es que es gratis. · <b>Lo peor</b> fue la espera.</td></tr>
+ <tr><td class="es-t">lo + Adj./Adv. + que</td><td>wie … (Ausrufe, Staunen)</td><td class="es-t">No sabes <b>lo cansada que</b> estoy. · ¡Mira <b>lo bien que</b> canta!</td></tr>
+ <tr><td class="es-t">lo de + Nomen/Inf.</td><td>die Sache mit …</td><td class="es-t"><b>Lo de</b> ayer fue un error.</td></tr></table>
+ <div class="ojo">Bei <i>lo + Adj. + que</i> passt sich das Adjektiv an: <span class="es-t">lo cansad<b>a</b> que estoy</span> (ich, weiblich) · <span class="es-t">lo car<b>os</b> que son</span>.</div>`},
+ {t:'mc',q:'___ de vivir en Barcelona es el mar.',opts:['Lo mejor','El mejor','La mejor'],a:0},
+ {t:'mc',q:'No te imaginas lo ___ que son estas entradas.',opts:['caras','caro','cara'],a:0},
+ {t:'gap',q:'Lo ___ (malo) es que cierra a las seis.',a:['malo']},
+ {t:'gap',q:'¡Mira lo ___ (rápido) que corre ese niño!',a:['rápido']},
+ {t:'gap',q:'___ de mañana sigue en pie, ¿no? (die Sache mit morgen)',a:['Lo']},
+ {t:'tr',de:'Du weißt nicht, wie schön diese Stadt ist.',a:['No sabes lo bonita que es esta ciudad.']},
+ {t:'listen',es:'Lo increíble es lo bien conservados que están los frescos después de ochocientos años.',de:'Das Unglaubliche ist, wie gut erhalten die Fresken nach achthundert Jahren sind.'}]},
+{id:'l3',title:'Satzstellung & Kunst',desc:'Dislokation · Museumsbesuch',steps:[
+ {t:'info',title:'Thema nach vorn: Dislokation',html:`<p>Im gesprochenen Spanisch stellt man das Thema oft nach vorn und wiederholt es mit einem Pronomen:</p>
+ <p class="es-t">El libro, ya <b>lo</b> he leído. · A tu hermana, no <b>la</b> conozco. · De eso, mejor no hablamos.</p>
+ <div class="ex">So sagst du: „Was X betrifft …“. Das Pronomen (<i>lo, la, le …</i>) ist dann Pflicht.</div>`},
+ {t:'mc',q:'Esa película, ya ___ he visto.',opts:['la','lo','le'],a:0},
+ {t:'mc',q:'A Marc, no ___ he dicho nada.',opts:['le','lo','la'],a:0},
+ {t:'vocab',title:'Kunst & Kultur',items:[['la obra de arte','das Kunstwerk','🖼️'],['el cuadro','das Gemälde','🎨'],['la escultura','die Skulptur','🗿'],['el fresco','das Fresko','🏛️'],['la exposición','die Ausstellung','🖼️'],['el/la comisario/a','der/die Kurator/in','🧑‍🎨'],['el románico / el gótico','die Romanik / die Gotik','⛪'],['el modernismo','der (katalanische) Jugendstil','🌿'],['impresionar','beeindrucken','😮'],['conmover','berühren','🥲'],['la pincelada','der Pinselstrich','🖌️'],['vanguardista','avantgardistisch','✨']]},
+ {t:'dialog',place:'Museu Nacional d’Art de Catalunya',title:'Vor dem Fresko',scene:'Marta führt dich in den Saal mit den romanischen Apsiden.',lines:[
+  {n:'Marta',es:'Estas pinturas estaban en iglesias del Pirineo. Fue a principios del siglo XX cuando las trajeron aquí.',de:'Diese Malereien waren in Kirchen in den Pyrenäen. Anfang des 20. Jahrhunderts hat man sie hierher gebracht.'},
+  {you:true,opts:[{es:'¡Impresionante! Lo que más me sorprende es lo vivos que son los colores.',ok:true},{es:'¡Impresionante! Lo que más me sorprende es lo vivo que son los colores.',ok:false,why:'Anpassung an <i>los colores</i>: <i>lo vivos que son</i>.'}]},
+  {n:'Marta',es:'¿Verdad? ¿Y por qué crees que las trasladaron?',de:'Oder? Und warum, glaubst du, hat man sie umgezogen?'},
+  {you:true,opts:[{es:'Supongo que fue por miedo a perderlas por lo que las trajeron aquí.',ok:true},{es:'Supongo que fue por miedo a perderlas quien las trajeron aquí.',ok:false,why:'Grund betonen: <i>Fue por … por lo que …</i> – <i>quien</i> ist nur für Personen.'}]},
+  {n:'Marta',es:'Exacto. Muchas obras se estaban vendiendo al extranjero. El museo, de hecho, lo crearon en parte por eso.',de:'Genau. Viele Werke wurden ins Ausland verkauft. Das Museum hat man tatsächlich teilweise deshalb gegründet.'}]}]},
+{id:'l4',title:'Lesen: Una ciudad modernista',desc:'Kulturtext · Kritik schreiben',steps:[
+ {t:'read',title:'Gaudí y los demás',text:`Lo primero que hacen la mayoría de los turistas en Barcelona es visitar la Sagrada Familia. Lo que pocos saben es que el modernismo catalán no fue obra de un solo genio. Fue un movimiento entero el que transformó la ciudad entre 1888 y 1911, y fueron arquitectos como Domènech i Montaner o Puig i Cadafalch quienes dejaron algunas de sus joyas más impresionantes.
+
+El Palau de la Música Catalana, por ejemplo, es probablemente el edificio donde mejor se aprecia lo que pretendía el modernismo: unir arquitectura, escultura, vidrio y cerámica en una sola obra. Quien entra por primera vez no se imagina lo luminosa que es la sala, gracias a una enorme {claraboya|Oberlicht} de cristal de colores.
+
+Lo curioso es que durante décadas estos edificios se consideraron «de mal gusto». Fue a partir de los años setenta cuando se empezaron a valorar de nuevo. Hoy, en cambio, son precisamente ellos los que atraen a millones de visitantes. Lo que antes se despreciaba se ha convertido en la imagen de la ciudad.`,de:`Das Erste, was die meisten Touristen in Barcelona tun, ist die Sagrada Familia zu besuchen. Was nur wenige wissen: Der katalanische Modernisme war nicht das Werk eines einzelnen Genies. Es war eine ganze Bewegung, die die Stadt zwischen 1888 und 1911 verwandelte, und es waren Architekten wie Domènech i Montaner oder Puig i Cadafalch, die einige ihrer beeindruckendsten Juwelen hinterließen.\n\nDer Palau de la Música Catalana zum Beispiel ist wohl das Gebäude, in dem man am besten sieht, was der Modernisme wollte: Architektur, Skulptur, Glas und Keramik in einem einzigen Werk vereinen. Wer zum ersten Mal hineingeht, ahnt nicht, wie hell der Saal ist – dank eines riesigen Oberlichts aus farbigem Glas.\n\nKurios ist, dass diese Gebäude jahrzehntelang als „geschmacklos“ galten. Erst ab den Siebzigerjahren begann man, sie wieder zu schätzen. Heute dagegen sind gerade sie es, die Millionen Besucher anziehen. Was früher verachtet wurde, ist zum Aushängeschild der Stadt geworden.`},
+ {t:'mc',q:'Según el texto, ¿quién transformó Barcelona?',opts:['todo un movimiento de arquitectos y artistas','solo Gaudí','los turistas'],a:0},
+ {t:'mc',q:'¿Cuándo se empezaron a valorar de nuevo estos edificios?',opts:['a partir de los años setenta','en 1911','en el siglo XXI'],a:0},
+ {t:'gap',q:'Quien entra no se imagina lo ___ (luminoso) que es la sala.',a:['luminosa']},
+ {t:'free',task:'Schreib eine kurze Kritik (7–9 Sätze) über ein Museum, eine Ausstellung, ein Konzert oder einen Film, den du gesehen hast. Benutze Hervorhebungen.',hint:'Lo que más me impresionó fue … · Fue … quien / donde / cuando … · Lo bueno / Lo malo es que … · No te imaginas lo … que …',focus:'Spaltsätze, lo + Adjektiv, lo + Adj. + que',model:'El fin de semana pasado fui al Palau de la Música a un concierto de piano. Lo que más me impresionó no fue la música, sino la sala. No te imaginas lo luminosa que es, incluso de noche. Fue durante el segundo movimiento cuando me di cuenta de que había dejado de mirar al pianista para mirar el techo. Lo malo es que las butacas son bastante incómodas. Lo bueno, que la acústica es increíble. Fue mi amiga Marta quien me regaló la entrada, y se lo agradeceré siempre.'}]}
+],
+placement:[
+ {t:'mc',q:'Fue Gaudí ___ diseñó la Casa Batlló.',opts:['quien','donde','lo que'],a:0},
+ {t:'mc',q:'___ mejor del viaje fue la comida.',opts:['Lo','El','La'],a:0},
+ {t:'gap',q:'No sabes lo ___ (cansado) que estamos. (wir, weiblich)',a:['cansadas']},
+ {t:'gap',q:'Es aquí ___ nos conocimos.',a:['donde']},
+ {t:'mc',q:'Las llaves, ya ___ he encontrado.',opts:['las','lo','les'],a:0},
+ {t:'gap',q:'Lo que me preocupa ___ el precio.',a:['es']}],
+resumen:`<h3>Spaltsätze</h3><p class="es-t">Fue Laia quien … · Es aquí donde … · Fue en 2020 cuando … · Fue así como … · Lo que me preocupa es …</p>
+<h3>lo</h3><p class="es-t">lo bueno / lo peor / lo importante · No sabes lo cansada que estoy. · lo de ayer</p>
+<h3>Dislokation</h3><p class="es-t">El libro, ya lo he leído. · A Marc, no le he dicho nada.</p>`});
+
+COURSE.units.push({id:'u36',n:'38',level:'C1b',title:'Por muy difícil que sea',sub:'Konzessiv für Fortgeschrittene (por muy … que, aun + Gerundium, y eso que, si bien) · Folge (tan … que, de ahí que + Subj., con lo que) · Wissenschaft & Ethik',
+goals:['por muy + Adj./Adv. + que + Subj.','por más / mucho que + Subj.','aun + Gerundium, aun así','y eso que (+ Ind.: obwohl doch)','si bien (formell: wenn auch)','Folge: tan/tanto … que, de ahí que + Subj., con lo que, de tal modo que'],
+situacion:{title:'Diskussion über KI und Arbeit',npc:'Dr. Puig',scene:'Bei einem Abendvortrag der UPC über künstliche Intelligenz und Arbeitswelt sitzt du neben Dr. Puig, einer Forscherin. In der Pause diskutiert ihr.',role:'Du bist Dr. Puig, Informatikerin an der UPC, freundlich und skeptisch gegenüber Technik-Hype. Ihr wechselt nach kurzer Zeit zum tú. Diskutiere, ob KI Jobs vernichtet oder schafft. Bring Gegenargumente mit Konzessiv-Konstruktionen (Por muy avanzada que sea…, Si bien es cierto que…, y eso que…) und zieh Schlüsse (de ahí que…).',goal:'Argumentiere mit por muy … que, si bien, aun así und ziehe Schlussfolgerungen mit de ahí que + Subj. oder tan … que.'},
+lessons:[
+{id:'l1',title:'So … auch immer',desc:'por muy … que · por más que',steps:[
+ {t:'info',title:'Starke Konzessivsätze',html:`<table><tr><th>Struktur</th><th>Beispiel</th><th>Deutsch</th></tr>
+ <tr><td class="es-t">por muy + Adj./Adv. + que + Subj.</td><td class="es-t">Por muy listo que <b>sea</b>, no lo sabe todo.</td><td>So klug er auch ist, …</td></tr>
+ <tr><td class="es-t">por más / mucho que + Subj.</td><td class="es-t">Por más que <b>lo intente</b>, no me sale.</td><td>So sehr ich es auch versuche, …</td></tr>
+ <tr><td class="es-t">por mucho/a/os/as + Nomen + que</td><td class="es-t">Por mucho dinero que <b>tenga</b>, no es feliz.</td><td>So viel Geld er auch hat, …</td></tr></table>
+ <div class="ex">Mit Indikativ, wenn es um echte, wiederholte Erfahrung geht: <span class="es-t">Por más que lo intento, no me sale.</span> (Ich versuche es tatsächlich ständig.)</div>`},
+ {t:'mc',q:'Por muy caro que ___, lo voy a comprar.',opts:['sea','es','será'],a:0},
+ {t:'mc',q:'Por mucha prisa que ___, no llegaremos a tiempo.',opts:['nos demos','nos damos','darnos'],a:0},
+ {t:'gap',q:'Por muy ___ (temprano) que salgas, habrá tráfico.',a:['temprano']},
+ {t:'gap',q:'Por más que ___ (tú, insistir), no cambiaré de opinión.',a:['insistas']},
+ {t:'gap',q:'Por muy ___ (inteligente) que sean las máquinas, necesitan supervisión.',a:['inteligentes']},
+ {t:'tr',de:'So schwer es auch sein mag, wir schaffen es.',a:['Por muy difícil que sea, lo conseguiremos.','Por difícil que sea, lo conseguiremos.']}]},
+{id:'l2',title:'Obwohl doch …',desc:'aun · y eso que · si bien',steps:[
+ {t:'info',title:'Weitere Konzessiv-Mittel',html:`<table><tr><th>Mittel</th><th>Register</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">aun + Gerundium</td><td>neutral</td><td class="es-t">Aun estando cansado, siguió trabajando.</td></tr>
+ <tr><td class="es-t">aun así</td><td>neutral</td><td class="es-t">Era caro; aun así, lo compré.</td></tr>
+ <tr><td class="es-t">y eso que + Ind.</td><td>umgangssprachlich, nachgestellt</td><td class="es-t">Suspendió, y eso que estudió mucho.</td></tr>
+ <tr><td class="es-t">si bien + Ind.</td><td>formell</td><td class="es-t">Si bien el estudio es interesante, tiene limitaciones.</td></tr>
+ <tr><td class="es-t">pese a (que)</td><td>formell, = a pesar de</td><td class="es-t">Pese a la lluvia, el acto se celebró.</td></tr></table>`},
+ {t:'mc',q:'Llegó tarde, ___ salió una hora antes.',opts:['y eso que','si bien','aun así'],a:0},
+ {t:'mc',q:'Formell: „Wenn auch die Ergebnisse positiv sind, …“',opts:['Si bien los resultados son positivos, …','Y eso que los resultados son positivos, …','Por muy positivos los resultados, …'],a:0},
+ {t:'gap',q:'Aun ___ (saber) la respuesta, no dijo nada. (Gerundium)',a:['sabiendo']},
+ {t:'gap',q:'___ a las críticas, el proyecto siguió adelante. (formell: trotz)',a:['Pese']},
+ {t:'vocab',title:'Wissenschaft & Technik',items:[['la investigación','die Forschung','🔬'],['el/la investigador/a','der/die Forscher/in','🧑‍🔬'],['el avance','der Fortschritt','📈'],['los datos','die Daten','📊'],['el algoritmo','der Algorithmus','🧮'],['automatizar','automatisieren','🤖'],['el puesto de trabajo','der Arbeitsplatz','💼'],['la ética','die Ethik','⚖️'],['el sesgo','die Verzerrung, der Bias','🎯'],['la privacidad','die Privatsphäre','🔒'],['regular por ley','gesetzlich regeln','📜'],['a costa de','auf Kosten von','💸']]},
+ {t:'tr',de:'Er hat die Prüfung bestanden, obwohl er doch kaum gelernt hat.',a:['Aprobó el examen, y eso que apenas estudió.','Aprobó el examen, y eso que casi no estudió.']}]},
+{id:'l3',title:'So …, dass … / Daher …',desc:'tan … que · de ahí que · con lo que',steps:[
+ {t:'info',title:'Folgen ausdrücken',html:`<table><tr><th>Struktur</th><th>Modus</th><th>Beispiel</th></tr>
+ <tr><td class="es-t">tan + Adj. + que / tanto/a + Nomen + que</td><td>Ind.</td><td class="es-t">Estaba tan cansado que me dormí en el metro.</td></tr>
+ <tr><td class="es-t">de tal modo / manera que</td><td>Ind.</td><td class="es-t">Lo explicó de tal manera que todos lo entendieron.</td></tr>
+ <tr><td class="es-t">de ahí que</td><td><b>Subj.</b></td><td class="es-t">No hay datos fiables; de ahí que el debate <b>sea</b> tan difícil.</td></tr>
+ <tr><td class="es-t">con lo que / por lo que</td><td>Ind.</td><td class="es-t">Perdió el tren, con lo que llegó tarde.</td></tr></table>
+ <div class="ex"><i>de ahí que</i> („daher“) steht – überraschend – mit <b>Subjuntivo</b>, weil die Ursache schon bekannt ist und nur noch bewertet wird.</div>`},
+ {t:'mc',q:'Los datos no son claros; de ahí que los expertos no se ___.',opts:['pongan de acuerdo','ponen de acuerdo','pondrán de acuerdo'],a:0},
+ {t:'mc',q:'Había ___ gente que no pudimos entrar.',opts:['tanta','tan','tanto'],a:0},
+ {t:'gap',q:'Hablaba tan ___ (rápido) que nadie le entendía.',a:['rápido']},
+ {t:'gap',q:'El algoritmo tiene un sesgo; de ahí que ___ (discriminar) a algunos candidatos.',a:['discrimine']},
+ {t:'dialog',place:'Pausa de una conferencia en la UPC',title:'KI und Arbeit',scene:'Dr. Puig nimmt sich einen Kaffee.',lines:[
+  {n:'Dr. Puig',es:'Dicen que la IA va a destruir millones de empleos. ¿Tú qué crees?',de:'Man sagt, die KI wird Millionen Jobs vernichten. Was glaubst du?'},
+  {you:true,opts:[{es:'Si bien es cierto que muchas tareas se automatizarán, también surgirán trabajos nuevos.',ok:true},{es:'Y eso que es cierto que muchas tareas se automatizarán, también surgirán trabajos nuevos.',ok:false,why:'<i>y eso que</i> steht nachgestellt; am Satzanfang formell: <i>si bien</i>.'}]},
+  {n:'Dr. Puig',es:'Ya, pero por muy optimistas que seamos, no todo el mundo podrá reciclarse.',de:'Schon, aber so optimistisch wir auch sein mögen, nicht jeder wird sich umschulen können.'},
+  {you:true,opts:[{es:'Tienes razón; de ahí que la formación sea tan importante.',ok:true},{es:'Tienes razón; de ahí que la formación es tan importante.',ok:false,why:'<i>de ahí que</i> → Subjuntivo: <i>sea</i>.'}]},
+  {n:'Dr. Puig',es:'Exacto. Y aun siendo una investigadora del tema, a mí también me da un poco de miedo.',de:'Genau. Und obwohl ich zu dem Thema forsche, macht es mir auch ein bisschen Angst.'}]}]},
+{id:'l4',title:'Lesen: Progreso y precaución',desc:'Essay · Stellungnahme',steps:[
+ {t:'read',title:'¿Progreso a cualquier precio?',text:`Pocas tecnologías han avanzado tan rápido como la inteligencia artificial. En apenas unos años, los sistemas han pasado de reconocer imágenes a redactar textos, diagnosticar enfermedades o componer música. Si bien estos avances abren posibilidades enormes, también plantean preguntas que todavía no sabemos responder.
+
+Por muy precisos que sean los algoritmos, aprenden de datos creados por personas, con todos nuestros prejuicios. De ahí que algunos sistemas de selección de personal hayan discriminado a mujeres o a candidatos de ciertos barrios sin que nadie lo programara de forma consciente. Y eso que sus creadores pretendían precisamente lo contrario: decisiones más objetivas.
+
+Aun reconociendo estos riesgos, sería un error frenar la investigación. Lo que hace falta es una regulación tan clara que las empresas no puedan esconderse detrás de la «caja negra» de sus algoritmos. Por mucho que nos fascine la tecnología, las decisiones que afectan a personas deberían seguir teniendo, en último término, un responsable humano.`,de:`Nur wenige Technologien haben sich so schnell entwickelt wie die künstliche Intelligenz. In kaum ein paar Jahren sind die Systeme vom Erkennen von Bildern dazu übergegangen, Texte zu verfassen, Krankheiten zu diagnostizieren oder Musik zu komponieren. Wenn diese Fortschritte auch enorme Möglichkeiten eröffnen, werfen sie doch Fragen auf, die wir noch nicht beantworten können.\n\nSo präzise die Algorithmen auch sein mögen, sie lernen aus Daten, die von Menschen geschaffen wurden – mit all unseren Vorurteilen. Daher haben manche Personalauswahlsysteme Frauen oder Bewerber aus bestimmten Vierteln diskriminiert, ohne dass jemand das bewusst programmiert hätte. Und das, obwohl ihre Entwickler genau das Gegenteil wollten: objektivere Entscheidungen.\n\nAuch wenn man diese Risiken anerkennt, wäre es ein Fehler, die Forschung zu bremsen. Was es braucht, ist eine so klare Regulierung, dass sich Firmen nicht hinter der „Blackbox“ ihrer Algorithmen verstecken können. So sehr uns die Technik auch fasziniert: Entscheidungen, die Menschen betreffen, sollten letztlich weiterhin einen menschlichen Verantwortlichen haben.`},
+ {t:'mc',q:'¿Por qué discriminan algunos algoritmos?',opts:['porque aprenden de datos con prejuicios humanos','porque sus creadores lo programaron así a propósito','porque no tienen suficientes datos'],a:0},
+ {t:'mc',q:'¿Qué propone el autor?',opts:['una regulación clara, no frenar la investigación','prohibir la IA','dejar que las empresas decidan'],a:0},
+ {t:'gap',q:'Por muy precisos que ___ (ser) los algoritmos, aprenden de datos humanos.',a:['sean']},
+ {t:'free',task:'Nimm Stellung (8–10 Sätze): ¿Debería usarse la IA para seleccionar candidatos en las empresas?',hint:'Si bien … · Por muy … que … · Aun + Gerundium … · de ahí que + Subj. · tan … que … · y eso que …',focus:'Konzessiv- und Konsekutivstrukturen auf C1-Niveau',model:'La inteligencia artificial puede ahorrar mucho tiempo en los procesos de selección. Si bien es cierto que revisa cientos de currículos en segundos, no siempre entiende el contexto de cada persona. Por muy objetivo que parezca un algoritmo, reproduce los prejuicios de los datos con los que ha aprendido. De ahí que haya habido casos de discriminación. Aun así, no creo que haya que prohibirla. Sería útil para hacer una primera selección, siempre que una persona revise las decisiones finales. Además, las empresas deberían explicar con tanta claridad cómo funciona el sistema que cualquier candidato pudiera entenderlo.'}]}
+],
+placement:[
+ {t:'mc',q:'Por muy difícil que ___, lo intentaré.',opts:['sea','es','será'],a:0},
+ {t:'mc',q:'No hay datos; de ahí que no ___ conclusiones claras.',opts:['haya','hay','habrá'],a:0},
+ {t:'gap',q:'Aun ___ (estar) enfermo, fue a trabajar. (Gerundium)',a:['estando']},
+ {t:'mc',q:'Suspendió, ___ estudió muchísimo.',opts:['y eso que','de ahí que','por muy'],a:0},
+ {t:'gap',q:'Había ___ ruido que no podía dormir.',a:['tanto']},
+ {t:'mc',q:'Formell: „trotz der Kritik“',opts:['pese a las críticas','y eso que las críticas','con lo que las críticas'],a:0}],
+resumen:`<h3>Konzessiv</h3><p class="es-t">por muy + Adj. + que + Subj. · por más / mucho que · aun + Gerundium · aun así · y eso que + Ind. · si bien (formell) · pese a (que)</p>
+<h3>Folge</h3><p class="es-t">tan / tanto … que + Ind. · de tal modo que · de ahí que + Subj. · con lo que / por lo que</p>`});
+
+COURSE.units.push({id:'u37',n:'39',level:'C1b',title:'Escribir bien',sub:'Essay & formelle Textsorten · Konnektoren für Fortgeschrittene (ahora bien, dicho esto, en lo que respecta a) · Nominalisierung · Gerundium richtig benutzen · C1 abschließen',
+goals:['Konnektoren: ahora bien, dicho esto, a raíz de, en lo que respecta a, cabe señalar','Nominalisierung: aumentar → el aumento','Gerundium: richtig (gleichzeitig) vs. falsch (Folge, Attribut)','Zeichensetzung: Komma vor pero, nach Konnektoren','Aufbau eines Essays: Einleitung, These, Argumente, Schluss','C1-Wiederholung'],
+situacion:{title:'Feedback zur Hausarbeit',npc:'Profesora Vidal',scene:'Du hast einen Essay für das Seminar „Tecnología y sociedad“ geschrieben. Profesora Vidal bespricht ihn mit dir in der Sprechstunde.',role:'Du bist Profesora Vidal, Dozentin, wohlwollend, aber genau. Ihr siezt euch. Gib Jonas Feedback zu seinem Essay (estructura, conectores, registro, gerundios mal usados), frag nach seiner These und lass ihn einzelne Sätze verbessern. Benutze formelle Konnektoren.',goal:'Erkläre deine These, reagiere auf Kritik und verbessere Sätze mit formellen Konnektoren (ahora bien, dicho esto, en lo que respecta a) und Nominalisierungen.'},
+lessons:[
+{id:'l1',title:'Konnektoren für Texte',desc:'ahora bien · dicho esto · a raíz de',steps:[
+ {t:'info',title:'Konnektoren auf C1-Niveau',html:`<table><tr><th>Funktion</th><th>Konnektoren</th></tr>
+ <tr><td>Thema einführen</td><td class="es-t">en lo que respecta a · en cuanto a · por lo que se refiere a</td></tr>
+ <tr><td>Einschränken</td><td class="es-t">ahora bien · no obstante · con todo · dicho esto</td></tr>
+ <tr><td>Ursache</td><td class="es-t">a raíz de · dado que · habida cuenta de que</td></tr>
+ <tr><td>Hervorheben</td><td class="es-t">cabe señalar / destacar que · conviene subrayar que · es más</td></tr>
+ <tr><td>Ergänzen</td><td class="es-t">asimismo · a su vez · de igual modo</td></tr>
+ <tr><td>Schließen</td><td class="es-t">en suma · en definitiva · a modo de conclusión</td></tr></table>
+ <div class="ex"><i>ahora bien</i> = „allerdings“ – leitet eine wichtige Einschränkung ein. <i>dicho esto</i> = „das vorausgeschickt“.</div>`},
+ {t:'mc',q:'El proyecto es viable. ___, exigirá una gran inversión.',opts:['Ahora bien','Asimismo','En cuanto a'],a:0},
+ {t:'mc',q:'___ la vivienda, los datos son preocupantes.',opts:['En lo que respecta a','Ahora bien','Es más'],a:0},
+ {t:'mc',q:'___ la crisis de 2008, muchos jóvenes emigraron.',opts:['A raíz de','Asimismo','Dicho esto'],a:0},
+ {t:'gap',q:'Cabe ___ que el estudio solo analizó a 200 personas. (hervorheben)',a:['señalar','destacar']},
+ {t:'gap',q:'El gobierno subió los impuestos; ___ su vez, redujo el gasto. (gleichzeitig)',a:['a']},
+ {t:'match',q:'Funktion zuordnen',pairs:[['ahora bien','Einschränkung'],['a raíz de','Ursache'],['asimismo','Ergänzung'],['en suma','Schluss'],['en cuanto a','Thema']]}]},
+{id:'l2',title:'Nominalisieren',desc:'aumentar → el aumento',steps:[
+ {t:'info',title:'Verben werden Nomen – typisch für formelle Texte',html:`<table><tr><th>Verb</th><th>Nomen</th></tr>
+ <tr><td class="es-t">aumentar / disminuir</td><td class="es-t">el aumento / la disminución</td></tr>
+ <tr><td class="es-t">crecer / desarrollar</td><td class="es-t">el crecimiento / el desarrollo</td></tr>
+ <tr><td class="es-t">analizar / proponer</td><td class="es-t">el análisis / la propuesta</td></tr>
+ <tr><td class="es-t">mejorar / reducir</td><td class="es-t">la mejora / la reducción</td></tr></table>
+ <p class="es-t">Los precios aumentaron mucho, por eso la gente consume menos.<br>→ El fuerte aumento de los precios ha provocado una disminución del consumo.</p>
+ <div class="ex">Nominalisierung macht Texte dichter und sachlicher – aber nicht übertreiben, sonst wird es schwer lesbar.</div>`},
+ {t:'gap',q:'reducir → la ___',a:['reducción']},
+ {t:'gap',q:'crecer → el ___',a:['crecimiento']},
+ {t:'gap',q:'proponer → la ___',a:['propuesta']},
+ {t:'mc',q:'Nominalisiert: „Wenn die Stadt den Verkehr reduziert, …“',opts:['La reducción del tráfico en la ciudad …','Reduciendo la ciudad el tráfico …','El reducir tráfico ciudad …'],a:0},
+ {t:'tr',de:'Die Verbesserung der öffentlichen Verkehrsmittel ist dringend.',a:['La mejora del transporte público es urgente.']}]},
+{id:'l3',title:'Gerundium & Zeichensetzung',desc:'häufige Fehler',steps:[
+ {t:'info',title:'Gerundium: wann richtig, wann falsch?',html:`<table><tr><th>richtig</th><th>falsch</th></tr>
+ <tr><td>gleichzeitig: <span class="es-t">Entró <b>cantando</b>.</span></td><td>als Folge danach: <s>Se cayó, rompiéndose la pierna.</s> → <span class="es-t">Se cayó y se rompió la pierna.</span></td></tr>
+ <tr><td>Art und Weise: <span class="es-t">Aprendí <b>leyendo</b>.</span></td><td>als Attribut: <s>una caja conteniendo libros</s> → <span class="es-t">una caja <b>que contiene</b> libros</span></td></tr>
+ <tr><td>vorher/Grund: <span class="es-t"><b>Viendo</b> que llovía, nos quedamos.</span></td><td>Englischer Stil: <s>Adjuntando el informe…</s> → <span class="es-t">Le adjunto el informe.</span></td></tr></table>
+ <div class="ojo">Zeichensetzung: Komma <b>vor</b> <i>pero, sino, aunque</i>; Komma <b>nach</b> satzeinleitenden Konnektoren (<i>Sin embargo, …</i>). Kein Komma zwischen Subjekt und Verb!</div>`},
+ {t:'mc',q:'Welcher Satz ist korrekt?',opts:['Recibí un paquete que contenía libros.','Recibí un paquete conteniendo libros.','Recibí un paquete, conteniendo libros.'],a:0},
+ {t:'mc',q:'Welcher Satz ist korrekt?',opts:['El ladrón huyó y fue detenido horas después.','El ladrón huyó, siendo detenido horas después.','El ladrón huyó siendo detenido después.'],a:0},
+ {t:'mc',q:'Zeichensetzung:',opts:['Sin embargo, el estudio tiene limitaciones.','Sin embargo el estudio, tiene limitaciones.','Sin embargo el estudio tiene, limitaciones.'],a:0},
+ {t:'dialog',place:'Despacho de la profesora Vidal',title:'Feedback zum Essay',scene:'Der Essay liegt mit roten Anmerkungen auf dem Tisch.',lines:[
+  {n:'Prof. Vidal',es:'El contenido es bueno, pero hay algunos gerundios incorrectos. Por ejemplo: «Se aprobó la ley, entrando en vigor en enero».',de:'Der Inhalt ist gut, aber es gibt ein paar falsche Gerundien. Zum Beispiel: „Se aprobó la ley, entrando en vigor en enero.“'},
+  {you:true,opts:[{es:'Entiendo. Sería mejor: «Se aprobó la ley, que entró en vigor en enero».',ok:true},{es:'Entiendo. Sería mejor: «Se aprobó la ley, entrada en vigor en enero».',ok:false,why:'Folge danach → Relativsatz oder <i>y</i>: <i>…, que entró en vigor</i>.'}]},
+  {n:'Prof. Vidal',es:'Exacto. ¿Y cuál es exactamente su tesis?',de:'Genau. Und was genau ist Ihre These?'},
+  {you:true,opts:[{es:'Que la tecnología no es neutral. Ahora bien, eso no significa que debamos rechazarla.',ok:true},{es:'Que la tecnología no es neutral. Asimismo, eso no significa que debamos rechazarla.',ok:false,why:'Einschränkung → <i>ahora bien</i>; <i>asimismo</i> ergänzt nur.'}]},
+  {n:'Prof. Vidal',es:'Muy bien. En lo que respecta a la conclusión, le falta fuerza.',de:'Sehr gut. Was den Schluss betrifft, fehlt ihm Kraft.'},
+  {you:true,opts:[{es:'La reformularé. En suma, lo que quiero decir es que la responsabilidad es nuestra.',ok:true},{es:'La reformularé. A raíz de, lo que quiero decir es que la responsabilidad es nuestra.',ok:false,why:'Fazit → <i>en suma / en definitiva</i>; <i>a raíz de</i> braucht ein Nomen (Ursache).'}]}]}]},
+{id:'l4',title:'C1-Check: Ein Essay',desc:'Lesen · Essay schreiben',steps:[
+ {t:'read',title:'Ensayo: El valor del aburrimiento',text:`Vivimos en la era de la distracción permanente. Basta con que pasen unos segundos sin estímulos para que saquemos el móvil del bolsillo. Ahora bien, ¿qué perdemos cuando eliminamos por completo el aburrimiento?
+
+En lo que respecta a la creatividad, numerosos estudios coinciden en que los momentos de inactividad favorecen la aparición de ideas nuevas. Cabe señalar, por ejemplo, el experimento en el que un grupo de personas que había realizado una tarea monótona encontró después más soluciones originales que otro grupo que no se había aburrido. De ahí que algunos expertos hablen del aburrimiento como de un «motor» del pensamiento.
+
+Dicho esto, no se trata de idealizarlo. Por mucho que favorezca la reflexión, un aburrimiento crónico puede derivar en apatía. Lo que parece razonable, en suma, es recuperar pequeños espacios de silencio: un trayecto sin auriculares, una espera sin pantalla. Quizá sea ahí donde, paradójicamente, empiecen las mejores ideas.`,de:`Wir leben im Zeitalter der permanenten Ablenkung. Es reicht, dass ein paar Sekunden ohne Reize vergehen, damit wir das Handy aus der Tasche ziehen. Allerdings: Was verlieren wir, wenn wir die Langeweile vollständig abschaffen?\n\nWas die Kreativität betrifft, stimmen zahlreiche Studien darin überein, dass Momente der Untätigkeit das Entstehen neuer Ideen begünstigen. Hervorzuheben ist etwa das Experiment, in dem eine Gruppe, die eine monotone Aufgabe erledigt hatte, danach mehr originelle Lösungen fand als eine andere Gruppe, die sich nicht gelangweilt hatte. Daher sprechen manche Experten von der Langeweile als „Motor“ des Denkens.\n\nDas vorausgeschickt, geht es nicht darum, sie zu idealisieren. So sehr sie das Nachdenken auch fördert, chronische Langeweile kann in Apathie münden. Vernünftig erscheint also, kleine Räume der Stille zurückzugewinnen: eine Fahrt ohne Kopfhörer, ein Warten ohne Bildschirm. Vielleicht beginnen paradoxerweise genau dort die besten Ideen.`},
+ {t:'mc',q:'¿Cuál es la tesis del texto?',opts:['Recuperar momentos de aburrimiento puede favorecer la creatividad.','El aburrimiento siempre es negativo.','Hay que prohibir los móviles.'],a:0},
+ {t:'mc',q:'„Dicho esto“ leitet hier ein …',opts:['eine Einschränkung des Vorigen','ein Beispiel','die Einleitung'],a:0},
+ {t:'mc',q:'C1-Mix: Siento que no ___ venir. (Bedauern)',opts:['puedas','puedes','podrás'],a:0},
+ {t:'mc',q:'C1-Mix: De ___ antes, te habría ayudado.',opts:['haberlo sabido','saberlo habido','lo haber sabido'],a:0},
+ {t:'free',task:'Schreib einen kurzen Essay (10–12 Sätze) zu einem dieser Themen: «¿Deberíamos trabajar menos horas?» oder «¿Las redes sociales nos acercan o nos alejan?». Mit These, Argumenten, Gegenargument und Schluss.',hint:'Einleitung mit Frage · En lo que respecta a … · Cabe señalar que … · Ahora bien … · Por mucho que … · De ahí que … · Dicho esto … · En suma …',focus:'Essay-Aufbau, Konnektoren, Nominalisierung, C1-Strukturen',model:'Nunca habíamos estado tan conectados como ahora; ahora bien, ¿estamos realmente más cerca unos de otros? En lo que respecta al contacto con personas lejanas, las redes sociales han supuesto un avance enorme: un estudiante de Erasmus puede hablar a diario con su familia. Cabe señalar, asimismo, que han permitido la creación de comunidades en torno a intereses compartidos. Dicho esto, el uso excesivo tiene consecuencias. Por mucho que sumemos «amigos», el tiempo que pasamos frente a la pantalla se lo restamos a las relaciones cara a cara. De ahí que cada vez más jóvenes afirmen sentirse solos. En suma, las redes no nos acercan ni nos alejan por sí mismas: es el uso que hacemos de ellas lo que marca la diferencia.'}]}
+],
+placement:[
+ {t:'mc',q:'El plan es bueno. ___, es muy caro. (Einschränkung)',opts:['Ahora bien','Asimismo','A raíz de'],a:0},
+ {t:'gap',q:'aumentar → el ___',a:['aumento']},
+ {t:'mc',q:'Korrekt:',opts:['una carta que contiene datos','una carta conteniendo datos','una carta, conteniendo datos'],a:0},
+ {t:'mc',q:'___ la economía, los datos son positivos. (Was … betrifft)',opts:['En lo que respecta a','Ahora bien','Dicho esto'],a:0},
+ {t:'gap',q:'Cabe ___ que la muestra era pequeña.',a:['señalar','destacar']},
+ {t:'mc',q:'Komma richtig gesetzt:',opts:['No es caro, sino barato.','No es caro sino, barato.','No es, caro sino barato.'],a:0}],
+resumen:`<h3>Konnektoren C1</h3><p class="es-t">en lo que respecta a · en cuanto a · ahora bien · dicho esto · con todo · a raíz de · dado que · cabe señalar que · asimismo · a su vez · en suma</p>
+<h3>Nominalisierung</h3><p class="es-t">aumentar → el aumento · reducir → la reducción · mejorar → la mejora · proponer → la propuesta</p>
+<h3>Gerundium</h3><p>richtig: gleichzeitig, Art und Weise, Grund · falsch: Folge danach, Attribut (<s>caja conteniendo</s>)</p>`});
+;
+/* ===== C2: Unidad 40–43 – eigene Inhalte nach dem Plan Curricular (Instituto Cervantes) ===== */
+
+COURSE.units.push({id:'u38',n:'40',level:'C2',title:'Entre líneas',sub:'Ironie & Andeutungen verstehen · Höflichkeits-Imperfekt (Quería pedirte…) · Futur des Staunens (¿Será posible?) · Ausrufe (¡Menudo…!, ¡Vaya … que …!) · Humor',
+goals:['Ironie erkennen: Lob, das Kritik ist','Imperfecto/Konditional der Höflichkeit: Quería / Venía a pedirte…','Futur/Konditional des Staunens und Vorwurfs: ¿Será posible? ¿Serás capaz…?','Ausrufe: ¡Menudo + Nomen!, ¡Vaya + Nomen + que …!, ¡Qué de …!','Andeutungen: no es por nada, pero… · ya sabes lo que te digo','Humor und Doppeldeutigkeit'],
+situacion:{title:'Eine diplomatische Bitte',npc:'Sra. Rovira',scene:'Deine Nachbarin, Frau Rovira (über 70, sehr direkt und ironisch), lässt jeden Morgen um sechs ihren Hund laut bellen. Du willst das ansprechen – sehr diplomatisch.',role:'Du bist Sra. Rovira, ältere Nachbarin von Jonas, schlagfertig, ironisch, aber im Grunde herzlich. Ihr siezt euch. Antworte zuerst ironisch und ausweichend (¡Menuda hora de venir a quejarse!, ¿Será posible que un perro tan pequeño moleste tanto?), mach Andeutungen über Jonas’ eigene späte Partys. Gib nach, wenn Jonas höflich und humorvoll bleibt.',goal:'Bring dein Anliegen mit Höflichkeits-Imperfekt vor (Venía a comentarle…), versteh Frau Roviras Ironie und antworte schlagfertig, aber freundlich.'},
+lessons:[
+{id:'l1',title:'Höflich verpacken',desc:'Quería pedirte · Venía a decirle',steps:[
+ {t:'info',title:'Imperfekt und Konditional der Höflichkeit',html:`<p>Imperfekt und Konditional „schieben“ eine Bitte zeitlich weg und machen sie weicher:</p>
+ <table><tr><th>direkt</th><th>höflicher</th><th>sehr höflich</th></tr>
+ <tr><td class="es-t">Quiero pedirte algo.</td><td class="es-t">Quería pedirte algo.</td><td class="es-t">Querría / Quisiera pedirte algo.</td></tr>
+ <tr><td class="es-t">Vengo a decirle que …</td><td class="es-t">Venía a decirle que …</td><td class="es-t">Me gustaría comentarle que …</td></tr>
+ <tr><td class="es-t">¿Puedes …?</td><td class="es-t">¿Podías …?</td><td class="es-t">¿Te importaría + Inf.?</td></tr></table>
+ <div class="ex">Das Imperfekt bedeutet hier <b>keine</b> Vergangenheit – <i>Quería pedirte</i> heißt „Ich möchte dich bitten“.</div>`},
+ {t:'mc',q:'Am höflichsten:',opts:['Quisiera hacerle una pregunta.','Quiero hacerle una pregunta.','Le hago una pregunta.'],a:0},
+ {t:'mc',q:'„Venía a pedirle un favor“ bedeutet …',opts:['Ich möchte Sie um einen Gefallen bitten.','Ich kam früher, um Sie zu bitten.','Ich werde Sie um einen Gefallen bitten.'],a:0},
+ {t:'gap',q:'¿Te ___ (importar) bajar un poco la música?',a:['importaría']},
+ {t:'gap',q:'Perdone, ___ (yo, querer) saber si este asiento está libre. (Imperfekt)',a:['quería']},
+ {t:'tr',de:'Ich wollte Sie fragen, ob Sie morgen Zeit hätten.',a:['Quería preguntarle si tendría tiempo mañana.','Quería preguntarle si mañana tendría tiempo.']}]},
+{id:'l2',title:'Na, das ist ja toll!',desc:'Ironie · ¡Menudo …! · ¿Será posible?',steps:[
+ {t:'info',title:'Ironie, Ausrufe und Staunen',html:`<table><tr><th>Mittel</th><th>Beispiel</th><th>gemeint</th></tr>
+ <tr><td>ironisches Lob</td><td class="es-t">¡Qué puntual! (bei 40 Min. Verspätung)</td><td>Du bist viel zu spät.</td></tr>
+ <tr><td class="es-t">¡Menudo/a + Nomen!</td><td class="es-t">¡Menudo día! · ¡Menuda cara!</td><td>Was für ein (schlimmer/toller) …!</td></tr>
+ <tr><td class="es-t">¡Vaya + Nomen + que …!</td><td class="es-t">¡Vaya cara que tiene!</td><td>Ist der dreist!</td></tr>
+ <tr><td>Futur des Staunens</td><td class="es-t">¿Será posible? · ¿Serás capaz de …?</td><td>Kann das wahr sein? · Wirst du es wagen …?</td></tr>
+ <tr><td class="es-t">¡Qué de + Nomen!</td><td class="es-t">¡Qué de gente!</td><td>Wie viele Leute!</td></tr></table>
+ <div class="ex">Ironie erkennst du am Kontext und am Ton. Im Schriftlichen helfen oft Anführungszeichen: <span class="es-t">Gracias por tu «ayuda».</span></div>`},
+ {t:'mc',q:'Dein Freund kommt 40 Minuten zu spät. Du sagst: „¡Qué puntual!“ Das ist …',opts:['ironisch','ein Kompliment','eine Frage'],a:0},
+ {t:'mc',q:'„Ist der dreist!“',opts:['¡Vaya cara que tiene!','¡Vaya cara tiene que!','¡Qué cara tan tiene!'],a:0},
+ {t:'mc',q:'„¿Serás capaz de decírselo?“ drückt aus …',opts:['Empörung/Vorwurf: Du wirst es doch nicht wagen!','eine Zukunftsplanung','eine höfliche Bitte'],a:0},
+ {t:'gap',q:'¡___ lío has montado! (Was für ein Durcheinander!)',a:['Menudo','Vaya']},
+ {t:'gap',q:'¡Qué ___ coches hay hoy en la ciudad! (wie viele)',a:['de']},
+ {t:'listen',es:'¡Menuda nochecita! El perro de la vecina ha estado ladrando desde las cinco. ¿Será posible?',de:'Was für eine Nacht! Der Hund der Nachbarin hat seit fünf Uhr gebellt. Kann das wahr sein?'}]},
+{id:'l3',title:'Zwischen den Zeilen',desc:'Andeutungen · Nachbarschaftsgespräch',steps:[
+ {t:'vocab',title:'Andeuten & Ironie',items:[['no es por nada, pero …','ich sag ja nichts, aber …','🤐'],['ya sabes lo que te digo','du weißt schon, was ich meine','😉'],['dejar caer','andeuten, fallen lassen','🪶'],['tirar una indirecta','eine Anspielung machen','🎯'],['hacerse el tonto','sich dumm stellen','🙃'],['con la boca pequeña','halbherzig (sagen)','🤏'],['¡Hasta ahí podíamos llegar!','Das fehlte noch!','🛑'],['tener retintín','einen spitzen Unterton haben','🔔'],['ser un/a cachondo/a','ein Spaßvogel sein','😂'],['pillar la ironía','die Ironie verstehen','💡'],['ir con segundas','etwas mit Hintergedanken sagen','🕵️'],['quedarse con alguien','jemanden veräppeln','🤡']]},
+ {t:'dialog',place:'Rellano de la escalera',title:'Der Hund von Frau Rovira',scene:'Du klingelst bei Frau Rovira. Der Hund bellt hinter der Tür.',lines:[
+  {n:'Sra. Rovira',es:'¡Hombre, el vecino del tercero! ¡Menuda sorpresa! ¿Viene a devolverme la sal que le presté en marzo?',de:'Na so was, der Nachbar aus dem Dritten! Was für eine Überraschung! Bringen Sie mir das Salz zurück, das ich Ihnen im März geliehen habe?'},
+  {you:true,opts:[{es:'Ja, ja, eso también. Pero venía a comentarle una cosa del perro, si no le importa.',ok:true},{es:'Vengo a quejarme del perro. Ladra demasiado.',ok:false,why:'Zu direkt. Mit Höflichkeits-Imperfekt: <i>Venía a comentarle …</i>'}]},
+  {n:'Sra. Rovira',es:'¿Del perro? ¿Será posible que un animalito de tres kilos moleste tanto? No es por nada, pero sus fiestas de los sábados tampoco son una nana.',de:'Wegen des Hundes? Kann es sein, dass ein Tierchen von drei Kilo so stört? Ich sag ja nichts, aber Ihre Samstagspartys sind auch kein Wiegenlied.'},
+  {you:true,opts:[{es:'Pillo la indirecta. ¿Qué le parece si yo bajo la música y usted saca a Lola un poco más tarde?',ok:true},{es:'No entiendo qué quiere decir. Mis fiestas no son una canción.',ok:false,why:'Sie spielt ironisch auf deine Partys an – darauf eingehen, nicht wörtlich nehmen.'}]},
+  {n:'Sra. Rovira',es:'¡Vaya negociador que está hecho! Trato hecho. Y la sal, cuando quiera.',de:'Was für ein Verhandler Sie sind! Abgemacht. Und das Salz, wann Sie wollen.'}]},
+ {t:'speak',es:'No es por nada, pero quizá podríamos buscar una solución que nos vaya bien a los dos.',de:'Ich sag ja nichts, aber vielleicht könnten wir eine Lösung finden, die uns beiden passt.'}]},
+{id:'l4',title:'Lesen: Una columna de humor',desc:'Satire verstehen · eigene Glosse',steps:[
+ {t:'read',title:'Manual del perfecto vecino',text:`Querido lector: si acaba de mudarse a un edificio de Barcelona, enhorabuena. Está a punto de descubrir la convivencia en su estado más puro. Permítame unos consejos de alguien que lleva treinta años en el mismo rellano.
+
+En primer lugar, no se le ocurra saludar en el ascensor con algo más que un «bon dia» murmurado. Contar su vida entre el segundo y el quinto piso es de muy mala educación; para eso están las reuniones de la comunidad, que, como todo el mundo sabe, son la actividad favorita de los vecinos. ¡Qué de horas felices pasará discutiendo si el portal se pinta de beige o de beige claro!
+
+En segundo lugar, si su vecino de arriba decide mover los muebles a las dos de la madrugada, no se queje. Seguramente estará buscando la inspiración. ¿Será usted tan egoísta como para cortarle las alas a un artista? Y, por último, si alguien le pide sal, désela. Nunca se la devolverán, pero ganará algo mucho más valioso: un tema de conversación para los próximos diez años.`,de:`Lieber Leser: Wenn Sie gerade in ein Haus in Barcelona gezogen sind, herzlichen Glückwunsch. Sie sind dabei, das Zusammenleben in seiner reinsten Form zu entdecken. Erlauben Sie mir ein paar Ratschläge von jemandem, der seit dreißig Jahren auf demselben Treppenabsatz wohnt.\n\nErstens: Kommen Sie bloß nicht auf die Idee, im Aufzug mit mehr als einem gemurmelten „bon dia“ zu grüßen. Zwischen dem zweiten und dem fünften Stock sein Leben zu erzählen, ist äußerst unhöflich; dafür gibt es die Eigentümerversammlungen, die, wie jeder weiß, die Lieblingsbeschäftigung der Nachbarn sind. Wie viele glückliche Stunden werden Sie damit verbringen, darüber zu streiten, ob der Hauseingang beige oder hellbeige gestrichen wird!\n\nZweitens: Wenn Ihr Nachbar von oben beschließt, um zwei Uhr nachts die Möbel zu verrücken, beschweren Sie sich nicht. Er sucht bestimmt nach Inspiration. Wollen Sie wirklich so egoistisch sein, einem Künstler die Flügel zu stutzen? Und schließlich: Wenn jemand Sie um Salz bittet, geben Sie es ihm. Sie bekommen es nie zurück, aber Sie gewinnen etwas viel Wertvolleres: ein Gesprächsthema für die nächsten zehn Jahre.`},
+ {t:'mc',q:'„las reuniones de la comunidad, que … son la actividad favorita de los vecinos“ ist …',opts:['ironisch gemeint','eine ernste Information','eine Statistik'],a:0},
+ {t:'mc',q:'¿Qué critica realmente el autor en el segundo consejo?',opts:['a los vecinos que hacen ruido de noche','a los artistas','a la gente egoísta que se queja'],a:0},
+ {t:'mc',q:'„¿Será usted tan egoísta …?“ – welche Funktion hat das Futur?',opts:['ironische Empörung','Zukunft','Vermutung über jetzt'],a:0},
+ {t:'free',task:'Schreib eine kurze ironische Glosse (8–10 Sätze): „Manual del perfecto estudiante de Erasmus“ oder „Manual del perfecto compañero de piso“.',hint:'Ironisches Lob · ¡Menudo …! · ¡Qué de …! · ¿Será posible …? · No es por nada, pero … · Höflichkeits-Imperfekt',focus:'Ironie, Ausrufe, Futur des Staunens',model:'Querido futuro estudiante de Erasmus: prepárate para el semestre más productivo de tu vida. Lo primero que debes saber es que las clases son opcionales; al fin y al cabo, ¿qué profesor sería capaz de suspender a alguien tan simpático? Por las tardes, es imprescindible visitar todas las terrazas de la ciudad, por motivos estrictamente culturales. ¡Menudo esfuerzo de integración! Por la noche, recuerda que en España se cena a las diez, así que nunca te acuestes antes de las tres. No es por nada, pero tus compañeros de piso agradecerán mucho que cantes al volver a casa. Y, sobre todo, no aprendas demasiado español: ¿será posible que alguien quiera hablar contigo en otro idioma que no sea inglés?'}]}
+],
+placement:[
+ {t:'mc',q:'Am höflichsten:',opts:['Quisiera pedirle un favor.','Quiero un favor.','Hágame un favor.'],a:0},
+ {t:'mc',q:'„¡Menudo día!“ bedeutet …',opts:['Was für ein Tag!','Ein kleiner Tag.','Ein normaler Tag.'],a:0},
+ {t:'gap',q:'¡Vaya cara ___ tiene!',a:['que']},
+ {t:'mc',q:'„¿Será posible?“ drückt aus …',opts:['Staunen/Empörung','eine Zukunftsfrage','eine Bitte'],a:0},
+ {t:'gap',q:'¿Te ___ (importar) cerrar la ventana?',a:['importaría']},
+ {t:'mc',q:'„tirar una indirecta“',opts:['eine Anspielung machen','etwas wegwerfen','direkt sagen'],a:0}],
+resumen:`<h3>Höflichkeit</h3><p class="es-t">Quería / Quisiera / Venía a + Inf. · ¿Te importaría + Inf.?</p>
+<h3>Ausrufe & Staunen</h3><p class="es-t">¡Menudo día! · ¡Vaya cara que tiene! · ¡Qué de gente! · ¿Será posible? · ¿Serás capaz de …?</p>
+<h3>Andeutungen</h3><p class="es-t">no es por nada, pero … · tirar una indirecta · ir con segundas · pillar la ironía</p>`});
+
+COURSE.units.push({id:'u39',n:'41',level:'C2',title:'Dicho y hecho',sub:'Sprichwörter (refranes) · feste Kollokationen (tomar una decisión, poner en marcha) · kulturelle Anspielungen · Fiestas & Traditionen',
+goals:['häufige refranes verstehen und passend benutzen','Kollokationen: Verb + Nomen (tomar, poner, dar, llevar, hacer)','kulturelle Anspielungen (Don Quijote, Sancho, ir a por uvas …)','über Feste und Traditionen sprechen','Sprichwörter abwandeln und anspielen','C2-Wortschatz: präzise Verben'],
+situacion:{title:'Sant Joan mit Abuelo Ramón',npc:'Ramón',scene:'In der Nacht von Sant Joan sitzt du am Strand neben Ramón, Nurias Großvater (82). Er spricht fast nur in Sprichwörtern und erzählt von früher.',role:'Du bist Ramón, Großvater von Nuria, 82, gutmütig, weise und voller refranes (Más vale tarde que nunca, A quien madruga Dios le ayuda, No hay mal que cien años dure…). Ihr siezt euch erst, du bietest das tú an. Erzähl von Sant Joan früher, frag Jonas nach deutschen Traditionen und kommentiere alles mit Sprichwörtern. Freu dich, wenn er selbst eins benutzt.',goal:'Versteh Ramóns Sprichwörter und benutze selbst mindestens zwei passende refranes oder kulturelle Anspielungen.'},
+lessons:[
+{id:'l1',title:'Sprichwörter',desc:'Más vale tarde que nunca …',steps:[
+ {t:'vocab',title:'Häufige refranes',items:[['Más vale tarde que nunca.','Besser spät als nie.','⏰'],['A quien madruga, Dios le ayuda.','Morgenstund hat Gold im Mund.','🌅'],['No hay mal que por bien no venga.','Alles hat sein Gutes.','🍀'],['Del dicho al hecho hay mucho trecho.','Leichter gesagt als getan.','🛤️'],['En casa del herrero, cuchillo de palo.','Der Schuster hat die schlechtesten Schuhe.','🔨'],['Ojos que no ven, corazón que no siente.','Was ich nicht weiß, macht mich nicht heiß.','🙈'],['Dime con quién andas y te diré quién eres.','Sag mir, mit wem du gehst …','👥'],['Más vale pájaro en mano que ciento volando.','Lieber den Spatz in der Hand …','🐦'],['Perro ladrador, poco mordedor.','Hunde, die bellen, beißen nicht.','🐕'],['Cada maestrillo tiene su librillo.','Jeder hat seine eigene Methode.','📒'],['A buen entendedor, pocas palabras bastan.','Dem Kundigen genügen wenige Worte.','💡'],['No hay mal que cien años dure.','Alles Schlechte geht vorbei.','⌛']]},
+ {t:'match',q:'Sprichwort → Situation',pairs:[['Más vale tarde que nunca.','Er kommt endlich, wenn auch spät.'],['En casa del herrero, cuchillo de palo.','Die Friseurin hat selbst einen schlechten Haarschnitt.'],['Perro ladrador, poco mordedor.','Er droht viel, tut aber nichts.'],['Del dicho al hecho hay mucho trecho.','Er verspricht viel, macht aber nichts.']]},
+ {t:'mc',q:'Der IT-Experte hat selbst einen uralten Laptop:',opts:['En casa del herrero, cuchillo de palo.','A quien madruga, Dios le ayuda.','Más vale tarde que nunca.'],a:0},
+ {t:'gap',q:'No hay mal que por bien no ___.',a:['venga']},
+ {t:'gap',q:'Más vale pájaro en ___ que ciento volando.',a:['mano']},
+ {t:'mc',q:'„A buen entendedor …“ – wie geht es weiter?',opts:['pocas palabras bastan','Dios le ayuda','corazón que no siente'],a:0}]},
+{id:'l2',title:'Was zusammengehört',desc:'Kollokationen',steps:[
+ {t:'info',title:'Feste Verbindungen: Verb + Nomen',html:`<table><tr><th>Verb</th><th>typische Partner</th></tr>
+ <tr><td class="es-t">tomar</td><td class="es-t">una decisión, medidas, el pelo, en serio, en cuenta</td></tr>
+ <tr><td class="es-t">poner</td><td class="es-t">en marcha, en duda, de manifiesto, fin a, en práctica</td></tr>
+ <tr><td class="es-t">dar</td><td class="es-t">un paso, por hecho, a conocer, lugar a, la razón</td></tr>
+ <tr><td class="es-t">llevar</td><td class="es-t">a cabo, la contraria, razón (Am.), las riendas</td></tr>
+ <tr><td class="es-t">hacer</td><td class="es-t">hincapié en, frente a, caso a, falta</td></tr></table>
+ <div class="ex">Auf C2-Niveau zählt nicht nur, ob ein Satz korrekt ist, sondern ob er <b>idiomatisch</b> ist. <i>hacer una decisión</i> versteht jeder – aber man sagt <i>tomar</i>.</div>`},
+ {t:'mc',q:'Das Projekt ___ en marcha el año pasado.',opts:['se puso','se tomó','se hizo'],a:0},
+ {t:'mc',q:'El informe ___ hincapié en la falta de datos.',opts:['hace','pone','da'],a:0},
+ {t:'gap',q:'Siempre me ___ (llevar) la contraria. (er widerspricht mir immer)',a:['lleva']},
+ {t:'gap',q:'Hay que ___ en cuenta todos los factores.',a:['tener','tomar']},
+ {t:'gap',q:'La empresa ___ (llevar) a cabo un estudio en 2024. (Indefinido)',a:['llevó']},
+ {t:'match',q:'Was gehört zusammen?',pairs:[['dar','un paso'],['poner','fin a'],['hacer','frente a'],['llevar','a cabo'],['tomar','medidas']]},
+ {t:'tr',de:'Wir müssen Maßnahmen ergreifen.',a:['Tenemos que tomar medidas.','Hay que tomar medidas.']}]},
+{id:'l3',title:'Feste & Anspielungen',desc:'Sant Joan · Don Quijote',steps:[
+ {t:'info',title:'Kulturelle Anspielungen im Alltag',html:`<table><tr><th>Ausdruck</th><th>Herkunft</th><th>Bedeutung</th></tr>
+ <tr><td class="es-t">luchar contra molinos de viento</td><td>Don Quijote</td><td>gegen Windmühlen kämpfen</td></tr>
+ <tr><td class="es-t">ser un quijote</td><td>Don Quijote</td><td>ein Idealist sein</td></tr>
+ <tr><td class="es-t">ir a por uvas</td><td>Nochevieja (12 Trauben)</td><td>nicht bei der Sache sein</td></tr>
+ <tr><td class="es-t">ser más largo que un día sin pan</td><td>Alltag</td><td>endlos lang sein</td></tr>
+ <tr><td class="es-t">quedarse para vestir santos</td><td>Kirche</td><td>(veraltet) unverheiratet bleiben</td></tr>
+ <tr><td class="es-t">hacer el agosto</td><td>Ernte</td><td>ein Riesengeschäft machen</td></tr></table>`},
+ {t:'vocab',title:'Feste & Traditionen',items:[['la verbena de Sant Joan','die Johannisnacht-Feier','🔥'],['la hoguera','das Lagerfeuer','🔥'],['los petardos','die Böller','🧨'],['la coca','katalanischer Kuchen','🍰'],['las doce uvas','die zwölf Trauben (Silvester)','🍇'],['los Reyes Magos','die Heiligen Drei Könige','👑'],['la cabalgata','der Umzug','🐫'],['los castellers','die Menschentürme','🏰'],['la Semana Santa','die Karwoche','✝️'],['el patrón / la patrona','der/die Schutzheilige','😇']]},
+ {t:'dialog',place:'Playa de la Barceloneta, noche de Sant Joan',title:'Großvater Ramón',scene:'Überall Feuer und Böller. Ramón reicht dir ein Stück Coca.',lines:[
+  {n:'Ramón',es:'Toma, coca de Sant Joan. Más vale tarde que nunca: ¡llevo una hora intentando abrir la caja!',de:'Nimm, Coca de Sant Joan. Besser spät als nie: Ich versuche seit einer Stunde, die Schachtel aufzumachen!'},
+  {you:true,opts:[{es:'¡Gracias! Pues ha merecido la pena. ¿Esto lo celebraban igual cuando usted era joven?',ok:true},{es:'¡Gracias! ¿Por qué tarde? Es nunca.',ok:false,why:'Ramón benutzt ein Sprichwort – nicht wörtlich nehmen.'}]},
+  {n:'Ramón',es:'Más o menos. Pero antes los petardos los hacíamos nosotros… y del dicho al hecho había mucho trecho, ¡ja, ja! ¿Y en Alemania qué hacéis?',de:'Mehr oder weniger. Aber früher haben wir die Böller selbst gemacht … und zwischen Sagen und Tun lag ein weiter Weg, haha! Und was macht ihr in Deutschland?'},
+  {you:true,opts:[{es:'En Sant Joan, poca cosa. Pero en Nochevieja también tiramos petardos. Eso sí, sin uvas: si no, yo iría a por uvas toda la noche.',ok:true},{es:'En Sant Joan, poca cosa. Y en Nochevieja comemos uvas para ir a por uvas.',ok:false,why:'<i>ir a por uvas</i> heißt „nicht bei der Sache sein“ – nicht „Trauben essen“.'}]},
+  {n:'Ramón',es:'¡Este chico tiene gracia! A buen entendedor, pocas palabras bastan.',de:'Der Junge hat Humor! Dem Kundigen genügen wenige Worte.'}]}]},
+{id:'l4',title:'Lesen: El refranero',desc:'Essay · eigener Text',steps:[
+ {t:'read',title:'¿Siguen vivos los refranes?',text:`Hubo un tiempo en que el refranero era una enciclopedia de bolsillo. Quien no sabía leer sabía, en cambio, que «en abril, aguas mil» y que «a quien madruga, Dios le ayuda». Los refranes condensaban siglos de experiencia campesina en frases fáciles de recordar, a menudo con rima.
+
+Hoy, sin embargo, muchos jóvenes reconocen apenas una docena. No es de extrañar: buena parte del refranero alude a un mundo rural que ya no existe. ¿Qué sentido tiene «cría cuervos y te sacarán los ojos» para alguien que no ha visto un cuervo en su vida? Aun así, sería precipitado darlos por muertos. Lo que ocurre es que se transforman: se citan con ironía, se acortan («ojos que no ven…») o se reinventan en las redes, donde «más vale tarde que nunca» convive con «más vale meme que nunca».
+
+En definitiva, los refranes no desaparecen; cambian de piel. Y quizá esa sea su mayor lección: del dicho al hecho hay mucho trecho, pero del refrán al meme, apenas un clic.`,de:`Es gab eine Zeit, in der der Sprichwortschatz eine Taschenenzyklopädie war. Wer nicht lesen konnte, wusste dafür, dass „im April tausend Regen“ und dass „Morgenstund Gold im Mund hat“. Sprichwörter verdichteten jahrhundertelange bäuerliche Erfahrung in leicht zu merkenden Sätzen, oft mit Reim.\n\nHeute kennen viele junge Leute dagegen kaum ein Dutzend. Kein Wunder: Ein großer Teil der Sprichwörter spielt auf eine ländliche Welt an, die es nicht mehr gibt. Welchen Sinn hat „Zieh Raben groß, und sie hacken dir die Augen aus“ für jemanden, der nie in seinem Leben einen Raben gesehen hat? Trotzdem wäre es voreilig, sie für tot zu erklären. Sie verwandeln sich vielmehr: Man zitiert sie ironisch, kürzt sie („ojos que no ven …“) oder erfindet sie in den sozialen Netzwerken neu, wo „besser spät als nie“ neben „besser Meme als nie“ steht.\n\nLetztlich verschwinden Sprichwörter nicht; sie häuten sich. Und vielleicht ist das ihre größte Lehre: Vom Sagen zum Tun ist es ein weiter Weg, aber vom Sprichwort zum Meme nur ein Klick.`},
+ {t:'mc',q:'¿Por qué los jóvenes conocen menos refranes?',opts:['porque muchos aluden a un mundo rural que ya no existe','porque están prohibidos en la escuela','porque no tienen rima'],a:0},
+ {t:'mc',q:'¿Qué tesis defiende el autor?',opts:['Los refranes no mueren, se transforman.','Los refranes ya han desaparecido.','Los memes son peores que los refranes.'],a:0},
+ {t:'free',task:'Erzähl (8–10 Sätze) von einer Situation aus deinem Leben, die zu einem spanischen Sprichwort passt. Benutze mindestens zwei Sprichwörter und drei Kollokationen.',hint:'refranes aus Lektion 1 · tomar una decisión · poner en marcha · dar un paso · llevar a cabo · hacer frente a',focus:'Sprichwörter, Kollokationen',model:'Cuando decidí hacer el Erasmus, todo el mundo me decía que era una gran idea, pero del dicho al hecho hay mucho trecho. Tardé meses en tomar la decisión, porque me daba miedo dar el paso. Al final, puse en marcha los trámites un poco tarde, pero más vale tarde que nunca. Los primeros meses tuve que hacer frente a muchos problemas: no encontraba piso y no entendía el catalán. Sin embargo, no hay mal que por bien no venga: gracias a esos problemas conocí a Nuria. Hoy puedo decir que llevé a cabo el mejor proyecto de mi vida.'}]}
+],
+placement:[
+ {t:'mc',q:'„Besser spät als nie.“',opts:['Más vale tarde que nunca.','A quien madruga, Dios le ayuda.','Del dicho al hecho hay mucho trecho.'],a:0},
+ {t:'mc',q:'___ una decisión',opts:['tomar','hacer','poner'],a:0},
+ {t:'gap',q:'Perro ladrador, poco ___.',a:['mordedor']},
+ {t:'mc',q:'„ir a por uvas“ bedeutet …',opts:['nicht bei der Sache sein','Trauben kaufen','feiern'],a:0},
+ {t:'gap',q:'El gobierno puso ___ marcha un nuevo plan.',a:['en']},
+ {t:'mc',q:'Der Bäcker kauft sein Brot im Supermarkt:',opts:['En casa del herrero, cuchillo de palo.','Ojos que no ven, corazón que no siente.','Perro ladrador, poco mordedor.'],a:0}],
+resumen:`<h3>Refranes</h3><p class="es-t">Más vale tarde que nunca · A quien madruga, Dios le ayuda · No hay mal que por bien no venga · Del dicho al hecho hay mucho trecho · En casa del herrero, cuchillo de palo · Perro ladrador, poco mordedor</p>
+<h3>Kollokationen</h3><p class="es-t">tomar una decisión / medidas · poner en marcha / fin a · dar un paso / por hecho · llevar a cabo · hacer hincapié en / frente a</p>
+<h3>Anspielungen</h3><p class="es-t">luchar contra molinos de viento · ir a por uvas · hacer el agosto</p>`});
+
+COURSE.units.push({id:'u40',n:'42',level:'C2',title:'Sea como fuere',sub:'Gehobene & literarische Sprache · Futuro de subjuntivo (quien fuere, sea como fuere) · dondequiera / comoquiera que · Juristen- und Verwaltungssprache · Literatur lesen',
+goals:['Futuro de subjuntivo erkennen: hubiere, fuere, a donde fueres…','feste Formeln: sea como fuere, pase lo que pase, digan lo que digan','dondequiera / comoquiera / cuandoquiera que + Subj.','Verwaltungssprache verstehen (el abajo firmante, en virtud de, a efectos de)','Konditional der Berichterstattung & Imperfecto narrativo','einen literarischen Text verstehen'],
+situacion:{title:'Ein Brief vom Amt',npc:'Sr. Martí',scene:'Du hast einen Brief vom Ayuntamiento bekommen, voller Behördensprache, wegen deiner Anmeldung (empadronamiento). Herr Martí am Schalter soll dir helfen, ihn zu verstehen.',role:'Du bist Sr. Martí, Verwaltungsbeamter, korrekt, etwas trocken, aber hilfsbereit. Ihr siezt euch. Sprich zuerst in Behördensprache (En virtud de lo dispuesto…, a efectos de…, el interesado deberá…). Wenn Jonas höflich nachfragt, erkläre es in normaler Sprache. Benutze feste Formeln (sea como fuere, en su caso).',goal:'Frag höflich nach, was die Formulierungen bedeuten, gib sie in eigenen Worten wieder und kläre, was du tun musst.'},
+lessons:[
+{id:'l1',title:'Wie dem auch sei',desc:'sea como fuere · pase lo que pase',steps:[
+ {t:'info',title:'Feste Formeln mit Subjuntivo-Verdopplung',html:`<table><tr><th>Formel</th><th>Bedeutung</th></tr>
+ <tr><td class="es-t">pase lo que pase</td><td>was auch immer passiert</td></tr>
+ <tr><td class="es-t">digan lo que digan</td><td>egal, was sie sagen</td></tr>
+ <tr><td class="es-t">cueste lo que cueste</td><td>koste es, was es wolle</td></tr>
+ <tr><td class="es-t">vayas donde vayas</td><td>wohin du auch gehst</td></tr>
+ <tr><td class="es-t">sea como sea / sea como fuere</td><td>wie dem auch sei</td></tr>
+ <tr><td class="es-t">quieras o no</td><td>ob du willst oder nicht</td></tr></table>
+ <div class="ex">Gebaut nach dem Muster <b>Verb (Subj.) + lo que / donde / como + gleiches Verb (Subj.)</b>.</div>`},
+ {t:'mc',q:'„Was auch immer passiert, ich bin bei dir.“',opts:['Pase lo que pase, estoy contigo.','Pasa lo que pasa, estoy contigo.','Pase lo que pasa, estoy contigo.'],a:0},
+ {t:'gap',q:'___ lo que digan, voy a hacerlo. (sagen)',a:['Digan']},
+ {t:'gap',q:'Lo conseguiremos, cueste lo que ___.',a:['cueste']},
+ {t:'gap',q:'Vayas donde ___, llévate un paraguas.',a:['vayas']},
+ {t:'tr',de:'Ob du willst oder nicht, du musst kommen.',a:['Quieras o no, tienes que venir.','Quieras o no, tienes que venir tú.']}]},
+{id:'l2',title:'Der Futuro de subjuntivo',desc:'quien fuere · a donde fueres',steps:[
+ {t:'info',title:'Eine fast verschwundene Form',html:`<p>Der <b>Futuro de subjuntivo</b> wird heute fast nur noch in Gesetzestexten und Redewendungen benutzt. Bildung wie Imperf. Subj., aber mit <b>-re</b>: <span class="es-t">hablare, tuviere, fuere, hubiere</span>.</p>
+ <table><tr><th>Wo?</th><th>Beispiel</th><th>heute normal</th></tr>
+ <tr><td>Sprichwort</td><td class="es-t">Adonde fueres, haz lo que vieres.</td><td class="es-t">Adonde vayas, haz lo que veas.</td></tr>
+ <tr><td>Formel</td><td class="es-t">Sea como fuere …</td><td class="es-t">Sea como sea …</td></tr>
+ <tr><td>Gesetz</td><td class="es-t">El que hubiere cometido el delito …</td><td class="es-t">El que haya cometido …</td></tr></table>
+ <div class="ex">Du musst ihn nur <b>erkennen</b>, nicht aktiv benutzen.</div>`},
+ {t:'mc',q:'„Adonde fueres, haz lo que vieres“ entspricht …',opts:['Andere Länder, andere Sitten.','Wer zuerst kommt, mahlt zuerst.','Ende gut, alles gut.'],a:0},
+ {t:'mc',q:'„tuviere“ ist …',opts:['Futuro de subjuntivo von tener','ein Tippfehler','Konditional von tener'],a:0},
+ {t:'match',q:'Futuro de subj. → heute',pairs:[['fuere','sea / fuera'],['hubiere','haya'],['vieres','veas'],['tuviere','tenga']]},
+ {t:'info',title:'dondequiera, comoquiera, cuandoquiera',html:`<p class="es-t">Dondequiera que <b>vayas</b>, encontrarás amigos. · Comoquiera que <b>sea</b>, hay que decidir. · Cuandoquiera que <b>llegues</b>, avísame.</p>
+ <div class="ex">= wo/wie/wann auch immer – immer mit Subjuntivo, gehobenes Register. Umgangssprachlich: <i>vayas donde vayas</i>.</div>`},
+ {t:'gap',q:'Dondequiera que ___ (tú, estar), te encontraré.',a:['estés']}]},
+{id:'l3',title:'Behördensprache',desc:'en virtud de · a efectos de',steps:[
+ {t:'vocab',title:'Verwaltung & Recht',items:[['el empadronamiento','die Meldebescheinigung / Anmeldung','🏛️'],['el/la interesado/a','der/die Antragsteller/in','🙋'],['el abajo firmante','der Unterzeichnende','✍️'],['en virtud de','aufgrund (Gesetz)','📜'],['a efectos de','zum Zwecke von','🎯'],['en su caso','gegebenenfalls','❓'],['el plazo de diez días hábiles','die Frist von zehn Werktagen','📅'],['subsanar','beheben, nachbessern','🔧'],['la notificación','der Bescheid','📨'],['el recurso','der Einspruch','⚖️'],['la sede electrónica','das Online-Portal (Behörde)','💻'],['dar de alta / de baja','an- / abmelden','📝']]},
+ {t:'mc',q:'„en su caso“ bedeutet …',opts:['gegebenenfalls','in Ihrem Koffer','in Ihrem Fall immer'],a:0},
+ {t:'mc',q:'„Deberá subsanar la solicitud“ heißt …',opts:['Sie müssen den Antrag nachbessern.','Sie müssen den Antrag zurückziehen.','Sie müssen den Antrag bezahlen.'],a:0},
+ {t:'dialog',place:'Oficina de atención ciudadana',title:'Der Brief vom Amt',scene:'Du legst Herrn Martí den Brief auf den Schalter.',lines:[
+  {n:'Sr. Martí',es:'A ver… «En virtud de lo dispuesto, el interesado deberá subsanar la solicitud en un plazo de diez días hábiles, aportando, en su caso, la documentación requerida».',de:'Mal sehen … „Gemäß den Bestimmungen hat der Antragsteller den Antrag innerhalb von zehn Werktagen nachzubessern und gegebenenfalls die geforderten Unterlagen beizubringen.“'},
+  {you:true,opts:[{es:'Disculpe, ¿podría explicármelo con otras palabras? Si no lo he entendido mal, me falta algún documento.',ok:true},{es:'¿Qué? No entiendo nada de nada. Dígalo normal.',ok:false,why:'Zu unhöflich gegenüber einem Beamten. Besser mit <i>Disculpe, ¿podría …?</i>'}]},
+  {n:'Sr. Martí',es:'Exacto. Le falta el contrato de alquiler. Tiene diez días laborables para traerlo.',de:'Genau. Ihnen fehlt der Mietvertrag. Sie haben zehn Werktage, um ihn zu bringen.'},
+  {you:true,opts:[{es:'Entendido. Y en caso de que no lo tuviera a tiempo, ¿qué pasaría?',ok:true},{es:'Entendido. Y en caso de que no lo tendría a tiempo, ¿qué pasaría?',ok:false,why:'<i>en caso de que</i> + Subjuntivo: <i>tuviera</i>.'}]},
+  {n:'Sr. Martí',es:'Se archivaría la solicitud. Pero, sea como fuere, puede subirlo también a la sede electrónica.',de:'Der Antrag würde abgelegt. Aber wie dem auch sei, Sie können ihn auch im Online-Portal hochladen.'}]}]},
+{id:'l4',title:'Lesen: Literatur',desc:'eine literarische Erzählung',steps:[
+ {t:'read',title:'La última tienda de la calle',text:`La librería de don Esteve cerraba a las ocho, pero aquella noche, como tantas otras, las luces seguían encendidas pasadas las diez. Desde la acera de enfrente se le veía, encorvado sobre el mostrador, anotando en un cuaderno de tapas negras lo que nadie le había pedido que anotara: los títulos que no había vendido.
+
+Decían en el barrio que la tienda no sobreviviría al invierno. Lo decían con esa mezcla de pena y alivio con que se habla de lo inevitable. Él, en cambio, abría cada mañana a las nueve en punto, pasara lo que pasara, como si la puntualidad pudiera {conjurar|bannen} el final. Comoquiera que fuese, nadie se atrevía a preguntarle.
+
+Una tarde de enero entró una niña con un billete arrugado en la mano. Quería un libro de piratas, dijo, uno que tuviera mapa. Don Esteve tardó en contestar. Luego subió la escalera de madera, rebuscó en la última estantería y bajó con un volumen descolorido. —Este era mío —dijo—. Tiene mapa y, si lo lees bien, también tesoro. La niña no entendió, pero sonrió. Él no le cobró. Aquella noche, por primera vez en meses, apagó las luces a las ocho.`,de:`Don Esteves Buchhandlung schloss um acht, aber an jenem Abend brannten, wie an so vielen anderen, die Lichter nach zehn noch. Vom gegenüberliegenden Gehweg aus sah man ihn, über den Ladentisch gebeugt, in ein Heft mit schwarzem Einband notieren, was niemand von ihm verlangt hatte: die Titel, die er nicht verkauft hatte.\n\nIm Viertel hieß es, der Laden werde den Winter nicht überstehen. Man sagte es mit jener Mischung aus Bedauern und Erleichterung, mit der man über das Unvermeidliche spricht. Er dagegen öffnete jeden Morgen pünktlich um neun, was auch geschah, als könnte die Pünktlichkeit das Ende bannen. Wie dem auch sei, niemand wagte es, ihn zu fragen.\n\nAn einem Januarnachmittag kam ein Mädchen herein, einen zerknitterten Geldschein in der Hand. Sie wollte ein Piratenbuch, sagte sie, eins mit einer Karte. Don Esteve antwortete nicht gleich. Dann stieg er die Holzleiter hinauf, suchte im obersten Regal und kam mit einem verblichenen Band herunter. „Das war meins“, sagte er. „Es hat eine Karte und, wenn du es gut liest, auch einen Schatz.“ Das Mädchen verstand nicht, lächelte aber. Er nahm kein Geld. An jenem Abend schaltete er zum ersten Mal seit Monaten die Lichter um acht aus.`},
+ {t:'mc',q:'¿Qué anotaba don Esteve en su cuaderno?',opts:['los libros que no había vendido','sus ventas del día','los nombres de sus clientes'],a:0},
+ {t:'mc',q:'„pasara lo que pasara“ bedeutet hier …',opts:['was auch immer geschah','was gestern passiert war','was passieren sollte'],a:0},
+ {t:'mc',q:'¿Por qué apaga las luces a las ocho al final?',opts:['Parece haber encontrado sentido o paz al regalar su libro.','Porque la tienda ha cerrado definitivamente.','Porque la niña se lo pidió.'],a:0},
+ {t:'free',task:'Schreib (8–10 Sätze), wie die Geschichte weitergehen könnte – im gleichen literarischen Stil (Vergangenheit, Beschreibungen, ein Dialog).',hint:'Imperfekt für Hintergrund, Indefinido für Ereignisse · pasara lo que pasara · como si + Imperf. Subj. · Comoquiera que fuese …',focus:'literarischer Stil, Vergangenheitstempora, gehobene Formeln',model:'Al día siguiente, la niña volvió con su abuela. Traía el libro bajo el brazo, como si temiera que alguien se lo quitara. —Ha encontrado el tesoro —anunció la abuela—, y ahora quiere otro mapa. Don Esteve las miró largo rato sin decir nada. Después, con una sonrisa que nadie le conocía, sacó del mostrador el cuaderno negro. —Aquí hay muchos —dijo—. Elige el que quieras. Aquella semana vendió más libros que en todo el otoño. Comoquiera que fuese, la noticia corrió por el barrio. Y cuando llegó la primavera, la librería seguía abierta.'}]}
+],
+placement:[
+ {t:'mc',q:'„Was auch immer passiert …“',opts:['Pase lo que pase …','Pasa lo que pasa …','Pasara lo que pase …'],a:0},
+ {t:'mc',q:'„fuere“ ist …',opts:['Futuro de subjuntivo','Imperfekt','Konditional'],a:0},
+ {t:'gap',q:'Dondequiera que ___ (tú, ir), escríbeme.',a:['vayas']},
+ {t:'mc',q:'„en su caso“',opts:['gegebenenfalls','in seinem Haus','auf jeden Fall'],a:0},
+ {t:'gap',q:'Lo haré, cueste lo que ___.',a:['cueste']},
+ {t:'mc',q:'„Adonde fueres, haz lo que vieres.“',opts:['Andere Länder, andere Sitten.','Wo ein Wille ist, ist ein Weg.','Übung macht den Meister.'],a:0}],
+resumen:`<h3>Formeln</h3><p class="es-t">pase lo que pase · digan lo que digan · cueste lo que cueste · vayas donde vayas · sea como sea / fuere · quieras o no</p>
+<h3>Futuro de subjuntivo (erkennen)</h3><p class="es-t">fuere · hubiere · tuviere · Adonde fueres, haz lo que vieres.</p><p class="es-t">dondequiera / comoquiera / cuandoquiera que + Subj.</p>
+<h3>Verwaltung</h3><p class="es-t">en virtud de · a efectos de · en su caso · el interesado · subsanar · plazo de diez días hábiles</p>`});
+
+COURSE.units.push({id:'u41',n:'43',level:'C2',title:'Con mis propias palabras',sub:'Zusammenfassen & umformulieren (dicho de otro modo, o lo que es lo mismo, mejor dicho) · Sprachmittlung Deutsch ↔ Spanisch · Register souverän wechseln · großer Abschluss-Check A1–C2',
+goals:['Reformulierer: es decir, dicho de otro modo, o lo que es lo mismo, mejor dicho, a saber','Zusammenfassen: en pocas palabras, en síntesis, grosso modo','Sprachmittlung: Inhalte sinngemäß übertragen, nicht Wort für Wort','typische Übersetzungsfallen Deutsch–Spanisch','Register und Stil souverän wählen','Abschluss: Rückblick auf den ganzen Kurs'],
+situacion:{title:'Dolmetschen beim Elternbesuch',npc:'Nuria',scene:'Deine Eltern besuchen dich in Barcelona und lernen Nuria kennen. Deine Eltern sprechen kein Spanisch, Nuria kein Deutsch – du vermittelst beim Abendessen.',role:'Du bist Nuria, Mitbewohnerin von Jonas, herzlich und neugierig. Ihr duzt euch. Stell Jonas Fragen, die er seinen Eltern übersetzen soll (¿Pregúntales qué les parece Barcelona?), und reagiere auf ihre (von Jonas wiedergegebenen) Antworten. Erzähl auch etwas Lustiges über Jonas, das er sinngemäß und diplomatisch wiedergeben soll.',goal:'Gib Aussagen deiner Eltern sinngemäß auf Spanisch wieder (Dicen que…, Lo que quieren decir es que…), fasse zusammen und formuliere diplomatisch um.'},
+lessons:[
+{id:'l1',title:'Anders gesagt',desc:'dicho de otro modo · mejor dicho',steps:[
+ {t:'info',title:'Umformulieren und präzisieren',html:`<table><tr><th>Funktion</th><th>Reformulierer</th><th>Beispiel</th></tr>
+ <tr><td>erklären</td><td class="es-t">es decir · o sea · esto es</td><td class="es-t">Es bilingüe, es decir, habla dos lenguas nativas.</td></tr>
+ <tr><td>anders sagen</td><td class="es-t">dicho de otro modo · en otras palabras · o lo que es lo mismo</td><td class="es-t">Subió un 100 %, o lo que es lo mismo, se duplicó.</td></tr>
+ <tr><td>korrigieren</td><td class="es-t">mejor dicho · más bien · digo</td><td class="es-t">Vendré el lunes, mejor dicho, el martes.</td></tr>
+ <tr><td>aufzählen/präzisieren</td><td class="es-t">a saber</td><td class="es-t">Hay tres requisitos, a saber: …</td></tr>
+ <tr><td>zusammenfassen</td><td class="es-t">en pocas palabras · en síntesis · grosso modo</td><td class="es-t">En pocas palabras, fue un éxito.</td></tr></table>`},
+ {t:'mc',q:'Los precios han bajado un 50 %, ___, cuestan la mitad.',opts:['o lo que es lo mismo','mejor dicho','a saber'],a:0},
+ {t:'mc',q:'Nos vemos a las ocho, ___, a las ocho y media.',opts:['mejor dicho','a saber','en síntesis'],a:0},
+ {t:'gap',q:'El curso tiene tres niveles, a ___: básico, intermedio y avanzado.',a:['saber']},
+ {t:'gap',q:'___ otro modo: no hay presupuesto. (anders gesagt)',a:['Dicho de']},
+ {t:'tr',de:'Kurz gesagt: Es hat sich gelohnt.',a:['En pocas palabras, ha valido la pena.','En pocas palabras: ha merecido la pena.','En resumen, ha valido la pena.']}]},
+{id:'l2',title:'Übersetzungsfallen',desc:'Deutsch ↔ Spanisch',steps:[
+ {t:'info',title:'Sinngemäß statt wörtlich',html:`<table><tr><th>Deutsch</th><th>wörtlich (falsch/seltsam)</th><th>idiomatisch</th></tr>
+ <tr><td>Ich bin fertig. (erschöpft)</td><td><s>Estoy listo.</s></td><td class="es-t">Estoy agotado / hecho polvo.</td></tr>
+ <tr><td>Das macht Sinn.</td><td><s>Eso hace sentido.</s></td><td class="es-t">Eso tiene sentido.</td></tr>
+ <tr><td>Ich bekomme ein Kind.</td><td><s>Recibo un niño.</s></td><td class="es-t">Voy a tener un hijo / Estoy embarazada.</td></tr>
+ <tr><td>eventuell</td><td><s>eventualmente</s> (= gelegentlich)</td><td class="es-t">quizás, posiblemente</td></tr>
+ <tr><td>sensibel</td><td><s>sensible</s> (passt) / aktuell</td><td class="es-t">sensible ✓ · <b>actual</b> = aktuell ✓ · <b>sensato</b> = vernünftig</td></tr>
+ <tr><td>Kompetenz/kompetent</td><td>competente ✓, aber <s>la competencia</s> = auch „Konkurrenz“</td><td class="es-t">Kontext prüfen</td></tr>
+ <tr><td>Ich freue mich auf …</td><td><s>Me alegro a …</s></td><td class="es-t">Tengo muchas ganas de …</td></tr></table>`},
+ {t:'mc',q:'„Das macht keinen Sinn.“',opts:['No tiene sentido.','No hace sentido.','No da sentido.'],a:0},
+ {t:'mc',q:'„Ich freue mich auf den Urlaub.“',opts:['Tengo muchas ganas de que lleguen las vacaciones.','Me alegro a las vacaciones.','Estoy feliz sobre las vacaciones.'],a:0},
+ {t:'mc',q:'„Ich komme eventuell später.“',opts:['Quizás llegue más tarde.','Eventualmente llego más tarde.','Llego eventual más tarde.'],a:0},
+ {t:'gap',q:'Después de la mudanza estoy hecho ___. (fix und fertig)',a:['polvo']},
+ {t:'tr',de:'Ich bin total erschöpft.',a:['Estoy agotado.','Estoy hecho polvo.','Estoy reventado.','Estoy agotada.']},
+ {t:'listen',es:'Dicho de otro modo, traducir no es cambiar palabras, sino trasladar ideas.',de:'Anders gesagt: Übersetzen heißt nicht, Wörter auszutauschen, sondern Ideen zu übertragen.'}]},
+{id:'l3',title:'Vermitteln',desc:'Dialog beim Abendessen',steps:[
+ {t:'vocab',title:'Sprachmittlung',items:[['hacer de intérprete','dolmetschen','🗣️'],['traducir al pie de la letra','wörtlich übersetzen','📏'],['captar el sentido','den Sinn erfassen','🎯'],['suavizar','abmildern','🪶'],['matizar','nuancieren, präzisieren','🎨'],['lo que viene a decir es que …','was er/sie damit sagen will, ist …','💡'],['transmitir','übermitteln','📡'],['perderse en la traducción','in der Übersetzung verloren gehen','🌫️'],['un falso amigo','ein falscher Freund','🎭'],['el matiz','die Nuance','🔍']]},
+ {t:'dialog',place:'Cena en el piso',title:'Eltern zu Besuch',scene:'Deine Eltern, Nuria und du am Tisch. Es gibt Paella.',lines:[
+  {n:'Nuria',es:'Jonas, pregúntales a tus padres qué les parece Barcelona.',de:'Jonas, frag deine Eltern, wie sie Barcelona finden.'},
+  {you:true,opts:[{es:'Dicen que les encanta, aunque mi padre añade que hay demasiada gente en las Ramblas. O sea, que es un poco agobiante.',ok:true},{es:'Ellos dicen: «Nos gusta mucho, pero hay demasiadas personas en las Ramblas, es un poco agobiante para nosotros, dice mi padre».',ok:false,why:'Beim Vermitteln: indirekte Rede und sinngemäß zusammenfassen, nicht wörtlich mit Anführungszeichen.'}]},
+  {n:'Nuria',es:'¡Normal! Oye, diles que su hijo es el peor fregando platos de todo Gràcia.',de:'Normal! Hey, sag ihnen, dass ihr Sohn der schlechteste Abspüler in ganz Gràcia ist.'},
+  {you:true,opts:[{es:'Mi madre dice que en casa era igual, o lo que es lo mismo, que no es culpa de Barcelona.',ok:true},{es:'Mi madre dice que en casa era igual, mejor dicho, que no es culpa de Barcelona.',ok:false,why:'Hier ist es keine Korrektur, sondern eine Umschreibung → <i>o lo que es lo mismo</i>.'}]},
+  {n:'Nuria',es:'¡Ja, ja! Bueno, en pocas palabras: ¡bienvenidos y que aprovechen!',de:'Haha! Na gut, kurz gesagt: Willkommen und guten Appetit!'}]},
+ {t:'speak',es:'Lo que mis padres vienen a decir es que están muy orgullosos de que me haya atrevido a venir.',de:'Was meine Eltern damit sagen wollen, ist, dass sie sehr stolz sind, dass ich mich getraut habe herzukommen.'}]},
+{id:'l4',title:'Abschluss: De A1 a C2',desc:'großer Check · Rückblick',steps:[
+ {t:'read',title:'Carta a mí mismo',text:`Querido Jonas del primer día:
+
+Ahora mismo estás en el aeropuerto del Prat, repitiendo en voz baja «Me llamo Jonas, soy alemán». Dentro de un rato te perderás en el metro y pensarás que nunca entenderás a nadie. Déjame decirte algo: lo entenderás. No de golpe, sino poco a poco, como quien sube una montaña sin mirar demasiado hacia arriba.
+
+Vas a meter la pata muchas veces. Dirás «estoy embarazado» cuando quieras decir que te da vergüenza, y la cajera del súper se reirá contigo, no de ti. Aprenderás que «ahora» no significa ahora, que se cena a las diez y que una caña nunca es solo una caña. Te costará distinguir el indefinido del imperfecto, y años después te sorprenderás usando un subjuntivo sin pensarlo.
+
+Si pudiera darte un solo consejo, sería este: no esperes a hablar perfecto para hablar. Pase lo que pase, sigue preguntando, sigue equivocándote, sigue escuchando. Dicho de otro modo: el idioma no se aprende; se vive.
+
+Un abrazo del Jonas que, por fin, sueña en español.`,de:`Lieber Jonas vom ersten Tag,\n\ngerade stehst du am Flughafen El Prat und wiederholst leise „Me llamo Jonas, soy alemán“. Gleich wirst du dich in der Metro verlaufen und denken, dass du nie jemanden verstehen wirst. Lass mich dir etwas sagen: Du wirst verstehen. Nicht auf einen Schlag, sondern nach und nach, wie jemand, der einen Berg hinaufsteigt, ohne zu oft nach oben zu schauen.\n\nDu wirst oft ins Fettnäpfchen treten. Du wirst „estoy embarazado“ sagen, wenn du sagen willst, dass dir etwas peinlich ist, und die Kassiererin im Supermarkt wird mit dir lachen, nicht über dich. Du wirst lernen, dass „ahora“ nicht jetzt heißt, dass man um zehn zu Abend isst und dass eine Caña nie nur eine Caña ist. Es wird dir schwerfallen, das Indefinido vom Imperfekt zu unterscheiden, und Jahre später wirst du dich dabei ertappen, wie du einen Subjuntivo benutzt, ohne nachzudenken.\n\nWenn ich dir nur einen Rat geben könnte, wäre es dieser: Warte nicht darauf, perfekt zu sprechen, um zu sprechen. Was auch passiert – frag weiter, irr dich weiter, hör weiter zu. Anders gesagt: Eine Sprache lernt man nicht; man lebt sie.\n\nHerzliche Grüße vom Jonas, der endlich auf Spanisch träumt.`},
+ {t:'mc',q:'¿Qué consejo principal da el autor?',opts:['No esperar a hablar perfecto para hablar.','Estudiar más gramática.','No salir de noche.'],a:0},
+ {t:'mc',q:'A1: Hola, me ___ Jonas.',opts:['llamo','llama','llamas'],a:0},
+ {t:'mc',q:'A2: Ayer ___ al cine con Laia.',opts:['fui','iba','he ido a'],a:0},
+ {t:'mc',q:'B1: No creo que ___ razón.',opts:['tengas','tienes','tendrás'],a:0},
+ {t:'mc',q:'B2: Si lo ___ sabido, te lo habría dicho.',opts:['hubiera','habría','había'],a:0},
+ {t:'mc',q:'C1: Por muy difícil que ___, lo intentaré.',opts:['sea','es','fuera a'],a:0},
+ {t:'mc',q:'C2: Adonde ___, haz lo que vieres.',opts:['fueres','fueras','vayas a'],a:0},
+ {t:'free',task:'Schreib dir selbst einen Brief (10–12 Sätze): an dein „Ich vom ersten Spanisch-Tag“. Was würdest du dir raten? Was hast du gelernt? Benutze Strukturen aus allen Stufen.',hint:'Si pudiera … · Vas a … · Aprenderás que … · Pase lo que pase … · Dicho de otro modo … · No es por nada, pero … · Más vale tarde que nunca …',focus:'freie Produktion auf C2-Niveau, Register, Stil',model:'Querido Jonas de hace tres años: ahora mismo piensas que el español es imposible y que nunca podrás hablar con fluidez. Déjame quitarte esa idea. Aprenderás que equivocarse no es un fracaso, sino parte del camino. Habrá días en que no entiendas nada y otros en que te sorprendas contando un chiste. Si pudiera darte un consejo, sería que hablaras más y te preocuparas menos. No es por nada, pero esas tardes en la biblioteca repitiendo listas de verbos no te sirvieron tanto como una sola noche charlando en una terraza. Pase lo que pase, no dejes de leer: las historias te enseñarán más que cualquier manual. Y cuando por fin entiendas una indirecta de la señora Rovira, sabrás que lo has conseguido. Dicho de otro modo: disfruta del viaje. Un abrazo de tu yo del futuro.'}]}
+],
+placement:[
+ {t:'mc',q:'Subió un 100 %, ___, se duplicó.',opts:['o lo que es lo mismo','mejor dicho','a saber'],a:0},
+ {t:'mc',q:'„Das macht Sinn.“',opts:['Tiene sentido.','Hace sentido.','Da sentido.'],a:0},
+ {t:'gap',q:'Hay dos opciones, a ___: quedarse o irse.',a:['saber']},
+ {t:'mc',q:'„Ich bin fix und fertig.“',opts:['Estoy hecho polvo.','Estoy listo.','Estoy terminado.'],a:0},
+ {t:'gap',q:'Vendré el lunes, mejor ___, el martes.',a:['dicho']},
+ {t:'mc',q:'„eventuell“ = …',opts:['quizás','eventualmente','eventual'],a:0}],
+resumen:`<h3>Reformulieren</h3><p class="es-t">es decir · o sea · dicho de otro modo · en otras palabras · o lo que es lo mismo · mejor dicho · a saber · en pocas palabras · en síntesis</p>
+<h3>Übersetzungsfallen</h3><p class="es-t">tener sentido (nicht hacer) · estar hecho polvo (erschöpft) · tener ganas de (sich freuen auf) · quizás (eventuell) · embarazada ≠ verlegen</p>
+<h3>Vermitteln</h3><p class="es-t">Dicen que … · Lo que vienen a decir es que … · suavizar · matizar · captar el sentido</p>`});
+;
+/* ===== Wortschatz-Plus: pro Unidad ab B1 eine Extra-Lektion mit thematischem Wortschatz (Ziel: Wortschatz passend zur Stufe) =====
+   Format: W('unit-id','Thema','Kurzbeschreibung',[ [es,de], … ]) → Lektion 'lw' mit Vokabel-Schritten à 10 Wörtern + Zuordnung. */
+{
+const W=(id,topic,desc,items)=>{const u=COURSE.units.find(x=>x.id===id);if(!u)return;const steps=[];
+  for(let i=0;i<items.length;i+=10)steps.push({t:'vocab',title:topic+(items.length>10?' ('+(i/10+1)+')':''),items:items.slice(i,i+10)});
+  const pick=items.filter((_,i)=>i%6===2).slice(0,5);if(pick.length>=4)steps.push({t:'match',q:'Was bedeutet …?',pairs:pick.map(([es,de])=>[es,de])});
+  u.lessons.push({id:'lw',title:'Wortschatz: '+topic,desc:desc,steps});};
+
+/* ---------- B1 ---------- */
+W('u16','Stadt & Reisen','Sehenswürdigkeiten, Unterkunft, unterwegs',[
+['el alojamiento','die Unterkunft'],['la visita guiada','die Führung'],['el casco histórico','die Altstadt'],['el mirador','der Aussichtspunkt'],['la entrada','die Eintrittskarte'],['hacer cola','Schlange stehen'],['el carterista','der Taschendieb'],['la consigna','die Gepäckaufbewahrung'],['el horario de apertura','die Öffnungszeiten'],['reservar con antelación','im Voraus buchen'],
+['el barrio de moda','das Szeneviertel'],['la tasa turística','die Touristensteuer'],['el recorrido','die Route, der Rundgang'],['merecer la pena','sich lohnen'],['estar abarrotado','überfüllt sein'],['el paseo marítimo','die Strandpromenade'],['alquilar una bici','ein Fahrrad mieten'],['perderse','sich verlaufen'],['el plano','der Stadtplan'],['la temporada alta','die Hochsaison'],
+['el folleto','der Prospekt'],['la oficina de turismo','das Touristenbüro'],['la postal','die Postkarte'],['probar la comida local','die lokale Küche probieren'],['madrugar','früh aufstehen'],['el atardecer','der Sonnenuntergang'],['de camino','auf dem Weg'],['imprescindible','unverzichtbar'],['el bullicio','das Getümmel'],['callejear','durch die Straßen bummeln']]);
+
+W('u17','Ereignisse & Erzählen','Zeitangaben, Missgeschicke, Reaktionen',[
+['de repente','plötzlich'],['al principio','am Anfang'],['al final','am Ende'],['mientras tanto','währenddessen'],['de pronto','auf einmal'],['por casualidad','zufällig'],['menos mal','zum Glück'],['el susto','der Schreck'],['darse cuenta de','merken'],['ocurrir','passieren, geschehen'],
+['el malentendido','das Missverständnis'],['quedarse en blanco','ein Blackout haben'],['equivocarse de','sich vertun (bei)'],['olvidarse de','vergessen'],['tener mala suerte','Pech haben'],['por suerte','glücklicherweise'],['la anécdota','die Anekdote'],['el recuerdo','die Erinnerung'],['acordarse de','sich erinnern an'],['contar','erzählen'],
+['¡Qué fuerte!','Krass!'],['¡No me digas!','Was du nicht sagst!'],['¡Qué vergüenza!','Wie peinlich!'],['¡Qué mala pata!','So ein Pech!'],['pasarlo fatal','eine schlimme Zeit haben'],['pasarlo genial','viel Spaß haben'],['de golpe','auf einen Schlag'],['a la mañana siguiente','am nächsten Morgen'],['aquella noche','in jener Nacht'],['hace años','vor Jahren']]);
+
+W('u18','Wohnen & Haushalt','Wohnung, Reparaturen, Nachbarn',[
+['el casero / la casera','der Vermieter / die Vermieterin'],['el contrato de alquiler','der Mietvertrag'],['la comunidad de vecinos','die Hausgemeinschaft'],['el portero automático','die Gegensprechanlage'],['la gotera','das undichte Dach (Tropfen)'],['estar estropeado','kaputt sein'],['el fontanero','der Klempner'],['el electricista','der Elektriker'],['la avería','die Panne, der Defekt'],['arreglar','reparieren'],
+['la lavadora','die Waschmaschine'],['el lavavajillas','die Spülmaschine'],['tender la ropa','Wäsche aufhängen'],['planchar','bügeln'],['barrer','fegen'],['fregar el suelo','den Boden wischen'],['pasar la aspiradora','staubsaugen'],['hacer la compra','einkaufen'],['el trastero','der Abstellraum'],['la azotea','die Dachterrasse'],
+['el recibo de la luz','die Stromrechnung'],['los gastos','die Nebenkosten'],['compartir gastos','Kosten teilen'],['el ruido','der Lärm'],['la humedad','die Feuchtigkeit'],['la calefacción central','die Zentralheizung'],['mudarse','umziehen'],['la mudanza','der Umzug'],['amueblar','möblieren'],['el inquilino','der Mieter']]);
+
+W('u19','Medien & Gesellschaft','Nachrichten, Debatten, Probleme der Stadt',[
+['la prensa','die Presse'],['el diario','die Tageszeitung'],['la portada','die Titelseite'],['el artículo de opinión','der Meinungsartikel'],['la encuesta','die Umfrage'],['la mayoría','die Mehrheit'],['la minoría','die Minderheit'],['el debate','die Debatte'],['el tema','das Thema'],['polémico','umstritten'],
+['la vivienda','der Wohnraum'],['el desempleo','die Arbeitslosigkeit'],['la desigualdad','die Ungleichheit'],['la gentrificación','die Gentrifizierung'],['el ayuntamiento','das Rathaus, die Stadtverwaltung'],['el alcalde / la alcaldesa','der/die Bürgermeister/in'],['los ciudadanos','die Bürger'],['protestar','protestieren'],['la manifestación','die Demonstration'],['la medida','die Maßnahme'],
+['a favor de','dafür'],['en contra de','dagegen'],['defender','verteidigen'],['criticar','kritisieren'],['proponer','vorschlagen'],['la propuesta','der Vorschlag'],['el inconveniente','der Nachteil'],['la ventaja','der Vorteil'],['estar harto de','die Nase voll haben von'],['convencer','überzeugen']]);
+
+W('u20','Reisen & Behörden','Flughafen, Umzug ins Ausland, Papiere',[
+['la tarjeta de embarque','die Bordkarte'],['facturar la maleta','den Koffer aufgeben'],['el equipaje de mano','das Handgepäck'],['la puerta de embarque','das Gate'],['el control de seguridad','die Sicherheitskontrolle'],['el retraso','die Verspätung'],['cancelar','stornieren, absagen'],['hacer escala','zwischenlanden'],['el vuelo directo','der Direktflug'],['aterrizar','landen'],
+['despegar','abheben'],['el pasaporte','der Reisepass'],['el DNI','der Personalausweis'],['el NIE','die Ausländer-Identifikationsnummer'],['la cita previa','der Termin (beim Amt)'],['el trámite','der Behördengang'],['rellenar un formulario','ein Formular ausfüllen'],['el certificado','die Bescheinigung'],['la firma','die Unterschrift'],['caducar','ablaufen (Dokument)'],
+['renovar','verlängern, erneuern'],['la beca','das Stipendium'],['el intercambio','der Austausch'],['despedirse','sich verabschieden'],['echar de menos','vermissen'],['la nostalgia','das Heimweh, die Nostalgie'],['volver a casa','nach Hause zurückkehren'],['el billete de ida y vuelta','das Hin- und Rückfahrticket'],['el aeropuerto','der Flughafen'],['la llegada','die Ankunft']]);
+
+W('u21','Kommunikation & Handy','Telefonieren, Nachrichten, soziale Netzwerke',[
+['el mensaje','die Nachricht'],['el audio','die Sprachnachricht'],['la llamada perdida','der verpasste Anruf'],['colgar','auflegen'],['no hay cobertura','kein Empfang'],['quedarse sin batería','keinen Akku mehr haben'],['el cargador','das Ladegerät'],['reenviar','weiterleiten'],['bloquear','blockieren'],['silenciar','stummschalten'],
+['la red social','das soziale Netzwerk'],['publicar','posten, veröffentlichen'],['el seguidor','der Follower'],['dar like','liken'],['compartir','teilen'],['la captura de pantalla','der Screenshot'],['el grupo de WhatsApp','die WhatsApp-Gruppe'],['estar en línea','online sein'],['la contraseña','das Passwort'],['descargar','herunterladen'],
+['el chisme / el cotilleo','der Klatsch'],['enterarse de','erfahren'],['avisar','Bescheid sagen'],['comentar','erwähnen, kommentieren'],['explicar','erklären'],['contestar','antworten'],['quejarse','sich beschweren'],['insistir','darauf bestehen'],['prometer','versprechen'],['recordar algo a alguien','jemanden an etwas erinnern']]);
+
+W('u22','Wohnungssuche & Charakter','Anzeigen, Mitbewohner, Eigenschaften',[
+['el anuncio','die Anzeige'],['el piso compartido','die WG'],['la habitación individual','das Einzelzimmer'],['exterior / interior','zur Straße / zum Hof'],['luminoso','hell'],['amplio','geräumig'],['reformado','renoviert'],['bien comunicado','gut angebunden'],['la fianza','die Kaution'],['el mes por adelantado','die Monatsmiete im Voraus'],
+['la visita','die Besichtigung'],['el requisito','die Voraussetzung'],['responsable','verantwortungsbewusst'],['tranquilo','ruhig'],['sociable','gesellig'],['limpio','sauber'],['desordenado','unordentlich'],['puntual','pünktlich'],['respetuoso','respektvoll'],['flexible','flexibel'],
+['tolerante','tolerant'],['convivir','zusammenleben'],['la convivencia','das Zusammenleben'],['repartir las tareas','die Aufgaben verteilen'],['las normas de la casa','die Hausregeln'],['la mascota','das Haustier'],['fumar','rauchen'],['traer visitas','Besuch mitbringen'],['llevarse bien','sich gut verstehen'],['el compañero de piso','der Mitbewohner']]);
+
+W('u23','Natur & Klima','Natur, Wetterextreme, Nachhaltigkeit',[
+['la naturaleza','die Natur'],['el bosque','der Wald'],['el río','der Fluss'],['la costa','die Küste'],['la ola de calor','die Hitzewelle'],['el incendio forestal','der Waldbrand'],['la inundación','die Überschwemmung'],['la tormenta','das Gewitter, der Sturm'],['la temperatura','die Temperatur'],['el calentamiento global','die Erderwärmung'],
+['las emisiones','die Emissionen'],['el combustible','der Treibstoff'],['el coche eléctrico','das Elektroauto'],['la placa solar','die Solaranlage'],['el aerogenerador','das Windrad'],['el consumo','der Verbrauch'],['malgastar','verschwenden'],['reutilizar','wiederverwenden'],['el envase','die Verpackung'],['el contenedor','der Container'],
+['la especie','die Art'],['en peligro de extinción','vom Aussterben bedroht'],['proteger','schützen'],['contaminar','verschmutzen'],['el reciclaje','das Recycling'],['los productos de temporada','saisonale Produkte'],['el comercio local','der lokale Handel'],['la huella de carbono','der CO₂-Fußabdruck'],['concienciar','sensibilisieren'],['el futuro','die Zukunft']]);
+
+/* ---------- B2 ---------- */
+W('u24','Geld & Lebenspläne','Finanzen, Sparen, Träume',[
+['ahorrar','sparen'],['los ahorros','die Ersparnisse'],['la cuenta corriente','das Girokonto'],['la hipoteca','die Hypothek'],['el préstamo','der Kredit'],['pedir un préstamo','einen Kredit aufnehmen'],['la deuda','die Schuld (Geld)'],['invertir','investieren'],['la inversión','die Investition'],['el presupuesto','das Budget'],
+['llegar a fin de mes','über die Runden kommen'],['el sueldo','das Gehalt'],['subir el sueldo','das Gehalt erhöhen'],['la jubilación','die Rente, der Ruhestand'],['jubilarse','in Rente gehen'],['la herencia','das Erbe'],['tocar la lotería','im Lotto gewinnen'],['derrochar','verschwenden (Geld)'],['tacaño','geizig'],['generoso','großzügig'],
+['el capricho','die Laune, der Luxuswunsch'],['darse un capricho','sich etwas gönnen'],['independizarse','selbstständig werden, ausziehen'],['formar una familia','eine Familie gründen'],['emprender','unternehmen, gründen'],['el emprendedor','der Gründer'],['arriesgar','riskieren'],['la estabilidad','die Stabilität'],['la incertidumbre','die Ungewissheit'],['cumplir un sueño','einen Traum erfüllen']]);
+
+W('u25','Arbeitswelt','Büro, Team, Karriere',[
+['la plantilla','die Belegschaft'],['el departamento','die Abteilung'],['el/la responsable','der/die Verantwortliche'],['el/la superior','der/die Vorgesetzte'],['el equipo','das Team'],['la reunión','die Besprechung'],['el plazo de entrega','die Abgabefrist'],['cumplir un plazo','eine Frist einhalten'],['delegar','delegieren'],['coordinar','koordinieren'],
+['el ascenso','die Beförderung'],['ascender','befördert werden'],['despedir','entlassen'],['el despido','die Kündigung, Entlassung'],['dimitir','zurücktreten, kündigen'],['las horas extra','die Überstunden'],['el convenio','der Tarifvertrag'],['la baja por enfermedad','die Krankmeldung'],['estar de baja','krankgeschrieben sein'],['la conciliación','die Vereinbarkeit (Familie/Beruf)'],
+['el rendimiento','die Leistung'],['la productividad','die Produktivität'],['el reto','die Herausforderung'],['la competencia','die Konkurrenz; die Kompetenz'],['el sindicato','die Gewerkschaft'],['la entrevista de trabajo','das Vorstellungsgespräch'],['el perfil','das Profil'],['la experiencia laboral','die Berufserfahrung'],['el puesto','die Stelle'],['estar en paro','arbeitslos sein']]);
+
+W('u26','Gesundheit & Körper','Beschwerden, Arzt, Prävention',[
+['el síntoma','das Symptom'],['el dolor de cabeza','die Kopfschmerzen'],['la fiebre','das Fieber'],['marearse','schwindlig werden'],['el mareo','der Schwindel'],['la tos','der Husten'],['estornudar','niesen'],['la alergia','die Allergie'],['torcerse el tobillo','sich den Knöchel verstauchen'],['la herida','die Wunde'],
+['la consulta','die Sprechstunde, Praxis'],['el centro de salud','das Gesundheitszentrum'],['la receta','das Rezept (ärztlich)'],['recetar','verschreiben'],['el análisis de sangre','die Blutuntersuchung'],['la radiografía','das Röntgenbild'],['la urgencia','die Notaufnahme'],['el seguro médico','die Krankenversicherung'],['vacunarse','sich impfen lassen'],['el tratamiento','die Behandlung'],
+['la prevención','die Vorbeugung'],['la dieta equilibrada','die ausgewogene Ernährung'],['engordar','zunehmen'],['adelgazar','abnehmen'],['el insomnio','die Schlaflosigkeit'],['agotado','erschöpft'],['recuperarse','sich erholen'],['la salud mental','die psychische Gesundheit'],['el estrés crónico','der chronische Stress'],['el músculo','der Muskel']]);
+
+W('u27','Politik & Nachrichten','Staat, Wahlen, Justiz',[
+['el gobierno','die Regierung'],['el parlamento','das Parlament'],['el partido','die Partei'],['las elecciones','die Wahlen'],['votar','wählen, abstimmen'],['el voto','die Stimme'],['el candidato','der Kandidat'],['la campaña electoral','der Wahlkampf'],['la oposición','die Opposition'],['el ministerio','das Ministerium'],
+['la ley','das Gesetz'],['aprobar una ley','ein Gesetz verabschieden'],['el juicio','der Prozess (Gericht)'],['el juez / la jueza','der Richter / die Richterin'],['condenar','verurteilen'],['la corrupción','die Korruption'],['el escándalo','der Skandal'],['el escaño','der Parlamentssitz'],['la reforma','die Reform'],['los impuestos','die Steuern'],
+['la comunidad autónoma','die autonome Gemeinschaft'],['el Estado','der Staat'],['la Unión Europea','die Europäische Union'],['el acuerdo','das Abkommen'],['negociar','verhandeln'],['el portavoz','der Sprecher'],['la rueda de prensa','die Pressekonferenz'],['desmentir','dementieren'],['filtrar','durchsickern lassen'],['la fuente oficial','die offizielle Quelle']]);
+
+W('u28','Lebensereignisse & Beziehungen','Entscheidungen, Liebe, Familie',[
+['la etapa','die Lebensphase'],['el punto de inflexión','der Wendepunkt'],['casarse','heiraten'],['la boda','die Hochzeit'],['divorciarse','sich scheiden lassen'],['separarse','sich trennen'],['romper con alguien','mit jemandem Schluss machen'],['la pareja de hecho','die eingetragene Partnerschaft'],['tener hijos','Kinder bekommen'],['criar','großziehen'],
+['emanciparse','unabhängig werden'],['la crisis','die Krise'],['superar','überwinden'],['el duelo','die Trauer'],['fallecer','versterben'],['el nacimiento','die Geburt'],['el aniversario','der Jahrestag'],['comprometerse','sich verloben; sich verpflichten'],['el compromiso','die Verlobung; die Verpflichtung'],['la confianza','das Vertrauen'],
+['los celos','die Eifersucht'],['celoso','eifersüchtig'],['engañar','betrügen, täuschen'],['perdonar','verzeihen'],['reconciliarse','sich versöhnen'],['la añoranza','die Sehnsucht'],['arrepentirse','bereuen'],['la oportunidad perdida','die verpasste Chance'],['el destino','das Schicksal'],['el reencuentro','das Wiedersehen']]);
+
+W('u29','Konsum & Verbraucherrechte','Einkaufen, Bank, Reklamation',[
+['el consumidor','der Verbraucher'],['los derechos del consumidor','die Verbraucherrechte'],['el ticket de compra','der Kassenbon'],['la factura','die Rechnung'],['el plazo de devolución','die Rückgabefrist'],['la garantía','die Garantie'],['el reembolso','die Rückerstattung'],['las rebajas','der Schlussverkauf'],['el descuento','der Rabatt'],['la oferta','das Angebot'],
+['comprar a plazos','in Raten kaufen'],['la transferencia','die Überweisung'],['la domiciliación','die Lastschrift'],['la comisión','die Gebühr'],['el cajero automático','der Geldautomat'],['sacar dinero','Geld abheben'],['la tarjeta de crédito','die Kreditkarte'],['el cargo','die Belastung (Konto)'],['el fraude','der Betrug'],['la estafa','der Schwindel, Betrug'],
+['la tienda online','der Onlineshop'],['el envío','der Versand'],['el paquete','das Paket'],['el seguimiento del pedido','die Sendungsverfolgung'],['defectuoso','fehlerhaft'],['la reclamación','die Reklamation'],['presentar una queja','eine Beschwerde einreichen'],['la atención al cliente','der Kundenservice'],['la suscripción','das Abonnement'],['darse de baja','kündigen (Abo)']]);
+
+W('u30','Gefühle & Charakter','Nuancierte Eigenschaften und Stimmungen',[
+['ilusionado','voller Vorfreude'],['decepcionado','enttäuscht'],['agobiado','überfordert, gestresst'],['emocionado','gerührt; aufgeregt'],['avergonzado','beschämt'],['orgulloso','stolz'],['envidioso','neidisch'],['resentido','verbittert, nachtragend'],['aliviado','erleichtert'],['indignado','empört'],
+['ingenuo','naiv'],['astuto','schlau, gerissen'],['terco','stur'],['sensato','vernünftig'],['despistado','zerstreut'],['maniático','pingelig'],['quisquilloso','kleinlich'],['entrañable','liebenswert'],['cariñoso','liebevoll'],['borde','unfreundlich (ugs.)'],
+['tener mal genio','jähzornig sein'],['tener paciencia','Geduld haben'],['la autoestima','das Selbstwertgefühl'],['la empatía','die Empathie'],['la inseguridad','die Unsicherheit'],['la madurez','die Reife'],['el carácter','der Charakter'],['el temperamento','das Temperament'],['la personalidad','die Persönlichkeit'],['los defectos','die Schwächen']]);
+
+W('u31','Bildung & Gesellschaft','Schule, Uni, gesellschaftliche Themen',[
+['la enseñanza pública','das staatliche Bildungswesen'],['la escuela concertada','die staatlich geförderte Privatschule'],['la selectividad','die Hochschulzugangsprüfung'],['la carrera','das Studium'],['el grado universitario','der Bachelor'],['el máster','der Master'],['la matrícula','die Einschreibung, Studiengebühr'],['el abandono escolar','der Schulabbruch'],['la formación profesional','die Berufsausbildung'],['el profesorado','die Lehrerschaft'],
+['la igualdad de oportunidades','die Chancengleichheit'],['la brecha digital','die digitale Kluft'],['la inmigración','die Einwanderung'],['la integración','die Integration'],['la diversidad','die Vielfalt'],['el envejecimiento','die Alterung'],['la natalidad','die Geburtenrate'],['la precariedad','die Prekarität'],['el bienestar','das Wohlergehen'],['la sociedad de consumo','die Konsumgesellschaft'],
+['el argumento de peso','das gewichtige Argument'],['la tesis','die These'],['la postura','die Position'],['rebatir','widerlegen'],['matizar','präzisieren, einschränken'],['plantear','aufwerfen'],['el punto de vista','der Standpunkt'],['la conclusión','die Schlussfolgerung'],['a largo plazo','langfristig'],['a corto plazo','kurzfristig']]);
+
+/* ---------- C1 ---------- */
+W('u32','Psychologie & Kommunikation','Wahrnehmung, Konflikte, Gesprächsführung',[
+['la percepción','die Wahrnehmung'],['el prejuicio','das Vorurteil'],['el estereotipo','das Klischee'],['el lenguaje no verbal','die Körpersprache'],['el tono','der Tonfall'],['sobrentender','stillschweigend voraussetzen'],['insinuar','andeuten'],['la insinuación','die Andeutung'],['reprochar','vorwerfen'],['el reproche','der Vorwurf'],
+['la susceptibilidad','die Empfindlichkeit'],['susceptible','empfindlich, leicht gekränkt'],['ofenderse','beleidigt sein'],['disculparse','sich entschuldigen'],['la disculpa','die Entschuldigung'],['el rencor','der Groll'],['ceder','nachgeben'],['mediar','vermitteln'],['el/la mediador/a','der/die Vermittler/in'],['la escucha activa','das aktive Zuhören'],
+['asertivo','selbstsicher (kommunizierend)'],['la asertividad','die Durchsetzungsfähigkeit'],['eludir','umgehen, ausweichen'],['tergiversar','verdrehen (Worte)'],['sacar de contexto','aus dem Zusammenhang reißen'],['la complicidad','das Einvernehmen'],['el desencuentro','die Unstimmigkeit'],['zanjar un tema','ein Thema abschließen'],['ir al grano','zur Sache kommen'],['andarse con rodeos','um den heißen Brei reden']]);
+
+W('u33','Umgangssprache: Alltag','Essen, Ausgehen, Gefühle – wie man wirklich redet',[
+['el finde','das Wochenende (ugs.)'],['quedar','sich verabreden'],['ir de cañas','auf ein Bier gehen'],['ir de tapas','Tapas essen gehen'],['el chiringuito','die Strandbar'],['el botellón','Trinken im Freien'],['estar de resaca','verkatert sein'],['pegarse un atracón','sich vollstopfen'],['estar como una cuba','sternhagelvoll sein'],['estar pelado','pleite sein'],
+['ser un pringado','ein armer Tropf sein'],['currarse algo','sich Mühe geben mit'],['pasarse','übertreiben'],['¡Te has pasado!','Du hast übertrieben!'],['ligar','flirten, anbandeln'],['el ligue','der Flirt'],['ser un plasta','eine Nervensäge sein'],['dar la lata','nerven'],['flipar en colores','total ausflippen'],['estar de bajón','down sein'],
+['estar a tope','voll dabei sein'],['molar mazo','voll cool sein'],['ni de coña','auf keinen Fall'],['¡Qué morro!','So eine Frechheit!'],['tener morro','dreist sein'],['el colega','der Kumpel'],['el pibón','die Granate (attraktiv, ugs.)'],['cutre','schäbig'],['chungo','übel, mies'],['guay del Paraguay','supercool (scherzhaft)']]);
+
+W('u34','Wirtschaft & Unternehmen','Märkte, Verträge, Unternehmensführung',[
+['la empresa emergente','das Start-up'],['el/la socio/a','der/die Geschäftspartner/in'],['la facturación','der Umsatz'],['los beneficios','der Gewinn'],['las pérdidas','die Verluste'],['la rentabilidad','die Rentabilität'],['rentable','rentabel'],['la financiación','die Finanzierung'],['el inversor','der Investor'],['la ronda de financiación','die Finanzierungsrunde'],
+['la cuota de mercado','der Marktanteil'],['la libre competencia','der freie Wettbewerb'],['la cláusula','die Klausel'],['rescindir un contrato','einen Vertrag kündigen'],['la indemnización','die Abfindung, Entschädigung'],['el incumplimiento','die Nichterfüllung'],['la negociación','die Verhandlung'],['el margen','die Marge, der Spielraum'],['la oferta y la demanda','Angebot und Nachfrage'],['la subcontratación','das Outsourcing'],
+['la quiebra','die Insolvenz'],['quebrar','pleitegehen'],['la fusión','die Fusion'],['la adquisición','die Übernahme'],['la estrategia','die Strategie'],['el balance','die Bilanz'],['el IVA','die Mehrwertsteuer'],['el/la autónomo/a','der/die Selbstständige'],['darse de alta como autónomo','sich selbstständig melden'],['el plan de negocio','der Businessplan']]);
+
+W('u35','Kunst & Kultur','Malerei, Musik, Literatur, Bühne',[
+['la pintura','die Malerei'],['el lienzo','die Leinwand'],['el retrato','das Porträt'],['el paisaje','die Landschaft'],['el bodegón','das Stillleben'],['la obra maestra','das Meisterwerk'],['la vanguardia','die Avantgarde'],['el surrealismo','der Surrealismus'],['la instalación','die Installation'],['la galería','die Galerie'],
+['la novela','der Roman'],['el relato','die Erzählung'],['el ensayo','der Essay'],['la poesía','die Lyrik'],['el verso','der Vers'],['el/la protagonista','der/die Hauptfigur'],['la trama','die Handlung'],['el desenlace','das Ende, die Auflösung'],['la obra de teatro','das Theaterstück'],['el escenario','die Bühne'],
+['el estreno','die Premiere'],['la crítica','die Kritik'],['el/la director/a','der/die Regisseur/in'],['la banda sonora','der Soundtrack'],['la orquesta','das Orchester'],['el compás','der Takt'],['la letra','der Liedtext'],['el patrimonio cultural','das Kulturerbe'],['restaurar','restaurieren'],['la exposición temporal','die Wechselausstellung']]);
+
+W('u36','Wissenschaft & Technik','Forschung, Digitales, Ethik',[
+['el estudio','die Studie'],['la hipótesis','die Hypothese'],['el experimento','das Experiment'],['la muestra','die Stichprobe'],['los resultados','die Ergebnisse'],['demostrar','beweisen'],['refutar','widerlegen'],['el hallazgo','der Fund, die Entdeckung'],['la evidencia científica','die wissenschaftliche Evidenz'],['la revista científica','die Fachzeitschrift'],
+['el/la científico/a','der/die Wissenschaftler/in'],['el laboratorio','das Labor'],['la genética','die Genetik'],['el ADN','die DNA'],['la vacuna','der Impfstoff'],['el aprendizaje automático','das maschinelle Lernen'],['la ciberseguridad','die Cybersicherheit'],['el hackeo','der Hackerangriff'],['la nube','die Cloud'],['los datos personales','die personenbezogenen Daten'],
+['la vigilancia','die Überwachung'],['el dilema ético','das ethische Dilemma'],['la responsabilidad','die Verantwortung'],['la transparencia','die Transparenz'],['el impacto','die Auswirkung'],['innovador','innovativ'],['obsoleto','veraltet'],['pionero','bahnbrechend'],['la patente','das Patent'],['el avance tecnológico','der technologische Fortschritt']]);
+
+W('u37','Akademische Sprache','Verben des Sagens, Textarbeit, Recht',[
+['afirmar','behaupten'],['sostener','vertreten (These)'],['señalar','hinweisen'],['subrayar','unterstreichen'],['destacar','hervorheben'],['advertir','warnen; bemerken'],['aludir a','anspielen auf'],['cuestionar','infrage stellen'],['matizar','nuancieren'],['concluir','folgern'],
+['el planteamiento','der Ansatz'],['el enfoque','die Herangehensweise'],['el marco teórico','der theoretische Rahmen'],['la cita textual','das Zitat'],['citar','zitieren'],['la bibliografía','das Literaturverzeichnis'],['el resumen','die Zusammenfassung'],['el apartado','der Abschnitt'],['la nota a pie de página','die Fußnote'],['el plagio','das Plagiat'],
+['la normativa','die Vorschriften'],['el reglamento','die Verordnung'],['vigente','geltend'],['entrar en vigor','in Kraft treten'],['derogar','aufheben (Gesetz)'],['el decreto','der Erlass'],['el ámbito','der Bereich'],['la índole','die Art, Natur'],['el fenómeno','das Phänomen'],['la tendencia','die Tendenz']]);
+
+/* ---------- C2 ---------- */
+W('u38','Humor & Zwischentöne','Witz, Ironie, Körpersprache',[
+['el chiste','der Witz'],['contar un chiste','einen Witz erzählen'],['la broma','der Scherz'],['gastar una broma','einen Streich spielen'],['la ironía','die Ironie'],['el sarcasmo','der Sarkasmus'],['el doble sentido','die Doppeldeutigkeit'],['el juego de palabras','das Wortspiel'],['la ocurrencia','der Einfall, Gag'],['ocurrente','witzig, schlagfertig'],
+['la retranca','der hintergründige Humor'],['el retintín','der spitze Unterton'],['soltar una pulla','einen Seitenhieb verteilen'],['el guiño','das Augenzwinkern; die Anspielung'],['guiñar un ojo','zwinkern'],['encogerse de hombros','mit den Schultern zucken'],['fruncir el ceño','die Stirn runzeln'],['poner los ojos en blanco','die Augen verdrehen'],['morderse la lengua','sich auf die Zunge beißen'],['carcajearse','schallend lachen'],
+['la carcajada','das schallende Gelächter'],['partirse de risa','sich kaputtlachen'],['tener gracia','witzig sein'],['sin gracia','unlustig'],['el humor negro','der schwarze Humor'],['la sátira','die Satire'],['burlarse de','sich lustig machen über'],['la burla','der Spott'],['picarse','beleidigt sein (ugs.)'],['seguir la corriente','mitspielen, zustimmen']]);
+
+W('u39','Feste, Geschichte & Glaube','Traditionen, Geschichte, Religion',[
+['la tradición','die Tradition'],['la costumbre','der Brauch'],['el folclore','die Volkskultur'],['la procesión','die Prozession'],['la romería','die Wallfahrt (Volksfest)'],['el santo','der Namenstag; der Heilige'],['la Nochebuena','der Heiligabend'],['la Nochevieja','Silvester'],['el turrón','der Turrón (Süßigkeit)'],['los fuegos artificiales','das Feuerwerk'],
+['la Edad Media','das Mittelalter'],['la Reconquista','die Reconquista'],['el Siglo de Oro','das Goldene Zeitalter'],['la Guerra Civil','der Bürgerkrieg'],['la dictadura','die Diktatur'],['la Transición','der Übergang zur Demokratie'],['la monarquía','die Monarchie'],['el imperio','das Reich'],['la conquista','die Eroberung'],['el legado','das Erbe, Vermächtnis'],
+['la fe','der Glaube'],['creyente','gläubig'],['ateo','atheistisch'],['laico','weltlich'],['la iglesia','die Kirche'],['la mezquita','die Moschee'],['la sinagoga','die Synagoge'],['el peregrino','der Pilger'],['el Camino de Santiago','der Jakobsweg'],['la superstición','der Aberglaube']]);
+
+W('u40','Recht & Literatur','Gericht, Verwaltung, literarische Sprache',[
+['el tribunal','das Gericht'],['la sentencia','das Urteil'],['el/la abogado/a','der/die Anwalt/Anwältin'],['el/la fiscal','der/die Staatsanwalt/-anwältin'],['el acusado','der Angeklagte'],['la demanda','die Klage'],['demandar','verklagen'],['el recurso','die Berufung, der Einspruch'],['absolver','freisprechen'],['la prueba','der Beweis'],
+['el testigo','der Zeuge'],['declarar','aussagen'],['el delito','die Straftat'],['la multa','die Geldstrafe'],['prescribir','verjähren'],['el boletín oficial','das Amtsblatt'],['la instancia','der Antrag (formell)'],['el expediente','die Akte'],['la notificación','der Bescheid'],['el plazo','die Frist'],
+['el narrador','der Erzähler'],['la metáfora','die Metapher'],['el símbolo','das Symbol'],['evocar','heraufbeschwören'],['el matiz','die Nuance'],['sombrío','düster'],['melancólico','melancholisch'],['efímero','vergänglich'],['inefable','unbeschreiblich'],['el ocaso','der Niedergang; Sonnenuntergang']]);
+
+W('u41','Präzise Verben & Nuancen','Synonyme für C2: genauer sagen, was man meint',[
+['acarrear','mit sich bringen (Folgen)'],['conllevar','mit sich bringen'],['suponer','bedeuten, darstellen'],['desencadenar','auslösen'],['propiciar','begünstigen'],['agravar','verschlimmern'],['paliar','lindern'],['subsanar','beheben'],['soslayar','umgehen'],['acotar','eingrenzen'],
+['vislumbrar','erahnen'],['entrever','durchblicken lassen'],['aducir','anführen (Gründe)'],['esgrimir','ins Feld führen (Argument)'],['recalcar','betonen'],['abogar por','sich einsetzen für'],['desdeñar','verschmähen'],['menospreciar','geringschätzen'],['ensalzar','preisen'],['enaltecer','verherrlichen'],
+['ostensible','offensichtlich'],['fehaciente','glaubwürdig, beweiskräftig'],['ineludible','unumgänglich'],['exhaustivo','erschöpfend'],['somero','oberflächlich, knapp'],['ambiguo','mehrdeutig'],['tácito','stillschweigend'],['pertinente','angebracht, relevant'],['ecuánime','ausgeglichen, unparteiisch'],['perspicaz','scharfsinnig']]);
+}
+;
+/* ===== Häufige Wörter: pro Unidad eine Lektion mit 30 häufigen Wörtern (häufigste zuerst, also in den frühen Unidades) =====
+   Daten: Häufigkeit aus „FrequencyWords“ (Hermit Dave, OpenSubtitles 2018, CC BY-SA 4.0, github.com/hermitdave/FrequencyWords),
+   Übersetzungen aus WikDict (wikdict.com, aus Wiktionary, CC BY-SA 3.0), automatisch gefiltert und von Hand korrigiert.
+   Diese Wortliste steht deshalb ebenfalls unter CC BY-SA 4.0. Erzeugt von einem Skript – Korrekturen direkt hier im Array. */
+window.FREQ_WORDS=[["deber", "müssen, sollen"], ["crear", "schaffen, erschaffen"], ["la mamá", "die Mama, die Mutti"], ["el papá", "der Papa"], ["importar", "wichtig sein, importieren"], ["encontrar", "finden, treffen"], ["realmente", "wirklich"], ["aún", "noch"], ["el minuto", "die Minute"], ["intentar", "versuchen"], ["el amor", "die Liebe"], ["el muerto", "der Tote"], ["junto", "zusammen"], ["tratar", "behandeln"], ["el cariño", "der Liebling"], ["ayudar", "helfen"], ["significar", "meinen, bedeuten"], ["viejo", "alt"], ["suceder", "geschehen, passieren"], ["la palabra", "das Wort"], ["matar", "töten, umbringen"], ["propio", "eigen"], ["la muerte", "der Tod"], ["ganar", "gewinnen, verdienen"], ["el loco", "der Verrückte"], ["conseguir", "erreichen, schaffen"], ["suficiente", "genügend, ausreichend"], ["la esposa", "die Ehefrau, die Gattin"], ["el cuidado", "die Vorsicht, die Pflege"], ["funcionar", "funktionieren"], ["el cuerpo", "der Körper, der Leib"], ["encontrarse", "sich befinden, sich treffen"], ["adelante", "vorwärts, voran"], ["la tierra", "die Erde"], ["el doctor", "der Doktor"], ["regresar", "zurückkehren, zurückgehen"], ["la guerra", "der Krieg"], ["allá", "da, dort"], ["la oportunidad", "die Chance, die Gelegenheit"], ["el bebé", "das Baby"], ["la sangre", "das Blut"], ["la culpa", "die Schuld"], ["morir", "sterben"], ["exactamente", "genau"], ["correcto", "richtig, korrekt"], ["abajo", "unten, runter"], ["la foto", "das Foto"], ["robar", "stehlen"], ["atrás", "zurück, hinter"], ["el capitán", "der Kapitän, der Hauptmann"], ["hermoso", "schön, wunderschön"], ["maldito", "verdammt, verflucht"], ["el muchacho", "der Junge"], ["extraño", "seltsam, merkwürdig"], ["el par", "das Paar"], ["el dólar", "der Dollar"], ["el amo", "der Herr, der Besitzer"], ["el sitio", "der Ort, die Stelle"], ["disculpar", "entschuldigen"], ["recibir", "bekommen, kriegen"], ["simplemente", "einfach"], ["duro", "hart"], ["el asunto", "die Angelegenheit, die Sache"], ["disparar", "schießen, feuern"], ["el arma", "die Waffe"], ["la seguridad", "die Sicherheit"], ["estúpido", "dumm, dämlich"], ["real", "echt, wirklich"], ["el derecho", "das Recht"], ["el rey", "der König"], ["el oído", "das Gehör, das Ohr"], ["tonto", "blöd, doof"], ["acerca de", "über (ein Thema)"], ["la señorita", "das Fräulein, die junge Dame"], ["la fuerza", "die Kraft"], ["el secreto", "das Geheimnis"], ["la paz", "der Frieden"], ["el asesino", "der Mörder"], ["el fuego", "das Feuer"], ["divertido", "lustig"], ["el caballero", "der Ritter"], ["el orden", "die Ordnung, der Befehl"], ["matarse", "sich umbringen"], ["verdadero", "wirklich, wahr"], ["temer", "fürchten, befürchten"], ["el daño", "der Schaden"], ["afuera", "draußen, nach draußen"], ["pobre", "arm"], ["el cielo", "der Himmel"], ["el general", "der General"], ["oficial", "offiziell"], ["el presidente", "der Präsident, der Vorsitzende"], ["el asesinato", "der Mord, die Ermordung"], ["el trato", "die Abmachung, der Umgang"], ["el resto", "der Rest"], ["el abogado", "der Anwalt, der Rechtsanwalt"], ["existir", "existieren, bestehen"], ["el control", "die Kontrolle, die Überprüfung"], ["comenzar", "anfangen, starten"], ["desear", "wünschen, möchten"], ["maravilloso", "wunderbar, wunderschön"], ["el sistema", "das System"], ["el campo", "das Feld, das Land"], ["el odio", "der Hass"], ["caminar", "gehen, marschieren"], ["llorar", "weinen"], ["encima", "oben, darauf"], ["amar", "lieben"], ["el papel", "das Papier"], ["el caballo", "das Pferd, der Springer"], ["la cámara", "die Kamera, die Kammer"], ["jamás", "niemals"], ["la víctima", "das Opfer"], ["golpear", "klopfen, hauen"], ["olvidar", "vergessen"], ["la compañía", "die Gesellschaft, die Firma"], ["la edad", "das Alter"], ["ambos", "beide"], ["el barco", "das Schiff, das Boot"], ["alrededor", "rundum, ringsum"], ["ocupado", "beschäftigt, belegt"], ["dulce", "süß"], ["el accidente", "der Unfall"], ["adónde", "wohin"], ["lleno", "voll"], ["luchar", "kämpfen"], ["el deseo", "der Wunsch, das Verlangen"], ["la situación", "die Situation"], ["aparecer", "erscheinen"], ["parar", "anhalten, stoppen"], ["la señal", "das Signal"], ["el ataque", "der Angriff, der Anfall"], ["jurar", "schwören"], ["el soldado", "der Soldat"], ["horrible", "entsetzlich, schrecklich"], ["el montón", "der Haufen, der Stapel"], ["peligroso", "gefährlich"], ["gracioso", "witzig, lustig"], ["salvar", "retten, bergen"], ["el animal", "das Tier"], ["imposible", "unmöglich"], ["el alma", "die Seele"], ["la nave", "das Raumschiff, das Schiff"], ["morirse", "sterben"], ["terrible", "schrecklich, furchtbar"], ["preparar", "vorbereiten, bereiten"], ["el placer", "das Vergnügen"], ["asesinar", "ermorden, morden"], ["atrapar", "erwischen, erfassen"], ["completamente", "völlig"], ["preocupado", "besorgt"], ["mantener", "behalten, wahren"], ["bromear", "scherzen, spaßen"], ["totalmente", "völlig"], ["desaparecer", "verschwinden"], ["escapar", "abhauen, ausbrechen"], ["imaginar", "vorstellen"], ["la prisa", "die Hast, die Eile"], ["la canción", "das Lied, der Song"], ["resultar", "sich herausstellen, ergeben"], ["el suelo", "der Boden, der Fußboden"], ["la cárcel", "das Gefängnis"], ["el enemigo", "der Feind"], ["lograr", "erreichen, schaffen"], ["el maestro", "der Lehrer, der Meister"], ["la escena", "die Szene"], ["el ejército", "die Armee, das Heer"], ["la mentira", "die Lüge"], ["la regla", "die Regel"], ["acá", "hier"], ["inteligente", "klug, intelligent"], ["romper", "brechen, zerbrechen"], ["el silencio", "das Schweigen, die Stille"], ["lucir", "aussehen, glänzen"], ["la duda", "der Zweifel, das Bedenken"], ["la maldición", "der Fluch"], ["el fondo", "der Hintergrund, der Untergrund"], ["caer", "fallen"], ["la corte", "der Hof (Königshof)"], ["limpiar", "putzen, säubern"], ["la guardia", "die Wache"], ["el director", "der Direktor, der Regisseur"], ["la locura", "der Wahnsinn"], ["el matrimonio", "die Ehe"], ["el peligro", "die Gefahr"], ["preocupar", "beunruhigen"], ["el esposo", "der Ehemann"], ["el cerebro", "das Gehirn, das Hirn"], ["el teniente", "der Leutnant"], ["el permiso", "die Erlaubnis, die Genehmigung"], ["caliente", "heiß, warm"], ["simple", "einfach"], ["atacar", "angreifen, attackieren"], ["la libertad", "die Freiheit"], ["completo", "komplett, vollständig"], ["evitar", "vermeiden"], ["la pista", "der Hinweis, die Rennstrecke"], ["el honor", "die Ehre"], ["agradable", "angenehm, erfreulich"], ["disfrutar", "genießen"], ["la estrella", "der Stern"], ["gritar", "schreien"], ["el oro", "das Gold"], ["el dedo", "der Finger"], ["mandar", "schicken, befehlen"], ["la bomba", "die Bombe, die Pumpe"], ["planear", "planen, schweben"], ["el baile", "der Tanz"], ["el crimen", "das Verbrechen"], ["crecer", "wachsen, aufwachsen"], ["apuesto", "gutaussehend"], ["mentir", "lügen, anlügen"], ["saltar", "springen"], ["actuar", "handeln, wirken"], ["la luna", "der Mond"], ["el ángel", "der Engel"], ["falso", "falsch, verkehrt"], ["la energía", "die Energie"], ["el árbol", "der Baum"], ["enamorado", "verliebt"], ["la flor", "die Blume, die Blüte"], ["cuidar", "pflegen, aufpassen auf"], ["el nivel", "das Niveau, der Spiegel"], ["la esperanza", "die Hoffnung"], ["confiar", "vertrauen, anvertrauen"], ["averiguar", "herausfinden"], ["el zapato", "der Schuh"], ["adentro", "drinnen, hinein"], ["el resultado", "das Ergebnis, das Resultat"], ["el planeta", "der Planet"], ["privado", "privat"], ["la máquina", "die Maschine"], ["casado", "verheiratet"], ["respirar", "atmen"], ["la pelea", "der Streit"], ["la causa", "der Grund, die Ursache"], ["herido", "verletzt, verwundet"], ["la misión", "die Mission"], ["pelear", "kämpfen, streiten"], ["excelente", "ausgezeichnet, hervorragend"], ["finalmente", "endlich, schließlich"], ["la nota", "die Note, die Notiz"], ["fantástico", "fantastisch, toll"], ["la reina", "die Königin"], ["el hogar", "das Heim, das Zuhause"], ["la posibilidad", "die Möglichkeit"], ["la banda", "die Band, die Bande"], ["el sentimiento", "das Gefühl"], ["utilizar", "benutzen, verwenden"], ["el motivo", "der Grund, das Motiv"], ["nacer", "geboren werden"], ["descubrir", "entdecken"], ["el miembro", "das Mitglied"], ["el sargento", "der Feldwebel"], ["arruinar", "ruinieren, kaputt machen"], ["la diferencia", "der Unterschied"], ["la prisión", "das Gefängnis"], ["la felicidad", "das Glück"], ["el respeto", "der Respekt"], ["inocente", "unschuldig"], ["la salida", "der Ausgang, der Ausweg"], ["culpable", "schuldig"], ["el valor", "der Wert"], ["el té", "der Tee"], ["el norte", "der Norden"], ["sospechoso", "verdächtig, argwöhnisch"], ["el coronel", "der Oberst"], ["el objetivo", "das Ziel"], ["mencionar", "erwähnen"], ["excepto", "außer"], ["recordar", "erinnern"], ["la posición", "die Lage, die Position"], ["oscuro", "dunkel, düster"], ["la tontería", "die Dummheit"], ["el toque", "die Berührung"], ["sobrevivir", "überleben"], ["volar", "fliegen"], ["la pistola", "die Pistole"], ["el gato", "die Katze, der Kater"], ["molesto", "lästig; genervt"], ["la isla", "die Insel"], ["sucio", "schmutzig, dreckig"], ["recoger", "holen, abholen"], ["el regreso", "die Rückkehr"], ["el héroe", "der Held"], ["llenar", "füllen"], ["el apartamento", "die Wohnung, das Appartement"], ["pertenecer", "gehören"], ["el invitado", "der Gast"], ["debajo", "darunter, unten"], ["guardar", "aufbewahren, speichern"], ["brillante", "brillant, glänzend"], ["borracho", "betrunken"], ["cometer", "begehen, verüben"], ["el espíritu", "der Geist"], ["vengar", "rächen, vergelten"], ["gay", "schwul"], ["notar", "bemerken"], ["el beso", "der Kuss"], ["enorme", "ungeheuer, enorm"], ["vacío", "leer"], ["el detalle", "das Detail"], ["el vistazo", "der Blick"], ["el comandante", "der Kommandant, der Kommandeur"], ["sentado", "sitzend"], ["el sur", "der Süden"], ["desaparecido", "verschwunden, verschollen"], ["causar", "verursachen, auslösen"], ["la piel", "die Haut, das Fell"], ["sufrir", "leiden"], ["el estilo", "der Stil"], ["el asiento", "der Sitz"], ["la trampa", "die Falle"], ["discutir", "besprechen, diskutieren"], ["considerar", "überlegen, bedenken"], ["el trago", "der Schluck, der Drink"], ["odiar", "hassen"], ["americano", "amerikanisch"], ["el fantasma", "das Gespenst, der Geist"], ["la cuestión", "die Frage, die Angelegenheit"], ["la piedra", "der Stein"], ["el monstruo", "das Monster, das Ungeheuer"], ["el registro", "die Registrierung, das Register"], ["la majestad", "die Majestät"], ["el anillo", "der Ring"], ["la huella", "die Spur, der Abdruck"], ["levantar", "heben, errichten"], ["la enfermedad", "die Krankheit"], ["la batalla", "die Schlacht, das Gefecht"], ["bello", "schön"], ["común", "gemeinsam, gemein"], ["el efecto", "die Wirkung, der Effekt"], ["profundo", "tief, profund"], ["casar", "verheiraten"], ["la bala", "die Kugel (Geschoss)"], ["continuar", "weitermachen, fortsetzen"], ["sexual", "sexuell"], ["quitar", "wegnehmen, entziehen"], ["entero", "ganz"], ["olvidarse", "vergessen, entfallen"], ["adivinar", "erraten, erahnen"], ["el sonido", "der Laut"], ["la defensa", "die Verteidigung, der Verteidiger"], ["acaso", "etwa, vielleicht"], ["prestar", "leihen, ausleihen"], ["la opción", "die Option"], ["quieto", "ruhig"], ["el código", "der Code, der Kodex"], ["besar", "küssen"], ["la emergencia", "der Notfall"], ["obtener", "erhalten, erlangen"], ["contratar", "einstellen, anstellen"], ["la justicia", "die Gerechtigkeit, die Justiz"], ["el archivo", "das Archiv, die Datei"], ["el cerdo", "das Schwein"], ["el disparo", "der Schuss"], ["militar", "militärisch"], ["el pedazo", "das Stück, die Scherbe"], ["ordenar", "aufräumen, befehlen"], ["andar", "gehen, laufen"], ["absolutamente", "absolut, völlig"], ["presentar", "vorstellen, präsentieren"], ["reconocer", "erkennen, wiedererkennen"], ["hallar", "finden"], ["el ganado", "das Vieh"], ["el propósito", "der Zweck"], ["admitir", "zugeben, einlassen"], ["decidido", "entschieden, entschlossen"], ["criminal", "kriminell"], ["vigilar", "bewachen"], ["absoluto", "absolut"], ["soportar", "ertragen, aushalten"], ["grave", "schwerwiegend, ernsthaft"], ["el tiro", "der Schuss, der Wurf"], ["distinto", "verschieden, anders"], ["observar", "beobachten, beachten"], ["durar", "dauern"], ["especialmente", "besonders"], ["el robo", "der Raub"], ["la victoria", "der Sieg"], ["la presión", "der Druck"], ["la cantidad", "die Menge"], ["inmediatamente", "sofort"], ["agarrar", "fassen, packen"], ["la necesidad", "das Bedürfnis, die Notwendigkeit"], ["puro", "rein, pur"], ["la bienvenida", "das Willkommen"], ["la operación", "die Operation"], ["la elección", "die Wahl"], ["la marca", "die Marke, das Mal"], ["la lucha", "der Kampf"], ["la copa", "das Weinglas, der Pokal"], ["la conversación", "das Gespräch, die Konversation"], ["el área", "die Fläche, der Bereich"], ["contrario", "gegenteilig, entgegengesetzt"], ["destruir", "zerstören"], ["firmar", "unterschreiben, unterzeichnen"], ["poderoso", "mächtig"], ["la política", "die Politik"], ["la memoria", "das Gedächtnis, der Speicher"], ["controlar", "kontrollieren, steuern"], ["mostrar", "zeigen, weisen"], ["honesto", "ehrlich"], ["salvarse", "sich retten"], ["solamente", "nur"], ["el desastre", "das Desaster, das Verhängnis"], ["el cabello", "das Haar"], ["el agujero", "das Loch"], ["la escalera", "die Treppe"], ["la imagen", "das Bild, das Image"], ["el príncipe", "der Prinz, der Fürst"], ["la cinta", "das Band, das Klebeband"], ["el pecho", "die Brust"], ["soñar", "träumen"], ["nacional", "national"], ["el cuento", "die Geschichte, das Märchen"], ["el reloj", "die Uhr"], ["faltar", "fehlen, versäumen"], ["mantenerse", "sich halten, bleiben"], ["débil", "schwach, schlapp"], ["el dueño", "der Besitzer"], ["construir", "bauen"], ["el truco", "der Trick"], ["fallar", "scheitern, versagen"], ["apuntar", "zielen, deuten"], ["el hielo", "das Eis"], ["la serie", "die Serie"], ["el millón", "die Million"], ["la dama", "die Dame"], ["natural", "natürlich"], ["inmediato", "umgehend, unverzüglich"], ["la evidencia", "der Beweis"], ["feo", "hässlich, unschön"], ["la televisión", "das Fernsehen"], ["el vídeo", "Videotechnik"], ["la velocidad", "die Geschwindigkeit"], ["la propiedad", "das Eigentum, das Anwesen"], ["el pastel", "der Kuchen, die Torte"], ["el disco", "die Schallplatte, die Scheibe"], ["el espectáculo", "die Show, das Spektakel"], ["la época", "die Epoche"], ["el presente", "die Gegenwart"], ["adorar", "anbeten"], ["la enfermera", "die Krankenschwester"], ["total", "total, gänzlich"], ["lastimar", "verletzen"], ["la paga", "der Lohn"], ["escaparse", "entkommen, abhauen"], ["el peso", "das Gewicht"], ["el modelo", "das Modell, das Vorbild"], ["imaginarse", "sich vorstellen"], ["la amenaza", "die Bedrohung, die Drohung"], ["mover", "bewegen, regen"], ["complicado", "kompliziert"], ["suficientemente", "genug"], ["cruzar", "überqueren"], ["abandonar", "verlassen, aufgeben"], ["el sombrero", "der Hut"], ["valiente", "mutig, tapfer"], ["el universo", "das Universum, das Weltall"], ["la princesa", "die Prinzessin"], ["separar", "trennen"], ["la belleza", "die Schönheit"], ["la distancia", "der Abstand, die Distanz"], ["el descanso", "die Pause, die Ruhepause"], ["el apoyo", "die Unterstützung"], ["la mirada", "der Blick"], ["permanecer", "bleiben"], ["el socio", "der Geschäftspartner"], ["resolver", "lösen"], ["la teoría", "die Theorie"], ["el premio", "der Preis, die Auszeichnung"], ["la tarea", "die Aufgabe"], ["el pensamiento", "das Denken, der Gedanke"], ["científico", "wissenschaftlich"], ["romperse", "kaputtgehen, brechen"], ["asegurar", "versichern, sichern"], ["adulto", "erwachsen"], ["el jurado", "die Jury, die Geschworenen"], ["la carga", "die Last, die Ladung"], ["el pago", "die Bezahlung, die Zahlung"], ["inventar", "erfinden"], ["superior", "höher, oberer"], ["el aspecto", "das Aussehen, der Aspekt"], ["gastar", "ausgeben, spendieren"], ["la magia", "die Magie, der Zauber"], ["fingir", "vortäuschen, schauspielern"], ["inútil", "sinnlos, nutzlos"], ["caerse", "hinfallen, umfallen"], ["ocultar", "verstecken, verbergen"], ["variar", "variieren, sich ändern"], ["la carretera", "die Landstraße"], ["enterarse", "erfahren, mitbekommen"], ["el motor", "der Motor"], ["el fiscal", "der Staatsanwalt, die Staatsanwältin"], ["sabio", "weise"], ["la central", "die Zentrale"], ["el pájaro", "der Vogel"], ["la criatura", "die Kreatur, das Geschöpf"], ["el empleado", "der Angestellte"], ["preocuparse", "sich Sorgen machen"], ["la ciencia", "die Wissenschaft"], ["la habilidad", "die Fähigkeit"], ["parecido", "ähnlich"], ["la bruja", "die Hexe"], ["el talento", "die Begabung"], ["escoger", "auswählen"], ["judío", "jüdisch"], ["aguantar", "aushalten, ertragen"], ["el oeste", "der Westen, der West"], ["la venta", "der Verkauf"], ["dirigir", "leiten, lenken"], ["directamente", "direkt"], ["el artículo", "der Artikel"], ["grandioso", "großartig"], ["la pérdida", "der Verlust"], ["salvaje", "wild"], ["el kilómetro", "der Kilometer"], ["confirmar", "bestätigen, besiegeln"], ["renunciar", "verzichten"], ["despertar", "wecken, aufwecken"], ["el límite", "das Limit, die Schranke"], ["contento", "froh"], ["el material", "das Material"], ["divorciarse", "sich scheiden lassen"], ["adecuado", "passend, angemessen"], ["el acceso", "der Zugang, das Betreten"], ["la oscuridad", "die Dunkelheit"], ["cercano", "nah, nahe"], ["el comienzo", "der Anfang, der Beginn"], ["el teatro", "das Theater"], ["esconder", "verstecken, verbergen"], ["impresionante", "beeindruckend, eindrucksvoll"], ["asustar", "erschrecken"], ["alcanzar", "erreichen, gelangen"], ["el mono", "der Affe"], ["asumir", "übernehmen"], ["la búsqueda", "die Suche, die Ausschau"], ["original", "original, ursprünglich"], ["el jardín", "der Garten"], ["pesado", "schwer"], ["el esfuerzo", "die Mühe, die Anstrengung"], ["el campamento", "das Lager, das Camp"], ["la promesa", "das Versprechen"], ["representar", "vertreten, darstellen"], ["pretender", "beabsichtigen, vorhaben"], ["el proceso", "der Prozess, der Vorgang"], ["la lengua", "die Zunge, die Sprache"], ["varios", "mehrere"], ["el prisionero", "der Gefangene"], ["el jugador", "der Spieler"], ["la espada", "das Schwert"], ["la base", "die Basis, die Base"], ["el rostro", "das Gesicht"], ["el homicidio", "der Totschlag, der Mord"], ["acompañar", "begleiten, mitkommen"], ["legal", "legal, rechtmäßig"], ["perfectamente", "perfekt, bestens"], ["la lástima", "das Mitleid (¡qué lástima! = wie schade)"], ["asqueroso", "eklig, fies"], ["explotar", "explodieren, ausbeuten"], ["cuidarse", "auf sich aufpassen"], ["extranjero", "fremd"], ["el piloto", "der Pilot, der Flieger"], ["detener", "anhalten, festnehmen"], ["el sujeto", "das Subjekt, der Typ"], ["la rueda", "das Rad"], ["el discurso", "die Rede"], ["la sombra", "der Schatten"], ["el lobo", "der Wolf"], ["el actor", "der Schauspieler, der Darsteller"], ["la autoridad", "die Autorität, die Behörde"], ["la voluntad", "der Wille"], ["el documento", "das Dokument"], ["tardar", "dauern"], ["el entrenador", "der Trainer"], ["el helado", "die Eiscreme, das Eis"], ["el crédito", "der Kredit"], ["el interés", "das Interesse"], ["el pecado", "die Sünde"], ["sencillo", "einfach, schlicht"], ["el bote", "die Dose, das Boot"], ["la roca", "der Felsen"], ["efectivo", "wirksam; das Bargeld (en efectivo)"], ["pelearse", "sich streiten"], ["la esquina", "die Ecke"], ["amenazar", "drohen, bedrohen"], ["la revista", "die Zeitschrift"], ["la rata", "die Ratte"], ["el chocolate", "die Schokolade"], ["huir", "fliehen, flüchten"], ["el objeto", "das Objekt, der Gegenstand"], ["experto", "erfahren, fachkundig"], ["el milagro", "das Wunder"], ["el cigarrillo", "die Zigarette, die Kippe"], ["la cadena", "die Kette"], ["la temporada", "die Staffel, die Saison"], ["afortunado", "glücklich (Glück haben)"], ["el tamaño", "die Größe, der Umfang"], ["el personaje", "die Figur (im Film/Buch)"], ["sincero", "aufrichtig"], ["la pesadilla", "der Albtraum"], ["el vaso", "das Gefäß, das Glas"], ["el techo", "das Dach, die Decke"], ["federal", "föderal"], ["el acto", "die Tat, der Akt"], ["sorprender", "überraschen"], ["soltero", "single, ledig"], ["la sensación", "das Gefühl, die Empfindung"], ["el alcohol", "der Alkohol, der Sprit"], ["atractivo", "attraktiv"], ["la fotografía", "die Fotografie"], ["cobarde", "feige"], ["delicioso", "lecker, köstlich"], ["deprisa", "schnell"], ["el lago", "der See"], ["el tesoro", "der Schatz"], ["el olor", "der Geruch"], ["civil", "zivil"], ["la gloria", "der Ruhm"], ["desconocido", "unbekannt"], ["la torre", "der Turm"], ["anterior", "vorherig, früher"], ["apestar", "stinken"], ["la declaración", "die Erklärung, die Aussage"], ["el cheque", "der Scheck"], ["el lío", "das Durcheinander, der Schlamassel"], ["claramente", "deutlich, klar"], ["la tumba", "das Grab"], ["la aventura", "das Abenteuer"], ["el oso", "der Bär"], ["reunir", "versammeln, sammeln"], ["anciano", "alt, betagt"], ["montar", "aufbauen, reiten"], ["la muñeca", "die Puppe, das Handgelenk"], ["opinar", "meinen, eine Meinung haben"], ["conectar", "verbinden, anschließen"], ["la nieve", "der Schnee"], ["la doctora", "die Ärztin, die Doktorin"], ["el empleo", "die Beschäftigung, die Anstellung"], ["mundial", "Welt-, weltweit"], ["entregar", "liefern, übergeben"], ["la protección", "der Schutz"], ["la copia", "die Kopie"], ["la venganza", "die Rache"], ["la apuesta", "die Wette"], ["lento", "langsam"], ["útil", "nützlich"], ["enfermar", "erkranken"], ["parado", "stehend; arbeitslos"], ["amado", "geliebt"], ["político", "politisch"], ["el rastro", "die Spur"], ["el incendio", "der Brand, das Feuer"], ["la milla", "die Meile"], ["colocar", "hinstellen, setzen"], ["realizar", "durchführen, verwirklichen"], ["identificar", "identifizieren"], ["gigante", "riesig"], ["la granja", "der Bauernhof"], ["uniforme", "uniform"], ["eliminar", "eliminieren, wegräumen"], ["probable", "wahrscheinlich"], ["la camioneta", "der Lieferwagen"], ["el bolso", "die Tasche, der Beutel"], ["la conexión", "die Verbindung"], ["la amistad", "die Freundschaft"], ["el reino", "das Reich, das Königreich"], ["culpar", "beschuldigen"], ["marchar", "gehen, marschieren"], ["rechazar", "ablehnen, abweisen"], ["confundir", "verwechseln, verwirren"], ["recién", "frisch, neu-"], ["la taza", "die Tasse"], ["la clave", "der Schlüssel"], ["aparte", "beiseite, separat"], ["el hombro", "die Schulter"], ["el evento", "das Ereignis, die Veranstaltung"], ["el ala", "der Flügel"], ["la visión", "die Vision"], ["ilegal", "illegal"], ["el rumor", "das Gerücht"], ["la diversión", "der Spaß, die Unterhaltung"], ["la risa", "das Lachen"], ["el labio", "die Lippe"], ["ciego", "blind"], ["el canal", "der Kanal"], ["la cirugía", "die Operation, die Chirurgie"], ["arrestar", "festnehmen"], ["la fortuna", "das Glück, das Vermögen"], ["la ira", "der Zorn"], ["la muchacha", "das Mädchen"], ["el cáncer", "der Krebs"], ["dudar", "zweifeln, bezweifeln"], ["la moneda", "die Münze, die Währung"], ["involucrar", "involvieren"], ["romántico", "romantisch"], ["vencer", "besiegen, gewinnen"], ["suave", "sanft, mild"], ["bravo", "wild, mutig; bravo!"], ["la fábrica", "die Fabrik"], ["la frontera", "die Grenze"], ["traicionar", "verraten, hintergehen"], ["vengarse", "sich rächen"], ["encerrar", "einsperren, einschließen"], ["enterrar", "begraben, beerdigen"], ["completar", "vervollständigen, abschließen"], ["desnudo", "nackt"], ["la campaña", "die Kampagne"], ["la sonrisa", "das Lächeln"], ["el vehículo", "das Fahrzeug"], ["el castillo", "die Burg"], ["provocar", "provozieren, verursachen"], ["la cuerda", "das Seil, die Leine"], ["la violencia", "die Gewalt"], ["desgraciado", "unglücklich, elend"], ["el ritmo", "der Rhythmus"], ["cómodo", "bequem, gemütlich"], ["cubrir", "bedecken, abdecken"], ["la pizza", "die Pizza"], ["el grito", "der Schrei"], ["asombroso", "erstaunlich"], ["el mentiroso", "der Lügner"], ["el espejo", "der Spiegel"], ["interrumpir", "unterbrechen, abbrechen"], ["la presencia", "die Anwesenheit, das Beisein"], ["el cable", "das Kabel"], ["el conductor", "der Fahrer"], ["el combate", "der Kampf"], ["escondido", "versteckt"], ["británico", "britisch"], ["la alegría", "die Freude"], ["respetar", "respektieren, achten"], ["rezar", "beten"], ["aparentemente", "anscheinend, scheinbar"], ["encantador", "charmant, bezaubernd"], ["extrañarse", "sich wundern"], ["la charla", "das Gespräch, der Plausch"], ["el tratado", "der Vertrag"], ["el ciudadano", "der Bürger, der Staatsbürger"], ["obligar", "zwingen"], ["el pasillo", "der Gang, der Korridor"], ["agradecido", "dankbar"], ["la fila", "die Reihe, die Kolonne"], ["la coincidencia", "der Zufall"], ["la desgracia", "das Unglück"], ["afectar", "betreffen, beeinträchtigen"], ["el entrenamiento", "das Training"], ["la cola", "die Schlange (Warteschlange), der Schwanz"], ["girar", "drehen, abbiegen"], ["la ruta", "die Route"], ["la tribu", "der Volksstamm, der Stamm"], ["magnífico", "großartig"], ["la maravilla", "das Wunder"], ["sospechar", "vermuten, verdächtigen"], ["la actividad", "die Aktivität, die Tätigkeit"], ["el palacio", "der Palast"], ["filmar", "filmen"], ["la galleta", "der Keks, das Plätzchen"], ["formar", "bilden, formen"], ["harto", "satt (estar harto de = genug haben von)"], ["presionar", "drücken"], ["desesperado", "verzweifelt, hoffnungslos"], ["el arresto", "die Festnahme"], ["lanzar", "werfen, starten"], ["la ambulancia", "der Krankenwagen, der Rettungswagen"], ["la arena", "der Sand"], ["comprobar", "überprüfen"], ["la importancia", "die Wichtigkeit, die Geltung"], ["la lección", "die Lektion, die Lehre"], ["personalmente", "persönlich"], ["el vampiro", "der Vampir"], ["unir", "vereinen, verbinden"], ["liberar", "befreien, freilassen"], ["el encargo", "der Auftrag"], ["abandonado", "verlassen"], ["quitarse", "ausziehen (Kleidung), abnehmen"], ["acusar", "beschuldigen, bezichtigen"], ["solitario", "einsam"], ["la pelota", "der Ball"], ["avanzar", "vorankommen, vordringen"], ["la serpiente", "die Schlange"], ["cruel", "grausam"], ["equivocar", "verwechseln"], ["la celda", "die Zelle"], ["la hierba", "das Gras, das Kraut"], ["el misterio", "das Geheimnis, das Rätsel"], ["particular", "privat, besonders"], ["la identidad", "die Identität"], ["el suicidio", "der Selbstmord"], ["el saco", "der Sack"], ["lavar", "waschen"], ["ignorar", "ignorieren"], ["la madera", "das Holz"], ["sagrado", "heilig"], ["el comisario", "der Kommissar"], ["resistir", "widerstehen"], ["marcar", "bezeichnen, markieren"], ["adolescente", "jugendlich"], ["malvado", "böse"], ["firme", "standhaft, fest"], ["la alerta", "die Warnung, der Alarm"], ["el periodista", "der Journalist"], ["mental", "geistig, mental"], ["el cristal", "das Glas, die Scheibe"], ["la tropa", "die Truppe"], ["adorable", "liebenswert"], ["condenado", "verurteilt"], ["el aviso", "die Warnung, die Benachrichtigung"], ["pegar", "kleben, schlagen"], ["disponible", "verfügbar, vorhanden"], ["contactar", "kontaktieren"], ["la circunstancia", "der Umstand, der Sachverhalt"], ["la licencia", "die Lizenz"], ["quemar", "brennen, verbrennen"], ["el impuesto", "die Steuer"], ["la educación", "die Erziehung, die Bildung"], ["positivo", "positiv"], ["participar", "mitmachen, teilnehmen"], ["secuestrar", "kidnappen, entführen"], ["solicitar", "beantragen"], ["el episodio", "die Episode"], ["el sótano", "der Keller"], ["mínimo", "minimal, mindest-"], ["presentarse", "sich vorstellen, sich melden"], ["cargar", "laden, tragen"], ["el título", "der Titel, der Abschluss"], ["la humanidad", "die Menschheit, die Menschlichkeit"], ["la marina", "die Marine"], ["la placa", "das Schild, die Platte"], ["franco", "offen, ehrlich"], ["la traducción", "die Übersetzung"], ["el comportamiento", "das Verhalten"], ["elegante", "schick, elegant"], ["el desierto", "die Wüste"], ["la mina", "die Mine, das Bergwerk"], ["el conocimiento", "das Wissen"], ["ciertamente", "sicherlich"], ["la cubierta", "das Deck, die Abdeckung"], ["la conciencia", "das Gewissen"], ["el término", "der Begriff"], ["el beneficio", "der Nutzen, der Gewinn"], ["apagar", "ausschalten, löschen"], ["ocupar", "beschäftigen, einnehmen"], ["la caza", "die Jagd"], ["rodear", "umgeben, umfassen"], ["el gobernador", "der Gouverneur"], ["la ocasión", "die Gelegenheit, der Anlass"], ["indicar", "hinweisen, angeben"], ["el senador", "der Senator"], ["moderno", "modern"], ["el esclavo", "der Sklave"], ["la entrega", "die Lieferung, die Übergabe"], ["capturar", "fangen, einfangen"], ["la miel", "der Honig"], ["cobrar", "kassieren, verlangen"], ["el guerrero", "der Krieger"], ["idear", "sich ausdenken"], ["la curiosidad", "die Neugier, die Neugierde"], ["desagradable", "unangenehm, widerwärtig"], ["el tanque", "der Panzer"], ["agradar", "gefallen"], ["vomitar", "sich übergeben"], ["el círculo", "der Kreis"], ["la paciencia", "die Geduld"], ["la recompensa", "die Belohnung"], ["anteriormente", "zuvor"], ["el ordenador", "der Computer"], ["armado", "bewaffnet"], ["retroceder", "zurückweichen"], ["el ejercicio", "die Übung"], ["la consecuencia", "die Konsequenz, die Auswirkung"], ["la audiencia", "das Publikum, die Anhörung"], ["la joya", "das Juwel"], ["la sección", "der Abschnitt, die Abteilung"], ["el desafío", "die Herausforderung"], ["el océano", "der Ozean"], ["la actitud", "die Einstellung, die Haltung"], ["la impresión", "der Eindruck, der Abdruck"], ["el pez", "der Fisch"], ["noble", "edel, nobel"], ["violento", "gewalttätig, heftig"], ["eléctrico", "elektrisch"], ["el terreno", "das Gelände, das Terrain"], ["controlarse", "sich beherrschen"], ["el virus", "das Virus"], ["mostrarse", "sich zeigen"], ["la salsa", "die Soße"], ["el distrito", "der Bezirk, der Landkreis"], ["el incidente", "der Vorfall, der Zwischenfall"], ["el castigo", "die Strafe"], ["la barra", "die Stange, die Theke"], ["la lágrima", "die Träne"], ["la casualidad", "der Zufall"], ["informar", "melden, informieren"], ["el orgullo", "der Stolz"], ["la altura", "die Höhe"], ["la física", "die Physik"], ["el veneno", "das Gift"], ["fácilmente", "leicht, mühelos"], ["incómodo", "unwohl, unbequem"], ["precisamente", "genau, gerade"], ["máximo", "maximal"], ["clásico", "klassisch"], ["el comentario", "der Kommentar, die Bemerkung"], ["emocionante", "spannend"], ["el muro", "die Mauer"], ["la versión", "die Version, die Fassung"], ["la ronda", "die Runde"], ["consciente", "bewusst"], ["prohibido", "verboten"], ["la cruz", "das Kreuz"], ["apostar", "wetten"], ["el trozo", "das Stück"], ["urgente", "dringend"], ["espacial", "Raum-, Weltraum-"], ["la moto", "das Motorrad"], ["cazar", "jagen"], ["valer", "kosten, wert sein"], ["apropiado", "angemessen, passend"], ["negar", "leugnen, bestreiten"], ["nuclear", "nuklear"], ["el subtítulo", "der Untertitel"], ["arrojar", "werfen"], ["operar", "operieren, betreiben"], ["destrozar", "zerstören"], ["la conferencia", "die Konferenz, der Vortrag"], ["la moral", "die Moral"], ["el campeón", "der Champion, der Meister"], ["misterioso", "geheimnisvoll, mysteriös"], ["arder", "brennen"], ["brillar", "glänzen, scheinen"], ["la cultura", "die Kultur"], ["el sacerdote", "der Priester"], ["callar", "schweigen, verschweigen"], ["el robot", "der Roboter"], ["el patio", "der Hof"], ["la sesión", "die Sitzung"], ["el dibujo", "die Zeichnung"], ["la colina", "der Hügel"], ["la identificación", "der Ausweis, die Identifikation"], ["el escritor", "der Schriftsteller"], ["el cierre", "die Schließung, der Reißverschluss"], ["la reputación", "der Ruf, das Ansehen"], ["el metal", "das Metall"], ["el socorro", "die Hilfe"], ["el rescate", "das Retten, die Rettung"], ["el templo", "der Tempel"], ["empujar", "schieben, stoßen"], ["sano", "gesund, heil"], ["el ayudante", "der Helfer, der Assistent"], ["el humo", "der Rauch"], ["la nación", "die Nation"], ["nocturno", "nächtlich"], ["la reserva", "die Reservierung, die Reserve"], ["el túnel", "der Tunnel"], ["grabar", "aufnehmen (Ton/Video)"], ["la explicación", "die Erklärung"], ["la bandera", "die Flagge, die Fahne"], ["el territorio", "das Gebiet, das Revier"], ["la ave", "der Vogel"], ["encajar", "passen"], ["fabuloso", "fabelhaft"], ["la superficie", "die Oberfläche, die Fläche"], ["la terapia", "die Therapie"], ["el cubierto", "das Besteck"], ["el conde", "der Graf"], ["seco", "trocken"], ["alejado", "entfernt, abgelegen"], ["el helicóptero", "der Hubschrauber"], ["moverse", "sich bewegen"], ["confesar", "gestehen, bekennen"], ["amanecer", "dämmern; der Tagesanbruch"], ["el pánico", "die Panik"], ["la leyenda", "die Legende"], ["el dormitorio", "das Schlafzimmer"], ["la pasión", "die Leidenschaft, die Liebe"], ["sangrar", "bluten"], ["abandonarse", "sich gehen lassen"], ["negativo", "negativ"], ["el payaso", "der Clown, der Kasper"], ["el signo", "das Zeichen"], ["retrasar", "verzögern, verschieben"], ["la clínica", "die Klinik"], ["la punta", "die Spitze"], ["el refugio", "die Zuflucht, der Zufluchtsort"], ["telefónico", "telefonisch"], ["la raza", "die Rasse"], ["el conejo", "das Kaninchen"], ["el cazador", "der Jäger"], ["el encanto", "der Charme"], ["el asco", "der Ekel"], ["el sabor", "der Geschmack"], ["el chef", "der Koch, der Küchenchef"], ["juntar", "zusammenbringen, sammeln"], ["la maestra", "die Lehrerin"], ["considerado", "rücksichtsvoll; angesehen"], ["revelar", "enthüllen, offenbaren"], ["nuevamente", "erneut, wieder"], ["el depósito", "die Einzahlung, der Tank"], ["valioso", "wertvoll, kostbar"], ["apoyar", "unterstützen, stützen"], ["juzgar", "beurteilen, urteilen"], ["mudar", "wechseln; mudarse = umziehen"], ["retirar", "zurückziehen, abheben"], ["la capacidad", "die Fähigkeit, die Kapazität"], ["encargar", "beauftragen, bestellen"], ["acercar", "näher bringen"], ["el collar", "die Halskette, das Halsband"], ["patético", "erbärmlich, pathetisch"], ["la norma", "die Norm, die Regel"], ["absurdo", "lächerlich, absurd"], ["la paliza", "die Tracht Prügel"], ["el método", "die Methode, die Vorgehensweise"], ["el guante", "der Handschuh"], ["asegurarse", "sich vergewissern"], ["poseer", "besitzen"], ["la ceremonia", "die Zeremonie"], ["la masa", "die Masse, der Teig"], ["el arreglo", "die Reparatur, die Regelung"], ["oculto", "versteckt, verborgen"], ["decente", "anständig, dezent"], ["describir", "beschreiben, schildern"], ["enfrentarse", "sich stellen, gegenübertreten"], ["voluntario", "freiwillig"], ["el condado", "die Grafschaft"], ["estrellar", "zerschmettern, aufprallen"], ["el sacrificio", "das Opfer"], ["el alimento", "die Nahrung, das Lebensmittel"], ["agradecer", "danken, bedanken"], ["la custodia", "das Sorgerecht"], ["garantizar", "garantieren, gewährleisten"], ["la organización", "die Organisation"], ["el asalto", "der Überfall"], ["ligero", "leicht"], ["sensible", "sensibel, empfindlich"], ["patear", "treten"], ["atender", "sich kümmern um, bedienen"], ["el salto", "der Sprung, der Absprung"], ["el emperador", "der Kaiser"], ["coincidir", "übereinstimmen, zusammenfallen"], ["la gasolina", "das Benzin"], ["miserable", "miserabel, jämmerlich"], ["oler", "riechen"], ["la industria", "die Industrie"], ["la tripulación", "die Crew, die Besatzung"], ["pescar", "fischen, angeln"], ["la ola", "die Welle"], ["callado", "still, schweigsam"], ["encender", "einschalten, anzünden"], ["femenino", "weiblich, feminin"], ["la guía", "der/die Reiseführer/in; der Führer (Buch)"], ["surgir", "auftauchen"], ["la batería", "die Batterie, das Schlagzeug"], ["la crema", "die Sahne, die Creme"], ["el procedimiento", "das Verfahren, die Prozedur"], ["el instante", "der Augenblick"], ["recientemente", "kürzlich"], ["el huevo", "das Ei"], ["la violación", "die Vergewaltigung, die Verletzung"], ["aguantarse", "sich zusammenreißen"], ["el boleto", "die Fahrkarte"], ["el gasto", "die Ausgabe (Geld)"], ["la práctica", "die Praxis, die Übung"], ["la onda", "die Welle"], ["acostar", "ins Bett bringen"], ["dirigirse", "sich wenden an, gehen zu"], ["copiar", "kopieren, nachmachen"], ["la hamburguesa", "der Hamburger"], ["el dispositivo", "das Gerät, die Vorrichtung"], ["el pasajero", "der Passagier, der Fahrgast"], ["furioso", "wütend"], ["el alcance", "die Reichweite"], ["amarillo", "gelb"], ["entrenar", "trainieren"], ["despejado", "klar, wolkenlos"], ["eterno", "ewig"], ["el tatuaje", "die Tätowierung"], ["el instinto", "der Instinkt, der Trieb"], ["la actuación", "der Auftritt, die Leistung"], ["la reacción", "die Reaktion"], ["alimentar", "füttern, ernähren"], ["la flota", "die Flotte"], ["el golf", "das Golf"], ["saludar", "begrüßen, grüßen"], ["el diseño", "das Design"], ["complejo", "komplex"], ["el tubo", "das Rohr, die Röhre"], ["la comisaría", "die Wache"], ["el pulso", "der Puls"], ["temporal", "vorübergehend, zeitweilig"], ["activo", "aktiv, tätig"], ["esconderse", "sich verstecken"], ["admirar", "bewundern"], ["la gallina", "das Huhn, die Henne"], ["el botón", "der Knopf"], ["apreciar", "würdigen, schätzen"], ["delicado", "zart, heikel"], ["asustarse", "sich erschrecken"], ["cerebral", "Gehirn-"], ["activar", "aktivieren"], ["igualmente", "ebenso, gleichfalls"], ["anunciar", "verkünden, ankündigen"], ["mágico", "magisch"], ["soltar", "loslassen, freigeben"], ["la revolución", "die Revolution"], ["preciso", "präzise"], ["atraer", "anlocken, anziehen"], ["razonable", "vernünftig"], ["la niñera", "der Babysitter, das Kindermädchen"], ["posiblemente", "möglicherweise"], ["expulsar", "ausweisen, hinauswerfen"], ["hambriento", "hungrig"], ["el aliento", "der Atem, der Hauch"], ["musical", "musikalisch"], ["la división", "die Division, die Teilung"], ["ideal", "ideal"], ["el ánimo", "die Stimmung, der Mut"], ["la lectura", "das Lesen"], ["la cabaña", "die Hütte"], ["naturalmente", "natürlich"], ["castigar", "bestrafen, strafen"], ["similar", "ähnlich, gleichartig"], ["la imaginación", "die Vorstellungskraft"], ["el almacén", "das Lager, das Kaufhaus"], ["el cartel", "das Plakat, das Kartell"], ["la unión", "die Verbindung, die Union"], ["localizar", "orten, aufspüren"], ["la molestia", "die Unannehmlichkeit"], ["la calidad", "die Qualität"], ["la frecuencia", "die Frequenz"], ["herir", "verletzen"], ["la célula", "die Zelle"], ["la secretaria", "die Sekretärin"], ["el cinturón", "der Gürtel, der Gurt"], ["el sobrino", "der Neffe"], ["la vaca", "die Kuh"], ["detenerse", "anhalten, stehen bleiben"], ["acceder", "zugreifen, zustimmen"], ["la cueva", "die Höhle"], ["examinar", "prüfen, nachsehen"], ["la partida", "die Partie, die Abreise"], ["satisfecho", "zufrieden"], ["la capital", "die Hauptstadt, das Kapital"], ["la excelencia", "die Exzellenz"], ["suelto", "locker, lose"], ["sorprendente", "erstaunlich, überraschend"], ["el gusano", "der Wurm"], ["la discusión", "die Diskussion, die Auseinandersetzung"], ["pintar", "malen, streichen"], ["el pozo", "der Brunnen, der Schacht"], ["la técnica", "die Technik"], ["la sed", "der Durst"], ["la uña", "der Fingernagel, der Nagel"], ["la lealtad", "die Loyalität"], ["aprovechar", "nutzen, ausnutzen"], ["el alumno", "der Schüler"], ["el mago", "der Zauberer"], ["la corona", "die Krone"], ["morder", "beißen"], ["la vía", "der Weg, das Gleis"], ["la resistencia", "der Widerstand"], ["la alianza", "das Bündnis, der Ehering"], ["reciente", "neu, kürzlich"], ["nombrar", "ernennen, nennen"], ["el físico", "körperlich; der Physiker"], ["el valle", "das Tal"], ["explosivo", "explosiv, explosibel"], ["el capítulo", "das Kapitel"], ["dorado", "golden"], ["el lenguaje", "die Sprache"], ["la alternativa", "die Alternative"], ["el progreso", "der Fortschritt"], ["la tensión", "die Anspannung, die Spannung"], ["extraordinario", "außerordentlich"], ["el lujo", "der Luxus"], ["establecer", "gründen, festlegen"], ["financiero", "finanziell"], ["la porquería", "der Mist, der Dreck"], ["el hueso", "der Knochen"], ["el vecindario", "die Nachbarschaft"], ["potencial", "potenziell"], ["la caída", "der Absturz, der Fall"], ["la patada", "der Tritt, der Kick"], ["el bombero", "der Feuerwehrmann"], ["dibujar", "zeichnen"], ["el extremo", "das Ende, das Äußerste"], ["la invitación", "die Einladung"], ["aclarar", "klären, aufklären"], ["el tigre", "der Tiger"], ["el paraíso", "das Paradies"], ["auténtico", "echt"], ["breve", "kurz"], ["infantil", "kindlich, Kinder-"], ["la patrulla", "die Patrouille, die Streife"], ["fiel", "treu, redlich"], ["el león", "der Löwe"], ["dedicar", "widmen"], ["sorprenderse", "wundern"], ["el secuestro", "das Kidnapping, die Entführung"], ["el secretario", "der Sekretär"], ["el dragón", "der Drache"], ["estropear", "kaputt machen, verderben"], ["el vaquero", "der Cowboy"], ["rebelde", "rebellierend, rebellisch"], ["detectar", "entdecken, feststellen"], ["la pandilla", "die Clique, die Bande"], ["la generación", "die Generation"], ["el corredor", "der Läufer, der Flur"], ["la aldea", "das Dorf"], ["anotar", "aufschreiben, notieren"], ["aliado", "der Verbündete"], ["básico", "grundlegend, Grund-"], ["dañar", "schaden, beschädigen"], ["la coartada", "das Alibi"], ["producir", "herstellen, erzeugen"], ["la influencia", "der Einfluss"], ["la tragedia", "die Tragödie"], ["el sufrimiento", "das Leiden"], ["el medicamento", "das Medikament, die Arznei"], ["ansioso", "ängstlich; begierig"], ["el escudo", "das Schild, das Wappen"], ["el testimonio", "die Zeugenaussage"], ["la construcción", "der Bau, der Aufbau"], ["el hechizo", "der Zauber"], ["la actriz", "die Schauspielerin"], ["ejecutar", "ausführen"], ["la juventud", "die Jugend"], ["arrancar", "ausreißen; starten (Motor)"], ["divino", "göttlich"], ["profundamente", "zutiefst"], ["el pastor", "der Pastor, der Hirte"], ["la debilidad", "die Schwäche"], ["gris", "grau"], ["la piedad", "das Mitleid, das Erbarmen"], ["la liga", "die Liga"], ["la alfombra", "der Teppich"], ["expresar", "ausdrücken, äußern"], ["el productor", "der Produzent"], ["la expresión", "der Ausdruck, die Redensart"], ["religioso", "religiös"], ["la armada", "die Kriegsmarine"], ["la emoción", "die Emotion, die Aufregung"], ["la dificultad", "die Schwierigkeit"], ["la aguja", "die Nadel"], ["solar", "Sonnen-"], ["el cementerio", "der Friedhof"], ["la figura", "die Figur"], ["entregarse", "sich ergeben, sich hingeben"], ["aguardar", "warten, erwarten"], ["el rumbo", "die Richtung, der Kurs"], ["la preocupación", "die Sorge"], ["el guión", "das Drehbuch"], ["la multitud", "die Menge (Menschen)"], ["pisar", "treten auf"], ["resuelto", "entschlossen, forsch"], ["librar", "befreien, bewahren"], ["el pico", "der Schnabel"], ["el huésped", "der Gast"], ["interpretar", "vortragen, auslegen"], ["el cristiano", "der Christ"], ["traducir", "übersetzen"], ["el pato", "die Ente"], ["el propietario", "der Eigentümer, der Inhaber"], ["adicto", "süchtig"], ["quemado", "verbrannt"], ["reaccionar", "reagieren"], ["el caos", "das Chaos"], ["diseñar", "entwerfen"], ["la estupidez", "die Dummheit"], ["iniciar", "beginnen, einleiten"], ["empeorar", "verschlimmern, verschlechtern"], ["verdaderamente", "wirklich"], ["la religión", "die Religion"], ["el hierro", "das Eisen"], ["el fracaso", "das Versagen, der Misserfolg"], ["la sospecha", "der Verdacht"], ["la inmunidad", "die Immunität"], ["la grabación", "die Aufnahme"], ["la producción", "die Produktion"], ["vital", "lebenswichtig"], ["el caramelo", "das Bonbon, das Karamell"], ["la máscara", "die Maske"], ["firmado", "unterschrieben"], ["emocional", "emotional"], ["el poema", "das Gedicht"], ["desafortunadamente", "leider"], ["el representante", "der Vertreter"], ["romano", "römisch"], ["fascinante", "faszinierend"], ["curar", "heilen"], ["grosero", "unhöflich, grob"], ["la existencia", "die Existenz, das Dasein"], ["el significado", "die Bedeutung"], ["la libra", "das Pfund"], ["la ensalada", "der Salat"], ["la colección", "die Sammlung, die Ansammlung"], ["la barba", "der Bart"], ["la petición", "die Bitte, der Antrag"], ["enloquecer", "verrückt werden"], ["el coraje", "der Mut, die Tapferkeit"], ["el refuerzo", "die Stärkung, die Verstärkung"], ["marcharse", "weggehen"], ["la caridad", "die Nächstenliebe"], ["digno", "würdig"], ["leal", "loyal"], ["la mancha", "der Fleck, der Flecken"], ["el cuartel", "die Kaserne"], ["el monte", "der Berg, der Wald"], ["el acero", "der Stahl"], ["comunista", "kommunistisch"], ["la advertencia", "die Warnung"], ["la confesión", "das Geständnis, die Beichte"], ["el terror", "der Terror"], ["el globo", "der Ballon, der Luftballon"], ["el rayo", "der Strahl, der Blitzschlag"], ["la apariencia", "der Anschein, der Schein"], ["el costado", "die Seite (Körper)"], ["la corbata", "die Krawatte"], ["el drama", "das Drama"]];
+{
+const per=30;let i=0;
+for(const u of COURSE.units){if(u.status==='soon')continue;const items=FREQ_WORDS.slice(i,i+per);i+=per;if(items.length<10)break;
+  const steps=[];for(let k=0;k<items.length;k+=10)steps.push({t:'vocab',title:'Häufige Wörter ('+(k/10+1)+')',items:items.slice(k,k+10)});
+  steps.push({t:'match',q:'Was bedeutet …?',pairs:items.filter((_,j)=>j%6===1).slice(0,5)});
+  u.lessons.push({id:'lf',title:'Häufige Wörter',desc:'30 Wörter, die im Alltag oft vorkommen',ab:true,freq:true,steps});/* ab: freiwillig, nicht in Liste/Fortschritt/Abschlusstest – Kachel unter Extras */}
+}
+;
+/* ===== Übersetzungen der spanischen Beispiele in Erklärungen & Resumen (antippen → Blase, nur bei Erklärsprache Deutsch) =====
+   Schlüssel = spanischer Text wie in der Erklärung (mit „Jonas“), Wert = Deutsch. Stand: A1–C2. Neue Erklärungen → hier ergänzen. */
+window.INFO_TR=Object.assign(window.INFO_TR||{},{
+"Buenos días": "Guten Morgen / Guten Tag",
+"Buenas tardes": "Guten Tag / Guten Abend (nachmittags)",
+"Buenas noches": "Guten Abend / Gute Nacht",
+"Hola": "Hallo",
+"¡Hola, buenos días!": "Hallo, guten Morgen!",
+"¿Cómo te llamas?": "Wie heißt du?",
+"¿Cómo se llama usted?": "Wie heißen Sie?",
+"Me llamo Jonas. ¿Y tú?": "Ich heiße Jonas. Und du?",
+"Soy Jonas. ¿Y usted?": "Ich bin Jonas. Und Sie?",
+"usted": "Sie (höflich)",
+"¿Qué tal?": "Wie geht’s?",
+"Bien, ¿y tú?": "Gut, und dir?",
+"¿Cómo estás? (tú)": "Wie geht es dir? (du)",
+"Muy bien, gracias. ¿Y tú?": "Sehr gut, danke. Und dir?",
+"¿Cómo está usted? (usted)": "Wie geht es Ihnen? (Sie)",
+"Bien, gracias. ¿Y usted?": "Gut, danke. Und Ihnen?",
+"¡Hola! ¿Qué tal?": "Hallo! Wie geht’s?",
+"encantado": "freut mich (Mann)",
+"encantada": "freut mich (Frau)",
+"queso": "Käse",
+"Soy … / Me llamo … ¿Y tú?": "Ich bin … / Ich heiße … Und du?",
+"Soy … / Me llamo … ¿Y usted?": "Ich bin … / Ich heiße … Und Sie?",
+"¿Qué tal? / ¿Cómo estás?": "Wie geht’s? / Wie geht es dir?",
+"Bien / Muy bien / Regular, ¿y tú?": "Gut / Sehr gut / Es geht, und dir?",
+"¿Cómo está usted?": "Wie geht es Ihnen?",
+"Muy bien, gracias. ¿Y usted?": "Sehr gut, danke. Und Ihnen?",
+"Adiós · Hasta luego · Hasta pronto · Hasta mañana · Hasta la próxima": "Tschüss · Bis später · Bis bald · Bis morgen · Bis zum nächsten Mal",
+"el producto, el equipo": "das Produkt, das Team",
+"la empresa, la ciudad, la exposición": "die Firma, die Stadt, die Ausstellung",
+"el hotel, la imagen, el arte": "das Hotel, das Bild, die Kunst",
+"el día": "der Tag",
+"el programa": "das Programm",
+"la foto": "das Foto",
+"la mano": "die Hand",
+"el producto": "das Produkt",
+"la página": "die Seite",
+"los productos": "die Produkte",
+"las páginas": "die Seiten",
+"un producto": "ein Produkt",
+"una página": "eine Seite",
+"unos productos": "einige Produkte",
+"unas páginas": "einige Seiten",
+"equipo → equipos": "Team → Teams",
+"hotel → hoteles": "Hotel → Hotels",
+"ciudad → ciudades": "Stadt → Städte",
+"exposición → exposiciones": "Ausstellung → Ausstellungen",
+"jamón → jamones": "Schinken → Schinken (Pl.)",
+"unos / unas": "einige (m / f)",
+"¿Qué significa «red social»?": "Was bedeutet „red social“?",
+"Creo que significa …": "Ich glaube, es bedeutet …",
+"¿«Red» significa «Netz»?": "Bedeutet „red“ „Netz“?",
+"Sí. / No. / No sé.": "Ja. / Nein. / Ich weiß nicht.",
+"¿Cómo se dice «Messe» en español?": "Wie sagt man „Messe“ auf Spanisch?",
+"Se dice «feria».": "Man sagt „feria“.",
+"¿Puedes repetir, por favor?": "Kannst du das wiederholen, bitte?",
+"Más despacio, por favor.": "Langsamer, bitte.",
+"soy": "ich bin",
+"eres": "du bist",
+"es": "er/sie ist, Sie sind",
+"somos": "wir sind",
+"sois": "ihr seid",
+"son": "sie sind, Sie sind (Pl.)",
+"Soy de Alemania.": "Ich komme aus Deutschland.",
+"Yo soy de Mannheim y ella es de Girona.": "Ich komme aus Mannheim und sie kommt aus Girona.",
+"ustedes": "Sie (Plural, höflich)",
+"vosotros": "ihr",
+"¿De dónde eres?": "Woher kommst du?",
+"¿De dónde es usted?": "Woher kommen Sie?",
+"Soy de Holanda.": "Ich komme aus Holland.",
+"¿Eres de España?": "Kommst du aus Spanien?",
+"No, soy de Chile.": "Nein, ich komme aus Chile.",
+"¿Sois de Colombia?": "Kommt ihr aus Kolumbien?",
+"Sí, de Bogotá.": "Ja, aus Bogotá.",
+"¿Son ustedes de Madrid?": "Kommen Sie aus Madrid?",
+"No, somos de Vigo.": "Nein, wir kommen aus Vigo.",
+"no": "nein / nicht",
+"Messi no es de Barcelona.": "Messi kommt nicht aus Barcelona.",
+"No, no soy de Madrid.": "Nein, ich komme nicht aus Madrid.",
+"hablo": "ich spreche",
+"hablas": "du sprichst",
+"habla": "er/sie spricht, Sie sprechen",
+"hablamos": "wir sprechen",
+"habláis": "ihr sprecht",
+"hablan": "sie sprechen, Sie sprechen (Pl.)",
+"estudiar, trabajar, buscar, necesitar, usar, practicar, viajar, escuchar, tocar": "lernen/studieren, arbeiten, suchen, brauchen, benutzen, üben, reisen, hören, spielen (Instrument)",
+"¿Qué?": "Was?",
+"¿Qué idiomas hablas?": "Welche Sprachen sprichst du?",
+"¿Quién? / ¿Quiénes?": "Wer? (Sg. / Pl.)",
+"¿Quiénes estudian chino?": "Wer lernt Chinesisch?",
+"¿Dónde?": "Wo?",
+"¿Dónde trabajas?": "Wo arbeitest du?",
+"¿De dónde?": "Woher?",
+"¿De dónde es Marco?": "Woher kommt Marco?",
+"¿Para qué?": "Wofür? / Wozu?",
+"¿Para qué estudias español?": "Wozu lernst du Spanisch?",
+"¿Cómo?": "Wie?",
+"Hablo español.": "Ich spreche Spanisch.",
+"Yo también.": "Ich auch.",
+"Yo no.": "Ich nicht.",
+"No hablo francés.": "Ich spreche kein Französisch.",
+"Yo tampoco.": "Ich auch nicht.",
+"Yo sí.": "Ich schon.",
+"Lucas y Sarah no practican deporte, pero yo sí.": "Lucas und Sarah treiben keinen Sport, aber ich schon.",
+"el / un producto": "das / ein Produkt",
+"la / una empresa": "die / eine Firma",
+"los / unos productos": "die / einige Produkte",
+"las / unas empresas": "die / einige Firmen",
+"¿Qué? · ¿Quién/es? · ¿Dónde? · ¿De dónde? · ¿Para qué? · ¿Cómo?": "Was? · Wer? · Wo? · Woher? · Wozu? · Wie?",
+"Yo también. / Yo no.": "Ich auch. / Ich nicht.",
+"Yo tampoco. / Yo sí.": "Ich auch nicht. / Ich schon.",
+"cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez": "null, eins, zwei, drei, vier, fünf, sechs, sieben, acht, neun, zehn",
+"Este es el señor Vega.": "Das ist Herr Vega.",
+"Esta es Paula Díaz.": "Das ist Paula Díaz.",
+"Estos son Andrés y Pablo.": "Das sind Andrés und Pablo.",
+"Estas son Ana y Elena.": "Das sind Ana und Elena.",
+"Encantado": "Freut mich (Mann)",
+"Encantada": "Freut mich (Frau)",
+"Mucho gusto": "Sehr erfreut",
+"Estos son Laia y Marc.": "Das sind Laia und Marc.",
+"¿Cómo se escribe?": "Wie schreibt man das?",
+"¿Se escribe con hache?": "Schreibt man das mit h?",
+"¿Con acento o sin acento?": "Mit oder ohne Akzent?",
+"¿Con mayúscula?": "Großgeschrieben?",
+"ingeniero, médico, informático": "Ingenieur, Arzt, Informatiker",
+"ingeniera, médica, informática": "Ingenieurin, Ärztin, Informatikerin",
+"profesor, programador, diseñador": "Lehrer, Programmierer, Designer",
+"profesora, programadora, diseñadora": "Lehrerin, Programmiererin, Designerin",
+"el estudiante, el analista": "der Student, der Analyst",
+"la estudiante, la analista": "die Studentin, die Analystin",
+"el jefe / la jefa": "der Chef / die Chefin",
+"Soy ingeniero.": "Ich bin Ingenieur.",
+"21 veintiuno": "21",
+"22 veintidós": "22",
+"23 veintitrés": "23",
+"29 veintinueve": "29",
+"30 treinta": "30",
+"31 treinta y uno": "31",
+"40 cuarenta": "40",
+"50 cincuenta": "50",
+"60 sesenta": "60",
+"70 setenta": "70",
+"80 ochenta": "80",
+"90 noventa": "90",
+"100 cien": "100",
+"101 ciento uno": "101",
+"200 doscientos": "200",
+"500 quinientos": "500",
+"1000 mil": "1000",
+"2000 dos mil": "2000",
+"2026 dos mil veintiséis": "2026",
+"treinta y cinco": "35",
+"cien": "hundert (allein)",
+"ciento": "hundert… (vor Zahlen)",
+"tengo": "ich habe",
+"tienes": "du hast",
+"tiene": "er/sie hat, Sie haben",
+"tenemos": "wir haben",
+"tenéis": "ihr habt",
+"tienen": "sie haben, Sie haben (Pl.)",
+"Tengo 23 años.": "Ich bin 23 Jahre alt.",
+"¿Cuántos años tienes?": "Wie alt bist du?",
+"¿Cuál es tu (número de) móvil?": "Wie ist deine Handynummer?",
+"Es el 612 34 56 78.": "Sie ist 612 34 56 78.",
+"¿Cuál es tu correo electrónico?": "Wie ist deine E-Mail-Adresse?",
+"Es pablo.ruiz@correo.es": "Sie ist pablo.ruiz@correo.es",
+"¿Cuál es tu dirección?": "Wie ist deine Adresse?",
+"Calle Mallorca, número 40.": "Calle Mallorca, Nummer 40.",
+"arroba": "@ (at)",
+"punto": "Punkt",
+"guion": "Bindestrich",
+"guion bajo": "Unterstrich",
+"c/": "Str. (calle)",
+"av.": "Allee (avenida)",
+"pl.": "Platz (plaza)",
+"n.º": "Nr.",
+"seis uno dos, treinta y cuatro, cincuenta y seis, setenta y ocho": "sechs eins zwei, vierunddreißig, sechsundfünfzig, achtundsiebzig",
+"aprendo": "ich lerne",
+"vivo": "ich wohne",
+"aprendes": "du lernst",
+"vives": "du wohnst",
+"aprende": "er/sie lernt",
+"vive": "er/sie wohnt",
+"aprendemos": "wir lernen",
+"vivimos": "wir wohnen",
+"aprendéis": "ihr lernt",
+"vivís": "ihr wohnt",
+"aprenden": "sie lernen",
+"viven": "sie wohnen",
+"leer, comer, beber, responder · escribir, asistir, abrir": "lesen, essen, trinken, antworten · schreiben, teilnehmen, öffnen",
+"¿Qué haces? / ¿A qué te dedicas?": "Was machst du? / Was machst du beruflich?",
+"Soy estudiante. / Trabajo como analista.": "Ich bin Student. / Ich arbeite als Analyst.",
+"Trabajo en un banco / en una consultora.": "Ich arbeite in einer Bank / in einer Beratungsfirma.",
+"¿Qué estudias?": "Was studierst du?",
+"Estudio Informática.": "Ich studiere Informatik.",
+"¿Dónde estudias?": "Wo studierst du?",
+"En la Universidad Politécnica de Cataluña.": "An der Polytechnischen Universität Katalonien.",
+"¿Dónde vives?": "Wo wohnst du?",
+"Vivo en Barcelona, en el barrio de Gràcia.": "Ich wohne in Barcelona, im Viertel Gràcia.",
+"¿Qué hace usted? ¿Dónde trabaja usted?": "Was machen Sie? Wo arbeiten Sie?",
+"Es responsable del contacto con clientes.": "Er/Sie ist für den Kundenkontakt zuständig.",
+"Es responsable de la agenda.": "Er/Sie ist für den Terminkalender zuständig.",
+"Es responsable de los empleados.": "Er/Sie ist für die Angestellten zuständig.",
+"Es responsable de las empresas.": "Er/Sie ist für die Firmen zuständig.",
+"Señor: Perdón, ustedes no son argentinos, ¿verdad?": "Herr: Entschuldigung, Sie sind keine Argentinier, oder?",
+"Julia: No, no. Somos alemanes.": "Julia: Nein, nein. Wir sind Deutsche.",
+"Señor: ¿Aprenden español en Alemania?": "Herr: Lernen Sie Spanisch in Deutschland?",
+"Julia: Sí, en la Universidad Popular.": "Julia: Ja, an der Volkshochschule.",
+"Paul: Yo trabajo en una empresa que vende tractores y ella escribe para un periódico.": "Paul: Ich arbeite in einer Firma, die Traktoren verkauft, und sie schreibt für eine Zeitung.",
+"Señor: Yo vivo en Buenos Aires. Trabajo en una agencia de viajes.": "Herr: Ich wohne in Buenos Aires. Ich arbeite in einem Reisebüro.",
+"El señor Garrido es cantante.": "Herr Garrido ist Sänger.",
+"Un momento, señora Domínguez.": "Einen Moment, Frau Domínguez.",
+"español": "Spanier / spanisch",
+"Este es el señor Vega. / Esta es Paula.": "Das ist Herr Vega. / Das ist Paula.",
+"Encantado / Encantada / Mucho gusto.": "Freut mich (m / w) / Sehr erfreut.",
+"Estos son Andrés y Pablo. / Estas son Ana y Elena.": "Das sind Andrés und Pablo. / Das sind Ana und Elena.",
+"¿Cómo se escribe …? · ¿Con hache? · ¿Con acento o sin acento? · ¿Con mayúscula?": "Wie schreibt man …? · Mit h? · Mit oder ohne Akzent? · Großgeschrieben?",
+"¿Qué haces?": "Was machst du?",
+"Soy ingeniera. / Trabajo como analista.": "Ich bin Ingenieurin. / Ich arbeite als Analystin.",
+"En un banco.": "In einer Bank.",
+"¿Qué estudias? ¿Dónde?": "Was studierst du? Wo?",
+"Informática, en la UPC.": "Informatik, an der UPC.",
+"Tengo 24 años.": "Ich bin 24 Jahre alt.",
+"¿Cuál es tu móvil / correo?": "Wie ist deine Handynummer / E-Mail?",
+"@ arroba · . punto · - guion · _ guion bajo": "@ at · . Punkt · - Bindestrich · _ Unterstrich",
+"Es responsable del contacto con clientes / de la agenda.": "Er/Sie ist für den Kundenkontakt / den Terminkalender zuständig.",
+"el padre + la madre": "der Vater + die Mutter",
+"los padres": "die Eltern",
+"el hermano + la hermana": "der Bruder + die Schwester",
+"los hermanos": "die Geschwister",
+"¿Tienes hermanos?": "Hast du Geschwister?",
+"Sí, tengo un hermano.": "Ja, ich habe einen Bruder.",
+"No, soy hijo único.": "Nein, ich bin Einzelkind.",
+"mi tío / tía": "mein Onkel / meine Tante",
+"mis tíos / tías": "meine Onkel / Tanten",
+"tu tío / tía": "dein Onkel / deine Tante",
+"tus tíos / tías": "deine Onkel / Tanten",
+"su tío / tía": "sein/ihr/Ihr Onkel / seine/ihre/Ihre Tante",
+"sus tíos / tías": "seine/ihre/Ihre Onkel / Tanten",
+"nuestro tío / nuestra tía": "unser Onkel / unsere Tante",
+"nuestros tíos / nuestras tías": "unsere Onkel / Tanten",
+"vuestro tío / vuestra tía": "euer Onkel / eure Tante",
+"vuestros tíos / vuestras tías": "eure Onkel / Tanten",
+"mis padres": "meine Eltern",
+"un hombre delgado": "ein schlanker Mann",
+"una mujer delgada": "eine schlanke Frau",
+"un niño alegre / un producto especial": "ein fröhlicher Junge / ein besonderes Produkt",
+"una niña alegre / una persona especial": "ein fröhliches Mädchen / eine besondere Person",
+"hombres delgados": "schlanke Männer",
+"mujeres delgadas": "schlanke Frauen",
+"Es muy alto.": "Er ist sehr groß.",
+"Es bastante alto.": "Er ist ziemlich groß.",
+"Es un poco vago.": "Er ist ein bisschen faul.",
+"muy, bastante, un poco": "sehr, ziemlich, ein bisschen",
+"estoy": "ich bin (Zustand, Ort)",
+"estás": "du bist",
+"está": "er/sie ist, Sie sind",
+"estamos": "wir sind",
+"estáis": "ihr seid",
+"están": "sie sind, Sie sind (Pl.)",
+"Es Juan. (Name)": "Das ist Juan.",
+"Estoy en Barcelona. (Ort)": "Ich bin in Barcelona.",
+"Es ingeniera. (Beruf)": "Sie ist Ingenieurin.",
+"La FIB está en Campus Nord. (Ort)": "Die FIB ist auf dem Campus Nord.",
+"Es de Cádiz. (Herkunft)": "Er/Sie kommt aus Cádiz.",
+"¿Cómo estás? – Estoy bien. (Befinden)": "Wie geht es dir? – Mir geht es gut.",
+"Es alto y simpático. (Eigenschaft)": "Er ist groß und sympathisch.",
+"Estoy cansado. (Zustand gerade)": "Ich bin müde.",
+"gusta la músicagusta viajar": "mir gefällt die Musik / ich reise gern",
+"gustan los idiomasgustan las fiestas": "mir gefallen Sprachen / Partys",
+"interesar": "interessieren",
+"molestar": "stören",
+"Me gusta la música": "Ich mag Musik.",
+"¿Te gusta la rutina?": "Magst du Routine?",
+"Sí, mucho. / Sí, bastante. / No, nada.": "Ja, sehr. / Ja, ziemlich. / Nein, gar nicht.",
+"¿Le interesa viajar?": "Interessieren Sie sich fürs Reisen?",
+"No mucho.": "Nicht besonders.",
+"¿Te molestan las discusiones?": "Stören dich Diskussionen?",
+"Un poco.": "Ein bisschen.",
+"¿Cuánto tiempo pasas con tu familia?": "Wie viel Zeit verbringst du mit deiner Familie?",
+"¿Cuánta gente trabaja aquí?": "Wie viele Leute arbeiten hier?",
+"¿Cuántas horas trabajas?": "Wie viele Stunden arbeitest du?",
+"José (el abuelo) y Amalia (la abuela)": "José (der Großvater) und Amalia (die Großmutter)",
+"Alberto (el padre) y Ana (la madre)": "Alberto (der Vater) und Ana (die Mutter)",
+"Teresa (la tía, hija de José y Amalia) y Pepe (el tío)": "Teresa (die Tante, Tochter von José und Amalia) und Pepe (der Onkel)",
+"Marta y Roberto (el hermano)": "Marta und Roberto (der Bruder)",
+"Laura (la prima) y Lucas (el primo)": "Laura (die Cousine) und Lucas (der Cousin)",
+"el sobrino / la sobrina": "der Neffe / die Nichte",
+"el marido / la mujer": "der Ehemann / die Ehefrau",
+"el yerno": "der Schwiegersohn",
+"la nuera": "die Schwiegertochter",
+"el suegro / la suegra": "der Schwiegervater / die Schwiegermutter",
+"el cuñado / la cuñada": "der Schwager / die Schwägerin",
+"el nieto": "der Enkel",
+"el padre · la madre · los padres · el hermano · la hermana · el hijo · la hija · el abuelo · la abuela · el tío · la tía · el primo · la prima": "der Vater · die Mutter · die Eltern · der Bruder · die Schwester · der Sohn · die Tochter · der Großvater · die Großmutter · der Onkel · die Tante · der Cousin · die Cousine",
+"Es cocinero. Es de Cádiz.": "Er ist Koch. Er kommt aus Cádiz.",
+"Está en Novelda. ¿Cómo estás?": "Er/Sie ist in Novelda. Wie geht es dir?",
+"gusta + Sg. / Infinitiv · gustan + Pl.": "gusta + Singular / Infinitiv · gustan + Plural",
+"Me gusta la rutina. Te molesta trabajar con estrés. Le interesan las discusiones.": "Ich mag Routine. Dich stört Arbeit unter Stress. Ihn/Sie interessieren die Diskussionen.",
+"¿Cuánto tiempo? · ¿Cuánta gente? · ¿Cuántos años? · ¿Cuántas horas?": "Wie viel Zeit? · Wie viele Leute? · Wie viele Jahre? · Wie viele Stunden?",
+"el desayuno": "das Frühstück",
+"desayunar": "frühstücken",
+"el almuerzo": "das Mittagessen (leichtes)",
+"almorzar": "zu Mittag essen",
+"la comida": "das Essen / Mittagessen",
+"comer": "essen",
+"la merienda": "der Nachmittagssnack",
+"merendar": "nachmittags etwas essen",
+"la cena": "das Abendessen",
+"cenar": "zu Abend essen",
+"¿Dónde comes hoy?": "Wo isst du heute?",
+"siempre": "immer",
+"todos los días": "jeden Tag",
+"muchas veces": "oft",
+"a veces": "manchmal",
+"pocas veces": "selten",
+"nunca": "nie",
+"dos veces a la semana": "zweimal pro Woche",
+"cinco veces al día": "fünfmal am Tag",
+"Nunca tomo pescado.": "Ich esse nie Fisch.",
+"No tomo nunca pescado.": "Ich esse nie Fisch.",
+"el lunes": "am Montag (diesen)",
+"los lunes": "montags (jeden)",
+"De lunes a viernes": "von Montag bis Freitag",
+"puedo": "ich kann",
+"quiero": "ich will",
+"prefiero": "ich ziehe vor",
+"puedes": "du kannst",
+"quieres": "du willst",
+"prefieres": "du ziehst vor",
+"puede": "er/sie kann",
+"quiere": "er/sie will",
+"prefiere": "er/sie zieht vor",
+"podemos": "wir können",
+"queremos": "wir wollen",
+"preferimos": "wir ziehen vor",
+"podéis": "ihr könnt",
+"queréis": "ihr wollt",
+"preferís": "ihr zieht vor",
+"pueden": "sie können",
+"quieren": "sie wollen",
+"prefieren": "sie ziehen vor",
+"almorzar (almuerzo), costar (cuesta), volver (vuelvo), empezar (empiezo), pensar (pienso)": "zu Mittag essen (ich esse), kosten (es kostet), zurückkommen (ich komme zurück), anfangen (ich fange an), denken (ich denke)",
+"Es la una.": "Es ist ein Uhr.",
+"Son las dos.": "Es ist zwei Uhr.",
+"Son las dos y cuarto.": "Es ist Viertel nach zwei.",
+"Son las dos y media.": "Es ist halb drei.",
+"Son las tres menos cuarto.": "Es ist Viertel vor drei.",
+"Son las tres menos diez.": "Es ist zehn vor drei.",
+"Son las dos y diez.": "Es ist zehn nach zwei.",
+"¿A qué hora comes?": "Um wie viel Uhr isst du?",
+"A las dos y media.": "Um halb drei.",
+"El martes por la tarde tengo una reunión.": "Am Dienstagnachmittag habe ich eine Besprechung.",
+"a las nueve de la mañana / de la noche": "um neun Uhr morgens / abends",
+"de dos a diez": "von zwei bis zehn",
+"por la mañana / por la tarde / por la noche": "morgens / nachmittags / abends",
+"de la mañana": "morgens (bei Uhrzeit)",
+"lo": "ihn / es",
+"la": "sie",
+"los": "sie (m. Pl.)",
+"las": "sie (f. Pl.)",
+"¿Quién compra la carne? – La compro yo.": "Wer kauft das Fleisch? – Ich kaufe es.",
+"¿Tomas el café con leche? – No, lo tomo solo.": "Trinkst du den Kaffee mit Milch? – Nein, ich trinke ihn schwarz.",
+"No las compro.": "Ich kaufe sie nicht.",
+"Se puede pagar con tarjeta.": "Man kann mit Karte bezahlen.",
+"El gazpacho se come frío.": "Gazpacho isst man kalt.",
+"Aquí se beben vinos italianos.": "Hier trinkt man italienische Weine.",
+"un kilo de patatas": "ein Kilo Kartoffeln",
+"cien gramos de jamón": "hundert Gramm Schinken",
+"medio litro de zumo": "ein halber Liter Saft",
+"un kilo y medio de carne": "anderthalb Kilo Fleisch",
+"una botella de agua · una lata de cerveza · un paquete de café": "eine Flasche Wasser · eine Dose Bier · ein Päckchen Kaffee",
+"suizo / suiza": "Schweizer / Schweizerin",
+"español / española": "Spanier / Spanierin",
+"belga": "Belgier/in",
+"argentino / argentina": "Argentinier / Argentinierin",
+"alemán / alemana": "Deutscher / Deutsche",
+"marroquí": "Marokkaner/in",
+"italiano / italiana": "Italiener / Italienerin",
+"inglés / inglesa": "Engländer / Engländerin",
+"estadounidense": "US-Amerikaner/in",
+"austriaco / austriaca": "Österreicher / Österreicherin",
+"francés / francesa": "Franzose / Französin",
+"canadiense": "Kanadier/in",
+"alemán → alemana": "deutsch → deutsch (f)",
+"en punto": "genau / Punkt (Uhrzeit)",
+"y cinco / y diez": "fünf nach / zehn nach",
+"y cuarto": "Viertel nach",
+"y veinte / y veinticinco": "zwanzig nach / fünf vor halb",
+"y media": "halb",
+"menos veinticinco / menos veinte": "fünf nach halb / zehn nach halb",
+"menos cuarto": "Viertel vor",
+"menos diez / menos cinco": "zehn vor / fünf vor",
+"Normalmente como en la cantina, aunque prefiero comer en casa.": "Normalerweise esse ich in der Kantine, obwohl ich lieber zu Hause esse.",
+"Desayuno todos los días. · Como de todo. · Soy vegetariano/-a. · No puedo beber alcohol. · Prefiero el café sin leche.": "Ich frühstücke jeden Tag. · Ich esse alles. · Ich bin Vegetarier/in. · Ich darf keinen Alkohol trinken. · Ich trinke den Kaffee lieber ohne Milch.",
+"siempre · todos los días · muchas veces · a veces · pocas veces · nunca · dos veces a la semana": "immer · jeden Tag · oft · manchmal · selten · nie · zweimal pro Woche",
+"lunes · martes · miércoles · jueves · viernes · sábado · domingo — el lunes (diesen) / los lunes (jeden)": "Montag · Dienstag · Mittwoch · Donnerstag · Freitag · Samstag · Sonntag — am Montag (diesen) / montags (jeden)",
+"Es la una. · Son las dos y cuarto / y media / menos cuarto.": "Es ist ein Uhr. · Es ist Viertel nach zwei / halb drei / Viertel vor drei.",
+"¿A qué hora …? – A las tres. · por la mañana / tarde / noche": "Um wie viel Uhr …? – Um drei. · morgens / nachmittags / abends",
+"¿Hay mesas libres? · ¿Para cuántas personas? · ¿A nombre de quién?": "Gibt es freie Tische? · Für wie viele Personen? · Auf welchen Namen?",
+"De primero … · De segundo … · ¿Y para beber? · La cuenta, por favor.": "Als Vorspeise … · Als Hauptgericht … · Und zu trinken? · Die Rechnung, bitte.",
+"La compro yo. No lo tomo.": "Ich kaufe sie. Ich trinke ihn nicht.",
+"un kilo de · cien gramos de · medio litro de · una botella de": "ein Kilo · hundert Gramm · ein halber Liter · eine Flasche",
+"En Barcelona hay una catedral famosa.": "In Barcelona gibt es eine berühmte Kathedrale.",
+"La Sagrada Família está en el Eixample.": "Die Sagrada Família ist im Eixample.",
+"Hay muchos bares y restaurantes.": "Es gibt viele Bars und Restaurants.",
+"Mi hotel está en el casco antiguo.": "Mein Hotel ist in der Altstadt.",
+"Hay más de 300 ferias al año.": "Es gibt mehr als 300 Messen im Jahr.",
+"Los servicios están al lado del restaurante.": "Die Toiletten sind neben dem Restaurant.",
+"hay dos parques": "es gibt zwei Parks",
+"mucho tráfico · mucha gente · muchos trenes · muchas obras": "viel Verkehr · viele Leute · viele Züge · viele Baustellen",
+"Es muy difícil llegar. · Está muy cerca.": "Es ist sehr schwer hinzukommen. · Es ist sehr nah.",
+"mucho": "viel",
+"No uso mucho la bicicleta. ¿Te gusta? – Sí, mucho.": "Ich fahre nicht viel Fahrrad. Gefällt es dir? – Ja, sehr.",
+"voy": "ich gehe / fahre",
+"vas": "du gehst",
+"va": "er/sie geht",
+"vamos": "wir gehen",
+"vais": "ihr geht",
+"van": "sie gehen",
+"Voy a Guadalajara. · Vamos a la oficina.": "Ich fahre nach Guadalajara. · Wir gehen ins Büro.",
+"Voy en metro / en tren / en coche / en bici / en avión": "Ich fahre mit der U-Bahn / dem Zug / dem Auto / dem Rad / dem Flugzeug",
+"Voy a pie / andando.": "Ich gehe zu Fuß.",
+"Voy al aeropuerto.": "Ich fahre zum Flughafen.",
+"a la estación": "zum Bahnhof",
+"sigo · sigues · sigue · seguimos · seguís · siguen": "ich folge · du folgst · er folgt · wir folgen · ihr folgt · sie folgen",
+"Tienes que tomar el autobús. Tenéis que bajar en la próxima parada.": "Du musst den Bus nehmen. Ihr müsst an der nächsten Haltestelle aussteigen.",
+"primero … después … luego … al final …": "zuerst … danach … dann … am Ende …",
+"Primero sigue todo recto. Después gira a la derecha. Luego cruza la plaza y al final está el museo, a la izquierda.": "Geh zuerst geradeaus. Dann bieg rechts ab. Dann überquer den Platz, und am Ende ist das Museum, links.",
+"cerca de ↔ lejos de": "nahe bei ↔ weit weg von",
+"delante de ↔ detrás de": "vor ↔ hinter",
+"a la izquierda de ↔ a la derecha de": "links von ↔ rechts von",
+"al lado de · enfrente de · entre … y …": "neben · gegenüber · zwischen … und …",
+"al lado del hotel": "neben dem Hotel",
+"cerca del metro": "in der Nähe der Metro",
+"porque": "weil",
+"Es fácil llegar porque está cerca del aeropuerto.": "Es ist leicht hinzukommen, weil es nahe am Flughafen ist.",
+"por eso": "deshalb",
+"Está cerca del aeropuerto, por eso es fácil llegar.": "Es ist nahe am Flughafen, deshalb ist es leicht hinzukommen.",
+"pero": "aber",
+"El metro es rápido, pero hay mucha gente.": "Die Metro ist schnell, aber es sind viele Leute da.",
+"y / también": "und / auch",
+"Hay parques y también playas.": "Es gibt Parks und auch Strände.",
+"¿Sabe dónde está la biblioteca? – Sí, está …": "Wissen Sie, wo die Bibliothek ist? – Ja, sie ist …",
+"¿Sabe si hay algún correo aquí cerca? – Sí, hay uno …": "Wissen Sie, ob es hier in der Nähe eine Post gibt? – Ja, es gibt eine …",
+"¿Sabe si la biblioteca está cerca de aquí?": "Wissen Sie, ob die Bibliothek hier in der Nähe ist?",
+"¿Hay algún café cerca de aquí? – No, no hay ninguno.": "Gibt es hier in der Nähe ein Café? – Nein, es gibt keins.",
+"Barcelona es una ciudad atractiva. Hay muchos bares y restaurantes. La catedral está en el casco antiguo.": "Barcelona ist eine attraktive Stadt. Es gibt viele Bars und Restaurants. Die Kathedrale ist in der Altstadt.",
+"Hay una catedral famosa.": "Es gibt eine berühmte Kathedrale.",
+"¿Dónde está la Sagrada Família?": "Wo ist die Sagrada Família?",
+"mucho tráfico, mucha gente, muchos trenes · Es muy fácil. · Trabajo mucho.": "viel Verkehr, viele Leute, viele Züge · Es ist sehr leicht. · Ich arbeite viel.",
+"Perdone, ¿sabe dónde está …? · Sigue todo recto. · Gira a la derecha / izquierda. · Cruza la calle. · Primero … después … luego … al final …": "Entschuldigung, wissen Sie, wo … ist? · Geh geradeaus. · Bieg rechts / links ab. · Überquer die Straße. · Zuerst … danach … dann … am Ende …",
+"cerca de / lejos de · delante de / detrás de · a la derecha de / a la izquierda de · al lado de · enfrente de · entre … y …": "nahe bei / weit weg von · vor / hinter · rechts / links von · neben · gegenüber · zwischen … und …",
+"porque (weil) · por eso (deshalb) · pero (aber)": "weil · deshalb · aber",
+"Me encanta la naturaleza. Me encantan los museos.": "Ich liebe die Natur. Ich liebe Museen.",
+"(A mí)": "(mir)",
+"me": "mir",
+"encanta jugar al tenis.gustan los museos.interesa la cultura.molesta el ruido.": "Tennis spielen macht mir Spaß. / Museen gefallen mir. / Kultur interessiert mich. / Lärm stört mich.",
+"(A ti)": "(dir)",
+"te": "dir",
+"(A él / ella / usted)": "(ihm / ihr / Ihnen)",
+"le": "ihm / ihr / Ihnen",
+"(A nosotros/-as)": "(uns)",
+"nos": "uns",
+"(A vosotros/-as)": "(euch)",
+"os": "euch",
+"(A ellos / ellas / ustedes)": "(ihnen / Ihnen, Pl.)",
+"les": "ihnen / Ihnen",
+"A él le gustan los bares, pero a mí me molesta el ruido.": "Ihm gefallen Bars, aber mich stört der Lärm.",
+"A Miguel le gusta la música.": "Miguel mag Musik.",
+"Me gusta nadar.": "Ich schwimme gern.",
+"A mí también. 🙂": "Ich auch.",
+"A mí no. 🙁": "Ich nicht.",
+"No me gusta la playa.": "Ich mag den Strand nicht.",
+"A mí tampoco.": "Ich auch nicht.",
+"A mí sí.": "Ich schon.",
+"Hablo inglés. – Yo también.": "Ich spreche Englisch. – Ich auch.",
+"hacer → hago": "machen → ich mache",
+"poner → pongo": "setzen/legen → ich lege",
+"salir → salgo": "ausgehen → ich gehe aus",
+"tener → tengo (tienes)": "haben → ich habe (du hast)",
+"venir → vengo (vienes)": "kommen → ich komme (du kommst)",
+"decir → digo (dices)": "sagen → ich sage (du sagst)",
+"juego, juegas, juega, jugamos, jugáis, juegan": "ich spiele, du spielst, er spielt, wir spielen, ihr spielt, sie spielen",
+"juego al tenis": "ich spiele Tennis",
+"Buenos días, ¿en qué puedo ayudarle?": "Guten Tag, wie kann ich Ihnen helfen?",
+"Quería reservar una habitación doble.": "Ich wollte ein Doppelzimmer reservieren.",
+"¿Para qué fechas?": "Für welche Daten?",
+"Del 20 al 23 de mayo.": "Vom 20. bis 23. Mai.",
+"¿Para cuántas personas?": "Für wie viele Personen?",
+"Para dos.": "Für zwei.",
+"¿Está incluido el desayuno?": "Ist das Frühstück inklusive?",
+"Sí, está incluido. / No, son 12 € más.": "Ja, es ist inklusive. / Nein, es kostet 12 € extra.",
+"¿Me puede decir si hay …?": "Können Sie mir sagen, ob es … gibt?",
+"el 3 de octubre": "der 3. Oktober",
+"del 20 al 23 de mayo": "vom 20. bis 23. Mai",
+"he · has · ha · hemos · habéis · han": "ich habe · du hast · er hat · wir haben · ihr habt · sie haben",
+"-ar → -ado (estado)-er / -ir → -ido (podido, elegido)": "-ar → -ado (gewesen) / -er, -ir → -ido (gekonnt, gewählt)",
+"Esta semana he trabajado mucho.": "Diese Woche habe ich viel gearbeitet.",
+"¿Has estado alguna vez en México?": "Warst du schon mal in Mexiko?",
+"Todavía no he recibido respuesta.": "Ich habe noch keine Antwort bekommen.",
+"hoy, esta semana, este año": "heute, diese Woche, dieses Jahr",
+"alguna vez, ya, todavía no, nunca, últimamente": "schon mal, schon, noch nicht, nie, in letzter Zeit",
+"No lo he visto": "Ich habe es nicht gesehen.",
+"decir → dicho": "sagen → gesagt",
+"hacer → hecho": "machen → gemacht",
+"ir → ido": "gehen → gegangen",
+"abrir → abierto": "öffnen → geöffnet",
+"escribir → escrito": "schreiben → geschrieben",
+"poner → puesto": "setzen/legen → gelegt",
+"ver → visto": "sehen → gesehen",
+"volver → vuelto": "zurückkommen → zurückgekommen",
+"romper → roto": "kaputt machen → kaputt",
+"Tenemos un problema con la habitación.": "Wir haben ein Problem mit dem Zimmer.",
+"Enseguida le mando al técnico.": "Ich schicke Ihnen sofort den Techniker.",
+"Mire, es que no funciona el aire acondicionado.": "Schauen Sie, die Klimaanlage funktioniert nicht.",
+"Perdón por las molestias.": "Entschuldigen Sie die Unannehmlichkeiten.",
+"En la habitación faltan toallas.": "Im Zimmer fehlen Handtücher.",
+"Disculpe. ¡Cuánto lo siento!": "Entschuldigung. Das tut mir sehr leid!",
+"Falta una toalla. Faltan toallas.": "Es fehlt ein Handtuch. Es fehlen Handtücher.",
+"– No funciona la calefacción. – ¡Cuánto lo siento!": "– Die Heizung funktioniert nicht. – Das tut mir sehr leid!",
+"Si lo desea, puedo ofrecerle otra habitación.": "Wenn Sie möchten, kann ich Ihnen ein anderes Zimmer anbieten.",
+"Yo toco la guitarra.": "Ich spiele Gitarre.",
+"(A mí) me gusta la guitarra.": "Mir gefällt Gitarre.",
+"Tú practicas muchos deportes.": "Du treibst viele Sportarten.",
+"(A ti) te gustan muchos deportes.": "Dir gefallen viele Sportarten.",
+"Lola baila flamenco.": "Lola tanzt Flamenco.",
+"(A Lola) le encanta bailar flamenco.": "Lola tanzt total gern Flamenco.",
+"Nosotros jugamos al fútbol.": "Wir spielen Fußball.",
+"(A nosotros) nos encanta el fútbol.": "Wir lieben Fußball.",
+"Mis compañeros estudian latín.": "Meine Mitschüler lernen Latein.",
+"A mis compañeros les interesa el latín.": "Meine Mitschüler interessieren sich für Latein.",
+"Nos encanta Picasso. Me interesa mucho Perú.": "Wir lieben Picasso. Peru interessiert mich sehr.",
+"museo Reina Sofía ✔ · parque del Retiro ✔ · la Plaza Mayor ✔ · Noche flamenca ✔ · jamón de bellota ✗ · el Escorial ✗ · el Rastro ✗": "Museum Reina Sofía ✔ · Retiro-Park ✔ · Plaza Mayor ✔ · Flamenco-Abend ✔ · Eichel-Schinken ✗ · El Escorial ✗ · Flohmarkt El Rastro ✗",
+"Ya han visitado el museo Reina Sofía.": "Sie haben das Museum Reina Sofía schon besucht.",
+"Todavía no han ido al Rastro.": "Sie sind noch nicht zum Rastro gegangen.",
+"normalmente, generalmente": "normalerweise, im Allgemeinen",
+"hoy, ya, este fin de semana": "heute, schon, dieses Wochenende",
+"(A mí) me encanta / gusta / interesa / molesta + Sg.": "Ich liebe / mag / interessiere mich für / mich stört + Singular",
+"… encantan / gustan + Pl.": "… + Plural (encantan / gustan)",
+"A mí también. / A mí no.": "Ich auch. / Ich nicht.",
+"A mí tampoco. / A mí sí.": "Ich auch nicht. / Ich schon.",
+"hago · pongo · salgo · tengo · vengo · digo — jugar: juego, juegas, juega, jugamos, jugáis, juegan": "ich mache · lege · gehe aus · habe · komme · sage — spielen: ich spiele, du spielst …",
+"Quería reservar una habitación doble. · ¿Para qué fechas? – Del 20 al 23 de mayo. · ¿Está incluido el desayuno?": "Ich wollte ein Doppelzimmer reservieren. · Für welche Daten? – Vom 20. bis 23. Mai. · Ist das Frühstück inklusive?",
+"No funciona la calefacción. · Faltan toallas. — Perdón por las molestias. · ¡Cuánto lo siento! · Enseguida le mando al técnico.": "Die Heizung funktioniert nicht. · Es fehlen Handtücher. — Entschuldigen Sie die Unannehmlichkeiten. · Das tut mir sehr leid! · Ich schicke Ihnen sofort den Techniker.",
+"dicho · hecho · ido · abierto · escrito · puesto · visto · vuelto": "gesagt · gemacht · gegangen · geöffnet · geschrieben · gelegt · gesehen · zurückgekommen",
+"¿Sabes chino?No sé usar este programa.": "Kannst du Chinesisch? / Ich kann dieses Programm nicht bedienen.",
+"Puedo ir a pie al trabajo.¿Puedes llevar los documentos?": "Ich kann zu Fuß zur Arbeit gehen. / Kannst du die Unterlagen mitnehmen?",
+"¿Puedo abrir la ventana?¿Se puede usar el móvil aquí?": "Darf ich das Fenster öffnen? / Darf man hier das Handy benutzen?",
+"sé · sabes · sabe · sabemos · sabéis · saben": "ich weiß/kann · du weißt · er weiß · wir wissen · ihr wisst · sie wissen",
+"Sé nadar.": "Ich kann schwimmen.",
+"Lucas es más joven que Carlos.": "Lucas ist jünger als Carlos.",
+"Valentina gana menos que Lucas.": "Valentina verdient weniger als Lucas.",
+"Lucas es tan joven como Valentina.": "Lucas ist so jung wie Valentina.",
+"Lucas trabaja tanto como Carlos.": "Lucas arbeitet so viel wie Carlos.",
+"Lucas trabaja tantas horas como Carlos.": "Lucas arbeitet so viele Stunden wie Carlos.",
+"Jan es el más deportista de la clase.": "Jan ist der Sportlichste in der Klasse.",
+"bueno → mejor": "gut → besser",
+"malo → peor": "schlecht → schlechter",
+"grande → mayor / más grande": "groß → älter / größer",
+"pequeño → menor / más pequeño": "klein → jünger / kleiner",
+"Gano más de 2000 €.": "Ich verdiene mehr als 2000 €.",
+"me levanto": "ich stehe auf",
+"te levantas": "du stehst auf",
+"se levanta": "er/sie steht auf",
+"nos levantamos": "wir stehen auf",
+"os levantáis": "ihr steht auf",
+"se levantan": "sie stehen auf",
+"No me levanto tarde.": "Ich stehe nicht spät auf.",
+"Me quiero duchar = Quiero ducharme.": "Ich will duschen.",
+"ducharse, acostarse (o→ue: me acuesto), vestirse (e→i: me visto), reunirse (me reúno), despertarse (e→ie: me despierto)": "duschen, ins Bett gehen (ich gehe ins Bett), sich anziehen (ich ziehe mich an), sich treffen (ich treffe mich), aufwachen (ich wache auf)",
+"Me ducho antes de desayunar.": "Ich dusche vor dem Frühstück.",
+"Después del trabajo ceno con la familia.": "Nach der Arbeit esse ich mit der Familie zu Abend.",
+"Después de estudiar voy al gimnasio.": "Nach dem Lernen gehe ich ins Fitnessstudio.",
+"buscar → Estoy buscando los precios.": "suchen → Ich suche gerade die Preise.",
+"hacer → ¿Qué estás haciendo? · escribir → escribiendo": "machen → Was machst du gerade? · schreiben → schreibend",
+"leer → leyendo": "lesen → lesend",
+"ir → yendo": "gehen → gehend",
+"decir → diciendo": "sagen → sagend",
+"pedir → pidiendo": "bitten → bittend",
+"venir → viniendo": "kommen → kommend",
+"dormir → durmiendo": "schlafen → schlafend",
+"Me estoy duchando = Estoy duchándome": "Ich dusche gerade.",
+"Ana es la chica morena que está pagando.": "Ana ist die dunkelhaarige Frau, die gerade bezahlt.",
+"Es la traducción que me has pedido.": "Das ist die Übersetzung, um die du mich gebeten hast.",
+"Lo siento (mucho), es que …": "Es tut mir (sehr) leid, aber …",
+"Perdón, pero ahora no puedo.": "Entschuldigung, aber jetzt kann ich nicht.",
+"Gracias, pero (es que) …": "Danke, aber …",
+"Me llamo Sara y soy enfermera en el Hospital Clínic de Barcelona. Me levanto a las once y media porque empiezo a trabajar a las cuatro de la tarde. […] A las cuatro menos cuarto salgo de casa. Si el metro va bien, necesito media hora para llegar al hospital. Soy una persona muy puntual y nunca llego tarde al trabajo.": "Ich heiße Sara und bin Krankenschwester im Hospital Clínic in Barcelona. Ich stehe um halb zwölf auf, weil ich um vier Uhr nachmittags anfange zu arbeiten. […] Um Viertel vor vier gehe ich aus dem Haus. Wenn die U-Bahn gut fährt, brauche ich eine halbe Stunde bis zum Krankenhaus. Ich bin sehr pünktlich und komme nie zu spät zur Arbeit.",
+"siempre / todos los días · casi siempre / a menudo · (todos) los lunes · dos veces por semana · a veces · cada quince días · una vez al mes · casi nunca · nunca": "immer / jeden Tag · fast immer / oft · (jeden) Montag · zweimal pro Woche · manchmal · alle zwei Wochen · einmal im Monat · fast nie · nie",
+"– Hay que ir a buscar al Sr. Chaw al aeropuerto. – Yo no, no puedo.": "– Jemand muss Herrn Chaw vom Flughafen abholen. – Ich nicht, ich kann nicht.",
+"– ¿Y tú? – Yo no sé conducir.": "– Und du? – Ich kann nicht Auto fahren.",
+"Es un trabajo creativo. · Mis horarios son flexibles. · Tengo un salario alto / bajo.": "Es ist eine kreative Arbeit. · Meine Arbeitszeiten sind flexibel. · Ich habe ein hohes / niedriges Gehalt.",
+"¿Sabes chino? · No sé usar este programa.": "Kannst du Chinesisch? · Ich kann dieses Programm nicht bedienen.",
+"Puedo ir a pie. · ¿Puedo abrir la ventana?": "Ich kann zu Fuß gehen. · Darf ich das Fenster öffnen?",
+"más / menos … que · tan … como · tanto/-a/-os/-as … como · el más …": "mehr / weniger … als · so … wie · so viel(e) … wie · der/die … -ste",
+"mejor · peor · mayor · menor · más / menos de + Zahl": "besser · schlechter · älter · jünger · mehr / weniger als + Zahl",
+"me levanto · te levantas · se levanta · nos levantamos · os levantáis · se levantan — Quiero ducharme = Me quiero duchar.": "ich stehe auf · du stehst auf · … — Ich will duschen.",
+"antes de / después de + Infinitiv: Me ducho antes de desayunar.": "vor / nach + Infinitiv: Ich dusche vor dem Frühstück.",
+"-ando / -iendo: Estoy escribiendo un informe. · leyendo · yendo · diciendo · pidiendo · durmiendo": "-end (Verlaufsform): Ich schreibe gerade einen Bericht. · lesend · gehend · sagend · bittend · schlafend",
+"La mujer que está hablando es mi compañera. · Lo siento, es que … · Perdón, pero ahora no puedo.": "Die Frau, die gerade spricht, ist meine Kollegin. · Es tut mir leid, aber … · Entschuldigung, aber jetzt kann ich nicht.",
+"¿Tienes ganas de tomar un café?": "Hast du Lust, einen Kaffee zu trinken?",
+"¡Vale!": "Okay!",
+"Justo el sábado no puedo.": "Ausgerechnet am Samstag kann ich nicht.",
+"¿Por qué no quedamos el lunes?": "Warum treffen wir uns nicht am Montag?",
+"De acuerdo.": "Einverstanden.",
+"Lo siento, pero no puedo.": "Tut mir leid, aber ich kann nicht.",
+"¿Qué te / le parece si nos vemos …?": "Was hältst du / halten Sie davon, wenn wir uns … sehen?",
+"Muy bien. / Perfecto.": "Sehr gut. / Perfekt.",
+"Es que tengo otra reunión.": "Ich habe nämlich eine andere Besprechung.",
+"¿Cuándo / Dónde podemos vernos?": "Wann / Wo können wir uns sehen?",
+"A las 10 es posible.": "Um 10 geht es.",
+"Gracias, pero es que …": "Danke, aber …",
+"¿Qué tal si quedamos a las 10?": "Wie wär’s, wenn wir uns um 10 treffen?",
+"Mejor el viernes.": "Lieber am Freitag.",
+"quedar": "sich verabreden",
+"¿Quedamos a las ocho delante del cine?": "Treffen wir uns um acht vor dem Kino?",
+"a": "zu (+ Infinitiv)",
+"comer con una amiga.quedar con Pablo a las 3.ir al gimnasio el lunes.hacer un viaje mañana.": "mit einer Freundin essen / mich um 3 mit Pablo treffen / am Montag ins Fitnessstudio gehen / morgen eine Reise machen",
+"mañana, pasado mañana, el próximo lunes, la semana que viene, este fin de semana, el 22 de octubre": "morgen, übermorgen, nächsten Montag, nächste Woche, dieses Wochenende, am 22. Oktober",
+"¿Conoces a la fundadora de la empresa?": "Kennst du die Gründerin der Firma?",
+"Voy a ver a María el martes.": "Ich treffe María am Dienstag.",
+"¿Conoces una tienda de segunda mano?": "Kennst du einen Secondhandladen?",
+"Tengo un hermano.": "Ich habe einen Bruder.",
+"conozco, conoces, conoce … · ofrezco, ofreces, ofrece …": "ich kenne, du kennst, er kennt … · ich biete an, du bietest an …",
+"blanco/-a · negro/-a · rojo/-a · amarillo/-a": "weiß · schwarz · rot · gelb",
+"azul · verde · gris · marrón": "blau · grün · grau · braun",
+"rosa": "rosa",
+"naranja": "orange",
+"zapatos rosa / rosas": "rosa Schuhe",
+"una camisa blanca · unos pantalones negros · una chaqueta azul · unas botas marrones": "ein weißes Hemd · eine schwarze Hose · eine blaue Jacke · braune Stiefel",
+"este / estos": "dieser / diese (Pl.)",
+"esta / estas": "diese / diese (Pl., f)",
+"ese / esos": "der da / die da (Pl.)",
+"esa / esas": "die da / die da (Pl., f)",
+"aquel / aquellos": "jener (dort drüben) / jene",
+"aquella / aquellas": "jene (f) / jene (Pl., f)",
+"esto, eso, aquello": "das (hier), das (da), das (dort)",
+"¿Qué es eso?": "Was ist das?",
+"Hace calor / frío / sol / viento.": "Es ist heiß / kalt / sonnig / windig.",
+"Hace buen / mal tiempo.": "Es ist schönes / schlechtes Wetter.",
+"Llueve. / Nieva.": "Es regnet. / Es schneit.",
+"Hay niebla.": "Es ist neblig.",
+"Estamos a 25 grados.": "Wir haben 25 Grad.",
+"¡Qué calor hace!": "Was für eine Hitze!",
+"¡Qué camiseta tan original!": "Was für ein originelles T-Shirt!",
+"¡Qué simpático es!": "Wie sympathisch er ist!",
+"¡Cómo llueve!": "Wie es regnet!",
+"¡Cuánto lo siento!": "Das tut mir so leid!",
+"¡Qué agradable es este hotel! ¿Verdad?": "Wie angenehm dieses Hotel ist! Oder?",
+"¡Qué simpático es el profesor del curso! ¿No?": "Wie sympathisch der Kursleiter ist! Nicht?",
+"¿Ha visto el último partido del Barça?": "Haben Sie das letzte Spiel von Barça gesehen?",
+"¿Ha leído algún libro interesante últimamente?": "Haben Sie in letzter Zeit ein interessantes Buch gelesen?",
+"¿Qué puedo comprar como recuerdo de aquí?": "Was kann ich als Souvenir von hier kaufen?",
+"quedar (con alguien)": "sich (mit jemandem) verabreden",
+"¿Quedamos a las ocho?": "Treffen wir uns um acht?",
+"quedarse": "bleiben",
+"Hoy me quedo en casa.": "Heute bleibe ich zu Hause.",
+"¿Tienes ganas de …? · ¿Por qué no quedamos …? · ¿Qué te parece si …? · ¿Qué tal si …?": "Hast du Lust zu …? · Warum treffen wir uns nicht …? · Was hältst du davon, wenn …? · Wie wär’s, wenn …?",
+"Vale. · De acuerdo. · Perfecto. · A las 10 es posible.": "Okay. · Einverstanden. · Perfekt. · Um 10 geht es.",
+"Justo el sábado no puedo. · Es que … · Mejor el viernes.": "Ausgerechnet am Samstag kann ich nicht. · Ich … nämlich … · Lieber am Freitag.",
+"voy / vas / va / vamos / vais / van + a + Infinitiv: El lunes voy a ver a un cliente.": "ich werde / du wirst … + zu + Infinitiv: Am Montag treffe ich einen Kunden.",
+"la camiseta, la camisa, el jersey, los pantalones, la falda, la chaqueta, el traje, los zapatos · a rayas, a cuadros · de algodón, de lana, de cuero": "das T-Shirt, das Hemd, der Pullover, die Hose, der Rock, die Jacke, der Anzug, die Schuhe · gestreift, kariert · aus Baumwolle, aus Wolle, aus Leder",
+"este/esta/estos/estas · ese/esa/esos/esas · aquel/aquella/aquellos/aquellas · esto, eso, aquello": "dieser/diese … · der da/die da … · jener/jene … · das hier, das da, das dort",
+"¿Conoces a la fundadora? — aber: ¿Conoces una tienda …? · Tengo un hermano.": "Kennst du die Gründerin? — aber: Kennst du einen Laden …? · Ich habe einen Bruder.",
+"Hace calor / frío / sol / viento / buen tiempo / mal tiempo · Llueve · Nieva · Hay niebla · Estamos a 25 grados": "Es ist heiß / kalt / sonnig / windig / schönes / schlechtes Wetter · Es regnet · Es schneit · Es ist neblig · Wir haben 25 Grad",
+"¡Qué calor hace! · ¡Qué camiseta tan original! · ¡Cómo llueve! · ¡Cuánto lo siento!": "Was für eine Hitze! · Was für ein originelles T-Shirt! · Wie es regnet! · Das tut mir so leid!",
+"Es moderno / antiguo.": "Es ist modern / alt.",
+"Está en buen estado.": "Es ist in gutem Zustand.",
+"Está en un edificio de oficinas.": "Es ist in einem Bürogebäude.",
+"Es tranquilo / luminoso.": "Es ist ruhig / hell.",
+"Está reformado.": "Es ist renoviert.",
+"Está en la zona comercial.": "Es liegt im Geschäftsviertel.",
+"Es exterior / interior.": "Es liegt zur Straße / zum Hof.",
+"Está amueblado.": "Es ist möbliert.",
+"Está cerca de la estación.": "Es ist in der Nähe des Bahnhofs.",
+"Es barato / caro.": "Es ist billig / teuer.",
+"Está limpio.": "Es ist sauber.",
+"Está bien comunicado.": "Es ist gut angebunden.",
+"El piso es limpio": "Die Wohnung ist ein sauberer Ort (immer).",
+"El piso está limpio.": "Die Wohnung ist (gerade) sauber.",
+"buscaba": "ich suchte",
+"tenía": "ich hatte",
+"buscabas": "du suchtest",
+"tenías": "du hattest",
+"buscábamos": "wir suchten",
+"teníamos": "wir hatten",
+"buscabais": "ihr suchtet",
+"teníais": "ihr hattet",
+"buscaban": "sie suchten",
+"tenían": "sie hatten",
+"era, eras, era, éramos, erais, eran": "ich war, du warst, er war, wir waren, ihr wart, sie waren",
+"iba, ibas, iba, íbamos, ibais, iban": "ich ging, du gingst, er ging …",
+"veía, veías, veía, veíamos, veíais, veían": "ich sah, du sahst, er sah …",
+"hay → había": "es gibt → es gab",
+"podía, quería, dormía": "ich konnte, ich wollte, ich schlief",
+"antes": "früher",
+"Antes iba a comer con mis compañeras. Ahora como sola.": "Früher ging ich mit meinen Kolleginnen essen. Jetzt esse ich allein.",
+"cuando era / tenía …": "als ich … war / … hatte",
+"Cuando tenía 10 años, hacía mucho deporte.": "Als ich 10 war, habe ich viel Sport gemacht.",
+"a los … años": "mit … Jahren",
+"A los 15 años leía muchos libros.": "Mit 15 habe ich viele Bücher gelesen.",
+"en los años 70": "in den 70er-Jahren",
+"En los años 70 la gente se quedaba mucho tiempo en la misma empresa.": "In den 70ern blieben die Leute lange in derselben Firma.",
+"Antes … – Ahora / Actualmente …": "Früher … – Jetzt / Heute …",
+"(casi) todos/-as": "(fast) alle",
+"Casi todos prefieren trabajar en remoto.": "Fast alle arbeiten lieber remote.",
+"la mayoría (de)": "die Mehrheit (der)",
+"La mayoría trabaja en una oficina.": "Die meisten arbeiten in einem Büro.",
+"la mitad (de)": "die Hälfte (der)",
+"Más de la mitad se ha mudado una vez.": "Mehr als die Hälfte ist schon einmal umgezogen.",
+"un tercio (de)": "ein Drittel (der)",
+"Un tercio prefiere ir a la oficina.": "Ein Drittel geht lieber ins Büro.",
+"muchos/-as · algunos/-as · pocos/-as": "viele · einige · wenige",
+"Pocos pueden separar la vida privada.": "Wenige können das Privatleben trennen.",
+"uno/-a de cada diez": "eine/r von zehn",
+"Solo una de cada diez españolas teletrabajaba.": "Nur eine von zehn Spanierinnen arbeitete im Homeoffice.",
+"(casi) nadie": "(fast) niemand",
+"Casi nadie tiene un espacio adecuado.": "Fast niemand hat einen geeigneten Platz.",
+"El 95 % de los trabajadores …": "95 % der Arbeitnehmer …",
+"Solo un 5 % …": "Nur 5 % …",
+"primero/-a · segundo/-a · tercero/-a · cuarto/-a · quinto/-a": "erste/r · zweite/r · dritte/r · vierte/r · fünfte/r",
+"el primer piso, el tercer piso": "der erste Stock, der dritte Stock",
+"tener que + Inf.": "müssen + Infinitiv",
+"Tengo que trabajar mucho.": "Ich muss viel arbeiten.",
+"hay que + Inf.": "man muss + Infinitiv",
+"¿Hay que pagar una fianza?": "Muss man eine Kaution zahlen?",
+"la oficina · el despacho · la recepción · la cocina · la puerta · la ventana · la terraza · el balcón · el escritorio · la silla · la estantería · el armario · el ascensor · la planta baja · la primera planta": "das Büro · das Arbeitszimmer · der Empfang · die Küche · die Tür · das Fenster · die Terrasse · der Balkon · der Schreibtisch · der Stuhl · das Regal · der Schrank · der Aufzug · das Erdgeschoss · der erste Stock",
+"moderno, tranquilo, luminoso, exterior, caro": "modern, ruhig, hell, zur Straße, teuer",
+"en buen estado, reformado, amueblado, limpio": "in gutem Zustand, renoviert, möbliert, sauber",
+"en la zona comercial, cerca de la estación, bien comunicado": "im Geschäftsviertel, in der Nähe des Bahnhofs, gut angebunden",
+"ser: era … · ir: iba … · ver: veía … · hay → había": "sein: war … · gehen: ging … · sehen: sah … · es gibt → es gab",
+"antes · cuando era joven · a los 15 años · en los años 70": "früher · als ich jung war · mit 15 · in den 70ern",
+"(casi) todos · la mayoría · la mitad · un tercio · muchos · algunos · pocos · uno de cada diez · (casi) nadie · el 95 % de …": "(fast) alle · die Mehrheit · die Hälfte · ein Drittel · viele · einige · wenige · eine/r von zehn · (fast) niemand · 95 % der …",
+"primer(o), segundo, tercer(o) · tener que + Inf. · hay que + Inf.": "erste, zweite, dritte · müssen + Inf. · man muss + Inf.",
+"trabajé": "ich arbeitete",
+"aprendí": "ich lernte",
+"trabajaste": "du arbeitetest",
+"aprendiste": "du lerntest",
+"trabajó": "er/sie arbeitete",
+"aprendió": "er/sie lernte",
+"trabajamos": "wir arbeiteten",
+"aprendimos": "wir lernten",
+"trabajasteis": "ihr arbeitetet",
+"aprendisteis": "ihr lerntet",
+"trabajaron": "sie arbeiteten",
+"aprendieron": "sie lernten",
+"trabajo": "ich arbeite (Präsens)",
+"ayer · anoche · el año pasado · la semana pasada · en 2019 · hace dos años · en diciembre · por última vez": "gestern · gestern Abend · letztes Jahr · letzte Woche · 2019 · vor zwei Jahren · im Dezember · zum letzten Mal",
+"buscar → busqué · empezar → empecé · llegar → llegué": "suchen → ich suchte · anfangen → ich fing an · ankommen → ich kam an",
+"fui": "ich war / ging",
+"estuve": "ich war (Zustand/Ort)",
+"tuve": "ich hatte",
+"hice": "ich machte",
+"fuiste": "du warst / gingst",
+"estuviste": "du warst",
+"tuviste": "du hattest",
+"hiciste": "du machtest",
+"fue": "er/sie war / ging",
+"estuvo": "er/sie war",
+"tuvo": "er/sie hatte",
+"hizo": "er/sie machte",
+"fuimos": "wir waren / gingen",
+"estuvimos": "wir waren",
+"tuvimos": "wir hatten",
+"hicimos": "wir machten",
+"fuisteis": "ihr wart / gingt",
+"estuvisteis": "ihr wart",
+"tuvisteis": "ihr hattet",
+"hicisteis": "ihr machtet",
+"fueron": "sie waren / gingen",
+"estuvieron": "sie waren",
+"tuvieron": "sie hatten",
+"hicieron": "sie machten",
+"poder → pud-": "können → konnt-",
+"poner → pus-": "setzen/legen → legt-",
+"querer → quis-": "wollen → wollt-",
+"venir → vin-": "kommen → kam-",
+"decir → dij- (dijeron)": "sagen → sagt- (sie sagten)",
+"producir → produj-": "produzieren → produziert-",
+"dar → di, diste, dio": "geben → ich gab, du gabst, er gab",
+"ver → vi, viste, vio": "sehen → ich sah, du sahst, er sah",
+"Fue un día genial": "Es war ein genialer Tag.",
+"Fue a Madrid": "Er/Sie fuhr nach Madrid.",
+"hay → hubo": "es gibt → es gab",
+"Nací en Cádiz en 1998.": "Ich bin 1998 in Cádiz geboren.",
+"A los 10 años nos mudamos a Gijón.": "Mit 10 Jahren sind wir nach Gijón gezogen.",
+"Fui a la escuela de 2004 a 2016.": "Ich bin von 2004 bis 2016 zur Schule gegangen.",
+"Hice un intercambio el año pasado.": "Letztes Jahr habe ich einen Austausch gemacht.",
+"Terminé el instituto dos años después.": "Zwei Jahre später habe ich das Abitur gemacht.",
+"Hace un mes empecé a trabajar.": "Vor einem Monat habe ich angefangen zu arbeiten.",
+"Desde 2023 trabajo en una agencia. (dauert an → Präsens!)": "Seit 2023 arbeite ich in einer Agentur.",
+"hace tres años": "vor drei Jahren",
+"hoy, esta semana, este mes, este año": "heute, diese Woche, diesen Monat, dieses Jahr",
+"ayer, la semana pasada, en 2019, hace dos años": "gestern, letzte Woche, 2019, vor zwei Jahren",
+"en diciembre, el lunes, por última vez": "im Dezember, am Montag, zum letzten Mal",
+"– ¿Has hecho unas prácticas alguna vez? – Sí, hice unas prácticas en SEAT hace dos años.": "– Hast du schon mal ein Praktikum gemacht? – Ja, ich habe vor zwei Jahren ein Praktikum bei SEAT gemacht.",
+"– ¿Cuándo hiciste una presentación por última vez? – Hice una la semana pasada. / He hecho una hoy por la mañana.": "– Wann hast du zum letzten Mal eine Präsentation gehalten? – Letzte Woche. / Heute Morgen habe ich eine gehalten.",
+"amable · comunicativo/-a · organizado/-a · trabajador/-a · creativo/-a · capaz de …": "freundlich · kommunikativ · organisiert · fleißig · kreativ · fähig zu …",
+"dispuesto/-a a viajar · acostumbrado/-a a … · interesado/-a en aprender": "reisebereit · gewohnt an … · lernbereit",
+"mucha experiencia · nivel alto de inglés · conocimientos de …": "viel Erfahrung · gutes Englisch · Kenntnisse in …",
+"idiomas · trabajar en equipo · convencer": "Sprachen (können) · im Team arbeiten · überzeugen",
+"En relación con la oferta publicada en … · Les envío mi currículum con el objetivo de participar en el proceso de selección. · Considero que mi experiencia es adecuada para el puesto. · Quedo a su disposición para una entrevista. · Atentamente,": "Bezugnehmend auf die in … veröffentlichte Stelle · Ich sende Ihnen meinen Lebenslauf, um am Auswahlverfahren teilzunehmen. · Ich halte meine Erfahrung für passend für die Stelle. · Für ein Vorstellungsgespräch stehe ich gern zur Verfügung. · Mit freundlichen Grüßen",
+"¿Cuáles son sus puntos fuertes?": "Was sind Ihre Stärken?",
+"Soy una persona organizada y acostumbrada a …": "Ich bin ein organisierter Mensch und gewohnt, …",
+"¿Por qué quiere trabajar en nuestra empresa?": "Warum möchten Sie in unserer Firma arbeiten?",
+"Quiero ser parte de un buen equipo de trabajo.": "Ich möchte Teil eines guten Teams sein.",
+"Nací en … · A los 10 años nos mudamos a … · Fui a la escuela de … a … · Hice un intercambio el año pasado. · Terminé el instituto dos años después. · Hace un mes empecé a trabajar.": "Ich bin in … geboren · Mit 10 sind wir nach … gezogen · Ich bin von … bis … zur Schule gegangen · Letztes Jahr habe ich einen Austausch gemacht · Zwei Jahre später habe ich das Abitur gemacht · Vor einem Monat habe ich angefangen zu arbeiten.",
+"ser/ir: fui, fuiste, fue, fuimos, fuisteis, fueron": "sein/gehen: ich war/ging, du warst …",
+"estar: estuve · tener: tuve · hacer: hice/hizo · poder: pude · poner: puse · querer: quise · venir: vine · decir: dije/dijeron · dar: di · ver: vi · hay → hubo": "sein: ich war · haben: ich hatte · machen: ich machte/er machte · können: ich konnte · legen: ich legte · wollen: ich wollte · kommen: ich kam · sagen: ich sagte/sie sagten · geben: ich gab · sehen: ich sah · es gibt → es gab",
+"ser organizado/comunicativo · estar dispuesto a / acostumbrado a · tener experiencia / conocimientos de · saber idiomas / trabajar en equipo": "organisiert/kommunikativ sein · bereit sein zu / gewohnt sein an · Erfahrung / Kenntnisse in … haben · Sprachen können / im Team arbeiten können",
+"En relación con la oferta publicada en … · Les envío mi currículum … · Considero que mi experiencia es adecuada para el puesto. · Quedo a su disposición … · Atentamente,": "Bezugnehmend auf die Stelle in … · Anbei mein Lebenslauf … · Ich halte meine Erfahrung für passend. · Ich stehe Ihnen zur Verfügung … · Mit freundlichen Grüßen",
+"¿Quieres algo?": "Willst du etwas?",
+"No quiero nada.": "Ich will nichts.",
+"¿Hay alguien en casa?": "Ist jemand zu Hause?",
+"No hay nadie.": "Es ist niemand da.",
+"Siempre llego tarde.": "Ich komme immer zu spät.",
+"No llego nunca tarde. / Nunca llego tarde.": "Ich komme nie zu spät.",
+"No veo nada.": "Ich sehe nichts.",
+"Nadie lo sabe.": "Niemand weiß es.",
+"otro": "ein anderer / noch ein",
+"otro café": "noch ein Kaffee",
+"algún banco · alguno": "irgendeine Bank · irgendeine(r)",
+"alguna farmacia": "irgendeine Apotheke",
+"ningún problema · ninguno": "kein Problem · keiner",
+"ninguna idea": "keine Ahnung",
+"algún día · ningún problema": "eines Tages · kein Problem",
+"– ¿Tienes algún libro en español? – No, no tengo ninguno.": "– Hast du ein Buch auf Spanisch? – Nein, ich habe keins.",
+"No tengo ningún amigo aquí.": "Ich habe hier keinen Freund.",
+"bueno": "gut",
+"un buen trabajo": "eine gute Arbeit",
+"malo": "schlecht",
+"un mal día": "ein schlechter Tag",
+"primero / tercero": "erste / dritte",
+"el primer / tercer piso": "der erste / dritte Stock",
+"grande": "groß",
+"una gran ciudad (vor jedem Nomen!)": "eine großartige Stadt",
+"un gran hombre": "ein großer (bedeutender) Mann",
+"un hombre grande": "ein großer (großgewachsener) Mann",
+"el / la / los / las + más + Adjektiv + de": "der/die … -ste von / in",
+"La Sagrada Familia es el edificio más famoso de Barcelona.": "Die Sagrada Familia ist das berühmteste Gebäude Barcelonas.",
+"el mejor (beste) · el peor (schlechteste) · el mayor (älteste) · el menor (jüngste)": "der beste · der schlechteste · der älteste · der jüngste",
+"-ísimo": "sehr / äußerst (Endung)",
+"caro → carísimo · bueno → buenísimo · fácil → facilísimo · rico → riquísimo": "teuer → sehr teuer · gut → super gut · leicht → total leicht · lecker → sehr lecker",
+"mí, ti, él, ella, usted, nosotros, vosotros, ellos": "mir/mich, dir/dich, ihm, ihr, Ihnen, uns, euch, ihnen",
+"Este regalo es para ti. · ¿Vienes sin mí? · Hablamos de ella.": "Dieses Geschenk ist für dich. · Kommst du ohne mich? · Wir sprechen über sie.",
+"conmigo": "mit mir",
+"contigo": "mit dir",
+"con él, con nosotros": "mit ihm, mit uns",
+"¿Qué libro lees?": "Welches Buch liest du?",
+"¿Cuál prefieres, el rojo o el azul?": "Welches magst du lieber, das rote oder das blaue?",
+"¿Qué es la Diada?": "Was ist die Diada?",
+"¿Cuál es tu número? ¿Cuál es la capital?": "Wie ist deine Nummer? Was ist die Hauptstadt?",
+"algo ↔ nada · alguien ↔ nadie · siempre ↔ nunca · algún/alguna ↔ ningún/ninguna": "etwas ↔ nichts · jemand ↔ niemand · immer ↔ nie · irgendein ↔ kein",
+"No hay nadie. · No quiero nada. · Nadie lo sabe. · otro café (ohne un!)": "Es ist niemand da. · Ich will nichts. · Niemand weiß es. · noch ein Kaffee",
+"un buen día · un mal momento · el primer / tercer piso · una gran ciudad": "ein schöner Tag · ein schlechter Moment · der erste / dritte Stock · eine großartige Stadt",
+"el más famoso de … · el mejor / el peor / el mayor / el menor · carísimo · buenísimo": "der/die Berühmteste von … · der beste / schlechteste / älteste / jüngste · sehr teuer · super gut",
+"para mí / ti / él … · conmigo · contigo": "für mich / dich / ihn … · mit mir · mit dir",
+"¿Qué libro? · ¿Qué es …? (Definition) — ¿Cuál prefieres? · ¿Cuál es tu número?": "Welches Buch? · Was ist …? (Definition) — Welches magst du lieber? · Wie ist deine Nummer?",
+"Hoy es (el) cinco de octubre de dos mil veintiséis.": "Heute ist der fünfte Oktober zweitausendsechsundzwanzig.",
+"el + Zahl + de + Monat (+ de + Jahr)": "der + Zahl + Monat (+ Jahr)",
+"el uno / el primero de mayo": "der erste Mai",
+"¿Qué fecha es hoy? · ¿A qué día estamos?": "Welches Datum ist heute? · Den Wievielten haben wir?",
+"en mayo": "im Mai",
+"1998 = mil novecientos noventa y ocho · 2026 = dos mil veintiséis": "1998 · 2026",
+"el 5 de octubre": "der 5. Oktober",
+"casa · hablan · libros": "Haus · sie sprechen · Bücher",
+"hablar · ciudad · español": "sprechen · Stadt · Spanisch",
+"café · inglés · fácil · música · habló": "Kaffee · Englisch · leicht · Musik · er sprach",
+"teléfono · rápido · miércoles · América": "Telefon · schnell · Mittwoch · Amerika",
+"tú (du) / tu (dein) · él (er) / el (der) · sí (ja) / si (wenn) · mí / mi · más / mas": "du / dein · er / der · ja / wenn · mir / mein · mehr / aber",
+"qué, cómo, dónde, cuándo": "was, wie, wo, wann (als Fragewort mit Akzent)",
+"acabar de + Inf.": "gerade etwas getan haben",
+"Acabo de llegar.": "Ich bin gerade angekommen.",
+"volver a + Inf.": "etwas wieder tun",
+"Vuelvo a llamarte luego.": "Ich rufe dich später noch mal an.",
+"dejar de + Inf.": "aufhören zu",
+"He dejado de fumar.": "Ich habe aufgehört zu rauchen.",
+"empezar a + Inf.": "anfangen zu",
+"Empecé a estudiar español en 2024.": "Ich habe 2024 angefangen, Spanisch zu lernen.",
+"Tengo que irme.": "Ich muss gehen.",
+"llevar + Zeit + Gerundium": "seit (Zeit) etwas tun",
+"Llevo dos años estudiando español.": "Ich lerne seit zwei Jahren Spanisch.",
+"seguir + Gerundium": "immer noch etwas tun",
+"Sigo viviendo en Gràcia.": "Ich wohne immer noch in Gràcia.",
+"estar + Gerundium": "gerade etwas tun",
+"Estoy leyendo.": "Ich lese gerade.",
+"Llevo dos años aquí. = Vivo aquí desde hace dos años. = Hace dos años que vivo aquí.": "Ich bin seit zwei Jahren hier. (drei Varianten)",
+"el cinco de octubre de dos mil veintiséis · ¿Qué fecha es hoy? · en mayo · enero, febrero, marzo …": "der fünfte Oktober 2026 · Welches Datum ist heute? · im Mai · Januar, Februar, März …",
+"tú/tu · él/el · sí/si · mí/mi": "du/dein · er/der · ja/wenn · mir/mein",
+"acabar de · volver a · dejar de · empezar a · tener que": "gerade getan haben · wieder tun · aufhören zu · anfangen zu · müssen",
+"Llevo dos años estudiando. · Sigo viviendo aquí. · Estoy leyendo.": "Ich lerne seit zwei Jahren. · Ich wohne immer noch hier. · Ich lese gerade.",
+"me gusta": "mir gefällt",
+"Me duele la cabeza.": "Mir tut der Kopf weh.",
+"Me duelen los pies.": "Mir tun die Füße weh.",
+"¿Te duele la espalda?": "Tut dir der Rücken weh?",
+"¿Te duelen los ojos?": "Tun dir die Augen weh?",
+"A Ana le duele el estómago.": "Ana tut der Bauch weh.",
+"A mis padres les duelen las rodillas.": "Meinen Eltern tun die Knie weh.",
+"Tengo fiebre.": "Ich habe Fieber.",
+"Estoy resfriado.": "Ich bin erkältet.",
+"Me duele la garganta.": "Mir tut der Hals weh.",
+"Tengo tos.": "Ich habe Husten.",
+"Estoy cansada.": "Ich bin müde.",
+"Me duelen los oídos.": "Mir tun die Ohren weh.",
+"desde hace + Zeitraum": "seit + Zeitraum",
+"Tengo tos desde hace una semana.": "Ich habe seit einer Woche Husten.",
+"desde el lunes": "seit Montag",
+"desde ayer": "seit gestern",
+"deberías + Infinitiv": "du solltest + Infinitiv",
+"Deberías descansar.": "Du solltest dich ausruhen.",
+"tienes que + Infinitiv": "du musst + Infinitiv",
+"Tienes que beber mucha agua.": "Du musst viel Wasser trinken.",
+"es mejor + Infinitiv": "es ist besser + Infinitiv",
+"Es mejor no salir hoy.": "Es ist besser, heute nicht rauszugehen.",
+"¿Por qué no + Präsens?": "Warum … nicht? (Vorschlag)",
+"¿Por qué no vas al médico?": "Warum gehst du nicht zum Arzt?",
+"toma": "nimm (du)",
+"tome": "nehmen Sie",
+"bebe": "trink (du)",
+"beba": "trinken Sie",
+"abre": "mach auf (du)",
+"abra": "machen Sie auf",
+"descansa": "ruh dich aus",
+"descanse": "ruhen Sie sich aus",
+"ven (venir) · ve (ir) · haz (hacer) · pon (poner) · ten (tener) · di (decir) · sal (salir) · sé (ser)": "komm · geh · mach · stell · hab · sag · geh raus · sei",
+"tengo → tenga · hago → haga · vengo → venga": "ich habe → haben Sie · ich mache → machen Sie · ich komme → kommen Sie",
+"ir → vaya": "gehen → gehen Sie",
+"¡Siéntate! · ¡Siéntese!": "Setz dich! · Setzen Sie sich!",
+"Me duele la cabeza / la espalda.": "Mir tut der Kopf / der Rücken weh.",
+"Me duelen los pies / los ojos.": "Mir tun die Füße / die Augen weh.",
+"Tengo fiebre / tos / gripe. · Estoy resfriado / mareado / cansado. · Me encuentro mal / mejor. · desde hace dos días · desde ayer": "Ich habe Fieber / Husten / Grippe. · Ich bin erkältet / mir ist schwindlig / ich bin müde. · Mir geht es schlecht / besser. · seit zwei Tagen · seit gestern",
+"Deberías descansar. · Tienes que beber agua. · Es mejor no salir. · ¿Por qué no vas al médico?": "Du solltest dich ausruhen. · Du musst Wasser trinken. · Es ist besser, nicht rauszugehen. · Warum gehst du nicht zum Arzt?",
+"ven · ve · haz · pon · ten · di · sal · sé": "komm · geh · mach · stell · hab · sag · geh raus · sei",
+"Hacía sol y había mucha gente.": "Die Sonne schien und es waren viele Leute da.",
+"Fuimos a la playa.": "Wir sind an den Strand gegangen.",
+"Era tarde y estaba cansado.": "Es war spät und ich war müde.",
+"Llegué al hotel a las once.": "Ich kam um elf im Hotel an.",
+"Estaba durmiendo cuando sonó el teléfono.": "Ich schlief gerade, als das Telefon klingelte.",
+"-ar → -ando, -er/-ir → -iendo": "-ar → -ando, -er/-ir → -iendo",
+"leer → leyendo, dormir → durmiendo": "lesen → lesend, schlafen → schlafend",
+"el vuelo · la maleta · facturar · la tarjeta de embarque · el retraso · perder el vuelo · el alojamiento": "der Flug · der Koffer · einchecken · die Bordkarte · die Verspätung · den Flug verpassen · die Unterkunft",
+"Hacía sol. Era tarde. Estaba cansado.": "Die Sonne schien. Es war spät. Ich war müde.",
+"Fuimos a la playa. Llegué a las once.": "Wir gingen an den Strand. Ich kam um elf an.",
+"aquel día · al día siguiente · de repente · al final · por suerte · ¡Qué bien! · ¡Qué mala suerte! · ¿De verdad?": "an jenem Tag · am nächsten Tag · plötzlich · am Ende · zum Glück · Wie schön! · So ein Pech! · Wirklich?",
+"un kilo de tomates · una botella de aceite · un poco de sal": "ein Kilo Tomaten · eine Flasche Öl · ein bisschen Salz",
+"¿Cuánta harina? ¿Cuántos huevos? ¿Cuánto aceite? ¿Cuántas patatas?": "Wie viel Mehl? Wie viele Eier? Wie viel Öl? Wie viele Kartoffeln?",
+"Has puesto demasiada sal.": "Du hast zu viel Salz genommen.",
+"Se pela la cebolla.": "Man schält die Zwiebel.",
+"Se pelan las patatas.": "Man schält die Kartoffeln.",
+"Se añade la sal.": "Man gibt das Salz dazu.",
+"Se baten los huevos.": "Man schlägt die Eier.",
+"Aquí se habla catalán. · ¿Cómo se dice … en español? · Se alquila piso.": "Hier spricht man Katalanisch. · Wie sagt man … auf Spanisch? · Wohnung zu vermieten.",
+"lo, la, los, las": "ihn/es, sie, sie (m. Pl.), sie (f. Pl.)",
+"el pan": "das Brot",
+"córtalo": "schneid es",
+"córtelo": "schneiden Sie es",
+"la cebolla": "die Zwiebel",
+"pélala": "schäl sie",
+"pélela": "schälen Sie sie",
+"los huevos": "die Eier",
+"bátelos": "schlag sie",
+"bátalos": "schlagen Sie sie",
+"las patatas": "die Kartoffeln",
+"échalas": "gib sie hinein",
+"échelas": "geben Sie sie hinein",
+"Las corto ahora.": "Ich schneide sie jetzt.",
+"un kilo de · medio kilo de · cien gramos de · un litro de · una docena de · una cucharada de · una pizca de · un poco de · demasiado": "ein Kilo · ein halbes Kilo · hundert Gramm · ein Liter · ein Dutzend · ein Esslöffel · eine Prise · ein bisschen · zu viel",
+"córtalo · pélala · bátelos · échalas · dale la vuelta": "schneid es · schäl sie · schlag sie · gib sie hinein · dreh es um",
+"Aber: Las corto ahora. · Ya los he batido.": "Aber: Ich schneide sie jetzt. · Ich habe sie schon geschlagen.",
+"¡Feliz cumpleaños! / ¡Felicidades!": "Alles Gute zum Geburtstag! / Herzlichen Glückwunsch!",
+"¡Enhorabuena!": "Glückwunsch! (zu einem Erfolg)",
+"¡Que seáis muy felices!": "Ich wünsche euch viel Glück! (Hochzeit)",
+"¡Buen viaje! · ¡Que lo pases bien!": "Gute Reise! · Viel Spaß!",
+"¡Que te mejores!": "Gute Besserung!",
+"Mi madre me regala un libro.": "Meine Mutter schenkt mir ein Buch.",
+"¿Te escribo mañana?": "Soll ich dir morgen schreiben?",
+"Le regalo flores a Laia.": "Ich schenke Laia Blumen.",
+"Nos invitan a la boda.": "Sie laden uns zur Hochzeit ein.",
+"Os mando las fotos.": "Ich schicke euch die Fotos.",
+"Les escribo a mis padres.": "Ich schreibe meinen Eltern.",
+"¿El libro? Te lo presto. · ¿Las fotos? Me las mandas luego.": "Das Buch? Ich leihe es dir. · Die Fotos? Schick sie mir später.",
+"le lo → se lo": "le + lo → se lo",
+"¿El regalo? Se lo doy a Laia mañana.": "Das Geschenk? Ich gebe es Laia morgen.",
+"les las → se las": "les + las → se las",
+"¿Las fotos? Se las mando a mis padres.": "Die Fotos? Ich schicke sie meinen Eltern.",
+"¡Dámelo! · ¡Dáselo!": "Gib es mir! · Gib es ihm/ihr!",
+"¡Felicidades! · ¡Feliz cumpleaños! · ¡Enhorabuena! · ¡Que te mejores! · ¡Que lo pases bien! · ¡Buen viaje!": "Herzlichen Glückwunsch! · Alles Gute zum Geburtstag! · Glückwunsch! · Gute Besserung! · Viel Spaß! · Gute Reise!",
+"me · te · le · nos · os · les — Le regalo flores a Laia.": "mir · dir · ihm/ihr · uns · euch · ihnen — Ich schenke Laia Blumen.",
+"Te lo presto. · Me las mandas. · le/les + lo → se lo: Se lo doy a Laia.": "Ich leihe es dir. · Du schickst sie mir. · le/les + lo → se lo: Ich gebe es Laia.",
+"¿Me prestas …? · ¿Puedes …? · ¿Te importa + Inf.? · ¿Te importa si …? · ¿Podría …? — Sí, claro. · Lo siento, es que …": "Leihst du mir …? · Kannst du …? · Würdest du bitte …? · Stört es dich, wenn …? · Könnten Sie …? — Ja, klar. · Tut mir leid, aber …",
+"trabajaré": "ich werde arbeiten",
+"trabajarás": "du wirst arbeiten",
+"trabajará": "er/sie wird arbeiten",
+"trabajaremos": "wir werden arbeiten",
+"trabajaréis": "ihr werdet arbeiten",
+"trabajarán": "sie werden arbeiten",
+"tendr-": "haben (Stamm)",
+"tendré": "ich werde haben",
+"pondr-": "legen (Stamm)",
+"pondré": "ich werde legen",
+"saldr-": "ausgehen (Stamm)",
+"saldré": "ich werde ausgehen",
+"vendr-": "kommen (Stamm)",
+"vendré": "ich werde kommen",
+"podr-": "können (Stamm)",
+"podré": "ich werde können",
+"sabr-": "wissen (Stamm)",
+"sabré": "ich werde wissen",
+"har-": "machen (Stamm)",
+"haré": "ich werde machen",
+"dir-": "sagen (Stamm)",
+"diré": "ich werde sagen",
+"querr-": "wollen (Stamm)",
+"querré": "ich werde wollen",
+"habr-": "es geben (Stamm)",
+"habrá": "es wird geben",
+"Creo que dentro de diez años trabajaremos menos.": "Ich glaube, dass wir in zehn Jahren weniger arbeiten werden.",
+"Seguramente habrá más coches eléctricos.": "Sicher wird es mehr Elektroautos geben.",
+"Para mí, la inteligencia artificial cambiará muchas profesiones.": "Für mich wird die künstliche Intelligenz viele Berufe verändern.",
+"gustar → me gustaría": "gefallen → ich würde gern",
+"poder → podría": "können → ich könnte",
+"deber → deberías": "müssen → du solltest",
+"tener → tendría": "haben → ich hätte",
+"Me gustaría trabajar en España. · ¿Podría ayudarme? · Deberías hablar con tu jefe.": "Ich würde gern in Spanien arbeiten. · Könnten Sie mir helfen? · Du solltest mit deinem Chef sprechen.",
+"Estudio para trabajar en España.": "Ich lerne, um in Spanien zu arbeiten.",
+"Gracias por tu ayuda.": "Danke für deine Hilfe.",
+"El regalo es para Laia.": "Das Geschenk ist für Laia.",
+"Paseamos por el centro.": "Wir spazieren durch das Zentrum.",
+"El informe es para el lunes.": "Der Bericht ist für Montag (fällig).",
+"por la mañana": "am Morgen / morgens",
+"Salgo para Madrid.": "Ich fahre nach Madrid los.",
+"por teléfono · por 10 euros": "per Telefon · für 10 Euro",
+"trabajaré · trabajarás · trabajará · trabajaremos · trabajaréis · trabajarán": "ich werde arbeiten · du wirst … · er wird … · wir werden … · ihr werdet … · sie werden …",
+"tendré · pondré · saldré · vendré · podré · sabré · haré · diré · querré · habrá": "ich werde haben · legen · ausgehen · kommen · können · wissen · machen · sagen · wollen · es wird geben",
+"Creo que … · Pienso que … · Para mí … · Estoy de acuerdo. · Tienes razón. · Depende.": "Ich glaube, … · Ich denke, … · Für mich … · Ich bin einverstanden. · Du hast recht. · Kommt darauf an.",
+"Me gustaría … · ¿Podría …? · Deberías …": "Ich würde gern … · Könnten Sie …? · Du solltest …",
+"para: Ziel, Empfänger, Frist": "para: Ziel, Empfänger, Frist",
+"por: Grund, durch, Tageszeit, Mittel": "por: Grund, durch, Tageszeit, Mittel",
+"Laia habla español.": "Laia spricht Spanisch.",
+"Quiero que Laia hable español.": "Ich will, dass Laia Spanisch spricht.",
+"Hace sol.": "Die Sonne scheint.",
+"Ojalá haga sol.": "Hoffentlich scheint die Sonne.",
+"Quiero que (tú) vengas.": "Ich will, dass du kommst.",
+"Quiero venir.": "Ich will kommen.",
+"hable": "(dass) ich spreche",
+"coma": "(dass) ich esse",
+"viva": "(dass) ich lebe",
+"hables": "(dass) du sprichst",
+"comas": "(dass) du isst",
+"vivas": "(dass) du lebst",
+"hablemos": "(dass) wir sprechen",
+"comamos": "(dass) wir essen",
+"vivamos": "(dass) wir leben",
+"habléis": "(dass) ihr sprecht",
+"comáis": "(dass) ihr esst",
+"viváis": "(dass) ihr lebt",
+"hablen": "(dass) sie sprechen",
+"coman": "(dass) sie essen",
+"vivan": "(dass) sie leben",
+"tenga, tengas …": "(dass) ich habe, du hast …",
+"hago": "ich mache",
+"haga, hagas …": "(dass) ich mache, du machst …",
+"vengo / salgo / pongo / digo": "ich komme / gehe aus / lege / sage",
+"venga / salga / ponga / diga": "(dass) ich komme / ausgehe / lege / sage",
+"puedo / quiero": "ich kann / will",
+"pueda / quiera (aber: podamos, queramos)": "(dass) ich kann / will",
+"ser → sea · ir → vaya · estar → esté · haber → haya · saber → sepa · dar → dé": "sein → sea · gehen → vaya · sein (Zustand) → esté · haben → haya · wissen → sepa · geben → dé",
+"¡Que te mejores! · ¡Que lo pases bien! · ¡Que aproveche! · ¡Que tengas suerte!": "Gute Besserung! · Viel Spaß! · Guten Appetit! · Viel Glück!",
+"no hables": "sprich nicht",
+"ve": "geh",
+"no vayas": "geh nicht",
+"hazlo": "mach es",
+"no lo hagas": "mach es nicht",
+"venga": "kommen Sie",
+"no venga": "kommen Sie nicht",
+"comed": "esst",
+"no comáis": "esst nicht",
+"¡Cómpralo!": "Kauf es!",
+"¡No lo compres!": "Kauf es nicht!",
+"¡No te preocupes!": "Mach dir keine Sorgen!",
+"hable, hables, hable, hablemos, habléis, hablen": "(dass) ich spreche, du sprichst …",
+"coma, comas …": "(dass) ich esse …",
+"viva, vivas …": "(dass) ich lebe …",
+"tenga · haga · venga · salga · diga · pueda — sea · vaya · esté · haya · sepa · dé": "Subjuntivo-Formen: haben · machen · kommen · ausgehen · sagen · können — sein · gehen · sein · haben · wissen · geben",
+"ojalá · espero que · quiero que · prefiero que · te recomiendo que · es importante que · es mejor que": "hoffentlich · ich hoffe, dass · ich will, dass · mir ist lieber, dass · ich empfehle dir, dass · es ist wichtig, dass · es ist besser, dass",
+"Quiero vivir aquí. · Es importante beber agua.": "Ich will hier wohnen. · Es ist wichtig, Wasser zu trinken.",
+"no hables · no vayas · no lo hagas · ¡No te preocupes!": "sprich nicht · geh nicht · mach es nicht · Mach dir keine Sorgen!",
+"Cuando llegué a la estación, el tren ya había salido.": "Als ich am Bahnhof ankam, war der Zug schon abgefahren.",
+"había": "ich hatte / war",
+"habías": "du hattest",
+"habíamos": "wir hatten",
+"habíais": "ihr hattet",
+"habían": "sie hatten",
+"hablado, comido, vivido · hecho, visto, dicho, escrito, puesto, vuelto, roto, abierto": "gesprochen, gegessen, gelebt · gemacht, gesehen, gesagt, geschrieben, gelegt, zurückgekommen, kaputt, geöffnet",
+"Hoy he trabajado mucho.": "Heute habe ich viel gearbeitet.",
+"Ayer fui al cine.": "Gestern bin ich ins Kino gegangen.",
+"Hacía frío. Antes iba a pie.": "Es war kalt. Früher ging ich zu Fuß.",
+"Ya había comido.": "Ich hatte schon gegessen.",
+"había / habías / había / habíamos / habíais / habían + Partizip": "hatte / hattest / hatte / hatten / hattet / hatten + Partizip",
+"Cuando llegué, el tren ya había salido.": "Als ich ankam, war der Zug schon abgefahren.",
+"resulta que · un día · mientras · en cuanto · de repente · sin embargo · así que · al final": "also, die Sache ist die · eines Tages · während · sobald · plötzlich · jedoch · also · am Ende",
+"¿En serio? · ¡Qué fuerte! · ¿Y qué pasó después? · ¡Qué vergüenza!": "Im Ernst? · Krass! · Und was ist dann passiert? · Wie peinlich!",
+"Si llueve,": "Wenn es regnet,",
+"nos quedamos en casa. (Präsens)": "bleiben wir zu Hause.",
+"Si tengo tiempo,": "Wenn ich Zeit habe,",
+"iré a la playa. (Futur)": "gehe ich an den Strand.",
+"Si tienes hambre,": "Wenn du Hunger hast,",
+"come algo. (Imperativ)": "iss etwas.",
+"viajaría": "ich würde reisen",
+"viajarías": "du würdest reisen",
+"viajaríamos": "wir würden reisen",
+"viajaríais": "ihr würdet reisen",
+"viajarían": "sie würden reisen",
+"tendría · pondría · saldría · vendría · podría · sabría · haría · diría · querría · habría": "ich hätte · würde legen · würde ausgehen · würde kommen · könnte · wüsste · würde machen · würde sagen · würde wollen · es gäbe",
+"Con más dinero viajaría más.": "Mit mehr Geld würde ich mehr reisen.",
+"Yo en tu lugar hablaría con él. · Yo que tú no diría nada.": "An deiner Stelle würde ich mit ihm reden. · Wenn ich du wäre, würde ich nichts sagen.",
+"Podrías hacer un plan de limpieza. · Sería mejor llegar a un acuerdo.": "Du könntest einen Putzplan machen. · Es wäre besser, sich zu einigen.",
+"Si llueve, nos quedamos en casa. · Si tengo tiempo, iré. · Si tienes hambre, come algo.": "Wenn es regnet, bleiben wir zu Hause. · Wenn ich Zeit habe, gehe ich hin. · Wenn du Hunger hast, iss etwas.",
+"viajaría · viajarías · viajaría · viajaríamos · viajaríais · viajarían": "ich würde reisen · du würdest … · er würde … · wir würden … · ihr würdet … · sie würden …",
+"Yo en tu lugar … · Yo que tú … · Podrías … · Sería mejor … · ¿Tú qué harías?": "An deiner Stelle … · Wenn ich du wäre … · Du könntest … · Es wäre besser … · Was würdest du tun?",
+"Creo que es caro.": "Ich glaube, es ist teuer.",
+"No creo que sea caro.": "Ich glaube nicht, dass es teuer ist.",
+"Pienso que tienes razón.": "Ich denke, du hast recht.",
+"No pienso que tengas razón.": "Ich denke nicht, dass du recht hast.",
+"Me parece que va a llover.": "Mir scheint, es wird regnen.",
+"No me parece que vaya a llover.": "Mir scheint nicht, dass es regnen wird.",
+"¿No crees que es demasiado caro?": "Findest du nicht, dass es zu teuer ist?",
+"quizá(s) / tal vez": "vielleicht",
+"Quizá llueva mañana.": "Vielleicht regnet es morgen.",
+"puede que": "es kann sein, dass",
+"Puede que llegue tarde.": "Es kann sein, dass ich zu spät komme.",
+"es posible / probable que": "es ist möglich / wahrscheinlich, dass",
+"Es posible que tengas razón.": "Es ist möglich, dass du recht hast.",
+"a lo mejor": "vielleicht (+ Indikativ)",
+"A lo mejor viene Laia.": "Vielleicht kommt Laia.",
+"Es verdad que / Está claro que / Es seguro que": "Es stimmt, dass / Es ist klar, dass / Es ist sicher, dass",
+"no es verdad que": "es stimmt nicht, dass",
+"Entiendo lo que dices, pero … · Sí, pero por otro lado … · No estoy del todo de acuerdo.": "Ich verstehe, was du sagst, aber … · Ja, aber andererseits … · Ich bin nicht ganz einverstanden.",
+"¿no?": "…, oder?",
+"¿verdad?": "…, nicht wahr?",
+"Creo que es · Pienso que tiene · Me parece que va": "Ich glaube, es ist · Ich denke, er hat · Mir scheint, es wird",
+"No creo que sea · No pienso que tenga · No me parece que vaya": "Ich glaube nicht, dass es ist · … dass er hat · … dass es wird",
+"quizá / tal vez / puede que / es posible que + Subj. · a lo mejor + Ind.": "vielleicht / es kann sein / es ist möglich, dass + Subj. · vielleicht (a lo mejor) + Ind.",
+"es verdad / está claro que + Ind. · no es verdad que + Subj.": "es stimmt / es ist klar, dass + Ind. · es stimmt nicht, dass + Subj.",
+"En mi opinión … · Desde mi punto de vista … · (No) estoy de acuerdo · Por un lado … por otro … · Sin embargo … · Entiendo lo que dices, pero …": "Meiner Meinung nach … · Aus meiner Sicht … · Ich bin (nicht) einverstanden · Einerseits … andererseits … · Jedoch … · Ich verstehe, was du sagst, aber …",
+"Cuando llego a casa, me ducho.": "Wenn ich nach Hause komme, dusche ich.",
+"Cuando llegué, no había nadie.": "Als ich ankam, war niemand da.",
+"Cuando llegues, llámame.": "Wenn du ankommst, ruf mich an.",
+"en cuanto": "sobald",
+"En cuanto pueda, te ayudo.": "Sobald ich kann, helfe ich dir.",
+"hasta que": "bis",
+"Espera aquí hasta que vuelva.": "Warte hier, bis ich zurückkomme.",
+"después de que": "nachdem",
+"Después de que se vayan, limpiamos.": "Nachdem sie gegangen sind, putzen wir.",
+"antes de que": "bevor",
+"Antes de que te vayas, … (immer Subj.)": "Bevor du gehst, … (immer Subj.)",
+"Antes de salir, cierro la ventana.": "Bevor ich gehe, schließe ich das Fenster.",
+"Después de comer, descanso.": "Nach dem Essen ruhe ich mich aus.",
+"Estudio español para trabajar en España.": "Ich lerne Spanisch, um in Spanien zu arbeiten.",
+"Te lo explico para que lo entiendas.": "Ich erkläre es dir, damit du es verstehst.",
+"Cuando llego, … · Cuando llegué, …": "Wenn ich ankomme, … (immer) · Als ich ankam, …",
+"Cuando llegue, … (Subj.)": "Wenn ich ankomme, … (Zukunft, Subj.)",
+"en cuanto · hasta que · después de que + Subj. (Zukunft) · antes de que + immer Subj.": "sobald · bis · nachdem + Subj. (Zukunft) · bevor + immer Subj.",
+"antes de / después de / hasta + Infinitiv": "vor / nach / bis + Infinitiv",
+"para + Infinitiv (gleiche Person) · para que + Subjuntivo (andere Person)": "um zu + Infinitiv (gleiche Person) · damit + Subjuntivo (andere Person)",
+"echar de menos · mantener el contacto · ¡Que te vaya bien!": "vermissen · in Kontakt bleiben · Mach’s gut!",
+"Nuria: «Estoy cansada.»": "Nuria: „Ich bin müde.“",
+"Nuria dice que está cansada.": "Nuria sagt, dass sie müde ist.",
+"Marc: «Mañana vengo a tu casa.»": "Marc: „Morgen komme ich zu dir.“",
+"Marc dice que mañana viene a mi casa.": "Marc sagt, dass er morgen zu mir kommt.",
+"Laia: «He perdido el móvil.»": "Laia: „Ich habe das Handy verloren.“",
+"Laia ha dicho que ha perdido el móvil.": "Laia hat gesagt, dass sie das Handy verloren hat.",
+"Dice que viene.": "Er sagt, dass er kommt.",
+"estaba": "ich war",
+"vendría": "ich würde kommen",
+"he perdido / perdí": "ich habe verloren / ich verlor",
+"había perdido": "ich hatte verloren",
+"voy a ir": "ich werde gehen",
+"iba a ir": "ich wollte gehen / würde gehen",
+"hoy → ese día · mañana → al día siguiente · aquí → allí": "heute → an dem Tag · morgen → am nächsten Tag · hier → dort",
+"«¿Vienes?»": "„Kommst du?“",
+"Me pregunta si voy. / Me preguntó si iba.": "Er/Sie fragt mich, ob ich komme. / … fragte mich, ob ich käme.",
+"«¿Dónde vives?»": "„Wo wohnst du?“",
+"Me preguntó dónde vivía.": "Er/Sie fragte mich, wo ich wohne.",
+"«¡Ayúdame!»": "„Hilf mir!“",
+"Me pide que la ayude. / Me pidió que la ayudara*.": "Sie bittet mich, ihr zu helfen. / Sie bat mich, ihr zu helfen.",
+"Me pide que + Subj. Präsens": "Er/Sie bittet mich + Subj. Präsens",
+"Dice que está cansada. (gleiche Zeit)": "Sie sagt, dass sie müde ist. (gleiche Zeit)",
+"he venido / vine": "ich bin gekommen / ich kam",
+"había venido": "ich war gekommen",
+"voy a venir": "ich werde kommen",
+"iba a venir": "ich wollte kommen",
+"Me preguntó si … · Me preguntó dónde / cuándo … · Me pide que + Subjuntivo": "Er/Sie fragte mich, ob … · … wo / wann … · Er/Sie bittet mich + Subjuntivo",
+"que (der/die/das)": "der/die/das (Relativpronomen)",
+"El chico que vive arriba es músico.": "Der Junge, der oben wohnt, ist Musiker.",
+"donde (wo)": "wo",
+"El bar donde nos conocimos ya no existe.": "Die Bar, in der wir uns kennengelernt haben, gibt es nicht mehr.",
+"lo que (was)": "(das,) was",
+"No entiendo lo que dices.": "Ich verstehe nicht, was du sagst.",
+"con el que / la que": "mit dem / mit der",
+"El amigo con el que viajé …": "Der Freund, mit dem ich gereist bin, …",
+"con quien": "mit dem/der (Person)",
+"La chica con quien hablé …": "Das Mädchen, mit dem ich gesprochen habe, …",
+"en el que / la que": "in dem / in der",
+"La empresa en la que trabajo …": "Die Firma, in der ich arbeite, …",
+"de lo que": "worüber",
+"Eso es de lo que quería hablar.": "Darüber wollte ich sprechen.",
+"Tengo un piso que tiene terraza.": "Ich habe eine Wohnung, die eine Terrasse hat.",
+"Busco un piso que tenga terraza.": "Ich suche eine Wohnung, die eine Terrasse hat.",
+"Conozco a alguien que habla ruso.": "Ich kenne jemanden, der Russisch spricht.",
+"¿Conoces a alguien que hable ruso?": "Kennst du jemanden, der Russisch spricht?",
+"Hay un bar que abre a las seis.": "Es gibt eine Bar, die um sechs öffnet.",
+"No hay ningún bar que abra a las seis.": "Es gibt keine Bar, die um sechs öffnet.",
+"Se busca persona que sea ordenada y que no fume.": "Gesucht: Person, die ordentlich ist und nicht raucht.",
+"No vuelvas a hacerlo.": "Mach das nicht noch mal.",
+"que (Personen & Sachen) · donde · lo que · con el que / la que · con quien": "der/die/das · wo · was · mit dem/der · mit dem/der (Person)",
+"Tengo un piso que tiene terraza. ↔ Busco un piso que tenga terraza.": "Ich habe eine Wohnung mit Terrasse. ↔ Ich suche eine Wohnung mit Terrasse.",
+"No hay nadie que sepa … · ¿Conoces a alguien que hable …?": "Es gibt niemanden, der … weiß · Kennst du jemanden, der … spricht?",
+"seguir + Gerundium · llevar + Zeit + Gerundium · dejar de / volver a / acabar de + Infinitiv": "immer noch · seit … · aufhören zu / wieder tun / gerade getan haben",
+"me alegra que": "es freut mich, dass",
+"Me alegra que vengas.": "Es freut mich, dass du kommst.",
+"me molesta que": "es stört mich, dass",
+"Me molesta que la gente tire basura.": "Es stört mich, dass die Leute Müll wegwerfen.",
+"me preocupa que": "es macht mir Sorgen, dass",
+"Me preocupa que no llueva.": "Es macht mir Sorgen, dass es nicht regnet.",
+"me encanta / odio que": "ich finde es toll / hasse es, dass",
+"Me encanta que haga sol.": "Ich finde es toll, dass die Sonne scheint.",
+"Me alegra verte.": "Es freut mich, dich zu sehen.",
+"Me alegra que me veas.": "Es freut mich, dass du mich siehst.",
+"Es importante reciclar.": "Es ist wichtig zu recyceln.",
+"Es importante que reciclemos.": "Es ist wichtig, dass wir recyceln.",
+"Es necesario ahorrar agua.": "Es ist nötig, Wasser zu sparen.",
+"Es necesario que todos ahorren agua.": "Es ist nötig, dass alle Wasser sparen.",
+"Es una pena tirar comida.": "Es ist schade, Essen wegzuwerfen.",
+"Es una pena que la gente tire comida.": "Es ist schade, dass die Leute Essen wegwerfen.",
+"Auch: es normal / lógico / increíble / mejor / fundamental que …": "Auch: es ist normal / logisch / unglaublich / besser / grundlegend, dass …",
+"Es verdad / Es obvio que hace calor.": "Es stimmt / Es ist offensichtlich, dass es heiß ist.",
+"quiero que, espero que, ojalá, te recomiendo que": "ich will, dass · ich hoffe, dass · hoffentlich · ich empfehle dir, dass",
+"no creo que, quizá, es posible que, puede que": "ich glaube nicht, dass · vielleicht · es ist möglich, dass · es kann sein, dass",
+"me alegra que, me molesta que, es importante que, es una pena que": "es freut mich, dass · es stört mich, dass · es ist wichtig, dass · es ist schade, dass",
+"cuando, en cuanto, hasta que, antes de que, para que": "wenn (Zukunft) · sobald · bis · bevor · damit",
+"busco un piso que, no hay nadie que": "ich suche eine Wohnung, die … · es gibt niemanden, der …",
+"me pide que, te digo que (Befehl)": "er bittet mich, dass · ich sage dir, dass (Aufforderung)",
+"me alegra / me molesta / me preocupa / me encanta que + Subj.": "es freut / stört / besorgt mich · ich finde es toll, dass + Subj.",
+"es importante / necesario / mejor / una pena que + Subj. · es importante + Inf. (allgemein)": "es ist wichtig / nötig / besser / schade, dass + Subj. · es ist wichtig + Inf. (allgemein)",
+"es verdad / obvio / está claro que + Ind.": "es stimmt / ist offensichtlich / ist klar, dass + Ind.",
+"el medio ambiente · el cambio climático · reciclar · ahorrar agua · la sequía · sostenible": "die Umwelt · der Klimawandel · recyceln · Wasser sparen · die Dürre · nachhaltig",
+"hablaron": "sie sprachen",
+"habla-": "sprach- (Stamm)",
+"hablara, hablaras, hablara, habláramos, hablarais, hablaran": "(dass) ich spräche, du sprächest … (Imperf. Subj.)",
+"comieron": "sie aßen",
+"comie-": "aß- (Stamm)",
+"comiera, comieras …": "(dass) ich äße, du äßest …",
+"tuvie-": "hätt- (Stamm)",
+"tuviera, tuvieras …": "(dass) ich hätte, du hättest …",
+"fue-": "wär- / ging- (Stamm)",
+"fuera (ser und ir)": "(dass) ich wäre / ginge",
+"hicieron → hiciera, dijeron → dijera, pudieron → pudiera, estuvieron → estuviera": "sie machten → ich machte (Subj.), sie sagten → ich sagte, sie konnten → ich könnte, sie waren → ich wäre",
+"Si tengo tiempo, iré.": "Wenn ich Zeit habe, gehe ich hin.",
+"Si tuviera tiempo, iría.": "Wenn ich Zeit hätte, würde ich hingehen.",
+"Iría si tuviera tiempo.": "Ich würde hingehen, wenn ich Zeit hätte.",
+"ojalá + Subj. Präsens": "hoffentlich + Subj. Präsens",
+"Ojalá venga.": "Hoffentlich kommt er.",
+"ojalá + Imperf. Subj.": "hoffentlich + Imperf. Subj. (unwahrscheinlich)",
+"Ojalá viniera.": "Wenn er doch käme!",
+"como si + Imperf. Subj.": "als ob + Imperf. Subj.",
+"Habla como si fuera el jefe.": "Er redet, als ob er der Chef wäre.",
+"me gustaría que + Imperf. Subj.": "ich hätte gern, dass + Imperf. Subj.",
+"Me gustaría que vinieras.": "Ich hätte gern, dass du kommst.",
+"hablaron → hablara · tuvieron → tuviera · fueron → fuera · hicieron → hiciera": "sie sprachen → spräche · sie hatten → hätte · sie waren → wäre · sie machten → machte",
+"-ra, -ras, -ra, -ramos (mit Akzent: habláramos), -rais, -ran": "Endungen: -ra, -ras, -ra, -ramos, -rais, -ran",
+"Si tuviera tiempo, iría. (si + Imperf. Subj. → Konditional)": "Wenn ich Zeit hätte, würde ich hingehen.",
+"Ojalá viniera. · Me gustaría que vinieras. · Habla como si fuera el jefe.": "Wenn er doch käme! · Ich hätte gern, dass du kommst. · Er redet, als ob er der Chef wäre.",
+"Quiero que vengas.": "Ich will, dass du kommst.",
+"Quería / Quise / Querría que vinieras.": "Ich wollte / würde wollen, dass du kommst.",
+"Me pide que llame → Me pidió que llamara.": "Er bittet mich anzurufen → Er bat mich anzurufen.",
+"Me sorprende que sea tan fácil.": "Es überrascht mich, dass es so leicht ist.",
+"Me sorprendió que fuera tan fácil.": "Es überraschte mich, dass es so leicht war.",
+"Es normal que estés nervioso.": "Es ist normal, dass du nervös bist.",
+"Era normal que estuvieras nervioso.": "Es war normal, dass du nervös warst.",
+"No creo que venga.": "Ich glaube nicht, dass er kommt.",
+"No creía que viniera.": "Ich glaubte nicht, dass er käme.",
+"Busco a alguien que sepa …": "Ich suche jemanden, der … kann/weiß.",
+"Buscaba a alguien que supiera …": "Ich suchte jemanden, der … konnte/wusste.",
+"Me habría gustado que hubiera más formación. · Habría estado bien que me dieran más feedback.": "Ich hätte mir mehr Schulungen gewünscht. · Es wäre gut gewesen, wenn sie mir mehr Feedback gegeben hätten.",
+"Quería que vinieras.": "Ich wollte, dass du kommst.",
+"me pidió que + Imperf. Subj. · me sorprendió que … · era normal que … · no creía que … · buscaba a alguien que …": "er bat mich + Imperf. Subj. · es überraschte mich, dass … · es war normal, dass … · ich glaubte nicht, dass … · ich suchte jemanden, der …",
+"Me habría gustado que … · Habría estado bien que …": "Ich hätte mir gewünscht, dass … · Es wäre gut gewesen, wenn …",
+"Aunque sea tu jefe, no tiene razón.": "Auch wenn er dein Chef ist, hat er nicht recht.",
+"a pesar de + Inf./Nomen": "trotz + Infinitiv/Nomen",
+"a pesar de que": "obwohl",
+"por mucho que + Subj.": "so sehr … auch + Subj.",
+"como": "da / weil (am Satzanfang)",
+"Como estaba enfermo, no fui.": "Da ich krank war, bin ich nicht hingegangen.",
+"ya que / puesto que": "da / weil (formell)",
+"No fui, ya que estaba enfermo.": "Ich bin nicht hingegangen, da ich krank war.",
+"debido a + Nomen": "aufgrund + Nomen",
+"Debido a la lluvia, se canceló el partido.": "Wegen des Regens wurde das Spiel abgesagt.",
+"así que": "also",
+"Estaba cansado, así que me acosté.": "Ich war müde, also bin ich ins Bett gegangen.",
+"por lo tanto / por consiguiente": "deshalb / folglich (formell)",
+"No hay datos; por lo tanto, no podemos decidir. (formell)": "Es gibt keine Daten; deshalb können wir nicht entscheiden.",
+"de modo que / de manera que": "sodass",
+"Habló claro, de modo que todos lo entendieron.": "Er sprach deutlich, sodass alle es verstanden.",
+"aunque + Ind. (obwohl, Tatsache) · aunque + Subj. (auch wenn, egal) · a pesar de + Inf./Nomen · a pesar de que · por mucho que + Subj.": "obwohl (+ Ind., Tatsache) · auch wenn (+ Subj.) · trotz · obwohl · so sehr … auch",
+"como (Satzanfang) · porque · ya que · puesto que · debido a": "da (Satzanfang) · weil · da · da · aufgrund",
+"así que · por eso · por lo tanto · por consiguiente · de modo que": "also · deshalb · daher · folglich · sodass",
+"ser + Partizip": "ser + Partizip (Vorgangspassiv)",
+"La Sagrada Familia fue diseñada por Gaudí.": "Die Sagrada Familia wurde von Gaudí entworfen.",
+"estar + Partizip": "estar + Partizip (Zustand)",
+"El museo está cerrado los lunes.": "Das Museum ist montags geschlossen.",
+"la casa fue construida, los pisos fueron vendidos": "das Haus wurde gebaut, die Wohnungen wurden verkauft",
+"Se vende piso. · Se venden pisos.": "Wohnung zu verkaufen. · Wohnungen zu verkaufen.",
+"Se construyeron tres hoteles.": "Es wurden drei Hotels gebaut.",
+"Se vive bien aquí. · Se dice que …": "Hier lebt man gut. · Man sagt, dass …",
+"Se busca al responsable.": "Der Verantwortliche wird gesucht.",
+"Según el periódico, … · Al parecer, … · Se calcula que … · Fuentes de la policía informan de que …": "Laut der Zeitung … · Anscheinend … · Man schätzt, dass … · Polizeiquellen berichten, dass …",
+"El ministro habría dimitido.": "Der Minister soll zurückgetreten sein.",
+"ser + Partizip (Vorgang): fue construida por … · estar + Partizip (Zustand): está cerrado": "Vorgang: wurde gebaut von … · Zustand: ist geschlossen",
+"Se vende piso. / Se venden pisos. (Passiv) · Se vive bien. Se dice que … (unpersönlich)": "Wohnung(en) zu verkaufen (Passiv) · Man lebt gut. Man sagt, dass … (unpersönlich)",
+"según · al parecer · se calcula que · habría dimitido (unbestätigt)": "laut · anscheinend · man schätzt, dass · soll zurückgetreten sein (unbestätigt)",
+"hubiera, hubieras, hubiera, hubiéramos, hubierais, hubieran + Partizip": "(dass) ich gehabt hätte … + Partizip",
+"habría, habrías, habría, habríamos, habríais, habrían + Partizip": "ich hätte / würde … + Partizip",
+"Si lo hubiera sabido, te lo habría dicho.": "Wenn ich es gewusst hätte, hätte ich es dir gesagt.",
+"Si lo hubiera sabido, te lo hubiera dicho.": "Wenn ich es gewusst hätte, hätte ich es dir gesagt.",
+"Si hubiera aceptado el trabajo,": "Wenn ich die Stelle angenommen hätte,",
+"ahora viviría en Berlín.": "würde ich jetzt in Berlin wohnen.",
+"Si no hubiera venido a Barcelona,": "Wenn ich nicht nach Barcelona gekommen wäre,",
+"no te conocería.": "würde ich dich nicht kennen.",
+"Si fuera más valiente,": "Wenn ich mutiger wäre,",
+"se lo habría dicho.": "hätte ich es ihm gesagt.",
+"ojalá + Plusc. Subj.": "hoffentlich + Plusquamperfekt Subj.",
+"me arrepiento de + Inf.": "ich bereue + Infinitiv",
+"Me arrepiento de no haber aceptado.": "Ich bereue, nicht angenommen zu haben.",
+"deberías haber + Partizip": "du hättest … sollen",
+"podrías haber + Partizip": "du hättest … können",
+"tendría que haber + Partizip": "ich hätte … müssen",
+"Tendría que haber estudiado más.": "Ich hätte mehr lernen müssen.",
+"Si lo hubiera sabido, te lo habría dicho. (si + hubiera + Partizip → habría / hubiera + Partizip)": "Wenn ich es gewusst hätte, hätte ich es dir gesagt.",
+"Si hubiera aceptado, ahora viviría en Berlín. · Si fuera valiente, se lo habría dicho.": "Wenn ich angenommen hätte, würde ich jetzt in Berlin wohnen. · Wenn ich mutig wäre, hätte ich es ihm gesagt.",
+"¡Ojalá hubiera ido! · Me arrepiento de no haber … · Deberías / Podrías / Tendría que haber + Partizip": "Wäre ich doch gegangen! · Ich bereue, nicht … zu haben · Du hättest … sollen / können · Ich hätte … müssen",
+"Estimado señor García: · Estimada señora: · Estimados señores:": "Sehr geehrter Herr García, · Sehr geehrte Frau …, · Sehr geehrte Damen und Herren,",
+"Me pongo en contacto con usted para … · Le escribo en relación con …": "Ich wende mich an Sie, um … · Ich schreibe Ihnen bezüglich …",
+"Le agradecería que me enviara … · Quisiera solicitar … · Le ruego que …": "Ich wäre Ihnen dankbar, wenn Sie mir … schicken würden · Ich möchte … beantragen · Ich bitte Sie, …",
+"Quedo a la espera de su respuesta. · Atentamente, · Un cordial saludo,": "Ich freue mich auf Ihre Antwort. · Mit freundlichen Grüßen · Freundliche Grüße",
+"el cual, la cual, los cuales …": "welcher, welche, welche (Pl.) …",
+"El proyecto en el cual trabajo …": "Das Projekt, an dem ich arbeite, …",
+"lo cual": "was (bezogen auf den ganzen Satz)",
+"No contestó, lo cual me pareció raro.": "Er antwortete nicht, was mir seltsam vorkam.",
+"cuyo, cuya, cuyos, cuyas": "dessen, deren",
+"La autora, cuya novela leí, …": "Die Autorin, deren Roman ich gelesen habe, …",
+"el vecino cuya hija …": "der Nachbar, dessen Tochter …",
+"listo": "klug / fertig",
+"rico": "reich / lecker",
+"aburrido": "langweilig / gelangweilt",
+"despierto": "aufgeweckt / wach",
+"orgulloso": "hochmütig / stolz",
+"Estimado/a … : · Me pongo en contacto con usted para … · Le agradecería que + Imperf. Subj. · Quedo a la espera de su respuesta. · Atentamente,": "Sehr geehrte/r … · Ich wende mich an Sie, um … · Ich wäre Ihnen dankbar, wenn … · Ich freue mich auf Ihre Antwort. · Mit freundlichen Grüßen",
+"el / la cual (nach Präposition) · lo cual (ganzer Satz) · cuyo / cuya / cuyos / cuyas (dessen, deren)": "welche/r (nach Präposition) · was (ganzer Satz) · dessen / deren",
+"ser listo (klug) / estar listo (fertig) · ser rico (reich) / estar rico (lecker) · ser malo / estar malo (krank) · ser aburrido / estar aburrido": "klug / fertig · reich / lecker · schlecht / krank · langweilig / gelangweilt",
+"ponerse + Adj.": "werden (kurz, plötzlich)",
+"Se puso rojo. Me pongo nervioso.": "Er wurde rot. Ich werde nervös.",
+"volverse + Adj.": "werden (Charakter)",
+"Se ha vuelto muy egoísta.": "Er ist sehr egoistisch geworden.",
+"hacerse + Nomen/Adj.": "werden (durch Anstrengung)",
+"Se hizo médica. Se hizo rico.": "Sie ist Ärztin geworden. Er ist reich geworden.",
+"quedarse + Adj.": "werden (Ergebnis)",
+"Se quedó sorprendido. Me quedé sin batería.": "Er war überrascht. Mein Akku war leer.",
+"convertirse en + Nomen": "sich verwandeln in",
+"El pueblo se convirtió en una ciudad.": "Das Dorf wurde zu einer Stadt.",
+"llegar a ser": "es schaffen zu werden",
+"Llegó a ser ministra.": "Sie wurde schließlich Ministerin.",
+"ponerse a + Inf.": "anfangen zu",
+"Se puso a llorar.": "Er/Sie fing an zu weinen.",
+"echarse a + Inf.": "losbrechen (lachen, weinen …)",
+"Nos echamos a reír.": "Wir brachen in Lachen aus.",
+"llegar a + Inf.": "sogar so weit gehen zu",
+"Llegó a dormir en la oficina.": "Er schlief sogar im Büro.",
+"acabar + Gerundium": "am Ende doch …",
+"Acabé aceptando el trabajo.": "Am Ende habe ich die Stelle angenommen.",
+"estar a punto de + Inf.": "kurz davor sein zu",
+"Estaba a punto de salir.": "Ich war kurz davor zu gehen.",
+"tener + Partizip": "(fertig) haben",
+"Tengo hechos los deberes.": "Ich habe die Hausaufgaben fertig.",
+"ponerse + Adj. (kurz: rojo, nervioso) · volverse + Adj. (Charakter) · hacerse + Nomen/Adj. (Anstrengung: médico, rico) · quedarse + Adj. (Ergebnis: sorprendido, sin trabajo) · convertirse en + Nomen · llegar a ser": "werden: kurz (rot, nervös) · Charakter · durch Anstrengung (Arzt, reich) · Ergebnis (überrascht, arbeitslos) · sich verwandeln in · es schaffen zu werden",
+"ponerse a / echarse a + Inf. · llegar a + Inf. · acabar + Gerundium · estar a punto de + Inf. · tener + Partizip": "anfangen / losbrechen zu · sogar … · am Ende doch … · kurz davor sein zu · fertig haben",
+"en primer lugar · en segundo lugar · por otra parte · además · por último": "erstens · zweitens · andererseits · außerdem · schließlich",
+"sin embargo · no obstante (formell) · en cambio (dagegen) · aun así": "jedoch · dennoch (formell) · dagegen · trotzdem",
+"es decir · o sea · en otras palabras": "das heißt · also · mit anderen Worten",
+"por ejemplo · tal es el caso de · sin ir más lejos": "zum Beispiel · so etwa · ohne weit zu suchen",
+"en definitiva · en resumen · en conclusión · en suma": "letztlich · zusammenfassend · abschließend · kurzum",
+"Yo trabajo mucho; mi hermano, en cambio, …": "Ich arbeite viel; mein Bruder dagegen …",
+"¿Dónde está Pablo? – Estará en casa.": "Wo ist Pablo? – Er wird wohl zu Hause sein.",
+"No contesta. Habrá salido.": "Er antwortet nicht. Er wird wohl weggegangen sein.",
+"Cuando llegó serían las diez.": "Als er ankam, war es wohl zehn Uhr.",
+"habré, habrás, habrá, habremos, habréis, habrán + Partizip": "ich werde … haben + Partizip (Futur II)",
+"en primer lugar · además · por otra parte · por último · sin embargo · no obstante · en cambio · es decir · o sea · por ejemplo · en definitiva · en resumen": "erstens · außerdem · andererseits · schließlich · jedoch · dennoch · dagegen · das heißt · also · zum Beispiel · letztlich · zusammenfassend",
+"Estará en casa. (jetzt) · Habrá salido. (gerade) · Serían las diez. (damals)": "Er wird zu Hause sein. (jetzt) · Er wird gegangen sein. (gerade) · Es wird zehn gewesen sein. (damals)",
+"a favor / en contra de · hay quien opina que … · cabe destacar que … · ventajas e inconvenientes": "dafür / dagegen · manche meinen, dass … · hervorzuheben ist, dass … · Vor- und Nachteile",
+"decir que": "sagen, dass",
+"Dice que vengas.": "Er sagt, du sollst kommen.",
+"sentir que": "spüren / bedauern, dass",
+"Siento que algo va mal.": "Ich spüre, dass etwas nicht stimmt.",
+"Siento que estés mal.": "Es tut mir leid, dass es dir schlecht geht.",
+"comprender / entender que": "begreifen / Verständnis haben, dass",
+"Entendí que no había plazas.": "Ich begriff, dass es keine Plätze gab.",
+"Entiendo que estés enfadada.": "Ich verstehe, dass du sauer bist.",
+"temer(se) que": "befürchten, dass",
+"Me temo que no hay solución.": "Ich fürchte, es gibt keine Lösung.",
+"Temo que no haya solución.": "Ich habe Angst, dass es keine Lösung gibt.",
+"el hecho de que + Subj.": "die Tatsache, dass + Subj.",
+"El hecho de que no llamara me dolió.": "Dass er nicht angerufen hat, hat mich verletzt.",
+"Que + Subj. (am Satzanfang)": "Dass … (am Satzanfang)",
+"Que no quiera venir no me extraña.": "Dass sie nicht kommen will, wundert mich nicht.",
+"lo de que / eso de que + Subj./Ind.": "die Sache mit … / dass …",
+"Eso de que te vayas no me gusta nada.": "Dass du weggehst, gefällt mir gar nicht.",
+"No me extraña que no quiera venir.": "Es wundert mich nicht, dass sie nicht kommen will.",
+"decir que + Ind. (mitteilen) / + Subj. (auffordern) · sentir que + Ind. (spüren) / + Subj. (bedauern) · entender que + Ind. (begreifen) / + Subj. (Verständnis) · me temo que + Ind.": "sagen, dass + Ind. (mitteilen) / + Subj. (auffordern) · spüren / bedauern · begreifen / Verständnis haben · ich fürchte, dass + Ind.",
+"El hecho de que + Subj. · Que + Subj. … no me extraña · Eso de que …": "Die Tatsache, dass … · Dass … wundert mich nicht · Die Sache mit …",
+"un poco / algo · más bien · digamos que · igual (vielleicht) · ¿no te parece que …?": "ein bisschen / etwas · eher · sagen wir mal · vielleicht · findest du nicht, dass …?",
+"súper- / requete- · -ísimo · de lo más + Adj. · la mar de · un montón · nada de nada": "super- · -ísimo (sehr) · äußerst · total · jede Menge · überhaupt nichts",
+"Es más bien caro. · Igual llegamos tarde.": "Es ist eher teuer. · Vielleicht kommen wir zu spät.",
+"Es carísimo. · Fue de lo más raro. · Estoy la mar de bien.": "Es ist sehr teuer. · Es war total seltsam. · Mir geht’s richtig gut.",
+"No está mal, pero igual podríamos …": "Nicht schlecht, aber vielleicht könnten wir …",
+"meter la pata · ser pan comido · estar hasta las narices · tomar el pelo · costar un ojo de la cara · ir al grano · dar en el clavo · tirar la toalla · ponerse las pilas": "ins Fettnäpfchen treten · ein Kinderspiel sein · die Nase voll haben · jemanden veräppeln · ein Vermögen kosten · zur Sache kommen · den Nagel auf den Kopf treffen · das Handtuch werfen · sich ranhalten",
+"currar · mola · flipar · tío/tía · guay · la pasta · rayarse · ser un rollo · majo": "schuften · ist cool · ausflippen · Alter/Mädel · cool · die Kohle · sich einen Kopf machen · öde sein · nett",
+"abschwächen: más bien, igual, digamos · verstärken: -ísimo, de lo más, la mar de, súper-": "abschwächen: eher, vielleicht, sagen wir · verstärken: sehr, äußerst, total, super-",
+"siempre que / siempre y cuando": "vorausgesetzt, dass",
+"Te lo presto siempre que me lo devuelvas.": "Ich leihe es dir, vorausgesetzt, du gibst es mir zurück.",
+"con tal de que": "sofern / Hauptsache",
+"Hago lo que sea con tal de que estés bien.": "Ich tue alles, Hauptsache, dir geht es gut.",
+"a no ser que / salvo que": "es sei denn",
+"Iremos, a no ser que llueva.": "Wir gehen hin, es sei denn, es regnet.",
+"en caso de que": "falls",
+"En caso de que haya problemas, llámeme.": "Falls es Probleme gibt, rufen Sie mich an.",
+"solo si": "nur wenn",
+"Solo si tengo tiempo.": "Nur wenn ich Zeit habe.",
+"Siempre que vengo, llueve.": "Immer wenn ich komme, regnet es.",
+"de + Infinitiv": "de + Infinitiv (= wenn)",
+"De tener más tiempo, viajaría más.": "Hätte ich mehr Zeit, würde ich mehr reisen.",
+"de + haber + Partizip": "de + haber + Partizip",
+"De haberlo sabido, no habría venido.": "Hätte ich das gewusst, wäre ich nicht gekommen.",
+"como + Subj.": "como + Subj. (Drohung)",
+"Como no estudies, suspenderás.": "Wenn du nicht lernst, fällst du durch.",
+"Gerundium": "Gerundium (als Bedingung)",
+"Trabajando así, no acabarás nunca.": "Wenn du so arbeitest, wirst du nie fertig.",
+"¡Como lo vuelvas a hacer…!": "Wehe, du machst das noch mal!",
+"siempre que / siempre y cuando · con tal de que · a no ser que / salvo que · en caso de que": "vorausgesetzt, dass · sofern · es sei denn · falls",
+"siempre que + Ind.": "immer wenn + Ind.",
+"solo si + Ind.": "nur wenn + Ind.",
+"De tener tiempo, … (= si tuviera) · De haberlo sabido, … (= si lo hubiera sabido) · Como no vengas, … (Drohung)": "Hätte ich Zeit, … · Hätte ich es gewusst, … · Wehe, du kommst nicht, …",
+"Laia organizó la fiesta.": "Laia hat die Party organisiert.",
+"Fue Laia quien organizó la fiesta.": "Es war Laia, die die Party organisiert hat.",
+"Nos conocimos aquí.": "Wir haben uns hier kennengelernt.",
+"Es aquí donde nos conocimos.": "Hier haben wir uns kennengelernt.",
+"Me di cuenta en 2020.": "Ich habe es 2020 gemerkt.",
+"Fue en 2020 cuando me di cuenta.": "Erst 2020 habe ich es gemerkt.",
+"Lo hice así.": "Ich habe es so gemacht.",
+"Fue así como lo hice.": "So habe ich es gemacht.",
+"Me preocupa el precio.": "Mich beunruhigt der Preis.",
+"Lo que me preocupa es el precio.": "Was mich beunruhigt, ist der Preis.",
+"lo + Adj.": "lo + Adjektiv (das …e)",
+"Lo bueno es que es gratis. · Lo peor fue la espera.": "Das Gute ist, dass es kostenlos ist. · Das Schlimmste war das Warten.",
+"lo + Adj./Adv. + que": "wie … (lo + Adj./Adv. + que)",
+"No sabes lo cansada que estoy. · ¡Mira lo bien que canta!": "Du ahnst nicht, wie müde ich bin. · Schau, wie gut sie singt!",
+"lo de + Nomen/Inf.": "die Sache mit …",
+"Lo de ayer fue un error.": "Die Sache gestern war ein Fehler.",
+"lo cansada que estoy": "wie müde ich bin",
+"lo caros que son": "wie teuer sie sind",
+"El libro, ya lo he leído. · A tu hermana, no la conozco. · De eso, mejor no hablamos.": "Das Buch habe ich schon gelesen. · Deine Schwester kenne ich nicht. · Darüber reden wir besser nicht.",
+"Fue Laia quien … · Es aquí donde … · Fue en 2020 cuando … · Fue así como … · Lo que me preocupa es …": "Es war Laia, die … · Hier … · Erst 2020 … · So … · Was mich beunruhigt, ist …",
+"lo bueno / lo peor / lo importante · No sabes lo cansada que estoy. · lo de ayer": "das Gute / das Schlimmste / das Wichtige · Du ahnst nicht, wie müde ich bin. · die Sache gestern",
+"El libro, ya lo he leído. · A Marc, no le he dicho nada.": "Das Buch habe ich schon gelesen. · Marc habe ich nichts gesagt.",
+"por muy + Adj./Adv. + que + Subj.": "so … auch + Subj.",
+"Por muy listo que sea, no lo sabe todo.": "So klug er auch ist, er weiß nicht alles.",
+"por más / mucho que + Subj.": "so sehr … auch + Subj.",
+"Por más que lo intente, no me sale.": "So sehr ich es auch versuche, es klappt nicht.",
+"por mucho/a/os/as + Nomen + que": "so viel … auch",
+"Por mucho dinero que tenga, no es feliz.": "So viel Geld er auch hat, er ist nicht glücklich.",
+"Por más que lo intento, no me sale.": "So sehr ich es auch versuche (und ich versuche es), es klappt nicht.",
+"aun + Gerundium": "selbst wenn / obwohl + Gerundium",
+"Aun estando cansado, siguió trabajando.": "Obwohl er müde war, arbeitete er weiter.",
+"aun así": "trotzdem",
+"Era caro; aun así, lo compré.": "Es war teuer; trotzdem habe ich es gekauft.",
+"y eso que + Ind.": "und das, obwohl",
+"Suspendió, y eso que estudió mucho.": "Er ist durchgefallen, und das, obwohl er viel gelernt hat.",
+"si bien + Ind.": "wenn auch (formell)",
+"Si bien el estudio es interesante, tiene limitaciones.": "Wenn die Studie auch interessant ist, hat sie Grenzen.",
+"pese a (que)": "trotz / obwohl (formell)",
+"Pese a la lluvia, el acto se celebró.": "Trotz des Regens fand die Veranstaltung statt.",
+"tan + Adj. + que / tanto/a + Nomen + que": "so … dass / so viel … dass",
+"Estaba tan cansado que me dormí en el metro.": "Ich war so müde, dass ich in der U-Bahn eingeschlafen bin.",
+"de tal modo / manera que": "so … dass / derart, dass",
+"Lo explicó de tal manera que todos lo entendieron.": "Er erklärte es so, dass alle es verstanden.",
+"de ahí que": "daher (+ Subj.)",
+"No hay datos fiables; de ahí que el debate sea tan difícil.": "Es gibt keine verlässlichen Daten; daher ist die Debatte so schwierig.",
+"con lo que / por lo que": "womit / weshalb",
+"Perdió el tren, con lo que llegó tarde.": "Er verpasste den Zug, weshalb er zu spät kam.",
+"por muy + Adj. + que + Subj. · por más / mucho que · aun + Gerundium · aun así · y eso que + Ind. · si bien (formell) · pese a (que)": "so … auch · so sehr … auch · obwohl + Gerundium · trotzdem · und das, obwohl · wenn auch · trotz",
+"tan / tanto … que + Ind. · de tal modo que · de ahí que + Subj. · con lo que / por lo que": "so … dass · derart, dass · daher + Subj. · weshalb",
+"en lo que respecta a · en cuanto a · por lo que se refiere a": "was … betrifft · bezüglich · was … angeht",
+"ahora bien · no obstante · con todo · dicho esto": "allerdings · dennoch · dennoch · das vorausgeschickt",
+"a raíz de · dado que · habida cuenta de que": "infolge · da · in Anbetracht dessen, dass",
+"cabe señalar / destacar que · conviene subrayar que · es más": "hervorzuheben ist, dass · es ist zu betonen, dass · mehr noch",
+"asimismo · a su vez · de igual modo": "ebenso · seinerseits · gleichermaßen",
+"en suma · en definitiva · a modo de conclusión": "kurzum · letztlich · abschließend",
+"aumentar / disminuir": "steigen / sinken",
+"el aumento / la disminución": "der Anstieg / der Rückgang",
+"crecer / desarrollar": "wachsen / entwickeln",
+"el crecimiento / el desarrollo": "das Wachstum / die Entwicklung",
+"analizar / proponer": "analysieren / vorschlagen",
+"el análisis / la propuesta": "die Analyse / der Vorschlag",
+"mejorar / reducir": "verbessern / verringern",
+"la mejora / la reducción": "die Verbesserung / die Verringerung",
+"Los precios aumentaron mucho, por eso la gente consume menos.→ El fuerte aumento de los precios ha provocado una disminución del consumo.": "Die Preise sind stark gestiegen, deshalb konsumieren die Leute weniger. → Der starke Preisanstieg hat zu einem Rückgang des Konsums geführt.",
+"Entró cantando.": "Er kam singend herein.",
+"Se cayó y se rompió la pierna.": "Er fiel hin und brach sich das Bein.",
+"Aprendí leyendo.": "Ich habe durch Lesen gelernt.",
+"una caja que contiene libros": "eine Kiste, die Bücher enthält",
+"Viendo que llovía, nos quedamos.": "Da wir sahen, dass es regnete, blieben wir.",
+"Le adjunto el informe.": "Anbei sende ich Ihnen den Bericht.",
+"en lo que respecta a · en cuanto a · ahora bien · dicho esto · con todo · a raíz de · dado que · cabe señalar que · asimismo · a su vez · en suma": "was … betrifft · bezüglich · allerdings · das vorausgeschickt · dennoch · infolge · da · hervorzuheben ist · ebenso · seinerseits · kurzum",
+"aumentar → el aumento · reducir → la reducción · mejorar → la mejora · proponer → la propuesta": "steigen → der Anstieg · verringern → die Verringerung · verbessern → die Verbesserung · vorschlagen → der Vorschlag",
+"Quiero pedirte algo.": "Ich will dich um etwas bitten.",
+"Quería pedirte algo.": "Ich wollte dich um etwas bitten. (= höflich: ich möchte)",
+"Querría / Quisiera pedirte algo.": "Ich würde dich gern um etwas bitten.",
+"Vengo a decirle que …": "Ich komme, um Ihnen zu sagen, dass …",
+"Venía a decirle que …": "Ich wollte Ihnen sagen, dass … (höflich)",
+"Me gustaría comentarle que …": "Ich würde Ihnen gern sagen, dass …",
+"¿Puedes …?": "Kannst du …?",
+"¿Podías …?": "Könntest du …? (höflich)",
+"¿Te importaría + Inf.?": "Würde es dir etwas ausmachen, … zu …?",
+"¡Menudo/a + Nomen!": "Was für ein …! (Ausruf)",
+"¡Menudo día! · ¡Menuda cara!": "Was für ein Tag! · So eine Frechheit!",
+"¡Vaya + Nomen + que …!": "Was für ein …! (Ausruf)",
+"¡Vaya cara que tiene!": "Ist der dreist!",
+"¿Será posible? · ¿Serás capaz de …?": "Kann das wahr sein? · Wirst du es wagen, …?",
+"¡Qué de + Nomen!": "Wie viele …!",
+"¡Qué de gente!": "Wie viele Leute!",
+"Gracias por tu «ayuda».": "Danke für deine „Hilfe“. (ironisch)",
+"Quería / Quisiera / Venía a + Inf. · ¿Te importaría + Inf.?": "Ich wollte / möchte / würde gern … · Würde es dir etwas ausmachen, …?",
+"¡Menudo día! · ¡Vaya cara que tiene! · ¡Qué de gente! · ¿Será posible? · ¿Serás capaz de …?": "Was für ein Tag! · Ist der dreist! · Wie viele Leute! · Kann das wahr sein? · Wirst du es wagen …?",
+"no es por nada, pero … · tirar una indirecta · ir con segundas · pillar la ironía": "ich sag ja nichts, aber … · eine Anspielung machen · etwas mit Hintergedanken sagen · die Ironie verstehen",
+"tomar": "nehmen / treffen",
+"una decisión, medidas, el pelo, en serio, en cuenta": "eine Entscheidung (treffen), Maßnahmen (ergreifen), jemanden veräppeln, ernst nehmen, berücksichtigen",
+"poner": "setzen / stellen",
+"en marcha, en duda, de manifiesto, fin a, en práctica": "in Gang setzen, infrage stellen, deutlich machen, beenden, in die Praxis umsetzen",
+"dar": "geben / machen",
+"un paso, por hecho, a conocer, lugar a, la razón": "einen Schritt machen, als gegeben annehmen, bekannt geben, Anlass geben zu, recht geben",
+"llevar": "führen / bringen",
+"a cabo, la contraria, razón (Am.), las riendas": "durchführen, widersprechen, recht haben (Am.), die Zügel in der Hand haben",
+"hacer": "machen",
+"hincapié en, frente a, caso a, falta": "betonen, sich stellen, beachten, nötig sein",
+"luchar contra molinos de viento": "gegen Windmühlen kämpfen",
+"ser un quijote": "ein Idealist sein",
+"ir a por uvas": "nicht bei der Sache sein",
+"ser más largo que un día sin pan": "endlos lang sein",
+"quedarse para vestir santos": "(veraltet) unverheiratet bleiben",
+"hacer el agosto": "ein Riesengeschäft machen",
+"Más vale tarde que nunca · A quien madruga, Dios le ayuda · No hay mal que por bien no venga · Del dicho al hecho hay mucho trecho · En casa del herrero, cuchillo de palo · Perro ladrador, poco mordedor": "Besser spät als nie · Morgenstund hat Gold im Mund · Alles hat sein Gutes · Leichter gesagt als getan · Der Schuster hat die schlechtesten Schuhe · Hunde, die bellen, beißen nicht",
+"tomar una decisión / medidas · poner en marcha / fin a · dar un paso / por hecho · llevar a cabo · hacer hincapié en / frente a": "eine Entscheidung treffen / Maßnahmen ergreifen · in Gang setzen / beenden · einen Schritt wagen / als gegeben annehmen · durchführen · betonen / sich stellen",
+"luchar contra molinos de viento · ir a por uvas · hacer el agosto": "gegen Windmühlen kämpfen · nicht bei der Sache sein · ein Riesengeschäft machen",
+"pase lo que pase": "was auch immer passiert",
+"digan lo que digan": "egal, was sie sagen",
+"cueste lo que cueste": "koste es, was es wolle",
+"vayas donde vayas": "wohin du auch gehst",
+"sea como sea / sea como fuere": "wie dem auch sei",
+"quieras o no": "ob du willst oder nicht",
+"hablare, tuviere, fuere, hubiere": "Futuro de subjuntivo (sprechen, haben, sein, haben)",
+"Adonde fueres, haz lo que vieres.": "Andere Länder, andere Sitten.",
+"Adonde vayas, haz lo que veas.": "Wohin du auch gehst, mach, was du dort siehst.",
+"Sea como fuere …": "Wie dem auch sei …",
+"Sea como sea …": "Wie dem auch sei …",
+"El que hubiere cometido el delito …": "Wer die Straftat begangen hat … (Gesetzessprache)",
+"El que haya cometido …": "Wer … begangen hat …",
+"Dondequiera que vayas, encontrarás amigos. · Comoquiera que sea, hay que decidir. · Cuandoquiera que llegues, avísame.": "Wohin du auch gehst, du wirst Freunde finden. · Wie dem auch sei, man muss entscheiden. · Wann immer du ankommst, sag Bescheid.",
+"pase lo que pase · digan lo que digan · cueste lo que cueste · vayas donde vayas · sea como sea / fuere · quieras o no": "was auch passiert · egal, was sie sagen · koste es, was es wolle · wohin du auch gehst · wie dem auch sei · ob du willst oder nicht",
+"fuere · hubiere · tuviere · Adonde fueres, haz lo que vieres.": "(Futuro de subjuntivo erkennen) · Andere Länder, andere Sitten.",
+"dondequiera / comoquiera / cuandoquiera que + Subj.": "wo / wie / wann auch immer + Subj.",
+"en virtud de · a efectos de · en su caso · el interesado · subsanar · plazo de diez días hábiles": "gemäß · zum Zwecke von · gegebenenfalls · der Antragsteller · nachbessern · Frist von zehn Werktagen",
+"es decir · o sea · esto es": "das heißt · also · nämlich",
+"Es bilingüe, es decir, habla dos lenguas nativas.": "Er ist zweisprachig, das heißt, er hat zwei Muttersprachen.",
+"dicho de otro modo · en otras palabras · o lo que es lo mismo": "anders gesagt · mit anderen Worten · was dasselbe ist",
+"Subió un 100 %, o lo que es lo mismo, se duplicó.": "Es stieg um 100 %, was dasselbe ist wie: Es hat sich verdoppelt.",
+"mejor dicho · más bien · digo": "besser gesagt · eher · ich meine",
+"Vendré el lunes, mejor dicho, el martes.": "Ich komme am Montag, besser gesagt am Dienstag.",
+"a saber": "nämlich",
+"Hay tres requisitos, a saber: …": "Es gibt drei Voraussetzungen, nämlich: …",
+"en pocas palabras · en síntesis · grosso modo": "kurz gesagt · zusammengefasst · grob gesagt",
+"En pocas palabras, fue un éxito.": "Kurz gesagt: Es war ein Erfolg.",
+"es decir · o sea · dicho de otro modo · en otras palabras · o lo que es lo mismo · mejor dicho · a saber · en pocas palabras · en síntesis": "das heißt · also · anders gesagt · mit anderen Worten · was dasselbe ist · besser gesagt · nämlich · kurz gesagt · zusammengefasst",
+"Dicen que … · Lo que vienen a decir es que … · suavizar · matizar · captar el sentido": "Sie sagen, dass … · Was sie damit sagen wollen, ist … · abmildern · nuancieren · den Sinn erfassen"
+});
+;
+/* ================= GESCHICHTEN: „Nuevo en Barcelona“ – Serie zum Lesen & Hören =================
+   Ben, ein deutscher Student, zieht nach Barcelona. Jede Geschichte nutzt nur Grammatik bis zur Unidad in `after`.
+   text: {Wort|Übersetzung} = antippbar. qs: 6 Verständnisfragen, gesetzt per quellcode/story_qs.py (mc / tf = richtig-falsch / gap = Lücke). */
+window.STORIES=[
+{id:'s1',after:'u1',title:'¡Hola, Barcelona!',sub:'Ben kommt an',text:`Me llamo Ben. Soy {alemán|Deutscher}, de Hamburgo. Estudio informática y ahora {vivo|wohne} en Barcelona. ¡Es mi primer día!
+
+En el aeropuerto hablo con una chica. Se llama Laia y es de Barcelona. Laia estudia {inglés|Englisch} y alemán. Habla muy bien. —¿Hablas español? —pregunta Laia. —Un poco —digo yo—. Necesito practicar. —¡Yo también necesito practicar alemán! —dice ella.
+
+Laia y yo {tomamos|nehmen} el autobús al centro. Es fantástico: ¡ya tengo una amiga!`,
+de:`Ich heiße Ben. Ich bin Deutscher, aus Hamburg. Ich studiere Informatik und wohne jetzt in Barcelona. Es ist mein erster Tag!\n\nAm Flughafen spreche ich mit einem Mädchen. Sie heißt Laia und ist aus Barcelona. Laia studiert Englisch und Deutsch. Sie spricht sehr gut. „Sprichst du Spanisch?“, fragt Laia. „Ein bisschen“, sage ich. „Ich muss üben.“ „Ich muss auch Deutsch üben!“, sagt sie.\n\nLaia und ich nehmen den Bus ins Zentrum. Es ist fantastisch: Ich habe schon eine Freundin!`,
+qs:[{"q": "¿Quién es Laia?", "opts": ["una chica de Barcelona", "una profesora de Hamburgo", "la hermana de Ben"], "a": 0}, {"q": "¿Qué idioma quiere practicar Laia?", "opts": ["alemán", "español", "catalán"], "a": 0}, {"t": "tf", "q": "Ben es de Barcelona.", "a": false}, {"t": "tf", "q": "Ben habla un poco de español.", "a": true}, {"t": "gap", "q": "Ben estudia ___.", "a": ["informática"]}, {"t": "gap", "q": "Laia y Ben van al centro en ___.", "a": ["autobús|el autobús"]}]},
+
+{id:'s2',after:'u3',title:'El piso de Nuria',sub:'Die neue WG',text:`Mi piso está en Gràcia, un barrio muy bonito. {Comparto|Ich teile} el piso con Nuria y Pablo. Nuria es de Valencia. Es alta, {morena|dunkelhaarig} y muy simpática. Trabaja en una agencia de publicidad. Pablo es de Sevilla, es estudiante y es un poco caótico.
+
+El piso es pequeño pero tiene un balcón. A Nuria le gusta mucho {cocinar|kochen}. A Pablo le gusta la música... ¡a las dos de la mañana! A mí me gustan las plantas del balcón y el {ambiente|die Atmosphäre} del barrio.
+
+Nuria tiene una hermana y dos hermanos. Su familia es muy grande y siempre llama por teléfono. —Mi madre está {preocupada|besorgt} —dice Nuria—. ¡Siempre pregunta si como bien!`,
+de:`Meine Wohnung ist in Gràcia, einem sehr schönen Viertel. Ich teile die Wohnung mit Nuria und Pablo. Nuria ist aus Valencia. Sie ist groß, dunkelhaarig und sehr sympathisch. Sie arbeitet in einer Werbeagentur. Pablo ist aus Sevilla, Student und ein bisschen chaotisch.\n\nDie Wohnung ist klein, aber sie hat einen Balkon. Nuria kocht sehr gern. Pablo mag Musik … um zwei Uhr morgens! Mir gefallen die Pflanzen auf dem Balkon und die Atmosphäre im Viertel.\n\nNuria hat eine Schwester und zwei Brüder. Ihre Familie ist sehr groß und ruft immer an. „Meine Mutter ist besorgt“, sagt Nuria. „Sie fragt immer, ob ich gut esse!“`,
+qs:[{"q": "¿Dónde vive Ben?", "opts": ["en un piso en Gràcia", "en una casa en Valencia", "en una residencia de estudiantes"], "a": 0}, {"q": "¿Qué problema hay con Pablo?", "opts": ["Escucha música muy tarde.", "Nunca cocina.", "No paga el piso."], "a": 0}, {"t": "tf", "q": "Nuria trabaja en una universidad.", "a": false}, {"t": "tf", "q": "El piso no es muy grande.", "a": true}, {"t": "gap", "q": "A Ben le gustan las ___ del balcón.", "a": ["plantas"]}, {"t": "gap", "q": "La madre de Nuria siempre pregunta si Nuria ___ bien.", "a": ["come"]}]},
+
+{id:'s3',after:'u4',title:'Una cena a las diez',sub:'Essen wie die Spanier',text:`Hoy Marc, un compañero de la universidad, me invita a cenar. —¿A qué hora quedamos? —pregunto. —¿A las diez? —dice Marc. ¡A las diez! En Alemania a las diez ya {estoy en la cama|liege ich im Bett}.
+
+Vamos a un bar de tapas en el Born. Hay mucha gente. Pedimos patatas bravas, pan con tomate, croquetas y {calamares|Tintenfisch}. Para beber, Marc toma una cerveza y yo un agua con gas. —¿Y de postre? —pregunta el camarero. —Una crema catalana, por favor —dice Marc—. Es típica de aquí.
+
+Al final pedimos la cuenta. Son treinta euros. —Hoy pago yo —dice Marc—. ¡{Bienvenido|Willkommen} a Barcelona!`,
+de:`Heute lädt mich Marc, ein Kommilitone, zum Abendessen ein. „Um wie viel Uhr treffen wir uns?“, frage ich. „Um zehn?“, sagt Marc. Um zehn! In Deutschland liege ich um zehn schon im Bett.\n\nWir gehen in eine Tapas-Bar im Born. Es sind viele Leute da. Wir bestellen Patatas bravas, Pan con tomate, Kroketten und Tintenfisch. Zu trinken nimmt Marc ein Bier und ich ein Wasser mit Kohlensäure. „Und als Nachtisch?“, fragt der Kellner. „Eine Crema catalana, bitte“, sagt Marc. „Die ist typisch für hier.“\n\nZum Schluss bitten wir um die Rechnung. Es sind dreißig Euro. „Heute zahle ich“, sagt Marc. „Willkommen in Barcelona!“`,
+qs:[{"q": "¿Por qué le sorprende a Ben la hora de la cena?", "opts": ["En Alemania a esa hora ya está en la cama.", "No tiene hambre.", "El bar está cerrado."], "a": 0}, {"q": "¿Qué es la crema catalana?", "opts": ["un postre típico", "una bebida", "una tapa de patatas"], "a": 0}, {"t": "tf", "q": "Ben bebe cerveza.", "a": false}, {"t": "tf", "q": "En el bar hay muchas personas.", "a": true}, {"t": "gap", "q": "La cena cuesta ___ euros.", "a": ["treinta|30"]}, {"t": "gap", "q": "Marc es un ___ de la universidad.", "a": ["compañero|amigo"]}]},
+
+{id:'s4',after:'u5',title:'Perdido en el metro',sub:'Der falsche Weg',text:`El sábado quiero ir a la playa de la Barceloneta. Tomo el metro en Fontana, la línea verde. Pero no {cambio|steige um} de línea en Passeig de Gràcia y llego a... ¡Zona Universitaria! Estoy muy lejos de la playa.
+
+Pregunto a una señora: —Perdone, ¿sabe dónde está la playa? —¡Uy, está muy lejos! —dice ella—. Tome la línea verde otra vez y cambie a la línea amarilla en Passeig de Gràcia. Baje en Barceloneta. Después siga todo recto unos diez minutos.
+
+Una hora después estoy en la playa. Hace sol, hay mucha gente y el mar es azul. —Bueno —pienso—, ahora conozco muy bien el metro de Barcelona.`,
+de:`Am Samstag will ich an den Strand von Barceloneta. Ich nehme die Metro in Fontana, die grüne Linie. Aber ich steige in Passeig de Gràcia nicht um und komme an … Zona Universitaria! Ich bin sehr weit weg vom Strand.\n\nIch frage eine Dame: „Entschuldigung, wissen Sie, wo der Strand ist?“ „Oh, der ist sehr weit weg!“, sagt sie. „Nehmen Sie wieder die grüne Linie und steigen Sie in Passeig de Gràcia in die gelbe Linie um. Steigen Sie in Barceloneta aus. Danach gehen Sie etwa zehn Minuten geradeaus.“\n\nEine Stunde später bin ich am Strand. Die Sonne scheint, es sind viele Leute da und das Meer ist blau. „Na ja“, denke ich, „jetzt kenne ich die Metro von Barcelona sehr gut.“`,
+qs:[{"q": "¿Adónde quiere ir Ben el sábado?", "opts": ["a la playa", "a la universidad", "a la montaña"], "a": 0}, {"q": "¿A qué línea tiene que cambiar Ben?", "opts": ["a la amarilla", "a la verde", "a la roja"], "a": 0}, {"t": "tf", "q": "La señora no sabe dónde está la playa.", "a": false}, {"t": "tf", "q": "Al final, Ben llega a la playa.", "a": true}, {"t": "gap", "q": "Desde la estación, Ben tiene que ir todo ___ unos diez minutos.", "a": ["recto"]}, {"t": "gap", "q": "Ben tiene que bajar en la estación ___.", "a": ["Barceloneta"]}]},
+
+{id:'s5',after:'u6',title:'Un fin de semana en Sitges',sub:'Was haben sie gemacht?',text:`Este fin de semana Laia y yo hemos ido a Sitges, un pueblo en la costa, a cuarenta minutos de Barcelona en tren. ¡Ha sido genial!
+
+Hemos llegado el sábado por la mañana. Primero hemos paseado por el casco antiguo, con sus casas blancas y sus calles {estrechas|eng}. Después hemos comido una paella en un restaurante al lado del mar. Por la tarde hemos nadado un poco, aunque el agua estaba fría.
+
+Laia me ha preguntado: —¿Has estado alguna vez en un pueblo así? —No, nunca —he dicho yo—. En Hamburgo también hay mar, pero no hay palmeras. Hemos vuelto a casa muy tarde y muy cansados, pero muy {contentos|zufrieden}.`,
+de:`Dieses Wochenende sind Laia und ich nach Sitges gefahren, einem Ort an der Küste, vierzig Minuten mit dem Zug von Barcelona. Es war genial!\n\nWir sind am Samstagmorgen angekommen. Zuerst sind wir durch die Altstadt spaziert, mit ihren weißen Häusern und engen Gassen. Danach haben wir in einem Restaurant am Meer Paella gegessen. Am Nachmittag sind wir ein bisschen geschwommen, obwohl das Wasser kalt war.\n\nLaia hat mich gefragt: „Warst du schon einmal in so einem Ort?“ „Nein, nie“, habe ich gesagt. „In Hamburg gibt es auch Meer, aber keine Palmen.“ Wir sind sehr spät und sehr müde, aber sehr zufrieden nach Hause gekommen.`,
+qs:[{"q": "¿Qué es Sitges?", "opts": ["un pueblo en la costa", "un barrio de Barcelona", "una playa de Hamburgo"], "a": 0}, {"q": "¿Qué han comido?", "opts": ["paella", "tapas", "pizza"], "a": 0}, {"t": "tf", "q": "El agua del mar estaba caliente.", "a": false}, {"t": "tf", "q": "Ben nunca ha estado antes en un pueblo así.", "a": true}, {"t": "gap", "q": "En tren, el viaje dura ___ minutos.", "a": ["cuarenta|40"]}, {"t": "gap", "q": "Han vuelto a casa cansados, pero ___.", "a": ["contentos|muy contentos"]}]},
+
+{id:'s6',after:'u7',title:'Un día normal... o no',sub:'Bens Alltag',text:`Normalmente me levanto a las siete y media. Me ducho, me visto y desayuno un café con leche y una tostada. A las nueve tengo clase en la universidad. Mi compañero Marc siempre llega tarde: es más simpático que yo, pero menos {puntual|pünktlich}.
+
+Pero hoy no es un día normal. Hoy me he despertado a las nueve menos cuarto. ¡La alarma no ha {sonado|geklingelt}! Me he vestido en dos minutos, no he desayunado y he corrido al metro.
+
+Cuando he llegado a clase, el profesor estaba explicando algo en la pizarra. Marc me ha mirado y ha dicho en voz baja: —Hoy tú eres el que llega tarde. ¡Por fin no soy el único!`,
+de:`Normalerweise stehe ich um halb acht auf. Ich dusche, ziehe mich an und frühstücke einen Milchkaffee und einen Toast. Um neun habe ich Unterricht an der Uni. Mein Kommilitone Marc kommt immer zu spät: Er ist sympathischer als ich, aber weniger pünktlich.\n\nAber heute ist kein normaler Tag. Heute bin ich um Viertel vor neun aufgewacht. Der Wecker hat nicht geklingelt! Ich habe mich in zwei Minuten angezogen, nicht gefrühstückt und bin zur Metro gerannt.\n\nAls ich im Unterricht angekommen bin, hat der Professor gerade etwas an der Tafel erklärt. Marc hat mich angeschaut und leise gesagt: „Heute bist du derjenige, der zu spät kommt. Endlich bin ich nicht der Einzige!“`,
+qs:[{"q": "¿Qué desayuna Ben normalmente?", "opts": ["café con leche y una tostada", "nada", "zumo y cereales"], "a": 0}, {"q": "Hoy, ¿qué no ha hecho Ben?", "opts": ["No ha desayunado.", "No se ha vestido.", "No ha ido a clase."], "a": 0}, {"t": "tf", "q": "Normalmente, Marc llega puntual.", "a": false}, {"t": "tf", "q": "Hoy Ben se ha vestido muy rápido.", "a": true}, {"t": "gap", "q": "Ben tiene clase a las ___.", "a": ["nueve|9"]}, {"t": "gap", "q": "Hoy el que llega tarde es ___.", "a": ["Ben"]}]},
+
+{id:'s7',after:'u8',title:'Planes para el puente',sub:'Ein langes Wochenende',text:`El jueves es {festivo|Feiertag} y muchos catalanes hacen «puente»: no trabajan el viernes y tienen cuatro días libres. Nuria va a visitar a su familia en Valencia. Pablo va a ir a un festival de música. ¿Y yo?
+
+—¿Qué vas a hacer tú? —me pregunta Laia. —No sé. ¿Tienes ganas de ir a los Pirineos? —¡Me encanta la idea! Pero mira el tiempo: el jueves va a llover y va a hacer frío. —Pues {llevamos|wir nehmen mit} chaquetas y botas —digo yo.
+
+Al final vamos a ir a Puigcerdà, un pueblo en la montaña. Vamos a hacer {senderismo|Wandern} el viernes y el sábado. El domingo, si hace buen tiempo, vamos a volver por la costa. —¡Va a ser un puente perfecto! —dice Laia.`,
+de:`Am Donnerstag ist Feiertag und viele Katalanen machen eine „Brücke“: Sie arbeiten am Freitag nicht und haben vier freie Tage. Nuria wird ihre Familie in Valencia besuchen. Pablo wird auf ein Musikfestival gehen. Und ich?\n\n„Was machst du?“, fragt mich Laia. „Weiß nicht. Hast du Lust, in die Pyrenäen zu fahren?“ „Ich liebe die Idee! Aber schau dir das Wetter an: Am Donnerstag wird es regnen und kalt sein.“ „Dann nehmen wir Jacken und Stiefel mit“, sage ich.\n\nAm Ende fahren wir nach Puigcerdà, einem Dorf in den Bergen. Am Freitag und Samstag werden wir wandern. Am Sonntag fahren wir, wenn das Wetter gut ist, über die Küste zurück. „Das wird eine perfekte Brücke!“, sagt Laia.`,
+qs:[{"q": "¿Qué va a hacer Nuria en el puente?", "opts": ["visitar a su familia", "ir a un festival", "ir a los Pirineos"], "a": 0}, {"q": "¿Qué van a llevar Ben y Laia por el mal tiempo?", "opts": ["chaquetas y botas", "paraguas", "nada especial"], "a": 0}, {"t": "tf", "q": "El viernes del puente muchos catalanes trabajan.", "a": false}, {"t": "tf", "q": "Puigcerdà está en la montaña.", "a": true}, {"t": "gap", "q": "Pablo va a ir a un ___ de música.", "a": ["festival"]}, {"t": "gap", "q": "El domingo van a volver por la ___.", "a": ["costa"]}]},
+
+{id:'s8',after:'u9',title:'Cuando la abuela era joven',sub:'Barcelona früher',text:`El domingo Nuria y yo visitamos al señor Puig, nuestro {casero|Vermieter}. Tiene ochenta años y vive en el primer piso. Nos invita a un café y nos enseña fotos antiguas.
+
+—Cuando yo era joven, Gràcia era muy diferente —dice—. No había tantos turistas. Todos los vecinos se conocían. Los niños jugaban en la calle y las {abuelas|Großmütter} se sentaban delante de las puertas por la tarde. Mi padre tenía una pequeña tienda de {zapatos|Schuhe} en esta calle.
+
+—¿Y qué hacían los jóvenes los fines de semana? —pregunto yo. —Íbamos a bailar a la plaza del Sol. No teníamos móviles, así que quedábamos siempre a la misma hora en el mismo lugar. ¡Y nadie llegaba tarde! —dice, y se ríe.`,
+de:`Am Sonntag besuchen Nuria und ich Herrn Puig, unseren Vermieter. Er ist achtzig Jahre alt und wohnt im ersten Stock. Er lädt uns auf einen Kaffee ein und zeigt uns alte Fotos.\n\n„Als ich jung war, war Gràcia ganz anders“, sagt er. „Es gab nicht so viele Touristen. Alle Nachbarn kannten sich. Die Kinder spielten auf der Straße und die Großmütter setzten sich nachmittags vor die Türen. Mein Vater hatte in dieser Straße einen kleinen Schuhladen.“\n\n„Und was machten die jungen Leute am Wochenende?“, frage ich. „Wir gingen auf der Plaza del Sol tanzen. Wir hatten keine Handys, also trafen wir uns immer zur selben Zeit am selben Ort. Und keiner kam zu spät!“, sagt er und lacht.`,
+qs:[{"q": "¿Quién es el señor Puig?", "opts": ["el casero de Ben y Nuria", "el abuelo de Nuria", "un profesor de la universidad"], "a": 0}, {"q": "Según el señor Puig, ¿cómo era Gràcia antes?", "opts": ["Había menos turistas.", "Había más coches.", "Era más grande."], "a": 0}, {"t": "tf", "q": "Antes los vecinos no se conocían.", "a": false}, {"t": "tf", "q": "Los jóvenes iban a bailar a una plaza.", "a": true}, {"t": "gap", "q": "El señor Puig tiene ___ años.", "a": ["ochenta|80"]}, {"t": "gap", "q": "Antes, ___ llegaba tarde a las citas.", "a": ["nadie"]}]},
+
+{id:'s9',after:'u10',title:'La entrevista de Marc',sub:'Ein wichtiger Tag',text:`Marc buscaba unas prácticas desde hacía meses. La semana pasada por fin lo llamaron de una empresa de tecnología en el 22@, el barrio de las {startups|Start-ups}.
+
+El día de la entrevista se levantó a las seis, se puso su mejor camisa y repasó su currículum tres veces. Llegó media hora antes. La entrevistadora era muy amable. Le preguntó por sus estudios, por sus puntos fuertes y por qué quería trabajar allí. Marc contestó con calma, aunque estaba muy nervioso.
+
+Al final ella le preguntó: —¿Habla usted otros idiomas? —Catalán, castellano, inglés... y estoy aprendiendo alemán con un amigo —dijo Marc. Ella sonrió. Dos días después lo llamaron otra vez: ¡consiguió el puesto! Esa noche lo celebramos en el bar de siempre.`,
+de:`Marc suchte seit Monaten ein Praktikum. Letzte Woche rief ihn endlich ein Technologieunternehmen im 22@ an, dem Start-up-Viertel.\n\nAm Tag des Vorstellungsgesprächs stand er um sechs auf, zog sein bestes Hemd an und ging seinen Lebenslauf dreimal durch. Er kam eine halbe Stunde zu früh. Die Interviewerin war sehr freundlich. Sie fragte ihn nach seinem Studium, nach seinen Stärken und warum er dort arbeiten wollte. Marc antwortete ruhig, obwohl er sehr nervös war.\n\nZum Schluss fragte sie ihn: „Sprechen Sie andere Sprachen?“ „Katalanisch, Spanisch, Englisch … und ich lerne gerade Deutsch mit einem Freund“, sagte Marc. Sie lächelte. Zwei Tage später riefen sie ihn wieder an: Er bekam die Stelle! An diesem Abend feierten wir in der üblichen Bar.`,
+qs:[{"q": "¿Dónde está la empresa?", "opts": ["en el barrio de las startups", "en el centro de Madrid", "en Alemania"], "a": 0}, {"q": "¿Qué hizo Marc la mañana de la entrevista?", "opts": ["Leyó su currículum varias veces.", "Durmió hasta tarde.", "Llamó a la empresa."], "a": 0}, {"t": "tf", "q": "Marc llegó tarde a la entrevista.", "a": false}, {"t": "tf", "q": "Marc está aprendiendo alemán.", "a": true}, {"t": "gap", "q": "La entrevistadora fue muy ___.", "a": ["amable"]}, {"t": "gap", "q": "Esa noche Marc y sus amigos lo ___ en un bar.", "a": ["celebraron"]}]},
+
+{id:'s10',after:'u11',title:'Fiebre en la Mercè',sub:'Krank zur Fiesta',text:`La Mercè es la gran fiesta de Barcelona, en septiembre. Hay conciertos, {castellers|Menschentürme} y el «correfoc», con fuego y música por las calles. Yo tenía muchas ganas de verlo todo.
+
+Pero el viernes me desperté con fiebre. Me dolía la cabeza y la garganta. Nuria me miró y dijo: —Tienes muy mala cara. Quédate en la cama, bebe mucha agua y toma un ibuprofeno. Y no salgas esta noche. —¡Pero es el correfoc! —dije yo. —El año que viene hay otro —contestó ella.
+
+Nuria fue a la farmacia y me trajo un jarabe y una sopa de su madre. El domingo ya me encontraba mejor y pude ver los castellers en la plaza Sant Jaume. Eran increíbles: ¡nueve {pisos|Etagen} de personas!`,
+de:`Die Mercè ist das große Fest von Barcelona, im September. Es gibt Konzerte, Menschentürme und den „Correfoc“ mit Feuer und Musik durch die Straßen. Ich hatte große Lust, alles zu sehen.\n\nAber am Freitag wachte ich mit Fieber auf. Mir taten Kopf und Hals weh. Nuria sah mich an und sagte: „Du siehst echt schlecht aus. Bleib im Bett, trink viel Wasser und nimm ein Ibuprofen. Und geh heute Abend nicht raus.“ „Aber es ist der Correfoc!“, sagte ich. „Nächstes Jahr gibt es wieder einen“, antwortete sie.\n\nNuria ging in die Apotheke und brachte mir einen Hustensaft und eine Suppe von ihrer Mutter. Am Sonntag ging es mir schon besser und ich konnte die Menschentürme auf der Plaza Sant Jaume sehen. Sie waren unglaublich: neun Stockwerke aus Menschen!`,
+qs:[{"q": "¿Qué es la Mercè?", "opts": ["la gran fiesta de Barcelona", "una farmacia del barrio", "una amiga de Nuria"], "a": 0}, {"q": "¿Qué le trajo Nuria a Ben?", "opts": ["un jarabe y una sopa", "un ibuprofeno y una pizza", "entradas para el correfoc"], "a": 0}, {"t": "tf", "q": "Ben fue al correfoc el viernes por la noche.", "a": false}, {"t": "tf", "q": "El domingo Ben estaba mejor.", "a": true}, {"t": "gap", "q": "Nuria le dice: «Bebe mucha ___».", "a": ["agua"]}, {"t": "gap", "q": "Los castellers tenían ___ pisos de personas.", "a": ["nueve|9"]}]},
+
+{id:'s11',after:'u16',title:'Ojalá no llueva',sub:'Besuch aus Deutschland',text:`Mañana llega mi amigo Lukas desde Mannheim y quiero que todo sea perfecto. Le he escrito una lista de consejos: «Te recomiendo que traigas ropa ligera, pero también una chaqueta. Es importante que compres una tarjeta de transporte en el aeropuerto. Y no dejes la mochila sola en la playa».
+
+Nuria se ríe cuando ve la lista. —Pareces su madre —me dice—. Déjale que descubra la ciudad solo. —Ya, pero quiero que le guste Barcelona tanto como a mí —contesto.
+
+Miro el {pronóstico|die Vorhersage} del tiempo: dicen que el sábado puede llover. Ojalá no llueva, porque quiero que subamos al {búnker|Bunker} del Carmel para ver la puesta de sol. Nuria me da una {palmada|Klaps} en el hombro: —Tranquilo. Si llueve, os llevo a comer el mejor arroz de la ciudad. Espero que tenga hambre.`,
+de:`Morgen kommt mein Freund Lukas aus Mannheim und ich will, dass alles perfekt ist. Ich habe ihm eine Liste mit Tipps geschrieben: „Ich empfehle dir, leichte Kleidung mitzubringen, aber auch eine Jacke. Es ist wichtig, dass du am Flughafen eine Fahrkarte kaufst. Und lass den Rucksack am Strand nicht allein.“\n\nNuria lacht, als sie die Liste sieht. „Du wirkst wie seine Mutter“, sagt sie. „Lass ihn die Stadt allein entdecken.“ „Ja, aber ich will, dass ihm Barcelona so gut gefällt wie mir“, antworte ich.\n\nIch schaue mir die Wettervorhersage an: Es heißt, am Samstag könnte es regnen. Hoffentlich regnet es nicht, denn ich will, dass wir auf den Bunker des Carmel steigen, um den Sonnenuntergang zu sehen. Nuria klopft mir auf die Schulter: „Ganz ruhig. Wenn es regnet, nehme ich euch mit zum besten Reis der Stadt. Ich hoffe, er hat Hunger.“`,
+qs:[{"q": "¿De dónde viene Lukas?", "opts": ["de Mannheim", "de Hamburgo", "de Valencia"], "a": 0}, {"q": "Según Nuria, ¿qué debería hacer Lukas?", "opts": ["descubrir la ciudad solo", "leer bien la lista de Ben", "quedarse en casa"], "a": 0}, {"t": "tf", "q": "Ben le recomienda a Lukas que traiga solo ropa de invierno.", "a": false}, {"t": "tf", "q": "Si llueve, Nuria los lleva a comer arroz.", "a": true}, {"t": "gap", "q": "Ben le aconseja a Lukas que ___ una tarjeta de transporte en el aeropuerto.", "a": ["compre"]}, {"t": "gap", "q": "Ojalá no ___ el sábado.", "a": ["llueva"]}]},
+
+{id:'s12',after:'u17',title:'La noche que se fue la luz',sub:'Eine dunkle Nacht in Gràcia',text:`Era un martes de noviembre y llovía mucho. Nuria estaba cocinando, Pablo veía una serie y yo estaba escribiendo un trabajo para la universidad. De repente, se fue la luz en todo el barrio.
+
+Al principio nadie dijo nada. Luego Pablo gritó desde el sofá: —¡Justo en el último capítulo! Yo estaba peor: no había guardado mi trabajo desde hacía dos horas. Nuria encontró unas {velas|Kerzen} en la cocina y las encendimos.
+
+Como no podíamos hacer nada, nos sentamos los tres en el suelo del salón y empezamos a contar historias. Pablo nos contó que de pequeño se había perdido en la Feria de Abril de Sevilla. Nuria nos contó cómo había conocido a su mejor amiga. Cuando volvió la luz, a las once, nos dimos cuenta de que habíamos estado hablando tres horas. —Deberíamos apagar la luz más a menudo —dijo Nuria. Y, por suerte, mi ordenador había guardado el trabajo {automáticamente|automatisch}.`,
+de:`Es war ein Dienstag im November und es regnete stark. Nuria kochte gerade, Pablo schaute eine Serie und ich schrieb an einer Arbeit für die Uni. Plötzlich fiel im ganzen Viertel der Strom aus.\n\nZuerst sagte niemand etwas. Dann rief Pablo vom Sofa: „Ausgerechnet in der letzten Folge!“ Mir ging es schlechter: Ich hatte meine Arbeit seit zwei Stunden nicht gespeichert. Nuria fand ein paar Kerzen in der Küche und wir zündeten sie an.\n\nWeil wir nichts tun konnten, setzten wir uns zu dritt auf den Boden im Wohnzimmer und fingen an, Geschichten zu erzählen. Pablo erzählte uns, dass er sich als Kind auf der Feria de Abril in Sevilla verlaufen hatte. Nuria erzählte, wie sie ihre beste Freundin kennengelernt hatte. Als um elf der Strom zurückkam, merkten wir, dass wir drei Stunden geredet hatten. „Wir sollten öfter das Licht ausmachen“, sagte Nuria. Und zum Glück hatte mein Computer die Arbeit automatisch gespeichert.`,
+qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
+,{id:'s13',after:'u28',title:'La oferta',sub:'Bleiben oder gehen?',text:`El lunes recibí un correo de una empresa de Múnich. Me ofrecían un trabajo fijo, con un sueldo que en Barcelona solo podría soñar. Aunque llevaba meses buscando algo así, no me alegré tanto como esperaba. Me quedé mirando la pantalla un buen rato.
+
+Esa noche se lo conté a Nuria y a Laia en la terraza. —Si yo fuera tú, lo aceptaría sin pensarlo —dijo Nuria—. Con ese sueldo podrías ahorrar y volver cuando quisieras. Laia, en cambio, no dijo nada durante un rato. Luego me miró y me preguntó: —¿Y tú qué quieres? No lo que deberías querer, sino lo que quieres de verdad.
+
+No supe qué contestar. Como no podía dormir, salí a pasear por Gràcia. Se oían risas en las plazas y alguien tocaba la guitarra. Pensé en mi primer día, cuando no entendía nada y me perdí en el metro. Si alguien me hubiera dicho entonces que algún día me costaría tanto irme, no lo habría creído.
+
+Al día siguiente escribí a la empresa. Les agradecí la oferta y les pregunté si sería posible trabajar en remoto desde Barcelona. Me contestaron que lo {estudiarían|prüfen}. Todavía no sé qué pasará, pero por primera vez tengo claro lo que quiero.`,
+de:`Am Montag bekam ich eine E-Mail von einer Firma aus München. Sie boten mir eine feste Stelle an, mit einem Gehalt, von dem ich in Barcelona nur träumen könnte. Obwohl ich seit Monaten so etwas suchte, freute ich mich nicht so sehr, wie ich erwartet hatte. Ich starrte eine ganze Weile auf den Bildschirm.\n\nAm Abend erzählte ich es Nuria und Laia auf der Terrasse. „Wenn ich du wäre, würde ich es ohne Nachdenken annehmen“, sagte Nuria. „Mit dem Gehalt könntest du sparen und zurückkommen, wann du willst.“ Laia dagegen sagte eine Weile nichts. Dann sah sie mich an und fragte: „Und was willst du? Nicht, was du wollen solltest, sondern was du wirklich willst.“\n\nIch wusste nicht, was ich antworten sollte. Da ich nicht schlafen konnte, ging ich in Gràcia spazieren. Man hörte Lachen auf den Plätzen, und jemand spielte Gitarre. Ich dachte an meinen ersten Tag, als ich nichts verstand und mich in der Metro verlief. Wenn mir damals jemand gesagt hätte, dass es mir eines Tages so schwerfallen würde zu gehen, hätte ich es nicht geglaubt.\n\nAm nächsten Tag schrieb ich der Firma. Ich bedankte mich für das Angebot und fragte, ob es möglich wäre, remote aus Barcelona zu arbeiten. Sie antworteten, dass sie es prüfen würden. Ich weiß noch nicht, was passieren wird, aber zum ersten Mal ist mir klar, was ich will.`,
+qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
+,{id:'s14',after:'u35',title:'El manuscrito',sub:'Ein Fund im Archiv',text:`Fue un martes lluvioso cuando Laia me llamó desde el archivo de la Biblioteca de Catalunya, donde hacía prácticas. —Tienes que venir. No te imaginas lo que he encontrado —me dijo, en voz tan baja que apenas la oí.
+
+Lo que había encontrado era un cuaderno escrito a mano, metido por error en una caja de facturas de 1936. Por muy acostumbrada que estuviera a los documentos antiguos, a Laia le temblaban las manos. Las primeras páginas eran recetas de cocina; ahora bien, a partir de la página veinte, la letra cambiaba y empezaba un diario. Era de una chica de diecisiete años, Mercè, que vivía en Gràcia, a dos calles de nuestro piso.
+
+Pasamos la tarde leyéndolo. Mercè hablaba de los bombardeos con una calma que daba miedo, y eso que, a veces, describía cómo se escondían en el metro. Lo que más me conmovió, sin embargo, no fueron las escenas de guerra, sino lo normal que intentaba ser su vida: los nervios antes de un baile, una pelea con su hermana, un chico que le gustaba.
+
+—Si no lo hubiera abierto por curiosidad, se habría quedado ahí otros noventa años —dijo Laia. De ahí que, a la semana siguiente, la biblioteca decidiera revisar todas las cajas de esa época. Y fue así como, buscando una vida, encontraron cientos.`,
+de:`Es war an einem regnerischen Dienstag, als Laia mich aus dem Archiv der Biblioteca de Catalunya anrief, wo sie ein Praktikum machte. „Du musst kommen. Du ahnst nicht, was ich gefunden habe“, sagte sie so leise, dass ich sie kaum hörte.\n\nWas sie gefunden hatte, war ein handgeschriebenes Heft, das versehentlich in einer Kiste mit Rechnungen von 1936 steckte. So sehr Laia an alte Dokumente gewöhnt war, ihr zitterten die Hände. Die ersten Seiten waren Kochrezepte; ab Seite zwanzig änderte sich jedoch die Schrift und ein Tagebuch begann. Es gehörte einem siebzehnjährigen Mädchen, Mercè, die in Gràcia wohnte, zwei Straßen von unserer Wohnung entfernt.\n\nWir verbrachten den Nachmittag damit, es zu lesen. Mercè schrieb über die Bombenangriffe mit einer Ruhe, die Angst machte, obwohl sie manchmal beschrieb, wie sie sich in der Metro versteckten. Was mich am meisten berührte, waren jedoch nicht die Kriegsszenen, sondern wie normal sie ihr Leben zu halten versuchte: die Aufregung vor einem Tanzabend, ein Streit mit ihrer Schwester, ein Junge, der ihr gefiel.\n\n„Wenn ich es nicht aus Neugier geöffnet hätte, wäre es noch weitere neunzig Jahre dort geblieben“, sagte Laia. Deshalb beschloss die Bibliothek in der Woche darauf, alle Kisten aus dieser Zeit zu überprüfen. Und so fanden sie, auf der Suche nach einem Leben, Hunderte.`,
+qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
+,{id:'s15',after:'u39',title:'Un año después',sub:'Das letzte Kapitel',text:`Hace un año, por estas fechas, aterricé en el Prat con dos maletas y un español de manual. Hoy escribo desde la misma terraza de Gràcia donde Nuria me enseñó a pelar gambas sin mancharme, cosa que, dicho sea de paso, sigo sin dominar.
+
+Al final, la empresa de Múnich aceptó que trabajara en remoto. Ni yo mismo me lo creía: de haberlo sabido, me habría ahorrado unas cuantas noches sin dormir. Pase lo que pase con el contrato el año que viene, ya no tengo dudas de dónde quiero estar. Laia dice que me he vuelto «más mediterráneo que el mar»; Pablo, que sigue en Madrid, que me he hecho «un auténtico cansino de las sobremesas». Por muy exagerados que sean, algo de razón tienen.
+
+Lo que más ha cambiado, sin embargo, no es dónde vivo, sino cómo escucho. Antes me agobiaba no entender una palabra; ahora me fijo en lo que no se dice: el retintín de la señora Rovira, el «ya veremos» que en realidad significa «no», el «¿quedamos?» que nunca tiene hora. Dicho de otro modo, he aprendido el idioma que hay entre las palabras.
+
+Esta noche es la verbena de Sant Joan. El abuelo de Nuria ha prometido traer coca y refranes a partes iguales. «Más vale tarde que nunca», me dijo ayer cuando por fin le devolví la sal a la vecina. Tiene razón. Y si alguien me hubiera dicho hace un año que acabaría citando refranes en una azotea de Barcelona, le habría dicho que me estaba tomando el pelo.`,
+de:`Vor einem Jahr, um diese Zeit, landete ich in El Prat mit zwei Koffern und einem Lehrbuch-Spanisch. Heute schreibe ich von derselben Terrasse in Gràcia, auf der Nuria mir beigebracht hat, Garnelen zu schälen, ohne mich zu bekleckern – was ich, nebenbei bemerkt, immer noch nicht beherrsche.\n\nAm Ende hat die Firma aus München akzeptiert, dass ich remote arbeite. Ich konnte es selbst kaum glauben: Hätte ich das gewusst, hätte ich mir ein paar schlaflose Nächte gespart. Was auch immer nächstes Jahr mit dem Vertrag passiert, ich habe keine Zweifel mehr, wo ich sein will. Laia sagt, ich sei „mediterraner als das Meer“ geworden; Pablo, der immer noch in Madrid ist, ich sei „ein echter Nervtöter bei den Tischgesprächen nach dem Essen“ geworden. So übertrieben sie auch sein mögen, ein bisschen recht haben sie.\n\nWas sich am meisten verändert hat, ist jedoch nicht, wo ich wohne, sondern wie ich zuhöre. Früher hat es mich gestresst, ein Wort nicht zu verstehen; heute achte ich auf das, was nicht gesagt wird: den spitzen Unterton von Frau Rovira, das „mal sehen“, das eigentlich „nein“ heißt, das „treffen wir uns?“, das nie eine Uhrzeit hat. Anders gesagt: Ich habe die Sprache gelernt, die zwischen den Wörtern liegt.\n\nHeute Nacht ist die Verbena de Sant Joan. Nurias Großvater hat versprochen, Coca und Sprichwörter zu gleichen Teilen mitzubringen. „Besser spät als nie“, sagte er gestern zu mir, als ich der Nachbarin endlich das Salz zurückgab. Er hat recht. Und wenn mir vor einem Jahr jemand gesagt hätte, dass ich am Ende auf einer Dachterrasse in Barcelona Sprichwörter zitieren würde, hätte ich gesagt, dass er mich auf den Arm nimmt.`,
+qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
+];
+;
+/* ================= LESETEXTE C1/C2 (Bibliothek → Lesetexte) =================
+   Eigene Texte, verschiedene Textsorten. after = ab welcher Unidad (id) passend.
+   text: {Wort|Übersetzung} = antippbar. qs wie bei den Geschichten: mc {q,opts,a} · tf {t:'tf',q,a} · gap {t:'gap',q,a:['…|…']} */
+window.READINGS=[
+{id:'r1',level:'C1',after:'u32',kind:'Reportage',title:'El silencio de la oficina abierta',sub:'Großraumbüro, Kopfhörer & Konzentration',
+text:`Hace veinte años, las empresas derribaron las paredes con una promesa: si todos compartíamos el mismo espacio, hablaríamos más, colaboraríamos mejor y las ideas circularían solas. Hoy, en muchas oficinas abiertas de Madrid o Barcelona, lo que más se oye es... nada. Decenas de personas trabajan en silencio, con los {auriculares|Kopfhörer} puestos, y se escriben por chat aunque estén sentadas a dos metros.
+
+El hecho de que la gente se aísle no debería sorprendernos, explica la psicóloga laboral Marta Ibáñez. «Cuando no hay paredes, cada uno construye las suyas. Los auriculares son la puerta que la arquitectura nos quitó». Según varios estudios, en los espacios abiertos las conversaciones cara a cara no aumentan, sino que disminuyen, porque nadie quiere que todo el equipo escuche lo que dice.
+
+Algunas empresas han empezado a {rectificar|umsteuern}. En una consultora de Valencia han creado «zonas de biblioteca», donde está prohibido hablar, y salas pequeñas para llamadas. «Que la gente pueda elegir dónde trabaja según la tarea es lo que de verdad ha cambiado el ambiente», cuenta su directora. Otras, en cambio, han optado por el modelo híbrido: a la oficina se va a reunirse; a concentrarse, a casa.
+
+Ibáñez, sin embargo, advierte de que el problema no es solo de espacio. «Comprendo que las empresas quieran ahorrar metros cuadrados, pero si no se respeta el tiempo de concentración, da igual que haya paredes o no». Su consejo es sencillo: acordar en equipo cuándo se puede interrumpir y cuándo no.`,
+de:`Vor zwanzig Jahren rissen die Firmen die Wände ein, mit einem Versprechen: Wenn wir alle denselben Raum teilen, würden wir mehr reden, besser zusammenarbeiten, und die Ideen würden von selbst fließen. Heute hört man in vielen Großraumbüros in Madrid oder Barcelona vor allem … nichts. Dutzende Menschen arbeiten schweigend, mit aufgesetzten Kopfhörern, und schreiben sich per Chat, obwohl sie zwei Meter voneinander entfernt sitzen.\n\nDass sich die Leute abschotten, sollte uns nicht überraschen, erklärt die Arbeitspsychologin Marta Ibáñez. „Wenn es keine Wände gibt, baut sich jeder seine eigenen. Die Kopfhörer sind die Tür, die uns die Architektur genommen hat.“ Mehreren Studien zufolge nehmen in offenen Räumen die persönlichen Gespräche nicht zu, sondern ab, weil niemand will, dass das ganze Team mithört.\n\nEinige Firmen haben begonnen umzusteuern. In einer Beratungsfirma in Valencia hat man „Bibliothekszonen“ eingerichtet, in denen Reden verboten ist, und kleine Räume für Telefonate. „Dass die Leute je nach Aufgabe wählen können, wo sie arbeiten, hat die Atmosphäre wirklich verändert“, erzählt die Leiterin. Andere haben sich dagegen für das Hybridmodell entschieden: Ins Büro geht man, um sich zu treffen; zum Konzentrieren nach Hause.\n\nIbáñez warnt jedoch, dass das Problem nicht nur eines des Raums ist. „Ich verstehe, dass die Firmen Quadratmeter sparen wollen, aber wenn die Konzentrationszeit nicht respektiert wird, ist es egal, ob es Wände gibt oder nicht.“ Ihr Rat ist einfach: im Team vereinbaren, wann man stören darf und wann nicht.`,
+qs:[{q:'¿Qué se esperaba de las oficinas abiertas?',opts:['más comunicación y colaboración','más silencio','menos gastos de luz'],a:0},
+ {q:'Según los estudios citados, ¿qué pasa con las conversaciones cara a cara?',opts:['Disminuyen.','Aumentan mucho.','No cambian.'],a:0},
+ {t:'tf',q:'Para Ibáñez, los auriculares sustituyen las paredes que ya no existen.',a:true},
+ {t:'tf',q:'La consultora de Valencia ha vuelto a construir despachos individuales para todos.',a:false},
+ {t:'gap',q:'El hecho de que la gente ___ (aislarse) no debería sorprendernos.',a:['se aísle']},
+ {t:'gap',q:'Comprendo que las empresas ___ (querer) ahorrar metros cuadrados.',a:['quieran']}]},
+
+{id:'r2',level:'C1',after:'u33',kind:'Interview',title:'«El humor es lo último que se aprende»',sub:'Ein Comedian über Witze in der Fremdsprache',
+text:`Tomás Achterberg nació en Utrecht, lleva doce años en Sevilla y desde hace tres hace monólogos en bares y pequeños teatros. Hablamos con él antes de una actuación.
+
+—¿Cómo se le ocurre a un holandés hacer humor en español?
+—Pues metiendo la pata. Al principio me reía de mis propios errores: el día que le dije a mi suegra que estaba «embarazado» en vez de «avergonzado», por ejemplo. La gente se partía de risa y pensé: aquí hay material.
+
+—¿Es más difícil hacer reír en otro idioma?
+—Muchísimo. Puedes dominar la gramática y aun así no pillar un chiste. El humor depende del ritmo, de las referencias, de saber qué se puede decir y qué no. Eso no viene en ningún libro. Yo tardé años en entender por qué todo el mundo se reía cuando alguien decía «{¡que te den morcilla!|etwa: Rutsch mir den Buckel runter!}».
+
+—¿Cambia de registro según el público?
+—Claro. En un bar de barrio puedo soltar un par de tacos y nadie se escandaliza; en un festival con familias, me corto un poco. Lo que nunca hago es reírme de la gente del público. Me río de mí mismo, que es más barato y no ofende a nadie.
+
+—¿Algún consejo para quien aprende español?
+—Que no se agobie si no entiende las bromas. Es normal. Yo digo que el humor es como el {acento|Akzent}: lo último que se aprende y lo primero que te delata. Y que se {atreva|sich trauen} a equivocarse en voz alta, que de los errores salen los mejores chistes.`,
+de:`Tomás Achterberg wurde in Utrecht geboren, lebt seit zwölf Jahren in Sevilla und tritt seit drei Jahren mit Stand-up-Comedy in Bars und kleinen Theatern auf. Wir sprechen vor einem Auftritt mit ihm.\n\n– Wie kommt ein Niederländer auf die Idee, auf Spanisch Comedy zu machen?\n– Indem er ins Fettnäpfchen tritt. Am Anfang habe ich über meine eigenen Fehler gelacht: zum Beispiel an dem Tag, an dem ich meiner Schwiegermutter sagte, ich sei „schwanger“ statt „beschämt“. Die Leute haben sich kaputtgelacht, und ich dachte: Hier gibt es Material.\n\n– Ist es schwieriger, in einer anderen Sprache zum Lachen zu bringen?\n– Viel schwieriger. Du kannst die Grammatik beherrschen und trotzdem einen Witz nicht kapieren. Humor hängt vom Rhythmus ab, von den Anspielungen, davon zu wissen, was man sagen darf und was nicht. Das steht in keinem Buch. Ich habe Jahre gebraucht, um zu verstehen, warum alle lachten, wenn jemand „¡que te den morcilla!“ sagte.\n\n– Wechseln Sie das Register je nach Publikum?\n– Klar. In einer Kneipe im Viertel kann ich ein paar Schimpfwörter raushauen, und niemand regt sich auf; auf einem Festival mit Familien halte ich mich etwas zurück. Was ich nie tue: mich über Leute im Publikum lustig machen. Ich lache über mich selbst, das ist billiger und beleidigt niemanden.\n\n– Ein Rat für alle, die Spanisch lernen?\n– Sich nicht stressen lassen, wenn man die Witze nicht versteht. Das ist normal. Ich sage immer: Humor ist wie der Akzent – das Letzte, was man lernt, und das Erste, was einen verrät. Und sich trauen, laut Fehler zu machen, denn aus Fehlern entstehen die besten Witze.`,
+qs:[{q:'¿Cómo empezó Tomás a hacer humor?',opts:['riéndose de sus propios errores con el idioma','imitando a cómicos famosos','estudiando teatro en Sevilla'],a:0},
+ {q:'¿Por qué, según él, es difícil entender chistes en otro idioma?',opts:['porque dependen del ritmo, las referencias y lo que se puede decir','porque la gramática es muy complicada','porque los sevillanos hablan muy rápido'],a:0},
+ {t:'tf',q:'En los festivales con familias usa más tacos que en los bares.',a:false},
+ {t:'tf',q:'Tomás evita burlarse de las personas del público.',a:true},
+ {t:'gap',q:'«Meter la ___» significa cometer un error o decir algo inoportuno.',a:['pata']},
+ {t:'gap',q:'Le recomienda a quien aprende español que no se ___ (agobiar) si no entiende las bromas.',a:['agobie']}]},
+
+{id:'r3',level:'C1',after:'u34',kind:'Leserbrief',title:'Carril bici, sí, pero no así',sub:'Leserbrief an eine Lokalzeitung',
+text:`Señor director:
+
+Leo con interés que el Ayuntamiento pretende construir un nuevo carril bici en la avenida principal de nuestro barrio. Vaya por delante que soy ciclista: voy al trabajo en bici desde hace ocho años, llueva o haga sol. Precisamente por eso me permito hacer algunas observaciones.
+
+Apoyaré el proyecto siempre que el carril esté separado físicamente del tráfico. Una simple línea pintada en el suelo no protege a nadie; solo sirve para que las autoridades puedan decir que «han hecho algo». Tampoco tengo nada en contra de que se eliminen plazas de aparcamiento, con tal de que se informe a los comerciantes con tiempo y se habiliten zonas de carga y descarga.
+
+Lo que no entiendo es el trazado. Según los planos publicados, el carril se interrumpe dos veces y obliga a los ciclistas a cruzar una rotonda sin semáforo. A no ser que alguien me demuestre lo contrario, eso es una {invitación|Einladung} al accidente. En caso de que el proyecto siga adelante tal y como está, me temo que muchos vecinos seguirán prefiriendo el coche, y con razón.
+
+Por último, pido que se escuche a quienes usamos la bici a diario. De haber consultado a las asociaciones de ciclistas, el Ayuntamiento se habría ahorrado más de un error. No se trata de estar a favor o en contra de la bici, sino de hacer las cosas bien.
+
+Atentamente,
+Lucía Ferrer Molina (Zaragoza)`,
+de:`Sehr geehrter Herr Chefredakteur,\n\nmit Interesse lese ich, dass die Stadtverwaltung einen neuen Radweg auf der Hauptstraße unseres Viertels bauen will. Vorweg: Ich bin Radfahrerin; ich fahre seit acht Jahren mit dem Rad zur Arbeit, bei Regen wie bei Sonne. Gerade deshalb erlaube ich mir einige Anmerkungen.\n\nIch werde das Projekt unterstützen, sofern der Radweg baulich vom Verkehr getrennt ist. Eine bloße aufgemalte Linie schützt niemanden; sie dient nur dazu, dass die Behörden sagen können, sie hätten „etwas getan“. Ich habe auch nichts dagegen, dass Parkplätze wegfallen, vorausgesetzt, die Geschäftsleute werden rechtzeitig informiert und es werden Lieferzonen eingerichtet.\n\nWas ich nicht verstehe, ist die Streckenführung. Laut den veröffentlichten Plänen wird der Radweg zweimal unterbrochen und zwingt die Radfahrer, einen Kreisverkehr ohne Ampel zu überqueren. Solange mir niemand das Gegenteil beweist, ist das eine Einladung zum Unfall. Falls das Projekt so umgesetzt wird, wie es ist, fürchte ich, dass viele Nachbarn weiterhin das Auto vorziehen werden – und zwar zu Recht.\n\nSchließlich bitte ich darum, dass man diejenigen anhört, die täglich mit dem Rad fahren. Hätte die Stadt die Radfahrverbände befragt, hätte sie sich mehr als einen Fehler erspart. Es geht nicht darum, für oder gegen das Rad zu sein, sondern darum, die Dinge richtig zu machen.\n\nMit freundlichen Grüßen\nLucía Ferrer Molina (Saragossa)`,
+qs:[{q:'¿Cuál es la postura de la autora sobre el carril bici?',opts:['Lo apoya, pero con condiciones.','Está totalmente en contra.','Le da igual.'],a:0},
+ {q:'¿Qué critica del trazado?',opts:['que se interrumpe y obliga a cruzar una rotonda sin semáforo','que es demasiado ancho','que pasa por delante de un colegio'],a:0},
+ {t:'tf',q:'La autora se opone a que se eliminen plazas de aparcamiento en cualquier caso.',a:false},
+ {t:'tf',q:'Según ella, una línea pintada en el suelo no es suficiente protección.',a:true},
+ {t:'gap',q:'Apoyaré el proyecto siempre que el carril ___ (estar) separado del tráfico.',a:['esté']},
+ {t:'gap',q:'De ___ consultado a las asociaciones, se habría ahorrado errores.',a:['haber']}]},
+
+{id:'r4',level:'C1',after:'u35',kind:'Rezension',title:'Reseña: «La casa de las persianas bajadas»',sub:'Buchkritik zu einem (erfundenen) Familienroman',
+text:`Hay novelas que se leen de un tirón y otras que piden ir despacio. La segunda obra de la gallega Iria Castro, «La casa de las persianas bajadas», pertenece claramente al segundo grupo, y eso, lejos de ser un defecto, es su mayor virtud.
+
+La historia es sencilla: tras la muerte de su madre, tres hermanos que llevan años sin hablarse vuelven a la casa familiar de Lugo para vaciarla. Durante una semana de lluvia, entre cajas, fotos y facturas antiguas, van saliendo a la luz los {rencores|Groll} de siempre y algún secreto que nadie esperaba. Lo interesante no es tanto lo que pasa como lo que no se dice: Castro construye la tensión a base de silencios, frases a medias y miradas que el lector tiene que interpretar.
+
+Lo mejor del libro es, sin duda, el retrato de los personajes. Ninguno es del todo bueno ni del todo malo; los tres resultan tan {entrañables|liebenswert} como irritantes, igual que los hermanos de verdad. Ahora bien, la novela no está exenta de problemas. El ritmo del tercio central decae, y algunos capítulos dedicados a la infancia de la madre, aunque bien escritos, parecen pertenecer a otro libro.
+
+En lo que respecta al estilo, Castro escribe con una prosa limpia, sin adornos innecesarios, en la que de vez en cuando se cuela alguna palabra en gallego que da color al conjunto. Dicho esto, quien busque giros {argumentales|der Handlung} espectaculares saldrá decepcionado.
+
+En resumen: una novela sobria y honesta sobre lo difícil que es hablar con quienes más queremos. No es para todos los públicos, pero quien tenga paciencia encontrará en ella mucho más de lo que promete su discreta portada.`,
+de:`Es gibt Romane, die man in einem Zug liest, und andere, die verlangen, dass man langsam vorgeht. Das zweite Werk der Galicierin Iria Castro, „Das Haus mit den heruntergelassenen Rollläden“, gehört eindeutig zur zweiten Gruppe – und das ist weit davon entfernt, ein Makel zu sein, es ist seine größte Stärke.\n\nDie Geschichte ist einfach: Nach dem Tod ihrer Mutter kehren drei Geschwister, die seit Jahren nicht miteinander sprechen, in das Elternhaus in Lugo zurück, um es auszuräumen. Eine regnerische Woche lang kommen zwischen Kisten, Fotos und alten Rechnungen der altbekannte Groll und ein Geheimnis ans Licht, mit dem niemand gerechnet hat. Interessant ist weniger, was passiert, als das, was nicht gesagt wird: Castro baut die Spannung aus Schweigen, halben Sätzen und Blicken auf, die der Leser deuten muss.\n\nDas Beste an dem Buch ist zweifellos die Zeichnung der Figuren. Keine ist ganz gut oder ganz schlecht; alle drei sind so liebenswert wie nervig – genau wie echte Geschwister. Allerdings ist der Roman nicht frei von Schwächen. Im mittleren Drittel lässt das Tempo nach, und einige Kapitel über die Kindheit der Mutter wirken, obwohl gut geschrieben, als gehörten sie zu einem anderen Buch.\n\nWas den Stil angeht, schreibt Castro eine klare Prosa ohne unnötigen Schmuck, in die sich ab und zu ein galicisches Wort schleicht, das dem Ganzen Farbe gibt. Allerdings wird enttäuscht sein, wer spektakuläre Wendungen der Handlung sucht.\n\nFazit: ein nüchterner, ehrlicher Roman darüber, wie schwer es ist, mit den Menschen zu reden, die wir am meisten lieben. Er ist nicht für jedes Publikum, aber wer Geduld hat, findet darin viel mehr, als das unauffällige Cover verspricht.`,
+qs:[{q:'¿De qué trata la novela?',opts:['de tres hermanos que vacían la casa de su madre muerta','de una familia que se muda a Galicia','de una madre que busca a sus hijos'],a:0},
+ {q:'¿Qué es lo que más valora el crítico?',opts:['el retrato de los personajes','los giros espectaculares','la portada'],a:0},
+ {q:'¿Qué punto débil señala?',opts:['El ritmo decae en la parte central.','El final es demasiado largo.','Hay demasiados personajes.'],a:0},
+ {t:'tf',q:'El crítico recomienda la novela sobre todo a quien busca acción y sorpresas.',a:false},
+ {t:'gap',q:'Lo interesante no es tanto lo que pasa ___ lo que no se dice.',a:['como']},
+ {t:'gap',q:'___ bien, la novela no está exenta de problemas. (= Allerdings)',a:['Ahora']}]},
+
+{id:'r5',level:'C2',after:'u38',kind:'Kolumne',title:'Elogio de la reunión',sub:'Ironische Kolumne über das Büroleben',
+text:`Quería yo dedicar esta columna a un invento injustamente {denostado|geschmäht}: la reunión. Se la acusa de robar tiempo, de no servir para nada y de haber podido ser un correo electrónico. Calumnias. Quien así habla no ha sabido apreciar sus muchas virtudes.
+
+Pensemos, sin ir más lejos, en la reunión de los lunes a las nueve. ¿Qué otra actividad permite a doce personas descubrir, al mismo tiempo y en directo, que nadie ha leído el documento adjunto? Ninguna. Y, sin embargo, ahí estamos todos, asintiendo con gravedad, como si el {orden del día|Tagesordnung} fuera un texto sagrado.
+
+Admiremos también la creatividad lingüística que florece en estas citas. Solo en una reunión se puede «poner en valor», «bajar a tierra» y «tener una visión de trescientos sesenta grados» antes del primer café. Solo en una reunión «lo vemos» significa «no lo haremos nunca» y «buena pregunta» quiere decir «no tengo ni idea».
+
+Pero su mayor mérito es otro: la reunión nos enseña humildad. Uno llega convencido de que su trabajo es urgente y sale, dos horas después, comprendiendo que lo verdaderamente urgente era convocar otra reunión para la semana que viene. ¿Será posible mayor lección de {desapego|Gelassenheit, Loslassen}?
+
+Por eso propongo que se declare la reunión patrimonio inmaterial de la humanidad. Eso sí, que alguien convoque antes una reunión para decidir quién redacta la propuesta. Yo, lamentablemente, no podré asistir: tengo otra a la misma hora.`,
+de:`Ich wollte diese Kolumne einer zu Unrecht geschmähten Erfindung widmen: der Besprechung. Man wirft ihr vor, Zeit zu stehlen, zu nichts zu taugen und eigentlich eine E-Mail sein zu können. Verleumdungen! Wer so redet, hat ihre vielen Vorzüge nicht zu schätzen gewusst.\n\nDenken wir nur an die Montagsbesprechung um neun. Welche andere Tätigkeit erlaubt es zwölf Menschen, gleichzeitig und live festzustellen, dass niemand das angehängte Dokument gelesen hat? Keine. Und trotzdem sitzen wir alle da und nicken ernst, als wäre die Tagesordnung ein heiliger Text.\n\nBewundern wir auch die sprachliche Kreativität, die bei diesen Terminen aufblüht. Nur in einer Besprechung kann man vor dem ersten Kaffee „in Wert setzen“, „auf den Boden bringen“ und „einen 360-Grad-Blick haben“. Nur in einer Besprechung heißt „wir schauen mal“ „wir werden es nie machen“, und „gute Frage“ bedeutet „ich habe keine Ahnung“.\n\nIhr größtes Verdienst ist aber ein anderes: Die Besprechung lehrt uns Demut. Man kommt hinein, überzeugt davon, dass die eigene Arbeit dringend ist, und geht zwei Stunden später hinaus mit der Erkenntnis, dass das wirklich Dringende war, eine weitere Besprechung für nächste Woche einzuberufen. Kann es eine größere Lektion in Gelassenheit geben?\n\nDeshalb schlage ich vor, die Besprechung zum immateriellen Kulturerbe der Menschheit zu erklären. Allerdings sollte vorher jemand eine Besprechung einberufen, um zu entscheiden, wer den Antrag schreibt. Ich kann leider nicht teilnehmen: Ich habe zur selben Zeit eine andere.`,
+qs:[{q:'¿Qué opina realmente el autor de las reuniones?',opts:['Las critica usando la ironía.','Le parecen el mejor invento de la oficina.','No tiene una opinión clara.'],a:0},
+ {q:'Según el texto, ¿qué significa «lo vemos» en una reunión?',opts:['que no se hará nunca','que se hará enseguida','que hay que leer el documento'],a:0},
+ {t:'tf',q:'En la reunión de los lunes todos han leído el documento adjunto.',a:false},
+ {t:'tf',q:'El final del texto es irónico: el autor no irá porque tiene otra reunión.',a:true},
+ {t:'gap',q:'«___ yo dedicar esta columna…» (Höflichkeits-Imperfekt von querer)',a:['Quería']},
+ {t:'gap',q:'¿___ (ser) posible mayor lección de desapego? (Futur des Staunens)',a:['Será']}]},
+
+{id:'r6',level:'C2',after:'u39',kind:'Podcast',title:'La siesta: mito y realidad',sub:'Mitschrift einer Podcastfolge (gekürzt)',
+text:`—Bienvenidos a «Ciencia en la sobremesa». Hoy toca un tema que, dicho sea de paso, nos persigue a los españoles allá donde vamos: la siesta. Conmigo está la investigadora del sueño Carmen Lozano. Carmen, ¿es verdad que en España todo el mundo duerme la siesta?
+—Ni mucho menos. Es uno de esos tópicos que se repiten hasta la saciedad. Las encuestas indican que solo una minoría la duerme a diario, sobre todo jubilados y gente que trabaja en turnos. La mayoría, entre semana, no tiene ni tiempo ni sitio donde echarse un rato.
+—O sea, que nos han colgado el {sambenito|(fig.) Etikett, schlechter Ruf}.
+—Exacto. Ahora bien, eso no quita que la siesta tenga una base biológica. Después de comer, y no solo por la comida, nuestro reloj interno provoca una bajada natural de la atención. Ocurre en todas partes; lo que pasa es que en otros países se aguanta con café.
+—¿Y es buena o mala para la salud?
+—Depende de cómo se haga. Una siesta corta, de veinte minutos como mucho, mejora la memoria y el estado de ánimo. Si te pasas de la media hora, entras en sueño profundo y te levantas hecho polvo, peor que antes. Por no hablar de que luego te cuesta dormirte por la noche.
+—Entonces, la famosa «siesta de pijama y orinal»...
+—...es una mala idea, por mucho que nos guste el nombre. Mi consejo: corta, a primera hora de la tarde y, a ser posible, sin sentirse culpable. Más vale una cabezada a tiempo que una tarde entera bostezando.`,
+de:`– Willkommen bei „Wissenschaft am Nachmittagstisch“. Heute geht es um ein Thema, das uns Spanier, nebenbei bemerkt, überallhin verfolgt: die Siesta. Bei mir ist die Schlafforscherin Carmen Lozano. Carmen, stimmt es, dass in Spanien alle Siesta halten?\n– Bei Weitem nicht. Das ist eines dieser Klischees, die bis zum Überdruss wiederholt werden. Umfragen zeigen, dass nur eine Minderheit täglich Siesta hält, vor allem Rentner und Leute, die im Schichtdienst arbeiten. Die meisten haben unter der Woche weder Zeit noch einen Ort, um sich kurz hinzulegen.\n– Man hat uns also ein Etikett angehängt.\n– Genau. Allerdings ändert das nichts daran, dass die Siesta eine biologische Grundlage hat. Nach dem Essen – und nicht nur wegen des Essens – sorgt unsere innere Uhr für einen natürlichen Aufmerksamkeitsabfall. Das passiert überall; nur hält man in anderen Ländern mit Kaffee durch.\n– Und ist sie gut oder schlecht für die Gesundheit?\n– Das hängt davon ab, wie man sie macht. Ein kurzes Nickerchen von höchstens zwanzig Minuten verbessert das Gedächtnis und die Stimmung. Wenn man über eine halbe Stunde hinausgeht, kommt man in den Tiefschlaf und steht wie gerädert auf, schlechter als vorher. Ganz zu schweigen davon, dass man dann nachts schwer einschläft.\n– Dann ist die berühmte „Siesta mit Schlafanzug und Nachttopf“ …\n– … eine schlechte Idee, so sehr uns der Name auch gefällt. Mein Rat: kurz, am frühen Nachmittag und möglichst ohne schlechtes Gewissen. Lieber rechtzeitig ein Nickerchen als einen ganzen Nachmittag lang gähnen.`,
+qs:[{q:'Según la investigadora, ¿quién duerme la siesta a diario en España?',opts:['una minoría, sobre todo jubilados y trabajadores por turnos','casi todo el mundo','solo los niños'],a:0},
+ {q:'¿Por qué tenemos sueño después de comer?',opts:['sobre todo por nuestro reloj interno','solo porque comemos demasiado','por el calor del verano'],a:0},
+ {t:'tf',q:'Una siesta de más de media hora es la más recomendable.',a:false},
+ {t:'tf',q:'La bajada de atención por la tarde ocurre también en otros países.',a:true},
+ {t:'gap',q:'Si duermes demasiado, te levantas «hecho ___» (= agotado).',a:['polvo']},
+ {t:'gap',q:'«Más ___ una cabezada a tiempo que una tarde entera bostezando.»',a:['vale']}]},
+
+{id:'r7',level:'C2',after:'u40',kind:'Kurzgeschichte',title:'El faro',sub:'Erzählung in gehobener Sprache',
+text:`Dicen en el pueblo que el viejo Anselmo subió al faro la noche en que se fue la luz en toda la costa, y que no volvió a bajar hasta el amanecer. Nadie le había pedido nada; hacía veinte años que el faro funcionaba solo, gobernado por una máquina que alguien vigilaba desde una oficina en La Coruña.
+
+Aquella noche, sin embargo, la máquina calló. El mar golpeaba las rocas con una rabia antigua y, a lo lejos, un pesquero buscaba el puerto a ciegas. Anselmo, que había sido farero durante cuarenta años, no lo dudó. Cogió el {farol|Laterne} de aceite que guardaba en el desván, subió los ciento doce peldaños que se sabía de memoria y, con las manos temblorosas, encendió la vieja lámpara de reserva.
+
+Quien hubiere visto aquella luz desde el mar —escribiría después el patrón del pesquero en una carta al periódico— no la habría confundido con ninguna otra. Era débil, irregular, casi humana. Pero bastó.
+
+Al día siguiente, los técnicos de la capital llegaron con sus coches y sus informes. Revisaron cables, culparon a la tormenta y se marcharon sin preguntar quién había encendido la lámpara. Anselmo tampoco se lo contó a nadie. Sea como fuere, desde entonces los pescadores, al pasar frente al cabo, levantan la mano hacia la torre, por si acaso alguien sigue allí arriba, velando.
+
+Dondequiera que vayan los barcos del pueblo, dicen, llevan consigo un poco de aquella luz.`,
+de:`Im Dorf erzählt man, dass der alte Anselmo in der Nacht, in der an der ganzen Küste der Strom ausfiel, auf den Leuchtturm stieg und erst im Morgengrauen wieder herunterkam. Niemand hatte ihn um etwas gebeten; seit zwanzig Jahren lief der Leuchtturm von allein, gesteuert von einer Maschine, die jemand von einem Büro in La Coruña aus überwachte.\n\nIn jener Nacht jedoch verstummte die Maschine. Das Meer schlug mit uralter Wut gegen die Felsen, und in der Ferne suchte ein Fischkutter blind den Hafen. Anselmo, der vierzig Jahre lang Leuchtturmwärter gewesen war, zögerte nicht. Er nahm die Öllaterne, die er auf dem Dachboden aufbewahrte, stieg die hundertzwölf Stufen hinauf, die er auswendig kannte, und zündete mit zitternden Händen die alte Reservelampe an.\n\nWer immer jenes Licht vom Meer aus gesehen habe – schrieb später der Kapitän des Kutters in einem Brief an die Zeitung –, hätte es mit keinem anderen verwechselt. Es war schwach, unregelmäßig, fast menschlich. Aber es genügte.\n\nAm nächsten Tag kamen die Techniker aus der Hauptstadt mit ihren Autos und ihren Berichten. Sie prüften Kabel, gaben dem Sturm die Schuld und fuhren wieder, ohne zu fragen, wer die Lampe angezündet hatte. Anselmo erzählte es auch niemandem. Wie dem auch sei: Seitdem heben die Fischer, wenn sie am Kap vorbeifahren, die Hand zum Turm, für den Fall, dass dort oben noch jemand wacht.\n\nWohin die Boote des Dorfes auch fahren, sagt man, tragen sie ein wenig von jenem Licht mit sich.`,
+qs:[{q:'¿Por qué subió Anselmo al faro?',opts:['porque la máquina dejó de funcionar durante un apagón','porque se lo pidieron los técnicos','porque quería ver la tormenta'],a:0},
+ {q:'¿Cómo era la luz que encendió?',opts:['débil e irregular, pero suficiente','muy potente y moderna','de color rojo'],a:0},
+ {t:'tf',q:'Los técnicos le dieron las gracias a Anselmo.',a:false},
+ {t:'tf',q:'Hoy los pescadores saludan a la torre al pasar.',a:true},
+ {t:'gap',q:'Quien ___ visto aquella luz no la habría confundido. (Futuro de subjuntivo compuesto)',a:['hubiere']},
+ {t:'gap',q:'___ como fuere, desde entonces los pescadores levantan la mano.',a:['Sea']}]},
+
+{id:'r8',level:'C2',after:'u41',kind:'Sachtext',title:'Por qué olvidamos (y por qué es bueno)',sub:'Populärwissenschaft – passt gut zum Vokabellernen',
+text:`Solemos pensar en el olvido como en un fallo: la memoria sería un archivo y olvidar, perder documentos. La neurociencia actual propone una imagen bien distinta. Olvidar, dicho de otro modo, no es un error del sistema, sino una de sus funciones.
+
+Ya a finales del siglo XIX, el psicólogo alemán Hermann Ebbinghaus se aprendió de memoria listas de sílabas sin sentido y midió cuánto recordaba con el paso del tiempo. El resultado, conocido como «curva del olvido», es tan sencillo como {demoledor|niederschmetternd}: la mayor parte de lo aprendido se pierde en las primeras horas y días, a no ser que se repase.
+
+Ahora bien, Ebbinghaus descubrió también la otra cara de la moneda. Cada vez que repasaba una lista justo cuando estaba a punto de olvidarla, la curva se volvía más plana; o lo que es lo mismo, el recuerdo duraba más. En ese principio se basan hoy las aplicaciones de repaso espaciado: no se trata de repetir mucho, sino de repetir en el momento oportuno.
+
+¿Y por qué olvida el cerebro con tanta facilidad? Porque recordarlo todo sería, paradójicamente, un estorbo. Un cerebro que guardara cada detalle —cada número de teléfono, cada conversación banal— tendría muchas más dificultades para quedarse con lo importante y para {generalizar|verallgemeinern}. El olvido actúa como un filtro: descarta lo que no usamos para dejar sitio a lo que sí.
+
+En suma, quien aprende un idioma no debería desesperarse cuando una palabra se le escapa. Mejor dicho: debería alegrarse. Ese pequeño esfuerzo por recuperarla es, precisamente, lo que hará que la próxima vez se quede.`,
+de:`Wir stellen uns das Vergessen meist als Fehler vor: Das Gedächtnis wäre ein Archiv, und vergessen hieße, Dokumente zu verlieren. Die heutige Neurowissenschaft schlägt ein ganz anderes Bild vor. Vergessen ist, anders gesagt, kein Fehler des Systems, sondern eine seiner Funktionen.\n\nSchon Ende des 19. Jahrhunderts lernte der deutsche Psychologe Hermann Ebbinghaus Listen sinnloser Silben auswendig und maß, wie viel er im Lauf der Zeit noch wusste. Das Ergebnis, bekannt als „Vergessenskurve“, ist so einfach wie niederschmetternd: Der größte Teil des Gelernten geht in den ersten Stunden und Tagen verloren, es sei denn, man wiederholt es.\n\nAllerdings entdeckte Ebbinghaus auch die andere Seite der Medaille. Jedes Mal, wenn er eine Liste genau dann wiederholte, als er sie gerade zu vergessen drohte, wurde die Kurve flacher – oder, was dasselbe ist: Die Erinnerung hielt länger. Auf diesem Prinzip beruhen heute die Apps mit verteilter Wiederholung: Es geht nicht darum, viel zu wiederholen, sondern im richtigen Moment.\n\nUnd warum vergisst das Gehirn so leicht? Weil es paradoxerweise ein Hindernis wäre, sich alles zu merken. Ein Gehirn, das jedes Detail speicherte – jede Telefonnummer, jedes belanglose Gespräch –, hätte viel mehr Mühe, das Wichtige zu behalten und zu verallgemeinern. Das Vergessen wirkt wie ein Filter: Es verwirft, was wir nicht benutzen, um Platz für das zu schaffen, was wir benutzen.\n\nKurz: Wer eine Sprache lernt, sollte nicht verzweifeln, wenn ihm ein Wort entfällt. Besser gesagt: Er sollte sich freuen. Genau diese kleine Anstrengung, es wieder hervorzuholen, sorgt dafür, dass es beim nächsten Mal bleibt.`,
+qs:[{q:'¿Qué idea defiende el texto?',opts:['que olvidar es una función útil del cerebro','que olvidar es siempre un fallo','que la memoria es un archivo perfecto'],a:0},
+ {q:'¿Qué descubrió Ebbinghaus sobre el repaso?',opts:['que repasar justo antes de olvidar hace que el recuerdo dure más','que hay que repetir muchas veces seguidas','que repasar no sirve de nada'],a:0},
+ {t:'tf',q:'Según la curva del olvido, perdemos la mayor parte de lo aprendido en los primeros días.',a:true},
+ {t:'tf',q:'Un cerebro que lo recordara todo generalizaría mejor.',a:false},
+ {t:'gap',q:'Olvidar, ___ de otro modo, no es un error, sino una función.',a:['dicho']},
+ {t:'gap',q:'Un cerebro que ___ (guardar) cada detalle tendría más dificultades.',a:['guardara|guardase']}]}
+];
+;
+window.PLACEMENT=[
+/* u0 */
+{u:'u0',t:'mc',q:'Es 9:00 Uhr morgens. Du begrüßt die Professorin:',opts:['Buenos días.','Buenas tardes.','Buenas noches.'],a:0},
+{u:'u0',t:'mc',q:'Formell: „Wie heißen Sie?“',opts:['¿Cómo se llama usted?','¿Cómo te llamas?','¿Cómo está usted?'],a:0},
+{u:'u0',t:'mc',q:'Eine Frau freut sich, dich kennenzulernen. Sie sagt:',opts:['Encantada.','Encantado.','Hasta luego.'],a:0},
+{u:'u0',t:'mc',q:'In welchem Wort ist das u stumm?',opts:['guitarra','Uruguay','agua'],a:0},
+/* u1 */
+{u:'u1',t:'mc',q:'___ ciudades de España',opts:['las','los','la'],a:0},
+{u:'u1',t:'gap',q:'– ¿De dónde ___ (tú)? – ___ de Alemania.',a:['eres','soy']},
+{u:'u1',t:'gap',q:'Nosotros ___ (hablar) inglés y español.',a:['hablamos']},
+{u:'u1',t:'mc',q:'– No hablo chino. – Ich auch nicht:',opts:['Yo tampoco.','Yo también.','Yo sí.'],a:0},
+/* u2 */
+{u:'u2',t:'mc',q:'„Ich bin 24 Jahre alt.“',opts:['Tengo 24 años.','Soy 24 años.','Estoy 24 años.'],a:0},
+{u:'u2',t:'gap',q:'Mis padres ___ (vivir) en Alemania.',a:['viven']},
+{u:'u2',t:'mc',q:'Du stellst Laia vor:',opts:['Esta es Laia.','Este es Laia.','Estos son Laia.'],a:0},
+{u:'u2',t:'mc',q:'„@“ heißt auf Spanisch …',opts:['arroba','punto','guion'],a:0},
+/* u3 */
+{u:'u3',t:'mc',q:'Barcelona ___ en Cataluña.',opts:['está','es','hay'],a:0},
+{u:'u3',t:'mc',q:'A mí me ___ los idiomas.',opts:['gustan','gusta','gusto'],a:0},
+{u:'u3',t:'gap',q:'Mis hermanas son muy ___ (simpático).',a:['simpáticas']},
+{u:'u3',t:'mc',q:'„ihre Eltern“ (von Ana):',opts:['sus padres','su padres','suyos padres'],a:0},
+/* u4 */
+{u:'u4',t:'gap',q:'Yo no ___ (poder) comer carne, soy vegetariano.',a:['puedo']},
+{u:'u4',t:'mc',q:'14:30 Uhr – ¿Qué hora es?',opts:['Son las dos y media.','Es la dos y media.','Son las tres menos media.'],a:0},
+{u:'u4',t:'mc',q:'Im Restaurant: „Und zu trinken?“',opts:['¿Y para beber?','¿Y por beber?','¿Y a beber?'],a:0},
+{u:'u4',t:'mc',q:'– ¿Quién compra el pan? – Yo ___ compro.',opts:['lo','la','le'],a:0},
+/* u5 */
+{u:'u5',t:'mc',q:'En Barcelona ___ muchos museos.',opts:['hay','están','es'],a:0},
+{u:'u5',t:'gap',q:'Mañana yo ___ (ir) a la universidad en metro.',a:['voy']},
+{u:'u5',t:'mc',q:'„Gehen Sie geradeaus.“',opts:['Siga todo recto.','Gira a la izquierda.','Está cerca.'],a:0},
+{u:'u5',t:'mc',q:'Vamos ___ aeropuerto.',opts:['al','a el','en el'],a:0},
+/* u6 */
+{u:'u6',t:'gap',q:'Esta semana ___ (yo, trabajar) mucho. (Perfekt)',a:['he trabajado']},
+{u:'u6',t:'mc',q:'Partizip von „hacer“:',opts:['hecho','hacido','hizo'],a:0},
+{u:'u6',t:'mc',q:'– Me encanta la playa. – (Dir auch.)',opts:['A mí también.','Yo también.','A mí tampoco.'],a:0},
+{u:'u6',t:'gap',q:'¿___ (tú, estar) alguna vez en México? (Perfekt)',a:['has estado']},
+/* u7 */
+{u:'u7',t:'gap',q:'Normalmente me ___ (levantarse) a las siete.',a:['levanto']},
+{u:'u7',t:'mc',q:'¿Qué estás ___? – Estoy escribiendo un informe.',opts:['haciendo','hacer','hecho'],a:0},
+{u:'u7',t:'mc',q:'Luis trabaja ___ horas ___ Pedro. (genauso viele)',opts:['tantas … como','más … que','tanto … como'],a:0},
+{u:'u7',t:'mc',q:'„Kannst du Französisch?“ (Fähigkeit)',opts:['¿Sabes francés?','¿Puedes francés?','¿Conoces francés?'],a:0},
+/* u8 */
+{u:'u8',t:'gap',q:'El lunes ___ ___ visitar a un cliente. (ir a + Inf., yo)',a:['voy','a']},
+{u:'u8',t:'mc',q:'Wetter: „Es ist heiß.“',opts:['Hace calor.','Es calor.','Está calor.'],a:0},
+{u:'u8',t:'mc',q:'¿Te parece si quedamos a las diez? – Zusagen:',opts:['Vale, de acuerdo.','Lo siento, no puedo.','Mejor el viernes.'],a:0},
+{u:'u8',t:'mc',q:'Ich kenne die Gründerin:',opts:['Conozco a la fundadora.','Conozco la fundadora.','Sé a la fundadora.'],a:0}
+,
+/* zusätzliche Fragen (Pool) – pro Test werden je Unidad 4 zufällig gezogen */
+{u:'u0',t:'mc',q:'„Bis morgen!“',opts:['¡Hasta mañana!','¡Hasta luego!','¡Buenas noches!'],a:0},
+{u:'u0',t:'mc',q:'Wie spricht man „j“ in „jamón“?',opts:['wie ch in „Sache“','wie j in „ja“','wie dsch'],a:0},
+{u:'u1',t:'mc',q:'Plural von „la ciudad“:',opts:['las ciudades','las ciudads','los ciudades'],a:0},
+{u:'u1',t:'gap',q:'¿Vosotros ___ (ser) de Barcelona?',a:['sois']},
+{u:'u2',t:'gap',q:'Nosotros ___ (aprender) español.',a:['aprendemos']},
+{u:'u2',t:'mc',q:'Weibliche Form von „el programador“:',opts:['la programadora','la programador','la programadera'],a:0},
+{u:'u3',t:'gap',q:'¿Cómo ___ (estar) tus padres?',a:['están']},
+{u:'u3',t:'mc',q:'Der Vater meiner Mutter ist mein …',opts:['abuelo','tío','primo'],a:0},
+{u:'u4',t:'gap',q:'Nosotros ___ (querer) un café.',a:['queremos']},
+{u:'u4',t:'mc',q:'„Man kann mit Karte zahlen.“',opts:['Se puede pagar con tarjeta.','Puede pagar con tarjeta se.','Se pueden pagar con tarjeta.'],a:0},
+{u:'u5',t:'mc',q:'El hotel está ___ museo. (neben)',opts:['al lado del','al lado de el','a lado del'],a:0},
+{u:'u5',t:'gap',q:'Para ir a la feria ___ ___ tomar el metro. (du musst)',a:['tienes','que']},
+{u:'u6',t:'mc',q:'„Die Heizung funktioniert nicht.“',opts:['No funciona la calefacción.','No funcionan la calefacción.','La calefacción no funcionan.'],a:0},
+{u:'u6',t:'gap',q:'Todavía no ___ ___ (yo, ver) la Sagrada Família.',a:['he','visto']},
+{u:'u7',t:'gap',q:'¿A qué hora ___ ___ (tú, acostarse)?',a:['te','acuestas']},
+{u:'u7',t:'mc',q:'„Bevor ich frühstücke, dusche ich.“',opts:['Me ducho antes de desayunar.','Me ducho antes desayuno.','Me ducho antes que desayunar.'],a:0},
+{u:'u8',t:'mc',q:'Diese Schuhe (hier bei mir):',opts:['estos zapatos','esos zapatos','estas zapatos'],a:0},
+{u:'u8',t:'gap',q:'¿Qué ___ ___ hacer (tú) el sábado? (ir a + Inf.)',a:['vas','a']},
+{u:'u9',t:'gap',q:'Cuando ___ (ser, yo) pequeño, ___ (vivir) en un pueblo.',a:['era','vivía']},
+{u:'u9',t:'mc',q:'Imperfekt von „ir“ (nosotros):',opts:['íbamos','ibamos','fuimos'],a:0},
+{u:'u9',t:'mc',q:'La cocina ___ equipada.',opts:['está','es','hay'],a:0},
+{u:'u9',t:'mc',q:'„Man muss eine Kaution zahlen.“',opts:['Hay que pagar una fianza.','Hay pagar una fianza.','Tiene que pagar una fianza se.'],a:0},
+{u:'u9',t:'gap',q:'Antes en mi barrio ___ (haber) muchas tiendas pequeñas.',a:['había']},
+{u:'u9',t:'mc',q:'„Die Hälfte der Studierenden …“',opts:['La mitad de los estudiantes …','El medio de los estudiantes …','La media de estudiantes …'],a:0},
+{u:'u10',t:'gap',q:'Ayer ___ (yo, trabajar) hasta las ocho.',a:['trabajé']},
+{u:'u10',t:'mc',q:'Indefinido von „hacer“ (él):',opts:['hizo','hació','hice'],a:0},
+{u:'u10',t:'mc',q:'En 2025 ___ tres meses en Singapur.',opts:['estuve','he estado','estaba'],a:0},
+{u:'u10',t:'gap',q:'El año pasado mis padres ___ (ir) a México.',a:['fueron']},
+{u:'u10',t:'mc',q:'Hoy ___ mucho. (heute – noch nicht vorbei)',opts:['he trabajado','trabajé','trabajaba'],a:0},
+{u:'u10',t:'mc',q:'„Ich bin bereit zu reisen.“',opts:['Estoy dispuesto a viajar.','Soy dispuesto a viajar.','Tengo dispuesto a viajar.'],a:0}
+];
+;
+/* ===== Stufen (A1 → C2) & Bilder zu Vokabeln ===== */
+/* Abschnitte des Kurses. Der Einstufungstest läuft in dieser Reihenfolge, Etappe für Etappe. */
+window.LEVELS=[
+  {id:'A1',label:'A1',title:'A1 · Einstieg',sub:'Kursbuch Meta profesional, Unidad 0–5: dich vorstellen, Familie, Essen, Stadt, Freizeit.'},
+  {id:'A2a',label:'A2',title:'A2 · Teil 1',sub:'Kursbuch Meta profesional, Unidad 6–10: Perfekt, Alltag, Pläne, Imperfekt, Indefinido.'},
+  {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Grammatik-Lücken aus dem Kursbuch schließen, dann Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
+  {id:'B1',label:'B1',title:'B1 · Teil 1',sub:'Subjuntivo, Geschichten erzählen, Bedingungen, Meinung & Zweifel.'},
+  {id:'B1b',label:'B1',title:'B1 · Teil 2',sub:'Zeit- und Zwecksätze, indirekte Rede, Relativsätze, Gefühle & Bewertungen – B1 komplett.'},
+  {id:'B2',label:'B2',title:'B2 · Teil 1',sub:'Imperfecto de subjuntivo, irreale Bedingungen, Zeitenfolge, Konzessivsätze, Passiv & Nachrichten.'},
+  {id:'B2b',label:'B2',title:'B2 · Teil 2',sub:'Irreale Vergangenheit, formelles Register, Verben der Veränderung, Argumentieren – B2 komplett.'},
+  {id:'C1',label:'C1',title:'C1 · Teil 1',sub:'Subjuntivo-Nuancen, Umgangssprache & Redewendungen, Bedingungen ohne si.'},
+  {id:'C1b',label:'C1',title:'C1 · Teil 2',sub:'Hervorheben, starke Konzessiv- und Folgesätze, Essays schreiben – C1 komplett.'},
+  {id:'C2',label:'C2',title:'C2 · Meisterschaft',sub:'Ironie & Andeutungen, Sprichwörter, gehobene und Behördensprache, Sprachmittlung – Kurs komplett.'}];
+window.LEVEL_OF={u0:'A1',u1:'A1',u2:'A1',u3:'A1',u4:'A1',u5:'A1',u6:'A2a',u7:'A2a',u8:'A2a',u9:'A2a',u10:'A2a'};
+
+/* Einstufungsfragen, die direkt in einer Unidad stehen (u.placement), in den gemeinsamen Pool hängen.
+   Reihenfolge bleibt stabil → Verweise 'P||i' im Fehlerheft bleiben gültig. */
+/* nachträglich eingefügte Unidades (id g…) hinten anhängen, damit ältere Verweise stabil bleiben */
+for(const u of COURSE.units.filter(u=>!u.id.startsWith('g')).concat(COURSE.units.filter(u=>u.id.startsWith('g'))))for(const q of u.placement||[])PLACEMENT.push(Object.assign({u:u.id},q));
+
+/* Bild (Emoji) zu einem Wort. Eigene Vokabeln können als 3. Element ein Emoji mitbringen: ['la manzana','der Apfel','🍎'] */
+window.EMOJI={
+hola:'👋',adiós:'👋','buenos días':'🌅','buenas tardes':'🌇','buenas noches':'🌙',gracias:'🙏','hasta mañana':'📅',
+bien:'👍','muy bien':'😄',regular:'😐',mal:'👎',
+empresa:'🏢',producto:'📦',hotel:'🏨',ciudad:'🏙️',país:'🗺️',comida:'🍽️',deporte:'⚽',tecnología:'💻','red social':'📱',publicidad:'📢',éxito:'🏆',feria:'🎪',turismo:'🧳',fiesta:'🎉',
+cero:'0️⃣',uno:'1️⃣',dos:'2️⃣',tres:'3️⃣',cuatro:'4️⃣',cinco:'5️⃣',seis:'6️⃣',siete:'7️⃣',ocho:'8️⃣',nueve:'9️⃣',diez:'🔟',cien:'💯',
+alemania:'🇩🇪',españa:'🇪🇸',austria:'🇦🇹',suiza:'🇨🇭',holanda:'🇳🇱',francia:'🇫🇷',italia:'🇮🇹',inglaterra:'🏴',
+'estados unidos':'🇺🇸',méxico:'🇲🇽',argentina:'🇦🇷',colombia:'🇨🇴',perú:'🇵🇪',chile:'🇨🇱',
+hablar:'🗣️',estudiar:'📚',trabajar:'💼',buscar:'🔍',viajar:'✈️',escuchar:'👂','tocar un instrumento':'🎸',
+español:'🇪🇸',alemán:'🇩🇪',inglés:'🇬🇧',francés:'🇫🇷',catalán:'🟨',italiano:'🇮🇹',chino:'🇨🇳',
+ingeniero:'👷',informático:'🧑‍💻',programador:'🧑‍💻',analista:'📊',auditor:'🔎',consultor:'🧑‍💼',estudiante:'🧑‍🎓',profesor:'🧑‍🏫',médico:'🧑‍⚕️',diseñador:'🎨',recepcionista:'🛎️',jefe:'👔',
+móvil:'📱','correo electrónico':'📧',dirección:'📍',calle:'🛣️',arroba:'@',
+consultora:'🏢',banco:'🏦',universidad:'🎓',máster:'🎓',prácticas:'🧑‍💼',vivir:'🏠',aprender:'🧠',escribir:'✍️',leer:'📖',barrio:'🏘️',
+'llevar la agenda':'📒','organizar seminarios':'🗂️','responder a los correos':'📧',cliente:'🤝',departamento:'🏬',revisar:'✅',
+padre:'👨',padres:'👨‍👩‍👦',hermano:'👦',hermanos:'👫',hijo:'👶',abuelo:'👴',nieto:'🧒',tío:'🧔',primo:'🧑',pareja:'💑',novio:'💑',
+delgado:'🧍',guapo:'😍',joven:'🧒',mayor:'🧓',moreno:'👱🏽',rubio:'👱',
+'tiene el pelo largo':'💇',simpático:'😊',antipático:'😠',trabajador:'💪',vago:'🛋️',ordenado:'🗄️',caótico:'🌪️',optimista:'🌞',pesimista:'🌧️',alegre:'😃',triste:'😢',tímido:'🙈',abierto:'🤗',
+'empresa familiar':'👨‍👩‍👧',fundador:'🧑‍💼',empleados:'👥',exportar:'🚢',vender:'🏷️','líder del mercado':'🥇',sede:'🏢',
+pan:'🍞',fruta:'🍎',verdura:'🥦',carne:'🥩',pescado:'🐟',marisco:'🦐',pollo:'🍗',huevos:'🥚',huevo:'🥚',queso:'🧀',jamón:'🍖',arroz:'🍚',leche:'🥛',agua:'💧',zumo:'🧃',vino:'🍷',cerveza:'🍺',
+lunes:'📅',martes:'📅',miércoles:'📅',jueves:'📅',viernes:'📅',sábado:'🎉',domingo:'😴','fin de semana':'🏖️',
+'reservar una mesa':'📞','está lleno':'🚫','menú del día':'📋',postre:'🍰','la cuenta, por favor':'🧾','pagar con tarjeta':'💳',camarero:'🧑‍🍳',
+centro:'🏙️',parque:'🌳',plaza:'⛲',museo:'🏛️',catedral:'⛪',edificio:'🏢',mercado:'🛒',playa:'🏖️',tráfico:'🚦','casco antiguo':'🏰',
+metro:'🚇',autobús:'🚌',tren:'🚆',coche:'🚗',bici:'🚲',avión:'✈️','a pie':'🚶',parada:'🚏',estación:'🚉',
+'seguir todo recto':'⬆️','girar a la derecha':'➡️','girar a la izquierda':'⬅️','cruzar la calle':'🚸',cerca:'📍',lejos:'🔭',
+'tiempo libre':'🎈','hacer deporte':'🏃','ir al gimnasio':'🏋️',nadar:'🏊','jugar al tenis':'🎾','salir con amigos':'🍻','leer un libro':'📖','ir de excursión':'🥾',montaña:'⛰️',naturaleza:'🌿',encantar:'😍',
+'habitación doble':'🛏️',tranquila:'🤫',ruidosa:'📢','con ducha':'🚿','aire acondicionado':'❄️',calefacción:'🔥',piscina:'🏊','desayuno incluido':'🥐',precio:'💶',
+toalla:'🧴','faltan toallas':'🧴','está sucio':'🧽','hay mucho ruido':'🔊',técnico:'🔧',queja:'😤',
+sueldo:'💰','horario flexible':'🕘',teletrabajo:'🏠💻',teletrabajar:'🏠💻',jornada:'⏰',creativo:'💡',estresante:'😫',compañero:'🧑‍🤝‍🧑',vacaciones:'🌴',reunión:'👥',
+levantarse:'🛏️',despertarse:'⏰',ducharse:'🚿',vestirse:'👕',acostarse:'😴',reunirse:'👥',cita:'📅',agenda:'📒',
+camiseta:'👕',camisa:'👔',blusa:'👚',jersey:'🧶',pantalones:'👖',vaqueros:'👖',falda:'👗',vestido:'👗',traje:'🤵',chaqueta:'🧥',abrigo:'🧥',zapatos:'👞',botas:'🥾',
+'hace calor':'🥵','hace frío':'🥶','hace sol':'☀️','hace viento':'💨',llueve:'🌧️',nieva:'❄️','hay niebla':'🌫️',tiempo:'🌤️',grado:'🌡️',
+habitación:'🛏️',despacho:'🗄️',cocina:'🍳',baño:'🛁',puerta:'🚪',ventana:'🪟',pared:'🧱',terraza:'🌇',balcón:'🌇',ascensor:'🛗',
+escritorio:'🖥️',mesa:'🪑',silla:'🪑',estantería:'📚',armario:'🚪',lámpara:'💡',sofá:'🛋️',cama:'🛏️',
+mudarse:'📦',nacer:'👶','ir a la escuela':'🏫','hacer un intercambio':'🌍','empezar a trabajar':'💼',
+currículum:'📄','carta de presentación':'✉️',puesto:'💼','oferta de trabajo':'📰',entrevista:'🤝',
+botella:'🍾',lata:'🥫',paquete:'📦',bolsa:'🛍️','barra de pan':'🥖'};
+window.picOf=function(es,explicit){if(explicit)return explicit;
+  let k=String(es).toLowerCase().replace(/[¿?¡!]/g,'').replace(/\(.*?\)/g,'').split(' / ')[0].replace(/\s*….*$/,'').trim();
+  if(EMOJI[k])return EMOJI[k];k=k.replace(window.LANG&&LANG.articles||/^(el|la|los|las|un|una)\s+/,'').trim();
+  return EMOJI[k]||'';};
+;
+/* Spanisch-Paket: Definition (läuft nach allen Spanisch-Inhalten, siehe build.py PACKS['es']) */
+defineLang('es',{name:'Spanisch',flag:'🇪🇸',native:'Español',into:'ins Spanische',onLang:'auf Spanisch',adj:'spanisch',voice:'es-ES',
+  keys:['á','é','í','ó','ú','ñ','ü','¿','?','¡','!'],
+  pron:/^(yo|tu|tú|el|él|ella|usted|nosotros|nosotras|vosotros|vosotras|ellos|ellas|ustedes)\s+/,
+  persons:['yo','tú','él / ella / usted','nosotros/-as','vosotros/-as','ellos / ellas / ustedes'],
+  conjTip:'Tipp: Stamm + Endung. Unregelmäßig? Schau, ob sich der Stammvokal ändert (o→ue, e→ie) – bei nosotros/vosotros meistens nicht.',
+  unit:'Unidad',units:'Unidades',fem:true,genderEx:['Estoy cansado','Estoy cansada'],
+  greet:['¡Buenos días','¡Buenas tardes','¡Buenas noches'],
+  teacher:'Du bist ein geduldiger, motivierender Spanischlehrer für Jonas, einen deutschen Muttersprachler (Niveau A1–B1, lernt mit dem Kursbuch "Meta profesional" und eigenen A2/B1-Unidades, lebt in Barcelona). Erklärungen IMMER auf Deutsch, kurz und konkret, auf dem Niveau der jeweiligen Unidad. Korrigiere nur echte Fehler, keine Stilfragen. Spanisch aus Spanien (vosotros) ist Standard.',
+  sampleSay:['Hola, soy tu profesora de español.','¿Qué tal? Me llamo Lucía.'],
+  voiceHint:'Auf dem Mac klingen „Mónica“ bzw. Stimmen mit „(Premium)“/„(Erweitert)“ am besten. Mehr Stimmen: Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Spanisch.',
+  storySeries:'Nuevo en Barcelona',storyIntro:'Ben zieht nach Barcelona.',
+  key:'espanol-lehrer-v1',gist:'mi-profe-fortschritt.json',
+  course:window.COURSE,placement:window.PLACEMENT,stories:window.STORIES||[],levels:window.LEVELS,levelOf:window.LEVEL_OF,emoji:window.EMOJI});
+
