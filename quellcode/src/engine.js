@@ -410,11 +410,15 @@ function vResumen(m,id){const u=unitById(id);m.append(backTo(UW+' '+u.n,'unit/'+
 /* Übersetzungen der spanischen Beispiele in Erklärungen (INFO_TR in c_info_tr.js, Schlüssel = Originaltext mit „Jonas“) */
 const infoKey=t=>String(t).replace(S.surname?new RegExp((S.name||'Jonas')+' '+S.surname,'g'):/$^/,'Jonas').replace(new RegExp('\\b'+(S.name||'Jonas').replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','g'),'Jonas').replace(/\s+/g,' ').trim();
 function trToggle(box){const TRI=EX==='de'&&window.INFO_TR||null;if(!TRI)return null;
-  box.querySelectorAll('.es-t').forEach(e=>{const d=TRI[infoKey(e.textContent)];if(!d)return;e.classList.add('hastr');
-    e.onclick=ev=>{if(ev.target.closest('button'))return;ev.stopPropagation();document.querySelectorAll('.trpop').forEach(x=>x.remove());
-      const r=e.getBoundingClientRect();const p=h('div',{class:'glpop trpop'},d);document.body.append(p);
+  const pop=(e,d)=>{const r=e.getBoundingClientRect();const p=h('div',{class:'glpop trpop'},d);document.body.append(p);
       p.style.left=Math.max(8,Math.min(r.left,window.innerWidth-p.offsetWidth-8))+'px';p.style.top=(r.bottom+6)+'px';
-      const close=()=>{p.remove();document.removeEventListener('click',close,true);document.removeEventListener('scroll',close,true);};setTimeout(()=>{document.addEventListener('click',close,true);document.addEventListener('scroll',close,true);},0);};});
+      const close=()=>{p.remove();document.removeEventListener('click',close,true);document.removeEventListener('scroll',close,true);};setTimeout(()=>{document.addEventListener('click',close,true);document.addEventListener('scroll',close,true);},0);};
+  const bind=(e,d)=>{e.classList.add('hastr');e.onclick=ev=>{if(ev.target.closest('button'))return;ev.stopPropagation();document.querySelectorAll('.trpop').forEach(x=>x.remove());pop(e,d);};};
+  box.querySelectorAll('.es-t').forEach(e=>{const d=TRI[infoKey(e.textContent)];if(!d)return;
+    /* Aufzählungen (a, b, c · d / e) mit gleich vielen Teilen in der Übersetzung → jedes Wort einzeln antippbar */
+    if(e.children.length===0){for(const sep of [' · ',', ',' / ']){const es=e.textContent.split(sep),de=d.split(sep);
+      if(es.length>2&&es.length===de.length){e.textContent='';es.forEach((w,i)=>{const sp=h('span',{},w);bind(sp,de[i]);e.append(sp);if(i<es.length-1)e.append(sep);});return;}}}
+    bind(e,d);});
   return null;}
 function addSpeakTo(el){const t=el.textContent;if(!t.trim())return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}
 const cleanWord=es=>es.length<=28&&!/[…\/(]/.test(es);
