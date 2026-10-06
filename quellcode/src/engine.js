@@ -66,6 +66,42 @@ function femCourse(o,inVocab){if(typeof o==='string'){let t=femFirst(o);if(S.nam
   if(o&&typeof o==='object'){if(o.t==='vocab')return o;if(o.you&&o.opts)o.opts.forEach(x=>{x.es=femFirst(x.es).replace(/\b([Ee])ncantado\b/g,'$1ncantada');});
     if(o.t==='speak'&&o.es)o.es=o.es.replace(/\b([Ee])ncantado\b/g,'$1ncantada');for(const k of Object.keys(o))if(k!=='items')o[k]=femCourse(o[k]);}return o;}
 if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}
+/* Herkunft (Profil): Inhalte gehen von Deutschland/Mannheim aus. S.origin={c:'AT',city:'Wien',other:'…'} ersetzt nur Herkunftsangaben
+   (soy alemán, ¿Eres alemán?, Alemania, Mannheim, Hablo alemán, Deutschland/Germany …) – nicht Vokabellisten, nicht die Geschichten (Ben). */
+const ORIGINS={DE:['🇩🇪','Deutschland','Alemania','alemán','alemana','alemán','Germany','German',['Deutscher','Deutsche'],['aus Deutschland','in Deutschland','nach Deutschland']],
+ AT:['🇦🇹','Österreich','Austria','austriaco','austriaca','alemán','Austria','Austrian',['Österreicher','Österreicherin'],['aus Österreich','in Österreich','nach Österreich']],
+ CH:['🇨🇭','die Schweiz','Suiza','suizo','suiza','alemán','Switzerland','Swiss',['Schweizer','Schweizerin'],['aus der Schweiz','in der Schweiz','in die Schweiz']],
+ LI:['🇱🇮','Liechtenstein','Liechtenstein','liechtensteiniano','liechtensteiniana','alemán','Liechtenstein','Liechtensteiner',['Liechtensteiner','Liechtensteinerin'],['aus Liechtenstein','in Liechtenstein','nach Liechtenstein']],
+ LU:['🇱🇺','Luxemburg','Luxemburgo','luxemburgués','luxemburguesa','luxemburgués','Luxembourg','Luxembourgish',['Luxemburger','Luxemburgerin'],['aus Luxemburg','in Luxemburg','nach Luxemburg']],
+ NL:['🇳🇱','die Niederlande','los Países Bajos','neerlandés','neerlandesa','neerlandés','the Netherlands','Dutch',['Niederländer','Niederländerin'],['aus den Niederlanden','in den Niederlanden','in die Niederlande']],
+ BE:['🇧🇪','Belgien','Bélgica','belga','belga','neerlandés','Belgium','Belgian',['Belgier','Belgierin'],['aus Belgien','in Belgien','nach Belgien']],
+ IT:['🇮🇹','Italien','Italia','italiano','italiana','italiano','Italy','Italian',['Italiener','Italienerin'],['aus Italien','in Italien','nach Italien']],
+ FR:['🇫🇷','Frankreich','Francia','francés','francesa','francés','France','French',['Franzose','Französin'],['aus Frankreich','in Frankreich','nach Frankreich']],
+ PL:['🇵🇱','Polen','Polonia','polaco','polaca','polaco','Poland','Polish',['Pole','Polin'],['aus Polen','in Polen','nach Polen']],
+ TR:['🇹🇷','die Türkei','Turquía','turco','turca','turco','Turkey','Turkish',['Türke','Türkin'],['aus der Türkei','in der Türkei','in die Türkei']],
+ GB:['🇬🇧','Großbritannien','el Reino Unido','británico','británica','inglés','the UK','British',['Brite','Britin'],['aus Großbritannien','in Großbritannien','nach Großbritannien']],
+ US:['🇺🇸','die USA','Estados Unidos','estadounidense','estadounidense','inglés','the USA','American',['Amerikaner','Amerikanerin'],['aus den USA','in den USA','in die USA']],
+ BR:['🇧🇷','Brasilien','Brasil','brasileño','brasileña','portugués','Brazil','Brazilian',['Brasilianer','Brasilianerin'],['aus Brasilien','in Brasilien','nach Brasilien']],
+ MX:['🇲🇽','Mexiko','México','mexicano','mexicana','español','Mexico','Mexican',['Mexikaner','Mexikanerin'],['aus Mexiko','in Mexiko','nach Mexiko']],
+ PT:['🇵🇹','Portugal','Portugal','portugués','portuguesa','portugués','Portugal','Portuguese',['Portugiese','Portugiesin'],['aus Portugal','in Portugal','nach Portugal']]};
+function originStr(t){const o=S.origin;if(!o||(!o.c&&!o.other)||(o.c==='DE'&&!o.city)||typeof t!=='string'||!/Alemania|alem|Mannheim|Deutsch|German/.test(t))return t;
+  const f=S.gender==='f',X=o.c&&ORIGINS[o.c],oth=!X&&o.other;const esC=X?X[2]:oth,deC=X?X[1]:oth,enC=X?X[6]:oth,city=(o.city||'').trim();
+  const deF=X?X[9]:['aus '+oth,'in '+oth,'nach '+oth],bareDe=deC.replace(/^die /,'');
+  let r=t;
+  r=r.replace(/\b([Ss])oy alem(?:án|ana)(?![a-záéíóúñ])/g,(m,s1)=>X?s1+'oy '+(f?X[4]:X[3]):s1+'oy de '+oth).replace(/\b([Ee])res alem(?:án|ana)(?![a-záéíóúñ])/g,(m,e)=>X?e+'res '+(f?X[4]:X[3]):e+'res de '+oth);
+  if(X&&X[5]!=='alemán')r=r.replace(/\b([Hh])ablo alemán(?![a-záéíóúñ])/g,'$1ablo '+X[5]).replace(/\b(inglés|francés|italiano|español|portugués|polaco|turco|neerlandés|luxemburgués), \1\b/g,'$1').replace(/Hablo español, inglés y un poco de español/g,'Hablo español e inglés');
+  r=r.replace(/\b(a|de|en|desde|para) Alemania\b/g,(m,p)=>p+' '+esC).replace(/\bAlemania\b/g,esC.replace(/^(el|los) /,m=>m[0].toUpperCase()+m.slice(1)));
+  r=r.replace(/\bde el /g,'del ').replace(/\ba el /g,'al ');
+  if(!city){r=r.replace(/, (de|aus|en|in|from) Mannheim\b/g,'');/* ohne Stadt: „…, aus Mannheim“ weglassen */
+    r=r.replace(/\baus Mannheim\b/g,deF[0]).replace(/\bin Mannheim\b/g,deF[1]).replace(/\bnach Mannheim\b/g,deF[2]).replace(/\bfrom Mannheim\b/g,'from '+enC);}
+  r=r.replace(/\bMannheim\b/g,city||esC.replace(/^(el|los) /,''));
+  r=r.replace(/\baus Deutschland\b/g,deF[0]).replace(/\bin Deutschland\b/g,deF[1]).replace(/\bnach Deutschland\b/g,deF[2]).replace(/\bDeutschland\b/g,bareDe);
+  r=r.replace(/\b(Ich bin|Du bist|bist du) Deutsche[r]?\b/g,(m,a)=>X?a+' '+X[8][f?1:0]:a+' aus '+oth);
+  r=r.replace(/\bGermany\b/g,enC).replace(/\b(I'm|You're|you're|I am|You are) German\b/g,(m,a)=>X?a+' '+X[7]:a+' from '+oth);
+  return r;}
+function applyOrigin(o){if(typeof o==='string')return originStr(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=applyOrigin(o[i]);return o;}
+  if(o&&typeof o==='object'){if(o.t==='vocab')return o;for(const k of Object.keys(o))if(k!=='items')o[k]=applyOrigin(o[k]);}return o;}
+applyOrigin(COURSE);applyOrigin(PLACEMENT);
 
 
 /* ---------- helpers ---------- */
@@ -335,7 +371,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
   setTimeout(()=>inp.focus(),80);}
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();trackNav(curRoute());const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
-  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
+  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix}[parts[0]]||vHome;
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
 /* ---------- views ---------- */
@@ -1022,8 +1058,20 @@ function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & P
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Knöpfe, Menüs und Hinweise.')));
   m.append(h('div',{class:'kind',style:'margin-top:20px'},fmt(T('{L} lernen mit'))),h('div',{class:'chips'},EX_LANGS.map(c=>h('button',{class:'chip'+(c===EX?' on':''),onclick:()=>{if(c!==EX){if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}setEX(c);}}},h('span',{},EX_FLAGS[c]||''),h('span',{},fmt(T(EX_NAMES[c]||c)))))),
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Erklärungen, Übersetzungen und Wortbedeutungen im Kurs – unabhängig von der Sprache der App.')));
-  m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Name & Ansprache')),h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'row',style:'flex-wrap:nowrap'},
-    h('div',{style:'flex:1;min-width:0;font-weight:600'},'👤 '+S.name+(S.surname?' '+S.surname:'')+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):'')),h('button',{class:'btn small',onclick:()=>go('name')},T('Ändern')))));}
+  const orig=(()=>{const o=S.origin||{};const X=ORIGINS[o.c||'DE'];return (o.other?'🌍 '+o.other:X[0]+' '+T(X[1].replace(/^die /,'')))+(o.city?' · '+o.city:'');})();
+  const prow=(txt,r)=>h('div',{class:'row',style:'flex-wrap:nowrap'},h('div',{style:'flex:1;min-width:0;font-weight:600'},txt),h('button',{class:'btn small',onclick:()=>go(r)},T('Ändern')));
+  m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Profil')),h('div',{class:'card',style:'padding:10px 16px;display:grid;gap:8px'},
+    prow('👤 '+S.name+(S.surname?' '+S.surname:'')+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):''),'name'),prow(orig,'origin')));}
+function vOrigin(m){const o=Object.assign({c:'DE',city:'',other:''},S.origin||{});let sel=o.other?'XX':o.c;
+  const city=h('input',{class:'inp',placeholder:T('Stadt (optional)'),value:o.city,autocapitalize:'words',style:'font-size:16px;margin-top:6px'});
+  const other=h('input',{class:'inp'+(sel==='XX'?'':' hide'),placeholder:T('Land (auf Spanisch, z. B. Grecia)'),value:o.other,autocapitalize:'words',style:'font-size:16px;margin-top:8px'});
+  const pickChip=(e,c)=>{sel=c;chips.querySelectorAll('.chip').forEach(b=>b.classList.remove('on'));e.currentTarget.classList.add('on');other.classList.toggle('hide',c!=='XX');if(c==='XX')other.focus();};
+  const chips=h('div',{class:'chips'},Object.entries(ORIGINS).map(([c,X])=>h('button',{class:'chip'+(sel===c?' on':''),onclick:e=>pickChip(e,c)},h('span',{},X[0]),h('span',{},T(X[1].replace(/^die /,''))))),
+    h('button',{class:'chip'+(sel==='XX'?' on':''),onclick:e=>pickChip(e,'XX')},h('span',{},'🌍'),h('span',{},T('Anderes Land'))));
+  m.append(backTo(T('Sprache & Profil'),'lang'),h('h1',{},T('Herkunft')),h('p',{class:'sub'},T('Woher kommst du? Übungen wie „Soy de …“ und „¿De dónde eres?“ passen sich daran an.')),
+    h('div',{class:'kind',style:'margin-top:4px'},T('Land')),chips,other,h('div',{class:'kind',style:'margin-top:16px'},T('Stadt')),city,
+    h('button',{class:'btn primary',style:'margin-top:16px',onclick:()=>{const v=sel==='XX'?{c:'',other:other.value.trim().slice(0,40),city:city.value.trim().slice(0,40)}:{c:sel,other:'',city:city.value.trim().slice(0,40)};
+      if(sel==='XX'&&!v.other)return toast(T('Gib dein Land ein'));S.origin=v;save();if(IN_ARTIFACT){toast(T('Gespeichert'));return;}location.hash='lang';location.reload();}},T('Speichern')));}
 /* Unterseiten von „Mehr“: welche Karten aus vSettingsAll gezeigt werden (Erkennung über die – ggf. übersetzte – Überschrift) */
 const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),['🔊 Aussprache']],
   ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 Gemini (optional)']],
@@ -1064,6 +1112,7 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
   if((b.vocabGoalT||0)>(a.vocabGoalT||0)){o.vocabGoal=b.vocabGoal;o.vocabGoalT=b.vocabGoalT;}
   o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
+  o.origin=a.origin||b.origin;
   o.name=a.name||b.name;o.gender=a.gender||b.gender;
   o.stories=Object.assign({},b.stories||{});for(const[k,v]of Object.entries(a.stories||{})){const r=o.stories[k];o.stories[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.checks=Object.assign({},b.checks||{});for(const[k,v]of Object.entries(a.checks||{})){const r=o.checks[k];o.checks[k]=!r?v:{date:(v.date>r.date?v.date:r.date),score:Math.max(v.score||0,r.score||0),pass:!!(v.pass||r.pass)};}
