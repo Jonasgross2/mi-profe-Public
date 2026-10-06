@@ -58,7 +58,7 @@ lessons:[
  <div class="ojo">Das Alter „hat“ man: <span class="es-t">Tengo 23 años.</span> – nicht „soy 23“! Frage: <span class="es-t">¿Cuántos años tienes?</span></div>`},
  {t:'conj',verb:'tener',de:'haben',forms:['tengo','tienes','tiene','tenemos','tenéis','tienen']},
  {t:'info',title:'Telefon, E-Mail, Adresse',html:`<table><tr><td class="es-t">¿Cuál es tu (número de) móvil?</td><td class="es-t">Es el 612 34 56 78.</td></tr>
- <tr><td class="es-t">¿Cuál es tu correo electrónico?</td><td class="es-t">Es jonas.gross@web.de</td></tr>
+ <tr><td class="es-t">¿Cuál es tu correo electrónico?</td><td class="es-t">Es pablo.ruiz@correo.es</td></tr>
  <tr><td class="es-t">¿Cuál es tu dirección?</td><td class="es-t">Calle Mallorca, número 40.</td></tr></table>
  <table><tr><td><b>@</b> <span class="es-t">arroba</span></td><td><b>.</b> <span class="es-t">punto</span></td><td><b>-</b> <span class="es-t">guion</span></td><td><b>_</b> <span class="es-t">guion bajo</span></td></tr>
  <tr><td><span class="es-t">c/</span> = calle</td><td><span class="es-t">av.</span> = avenida</td><td><span class="es-t">pl.</span> = plaza</td><td><span class="es-t">n.º</span> = número</td></tr></table>

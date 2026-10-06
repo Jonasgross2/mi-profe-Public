@@ -321,3 +321,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 }
 @media (max-width:700px){.xgoals{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
 @media (max-width:700px){.main h1.uh1{font-size:23px;line-height:1.15}}
+.btn.tog.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.wok{color:var(--ok);font-weight:600}.wbad{color:var(--bad);text-decoration:underline wavy;text-underline-offset:3px}
+.info .trx{display:block;font-size:12.5px;color:var(--muted);font-style:italic;margin:1px 0 3px}
+.info td .trx{margin:2px 0 0}
