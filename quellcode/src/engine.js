@@ -1,5 +1,8 @@
 /* Neustart (Sprachwechsel, Update …): erst Startbildschirm mit Drehsymbol zeigen, dann neu laden – sonst wirkt die App kurz eingefroren */
 function bootScreen(){let b=document.getElementById('boot');if(!b){b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">🇪🇸</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
+/* Startbildschirm ruhig ausblenden: mindestens 1,5 s ab dem Öffnen sichtbar, dann 0,4 s weiches Ausblenden (kein Flackern) */
+let bootHiding=false;function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
+  setTimeout(()=>{bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(0,1500-performance.now()));}
 function reloadApp(){bootScreen();setTimeout(()=>location.reload(),60);}
 /* ===== Mi profe · Engine (sprachunabhängig – alles Sprachspezifische steht im Paket LANG, siehe lang.js) ===== */
 (function(){
@@ -394,7 +397,7 @@ function vWelcome(again){document.body.innerHTML='';const inp=h('input',{class:'
 function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=false;trackNav(curRoute());const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
   const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum,reading:vReading}[parts[0]]||vHome;
-  v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;const bt=document.getElementById('boot');if(bt)bt.remove();}
+  v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;hideBoot();}
 
 /* ---------- views ---------- */
 /* Tagesplan: Bausteine mit id; welche täglich dazugehören, stellt man unter Mehr → Mein Tagesplan ein (S.plan, synchronisiert über planT) */
@@ -451,9 +454,11 @@ function vHome(m){
       return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+T('T12:00:00')).getDay()]),h('div',{class:'small'},v||''));}))));
   /* passt es am Handy nicht ganz, wird „Deine Woche“ kompakter (kein Scrollen) */
   /* passt es am Handy nicht ganz (auch 1 px), wird „Deine Woche“ schrittweise kompakter: flach → ganz ausblenden. Mehrfach prüfen (iOS legt Ränder/Höhen verzögert fest) */
-  const fit=()=>{const mn=m.closest('main')||m,wc=m.querySelector('.weekcard');if(!wc||!wc.isConnected)return;const over=()=>mn.scrollHeight>mn.clientHeight;
-    m.classList.remove('homecompact');wc.classList.remove('tight');wc.style.display='';if(!over())return;wc.classList.add('tight');if(!over())return;wc.style.display='none';if(over())m.classList.add('homecompact');};
-  [0,250,800].forEach(t=>setTimeout(fit,t));window.addEventListener('resize',fit,{once:true});
+  /* Startseite ohne Scrollen: sofort (vor dem ersten Bild) messen; spätere Prüfungen machen nur noch kompakter, nie wieder größer (kein Springen) */
+  const fit=reset=>{const mn=m.closest('main')||m,wc=m.querySelector('.weekcard');if(!wc||!wc.isConnected)return;const over=()=>mn.scrollHeight>mn.clientHeight;
+    if(reset){m.classList.remove('homecompact');wc.classList.remove('tight');wc.style.display='';}
+    if(!over())return;if(!wc.classList.contains('tight')){wc.classList.add('tight');if(!over())return;}if(wc.style.display!=='none'){wc.style.display='none';if(!over())return;}m.classList.add('homecompact');};
+  fit(true);[250,800].forEach(t=>setTimeout(()=>fit(false),t));window.addEventListener('resize',()=>fit(true),{once:true});
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 

@@ -392,3 +392,4 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 #boot .bootlogo{font-size:52px;line-height:1}
 #boot .bootspin{width:30px;height:30px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--accent);animation:bootspin .8s linear infinite}
 @keyframes bootspin{to{transform:rotate(360deg)}}
+#boot{transition:opacity .4s ease}#boot.out{opacity:0;pointer-events:none}
