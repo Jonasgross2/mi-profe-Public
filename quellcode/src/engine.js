@@ -228,6 +228,7 @@ function grade(card,status,rating){const c=S.srs[vkey(card.es)];if(!c)return;srs
   const td=today();if(!S.vocabCount||S.vocabCount.d!==td)S.vocabCount={d:td,n:0};S.vocabCount.n++;save();}
 const vocabGoal=()=>S.settings.vocabGoal||20;
 const vocabToday=()=>S.vocabCount&&S.vocabCount.d===today()?S.vocabCount.n:0;
+const vocabLeft=()=>Math.max(0,Math.min(dueCards().length,vocabGoal()-vocabToday()));/* heute noch fürs Ziel */
 /* Karten für eine Runde: überfällige Wiederholungen zuerst, dann neue; Größe = Rest bis zum Tagesziel (danach freiwillig 20) */
 function reviewSet(){const due=dueCards();const rest=vocabGoal()-vocabToday();const n=rest>0?rest:20;
   const old=due.filter(c=>c.reps||c.box).sort((a,b)=>a.due<b.due?-1:a.due>b.due?1:0),neu=due.filter(c=>!(c.reps||c.box));
@@ -298,7 +299,7 @@ const NAV=[['home','🏠',T('Start')],['units','📚',T('Kurs')],['vocab','🗂�
 function shell(){
   document.documentElement.dataset.theme=S.settings.theme==='auto'?'':S.settings.theme;
   const route=curRoute().split('/')[0];
-  const due=dueCards().length;
+  const due=vocabLeft();/* Abzeichen: nur was heute fürs Tagesziel noch fehlt */
   const NAVD=NAV;const mini=S.settings.side==='mini';
   const nav=h('div',{class:'nav'},NAVD.map(([r,ic,l])=>h('button',{class:route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round','placement'].includes(route))||(r==='ref'&&['verbs','story'].includes(route))?'active':'',title:l,onclick:()=>{NAVRESET=true;go(r);}},h('span',{class:'ni'},ic),h('span',{class:'nl'},l),r==='vocab'&&due?h('span',{class:'badge'},due):null)));
   const SHORT={home:T('Start'),units:T('Kurs'),vocab:T('Vokabeln'),ref:T('Bibliothek'),mistakes:T('Fehler'),settings:T('Mehr')};
@@ -340,7 +341,7 @@ function route(){if(window.speechSynthesis)speechSynthesis.cancel();trackNav(cur
 function dayPlan(){const nx=nextLesson();const due=dueCards().length;const done=Object.values(S.lessons).filter(x=>x.done).length;const td=today();
   const ns=nextStory();const storyToday=Object.entries(S.stories||{}).find(([,v])=>v.date===td);
   const plan=[
-    Object.keys(S.srs).length?{ic:'🗂️',t:T('Vokabeln wiederholen'),d:due?T('Tagesziel: ')+Math.min(vocabToday(),vocabGoal())+' / '+vocabGoal()+T(' Karten · ')+due+T(' fällig'):T('Alle fälligen Karten wiederholt.'),r:'vocab',b:T('Wiederholen →'),min:Math.max(3,Math.round((vocabGoal()-vocabToday())/4)),done:!due||vocabToday()>=vocabGoal()}:null,
+    Object.keys(S.srs).length?{ic:'🗂️',t:T('Vokabeln wiederholen'),d:vocabLeft()?T('Noch ')+vocabLeft()+T(' Karten bis zum Tagesziel (')+vocabGoal()+').':T('Tagesziel erreicht.'),r:'vocab',b:T('Wiederholen →'),min:Math.max(2,Math.round(vocabLeft()/4)),done:!vocabLeft()}:null,
     nx||Object.values(S.lessons).some(x=>x.date===td)?{ic:nx&&(nx.check||nx.test)?'🏆':'📚',t:nx?nxTitle(nx):T('Lektion'),d:nx?nxDesc(nx):T('Alles fertig!'),r:nx?nxRoute(nx):'units',b:nx&&(nx.check||nx.test)?T('Test starten →'):T('Los geht’s →'),min:10,done:Object.values(S.lessons).some(x=>x.date===td)}:null,
     done>=2?{ic:'🔀',t:T('Gemischte Wiederholung'),d:T('15 Aufgaben quer durch alles, was du schon gelernt hast.'),r:'mix',b:T('Starten →'),min:5,done:S.lastMix===td}:null,
     ns||storyToday?{ic:'📖',t:ns&&!storyToday?T('Geschichte: ')+ns.title:T('Geschichte lesen'),d:T('Erst hören, dann lesen – ca. 5 Minuten.'),r:ns?'story/'+ns.id:'ref/s',b:T('Lesen →'),min:5,done:!!storyToday}:null].filter(Boolean);
@@ -853,9 +854,10 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
       return h('div',{},h('div',{class:'kind',style:'margin:8px 0 6px'},L.title),h('div',{class:'chips'},us.map(u=>{const w=all.filter(c=>c.unit===u.id);return h('button',{class:'chip',onclick:()=>runVocab(shuffle(w).slice(0,20),'type',false)},h('span',{},'U'+u.n),h('span',{},u.title+' ('+w.length+')'));})));})));
     if(!all.length)m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return;}
   m.append(h('h1',{},T('Vokabeln')),h('p',{class:'sub'},total?total+T(' Wörter gesammelt · ')+boxes[3]+T(' sitzen sicher · ')+(boxes[0]+boxes[1])+T(' in Arbeit'):T('Wörter kommen automatisch dazu, sobald du sie in einer Lektion siehst.')));
-  m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 12px'},due.length?due.length+T(' Karten fällig'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
+  m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 '+(vocabLeft()||!due.length?'12px':'4px')},vocabLeft()?T('Heute noch ')+vocabLeft()+T(' Karten'):due.length?T('Tagesziel erreicht ✓'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
+    !vocabLeft()&&due.length?h('p',{class:'muted small',style:'margin:0 0 12px'},due.length+T(' weitere Karten sind fällig – freiwillig, sonst kommen sie an den nächsten Tagen.')):null,
 
-    h('div',{class:'row'},h('button',{class:'btn'+(due.length?' primary':''),disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
+    h('div',{class:'row'},h('button',{class:'btn'+(vocabLeft()?' primary':''),disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true)},T('🃏 Karten')),
       h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true)},T('🎧 Hören'))),
     total?(()=>{const pick=h('div',{class:'chips hide',style:'margin:8px 0 0;justify-content:flex-end'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.settings.vocabGoal=n;save();route();}},n+'')));
