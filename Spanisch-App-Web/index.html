@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261006-1840";</script>
+<script>window.PWA=true;window.APP_VERSION="20261006-1856";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -35,7 +35,8 @@
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation}
-body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
+body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea,select,[contenteditable]{-webkit-user-select:text;user-select:text;-webkit-touch-callout:default}
 button{touch-action:manipulation}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
 button,input,textarea,select{font:inherit;color:inherit}
@@ -48,7 +49,7 @@ a{color:var(--accent)}
 .brand .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:14px 0 0 var(--gold)}
 
 .nav button{display:flex;align-items:center;gap:10px;width:100%;text-align:left;padding:10px 12px;border:0;background:none;border-radius:10px;cursor:pointer;color:var(--ink)}
-.nav button:hover{background:var(--surface2)}
+@media (hover:hover){.nav button:hover{background:var(--surface2)}}
 .nav button.active{background:var(--accent-soft);color:var(--accent);font-weight:600}
 .nav .badge{margin-left:auto;background:var(--accent);color:var(--accent-ink);font-size:12px;border-radius:99px;padding:1px 8px;font-weight:600}
 .side .foot{margin-top:auto;font-size:12px;color:var(--muted);padding:8px 10px}
@@ -65,9 +66,9 @@ h3{font-size:16px;margin:18px 0 6px}
 .stat .n{font-size:28px;font-weight:700;font-variant-numeric:tabular-nums}
 .stat .l{color:var(--muted);font-size:13px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-weight:600}
-.btn:hover{background:var(--surface2)}
+@media (hover:hover){.btn:hover{background:var(--surface2)}}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.btn.primary:hover{filter:brightness(1.06)}
+@media (hover:hover){.btn.primary:hover{filter:brightness(1.06)}}
 .btn.ghost{background:none;border-color:transparent}
 .btn.small{padding:6px 12px;font-size:14px}
 .btn:disabled{opacity:.5;cursor:not-allowed}
@@ -78,16 +79,16 @@ h3{font-size:16px;margin:18px 0 6px}
 :root[data-theme="dark"] .pill.warn{color:var(--gold)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill.warn{color:var(--gold)}}
 .unit{display:flex;gap:16px;align-items:center;padding:16px 18px;cursor:pointer;transition:transform .08s}
-.unit:hover{transform:translateY(-1px);border-color:var(--accent)}
+@media (hover:hover){.unit:hover{transform:translateY(-1px);border-color:var(--accent)}}
 .unit .num{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-family:var(--serif);font-size:20px;flex:none}
 .unit.locked{opacity:.55;cursor:default}
-.unit.locked:hover{transform:none;border-color:var(--line)}
+@media (hover:hover){.unit.locked:hover{transform:none;border-color:var(--line)}}
 .unit .t{font-weight:700;font-family:var(--serif);font-size:18px}
 .unit .d{color:var(--muted);font-size:14px}
 .bar{height:6px;background:var(--surface2);border-radius:99px;overflow:hidden}
 .bar>i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
 .lesson{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer}
-.lesson:hover{border-color:var(--accent)}
+@media (hover:hover){.lesson:hover{border-color:var(--accent)}}
 .lesson .ic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--surface2);font-size:15px;flex:none}
 .lesson.done .ic{background:var(--ok-soft);color:var(--ok)}
 .lesson .lt{font-weight:600}
@@ -103,7 +104,7 @@ h3{font-size:16px;margin:18px 0 6px}
 .q .es{font-family:var(--serif)}
 .opts{display:grid;gap:10px}
 .opt{padding:13px 16px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);cursor:pointer;text-align:left;font-size:17px}
-.opt:hover{border-color:var(--accent)}
+@media (hover:hover){.opt:hover{border-color:var(--accent)}}
 .opt.sel{border-color:var(--accent);background:var(--accent-soft)}
 .opt.right{border-color:var(--ok);background:var(--ok-soft)}
 .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
@@ -116,7 +117,7 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .keys{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
 .keys .kshift.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
 .keys button{width:36px;height:34px;border-radius:8px;border:1px solid var(--line);background:var(--surface2);cursor:pointer;font-size:16px}
-.keys button:hover{border-color:var(--accent)}
+@media (hover:hover){.keys button:hover{border-color:var(--accent)}}
 .fb{margin-top:16px;padding:14px 16px;border-radius:12px;font-size:15px}
 .fb.ok{background:var(--ok-soft);border:1px solid var(--ok)}
 .fb.bad{background:var(--bad-soft);border:1px solid var(--bad)}
@@ -128,7 +129,7 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .actions>.btn{min-height:48px}
 .actions>.btn.primary{flex:1}
 .speak{border:0;background:var(--accent-soft);color:var(--accent);border-radius:50%;width:30px;height:30px;cursor:pointer;display:inline-grid;place-items:center;vertical-align:middle;flex:none;font-size:14px}
-.speak:hover{filter:brightness(.95)}
+@media (hover:hover){.speak:hover{filter:brightness(.95)}}
 .speak.big{width:64px;height:64px;font-size:26px}
 .info{font-size:16px}
 .info table{border-collapse:collapse;margin:10px 0;width:100%;font-size:15px}
@@ -144,7 +145,7 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .vrow .de{color:var(--muted)}
 .tiles{display:flex;flex-wrap:wrap;gap:8px;min-height:52px;padding:10px;border:1.5px dashed var(--line);border-radius:12px;margin-bottom:12px}
 .tile{padding:8px 13px;border-radius:9px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font-family:var(--serif);font-size:18px;box-shadow:var(--shadow)}
-.tile:hover{border-color:var(--accent)}
+@media (hover:hover){.tile:hover{border-color:var(--accent)}}
 .match{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .match .opt{font-size:16px;padding:10px 14px}
 .match .opt.done{opacity:.35;pointer-events:none;border-color:var(--ok)}
@@ -185,7 +186,7 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .reading{font-size:19px;line-height:1.75}
 .reading p{margin:0 0 12px}
 .gl{border-bottom:1.5px dotted var(--accent);cursor:pointer}
-.gl:hover{background:var(--accent-soft)}
+@media (hover:hover){.gl:hover{background:var(--accent-soft)}}
 .glpop{position:fixed;z-index:50;background:var(--ink);color:var(--bg);padding:6px 12px;border-radius:8px;font-size:14px;max-width:280px;box-shadow:var(--shadow)}
 .shadowcard{text-align:center;padding:30px 20px}
 .shadowcard .es{font-family:var(--serif);font-size:26px;line-height:1.4;margin:10px 0}
@@ -206,12 +207,12 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .rounds{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 .rounds .rd{border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:99px;padding:3px 10px;font-size:12px;font-weight:600;cursor:pointer}
 .rounds .rd.on{background:var(--ok-soft);color:var(--ok);border-color:transparent}
-.rounds .rd:hover{border-color:var(--accent)}
+@media (hover:hover){.rounds .rd:hover{border-color:var(--accent)}}
 
 /* einklappbare Seitenleiste */
 .brand{justify-content:space-between}
 .sidetog{border:1px solid var(--line);background:none;color:var(--muted);border-radius:8px;width:28px;height:28px;cursor:pointer;font-size:15px;line-height:1;flex:none}
-.sidetog:hover{color:var(--accent);border-color:var(--accent)}
+@media (hover:hover){.sidetog:hover{color:var(--accent);border-color:var(--accent)}}
 .nav .ni{width:22px;text-align:center;flex:none}
 .app{transition:grid-template-columns .15s}
 .app.mini{grid-template-columns:72px 1fr}
@@ -234,12 +235,12 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .hic{font-size:34px;line-height:1;flex:none;margin-top:2px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;padding:8px 14px;font-size:14px;cursor:pointer;font-weight:600}
-.chip:hover{border-color:var(--accent);color:var(--accent)}
+@media (hover:hover){.chip:hover{border-color:var(--accent);color:var(--accent)}}
 
 /* Kachel-Menüs */
 .mtiles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
 .mtile{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);cursor:pointer;min-height:112px;box-shadow:var(--shadow)}
-.mtile:hover{border-color:var(--accent)}
+@media (hover:hover){.mtile:hover{border-color:var(--accent)}}
 .mtile .mi2{font-size:28px;line-height:1;margin-bottom:6px}
 .mtile .mt{font-weight:700;font-size:16px}
 .mtile .md{font-size:12.5px;color:var(--muted);line-height:1.3}
@@ -364,6 +365,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .goalpick{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:8px}.goalpick.hide{display:none}.goalpick .chip{justify-content:center;padding:6px 0}
 @media (max-width:700px){.hero p.muted{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
 .weekcard.tight{padding:8px 12px}.weekcard.tight .wb{height:14px;margin-bottom:2px}.weekcard.tight .wd .small:last-child{display:none}.weekcard.tight .week{margin-top:2px}
+.mtile:active,.chip:active,.card.unit:active{transform:scale(.98)}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -6681,6 +6683,7 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Tippen → 🎙 → Satz sprechen": "Tap → 🎙 → say the sentence",
 "Tagesziel ": "Daily goal ",
 " Fragen wiederholen →": " questions again →",
 " · mit Text": " · with text",
@@ -7348,6 +7351,7 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Tippen → 🎙 → Satz sprechen": "Toca → 🎙 → di la frase",
 "Tagesziel ": "Objetivo diario ",
 " Fragen wiederholen →": " preguntas otra vez →",
 " · mit Text": " · con texto",
@@ -8015,6 +8019,7 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Tippen → 🎙 → Satz sprechen": "Toca → 🎙 → diz a frase",
 "Tagesziel ": "Objetivo diário ",
 " Fragen wiederholen →": " perguntas outra vez →",
 " · mit Text": " · com texto",
@@ -8399,6 +8404,8 @@ const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==
 let audioUnlocked=false;
 /* Standard „ambient“: Musik anderer Apps (Spotify) läuft weiter, dafür folgt die App dem Stummschalter.
    „playback“: App auch bei Stummschalter hörbar, iOS pausiert dann aber andere Musik. */
+/* Mikrofon (Spracherkennung/Aufnahme) geht auf iOS nur im Modus „play-and-record“ – davor umschalten, danach setAudioMode() */
+function recMode(){try{if(navigator.audioSession)navigator.audioSession.type='play-and-record';}catch(e){}}
 function setAudioMode(){try{if(navigator.audioSession)navigator.audioSession.type=S.settings.loudAudio?'playback':'ambient';}catch(e){}}
 function unlockAudio(){if(audioUnlocked)return;audioUnlocked=true;
   setAudioMode();
@@ -9069,18 +9076,18 @@ function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7
       h('div',{class:'row',style:'justify-content:center;margin-top:12px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.6)},T('🐢 Langsam')),h('button',{class:'btn small',onclick:()=>{say(c.es);setTimeout(()=>say(c.es),400+c.es.length*85);}},'🔁 2×')));
     const act=h('div',{class:'row',style:'justify-content:center;margin-top:12px'});
     /* Ersatz ohne Spracherkennung: Diktierfunktion der Tastatur */
-    const dict=()=>{const di=h('input',{class:'inp',placeholder:IS_IOS?T('Hier tippen → 🎙 auf der Tastatur → Satz sprechen'):T('Per Diktat hier hineinsprechen'),style:'font-size:16px'});
+    const dict=()=>{const di=h('input',{class:'inp',placeholder:IS_IOS?T('Tippen → 🎙 → Satz sprechen'):T('Per Diktat hier hineinsprechen'),style:'font-size:16px'});
       const chk=h('button',{class:'btn primary small',style:'margin-top:8px'},T('Aussprache prüfen'));chk.onclick=()=>{if(!di.value.trim())return toast(T('Zuerst sprechen/diktieren'));feedback(out,di.value,c);};
       return h('div',{style:'width:100%'},di,chk);};
-    if(SR){const mic=h('button',{class:'btn primary'},T('🎙️ Nachsprechen & prüfen'));mic.onclick=()=>{speechSynthesis.cancel();const r=new SR();r.lang=LANG.voice;r.interimResults=false;r.maxAlternatives=3;mic.textContent=T('… ich höre zu');mic.disabled=true;
+    if(SR){const mic=h('button',{class:'btn primary'},T('🎙️ Nachsprechen & prüfen'));mic.onclick=()=>{speechSynthesis.cancel();recMode();const r=new SR();r.lang=LANG.voice;r.interimResults=false;r.maxAlternatives=3;mic.textContent=T('… ich höre zu');mic.disabled=true;
         r.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);const best=alts.map(a=>({a,p:wordCheck(c.es,a).pct})).sort((x,y)=>y.p-x.p)[0];feedback(out,best.a,c);};
-        r.onerror=e=>{out.innerHTML='';const standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
+        r.onerror=e=>{setAudioMode();out.innerHTML='';const standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
           out.append(h('div',{class:'fb warn'},T('Spracherkennung nicht möglich (')+e.error+')'+(IS_IOS&&standalone?T(' – in der App vom Home-Bildschirm blockiert iOS sie oft. Nutze das Diktat-Feld oder öffne die Seite in Safari.'):T(' – nutze das Diktat-Feld.'))),dict());};
         r.onend=()=>{mic.textContent=T('🎙️ Noch mal');mic.disabled=false;setAudioMode();};r.start();};act.append(mic);}
     else act.append(dict());
     if(navigator.mediaDevices&&window.MediaRecorder){const rb=h('button',{class:'btn small ghost'},rec?T('⏹ Stopp'):T('⏺ Aufnahme zum Anhören'));
-      rb.onclick=async()=>{if(rec){rec.stop();return;}try{const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
-        rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());audioUrl=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();};rec.start();rb.textContent=T('⏹ Stopp');}catch(e){toast(T('Mikrofon nicht verfügbar'));}};
+      rb.onclick=async()=>{if(rec){rec.stop();return;}try{recMode();const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
+        rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());setAudioMode();audioUrl=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();};rec.start();rb.textContent=T('⏹ Stopp');}catch(e){toast(T('Mikrofon nicht verfügbar'));}};
       act.append(rb);if(audioUrl)act.append(h('button',{class:'btn small ghost',onclick:()=>new Audio(audioUrl).play()},T('▶ Meine Aufnahme')));}
     card.append(act,out);
     box.append(card,h('div',{class:'actions'},h('button',{class:'btn',disabled:i===0,onclick:()=>{i--;audioUrl=null;draw();}},T('← Zurück')),

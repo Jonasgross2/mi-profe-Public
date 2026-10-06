@@ -176,6 +176,8 @@ const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==
 let audioUnlocked=false;
 /* Standard „ambient“: Musik anderer Apps (Spotify) läuft weiter, dafür folgt die App dem Stummschalter.
    „playback“: App auch bei Stummschalter hörbar, iOS pausiert dann aber andere Musik. */
+/* Mikrofon (Spracherkennung/Aufnahme) geht auf iOS nur im Modus „play-and-record“ – davor umschalten, danach setAudioMode() */
+function recMode(){try{if(navigator.audioSession)navigator.audioSession.type='play-and-record';}catch(e){}}
 function setAudioMode(){try{if(navigator.audioSession)navigator.audioSession.type=S.settings.loudAudio?'playback':'ambient';}catch(e){}}
 function unlockAudio(){if(audioUnlocked)return;audioUnlocked=true;
   setAudioMode();
@@ -846,18 +848,18 @@ function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7
       h('div',{class:'row',style:'justify-content:center;margin-top:12px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.6)},T('🐢 Langsam')),h('button',{class:'btn small',onclick:()=>{say(c.es);setTimeout(()=>say(c.es),400+c.es.length*85);}},'🔁 2×')));
     const act=h('div',{class:'row',style:'justify-content:center;margin-top:12px'});
     /* Ersatz ohne Spracherkennung: Diktierfunktion der Tastatur */
-    const dict=()=>{const di=h('input',{class:'inp',placeholder:IS_IOS?T('Hier tippen → 🎙 auf der Tastatur → Satz sprechen'):T('Per Diktat hier hineinsprechen'),style:'font-size:16px'});
+    const dict=()=>{const di=h('input',{class:'inp',placeholder:IS_IOS?T('Tippen → 🎙 → Satz sprechen'):T('Per Diktat hier hineinsprechen'),style:'font-size:16px'});
       const chk=h('button',{class:'btn primary small',style:'margin-top:8px'},T('Aussprache prüfen'));chk.onclick=()=>{if(!di.value.trim())return toast(T('Zuerst sprechen/diktieren'));feedback(out,di.value,c);};
       return h('div',{style:'width:100%'},di,chk);};
-    if(SR){const mic=h('button',{class:'btn primary'},T('🎙️ Nachsprechen & prüfen'));mic.onclick=()=>{speechSynthesis.cancel();const r=new SR();r.lang=LANG.voice;r.interimResults=false;r.maxAlternatives=3;mic.textContent=T('… ich höre zu');mic.disabled=true;
+    if(SR){const mic=h('button',{class:'btn primary'},T('🎙️ Nachsprechen & prüfen'));mic.onclick=()=>{speechSynthesis.cancel();recMode();const r=new SR();r.lang=LANG.voice;r.interimResults=false;r.maxAlternatives=3;mic.textContent=T('… ich höre zu');mic.disabled=true;
         r.onresult=e=>{const alts=[...e.results[0]].map(a=>a.transcript);const best=alts.map(a=>({a,p:wordCheck(c.es,a).pct})).sort((x,y)=>y.p-x.p)[0];feedback(out,best.a,c);};
-        r.onerror=e=>{out.innerHTML='';const standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
+        r.onerror=e=>{setAudioMode();out.innerHTML='';const standalone=navigator.standalone||matchMedia('(display-mode: standalone)').matches;
           out.append(h('div',{class:'fb warn'},T('Spracherkennung nicht möglich (')+e.error+')'+(IS_IOS&&standalone?T(' – in der App vom Home-Bildschirm blockiert iOS sie oft. Nutze das Diktat-Feld oder öffne die Seite in Safari.'):T(' – nutze das Diktat-Feld.'))),dict());};
         r.onend=()=>{mic.textContent=T('🎙️ Noch mal');mic.disabled=false;setAudioMode();};r.start();};act.append(mic);}
     else act.append(dict());
     if(navigator.mediaDevices&&window.MediaRecorder){const rb=h('button',{class:'btn small ghost'},rec?T('⏹ Stopp'):T('⏺ Aufnahme zum Anhören'));
-      rb.onclick=async()=>{if(rec){rec.stop();return;}try{const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
-        rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());audioUrl=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();};rec.start();rb.textContent=T('⏹ Stopp');}catch(e){toast(T('Mikrofon nicht verfügbar'));}};
+      rb.onclick=async()=>{if(rec){rec.stop();return;}try{recMode();const st=await navigator.mediaDevices.getUserMedia({audio:true});const chunks=[];rec=new MediaRecorder(st);rec.ondataavailable=e=>chunks.push(e.data);
+        rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());setAudioMode();audioUrl=URL.createObjectURL(new Blob(chunks,{type:rec.mimeType}));rec=null;draw();};rec.start();rb.textContent=T('⏹ Stopp');}catch(e){toast(T('Mikrofon nicht verfügbar'));}};
       act.append(rb);if(audioUrl)act.append(h('button',{class:'btn small ghost',onclick:()=>new Audio(audioUrl).play()},T('▶ Meine Aufnahme')));}
     card.append(act,out);
     box.append(card,h('div',{class:'actions'},h('button',{class:'btn',disabled:i===0,onclick:()=>{i--;audioUrl=null;draw();}},T('← Zurück')),
