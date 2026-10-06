@@ -1301,6 +1301,11 @@ window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,nu
 ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
 document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
 setTimeout(()=>{if(S.settings.ghToken)syncNow();},300);
-if(T('serviceWorker') in navigator&&/^https?:/.test(location.protocol)&&window.PWA){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+/* Service Worker: App kommt sofort aus dem Speicher; Updates im Hintergrund prüfen (beim Start und beim Zurückkehren in die App).
+   Hat eine neue Version übernommen → Hinweis zum Neuladen (nicht automatisch, damit keine Lektion abbricht). */
+if(T('serviceWorker') in navigator&&/^https?:/.test(location.protocol)&&window.PWA){const hadCtl=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register('sw.js').then(r=>{const chk=()=>r.update().catch(()=>{});setTimeout(chk,3000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')chk();});}).catch(()=>{});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||document.getElementById('updbar'))return;
+    document.body.append(h('button',{id:'updbar',class:'updbar',onclick:()=>location.reload()},T('✨ Neue Version – tippen zum Laden')));});}
 route();
 })();

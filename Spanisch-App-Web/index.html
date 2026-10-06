@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261007-0021";</script>
+<script>window.PWA=true;window.APP_VERSION="20261007-0025";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -386,6 +386,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .stattiles .stat{padding:10px 8px;text-align:center}.stattiles .stat .n{font-size:22px}.stattiles .stat .l{font-size:12px}
 .hardrow{display:grid;grid-template-columns:auto auto 1fr auto;gap:8px;align-items:center;padding:5px 0;border-top:1px solid var(--line)}
 .hardrow:first-child{border-top:0}.hardrow .es{font-weight:600}.hardrow .muted{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.updbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:200;background:var(--accent);color:var(--accent-ink);border:0;border-radius:99px;padding:10px 18px;font-weight:600;font-size:14px;box-shadow:0 4px 16px rgba(0,0,0,.2);white-space:nowrap}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt schwarzem Bildschirm eine Meldung mit Neu-laden/Update-Knopf. Fortschritt im localStorage bleibt unberührt. */
@@ -6862,6 +6863,7 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"✨ Neue Version – tippen zum Laden": "✨ New version – tap to load",
 "Statistik": "Statistics",
 "Morgen fällig: ": "Due tomorrow: ",
 "Noch keine Karten": "No cards yet",
@@ -7610,6 +7612,7 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"✨ Neue Version – tippen zum Laden": "✨ Nueva versión: toca para cargar",
 "Statistik": "Estadísticas",
 "Morgen fällig: ": "Para mañana: ",
 "Noch keine Karten": "Aún no hay tarjetas",
@@ -8358,6 +8361,7 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"✨ Neue Version – tippen zum Laden": "✨ Nova versão – toca para carregar",
 "Statistik": "Estatísticas",
 "Morgen fällig: ": "Para amanhã: ",
 "Noch keine Karten": "Ainda não há cartões",
@@ -9949,7 +9953,12 @@ window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,nu
 ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
 document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
 setTimeout(()=>{if(S.settings.ghToken)syncNow();},300);
-if(T('serviceWorker') in navigator&&/^https?:/.test(location.protocol)&&window.PWA){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+/* Service Worker: App kommt sofort aus dem Speicher; Updates im Hintergrund prüfen (beim Start und beim Zurückkehren in die App).
+   Hat eine neue Version übernommen → Hinweis zum Neuladen (nicht automatisch, damit keine Lektion abbricht). */
+if(T('serviceWorker') in navigator&&/^https?:/.test(location.protocol)&&window.PWA){const hadCtl=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register('sw.js').then(r=>{const chk=()=>r.update().catch(()=>{});setTimeout(chk,3000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')chk();});}).catch(()=>{});
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||document.getElementById('updbar'))return;
+    document.body.append(h('button',{id:'updbar',class:'updbar',onclick:()=>location.reload()},T('✨ Neue Version – tippen zum Laden')));});}
 route();
 })();
 </script>

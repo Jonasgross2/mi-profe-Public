@@ -32,7 +32,8 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 ## Änderungen machen
 1. Dateien in `quellcode/src/` ändern.
 2. `python3 quellcode/build.py` ausführen (keine Abhängigkeiten außer Python 3).
-3. `Spanisch-App-Web/index.html` und `Spanisch-App-Web/sw.js` committen und auf `main` pushen. `sw.js` bekommt bei jedem Build eine neue Version → Geräte laden das Update beim nächsten Öffnen.
+3. `Spanisch-App-Web/index.html` und `Spanisch-App-Web/sw.js` committen und auf `main` pushen. `sw.js` bekommt bei jedem Build eine neue Version. Der Service Worker liefert die App **aus dem Speicher** (sofortiger Start); das neue sw.js wird im Hintergrund installiert (beim Start und beim Zurückkehren in die App), danach erscheint unten „✨ Neue Version – tippen zum Laden“ (`#updbar`). Manuell: Mehr → Nach Update suchen.
+4. Nur Syntax benutzen, die ältere iOS-Safari kennen (kein Regex-Lookbehind `(?<!…)`, kein `\p{…}`, kein `.at()`, `findLast`, `structuredClone` …) – sonst bleibt die App auf dem iPhone schwarz. `build.py` setzt ein ES5-Sicherheitsnetz (`GUARD`) davor, das bei Startfehlern eine Meldung zeigt. Der eingebaute Browser kann keine Service Worker – das Update-Verhalten nur live prüfen.
 
 ## Wichtig
 - Fortschritt liegt im Browser (localStorage, Key `espanol-lehrer-v1`) und wird optional per GitHub-Gist synchronisiert – Datenformat abwärtskompatibel halten.
