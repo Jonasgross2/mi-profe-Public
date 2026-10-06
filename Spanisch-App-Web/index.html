@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261006-1822";</script>
+<script>window.PWA=true;window.APP_VERSION="20261006-1829";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -264,7 +264,7 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .seg.two{grid-template-columns:repeat(2,1fr);margin-top:10px}
 .lrow{padding:12px 14px}
 @media (max-width:700px){.lrow .ld{display:none}.lrow .rounds{margin-top:6px}}
-@media (max-width:700px){.wb{height:34px}.week{margin:4px 0 0}.hero{padding:16px 18px}.hero h2{font-size:21px}.hic{font-size:28px}.today{margin:0 0 12px}}
+@media (max-width:700px){.chips .chip{padding:6px 12px}.wb{height:30px}.week{margin:4px 0 0}.hero{padding:16px 18px}.hero h2{font-size:21px}.hic{font-size:28px}.today{margin:0 0 12px}}
 @media (max-width:700px){.weekcard{padding:12px 14px}.weekcard .small{font-size:11px}.lrow{padding:9px 12px}.lrow .lt{font-size:15px}.lrow .rounds{margin-top:4px;gap:4px}.rounds .rd{padding:2px 8px;font-size:11.5px}.main h1{font-size:26px}}
 
 /* Wörterbuch */
@@ -355,6 +355,12 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .btn.pickopt{justify-content:flex-start;text-align:left;gap:12px;padding:12px 14px;min-height:60px}
 .pickopt .pt{flex:1;display:flex;flex-direction:column;gap:2px;font-weight:400}
 .pickopt .pic{font-size:24px}
+/* Mein Tagesplan */
+.planset{padding:6px 16px}
+.planrow{flex-wrap:nowrap;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.planrow:last-child{border-bottom:0}
+.planrow input{width:20px;height:20px;accent-color:var(--accent);flex:none}
+.hidetext{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:180px;text-align:center}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <script>window.COURSE={units:[]};
@@ -5902,7 +5908,7 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 </script>
 <script>/* ================= GESCHICHTEN: „Nuevo en Barcelona“ – Serie zum Lesen & Hören =================
    Ben, ein deutscher Student, zieht nach Barcelona. Jede Geschichte nutzt nur Grammatik bis zur Unidad in `after`.
-   text: {Wort|Übersetzung} = antippbar. qs: Verständnisfragen (Multiple Choice, a = Index der richtigen Antwort). */
+   text: {Wort|Übersetzung} = antippbar. qs: 6 Verständnisfragen, gesetzt per quellcode/story_qs.py (mc / tf = richtig-falsch / gap = Lücke). */
 window.STORIES=[
 {id:'s1',after:'u1',title:'¡Hola, Barcelona!',sub:'Ben kommt an',text:`Me llamo Ben. Soy {alemán|Deutscher}, de Hamburgo. Estudio informática y ahora {vivo|wohne} en Barcelona. ¡Es mi primer día!
 
@@ -5910,7 +5916,7 @@ En el aeropuerto hablo con una chica. Se llama Laia y es de Barcelona. Laia estu
 
 Laia y yo {tomamos|nehmen} el autobús al centro. Es fantástico: ¡ya tengo una amiga!`,
 de:`Ich heiße Ben. Ich bin Deutscher, aus Hamburg. Ich studiere Informatik und wohne jetzt in Barcelona. Es ist mein erster Tag!\n\nAm Flughafen spreche ich mit einem Mädchen. Sie heißt Laia und ist aus Barcelona. Laia studiert Englisch und Deutsch. Sie spricht sehr gut. „Sprichst du Spanisch?“, fragt Laia. „Ein bisschen“, sage ich. „Ich muss üben.“ „Ich muss auch Deutsch üben!“, sagt sie.\n\nLaia und ich nehmen den Bus ins Zentrum. Es ist fantastisch: Ich habe schon eine Freundin!`,
-qs:[{q:'¿De dónde es Ben?',opts:['de Hamburgo','de Barcelona','de Berlín'],a:0},{q:'¿Qué estudia Laia?',opts:['inglés y alemán','informática','español'],a:0},{q:'¿Cómo van al centro?',opts:['en autobús','en metro','a pie'],a:0}]},
+qs:[{"q": "¿Quién es Laia?", "opts": ["una chica de Barcelona", "una profesora de Hamburgo", "la hermana de Ben"], "a": 0}, {"q": "¿Qué idioma quiere practicar Laia?", "opts": ["alemán", "español", "catalán"], "a": 0}, {"t": "tf", "q": "Ben es de Barcelona.", "a": false}, {"t": "tf", "q": "Ben habla un poco de español.", "a": true}, {"t": "gap", "q": "Ben estudia ___.", "a": ["informática"]}, {"t": "gap", "q": "Laia y Ben van al centro en ___.", "a": ["autobús|el autobús"]}]},
 
 {id:'s2',after:'u3',title:'El piso de Nuria',sub:'Die neue WG',text:`Mi piso está en Gràcia, un barrio muy bonito. {Comparto|Ich teile} el piso con Nuria y Pablo. Nuria es de Valencia. Es alta, {morena|dunkelhaarig} y muy simpática. Trabaja en una agencia de publicidad. Pablo es de Sevilla, es estudiante y es un poco caótico.
 
@@ -5918,7 +5924,7 @@ El piso es pequeño pero tiene un balcón. A Nuria le gusta mucho {cocinar|koche
 
 Nuria tiene una hermana y dos hermanos. Su familia es muy grande y siempre llama por teléfono. —Mi madre está {preocupada|besorgt} —dice Nuria—. ¡Siempre pregunta si como bien!`,
 de:`Meine Wohnung ist in Gràcia, einem sehr schönen Viertel. Ich teile die Wohnung mit Nuria und Pablo. Nuria ist aus Valencia. Sie ist groß, dunkelhaarig und sehr sympathisch. Sie arbeitet in einer Werbeagentur. Pablo ist aus Sevilla, Student und ein bisschen chaotisch.\n\nDie Wohnung ist klein, aber sie hat einen Balkon. Nuria kocht sehr gern. Pablo mag Musik … um zwei Uhr morgens! Mir gefallen die Pflanzen auf dem Balkon und die Atmosphäre im Viertel.\n\nNuria hat eine Schwester und zwei Brüder. Ihre Familie ist sehr groß und ruft immer an. „Meine Mutter ist besorgt“, sagt Nuria. „Sie fragt immer, ob ich gut esse!“`,
-qs:[{q:'¿Cómo es Pablo?',opts:['un poco caótico','muy ordenado','tímido'],a:0},{q:'¿Qué le gusta a Nuria?',opts:['cocinar','la música por la noche','las plantas'],a:0},{q:'¿Cuántos hermanos tiene Nuria?',opts:['tres','dos','uno'],a:0}]},
+qs:[{"q": "¿Dónde vive Ben?", "opts": ["en un piso en Gràcia", "en una casa en Valencia", "en una residencia de estudiantes"], "a": 0}, {"q": "¿Qué problema hay con Pablo?", "opts": ["Escucha música muy tarde.", "Nunca cocina.", "No paga el piso."], "a": 0}, {"t": "tf", "q": "Nuria trabaja en una universidad.", "a": false}, {"t": "tf", "q": "El piso no es muy grande.", "a": true}, {"t": "gap", "q": "A Ben le gustan las ___ del balcón.", "a": ["plantas"]}, {"t": "gap", "q": "La madre de Nuria siempre pregunta si Nuria ___ bien.", "a": ["come"]}]},
 
 {id:'s3',after:'u4',title:'Una cena a las diez',sub:'Essen wie die Spanier',text:`Hoy Marc, un compañero de la universidad, me invita a cenar. —¿A qué hora quedamos? —pregunto. —¿A las diez? —dice Marc. ¡A las diez! En Alemania a las diez ya {estoy en la cama|liege ich im Bett}.
 
@@ -5926,7 +5932,7 @@ Vamos a un bar de tapas en el Born. Hay mucha gente. Pedimos patatas bravas, pan
 
 Al final pedimos la cuenta. Son treinta euros. —Hoy pago yo —dice Marc—. ¡{Bienvenido|Willkommen} a Barcelona!`,
 de:`Heute lädt mich Marc, ein Kommilitone, zum Abendessen ein. „Um wie viel Uhr treffen wir uns?“, frage ich. „Um zehn?“, sagt Marc. Um zehn! In Deutschland liege ich um zehn schon im Bett.\n\nWir gehen in eine Tapas-Bar im Born. Es sind viele Leute da. Wir bestellen Patatas bravas, Pan con tomate, Kroketten und Tintenfisch. Zu trinken nimmt Marc ein Bier und ich ein Wasser mit Kohlensäure. „Und als Nachtisch?“, fragt der Kellner. „Eine Crema catalana, bitte“, sagt Marc. „Die ist typisch für hier.“\n\nZum Schluss bitten wir um die Rechnung. Es sind dreißig Euro. „Heute zahle ich“, sagt Marc. „Willkommen in Barcelona!“`,
-qs:[{q:'¿A qué hora cenan?',opts:['a las diez','a las ocho','a las siete'],a:0},{q:'¿Qué toma Ben para beber?',opts:['agua con gas','cerveza','vino'],a:0},{q:'¿Quién paga?',opts:['Marc','Ben','los dos'],a:0}]},
+qs:[{"q": "¿Por qué le sorprende a Ben la hora de la cena?", "opts": ["En Alemania a esa hora ya está en la cama.", "No tiene hambre.", "El bar está cerrado."], "a": 0}, {"q": "¿Qué es la crema catalana?", "opts": ["un postre típico", "una bebida", "una tapa de patatas"], "a": 0}, {"t": "tf", "q": "Ben bebe cerveza.", "a": false}, {"t": "tf", "q": "En el bar hay muchas personas.", "a": true}, {"t": "gap", "q": "La cena cuesta ___ euros.", "a": ["treinta|30"]}, {"t": "gap", "q": "Marc es un ___ de la universidad.", "a": ["compañero|amigo"]}]},
 
 {id:'s4',after:'u5',title:'Perdido en el metro',sub:'Der falsche Weg',text:`El sábado quiero ir a la playa de la Barceloneta. Tomo el metro en Fontana, la línea verde. Pero no {cambio|steige um} de línea en Passeig de Gràcia y llego a... ¡Zona Universitaria! Estoy muy lejos de la playa.
 
@@ -5934,7 +5940,7 @@ Pregunto a una señora: —Perdone, ¿sabe dónde está la playa? —¡Uy, está
 
 Una hora después estoy en la playa. Hace sol, hay mucha gente y el mar es azul. —Bueno —pienso—, ahora conozco muy bien el metro de Barcelona.`,
 de:`Am Samstag will ich an den Strand von Barceloneta. Ich nehme die Metro in Fontana, die grüne Linie. Aber ich steige in Passeig de Gràcia nicht um und komme an … Zona Universitaria! Ich bin sehr weit weg vom Strand.\n\nIch frage eine Dame: „Entschuldigung, wissen Sie, wo der Strand ist?“ „Oh, der ist sehr weit weg!“, sagt sie. „Nehmen Sie wieder die grüne Linie und steigen Sie in Passeig de Gràcia in die gelbe Linie um. Steigen Sie in Barceloneta aus. Danach gehen Sie etwa zehn Minuten geradeaus.“\n\nEine Stunde später bin ich am Strand. Die Sonne scheint, es sind viele Leute da und das Meer ist blau. „Na ja“, denke ich, „jetzt kenne ich die Metro von Barcelona sehr gut.“`,
-qs:[{q:'¿Qué error hace Ben?',opts:['No cambia de línea.','Toma un taxi.','Baja en Barceloneta.'],a:0},{q:'¿En qué estación tiene que cambiar?',opts:['Passeig de Gràcia','Fontana','Zona Universitaria'],a:0},{q:'¿Cuánto tiempo necesita para llegar a la playa?',opts:['una hora','diez minutos','todo el día'],a:0}]},
+qs:[{"q": "¿Adónde quiere ir Ben el sábado?", "opts": ["a la playa", "a la universidad", "a la montaña"], "a": 0}, {"q": "¿A qué línea tiene que cambiar Ben?", "opts": ["a la amarilla", "a la verde", "a la roja"], "a": 0}, {"t": "tf", "q": "La señora no sabe dónde está la playa.", "a": false}, {"t": "tf", "q": "Al final, Ben llega a la playa.", "a": true}, {"t": "gap", "q": "Desde la estación, Ben tiene que ir todo ___ unos diez minutos.", "a": ["recto"]}, {"t": "gap", "q": "Ben tiene que bajar en la estación ___.", "a": ["Barceloneta"]}]},
 
 {id:'s5',after:'u6',title:'Un fin de semana en Sitges',sub:'Was haben sie gemacht?',text:`Este fin de semana Laia y yo hemos ido a Sitges, un pueblo en la costa, a cuarenta minutos de Barcelona en tren. ¡Ha sido genial!
 
@@ -5942,7 +5948,7 @@ Hemos llegado el sábado por la mañana. Primero hemos paseado por el casco anti
 
 Laia me ha preguntado: —¿Has estado alguna vez en un pueblo así? —No, nunca —he dicho yo—. En Hamburgo también hay mar, pero no hay palmeras. Hemos vuelto a casa muy tarde y muy cansados, pero muy {contentos|zufrieden}.`,
 de:`Dieses Wochenende sind Laia und ich nach Sitges gefahren, einem Ort an der Küste, vierzig Minuten mit dem Zug von Barcelona. Es war genial!\n\nWir sind am Samstagmorgen angekommen. Zuerst sind wir durch die Altstadt spaziert, mit ihren weißen Häusern und engen Gassen. Danach haben wir in einem Restaurant am Meer Paella gegessen. Am Nachmittag sind wir ein bisschen geschwommen, obwohl das Wasser kalt war.\n\nLaia hat mich gefragt: „Warst du schon einmal in so einem Ort?“ „Nein, nie“, habe ich gesagt. „In Hamburg gibt es auch Meer, aber keine Palmen.“ Wir sind sehr spät und sehr müde, aber sehr zufrieden nach Hause gekommen.`,
-qs:[{q:'¿Cómo han ido a Sitges?',opts:['en tren','en coche','en autobús'],a:0},{q:'¿Qué han hecho por la tarde?',opts:['Han nadado.','Han visitado un museo.','Han dormido.'],a:0},{q:'¿Qué no hay en Hamburgo, según Ben?',opts:['palmeras','mar','restaurantes'],a:0}]},
+qs:[{"q": "¿Qué es Sitges?", "opts": ["un pueblo en la costa", "un barrio de Barcelona", "una playa de Hamburgo"], "a": 0}, {"q": "¿Qué han comido?", "opts": ["paella", "tapas", "pizza"], "a": 0}, {"t": "tf", "q": "El agua del mar estaba caliente.", "a": false}, {"t": "tf", "q": "Ben nunca ha estado antes en un pueblo así.", "a": true}, {"t": "gap", "q": "En tren, el viaje dura ___ minutos.", "a": ["cuarenta|40"]}, {"t": "gap", "q": "Han vuelto a casa cansados, pero ___.", "a": ["contentos|muy contentos"]}]},
 
 {id:'s6',after:'u7',title:'Un día normal... o no',sub:'Bens Alltag',text:`Normalmente me levanto a las siete y media. Me ducho, me visto y desayuno un café con leche y una tostada. A las nueve tengo clase en la universidad. Mi compañero Marc siempre llega tarde: es más simpático que yo, pero menos {puntual|pünktlich}.
 
@@ -5950,7 +5956,7 @@ Pero hoy no es un día normal. Hoy me he despertado a las nueve menos cuarto. ¡
 
 Cuando he llegado a clase, el profesor estaba explicando algo en la pizarra. Marc me ha mirado y ha dicho en voz baja: —Hoy tú eres el que llega tarde. ¡Por fin no soy el único!`,
 de:`Normalerweise stehe ich um halb acht auf. Ich dusche, ziehe mich an und frühstücke einen Milchkaffee und einen Toast. Um neun habe ich Unterricht an der Uni. Mein Kommilitone Marc kommt immer zu spät: Er ist sympathischer als ich, aber weniger pünktlich.\n\nAber heute ist kein normaler Tag. Heute bin ich um Viertel vor neun aufgewacht. Der Wecker hat nicht geklingelt! Ich habe mich in zwei Minuten angezogen, nicht gefrühstückt und bin zur Metro gerannt.\n\nAls ich im Unterricht angekommen bin, hat der Professor gerade etwas an der Tafel erklärt. Marc hat mich angeschaut und leise gesagt: „Heute bist du derjenige, der zu spät kommt. Endlich bin ich nicht der Einzige!“`,
-qs:[{q:'¿A qué hora se levanta Ben normalmente?',opts:['a las siete y media','a las nueve','a las nueve menos cuarto'],a:0},{q:'¿Por qué llega tarde hoy?',opts:['La alarma no ha sonado.','Ha perdido el metro.','Ha desayunado mucho.'],a:0},{q:'¿Cómo es Marc, comparado con Ben?',opts:['más simpático pero menos puntual','más puntual','menos simpático'],a:0}]},
+qs:[{"q": "¿Qué desayuna Ben normalmente?", "opts": ["café con leche y una tostada", "nada", "zumo y cereales"], "a": 0}, {"q": "Hoy, ¿qué no ha hecho Ben?", "opts": ["No ha desayunado.", "No se ha vestido.", "No ha ido a clase."], "a": 0}, {"t": "tf", "q": "Normalmente, Marc llega puntual.", "a": false}, {"t": "tf", "q": "Hoy Ben se ha vestido muy rápido.", "a": true}, {"t": "gap", "q": "Ben tiene clase a las ___.", "a": ["nueve|9"]}, {"t": "gap", "q": "Hoy el que llega tarde es ___.", "a": ["Ben"]}]},
 
 {id:'s7',after:'u8',title:'Planes para el puente',sub:'Ein langes Wochenende',text:`El jueves es {festivo|Feiertag} y muchos catalanes hacen «puente»: no trabajan el viernes y tienen cuatro días libres. Nuria va a visitar a su familia en Valencia. Pablo va a ir a un festival de música. ¿Y yo?
 
@@ -5958,7 +5964,7 @@ qs:[{q:'¿A qué hora se levanta Ben normalmente?',opts:['a las siete y media','
 
 Al final vamos a ir a Puigcerdà, un pueblo en la montaña. Vamos a hacer {senderismo|Wandern} el viernes y el sábado. El domingo, si hace buen tiempo, vamos a volver por la costa. —¡Va a ser un puente perfecto! —dice Laia.`,
 de:`Am Donnerstag ist Feiertag und viele Katalanen machen eine „Brücke“: Sie arbeiten am Freitag nicht und haben vier freie Tage. Nuria wird ihre Familie in Valencia besuchen. Pablo wird auf ein Musikfestival gehen. Und ich?\n\n„Was machst du?“, fragt mich Laia. „Weiß nicht. Hast du Lust, in die Pyrenäen zu fahren?“ „Ich liebe die Idee! Aber schau dir das Wetter an: Am Donnerstag wird es regnen und kalt sein.“ „Dann nehmen wir Jacken und Stiefel mit“, sage ich.\n\nAm Ende fahren wir nach Puigcerdà, einem Dorf in den Bergen. Am Freitag und Samstag werden wir wandern. Am Sonntag fahren wir, wenn das Wetter gut ist, über die Küste zurück. „Das wird eine perfekte Brücke!“, sagt Laia.`,
-qs:[{q:'¿Qué significa «hacer puente»?',opts:['tener días libres entre un festivo y el fin de semana','construir un puente','trabajar el fin de semana'],a:0},{q:'¿Qué tiempo va a hacer el jueves?',opts:['Va a llover y hacer frío.','Va a hacer sol.','Va a nevar.'],a:0},{q:'¿Qué van a hacer en Puigcerdà?',opts:['senderismo','ir a la playa','visitar a la familia'],a:0}]},
+qs:[{"q": "¿Qué va a hacer Nuria en el puente?", "opts": ["visitar a su familia", "ir a un festival", "ir a los Pirineos"], "a": 0}, {"q": "¿Qué van a llevar Ben y Laia por el mal tiempo?", "opts": ["chaquetas y botas", "paraguas", "nada especial"], "a": 0}, {"t": "tf", "q": "El viernes del puente muchos catalanes trabajan.", "a": false}, {"t": "tf", "q": "Puigcerdà está en la montaña.", "a": true}, {"t": "gap", "q": "Pablo va a ir a un ___ de música.", "a": ["festival"]}, {"t": "gap", "q": "El domingo van a volver por la ___.", "a": ["costa"]}]},
 
 {id:'s8',after:'u9',title:'Cuando la abuela era joven',sub:'Barcelona früher',text:`El domingo Nuria y yo visitamos al señor Puig, nuestro {casero|Vermieter}. Tiene ochenta años y vive en el primer piso. Nos invita a un café y nos enseña fotos antiguas.
 
@@ -5966,7 +5972,7 @@ qs:[{q:'¿Qué significa «hacer puente»?',opts:['tener días libres entre un f
 
 —¿Y qué hacían los jóvenes los fines de semana? —pregunto yo. —Íbamos a bailar a la plaza del Sol. No teníamos móviles, así que quedábamos siempre a la misma hora en el mismo lugar. ¡Y nadie llegaba tarde! —dice, y se ríe.`,
 de:`Am Sonntag besuchen Nuria und ich Herrn Puig, unseren Vermieter. Er ist achtzig Jahre alt und wohnt im ersten Stock. Er lädt uns auf einen Kaffee ein und zeigt uns alte Fotos.\n\n„Als ich jung war, war Gràcia ganz anders“, sagt er. „Es gab nicht so viele Touristen. Alle Nachbarn kannten sich. Die Kinder spielten auf der Straße und die Großmütter setzten sich nachmittags vor die Türen. Mein Vater hatte in dieser Straße einen kleinen Schuhladen.“\n\n„Und was machten die jungen Leute am Wochenende?“, frage ich. „Wir gingen auf der Plaza del Sol tanzen. Wir hatten keine Handys, also trafen wir uns immer zur selben Zeit am selben Ort. Und keiner kam zu spät!“, sagt er und lacht.`,
-qs:[{q:'¿Qué tenía el padre del señor Puig?',opts:['una tienda de zapatos','un bar','una panadería'],a:0},{q:'¿Dónde jugaban los niños?',opts:['en la calle','en el parque','en casa'],a:0},{q:'¿Por qué quedaban siempre a la misma hora?',opts:['porque no tenían móviles','porque trabajaban mucho','porque eran puntuales'],a:0}]},
+qs:[{"q": "¿Quién es el señor Puig?", "opts": ["el casero de Ben y Nuria", "el abuelo de Nuria", "un profesor de la universidad"], "a": 0}, {"q": "Según el señor Puig, ¿cómo era Gràcia antes?", "opts": ["Había menos turistas.", "Había más coches.", "Era más grande."], "a": 0}, {"t": "tf", "q": "Antes los vecinos no se conocían.", "a": false}, {"t": "tf", "q": "Los jóvenes iban a bailar a una plaza.", "a": true}, {"t": "gap", "q": "El señor Puig tiene ___ años.", "a": ["ochenta|80"]}, {"t": "gap", "q": "Antes, ___ llegaba tarde a las citas.", "a": ["nadie"]}]},
 
 {id:'s9',after:'u10',title:'La entrevista de Marc',sub:'Ein wichtiger Tag',text:`Marc buscaba unas prácticas desde hacía meses. La semana pasada por fin lo llamaron de una empresa de tecnología en el 22@, el barrio de las {startups|Start-ups}.
 
@@ -5974,7 +5980,7 @@ El día de la entrevista se levantó a las seis, se puso su mejor camisa y repas
 
 Al final ella le preguntó: —¿Habla usted otros idiomas? —Catalán, castellano, inglés... y estoy aprendiendo alemán con un amigo —dijo Marc. Ella sonrió. Dos días después lo llamaron otra vez: ¡consiguió el puesto! Esa noche lo celebramos en el bar de siempre.`,
 de:`Marc suchte seit Monaten ein Praktikum. Letzte Woche rief ihn endlich ein Technologieunternehmen im 22@ an, dem Start-up-Viertel.\n\nAm Tag des Vorstellungsgesprächs stand er um sechs auf, zog sein bestes Hemd an und ging seinen Lebenslauf dreimal durch. Er kam eine halbe Stunde zu früh. Die Interviewerin war sehr freundlich. Sie fragte ihn nach seinem Studium, nach seinen Stärken und warum er dort arbeiten wollte. Marc antwortete ruhig, obwohl er sehr nervös war.\n\nZum Schluss fragte sie ihn: „Sprechen Sie andere Sprachen?“ „Katalanisch, Spanisch, Englisch … und ich lerne gerade Deutsch mit einem Freund“, sagte Marc. Sie lächelte. Zwei Tage später riefen sie ihn wieder an: Er bekam die Stelle! An diesem Abend feierten wir in der üblichen Bar.`,
-qs:[{q:'¿Qué buscaba Marc?',opts:['unas prácticas','un piso','un curso de alemán'],a:0},{q:'¿Cómo estaba Marc durante la entrevista?',opts:['nervioso pero tranquilo al hablar','muy relajado','enfadado'],a:0},{q:'¿Qué pasó dos días después?',opts:['Le dieron el puesto.','Tuvo otra entrevista.','Lo llamaron para decir que no.'],a:0}]},
+qs:[{"q": "¿Dónde está la empresa?", "opts": ["en el barrio de las startups", "en el centro de Madrid", "en Alemania"], "a": 0}, {"q": "¿Qué hizo Marc la mañana de la entrevista?", "opts": ["Leyó su currículum varias veces.", "Durmió hasta tarde.", "Llamó a la empresa."], "a": 0}, {"t": "tf", "q": "Marc llegó tarde a la entrevista.", "a": false}, {"t": "tf", "q": "Marc está aprendiendo alemán.", "a": true}, {"t": "gap", "q": "La entrevistadora fue muy ___.", "a": ["amable"]}, {"t": "gap", "q": "Esa noche Marc y sus amigos lo ___ en un bar.", "a": ["celebraron"]}]},
 
 {id:'s10',after:'u11',title:'Fiebre en la Mercè',sub:'Krank zur Fiesta',text:`La Mercè es la gran fiesta de Barcelona, en septiembre. Hay conciertos, {castellers|Menschentürme} y el «correfoc», con fuego y música por las calles. Yo tenía muchas ganas de verlo todo.
 
@@ -5982,7 +5988,7 @@ Pero el viernes me desperté con fiebre. Me dolía la cabeza y la garganta. Nuri
 
 Nuria fue a la farmacia y me trajo un jarabe y una sopa de su madre. El domingo ya me encontraba mejor y pude ver los castellers en la plaza Sant Jaume. Eran increíbles: ¡nueve {pisos|Etagen} de personas!`,
 de:`Die Mercè ist das große Fest von Barcelona, im September. Es gibt Konzerte, Menschentürme und den „Correfoc“ mit Feuer und Musik durch die Straßen. Ich hatte große Lust, alles zu sehen.\n\nAber am Freitag wachte ich mit Fieber auf. Mir taten Kopf und Hals weh. Nuria sah mich an und sagte: „Du siehst echt schlecht aus. Bleib im Bett, trink viel Wasser und nimm ein Ibuprofen. Und geh heute Abend nicht raus.“ „Aber es ist der Correfoc!“, sagte ich. „Nächstes Jahr gibt es wieder einen“, antwortete sie.\n\nNuria ging in die Apotheke und brachte mir einen Hustensaft und eine Suppe von ihrer Mutter. Am Sonntag ging es mir schon besser und ich konnte die Menschentürme auf der Plaza Sant Jaume sehen. Sie waren unglaublich: neun Stockwerke aus Menschen!`,
-qs:[{q:'¿Qué le pasaba a Ben el viernes?',opts:['Tenía fiebre y le dolía la garganta.','Se había roto una pierna.','Estaba muy cansado de bailar.'],a:0},{q:'¿Qué le dijo Nuria?',opts:['Quédate en la cama.','Ve al correfoc.','Ve al médico enseguida.'],a:0},{q:'¿Qué vio Ben el domingo?',opts:['los castellers','el correfoc','un concierto'],a:0}]},
+qs:[{"q": "¿Qué es la Mercè?", "opts": ["la gran fiesta de Barcelona", "una farmacia del barrio", "una amiga de Nuria"], "a": 0}, {"q": "¿Qué le trajo Nuria a Ben?", "opts": ["un jarabe y una sopa", "un ibuprofeno y una pizza", "entradas para el correfoc"], "a": 0}, {"t": "tf", "q": "Ben fue al correfoc el viernes por la noche.", "a": false}, {"t": "tf", "q": "El domingo Ben estaba mejor.", "a": true}, {"t": "gap", "q": "Nuria le dice: «Bebe mucha ___».", "a": ["agua"]}, {"t": "gap", "q": "Los castellers tenían ___ pisos de personas.", "a": ["nueve|9"]}]},
 
 {id:'s11',after:'u16',title:'Ojalá no llueva',sub:'Besuch aus Deutschland',text:`Mañana llega mi amigo Lukas desde Mannheim y quiero que todo sea perfecto. Le he escrito una lista de consejos: «Te recomiendo que traigas ropa ligera, pero también una chaqueta. Es importante que compres una tarjeta de transporte en el aeropuerto. Y no dejes la mochila sola en la playa».
 
@@ -5990,7 +5996,7 @@ Nuria se ríe cuando ve la lista. —Pareces su madre —me dice—. Déjale que
 
 Miro el {pronóstico|die Vorhersage} del tiempo: dicen que el sábado puede llover. Ojalá no llueva, porque quiero que subamos al {búnker|Bunker} del Carmel para ver la puesta de sol. Nuria me da una {palmada|Klaps} en el hombro: —Tranquilo. Si llueve, os llevo a comer el mejor arroz de la ciudad. Espero que tenga hambre.`,
 de:`Morgen kommt mein Freund Lukas aus Mannheim und ich will, dass alles perfekt ist. Ich habe ihm eine Liste mit Tipps geschrieben: „Ich empfehle dir, leichte Kleidung mitzubringen, aber auch eine Jacke. Es ist wichtig, dass du am Flughafen eine Fahrkarte kaufst. Und lass den Rucksack am Strand nicht allein.“\n\nNuria lacht, als sie die Liste sieht. „Du wirkst wie seine Mutter“, sagt sie. „Lass ihn die Stadt allein entdecken.“ „Ja, aber ich will, dass ihm Barcelona so gut gefällt wie mir“, antworte ich.\n\nIch schaue mir die Wettervorhersage an: Es heißt, am Samstag könnte es regnen. Hoffentlich regnet es nicht, denn ich will, dass wir auf den Bunker des Carmel steigen, um den Sonnenuntergang zu sehen. Nuria klopft mir auf die Schulter: „Ganz ruhig. Wenn es regnet, nehme ich euch mit zum besten Reis der Stadt. Ich hoffe, er hat Hunger.“`,
-qs:[{q:'¿Por qué se ríe Nuria?',opts:['Porque la lista de Ben parece de una madre.','Porque Lukas no viene.','Porque va a llover.'],a:0},{q:'¿Qué quiere hacer Ben si hace buen tiempo?',opts:['ver la puesta de sol desde el Carmel','ir a la playa','comer arroz'],a:0},{q:'«Ojalá no llueva» – ¿por qué subjuntivo?',opts:['Es un deseo.','Es una costumbre.','Es una acción terminada.'],a:0}]},
+qs:[{"q": "¿De dónde viene Lukas?", "opts": ["de Mannheim", "de Hamburgo", "de Valencia"], "a": 0}, {"q": "Según Nuria, ¿qué debería hacer Lukas?", "opts": ["descubrir la ciudad solo", "leer bien la lista de Ben", "quedarse en casa"], "a": 0}, {"t": "tf", "q": "Ben le recomienda a Lukas que traiga solo ropa de invierno.", "a": false}, {"t": "tf", "q": "Si llueve, Nuria los lleva a comer arroz.", "a": true}, {"t": "gap", "q": "Ben le aconseja a Lukas que ___ una tarjeta de transporte en el aeropuerto.", "a": ["compre"]}, {"t": "gap", "q": "Ojalá no ___ el sábado.", "a": ["llueva"]}]},
 
 {id:'s12',after:'u17',title:'La noche que se fue la luz',sub:'Eine dunkle Nacht in Gràcia',text:`Era un martes de noviembre y llovía mucho. Nuria estaba cocinando, Pablo veía una serie y yo estaba escribiendo un trabajo para la universidad. De repente, se fue la luz en todo el barrio.
 
@@ -5998,7 +6004,7 @@ Al principio nadie dijo nada. Luego Pablo gritó desde el sofá: —¡Justo en e
 
 Como no podíamos hacer nada, nos sentamos los tres en el suelo del salón y empezamos a contar historias. Pablo nos contó que de pequeño se había perdido en la Feria de Abril de Sevilla. Nuria nos contó cómo había conocido a su mejor amiga. Cuando volvió la luz, a las once, nos dimos cuenta de que habíamos estado hablando tres horas. —Deberíamos apagar la luz más a menudo —dijo Nuria. Y, por suerte, mi ordenador había guardado el trabajo {automáticamente|automatisch}.`,
 de:`Es war ein Dienstag im November und es regnete stark. Nuria kochte gerade, Pablo schaute eine Serie und ich schrieb an einer Arbeit für die Uni. Plötzlich fiel im ganzen Viertel der Strom aus.\n\nZuerst sagte niemand etwas. Dann rief Pablo vom Sofa: „Ausgerechnet in der letzten Folge!“ Mir ging es schlechter: Ich hatte meine Arbeit seit zwei Stunden nicht gespeichert. Nuria fand ein paar Kerzen in der Küche und wir zündeten sie an.\n\nWeil wir nichts tun konnten, setzten wir uns zu dritt auf den Boden im Wohnzimmer und fingen an, Geschichten zu erzählen. Pablo erzählte uns, dass er sich als Kind auf der Feria de Abril in Sevilla verlaufen hatte. Nuria erzählte, wie sie ihre beste Freundin kennengelernt hatte. Als um elf der Strom zurückkam, merkten wir, dass wir drei Stunden geredet hatten. „Wir sollten öfter das Licht ausmachen“, sagte Nuria. Und zum Glück hatte mein Computer die Arbeit automatisch gespeichert.`,
-qs:[{q:'¿Qué estaba haciendo Ben cuando se fue la luz?',opts:['Estaba escribiendo un trabajo.','Estaba cocinando.','Estaba viendo una serie.'],a:0},{q:'¿Qué le había pasado a Pablo de pequeño?',opts:['Se había perdido en la Feria de Abril.','Había conocido a su mejor amiga.','Se había ido a vivir a Barcelona.'],a:0},{q:'¿Cuánto tiempo estuvieron hablando?',opts:['tres horas','dos horas','toda la noche'],a:0}]}
+qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
 ,{id:'s13',after:'u28',title:'La oferta',sub:'Bleiben oder gehen?',text:`El lunes recibí un correo de una empresa de Múnich. Me ofrecían un trabajo fijo, con un sueldo que en Barcelona solo podría soñar. Aunque llevaba meses buscando algo así, no me alegré tanto como esperaba. Me quedé mirando la pantalla un buen rato.
 
 Esa noche se lo conté a Nuria y a Laia en la terraza. —Si yo fuera tú, lo aceptaría sin pensarlo —dijo Nuria—. Con ese sueldo podrías ahorrar y volver cuando quisieras. Laia, en cambio, no dijo nada durante un rato. Luego me miró y me preguntó: —¿Y tú qué quieres? No lo que deberías querer, sino lo que quieres de verdad.
@@ -6007,7 +6013,7 @@ No supe qué contestar. Como no podía dormir, salí a pasear por Gràcia. Se o�
 
 Al día siguiente escribí a la empresa. Les agradecí la oferta y les pregunté si sería posible trabajar en remoto desde Barcelona. Me contestaron que lo {estudiarían|prüfen}. Todavía no sé qué pasará, pero por primera vez tengo claro lo que quiero.`,
 de:`Am Montag bekam ich eine E-Mail von einer Firma aus München. Sie boten mir eine feste Stelle an, mit einem Gehalt, von dem ich in Barcelona nur träumen könnte. Obwohl ich seit Monaten so etwas suchte, freute ich mich nicht so sehr, wie ich erwartet hatte. Ich starrte eine ganze Weile auf den Bildschirm.\n\nAm Abend erzählte ich es Nuria und Laia auf der Terrasse. „Wenn ich du wäre, würde ich es ohne Nachdenken annehmen“, sagte Nuria. „Mit dem Gehalt könntest du sparen und zurückkommen, wann du willst.“ Laia dagegen sagte eine Weile nichts. Dann sah sie mich an und fragte: „Und was willst du? Nicht, was du wollen solltest, sondern was du wirklich willst.“\n\nIch wusste nicht, was ich antworten sollte. Da ich nicht schlafen konnte, ging ich in Gràcia spazieren. Man hörte Lachen auf den Plätzen, und jemand spielte Gitarre. Ich dachte an meinen ersten Tag, als ich nichts verstand und mich in der Metro verlief. Wenn mir damals jemand gesagt hätte, dass es mir eines Tages so schwerfallen würde zu gehen, hätte ich es nicht geglaubt.\n\nAm nächsten Tag schrieb ich der Firma. Ich bedankte mich für das Angebot und fragte, ob es möglich wäre, remote aus Barcelona zu arbeiten. Sie antworteten, dass sie es prüfen würden. Ich weiß noch nicht, was passieren wird, aber zum ersten Mal ist mir klar, was ich will.`,
-qs:[{q:'¿Qué le aconseja Nuria a Ben?',opts:['que acepte la oferta','que se quede en Barcelona','que busque otro trabajo'],a:0},{q:'¿Qué le pregunta Laia?',opts:['qué quiere él de verdad','cuánto es el sueldo','cuándo se va a Múnich'],a:0},{q:'¿Qué hace Ben al final?',opts:['Pregunta si puede trabajar en remoto desde Barcelona.','Rechaza la oferta.','Acepta la oferta y se va.'],a:0}]}
+qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
 ,{id:'s14',after:'u35',title:'El manuscrito',sub:'Ein Fund im Archiv',text:`Fue un martes lluvioso cuando Laia me llamó desde el archivo de la Biblioteca de Catalunya, donde hacía prácticas. —Tienes que venir. No te imaginas lo que he encontrado —me dijo, en voz tan baja que apenas la oí.
 
 Lo que había encontrado era un cuaderno escrito a mano, metido por error en una caja de facturas de 1936. Por muy acostumbrada que estuviera a los documentos antiguos, a Laia le temblaban las manos. Las primeras páginas eran recetas de cocina; ahora bien, a partir de la página veinte, la letra cambiaba y empezaba un diario. Era de una chica de diecisiete años, Mercè, que vivía en Gràcia, a dos calles de nuestro piso.
@@ -6016,7 +6022,7 @@ Pasamos la tarde leyéndolo. Mercè hablaba de los bombardeos con una calma que 
 
 —Si no lo hubiera abierto por curiosidad, se habría quedado ahí otros noventa años —dijo Laia. De ahí que, a la semana siguiente, la biblioteca decidiera revisar todas las cajas de esa época. Y fue así como, buscando una vida, encontraron cientos.`,
 de:`Es war an einem regnerischen Dienstag, als Laia mich aus dem Archiv der Biblioteca de Catalunya anrief, wo sie ein Praktikum machte. „Du musst kommen. Du ahnst nicht, was ich gefunden habe“, sagte sie so leise, dass ich sie kaum hörte.\n\nWas sie gefunden hatte, war ein handgeschriebenes Heft, das versehentlich in einer Kiste mit Rechnungen von 1936 steckte. So sehr Laia an alte Dokumente gewöhnt war, ihr zitterten die Hände. Die ersten Seiten waren Kochrezepte; ab Seite zwanzig änderte sich jedoch die Schrift und ein Tagebuch begann. Es gehörte einem siebzehnjährigen Mädchen, Mercè, die in Gràcia wohnte, zwei Straßen von unserer Wohnung entfernt.\n\nWir verbrachten den Nachmittag damit, es zu lesen. Mercè schrieb über die Bombenangriffe mit einer Ruhe, die Angst machte, obwohl sie manchmal beschrieb, wie sie sich in der Metro versteckten. Was mich am meisten berührte, waren jedoch nicht die Kriegsszenen, sondern wie normal sie ihr Leben zu halten versuchte: die Aufregung vor einem Tanzabend, ein Streit mit ihrer Schwester, ein Junge, der ihr gefiel.\n\n„Wenn ich es nicht aus Neugier geöffnet hätte, wäre es noch weitere neunzig Jahre dort geblieben“, sagte Laia. Deshalb beschloss die Bibliothek in der Woche darauf, alle Kisten aus dieser Zeit zu überprüfen. Und so fanden sie, auf der Suche nach einem Leben, Hunderte.`,
-qs:[{q:'¿Dónde encontró Laia el cuaderno?',opts:['en una caja de facturas de 1936','en el metro','en el piso de Ben'],a:0},{q:'¿Qué conmovió más a Ben?',opts:['lo normal que intentaba ser la vida de Mercè','las escenas de los bombardeos','las recetas de cocina'],a:0},{q:'¿Qué decidió la biblioteca?',opts:['revisar todas las cajas de esa época','publicar el diario','cerrar el archivo'],a:0}]}
+qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
 ,{id:'s15',after:'u39',title:'Un año después',sub:'Das letzte Kapitel',text:`Hace un año, por estas fechas, aterricé en el Prat con dos maletas y un español de manual. Hoy escribo desde la misma terraza de Gràcia donde Nuria me enseñó a pelar gambas sin mancharme, cosa que, dicho sea de paso, sigo sin dominar.
 
 Al final, la empresa de Múnich aceptó que trabajara en remoto. Ni yo mismo me lo creía: de haberlo sabido, me habría ahorrado unas cuantas noches sin dormir. Pase lo que pase con el contrato el año que viene, ya no tengo dudas de dónde quiero estar. Laia dice que me he vuelto «más mediterráneo que el mar»; Pablo, que sigue en Madrid, que me he hecho «un auténtico cansino de las sobremesas». Por muy exagerados que sean, algo de razón tienen.
@@ -6025,7 +6031,7 @@ Lo que más ha cambiado, sin embargo, no es dónde vivo, sino cómo escucho. Ant
 
 Esta noche es la verbena de Sant Joan. El abuelo de Nuria ha prometido traer coca y refranes a partes iguales. «Más vale tarde que nunca», me dijo ayer cuando por fin le devolví la sal a la vecina. Tiene razón. Y si alguien me hubiera dicho hace un año que acabaría citando refranes en una azotea de Barcelona, le habría dicho que me estaba tomando el pelo.`,
 de:`Vor einem Jahr, um diese Zeit, landete ich in El Prat mit zwei Koffern und einem Lehrbuch-Spanisch. Heute schreibe ich von derselben Terrasse in Gràcia, auf der Nuria mir beigebracht hat, Garnelen zu schälen, ohne mich zu bekleckern – was ich, nebenbei bemerkt, immer noch nicht beherrsche.\n\nAm Ende hat die Firma aus München akzeptiert, dass ich remote arbeite. Ich konnte es selbst kaum glauben: Hätte ich das gewusst, hätte ich mir ein paar schlaflose Nächte gespart. Was auch immer nächstes Jahr mit dem Vertrag passiert, ich habe keine Zweifel mehr, wo ich sein will. Laia sagt, ich sei „mediterraner als das Meer“ geworden; Pablo, der immer noch in Madrid ist, ich sei „ein echter Nervtöter bei den Tischgesprächen nach dem Essen“ geworden. So übertrieben sie auch sein mögen, ein bisschen recht haben sie.\n\nWas sich am meisten verändert hat, ist jedoch nicht, wo ich wohne, sondern wie ich zuhöre. Früher hat es mich gestresst, ein Wort nicht zu verstehen; heute achte ich auf das, was nicht gesagt wird: den spitzen Unterton von Frau Rovira, das „mal sehen“, das eigentlich „nein“ heißt, das „treffen wir uns?“, das nie eine Uhrzeit hat. Anders gesagt: Ich habe die Sprache gelernt, die zwischen den Wörtern liegt.\n\nHeute Nacht ist die Verbena de Sant Joan. Nurias Großvater hat versprochen, Coca und Sprichwörter zu gleichen Teilen mitzubringen. „Besser spät als nie“, sagte er gestern zu mir, als ich der Nachbarin endlich das Salz zurückgab. Er hat recht. Und wenn mir vor einem Jahr jemand gesagt hätte, dass ich am Ende auf einer Dachterrasse in Barcelona Sprichwörter zitieren würde, hätte ich gesagt, dass er mich auf den Arm nimmt.`,
-qs:[{q:'¿Qué decidió finalmente la empresa de Múnich?',opts:['que Ben trabajara en remoto desde Barcelona','despedir a Ben','que Ben se mudara a Múnich'],a:0},{q:'Según Ben, ¿qué es lo que más ha cambiado?',opts:['cómo escucha','dónde trabaja','su comida favorita'],a:0},{q:'¿Qué significa en realidad «ya veremos», según Ben?',opts:['no','sí','mañana'],a:0}]}
+qs:[{"q": "¿Qué tiempo hacía esa noche?", "opts": ["Llovía mucho.", "Hacía calor.", "Nevaba."], "a": 0}, {"q": "¿Por qué estaba preocupado Ben?", "opts": ["No había guardado su trabajo.", "Tenía hambre.", "Pablo se había perdido."], "a": 0}, {"t": "tf", "q": "Solo se fue la luz en su piso.", "a": false}, {"t": "tf", "q": "Al final, el trabajo de Ben no se perdió.", "a": true}, {"t": "gap", "q": "Nuria encontró unas ___ en la cocina.", "a": ["velas"]}, {"t": "gap", "q": "La luz volvió a las ___.", "a": ["once|11"]}]}
 ];
 </script>
 <script>window.PLACEMENT=[
@@ -6672,6 +6678,34 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+" Fragen wiederholen →": " questions again →",
+" · mit Text": " · with text",
+"15 Aufgaben aus allem Gelernten": "15 tasks from everything you've learned",
+"30 Alltagswörter · ": "30 everyday words · ",
+"7 Sätze Shadowing": "7 sentences of shadowing",
+"7 Sätze nachsprechen · ": "Repeat 7 sentences · ",
+"Alles ist schon im Tagesplan.": "Everything is already in your daily plan.",
+"Angehakt = jeden Tag im Plan auf der Startseite. Der Rest steht unter „Extras“. Reihenfolge: leicht → schwer.": "Ticked = in the plan on the home page every day. The rest is under “Extras”. Order: easy → hard.",
+"Die Lösung verrate ich noch nicht – gleich hörst du die Geschichte mit Text und bekommst die Frage noch einmal.": "I won't reveal the answer yet – next you'll hear the story with text and get the question again.",
+"Ergänze": "Complete",
+"Erst nur hören – der Text ist versteckt. Hör so oft du willst, dann kommen Fragen.": "Just listen first – the text is hidden. Listen as often as you like, then come the questions.",
+"Falsche Antworten noch einmal.": "Wrong answers once more.",
+"Heute": "Today",
+"Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.": "Listen again and read along. Then come the questions that didn't work yet.",
+"Jetzt mit Text": "Now with text",
+"Lernen, Üben, Festigen, Tests": "Learn, practise, consolidate, tests",
+"Mein Tagesplan": "My daily plan",
+"Mit Text anhören & ": "Listen with text & ",
+"Nächste Lektion": "Next lesson",
+"Richtig oder falsch?": "True or false?",
+"Text versteckt – erst nur zuhören.": "Text hidden – just listen first.",
+"Was täglich dran ist": "What's on each day",
+"bis zum Tagesziel": "up to the daily goal",
+"der aktuellen ": "of the current ",
+"wenn eine neue freigeschaltet ist": "when a new one is unlocked",
+"wenn es offene Fehler gibt": "when there are open mistakes",
+"Üben →": "Practise →",
+"⚙ Plan anpassen": "⚙ Adjust plan",
 " (freiwillig)": " (optional)",
 " · Erweitert": " · Enhanced",
 " · Premium": " · Premium",
@@ -7310,6 +7344,34 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+" Fragen wiederholen →": " preguntas otra vez →",
+" · mit Text": " · con texto",
+"15 Aufgaben aus allem Gelernten": "15 ejercicios de todo lo aprendido",
+"30 Alltagswörter · ": "30 palabras cotidianas · ",
+"7 Sätze Shadowing": "7 frases de shadowing",
+"7 Sätze nachsprechen · ": "Repetir 7 frases · ",
+"Alles ist schon im Tagesplan.": "Todo está ya en el plan del día.",
+"Angehakt = jeden Tag im Plan auf der Startseite. Der Rest steht unter „Extras“. Reihenfolge: leicht → schwer.": "Marcado = cada día en el plan de la página de inicio. El resto está en «Extras». Orden: fácil → difícil.",
+"Die Lösung verrate ich noch nicht – gleich hörst du die Geschichte mit Text und bekommst die Frage noch einmal.": "Todavía no te digo la solución: ahora escucharás la historia con texto y tendrás la pregunta otra vez.",
+"Ergänze": "Completa",
+"Erst nur hören – der Text ist versteckt. Hör so oft du willst, dann kommen Fragen.": "Primero solo escuchar: el texto está oculto. Escucha las veces que quieras y luego vienen las preguntas.",
+"Falsche Antworten noch einmal.": "Las respuestas incorrectas otra vez.",
+"Heute": "Hoy",
+"Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.": "Escucha otra vez y lee a la vez. Después vienen las preguntas que todavía no salieron bien.",
+"Jetzt mit Text": "Ahora con texto",
+"Lernen, Üben, Festigen, Tests": "Aprender, practicar, afianzar, pruebas",
+"Mein Tagesplan": "Mi plan del día",
+"Mit Text anhören & ": "Escuchar con texto y ",
+"Nächste Lektion": "Siguiente lección",
+"Richtig oder falsch?": "¿Verdadero o falso?",
+"Text versteckt – erst nur zuhören.": "Texto oculto: primero solo escucha.",
+"Was täglich dran ist": "Lo que toca cada día",
+"bis zum Tagesziel": "hasta el objetivo diario",
+"der aktuellen ": "de la ",
+"wenn eine neue freigeschaltet ist": "cuando hay una nueva desbloqueada",
+"wenn es offene Fehler gibt": "cuando hay errores pendientes",
+"Üben →": "Practicar →",
+"⚙ Plan anpassen": "⚙ Ajustar plan",
 " (freiwillig)": " (opcional)",
 " · Erweitert": " · Mejorada",
 " · Premium": " · Premium",
@@ -7948,6 +8010,34 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+" Fragen wiederholen →": " perguntas outra vez →",
+" · mit Text": " · com texto",
+"15 Aufgaben aus allem Gelernten": "15 exercícios de tudo o que aprendeste",
+"30 Alltagswörter · ": "30 palavras do dia a dia · ",
+"7 Sätze Shadowing": "7 frases de shadowing",
+"7 Sätze nachsprechen · ": "Repetir 7 frases · ",
+"Alles ist schon im Tagesplan.": "Já está tudo no plano do dia.",
+"Angehakt = jeden Tag im Plan auf der Startseite. Der Rest steht unter „Extras“. Reihenfolge: leicht → schwer.": "Marcado = todos os dias no plano da página inicial. O resto está em «Extras». Ordem: fácil → difícil.",
+"Die Lösung verrate ich noch nicht – gleich hörst du die Geschichte mit Text und bekommst die Frage noch einmal.": "Ainda não revelo a solução: a seguir ouves a história com texto e recebes a pergunta outra vez.",
+"Ergänze": "Completa",
+"Erst nur hören – der Text ist versteckt. Hör so oft du willst, dann kommen Fragen.": "Primeiro só ouvir: o texto está escondido. Ouve as vezes que quiseres e depois vêm as perguntas.",
+"Falsche Antworten noch einmal.": "As respostas erradas outra vez.",
+"Heute": "Hoje",
+"Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.": "Ouve outra vez e lê ao mesmo tempo. Depois vêm as perguntas que ainda não correram bem.",
+"Jetzt mit Text": "Agora com texto",
+"Lernen, Üben, Festigen, Tests": "Aprender, praticar, consolidar, testes",
+"Mein Tagesplan": "O meu plano do dia",
+"Mit Text anhören & ": "Ouvir com texto e ",
+"Nächste Lektion": "Próxima lição",
+"Richtig oder falsch?": "Verdadeiro ou falso?",
+"Text versteckt – erst nur zuhören.": "Texto escondido: primeiro só ouve.",
+"Was täglich dran ist": "O que há para fazer cada dia",
+"bis zum Tagesziel": "até ao objetivo diário",
+"der aktuellen ": "da ",
+"wenn eine neue freigeschaltet ist": "quando há uma nova desbloqueada",
+"wenn es offene Fehler gibt": "quando há erros pendentes",
+"Üben →": "Praticar →",
+"⚙ Plan anpassen": "⚙ Ajustar plano",
 " (freiwillig)": " (opcional)",
 " · Erweitert": " · Melhorada",
 " · Premium": " · Premium",
@@ -8460,7 +8550,11 @@ const nxTitle=nx=>nx.check?''+UW+' '+nx.u.n+T(' · Abschlusstest'):nx.test?''+UW
 const nxDesc=nx=>nx.check?T('Laut Test sitzt ')+nx.u.title+T(' – bestehst du den Abschlusstest, ist sie abgehakt.'):nx.test?T('Alle Lektionen gefestigt – zeig, dass du die ')+UW+T(' kannst (ab 80 % bestanden).'):nx.n===2?T('Runde 2 von 3: dieselben Inhalte, neu gemischt und mit Vokabelübungen.'):nx.n===3?T('Runde 3 von 3: nur selbst schreiben & hören – mit einem Tag Abstand.'):nx.l.desc;
 const nxRoute=nx=>nx.check||nx.test?'check/'+nx.u.id:nx.n>1?'round/'+nx.u.id+'/'+nx.l.id+'/'+nx.n:'lesson/'+nx.u.id+'/'+nx.l.id;
 function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.ref!==ref);S.mistakes.unshift({ref,your:String(your||'').slice(0,200),date:today()});S.mistakes=S.mistakes.slice(0,150);save();}
-function resolveRef(ref){if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?{t:'mc',q:q.q,opts:q.opts,a:q.a}:null;}
+/* Verständnisfrage einer Geschichte → Aufgabe (mc / richtig-falsch / Lücke) */
+function storyQ(q){if(q.t==='tf')return{t:'mc',kind:T('Richtig oder falsch?'),q:q.q,opts:['Verdadero','Falso'],a:q.a?0:1,keep:true};
+  if(q.t==='gap')return{t:'gap',kind:T('Ergänze'),q:q.q,a:q.a};
+  return{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a};}
+function resolveRef(ref){if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
   if(ref.startsWith(T('W|'))){const[,uid,mode,...rest]=ref.split('|');const es=rest.join('|');const u=unitById(uid);const w=u&&allUnitWords(u).find(x=>x[0]===es);return w?vocabStep(u,mode,w[0],w[1],w[2]):null;}
   const[uid,lid,i]=ref.split('|');if(uid==='P')return PLACEMENT[+i];const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);return l?.steps[+i];}
 
@@ -8508,14 +8602,24 @@ function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=fals
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
 /* ---------- views ---------- */
-function dayPlan(){const nx=nextLesson();const due=dueCards().length;const done=Object.values(S.lessons).filter(x=>x.done).length;const td=today();
-  const ns=nextStory();const storyToday=Object.entries(S.stories||{}).find(([,v])=>v.date===td);
-  const plan=[
-    Object.keys(S.srs).length?{ic:'🗂️',t:T('Vokabeln wiederholen'),d:vocabLeft()?T('Noch ')+vocabLeft()+T(' Karten bis zum Tagesziel (')+vocabGoal()+').':T('Tagesziel erreicht.'),r:'vocab',fn:vocabPick,b:T('Wiederholen →'),min:Math.max(2,Math.round(vocabLeft()/4)),done:!vocabLeft()}:null,
-    nx||Object.values(S.lessons).some(x=>x.date===td)?{ic:nx&&(nx.check||nx.test)?'🏆':'📚',t:nx?nxTitle(nx):T('Lektion'),d:nx?nxDesc(nx):T('Alles fertig!'),r:nx?nxRoute(nx):'units',b:nx&&(nx.check||nx.test)?T('Test starten →'):T('Los geht’s →'),min:10,done:Object.values(S.lessons).some(x=>x.date===td)}:null,
-    done>=2?{ic:'🔀',t:T('Gemischte Wiederholung'),d:T('15 Aufgaben quer durch alles, was du schon gelernt hast.'),r:'mix',b:T('Starten →'),min:5,done:S.lastMix===td}:null,
-    ns||storyToday?{ic:'📖',t:ns&&!storyToday?T('Geschichte: ')+ns.title:T('Geschichte lesen'),d:T('Erst hören, dann lesen – ca. 5 Minuten.'),r:ns?'story/'+ns.id:'ref/s',b:T('Lesen →'),min:5,done:!!storyToday}:null].filter(Boolean);
-  if(!S.placement)plan.unshift({ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis C2, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.'),r:'placement',b:T('Test starten →'),min:15,done:false});
+/* Tagesplan: Bausteine mit id; welche täglich dazugehören, stellt man unter Mehr → Mein Tagesplan ein (S.plan, synchronisiert über planT) */
+const PLAN_DEF={vocab:true,lesson:true,mix:true,story:true,freq:false,shadow:false,mistakes:false};
+const planOn=id=>Object.assign({},PLAN_DEF,S.plan||{})[id];
+const doneDay=k=>(S.day||{})[k]===today();
+function markDay(k){S.day=S.day||{};S.day[k]=today();save();}
+function planItems(){const nx=nextLesson();const done=Object.values(S.lessons).filter(x=>x.done).length;const td=today();
+  const ns=nextStory();const storyToday=Object.entries(S.stories||{}).find(([,v])=>v.date===td);const cu=curUnit();const FQ=cu&&cu.lessons.find(l=>l.freq);
+  const all=[
+    Object.keys(S.srs).length?{id:'vocab',ic:'🗂️',t:T('Vokabeln wiederholen'),d:vocabLeft()?T('Noch ')+vocabLeft()+T(' Karten bis zum Tagesziel (')+vocabGoal()+').':T('Tagesziel erreicht.'),r:'vocab',fn:vocabPick,b:T('Wiederholen →'),min:Math.max(2,Math.round(vocabLeft()/4)),done:!vocabLeft()}:null,
+    nx||Object.values(S.lessons).some(x=>x.date===td)?{id:'lesson',ic:nx&&(nx.check||nx.test)?'🏆':'📚',t:nx?nxTitle(nx):T('Lektion'),d:nx?nxDesc(nx):T('Alles fertig!'),r:nx?nxRoute(nx):'units',b:nx&&(nx.check||nx.test)?T('Test starten →'):T('Los geht’s →'),min:10,done:Object.values(S.lessons).some(x=>x.date===td&&!x.freqL)}:null,
+    done>=2?{id:'mix',ic:'🔀',t:T('Gemischte Wiederholung'),d:T('15 Aufgaben quer durch alles, was du schon gelernt hast.'),r:'mix',b:T('Starten →'),min:5,done:S.lastMix===td}:null,
+    ns||storyToday?{id:'story',ic:'📖',t:ns&&!storyToday?T('Geschichte: ')+ns.title:T('Geschichte lesen'),d:T('Erst hören, dann lesen – ca. 5 Minuten.'),r:ns?'story/'+ns.id:'ref/s',b:T('Lesen →'),min:5,done:!!storyToday}:null,
+    FQ?{id:'freq',ic:'📚',t:T('Häufige Wörter'),d:T('30 Alltagswörter · ')+UW+' '+cu.n,r:'lesson/'+cu.id+'/'+FQ.id,b:T('Üben →'),min:5,done:S.lessons[cu.id+'.'+FQ.id]?.date===td}:null,
+    cu?{id:'shadow',ic:'🎧',t:T('Aussprache'),d:T('7 Sätze nachsprechen · ')+UW+' '+cu.n,r:'shadow/'+cu.id,b:T('Starten →'),min:4,done:doneDay('shadow')}:null,
+    S.mistakes.length||doneDay('mistakes')?{id:'mistakes',ic:'✏️',t:S.mistakes.length?T('Fehler üben (')+S.mistakes.length+')':T('Fehler üben'),d:T('Falsche Antworten noch einmal.'),r:'mistakes',b:T('Üben →'),min:5,done:doneDay('mistakes')}:null].filter(Boolean);
+  return all;}
+function dayPlan(){const plan=planItems().filter(x=>planOn(x.id));
+  if(!S.placement)plan.unshift({id:'placement',ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis C2, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.'),r:'placement',b:T('Test starten →'),min:15,done:false});
   return plan;}
 /* Plan-Eintrag öffnen: Vokabeln fragen erst nach der Art (je nach verfügbarer Zeit) */
 function planGo(x){x.fn&&!x.done?x.fn():go(x.r);}
@@ -8542,12 +8646,13 @@ function vHome(m){
     h('div',{class:'row',style:'flex-wrap:nowrap;align-items:flex-start'},h('div',{class:'hic'},hero.ic),h('div',{style:'flex:1;min-width:0'},h('h2',{style:'margin:0 0 4px'},hero.t),h('p',{class:'muted',style:'margin:0 0 14px'},hero.d),
       h('button',{class:'btn primary',onclick:e=>{e.stopPropagation();planGo(hero);}},hero.b)))));
   else m.append(h('div',{class:'card hero'},h('h2',{style:'margin:0'},T('Für heute alles erledigt ✓')),h('p',{class:'muted',style:'margin:6px 0 0'},T('¡Muy bien! Wenn du noch Lust hast: unten gibt es Extras.'))));
-  const chips=plan.filter(x=>x!==hero).map(x=>h('button',{class:'chip'+(x.done?' done':''),onclick:()=>planGo(x)},h('span',{},x.done?'✓':x.ic),h('span',{},x.t)));
-  if(S.mistakes.length)chips.push(h('button',{class:'chip',onclick:()=>go('mistakes')},h('span',{},'✏️'),h('span',{},T('Fehler üben (')+S.mistakes.length+')')));
-  chips.push(h('button',{class:'chip',onclick:()=>go('shadow/'+curUnit().id)},h('span',{},'🎧'),h('span',{},T('Aussprache'))));
-  m.append(h('div',{class:'kind',style:'margin:14px 0 8px'},T('Plan & Extras')),h('div',{class:'chips'},chips));
+  const chip=x=>h('button',{class:'chip'+(x.done?' done':''),onclick:()=>planGo(x)},h('span',{},x.done?'✓':x.ic),h('span',{},x.t));
+  const rest=plan.filter(x=>x!==hero),extra=planItems().filter(x=>!planOn(x.id));
+  if(rest.length)m.append(h('div',{class:'kind',style:'margin:12px 0 6px'},T('Heute')),h('div',{class:'chips'},rest.map(chip)));
+  m.append(h('div',{class:'row',style:'justify-content:space-between;margin:10px 0 6px'},h('div',{class:'kind',style:'margin:0'},T('Extras')),h('button',{class:'linkbtn',onclick:()=>go('settings/plan')},T('⚙ Plan anpassen'))),
+    extra.length?h('div',{class:'chips'},extra.map(chip)):h('p',{class:'muted small',style:'margin:0'},T('Alles ist schon im Tagesplan.')));
   const days=[...Array(7)].map((_,i)=>addDays(td,i-6));const mx=Math.max(10,...days.map(d=>S.stats.days[d]||0));
-  m.append(h('div',{class:'card weekcard',style:'margin-top:16px'},h('div',{class:'row'},h('div',{class:'kind',style:'flex:1;margin:0'},T('Deine Woche')),h('span',{class:'muted small'},done+(done===1?T(' Lektion'):T(' Lektionen'))+' · '+acc+T(' % richtig'))),
+  m.append(h('div',{class:'card weekcard',style:'margin-top:12px'},h('div',{class:'row'},h('div',{class:'kind',style:'flex:1;margin:0'},T('Deine Woche')),h('span',{class:'muted small'},done+(done===1?T(' Lektion'):T(' Lektionen'))+' · '+acc+T(' % richtig'))),
     h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
       return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+T('T12:00:00')).getDay()]),h('div',{class:'small'},v||''));}))));
 }
@@ -8665,7 +8770,7 @@ function freqSteps(u,l){const W=l.steps.filter(s=>s.t==='vocab').flatMap(s=>s.it
 function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l)return vUnits(m);
   const steps=l.freq?freqSteps(u,l):l.steps.map((s,i)=>({s,ref:uid+'|'+lid+'|'+i}));
   play(m,{title:''+UW+' '+u.n+' · '+l.title,steps,unit:u,onBack:()=>goBack('unit/'+uid),
-    onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};save();return{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)};}
+    onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};if(l.freq)S.lessons[k].freqL=1;save();return{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)};}
       const was=rnd(k);setRound(k,1,res.score);
       if(was<2&&(res.score>=0.9||shortLesson(l))){setRound(k,shortLesson(l)?3:2,res.score);}
       const nx=nextLesson();const r=rnd(k);
@@ -8744,6 +8849,7 @@ function actionBar(onCheck,ctx,opts={}){
   bar.setNext=()=>{state='next';btn.textContent=T('Weiter →');};
   return bar;}
 function feedback(el,res,step,your,ctx){
+  if(step.noReveal&&res.status==='bad'){const b=h('div',{class:'fb bad'},h('b',{class:'h'},T('Nicht ganz')),h('div',{},T('Die Lösung verrate ich noch nicht – gleich hörst du die Geschichte mit Text und bekommst die Frage noch einmal.')));el.append(b);return b;}
   const box=h('div',{class:'fb '+(res.status==='ok'?'ok':res.status==='near'?'warn':'bad')});
   if(res.status==='ok')box.append(h('b',{class:'h'},pick([T('¡Correcto! ✓'),T('¡Muy bien! ✓'),T('¡Perfecto! ✓'),T('¡Eso es! ✓')])));
   else if(res.status==='near')box.append(h('b',{class:'h'},T('Fast richtig')),h('div',{html:T('Richtig: ')+(your?diffHtml(your,res.right):'<span class="es-t">'+esc(res.right)+'</span>')}));
@@ -8803,7 +8909,7 @@ mc(el,s,ctx){let sel=null;const all=s.opts.map((o,i)=>[o,i]);const opts=s.keep?a
     b.onclick=()=>{if(box.dataset.done)return;btns.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=i;};return b;});box.append(...btns);el.append(box);
   const nk=e=>{if(!box.isConnected)return document.removeEventListener('keydown',nk);if(document.activeElement?.tagName==='INPUT')return;const k=+e.key;if(k>=1&&k<=btns.length&&!box.dataset.done)btns[k-1].click();};document.addEventListener('keydown',nk);
   el.append(actionBar(()=>{if(sel==null){toast(T('Wähle eine Antwort'));return false;}box.dataset.done=1;document.removeEventListener('keydown',nk);
-    const ok=sel===s.a;btns.forEach((b,k)=>{if(opts[k][1]===s.a)b.classList.add('right');else if(opts[k][1]===sel)b.classList.add('wrong');});
+    const ok=sel===s.a;btns.forEach((b,k)=>{if(opts[k][1]===s.a&&(ok||!s.noReveal))b.classList.add('right');else if(opts[k][1]===sel)b.classList.add('wrong');});
     feedback(el,{status:ok?'ok':'bad',right:s.opts[s.a]},s,null,null);ctx.done(ok?'ok':'bad',s.opts[sel]);},ctx));},
 gap(el,s,ctx){el.append(kind(s.kind||T('Lücke füllen')),s.task?h('p',{class:'muted'},s.task):null);
   const parts=s.q.split('___');const inputs=[];const q=h('div',{class:'gapq'});
@@ -8871,6 +8977,9 @@ read(el,s,ctx){const plain=s.text.replace(/\{([^|}]+)\|[^}]+\}/g,'$1');
   const html=esc(s.text).replace(/\{([^|}]+)\|([^}]+)\}/g,(m,w,t)=>'<span class="gl" data-t="'+t+'">'+w+'</span>').replace(/\n\n/g,'</p><p>');
   const tr=h('div',{class:'fb ai hide',style:'margin-top:12px'},h('b',{class:'h'},T('Übersetzung')),h('div',{html:esc(s.de||'').replace(/\n\n/g,'<br><br>')}));
   const pop=h('div',{class:'glpop hide'});
+  if(s.hideText){el.append(kind(s.kind||T('Hören')),h('h2',{style:'margin-top:0'},s.title),s.intro?h('p',{class:'muted'},s.intro):null,
+      h('div',{class:'row',style:'margin-bottom:10px'},...reader(plain)),h('div',{class:'card reading hidetext'},h('div',{style:'font-size:40px'},'🎧'),h('div',{class:'muted'},T('Text versteckt – erst nur zuhören.'))));
+    el.append(actionBar(()=>{speechSynthesis.cancel();ctx.next();return false;},ctx,{label:T('Weiter zu den Fragen →')}));return;}
   el.append(kind(s.kind||T('Lesen & Hören')),h('h2',{style:'margin-top:0'},s.title),s.intro?h('p',{class:'muted'},s.intro):null,
     h('div',{class:'row',style:'margin-bottom:10px'},...reader(plain),
       s.de?h('button',{class:'btn small ghost',onclick:()=>tr.classList.toggle('hide')},T('Übersetzung')):null),
@@ -8969,7 +9078,7 @@ function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7
     card.append(act,out);
     box.append(card,h('div',{class:'actions'},h('button',{class:'btn',disabled:i===0,onclick:()=>{i--;audioUrl=null;draw();}},T('← Zurück')),
       h('button',{class:'btn primary',onclick:()=>{audioUrl=null;if(i<list.length-1){i++;draw();setTimeout(()=>say(list[i].es),150);}else finish();}},i<list.length-1?T('Nächster Satz →'):T('Runde beenden ✓'))));}
-  function finish(){S.shadow[id]=(start+list.length)%all.length;save();const sc=scores.filter(x=>x!=null);const avg=sc.length?Math.round(sc.reduce((a,b)=>a+b,0)/sc.length):null;box.innerHTML='';
+  function finish(){S.shadow[id]=(start+list.length)%all.length;markDay('shadow');const sc=scores.filter(x=>x!=null);const avg=sc.length?Math.round(sc.reduce((a,b)=>a+b,0)/sc.length):null;box.innerHTML='';
     box.append(h('div',{class:'card',style:'text-align:center;padding:30px'},h('div',{style:'font-size:44px'},'🎧'),h('h1',{},T('¡Bien hecho!')),
       h('p',{class:'sub'},list.length+T(' Sätze geübt')+(avg!=null?T(' · Aussprache im Schnitt ')+avg+'%':'')),
       h('div',{class:'endbtns'},h('button',{class:'btn primary',onclick:()=>{box.innerHTML='';m.innerHTML='';vShadow(m,id);}},T('Nächste 7 Sätze →')),h('button',{class:'btn ghost',onclick:()=>goBack('unit/'+id)},T('Fertig')))));}
@@ -9023,13 +9132,22 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
     if(!hits.length)out.append(h('p',{class:'muted'},mine?T('Noch keine gesammelten Wörter hier – sie kommen mit den Lektionen.'):T('Nichts gefunden.')));};
   inp.oninput=draw;
   m.append(inp,levelSeg(lv,'ref/w',L=>{const n=all.filter(([,u])=>unitLevel(u)===L.id).length;return n+T(' W.');}),h('div',{class:'row'},tog),info,out,h('p',{class:'muted small',style:'margin-top:16px'},T('Lektionen „Häufige Wörter“: Häufigkeit aus FrequencyWords (OpenSubtitles, CC BY-SA 4.0), Übersetzungen aus WikDict/Wiktionary (CC BY-SA 3.0), bearbeitet.')));draw();}
+/* Geschichte: 1) nur hören (Text versteckt) → Fragen ohne Auflösung; alles richtig = fertig.
+   2) sonst mit Text noch mal hören/lesen → nur die falschen Fragen wiederholen (mit Auflösung). */
 function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'s');const u=storyFor(st);
   if(!storyOpen(st))m.append(h('div',{class:'fb warn',style:'margin-bottom:12px'},T('Diese Geschichte passt ab ')+UW+' '+u.n+T(' – vielleicht kommt dir noch nicht alles bekannt vor. Lies sie trotzdem, wenn du magst!')));
-  const steps=[{s:{t:'read',kind:T('Geschichte · ')+levelOf(u).title,title:st.title,intro:T('Tipp: Hör sie dir zuerst einmal ohne Text an (🔊 Vorlesen, Augen zu) – dann lies mit.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}]
-    .concat(st.qs.map((q,i)=>({s:{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a},ref:T('S|')+st.id+'|'+i})));
-  play(m,{title:T('Geschichte · ')+st.title,steps,onBack:()=>goBack('ref/s'),
-    onDone:(r)=>{S.stories=S.stories||{};const p=S.stories[st.id];S.stories[st.id]={date:today(),score:Math.max(p?.score||0,r.score)};save();const nx=nextStory();
-      return nx?{label:T('Nächste Geschichte →'),fn:()=>go('story/'+nx.id)}:{label:T('Zur Bibliothek →'),fn:()=>go('ref/s')};}});}
+  const qsteps=(idx,hide)=>shuffle(idx).map(i=>({s:Object.assign(storyQ(st.qs[i]),hide?{noReveal:true}:{}),ref:T('S|')+st.id+'|'+i}));
+  const finish=score=>{S.stories=S.stories||{};const p=S.stories[st.id];S.stories[st.id]={date:today(),score:Math.max(p?.score||0,score)};save();const nx=nextStory();
+    return nx?{label:T('Nächste Geschichte →'),fn:()=>go('story/'+nx.id)}:{label:T('Zur Bibliothek →'),fn:()=>go('ref/s')};};
+  const wrong=[];let first=1;
+  play(m,{title:T('Geschichte · ')+st.title,noRetry:true,noPrompt:true,
+    steps:[{s:{t:'read',hideText:true,kind:T('Geschichte · ')+levelOf(u).title,title:st.title,intro:T('Erst nur hören – der Text ist versteckt. Hör so oft du willst, dann kommen Fragen.'),text:st.text},ref:T('S|')+st.id+'|r'}].concat(qsteps(st.qs.map((_,i)=>i),true)),
+    onAnswer:(it,status)=>{if(status==='bad'){const i=+it.ref.split('|')[2];if(!wrong.includes(i))wrong.push(i);}},
+    onBack:()=>goBack('ref/s'),
+    onDone:(r)=>{first=r.score;if(!wrong.length)return finish(r.score);
+      return{label:T('Mit Text anhören & ')+wrong.length+T(' Fragen wiederholen →'),fn:()=>{m.innerHTML='';
+        play(m,{title:T('Geschichte · ')+st.title+T(' · mit Text'),steps:[{s:{t:'read',kind:T('Jetzt mit Text'),title:st.title,intro:T('Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}].concat(qsteps(wrong,false)),
+          mistakeMode:true,onBack:()=>goBack('ref/s'),onDone:()=>finish(first)});}};}});}
 /* ---------- Verben-Trainer: Konjugationen aus allen '+UWS+', die du schon angefangen hast ---------- */
 function vVerbs(m){m.append(backTo(T('Bibliothek'),'ref'));const pool=[];for(const u of COURSE.units){const started=u.lessons.some(l=>rnd(u.id+'.'+l.id)>=1)||S.checks[u.id]?.pass;
     u.lessons.forEach(l=>l.steps.forEach((s,i)=>{if(s.t==='conj')pool.push({s,ref:u.id+'|'+l.id+'|'+i,unit:u,started});}));}
@@ -9067,10 +9185,12 @@ function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,ok
     if(st==='bad'||rating==='again'){failed.add(c.es);q.push(c);}}
   function nxt(){i++;if(i>=q.length)return end();show();}
   function show(){upd();stage.innerHTML='';const c=q[i];
-    if(mode==='flip'){let shown=false;const card=h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
-      stage.append(kind(T('Was bedeutet das?')),card);setTimeout(()=>say(c.es),200);
+    if(mode==='flip'){let shown=false;const rev=Math.random()<0.5; /* Richtung zufällig: Spanisch → Deutsch oder Deutsch → Spanisch */
+      const card=rev?h('div',{class:'card flash'},h('div',{class:'big'},(pic(c.es,c.em)?pic(c.es,c.em)+' ':'')+trc(c.de)),h('div',{id:'ans',style:'visibility:hidden'},h('div',{class:'big',style:'font-size:24px;margin-top:6px'},c.es),spk(c.es)))
+        :h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
+      stage.append(kind(rev?fmt(T('Wie heißt das {ON}?')):T('Was bedeutet das?')),card);if(!rev)setTimeout(()=>say(c.es),200);
       const row=h('div',{class:'actions'});const reveal=h('button',{class:'btn primary'},T('Aufdecken'));
-      reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';row.innerHTML='';row.className='rates';row.append(
+      reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';if(rev)say(c.es);row.innerHTML='';row.className='rates';row.append(
         ...[['again','bad',T('Nochmal'),'var(--bad)'],['hard','near',T('Schwer'),'var(--gold)'],['good','ok',T('Gut'),'var(--accent)'],['easy','ok',T('Leicht'),'var(--ok)']].map(([r,st,l,col])=>{
           const sc=srs&&S.srs[vkey(c.es)];const d=sc?nextIvl(Object.assign({},sc),r):(r==='hard'?1:r==='good'?3:5);
           return h('button',{class:'btn rate',style:'color:'+col,onclick:()=>{res(c,st,r);nxt();}},h('b',{},l),h('span',{},r==='again'?T('gleich nochmal'):d===1?T('morgen'):d+T(' Tage')));}));};row.append(reveal);stage.append(row);
@@ -9125,7 +9245,7 @@ function placementTable(){const r=S.placement?.results||{};const t=h('div',{clas
 function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')),h('p',{class:'sub'},T('Jede falsch beantwortete Aufgabe landet hier. Richtig beantwortet beim Üben → sie verschwindet.')));
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
-  m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>({label:T('Zum Fehlerheft'),fn:()=>go('mistakes')})});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
+  m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
   m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
     h('div',{html:(s.q||s.de||s.es||s.verb||s.title||'').replace(/___/g,'_____')}),x.your?h('div',{class:'small'},T('Deine Antwort: '),h('span',{style:'color:var(--bad)'},x.your)):null))));}
 
@@ -9235,7 +9355,15 @@ function vOrigin(m){const o=Object.assign({c:'DE',city:'',other:''},S.origin||{}
 const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),['🔊 Aussprache']],
   ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 Gemini (optional)']],
   ['sync','☁️',T('Sync & Backup'),T('Geräte abgleichen & sichern'),['☁️ Geräte synchronisieren (GitHub)','💾 Fortschritt sichern']]];
+function vPlanSet(m){const P=Object.assign({},PLAN_DEF,S.plan||{});
+  const L=[['vocab','🗂️',T('Vokabeln wiederholen'),T('bis zum Tagesziel')],['lesson','📚',T('Nächste Lektion'),T('Lernen, Üben, Festigen, Tests')],['mix','🔀',T('Gemischte Wiederholung'),T('15 Aufgaben aus allem Gelernten')],
+    ['story','📖',T('Geschichte'),T('wenn eine neue freigeschaltet ist')],['freq','📚',T('Häufige Wörter'),T('der aktuellen ')+UW],['shadow','🎧',T('Aussprache'),T('7 Sätze Shadowing')],['mistakes','✏️',T('Fehler üben'),T('wenn es offene Fehler gibt')]];
+  m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Mein Tagesplan')),h('p',{class:'sub'},T('Angehakt = jeden Tag im Plan auf der Startseite. Der Rest steht unter „Extras“. Reihenfolge: leicht → schwer.')),
+    h('div',{class:'card planset'},L.map(([id,ic,t,d])=>{const cb=h('input',{type:'checkbox',checked:!!P[id]});
+      cb.onchange=()=>{S.plan=Object.assign({},PLAN_DEF,S.plan||{},{[id]:cb.checked});S.planT=Date.now();save();};
+      return h('label',{class:'row planrow'},cb,h('span',{class:'pic'},ic),h('span',{style:'flex:1;min-width:0'},h('b',{},t),h('span',{class:'muted small',style:'display:block'},d)));})));}
 function vSettings(m,sec){
+  if(sec==='plan')return vPlanSet(m);
   const s=SETSEC.find(x=>x[0]===sec);
   if(s){const tmp=h('div');vSettingsAll(tmp);const want=s[4].map(x=>T(x));const cards=[...tmp.children].filter(el=>want.includes(el.querySelector('h2')?.textContent||''));
     /* lange Erklärtexte einklappen, damit die Seite ohne Scrollen auskommt */
@@ -9245,7 +9373,7 @@ function vSettings(m,sec){
     const html=await (await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'})).text();const v=(html.match(/APP_VERSION="([^"]+)"/)||[])[1];
     if(v&&v!==window.APP_VERSION){toast(T('Neue Version gefunden – lade neu …'));if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>location.reload(),600);}else toast(T('Du hast schon die neueste Version ✓'));}catch(e){toast(T('Keine Verbindung – später noch mal versuchen'));}};
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):T('Offline-Datei');
-  m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),
+  m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),mtile('📅',T('Mein Tagesplan'),T('Was täglich dran ist'),()=>go('settings/plan')),
     ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0])))),
     h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
 
@@ -9270,6 +9398,8 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   o.mistakes=((a.updated||0)>=(b.updated||0)?a.mistakes:b.mistakes)||[];
   o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
   if((b.vocabGoalT||0)>(a.vocabGoalT||0)){o.vocabGoal=b.vocabGoal;o.vocabGoalT=b.vocabGoalT;}
+  if((b.planT||0)>(a.planT||0)){o.plan=b.plan;o.planT=b.planT;}
+  o.day=Object.assign({},b.day||{});for(const[k,v]of Object.entries(a.day||{}))if(v>(o.day[k]||''))o.day[k]=v;
   o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
   o.origin=a.origin||b.origin;
   o.name=a.name||b.name;o.gender=a.gender||b.gender;

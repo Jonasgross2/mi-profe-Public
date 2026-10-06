@@ -333,7 +333,11 @@ const nxTitle=nx=>nx.check?''+UW+' '+nx.u.n+T(' · Abschlusstest'):nx.test?''+UW
 const nxDesc=nx=>nx.check?T('Laut Test sitzt ')+nx.u.title+T(' – bestehst du den Abschlusstest, ist sie abgehakt.'):nx.test?T('Alle Lektionen gefestigt – zeig, dass du die ')+UW+T(' kannst (ab 80 % bestanden).'):nx.n===2?T('Runde 2 von 3: dieselben Inhalte, neu gemischt und mit Vokabelübungen.'):nx.n===3?T('Runde 3 von 3: nur selbst schreiben & hören – mit einem Tag Abstand.'):nx.l.desc;
 const nxRoute=nx=>nx.check||nx.test?'check/'+nx.u.id:nx.n>1?'round/'+nx.u.id+'/'+nx.l.id+'/'+nx.n:'lesson/'+nx.u.id+'/'+nx.l.id;
 function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.ref!==ref);S.mistakes.unshift({ref,your:String(your||'').slice(0,200),date:today()});S.mistakes=S.mistakes.slice(0,150);save();}
-function resolveRef(ref){if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?{t:'mc',q:q.q,opts:q.opts,a:q.a}:null;}
+/* Verständnisfrage einer Geschichte → Aufgabe (mc / richtig-falsch / Lücke) */
+function storyQ(q){if(q.t==='tf')return{t:'mc',kind:T('Richtig oder falsch?'),q:q.q,opts:['Verdadero','Falso'],a:q.a?0:1,keep:true};
+  if(q.t==='gap')return{t:'gap',kind:T('Ergänze'),q:q.q,a:q.a};
+  return{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a};}
+function resolveRef(ref){if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
   if(ref.startsWith(T('W|'))){const[,uid,mode,...rest]=ref.split('|');const es=rest.join('|');const u=unitById(uid);const w=u&&allUnitWords(u).find(x=>x[0]===es);return w?vocabStep(u,mode,w[0],w[1],w[2]):null;}
   const[uid,lid,i]=ref.split('|');if(uid==='P')return PLACEMENT[+i];const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);return l?.steps[+i];}
 
@@ -381,14 +385,24 @@ function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=fals
   v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;}
 
 /* ---------- views ---------- */
-function dayPlan(){const nx=nextLesson();const due=dueCards().length;const done=Object.values(S.lessons).filter(x=>x.done).length;const td=today();
-  const ns=nextStory();const storyToday=Object.entries(S.stories||{}).find(([,v])=>v.date===td);
-  const plan=[
-    Object.keys(S.srs).length?{ic:'🗂️',t:T('Vokabeln wiederholen'),d:vocabLeft()?T('Noch ')+vocabLeft()+T(' Karten bis zum Tagesziel (')+vocabGoal()+').':T('Tagesziel erreicht.'),r:'vocab',fn:vocabPick,b:T('Wiederholen →'),min:Math.max(2,Math.round(vocabLeft()/4)),done:!vocabLeft()}:null,
-    nx||Object.values(S.lessons).some(x=>x.date===td)?{ic:nx&&(nx.check||nx.test)?'🏆':'📚',t:nx?nxTitle(nx):T('Lektion'),d:nx?nxDesc(nx):T('Alles fertig!'),r:nx?nxRoute(nx):'units',b:nx&&(nx.check||nx.test)?T('Test starten →'):T('Los geht’s →'),min:10,done:Object.values(S.lessons).some(x=>x.date===td)}:null,
-    done>=2?{ic:'🔀',t:T('Gemischte Wiederholung'),d:T('15 Aufgaben quer durch alles, was du schon gelernt hast.'),r:'mix',b:T('Starten →'),min:5,done:S.lastMix===td}:null,
-    ns||storyToday?{ic:'📖',t:ns&&!storyToday?T('Geschichte: ')+ns.title:T('Geschichte lesen'),d:T('Erst hören, dann lesen – ca. 5 Minuten.'),r:ns?'story/'+ns.id:'ref/s',b:T('Lesen →'),min:5,done:!!storyToday}:null].filter(Boolean);
-  if(!S.placement)plan.unshift({ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis C2, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.'),r:'placement',b:T('Test starten →'),min:15,done:false});
+/* Tagesplan: Bausteine mit id; welche täglich dazugehören, stellt man unter Mehr → Mein Tagesplan ein (S.plan, synchronisiert über planT) */
+const PLAN_DEF={vocab:true,lesson:true,mix:true,story:true,freq:false,shadow:false,mistakes:false};
+const planOn=id=>Object.assign({},PLAN_DEF,S.plan||{})[id];
+const doneDay=k=>(S.day||{})[k]===today();
+function markDay(k){S.day=S.day||{};S.day[k]=today();save();}
+function planItems(){const nx=nextLesson();const done=Object.values(S.lessons).filter(x=>x.done).length;const td=today();
+  const ns=nextStory();const storyToday=Object.entries(S.stories||{}).find(([,v])=>v.date===td);const cu=curUnit();const FQ=cu&&cu.lessons.find(l=>l.freq);
+  const all=[
+    Object.keys(S.srs).length?{id:'vocab',ic:'🗂️',t:T('Vokabeln wiederholen'),d:vocabLeft()?T('Noch ')+vocabLeft()+T(' Karten bis zum Tagesziel (')+vocabGoal()+').':T('Tagesziel erreicht.'),r:'vocab',fn:vocabPick,b:T('Wiederholen →'),min:Math.max(2,Math.round(vocabLeft()/4)),done:!vocabLeft()}:null,
+    nx||Object.values(S.lessons).some(x=>x.date===td)?{id:'lesson',ic:nx&&(nx.check||nx.test)?'🏆':'📚',t:nx?nxTitle(nx):T('Lektion'),d:nx?nxDesc(nx):T('Alles fertig!'),r:nx?nxRoute(nx):'units',b:nx&&(nx.check||nx.test)?T('Test starten →'):T('Los geht’s →'),min:10,done:Object.values(S.lessons).some(x=>x.date===td&&!x.freqL)}:null,
+    done>=2?{id:'mix',ic:'🔀',t:T('Gemischte Wiederholung'),d:T('15 Aufgaben quer durch alles, was du schon gelernt hast.'),r:'mix',b:T('Starten →'),min:5,done:S.lastMix===td}:null,
+    ns||storyToday?{id:'story',ic:'📖',t:ns&&!storyToday?T('Geschichte: ')+ns.title:T('Geschichte lesen'),d:T('Erst hören, dann lesen – ca. 5 Minuten.'),r:ns?'story/'+ns.id:'ref/s',b:T('Lesen →'),min:5,done:!!storyToday}:null,
+    FQ?{id:'freq',ic:'📚',t:T('Häufige Wörter'),d:T('30 Alltagswörter · ')+UW+' '+cu.n,r:'lesson/'+cu.id+'/'+FQ.id,b:T('Üben →'),min:5,done:S.lessons[cu.id+'.'+FQ.id]?.date===td}:null,
+    cu?{id:'shadow',ic:'🎧',t:T('Aussprache'),d:T('7 Sätze nachsprechen · ')+UW+' '+cu.n,r:'shadow/'+cu.id,b:T('Starten →'),min:4,done:doneDay('shadow')}:null,
+    S.mistakes.length||doneDay('mistakes')?{id:'mistakes',ic:'✏️',t:S.mistakes.length?T('Fehler üben (')+S.mistakes.length+')':T('Fehler üben'),d:T('Falsche Antworten noch einmal.'),r:'mistakes',b:T('Üben →'),min:5,done:doneDay('mistakes')}:null].filter(Boolean);
+  return all;}
+function dayPlan(){const plan=planItems().filter(x=>planOn(x.id));
+  if(!S.placement)plan.unshift({id:'placement',ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis C2, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.'),r:'placement',b:T('Test starten →'),min:15,done:false});
   return plan;}
 /* Plan-Eintrag öffnen: Vokabeln fragen erst nach der Art (je nach verfügbarer Zeit) */
 function planGo(x){x.fn&&!x.done?x.fn():go(x.r);}
@@ -415,12 +429,13 @@ function vHome(m){
     h('div',{class:'row',style:'flex-wrap:nowrap;align-items:flex-start'},h('div',{class:'hic'},hero.ic),h('div',{style:'flex:1;min-width:0'},h('h2',{style:'margin:0 0 4px'},hero.t),h('p',{class:'muted',style:'margin:0 0 14px'},hero.d),
       h('button',{class:'btn primary',onclick:e=>{e.stopPropagation();planGo(hero);}},hero.b)))));
   else m.append(h('div',{class:'card hero'},h('h2',{style:'margin:0'},T('Für heute alles erledigt ✓')),h('p',{class:'muted',style:'margin:6px 0 0'},T('¡Muy bien! Wenn du noch Lust hast: unten gibt es Extras.'))));
-  const chips=plan.filter(x=>x!==hero).map(x=>h('button',{class:'chip'+(x.done?' done':''),onclick:()=>planGo(x)},h('span',{},x.done?'✓':x.ic),h('span',{},x.t)));
-  if(S.mistakes.length)chips.push(h('button',{class:'chip',onclick:()=>go('mistakes')},h('span',{},'✏️'),h('span',{},T('Fehler üben (')+S.mistakes.length+')')));
-  chips.push(h('button',{class:'chip',onclick:()=>go('shadow/'+curUnit().id)},h('span',{},'🎧'),h('span',{},T('Aussprache'))));
-  m.append(h('div',{class:'kind',style:'margin:14px 0 8px'},T('Plan & Extras')),h('div',{class:'chips'},chips));
+  const chip=x=>h('button',{class:'chip'+(x.done?' done':''),onclick:()=>planGo(x)},h('span',{},x.done?'✓':x.ic),h('span',{},x.t));
+  const rest=plan.filter(x=>x!==hero),extra=planItems().filter(x=>!planOn(x.id));
+  if(rest.length)m.append(h('div',{class:'kind',style:'margin:12px 0 6px'},T('Heute')),h('div',{class:'chips'},rest.map(chip)));
+  m.append(h('div',{class:'row',style:'justify-content:space-between;margin:10px 0 6px'},h('div',{class:'kind',style:'margin:0'},T('Extras')),h('button',{class:'linkbtn',onclick:()=>go('settings/plan')},T('⚙ Plan anpassen'))),
+    extra.length?h('div',{class:'chips'},extra.map(chip)):h('p',{class:'muted small',style:'margin:0'},T('Alles ist schon im Tagesplan.')));
   const days=[...Array(7)].map((_,i)=>addDays(td,i-6));const mx=Math.max(10,...days.map(d=>S.stats.days[d]||0));
-  m.append(h('div',{class:'card weekcard',style:'margin-top:16px'},h('div',{class:'row'},h('div',{class:'kind',style:'flex:1;margin:0'},T('Deine Woche')),h('span',{class:'muted small'},done+(done===1?T(' Lektion'):T(' Lektionen'))+' · '+acc+T(' % richtig'))),
+  m.append(h('div',{class:'card weekcard',style:'margin-top:12px'},h('div',{class:'row'},h('div',{class:'kind',style:'flex:1;margin:0'},T('Deine Woche')),h('span',{class:'muted small'},done+(done===1?T(' Lektion'):T(' Lektionen'))+' · '+acc+T(' % richtig'))),
     h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
       return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+T('T12:00:00')).getDay()]),h('div',{class:'small'},v||''));}))));
 }
@@ -538,7 +553,7 @@ function freqSteps(u,l){const W=l.steps.filter(s=>s.t==='vocab').flatMap(s=>s.it
 function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l)return vUnits(m);
   const steps=l.freq?freqSteps(u,l):l.steps.map((s,i)=>({s,ref:uid+'|'+lid+'|'+i}));
   play(m,{title:''+UW+' '+u.n+' · '+l.title,steps,unit:u,onBack:()=>goBack('unit/'+uid),
-    onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};save();return{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)};}
+    onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};if(l.freq)S.lessons[k].freqL=1;save();return{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)};}
       const was=rnd(k);setRound(k,1,res.score);
       if(was<2&&(res.score>=0.9||shortLesson(l))){setRound(k,shortLesson(l)?3:2,res.score);}
       const nx=nextLesson();const r=rnd(k);
@@ -617,6 +632,7 @@ function actionBar(onCheck,ctx,opts={}){
   bar.setNext=()=>{state='next';btn.textContent=T('Weiter →');};
   return bar;}
 function feedback(el,res,step,your,ctx){
+  if(step.noReveal&&res.status==='bad'){const b=h('div',{class:'fb bad'},h('b',{class:'h'},T('Nicht ganz')),h('div',{},T('Die Lösung verrate ich noch nicht – gleich hörst du die Geschichte mit Text und bekommst die Frage noch einmal.')));el.append(b);return b;}
   const box=h('div',{class:'fb '+(res.status==='ok'?'ok':res.status==='near'?'warn':'bad')});
   if(res.status==='ok')box.append(h('b',{class:'h'},pick([T('¡Correcto! ✓'),T('¡Muy bien! ✓'),T('¡Perfecto! ✓'),T('¡Eso es! ✓')])));
   else if(res.status==='near')box.append(h('b',{class:'h'},T('Fast richtig')),h('div',{html:T('Richtig: ')+(your?diffHtml(your,res.right):'<span class="es-t">'+esc(res.right)+'</span>')}));
@@ -676,7 +692,7 @@ mc(el,s,ctx){let sel=null;const all=s.opts.map((o,i)=>[o,i]);const opts=s.keep?a
     b.onclick=()=>{if(box.dataset.done)return;btns.forEach(x=>x.classList.remove('sel'));b.classList.add('sel');sel=i;};return b;});box.append(...btns);el.append(box);
   const nk=e=>{if(!box.isConnected)return document.removeEventListener('keydown',nk);if(document.activeElement?.tagName==='INPUT')return;const k=+e.key;if(k>=1&&k<=btns.length&&!box.dataset.done)btns[k-1].click();};document.addEventListener('keydown',nk);
   el.append(actionBar(()=>{if(sel==null){toast(T('Wähle eine Antwort'));return false;}box.dataset.done=1;document.removeEventListener('keydown',nk);
-    const ok=sel===s.a;btns.forEach((b,k)=>{if(opts[k][1]===s.a)b.classList.add('right');else if(opts[k][1]===sel)b.classList.add('wrong');});
+    const ok=sel===s.a;btns.forEach((b,k)=>{if(opts[k][1]===s.a&&(ok||!s.noReveal))b.classList.add('right');else if(opts[k][1]===sel)b.classList.add('wrong');});
     feedback(el,{status:ok?'ok':'bad',right:s.opts[s.a]},s,null,null);ctx.done(ok?'ok':'bad',s.opts[sel]);},ctx));},
 gap(el,s,ctx){el.append(kind(s.kind||T('Lücke füllen')),s.task?h('p',{class:'muted'},s.task):null);
   const parts=s.q.split('___');const inputs=[];const q=h('div',{class:'gapq'});
@@ -744,6 +760,9 @@ read(el,s,ctx){const plain=s.text.replace(/\{([^|}]+)\|[^}]+\}/g,'$1');
   const html=esc(s.text).replace(/\{([^|}]+)\|([^}]+)\}/g,(m,w,t)=>'<span class="gl" data-t="'+t+'">'+w+'</span>').replace(/\n\n/g,'</p><p>');
   const tr=h('div',{class:'fb ai hide',style:'margin-top:12px'},h('b',{class:'h'},T('Übersetzung')),h('div',{html:esc(s.de||'').replace(/\n\n/g,'<br><br>')}));
   const pop=h('div',{class:'glpop hide'});
+  if(s.hideText){el.append(kind(s.kind||T('Hören')),h('h2',{style:'margin-top:0'},s.title),s.intro?h('p',{class:'muted'},s.intro):null,
+      h('div',{class:'row',style:'margin-bottom:10px'},...reader(plain)),h('div',{class:'card reading hidetext'},h('div',{style:'font-size:40px'},'🎧'),h('div',{class:'muted'},T('Text versteckt – erst nur zuhören.'))));
+    el.append(actionBar(()=>{speechSynthesis.cancel();ctx.next();return false;},ctx,{label:T('Weiter zu den Fragen →')}));return;}
   el.append(kind(s.kind||T('Lesen & Hören')),h('h2',{style:'margin-top:0'},s.title),s.intro?h('p',{class:'muted'},s.intro):null,
     h('div',{class:'row',style:'margin-bottom:10px'},...reader(plain),
       s.de?h('button',{class:'btn small ghost',onclick:()=>tr.classList.toggle('hide')},T('Übersetzung')):null),
@@ -842,7 +861,7 @@ function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7
     card.append(act,out);
     box.append(card,h('div',{class:'actions'},h('button',{class:'btn',disabled:i===0,onclick:()=>{i--;audioUrl=null;draw();}},T('← Zurück')),
       h('button',{class:'btn primary',onclick:()=>{audioUrl=null;if(i<list.length-1){i++;draw();setTimeout(()=>say(list[i].es),150);}else finish();}},i<list.length-1?T('Nächster Satz →'):T('Runde beenden ✓'))));}
-  function finish(){S.shadow[id]=(start+list.length)%all.length;save();const sc=scores.filter(x=>x!=null);const avg=sc.length?Math.round(sc.reduce((a,b)=>a+b,0)/sc.length):null;box.innerHTML='';
+  function finish(){S.shadow[id]=(start+list.length)%all.length;markDay('shadow');const sc=scores.filter(x=>x!=null);const avg=sc.length?Math.round(sc.reduce((a,b)=>a+b,0)/sc.length):null;box.innerHTML='';
     box.append(h('div',{class:'card',style:'text-align:center;padding:30px'},h('div',{style:'font-size:44px'},'🎧'),h('h1',{},T('¡Bien hecho!')),
       h('p',{class:'sub'},list.length+T(' Sätze geübt')+(avg!=null?T(' · Aussprache im Schnitt ')+avg+'%':'')),
       h('div',{class:'endbtns'},h('button',{class:'btn primary',onclick:()=>{box.innerHTML='';m.innerHTML='';vShadow(m,id);}},T('Nächste 7 Sätze →')),h('button',{class:'btn ghost',onclick:()=>goBack('unit/'+id)},T('Fertig')))));}
@@ -896,13 +915,22 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
     if(!hits.length)out.append(h('p',{class:'muted'},mine?T('Noch keine gesammelten Wörter hier – sie kommen mit den Lektionen.'):T('Nichts gefunden.')));};
   inp.oninput=draw;
   m.append(inp,levelSeg(lv,'ref/w',L=>{const n=all.filter(([,u])=>unitLevel(u)===L.id).length;return n+T(' W.');}),h('div',{class:'row'},tog),info,out,h('p',{class:'muted small',style:'margin-top:16px'},T('Lektionen „Häufige Wörter“: Häufigkeit aus FrequencyWords (OpenSubtitles, CC BY-SA 4.0), Übersetzungen aus WikDict/Wiktionary (CC BY-SA 3.0), bearbeitet.')));draw();}
+/* Geschichte: 1) nur hören (Text versteckt) → Fragen ohne Auflösung; alles richtig = fertig.
+   2) sonst mit Text noch mal hören/lesen → nur die falschen Fragen wiederholen (mit Auflösung). */
 function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'s');const u=storyFor(st);
   if(!storyOpen(st))m.append(h('div',{class:'fb warn',style:'margin-bottom:12px'},T('Diese Geschichte passt ab ')+UW+' '+u.n+T(' – vielleicht kommt dir noch nicht alles bekannt vor. Lies sie trotzdem, wenn du magst!')));
-  const steps=[{s:{t:'read',kind:T('Geschichte · ')+levelOf(u).title,title:st.title,intro:T('Tipp: Hör sie dir zuerst einmal ohne Text an (🔊 Vorlesen, Augen zu) – dann lies mit.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}]
-    .concat(st.qs.map((q,i)=>({s:{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a},ref:T('S|')+st.id+'|'+i})));
-  play(m,{title:T('Geschichte · ')+st.title,steps,onBack:()=>goBack('ref/s'),
-    onDone:(r)=>{S.stories=S.stories||{};const p=S.stories[st.id];S.stories[st.id]={date:today(),score:Math.max(p?.score||0,r.score)};save();const nx=nextStory();
-      return nx?{label:T('Nächste Geschichte →'),fn:()=>go('story/'+nx.id)}:{label:T('Zur Bibliothek →'),fn:()=>go('ref/s')};}});}
+  const qsteps=(idx,hide)=>shuffle(idx).map(i=>({s:Object.assign(storyQ(st.qs[i]),hide?{noReveal:true}:{}),ref:T('S|')+st.id+'|'+i}));
+  const finish=score=>{S.stories=S.stories||{};const p=S.stories[st.id];S.stories[st.id]={date:today(),score:Math.max(p?.score||0,score)};save();const nx=nextStory();
+    return nx?{label:T('Nächste Geschichte →'),fn:()=>go('story/'+nx.id)}:{label:T('Zur Bibliothek →'),fn:()=>go('ref/s')};};
+  const wrong=[];let first=1;
+  play(m,{title:T('Geschichte · ')+st.title,noRetry:true,noPrompt:true,
+    steps:[{s:{t:'read',hideText:true,kind:T('Geschichte · ')+levelOf(u).title,title:st.title,intro:T('Erst nur hören – der Text ist versteckt. Hör so oft du willst, dann kommen Fragen.'),text:st.text},ref:T('S|')+st.id+'|r'}].concat(qsteps(st.qs.map((_,i)=>i),true)),
+    onAnswer:(it,status)=>{if(status==='bad'){const i=+it.ref.split('|')[2];if(!wrong.includes(i))wrong.push(i);}},
+    onBack:()=>goBack('ref/s'),
+    onDone:(r)=>{first=r.score;if(!wrong.length)return finish(r.score);
+      return{label:T('Mit Text anhören & ')+wrong.length+T(' Fragen wiederholen →'),fn:()=>{m.innerHTML='';
+        play(m,{title:T('Geschichte · ')+st.title+T(' · mit Text'),steps:[{s:{t:'read',kind:T('Jetzt mit Text'),title:st.title,intro:T('Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}].concat(qsteps(wrong,false)),
+          mistakeMode:true,onBack:()=>goBack('ref/s'),onDone:()=>finish(first)});}};}});}
 /* ---------- Verben-Trainer: Konjugationen aus allen '+UWS+', die du schon angefangen hast ---------- */
 function vVerbs(m){m.append(backTo(T('Bibliothek'),'ref'));const pool=[];for(const u of COURSE.units){const started=u.lessons.some(l=>rnd(u.id+'.'+l.id)>=1)||S.checks[u.id]?.pass;
     u.lessons.forEach(l=>l.steps.forEach((s,i)=>{if(s.t==='conj')pool.push({s,ref:u.id+'|'+l.id+'|'+i,unit:u,started});}));}
@@ -940,10 +968,12 @@ function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,ok
     if(st==='bad'||rating==='again'){failed.add(c.es);q.push(c);}}
   function nxt(){i++;if(i>=q.length)return end();show();}
   function show(){upd();stage.innerHTML='';const c=q[i];
-    if(mode==='flip'){let shown=false;const card=h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
-      stage.append(kind(T('Was bedeutet das?')),card);setTimeout(()=>say(c.es),200);
+    if(mode==='flip'){let shown=false;const rev=Math.random()<0.5; /* Richtung zufällig: Spanisch → Deutsch oder Deutsch → Spanisch */
+      const card=rev?h('div',{class:'card flash'},h('div',{class:'big'},(pic(c.es,c.em)?pic(c.es,c.em)+' ':'')+trc(c.de)),h('div',{id:'ans',style:'visibility:hidden'},h('div',{class:'big',style:'font-size:24px;margin-top:6px'},c.es),spk(c.es)))
+        :h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
+      stage.append(kind(rev?fmt(T('Wie heißt das {ON}?')):T('Was bedeutet das?')),card);if(!rev)setTimeout(()=>say(c.es),200);
       const row=h('div',{class:'actions'});const reveal=h('button',{class:'btn primary'},T('Aufdecken'));
-      reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';row.innerHTML='';row.className='rates';row.append(
+      reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';if(rev)say(c.es);row.innerHTML='';row.className='rates';row.append(
         ...[['again','bad',T('Nochmal'),'var(--bad)'],['hard','near',T('Schwer'),'var(--gold)'],['good','ok',T('Gut'),'var(--accent)'],['easy','ok',T('Leicht'),'var(--ok)']].map(([r,st,l,col])=>{
           const sc=srs&&S.srs[vkey(c.es)];const d=sc?nextIvl(Object.assign({},sc),r):(r==='hard'?1:r==='good'?3:5);
           return h('button',{class:'btn rate',style:'color:'+col,onclick:()=>{res(c,st,r);nxt();}},h('b',{},l),h('span',{},r==='again'?T('gleich nochmal'):d===1?T('morgen'):d+T(' Tage')));}));};row.append(reveal);stage.append(row);
@@ -998,7 +1028,7 @@ function placementTable(){const r=S.placement?.results||{};const t=h('div',{clas
 function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')),h('p',{class:'sub'},T('Jede falsch beantwortete Aufgabe landet hier. Richtig beantwortet beim Üben → sie verschwindet.')));
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
-  m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>({label:T('Zum Fehlerheft'),fn:()=>go('mistakes')})});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
+  m.append(h('button',{class:'btn primary',style:'margin-bottom:16px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben (')+Math.min(list.length,20)+')'));
   m.append(h('div',{class:'grid',style:'gap:8px'},list.map(({x,s})=>h('div',{class:'card',style:'padding:12px 16px'},h('div',{class:'small muted'},x.ref.startsWith('P')?T('Einstufungstest'):(x.ref.startsWith(T('S|'))?T('Geschichte'):''+UW+' '+(unitById(x.ref.split('|')[x.ref.startsWith(T('W|'))?1:0])?.n??''))+' · '+x.date),
     h('div',{html:(s.q||s.de||s.es||s.verb||s.title||'').replace(/___/g,'_____')}),x.your?h('div',{class:'small'},T('Deine Antwort: '),h('span',{style:'color:var(--bad)'},x.your)):null))));}
 
@@ -1108,7 +1138,15 @@ function vOrigin(m){const o=Object.assign({c:'DE',city:'',other:''},S.origin||{}
 const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),['🔊 Aussprache']],
   ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 Gemini (optional)']],
   ['sync','☁️',T('Sync & Backup'),T('Geräte abgleichen & sichern'),['☁️ Geräte synchronisieren (GitHub)','💾 Fortschritt sichern']]];
+function vPlanSet(m){const P=Object.assign({},PLAN_DEF,S.plan||{});
+  const L=[['vocab','🗂️',T('Vokabeln wiederholen'),T('bis zum Tagesziel')],['lesson','📚',T('Nächste Lektion'),T('Lernen, Üben, Festigen, Tests')],['mix','🔀',T('Gemischte Wiederholung'),T('15 Aufgaben aus allem Gelernten')],
+    ['story','📖',T('Geschichte'),T('wenn eine neue freigeschaltet ist')],['freq','📚',T('Häufige Wörter'),T('der aktuellen ')+UW],['shadow','🎧',T('Aussprache'),T('7 Sätze Shadowing')],['mistakes','✏️',T('Fehler üben'),T('wenn es offene Fehler gibt')]];
+  m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Mein Tagesplan')),h('p',{class:'sub'},T('Angehakt = jeden Tag im Plan auf der Startseite. Der Rest steht unter „Extras“. Reihenfolge: leicht → schwer.')),
+    h('div',{class:'card planset'},L.map(([id,ic,t,d])=>{const cb=h('input',{type:'checkbox',checked:!!P[id]});
+      cb.onchange=()=>{S.plan=Object.assign({},PLAN_DEF,S.plan||{},{[id]:cb.checked});S.planT=Date.now();save();};
+      return h('label',{class:'row planrow'},cb,h('span',{class:'pic'},ic),h('span',{style:'flex:1;min-width:0'},h('b',{},t),h('span',{class:'muted small',style:'display:block'},d)));})));}
 function vSettings(m,sec){
+  if(sec==='plan')return vPlanSet(m);
   const s=SETSEC.find(x=>x[0]===sec);
   if(s){const tmp=h('div');vSettingsAll(tmp);const want=s[4].map(x=>T(x));const cards=[...tmp.children].filter(el=>want.includes(el.querySelector('h2')?.textContent||''));
     /* lange Erklärtexte einklappen, damit die Seite ohne Scrollen auskommt */
@@ -1118,7 +1156,7 @@ function vSettings(m,sec){
     const html=await (await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'})).text();const v=(html.match(/APP_VERSION="([^"]+)"/)||[])[1];
     if(v&&v!==window.APP_VERSION){toast(T('Neue Version gefunden – lade neu …'));if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>location.reload(),600);}else toast(T('Du hast schon die neueste Version ✓'));}catch(e){toast(T('Keine Verbindung – später noch mal versuchen'));}};
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):T('Offline-Datei');
-  m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),
+  m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),mtile('📅',T('Mein Tagesplan'),T('Was täglich dran ist'),()=>go('settings/plan')),
     ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0])))),
     h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
 
@@ -1143,6 +1181,8 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   o.mistakes=((a.updated||0)>=(b.updated||0)?a.mistakes:b.mistakes)||[];
   o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
   if((b.vocabGoalT||0)>(a.vocabGoalT||0)){o.vocabGoal=b.vocabGoal;o.vocabGoalT=b.vocabGoalT;}
+  if((b.planT||0)>(a.planT||0)){o.plan=b.plan;o.planT=b.planT;}
+  o.day=Object.assign({},b.day||{});for(const[k,v]of Object.entries(a.day||{}))if(v>(o.day[k]||''))o.day[k]=v;
   o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
   o.origin=a.origin||b.origin;
   o.name=a.name||b.name;o.gender=a.gender||b.gender;

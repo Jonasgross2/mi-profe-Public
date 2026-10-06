@@ -252,7 +252,7 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .seg.two{grid-template-columns:repeat(2,1fr);margin-top:10px}
 .lrow{padding:12px 14px}
 @media (max-width:700px){.lrow .ld{display:none}.lrow .rounds{margin-top:6px}}
-@media (max-width:700px){.wb{height:34px}.week{margin:4px 0 0}.hero{padding:16px 18px}.hero h2{font-size:21px}.hic{font-size:28px}.today{margin:0 0 12px}}
+@media (max-width:700px){.chips .chip{padding:6px 12px}.wb{height:30px}.week{margin:4px 0 0}.hero{padding:16px 18px}.hero h2{font-size:21px}.hic{font-size:28px}.today{margin:0 0 12px}}
 @media (max-width:700px){.weekcard{padding:12px 14px}.weekcard .small{font-size:11px}.lrow{padding:9px 12px}.lrow .lt{font-size:15px}.lrow .rounds{margin-top:4px;gap:4px}.rounds .rd{padding:2px 8px;font-size:11.5px}.main h1{font-size:26px}}
 
 /* Wörterbuch */
@@ -343,3 +343,9 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .btn.pickopt{justify-content:flex-start;text-align:left;gap:12px;padding:12px 14px;min-height:60px}
 .pickopt .pt{flex:1;display:flex;flex-direction:column;gap:2px;font-weight:400}
 .pickopt .pic{font-size:24px}
+/* Mein Tagesplan */
+.planset{padding:6px 16px}
+.planrow{flex-wrap:nowrap;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.planrow:last-child{border-bottom:0}
+.planrow input{width:20px;height:20px;accent-color:var(--accent);flex:none}
+.hidetext{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:180px;text-align:center}
