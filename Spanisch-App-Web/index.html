@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261007-0013";</script>
+<script>window.PWA=true;window.APP_VERSION="20261007-0018";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -388,6 +388,13 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .hardrow:first-child{border-top:0}.hardrow .es{font-weight:600}.hardrow .muted{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
+<script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt schwarzem Bildschirm eine Meldung mit Neu-laden/Update-Knopf. Fortschritt im localStorage bleibt unberührt. */
+(function(){var err='';window.addEventListener('error',function(e){if(!err)err=(e&&e.message)||'';});
+function fix(){try{if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister();});});if(window.caches)caches.keys().then(function(k){k.forEach(function(x){caches.delete(x);});});}catch(e){}setTimeout(function(){location.reload();},800);}
+window.addEventListener('load',function(){setTimeout(function(){var vis=[].some.call(document.body.children,function(e){return!/^(SCRIPT|NOSCRIPT)$/.test(e.tagName);});if(vis)return;
+var d=document.createElement('div');d.style.cssText='font:16px -apple-system,sans-serif;padding:40px 24px;color:#222;background:#fff;min-height:100vh';
+d.innerHTML='<h2>Mi profe startet gerade nicht</h2><p>Dein Fortschritt ist sicher gespeichert. Bitte lade die neueste Version.</p><p style="color:#888;font-size:13px">'+String(err).replace(/</g,'&lt;')+'</p>';
+var b=document.createElement('button');b.textContent='Neueste Version laden';b.style.cssText='font-size:17px;padding:12px 18px;border-radius:10px;border:0;background:#c0472f;color:#fff';b.onclick=fix;d.appendChild(b);document.body.appendChild(d);},1500);});})();</script>
 <script>window.COURSE={units:[]};
 /* ================= UNIDAD 0 · EL PRIMER DÍA ================= */
 COURSE.units.push({id:'u0',n:'0',title:'El primer día',sub:'Begrüßen · sich vorstellen · nach dem Befinden fragen · Aussprache',
@@ -9151,7 +9158,9 @@ function trToggle(box){const TRI=EX==='de'&&window.INFO_TR||null;if(!TRI)return 
   return null;}
 /* Vorlesbarer Teil eines Beispiels: ohne (Klammern), „= Übersetzung“, „+ Präsens“-Angaben, ✓ und deutsche Teile nach „–“ */
 /* nicht vorlesen: deutsche oder englische Erklärteile (Erklärsprache) */
-const looksDe=t=>/[äöß]|(?<!g)ü|(?<!\p{L})(ich|du|er|wir|ihr|und|der|die|das|ist|bin|nicht|auch|mit|für|oder|aber|doch|sollen|können|Kontext|the|you|your|have|had|should|could|would|only|with|and|is|are|was|of|to|it|that|this|what|when|where|why|how|I)(?!\p{L})/u.test(t);
+const LOOKS_W=new Set(['ich','du','er','wir','ihr','und','der','die','das','ist','bin','nicht','auch','mit','für','oder','aber','doch','sollen','können','kontext','the','you','your','have','had','should','could','would','only','with','and','is','are','was','of','to','it','that','this','what','when','where','why','how']);
+const looksDe=t=>{if(/[äöß]/.test(t)||/(^|[^g])ü/.test(t))return true; /* ohne Lookbehind – ältere iOS-Safari kennen ihn nicht */
+  return t.split(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñÄÖäöß]+/).some(w=>w==='I'||LOOKS_W.has(w.toLowerCase()));};
 function speakable(t){t=t.replace(/\s*\([^)]*\)/g,'').replace(/\s*=\s*[^·]*/g,' ').replace(/\s*\+\s*[A-ZÄÖÜ][\wäöüß]*\.?(\s+[A-ZÄÖÜ][\wäöüß]*\.?)*/g,'').replace(/✓/g,'');
   t=t.split(/\s+–\s+/).filter(x=>!looksDe(x)).join(' – ').replace(/\s*\+\s*/g,', ');return t.replace(/\s+·\s*$/,'').replace(/\s{2,}/g,' ').trim();}
 function addSpeakTo(el){const t=speakable(el.textContent);if(!t||looksDe(t))return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}

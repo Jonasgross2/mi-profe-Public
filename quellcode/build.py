@@ -2,6 +2,14 @@ import pathlib, time
 base=pathlib.Path(__file__).resolve().parent
 s=base/'src'
 VERSION=time.strftime('%Y%m%d-%H%M')
+GUARD=r'''<script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt schwarzem Bildschirm eine Meldung mit Neu-laden/Update-Knopf. Fortschritt im localStorage bleibt unberührt. */
+(function(){var err='';window.addEventListener('error',function(e){if(!err)err=(e&&e.message)||'';});
+function fix(){try{if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister();});});if(window.caches)caches.keys().then(function(k){k.forEach(function(x){caches.delete(x);});});}catch(e){}setTimeout(function(){location.reload();},800);}
+window.addEventListener('load',function(){setTimeout(function(){var vis=[].some.call(document.body.children,function(e){return!/^(SCRIPT|NOSCRIPT)$/.test(e.tagName);});if(vis)return;
+var d=document.createElement('div');d.style.cssText='font:16px -apple-system,sans-serif;padding:40px 24px;color:#222;background:#fff;min-height:100vh';
+d.innerHTML='<h2>Mi profe startet gerade nicht</h2><p>Dein Fortschritt ist sicher gespeichert. Bitte lade die neueste Version.</p><p style="color:#888;font-size:13px">'+String(err).replace(/</g,'&lt;')+'</p>';
+var b=document.createElement('button');b.textContent='Neueste Version laden';b.style.cssText='font-size:17px;padding:12px 18px;border-radius:10px;border:0;background:#c0472f;color:#fff';b.onclick=fix;d.appendChild(b);document.body.appendChild(d);},1500);});})();</script>
+'''
 def page(pwa):
     head_pwa='''<link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#c4472b">
@@ -20,7 +28,7 @@ def page(pwa):
 {head_pwa}
 <style>{(s/'app.css').read_text()}</style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
-{scripts}
+{GUARD}{scripts}
 </body></html>'''
 d=base/'dist';d.mkdir(exist_ok=True)
 (d/'Spanisch-Lehrer.html').write_text(page(False))
