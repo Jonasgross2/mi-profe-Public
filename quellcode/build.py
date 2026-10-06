@@ -2,13 +2,16 @@ import pathlib, time
 base=pathlib.Path(__file__).resolve().parent
 s=base/'src'
 VERSION=time.strftime('%Y%m%d-%H%M')
-GUARD=r'''<script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt schwarzem Bildschirm eine Meldung mit Neu-laden/Update-Knopf. Fortschritt im localStorage bleibt unberührt. */
-(function(){var err='';window.addEventListener('error',function(e){if(!err)err=(e&&e.message)||'';});
+GUARD=r'''<script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt leerem Bildschirm eine Meldung mit Fehlertext, Neu-laden- und Sprache-zurück-Knopf. Fortschritt bleibt unberührt. */
+(function(){var err='';window.addEventListener('error',function(e){if(!err)err=((e&&e.message)||'')+(e&&e.lineno?' (Zeile '+e.lineno+':'+e.colno+')':'');});
 function fix(){try{if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(function(r){r.forEach(function(x){x.unregister();});});if(window.caches)caches.keys().then(function(k){k.forEach(function(x){caches.delete(x);});});}catch(e){}setTimeout(function(){location.reload();},800);}
-window.addEventListener('load',function(){setTimeout(function(){var vis=[].some.call(document.body.children,function(e){return!/^(SCRIPT|NOSCRIPT)$/.test(e.tagName);});if(vis)return;
-var d=document.createElement('div');d.style.cssText='font:16px -apple-system,sans-serif;padding:40px 24px;color:#222;background:#fff;min-height:100vh';
-d.innerHTML='<h2>Mi profe startet gerade nicht</h2><p>Dein Fortschritt ist sicher gespeichert. Bitte lade die neueste Version.</p><p style="color:#888;font-size:13px">'+String(err).replace(/</g,'&lt;')+'</p>';
-var b=document.createElement('button');b.textContent='Neueste Version laden';b.style.cssText='font-size:17px;padding:12px 18px;border-radius:10px;border:0;background:#c0472f;color:#fff';b.onclick=fix;d.appendChild(b);document.body.appendChild(d);},1500);});})();</script>
+function de(){try{var sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}');sh.ui='de';sh.ex='de';localStorage.setItem('mi-profe-shared',JSON.stringify(sh));}catch(e){}location.hash='';location.reload();}
+function btn(t,f,bg){var b=document.createElement('button');b.textContent=t;b.style.cssText='display:block;width:100%;font-size:17px;padding:13px;margin-top:10px;border-radius:10px;border:0;background:'+bg+';color:#fff';b.onclick=f;return b;}
+var shown=false;function check(){if(shown)return;if(document.readyState!=='complete')return setTimeout(check,1000);var vis=[].some.call(document.body.children,function(e){return!/^(SCRIPT|NOSCRIPT)$/.test(e.tagName);});if(vis)return;
+var d=document.createElement('div');d.style.cssText='font:16px -apple-system,sans-serif;padding:48px 24px;color:#222;background:#fff;min-height:100vh;box-sizing:border-box';
+d.innerHTML='<h2 style="margin-top:0">Mi profe startet gerade nicht</h2><p>Dein Fortschritt ist sicher gespeichert.</p><p style="background:#f4f0ea;padding:10px;border-radius:8px;font:13px ui-monospace,Menlo,monospace;word-break:break-word">Fehler: '+(String(err).replace(/</g,'&lt;')||'(keine Meldung)')+'<br>Version: '+(window.APP_VERSION||'?')+'<br>'+navigator.userAgent.replace(/</g,'&lt;')+'</p><p style="font-size:14px;color:#666">Bitte mach einen Screenshot davon.</p>';
+d.appendChild(btn('Neueste Version laden',fix,'#c0472f'));d.appendChild(btn('Sprache auf Deutsch zurückstellen',de,'#555'));shown=true;document.body.appendChild(d);}
+window.addEventListener('load',function(){setTimeout(check,1500);});setTimeout(check,3000);})();</script>
 '''
 def page(pwa):
     head_pwa='''<link rel="manifest" href="manifest.webmanifest">
