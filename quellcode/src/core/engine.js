@@ -380,7 +380,21 @@ if(!IN_ARTIFACT)window.addEventListener('hashchange',route);
 function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{class:'overlay'});const close=v=>{ov.remove();res(v);};
   ov.append(h('div',{class:'card',style:'max-width:380px;width:100%'},h('p',{style:'margin-top:0;font-weight:600'},text),h('div',{class:'row',style:'justify-content:flex-end'},h('button',{class:'btn',onclick:()=>close(false)},T('Abbrechen')),h('button',{class:'btn primary',onclick:()=>close(true)},okLabel||'OK'))));
   ov.onclick=e=>{if(e.target===ov)close(false);};document.body.append(ov);});}
-function vWelcome(again){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
+/* Erster Start in 2 Schritten: 1) Lernsprache wählen, 2) Name & Ansprache (Beispiel hängt von der Lernsprache ab).
+   Gewählt = mi-profe-shared.lang gesetzt (oder in dieser Sitzung bestätigt). Andere Sprache als die geladene → Neustart mit deren Paket. */
+function learnChosen(){try{if(sessionStorage.getItem('mp-learn-ok'))return true;}catch(e){}try{const sh=JSON.parse(localStorage.getItem(SHARED)||'null');return!!(sh&&sh.lang);}catch(e){return false;}}
+function vLearnPick(){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}
+  const avail=window.PACKS?PACKS.learn:Object.values(LANGS).filter(L=>L.course&&L.course.units.length).map(L=>({code:L.code,name:L.name,flag:L.flag}));
+  const planned=(window.LANG_PLANNED||[]).filter(([c])=>!avail.some(L=>L.code===c));
+  const pick=code=>{try{sessionStorage.setItem('mp-learn-ok','1');}catch(e){}let sh={};try{sh=JSON.parse(localStorage.getItem(SHARED)||'{}')||{};}catch(e){}sh.lang=code;if(!sh.ui)sh.ui=UI;
+    try{localStorage.setItem(SHARED,JSON.stringify(sh));}catch(e){}if(code!==LANG.code&&!IN_ARTIFACT)return reloadApp();route();};
+  document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:440px;width:100%;text-align:center;padding:32px 24px'},
+    UI_LANGS.length>1?h('div',{class:'uisel'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',title:n,onclick:()=>{if(c!==UI)setUI(c,true);}},f))):null,
+    h('div',{class:'muted small',style:'margin-bottom:6px'},T('Schritt 1 von 2')),h('div',{style:'font-size:44px;margin-bottom:6px'},'🌍'),
+    h('h1',{style:'margin:0 0 6px'},T('Was möchtest du lernen?')),h('p',{class:'muted',style:'margin:0 0 18px'},T('Du kannst später jederzeit wechseln – jede Sprache hat ihren eigenen Fortschritt.')),
+    h('div',{class:'learngrid'},...avail.map(L=>h('button',{class:'learntile',onclick:()=>pick(L.code)},h('span',{class:'lf'},L.flag),h('b',{},T(L.name)),h('span',{class:'muted small'},T('A1 bis C2')))),
+      ...planned.map(([c,n,f])=>h('button',{class:'learntile soon',onclick:()=>toast(T(n)+T(' ist noch in Arbeit'))},h('span',{class:'lf'},f),h('b',{},T(n)),h('span',{class:'muted small'},T('bald'))))))));}
+function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
   let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('b',{},l),ex?h('span',{},ex):null);return b;});
   const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const v2=inp2.value.trim().replace(/\s+/g,' ').slice(0,40);const changed=v!==S.name||g!==S.gender||v2!==(S.surname||'');S.name=v;S.gender=g;if(v2)S.surname=v2;else delete S.surname;save();
@@ -389,6 +403,7 @@ function vWelcome(again){const bt=document.getElementById('boot');document.body.
   inp.onkeydown=inp2.onkeydown=e=>{if(e.key==='Enter')ok();};
   document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
     UI_LANGS.length>1?h('div',{class:'uisel'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',title:n,onclick:()=>{if(c!==UI)setUI(c,true);}},f))):null,
+    again?null:h('button',{class:'linkbtn',style:'display:block;margin:0 auto 6px;text-decoration:none;color:var(--muted)',onclick:()=>{try{sessionStorage.removeItem('mp-learn-ok');}catch(e){}vLearnPick();}},T('← Schritt 2 von 2 · ')+LANG.flag+' '+T(LANG.name)),
     h('div',{style:'font-size:48px;margin-bottom:6px'},'👋'),h('h1',{style:'margin:0 0 6px'},again?T('Name ändern'):T('¡Hola!')),
     h('p',{class:'muted',style:'margin:0 0 18px'},again?T('So begrüße ich dich und so heißt du in den Übungen.'):fmt(T('Ich bin dein Lehrer für {L}. Wie heißt du?'))),
     inp,inp2,h('p',{class:'muted small',style:'margin:16px 0 8px'},T('Wie soll ich dich ansprechen? (wichtig für die Endungen)')),LANG.genderEx?h('div',{class:'gsel'},gb):null,
