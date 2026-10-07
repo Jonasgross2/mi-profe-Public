@@ -10,6 +10,8 @@ defineLang('es',{name:'Spanisch',flag:'🇪🇸',native:'Español',into:'ins Spa
   sampleSay:['Hola, soy tu profesora de español.','¿Qué tal? Me llamo Lucía.'],
   voiceHint:'Auf dem Mac klingen „Mónica“ bzw. Stimmen mit „(Premium)“/„(Erweitert)“ am besten. Mehr Stimmen: Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Spanisch.',
   storySeries:'Nuevo en Barcelona',storyIntro:'Ben zieht nach Barcelona.',
+  mark:/[ñ¿¡áéíóú]|^(el|la|los|las|un|una|unos|unas)\s/i, /* erkennt beim Import von Wortlisten, welche Seite Spanisch ist */
+  sampleWords:[['la mesa',{de:'der Tisch',en:'the table',pt:'a mesa'}],['el perro',{de:'der Hund',en:'the dog',pt:'o cão'}]],
   key:'espanol-lehrer-v1',gist:'mi-profe-fortschritt.json',
   course:window.COURSE,placement:window.PLACEMENT,stories:window.STORIES||[],levels:window.LEVELS,levelOf:window.LEVEL_OF,emoji:window.EMOJI});
 
