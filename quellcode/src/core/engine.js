@@ -306,7 +306,7 @@ const tiles=(...k)=>h('div',{class:'mtiles'},...k);
 /* Zurück-Navigation: Verlauf der besuchten Seiten. „Zurück“ führt dorthin, wo man herkam (sonst zur Standardseite r).
    Reiterwechsel auf derselben Seite (Stufe, Lektionen/Extras) ersetzen den Eintrag; ein Tipp auf die Leiste startet neu. */
 let NAVSTACK=[],NAVRESET=false;
-const PLAYR=['lesson','round','check','mix','num','reading'];
+const PLAYR=['lesson','round','check','mix','reading'];
 const pageKey=r=>{const p=r.split('/');return PLAYR.includes(p[0])?'play':p[0]==='units'?'units':p[0]==='unit'?'unit/'+p[1]:p[0]==='ref'&&p[1]?'ref/'+p[1]:p[0]==='ref'?'ref':r;};
 function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NAVSTACK.length;
   if(n>=2&&pageKey(NAVSTACK[n-2])===pageKey(r))NAVSTACK.pop();
@@ -925,9 +925,13 @@ function horaEs(hh,mm){let h=hh%12||12,m=mm,pre='';const hw=x=>x===1?'una':numEs
   if(m===0)return[base+' en punto',base];if(m===15)return[base+' y cuarto',base+' y quince'];if(m===30)return[base+' y media',base+' y treinta'];return[base+' y '+numEs(m)];}
 const rint=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 /* freigeschaltet nach Kursfortschritt: Zahlen ab U1, große Zahlen ab U2 L3, Uhrzeit & Preise ab U4, Datum ab U6 */
-function numKinds(){const st=id=>Object.keys(S.lessons).some(k=>k.startsWith(id+'.'));const K=[];
-  if(st('u1')||st('u2'))K.push('numw','numl');if(S.lessons['u2.l3']?.done||st('u3'))K.push('bigw','bigl');if(st('u4'))K.push('time','timel','price');if(st('u6'))K.push('date');return K;}
-function numVal(kind){if(kind==='numw'||kind==='numl')return rint(0,20)+'';if(kind==='bigw'||kind==='bigl')return(Math.random()<.5?rint(21,99):Math.random()<.6?rint(100,999):rint(1000,2100))+'';
+/* gelernt = Lektion mindestens einmal gemacht (Runde 1) oder Abschlusstest der Unidad bestanden */
+const learnedL=(uid,lid)=>rnd(uid+'.'+lid)>=1||!!S.checks[uid]?.pass;
+/* Zahlen-Aufgaben nach gelernten Lektionen: U1 L2 Zahlen 0–10 · U2 L3 bis 20 & große Zahlen · U4 L3 Uhrzeit · U4 L4 Preise · U6 L2 Datum. all = auch Neues */
+function numKinds(all){const K=[];const L=(u,l)=>all||learnedL(u,l);
+  if(L('u1','l2'))K.push('numw','numl');if(L('u2','l3'))K.push('bigw','bigl');if(L('u4','l3'))K.push('time','timel');if(L('u4','l4'))K.push('price');if(L('u6','l2'))K.push('date');return K;}
+let NUM_ALL=false;
+function numVal(kind){if(kind==='numw'||kind==='numl')return rint(0,NUM_ALL||learnedL('u2','l3')?20:10)+'';if(kind==='bigw'||kind==='bigl')return(Math.random()<.5?rint(21,99):Math.random()<.6?rint(100,999):rint(1000,2100))+'';
   if(kind==='time'||kind==='timel')return rint(0,23)+':'+String(rint(0,11)*5).padStart(2,'0');if(kind==='date')return rint(1,28)+'.'+rint(1,12);
   return rint(1,40)+','+String(rint(0,19)*5).padStart(2,'0');}
 const near=(n,max)=>{const c=new Set([n+10,n-10,n+1,n-1,+String(n).split('').reverse().join(''),n%10===6?n+1:n%10===7?n-1:n+20]);if(Math.floor(n/10)===6)c.add(n+10);if(Math.floor(n/10)===7)c.add(n-10);
@@ -945,10 +949,14 @@ function numStep(kind,v){
   const fmtP=(E,C)=>E+','+String(C).padStart(2,'0')+' €';const o=new Set([fmtP(e,c)]);
   for(const[E,C]of shuffle([[e,(c+50)%100],[e+10,c],[Math.max(1,e-10),c],[e,c===0?5:0],[+String(e).split('').reverse().join('')||e+2,c]]))if(o.size<3)o.add(fmtP(E,C));
   return{t:'mc',kind:T('Preise hören'),q:T('Wie viel kostet es?'),say,autoSay:true,opts:[...o],a:0};}
-function numItems(n){const K=numKinds();if(!K.length)return[];return[...Array(n)].map(()=>{const k=K[Math.floor(Math.random()*K.length)];const v=numVal(k);return{s:numStep(k,v),ref:'N|'+k+'|'+v};});}
-function vNum(m){const steps=numItems(15);
-  if(!steps.length){m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},T('Zahlen & Uhrzeit')),h('div',{class:'card'},T('Zahlen kommen in Unidad 1 – fang dort an, dann geht es hier los.')));return;}
-  play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps,onBack:()=>goBack('ref'),onDone:()=>({label:T('Noch eine Runde →'),fn:()=>{m.innerHTML='';vNum(m);}})});}
+function numItems(n,all){NUM_ALL=!!all;const K=numKinds(all);if(!K.length)return[];return[...Array(n)].map(()=>{const k=K[Math.floor(Math.random()*K.length)];const v=numVal(k);return{s:numStep(k,v),ref:'N|'+k+'|'+v};});}
+/* Umschalter „Nur Gelerntes | Alles“ (Zahlen & Verben), gemerkt in S.settings */
+const learnSeg=(key,re)=>h('div',{class:'seg two',style:'margin:4px 0 14px'},[[false,T('Nur Gelerntes')],[true,T('Alles (auch Neues)')]].map(([v,l])=>h('button',{class:!!S.settings[key]===v?'on':'',onclick:()=>{S.settings[key]=v;save();re();}},h('b',{},l))));
+function vNum(m){const all=!!S.settings.numAll;m.innerHTML='';m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},T('Zahlen & Uhrzeit')),h('p',{class:'sub'},T('Jedes Mal neue Werte – 15 Aufgaben.')),learnSeg('numAll',()=>vNum(m)));
+  const K=numKinds(all);const NAMES=[[['numw','numl'],learnedL('u2','l3')||all?T('Zahlen bis 20'):T('Zahlen bis 10')],[['bigw','bigl'],T('große Zahlen')],[['time','timel'],T('Uhrzeit')],[['price'],T('Preise')],[['date'],T('Datum')]];
+  if(!K.length){m.append(h('div',{class:'card'},T('Zahlen kommen in Unidad 1, Lektion 2 – danach geht es hier los. Oder oben „Alles“ wählen.')));return;}
+  m.append(h('div',{class:'card',style:'padding:14px 16px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Dabei')),h('div',{class:'chips'},NAMES.map(([ks,n])=>{const on=ks.some(k=>K.includes(k));return h('span',{class:'chip'+(on?'':' done'),style:on?'':'opacity:.45'},(on?'✓ ':'🔒 ')+n);}))),
+    h('button',{class:'btn primary',style:'width:100%;margin-top:14px;min-height:48px',onclick:()=>{m.innerHTML='';play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps:numItems(15,all),onBack:()=>vNum(m),onDone:()=>({label:T('Noch eine Runde →'),fn:()=>{m.innerHTML='';play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps:numItems(15,all),onBack:()=>vNum(m),onDone:()=>({label:T('Zur Übersicht'),fn:()=>vNum(m)})});}})});}},T('15 Aufgaben üben →')));}
 
 /* Gemischte Wiederholung: Aufgaben der letzten 3 Runden werden gemieden (S.mixSeen), dazu ein paar frisch erzeugte Vokabelaufgaben */
 function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
@@ -1026,11 +1034,13 @@ function vReading(m,id){const r=(window.READINGS||[]).find(x=>x.id===id);if(!r)r
     onDone:(res)=>{S.readings=S.readings||{};const p=S.readings[r.id];S.readings[r.id]={date:today(),score:Math.max(p?.score||0,res.score)};save();
       const R=window.READINGS||[];const nx=R.find(x=>!S.readings[x.id]);return nx?{label:T('Nächster Text →'),fn:()=>go('reading/'+nx.id)}:{label:T('Zu den Lesetexten →'),fn:()=>go('ref/r')};}});}
 /* ---------- Verben-Trainer: Konjugationen aus allen '+UWS+', die du schon angefangen hast ---------- */
-function vVerbs(m){m.append(backTo(T('Bibliothek'),'ref'));const pool=[];for(const u of COURSE.units){const started=u.lessons.some(l=>rnd(u.id+'.'+l.id)>=1)||S.checks[u.id]?.pass;
-    u.lessons.forEach(l=>l.steps.forEach((s,i)=>{if(s.t==='conj')pool.push({s,ref:u.id+'|'+l.id+'|'+i,unit:u,started});}));}
-  const mine=pool.filter(x=>x.started);const use=mine.length>=4?mine:pool.filter(x=>unitLevel(x.unit)===T('A1'));
-  m.append(h('h1',{},T('Verben-Trainer')),h('p',{class:'sub'},(mine.length>=4?T('Konjugationen aus den ')+UWS+T(', die du schon angefangen hast'):T('Sobald du mehr Lektionen gemacht hast, kommen deine Verben dazu – bis dahin A1-Verben'))+' ('+use.length+T(' Tabellen, alle Zeiten gemischt).')),
-    h('button',{class:'btn primary',onclick:()=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:shuffle(use).slice(0,8),onBack:()=>go('verbs'),onDone:()=>({label:T('Noch 8 Verben →'),fn:()=>{m.innerHTML='';vVerbs(m);}})});}},T('8 Verben üben →')));}
+function vVerbs(m){const all=!!S.settings.verbsAll;m.innerHTML='';m.append(backTo(T('Bibliothek'),'ref'));const pool=[];
+  for(const u of COURSE.units)u.lessons.forEach(l=>l.steps.forEach((s,i)=>{if(s.t==='conj')pool.push({s,ref:u.id+'|'+l.id+'|'+i,unit:u,learned:learnedL(u.id,l.id)});}));
+  const use=all?pool:pool.filter(x=>x.learned);
+  m.append(h('h1',{},T('Verben-Trainer')),learnSeg('verbsAll',()=>vVerbs(m)),
+    h('p',{class:'sub'},all?T('Alle Konjugationen des Kurses, A1 bis C2')+' ('+use.length+(use.length===1?T(' Tabelle).'):T(' Tabellen).')):T('Konjugationen aus Lektionen, die du schon gelernt hast')+' ('+use.length+(use.length===1?T(' Tabelle).'):T(' Tabellen).'))));
+  if(use.length<1){m.append(h('div',{class:'card'},T('Noch keine Verben gelernt – die ersten kommen in Unidad 1. Oder oben „Alles“ wählen.')));return;}
+  m.append(h('button',{class:'btn primary',style:'width:100%;min-height:48px',onclick:()=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:shuffle(use).slice(0,8),onBack:()=>go('verbs'),onDone:()=>({label:T('Noch 8 Verben →'),fn:()=>{m.innerHTML='';vVerbs(m);}})});}},T('8 Verben üben →')));}
 
 /* ---------- vocab trainer ---------- */
 /* Stand einer Karte: 0 neu · 1 lernend (< 7 Tage) · 2 gefestigt (7–20) · 3 sicher (≥ 21 Tage Abstand) */
