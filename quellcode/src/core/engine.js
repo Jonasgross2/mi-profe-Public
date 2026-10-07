@@ -476,9 +476,10 @@ function dayPlan(){const plan=planItems().filter(x=>planOn(x.id));
   return plan;}
 /* Plan-Eintrag öffnen: Vokabeln fragen erst nach der Art (je nach verfügbarer Zeit) */
 function planGo(x){x.fn&&!x.done?x.fn():go(x.r);}
-function vocabPick(){const set=reviewSet();if(!set.length)return go('vocab');const n=set.length;
+function vocabPick(){const pv=pauseGet('vocab');if(pv)return resumeVocab(Object.assign({key:'vocab'},pv));/* angefangene Runde von heute: direkt weiter */
+  const set=reviewSet();if(!set.length)return go('vocab');const n=set.length;
   const ov=h('div',{class:'overlay'});const close=()=>ov.remove();
-  const opt=(ic,t,d,sec,mode)=>h('button',{class:'btn pickopt',onclick:()=>{close();runVocab(set,mode,true);}},h('span',{class:'pic'},ic),h('span',{class:'pt'},h('b',{},t),h('span',{class:'muted small'},d)),h('span',{class:'muted small'},T('ca. ')+Math.max(1,Math.round(n*sec/60))+T(' Min.')));
+  const opt=(ic,t,d,sec,mode)=>h('button',{class:'btn pickopt',onclick:()=>{close();runVocab(set,mode,true,{pk:'vocab'});}},h('span',{class:'pic'},ic),h('span',{class:'pt'},h('b',{},t),h('span',{class:'muted small'},d)),h('span',{class:'muted small'},T('ca. ')+Math.max(1,Math.round(n*sec/60))+T(' Min.')));
   ov.append(h('div',{class:'card',style:'max-width:400px;width:100%'},h('div',{class:'kind'},n+T(' Karten')),h('h2',{style:'margin:0 0 12px'},T('Wie möchtest du üben?')),
     h('div',{class:'picklist'},opt('🃏',T('Karten'),T('Aufdecken & selbst bewerten – am schnellsten'),8,'flip'),opt('✍️',T('Tippen'),T('Wort schreiben – am gründlichsten'),18,'type'),opt('🎧',T('Hören'),T('Hören & schreiben'),15,'listen')),
     h('button',{class:'btn ghost',style:'width:100%;margin-top:8px',onclick:close},T('Abbrechen'))));
@@ -488,6 +489,11 @@ function vHome(m){
   const acc=S.stats.answers?Math.round(100*S.stats.correct/S.stats.answers):0;const td=today();
   const hr=new Date().getHours();const greet=LANG.greet[hr<14?0:hr<20?1:2];
   m.append(h('h1',{},greet+', '+S.name+'!'));
+  /* angefangen: die zuletzt unterbrochene Lektion/Runde (weitere als Zahl) */
+  const pl=pauseList();if(pl.length){const p=pl[0];const del=h('button',{class:'btn ghost small',title:T('Verwerfen'),onclick:e=>{e.stopPropagation();pauseDel(p.key);route();}},'×');
+    m.append(h('div',{class:'card resume',onclick:()=>resumeGo(p)},h('div',{class:'row',style:'flex-wrap:nowrap;gap:10px'},h('div',{style:'font-size:22px'},'⏸'),
+      h('div',{style:'flex:1;min-width:0'},h('div',{class:'kind',style:'margin:0'},T('Angefangen')+(pl.length>1?' · +'+(pl.length-1):'')),h('b',{style:'display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'},p.title),h('span',{class:'muted small'},pauseInfo(p))),
+      h('button',{class:'btn primary small',onclick:e=>{e.stopPropagation();resumeGo(p);}},T('▶ Weiter')),del)));}
   /* Tagesplan: feste Bausteine mit Zeitschätzung, die erste offene Aufgabe wird groß angezeigt */
   const plan=dayPlan();
   const nDone=plan.filter(x=>x.done).length,left=plan.filter(x=>!x.done).reduce((a,x)=>a+x.min,0);
@@ -640,7 +646,7 @@ function freqSteps(u,l){const W=l.steps.filter(s=>s.t==='vocab').flatMap(s=>s.it
   return out.concat(shuffle(ex));}
 function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l)return vUnits(m);
   const steps=l.freq?freqSteps(u,l):l.steps.map((s,i)=>({s,ref:uid+'|'+lid+'|'+i}));
-  play(m,{title:''+UW+' '+u.n+' · '+l.title,steps,unit:u,onBack:()=>goBack('unit/'+uid),
+  play(m,{title:''+UW+' '+u.n+' · '+l.title,steps,unit:u,pk:'lesson/'+uid+'/'+lid,onBack:()=>goBack('unit/'+uid),
     onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};if(l.freq)S.lessons[k].freqL=1;save();return{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)};}
       const was=rnd(k);setRound(k,1,res.score);
       if(was<2&&(res.score>=0.9||shortLesson(l))){setRound(k,shortLesson(l)?3:2,res.score);}
@@ -654,7 +660,7 @@ function roundSteps(u,l,n){const G=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+
   return shuffle(ex.concat(words.slice(0,5).map((w,i)=>vocabItem(u,w,i%2?'listen':'tr'))));}
 function vRound(m,uid,lid,n){n=+n;const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l||!(n===2||n===3))return vUnits(m);
   const k=uid+'.'+lid;let ok=false,fb='';
-  play(m,{title:''+UW+' '+u.n+' · '+l.title+T(' · Runde ')+n+T(' von 3: ')+RN[n],steps:roundSteps(u,l,n),unit:u,onBack:()=>goBack('unit/'+uid),
+  play(m,{title:''+UW+' '+u.n+' · '+l.title+T(' · Runde ')+n+T(' von 3: ')+RN[n],steps:roundSteps(u,l,n),unit:u,pk:'round/'+uid+'/'+lid+'/'+n,onBack:()=>goBack('unit/'+uid),
     onDone:(res)=>{ok=res.score>=(n===3?0.8:0.6);fb='';
       if(ok)setRound(k,n,res.score);
       else if(n===3&&res.score>=0.6){S.lessons[k].d2=today();save();fb='fast';}
@@ -666,14 +672,34 @@ function vRound(m,uid,lid,n){n=+n;const u=unitById(uid);const l=u?.lessons.find(
       :!ok?h('div',{class:'fb warn'},T('Unter 60 % – die Runde zählt noch nicht. Versuch es noch einmal oder schau dir die Lektion vorher kurz an.'))
       :n===2?h('div',{class:'fb ok'},T('Runde „Festigen“ wird morgen frei – mit etwas Abstand wiederholen bringt am meisten.')):h('div',{class:'fb ok'},T('Lektion gemeistert ✓'))});}
 
+/* ---------- Zwischenspeichern: angefangene Lektionen/Runden/Vokabelrunden merken sich automatisch, wo du warst ----------
+   Nur auf diesem Gerät (localStorage, pro Lernsprache). Lektionen 14 Tage, Vokabel-Wiederholung nur am selben Tag. */
+const PKEY=()=>'mi-profe-pause-'+LANG.code;
+function pauses(){try{return JSON.parse(localStorage.getItem(PKEY())||'{}')||{};}catch(e){return{};}}
+function pauseSave(P){try{localStorage.setItem(PKEY(),JSON.stringify(P));}catch(e){}}
+function pauseGet(k){const p=pauses()[k];if(!p)return null;const age=dayDiff(p.d,today());if(p.daily?age>0:age>14){pauseDel(k);return null;}return p;}
+function pauseSet(k,v){const P=pauses();v.d=today();v.t=Date.now();P[k]=v;pauseSave(P);}
+function pauseDel(k){const P=pauses();if(P[k]){delete P[k];pauseSave(P);}}
+function pauseList(){return Object.keys(pauses()).map(k=>{const p=pauseGet(k);return p&&Object.assign({key:k},p);}).filter(Boolean).sort((a,b)=>b.t-a.t);}
+let RESUME=null;
+function resumeGo(p){if(p.cards)return resumeVocab(p);RESUME=p.key;if(curRoute()===p.route)route();else go(p.route);}
+function resumeVocab(p){runVocab(p.cards,p.mode,p.srs,{pk:p.key,resume:p,myIds:p.myIds,again:p.myIds?()=>myRun(p.myIds.map(e=>S.srs[vkey(e)]).filter(c=>c&&!c.del)):null});}
+const pauseInfo=p=>(p.pos!=null?p.pos+1:p.i+1)+' / '+p.n;
+function pauseBtn(k,start,label){const p=pauseGet(k);return p?h('button',{class:'btn primary',style:'width:100%;min-height:48px;margin-bottom:8px',onclick:start},T('▶ Weitermachen')+' ('+pauseInfo(p)+')'):null;}
 function play(m,cfg){
-  const queue=cfg.steps.slice();let pos=0;const firstTry=new Map();let retried=new Set();const gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
-  const top=h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:async()=>{if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),h('span',{class:'muted small',id:'pcount'}));
+  let queue=cfg.steps.slice();let pos=0;const firstTry=new Map();let retried=new Set();let gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
+  /* cfg.pk = Schlüssel zum Zwischenspeichern; gespeicherter Stand wird automatisch fortgesetzt (cfg.fresh = neu anfangen) */
+  const sv=cfg.pk&&!cfg.fresh&&pauseGet(cfg.pk);
+  if(sv){queue=sv.steps;pos=sv.pos;(sv.ft||[]).forEach(([a,b])=>firstTry.set(a,b));retried=new Set((sv.rt||[]).map(i=>queue[i]).filter(Boolean));gradeable=sv.g;}
+  const top=h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:async()=>{if(cfg.pk&&pos>0){toast(T('Gespeichert – später geht es hier weiter.'));return cfg.onBack();}
+    if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),h('span',{class:'muted small',id:'pcount'}));
   const stage=h('div',{class:'step'});
-  m.append(h('div',{class:'player'},h('div',{class:'muted small',style:'margin-bottom:6px'},cfg.title),top,stage));
+  m.append(h('div',{class:'player'},h('div',{class:'muted small',style:'margin-bottom:6px'},cfg.title),
+    sv?h('div',{class:'muted small',style:'margin:-2px 0 6px'},T('⏸ Fortgesetzt, wo du aufgehört hast · '),h('button',{class:'linkbtn',onclick:()=>{pauseDel(cfg.pk);m.innerHTML='';play(m,Object.assign({},cfg,{fresh:true}));}},T('↺ neu anfangen'))):null,top,stage));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*pos/queue.length)+'%';$('#pcount').textContent=Math.min(pos+1,queue.length)+' / '+queue.length;}
   function next(){pos++;if(pos>=queue.length)return finish();show();}
   function show(){upd();stage.innerHTML='';stage.className='step';void stage.offsetWidth;stage.className='step';
+    if(cfg.pk&&pos>0)pauseSet(cfg.pk,{route:curRoute(),title:cfg.title,steps:queue,pos,ft:[...firstTry],rt:[...retried].map(x=>queue.indexOf(x)),g:gradeable,n:queue.length});
     const it=queue[pos];const isRetry=retried.has(it)&&firstTry.has(it.ref);
     if(isRetry)stage.append(h('div',{class:'pill acc',style:'margin-bottom:10px'},T('↻ Noch mal – das war vorhin falsch')));
     window.__cur=it;const R=RENDER[it.s.t];if(!R){stage.append(T('Unbekannter Schritt ')+it.s.t);return next();}
@@ -682,7 +708,7 @@ function play(m,cfg){
         if(status==='bad'){logMistake(it.ref,your);if(!cfg.noRetry&&!retried.has(it)){retried.add(it);queue.push(it);}}
         else if(cfg.mistakeMode){S.mistakes=S.mistakes.filter(x=>x.ref!==it.ref);save();}}
       if(cfg.onAnswer)cfg.onAnswer(it,status);},next});}
-  function finish(){$('.ptop .bar i').style.width='100%';
+  function finish(){$('.ptop .bar i').style.width='100%';if(cfg.pk)pauseDel(cfg.pk);
     const vals=[...firstTry.values()];const score=gradeable?vals.filter(v=>v!=='bad').length/Math.max(gradeable,vals.length||1):1;
     const after=cfg.onDone?cfg.onDone({score,firstTry}):null;stage.innerHTML='';
     const pct=Math.round(score*100);
@@ -995,7 +1021,9 @@ function vNum(m){const all=!!S.settings.numAll;m.innerHTML='';m.append(backTo(T(
   const K=numKinds(all);const NAMES=[[['numw','numl'],learnedL('u2','l3')||all?T('Zahlen bis 20'):T('Zahlen bis 10')],[['bigw','bigl'],T('große Zahlen')],[['time','timel'],T('Uhrzeit')],[['price'],T('Preise')],[['date'],T('Datum')]];
   if(!K.length){m.append(h('div',{class:'card'},T('Zahlen kommen in Unidad 1, Lektion 2 – danach geht es hier los. Oder oben „Alles“ wählen.')));return;}
   m.append(h('div',{class:'card',style:'padding:14px 16px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Dabei')),h('div',{class:'chips'},NAMES.map(([ks,n])=>{const on=ks.some(k=>K.includes(k));return h('span',{class:'chip'+(on?'':' done'),style:on?'':'opacity:.45'},(on?'✓ ':'🔒 ')+n);}))),
-    h('button',{class:'btn primary',style:'width:100%;margin-top:14px;min-height:48px',onclick:()=>{m.innerHTML='';play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps:numItems(15,all),onBack:()=>vNum(m),onDone:()=>({label:T('Noch eine Runde →'),fn:()=>{m.innerHTML='';play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps:numItems(15,all),onBack:()=>vNum(m),onDone:()=>({label:T('Zur Übersicht'),fn:()=>vNum(m)})});}})});}},T('15 Aufgaben üben →')));}
+    h('div',{style:'margin-top:14px'},pauseBtn('num',()=>goN()),h('button',{class:'btn'+(pauseGet('num')?'':' primary'),style:'width:100%;min-height:48px',onclick:()=>{pauseDel('num');goN();}},T('15 Aufgaben üben →'))));
+  function goN(){m.innerHTML='';play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps:numItems(15,all),pk:'num',onBack:()=>vNum(m),onDone:()=>({label:T('Noch eine Runde →'),fn:goN})});}
+  if(RESUME==='num'&&pauseGet('num')){RESUME=null;goN();}}
 
 /* Gemischte Wiederholung: Aufgaben der letzten 3 Runden werden gemieden (S.mixSeen), dazu ein paar frisch erzeugte Vokabelaufgaben */
 function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
@@ -1011,7 +1039,7 @@ function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
   return out;}
 function vMix(m){const steps=mixSteps(15);
   if(steps.length<5){m.append(h('h1',{},T('Gemischte Wiederholung')),h('div',{class:'card'},T('Schließ zuerst ein paar Lektionen ab – dann mische ich hier Aufgaben aus allen bisherigen Lektionen durcheinander.')));return;}
-  play(m,{title:T('Gemischte Wiederholung · 15 Aufgaben aus allen ')+UWS+'',steps,onBack:()=>go('home'),onDone:()=>{S.lastMix=today();save();return null;}});}
+  play(m,{title:T('Gemischte Wiederholung · 15 Aufgaben aus allen ')+UWS+'',steps,pk:'mix',onBack:()=>go('home'),onDone:()=>{S.lastMix=today();save();return null;}});}
 
 /* ---------- Nachschlagen: Wörterbuch & Grammatik ---------- */
 const storyFor=st=>unitById(st.after);
@@ -1088,8 +1116,9 @@ function vVerbs(m){const all=!!S.settings.verbsAll;m.innerHTML='';m.append(backT
   m.append(h('h1',{},T('Verben-Trainer')),learnSeg('verbsAll',()=>vVerbs(m)),
     h('p',{class:'sub'},(all?T('Verben aus dem ganzen Kurs'):T('Verben aus den Unidades, die du angefangen hast'))+' ('+gen.length+'). '+T('Du siehst nur den Infinitiv – überleg selbst: -ar, -er oder -ir? Stammwechsel? Bei Fehlern zeige ich das Muster.')+(tables.length?' '+T('Dazu andere Zeitformen aus gelernten Lektionen.'):'')));
   if(!gen.length&&!tables.length){m.append(h('div',{class:'card'},T('Noch keine Verben – fang eine Unidad an. Oder oben „Alles“ wählen.')));return;}
-  const go8=()=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:verbRound(all),onBack:()=>vVerbs(m),onDone:()=>({label:T('Noch 8 Verben →'),fn:go8})});};
-  m.append(h('button',{class:'btn primary',style:'width:100%;min-height:48px',onclick:go8},T('8 Verben üben →')));}
+  const go8=()=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:verbRound(all),pk:'verbs',onBack:()=>vVerbs(m),onDone:()=>({label:T('Noch 8 Verben →'),fn:go8})});};
+  if(RESUME==='verbs'&&pauseGet('verbs')){RESUME=null;return go8();}
+  m.append(pauseBtn('verbs',go8),h('button',{class:'btn'+(pauseGet('verbs')?'':' primary'),style:'width:100%;min-height:48px',onclick:()=>{pauseDel('verbs');go8();}},T('8 Verben üben →')));}
 
 /* ---------- vocab trainer ---------- */
 /* Stand einer Karte: 0 neu · 1 lernend (< 7 Tage) · 2 gefestigt (7–20) · 3 sicher (≥ 21 Tage Abstand) */
@@ -1132,7 +1161,7 @@ function myRun(cards,force){const due=myDueOf(cards);
     return askConfirm(T('Alle Wörter sind gerade geübt – das nächste ist ')+(d===1?T('morgen'):fmt(T('in {N} Tagen')).replace('{N}',d))+T(' wieder dran. Trotzdem üben?'),T('Trotzdem üben')).then(ok=>{if(ok)myRun(cards,true);});}
   const pool=due.length?due:cards;const pick=pool.map(c=>({c,k:Math.pow(Math.random(),1/myWeight(c))})).sort((a,b)=>b.k-a.k).slice(0,20).map(x=>x.c);
   const ids=cards.map(c=>c.es);
-  runVocab(shuffle(pick.map(c=>({es:c.es,de:c.de,em:c.em}))),'mix',false,{again:()=>myRun(ids.map(e=>S.srs[vkey(e)]).filter(c=>c&&!c.del))});}
+  runVocab(shuffle(pick.map(c=>({es:c.es,de:c.de,em:c.em}))),'mix',false,{pk:'my',myIds:ids,again:()=>myRun(ids.map(e=>S.srs[vkey(e)]).filter(c=>c&&!c.del))});}
 function myDueText(cards){const n=myDueOf(cards).length;if(n)return Math.min(20,n)+T(' Wörter dran · gemischt: Karteikarten, Tippen, Hören');
   const d=dayDiff(today(),cards.map(c=>c.pd).sort()[0]);return T('Alles geübt ✓ – nächste ')+(d===1?T('morgen'):fmt(T('in {N} Tagen')).replace('{N}',d));}
 function dayDiff(a,b){return Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/864e5);}
@@ -1146,7 +1175,7 @@ function vMyLists(m){m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Meine W
   const add=()=>{const n=inp.value.trim().slice(0,40)||T('Meine Wörter');const id=newListId();NEWLIST={id,l:{name:n,daily:true,t:Date.now(),c:Date.now()}};go('vocab/mine/'+id);};
   inp.onkeydown=e=>{if(e.key==='Enter')add();};
   const allW=L.flatMap(l=>myCards(l.id));
-  if(allW.length)m.append(h('button',{class:'btn primary',style:'width:100%;margin-bottom:6px',onclick:()=>myRun(allW)},L.length>1?T('▶ Alle Listen lernen'):T('▶ Lernen')),
+  if(allW.length)m.append(pauseBtn('my',()=>resumeVocab(Object.assign({key:'my'},pauseGet('my')))),h('button',{class:'btn'+(pauseGet('my')?'':' primary'),style:'width:100%;margin-bottom:6px',onclick:()=>myRun(allW)},L.length>1?T('▶ Alle Listen lernen'):T('▶ Lernen')),
     h('p',{class:'muted small',style:'margin:0 0 14px;text-align:center'},myDueText(allW)),h('div',{style:'text-align:right;margin:-6px 0 8px'},h('button',{class:'linkbtn',style:'text-decoration:none;color:var(--muted)',onclick:()=>go('vocab/stats/mine')},T('📊 Statistik'))));
   if(L.length)m.append(h('div',{class:'mlist',style:'margin-bottom:14px'},L.map(l=>{const n=myCards(l.id).length;return h('div',{class:'mrow',onclick:()=>go('vocab/mine/'+l.id)},h('span',{class:'mq'},h('b',{},l.name),h('br'),
       h('span',{class:'muted small'},n+(n===1?T(' Wort'):T(' Wörter'))+(l.daily===false?T(' · nur gezielt'):'')+(n?' · '+myDueOf(myCards(l.id)).length+T(' dran'):''))),
@@ -1203,9 +1232,10 @@ function vVocab(m,sub,lid){if(sub==='mine')return lid?vMyList(m,lid):vMyLists(m)
   m.append(h('div',{class:'card hero',style:'cursor:default'},h('div',{class:'kind'},T('Wiederholung nach Lernkurve')),h('h2',{style:'margin:0 0 '+(due.length>vocabLeft()?'4px':'12px')},vocabLeft()?T('Heute noch ')+vocabLeft()+T(' Karten'):due.length?T('Tagesziel erreicht ✓'):total?T('Für heute alles wiederholt ✓'):T('Noch keine Karten')),
     due.length>vocabLeft()?h('p',{class:'muted small',style:'margin:0 0 12px'},vocabLeft()?due.length+T(' fällig insgesamt · ')+(due.length-vocabLeft())+T(' davon freiwillig'):due.length+T(' weitere Karten sind fällig – freiwillig, sonst kommen sie an den nächsten Tagen.')):null,
 
-    h('div',{class:'row'},h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true)},T('✍️ Tippen')),
-      h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true)},T('🃏 Karten')),
-      h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true)},T('🎧 Hören'))),
+    pauseBtn('vocab',()=>resumeVocab(Object.assign({key:'vocab'},pauseGet('vocab')))),
+    h('div',{class:'row'},h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'type',true,{pk:'vocab'})},T('✍️ Tippen')),
+      h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'flip',true,{pk:'vocab'})},T('🃏 Karten')),
+      h('button',{class:'btn',disabled:!due.length,onclick:()=>runVocab(reviewSet(),'listen',true,{pk:'vocab'})},T('🎧 Hören'))),
     total?(()=>{const pick=h('div',{class:'goalpick hide'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.vocabGoal=n;S.vocabGoalT=Date.now();save();route();}},n+'')));
       return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},vocabToday()>=vocabGoal()?h('span',{class:'small',style:'color:var(--ok);font-weight:600'},T('Tagesziel ')+vocabGoal()+' / '+vocabGoal()+' ✓'):h('span',{class:'muted small'},T('Tagesziel ')+vocabToday()+' / '+vocabGoal()),
         h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('⚙ Ziel ändern'))),pick);})():null));
@@ -1215,12 +1245,13 @@ function vVocab(m,sub,lid){if(sub==='mine')return lid?vMyList(m,lid):vMyLists(m)
 function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es,de,em])=>({es,de,em}))).slice(0,20),'type',false);}
 /* opt: {again:()=>…} = „Noch eine Runde“ statt Tagesplan (eigene Listen). Zurück (✕ und Ende) = Seite, von der die Runde gestartet wurde. */
 function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fromL=navLabel(from)||T('Vokabeln');const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
+  const rs=opt.resume;if(rs){i=rs.i;okc=rs.okc;(rs.seen||[]).forEach(x=>seen.add(x));}
   const undoB=h('button',{class:'btn ghost small hide',title:T('Rückgängig'),onclick:()=>undo()},'↶');
-  const stage=h('div',{class:'step'});m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>go(from)},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'})),stage));
+  const stage=h('div',{class:'step'});m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>{if(opt.pk&&i>0&&i<q.length)toast(T('Gespeichert – später geht es hier weiter.'));go(from);}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'})),stage));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;undoB.classList.toggle('hide',!hist.length);}
-  const failed=new Set();
+  const failed=new Set(rs&&rs.failed||[]);
   /* Rückgängig: Zustand vor jeder Antwort merken (Karte, Zähler, Statistik) und bei ↶ wiederherstellen */
-  const hist=[],kinds=[];const cp=o=>o==null?o:JSON.parse(JSON.stringify(o));
+  const hist=[],kinds=rs&&rs.kinds||[];const cp=o=>o==null?o:JSON.parse(JSON.stringify(o));
   function snap(c){const k=vkey(c.es);hist.push({i,ql:q.length,okc,seen:new Set(seen),failed:new Set(failed),k,card:cp(S.srs[k]),stats:cp(S.stats),streak:cp(S.streak),vlog:cp(S.vlog)});if(hist.length>30)hist.shift();}
   function undo(){const h0=hist.pop();if(!h0)return;speechSynthesis.cancel();i=h0.i;q.length=h0.ql;kinds.length=Math.min(kinds.length,h0.ql);okc=h0.okc;seen.clear();h0.seen.forEach(x=>seen.add(x));failed.clear();h0.failed.forEach(x=>failed.add(x));
     if(h0.card)S.srs[h0.k]=h0.card;S.stats=h0.stats;S.streak=h0.streak;S.vlog=h0.vlog;save();show();}
@@ -1233,6 +1264,7 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
     if(st==='bad'||rating==='again'){failed.add(c.es);q.push(c);}}
   function nxt(){i++;if(i>=q.length)return end();show();}
   function show(){upd();stage.innerHTML='';const c=q[i];
+    if(opt.pk&&i>0)pauseSet(opt.pk,{route:from,title:srs?T('Vokabeln'):T('Meine Wörter'),cards:q,i,okc,seen:[...seen],failed:[...failed],kinds:kinds.slice(0,q.length),mode,srs,daily:srs,myIds:opt.myIds||null,n:q.length});
     /* 'mix' (eigene Listen): pro Karte zufällig Karte (beide Richtungen), Tippen oder Hören */
     if(!kinds[i])kinds[i]={md:mode==='mix'?['flip','flip','type','listen'][Math.floor(Math.random()*4)]:mode,rev:Math.random()<0.5};/* gemerkt, damit ↶ dieselbe Aufgabe zeigt */
     const md=kinds[i].md;
@@ -1253,9 +1285,9 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
     setTimeout(()=>inp.focus(),50);
     stage.append(actionBar(()=>{const r=compare(inp.value,c.es,{pron:false});inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
       feedback(stage,r,{t:'v'},inp.value,null);if(md==='listen')stage.append(h('p',{class:'muted'},'= '+trc(c.de)));if(r.status!=='bad')say(c.es);res(c,r.status);},{next:nxt}));}
-  function end(){stage.innerHTML='';upd();const pct=Math.round(100*okc/Math.max(seen.size,1));if(srs&&seen.size){S.vocabDay=today();save();}const np=opt.again?null:dayPlan().find(x=>!x.done&&x.r!=='vocab');const more=srs?reviewSet():[];
+  function end(){stage.innerHTML='';upd();if(opt.pk)pauseDel(opt.pk);const pct=Math.round(100*okc/Math.max(seen.size,1));if(srs&&seen.size){S.vocabDay=today();save();}const np=opt.again?null:dayPlan().find(x=>!x.done&&x.r!=='vocab');const more=srs?reviewSet():[];
     stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:44px'},'🗂️'),h('h1',{},T('¡Hecho!')),h('p',{class:'sub'},pct+T('% gewusst · ')+seen.size+T(' Karten')),
-      h('div',{class:'endbtns'},more.length?h('button',{class:'btn'+(np?'':' primary'),onclick:()=>runVocab(more,mode,true)},T('Weiter üben: ')+more.length+T(' Karten')+(vocabLeft()?'':T(' (freiwillig)'))+' →'):null,
+      h('div',{class:'endbtns'},more.length?h('button',{class:'btn'+(np?'':' primary'),onclick:()=>runVocab(more,mode,true,{pk:'vocab'})},T('Weiter üben: ')+more.length+T(' Karten')+(vocabLeft()?'':T(' (freiwillig)'))+' →'):null,
         opt.again?h('button',{class:'btn primary',onclick:opt.again},T('Noch eine Runde →')):null,
         np?h('button',{class:'btn primary',onclick:()=>{NAVRESET=true;planGo(np);}},T('Nächste Aufgabe: ')+np.t+' →'):null,
         h('button',{class:'btn ghost',onclick:()=>go(from)},'← '+fromL))));}
@@ -1302,10 +1334,13 @@ function rightOf(s){const first=a=>String([].concat(a)[0]||'').split('|')[0];
   if(s.t==='match')return(s.pairs||[]).map(p=>p[0]+' = '+p[1]).join(' · ');return '';}
 function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')));
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
+  function goM(){m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,pk:'mistakes',steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}
+  if(RESUME==='mistakes'&&pauseGet('mistakes')){RESUME=null;return goM();}
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
   const n=Math.min(list.length,20);
   m.append(h('div',{class:'card mistakehead'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},h('b',{},list.length+(list.length===1?T(' offener Fehler'):T(' offene Fehler'))),h('span',{class:'muted small'},T('richtig geübt = weg'))),
-    h('button',{class:'btn primary',style:'width:100%;margin-top:10px;min-height:46px',onclick:()=>{m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}},T('Fehler üben')+(list.length>20?' ('+n+')':'')+' →')));
+    pauseGet('mistakes')?h('div',{style:'margin-top:10px'},pauseBtn('mistakes',()=>goM())):null,
+    h('button',{class:'btn'+(pauseGet('mistakes')?'':' primary'),style:'width:100%;margin-top:10px;min-height:46px',onclick:()=>{pauseDel('mistakes');goM();}},T('Fehler üben')+(list.length>20?' ('+n+')':'')+' →')));
   m.append(h('div',{class:'mlist'},list.map(({x,s})=>{const q=String(s.t==='conj'?s.verb+' ('+(s.de||'')+')':s.q||s.de||s.es||s.verb||s.title||'').replace(/<[^>]+>/g,'').replace(/___/g,'_____');const r=rightOf(s);
     const det=h('div',{class:'mdet hide'},x.your?h('div',{},h('span',{class:'mx'},'✗ '),T('Deine Antwort: '),h('span',{class:'es-t',style:'color:var(--bad)'},x.your)):null,
       r?h('div',{},h('span',{class:'mok'},'✓ '),T('Richtig: '),h('span',{class:'es-t',style:'color:var(--ok);font-weight:600'},r)):null,h('div',{class:'muted small'},String(x.date||'').split('-').reverse().join('.')));

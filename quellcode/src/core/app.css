@@ -400,3 +400,4 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .learntile:not(.soon){border-color:var(--accent)}
 .learntile.soon{opacity:.55}
 @media (hover:hover){.learntile:not(.soon):hover{background:var(--accent-soft)}}
+.card.resume{padding:10px 12px;margin-bottom:12px;cursor:pointer}.card.resume .btn.small{flex:none}
