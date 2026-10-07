@@ -350,7 +350,8 @@ function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.r
 function storyQ(q){if(q.t==='tf')return{t:'mc',kind:T('Richtig oder falsch?'),q:q.q,opts:['Verdadero','Falso'],a:q.a?0:1,keep:true};
   if(q.t==='gap')return{t:'gap',kind:T('Ergänze'),q:q.q,a:q.a};
   return{t:'mc',kind:T('Hast du es verstanden?'),q:q.q,opts:q.opts,a:q.a};}
-function resolveRef(ref){if(ref.startsWith('R|')){const[,rid,i]=ref.split('|');const q=(window.READINGS||[]).find(x=>x.id===rid)?.qs[+i];return q?storyQ(q):null;}
+function resolveRef(ref){if(ref.startsWith('V|')){const[,uid,w]=ref.split('|');const u=unitById(uid);const it=u&&allUnitWords(u).find(x=>x[0]===w);return it?verbStep(u,w,it[1]):null;}
+  if(ref.startsWith('R|')){const[,rid,i]=ref.split('|');const q=(window.READINGS||[]).find(x=>x.id===rid)?.qs[+i];return q?storyQ(q):null;}
   if(ref.startsWith('N|')){const[,k,v]=ref.split('|');try{return numStep(k,v);}catch(e){return null;}}
   if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
   if(ref.startsWith(T('W|'))){const[,uid,mode,...rest]=ref.split('|');const es=rest.join('|');const u=unitById(uid);const w=u&&allUnitWords(u).find(x=>x[0]===es);return w?vocabStep(u,mode,w[0],w[1],w[2]):null;}
@@ -1034,13 +1035,23 @@ function vReading(m,id){const r=(window.READINGS||[]).find(x=>x.id===id);if(!r)r
     onDone:(res)=>{S.readings=S.readings||{};const p=S.readings[r.id];S.readings[r.id]={date:today(),score:Math.max(p?.score||0,res.score)};save();
       const R=window.READINGS||[];const nx=R.find(x=>!S.readings[x.id]);return nx?{label:T('Nächster Text →'),fn:()=>go('reading/'+nx.id)}:{label:T('Zu den Lesetexten →'),fn:()=>go('ref/r')};}});}
 /* ---------- Verben-Trainer: Konjugationen aus allen '+UWS+', die du schon angefangen hast ---------- */
-function vVerbs(m){const all=!!S.settings.verbsAll;m.innerHTML='';m.append(backTo(T('Bibliothek'),'ref'));const pool=[];
-  for(const u of COURSE.units)u.lessons.forEach(l=>l.steps.forEach((s,i)=>{if(s.t==='conj')pool.push({s,ref:u.id+'|'+l.id+'|'+i,unit:u,learned:learnedL(u.id,l.id)});}));
-  const use=all?pool:pool.filter(x=>x.learned);
+/* Verben-Trainer: Präsens zu Verben aus den Vokabellisten angefangener Unidades (Formen bildet LANG.conjugate – man muss die Regel selbst anwenden)
+   + andere Zeitformen aus gelernten Lektionen. Fehler-Ref V|unit|infinitiv. „Alles“ = ganzer Kurs. */
+const startedU=u=>Object.keys(S.lessons).some(k=>k.startsWith(u.id+'.'))||!!S.checks[u.id]?.pass;
+function verbStep(u,inf,de){if(!LANG.conjugate)return null;const r=LANG.conjugate(inf);if(!r)return null;return{t:'conj',verb:inf,de,forms:r.forms,tense:T('Präsens'),why:r.why};}
+function verbPool(all){const gen=[],seen=new Set(),tables=[];
+  for(const u of COURSE.units){const st=all||startedU(u);
+    for(const l of u.lessons){if(st&&(!l.freq||all||rnd(u.id+'.'+l.id)>=1))for(const s of l.steps)if(s.t==='vocab')for(const [es,de] of s.items){const w=es.trim();if(seen.has(w)||!/^[a-záéíóúñü]+(ar|er|ir|ír)(se)?$/.test(w)||!/n\b/.test(String(de).split(',')[0]))continue;
+        const st2=verbStep(u,w,de);if(st2){seen.add(w);gen.push({s:st2,ref:'V|'+u.id+'|'+w});}}
+      if(all||learnedL(u.id,l.id))l.steps.forEach((s,i)=>{if(s.t==='conj'&&s.tense)tables.push({s,ref:u.id+'|'+l.id+'|'+i});});}}
+  return{gen,tables};}
+function verbRound(all){const{gen,tables}=verbPool(all);const t=shuffle(tables).slice(0,gen.length?2:8);return shuffle(shuffle(gen).slice(0,8-t.length).concat(t));}
+function vVerbs(m){const all=!!S.settings.verbsAll;m.innerHTML='';m.append(backTo(T('Bibliothek'),'ref'));const{gen,tables}=verbPool(all);
   m.append(h('h1',{},T('Verben-Trainer')),learnSeg('verbsAll',()=>vVerbs(m)),
-    h('p',{class:'sub'},all?T('Alle Konjugationen des Kurses, A1 bis C2')+' ('+use.length+(use.length===1?T(' Tabelle).'):T(' Tabellen).')):T('Konjugationen aus Lektionen, die du schon gelernt hast')+' ('+use.length+(use.length===1?T(' Tabelle).'):T(' Tabellen).'))));
-  if(use.length<1){m.append(h('div',{class:'card'},T('Noch keine Verben gelernt – die ersten kommen in Unidad 1. Oder oben „Alles“ wählen.')));return;}
-  m.append(h('button',{class:'btn primary',style:'width:100%;min-height:48px',onclick:()=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:shuffle(use).slice(0,8),onBack:()=>go('verbs'),onDone:()=>({label:T('Noch 8 Verben →'),fn:()=>{m.innerHTML='';vVerbs(m);}})});}},T('8 Verben üben →')));}
+    h('p',{class:'sub'},(all?T('Verben aus dem ganzen Kurs'):T('Verben aus den Unidades, die du angefangen hast'))+' ('+gen.length+'). '+T('Du siehst nur den Infinitiv – überleg selbst: -ar, -er oder -ir? Stammwechsel? Bei Fehlern zeige ich das Muster.')+(tables.length?' '+T('Dazu andere Zeitformen aus gelernten Lektionen.'):'')));
+  if(!gen.length&&!tables.length){m.append(h('div',{class:'card'},T('Noch keine Verben – fang eine Unidad an. Oder oben „Alles“ wählen.')));return;}
+  const go8=()=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:verbRound(all),onBack:()=>vVerbs(m),onDone:()=>({label:T('Noch 8 Verben →'),fn:go8})});};
+  m.append(h('button',{class:'btn primary',style:'width:100%;min-height:48px',onclick:go8},T('8 Verben üben →')));}
 
 /* ---------- vocab trainer ---------- */
 /* Stand einer Karte: 0 neu · 1 lernend (< 7 Tage) · 2 gefestigt (7–20) · 3 sicher (≥ 21 Tage Abstand) */
@@ -1150,7 +1161,7 @@ function placementTable(){const r=S.placement?.results||{};const t=h('div',{clas
 
 /* ---------- mistakes ---------- */
 /* Fehlerheft: oben Übungs-Karte, darunter kompakte Zeilen (Herkunft + Frage); Antippen zeigt deine Antwort und die Lösung */
-function mistakeSrc(ref){return ref.startsWith('P')?T('Test'):ref.startsWith('N|')?T('Zahlen'):ref.startsWith('R|')?T('Lesetext'):ref.startsWith(T('S|'))?T('Geschichte'):'U'+(unitById(ref.split('|')[ref.startsWith(T('W|'))?1:0])?.n??'');}
+function mistakeSrc(ref){return ref.startsWith('V|')?T('Verben'):ref.startsWith('P')?T('Test'):ref.startsWith('N|')?T('Zahlen'):ref.startsWith('R|')?T('Lesetext'):ref.startsWith(T('S|'))?T('Geschichte'):'U'+(unitById(ref.split('|')[ref.startsWith(T('W|'))?1:0])?.n??'');}
 function rightOf(s){const first=a=>String([].concat(a)[0]||'').split('|')[0];
   if(s.t==='mc')return s.opts?s.opts[s.a]:'';if(s.t==='gap'){const a=[].concat(s.a);let k=0;return String(s.q||'').replace(/<[^>]+>/g,'').replace(/___/g,()=>first(a[k++]));}
   if(s.t==='tr')return first(s.a);if(s.t==='conj')return s.verb+': '+(s.forms||[]).join(', ');if(s.t==='order'||s.t==='listen')return s.es||'';
