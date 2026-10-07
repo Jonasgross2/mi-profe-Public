@@ -353,7 +353,7 @@ function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NA
 const prevRoute=()=>{for(let i=NAVSTACK.length-2;i>=0;i--)if(pageKey(NAVSTACK[i])!=='play')return NAVSTACK[i];return null;};
 function navLabel(r){const p=r.split('/');const u=p[1]&&unitById(p[1]);
   return p[0]==='home'?T('Start'):p[0]==='units'?T('Kurs'):p[0]==='unit'&&u?UW+' '+u.n:p[0]==='resumen'&&u?T('Resumen · ')+UW+' '+u.n:p[0]==='words'&&u?T('Wortschatz · ')+UW+' '+u.n:
-    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch'),r:T('Lesetexte')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?(p[1]==='mine'?T('Meine Wörter'):p[1]==='stats'?T('Statistik'):T('Vokabeln')):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
+    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch'),r:T('Lesetexte')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?(p[1]==='mine'?(p[2]&&myList(p[2])?myList(p[2]).name:T('Meine Wörter')):p[1]==='stats'?T('Statistik'):T('Vokabeln')):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
     p[0]==='settings'?T('Mehr'):p[0]==='lang'?T('Sprache & Profil'):p[0]==='placement'?T('Einstufungstest'):null;}
 function goBack(r){const pr=prevRoute();go(pr&&pr!==curRoute()?pr:r);}
 const backLabel=label=>{const pr=prevRoute();return(pr&&navLabel(pr))||label;};
@@ -1097,8 +1097,12 @@ const cardStage=c=>{srsInit(c);const iv=c.ivl||0;return!(c.reps||c.box)?0:iv<7?1
 /* Vokabel-Statistik: fällig in den nächsten 7 Tagen, Stand der Karten, Verlauf (S.vlog), schwierigste Wörter */
 function vVocabStats(m,all,src){const td=today();m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Vokabel-Statistik')));
   /* Umschalter Alle | Kurs | Meine Wörter – nur wenn es eigene Wörter in der Wiederholung gibt */
-  if(all.some(isMy)){src=src==='kurs'||src==='mine'?src:'';m.append(h('div',{class:'seg',style:'grid-template-columns:repeat(3,1fr);margin-bottom:12px'},[['',T('Alle')],['kurs',T('Kurs')],['mine',T('Meine Wörter')]].map(([k,l])=>h('button',{class:k===src?'on':'',onclick:()=>go('vocab/stats'+(k?'/'+k:''))},h('span',{},l)))));
-    if(src)all=all.filter(c=>src==='mine'?isMy(c):!isMy(c));}
+  if(myLists().length){src=src==='kurs'||src==='mine'?src:'';m.append(h('div',{class:'seg',style:'grid-template-columns:repeat(3,1fr);margin-bottom:12px'},[['',T('Alle')],['kurs',T('Kurs')],['mine',T('Meine Wörter')]].map(([k,l])=>h('button',{class:k===src?'on':'',onclick:()=>go('vocab/stats'+(k?'/'+k:''))},h('span',{},l)))));
+    if(src)all=all.filter(c=>src==='mine'?isMy(c):!isMy(c));
+    if(src==='mine'){m.append(h('div',{class:'card statcard'},h('div',{class:'kind',style:'margin:0 0 6px'},T('Eigene Listen – freies Üben')),
+      myLists().map(l=>{const cs=myCards(l.id);return h('div',{style:'margin:8px 0'},h('b',{},l.name),h('span',{class:'muted small'},' · '+cs.length+(cs.length===1?T(' Wort'):T(' Wörter'))+(l.daily===false?T(' · nur gezielt'):T(' · in der Wiederholung'))),
+        h('div',{class:'small'},(myPractice(cs)||T('Noch nicht frei geübt'))+' · '+myDueOf(cs).length+T(' dran')));})));
+      if(!all.length)return;m.append(h('div',{class:'kind',style:'margin:14px 2px 6px'},T('In der täglichen Wiederholung')));}}
   const dueNow=new Set(dueCards());
   if(!all.length){m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return;}
   const wdn=d=>[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+'T12:00:00').getDay()];
@@ -1119,8 +1123,18 @@ function newListId(){return 'l'+Date.now().toString(36);}
 /* eigene Wörter üben: zufällige Auswahl (max. 20), pro Wort zufällig Karte (beide Richtungen), Tippen oder Hören – ohne Einfluss auf die Wiederholungsplanung */
 /* Auswahl gewichtet: oft falsch, zuletzt falsch, lange nicht oder nie geübt → häufiger dran (gewichtete Zufallsauswahl) */
 function myWeight(c){const n=(c.pk||0)+(c.pn||0);const err=((c.pn||0)+1)/(n+2);const age=c.pl?Math.min(1,dayDiff(c.pl,today())/14):1;return 0.3+err*2+(c.pw?1:0)+age;}
-function myRun(cards){const pick=cards.map(c=>({c,k:Math.pow(Math.random(),1/myWeight(c))})).sort((a,b)=>b.k-a.k).slice(0,20).map(x=>x.c);
-  runVocab(shuffle(pick.map(c=>({es:c.es,de:c.de,em:c.em}))),'mix',false);}
+/* freier Abstand eigener Wörter: Nochmal gleich, Schwer 1 Tag, Gut nach Stufe 3/5/10/20/40/80 Tage, Leicht eine Stufe weiter */
+const PSTEP=[3,5,10,20,40,80];
+function pNext(k,r){const ps=k.ps||0;return r==='again'?0:r==='hard'?1:PSTEP[Math.min(PSTEP.length-1,ps+(r==='easy'?1:0))];}
+const myDueOf=cards=>cards.filter(c=>!c.pd||c.pd<=today());
+function myRun(cards,force){const due=myDueOf(cards);
+  if(!due.length&&!force){const nx=cards.map(c=>c.pd).sort()[0];const d=dayDiff(today(),nx);
+    return askConfirm(T('Alle Wörter sind gerade geübt – das nächste ist ')+(d===1?T('morgen'):fmt(T('in {N} Tagen')).replace('{N}',d))+T(' wieder dran. Trotzdem üben?'),T('Trotzdem üben')).then(ok=>{if(ok)myRun(cards,true);});}
+  const pool=due.length?due:cards;const pick=pool.map(c=>({c,k:Math.pow(Math.random(),1/myWeight(c))})).sort((a,b)=>b.k-a.k).slice(0,20).map(x=>x.c);
+  const ids=cards.map(c=>c.es);
+  runVocab(shuffle(pick.map(c=>({es:c.es,de:c.de,em:c.em}))),'mix',false,{again:()=>myRun(ids.map(e=>S.srs[vkey(e)]).filter(c=>c&&!c.del))});}
+function myDueText(cards){const n=myDueOf(cards).length;if(n)return Math.min(20,n)+T(' Wörter dran · gemischt: Karteikarten, Tippen, Hören');
+  const d=dayDiff(today(),cards.map(c=>c.pd).sort()[0]);return T('Alles geübt ✓ – nächste ')+(d===1?T('morgen'):fmt(T('in {N} Tagen')).replace('{N}',d));}
 function dayDiff(a,b){return Math.round((new Date(b+'T12:00:00')-new Date(a+'T12:00:00'))/864e5);}
 /* Übungsstand einer Liste: zuletzt geübt · % richtig · wackelig */
 function myPractice(cards){const pr=cards.filter(c=>c.pl);if(!pr.length)return null;const last=pr.map(c=>c.pl).sort().pop();const d=dayDiff(last,today());
@@ -1133,9 +1147,9 @@ function vMyLists(m){m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Meine W
   inp.onkeydown=e=>{if(e.key==='Enter')add();};
   const allW=L.flatMap(l=>myCards(l.id));
   if(allW.length)m.append(h('button',{class:'btn primary',style:'width:100%;margin-bottom:6px',onclick:()=>myRun(allW)},L.length>1?T('▶ Alle Listen lernen'):T('▶ Lernen')),
-    h('p',{class:'muted small',style:'margin:0 0 14px;text-align:center'},Math.min(20,allW.length)+T(' zufällige Wörter · gemischt: Karteikarten, Tippen, Hören')));
+    h('p',{class:'muted small',style:'margin:0 0 14px;text-align:center'},myDueText(allW)),h('div',{style:'text-align:right;margin:-6px 0 8px'},h('button',{class:'linkbtn',style:'text-decoration:none;color:var(--muted)',onclick:()=>go('vocab/stats/mine')},T('📊 Statistik'))));
   if(L.length)m.append(h('div',{class:'mlist',style:'margin-bottom:14px'},L.map(l=>{const n=myCards(l.id).length;return h('div',{class:'mrow',onclick:()=>go('vocab/mine/'+l.id)},h('span',{class:'mq'},h('b',{},l.name),h('br'),
-      h('span',{class:'muted small'},n+(n===1?T(' Wort'):T(' Wörter'))+(l.daily===false?T(' · nur gezielt'):''))),
+      h('span',{class:'muted small'},n+(n===1?T(' Wort'):T(' Wörter'))+(l.daily===false?T(' · nur gezielt'):'')+(n?' · '+myDueOf(myCards(l.id)).length+T(' dran'):''))),
       h('button',{class:'btn small primary',style:'flex:none',onclick:e=>{e.stopPropagation();myRun(myCards(l.id));}},T('▶ Lernen')),h('span',{class:'mch'},'›'));})));
   m.append(h('div',{class:'card',style:'padding:14px 16px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Neue Liste')),h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px'},inp,h('button',{class:'btn primary',onclick:add},T('Anlegen')))));}
 function importBox(m,id){const ta=h('textarea',{class:'inp',rows:'7',placeholder:T('Eine Zeile pro Wort, z. B.')+'\n'+(LANG.sampleWords||[]).map((w,i)=>w[0]+(i?'; ':' – ')+(w[1][EX]||w[1].de)).join('\n')+'\n'+T('Tab, Strich, =, ; oder : als Trenner'),style:'font-size:15px;width:100%;resize:vertical'});
@@ -1171,7 +1185,7 @@ function vMyList(m,id){const l=myList(id);if(!l)return go('vocab/mine');const ca
     cards.length?h('p',{class:'muted small',style:'margin:-4px 0 12px'},l.daily===false?T('Nicht in der Wiederholung – wird nicht eingeplant, nur über „Lernen“.'):(()=>{const st=[0,0,0,0];cards.forEach(c=>{st[cardStage(c)]++;});
       return [[st[0],T('neu')],[st[1],T('lernend')],[st[2],T('gefestigt')],[st[3],T('sicher')]].filter(x=>x[0]).map(x=>x[0]+' '+x[1]).join(' · ');})()):null,
     cards.length?h('div',{style:'margin-bottom:12px'},h('button',{class:'btn primary',style:'width:100%',onclick:()=>myRun(cards)},T('▶ Lernen')),
-      h('p',{class:'muted small',style:'margin:6px 0 0;text-align:center'},Math.min(20,cards.length)+T(' zufällige Wörter · gemischt: Karteikarten, Tippen, Hören'))):null,
+      h('p',{class:'muted small',style:'margin:6px 0 0;text-align:center'},myDueText(cards))):null,
     h('div',{class:'card myadd',style:'padding:14px 16px;margin-bottom:12px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Wort hinzufügen')),h('div',{class:'grid',style:'grid-template-columns:1fr 1fr;gap:8px'},es,de),
       h('button',{class:'btn',style:'width:100%;margin-top:8px',onclick:add1},T('＋ Hinzufügen'))),
     importBox(m,id));
@@ -1199,30 +1213,39 @@ function vVocab(m,sub,lid){if(sub==='mine')return lid?vMyList(m,lid):vMyLists(m)
     mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✍️',T('Meine Wörter'),myLists().length?srsCards().filter(c=>String(c.unit).startsWith(MY)).length+T(' eigene Wörter'):T('Eigene Listen anlegen'),()=>go('vocab/mine'))));
 }
 function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es,de,em])=>({es,de,em}))).slice(0,20),'type',false);}
-function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
-  const stage=h('div',{class:'step'});m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>go('vocab')},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),h('span',{class:'muted small',id:'pc'})),stage));
-  function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;}
+/* opt: {again:()=>…} = „Noch eine Runde“ statt Tagesplan (eigene Listen). Zurück (✕ und Ende) = Seite, von der die Runde gestartet wurde. */
+function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fromL=navLabel(from)||T('Vokabeln');const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
+  const undoB=h('button',{class:'btn ghost small hide',title:T('Rückgängig'),onclick:()=>undo()},'↶');
+  const stage=h('div',{class:'step'});m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>go(from)},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'})),stage));
+  function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;undoB.classList.toggle('hide',!hist.length);}
   const failed=new Set();
-  function res(c,st,rating){const first=!seen.has(c.es);if(first){seen.add(c.es);if(st!=='bad')okc++;
-      /* freies Üben eigener Wörter: richtig/falsch mitzählen (pk/pn), zuletzt geübt (pl), letztes Mal falsch (pw) – ohne Einfluss auf die Planung */
-      const k=!srs&&S.srs[vkey(c.es)];if(k&&isMy(k)){const ok=st!=='bad'&&rating!=='again';if(ok)k.pk=(k.pk||0)+1;else k.pn=(k.pn||0)+1;k.pw=!ok;k.pl=today();k.t=Date.now();}
+  /* Rückgängig: Zustand vor jeder Antwort merken (Karte, Zähler, Statistik) und bei ↶ wiederherstellen */
+  const hist=[],kinds=[];const cp=o=>o==null?o:JSON.parse(JSON.stringify(o));
+  function snap(c){const k=vkey(c.es);hist.push({i,ql:q.length,okc,seen:new Set(seen),failed:new Set(failed),k,card:cp(S.srs[k]),stats:cp(S.stats),streak:cp(S.streak),vlog:cp(S.vlog)});if(hist.length>30)hist.shift();}
+  function undo(){const h0=hist.pop();if(!h0)return;speechSynthesis.cancel();i=h0.i;q.length=h0.ql;kinds.length=Math.min(kinds.length,h0.ql);okc=h0.okc;seen.clear();h0.seen.forEach(x=>seen.add(x));failed.clear();h0.failed.forEach(x=>failed.add(x));
+    if(h0.card)S.srs[h0.k]=h0.card;S.stats=h0.stats;S.streak=h0.streak;S.vlog=h0.vlog;save();show();}
+  function res(c,st,rating){snap(c);const first=!seen.has(c.es);if(first){seen.add(c.es);if(st!=='bad')okc++;
+      /* freies Üben eigener Wörter: richtig/falsch (pk/pn), zuletzt geübt (pl), zuletzt falsch (pw), eigener Abstand (ps Stufe, pd wieder dran) – ohne Einfluss auf die Planung */
+      const k=!srs&&S.srs[vkey(c.es)];if(k&&isMy(k)){const r=rating||(st==='bad'?'again':st==='near'?'hard':'good');const ok=r!=='again';if(ok)k.pk=(k.pk||0)+1;else k.pn=(k.pn||0)+1;k.pw=!ok;k.pl=today();
+        const d=pNext(k,r);k.ps=r==='again'?0:r==='hard'?(k.ps||0):r==='easy'?(k.ps||0)+2:(k.ps||0)+1;k.pd=addDays(today(),d);k.t=Date.now();}
       bumpDay(st!=='bad');}
     if(srs){const r=rating||(st==='bad'?'again':failed.has(c.es)?'hard':RATE[st]);grade(c,st,r);}
     if(st==='bad'||rating==='again'){failed.add(c.es);q.push(c);}}
   function nxt(){i++;if(i>=q.length)return end();show();}
   function show(){upd();stage.innerHTML='';const c=q[i];
     /* 'mix' (eigene Listen): pro Karte zufällig Karte (beide Richtungen), Tippen oder Hören */
-    const md=mode==='mix'?['flip','flip','type','listen'][Math.floor(Math.random()*4)]:mode;
-    if(md==='flip'){let shown=false;const rev=Math.random()<0.5; /* Richtung zufällig: Spanisch → Deutsch oder Deutsch → Spanisch */
+    if(!kinds[i])kinds[i]={md:mode==='mix'?['flip','flip','type','listen'][Math.floor(Math.random()*4)]:mode,rev:Math.random()<0.5};/* gemerkt, damit ↶ dieselbe Aufgabe zeigt */
+    const md=kinds[i].md;
+    if(md==='flip'){let shown=false;const rev=kinds[i].rev; /* Richtung zufällig: Spanisch → Deutsch oder Deutsch → Spanisch */
       const card=rev?h('div',{class:'card flash'},h('div',{class:'big'},(pic(c.es,c.em)?pic(c.es,c.em)+' ':'')+trc(c.de)),h('div',{id:'ans',style:'visibility:hidden'},h('div',{class:'big',style:'font-size:24px;margin-top:6px'},c.es),spk(c.es)))
         :h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
       stage.append(kind(rev?fmt(T('Wie heißt das {ON}?')):T('Was bedeutet das?')),card);if(!rev)setTimeout(()=>say(c.es),200);
       const row=h('div',{class:'actions'});const reveal=h('button',{class:'btn primary'},T('Aufdecken'));
       reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';if(rev)say(c.es);row.innerHTML='';row.className='rates';row.append(
         ...[['again','bad',T('Nochmal'),'var(--bad)'],['hard','near',T('Schwer'),'var(--gold)'],['good','ok',T('Gut'),'var(--accent)'],['easy','ok',T('Leicht'),'var(--ok)']].map(([r,st,l,col])=>{
-          const sc=srs&&S.srs[vkey(c.es)];const d=sc?nextIvl(Object.assign({},sc),r):(r==='hard'?1:r==='good'?3:5);
+          const sc=S.srs[vkey(c.es)];const d=srs&&sc?nextIvl(Object.assign({},sc),r):sc&&isMy(sc)?pNext(sc,r):(r==='hard'?1:r==='good'?3:5);
           return h('button',{class:'btn rate',style:'color:'+col,onclick:()=>{res(c,st,r);nxt();}},h('b',{},l),h('span',{},r==='again'?T('gleich nochmal'):d===1?T('morgen'):d+T(' Tage')));}));};row.append(reveal);stage.append(row);
-      const kh=e=>{if(!stage.isConnected)return document.removeEventListener('keydown',kh);if(e.key===' '||e.key==='Enter'){e.preventDefault();if(!shown)reveal.click();}else if(shown&&['1','2','3'].includes(e.key)){document.removeEventListener('keydown',kh);row.children[+e.key-1].click();}};
+      const myI=i;const kh=e=>{if(!stage.isConnected||i!==myI||!row.isConnected)return document.removeEventListener('keydown',kh);if(e.key===' '||e.key==='Enter'){e.preventDefault();if(!shown)reveal.click();}else if(shown&&['1','2','3'].includes(e.key)){document.removeEventListener('keydown',kh);row.children[+e.key-1].click();}};
       document.addEventListener('keydown',kh);return;}
     const inp=h('input',{class:'inp',autocomplete:'off',spellcheck:'false',placeholder:fmt(T('{ON} …'))});
     if(md==='listen'){stage.append(kind(T('Hör zu und schreib das Wort')),h('div',{class:'row',style:'margin-bottom:14px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.55)},T('🐢 Langsam'))),inp,keys(()=>inp));setTimeout(()=>say(c.es),200);}
@@ -1230,11 +1253,12 @@ function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,ok
     setTimeout(()=>inp.focus(),50);
     stage.append(actionBar(()=>{const r=compare(inp.value,c.es,{pron:false});inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
       feedback(stage,r,{t:'v'},inp.value,null);if(md==='listen')stage.append(h('p',{class:'muted'},'= '+trc(c.de)));if(r.status!=='bad')say(c.es);res(c,r.status);},{next:nxt}));}
-  function end(){stage.innerHTML='';const pct=Math.round(100*okc/Math.max(seen.size,1));if(srs&&seen.size){S.vocabDay=today();save();}const np=dayPlan().find(x=>!x.done&&x.r!=='vocab');const more=srs?reviewSet():[];
+  function end(){stage.innerHTML='';upd();const pct=Math.round(100*okc/Math.max(seen.size,1));if(srs&&seen.size){S.vocabDay=today();save();}const np=opt.again?null:dayPlan().find(x=>!x.done&&x.r!=='vocab');const more=srs?reviewSet():[];
     stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:44px'},'🗂️'),h('h1',{},T('¡Hecho!')),h('p',{class:'sub'},pct+T('% gewusst · ')+seen.size+T(' Karten')),
       h('div',{class:'endbtns'},more.length?h('button',{class:'btn'+(np?'':' primary'),onclick:()=>runVocab(more,mode,true)},T('Weiter üben: ')+more.length+T(' Karten')+(vocabLeft()?'':T(' (freiwillig)'))+' →'):null,
+        opt.again?h('button',{class:'btn primary',onclick:opt.again},T('Noch eine Runde →')):null,
         np?h('button',{class:'btn primary',onclick:()=>{NAVRESET=true;planGo(np);}},T('Nächste Aufgabe: ')+np.t+' →'):null,
-        h('button',{class:'btn ghost',onclick:()=>go('vocab')},T('Zurück zum Trainer')))));}
+        h('button',{class:'btn ghost',onclick:()=>go(from)},'← '+fromL))));}
   show();}
 
 /* ---------- placement ---------- */
