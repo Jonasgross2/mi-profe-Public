@@ -263,7 +263,7 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "Es Juan. (Name)": "Das ist Juan.",
 "Estoy en Barcelona. (Ort)": "Ich bin in Barcelona.",
 "Es ingeniera. (Beruf)": "Sie ist Ingenieurin.",
-"La FIB está en Campus Nord. (Ort)": "Die FIB ist auf dem Campus Nord.",
+"La facultad está en el campus. (Ort)": "Die Fakultät ist auf dem Campus.",
 "Es de Cádiz. (Herkunft)": "Er/Sie kommt aus Cádiz.",
 "¿Cómo estás? – Estoy bien. (Befinden)": "Wie geht es dir? – Mir geht es gut.",
 "Es alto y simpático. (Eigenschaft)": "Er ist groß und sympathisch.",

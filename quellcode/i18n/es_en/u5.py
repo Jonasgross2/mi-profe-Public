@@ -88,7 +88,7 @@ EN = [
 "Barcelona is a very attractive city for doing business. It has a very important port, an international airport and more than 300 trade fairs and conferences a year, such as the Mobile World Congress.\n\nThe city has about 2,500 hours of sunshine a year. That's why many foreigners want to live here. In the centre there are buildings of every style: Gothic ones in the Barri Gòtic and Art Nouveau (modernista) ones in the Eixample, like the Casa Batlló.\n\nGetting around the city is easy because the metro is fast and cheap. But at rush hour there are lots of people and lots of traffic. Many people from Barcelona prefer to cycle: there are more than 300 kilometres of cycle lanes.",
 "<table><tr><td class=\"es-t\">porque</td><td>because (reason)</td><td class=\"es-t\">Es fácil llegar porque está cerca del aeropuerto.</td></tr>\n <tr><td class=\"es-t\">por eso</td><td>that's why (consequence)</td><td class=\"es-t\">Está cerca del aeropuerto, por eso es fácil llegar.</td></tr>\n <tr><td class=\"es-t\">pero</td><td>but</td><td class=\"es-t\">El metro es rápido, pero hay mucha gente.</td></tr>\n <tr><td class=\"es-t\">y / también</td><td>and / also</td><td class=\"es-t\">Hay parques y también playas.</td></tr></table>\n <div class=\"ojo\"><b>¿Por qué?</b> (why?, two words + accent) – <b>porque</b> (because, one word).</div>",
 "Describe your way to university (or to a favourite place in Barcelona) and your neighbourhood in 5–7 sentences.",
-"Vivo en … · En mi barrio hay … · Para ir a la FIB tomo … · Primero …, después … · porque / pero / por eso",
+"",
 "hay/estar, ir + en/a, tener que, giving directions, connectors",
 "📎 Worksheet: Explicar el camino",
 "From a university Spanish course (semester 5) · hay or está?",

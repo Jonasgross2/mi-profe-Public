@@ -2,7 +2,7 @@ window.COURSE={units:[]};
 /* ================= UNIDAD 0 · EL PRIMER DÍA ================= */
 COURSE.units.push({id:'u0',n:'0',title:'El primer día',sub:'Begrüßen · sich vorstellen · nach dem Befinden fragen · Aussprache',
 goals:['Hola, buenos días …','¿Cómo te llamas? / ¿Cómo se llama usted?','¿Qué tal? – Bien, ¿y tú?','tú vs. usted','Verabschiedungen','Aussprache: c, ch, g, h, j, ll, ñ, qu, r/rr, v, y, z'],
-situacion:{title:'Erster Tag an der FIB',npc:'Laia',scene:'Erster Tag im MIRI an der FIB (Campus Nord, UPC). Vor dem Hörsaal A5 spricht dich eine Kommilitonin an.',role:'Du bist Laia, 24, Masterstudentin aus Girona, freundlich und neugierig. Du duzt Jonas.',goal:'Begrüße Laia, stell dich vor (Name), frag, wie es ihr geht, und verabschiede dich passend.'},
+situacion:{title:'Erster Tag an der Uni',npc:'Laia',scene:'Erster Tag im Master an der Uni (UPC). Vor dem Hörsaal A5 spricht dich eine Kommilitonin an.',role:'Du bist Laia, 24, Masterstudentin aus Girona, freundlich und neugierig. Du duzt Jonas.',goal:'Begrüße Laia, stell dich vor (Name), frag, wie es ihr geht, und verabschiede dich passend.'},
 lessons:[
 {id:'l1',title:'Begrüßen & vorstellen',desc:'Hola, buenos días, ¿cómo te llamas?',steps:[
  {t:'info',title:'Begrüßung nach Tageszeit',html:`<p>Im Spanischen hängt die Begrüßung von der Uhrzeit ab – und Spanier essen spät, deshalb verschieben sich die Grenzen:</p>
@@ -24,7 +24,7 @@ lessons:[
  {t:'gap',q:'Hola, me ___ Jonas. ¿Y tú?',a:['llamo'],hint:'llamarse = heißen'},
  {t:'gap',q:'Buenos días, ¿cómo se ___ usted?',a:['llama'],why:'Bei <i>usted</i> nimmt man die 3. Person: <i>se llama</i>.'},
  {t:'order',es:'¿Cómo te llamas?',de:'Wie heißt du?'},
- {t:'dialog',place:'FIB, Campus Nord',title:'Der erste Kurstag',scene:'Du kommst in den Seminarraum. Ein Student setzt sich neben dich.',lines:[
+ {t:'dialog',place:'Universidad, campus',title:'Der erste Kurstag',scene:'Du kommst in den Seminarraum. Ein Student setzt sich neben dich.',lines:[
   {n:'Marc',es:'¡Hola! Soy Marc. ¿Y tú? ¿Cómo te llamas?',de:'Hallo! Ich bin Marc. Und du? Wie heißt du?'},
   {you:true,opts:[{es:'Hola, me llamo Jonas.',ok:true},{es:'Buenas noches, me llamo Jonas.',ok:false,why:'Es ist morgens im Seminar – <i>buenas noches</i> passt erst ab ca. 20 Uhr.'},{es:'¿Cómo se llama usted?',ok:false,why:'Marc hat nach <b>deinem</b> Namen gefragt – und unter Studierenden duzt man sich.'}]},
   {n:'Marc',es:'Encantado, Jonas.',de:'Freut mich, Jonas.'}]},
@@ -45,7 +45,7 @@ lessons:[
  {t:'mc',q:'Pablo trifft Laia. Er sagt: „Encantado“. Laia antwortet:',opts:['Encantada.','Encantado.','Encantados.'],a:0,why:'Laia ist eine Frau → <i>encantada</i>. Die Form richtet sich nach der Person, die spricht.'},
  {t:'gap',q:'– ¿Qué tal? – Muy ___, gracias. ¿Y ___?',a:['bien','tú|tu'],why:'<i>bien</i> = gut; <i>¿y tú?</i> = und du?'},
  {t:'mc',q:'Du gehst um 18 Uhr aus der Uni und siehst deine Kommilitonen morgen wieder. Was sagst du?',opts:['¡Hasta mañana!','¡Buenos días!','¡Mucho gusto!'],a:0},
- {t:'dialog',place:'Secretaría de la FIB',title:'Im Studierendensekretariat',scene:'Du gehst zur Secretaría, um deine Unterlagen abzugeben. Eine ältere Mitarbeiterin begrüßt dich. Hier ist <b>usted</b> angebracht.',lines:[
+ {t:'dialog',place:'Secretaría de la facultad',title:'Im Studierendensekretariat',scene:'Du gehst zur Secretaría, um deine Unterlagen abzugeben. Eine ältere Mitarbeiterin begrüßt dich. Hier ist <b>usted</b> angebracht.',lines:[
   {n:'Sra. Pujol',es:'Buenos días. ¿Cómo se llama usted?',de:'Guten Morgen. Wie heißen Sie?'},
   {you:true,opts:[{es:'Buenos días. Me llamo Jonas Gross.',ok:true},{es:'Buenas noches. Me llamo Jonas Gross.',ok:false,why:'Sie hat <i>buenos días</i> gesagt – es ist Vormittag.'},{es:'Bien, ¿y tú?',ok:false,why:'Das ist eine Antwort auf <i>¿Qué tal?</i>, nicht auf die Frage nach dem Namen.'}]},
   {n:'Sra. Pujol',es:'Muy bien, señor Gross. ¿Cómo está usted?',de:'Sehr gut, Herr Gross. Wie geht es Ihnen?'},
@@ -182,7 +182,7 @@ lessons:[
  <div class="ojo">Fragewörter tragen <b>immer</b> einen Akzent. Und Fragen beginnen mit <b>¿</b> (Mac: <span class="kbd">⌥ ⇧ ß</span>).</div>`},
  {t:'gap',q:'Yo ___ (hablar) inglés y alemán.',a:['hablo']},
  {t:'gap',q:'¿Tú ___ (trabajar) en una empresa?',a:['trabajas']},
- {t:'gap',q:'Mis compañeros ___ (estudiar) en la FIB.',a:['estudian']},
+ {t:'gap',q:'Mis compañeros ___ (estudiar) en la universidad.',a:['estudian']},
  {t:'gap',q:'¿Vosotros ___ (buscar) unas prácticas?',a:['buscáis'],why:'vosotros → <b>-áis</b> (mit Akzent).'},
  {t:'mc',q:'___ estudias español? – Para trabajar en España.',opts:['¿Para qué','¿Dónde','¿Quién'],a:0},
  {t:'mc',q:'___ trabajas? – En un banco.',opts:['¿Dónde','¿De dónde','¿Qué'],a:0},

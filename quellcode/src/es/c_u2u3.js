@@ -180,7 +180,7 @@ lessons:[
  {t:'info',title:'ser oder estar?',html:`<p>Beide heißen „sein“ – aber:</p>
  <table><tr><th>ser – Wer/Was ist es?</th><th>estar – Wo? Wie geht’s?</th></tr>
  <tr><td class="es-t">Es Juan. <span class="muted">(Name)</span></td><td class="es-t">Estoy en Barcelona. <span class="muted">(Ort)</span></td></tr>
- <tr><td class="es-t">Es ingeniera. <span class="muted">(Beruf)</span></td><td class="es-t">La FIB está en Campus Nord. <span class="muted">(Ort)</span></td></tr>
+ <tr><td class="es-t">Es ingeniera. <span class="muted">(Beruf)</span></td><td class="es-t">La facultad está en el campus. <span class="muted">(Ort)</span></td></tr>
  <tr><td class="es-t">Es de Cádiz. <span class="muted">(Herkunft)</span></td><td class="es-t">¿Cómo estás? – Estoy bien. <span class="muted">(Befinden)</span></td></tr>
  <tr><td class="es-t">Es alto y simpático. <span class="muted">(Eigenschaft)</span></td><td class="es-t">Estoy cansado. <span class="muted">(Zustand gerade)</span></td></tr></table>
  <div class="ex">Merkhilfe: <b>ser</b> = was jemand/etwas <b>ist</b> (Identität). <b>estar</b> = wo/wie jemand <b>sich befindet</b>.</div>`},

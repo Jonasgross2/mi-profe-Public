@@ -9,7 +9,7 @@ EN = [
 "direct object with a (people)",
 "Weather",
 "Exclamations: ¡Qué …! ¡Cómo …!",
-"Friday lunchtime in the FIB canteen. Laia, your fellow student, wants to do something with you at the weekend.",
+"Friday lunchtime in the university canteen. Laia, your fellow student, wants to do something with you at the weekend.",
 "Arrange a place and time to meet at the weekend: make a suggestion yourself, politely decline one suggestion, talk about the weather and about what you'll wear.",
 "¿Por qué no quedamos el lunes? · Vale · Es que …",
 "to arrange to meet (someone)",

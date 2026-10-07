@@ -2,7 +2,7 @@ window.COURSE={units:[]};
 /* ================= UNIDAD 0 · EL PRIMER DÍA ================= */
 COURSE.units.push({id:'u0',n:'0',title:'El primer día',sub:'Begrüßen · sich vorstellen · nach dem Befinden fragen · Aussprache',
 goals:['Hola, buenos días …','¿Cómo te llamas? / ¿Cómo se llama usted?','¿Qué tal? – Bien, ¿y tú?','tú vs. usted','Verabschiedungen','Aussprache: c, ch, g, h, j, ll, ñ, qu, r/rr, v, y, z'],
-situacion:{title:'Erster Tag an der FIB',npc:'Laia',scene:'Erster Tag im MIRI an der FIB (Campus Nord, UPC). Vor dem Hörsaal A5 spricht dich eine Kommilitonin an.',role:'Du bist Laia, 24, Masterstudentin aus Girona, freundlich und neugierig. Du duzt Jonas.',goal:'Begrüße Laia, stell dich vor (Name), frag, wie es ihr geht, und verabschiede dich passend.'},
+situacion:{title:'Erster Tag an der Uni',npc:'Laia',scene:'Erster Tag im Master an der Uni (UPC). Vor dem Hörsaal A5 spricht dich eine Kommilitonin an.',role:'Du bist Laia, 24, Masterstudentin aus Girona, freundlich und neugierig. Du duzt Jonas.',goal:'Begrüße Laia, stell dich vor (Name), frag, wie es ihr geht, und verabschiede dich passend.'},
 lessons:[
 {id:'l1',title:'Begrüßen & vorstellen',desc:'Hola, buenos días, ¿cómo te llamas?',steps:[
  {t:'info',title:'Begrüßung nach Tageszeit',html:`<p>Im Spanischen hängt die Begrüßung von der Uhrzeit ab – und Spanier essen spät, deshalb verschieben sich die Grenzen:</p>
@@ -24,7 +24,7 @@ lessons:[
  {t:'gap',q:'Hola, me ___ Jonas. ¿Y tú?',a:['llamo'],hint:'llamarse = heißen'},
  {t:'gap',q:'Buenos días, ¿cómo se ___ usted?',a:['llama'],why:'Bei <i>usted</i> nimmt man die 3. Person: <i>se llama</i>.'},
  {t:'order',es:'¿Cómo te llamas?',de:'Wie heißt du?'},
- {t:'dialog',place:'FIB, Campus Nord',title:'Der erste Kurstag',scene:'Du kommst in den Seminarraum. Ein Student setzt sich neben dich.',lines:[
+ {t:'dialog',place:'Universidad, campus',title:'Der erste Kurstag',scene:'Du kommst in den Seminarraum. Ein Student setzt sich neben dich.',lines:[
   {n:'Marc',es:'¡Hola! Soy Marc. ¿Y tú? ¿Cómo te llamas?',de:'Hallo! Ich bin Marc. Und du? Wie heißt du?'},
   {you:true,opts:[{es:'Hola, me llamo Jonas.',ok:true},{es:'Buenas noches, me llamo Jonas.',ok:false,why:'Es ist morgens im Seminar – <i>buenas noches</i> passt erst ab ca. 20 Uhr.'},{es:'¿Cómo se llama usted?',ok:false,why:'Marc hat nach <b>deinem</b> Namen gefragt – und unter Studierenden duzt man sich.'}]},
   {n:'Marc',es:'Encantado, Jonas.',de:'Freut mich, Jonas.'}]},
@@ -45,7 +45,7 @@ lessons:[
  {t:'mc',q:'Pablo trifft Laia. Er sagt: „Encantado“. Laia antwortet:',opts:['Encantada.','Encantado.','Encantados.'],a:0,why:'Laia ist eine Frau → <i>encantada</i>. Die Form richtet sich nach der Person, die spricht.'},
  {t:'gap',q:'– ¿Qué tal? – Muy ___, gracias. ¿Y ___?',a:['bien','tú|tu'],why:'<i>bien</i> = gut; <i>¿y tú?</i> = und du?'},
  {t:'mc',q:'Du gehst um 18 Uhr aus der Uni und siehst deine Kommilitonen morgen wieder. Was sagst du?',opts:['¡Hasta mañana!','¡Buenos días!','¡Mucho gusto!'],a:0},
- {t:'dialog',place:'Secretaría de la FIB',title:'Im Studierendensekretariat',scene:'Du gehst zur Secretaría, um deine Unterlagen abzugeben. Eine ältere Mitarbeiterin begrüßt dich. Hier ist <b>usted</b> angebracht.',lines:[
+ {t:'dialog',place:'Secretaría de la facultad',title:'Im Studierendensekretariat',scene:'Du gehst zur Secretaría, um deine Unterlagen abzugeben. Eine ältere Mitarbeiterin begrüßt dich. Hier ist <b>usted</b> angebracht.',lines:[
   {n:'Sra. Pujol',es:'Buenos días. ¿Cómo se llama usted?',de:'Guten Morgen. Wie heißen Sie?'},
   {you:true,opts:[{es:'Buenos días. Me llamo Jonas Gross.',ok:true},{es:'Buenas noches. Me llamo Jonas Gross.',ok:false,why:'Sie hat <i>buenos días</i> gesagt – es ist Vormittag.'},{es:'Bien, ¿y tú?',ok:false,why:'Das ist eine Antwort auf <i>¿Qué tal?</i>, nicht auf die Frage nach dem Namen.'}]},
   {n:'Sra. Pujol',es:'Muy bien, señor Gross. ¿Cómo está usted?',de:'Sehr gut, Herr Gross. Wie geht es Ihnen?'},
@@ -182,7 +182,7 @@ lessons:[
  <div class="ojo">Fragewörter tragen <b>immer</b> einen Akzent. Und Fragen beginnen mit <b>¿</b> (Mac: <span class="kbd">⌥ ⇧ ß</span>).</div>`},
  {t:'gap',q:'Yo ___ (hablar) inglés y alemán.',a:['hablo']},
  {t:'gap',q:'¿Tú ___ (trabajar) en una empresa?',a:['trabajas']},
- {t:'gap',q:'Mis compañeros ___ (estudiar) en la FIB.',a:['estudian']},
+ {t:'gap',q:'Mis compañeros ___ (estudiar) en la universidad.',a:['estudian']},
  {t:'gap',q:'¿Vosotros ___ (buscar) unas prácticas?',a:['buscáis'],why:'vosotros → <b>-áis</b> (mit Akzent).'},
  {t:'mc',q:'___ estudias español? – Para trabajar en España.',opts:['¿Para qué','¿Dónde','¿Quién'],a:0},
  {t:'mc',q:'___ trabajas? – En un banco.',opts:['¿Dónde','¿De dónde','¿Qué'],a:0},
@@ -406,7 +406,7 @@ lessons:[
  {t:'info',title:'ser oder estar?',html:`<p>Beide heißen „sein“ – aber:</p>
  <table><tr><th>ser – Wer/Was ist es?</th><th>estar – Wo? Wie geht’s?</th></tr>
  <tr><td class="es-t">Es Juan. <span class="muted">(Name)</span></td><td class="es-t">Estoy en Barcelona. <span class="muted">(Ort)</span></td></tr>
- <tr><td class="es-t">Es ingeniera. <span class="muted">(Beruf)</span></td><td class="es-t">La FIB está en Campus Nord. <span class="muted">(Ort)</span></td></tr>
+ <tr><td class="es-t">Es ingeniera. <span class="muted">(Beruf)</span></td><td class="es-t">La facultad está en el campus. <span class="muted">(Ort)</span></td></tr>
  <tr><td class="es-t">Es de Cádiz. <span class="muted">(Herkunft)</span></td><td class="es-t">¿Cómo estás? – Estoy bien. <span class="muted">(Befinden)</span></td></tr>
  <tr><td class="es-t">Es alto y simpático. <span class="muted">(Eigenschaft)</span></td><td class="es-t">Estoy cansado. <span class="muted">(Zustand gerade)</span></td></tr></table>
  <div class="ex">Merkhilfe: <b>ser</b> = was jemand/etwas <b>ist</b> (Identität). <b>estar</b> = wo/wie jemand <b>sich befindet</b>.</div>`},
@@ -719,7 +719,7 @@ Moverse por la ciudad es fácil porque el metro es rápido y barato. Pero en {ho
  {t:'gap',q:'Voy en bici ___ es más rápido. (weil)',a:['porque']},
  {t:'gap',q:'Vivo lejos de la universidad, ___ ___ voy en metro. (deshalb)',a:['por','eso']},
  {t:'gap',q:'El piso es bonito, ___ es muy caro.',a:['pero']},
- {t:'free',task:'Beschreibe deinen Weg zur Uni (oder zu einem Lieblingsort in Barcelona) und dein Viertel in 5–7 Sätzen.',hint:'Vivo en … · En mi barrio hay … · Para ir a la FIB tomo … · Primero …, después … · porque / pero / por eso',focus:'hay/estar, ir + en/a, tener que, Wegbeschreibung, Konnektoren',model:'Vivo en Sants, un barrio tranquilo cerca de la estación. En mi barrio hay muchos bares y un mercado muy bonito. Para ir a la FIB, primero voy a pie a la parada de metro. Después tomo la línea 3 y bajo en Palau Reial. Luego tengo que ir andando unos diez minutos. El metro es rápido, pero por la mañana hay mucha gente. Por eso a veces voy en bici.'}
+ {t:'free',task:'Beschreibe deinen Weg zur Uni (oder zu einem Lieblingsort in Barcelona) und dein Viertel in 5–7 Sätzen.',hint:'Vivo en … · En mi barrio hay … · Para ir a la universidad tomo … · Primero …, después … · porque / pero / por eso',focus:'hay/estar, ir + en/a, tener que, Wegbeschreibung, Konnektoren',model:'Vivo en Sants, un barrio tranquilo cerca de la estación. En mi barrio hay muchos bares y un mercado muy bonito. Para ir a la universidad, primero voy a pie a la parada de metro. Después tomo la línea 3 y bajo en Palau Reial. Luego tengo que ir andando unos diez minutos. El metro es rápido, pero por la mañana hay mucha gente. Por eso a veces voy en bici.'}
 ]}],
 resumen:`<h3>Stadt beschreiben</h3><p class="es-t">Barcelona es una ciudad atractiva. Hay muchos bares y restaurantes. La catedral está en el casco antiguo.</p>
 <h3>hay / estar</h3><table><tr><td><b>hay</b> + unbestimmt (un/una, Zahl, mucho …)</td><td class="es-t">Hay una catedral famosa.</td></tr><tr><td><b>está/n</b> + bestimmt (el/la, Name)</td><td class="es-t">¿Dónde está la Sagrada Família?</td></tr></table>
@@ -830,7 +830,7 @@ Todavía no he visto el Alcázar. Por eso quiero volver pronto. ¿Habéis estado
  {t:'mc',q:'¿Qué problema han tenido en el hotel?',opts:['No ha funcionado el aire acondicionado.','Han faltado toallas.','La habitación ha sido muy ruidosa.'],a:0},
  {t:'mc',q:'¿Por qué quiere volver?',opts:['Porque todavía no ha visto el Alcázar.','Porque el hotel ha sido muy barato.','Porque no le gusta Barcelona.'],a:0},
  {t:'order',es:'Este fin de semana hemos visitado la catedral.',de:'Dieses Wochenende haben wir die Kathedrale besichtigt.'},
- {t:'free',task:'Erzähl im Perfekt in 5–7 Sätzen, was du diese Woche gemacht hast (Uni, Freizeit, Barcelona) – und was du noch nicht gemacht hast.',hint:'Esta semana he … · El martes he ido … · He conocido a … · Todavía no he … · Me ha encantado …',focus:'Perfekt (haber + Partizip), unregelmäßige Partizipien, encantar/gustar',model:'Esta semana ha sido muy intensa. He tenido muchas clases en la FIB y he escrito un informe para la asignatura de redes. El miércoles he ido al gimnasio con un compañero. El sábado hemos visitado el Park Güell y me ha encantado. Todavía no he visto el Camp Nou, pero quiero ir pronto.'}
+ {t:'free',task:'Erzähl im Perfekt in 5–7 Sätzen, was du diese Woche gemacht hast (Uni, Freizeit, Barcelona) – und was du noch nicht gemacht hast.',hint:'Esta semana he … · El martes he ido … · He conocido a … · Todavía no he … · Me ha encantado …',focus:'Perfekt (haber + Partizip), unregelmäßige Partizipien, encantar/gustar',model:'Esta semana ha sido muy intensa. He tenido muchas clases en la universidad y he escrito un informe para la asignatura de redes. El miércoles he ido al gimnasio con un compañero. El sábado hemos visitado el Park Güell y me ha encantado. Todavía no he visto el Camp Nou, pero quiero ir pronto.'}
 ]}],
 resumen:`<h3>Vorlieben</h3><table><tr><td class="es-t">(A mí) me encanta / gusta / interesa / molesta + Sg.</td><td class="es-t">… encantan / gustan + Pl.</td></tr><tr><td colspan="2" class="es-t">A él le gustan los bares, pero a mí me molesta el ruido.</td></tr></table>
 <h3>Zustimmung (gustar-Verben)</h3><table><tr><td class="es-t">Me gusta nadar.</td><td class="es-t">A mí también. / A mí no.</td></tr><tr><td class="es-t">No me gusta la playa.</td><td class="es-t">A mí tampoco. / A mí sí.</td></tr></table>
@@ -918,7 +918,7 @@ Para mí, el teletrabajo es mejor que trabajar en la oficina: no pierdo tiempo e
  {t:'mc',q:'¿Qué hace Sergi antes de empezar a trabajar?',opts:['Sale a correr.','Va a la oficina.','Se reúne con su equipo.'],a:0},
  {t:'mc',q:'¿Qué desventaja tiene el teletrabajo para Sergi?',opts:['A veces se siente solo.','Pierde mucho tiempo en el metro.','Sus horarios no son flexibles.'],a:0},
  {t:'mc',q:'¿Cuántos días va Sergi a la oficina?',opts:['dos','tres','cinco'],a:0},
- {t:'free',task:'Beschreibe deinen typischen Tag als Masterstudent in Barcelona (oder einen Arbeitstag bei EY) in 6–8 Sätzen. Vergleiche am Ende: Was ist besser – Uni oder Arbeit?',hint:'Me levanto a las … · Antes de … · Después de … · Por la tarde … · Me acuesto … · La universidad es más … que …',focus:'reflexive Verben, antes de/después de + Infinitiv, Vergleiche, saber/poder',model:'Normalmente me levanto a las siete y media. Me ducho y desayuno en casa antes de ir a la universidad. Voy en metro y llego a la FIB a las nueve. Por la mañana tengo clases y a las dos como con mis compañeros. Después de comer estudio en la biblioteca. Por la noche ceno tarde y me acuesto a las doce. La vida de estudiante es más flexible que el trabajo en EY, pero también es más estresante antes de los exámenes.'}
+ {t:'free',task:'Beschreibe deinen typischen Tag als Masterstudent in Barcelona (oder einen Arbeitstag bei EY) in 6–8 Sätzen. Vergleiche am Ende: Was ist besser – Uni oder Arbeit?',hint:'Me levanto a las … · Antes de … · Después de … · Por la tarde … · Me acuesto … · La universidad es más … que …',focus:'reflexive Verben, antes de/después de + Infinitiv, Vergleiche, saber/poder',model:'Normalmente me levanto a las siete y media. Me ducho y desayuno en casa antes de ir a la universidad. Voy en metro y llego a la facultad a las nueve. Por la mañana tengo clases y a las dos como con mis compañeros. Después de comer estudio en la biblioteca. Por la noche ceno tarde y me acuesto a las doce. La vida de estudiante es más flexible que el trabajo en EY, pero también es más estresante antes de los exámenes.'}
 ]}],
 resumen:`<h3>Arbeitsbedingungen</h3><p class="es-t">Es un trabajo creativo. · Mis horarios son flexibles. · Tengo un salario alto / bajo.</p>
 <h3>saber / poder</h3><table><tr><td><b>saber</b>: Fähigkeit, Wissen</td><td class="es-t">¿Sabes chino? · No sé usar este programa.</td></tr><tr><td><b>poder</b>: Möglichkeit / Erlaubnis</td><td class="es-t">Puedo ir a pie. · ¿Puedo abrir la ventana?</td></tr></table>
@@ -931,7 +931,7 @@ resumen:`<h3>Arbeitsbedingungen</h3><p class="es-t">Es un trabajo creativo. · M
 /* ================= UNIDAD 8 · MI AGENDA ================= */
 COURSE.units.push({id:'u8',n:'8',title:'Mi agenda',sub:'Einen Termin vereinbaren · über Pläne sprechen · Kleidung & Farben · Ratschläge · Wetter · Smalltalk',
 goals:['Vorschlagen, annehmen, ablehnen','ir a + Infinitiv','Kleidung, Muster, Material','Farben (Angleichung)','este / ese / aquel','conocer, ofrecer (-zc-)','direktes Objekt mit a (Personen)','Wetter','Ausrufe: ¡Qué …! ¡Cómo …!'],
-situacion:{title:'Planes para el fin de semana',npc:'Laia',scene:'Freitagmittag in der Mensa der FIB. Laia, deine Kommilitonin, will am Wochenende etwas mit dir unternehmen.',role:'Du bist Laia, Kommilitonin aus Girona. Du duzt Jonas. Schlag Aktivitäten fürs Wochenende vor (Bunkers del Carmel bei Sonnenuntergang, Montjuïc, Strand, Mercat de Sant Antoni am Sonntag, ein Konzert). Erzähl vom Wetter (am Samstag Sonne, am Sonntag soll es regnen). Lehne einen Termin ab und schlag einen anderen vor, damit Jonas verhandeln muss. Benutze ir a + Infinitiv.',goal:'Vereinbare einen Treffpunkt und eine Uhrzeit fürs Wochenende: Mach selbst einen Vorschlag, lehne einen Vorschlag höflich ab, sprich übers Wetter und darüber, was du anziehst.'},
+situacion:{title:'Planes para el fin de semana',npc:'Laia',scene:'Freitagmittag in der Mensa der Uni. Laia, deine Kommilitonin, will am Wochenende etwas mit dir unternehmen.',role:'Du bist Laia, Kommilitonin aus Girona. Du duzt Jonas. Schlag Aktivitäten fürs Wochenende vor (Bunkers del Carmel bei Sonnenuntergang, Montjuïc, Strand, Mercat de Sant Antoni am Sonntag, ein Konzert). Erzähl vom Wetter (am Samstag Sonne, am Sonntag soll es regnen). Lehne einen Termin ab und schlag einen anderen vor, damit Jonas verhandeln muss. Benutze ir a + Infinitiv.',goal:'Vereinbare einen Treffpunkt und eine Uhrzeit fürs Wochenende: Mach selbst einen Vorschlag, lehne einen Vorschlag höflich ab, sprich übers Wetter und darüber, was du anziehst.'},
 lessons:[
 {id:'l1',title:'Einen Termin vereinbaren',desc:'¿Por qué no quedamos el lunes? · Vale · Es que …',steps:[
  {t:'info',title:'Vorschlagen, annehmen, ablehnen',html:`<table><tr><th>Vorschlagen</th><th>Annehmen</th><th>Ablehnen</th></tr>
@@ -1938,7 +1938,7 @@ resumen:`<h3>Glückwünsche</h3><p class="es-t">¡Felicidades! · ¡Feliz cumple
 /* ================= UNIDAD 15 · EL FUTURO ================= */
 COURSE.units.push({id:'u15',n:'17',level:'A2b',title:'El futuro',sub:'Futur (trabajaré, tendré) · Vorhersagen & Pläne · Meinung äußern · Konditional der Höflichkeit (me gustaría, podría) · por & para',
 goals:['Futur: regelmäßige Formen','Futur: tendré, haré, podré, saldré …','Vorhersagen: Creo que mañana lloverá','Meinung: creo que, para mí, (no) estoy de acuerdo','Wünsche & Höflichkeit: me gustaría, podría, debería','por vs. para (Grundregeln)'],
-situacion:{title:'Zukunftsgespräch mit deiner Tutorin',npc:'Dra. Vidal',scene:'Du hast ein Gespräch mit deiner Master-Tutorin an der UPC über deine Pläne nach dem Auslandssemester.',role:'Du bist Dra. Vidal, Tutorin an der UPC (FIB), sachlich und freundlich. Du siezt Jonas am Anfang, bietest dann das Du an. Frag nach seinen Plänen (¿Qué harás cuando termines el máster? ¿Te gustaría trabajar en España?), nach seiner Meinung (¿Crees que la inteligencia artificial cambiará el trabajo?) und gib Ratschläge mit deberías / podrías.',goal:'Sprich über deine Pläne im Futur (trabajaré, viviré…), äußere deine Meinung (creo que…, para mí…), und benutze me gustaría / podría.'},
+situacion:{title:'Zukunftsgespräch mit deiner Tutorin',npc:'Dra. Vidal',scene:'Du hast ein Gespräch mit deiner Master-Tutorin an der UPC über deine Pläne nach dem Auslandssemester.',role:'Du bist Dra. Vidal, Tutorin an der UPC, sachlich und freundlich. Du siezt Jonas am Anfang, bietest dann das Du an. Frag nach seinen Plänen (¿Qué harás cuando termines el máster? ¿Te gustaría trabajar en España?), nach seiner Meinung (¿Crees que la inteligencia artificial cambiará el trabajo?) und gib Ratschläge mit deberías / podrías.',goal:'Sprich über deine Pläne im Futur (trabajaré, viviré…), äußere deine Meinung (creo que…, para mí…), und benutze me gustaría / podría.'},
 lessons:[
 {id:'l1',title:'Das Futur',desc:'trabajaré · viviremos',steps:[
  {t:'info',title:'Futur: einfach anhängen',html:`<p>Infinitiv + Endung – gleich für -ar, -er, -ir:</p>
@@ -4209,7 +4209,7 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "Es Juan. (Name)": "Das ist Juan.",
 "Estoy en Barcelona. (Ort)": "Ich bin in Barcelona.",
 "Es ingeniera. (Beruf)": "Sie ist Ingenieurin.",
-"La FIB está en Campus Nord. (Ort)": "Die FIB ist auf dem Campus Nord.",
+"La facultad está en el campus. (Ort)": "Die Fakultät ist auf dem Campus.",
 "Es de Cádiz. (Herkunft)": "Er/Sie kommt aus Cádiz.",
 "¿Cómo estás? – Estoy bien. (Befinden)": "Wie geht es dir? – Mir geht es gut.",
 "Es alto y simpático. (Eigenschaft)": "Er ist groß und sympathisch.",
