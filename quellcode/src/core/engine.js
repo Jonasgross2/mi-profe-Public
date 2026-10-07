@@ -266,7 +266,27 @@ function bumpDay(correct){const d=today();S.stats.answers++;if(correct)S.stats.c
 function streakNow(){const d=today();return(S.streak.last===d||S.streak.last===addDays(d,-1))?S.streak.count:0;}
 function vkey(es){return es;}
 function addVocab(items,unit){let n=0;for(const[es,de,em]of items){const k=vkey(es);if(!S.srs[k]){S.srs[k]={es,de,unit,box:0,due:today(),t:Date.now()};if(em)S.srs[k].em=em;n++;}}if(n)save();return n;}
-function dueCards(){const d=today();return Object.values(S.srs).filter(c=>c.due<=d);}
+/* Eigene Wörter: normale Karten mit unit 'my:<liste>'; gelöscht = del:true (damit der Sync sie nicht zurückholt). Listen in S.mylists {id:{name,daily,t,del}} */
+const MY='my:';
+function myLists(){return Object.entries(S.mylists||{}).filter(([,l])=>!l.del).map(([id,l])=>Object.assign({id},l)).sort((a,b)=>(a.c||0)-(b.c||0));}
+function srsCards(){return Object.values(S.srs).filter(c=>!c.del);}
+function myCards(id){return srsCards().filter(c=>c.unit===MY+id);}
+function dueCards(){const d=today();const off=new Set(myLists().filter(l=>l.daily===false).map(l=>MY+l.id));return srsCards().filter(c=>c.due<=d&&!off.has(c.unit));}
+function addMyWords(id,pairs){const r={added:0,upd:0,course:[]};const now=Date.now();
+  for(const[es0,de0]of pairs){const es=String(es0).trim(),de=String(de0).trim();if(!es||!de)continue;const k=vkey(es),c=S.srs[k];
+    if(c&&!c.del&&!String(c.unit).startsWith(MY)){r.course.push(es);continue;}
+    if(c&&!c.del){if(c.de!==de||c.unit!==MY+id){c.de=de;c.unit=MY+id;c.t=now;r.upd++;}continue;}
+    S.srs[k]={es,de,unit:MY+id,box:0,due:today(),t:now};r.added++;}
+  save();return r;}
+/* Liste einfügen / Datei: eine Zeile = ein Wort; Trennzeichen Tab, –, -, =, ;, :, Komma werden erkannt; Seiten werden automatisch getauscht, wenn links Deutsch steht */
+function parsePairs(text,swap){const ok=[],bad=[];
+  for(let l of String(text).split(/\r?\n/)){l=l.replace(/<[^>]+>/g,' ').replace(/&nbsp;/g,' ').replace(/^\s*(\d+[.)]|[-•*·])\s+/,'').trim();if(!l)continue;
+    let parts=null;const q=l.match(/^"([^"]*)"\s*[,;\t]\s*"([^"]*)"/);if(q)parts=[q[1],q[2]];
+    if(!parts)for(const sep of ['\t',' – ',' — ',' - ',' = ','=',';',' : ',',']){const i=l.indexOf(sep);if(i>0&&i<l.length-sep.length){parts=[l.slice(0,i),l.slice(i+sep.length)];break;}}
+    if(!parts){bad.push(l);continue;}parts=parts.map(x=>x.trim().replace(/^"|"$/g,''));if(!parts[0]||!parts[1]){bad.push(l);continue;}ok.push(parts);}
+  const de=t=>/[äöüßÄÖÜ]|^(der|die|das|ein|eine|sich)\s/i.test(t),es=t=>/[ñ¿¡áéíóú]|^(el|la|los|las|un|una|unos|unas)\s/i.test(t);
+  /* pro Zeile: steht links Deutsch (oder rechts eindeutig Spanisch), wird getauscht; „Seiten tauschen“ dreht alles um */
+  return{pairs:ok.map(([a,b])=>((de(a)&&!de(b)||es(b)&&!es(a))!==!!swap)?[b,a]:[a,b]),bad};}
 /* Wiederholung nach Anki-Art: jede Karte hat Abstand (ivl, Tage) und Leichtigkeit (ease).
    Nochmal → morgen und danach wieder dieselben Stufen wie ein neues Wort · Schwer / Gut / Leicht siehe nextIvl.
    Alte Karten (nur box) werden beim ersten Bewerten übernommen. box bleibt als grobe Stufe für Statistik & Sync. */
@@ -315,7 +335,7 @@ function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NA
 const prevRoute=()=>{for(let i=NAVSTACK.length-2;i>=0;i--)if(pageKey(NAVSTACK[i])!=='play')return NAVSTACK[i];return null;};
 function navLabel(r){const p=r.split('/');const u=p[1]&&unitById(p[1]);
   return p[0]==='home'?T('Start'):p[0]==='units'?T('Kurs'):p[0]==='unit'&&u?UW+' '+u.n:p[0]==='resumen'&&u?T('Resumen · ')+UW+' '+u.n:p[0]==='words'&&u?T('Wortschatz · ')+UW+' '+u.n:
-    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch'),r:T('Lesetexte')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?T('Vokabeln'):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
+    p[0]==='ref'?({g:T('Grammatik'),s:T('Geschichten'),w:T('Wörterbuch'),r:T('Lesetexte')}[p[1]]||T('Bibliothek')):p[0]==='vocab'?(p[1]==='mine'?T('Meine Wörter'):p[1]==='stats'?T('Statistik'):T('Vokabeln')):p[0]==='verbs'?T('Verben'):p[0]==='mistakes'?T('Fehler'):
     p[0]==='settings'?T('Mehr'):p[0]==='lang'?T('Sprache & Profil'):p[0]==='placement'?T('Einstufungstest'):null;}
 function goBack(r){const pr=prevRoute();go(pr&&pr!==curRoute()?pr:r);}
 const backLabel=label=>{const pr=prevRoute();return(pr&&navLabel(pr))||label;};
@@ -1073,7 +1093,47 @@ function vVocabStats(m,all){const td=today();m.append(backTo(T('Vokabeln'),'voca
     Object.keys(log).length?bars(hist,T('Wiederholt – letzte 14 Tage'),T('Ø ')+Math.round(hist.reduce((a,r)=>a+r.v,0)/14)+T(' pro Tag')):null,
     hard.length?h('div',{class:'card statcard'},h('div',{class:'kind',style:'margin:0 0 6px'},T('Schwierigste Wörter')),
       h('div',{class:'hardlist'},hard.map(c=>h('div',{class:'hardrow'},spk(c.es),h('span',{class:'es'},c.es),h('span',{class:'muted small'},trc(c.de)),h('span',{class:'pill warn'},c.lapses+'× '+T('vergessen')))))):null);}
-function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const total=all.length;
+function newListId(){return 'l'+Date.now().toString(36);}
+function vMyLists(m){m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Meine Wörter')),h('p',{class:'sub'},T('Eigene Listen – sie kommen zusammen mit den Kurswörtern in die tägliche Wiederholung (pro Liste abschaltbar).')));
+  const L=myLists();const inp=h('input',{class:'inp',placeholder:T('Name der neuen Liste, z. B. Uni-Woche 3'),style:'font-size:16px'});
+  const add=()=>{const n=inp.value.trim().slice(0,40)||T('Meine Wörter');const id=newListId();S.mylists=S.mylists||{};S.mylists[id]={name:n,daily:true,t:Date.now(),c:Date.now()};save();go('vocab/mine/'+id);};
+  inp.onkeydown=e=>{if(e.key==='Enter')add();};
+  if(L.length)m.append(h('div',{class:'mlist',style:'margin-bottom:14px'},L.map(l=>{const n=myCards(l.id).length;return h('button',{class:'mrow',onclick:()=>go('vocab/mine/'+l.id)},h('span',{class:'mq'},h('b',{},l.name)),
+      h('span',{class:'muted small'},n+(n===1?T(' Wort'):T(' Wörter'))+(l.daily===false?T(' · nur gezielt'):'')),h('span',{class:'mch'},'›'));})));
+  m.append(h('div',{class:'card',style:'padding:14px 16px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Neue Liste')),h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px'},inp,h('button',{class:'btn primary',onclick:add},T('Anlegen')))));}
+function importBox(m,id){const ta=h('textarea',{class:'inp',rows:'7',placeholder:T('Eine Zeile pro Wort, z. B.\nla mesa – der Tisch\nel perro; der Hund\nTab, Strich, =, ; oder : als Trenner'),style:'font-size:15px;width:100%;resize:vertical'});
+  let swap=false;const pv=h('div',{class:'muted small',style:'margin-top:8px'});const go2=h('button',{class:'btn primary',style:'width:100%;margin-top:10px',disabled:true},T('Übernehmen'));
+  const sw=h('button',{class:'btn small',onclick:()=>{swap=!swap;upd();}},T('⇄ Seiten tauschen'));
+  const file=h('input',{type:'file',accept:'.txt,.csv,.tsv,text/plain,text/csv',style:'display:none',onchange:()=>{const f=file.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{ta.value=String(r.result||'');upd();};r.readAsText(f);}});
+  const upd=()=>{const r=parsePairs(ta.value,swap);pv.innerHTML='';go2.disabled=!r.pairs.length;go2.textContent=r.pairs.length+T(' Wörter übernehmen');
+    if(!ta.value.trim())return;pv.append(h('div',{},T('Erkannt: ')+r.pairs.length+(r.bad.length?T(' · nicht erkannt: ')+r.bad.length:'')),
+      h('div',{class:'mlist',style:'margin-top:6px'},r.pairs.slice(0,6).map(([a,b])=>h('div',{class:'mrow',style:'cursor:default'},h('span',{class:'mq es-t'},a),h('span',{class:'muted small',style:'text-align:right'},b)))),
+      r.pairs.length>6?h('div',{style:'margin-top:4px'},'… '+(r.pairs.length-6)+T(' weitere')):null,r.bad.length?h('div',{style:'color:var(--bad);margin-top:4px'},T('Nicht erkannt: ')+r.bad.slice(0,3).join(' · ')):null);};
+  ta.oninput=upd;
+  go2.onclick=()=>{const r=parsePairs(ta.value,swap);const x=addMyWords(id,r.pairs);toast(x.added+T(' neu')+(x.upd?' · '+x.upd+T(' aktualisiert'):'')+(x.course.length?' · '+x.course.length+T(' schon im Kurs'):''));route();};
+  /* zugeklappt: nur ein Knopf – öffnet die Karte mit Textfeld, Datei-Knopf und Vorschau */
+  const card=h('div',{class:'card hide',style:'padding:14px 16px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Liste einfügen oder Datei')),
+    h('div',{class:'row',style:'gap:6px;margin-bottom:8px'},sw,h('button',{class:'btn small',onclick:()=>file.click()},T('📄 Datei wählen'))),ta,file,pv,go2);
+  const head=h('button',{class:'btn',style:'width:100%;margin-bottom:12px',onclick:()=>{card.classList.remove('hide');head.classList.add('hide');setTimeout(()=>ta.focus(),50);}},T('📋 Liste einfügen oder Datei'));
+  return h('div',{},head,card);}
+function vMyList(m,id){const l=(S.mylists||{})[id];if(!l||l.del)return go('vocab/mine');const cards=myCards(id).sort((a,b)=>(b.t||0)-(a.t||0));
+  const nm=h('h1',{style:'margin-bottom:4px'},l.name);
+  const dl=h('input',{type:'checkbox',checked:l.daily!==false});dl.onchange=()=>{l.daily=dl.checked;l.t=Date.now();save();};
+  const es=h('input',{class:'inp',placeholder:fmt(T('{L}')),autocapitalize:'off',spellcheck:'false',style:'font-size:16px'}),de=h('input',{class:'inp',placeholder:T('Deutsch'),style:'font-size:16px'});
+  const add1=()=>{if(!es.value.trim()||!de.value.trim())return toast(T('Beide Felder ausfüllen'));const x=addMyWords(id,[[es.value,de.value]]);if(x.course.length)toast(T('Das Wort ist schon im Kurs – es wird dort schon geübt.'));else toast(T('Gespeichert ✓'));es.value='';de.value='';route();setTimeout(()=>{const f=document.querySelector('.myadd input');if(f)f.focus();},50);};
+  es.onkeydown=de.onkeydown=e=>{if(e.key==='Enter')add1();};
+  m.append(backTo(T('Meine Wörter'),'vocab/mine'),h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;align-items:baseline'},nm,
+      h('button',{class:'linkbtn',style:'text-decoration:none;color:var(--muted)',onclick:()=>{const n=prompt(T('Neuer Name der Liste'),l.name);if(n&&n.trim()){l.name=n.trim().slice(0,40);l.t=Date.now();save();route();}}},T('✎ umbenennen'))),
+    h('label',{class:'row',style:'gap:8px;margin:2px 0 12px'},dl,h('span',{class:'small'},T('In der täglichen Wiederholung'))),
+    h('div',{class:'row',style:'gap:8px;margin-bottom:12px'},h('button',{class:'btn primary',style:'flex:1',disabled:!cards.length,onclick:()=>runVocab(shuffle(cards.map(c=>({es:c.es,de:c.de,em:c.em}))).slice(0,20),'type',false)},T('▶ Liste üben')),
+      h('button',{class:'btn',style:'flex:1',disabled:!cards.length,onclick:()=>runVocab(shuffle(cards.map(c=>({es:c.es,de:c.de,em:c.em}))).slice(0,20),'flip',false)},T('🃏 Karten'))),
+    h('div',{class:'card myadd',style:'padding:14px 16px;margin-bottom:12px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Wort hinzufügen')),h('div',{class:'grid',style:'grid-template-columns:1fr 1fr;gap:8px'},es,de),
+      h('button',{class:'btn',style:'width:100%;margin-top:8px',onclick:add1},T('＋ Hinzufügen'))),
+    importBox(m,id));
+  if(cards.length)m.append(h('div',{class:'kind',style:'margin:16px 0 6px'},cards.length+(cards.length===1?T(' Wort'):T(' Wörter'))),h('div',{class:'mlist'},cards.map(c=>h('div',{class:'mrow',style:'cursor:default'},h('span',{class:'mq'},h('span',{class:'es-t'},c.es),h('span',{class:'muted'},' – '+c.de)),
+    h('button',{class:'btn ghost small',title:T('Löschen'),onclick:async()=>{if(!await askConfirm('„'+c.es+T('“ löschen?'),T('Löschen')))return;c.del=true;c.t=Date.now();save();route();}},'×')))));
+  m.append(h('button',{class:'btn ghost',style:'width:100%;margin-top:16px;color:var(--bad)',onclick:async()=>{if(!await askConfirm(T('Ganze Liste mit allen Wörtern löschen?'),T('Löschen')))return;const now=Date.now();myCards(id).forEach(c=>{c.del=true;c.t=now;});l.del=true;l.t=now;save();go('vocab/mine');}},T('Liste löschen')));}
+function vVocab(m,sub,lid){if(sub==='mine')return lid?vMyList(m,lid):vMyLists(m);const due=dueCards();const all=srsCards();const total=all.length;
   const boxes=[0,0,0,0];all.forEach(c=>{boxes[cardStage(c)]++;});
   if(sub==='stats')return vVocabStats(m,all);
   if(sub==='units'){m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Nach ')+UW+T(' üben')),h('p',{class:'sub'},T('Wörter einer ')+UW+T(' abfragen – zählt nicht für die Wiederholungsplanung.')),
@@ -1091,7 +1151,7 @@ function vVocab(m,sub){const due=dueCards();const all=Object.values(S.srs);const
       return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},vocabToday()>=vocabGoal()?h('span',{class:'small',style:'color:var(--ok);font-weight:600'},T('Tagesziel ')+vocabGoal()+' / '+vocabGoal()+' ✓'):h('span',{class:'muted small'},T('Tagesziel ')+vocabToday()+' / '+vocabGoal()),
         h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('⚙ Ziel ändern'))),pick);})():null));
   m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter einer ')+UW+T(' üben'),()=>go('vocab/units')),mtile('📊',T('Statistik'),total?T('Morgen fällig: ')+all.filter(c=>c.due===addDays(today(),1)).length:T('Noch keine Karten'),()=>go('vocab/stats')),
-    mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✏️',T('Fehlerheft'),S.mistakes.length?S.mistakes.length+T(' offene Fehler'):T('keine offenen Fehler'),()=>go('mistakes'))));
+    mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✍️',T('Meine Wörter'),myLists().length?srsCards().filter(c=>String(c.unit).startsWith(MY)).length+T(' eigene Wörter'):T('Eigene Listen anlegen'),()=>go('vocab/mine'))));
 }
 function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es,de,em])=>({es,de,em}))).slice(0,20),'type',false);}
 function runVocab(cards,mode,srs){const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
@@ -1329,6 +1389,7 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   o.lastMix=(a.lastMix||'')>(b.lastMix||'')?a.lastMix:b.lastMix;
   if((b.vocabGoalT||0)>(a.vocabGoalT||0)){o.vocabGoal=b.vocabGoal;o.vocabGoalT=b.vocabGoalT;}
   if((b.planT||0)>(a.planT||0)){o.plan=b.plan;o.planT=b.planT;}
+  o.mylists=Object.assign({},b.mylists||{});for(const[k,v]of Object.entries(a.mylists||{})){const r=o.mylists[k];if(!r||(v.t||0)>=(r.t||0))o.mylists[k]=v;}
   o.vlog=Object.assign({},b.vlog||{});for(const[k,v]of Object.entries(a.vlog||{}))o.vlog[k]=Math.max(v,o.vlog[k]||0);
   o.day=Object.assign({},b.day||{});for(const[k,v]of Object.entries(a.day||{}))if(v>(o.day[k]||''))o.day[k]=v;
   o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
