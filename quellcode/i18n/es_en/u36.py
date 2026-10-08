@@ -8,6 +8,7 @@ EN = [
 "setting conditions in negotiations",
 "The company in Munich wasn't your only option: a start-up in Barcelona wants to hire you. You're negotiating salary, working from home and holidays with the founder, Mr Ferrer.",
 "Negotiate with conditions: Acepto siempre que…, Podría… con tal de que…, A no ser que…, En caso de que…",
+"Provided that …",
 "siempre que · con tal de que · a no ser que",
 "Conditional connectors with the subjunctive",
 "<table><tr><th>Connector</th><th>Meaning</th><th>Example</th></tr>\n <tr><td class=\"es-t\">siempre que / siempre y cuando</td><td>provided that</td><td class=\"es-t\">Te lo presto siempre que me lo <b>devuelvas</b>.</td></tr>\n <tr><td class=\"es-t\">con tal de que</td><td>as long as</td><td class=\"es-t\">Hago lo que sea con tal de que <b>estés</b> bien.</td></tr>\n <tr><td class=\"es-t\">a no ser que / salvo que</td><td>unless</td><td class=\"es-t\">Iremos, a no ser que <b>llueva</b>.</td></tr>\n <tr><td class=\"es-t\">en caso de que</td><td>in case, if</td><td class=\"es-t\">En caso de que <b>haya</b> problemas, llámeme.</td></tr>\n <tr><td class=\"es-t\">solo si</td><td>only if (+ ind.!)</td><td class=\"es-t\">Solo si <b>tengo</b> tiempo.</td></tr></table>\n <div class=\"ojo\"><i>siempre que</i> + <b>ind.</b> = \"whenever\": <span class=\"es-t\">Siempre que vengo, llueve.</span> + <b>subj.</b> = \"provided that\".</div>",
@@ -98,5 +99,6 @@ EN = [
 "precise",
 "attract",
 "babysitter, nanny",
-"\"Don't you dare tell him!\""
+"\"Don't you dare tell him!\"",
+"<h3>Conditions + subjuntivo</h3><p class=\"es-t\">siempre que / siempre y cuando · con tal de que · a no ser que / salvo que · en caso de que</p><p>Careful: <span class=\"es-t\">siempre que + Ind.</span> = whenever · <span class=\"es-t\">solo si + Ind.</span></p>\n<h3>Compact</h3><p class=\"es-t\">De tener tiempo, … (= si tuviera) · De haberlo sabido, … (= si lo hubiera sabido) · Como no vengas, … (threat)</p>"
 ]

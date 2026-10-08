@@ -1,6 +1,6 @@
 :root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
-  --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
+  --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
   --gold:#e0a526; --gold-soft:#fbf0d6; --ok:#2f8a57; --ok-soft:#e1f2e8; --bad:#c23a3a; --bad-soft:#f9e1e1;
   --info:#2d6aa3; --info-soft:#e2edf8; --shadow:0 1px 2px rgba(60,40,20,.06),0 4px 16px rgba(60,40,20,.06);
   --radius:14px; --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
@@ -9,14 +9,14 @@
 @media (prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#1b1714; --surface:#25201c; --surface2:#2e2823; --ink:#f2ebe4; --muted:#b0a397; --line:#3d352e;
-    --accent:#e2694c; --accent-ink:#1b1714; --accent-soft:#3f2620; --gold:#e8b549; --gold-soft:#3a3020;
+    --accent:#e2694c; --accent-ink:#1b1714; --accent-soft:#3f2620; --accent-strong:#f08d71; --gold:#e8b549; --gold-soft:#3a3020;
     --ok:#5cc28a; --ok-soft:#1f3a2a; --bad:#ec6b6b; --bad-soft:#432222; --info:#76aee6; --info-soft:#1e2e40;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
   }
 }
 :root[data-theme="dark"]{
   --bg:#1b1714; --surface:#25201c; --surface2:#2e2823; --ink:#f2ebe4; --muted:#b0a397; --line:#3d352e;
-  --accent:#e2694c; --accent-ink:#1b1714; --accent-soft:#3f2620; --gold:#e8b549; --gold-soft:#3a3020;
+  --accent:#e2694c; --accent-ink:#1b1714; --accent-soft:#3f2620; --accent-strong:#f08d71; --gold:#e8b549; --gold-soft:#3a3020;
   --ok:#5cc28a; --ok-soft:#1f3a2a; --bad:#ec6b6b; --bad-soft:#432222; --info:#76aee6; --info-soft:#1e2e40;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
 }
@@ -68,7 +68,7 @@ h3{font-size:16px;margin:18px 0 6px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill.warn{color:var(--gold)}}
 .unit{display:flex;gap:16px;align-items:center;padding:16px 18px;cursor:pointer;transition:transform .08s}
 @media (hover:hover){.unit:hover{transform:translateY(-1px);border-color:var(--accent)}}
-.unit .num{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-family:var(--serif);font-size:20px;flex:none}
+.unit .num{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);color:var(--accent-strong);display:grid;place-items:center;font-weight:700;font-family:var(--serif);font-size:20px;flex:none}
 .unit.locked{opacity:.55;cursor:default}
 @media (hover:hover){.unit.locked:hover{transform:none;border-color:var(--line)}}
 .unit .t{font-weight:700;font-family:var(--serif);font-size:18px}
@@ -116,7 +116,7 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 /* Hauptknopf über die ganze Breite, feste Höhe – nichts verrutscht beim Wechsel Prüfen → Weiter */
 .actions>.btn{min-height:48px}
 .actions>.btn.primary{flex:1}
-.speak{border:0;background:var(--accent-soft);color:var(--accent);border-radius:50%;width:30px;height:30px;cursor:pointer;display:inline-grid;place-items:center;vertical-align:middle;flex:none;font-size:14px}
+.speak{border:0;background:var(--accent-soft);color:var(--accent-strong);border-radius:50%;width:30px;height:30px;cursor:pointer;display:inline-grid;place-items:center;vertical-align:middle;flex:none;font-size:14px}
 @media (hover:hover){.speak:hover{filter:brightness(.95)}}
 .speak.big{width:64px;height:64px;font-size:26px}
 .info{font-size:16px}

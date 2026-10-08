@@ -17,6 +17,7 @@ EN = [
 "habían",
 "Siento que alguien me ___ (seguir). (I can sense it.)",
 "I told you not to come.",
+"The fact that …",
 "el hecho de que · Que no venga…",
 "<p>When a known fact becomes the <b>topic</b>, the subjunctive is usually used:</p>\n <table><tr><th>Structure</th><th>Example</th></tr>\n <tr><td class=\"es-t\">el hecho de que + subj.</td><td class=\"es-t\">El hecho de que no <b>llamara</b> me dolió.</td></tr>\n <tr><td class=\"es-t\">Que + subj. (at the start)</td><td class=\"es-t\">Que no <b>quiera</b> venir no me extraña.</td></tr>\n <tr><td class=\"es-t\">lo de que / eso de que + subj./ind.</td><td class=\"es-t\">Eso de que te <b>vayas</b> no me gusta nada.</td></tr></table>\n <div class=\"ex\">Same statement, different focus: <span class=\"es-t\">No me extraña que no quiera venir.</span> – With <i>que</i> at the front the fact is emphasised.</div>",
 "The fact that you didn't let me know bothered me most.",

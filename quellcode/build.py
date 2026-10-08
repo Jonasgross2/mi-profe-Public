@@ -12,6 +12,18 @@ for k in PACKS:
 EXMAP={}
 for _,ln,ex in TRS:EXMAP.setdefault(ln,[]).append(ex)
 ALL=['core/lang.js']+[f for k in PACKS for f in PACKS[k]['files']]+['core/ui_tr.js']+[t[0] for t in TRS]+['core/engine.js']
+# ===== iPhone-Schutz: Syntax, die ältere iOS-Safari nicht kennen → App bliebe schwarz. Build bricht ab und nennt die Stelle. =====
+import re as _re, sys as _sys
+_BAD=[(r'\(\?<[=!]','Regex-Lookbehind (?<= / (?<!'),(r'\\p\{','Regex \\p{…}'),(r'\.at\(-?\d','Array.at()'),(r'\.findLast(Index)?\(','findLast'),
+  (r'structuredClone\(','structuredClone'),(r'Object\.hasOwn\(','Object.hasOwn'),(r'\.(toSorted|toReversed|toSpliced)\(','toSorted/toReversed'),
+  (r'(\?\?|\|\||&&)=(?!=)','logische Zuweisung ??= ||= &&='),(r'^\s*static\s*\{','static-Block'),(r'\.replaceAll\(','replaceAll (erst iOS 13.4)')]
+_errs=[]
+for _f in ALL:
+  for _n,_line in enumerate((s/_f).read_text(encoding='utf-8').splitlines(),1):
+    for _rx,_what in _BAD:
+      if _re.search(_rx,_line):_errs.append(f'  {_f}:{_n}: {_what}  →  {_line.strip()[:90]}')
+if _errs:
+  print('ABBRUCH – Syntax, die ältere iPhones nicht kennen:');print('\n'.join(_errs[:30]));_sys.exit(1)
 import json as _json
 MANIFEST='window.PACKS='+_json.dumps({'learn':[{'code':k,'name':v['name'],'flag':v['flag']} for k,v in PACKS.items()],'ex':EXMAP},ensure_ascii=False)+';'
 LOADER='''<script>'''+MANIFEST+'''

@@ -9,6 +9,7 @@ EN = [
 "Climate strike at the university",
 "There's a meeting about sustainability on campus at the UPC. Laia is on the organising team and asks you what bothers you and what you suggest.",
 "Say what bothers you and what pleases you with me molesta / me alegra que + subj., and make suggestions with es importante / necesario que + subj.",
+"I'm glad that …",
 "me alegra que · me molesta que",
 "Feelings + subjunctive",
 "<p>For feelings about something that <b>someone else</b> does, use the subjunctive:</p>\n <table><tr><th>Feeling</th><th>Example</th></tr>\n <tr><td class=\"es-t\">me alegra que</td><td class=\"es-t\">Me alegra que <b>vengas</b>.</td></tr>\n <tr><td class=\"es-t\">me molesta que</td><td class=\"es-t\">Me molesta que la gente <b>tire</b> basura.</td></tr>\n <tr><td class=\"es-t\">me preocupa que</td><td class=\"es-t\">Me preocupa que no <b>llueva</b>.</td></tr>\n <tr><td class=\"es-t\">me encanta / odio que</td><td class=\"es-t\">Me encanta que <b>haga</b> sol.</td></tr></table>\n <div class=\"ex\">Same person → infinitive: <span class=\"es-t\">Me alegra <b>verte</b>.</span> (I'm happy – I see you.) But: <span class=\"es-t\">Me alegra que <b>me veas</b>.</span></div>",

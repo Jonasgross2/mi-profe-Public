@@ -31,6 +31,7 @@ EN = [
 "My mother's father is my …",
 "My uncle's daughter is my …",
 "“Marta y su hermano” – whose brother?",
+"your brother",
 "Here <i>su</i> refers to Marta.",
 "I have a brother and two (female) cousins.",
 "Do you have any brothers or sisters?",

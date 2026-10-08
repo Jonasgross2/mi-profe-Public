@@ -8,6 +8,7 @@ EN = [
 "Solving flat-share problems",
 "There's trouble in your shared flat: the kitchen is never clean and it's noisy at night. Nuria wants to talk it over with you.",
 "Suggest solutions with si + present, give advice with “Yo en tu lugar / Yo que tú + conditional” and react politely to Nuria's suggestions.",
+"If …, then …",
 "si llueve, nos quedamos",
 "Real conditions: si + present",
 "<p>When something can really happen:</p>\n <table><tr><th>si + present</th><th>Result</th></tr>\n <tr><td class=\"es-t\">Si llueve,</td><td class=\"es-t\">nos quedamos en casa. (present)</td></tr>\n <tr><td class=\"es-t\">Si tengo tiempo,</td><td class=\"es-t\">iré a la playa. (future)</td></tr>\n <tr><td class=\"es-t\">Si tienes hambre,</td><td class=\"es-t\">come algo. (imperative)</td></tr></table>\n <div class=\"ex\">After <b>si</b> (if) <b>never</b> the future: <s>si lloverá</s> → <b>si llueve</b>. Just like English: “If it rains”, not “if it will rain”.</div>",

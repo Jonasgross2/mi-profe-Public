@@ -8,6 +8,7 @@ EN = [
 "discussing healthy habits",
 "You have back pain from sitting too much. Álex, your physiotherapist, wants to change your habits – you have an excuse for everything.",
 "Justify your habits with como / ya que and respond to advice with aunque (+ ind. or subj.) and a pesar de.",
+"Although … / Even if …",
 "aunque llueve · aunque llueva",
 "aunque: indicative or subjunctive?",
 "<table><tr><th>Mood</th><th>Meaning</th><th>Example</th></tr>\n <tr><td>indicative</td><td>\"although\" – fact, new information</td><td class=\"es-t\">Aunque <b>llueve</b>, salgo. (It's raining, I'm going anyway.)</td></tr>\n <tr><td>subjunctive</td><td>\"even if\" – maybe / doesn't matter</td><td class=\"es-t\">Aunque <b>llueva</b>, saldré. (Whether it rains or not.)</td></tr>\n <tr><td>subjunctive</td><td>known fact I don't care about</td><td class=\"es-t\">Aunque <b>sea</b> tu jefe, no tiene razón.</td></tr></table>\n <div class=\"ex\">Similar: <span class=\"es-t\">a pesar de + Inf./Nomen</span> · <span class=\"es-t\">a pesar de que</span> (like aunque) · <span class=\"es-t\">por mucho que + Subj.</span>.</div>",

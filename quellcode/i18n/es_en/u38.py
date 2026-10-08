@@ -29,6 +29,7 @@ EN = [
 "regulate by law",
 "at the expense of",
 "He passed the exam, even though he hardly studied.",
+"So … that … / Hence …",
 "tan … que · de ahí que · con lo que",
 "Expressing consequences",
 "<table><tr><th>Structure</th><th>Mood</th><th>Example</th></tr>\n <tr><td class=\"es-t\">tan + adj. + que / tanto/a + noun + que</td><td>ind.</td><td class=\"es-t\">Estaba tan cansado que me dormí en el metro.</td></tr>\n <tr><td class=\"es-t\">de tal modo / manera que</td><td>ind.</td><td class=\"es-t\">Lo explicó de tal manera que todos lo entendieron.</td></tr>\n <tr><td class=\"es-t\">de ahí que</td><td><b>subj.</b></td><td class=\"es-t\">No hay datos fiables; de ahí que el debate <b>sea</b> tan difícil.</td></tr>\n <tr><td class=\"es-t\">con lo que / por lo que</td><td>ind.</td><td class=\"es-t\">Perdió el tren, con lo que llegó tarde.</td></tr></table>\n <div class=\"ex\"><i>de ahí que</i> (\"hence\") is – surprisingly – followed by the <b>subjunctive</b>, because the cause is already known and is only being evaluated.</div>",

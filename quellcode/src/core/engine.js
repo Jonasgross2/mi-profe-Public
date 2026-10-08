@@ -638,8 +638,8 @@ let lastLv=null;/* zuletzt angesehene Stufe – beim Zurückkommen auf „Kurs�
 function vUnits(m,lv){
   const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):T('A1'));lastLv=lv;
   /* einmaliger Hinweis: die Kurs-Geschichte ist eine Rolle (Steckbrief LANG.roleNote) */
-  if(LANG.roleNote&&!S.settings.roleSeen)m.append(h('div',{class:'card',style:'padding:10px 14px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-start'},h('span',{},'🎭'),h('span',{class:'small',style:'flex:1'},T(LANG.roleNote)),
-    h('button',{class:'btn ghost small',title:T('Ausblenden'),onclick:e=>{S.settings.roleSeen=1;save();e.currentTarget.parentNode.remove();}},'×')));
+  if(LANG.roleNote&&!S.settings.roleSeen)m.append(h('div',{class:'card',style:'padding:6px 6px 6px 12px;margin-bottom:8px;display:flex;gap:8px;align-items:center'},h('span',{},'🎭'),h('span',{style:'flex:1;font-size:12.5px;line-height:1.35'},T(LANG.roleNote)),
+    h('button',{class:'btn ghost small',style:'flex:none',title:T('Ausblenden'),onclick:e=>{S.settings.roleSeen=1;save();e.currentTarget.parentNode.remove();}},'×')));
   m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},T('Kurs')),h('button',{class:'btn small',onclick:()=>go('placement')},T('🎯 Test')),h('button',{class:'btn small',onclick:()=>go('ref/g')},T('📄 Grammatik'))));
   const pctOf=Ls=>{const us=COURSE.units.filter(u=>Ls.some(L=>L.id===unitLevel(u))&&u.status!=='soon');return Math.round((us.length?us.reduce((a,u)=>a+lessonPct(u),0)/us.length:0)*100)+'%';};
   m.append(levelTabs(lv,'units',pctOf));

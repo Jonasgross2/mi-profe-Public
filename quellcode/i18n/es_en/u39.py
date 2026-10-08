@@ -21,6 +21,7 @@ EN = [
 "Nominalised: \"If the city reduces traffic, …\"",
 "Improving public transport is urgent.",
 "Common mistakes",
+"Gerund: when right, when wrong?",
 "<table><tr><th>correct</th><th>wrong</th></tr>\n <tr><td>simultaneous: <span class=\"es-t\">Entró <b>cantando</b>.</span></td><td>as a later consequence: <s>Se cayó, rompiéndose la pierna.</s> → <span class=\"es-t\">Se cayó y se rompió la pierna.</span></td></tr>\n <tr><td>manner: <span class=\"es-t\">Aprendí <b>leyendo</b>.</span></td><td>as an attribute: <s>una caja conteniendo libros</s> → <span class=\"es-t\">una caja <b>que contiene</b> libros</span></td></tr>\n <tr><td>prior event/reason: <span class=\"es-t\"><b>Viendo</b> que llovía, nos quedamos.</span></td><td>English style: <s>Adjuntando el informe…</s> → <span class=\"es-t\">Le adjunto el informe.</span></td></tr></table>\n <div class=\"ojo\">Punctuation: comma <b>before</b> <i>pero, sino, aunque</i>; comma <b>after</b> connectors at the start of a sentence (<i>Sin embargo, …</i>). No comma between subject and verb!</div>",
 "Which sentence is correct?",
 "Feedback on the essay",
