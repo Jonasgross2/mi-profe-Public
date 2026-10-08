@@ -19,6 +19,7 @@ EN = [
 "Languages",
 "Agreeing & disagreeing",
 "",
+"You both speak English. React to that …",
 "",
 "Introducing someone",
 "",

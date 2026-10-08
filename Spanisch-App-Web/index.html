@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261007-1601";</script>
+<script>window.PWA=true;window.APP_VERSION="20261008-1013";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -3946,7 +3946,7 @@ free(el,s,ctx){el.append(kind(T('Freies Schreiben')),h('p',{class:'q'},s.task),s
     ai.disabled=true;ai.textContent=AIN()+T(' korrigiert…');
     try{const r=await gemini(TEACHER+`\n\nAufgabe: ${s.task}\nLernziel/Grammatik dieser Lektion: ${s.focus||''}\nText von Jonas:\n"""${ta.value}"""\n\nKorrigiere den Text. Antworte als JSON: {"note": Zahl 1-10, "lob": "1 kurzer Satz, was gut ist", "korrigiert": "vollständig korrigierter Text", "fehler": [{"falsch":"...","richtig":"...","erklaerung":"kurz auf Deutsch"}], "tipp": "1 Tipp zum Weiterlernen"}`);
       out.innerHTML='';out.append(h('div',{class:'fb ai'},h('b',{class:'h'},T('🤖 Note: ')+r.note+'/10 · '+(r.lob||'')),
-        h('div',{class:'es-t',style:'margin:6px 0'},diffHtmlLong(ta.value,r.korrigiert||'')),
+        h('div',{class:'es-t',style:'margin:6px 0',html:diffHtmlLong(ta.value,r.korrigiert||'')}),
         (r.fehler||[]).length?h('ul',{style:'margin:6px 0;padding-left:18px'},(r.fehler||[]).map(f=>h('li',{},h('span',{class:'es-t'},h('del',{style:'color:var(--bad)'},f.falsch),' → ',h('b',{style:'color:var(--ok)'},f.richtig)),' – ',f.erklaerung))):h('div',{},T('Keine Fehler gefunden 🎉')),
         r.tipp?h('div',{class:'small',style:'margin-top:6px'},'💡 '+r.tipp):null,h('details',{style:'margin-top:8px'},h('summary',{class:'small'},T('Musterlösung aus dem Kurs')),h('div',{class:'es-t'},s.model))));}
     catch(e){out.innerHTML='';out.append(h('div',{class:'fb bad'},AIN()+T('-Fehler: ')+e.message),h('div',{class:'fb ai'},h('b',{class:'h'},T('Musterlösung')),h('div',{class:'es-t'},s.model)));}
