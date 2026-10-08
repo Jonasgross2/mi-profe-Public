@@ -816,6 +816,14 @@ function pauseTitle(p){const k=p.key||'',a=k.split('/');if(p.cards)return p.myId
   if(a[0]==='lesson'||a[0]==='round'){const u=unitById(a[1]),l=u&&u.lessons.find(x=>x.id===a[2]);if(l)return UW+' '+u.n+' · '+l.title+(a[0]==='round'?T(' · Runde ')+a[3]:'');}
   return {mix:T('Gemischte Wiederholung'),verbs:T('Verben-Trainer'),num:T('Zahlen & Uhrzeit'),mistakes:T('Fehler üben')}[k]||p.title||'';}
 function pauseBtn(k,start,label){const p=pauseGet(k);return p?h('button',{class:'btn primary',style:'width:100%;min-height:48px;margin-bottom:8px',onclick:start},T('▶ Weitermachen')+' ('+pauseInfo(p)+')'):null;}
+/* Text zu einer Verständnisfrage finden (Fehlerheft, Gemischte Wiederholung): Lektion = letzter Lesetext davor, Geschichte, Lesetext */
+function ctxOf(ref){const p=String(ref||'').split('|');
+  if(p[0]==='S'){const st=STORIES.find(x=>x.id===p[1]);return st&&st.text?{title:st.title,text:st.text}:null;}
+  if(p[0]==='R'){const r=(window.READINGS||[]).find(x=>x.id===p[1]);return r&&r.text?{title:r.title,text:r.text}:null;}
+  const u=unitById(p[0]),l=u&&u.lessons.find(x=>x.id===p[1]);const i=+p[2];if(!l||isNaN(i)||!['mc','tf','gap'].includes((l.steps[i]||{}).t))return null;
+  for(let k=i-1;k>=0&&k>=i-8;k--){const s=l.steps[k];if(s.t==='read'&&s.text)return{title:s.title||'',text:s.text};if(s.t==='vocab'||s.t==='info')break;}return null;}
+function ctxBox(cx){const html=esc(String(cx.text).replace(/\{([^|}]+)\|[^}]*\}/g,'$1')).split(/\n\s*\n/).map(x=>'<p>'+x.replace(/\n/g,'<br>')+'</p>').join('');
+  return h('details',{class:'card ctxbox',style:'padding:10px 14px;margin:0 0 12px'},h('summary',{class:'small',style:'cursor:pointer;font-weight:600'},T('📖 Text zum Nachlesen')+(cx.title?' · '+cx.title:'')),h('div',{class:'es-t',style:'margin-top:8px;font-size:15px',html}));}
 function play(m,cfg){
   let queue=cfg.steps.slice();let pos=0;let firstTry=new Map();let retried=new Set();let gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
   /* ↶ Rückgängig (nur bei Übungen mit Zwischenspeicher, nicht in Tests): Zustand bei jeder Aufgabe merken, zurück = vorige Aufgabe neu */
@@ -838,6 +846,8 @@ function play(m,cfg){
     if(cfg.pk&&pos>0)pauseSet(cfg.pk,{route:curRoute(),title:cfg.title,steps:queue,pos,ft:[...firstTry],rt:[...retried].map(x=>queue.indexOf(x)),g:gradeable,n:queue.length});
     const it=queue[pos];const isRetry=retried.has(it)&&firstTry.has(it.ref);
     if(isRetry)stage.append(h('div',{class:'pill acc',style:'margin-bottom:10px'},T('↻ Noch mal – das war vorhin falsch')));
+    /* Verständnisfrage ohne ihren Text (Fehlerheft, Mix): Text zum Aufklappen dazu */
+    if(cfg.mistakeMode||cfg.pk==='mix'){const cx=ctxOf(it.ref);if(cx)stage.append(ctxBox(cx));}
     window.__cur=it;const R=RENDER[it.s.t];if(!R){stage.append(T('Unbekannter Schritt ')+it.s.t);return next();}
     R(stage,it.s,{unit:cfg.unit,ref:it.ref,noPrompt:!!cfg.noPrompt,done:(status,your)=>{
       if(GRADED.has(it.s.t)){if(!firstTry.has(it.ref)){firstTry.set(it.ref,status);bumpDay(status!=='bad');}
