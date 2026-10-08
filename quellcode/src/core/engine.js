@@ -38,7 +38,12 @@ function load(){try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
   if(sh.name)S.name=sh.name;if(sh.surname)S.surname=sh.surname;else if(sh.name)delete S.surname;if(sh.gender)S.gender=sh.gender;if(sh.settings)S.settings=sh.settings;
   S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),S);S.settings=Object.assign({},DEFAULT.settings,S.settings||{});if(!S.settings.geminiModel||S.settings.geminiModel==='gemini-2.5-flash')S.settings.geminiModel='gemini-flash-latest';}
 function saveShared(){try{localStorage.setItem(SHARED,JSON.stringify({lang:LANG.code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}}
-function save(noSync){S.updated=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}saveShared();if(!noSync&&window.__sync)window.__sync.schedule();}
+/* Speicher voll? Erst die Zwischenstände (angefangene Übungen) opfern, dann noch einmal – sonst einmal deutlich warnen statt still Fortschritt zu verlieren */
+let SAVE_WARNED=false;
+function save(noSync){S.updated=Date.now();const js=JSON.stringify(S);try{localStorage.setItem(KEY,js);}catch(e){
+    try{Object.keys(localStorage).filter(k=>k.indexOf('mi-profe-pause-')===0).forEach(k=>localStorage.removeItem(k));localStorage.setItem(KEY,js);}
+    catch(e2){if(!SAVE_WARNED){SAVE_WARNED=true;setTimeout(()=>toast(T('⚠️ Speicher voll – Fortschritt konnte nicht gespeichert werden. Mehr → Sicherung exportieren.')),0);}}}
+  saveShared();if(!noSync&&window.__sync)window.__sync.schedule();}
 load();
 document.title=fmt(T('Mi profe · {L} lernen'));
 /* Name: wird beim ersten Öffnen abgefragt. Die Inhalte sind für „Jonas“ geschrieben – für andere Namen wird er überall ersetzt. */
@@ -216,7 +221,7 @@ const h=(tag,attrs={},...kids)=>{const e=document.createElement(tag);
 const cap=s=>String(s).charAt(0).toUpperCase()+String(s).slice(1);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
-const addDays=(ds,n)=>{const d=new Date(ds+T('T12:00:00'));d.setDate(d.getDate()+n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
+const addDays=(ds,n)=>{const d=new Date(ds+'T12:00:00');d.setDate(d.getDate()+n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 function toast(t){const e=h('div',{class:'toast'},t);document.body.append(e);setTimeout(()=>e.remove(),2200);}
 
@@ -232,7 +237,9 @@ function wordCmp(c,x,typo){ // c,x normalized strings
   for(let i=0;i<A.length;i++){const a=A[i],b=B[i];if(a===b)continue;
     if(strip(a)===strip(b)){worst=Math.max(worst,1);continue;}
     const sa=strip(a),sb=strip(b);
-    if(typo&&sb.length>=6&&lev(sa,sb)===1&&sa.slice(-2)===sb.slice(-2)){worst=Math.max(worst,2);continue;}
+    /* kein „Tippfehler“, wenn nur ein Vokal kurz vor dem Ende anders ist – das ist meist Zeit/Modus (comemos/comimos, hablamos/hablemos) */
+    const vowelSwap=sa.length===sb.length&&(()=>{let d=-1;for(let k=0;k<sa.length;k++)if(sa[k]!==sb[k]){d=k;break;}return d>=sb.length-5&&/[aeiou]/.test(sa[d])&&/[aeiou]/.test(sb[d]);})();
+    if(typo&&!vowelSwap&&sb.length>=6&&lev(sa,sb)===1&&sa.slice(-2)===sb.slice(-2)){worst=Math.max(worst,2);continue;}
     return 3;}
   return worst;}
 function compare(input,answers,opts={}){
@@ -275,7 +282,7 @@ let voices=[];function loadVoices(){const all=(window.speechSynthesis?speechSynt
 if(window.speechSynthesis){loadVoices();speechSynthesis.onvoiceschanged=loadVoices;}
 function pickVoice(){if(!voices.length)loadVoices();
   return voices.find(v=>v.name===S.settings.voice)||voices.find(v=>/es[-_]ES/i.test(v.lang)&&/m[oó]nica|jorge|paulina|google/i.test(v.name))||voices.find(v=>/es[-_]ES/i.test(v.lang))||voices[0];}
-const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform===T('MacIntel')&&navigator.maxTouchPoints>1);
+const IS_IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 /* iOS: Ton auch bei Stummschalter – Audio-Session auf "playback" + stilles Audio als Türöffner */
 let audioUnlocked=false;
 /* Standard „ambient“: Musik anderer Apps (Spotify) läuft weiter, dafür folgt die App dem Stummschalter.
@@ -333,7 +340,7 @@ const FALLBACK=['gemini-flash-latest','gemini-flash-lite-latest','gemini-3-flash
 let GMODE=null;
 async function gfetch(url,key,bodyStr){
   const variants=[
-    ()=>fetch(url+'?key='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':T('text/plain;charset=UTF-8')},body:bodyStr}),
+    ()=>fetch(url+'?key='+encodeURIComponent(key),{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:bodyStr}),
     ()=>fetch(url,{method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body:bodyStr})];
   const order=GMODE===1?[1,0]:[0,1];let last;
   for(const i of order){const ctl=new AbortController();const to=setTimeout(()=>ctl.abort(),45000);
@@ -342,15 +349,15 @@ async function gfetch(url,key,bodyStr){
       GMODE=i;return r;}catch(e){last=e;}}
   const e=new Error(netHelp(last));e.network=true;throw e;}
 function netHelp(e){
-  return T('Keine Verbindung zu Gemini (')+(e&&e.name===T('AbortError')?T('Zeitüberschreitung'):(e&&e.message)||T('Netzwerkfehler'))+T('). Mögliche Ursachen: kein Internet / VPN, ein Werbe- oder Tracking-Blocker (z. B. uBlock, Ghostery, Safari-Inhaltsblocker) blockiert googleapis.com, oder der Browser blockiert Anfragen aus lokalen Dateien. Tipp: In Chrome öffnen oder die Web-App-Version (GitHub Pages) nutzen.');}
+  return T('Keine Verbindung zu Gemini (')+(e&&e.name==='AbortError'?T('Zeitüberschreitung'):(e&&e.message)||T('Netzwerkfehler'))+T('). Mögliche Ursachen: kein Internet / VPN, ein Werbe- oder Tracking-Blocker (z. B. uBlock, Ghostery, Safari-Inhaltsblocker) blockiert googleapis.com, oder der Browser blockiert Anfragen aus lokalen Dateien. Tipp: In Chrome öffnen oder die Web-App-Version (GitHub Pages) nutzen.');}
 async function geminiCall(model,key,prompt,{json,history}){
   const body={contents:history||[{role:'user',parts:[{text:prompt}]}],generationConfig:{temperature:0.4}};
   if(history&&prompt)body.systemInstruction={parts:[{text:prompt}]};
   if(json)body.generationConfig.responseMimeType='application/json';
-  const base='https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+T(':generateContent');
+  const base='https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent';
   const r=await gfetch(base,key,JSON.stringify(body));
   const j=await r.json().catch(()=>({}));
-  if(!r.ok){const e=new Error((j.error&&j.error.message)||(T('HTTP ')+r.status));e.modelProblem=r.status===404||/no longer available|not found|not supported|deprecated/i.test(e.message);throw e;}
+  if(!r.ok){const e=new Error((j.error&&j.error.message)||('HTTP '+r.status));e.modelProblem=r.status===404||/no longer available|not found|not supported|deprecated/i.test(e.message);throw e;}
   const t=(((j.candidates||[])[0]||{}).content||{}).parts?.map(p=>p.text||'').join('')||'';
   if(!json)return t;
   try{return JSON.parse(t.replace(/^```json\s*|```\s*$/g,''));}catch(e){throw new Error(T('Antwort von Gemini nicht lesbar.'));}
@@ -457,7 +464,7 @@ function goBack(r){const pr=prevRoute();go(pr&&pr!==curRoute()?pr:r);}
 const backLabel=label=>{const pr=prevRoute();return(pr&&navLabel(pr))||label;};
 const backTo=(label,r)=>h('button',{class:'btn ghost small',style:'margin-bottom:6px',onclick:()=>goBack(r)},'← '+backLabel(label));
 const curUnit=()=>nextLesson()?.u||COURSE.units[0];
-const unitLevel=u=>u.level||LEVEL_OF[u.id]||T('A1');
+const unitLevel=u=>u.level||LEVEL_OF[u.id]||'A1';
 const levelOf=u=>LEVELS.find(L=>L.id===unitLevel(u))||LEVELS[0];
 /* Stufen-Reiter: oben A1 … C2 (GER-Stufe = L.label), darunter „Teil 1 | Teil 2“, wenn eine Stufe mehrere Teile hat. cnt(Liste von Teilstufen) → Text unter dem Namen */
 const LGROUPS=[...new Set(LEVELS.map(L=>L.label))];
@@ -489,8 +496,8 @@ function storyQ(q){if(q.t==='tf')return{t:'mc',kind:T('Richtig oder falsch?'),q:
 function resolveRef(ref){if(ref.startsWith('V|')){const[,uid,w]=ref.split('|');const u=unitById(uid);const it=u&&allUnitWords(u).find(x=>x[0]===w);return it?verbStep(u,w,it[1]):null;}
   if(ref.startsWith('R|')){const[,rid,i]=ref.split('|');const q=(window.READINGS||[]).find(x=>x.id===rid)?.qs[+i];return q?storyQ(q):null;}
   if(ref.startsWith('N|')){const[,k,v]=ref.split('|');try{return numStep(k,v);}catch(e){return null;}}
-  if(ref.startsWith(T('S|'))){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
-  if(ref.startsWith(T('W|'))){const[,uid,mode,...rest]=ref.split('|');const es=rest.join('|');const u=unitById(uid);const w=u&&allUnitWords(u).find(x=>x[0]===es);return w?vocabStep(u,mode,w[0],w[1],w[2]):null;}
+  if(ref.startsWith('S|')){const[,sid,i]=ref.split('|');const st=STORIES.find(x=>x.id===sid);const q=st?.qs[+i];return q?storyQ(q):null;}
+  if(ref.startsWith('W|')){const[,uid,mode,...rest]=ref.split('|');const es=rest.join('|');const u=unitById(uid);const w=u&&allUnitWords(u).find(x=>x[0]===es);return w?vocabStep(u,mode,w[0],w[1],w[2]):null;}
   const[uid,lid,i]=ref.split('|');if(uid==='P')return PLACEMENT[+i];const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);return l?.steps[+i];}
 
 /* ---------- layout ---------- */
@@ -534,7 +541,7 @@ function vLearnPick(){const bt=document.getElementById('boot');document.body.inn
 function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
   let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]],['x',T('🙂 keine Angabe'),T('beide Formen zählen')]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('div',{style:'font-size:20px;line-height:1.2'},l.split(' ')[0]),h('b',{},l.split(' ').slice(1).join(' ')),ex?h('span',{},ex):null);return b;});
-  const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const v2=inp2.value.trim().replace(/\s+/g,' ').slice(0,40);const changed=v!==S.name||g!==S.gender||v2!==(S.surname||'');S.name=v;S.gender=g;if(v2)S.surname=v2;else delete S.surname;save();
+  const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const v2=inp2.value.trim().replace(/\s+/g,' ').slice(0,40);const changed=v!==S.name||g!==S.gender||v2!==(S.surname||'');S.name=v;S.gender=g;if(v2)S.surname=v2;else delete S.surname;if(changed)S.profT=Date.now();save();
     const back=again?'lang':'home';if(IN_ARTIFACT)CUR=back;else history.replaceState(null,'','#'+back);
     if(changed&&!IN_ARTIFACT)reloadApp();else{if(changed){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}}route();}};
   inp.onkeydown=inp2.onkeydown=e=>{if(e.key==='Enter')ok();};
@@ -612,7 +619,7 @@ function vHome(m){
   const days=[...Array(7)].map((_,i)=>addDays(td,i-6));const mx=Math.max(10,...days.map(d=>S.stats.days[d]||0));
   m.append(h('div',{class:'card weekcard',style:'margin-top:12px'},h('div',{class:'row'},h('div',{class:'kind',style:'flex:1;margin:0'},T('Deine Woche')),h('span',{class:'muted small'},done+(done===1?T(' Lektion'):T(' Lektionen'))+' · '+acc+T(' % richtig'))),
     h('div',{class:'week'},days.map(d=>{const v=S.stats.days[d]||0;
-      return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+T('T12:00:00')).getDay()]),h('div',{class:'small'},v||''));}))));
+      return h('div',{class:'wd'+(d===td?' now':'')},h('div',{class:'wb'},h('i',{style:'height:'+Math.round(100*v/mx)+'%'})),h('div',{class:'small muted'},[T('So'),T('Mo'),T('Di'),T('Mi'),T('Do'),T('Fr'),T('Sa')][new Date(d+'T12:00:00').getDay()]),h('div',{class:'small'},v||''));}))));
   /* passt es am Handy nicht ganz, wird „Deine Woche“ kompakter (kein Scrollen) */
   /* passt es am Handy nicht ganz (auch 1 px), wird „Deine Woche“ schrittweise kompakter: flach → ganz ausblenden. Mehrfach prüfen (iOS legt Ränder/Höhen verzögert fest) */
   /* Startseite ohne Scrollen: sofort (vor dem ersten Bild) messen; spätere Prüfungen machen nur noch kompakter, nie wieder größer (kein Springen) */
@@ -642,7 +649,7 @@ function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.
       h('span',{class:'muted small upct'},soon?'':Math.round(pct*100)+'%')));}
 let lastLv=null;/* zuletzt angesehene Stufe – beim Zurückkommen auf „Kurs“ wieder dort, beim App-Start dort, wo es weitergeht */
 function vUnits(m,lv){
-  const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):T('A1'));lastLv=lv;
+  const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):'A1');lastLv=lv;
   /* einmaliger Hinweis: die Kurs-Geschichte ist eine Rolle (Steckbrief LANG.roleNote) */
   if(LANG.roleNote&&!S.settings.roleSeen)m.append(h('div',{class:'card',style:'padding:6px 6px 6px 12px;margin-bottom:8px;display:flex;gap:8px;align-items:center'},h('span',{},'🎭'),h('span',{style:'flex:1;font-size:12.5px;line-height:1.35'},T(LANG.roleNote)),
     h('button',{class:'btn ghost small',style:'flex:none',title:T('Ausblenden'),onclick:e=>{S.settings.roleSeen=1;save();e.currentTarget.parentNode.remove();}},'×')));
@@ -709,6 +716,13 @@ function speakable(t){t=t.replace(/\s*\([^)]*\)/g,'').replace(/\s*=\s*[^·]*/g,'
 function addSpeakTo(el){const t=speakable(el.textContent);if(!t||looksDe(t))return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}
 const cleanWord=es=>es.length<=28&&!/[…\/(]/.test(es);
 function lessonWords(l){const w=[];for(const s of l.steps)if(s.t==='vocab')w.push(...s.items);return w.filter(x=>cleanWord(x[0]));}
+/* Vokabeln mit „/“ in einzelne richtige Formen auflösen: „el / la estudiante“, „el/la becario/a“, „encantado / encantada“, „el ingeniero / la ingeniera“ */
+function vocabForms(es){es=String(es).trim();if(es.indexOf('/')<0)return[es];const out=[];
+  let m=es.match(/^(el|un)\s*\/\s*(la|una)\s+(.+)$/i);if(m){const rest=m[3];const g=rest.match(/^(\S+?)(o|or|e)?\/(a|ora)(\b.*)$/);
+    if(g){out.push(m[1]+' '+g[1]+(g[2]||'')+g[4],m[2]+' '+g[1]+(g[3]==='ora'&&!g[2]?'ora':g[2]==='or'?'ora':g[3])+g[4]);}else out.push(m[1]+' '+rest,m[2]+' '+rest);}
+  else if(/\s\/\s/.test(es)){es.split(/\s\/\s/).forEach(p=>out.push(p.trim()));}
+  else{const w=es.match(/^(.*?)(\S+?)(o|or)\/(a|ora)\b(.*)$/);if(w)out.push(w[1]+w[2]+w[3]+w[5],w[1]+w[2]+(w[3]==='or'?'ora':'a')+w[5]);}
+  return out.length?out.concat([es]):[es];}
 /* Synonyme: andere Kurswörter mit genau derselben deutschen Bedeutung (ganzer Text inkl. Klammern, damit z. B. ser/estar getrennt bleiben) */
 let DE_IDX=null;const deKeys=de=>{const k=norm(de);return k.length>2?[k]:[];};
 function synOf(es,de){if(!DE_IDX){DE_IDX={};COURSE.units.forEach(u=>(u.lessons||[]).forEach(l=>l.steps.forEach(s=>{if(s.t==='vocab')(s.items||[]).forEach(w=>deKeys(w[1]).forEach(k=>{(DE_IDX[k]=DE_IDX[k]||[]).push(w[0]);}));})));}
@@ -717,8 +731,8 @@ function vocabStep(u,mode,es,de,em){const p=pic(es,em);
   if(mode==='mc'){const others=shuffle(allUnitWords(u).map(x=>x[0]).filter(x=>x!==es&&cleanWord(x))).slice(0,2);return{t:'mc',kind:T('Was heißt das?'),q:(p?p+' ':'')+esc(de),opts:[es,...others],a:0};}
   if(mode==='mcde'){const others=shuffle(allUnitWords(u).filter(x=>x[0]!==es&&x[1]!==de).map(x=>x[1])).slice(0,2);return{t:'mc',kind:T('Was bedeutet das?'),q:(p?p+' ':'')+esc(es),opts:[de,...others],a:0};}
   if(mode==='listen')return{t:'listen',es,de};
-  return{t:'tr',kind:fmt(T('Wie heißt das {ON}?')),de:(p?p+'  ':'')+de,a:[es].concat(synOf(es,de))};}
-const vocabItem=(u,w,mode)=>({s:vocabStep(u,mode,w[0],w[1],w[2]),ref:T('W|')+u.id+'|'+mode+'|'+w[0]});
+  return{t:'tr',kind:fmt(T('Wie heißt das {ON}?')),de:(p?p+'  ':'')+de,a:vocabForms(es).concat(synOf(es,de))};}
+const vocabItem=(u,w,mode)=>({s:vocabStep(u,mode,w[0],w[1],w[2]),ref:'W|'+u.id+'|'+mode+'|'+w[0]});
 function allUnitWords(u){const w=[];for(const l of u.lessons)for(const s of l.steps)if(s.t==='vocab')w.push(...s.items);return w;}
 function vWords(m,id){const u=unitById(id);const w=allUnitWords(u);
   m.append(backTo(UW+' '+u.n,'unit/'+id),h('h1',{},T('Wortschatz · ')+UW+' '+u.n),
@@ -790,7 +804,7 @@ const PKEY=()=>'mi-profe-pause-'+LANG.code;
 function pauses(){try{return JSON.parse(localStorage.getItem(PKEY())||'{}')||{};}catch(e){return{};}}
 function pauseSave(P){try{localStorage.setItem(PKEY(),JSON.stringify(P));}catch(e){}}
 function pauseGet(k){const p=pauses()[k];if(!p)return null;const age=dayDiff(p.d,today());if(p.daily?age>0:age>14){pauseDel(k);return null;}return p;}
-function pauseSet(k,v){const P=pauses();v.d=today();v.t=Date.now();P[k]=v;pauseSave(P);}
+function pauseSet(k,v){const P=pauses();v.d=today();v.t=Date.now();P[k]=v;/* höchstens 8 Zwischenstände, älteste fliegen raus */Object.keys(P).sort((a,b)=>(P[b].t||0)-(P[a].t||0)).slice(8).forEach(x=>delete P[x]);pauseSave(P);}
 function pauseDel(k){const P=pauses();if(P[k]){delete P[k];pauseSave(P);}}
 function pauseList(){return Object.keys(pauses()).map(k=>{const p=pauseGet(k);return p&&Object.assign({key:k},p);}).filter(Boolean).sort((a,b)=>b.t-a.t);}
 let RESUME=null;
@@ -816,7 +830,7 @@ function play(m,cfg){
   function upd(){$('.ptop .bar i').style.width=Math.round(100*pos/queue.length)+'%';$('#pcount').textContent=Math.min(pos+1,queue.length)+' / '+queue.length;}
   function next(){pos++;if(pos>=queue.length)return finish();show();}
   function show(){if(cfg.pk){hist.push({pos,queue:queue.slice(),ft:new Map(firstTry),rt:[...retried].map(x=>queue.indexOf(x)),mis:cp(S.mistakes),stats:cp(S.stats),streak:cp(S.streak)});if(hist.length>30)hist.shift();undoB.classList.toggle('hide',hist.length<2);}
-    upd();stage.innerHTML='';stage.className='step';void stage.offsetWidth;stage.className='step';
+    upd();if(!queue[pos])return finish();/* leere Aufgabenliste (z. B. Runde 3 einer Lese-Lektion) */stage.innerHTML='';stage.className='step';void stage.offsetWidth;stage.className='step';
     if(cfg.pk&&pos>0)pauseSet(cfg.pk,{route:curRoute(),title:cfg.title,steps:queue,pos,ft:[...firstTry],rt:[...retried].map(x=>queue.indexOf(x)),g:gradeable,n:queue.length});
     const it=queue[pos];const isRetry=retried.has(it)&&firstTry.has(it.ref);
     if(isRetry)stage.append(h('div',{class:'pill acc',style:'margin-bottom:10px'},T('↻ Noch mal – das war vorhin falsch')));
@@ -928,6 +942,8 @@ mc(el,s,ctx){let sel=null;const all=s.opts.map((o,i)=>[o,i]);const opts=s.keep?a
     const ok=sel===s.a;btns.forEach((b,k)=>{if(opts[k][1]===s.a&&(ok||!s.noReveal))b.classList.add('right');else if(opts[k][1]===sel)b.classList.add('wrong');});
     feedback(el,{status:ok?'ok':'bad',right:s.opts[s.a]},s,null,null);ctx.done(ok?'ok':'bad',s.opts[sel]);},ctx));},
 gap(el,s,ctx){el.append(kind(s.kind||T('Lücke füllen')),s.task?h('p',{class:'muted'},s.task):null);
+  /* eine Lücke, aber mehrere Lösungen im Inhalt = Varianten (z. B. quien / la que) */
+  if((s.q.match(/___/g)||[]).length===1&&s.a.length>1)s=Object.assign({},s,{a:[s.a.join('|')]});
   const parts=s.q.split('___');const inputs=[];const q=h('div',{class:'gapq'});
   parts.forEach((p,i)=>{q.append(h('span',{html:p}));if(i<parts.length-1){const w=Math.max(6,...String(s.a[i]).split('|').map(x=>x.length));const inp=h('input',{class:'inp gapi',style:'width:'+(w*0.75+2)+'em',autocomplete:'off',autocapitalize:'off',spellcheck:'false'});inputs.push(inp);q.append(inp);}});
   el.append(q,s.hint?h('p',{class:'muted small'},T('Hinweis: '),h('span',{html:s.hint})):null,keys(()=>lastInput));setTimeout(()=>inputs[0]?.focus(),50);
@@ -984,7 +1000,7 @@ match(el,s,ctx){el.append(kind(T('Zuordnen')),h('p',{class:'q'},s.q||T('Was geh�
   const grid=h('div',{class:'match'});const colL=h('div',{class:'opts'}),colR=h('div',{class:'opts'});grid.append(colL,colR);
   const mk=(x,side)=>{const b=h('button',{class:'opt'},x.t);b.onclick=()=>{if(b.classList.contains('done'))return;
     if(side==='L'){colL.querySelectorAll('.sel').forEach(y=>y.classList.remove('sel'));selL={x,b};if(/[a-zñáéíóú]/i.test(x.t)&&s.sayLeft)say(x.t);}else{colR.querySelectorAll('.sel').forEach(y=>y.classList.remove('sel'));selR={x,b};}
-    b.classList.add('sel');if(selL&&selR){if(selL.x.i===selR.x.i){selL.b.classList.add('done');selR.b.classList.add('done');selL.b.classList.remove('sel');selR.b.classList.remove('sel');left--;}
+    b.classList.add('sel');if(selL&&selR){/* gleiche Beschriftung zählt auch (z. B. zweimal „+ Indikativ“) */if(selL.x.i===selR.x.i||s.pairs[selL.x.i][1]===selR.x.t||s.pairs[selR.x.i][0]===selL.x.t){selL.b.classList.add('done');selR.b.classList.add('done');selL.b.classList.remove('sel');selR.b.classList.remove('sel');left--;}
       else{errors++;const a=selL.b,c=selR.b;a.classList.add('wrong');c.classList.add('wrong');setTimeout(()=>{a.classList.remove('wrong','sel');c.classList.remove('wrong','sel');},500);}
       selL=selR=null;if(!left){const st=errors===0?'ok':errors<=2?'near':'bad';el.append(h('div',{class:'fb '+(st==='ok'?'ok':st==='near'?'warn':'bad')},st==='ok'?T('¡Perfecto! Alles beim ersten Versuch.'):errors+T(' Fehlversuch(e) – ')+(st==='near'?T('gut gemacht.'):T('schau dir die Paare noch mal an.'))));ctx.done(st,'');bar.setNext();}}};return b;};
   L.forEach(x=>colL.append(mk(x,'L')));Rr.forEach(x=>colR.append(mk(x,'R')));el.append(grid);
@@ -1146,14 +1162,14 @@ function vNum(m){const all=!!S.settings.numAll;m.innerHTML='';m.append(backTo(T(
 /* Gemischte Wiederholung: Aufgaben der letzten 3 Runden werden gemieden (S.mixSeen), dazu ein paar frisch erzeugte Vokabelaufgaben */
 function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
   for(const u of COURSE.units)for(const l of u.lessons||[]){const r=S.lessons[u.id+'.'+l.id];if(!r?.done||l.freq)continue;
-  const age=Math.max(1,(Date.now()-new Date(r.date+T('T12:00:00')))/864e5);
+  const age=Math.max(1,(Date.now()-new Date(r.date+'T12:00:00'))/864e5);
   lessonWords(l).forEach(w=>words.push([u,w]));
   l.steps.forEach((st,i)=>{if(['mc','gap','tr','conj','order','listen'].includes(st.t)){const ref=u.id+'|'+l.id+'|'+i;pool.push({s:st,ref,unit:u,w:Math.random()*Math.log(1+age)+Math.random()-(seen.has(ref)?5:0)});}});}
   const nv=pool.length?Math.min(Math.round(n/5),words.length):Math.min(n,words.length);
   const ex=pool.sort((a,b)=>b.w-a.w).slice(0,n-nv);
-  const voc=shuffle(words).filter(([u,w])=>!seen.has(T('W|')+u.id+'|'+w[0])).concat(shuffle(words)).slice(0,nv).map(([u,w])=>{const it=vocabItem(u,w,['mc','mcde','tr','listen'][Math.floor(Math.random()*4)]);it.unit=u;return it;});
+  const voc=shuffle(words).filter(([u,w])=>!seen.has('W|'+u.id+'|'+w[0])).concat(shuffle(words)).slice(0,nv).map(([u,w])=>{const it=vocabItem(u,w,['mc','mcde','tr','listen'][Math.floor(Math.random()*4)]);it.unit=u;return it;});
   const out=shuffle(ex.concat(voc).slice(0,n-Math.min(2,numKinds().length?2:0)).concat(numItems(2)));
-  S.mixSeen=out.map(x=>x.ref.startsWith(T('W|'))?x.ref.split('|').slice(0,2).concat(x.ref.split('|').slice(3)).join('|'):x.ref).concat(S.mixSeen||[]).slice(0,3*n);
+  S.mixSeen=out.map(x=>x.ref.startsWith('W|')?x.ref.split('|').slice(0,2).concat(x.ref.split('|').slice(3)).join('|'):x.ref).concat(S.mixSeen||[]).slice(0,3*n);
   return out;}
 function vMix(m){const steps=mixSteps(15);
   if(steps.length<5){m.append(h('h1',{},T('Gemischte Wiederholung')),h('div',{class:'card'},T('Schließ zuerst ein paar Lektionen ab – dann mische ich hier Aufgaben aus allen bisherigen Lektionen durcheinander.')));return;}
@@ -1164,7 +1180,7 @@ const storyFor=st=>unitById(st.after);
 const storyOpen=st=>{const u=storyFor(st);return !u||lessonPct(u)>0||S.checks[u.id]?.pass||(unitStatus(u)&&unitStatus(u)!==T('neu'));};
 function nextStory(){return STORIES.find(st=>storyOpen(st)&&!S.stories?.[st.id]);}
 const levelSeg=(cur,base,cnt)=>h('div',{style:'margin:4px 0 12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,'')));
-const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):T('A1');};
+const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):'A1';};
 function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
@@ -1200,17 +1216,17 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
    2) sonst mit Text noch mal hören/lesen → nur die falschen Fragen wiederholen (mit Auflösung). */
 function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'s');const u=storyFor(st);
   if(!storyOpen(st))m.append(h('div',{class:'fb warn',style:'margin-bottom:12px'},T('Diese Geschichte passt ab ')+UW+' '+u.n+T(' – vielleicht kommt dir noch nicht alles bekannt vor. Lies sie trotzdem, wenn du magst!')));
-  const qsteps=(idx,hide)=>shuffle(idx).map(i=>({s:Object.assign(storyQ(st.qs[i]),hide?{noReveal:true}:{}),ref:T('S|')+st.id+'|'+i}));
+  const qsteps=(idx,hide)=>shuffle(idx).map(i=>({s:Object.assign(storyQ(st.qs[i]),hide?{noReveal:true}:{}),ref:'S|'+st.id+'|'+i}));
   const finish=score=>{S.stories=S.stories||{};const p=S.stories[st.id];S.stories[st.id]={date:today(),score:Math.max(p?.score||0,score)};save();const nx=nextStory();
     return nx?{label:T('Nächste Geschichte →'),fn:()=>go('story/'+nx.id)}:{label:T('Zur Bibliothek →'),fn:()=>go('ref/s')};};
   const wrong=[];let first=1;
   play(m,{title:T('Geschichte · ')+st.title,noRetry:true,noPrompt:true,
-    steps:[{s:{t:'read',hideText:true,kind:T('Geschichte · ')+levelOf(u).title,title:st.title,intro:T('Erst nur hören – der Text ist versteckt. Hör so oft du willst, dann kommen Fragen.'),text:st.text},ref:T('S|')+st.id+'|r'}].concat(qsteps(st.qs.map((_,i)=>i),true)),
+    steps:[{s:{t:'read',hideText:true,kind:T('Geschichte · ')+levelOf(u).title,title:st.title,intro:T('Erst nur hören – der Text ist versteckt. Hör so oft du willst, dann kommen Fragen.'),text:st.text},ref:'S|'+st.id+'|r'}].concat(qsteps(st.qs.map((_,i)=>i),true)),
     onAnswer:(it,status)=>{if(status==='bad'){const i=+it.ref.split('|')[2];if(!wrong.includes(i))wrong.push(i);}},
     onBack:()=>goBack('ref/s'),
     onDone:(r)=>{first=r.score;if(!wrong.length)return finish(r.score);
       return{label:T('Mit Text anhören & ')+wrong.length+T(' Fragen wiederholen →'),fn:()=>{m.innerHTML='';
-        play(m,{title:T('Geschichte · ')+st.title+T(' · mit Text'),steps:[{s:{t:'read',kind:T('Jetzt mit Text'),title:st.title,intro:T('Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.'),text:st.text,de:st.de},ref:T('S|')+st.id+'|r'}].concat(qsteps(wrong,false)),
+        play(m,{title:T('Geschichte · ')+st.title+T(' · mit Text'),steps:[{s:{t:'read',kind:T('Jetzt mit Text'),title:st.title,intro:T('Hör noch einmal zu und lies mit. Danach kommen die Fragen, die noch nicht geklappt haben.'),text:st.text,de:st.de},ref:'S|'+st.id+'|r'}].concat(qsteps(wrong,false)),
           mistakeMode:true,onBack:()=>goBack('ref/s'),onDone:()=>finish(first)});}};}});}
 /* Lesetext C1/C2: lesen (mit Vorleser, antippbaren Wörtern, Übersetzung) → Fragen; Fehler-Ref R|id|i */
 function vReading(m,id){const r=(window.READINGS||[]).find(x=>x.id===id);if(!r)return vRef(m,'r');
@@ -1412,7 +1428,9 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
     if(md==='listen'){stage.append(kind(T('Hör zu und schreib das Wort')),h('div',{class:'row',style:'margin-bottom:14px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.55)},T('🐢 Langsam'))),inp,keys(()=>inp));setTimeout(()=>say(c.es),200);}
     else stage.append(kind(fmt(T('Wie heißt das {ON}?'))),picEl(c.es,c.em,'qpic'),h('p',{class:'q',style:'font-size:26px'},trc(c.de)),inp,keys(()=>inp));
     setTimeout(()=>inp.focus(),50);
-    stage.append(actionBar(()=>{let r=compare(inp.value,c.es,{pron:false});
+    stage.append(actionBar(()=>{let r=compare(inp.value,vocabForms(c.es),{pron:false});if(r.status!=='bad')r.right=c.es;
+      /* nur der Artikel fehlt (teléfono statt el teléfono) → fast richtig */
+      if(r.status==='bad'&&(LANG.articles||/(?!)/).test(c.es)&&vocabForms(c.es).some(f=>compare(inp.value,f.replace(LANG.articles,''),{pron:false}).status!=='bad'))r={status:'near',right:c.es,note:T('Fast – denk an den Artikel: ')+c.es};
       if(r.status==='bad'&&md!=='listen'){const sy=synOf(c.es,c.de);if(sy.length&&compare(inp.value,sy,{pron:false}).status==='ok')r={status:'ok',right:c.es,note:T('Auch richtig ✓ – gesucht war: ')+c.es};}inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
       feedback(stage,r,{t:'v'},inp.value,null);if(md==='listen')stage.append(h('p',{class:'muted'},'= '+trc(c.de)));if(r.status!=='bad')say(c.es);res(c,r.status);},{next:nxt}));}
   function end(){stage.innerHTML='';upd();if(opt.pk)pauseDel(opt.pk);const pct=Math.round(100*okc/Math.max(seen.size,1));if(srs&&seen.size){S.vocabDay=today();save();}const np=opt.again?null:dayPlan().find(x=>!x.done&&x.r!=='vocab');const more=srs?reviewSet():[];
@@ -1434,7 +1452,7 @@ function vPlacement(m){
 function runStage(m,li,results){const L=LEVELS[li];m.innerHTML='';window.scrollTo(0,0);m.scrollTop=0;
   const byU={};PLACEMENT.forEach((s,i)=>{(byU[s.u]=byU[s.u]||[]).push(i);});
   const units=levelUnits(L.id).filter(u=>byU[u.id]);
-  const steps=units.flatMap(u=>shuffle(byU[u.id]).slice(0,3)).map(i=>{const s=PLACEMENT[i];return{s:s.t==='mc'&&!s.opts.includes(T('Weiß ich nicht'))?Object.assign({},s,{opts:s.opts.concat([T('Weiß ich nicht')]),keepLast:true}):s,ref:T('P||')+i,unit:s.u};});
+  const steps=units.flatMap(u=>shuffle(byU[u.id]).slice(0,3)).map(i=>{const s=PLACEMENT[i];return{s:s.t==='mc'&&!s.opts.includes(T('Weiß ich nicht'))?Object.assign({},s,{opts:s.opts.concat([T('Weiß ich nicht')]),keepLast:true}):s,ref:'P||'+i,unit:s.u};});
   const per={};let sc=0,cont=false;const nextL=LEVELS[li+1];
   play(m,{title:T('Einstufungstest · Etappe ')+(li+1)+T(' von ')+LEVELS.length+' · '+L.title,steps:shuffle(steps),noRetry:true,noPrompt:true,onBack:()=>go('placement'),
     onAnswer:(it,st)=>{const u=it.unit;per[u]=per[u]||{n:0,ok:0};per[u].n++;if(st!=='bad')per[u].ok++;},
@@ -1457,7 +1475,7 @@ function placementTable(){const r=S.placement?.results||{};const t=h('div',{clas
 
 /* ---------- mistakes ---------- */
 /* Fehlerheft: oben Übungs-Karte, darunter kompakte Zeilen (Herkunft + Frage); Antippen zeigt deine Antwort und die Lösung */
-function mistakeSrc(ref){return ref.startsWith('V|')?T('Verben'):ref.startsWith('P')?T('Test'):ref.startsWith('N|')?T('Zahlen'):ref.startsWith('R|')?T('Lesetext'):ref.startsWith(T('S|'))?T('Geschichte'):'U'+(unitById(ref.split('|')[ref.startsWith(T('W|'))?1:0])?.n??'');}
+function mistakeSrc(ref){return ref.startsWith('V|')?T('Verben'):ref.startsWith('P')?T('Test'):ref.startsWith('N|')?T('Zahlen'):ref.startsWith('R|')?T('Lesetext'):ref.startsWith('S|')?T('Geschichte'):'U'+(unitById(ref.split('|')[ref.startsWith('W|')?1:0])?.n??'');}
 function rightOf(s){const first=a=>String([].concat(a)[0]||'').split('|')[0];
   if(s.t==='mc')return s.opts?s.opts[s.a]:'';if(s.t==='gap'){const a=[].concat(s.a);let k=0;return String(s.q||'').replace(/<[^>]+>/g,'').replace(/___/g,()=>first(a[k++]));}
   if(s.t==='tr')return first(s.a);if(s.t==='conj')return s.verb+': '+(s.forms||[]).join(', ');if(s.t==='order'||s.t==='listen')return s.es||'';
@@ -1519,7 +1537,7 @@ function vSettingsAll(m){const st=S.settings;
     try{const r=await gemini(T('Antworte als JSON {"ok":true,"saludo":"ein kurzer Gruß auf ')+LANG.code+'"}');model.value=st.geminiModel;out.append(h('div',{class:'fb ok'},T('✓ Funktioniert (')+st.geminiModel+T(')! Gemini sagt: '),h('span',{class:'es-t'},r.saludo||'')));}
     catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));
       try{const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=100&key='+encodeURIComponent(st.geminiKey));const j=await r.json();
-        const ms=(j.models||[]).filter(x=>(x.supportedGenerationMethods||[]).includes(T('generateContent'))&&/flash/.test(x.name)&&!/image|tts|audio|live|embed/.test(x.name)).map(x=>x.name.replace('models/',''));
+        const ms=(j.models||[]).filter(x=>(x.supportedGenerationMethods||[]).includes('generateContent')&&/flash/.test(x.name)&&!/image|tts|audio|live|embed/.test(x.name)).map(x=>x.name.replace('models/',''));
         if(ms.length)out.append(h('div',{class:'fb ai'},T('Verfügbare Modelle (klicken zum Übernehmen): '),h('div',{class:'row',style:'margin-top:6px'},ms.slice(0,12).map(n=>h('button',{class:'btn small',onclick:()=>{model.value=n;test.click();}},n)))));}catch(_){}}
     test.disabled=false;test.textContent=T('Verbindung testen');};
   if(SAMPLE){const sel=h('select',{class:'inp',style:'font-size:15px'},[['claude',T('Claude (über dein Claude-Abo, schnellstes Modell)')],['gemini',T('Gemini (eigener API-Key)')]].map(([v,l])=>h('option',{value:v,selected:(st.aiProvider||'claude')===v},l)));sel.onchange=()=>{st.aiProvider=sel.value;save();toast(T('Gespeichert'));};
@@ -1584,7 +1602,7 @@ function vOrigin(m){const o=Object.assign({c:'DE',city:'',other:''},S.origin||{}
   m.append(backTo(T('Sprache & Profil'),'lang'),h('h1',{},T('Herkunft')),h('p',{class:'sub'},T('Woher kommst du? Übungen wie „Soy de …“ und „¿De dónde eres?“ passen sich daran an.')),
     h('div',{class:'kind',style:'margin-top:4px'},T('Land')),chips,other,h('div',{class:'kind',style:'margin-top:16px'},T('Stadt')),city,
     h('button',{class:'btn primary',style:'margin-top:16px',onclick:()=>{const v=sel==='XX'?{c:'',other:other.value.trim().slice(0,40),city:city.value.trim().slice(0,40)}:{c:sel,other:'',city:city.value.trim().slice(0,40)};
-      if(sel==='XX'&&!v.other)return toast(T('Gib dein Land ein'));S.origin=v;save();if(IN_ARTIFACT){toast(T('Gespeichert'));return;}location.hash='lang';reloadApp();}},T('Speichern')));}
+      if(sel==='XX'&&!v.other)return toast(T('Gib dein Land ein'));S.origin=v;S.profT=Date.now();save();if(IN_ARTIFACT){toast(T('Gespeichert'));return;}location.hash='lang';reloadApp();}},T('Speichern')));}
 /* Unterseiten von „Mehr“: welche Karten aus vSettingsAll gezeigt werden (Erkennung über die – ggf. übersetzte – Überschrift) */
 const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),['🔊 Aussprache']],
   ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 Gemini (optional)']],
@@ -1637,8 +1655,8 @@ function mergeState(a,b){ // a=lokal, b=remote → vereinigt, nichts geht verlor
   o.vlog=Object.assign({},b.vlog||{});for(const[k,v]of Object.entries(a.vlog||{}))o.vlog[k]=Math.max(v,o.vlog[k]||0);
   o.day=Object.assign({},b.day||{});for(const[k,v]of Object.entries(a.day||{}))if(v>(o.day[k]||''))o.day[k]=v;
   o.shadow=Object.assign({},b.shadow||{},a.shadow||{});
-  o.origin=a.origin||b.origin;
-  o.name=a.name||b.name;o.gender=a.gender||b.gender;
+  /* Profil (Name, Nachname, Ansprache, Herkunft): neueste Änderung gewinnt (profT), sonst wie bisher lokal zuerst */
+  {const P=(b.profT||0)>(a.profT||0)?[b,a]:[a,b];o.name=P[0].name||P[1].name;o.gender=P[0].gender||P[1].gender;o.origin=P[0].origin||P[1].origin;o.surname=P[0].profT?P[0].surname:(P[0].surname||P[1].surname);if(!o.surname)delete o.surname;o.profT=Math.max(a.profT||0,b.profT||0)||undefined;}
   o.readings=Object.assign({},b.readings||{});for(const[k,v]of Object.entries(a.readings||{})){const r=o.readings[k];o.readings[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.stories=Object.assign({},b.stories||{});for(const[k,v]of Object.entries(a.stories||{})){const r=o.stories[k];o.stories[k]=!r?v:{date:v.date>r.date?v.date:r.date,score:Math.max(v.score||0,r.score||0)};}
   o.checks=Object.assign({},b.checks||{});for(const[k,v]of Object.entries(a.checks||{})){const r=o.checks[k];o.checks[k]=!r?v:{date:(v.date>r.date?v.date:r.date),score:Math.max(v.score||0,r.score||0),pass:!!(v.pass||r.pass)};}
@@ -1673,7 +1691,7 @@ document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.pre
 setTimeout(()=>{if(S.settings.ghToken)syncNow();},300);
 /* Service Worker: App kommt sofort aus dem Speicher; Updates im Hintergrund prüfen (beim Start und beim Zurückkehren in die App).
    Hat eine neue Version übernommen → Hinweis zum Neuladen (nicht automatisch, damit keine Lektion abbricht). */
-if(T('serviceWorker') in navigator&&/^https?:/.test(location.protocol)&&window.PWA){const hadCtl=!!navigator.serviceWorker.controller;
+if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)&&window.PWA){const hadCtl=!!navigator.serviceWorker.controller;
   navigator.serviceWorker.register('sw.js').then(r=>{const chk=()=>r.update().catch(()=>{});setTimeout(chk,3000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')chk();});}).catch(()=>{});
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||document.getElementById('updbar'))return;
     document.body.append(h('button',{id:'updbar',class:'updbar',onclick:()=>reloadApp()},T('✨ Neue Version – tippen zum Laden')));});}
