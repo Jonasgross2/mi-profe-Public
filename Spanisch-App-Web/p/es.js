@@ -5975,6 +5975,7 @@ defineLang('es',{name:'Spanisch',flag:'🇪🇸',native:'Español',into:'ins Spa
   sampleSay:['Hola, soy tu profesora de español.','¿Qué tal? Me llamo Lucía.'],
   voiceHint:'Auf dem Mac klingen „Mónica“ bzw. Stimmen mit „(Premium)“/„(Erweitert)“ am besten. Mehr Stimmen: Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Spanisch.',
   storySeries:'Nuevo en Barcelona',storyIntro:'Ben zieht nach Barcelona.',
+  accentNote:'Fast! Achte auf Akzente / ñ – sie können die Bedeutung ändern (esta ≠ está).',
   articles:/^(el|la|los|las|un|una|unos|unas)\s+/i,
   mark:/[ñ¿¡áéíóú]|^(el|la|los|las|un|una|unos|unas)\s/i, /* erkennt beim Import von Wortlisten, welche Seite Spanisch ist */
   sampleWords:[['la mesa',{de:'der Tisch',en:'the table',pt:'a mesa'}],['el perro',{de:'der Hund',en:'the dog',pt:'o cão'}]],
@@ -6032,7 +6033,7 @@ function conjugate(inf){var v=String(inf||'').trim().toLowerCase(),refl=false;
   return r;}
 /* Textbausteine der Hinweise – die Engine übersetzt sie einzeln (ui_tr.js) */
 var WHY_PARTS=['unregelmäßig – auswendig lernen','regelmäßig auf -','Stammwechsel ','(nicht bei nosotros/vosotros)','1. Person auf -zco (sonst regelmäßig)','y vor o/e','g → j vor o','c → z vor o','sonst regelmäßig','Akzent auf ','(außer nosotros/vosotros)','reflexiv: ','wie '];
-defineLang('es',{conjugate:conjugate,whyParts:WHY_PARTS});
+defineLang('es',{conjugate:conjugate,whyParts:WHY_PARTS,infinitive:/^[a-záéíóúñü]+(ar|er|ir|ír)(se)?$/});
 })();
 ;
 /* Spanisch: Zahlen, Uhrzeit, Datum, Preise für „Zahlen & Uhrzeit“ (LANG.numbers). Die Engine wählt Aufgabenart und Werte,
@@ -6090,5 +6091,125 @@ function str(t,P){var sp=P.sur||P.nm.split(' ')[0];
    .replace(/, señor Gross/g,P.g==='x'?', '+(P.sur?P.nm.split(' ')[0]+' '+P.sur:P.nm):', '+(P.g==='f'?'señora':'señor')+(P.sur?' '+P.sur:''));}
 /* ohne Nachnamen im Profil fragt die Rezeption nach dem Namen statt dem Nachnamen */
 function obj(o,P){if(o.n&&o.es==='¿Cómo se escribe tu apellido?'&&!P.sur){o.es='¿Cómo se escribe tu nombre?';o.de=P.ex==='de'?'Wie schreibt man deinen Namen?':'How do you spell your name?';}}
-defineLang('es',{persona:{name:'Jonas',surname:'Gross'},personal:{test:/erre, o, e/,str:str,obj:obj}});
+defineLang('es',{persona:{name:'Jonas',surname:'Gross',country:'DE',city:'Mannheim'},personal:{test:/erre, o, e/,str:str,obj:obj}});
+})();
+;
+/* Spanisch: Herkunft der lernenden Person (LANG.origin). Die Kursinhalte gehen von der Kurs-Person aus (LANG.persona: aus Alemania, Mannheim).
+   demonyms: Land → [Adjektiv m, Adjektiv f, Landessprache]. pre(t,O): spanische Herkunftssätze (soy alemán, Hablo alemán, de Alemania);
+   city(t,O): ohne Stadt im Profil wird „Mannheim“ durch das Land ersetzt. O = {X: Zeile aus ORIGINS, D: demonyms-Zeile, oth: freies Land, f: weiblich, city}. */
+(function(){
+var DEM={DE:["alemán", "alemana", "alemán"],
+AT:["austriaco", "austriaca", "alemán"],
+CH:["suizo", "suiza", "alemán"],
+LI:["liechtensteiniano", "liechtensteiniana", "alemán"],
+LU:["luxemburgués", "luxemburguesa", "luxemburgués"],
+NL:["neerlandés", "neerlandesa", "neerlandés"],
+BE:["belga", "belga", "neerlandés"],
+IT:["italiano", "italiana", "italiano"],
+FR:["francés", "francesa", "francés"],
+PL:["polaco", "polaca", "polaco"],
+TR:["turco", "turca", "turco"],
+GB:["británico", "británica", "inglés"],
+US:["estadounidense", "estadounidense", "inglés"],
+BR:["brasileño", "brasileña", "portugués"],
+MX:["mexicano", "mexicana", "español"],
+PT:["portugués", "portuguesa", "portugués"],
+IE:["irlandés", "irlandesa", "inglés"],
+DK:["danés", "danesa", "danés"],
+SE:["sueco", "sueca", "sueco"],
+NO:["noruego", "noruega", "noruego"],
+FI:["finlandés", "finlandesa", "finés"],
+IS:["islandés", "islandesa", "islandés"],
+CZ:["checo", "checa", "checo"],
+SK:["eslovaco", "eslovaca", "eslovaco"],
+HU:["húngaro", "húngara", "húngaro"],
+RO:["rumano", "rumana", "rumano"],
+BG:["búlgaro", "búlgara", "búlgaro"],
+HR:["croata", "croata", "croata"],
+SI:["esloveno", "eslovena", "esloveno"],
+RS:["serbio", "serbia", "serbio"],
+BA:["bosnio", "bosnia", "bosnio"],
+ME:["montenegrino", "montenegrina", "montenegrino"],
+MK:["macedonio", "macedonia", "macedonio"],
+AL:["albanés", "albanesa", "albanés"],
+XK:["kosovar", "kosovar", "albanés"],
+GR:["griego", "griega", "griego"],
+CY:["chipriota", "chipriota", "griego"],
+MT:["maltés", "maltesa", "maltés"],
+EE:["estonio", "estonia", "estonio"],
+LV:["letón", "letona", "letón"],
+LT:["lituano", "lituana", "lituano"],
+UA:["ucraniano", "ucraniana", "ucraniano"],
+BY:["bielorruso", "bielorrusa", "bielorruso"],
+MD:["moldavo", "moldava", "rumano"],
+RU:["ruso", "rusa", "ruso"],
+GE:["georgiano", "georgiana", "georgiano"],
+AM:["armenio", "armenia", "armenio"],
+AZ:["azerbaiyano", "azerbaiyana", "azerbaiyano"],
+CA:["canadiense", "canadiense", "inglés"],
+AR:["argentino", "argentina", "español"],
+CL:["chileno", "chilena", "español"],
+CO:["colombiano", "colombiana", "español"],
+PE:["peruano", "peruana", "español"],
+VE:["venezolano", "venezolana", "español"],
+EC:["ecuatoriano", "ecuatoriana", "español"],
+BO:["boliviano", "boliviana", "español"],
+UY:["uruguayo", "uruguaya", "español"],
+PY:["paraguayo", "paraguaya", "español"],
+CU:["cubano", "cubana", "español"],
+DO:["dominicano", "dominicana", "español"],
+CR:["costarricense", "costarricense", "español"],
+GT:["guatemalteco", "guatemalteca", "español"],
+HN:["hondureño", "hondureña", "español"],
+SV:["salvadoreño", "salvadoreña", "español"],
+NI:["nicaragüense", "nicaragüense", "español"],
+PA:["panameño", "panameña", "español"],
+PR:["puertorriqueño", "puertorriqueña", "español"],
+CN:["chino", "china", "chino"],
+JP:["japonés", "japonesa", "japonés"],
+KR:["surcoreano", "surcoreana", "coreano"],
+IN:["indio", "india", "hindi"],
+PK:["pakistaní", "pakistaní", "urdu"],
+BD:["bangladesí", "bangladesí", "bengalí"],
+VN:["vietnamita", "vietnamita", "vietnamita"],
+TH:["tailandés", "tailandesa", "tailandés"],
+PH:["filipino", "filipina", "tagalo"],
+ID:["indonesio", "indonesia", "indonesio"],
+MY:["malasio", "malasia", "malayo"],
+SG:["singapurense", "singapurense", "inglés"],
+IR:["iraní", "iraní", "persa"],
+IQ:["iraquí", "iraquí", "árabe"],
+SY:["sirio", "siria", "árabe"],
+LB:["libanés", "libanesa", "árabe"],
+IL:["israelí", "israelí", "hebreo"],
+JO:["jordano", "jordana", "árabe"],
+SA:["saudí", "saudí", "árabe"],
+AE:["emiratí", "emiratí", "árabe"],
+AF:["afgano", "afgana", "persa"],
+KZ:["kazajo", "kazaja", "kazajo"],
+EG:["egipcio", "egipcia", "árabe"],
+MA:["marroquí", "marroquí", "árabe"],
+DZ:["argelino", "argelina", "árabe"],
+TN:["tunecino", "tunecina", "árabe"],
+NG:["nigeriano", "nigeriana", "inglés"],
+GH:["ghanés", "ghanesa", "inglés"],
+KE:["keniano", "keniana", "suajili"],
+ET:["etíope", "etíope", "amhárico"],
+ZA:["sudafricano", "sudafricana", "inglés"],
+SN:["senegalés", "senegalesa", "francés"],
+CM:["camerunés", "camerunesa", "francés"],
+ER:["eritreo", "eritrea", "tigriña"],
+AU:["australiano", "australiana", "inglés"],
+NZ:["neozelandés", "neozelandesa", "inglés"]};
+var cap=function(s){return s.replace(/^(el|los) /,function(m){return m[0].toUpperCase()+m.slice(1);});};
+function nameOf(O){return O.X?O.X[2]:O.oth;}
+function pre(r,O){var X=O.X,D=O.D,oth=O.oth,f=O.f,esC=nameOf(O);
+  r=r.replace(/\b([Ss])oy alem(?:án|ana)(?![a-záéíóúñ])/g,function(m,s1){return D?s1+'oy '+(f?D[1]:D[0]):s1+'oy de '+oth;}).replace(/\b([Ee])res alem(?:án|ana)(?![a-záéíóúñ])/g,function(m,e){return D?e+'res '+(f?D[1]:D[0]):e+'res de '+oth;});
+  if(D&&D[2]!=='alemán')r=r.replace(/\b([Hh])ablo alemán(?![a-záéíóúñ])/g,'$1ablo '+D[2]).replace(/\b([a-záéíóúñ]+), \1(?![a-záéíóúñ])/g,'$1').replace(/Hablo español, inglés y un poco de español/g,'Hablo español e inglés');
+  r=r.replace(/\b(a|de|en|desde|para) Alemania\b/g,function(m,p){return p+' '+esC;}).replace(/\bAlemania\b/g,cap(esC));
+  r=r.replace(/\bde el /g,'del ').replace(/\ba el /g,'al ');
+  if(!O.city)r=r.replace(/, (de|en) Mannheim\b/g,'');
+  return r;}
+function city(r,O){var esC=nameOf(O);return r.replace(/\b(a|de|en|desde|para) Mannheim\b/g,function(m,p){return p+' '+esC;}).replace(/\bMannheim\b/g,cap(esC)).replace(/\bde el /g,'del ').replace(/\ba el /g,'al ');}
+defineLang('es',{origin:{demonyms:DEM,test:/Alemania|alem/,pre:pre,city:city,otherEx:'Grecia',examples:['Soy de …','¿De dónde eres?']}});
 })();

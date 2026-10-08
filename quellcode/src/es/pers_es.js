@@ -14,5 +14,5 @@ function str(t,P){var sp=P.sur||P.nm.split(' ')[0];
    .replace(/, señor Gross/g,P.g==='x'?', '+(P.sur?P.nm.split(' ')[0]+' '+P.sur:P.nm):', '+(P.g==='f'?'señora':'señor')+(P.sur?' '+P.sur:''));}
 /* ohne Nachnamen im Profil fragt die Rezeption nach dem Namen statt dem Nachnamen */
 function obj(o,P){if(o.n&&o.es==='¿Cómo se escribe tu apellido?'&&!P.sur){o.es='¿Cómo se escribe tu nombre?';o.de=P.ex==='de'?'Wie schreibt man deinen Namen?':'How do you spell your name?';}}
-defineLang('es',{persona:{name:'Jonas',surname:'Gross'},personal:{test:/erre, o, e/,str:str,obj:obj}});
+defineLang('es',{persona:{name:'Jonas',surname:'Gross',country:'DE',city:'Mannheim'},personal:{test:/erre, o, e/,str:str,obj:obj}});
 })();

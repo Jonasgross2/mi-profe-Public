@@ -5,7 +5,7 @@ VERSION=time.strftime('%Y%m%d-%H%M')
 # ===== Pakete: die Web-App lädt nur, was gebraucht wird (Lernsprache + ggf. Erklärsprache); die Mac-Einzeldateien enthalten alles =====
 # Ordner: src/core/ = gemeinsam (Logik, Design, Register, Oberflächentexte) · src/<lern>/ = Inhalte einer Lernsprache · src/<lern>/tr_<ex>.js = Erklärsprache
 # Neue Lernsprache: Ordner src/<code>/ + Eintrag hier (Dateien in Ladereihenfolge, Definition defineLang zuletzt). Erklärsprachen: automatisch aus src/<lern>/tr_<ex>.js
-PACKS={'es':{'name':'Spanisch','flag':'🇪🇸','files':['es/c_u0u1.js','es/c_u2u3.js','es/c_read03.js','es/c_u4u5.js','es/c_u6u8.js','es/c_u9u10.js','es/c_extra.js','es/c_gaps.js','es/c_a2b.js','es/c_b1.js','es/c_b1b.js','es/c_b2.js','es/c_b2b.js','es/c_c1.js','es/c_c1b.js','es/c_c2.js','es/c_vocab_plus.js','es/c_vocab_freq.js','es/c_info_tr.js','es/c_stories.js','es/c_reading.js','es/placement.js','es/levels.js','es/lang_es.js','es/conj_es.js','es/num_es.js','es/fem_es.js','es/pers_es.js']}}
+PACKS={'es':{'name':'Spanisch','flag':'🇪🇸','files':['es/c_u0u1.js','es/c_u2u3.js','es/c_read03.js','es/c_u4u5.js','es/c_u6u8.js','es/c_u9u10.js','es/c_extra.js','es/c_gaps.js','es/c_a2b.js','es/c_b1.js','es/c_b1b.js','es/c_b2.js','es/c_b2b.js','es/c_c1.js','es/c_c1b.js','es/c_c2.js','es/c_vocab_plus.js','es/c_vocab_freq.js','es/c_info_tr.js','es/c_stories.js','es/c_reading.js','es/placement.js','es/levels.js','es/lang_es.js','es/conj_es.js','es/num_es.js','es/fem_es.js','es/pers_es.js','es/origin_es.js']}}
 TRS=[]   # (Pfad, Lernsprache, Erklärsprache) – src/es/tr_en.js → Erklärsprache en für Lernsprache es
 for k in PACKS:
     for f in sorted((s/k).glob('tr_*.js')):TRS.append((f'{k}/{f.name}',k,f.stem[3:]))
@@ -22,6 +22,10 @@ for _f in ALL:
   for _n,_line in enumerate((s/_f).read_text(encoding='utf-8').splitlines(),1):
     for _rx,_what in _BAD:
       if _re.search(_rx,_line):_errs.append(f'  {_f}:{_n}: {_what}  →  {_line.strip()[:90]}')
+for _f in ALL:
+  _t=(s/_f).read_text(encoding='utf-8')
+  for _n,_line in enumerate(_t.splitlines(),1):
+    if any(ord(_c)<32 and _c not in '\t\r' for _c in _line):_errs.append(f'  {_f}:{_n}: unsichtbares Steuerzeichen (z. B. kaputtes \\b)  →  {_line.strip()[:60]!r}')
 if _errs:
   print('ABBRUCH – Syntax, die ältere iPhones nicht kennen:');print('\n'.join(_errs[:30]));_sys.exit(1)
 import json as _json

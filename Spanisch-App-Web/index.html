@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261008-1206";</script>
+<script>window.PWA=true;window.APP_VERSION="20261008-1211";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -924,6 +924,11 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Schreib die Zahl {ON}: ": "Write the number {ON}: ",
+"Land ({ON}, z. B. {X})": "Country ({ON}, e.g. {X})",
+"Woher kommst du? Übungen wie „{A}“ und „{B}“ passen sich daran an.": "Where are you from? Exercises like “{A}” and “{B}” adapt to it.",
+"Woher kommst du? Übungen zur Herkunft passen sich daran an.": "Where are you from? Exercises about your origin adapt to it.",
+"Fast! Achte auf die Schreibung (Akzente, Sonderzeichen).": "Almost! Watch the spelling (accents, special characters).",
 "Zahlen kommen in {U}, Lektion {L} – danach geht es hier los. Oder oben „Alles“ wählen.": "Numbers come in {U}, lesson {L} – then you can start here. Or choose “Everything” above.",
 "unregelmäßig – auswendig lernen": "irregular – learn by heart",
 "regelmäßig auf -": "regular in -",
@@ -1808,6 +1813,11 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Schreib die Zahl {ON}: ": "Escribe el número en letras: ",
+"Land ({ON}, z. B. {X})": "País ({ON}, p. ej. {X})",
+"Woher kommst du? Übungen wie „{A}“ und „{B}“ passen sich daran an.": "¿De dónde eres? Ejercicios como «{A}» y «{B}» se adaptan.",
+"Woher kommst du? Übungen zur Herkunft passen sich daran an.": "¿De dónde eres? Los ejercicios sobre tu origen se adaptan.",
+"Fast! Achte auf die Schreibung (Akzente, Sonderzeichen).": "¡Casi! Fíjate en la ortografía (tildes, caracteres especiales).",
 "Zahlen kommen in {U}, Lektion {L} – danach geht es hier los. Oder oben „Alles“ wählen.": "Los números llegan en la {U}, lección {L}; después empiezas aquí. O elige «Todo» arriba.",
 "unregelmäßig – auswendig lernen": "irregular: apréndelo de memoria",
 "regelmäßig auf -": "regular en -",
@@ -2692,6 +2702,11 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Schreib die Zahl {ON}: ": "Escreve o número por extenso: ",
+"Land ({ON}, z. B. {X})": "País ({ON}, ex.: {X})",
+"Woher kommst du? Übungen wie „{A}“ und „{B}“ passen sich daran an.": "De onde você é? Exercícios como “{A}” e “{B}” se adaptam.",
+"Woher kommst du? Übungen zur Herkunft passen sich daran an.": "De onde você é? Os exercícios sobre sua origem se adaptam.",
+"Fast! Achte auf die Schreibung (Akzente, Sonderzeichen).": "Quase! Atenção à escrita (acentos, caracteres especiais).",
 "Zahlen kommen in {U}, Lektion {L} – danach geht es hier los. Oder oben „Alles“ wählen.": "Os números chegam na {U}, lição {L} – depois começas aqui. Ou escolhe «Tudo» acima.",
 "unregelmäßig – auswendig lernen": "irregular – decore",
 "regelmäßig auf -": "regular em -",
@@ -3129,6 +3144,8 @@ let UI='de';try{const sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'nu
   UI=sh&&sh.ui||(sh?'de':nav.startsWith('de')?'de':nav.startsWith('es')?'es':nav.startsWith('pt')?'pt':'en');}catch(e){}
 if(UI!=='de'&&!(window.UI_TR&&UI_TR[UI]))UI='de';document.documentElement.lang=UI;
 const TR=UI==='de'?null:UI_TR[UI];const T=s=>TR&&TR[s]!=null?TR[s]:s;
+/* Lob in der Lernsprache (¡Muy bien!, ¡Hola! …): Texte enthalten die spanischen Wendungen; ein anderes Paket ersetzt sie über LANG.praise {'¡Muy bien!':'Sehr gut!', …} */
+const TP=k=>{let r=T(k);const P=LANG.praise;if(P)for(const a in P)r=r.split(a).join(P[a]);return r;};
 for(const L of LEVELS){L.title=T(L.title);L.sub=T(L.sub);}
 const UI_LANGS=[['de','🇩🇪','Deutsch'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['pt','🇧🇷','Português']].filter(([c])=>c==='de'||window.UI_TR&&UI_TR[c]);
 function setUI(code,withEx){let sh={};try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}')||{};}catch(e){}sh.ui=code;if(withEx)delete sh.ex;try{localStorage.setItem('mi-profe-shared',JSON.stringify(sh));}catch(e){}reloadApp();}
@@ -3202,124 +3219,125 @@ function femCourse(o,inVocab){if(typeof o==='string'){let t=GEN.first(o);if(S.na
 if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}
 /* Herkunft (Profil): Inhalte gehen von Deutschland/Mannheim aus. S.origin={c:'AT',city:'Wien',other:'…'} ersetzt nur Herkunftsangaben
    (soy alemán, ¿Eres alemán?, Alemania, Mannheim, Hablo alemán, Deutschland/Germany …) – nicht Vokabellisten, nicht die Geschichten (Ben). */
-const ORIGINS={DE:['🇩🇪','Deutschland','Alemania','alemán','alemana','alemán','Germany','German',['Deutscher','Deutsche'],['aus Deutschland','in Deutschland','nach Deutschland']],
- AT:['🇦🇹','Österreich','Austria','austriaco','austriaca','alemán','Austria','Austrian',['Österreicher','Österreicherin'],['aus Österreich','in Österreich','nach Österreich']],
- CH:['🇨🇭','die Schweiz','Suiza','suizo','suiza','alemán','Switzerland','Swiss',['Schweizer','Schweizerin'],['aus der Schweiz','in der Schweiz','in die Schweiz']],
- LI:['🇱🇮','Liechtenstein','Liechtenstein','liechtensteiniano','liechtensteiniana','alemán','Liechtenstein','Liechtensteiner',['Liechtensteiner','Liechtensteinerin'],['aus Liechtenstein','in Liechtenstein','nach Liechtenstein']],
- LU:['🇱🇺','Luxemburg','Luxemburgo','luxemburgués','luxemburguesa','luxemburgués','Luxembourg','Luxembourgish',['Luxemburger','Luxemburgerin'],['aus Luxemburg','in Luxemburg','nach Luxemburg']],
- NL:['🇳🇱','die Niederlande','los Países Bajos','neerlandés','neerlandesa','neerlandés','the Netherlands','Dutch',['Niederländer','Niederländerin'],['aus den Niederlanden','in den Niederlanden','in die Niederlande']],
- BE:['🇧🇪','Belgien','Bélgica','belga','belga','neerlandés','Belgium','Belgian',['Belgier','Belgierin'],['aus Belgien','in Belgien','nach Belgien']],
- IT:['🇮🇹','Italien','Italia','italiano','italiana','italiano','Italy','Italian',['Italiener','Italienerin'],['aus Italien','in Italien','nach Italien']],
- FR:['🇫🇷','Frankreich','Francia','francés','francesa','francés','France','French',['Franzose','Französin'],['aus Frankreich','in Frankreich','nach Frankreich']],
- PL:['🇵🇱','Polen','Polonia','polaco','polaca','polaco','Poland','Polish',['Pole','Polin'],['aus Polen','in Polen','nach Polen']],
- TR:['🇹🇷','die Türkei','Turquía','turco','turca','turco','Turkey','Turkish',['Türke','Türkin'],['aus der Türkei','in der Türkei','in die Türkei']],
- GB:['🇬🇧','Großbritannien','el Reino Unido','británico','británica','inglés','the UK','British',['Brite','Britin'],['aus Großbritannien','in Großbritannien','nach Großbritannien']],
- US:['🇺🇸','die USA','Estados Unidos','estadounidense','estadounidense','inglés','the USA','American',['Amerikaner','Amerikanerin'],['aus den USA','in den USA','in die USA']],
- BR:['🇧🇷','Brasilien','Brasil','brasileño','brasileña','portugués','Brazil','Brazilian',['Brasilianer','Brasilianerin'],['aus Brasilien','in Brasilien','nach Brasilien']],
- MX:['🇲🇽','Mexiko','México','mexicano','mexicana','español','Mexico','Mexican',['Mexikaner','Mexikanerin'],['aus Mexiko','in Mexiko','nach Mexiko']],
- PT:['🇵🇹','Portugal','Portugal','portugués','portuguesa','portugués','Portugal','Portuguese',['Portugiese','Portugiesin'],['aus Portugal','in Portugal','nach Portugal']],
- IE:["🇮🇪", "Irland", "Irlanda", "irlandés", "irlandesa", "inglés", "Ireland", "Irish", ["Ire", "Irin"], ["aus Irland", "in Irland", "nach Irland"]],
- DK:["🇩🇰", "Dänemark", "Dinamarca", "danés", "danesa", "danés", "Denmark", "Danish", ["Däne", "Dänin"], ["aus Dänemark", "in Dänemark", "nach Dänemark"]],
- SE:["🇸🇪", "Schweden", "Suecia", "sueco", "sueca", "sueco", "Sweden", "Swedish", ["Schwede", "Schwedin"], ["aus Schweden", "in Schweden", "nach Schweden"]],
- NO:["🇳🇴", "Norwegen", "Noruega", "noruego", "noruega", "noruego", "Norway", "Norwegian", ["Norweger", "Norwegerin"], ["aus Norwegen", "in Norwegen", "nach Norwegen"]],
- FI:["🇫🇮", "Finnland", "Finlandia", "finlandés", "finlandesa", "finés", "Finland", "Finnish", ["Finne", "Finnin"], ["aus Finnland", "in Finnland", "nach Finnland"]],
- IS:["🇮🇸", "Island", "Islandia", "islandés", "islandesa", "islandés", "Iceland", "Icelandic", ["Isländer", "Isländerin"], ["aus Island", "in Island", "nach Island"]],
- CZ:["🇨🇿", "Tschechien", "Chequia", "checo", "checa", "checo", "Czechia", "Czech", ["Tscheche", "Tschechin"], ["aus Tschechien", "in Tschechien", "nach Tschechien"]],
- SK:["🇸🇰", "die Slowakei", "Eslovaquia", "eslovaco", "eslovaca", "eslovaco", "Slovakia", "Slovak", ["Slowake", "Slowakin"], ["aus der Slowakei", "in der Slowakei", "in die Slowakei"]],
- HU:["🇭🇺", "Ungarn", "Hungría", "húngaro", "húngara", "húngaro", "Hungary", "Hungarian", ["Ungar", "Ungarin"], ["aus Ungarn", "in Ungarn", "nach Ungarn"]],
- RO:["🇷🇴", "Rumänien", "Rumanía", "rumano", "rumana", "rumano", "Romania", "Romanian", ["Rumäne", "Rumänin"], ["aus Rumänien", "in Rumänien", "nach Rumänien"]],
- BG:["🇧🇬", "Bulgarien", "Bulgaria", "búlgaro", "búlgara", "búlgaro", "Bulgaria", "Bulgarian", ["Bulgare", "Bulgarin"], ["aus Bulgarien", "in Bulgarien", "nach Bulgarien"]],
- HR:["🇭🇷", "Kroatien", "Croacia", "croata", "croata", "croata", "Croatia", "Croatian", ["Kroate", "Kroatin"], ["aus Kroatien", "in Kroatien", "nach Kroatien"]],
- SI:["🇸🇮", "Slowenien", "Eslovenia", "esloveno", "eslovena", "esloveno", "Slovenia", "Slovenian", ["Slowene", "Slowenin"], ["aus Slowenien", "in Slowenien", "nach Slowenien"]],
- RS:["🇷🇸", "Serbien", "Serbia", "serbio", "serbia", "serbio", "Serbia", "Serbian", ["Serbe", "Serbin"], ["aus Serbien", "in Serbien", "nach Serbien"]],
- BA:["🇧🇦", "Bosnien und Herzegowina", "Bosnia y Herzegovina", "bosnio", "bosnia", "bosnio", "Bosnia and Herzegovina", "Bosnian", ["Bosnier", "Bosnierin"], ["aus Bosnien und Herzegowina", "in Bosnien und Herzegowina", "nach Bosnien und Herzegowina"]],
- ME:["🇲🇪", "Montenegro", "Montenegro", "montenegrino", "montenegrina", "montenegrino", "Montenegro", "Montenegrin", ["Montenegriner", "Montenegrinerin"], ["aus Montenegro", "in Montenegro", "nach Montenegro"]],
- MK:["🇲🇰", "Nordmazedonien", "Macedonia del Norte", "macedonio", "macedonia", "macedonio", "North Macedonia", "Macedonian", ["Nordmazedonier", "Nordmazedonierin"], ["aus Nordmazedonien", "in Nordmazedonien", "nach Nordmazedonien"]],
- AL:["🇦🇱", "Albanien", "Albania", "albanés", "albanesa", "albanés", "Albania", "Albanian", ["Albaner", "Albanerin"], ["aus Albanien", "in Albanien", "nach Albanien"]],
- XK:["🇽🇰", "Kosovo", "Kosovo", "kosovar", "kosovar", "albanés", "Kosovo", "Kosovar", ["Kosovare", "Kosovarin"], ["aus dem Kosovo", "im Kosovo", "in den Kosovo"]],
- GR:["🇬🇷", "Griechenland", "Grecia", "griego", "griega", "griego", "Greece", "Greek", ["Grieche", "Griechin"], ["aus Griechenland", "in Griechenland", "nach Griechenland"]],
- CY:["🇨🇾", "Zypern", "Chipre", "chipriota", "chipriota", "griego", "Cyprus", "Cypriot", ["Zyprer", "Zyprerin"], ["aus Zypern", "in Zypern", "nach Zypern"]],
- MT:["🇲🇹", "Malta", "Malta", "maltés", "maltesa", "maltés", "Malta", "Maltese", ["Malteser", "Malteserin"], ["aus Malta", "in Malta", "nach Malta"]],
- EE:["🇪🇪", "Estland", "Estonia", "estonio", "estonia", "estonio", "Estonia", "Estonian", ["Este", "Estin"], ["aus Estland", "in Estland", "nach Estland"]],
- LV:["🇱🇻", "Lettland", "Letonia", "letón", "letona", "letón", "Latvia", "Latvian", ["Lette", "Lettin"], ["aus Lettland", "in Lettland", "nach Lettland"]],
- LT:["🇱🇹", "Litauen", "Lituania", "lituano", "lituana", "lituano", "Lithuania", "Lithuanian", ["Litauer", "Litauerin"], ["aus Litauen", "in Litauen", "nach Litauen"]],
- UA:["🇺🇦", "die Ukraine", "Ucrania", "ucraniano", "ucraniana", "ucraniano", "Ukraine", "Ukrainian", ["Ukrainer", "Ukrainerin"], ["aus der Ukraine", "in der Ukraine", "in die Ukraine"]],
- BY:["🇧🇾", "Belarus", "Bielorrusia", "bielorruso", "bielorrusa", "bielorruso", "Belarus", "Belarusian", ["Belarusse", "Belarussin"], ["aus Belarus", "in Belarus", "nach Belarus"]],
- MD:["🇲🇩", "Moldau", "Moldavia", "moldavo", "moldava", "rumano", "Moldova", "Moldovan", ["Moldauer", "Moldauerin"], ["aus Moldau", "in Moldau", "nach Moldau"]],
- RU:["🇷🇺", "Russland", "Rusia", "ruso", "rusa", "ruso", "Russia", "Russian", ["Russe", "Russin"], ["aus Russland", "in Russland", "nach Russland"]],
- GE:["🇬🇪", "Georgien", "Georgia", "georgiano", "georgiana", "georgiano", "Georgia", "Georgian", ["Georgier", "Georgierin"], ["aus Georgien", "in Georgien", "nach Georgien"]],
- AM:["🇦🇲", "Armenien", "Armenia", "armenio", "armenia", "armenio", "Armenia", "Armenian", ["Armenier", "Armenierin"], ["aus Armenien", "in Armenien", "nach Armenien"]],
- AZ:["🇦🇿", "Aserbaidschan", "Azerbaiyán", "azerbaiyano", "azerbaiyana", "azerbaiyano", "Azerbaijan", "Azerbaijani", ["Aserbaidschaner", "Aserbaidschanerin"], ["aus Aserbaidschan", "in Aserbaidschan", "nach Aserbaidschan"]],
- CA:["🇨🇦", "Kanada", "Canadá", "canadiense", "canadiense", "inglés", "Canada", "Canadian", ["Kanadier", "Kanadierin"], ["aus Kanada", "in Kanada", "nach Kanada"]],
- AR:["🇦🇷", "Argentinien", "Argentina", "argentino", "argentina", "español", "Argentina", "Argentinian", ["Argentinier", "Argentinierin"], ["aus Argentinien", "in Argentinien", "nach Argentinien"]],
- CL:["🇨🇱", "Chile", "Chile", "chileno", "chilena", "español", "Chile", "Chilean", ["Chilene", "Chilenin"], ["aus Chile", "in Chile", "nach Chile"]],
- CO:["🇨🇴", "Kolumbien", "Colombia", "colombiano", "colombiana", "español", "Colombia", "Colombian", ["Kolumbianer", "Kolumbianerin"], ["aus Kolumbien", "in Kolumbien", "nach Kolumbien"]],
- PE:["🇵🇪", "Peru", "Perú", "peruano", "peruana", "español", "Peru", "Peruvian", ["Peruaner", "Peruanerin"], ["aus Peru", "in Peru", "nach Peru"]],
- VE:["🇻🇪", "Venezuela", "Venezuela", "venezolano", "venezolana", "español", "Venezuela", "Venezuelan", ["Venezolaner", "Venezolanerin"], ["aus Venezuela", "in Venezuela", "nach Venezuela"]],
- EC:["🇪🇨", "Ecuador", "Ecuador", "ecuatoriano", "ecuatoriana", "español", "Ecuador", "Ecuadorian", ["Ecuadorianer", "Ecuadorianerin"], ["aus Ecuador", "in Ecuador", "nach Ecuador"]],
- BO:["🇧🇴", "Bolivien", "Bolivia", "boliviano", "boliviana", "español", "Bolivia", "Bolivian", ["Bolivianer", "Bolivianerin"], ["aus Bolivien", "in Bolivien", "nach Bolivien"]],
- UY:["🇺🇾", "Uruguay", "Uruguay", "uruguayo", "uruguaya", "español", "Uruguay", "Uruguayan", ["Uruguayer", "Uruguayerin"], ["aus Uruguay", "in Uruguay", "nach Uruguay"]],
- PY:["🇵🇾", "Paraguay", "Paraguay", "paraguayo", "paraguaya", "español", "Paraguay", "Paraguayan", ["Paraguayer", "Paraguayerin"], ["aus Paraguay", "in Paraguay", "nach Paraguay"]],
- CU:["🇨🇺", "Kuba", "Cuba", "cubano", "cubana", "español", "Cuba", "Cuban", ["Kubaner", "Kubanerin"], ["aus Kuba", "in Kuba", "nach Kuba"]],
- DO:["🇩🇴", "die Dominikanische Republik", "República Dominicana", "dominicano", "dominicana", "español", "the Dominican Republic", "Dominican", ["Dominikaner", "Dominikanerin"], ["aus der Dominikanischen Republik", "in der Dominikanischen Republik", "in die Dominikanische Republik"]],
- CR:["🇨🇷", "Costa Rica", "Costa Rica", "costarricense", "costarricense", "español", "Costa Rica", "Costa Rican", ["Costa-Ricaner", "Costa-Ricanerin"], ["aus Costa Rica", "in Costa Rica", "nach Costa Rica"]],
- GT:["🇬🇹", "Guatemala", "Guatemala", "guatemalteco", "guatemalteca", "español", "Guatemala", "Guatemalan", ["Guatemalteke", "Guatemaltekin"], ["aus Guatemala", "in Guatemala", "nach Guatemala"]],
- HN:["🇭🇳", "Honduras", "Honduras", "hondureño", "hondureña", "español", "Honduras", "Honduran", ["Honduraner", "Honduranerin"], ["aus Honduras", "in Honduras", "nach Honduras"]],
- SV:["🇸🇻", "El Salvador", "El Salvador", "salvadoreño", "salvadoreña", "español", "El Salvador", "Salvadoran", ["Salvadorianer", "Salvadorianerin"], ["aus El Salvador", "in El Salvador", "nach El Salvador"]],
- NI:["🇳🇮", "Nicaragua", "Nicaragua", "nicaragüense", "nicaragüense", "español", "Nicaragua", "Nicaraguan", ["Nicaraguaner", "Nicaraguanerin"], ["aus Nicaragua", "in Nicaragua", "nach Nicaragua"]],
- PA:["🇵🇦", "Panama", "Panamá", "panameño", "panameña", "español", "Panama", "Panamanian", ["Panamaer", "Panamaerin"], ["aus Panama", "in Panama", "nach Panama"]],
- PR:["🇵🇷", "Puerto Rico", "Puerto Rico", "puertorriqueño", "puertorriqueña", "español", "Puerto Rico", "Puerto Rican", ["Puerto-Ricaner", "Puerto-Ricanerin"], ["aus Puerto Rico", "in Puerto Rico", "nach Puerto Rico"]],
- CN:["🇨🇳", "China", "China", "chino", "china", "chino", "China", "Chinese", ["Chinese", "Chinesin"], ["aus China", "in China", "nach China"]],
- JP:["🇯🇵", "Japan", "Japón", "japonés", "japonesa", "japonés", "Japan", "Japanese", ["Japaner", "Japanerin"], ["aus Japan", "in Japan", "nach Japan"]],
- KR:["🇰🇷", "Südkorea", "Corea del Sur", "surcoreano", "surcoreana", "coreano", "South Korea", "South Korean", ["Südkoreaner", "Südkoreanerin"], ["aus Südkorea", "in Südkorea", "nach Südkorea"]],
- IN:["🇮🇳", "Indien", "India", "indio", "india", "hindi", "India", "Indian", ["Inder", "Inderin"], ["aus Indien", "in Indien", "nach Indien"]],
- PK:["🇵🇰", "Pakistan", "Pakistán", "pakistaní", "pakistaní", "urdu", "Pakistan", "Pakistani", ["Pakistaner", "Pakistanerin"], ["aus Pakistan", "in Pakistan", "nach Pakistan"]],
- BD:["🇧🇩", "Bangladesch", "Bangladés", "bangladesí", "bangladesí", "bengalí", "Bangladesh", "Bangladeshi", ["Bangladescher", "Bangladescherin"], ["aus Bangladesch", "in Bangladesch", "nach Bangladesch"]],
- VN:["🇻🇳", "Vietnam", "Vietnam", "vietnamita", "vietnamita", "vietnamita", "Vietnam", "Vietnamese", ["Vietnamese", "Vietnamesin"], ["aus Vietnam", "in Vietnam", "nach Vietnam"]],
- TH:["🇹🇭", "Thailand", "Tailandia", "tailandés", "tailandesa", "tailandés", "Thailand", "Thai", ["Thailänder", "Thailänderin"], ["aus Thailand", "in Thailand", "nach Thailand"]],
- PH:["🇵🇭", "die Philippinen", "Filipinas", "filipino", "filipina", "tagalo", "the Philippines", "Filipino", ["Philippiner", "Philippinerin"], ["von den Philippinen", "auf den Philippinen", "auf die Philippinen"]],
- ID:["🇮🇩", "Indonesien", "Indonesia", "indonesio", "indonesia", "indonesio", "Indonesia", "Indonesian", ["Indonesier", "Indonesierin"], ["aus Indonesien", "in Indonesien", "nach Indonesien"]],
- MY:["🇲🇾", "Malaysia", "Malasia", "malasio", "malasia", "malayo", "Malaysia", "Malaysian", ["Malaysier", "Malaysierin"], ["aus Malaysia", "in Malaysia", "nach Malaysia"]],
- SG:["🇸🇬", "Singapur", "Singapur", "singapurense", "singapurense", "inglés", "Singapore", "Singaporean", ["Singapurer", "Singapurerin"], ["aus Singapur", "in Singapur", "nach Singapur"]],
- IR:["🇮🇷", "der Iran", "Irán", "iraní", "iraní", "persa", "Iran", "Iranian", ["Iraner", "Iranerin"], ["aus dem Iran", "im Iran", "in den Iran"]],
- IQ:["🇮🇶", "der Irak", "Irak", "iraquí", "iraquí", "árabe", "Iraq", "Iraqi", ["Iraker", "Irakerin"], ["aus dem Irak", "im Irak", "in den Irak"]],
- SY:["🇸🇾", "Syrien", "Siria", "sirio", "siria", "árabe", "Syria", "Syrian", ["Syrer", "Syrerin"], ["aus Syrien", "in Syrien", "nach Syrien"]],
- LB:["🇱🇧", "der Libanon", "el Líbano", "libanés", "libanesa", "árabe", "Lebanon", "Lebanese", ["Libanese", "Libanesin"], ["aus dem Libanon", "im Libanon", "in den Libanon"]],
- IL:["🇮🇱", "Israel", "Israel", "israelí", "israelí", "hebreo", "Israel", "Israeli", ["Israeli", "Israelin"], ["aus Israel", "in Israel", "nach Israel"]],
- JO:["🇯🇴", "Jordanien", "Jordania", "jordano", "jordana", "árabe", "Jordan", "Jordanian", ["Jordanier", "Jordanierin"], ["aus Jordanien", "in Jordanien", "nach Jordanien"]],
- SA:["🇸🇦", "Saudi-Arabien", "Arabia Saudí", "saudí", "saudí", "árabe", "Saudi Arabia", "Saudi", ["Saudi-Araber", "Saudi-Araberin"], ["aus Saudi-Arabien", "in Saudi-Arabien", "nach Saudi-Arabien"]],
- AE:["🇦🇪", "die Vereinigten Arabischen Emirate", "los Emiratos Árabes Unidos", "emiratí", "emiratí", "árabe", "the UAE", "Emirati", ["Emirater", "Emiraterin"], ["aus den Vereinigten Arabischen Emiraten", "in den Vereinigten Arabischen Emiraten", "in die Vereinigten Arabischen Emirate"]],
- AF:["🇦🇫", "Afghanistan", "Afganistán", "afgano", "afgana", "persa", "Afghanistan", "Afghan", ["Afghane", "Afghanin"], ["aus Afghanistan", "in Afghanistan", "nach Afghanistan"]],
- KZ:["🇰🇿", "Kasachstan", "Kazajistán", "kazajo", "kazaja", "kazajo", "Kazakhstan", "Kazakh", ["Kasache", "Kasachin"], ["aus Kasachstan", "in Kasachstan", "nach Kasachstan"]],
- EG:["🇪🇬", "Ägypten", "Egipto", "egipcio", "egipcia", "árabe", "Egypt", "Egyptian", ["Ägypter", "Ägypterin"], ["aus Ägypten", "in Ägypten", "nach Ägypten"]],
- MA:["🇲🇦", "Marokko", "Marruecos", "marroquí", "marroquí", "árabe", "Morocco", "Moroccan", ["Marokkaner", "Marokkanerin"], ["aus Marokko", "in Marokko", "nach Marokko"]],
- DZ:["🇩🇿", "Algerien", "Argelia", "argelino", "argelina", "árabe", "Algeria", "Algerian", ["Algerier", "Algerierin"], ["aus Algerien", "in Algerien", "nach Algerien"]],
- TN:["🇹🇳", "Tunesien", "Túnez", "tunecino", "tunecina", "árabe", "Tunisia", "Tunisian", ["Tunesier", "Tunesierin"], ["aus Tunesien", "in Tunesien", "nach Tunesien"]],
- NG:["🇳🇬", "Nigeria", "Nigeria", "nigeriano", "nigeriana", "inglés", "Nigeria", "Nigerian", ["Nigerianer", "Nigerianerin"], ["aus Nigeria", "in Nigeria", "nach Nigeria"]],
- GH:["🇬🇭", "Ghana", "Ghana", "ghanés", "ghanesa", "inglés", "Ghana", "Ghanaian", ["Ghanaer", "Ghanaerin"], ["aus Ghana", "in Ghana", "nach Ghana"]],
- KE:["🇰🇪", "Kenia", "Kenia", "keniano", "keniana", "suajili", "Kenya", "Kenyan", ["Kenianer", "Kenianerin"], ["aus Kenia", "in Kenia", "nach Kenia"]],
- ET:["🇪🇹", "Äthiopien", "Etiopía", "etíope", "etíope", "amhárico", "Ethiopia", "Ethiopian", ["Äthiopier", "Äthiopierin"], ["aus Äthiopien", "in Äthiopien", "nach Äthiopien"]],
- ZA:["🇿🇦", "Südafrika", "Sudáfrica", "sudafricano", "sudafricana", "inglés", "South Africa", "South African", ["Südafrikaner", "Südafrikanerin"], ["aus Südafrika", "in Südafrika", "nach Südafrika"]],
- SN:["🇸🇳", "der Senegal", "Senegal", "senegalés", "senegalesa", "francés", "Senegal", "Senegalese", ["Senegalese", "Senegalesin"], ["aus dem Senegal", "im Senegal", "in den Senegal"]],
- CM:["🇨🇲", "Kamerun", "Camerún", "camerunés", "camerunesa", "francés", "Cameroon", "Cameroonian", ["Kameruner", "Kamerunerin"], ["aus Kamerun", "in Kamerun", "nach Kamerun"]],
- ER:["🇪🇷", "Eritrea", "Eritrea", "eritreo", "eritrea", "tigriña", "Eritrea", "Eritrean", ["Eritreer", "Eritreerin"], ["aus Eritrea", "in Eritrea", "nach Eritrea"]],
- AU:["🇦🇺", "Australien", "Australia", "australiano", "australiana", "inglés", "Australia", "Australian", ["Australier", "Australierin"], ["aus Australien", "in Australien", "nach Australien"]],
- NZ:["🇳🇿", "Neuseeland", "Nueva Zelanda", "neozelandés", "neozelandesa", "inglés", "New Zealand", "New Zealander", ["Neuseeländer", "Neuseeländerin"], ["aus Neuseeland", "in Neuseeland", "nach Neuseeland"]]};
-function originStr(t){const o=S.origin;if(!o||(!o.c&&!o.other)||(o.c==='DE'&&!o.city)||typeof t!=='string'||!/Alemania|alem|Mannheim|Deutsch|German/.test(t))return t;
-  const f=S.gender==='f',X=o.c&&ORIGINS[o.c],oth=!X&&o.other;const esC=X?X[2]:oth,deC=X?X[1]:oth,enC=X?X[6]:oth,city=(o.city||'').trim();
-  const deF=X?X[9]:['aus '+oth,'in '+oth,'nach '+oth],bareDe=deC.replace(/^die /,'');
-  let r=t;
-  r=r.replace(/\b([Ss])oy alem(?:án|ana)(?![a-záéíóúñ])/g,(m,s1)=>X?s1+'oy '+(f?X[4]:X[3]):s1+'oy de '+oth).replace(/\b([Ee])res alem(?:án|ana)(?![a-záéíóúñ])/g,(m,e)=>X?e+'res '+(f?X[4]:X[3]):e+'res de '+oth);
-  if(X&&X[5]!=='alemán')r=r.replace(/\b([Hh])ablo alemán(?![a-záéíóúñ])/g,'$1ablo '+X[5]).replace(/\b([a-záéíóúñ]+), \1(?![a-záéíóúñ])/g,'$1').replace(/Hablo español, inglés y un poco de español/g,'Hablo español e inglés');
-  r=r.replace(/\b(a|de|en|desde|para) Alemania\b/g,(m,p)=>p+' '+esC).replace(/\bAlemania\b/g,esC.replace(/^(el|los) /,m=>m[0].toUpperCase()+m.slice(1)));
-  r=r.replace(/\bde el /g,'del ').replace(/\ba el /g,'al ');
-  if(!city){r=r.replace(/, (de|aus|en|in|from) Mannheim\b/g,'');/* ohne Stadt: „…, aus Mannheim“ weglassen */
-    r=r.replace(/\baus Mannheim\b/g,deF[0]).replace(/\bin Mannheim\b/g,deF[1]).replace(/\bnach Mannheim\b/g,deF[2]).replace(/\bfrom Mannheim\b/g,'from '+enC);}
-  if(city)r=r.replace(/\bMannheim\b/g,city);
-  else r=r.replace(/\b(a|de|en|desde|para) Mannheim\b/g,(m,p)=>p+' '+esC).replace(/\bMannheim\b/g,esC.replace(/^(el|los) /,m=>m[0].toUpperCase()+m.slice(1))).replace(/\bde el /g,'del ').replace(/\ba el /g,'al ');
+/* Länder für die Herkunft (Profil): [Flagge, Name de (mit Artikel), Name es (mit Artikel), Name en, Adjektiv en, [Deutscher, Deutsche], [aus, in, nach]].
+   Namen in de/es/en braucht die Oberfläche; was die Lernsprache braucht (Adjektiv m/f, Landessprache), steht im Paket (LANG.origin.demonyms). */
+const ORIGINS={DE:["🇩🇪", "Deutschland", "Alemania", "Germany", "German", ["Deutscher", "Deutsche"], ["aus Deutschland", "in Deutschland", "nach Deutschland"]],
+ AT:["🇦🇹", "Österreich", "Austria", "Austria", "Austrian", ["Österreicher", "Österreicherin"], ["aus Österreich", "in Österreich", "nach Österreich"]],
+ CH:["🇨🇭", "die Schweiz", "Suiza", "Switzerland", "Swiss", ["Schweizer", "Schweizerin"], ["aus der Schweiz", "in der Schweiz", "in die Schweiz"]],
+ LI:["🇱🇮", "Liechtenstein", "Liechtenstein", "Liechtenstein", "Liechtensteiner", ["Liechtensteiner", "Liechtensteinerin"], ["aus Liechtenstein", "in Liechtenstein", "nach Liechtenstein"]],
+ LU:["🇱🇺", "Luxemburg", "Luxemburgo", "Luxembourg", "Luxembourgish", ["Luxemburger", "Luxemburgerin"], ["aus Luxemburg", "in Luxemburg", "nach Luxemburg"]],
+ NL:["🇳🇱", "die Niederlande", "los Países Bajos", "the Netherlands", "Dutch", ["Niederländer", "Niederländerin"], ["aus den Niederlanden", "in den Niederlanden", "in die Niederlande"]],
+ BE:["🇧🇪", "Belgien", "Bélgica", "Belgium", "Belgian", ["Belgier", "Belgierin"], ["aus Belgien", "in Belgien", "nach Belgien"]],
+ IT:["🇮🇹", "Italien", "Italia", "Italy", "Italian", ["Italiener", "Italienerin"], ["aus Italien", "in Italien", "nach Italien"]],
+ FR:["🇫🇷", "Frankreich", "Francia", "France", "French", ["Franzose", "Französin"], ["aus Frankreich", "in Frankreich", "nach Frankreich"]],
+ PL:["🇵🇱", "Polen", "Polonia", "Poland", "Polish", ["Pole", "Polin"], ["aus Polen", "in Polen", "nach Polen"]],
+ TR:["🇹🇷", "die Türkei", "Turquía", "Turkey", "Turkish", ["Türke", "Türkin"], ["aus der Türkei", "in der Türkei", "in die Türkei"]],
+ GB:["🇬🇧", "Großbritannien", "el Reino Unido", "the UK", "British", ["Brite", "Britin"], ["aus Großbritannien", "in Großbritannien", "nach Großbritannien"]],
+ US:["🇺🇸", "die USA", "Estados Unidos", "the USA", "American", ["Amerikaner", "Amerikanerin"], ["aus den USA", "in den USA", "in die USA"]],
+ BR:["🇧🇷", "Brasilien", "Brasil", "Brazil", "Brazilian", ["Brasilianer", "Brasilianerin"], ["aus Brasilien", "in Brasilien", "nach Brasilien"]],
+ MX:["🇲🇽", "Mexiko", "México", "Mexico", "Mexican", ["Mexikaner", "Mexikanerin"], ["aus Mexiko", "in Mexiko", "nach Mexiko"]],
+ PT:["🇵🇹", "Portugal", "Portugal", "Portugal", "Portuguese", ["Portugiese", "Portugiesin"], ["aus Portugal", "in Portugal", "nach Portugal"]],
+ IE:["🇮🇪", "Irland", "Irlanda", "Ireland", "Irish", ["Ire", "Irin"], ["aus Irland", "in Irland", "nach Irland"]],
+ DK:["🇩🇰", "Dänemark", "Dinamarca", "Denmark", "Danish", ["Däne", "Dänin"], ["aus Dänemark", "in Dänemark", "nach Dänemark"]],
+ SE:["🇸🇪", "Schweden", "Suecia", "Sweden", "Swedish", ["Schwede", "Schwedin"], ["aus Schweden", "in Schweden", "nach Schweden"]],
+ NO:["🇳🇴", "Norwegen", "Noruega", "Norway", "Norwegian", ["Norweger", "Norwegerin"], ["aus Norwegen", "in Norwegen", "nach Norwegen"]],
+ FI:["🇫🇮", "Finnland", "Finlandia", "Finland", "Finnish", ["Finne", "Finnin"], ["aus Finnland", "in Finnland", "nach Finnland"]],
+ IS:["🇮🇸", "Island", "Islandia", "Iceland", "Icelandic", ["Isländer", "Isländerin"], ["aus Island", "in Island", "nach Island"]],
+ CZ:["🇨🇿", "Tschechien", "Chequia", "Czechia", "Czech", ["Tscheche", "Tschechin"], ["aus Tschechien", "in Tschechien", "nach Tschechien"]],
+ SK:["🇸🇰", "die Slowakei", "Eslovaquia", "Slovakia", "Slovak", ["Slowake", "Slowakin"], ["aus der Slowakei", "in der Slowakei", "in die Slowakei"]],
+ HU:["🇭🇺", "Ungarn", "Hungría", "Hungary", "Hungarian", ["Ungar", "Ungarin"], ["aus Ungarn", "in Ungarn", "nach Ungarn"]],
+ RO:["🇷🇴", "Rumänien", "Rumanía", "Romania", "Romanian", ["Rumäne", "Rumänin"], ["aus Rumänien", "in Rumänien", "nach Rumänien"]],
+ BG:["🇧🇬", "Bulgarien", "Bulgaria", "Bulgaria", "Bulgarian", ["Bulgare", "Bulgarin"], ["aus Bulgarien", "in Bulgarien", "nach Bulgarien"]],
+ HR:["🇭🇷", "Kroatien", "Croacia", "Croatia", "Croatian", ["Kroate", "Kroatin"], ["aus Kroatien", "in Kroatien", "nach Kroatien"]],
+ SI:["🇸🇮", "Slowenien", "Eslovenia", "Slovenia", "Slovenian", ["Slowene", "Slowenin"], ["aus Slowenien", "in Slowenien", "nach Slowenien"]],
+ RS:["🇷🇸", "Serbien", "Serbia", "Serbia", "Serbian", ["Serbe", "Serbin"], ["aus Serbien", "in Serbien", "nach Serbien"]],
+ BA:["🇧🇦", "Bosnien und Herzegowina", "Bosnia y Herzegovina", "Bosnia and Herzegovina", "Bosnian", ["Bosnier", "Bosnierin"], ["aus Bosnien und Herzegowina", "in Bosnien und Herzegowina", "nach Bosnien und Herzegowina"]],
+ ME:["🇲🇪", "Montenegro", "Montenegro", "Montenegro", "Montenegrin", ["Montenegriner", "Montenegrinerin"], ["aus Montenegro", "in Montenegro", "nach Montenegro"]],
+ MK:["🇲🇰", "Nordmazedonien", "Macedonia del Norte", "North Macedonia", "Macedonian", ["Nordmazedonier", "Nordmazedonierin"], ["aus Nordmazedonien", "in Nordmazedonien", "nach Nordmazedonien"]],
+ AL:["🇦🇱", "Albanien", "Albania", "Albania", "Albanian", ["Albaner", "Albanerin"], ["aus Albanien", "in Albanien", "nach Albanien"]],
+ XK:["🇽🇰", "Kosovo", "Kosovo", "Kosovo", "Kosovar", ["Kosovare", "Kosovarin"], ["aus dem Kosovo", "im Kosovo", "in den Kosovo"]],
+ GR:["🇬🇷", "Griechenland", "Grecia", "Greece", "Greek", ["Grieche", "Griechin"], ["aus Griechenland", "in Griechenland", "nach Griechenland"]],
+ CY:["🇨🇾", "Zypern", "Chipre", "Cyprus", "Cypriot", ["Zyprer", "Zyprerin"], ["aus Zypern", "in Zypern", "nach Zypern"]],
+ MT:["🇲🇹", "Malta", "Malta", "Malta", "Maltese", ["Malteser", "Malteserin"], ["aus Malta", "in Malta", "nach Malta"]],
+ EE:["🇪🇪", "Estland", "Estonia", "Estonia", "Estonian", ["Este", "Estin"], ["aus Estland", "in Estland", "nach Estland"]],
+ LV:["🇱🇻", "Lettland", "Letonia", "Latvia", "Latvian", ["Lette", "Lettin"], ["aus Lettland", "in Lettland", "nach Lettland"]],
+ LT:["🇱🇹", "Litauen", "Lituania", "Lithuania", "Lithuanian", ["Litauer", "Litauerin"], ["aus Litauen", "in Litauen", "nach Litauen"]],
+ UA:["🇺🇦", "die Ukraine", "Ucrania", "Ukraine", "Ukrainian", ["Ukrainer", "Ukrainerin"], ["aus der Ukraine", "in der Ukraine", "in die Ukraine"]],
+ BY:["🇧🇾", "Belarus", "Bielorrusia", "Belarus", "Belarusian", ["Belarusse", "Belarussin"], ["aus Belarus", "in Belarus", "nach Belarus"]],
+ MD:["🇲🇩", "Moldau", "Moldavia", "Moldova", "Moldovan", ["Moldauer", "Moldauerin"], ["aus Moldau", "in Moldau", "nach Moldau"]],
+ RU:["🇷🇺", "Russland", "Rusia", "Russia", "Russian", ["Russe", "Russin"], ["aus Russland", "in Russland", "nach Russland"]],
+ GE:["🇬🇪", "Georgien", "Georgia", "Georgia", "Georgian", ["Georgier", "Georgierin"], ["aus Georgien", "in Georgien", "nach Georgien"]],
+ AM:["🇦🇲", "Armenien", "Armenia", "Armenia", "Armenian", ["Armenier", "Armenierin"], ["aus Armenien", "in Armenien", "nach Armenien"]],
+ AZ:["🇦🇿", "Aserbaidschan", "Azerbaiyán", "Azerbaijan", "Azerbaijani", ["Aserbaidschaner", "Aserbaidschanerin"], ["aus Aserbaidschan", "in Aserbaidschan", "nach Aserbaidschan"]],
+ CA:["🇨🇦", "Kanada", "Canadá", "Canada", "Canadian", ["Kanadier", "Kanadierin"], ["aus Kanada", "in Kanada", "nach Kanada"]],
+ AR:["🇦🇷", "Argentinien", "Argentina", "Argentina", "Argentinian", ["Argentinier", "Argentinierin"], ["aus Argentinien", "in Argentinien", "nach Argentinien"]],
+ CL:["🇨🇱", "Chile", "Chile", "Chile", "Chilean", ["Chilene", "Chilenin"], ["aus Chile", "in Chile", "nach Chile"]],
+ CO:["🇨🇴", "Kolumbien", "Colombia", "Colombia", "Colombian", ["Kolumbianer", "Kolumbianerin"], ["aus Kolumbien", "in Kolumbien", "nach Kolumbien"]],
+ PE:["🇵🇪", "Peru", "Perú", "Peru", "Peruvian", ["Peruaner", "Peruanerin"], ["aus Peru", "in Peru", "nach Peru"]],
+ VE:["🇻🇪", "Venezuela", "Venezuela", "Venezuela", "Venezuelan", ["Venezolaner", "Venezolanerin"], ["aus Venezuela", "in Venezuela", "nach Venezuela"]],
+ EC:["🇪🇨", "Ecuador", "Ecuador", "Ecuador", "Ecuadorian", ["Ecuadorianer", "Ecuadorianerin"], ["aus Ecuador", "in Ecuador", "nach Ecuador"]],
+ BO:["🇧🇴", "Bolivien", "Bolivia", "Bolivia", "Bolivian", ["Bolivianer", "Bolivianerin"], ["aus Bolivien", "in Bolivien", "nach Bolivien"]],
+ UY:["🇺🇾", "Uruguay", "Uruguay", "Uruguay", "Uruguayan", ["Uruguayer", "Uruguayerin"], ["aus Uruguay", "in Uruguay", "nach Uruguay"]],
+ PY:["🇵🇾", "Paraguay", "Paraguay", "Paraguay", "Paraguayan", ["Paraguayer", "Paraguayerin"], ["aus Paraguay", "in Paraguay", "nach Paraguay"]],
+ CU:["🇨🇺", "Kuba", "Cuba", "Cuba", "Cuban", ["Kubaner", "Kubanerin"], ["aus Kuba", "in Kuba", "nach Kuba"]],
+ DO:["🇩🇴", "die Dominikanische Republik", "República Dominicana", "the Dominican Republic", "Dominican", ["Dominikaner", "Dominikanerin"], ["aus der Dominikanischen Republik", "in der Dominikanischen Republik", "in die Dominikanische Republik"]],
+ CR:["🇨🇷", "Costa Rica", "Costa Rica", "Costa Rica", "Costa Rican", ["Costa-Ricaner", "Costa-Ricanerin"], ["aus Costa Rica", "in Costa Rica", "nach Costa Rica"]],
+ GT:["🇬🇹", "Guatemala", "Guatemala", "Guatemala", "Guatemalan", ["Guatemalteke", "Guatemaltekin"], ["aus Guatemala", "in Guatemala", "nach Guatemala"]],
+ HN:["🇭🇳", "Honduras", "Honduras", "Honduras", "Honduran", ["Honduraner", "Honduranerin"], ["aus Honduras", "in Honduras", "nach Honduras"]],
+ SV:["🇸🇻", "El Salvador", "El Salvador", "El Salvador", "Salvadoran", ["Salvadorianer", "Salvadorianerin"], ["aus El Salvador", "in El Salvador", "nach El Salvador"]],
+ NI:["🇳🇮", "Nicaragua", "Nicaragua", "Nicaragua", "Nicaraguan", ["Nicaraguaner", "Nicaraguanerin"], ["aus Nicaragua", "in Nicaragua", "nach Nicaragua"]],
+ PA:["🇵🇦", "Panama", "Panamá", "Panama", "Panamanian", ["Panamaer", "Panamaerin"], ["aus Panama", "in Panama", "nach Panama"]],
+ PR:["🇵🇷", "Puerto Rico", "Puerto Rico", "Puerto Rico", "Puerto Rican", ["Puerto-Ricaner", "Puerto-Ricanerin"], ["aus Puerto Rico", "in Puerto Rico", "nach Puerto Rico"]],
+ CN:["🇨🇳", "China", "China", "China", "Chinese", ["Chinese", "Chinesin"], ["aus China", "in China", "nach China"]],
+ JP:["🇯🇵", "Japan", "Japón", "Japan", "Japanese", ["Japaner", "Japanerin"], ["aus Japan", "in Japan", "nach Japan"]],
+ KR:["🇰🇷", "Südkorea", "Corea del Sur", "South Korea", "South Korean", ["Südkoreaner", "Südkoreanerin"], ["aus Südkorea", "in Südkorea", "nach Südkorea"]],
+ IN:["🇮🇳", "Indien", "India", "India", "Indian", ["Inder", "Inderin"], ["aus Indien", "in Indien", "nach Indien"]],
+ PK:["🇵🇰", "Pakistan", "Pakistán", "Pakistan", "Pakistani", ["Pakistaner", "Pakistanerin"], ["aus Pakistan", "in Pakistan", "nach Pakistan"]],
+ BD:["🇧🇩", "Bangladesch", "Bangladés", "Bangladesh", "Bangladeshi", ["Bangladescher", "Bangladescherin"], ["aus Bangladesch", "in Bangladesch", "nach Bangladesch"]],
+ VN:["🇻🇳", "Vietnam", "Vietnam", "Vietnam", "Vietnamese", ["Vietnamese", "Vietnamesin"], ["aus Vietnam", "in Vietnam", "nach Vietnam"]],
+ TH:["🇹🇭", "Thailand", "Tailandia", "Thailand", "Thai", ["Thailänder", "Thailänderin"], ["aus Thailand", "in Thailand", "nach Thailand"]],
+ PH:["🇵🇭", "die Philippinen", "Filipinas", "the Philippines", "Filipino", ["Philippiner", "Philippinerin"], ["von den Philippinen", "auf den Philippinen", "auf die Philippinen"]],
+ ID:["🇮🇩", "Indonesien", "Indonesia", "Indonesia", "Indonesian", ["Indonesier", "Indonesierin"], ["aus Indonesien", "in Indonesien", "nach Indonesien"]],
+ MY:["🇲🇾", "Malaysia", "Malasia", "Malaysia", "Malaysian", ["Malaysier", "Malaysierin"], ["aus Malaysia", "in Malaysia", "nach Malaysia"]],
+ SG:["🇸🇬", "Singapur", "Singapur", "Singapore", "Singaporean", ["Singapurer", "Singapurerin"], ["aus Singapur", "in Singapur", "nach Singapur"]],
+ IR:["🇮🇷", "der Iran", "Irán", "Iran", "Iranian", ["Iraner", "Iranerin"], ["aus dem Iran", "im Iran", "in den Iran"]],
+ IQ:["🇮🇶", "der Irak", "Irak", "Iraq", "Iraqi", ["Iraker", "Irakerin"], ["aus dem Irak", "im Irak", "in den Irak"]],
+ SY:["🇸🇾", "Syrien", "Siria", "Syria", "Syrian", ["Syrer", "Syrerin"], ["aus Syrien", "in Syrien", "nach Syrien"]],
+ LB:["🇱🇧", "der Libanon", "el Líbano", "Lebanon", "Lebanese", ["Libanese", "Libanesin"], ["aus dem Libanon", "im Libanon", "in den Libanon"]],
+ IL:["🇮🇱", "Israel", "Israel", "Israel", "Israeli", ["Israeli", "Israelin"], ["aus Israel", "in Israel", "nach Israel"]],
+ JO:["🇯🇴", "Jordanien", "Jordania", "Jordan", "Jordanian", ["Jordanier", "Jordanierin"], ["aus Jordanien", "in Jordanien", "nach Jordanien"]],
+ SA:["🇸🇦", "Saudi-Arabien", "Arabia Saudí", "Saudi Arabia", "Saudi", ["Saudi-Araber", "Saudi-Araberin"], ["aus Saudi-Arabien", "in Saudi-Arabien", "nach Saudi-Arabien"]],
+ AE:["🇦🇪", "die Vereinigten Arabischen Emirate", "los Emiratos Árabes Unidos", "the UAE", "Emirati", ["Emirater", "Emiraterin"], ["aus den Vereinigten Arabischen Emiraten", "in den Vereinigten Arabischen Emiraten", "in die Vereinigten Arabischen Emirate"]],
+ AF:["🇦🇫", "Afghanistan", "Afganistán", "Afghanistan", "Afghan", ["Afghane", "Afghanin"], ["aus Afghanistan", "in Afghanistan", "nach Afghanistan"]],
+ KZ:["🇰🇿", "Kasachstan", "Kazajistán", "Kazakhstan", "Kazakh", ["Kasache", "Kasachin"], ["aus Kasachstan", "in Kasachstan", "nach Kasachstan"]],
+ EG:["🇪🇬", "Ägypten", "Egipto", "Egypt", "Egyptian", ["Ägypter", "Ägypterin"], ["aus Ägypten", "in Ägypten", "nach Ägypten"]],
+ MA:["🇲🇦", "Marokko", "Marruecos", "Morocco", "Moroccan", ["Marokkaner", "Marokkanerin"], ["aus Marokko", "in Marokko", "nach Marokko"]],
+ DZ:["🇩🇿", "Algerien", "Argelia", "Algeria", "Algerian", ["Algerier", "Algerierin"], ["aus Algerien", "in Algerien", "nach Algerien"]],
+ TN:["🇹🇳", "Tunesien", "Túnez", "Tunisia", "Tunisian", ["Tunesier", "Tunesierin"], ["aus Tunesien", "in Tunesien", "nach Tunesien"]],
+ NG:["🇳🇬", "Nigeria", "Nigeria", "Nigeria", "Nigerian", ["Nigerianer", "Nigerianerin"], ["aus Nigeria", "in Nigeria", "nach Nigeria"]],
+ GH:["🇬🇭", "Ghana", "Ghana", "Ghana", "Ghanaian", ["Ghanaer", "Ghanaerin"], ["aus Ghana", "in Ghana", "nach Ghana"]],
+ KE:["🇰🇪", "Kenia", "Kenia", "Kenya", "Kenyan", ["Kenianer", "Kenianerin"], ["aus Kenia", "in Kenia", "nach Kenia"]],
+ ET:["🇪🇹", "Äthiopien", "Etiopía", "Ethiopia", "Ethiopian", ["Äthiopier", "Äthiopierin"], ["aus Äthiopien", "in Äthiopien", "nach Äthiopien"]],
+ ZA:["🇿🇦", "Südafrika", "Sudáfrica", "South Africa", "South African", ["Südafrikaner", "Südafrikanerin"], ["aus Südafrika", "in Südafrika", "nach Südafrika"]],
+ SN:["🇸🇳", "der Senegal", "Senegal", "Senegal", "Senegalese", ["Senegalese", "Senegalesin"], ["aus dem Senegal", "im Senegal", "in den Senegal"]],
+ CM:["🇨🇲", "Kamerun", "Camerún", "Cameroon", "Cameroonian", ["Kameruner", "Kamerunerin"], ["aus Kamerun", "in Kamerun", "nach Kamerun"]],
+ ER:["🇪🇷", "Eritrea", "Eritrea", "Eritrea", "Eritrean", ["Eritreer", "Eritreerin"], ["aus Eritrea", "in Eritrea", "nach Eritrea"]],
+ AU:["🇦🇺", "Australien", "Australia", "Australia", "Australian", ["Australier", "Australierin"], ["aus Australien", "in Australien", "nach Australien"]],
+ NZ:["🇳🇿", "Neuseeland", "Nueva Zelanda", "New Zealand", "New Zealander", ["Neuseeländer", "Neuseeländerin"], ["aus Neuseeland", "in Neuseeland", "nach Neuseeland"]]};
+/* Herkunft (Profil): Inhalte gehen von der Kurs-Person aus (LANG.persona.country/city, z. B. Deutschland/Mannheim). Ersetzt werden nur Herkunftsangaben:
+   Sätze in der Lernsprache macht das Paket (LANG.origin: pre, city), Erklärungen auf Deutsch/Englisch (aus Mannheim, Deutschland, Ich bin Deutscher, Germany) macht die Engine. */
+const PCOUNTRY=PN.country||'DE',PCITY=PN.city||'Mannheim',PX=ORIGINS[PCOUNTRY]||ORIGINS.DE,ORG=LANG.origin||{};
+const RX_ORG=new RegExp([rxe(PCITY),'Deutsch','German'].join('|')),RX_CITY=s=>new RegExp(s.replace('CITY',rxe(PCITY)),'g');
+function originStr(t){const o=S.origin;if(!o||(!o.c&&!o.other)||(o.c===PCOUNTRY&&!o.city)||typeof t!=='string'||!(RX_ORG.test(t)||ORG.test&&ORG.test.test(t)))return t;
+  const f=S.gender==='f',X=o.c&&ORIGINS[o.c],oth=!X&&o.other,D=X&&ORG.demonyms?ORG.demonyms[o.c]:null;const deC=X?X[1]:oth,enC=X?X[3]:oth,city=(o.city||'').trim();
+  const deF=X?X[6]:['aus '+oth,'in '+oth,'nach '+oth],bareDe=deC.replace(/^die /,'');const O={X,D,oth,f,city};
+  let r=t;if(ORG.pre)r=ORG.pre(r,O);
+  if(!city){r=r.replace(RX_CITY(', (aus|in|from) CITY\\b'),'');/* ohne Stadt: „…, aus Mannheim“ weglassen */
+    r=r.replace(RX_CITY('\\baus CITY\\b'),deF[0]).replace(RX_CITY('\\bin CITY\\b'),deF[1]).replace(RX_CITY('\\bnach CITY\\b'),deF[2]).replace(RX_CITY('\\bfrom CITY\\b'),'from '+enC);}
+  if(city)r=r.replace(RX_CITY('\\bCITY\\b'),city);else if(ORG.city)r=ORG.city(r,O);
   r=r.replace(/\baus Deutschland\b/g,deF[0]).replace(/\bin Deutschland\b/g,deF[1]).replace(/\bnach Deutschland\b/g,deF[2]).replace(/\bDeutschland\b/g,bareDe);
-  r=r.replace(/\b(Ich bin|Du bist|bist du) Deutsche[r]?\b/g,(m,a)=>X?a+' '+X[8][f?1:0]:a+' aus '+oth);
-  r=r.replace(/\bGermany\b/g,enC).replace(/\b(I'm|You're|you're|I am|You are) German\b/g,(m,a)=>X?a+' '+X[7]:a+' from '+oth);
+  r=r.replace(/\b(Ich bin|Du bist|bist du) Deutsche[r]?\b/g,(m,a)=>X?a+' '+X[5][f?1:0]:a+' aus '+oth);
+  r=r.replace(/\bGermany\b/g,enC).replace(/\b(I'm|You're|you're|I am|You are) German\b/g,(m,a)=>X?a+' '+X[4]:a+' from '+oth);
   return r;}
 function applyOrigin(o){if(typeof o==='string')return originStr(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=applyOrigin(o[i]);return o;}
   if(o&&typeof o==='object'){if(o.t==='vocab')return o;for(const k of Object.keys(o))if(k!=='items')o[k]=applyOrigin(o[k]);}return o;}
@@ -3366,7 +3384,7 @@ function compare(input,answers,opts={}){
   for(const a of answers){const na=norm(a);const nas=[na];if(opts.pron!==false&&PRON.test(na))nas.push(na.replace(PRON,''));
     for(const c of cands)for(const x of nas){const r=wordCmp(c,x,typo);
       if(r===0)return{status:'ok',right:a,note:c!==inp?T('Das Subjektpronomen kann man weglassen – meistens sagt man es nur zur Betonung.'):''};
-      if(r===1&&(!best||best.rank>1))best={status:'near',right:a,rank:1,note:T('Fast! Achte auf Akzente / ñ – sie können die Bedeutung ändern (esta ≠ está).')};
+      if(r===1&&(!best||best.rank>1))best={status:'near',right:a,rank:1,note:T(LANG.accentNote||'Fast! Achte auf die Schreibung (Akzente, Sonderzeichen).')};
       if(r===2&&!best)best={status:'near',right:a,rank:2,note:T('Kleiner Tippfehler – fast richtig.')};
     }}
   if(best)return best;
@@ -3663,7 +3681,7 @@ function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=
   document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
     UI_LANGS.length>1?h('div',{class:'uisel'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',title:n,onclick:()=>{if(c!==UI)setUI(c,true);}},f))):null,
     again?null:h('button',{class:'linkbtn',style:'display:block;margin:0 auto 6px;text-decoration:none;color:var(--muted)',onclick:()=>{try{sessionStorage.removeItem('mp-learn-ok');}catch(e){}vLearnPick();}},T('← Schritt 2 von 2 · ')+LANG.flag+' '+T(LANG.name)),
-    h('div',{style:'font-size:48px;margin-bottom:6px'},'👋'),h('h1',{style:'margin:0 0 6px'},again?T('Name ändern'):T('¡Hola!')),
+    h('div',{style:'font-size:48px;margin-bottom:6px'},'👋'),h('h1',{style:'margin:0 0 6px'},again?T('Name ändern'):TP('¡Hola!')),
     h('p',{class:'muted',style:'margin:0 0 18px'},again?T('So begrüße ich dich und so heißt du in den Übungen.'):fmt(T('Ich bin dein Lehrer für {L}. Wie heißt du?'))),
     inp,inp2,h('p',{class:'muted small',style:'margin:16px 0 8px'},T('Wie soll ich dich ansprechen? (wichtig für die Endungen)')),LANG.genderEx?h('div',{class:'gsel'},gb):null,
     !again&&LANG.roleNote?h('p',{class:'muted small',style:'margin:14px 0 0'},'🎭 '+T(LANG.roleNote)):null,
@@ -3726,7 +3744,7 @@ function vHome(m){
   if(hero)m.append(h('div',{class:'card hero',onclick:()=>planGo(hero)},h('div',{class:'kind'},T('Als Nächstes · ca. ')+hero.min+T(' Min.')),
     h('div',{class:'row',style:'flex-wrap:nowrap;align-items:flex-start'},h('div',{class:'hic'},hero.ic),h('div',{style:'flex:1;min-width:0'},h('h2',{style:'margin:0 0 4px'},hero.t),h('p',{class:'muted',style:'margin:0 0 14px'},hero.d),
       h('button',{class:'btn primary',onclick:e=>{e.stopPropagation();planGo(hero);}},hero.b)))));
-  else m.append(h('div',{class:'card hero'},h('h2',{style:'margin:0'},T('Für heute alles erledigt ✓')),h('p',{class:'muted',style:'margin:6px 0 0'},T('¡Muy bien! Wenn du noch Lust hast: unten gibt es Extras.'))));
+  else m.append(h('div',{class:'card hero'},h('h2',{style:'margin:0'},T('Für heute alles erledigt ✓')),h('p',{class:'muted',style:'margin:6px 0 0'},TP('¡Muy bien! Wenn du noch Lust hast: unten gibt es Extras.'))));
   const chip=x=>h('button',{class:'chip'+(x.done?' done':''),onclick:()=>planGo(x)},h('span',{},x.done?'✓':x.ic),h('span',{},x.t));
   const rest=plan.filter(x=>x!==hero),extra=planItems().filter(x=>!planOn(x.id));
   if(rest.length)m.append(h('div',{class:'kind',style:'margin:12px 0 6px'},T('Heute')),h('div',{class:'chips'},rest.map(chip)));
@@ -3974,7 +3992,7 @@ function play(m,cfg){
     const after=cfg.onDone?cfg.onDone({score,firstTry}):null;stage.innerHTML='';
     const pct=Math.round(score*100);
     stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:48px'},pct>=90?'🏆':pct>=70?'🎉':'💪'),
-      h('h1',{},pct>=90?T('¡Excelente!'):pct>=70?T('¡Muy bien!'):T('¡Sigue así!')),
+      h('h1',{},pct>=90?TP('¡Excelente!'):pct>=70?TP('¡Muy bien!'):TP('¡Sigue así!')),
       gradeable?h('p',{class:'sub'},pct+T('% beim ersten Versuch richtig')):h('p',{class:'sub'},T('Lektion abgeschlossen')),
       cfg.extraEnd?cfg.extraEnd({score,firstTry}):null,
       h('div',{class:'endbtns'},after?h('button',{class:'btn primary',onclick:after.fn},after.label):null,
@@ -4009,7 +4027,7 @@ function actionBar(onCheck,ctx,opts={}){
 function feedback(el,res,step,your,ctx){
   if(step.noReveal&&res.status==='bad'){const b=h('div',{class:'fb bad'},h('b',{class:'h'},T('Nicht ganz')),h('div',{},T('Die Lösung verrate ich noch nicht – gleich hörst du die Geschichte mit Text und bekommst die Frage noch einmal.')));el.append(b);return b;}
   const box=h('div',{class:'fb '+(res.status==='ok'?'ok':res.status==='near'?'warn':'bad')});
-  if(res.status==='ok')box.append(h('b',{class:'h'},pick([T('¡Correcto! ✓'),T('¡Muy bien! ✓'),T('¡Perfecto! ✓'),T('¡Eso es! ✓')])));
+  if(res.status==='ok')box.append(h('b',{class:'h'},pick([TP('¡Correcto! ✓'),TP('¡Muy bien! ✓'),TP('¡Perfecto! ✓'),TP('¡Eso es! ✓')])));
   else if(res.status==='near')box.append(h('b',{class:'h'},T('Fast richtig')),h('div',{html:T('Richtig: ')+(your?diffHtml(your,res.right):'<span class="es-t">'+esc(res.right)+'</span>')}));
   else box.append(h('b',{class:'h'},T('Nicht ganz')),h('div',{html:T('Richtig: <b class="es-t">')+esc(res.right)+'</b>'+(your?T('<br><span class="small muted">Deine Antwort: </span>')+diffHtml(your,res.right):'')}));
   if(res.note)box.append(h('div',{class:'small',style:'margin-top:4px'},res.note));
@@ -4131,7 +4149,7 @@ match(el,s,ctx){el.append(kind(T('Zuordnen')),h('p',{class:'q'},s.q||T('Was geh�
     if(side==='L'){colL.querySelectorAll('.sel').forEach(y=>y.classList.remove('sel'));selL={x,b};if(/[a-zñáéíóú]/i.test(x.t)&&s.sayLeft)say(x.t);}else{colR.querySelectorAll('.sel').forEach(y=>y.classList.remove('sel'));selR={x,b};}
     b.classList.add('sel');if(selL&&selR){/* gleiche Beschriftung zählt auch (z. B. zweimal „+ Indikativ“) */if(selL.x.i===selR.x.i||s.pairs[selL.x.i][1]===selR.x.t||s.pairs[selR.x.i][0]===selL.x.t){selL.b.classList.add('done');selR.b.classList.add('done');selL.b.classList.remove('sel');selR.b.classList.remove('sel');left--;}
       else{errors++;const a=selL.b,c=selR.b;a.classList.add('wrong');c.classList.add('wrong');setTimeout(()=>{a.classList.remove('wrong','sel');c.classList.remove('wrong','sel');},500);}
-      selL=selR=null;if(!left){const st=errors===0?'ok':errors<=2?'near':'bad';el.append(h('div',{class:'fb '+(st==='ok'?'ok':st==='near'?'warn':'bad')},st==='ok'?T('¡Perfecto! Alles beim ersten Versuch.'):errors+T(' Fehlversuch(e) – ')+(st==='near'?T('gut gemacht.'):T('schau dir die Paare noch mal an.'))));ctx.done(st,'');bar.setNext();}}};return b;};
+      selL=selR=null;if(!left){const st=errors===0?'ok':errors<=2?'near':'bad';el.append(h('div',{class:'fb '+(st==='ok'?'ok':st==='near'?'warn':'bad')},st==='ok'?TP('¡Perfecto! Alles beim ersten Versuch.'):errors+T(' Fehlversuch(e) – ')+(st==='near'?T('gut gemacht.'):T('schau dir die Paare noch mal an.'))));ctx.done(st,'');bar.setNext();}}};return b;};
   L.forEach(x=>colL.append(mk(x,'L')));Rr.forEach(x=>colR.append(mk(x,'R')));el.append(grid);
   const bar=actionBar(()=>{if(left){toast(T('Ordne zuerst alle Paare zu'));return false;}},ctx,{label:T('Weiter →')});el.append(bar);},
 read(el,s,ctx){const plain=s.text.replace(/\{([^|}]+)\|[^}]+\}/g,'$1');
@@ -4162,7 +4180,7 @@ dialog(el,s,ctx){el.append(kind(T('Dialog · ')+(s.place||T('Situación'))),h('h
   const chat=h('div',{class:'chat'});const zone=h('div',{});el.append(chat,zone);let i=0,errors=0;const bar=actionBar(()=>{if(i<s.lines.length){toast(T('Führe zuerst den Dialog zu Ende'));return false;}},ctx,{label:T('Weiter →')});
   function npc(L){const tr=h('div',{class:'tr'+(S.settings.showTr?'':' hide')},L.de||'');chat.append(h('div',{class:'msg'},h('div',{class:'who'},L.n),h('div',{class:'row',style:'gap:8px;flex-wrap:nowrap'},spk(L.es),h('span',{class:'es-t'},L.es)),tr,
       !S.settings.showTr&&L.de?h('button',{class:'btn ghost small',style:'padding:2px 0',onclick:e=>{tr.classList.remove('hide');e.target.remove();}},T('Übersetzung')):null));say(L.es);}
-  function step(){zone.innerHTML='';if(i>=s.lines.length){const st=errors===0?'ok':errors<=1?'near':'bad';zone.append(h('div',{class:'fb '+(st==='ok'?'ok':'warn')},st==='ok'?T('¡Genial! Dialog fehlerfrei gemeistert.'):T('Dialog geschafft – mit ')+errors+T(' Fehlversuch(en).')));ctx.done(st==='bad'?'bad':st,'');bar.setNext();return;}
+  function step(){zone.innerHTML='';if(i>=s.lines.length){const st=errors===0?'ok':errors<=1?'near':'bad';zone.append(h('div',{class:'fb '+(st==='ok'?'ok':'warn')},st==='ok'?TP('¡Genial! Dialog fehlerfrei gemeistert.'):T('Dialog geschafft – mit ')+errors+T(' Fehlversuch(en).')));ctx.done(st==='bad'?'bad':st,'');bar.setNext();return;}
     const L=s.lines[i];if(!L.you){npc(L);i++;setTimeout(step,250);return;}
     zone.append(h('p',{class:'muted small',style:'margin:4px 0 8px'},L.prompt?'👉 '+L.prompt:T('👉 Was antwortest du?')));
     const box=h('div',{class:'opts'});shuffle(L.opts).forEach(o=>{const b=h('button',{class:'opt es-t'},o.es);b.onclick=()=>{if(o.ok){chat.append(h('div',{class:'msg me'},h('div',{class:'who'},T('Du')),h('span',{class:'es-t'},o.es)));say(o.es);i++;setTimeout(step,500);}
@@ -4232,7 +4250,7 @@ function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7
     box.append(card,rates?null:h('div',{class:'actions'},h('button',{class:'btn',disabled:i===0,onclick:()=>{i--;audioUrl=null;draw();}},T('← Zurück')),
       h('button',{class:'btn',onclick:()=>{audioUrl=null;if(i<list.length-1){i++;draw();setTimeout(()=>say(list[i].es),150);}else finish();}},i<list.length-1?T('Überspringen →'):T('Runde beenden ✓'))));}
   function finish(){S.shadow[id]=(start+list.length)%all.length;markDay('shadow');const sc=scores.filter(x=>x!=null);const good=sc.filter(x=>x===100).length;box.innerHTML='';
-    box.append(h('div',{class:'card',style:'text-align:center;padding:30px'},h('div',{style:'font-size:44px'},'🎧'),h('h1',{},T('¡Bien hecho!')),
+    box.append(h('div',{class:'card',style:'text-align:center;padding:30px'},h('div',{style:'font-size:44px'},'🎧'),h('h1',{},TP('¡Bien hecho!')),
       h('p',{class:'sub'},list.length+T(' Sätze geübt')+(sc.length?T(' · ')+good+T(' klangen gleich'):'')),
       h('div',{class:'endbtns'},h('button',{class:'btn primary',onclick:()=>{box.innerHTML='';m.innerHTML='';vShadow(m,id);}},T('Nächste 7 Sätze →')),h('button',{class:'btn ghost',onclick:()=>goBack('unit/'+id)},T('Fertig')))));}
   draw();setTimeout(()=>say(list[0].es),300);}
@@ -4255,7 +4273,7 @@ function numVal(kind){const t20=(NUMS.unlock||{}).to20;if(kind==='numw'||kind===
 const near=(n,max)=>{const c=new Set([n+10,n-10,n+1,n-1,+String(n).split('').reverse().join(''),n%10===6?n+1:n%10===7?n-1:n+20]);if(Math.floor(n/10)===6)c.add(n+10);if(Math.floor(n/10)===7)c.add(n-10);
   return shuffle([...c].filter(x=>x>=0&&x<=max&&x!==n)).slice(0,2);};
 function numStep(kind,v){
-  if(kind==='numw'||kind==='bigw')return{t:'tr',kind:T('Zahlen'),de:T('Schreib die Zahl auf Spanisch: ')+v,a:[numEs(+v)]};
+  if(kind==='numw'||kind==='bigw')return{t:'tr',kind:T('Zahlen'),de:fmt(T('Schreib die Zahl {ON}: '))+v,a:[numEs(+v)]};
   if(kind==='numl'||kind==='bigl'){const n=+v;return{t:'mc',kind:T('Zahlen hören'),q:T('Welche Zahl hörst du?'),say:numEs(n),autoSay:true,opts:[v,...near(n,n<21?20:2100).map(String)],a:0};}
   const[hh,mm]=v.split(':').map(Number);
   if(kind==='time')return{t:'tr',kind:T('Uhrzeit'),de:T('Wie spät ist es? 🕒 ')+v,a:[horaEs(hh,mm).join('|')]};
@@ -4362,7 +4380,7 @@ function verbStep(u,inf,de){if(!LANG.conjugate)return null;const r=LANG.conjugat
   return{t:'conj',verb:inf,de:VOC_DE[inf]!=null?trc(VOC_DE[inf]):de,forms:r.forms,tense:T('Präsens'),why};}
 function verbPool(all){const gen=[],seen=new Set(),tables=[];
   for(const u of COURSE.units){const st=all||startedU(u);
-    for(const l of u.lessons){if(st&&(!l.freq||all||rnd(u.id+'.'+l.id)>=1))for(const s of l.steps)if(s.t==='vocab')for(const [es,de] of s.items){const w=es.trim();if(seen.has(w)||!/^[a-záéíóúñü]+(ar|er|ir|ír)(se)?$/.test(w)||!/n\b/.test(String(de).split(',')[0]))continue;
+    for(const l of u.lessons){if(st&&(!l.freq||all||rnd(u.id+'.'+l.id)>=1))for(const s of l.steps)if(s.t==='vocab')for(const [es,de] of s.items){const w=es.trim();if(seen.has(w)||!(LANG.infinitive||/(?!)/).test(w)||!/n\b/.test(String(de).split(',')[0]))continue;
         const st2=verbStep(u,w,de);if(st2){seen.add(w);gen.push({s:st2,ref:'V|'+u.id+'|'+w});}}
       if(all||learnedL(u.id,l.id))l.steps.forEach((s,i)=>{if(s.t==='conj'&&s.tense)tables.push({s,ref:u.id+'|'+l.id+'|'+i});});}}
   return{gen,tables};}
@@ -4370,7 +4388,7 @@ function verbRound(all){const{gen,tables}=verbPool(all);const t=shuffle(tables).
 function vVerbs(m){const all=!!S.settings.verbsAll;m.innerHTML='';m.append(backTo(T('Bibliothek'),'ref'));const{gen,tables}=verbPool(all);
   m.append(h('h1',{},T('Verben-Trainer')),learnSeg('verbsAll',()=>vVerbs(m)),
     h('p',{class:'sub'},(all?T('Verben aus dem ganzen Kurs'):T('Verben aus den Unidades, die du angefangen hast'))+' ('+gen.length+'). '+T('Du siehst nur den Infinitiv – überleg selbst: -ar, -er oder -ir? Stammwechsel? Bei Fehlern zeige ich das Muster.')+(tables.length?' '+T('Dazu andere Zeitformen aus gelernten Lektionen.'):'')));
-  if(!gen.length&&!tables.length){m.append(h('div',{class:'card'},T('Noch keine Verben – fang eine Unidad an. Oder oben „Alles“ wählen.')));return;}
+  if(!gen.length&&!tables.length){m.append(h('div',{class:'card'},T('Noch keine Verben – fang eine Unidad an. Oder oben „Alles“ wählen.').split('Unidad').join(UW)));return;}
   const go8=direct=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:verbRound(all),pk:'verbs',onBack:()=>direct===true?goBack('home'):vVerbs(m),onDone:()=>({label:T('Noch 8 Verben →'),fn:go8})});};
   if(RESUME==='verbs'){RESUME=null;return go8(true);}
   m.append(pauseBtn('verbs',go8),h('button',{class:'btn'+(pauseGet('verbs')?'':' primary'),style:'width:100%;min-height:48px',onclick:()=>{pauseDel('verbs');go8();}},T('8 Verben üben →')));}
@@ -4555,7 +4573,7 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
       if(r.status==='bad'&&md!=='listen'){const sy=synOf(c.es,c.de);if(sy.length&&compare(inp.value,sy,{pron:false}).status==='ok')r={status:'ok',right:c.es,note:T('Auch richtig ✓ – gesucht war: ')+c.es};}inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
       feedback(stage,r,{t:'v'},inp.value,null);if(md==='listen')stage.append(h('p',{class:'muted'},'= '+trc(c.de)));if(r.status!=='bad')say(c.es);res(c,r.status);},{next:nxt}));}
   function end(){stage.innerHTML='';upd();if(opt.pk)pauseDel(opt.pk);const pct=Math.round(100*okc/Math.max(seen.size,1));if(srs&&seen.size){S.vocabDay=today();save();}const np=opt.again?null:dayPlan().find(x=>!x.done&&x.r!=='vocab');const more=srs?reviewSet():[];
-    stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:44px'},'🗂️'),h('h1',{},T('¡Hecho!')),h('p',{class:'sub'},pct+T('% gewusst · ')+seen.size+T(' Karten')),
+    stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:44px'},'🗂️'),h('h1',{},TP('¡Hecho!')),h('p',{class:'sub'},pct+T('% gewusst · ')+seen.size+T(' Karten')),
       h('div',{class:'endbtns'},more.length?h('button',{class:'btn'+(np?'':' primary'),onclick:()=>runVocab(more,mode,true,{pk:'vocab'})},T('Weiter üben: ')+more.length+T(' Karten')+(vocabLeft()?'':T(' (freiwillig)'))+' →'):null,
         opt.again?h('button',{class:'btn primary',onclick:opt.again},T('Noch eine Runde →')):null,
         np?h('button',{class:'btn primary',onclick:()=>{NAVRESET=true;planGo(np);}},T('Nächste Aufgabe: ')+np.t+' →'):null,
@@ -4606,7 +4624,7 @@ function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')));
   /* direct = von woanders gestartet (Startseite) → Zurück dorthin, sonst zurück zum Fehlerheft */
   function goM(direct){m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,pk:'mistakes',steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>direct?goBack('home'):go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}
   if(RESUME==='mistakes'){RESUME=null;if(list.length)return goM(true);}
-  if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
+  if(!list.length){m.append(h('div',{class:'card'},TP('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
   const n=Math.min(list.length,20);
   m.append(h('div',{class:'card mistakehead'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},h('b',{},list.length+(list.length===1?T(' offener Fehler'):T(' offene Fehler'))),h('span',{class:'muted small'},T('richtig geübt = weg'))),
     pauseGet('mistakes')?h('div',{style:'margin-top:10px'},pauseBtn('mistakes',()=>goM())):null,
@@ -4621,7 +4639,7 @@ function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')));
 function vChat(m,id){const u=unitById(id);const sit=u.situacion;
   m.append(backTo(UW+' '+u.n,'unit/'+id),h('h1',{},'💬 '+sit.title),h('div',{class:'scene',html:'🎬 '+sit.scene+T('<br><b>Dein Ziel:</b> ')+sit.goal}));
   if(!hasAI()){m.append(h('div',{class:'card'},h('p',{},T('Für freie Gespräche brauchst du KI: entweder diese App über den claude.ai-Link öffnen (nutzt dein Claude-Abo) oder einen kostenlosen Gemini-Key in den Einstellungen. Alles andere funktioniert ohne.')),h('button',{class:'btn primary',onclick:()=>go('settings')},T('Zu den Einstellungen'))));return;}
-  const chat=h('div',{class:'chat'});const hist=[];const sys=TEACHER+`\n\nROLLENSPIEL: ${sit.role}\nSzene: ${sit.scene}\nZiel von Jonas: ${sit.goal}\nWortschatz/Grammatik bis ${UW} ${u.n}: ${u.goals.join(', ')}.\nRegeln: Spiele deine Rolle auf Spanisch, natürlich aber einfach (A1/A2), 1–3 kurze Sätze pro Antwort, stelle Rückfragen, damit das Gespräch weitergeht. Wenn Jonas einen Fehler macht, gib eine kurze Korrektur auf Deutsch im Feld "korrektur" (sonst null). Wenn das Ziel erreicht ist, beende das Gespräch freundlich und setze "fertig": true.\nAntworte NUR als JSON: {"antwort_es":"...","antwort_de":"deutsche Übersetzung","korrektur":null oder {"richtig":"korrigierter Satz von Jonas","erklaerung":"kurz"},"fertig":false}`;
+  const chat=h('div',{class:'chat'});const hist=[];const sys=TEACHER+`\n\nROLLENSPIEL: ${sit.role}\nSzene: ${sit.scene}\nZiel von Jonas: ${sit.goal}\nWortschatz/Grammatik bis ${UW} ${u.n}: ${u.goals.join(', ')}.\nRegeln: Spiele deine Rolle ${LANG.onLang||''}, natürlich aber einfach (A1/A2), 1–3 kurze Sätze pro Antwort, stelle Rückfragen, damit das Gespräch weitergeht. Wenn Jonas einen Fehler macht, gib eine kurze Korrektur auf Deutsch im Feld "korrektur" (sonst null). Wenn das Ziel erreicht ist, beende das Gespräch freundlich und setze "fertig": true.\nAntworte NUR als JSON: {"antwort_es":"...","antwort_de":"deutsche Übersetzung","korrektur":null oder {"richtig":"korrigierter Satz von Jonas","erklaerung":"kurz"},"fertig":false}`;
   const inp=h('input',{class:'inp',placeholder:fmt(T('Deine Antwort {ON} …')),autocomplete:'off',spellcheck:'false'});const send=h('button',{class:'btn primary'},T('Senden'));
   m.append(chat,h('div',{class:'row',style:'flex-wrap:nowrap'},inp,send),keys(()=>inp),h('p',{class:'muted small'},fmt(T('Tipp: Wenn du nicht weiterweißt, schreib auf {EX} „Hilfe: …“ – der Lehrer hilft dir.'))));
   function bubble(me,es,de,corr){const b=h('div',{class:'msg'+(me?' me':'')},h('div',{class:'who'},me?T('Du'):sit.npc||T('Profe')),h('div',{class:'row',style:'gap:8px;flex-wrap:nowrap'},me?null:spk(es),h('span',{class:'es-t'},me?es:aiH(es))),de?h('div',{class:'tr'},aiH(de)):null);chat.append(b);
@@ -4631,7 +4649,7 @@ function vChat(m,id){const u=unitById(id);const sit=u.situacion;
     send.disabled=true;send.textContent='…';
     try{const r=await gemini(sys,{history:hist});hist.push({role:'model',parts:[{text:JSON.stringify(r)}]});bubble(false,r.antwort_es,r.antwort_de,null);
       if(r.korrektur&&chat.children.length>1){const last=[...chat.querySelectorAll('.msg.me')].pop();if(last)last.after(h('div',{class:'fb warn',style:'align-self:flex-end;max-width:82%;margin:0'},'✏️ ',h('span',{class:'es-t'},aiH(r.korrektur.richtig)),h('div',{class:'small'},aiH(r.korrektur.erklaerung))));}
-      say(String(r.antwort_es||'').replace(/<[^>]+>|[*_]/g,''));if(r.fertig)chat.append(h('div',{class:'fb ok'},T('🎉 Ziel erreicht! ¡Muy bien!')));}
+      say(String(r.antwort_es||'').replace(/<[^>]+>|[*_]/g,''));if(r.fertig)chat.append(h('div',{class:'fb ok'},TP('🎉 Ziel erreicht! ¡Muy bien!')));}
     catch(e){chat.append(h('div',{class:'fb bad'},AIN()+T('-Fehler: ')+e.message));}
     send.disabled=false;send.textContent=T('Senden');inp.focus();}
   send.onclick=()=>{const t=inp.value.trim();if(!t)return;inp.value='';turn(t);};inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();send.click();}};
@@ -4712,16 +4730,16 @@ function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & P
     prow('👤 '+S.name+(S.surname?' '+S.surname:'')+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):S.gender==='x'?T(' · keine Angabe'):''),'name'),prow(orig,'origin')));}
 /* Ländername in der App-Sprache (de/es/en aus ORIGINS, pt über ui_tr oder Englisch) */
 function originName(X){const de=X[1].replace(/^(die|der) /,'');if(UI==='de')return de;if(UI==='es'){const e=X[2].replace(/^(el|los) /,'');return e.charAt(0).toUpperCase()+e.slice(1);}
-  if(UI==='pt'&&T(de)!==de)return T(de);return X[6].replace(/^the /,'');}
+  if(UI==='pt'&&T(de)!==de)return T(de);return X[3].replace(/^the /,'');}
 function vOrigin(m){const o=Object.assign({c:'DE',city:'',other:''},S.origin||{});let sel=o.other?'XX':o.c;
   const city=h('input',{class:'inp',placeholder:T('Stadt (optional)'),value:o.city,autocapitalize:'words',style:'font-size:16px;margin-top:6px'});
-  const other=h('input',{class:'inp'+(sel==='XX'?'':' hide'),placeholder:T('Land (auf Spanisch, z. B. Grecia)'),value:o.other,autocapitalize:'words',style:'font-size:16px;margin-top:8px'});
+  const other=h('input',{class:'inp'+(sel==='XX'?'':' hide'),placeholder:fmt(T('Land ({ON}, z. B. {X})')).replace('{X}',(LANG.origin||{}).otherEx||''),value:o.other,autocapitalize:'words',style:'font-size:16px;margin-top:8px'});
   /* Auswahlliste (am iPhone als Drehrad): DACH oben, dann alle Länder alphabetisch in der App-Sprache, zuletzt „Anderes Land“ */
   const opt=c=>{const X=ORIGINS[c];return h('option',{value:c,selected:sel===c},X[0]+' '+originName(X));};
   const rest=Object.keys(ORIGINS).filter(c=>!['DE','AT','CH'].includes(c)).sort((a,b)=>originName(ORIGINS[a]).localeCompare(originName(ORIGINS[b]),UI));
   const chips=h('select',{class:'inp',style:'font-size:16px'},['DE','AT','CH'].map(opt),h('option',{disabled:true},'──────────'),rest.map(opt),h('option',{value:'XX',selected:sel==='XX'},'🌍 '+T('Anderes Land')));
   chips.onchange=()=>{sel=chips.value;other.classList.toggle('hide',sel!=='XX');if(sel==='XX')other.focus();};
-  m.append(backTo(T('Sprache & Profil'),'lang'),h('h1',{},T('Herkunft')),h('p',{class:'sub'},T('Woher kommst du? Übungen wie „Soy de …“ und „¿De dónde eres?“ passen sich daran an.')),
+  m.append(backTo(T('Sprache & Profil'),'lang'),h('h1',{},T('Herkunft')),h('p',{class:'sub'},(()=>{const X=(LANG.origin||{}).examples;return X?T('Woher kommst du? Übungen wie „{A}“ und „{B}“ passen sich daran an.').replace('{A}',X[0]).replace('{B}',X[1]):T('Woher kommst du? Übungen zur Herkunft passen sich daran an.');})()),
     h('div',{class:'kind',style:'margin-top:4px'},T('Land')),chips,other,h('div',{class:'kind',style:'margin-top:16px'},T('Stadt')),city,
     h('button',{class:'btn primary',style:'margin-top:16px',onclick:()=>{const v=sel==='XX'?{c:'',other:other.value.trim().slice(0,40),city:city.value.trim().slice(0,40)}:{c:sel,other:'',city:city.value.trim().slice(0,40)};
       if(sel==='XX'&&!v.other)return toast(T('Gib dein Land ein'));S.origin=v;S.profT=Date.now();save();if(IN_ARTIFACT){toast(T('Gespeichert'));return;}location.hash='lang';reloadApp();}},T('Speichern')));}

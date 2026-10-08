@@ -47,5 +47,5 @@ function conjugate(inf){var v=String(inf||'').trim().toLowerCase(),refl=false;
   return r;}
 /* Textbausteine der Hinweise – die Engine übersetzt sie einzeln (ui_tr.js) */
 var WHY_PARTS=['unregelmäßig – auswendig lernen','regelmäßig auf -','Stammwechsel ','(nicht bei nosotros/vosotros)','1. Person auf -zco (sonst regelmäßig)','y vor o/e','g → j vor o','c → z vor o','sonst regelmäßig','Akzent auf ','(außer nosotros/vosotros)','reflexiv: ','wie '];
-defineLang('es',{conjugate:conjugate,whyParts:WHY_PARTS});
+defineLang('es',{conjugate:conjugate,whyParts:WHY_PARTS,infinitive:/^[a-záéíóúñü]+(ar|er|ir|ír)(se)?$/});
 })();
