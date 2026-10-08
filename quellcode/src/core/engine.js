@@ -547,6 +547,10 @@ function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{cla
 /* Erster Start in 2 Schritten: 1) Lernsprache wählen, 2) Name & Ansprache (Beispiel hängt von der Lernsprache ab).
    Gewählt = mi-profe-shared.lang gesetzt (oder in dieser Sitzung bestätigt). Andere Sprache als die geladene → Neustart mit deren Paket. */
 function learnChosen(){try{if(sessionStorage.getItem('mp-learn-ok'))return true;}catch(e){}try{const sh=JSON.parse(localStorage.getItem(SHARED)||'null');return!!(sh&&sh.lang);}catch(e){return false;}}
+/* „bald“-Kurs antippen: gibt es ihn schon im Aufbau (PACKS beta), kann man ihn nach Rückfrage ausprobieren */
+async function betaTry(c,n,pick){const B=window.PACKS&&PACKS.learn.find(L=>L.code===c&&L.beta);if(!B)return toast(T(n)+T(' ist noch in Arbeit'));
+  if(!await askConfirm(T(n)+T(' ist noch im Aufbau – es gibt erst die ersten Lektionen. Trotzdem ausprobieren?'),T('Ausprobieren')))return;
+  try{localStorage.setItem('mi-profe-beta','1');}catch(e){}pick(c);}
 function vLearnPick(){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}
   const avail=learnPacks();
   const planned=(window.LANG_PLANNED||[]).filter(([c])=>!avail.some(L=>L.code===c));
@@ -557,7 +561,7 @@ function vLearnPick(){const bt=document.getElementById('boot');document.body.inn
     h('div',{class:'muted small',style:'margin-bottom:6px'},T('Schritt 1 von 2')),h('div',{style:'font-size:44px;margin-bottom:6px'},'🌍'),
     h('h1',{style:'margin:0 0 6px'},T('Was möchtest du lernen?')),h('p',{class:'muted',style:'margin:0 0 18px'},T('Du kannst später jederzeit wechseln – jede Sprache hat ihren eigenen Fortschritt.')),
     h('div',{class:'learngrid'},...avail.map(L=>h('button',{class:'learntile',onclick:()=>pick(L.code)},h('span',{class:'lf'},L.flag),h('b',{},T(L.name)),L.stufen?h('span',{class:'muted small'},L.stufen[0]===L.stufen[1]?L.stufen[0]:T('{A} bis {B}').replace('{A}',L.stufen[0]).replace('{B}',L.stufen[1])):null)),
-      ...planned.map(([c,n,f])=>h('button',{class:'learntile soon',onclick:()=>toast(T(n)+T(' ist noch in Arbeit'))},h('span',{class:'lf'},f),h('b',{},T(n)),h('span',{class:'muted small'},T('bald'))))))));}
+      ...planned.map(([c,n,f])=>h('button',{class:'learntile soon',onclick:()=>betaTry(c,n,pick)},h('span',{class:'lf'},f),h('b',{},T(n)),h('span',{class:'muted small'},T('bald'))))))));}
 function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
   let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]],['x',T('🙂 keine Angabe'),T('beide Formen zählen')]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('div',{style:'font-size:20px;line-height:1.2'},l.split(' ')[0]),h('b',{},l.split(' ').slice(1).join(' ')),ex?h('span',{},ex):null);return b;});
@@ -1653,7 +1657,7 @@ function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & P
   const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';reloadApp();};
   m.append(h('div',{class:'kind',style:'margin-top:8px'},T('Ich lerne')),h('div',{class:'chips'},
     ...avail.map(L=>h('button',{class:'chip'+(L.code===LANG.code?' on':''),onclick:()=>pick(L.code)},h('span',{},L.flag),h('span',{},T(L.name)))),
-    ...planned.map(([c,n,f])=>h('button',{class:'chip soon',onclick:()=>toast(T(n)+T(' ist noch in Arbeit'))},h('span',{},f),h('span',{},T(n)+T(' · bald'))))),
+    ...planned.map(([c,n,f])=>h('button',{class:'chip soon',onclick:()=>betaTry(c,n,pick)},h('span',{},f),h('span',{},T(n)+T(' · bald'))))),
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Jede Sprache hat ihren eigenen Fortschritt.')));
   m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Sprache der App')),h('div',{class:'seg'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',onclick:()=>{if(c!==UI)setUI(c);}},h('b',{},f),h('span',{},n)))),
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Knöpfe, Menüs und Hinweise.')));
