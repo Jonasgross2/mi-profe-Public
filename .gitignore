@@ -2,3 +2,4 @@ quellcode/dist/
 .DS_Store
 quellcode/pruefung/
 server/invites.txt
+server/.wrangler/
