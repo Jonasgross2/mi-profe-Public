@@ -5,7 +5,7 @@ VERSION=time.strftime('%Y%m%d-%H%M')
 # ===== Pakete: die Web-App lädt nur, was gebraucht wird (Lernsprache + ggf. Erklärsprache); die Mac-Einzeldateien enthalten alles =====
 # Ordner: src/core/ = gemeinsam (Logik, Design, Register, Oberflächentexte) · src/<lern>/ = Inhalte einer Lernsprache · src/<lern>/tr_<ex>.js = Erklärsprache
 # Neue Lernsprache: Ordner src/<code>/ + Eintrag hier (Dateien in Ladereihenfolge, Definition defineLang zuletzt). Erklärsprachen: automatisch aus src/<lern>/tr_<ex>.js
-PACKS={'es':{'name':'Spanisch','flag':'🇪🇸','files':['es/c_u0u1.js','es/c_u2u3.js','es/c_read03.js','es/c_u4u5.js','es/c_u6u8.js','es/c_u9u10.js','es/c_extra.js','es/c_gaps.js','es/c_a2b.js','es/c_b1.js','es/c_b1b.js','es/c_b2.js','es/c_b2b.js','es/c_c1.js','es/c_c1b.js','es/c_c2.js','es/c_vocab_plus.js','es/c_vocab_freq.js','es/c_info_tr.js','es/c_stories.js','es/c_reading.js','es/placement.js','es/levels.js','es/lang_es.js','es/conj_es.js','es/num_es.js','es/fem_es.js','es/pers_es.js','es/origin_es.js']}}
+PACKS={'es':{'name':'Spanisch','flag':'🇪🇸','files':['es/c_u0u1.js','es/c_u2u3.js','es/c_read03.js','es/c_u4u5.js','es/c_u6u8.js','es/c_u9u10.js','es/c_extra.js','es/c_gaps.js','es/c_a2b.js','es/c_b1.js','es/c_b1b.js','es/c_b2.js','es/c_b2b.js','es/c_c1.js','es/c_c1b.js','es/c_c2.js','es/c_vocab_plus.js','es/c_vocab_freq.js','es/c_info_tr.js','es/c_stories.js','es/c_reading.js','es/placement.js','es/levels.js','es/lang_es.js','es/conj_es.js','es/num_es.js','es/fem_es.js','es/pers_es.js','es/origin_es.js'],'base':'de'}}
 TRS=[]   # (Pfad, Lernsprache, Erklärsprache) – src/es/tr_en.js → Erklärsprache en für Lernsprache es
 for k in PACKS:
     for f in sorted((s/k).glob('tr_*.js')):TRS.append((f'{k}/{f.name}',k,f.stem[3:]))
@@ -29,15 +29,16 @@ for _f in ALL:
 if _errs:
   print('ABBRUCH – Syntax, die ältere iPhones nicht kennen:');print('\n'.join(_errs[:30]));_sys.exit(1)
 import json as _json
-MANIFEST='window.PACKS='+_json.dumps({'learn':[{'code':k,'name':v['name'],'flag':v['flag']} for k,v in PACKS.items()],'ex':EXMAP},ensure_ascii=False)+';'
+MANIFEST='window.PACKS='+_json.dumps({'learn':[{'code':k,'name':v['name'],'flag':v['flag']} for k,v in PACKS.items()],'ex':EXMAP,'base':{k:v.get('base','de') for k,v in PACKS.items()}},ensure_ascii=False)+';'
 LOADER='''<script>'''+MANIFEST+'''
 /* Lader (ES5): gleiche Logik wie engine.js (App-Sprache → Erklärsprache), lädt das Lernsprachen-Paket und ggf. das Erklärsprachen-Paket synchron */
 (function(){var sh=null;try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');}catch(e){}
 var nav=(navigator.language||'de').toLowerCase(),ui=sh&&sh.ui||(sh?'de':nav.indexOf('de')===0?'de':nav.indexOf('es')===0?'es':nav.indexOf('pt')===0?'pt':'en');
 var codes=PACKS.learn.map(function(x){return x.code;}),lang=sh&&sh.lang||'es';if(codes.indexOf(lang)<0)lang='es';
-var exl=['de'].concat(PACKS.ex[lang]||[]).filter(function(c){return c!==lang;}),ex=sh&&sh.ex,old=!!(sh&&sh.name);
-if(exl.indexOf(ex)<0)ex=exl.indexOf(ui)>=0?ui:(ui!=='de'&&!old&&exl.indexOf('en')>=0?'en':'de');
-var v='?v='+window.APP_VERSION;document.write('<script src="p/'+lang+'.js'+v+'"><\/script>');if(ex!=='de')document.write('<script src="p/tr-'+lang+'-'+ex+'.js'+v+'"><\/script>');})();</script>
+var base=PACKS.base&&PACKS.base[lang]||'de';/* Ausgangssprache der Erklärungen im Kurs */
+var exl=[base].concat(PACKS.ex[lang]||[]).filter(function(c){return c!==lang;}),ex=sh&&sh.ex,old=!!(sh&&sh.name);
+if(exl.indexOf(ex)<0)ex=exl.indexOf(ui)>=0?ui:(ui!==base&&!old&&exl.indexOf('en')>=0?'en':base);
+var v='?v='+window.APP_VERSION;document.write('<script src="p/'+lang+'.js'+v+'"><\/script>');if(ex!==base)document.write('<script src="p/tr-'+lang+'-'+ex+'.js'+v+'"><\/script>');})();</script>
 '''
 GUARD=r'''<script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt leerem Bildschirm eine Meldung mit Fehlertext, Neu-laden- und Sprache-zurück-Knopf. Fortschritt bleibt unberührt. */
 window.__t0=Date.now();(function(){var err='';window.addEventListener('error',function(e){if(!err)err=((e&&e.message)||'')+(e&&e.lineno?' (Zeile '+e.lineno+':'+e.colno+')':'');});

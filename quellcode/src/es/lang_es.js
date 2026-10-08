@@ -10,6 +10,8 @@ defineLang('es',{name:'Spanisch',flag:'🇪🇸',native:'Español',into:'ins Spa
   sampleSay:['Hola, soy tu profesora de español.','¿Qué tal? Me llamo Lucía.'],
   voiceHint:'Auf dem Mac klingen „Mónica“ bzw. Stimmen mit „(Premium)“/„(Erweitert)“ am besten. Mehr Stimmen: Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Spanisch.',
   storySeries:'Nuevo en Barcelona',storyIntro:'Ben zieht nach Barcelona.',
+  i18nTarget:/^[¿¡]|[ñ]|\b(el|la|los|las|de|del|que|es|en|y|un|una|por|para|con|se|mi|tu|su)\b/i, /* Übersetzungs-Werkzeug: spanische Texte erkennen */
+  baseEx:'de', /* Erklärungen im Kurs sind auf Deutsch geschrieben; Englisch kommt aus tr_en.js */
   accentNote:'Fast! Achte auf Akzente / ñ – sie können die Bedeutung ändern (esta ≠ está).',
   articles:/^(el|la|los|las|un|una|unos|unas)\s+/i,
   mark:/[ñ¿¡áéíóú]|^(el|la|los|las|un|una|unos|unas)\s/i, /* erkennt beim Import von Wortlisten, welche Seite Spanisch ist */

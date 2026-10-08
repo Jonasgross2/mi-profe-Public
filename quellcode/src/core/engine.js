@@ -23,10 +23,12 @@ const KEY=LANG.key;const SHARED='mi-profe-shared';
 /* Erklärsprache (unabhängig von der App-Sprache): Sprache der Erklärungen & Übersetzungen im Kurs. Deutsch + alle Sprachen mit COURSE_TR[Lernsprache], nie die Lernsprache selbst. */
 const EX_NAMES={de:'Deutsch',en:'Englisch',pt:'Portugiesisch',es:'Spanisch',it:'Italienisch',fr:'Französisch'};
 const EX_FLAGS={de:'🇩🇪',en:'🇬🇧',pt:'🇧🇷',es:'🇪🇸',it:'🇮🇹',fr:'🇫🇷'};
-const EX_LANGS=['de'].concat(window.PACKS&&PACKS.ex[LANG.code]||Object.keys(window.COURSE_TR&&COURSE_TR[LANG.code]||{})).filter((c,i,a)=>c!==LANG.code&&a.indexOf(c)===i);
+/* EX_BASE = Sprache, in der die Erklärungen des Kurses geschrieben sind (LANG.baseEx, Spanischkurs: Deutsch); andere Erklärsprachen kommen aus COURSE_TR */
+const EX_BASE=LANG.baseEx||'de';
+const EX_LANGS=[EX_BASE].concat(window.PACKS&&PACKS.ex[LANG.code]||Object.keys(window.COURSE_TR&&COURSE_TR[LANG.code]||{})).filter((c,i,a)=>c!==LANG.code&&a.indexOf(c)===i);
 let EX=null,EX_SET,exOld=false;try{const sh=JSON.parse(localStorage.getItem(SHARED)||'null');if(sh){EX=EX_SET=sh.ex;exOld=!!sh.name;}}catch(e){}
 /* ohne Wahl: wie die App-Sprache; sonst bei neuen Nutzern Englisch, bei bestehenden (bisher immer Deutsch) Deutsch */
-if(!EX_LANGS.includes(EX))EX=EX_LANGS.includes(UI)?UI:UI!=='de'&&!exOld&&EX_LANGS.includes('en')?'en':'de';
+if(!EX_LANGS.includes(EX))EX=EX_LANGS.includes(UI)?UI:UI!==EX_BASE&&!exOld&&EX_LANGS.includes('en')?'en':EX_BASE;
 function setEX(code){let sh={};try{sh=JSON.parse(localStorage.getItem(SHARED)||'{}')||{};}catch(e){}sh.ex=code;try{localStorage.setItem(SHARED,JSON.stringify(sh));}catch(e){}reloadApp();}
 const UW=LANG.unit,UWS=LANG.units;
 const _ap=Element.prototype.append;Element.prototype.append=function(...k){return _ap.apply(this,k.flat().filter(x=>x!=null&&x!==false));};
@@ -64,8 +66,8 @@ function personalize(o){if(typeof o==='string')return persStr(o);if(Array.isArra
   if(o&&typeof o==='object'){if(PERS.obj)PERS.obj(o,{nm:S.name||PN.name,sur:S.surname||'',g:S.gender,ex:EX});
     for(const k of Object.keys(o))o[k]=personalize(o[k]);}return o;}
 /* Kursinhalte in der Erklärsprache: COURSE_TR[Lernsprache][EX] = {deutscher Text: Übersetzung}. Fehlt etwas, bleibt Deutsch. */
-const CT=EX!=='de'&&window.COURSE_TR&&COURSE_TR[LANG.code]&&COURSE_TR[LANG.code][EX]||null;
-const LESEN={en:'Reading: ',pt:'Leitura: ',es:'Lectura: '}[EX];
+const CT=EX!==EX_BASE&&window.COURSE_TR&&COURSE_TR[LANG.code]&&COURSE_TR[LANG.code][EX]||null;
+const LESEN=EX_BASE==='de'?{en:'Reading: ',pt:'Leitura: ',es:'Lectura: '}[EX]:null;/* „Lesen: …“-Titel (deutsche Kurstexte) */
 const trc=s=>!CT||s==null?s:CT[s]!=null?CT[s]:LESEN&&typeof s==='string'&&s.startsWith('Lesen: ')?LESEN+s.slice(7):s;
 function trContent(o){if(typeof o==='string')return trc(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=trContent(o[i]);return o;}
   if(o&&typeof o==='object'){for(const k of Object.keys(o))if(k!=='role'&&k!=='id')o[k]=trContent(o[k]);}return o;}
@@ -699,7 +701,7 @@ function vResumen(m,id){const u=unitById(id);m.append(backTo(UW+' '+u.n,'unit/'+
   m.querySelectorAll('.resumen .es-t, .resumen td.es').forEach(addSpeakTo);}
 /* Übersetzungen der spanischen Beispiele in Erklärungen (INFO_TR in c_info_tr.js, Schlüssel = Originaltext mit „Jonas“) */
 const infoKey=t=>String(t).replace(S.surname?new RegExp((S.name||'Jonas')+' '+S.surname,'g'):/$^/,'Jonas').replace(new RegExp('\\b'+(S.name||'Jonas').replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','g'),'Jonas').replace(/\s+/g,' ').trim();
-function trToggle(box){const TRI=EX==='de'&&window.INFO_TR||null;if(!TRI)return null;
+function trToggle(box){const TRI=EX===EX_BASE&&window.INFO_TR||null;/* INFO_TR = Beispiele in der Ausgangssprache der Erklärungen */if(!TRI)return null;
   const pop=(e,d)=>{const r=e.getBoundingClientRect();const p=h('div',{class:'glpop trpop'},d);document.body.append(p);
       p.style.left=Math.max(8,Math.min(r.left,window.innerWidth-p.offsetWidth-8))+'px';p.style.top=(r.bottom+6)+'px';
       const close=()=>{p.remove();document.removeEventListener('click',close,true);document.removeEventListener('scroll',close,true);};setTimeout(()=>{document.addEventListener('click',close,true);document.addEventListener('scroll',close,true);},0);};

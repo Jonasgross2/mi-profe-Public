@@ -1,28 +1,46 @@
-"""Übersetzungen nach Inhaltsänderungen neu zuordnen – über den DEUTSCHEN TEXT, nicht über die Position.
-  1) python3 i18n/remap.py extract   → course_de.json + course_de_extra.json neu erzeugen (jsc), alte Zuordnung de→en sichern
-  2) python3 i18n/remap.py todo      → i18n/es_en/<abschnitt>.py neu schreiben (vorhandene Übersetzungen übernommen,
-                                        fehlende = None) und i18n/todo/<abschnitt>.json mit den fehlenden deutschen Texten
-  3) Übersetzungen als i18n/todo/<abschnitt>.en.json (Liste, gleiche Reihenfolge wie <abschnitt>.json) ablegen
-  4) python3 i18n/remap.py fill      → trägt sie ein; None bleibt Deutsch ("" = absichtlich unverändert)
-  5) python3 i18n/gen.py              → src/es/tr_en.js
+"""Übersetzungen der Kursinhalte pflegen – Zuordnung über den TEXT in der Ausgangssprache, nicht über die Position.
+Jeder Kurs hat einen Ordner i18n/kurse/<kurs>/ (course.json = Texte in der Ausgangssprache, <ziel>/<abschnitt>.py = Übersetzungen,
+todo/<ziel>/ = offene Texte). Kurs und Zielsprache als Angabe, ohne Angabe: --kurs es --nach en (Spanischkurs → Englisch).
+Die Ausgangssprache der Erklärungen steht in build.py (PACKS[kurs]['base'], Standard 'de').
+  1) python3 i18n/remap.py extract [--kurs es] [--nach en] → course.json + course_extra.json neu erzeugen (jsc), alte Zuordnung sichern
+  2) python3 i18n/remap.py todo     → <ziel>/<abschnitt>.py neu schreiben (vorhandene Übersetzungen übernommen, fehlende = None)
+                                       und todo/<ziel>/<abschnitt>.json mit den fehlenden Texten
+  3) Übersetzungen als Datei mit EN=[…] in To-do-Reihenfolge, dann: python3 i18n/remap.py put <abschnitt> <datei.py>
+     (prüft Anzahl, HTML-Tags und {Wort|…}-Glossen) – oder als todo/<ziel>/<abschnitt>.en.json ablegen
+  4) python3 i18n/remap.py fill     → trägt sie ein; None bleibt in der Ausgangssprache ("" = absichtlich unverändert)
+  5) python3 i18n/gen.py            → src/<kurs>/tr_<ziel>.js (alle Kurse, alle Zielsprachen)
 Läuft im Ordner quellcode/."""
-import json, pathlib, runpy, subprocess, sys
+import ast, json, pathlib, runpy, subprocess, sys
 B = pathlib.Path(__file__).resolve().parent
+Q = B.parent
 JSC = '/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc'
-LANG = 'es_en'
-D = B / LANG
-TODO = B / 'todo'
-OLDMAP = B / 'todo' / '_oldmap.json'
+
+args = sys.argv[1:]
+def opt(name, default):
+    if name in args:
+        i = args.index(name); v = args[i + 1]; del args[i:i + 2]; return v
+    return default
+KURS = opt('--kurs', 'es'); NACH = opt('--nach', 'en')
+K = B / 'kurse' / KURS
+D = K / NACH
+TODO = K / 'todo' / NACH
+OLDMAP = TODO / '_oldmap.json'
+
+def packs():
+    """PACKS aus build.py lesen (ohne build.py auszuführen)."""
+    src = (Q / 'build.py').read_text(encoding='utf-8')
+    line = next(l for l in src.splitlines() if l.startswith('PACKS='))
+    return ast.literal_eval(line[len('PACKS='):])
 
 def sections():
-    de = json.load(open(B / 'course_de.json'))
-    if (B / 'course_de_extra.json').exists():
-        ex = json.load(open(B / 'course_de_extra.json'))
+    de = json.load(open(K / 'course.json'))
+    if (K / 'course_extra.json').exists():
+        ex = json.load(open(K / 'course_extra.json'))
         de['x_all'] = [s for k in ex for s in ex[k]]
     return de
 
 def oldmap():
-    """de → en aus den bisherigen Listen (inkl. "" = absichtlich unverändert)."""
+    """Ausgangstext → Übersetzung aus den bisherigen Listen (inkl. "" = absichtlich unverändert)."""
     de = sections(); m = {}
     for f in sorted(D.glob('*.py')):
         tr = runpy.run_path(str(f)).get('EN') or []
@@ -34,18 +52,19 @@ def write_py(sec, lst):
     body = ',\n'.join(json.dumps(x, ensure_ascii=False) if x is not None else 'None' for x in lst)
     (D / f'{sec}.py').write_text('EN = [\n' + body + '\n]\n', encoding='utf-8')
 
-cmd = sys.argv[1] if len(sys.argv) > 1 else ''
+cmd = args[0] if args else ''
 if cmd == 'extract':
-    TODO.mkdir(exist_ok=True)
-    m = oldmap(); OLDMAP.write_text(json.dumps(m, ensure_ascii=False), encoding='utf-8')
-    src = str(B.parent / 'src' / 'es')
-    out = subprocess.run([JSC, str(B / 'extract.js'), '--', src], capture_output=True, text=True, check=True).stdout
-    (B / 'course_de.json').write_text(out, encoding='utf-8')
-    out = subprocess.run([JSC, str(B / 'extract_extra.js'), '--', src, str(B / 'course_de.json')], capture_output=True, text=True, check=True).stdout
-    (B / 'course_de_extra.json').write_text(out, encoding='utf-8')
-    print('alte Zuordnungen gesichert:', len(m))
+    TODO.mkdir(parents=True, exist_ok=True); D.mkdir(parents=True, exist_ok=True)
+    m = oldmap() if (K / 'course.json').exists() else {}
+    OLDMAP.write_text(json.dumps(m, ensure_ascii=False), encoding='utf-8')
+    P = packs()[KURS]; base = P.get('base', 'de'); files = ','.join(P['files'])
+    run = lambda script, *extra: subprocess.run([JSC, str(B / script), '--', 'src', KURS, base, files, *extra], capture_output=True, text=True, check=True, cwd=str(Q)).stdout
+    (K / 'course.json').write_text(run('extract.js'), encoding='utf-8')
+    (K / 'course_extra.json').write_text(run('extract_extra.js', str(K / 'course.json')), encoding='utf-8')
+    print(KURS, '→', NACH, '· alte Zuordnungen gesichert:', len(m))
 elif cmd == 'todo':
     m = json.loads(OLDMAP.read_text(encoding='utf-8')); de = sections(); total = 0
+    D.mkdir(parents=True, exist_ok=True)
     for sec, texts in de.items():
         lst = [m.get(t) for t in texts]
         missing = [t for t, x in zip(texts, lst) if x is None]
@@ -63,12 +82,12 @@ elif cmd == 'fill':
         tr = dict(zip(missing, en))
         lst = runpy.run_path(str(D / f'{sec}.py'))['EN']
         lst = [tr.get(t, x) if x is None else x for t, x in zip(de[sec], lst)]
-        write_py(sec, lst); n += len(en)
+        write_py(sec, lst); n += len(en); f.unlink()
     print('eingetragen:', n)
 elif cmd == 'put':
     # python3 i18n/remap.py put <abschnitt> <datei.py mit EN=[…]> – prüft Anzahl, HTML-Tags und {Wort|…}-Glossen
     import re
-    sec, f = sys.argv[2], sys.argv[3]
+    sec, f = args[1], args[2]
     missing = json.load(open(TODO / f'{sec}.json')); en = runpy.run_path(f)['EN']
     if len(missing) != len(en): sys.exit(f'{sec}: {len(en)} Übersetzungen für {len(missing)} Texte')
     tags = lambda t: re.findall(r'<(/?[a-z0-9]+)', t); gl = lambda t: re.findall(r'\{([^|}]+)\|', t)
