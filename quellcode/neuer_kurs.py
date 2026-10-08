@@ -42,7 +42,7 @@ defineLang('{code}',{{name:'{name}',flag:'{flag}',into:'ins {name + "e" if name.
   baseEx:'{basis}',
   persona:{{name:'Jonas',surname:'Gross',country:'DE',city:'Mannheim'}},  /* für wen die Inhalte geschrieben sind (wird durch Name/Herkunft der lernenden Person ersetzt) */
   /* ERSETZEN: Lob-Wendungen der Oberfläche (dort auf Spanisch) in der neuen Lernsprache – rechts stehen nur Platzhalter: */
-  praise:{{'¡Muy bien!':'Sehr gut!','¡Hola!':'Hallo!','¡Excelente!':'Ausgezeichnet!','¡Sigue así!':'Weiter so!','¡Correcto!':'Richtig!','¡Perfecto!':'Perfekt!','¡Eso es!':'Genau!','¡Hecho!':'Geschafft!','¡Bien hecho!':'Gut gemacht!','¡Genial!':'Super!'}},
+  praise:{{'¡Muy bien!':'Sehr gut!','¡Hola!':'Hallo!','¡Excelente!':'Ausgezeichnet!','¡Sigue así!':'Weiter so!','¡Correcto!':'Richtig!','¡Perfecto!':'Perfekt!','¡Eso es!':'Genau!','¡Hecho!':'Geschafft!','¡Bien hecho!':'Gut gemacht!','¡Genial!':'Super!','¡OJO!':'ACHTUNG!'}},
   /* optional (weglassen = Funktion aus): articles:/^(…)\\s+/i  mark:/…/  sampleWords:[…]  accentNote:'…'  pron:/…/  persons:[…]  roleNote:'…'  storySeries:'…' */
   key:'mi-profe-{code}-v1',gist:'mi-profe-fortschritt-{code}.json',
   levels:[{{id:'A1',label:'A1',title:'Einstieg',sub:'Erste Schritte'}}],  /* Stufen; Teilstufen: mehrere Einträge mit demselben label */

@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261008-2329";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
+<script>window.PWA=true;window.APP_VERSION="20261008-2344";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -137,7 +137,7 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
 .info th{background:var(--surface2);font-weight:600}
 .info .ex{background:var(--surface2);border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 10px 10px 0;margin:10px 0}
 .info .ojo{background:var(--accent-soft);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 10px 10px 0;margin:10px 0}
-.info .ojo::before{content:"¡OJO! ";font-weight:700;color:var(--accent)}
+.info .ojo::before{content:var(--ojo,"¡OJO! ");font-weight:700;color:var(--accent)}
 .es-t{font-family:var(--serif)}
 .vlist{display:grid;gap:6px}
 .vrow{display:flex;align-items:center;gap:12px;padding:9px 12px;border-radius:10px;background:var(--surface2)}
@@ -452,7 +452,7 @@ window.selectLang=function(){let code='es';try{code=(JSON.parse(localStorage.get
   if(L.code!=='es')for(const u of L.course.units)for(const q of u.placement||[])L.placement.push(Object.assign({u:u.id},q));
   window.COURSE=L.course;window.PLACEMENT=L.placement;window.STORIES=L.stories;window.LEVELS=L.levels;window.LEVEL_OF=L.levelOf;window.EMOJI=L.emoji;};
 </script>
-<script>window.PACKS={"learn": [{"code": "es", "name": "Spanisch", "flag": "🇪🇸", "stufen": ["A1", "C2"]}], "ex": {"es": ["en"]}, "base": {"es": "de"}};
+<script>window.PACKS={"learn": [{"code": "es", "name": "Spanisch", "flag": "🇪🇸", "stufen": ["A1", "C2"]}, {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "stufen": ["A1", "A1"], "beta": true}], "ex": {"es": ["en"]}, "base": {"es": "de", "de": "pt"}};
 /* Lader (ES5): gleiche Logik wie engine.js (App-Sprache → Erklärsprache), lädt das Lernsprachen-Paket und ggf. das Erklärsprachen-Paket synchron */
 (function(){var sh=null;try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');}catch(e){}
 var nav=(navigator.language||'de').toLowerCase(),ui=sh&&sh.ui||(sh?'de':nav.indexOf('de')===0?'de':nav.indexOf('es')===0?'es':nav.indexOf('pt')===0?'pt':'en');
@@ -929,6 +929,11 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"auf Deutsch": "in German",
+"ins Deutsche": "into German",
+"Kapitel": "Chapter",
+"Iniciante": "Beginner",
+"Primeiros passos": "First steps",
 "{A} bis {B}": "{A} to {B}",
 "Wie funktioniert das?": "How does it work?",
 "Fortschritt automatisch sichern und auf allen Geräten abgleichen – ohne Konto.": "Back up your progress automatically and keep all your devices in sync – no account needed.",
@@ -1868,6 +1873,11 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"auf Deutsch": "en alemán",
+"ins Deutsche": "al alemán",
+"Kapitel": "Capítulo",
+"Iniciante": "Principiante",
+"Primeiros passos": "Primeros pasos",
 "{A} bis {B}": "{A} a {B}",
 "Wie funktioniert das?": "¿Cómo funciona?",
 "Fortschritt automatisch sichern und auf allen Geräten abgleichen – ohne Konto.": "Guarda tu progreso automáticamente y sincronízalo en todos tus dispositivos, sin cuenta.",
@@ -2807,6 +2817,11 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"auf Deutsch": "em alemão",
+"ins Deutsche": "para o alemão",
+"Kapitel": "Capítulo",
+"Iniciante": "Iniciante",
+"Primeiros passos": "Primeiros passos",
 "{A} bis {B}": "{A} a {B}",
 "Wie funktioniert das?": "Como funciona?",
 "Fortschritt automatisch sichern und auf allen Geräten abgleichen – ohne Konto.": "Salva o teu progresso automaticamente e sincroniza-o em todos os dispositivos – sem conta.",
@@ -3285,6 +3300,9 @@ window.UI_TR={
 };
 </script>
 <script>/* Neustart (Sprachwechsel, Update …): erst Startbildschirm mit Drehsymbol zeigen, dann neu laden – sonst wirkt die App kurz eingefroren */
+/* Kurse für die Auswahl; Kurse im Aufbau (PACKS beta) nur nach einmal ?beta=1 (ausschalten: ?beta=0) und immer der gerade gewählte */
+function learnPacks(){let beta=false;try{const q=new URLSearchParams(location.search).get('beta');if(q!=null)localStorage.setItem('mi-profe-beta',q==='1'?'1':'');beta=localStorage.getItem('mi-profe-beta')==='1';}catch(e){}
+  const cur=window.LANG&&LANG.code;return window.PACKS?PACKS.learn.filter(L=>!L.beta||beta||L.code===cur):Object.values(LANGS).filter(L=>L.course&&L.course.units.length).map(L=>({code:L.code,name:L.name,flag:L.flag}));}
 function bootScreen(){let b=document.getElementById('boot');if(!b){/* Flagge der Sprache, die gleich geladen wird */let f='🌍';try{const c=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}').lang;const P=((window.PACKS&&PACKS.learn)||[]).find(x=>x.code===c)||LANGS[c];if(P)f=P.flag;}catch(e){}
   b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">'+f+'</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
 /* Startbildschirm ruhig ausblenden: mindestens 1 s ab dem Öffnen (länger, wenn die App länger braucht) und 0,3 s nach dem Aufbau, dann 0,4 s weiches Ausblenden */
@@ -3302,6 +3320,8 @@ if(UI!=='de'&&!(window.UI_TR&&UI_TR[UI]))UI='de';document.documentElement.lang=U
 const TR=UI==='de'?null:UI_TR[UI];const T=s=>TR&&TR[s]!=null?TR[s]:s;
 /* Lob in der Lernsprache (¡Muy bien!, ¡Hola! …): Texte enthalten die spanischen Wendungen; ein anderes Paket ersetzt sie über LANG.praise {'¡Muy bien!':'Sehr gut!', …} */
 const TP=k=>{let r=T(k);const P=LANG.praise;if(P)for(const a in P)r=r.split(a).join(P[a]);return r;};
+/* Hinweiskästen (.ojo) beginnen mit „¡OJO!“ – in anderen Lernsprachen aus LANG.praise (z. B. 'ACHTUNG!') */
+if(LANG.praise&&LANG.praise['¡OJO!'])document.documentElement.style.setProperty('--ojo',JSON.stringify(LANG.praise['¡OJO!']+' '));
 for(const L of LEVELS){L.title=T(L.title);L.sub=T(L.sub);}
 const UI_LANGS=[['de','🇩🇪','Deutsch'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['pt','🇧🇷','Português']].filter(([c])=>c==='de'||window.UI_TR&&UI_TR[c]);
 function setUI(code,withEx){let sh={};try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}')||{};}catch(e){}sh.ui=code;if(withEx)delete sh.ex;try{localStorage.setItem('mi-profe-shared',JSON.stringify(sh));}catch(e){}reloadApp();}
@@ -3485,7 +3505,9 @@ const ORIGINS={DE:["🇩🇪", "Deutschland", "Alemania", "Germany", "German", [
 /* Herkunft (Profil): Inhalte gehen von der Kurs-Person aus (LANG.persona.country/city, z. B. Deutschland/Mannheim). Ersetzt werden nur Herkunftsangaben:
    Sätze in der Lernsprache macht das Paket (LANG.origin: pre, city), Erklärungen auf Deutsch/Englisch (aus Mannheim, Deutschland, Ich bin Deutscher, Germany) macht die Engine. */
 const PCOUNTRY=PN.country||'DE',PCITY=PN.city||'Mannheim',PX=ORIGINS[PCOUNTRY]||ORIGINS.DE,ORG=LANG.origin||{};
-const RX_ORG=new RegExp([rxe(PCITY),'Deutsch','German'].join('|')),RX_CITY=s=>new RegExp(s.replace('CITY',rxe(PCITY)),'g');
+/* Namen des Kurs-Landes auf Deutsch/Englisch (Spanischkurs: Deutschland, Deutscher/Deutsche, Germany, German) */
+const PB=PX[1].replace(/^(die|der|das) /,''),PDEM=PX[5].slice().sort((a,b)=>b.length-a.length);
+const RX_ORG=new RegExp([rxe(PCITY),rxe(PB)].concat(PDEM.map(rxe),[rxe(PX[3]),rxe(PX[4])]).join('|')),RX_CITY=s=>new RegExp(s.replace('CITY',rxe(PCITY)),'g');
 function originStr(t){const o=S.origin;if(!o||(!o.c&&!o.other)||(o.c===PCOUNTRY&&!o.city)||typeof t!=='string'||!(RX_ORG.test(t)||ORG.test&&ORG.test.test(t)))return t;
   const f=S.gender==='f',X=o.c&&ORIGINS[o.c],oth=!X&&o.other,D=X&&ORG.demonyms?ORG.demonyms[o.c]:null;const deC=X?X[1]:oth,enC=X?X[3]:oth,city=(o.city||'').trim();
   const deF=X?X[6]:['aus '+oth,'in '+oth,'nach '+oth],bareDe=deC.replace(/^die /,'');const O={X,D,oth,f,city};
@@ -3493,9 +3515,9 @@ function originStr(t){const o=S.origin;if(!o||(!o.c&&!o.other)||(o.c===PCOUNTRY&
   if(!city){r=r.replace(RX_CITY(', (aus|in|from) CITY\\b'),'');/* ohne Stadt: „…, aus Mannheim“ weglassen */
     r=r.replace(RX_CITY('\\baus CITY\\b'),deF[0]).replace(RX_CITY('\\bin CITY\\b'),deF[1]).replace(RX_CITY('\\bnach CITY\\b'),deF[2]).replace(RX_CITY('\\bfrom CITY\\b'),'from '+enC);}
   if(city)r=r.replace(RX_CITY('\\bCITY\\b'),city);else if(ORG.city)r=ORG.city(r,O);
-  r=r.replace(/\baus Deutschland\b/g,deF[0]).replace(/\bin Deutschland\b/g,deF[1]).replace(/\bnach Deutschland\b/g,deF[2]).replace(/\bDeutschland\b/g,bareDe);
-  r=r.replace(/\b(Ich bin|Du bist|bist du) Deutsche[r]?\b/g,(m,a)=>X?a+' '+X[5][f?1:0]:a+' aus '+oth);
-  r=r.replace(/\bGermany\b/g,enC).replace(/\b(I'm|You're|you're|I am|You are) German\b/g,(m,a)=>X?a+' '+X[4]:a+' from '+oth);
+  r=r.replace(new RegExp('\\b'+rxe(PX[6][0])+'\\b','g'),deF[0]).replace(new RegExp('\\b'+rxe(PX[6][1])+'\\b','g'),deF[1]).replace(new RegExp('\\b'+rxe(PX[6][2])+'\\b','g'),deF[2]).replace(new RegExp('\\b'+rxe(PB)+'\\b','g'),bareDe);
+  r=r.replace(new RegExp('\\b(Ich bin|Du bist|bist du) ('+PDEM.map(rxe).join('|')+')\\b','g'),(m,a)=>X?a+' '+X[5][f?1:0]:a+' aus '+oth);
+  r=r.replace(new RegExp('\\b'+rxe(PX[3])+'\\b','g'),enC).replace(new RegExp("\\b(I'm|You're|you're|I am|You are) "+rxe(PX[4])+'\\b','g'),(m,a)=>X?a+' '+X[4]:a+' from '+oth);
   return r;}
 function applyOrigin(o){if(typeof o==='string')return originStr(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=applyOrigin(o[i]);return o;}
   if(o&&typeof o==='object'){if(o.t==='vocab')return o;for(const k of Object.keys(o))if(k!=='items')o[k]=applyOrigin(o[k]);}return o;}
@@ -3518,7 +3540,7 @@ function toast(t){const e=h('div',{class:'toast'},t);document.body.append(e);set
 
 /* ---------- answer checking ---------- */
 const PRON=LANG.pron||/(?!)/;
-function norm(s){return String(s).toLowerCase().replace(/[¿?¡!.,;:"“”'«»()…\-–]/g,' ').replace(/\s+/g,' ').trim();}
+function norm(s){s=String(s).toLowerCase();if(LANG.norm)s=LANG.norm(s);/* Schreibvarianten der Lernsprache (Deutsch: ss = ß, ae = ä …) */return s.replace(/[¿?¡!.,;:"“”'«»()…\-–]/g,' ').replace(/\s+/g,' ').trim();}
 function strip(s){return s.normalize('NFD').replace(/[̀-ͯ]/g,'');}
 function lev(a,b){const m=a.length,n=b.length;if(!m)return n;if(!n)return m;let p=Array.from({length:n+1},(_,i)=>i);
   for(let i=1;i<=m;i++){const c=[i];for(let j=1;j<=n;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));p=c;}return p[n];}
@@ -3827,7 +3849,7 @@ function askConfirm(text,okLabel){return new Promise(res=>{const ov=h('div',{cla
    Gewählt = mi-profe-shared.lang gesetzt (oder in dieser Sitzung bestätigt). Andere Sprache als die geladene → Neustart mit deren Paket. */
 function learnChosen(){try{if(sessionStorage.getItem('mp-learn-ok'))return true;}catch(e){}try{const sh=JSON.parse(localStorage.getItem(SHARED)||'null');return!!(sh&&sh.lang);}catch(e){return false;}}
 function vLearnPick(){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}
-  const avail=window.PACKS?PACKS.learn:Object.values(LANGS).filter(L=>L.course&&L.course.units.length).map(L=>({code:L.code,name:L.name,flag:L.flag}));
+  const avail=learnPacks();
   const planned=(window.LANG_PLANNED||[]).filter(([c])=>!avail.some(L=>L.code===c));
   const pick=code=>{try{sessionStorage.setItem('mp-learn-ok','1');}catch(e){}let sh={};try{sh=JSON.parse(localStorage.getItem(SHARED)||'{}')||{};}catch(e){}sh.lang=code;if(!sh.ui)sh.ui=UI;
     try{localStorage.setItem(SHARED,JSON.stringify(sh));}catch(e){}if(code!==LANG.code&&!IN_ARTIFACT)return reloadApp();route();};
@@ -4007,9 +4029,16 @@ function trToggle(box){const TRI=EX===EX_BASE&&window.INFO_TR||null;/* INFO_TR =
   return null;}
 /* Vorlesbarer Teil eines Beispiels: ohne (Klammern), „= Übersetzung“, „+ Präsens“-Angaben, ✓ und deutsche Teile nach „–“ */
 /* nicht vorlesen: deutsche oder englische Erklärteile (Erklärsprache) */
-const LOOKS_W=new Set(['ich','du','er','wir','ihr','und','der','die','das','ist','bin','nicht','auch','mit','für','oder','aber','doch','sollen','können','kontext','the','you','your','have','had','should','could','would','only','with','and','is','are','was','of','to','it','that','this','what','when','where','why','how']);
-const looksDe=t=>{if(/[äöß]/.test(t)||/(^|[^g])ü/.test(t))return true; /* ohne Lookbehind – ältere iOS-Safari kennen ihn nicht */
-  return t.split(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñÄÖäöß]+/).some(w=>w==='I'||LOOKS_W.has(w.toLowerCase()));};
+const LOOK_W={de:['ich','du','er','wir','ihr','und','der','die','das','ist','bin','nicht','auch','mit','für','oder','aber','doch','sollen','können','kontext'],
+  en:['the','you','your','have','had','should','could','would','only','with','and','is','are','was','of','to','it','that','this','what','when','where','why','how'],
+  pt:['não','você','vocês','é','está','eu','ele','ela','nós','eles','uma','que','para','com','do','dos','em','no','os','e','mas','também','isso','isto','como','quando','onde','porque','por','muito','sim','obrigado','obrigada','frase','palavra','exemplo','verbo']};
+/* „sieht nach Erklärsprache aus“ (dann kein 🔊, beim Vorlesen weggelassen): geprüft werden Ausgangs- und Erklärsprache des Kurses
+   (deutsche Kurse: auch Englisch), nie die Lernsprache selbst – im Deutschkurs ist Deutsch ja der Lerntext */
+const LOOK_L=['de','en','pt'].filter(l=>l!==LANG.code&&(l===EX_BASE||l===EX||l==='en'&&EX_BASE==='de'));
+const LOOKS_W=new Set([].concat(...LOOK_L.map(l=>LOOK_W[l])));
+const looksDe=t=>{if(LOOK_L.indexOf('de')>=0&&(/[äöß]/.test(t)||/(^|[^g])ü/.test(t)))return true; /* ohne Lookbehind – ältere iOS-Safari kennen ihn nicht */
+  if(LOOK_L.indexOf('pt')>=0&&/[ãõç]/.test(t))return true;
+  return t.split(/[^A-Za-zÁÉÍÓÚÜÑáéíóúüñÄÖäößãõçâêôàÃÕÇÂÊÔ]+/).some(w=>w==='I'&&LOOK_L.indexOf('en')>=0||LOOKS_W.has(w.toLowerCase()));};
 function speakable(t){t=t.replace(/\s*\([^)]*\)/g,'').replace(/\s*=\s*[^·]*/g,' ').replace(/\s*\+\s*[A-ZÄÖÜ][\wäöüß]*\.?(\s+[A-ZÄÖÜ][\wäöüß]*\.?)*/g,'').replace(/✓/g,'');
   t=t.split(/\s+–\s+/).filter(x=>!looksDe(x)).join(' – ').replace(/\s*\+\s*/g,', ');return t.replace(/\s+·\s*$/,'').replace(/\s{2,}/g,' ').trim();}
 function addSpeakTo(el){const t=speakable(el.textContent);if(!t||looksDe(t))return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}
@@ -4921,7 +4950,7 @@ function vSettingsAll(m){const st=S.settings;
 
 function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & Profil')));
   /* Lernsprachen aus dem Verzeichnis PACKS (auch nicht geladene Pakete); ohne Verzeichnis (Einzeldatei) aus dem Register */
-  const avail=window.PACKS?PACKS.learn:Object.values(LANGS).filter(L=>L.course&&L.course.units.length).map(L=>({code:L.code,name:L.name,flag:L.flag}));const planned=LANG_PLANNED.filter(([c])=>!avail.some(L=>L.code===c));
+  const avail=learnPacks();const planned=LANG_PLANNED.filter(([c])=>!avail.some(L=>L.code===c));
   const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';reloadApp();};
   m.append(h('div',{class:'kind',style:'margin-top:8px'},T('Ich lerne')),h('div',{class:'chips'},
     ...avail.map(L=>h('button',{class:'chip'+(L.code===LANG.code?' on':''),onclick:()=>pick(L.code)},h('span',{},L.flag),h('span',{},T(L.name)))),
