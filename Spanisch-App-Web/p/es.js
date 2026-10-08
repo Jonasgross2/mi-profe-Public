@@ -5958,10 +5958,7 @@ escritorio:'🖥️',mesa:'🪑',silla:'🪑',estantería:'📚',armario:'🚪',
 mudarse:'📦',nacer:'👶','ir a la escuela':'🏫','hacer un intercambio':'🌍','empezar a trabajar':'💼',
 currículum:'📄','carta de presentación':'✉️',puesto:'💼','oferta de trabajo':'📰',entrevista:'🤝',
 botella:'🍾',lata:'🥫',paquete:'📦',bolsa:'🛍️','barra de pan':'🥖'};
-window.picOf=function(es,explicit){if(explicit)return explicit;
-  let k=String(es).toLowerCase().replace(/[¿?¡!]/g,'').replace(/\(.*?\)/g,'').split(' / ')[0].replace(/\s*….*$/,'').trim();
-  if(EMOJI[k])return EMOJI[k];k=k.replace(window.LANG&&LANG.articles||/^(el|la|los|las|un|una)\s+/,'').trim();
-  return EMOJI[k]||'';};
+/* picOf (Emoji zu einem Wort) steht jetzt allgemein in engine.js und nutzt EMOJI + LANG.articles */
 ;
 /* Spanisch-Paket: Definition (läuft nach allen Spanisch-Inhalten, siehe build.py PACKS['es']) */
 defineLang('es',{name:'Spanisch',flag:'🇪🇸',native:'Español',into:'ins Spanische',onLang:'auf Spanisch',adj:'spanisch',voice:'es-ES',

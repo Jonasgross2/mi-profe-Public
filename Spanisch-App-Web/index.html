@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261008-1211";</script>
+<script>window.PWA=true;window.APP_VERSION="20261008-1215";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -924,6 +924,7 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Zum Hören & Lesen": "To listen & read",
 "Schreib die Zahl {ON}: ": "Write the number {ON}: ",
 "Land ({ON}, z. B. {X})": "Country ({ON}, e.g. {X})",
 "Woher kommst du? Übungen wie „{A}“ und „{B}“ passen sich daran an.": "Where are you from? Exercises like “{A}” and “{B}” adapt to it.",
@@ -1813,6 +1814,7 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Zum Hören & Lesen": "Para escuchar y leer",
 "Schreib die Zahl {ON}: ": "Escribe el número en letras: ",
 "Land ({ON}, z. B. {X})": "País ({ON}, p. ej. {X})",
 "Woher kommst du? Übungen wie „{A}“ und „{B}“ passen sich daran an.": "¿De dónde eres? Ejercicios como «{A}» y «{B}» se adaptan.",
@@ -2702,6 +2704,7 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Zum Hören & Lesen": "Para ouvir e ler",
 "Schreib die Zahl {ON}: ": "Escreve o número por extenso: ",
 "Land ({ON}, z. B. {X})": "País ({ON}, ex.: {X})",
 "Woher kommst du? Übungen wie „{A}“ und „{B}“ passen sich daran an.": "De onde você é? Exercícios como “{A}” e “{B}” se adaptam.",
@@ -3608,7 +3611,9 @@ function levelTabs(cur,base,cnt){const C=LEVELS.find(L=>L.id===cur)||LEVELS[0];c
   if(parts.length<2)return top;
   return h('div',{},top,h('div',{class:'seg sub',style:'grid-template-columns:repeat('+parts.length+',1fr)'},parts.map((L,i)=>h('button',{class:L.id===cur?'on':'',onclick:()=>go(base+'/'+L.id)},h('b',{},T('Teil ')+(i+1)),h('span',{},cnt([L]))))));}
 const levelUnits=lv=>COURSE.units.filter(u=>unitLevel(u)===lv&&u.status!=='soon');
-const pic=(es,em)=>picOf(es,em);
+/* Bild (Emoji) zu einem Wort: ausdrücklich angegeben, sonst aus LANG.emoji (EMOJI), notfalls ohne Artikel (LANG.articles) */
+const pic=(es,em)=>{if(em)return em;let k=String(es).toLowerCase().replace(/[¿?¡!]/g,'').replace(/\(.*?\)/g,'').split(' / ')[0].replace(/\s*….*$/,'').trim();
+  if(EMOJI[k])return EMOJI[k];k=k.replace(LANG.articles||/^(el|la|los|las|un|una)\s+/,'').trim();return EMOJI[k]||'';};
 const picEl=(es,em,cls)=>{const p=pic(es,em);return p?h('span',{class:cls||'pic','aria-hidden':'true'},p):null;};
 /* nächster Schritt: Einheiten, die laut Test sitzen, bekommen zuerst einen kurzen Check statt aller Lektionen */
 function nextLesson(){for(const u of COURSE.units){if(u.status==='soon'||S.checks[u.id]?.pass)continue;
@@ -4321,11 +4326,11 @@ const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):'A1';};
 function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
-      tiles(mtile('📖',T('Geschichten'),T('Serie „')+(LANG.storySeries||'')+'“',()=>go('ref/s'),nNew?nNew+T(' neu'):null),mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
-        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),LANG.conjugate?mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')):null,NUMS?mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num')):null,mtile('📰',T('Lesetexte'),T('C1 & C2 · ')+(window.READINGS||[]).length+T(' Texte'),()=>go('ref/r'))));return;}
+      tiles(mtile('📖',T('Geschichten'),LANG.storySeries?T('Serie „')+LANG.storySeries+'“':T('Zum Hören & Lesen'),()=>go('ref/s'),nNew?nNew+T(' neu'):null),mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
+        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),LANG.conjugate?mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')):null,NUMS?mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num')):null,(window.READINGS||[]).length?mtile('📰',T('Lesetexte'),T('C1 & C2 · ')+(window.READINGS||[]).length+T(' Texte'),()=>go('ref/r')):null));return;}
   m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik'),r:T('Lesetexte')}[tab]||T('Bibliothek')));
   if(tab==='s'){const S2=S.stories||{};
-    m.append(h('p',{class:'sub'},'„'+(LANG.storySeries||'')+'“ – '+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik bis zur angegebenen ')+UW+T('. Tipp: erst nur hören, dann lesen.')));
+    m.append(h('p',{class:'sub'},(LANG.storySeries?'„'+LANG.storySeries+'“ – ':'')+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik bis zur angegebenen ')+UW+T('. Tipp: erst nur hören, dann lesen.')));
     m.append(levelSeg(lv,'ref/s',L=>STORIES.filter(st=>unitLevel(storyFor(st))===L.id).length+T(' Gesch.')),h('div',{class:'grid',style:'gap:8px'},STORIES.filter(st=>unitLevel(storyFor(st))===lv).map(st=>{const done=S2[st.id];const open=storyOpen(st);
         return h('div',{class:'lesson'+(done?' done':''),onclick:()=>go('story/'+st.id)},h('div',{class:'ic'},done?'✓':'📖'),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},st.title),h('div',{class:'ld'},st.sub+T(' · ab ')+UW+' '+storyFor(st).n)),
           done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
