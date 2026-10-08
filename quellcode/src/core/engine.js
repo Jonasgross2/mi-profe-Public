@@ -590,8 +590,9 @@ function vHome(m){
   m.append(h('h1',{},greet+', '+S.name+'!'));
   /* angefangen: die zuletzt unterbrochene Lektion/Runde (weitere als Zahl) */
   const pl=pauseList();if(pl.length){const p=pl[0];const del=h('button',{class:'btn ghost small',title:T('Verwerfen'),onclick:e=>{e.stopPropagation();pauseDel(p.key);route();}},'×');
-    m.append(h('div',{class:'card resume',onclick:()=>resumeGo(p)},h('div',{class:'row',style:'flex-wrap:nowrap;gap:10px'},h('div',{style:'font-size:22px'},'⏸'),
-      h('div',{style:'flex:1;min-width:0'},h('div',{class:'kind',style:'margin:0'},T('Angefangen')+(pl.length>1?' · +'+(pl.length-1):'')),h('b',{style:'display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'},p.title),h('span',{class:'muted small'},pauseInfo(p))),
+    /* einzeilig, damit „Deine Woche“ meist noch auf die Startseite passt */
+    m.append(h('div',{class:'card resume',onclick:()=>resumeGo(p)},h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px;align-items:center'},
+      h('div',{style:'flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'},h('span',{class:'kind',style:'margin:0 6px 0 0;display:inline'},T('Angefangen')),h('b',{},p.title.split(' · ')[0]),h('span',{class:'muted small'},' · '+pauseInfo(p)+(pl.length>1?' · +'+(pl.length-1):''))),
       h('button',{class:'btn primary small',onclick:e=>{e.stopPropagation();resumeGo(p);}},T('▶ Weiter')),del)));}
   /* Tagesplan: feste Bausteine mit Zeitschätzung, die erste offene Aufgabe wird groß angezeigt */
   const plan=dayPlan();
@@ -805,7 +806,8 @@ function play(m,cfg){
     if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pcount'}));
   const stage=h('div',{class:'step'});
   m.append(h('div',{class:'player'},h('div',{class:'muted small',style:'margin-bottom:6px'},cfg.title),
-    sv?h('div',{class:'muted small',style:'margin:-2px 0 6px'},T('⏸ Fortgesetzt, wo du aufgehört hast · '),h('button',{class:'linkbtn',onclick:()=>{pauseDel(cfg.pk);m.innerHTML='';play(m,Object.assign({},cfg,{fresh:true}));}},T('↺ neu anfangen'))):null,top,stage));
+    top,stage));
+  if(sv)setTimeout(()=>toast(T('Weiter, wo du aufgehört hast')+' · '+(pos+1)+' / '+queue.length),300);
   function upd(){$('.ptop .bar i').style.width=Math.round(100*pos/queue.length)+'%';$('#pcount').textContent=Math.min(pos+1,queue.length)+' / '+queue.length;}
   function next(){pos++;if(pos>=queue.length)return finish();show();}
   function show(){if(cfg.pk){hist.push({pos,queue:queue.slice(),ft:new Map(firstTry),rt:[...retried].map(x=>queue.indexOf(x)),mis:cp(S.mistakes),stats:cp(S.stats),streak:cp(S.streak)});if(hist.length>30)hist.shift();undoB.classList.toggle('hide',hist.length<2);}
