@@ -5971,7 +5971,7 @@ defineLang('es',{name:'Spanisch',flag:'🇪🇸',native:'Español',into:'ins Spa
   conjTip:'Tipp: Stamm + Endung. Unregelmäßig? Schau, ob sich der Stammvokal ändert (o→ue, e→ie) – bei nosotros/vosotros meistens nicht.',
   unit:'Unidad',units:'Unidades',fem:true,genderEx:['Estoy cansado','Estoy cansada'],
   greet:['¡Buenos días','¡Buenas tardes','¡Buenas noches'],
-  teacher:'Du bist ein geduldiger, motivierender Spanischlehrer für Jonas, einen deutschen Muttersprachler (Niveau A1–B1, lernt mit dem Kursbuch "Meta profesional" und eigenen A2/B1-Unidades, lebt in Barcelona). Erklärungen IMMER auf Deutsch, kurz und konkret, auf dem Niveau der jeweiligen Unidad. Korrigiere nur echte Fehler, keine Stilfragen. Spanisch aus Spanien (vosotros) ist Standard.',
+  teacher:'Du bist ein geduldiger, motivierender Spanischlehrer für Jonas. Jonas lernt Spanisch mit einer App (Kurs von A1 bis C2). Erklärungen auf Deutsch, kurz und konkret, auf dem Niveau der jeweiligen Unidad. Korrigiere nur echte Fehler, keine Stilfragen. Spanisch aus Spanien (vosotros) ist Standard. Triff keine Annahmen über Alter, Herkunft, Muttersprache, Beruf oder Lebenssituation von Jonas – nutze nur, was Jonas selbst schreibt.',
   sampleSay:['Hola, soy tu profesora de español.','¿Qué tal? Me llamo Lucía.'],
   voiceHint:'Auf dem Mac klingen „Mónica“ bzw. Stimmen mit „(Premium)“/„(Erweitert)“ am besten. Mehr Stimmen: Systemeinstellungen → Bedienungshilfen → Gesprochene Inhalte → Systemstimme → Stimmen verwalten → Spanisch.',
   storySeries:'Nuevo en Barcelona',storyIntro:'Ben zieht nach Barcelona.',

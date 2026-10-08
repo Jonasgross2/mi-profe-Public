@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261008-1030";</script>
+<script>window.PWA=true;window.APP_VERSION="20261008-1035";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc;
@@ -3351,7 +3351,7 @@ async function claudeAsk(prompt,{json,history}){
     if(json)return await SAMPLE.json(input,opt);return (await SAMPLE(input,opt)).text;}
   catch(e){throw new Error(CL_ERR[e&&e.code]||(T('Claude: ')+((e&&e.message)||e&&e.code||T('Fehler'))));}}
 /* ---------- gemini ---------- */
-async function gemini(prompt,{json=true,history=null}={}){if(EX!=='de')prompt=String(prompt)+'\n\nIMPORTANT: The learner wants explanations in '+({en:'English',es:'Spanish',pt:'Brazilian Portuguese',it:'Italian',fr:'French'}[EX])+'. Write ALL explanations, corrections and comments for the learner in that language instead of German (example sentences in the target language stay as they are).';if(S.name)prompt=String(prompt).replace(/\bJonas\b/g,S.name);if(S.gender)prompt+=S.gender==='f'?T('\n\nWICHTIG: ')+(S.name||T('Die lernende Person'))+T(' ist eine Frau. Sprich sie mit weiblichen Formen an (z. B. „estás cansada“, „bienvenida“) und erwarte von ihr weibliche Formen, wenn sie über sich spricht. Im Deutschen: „sie/ihr“ statt „er/ihm“.'):'\n\n'+(S.name||T('Die lernende Person'))+T(' ist ein Mann – männliche Formen verwenden.');
+async function gemini(prompt,{json=true,history=null}={}){if(EX!=='de')prompt=String(prompt)+'\n\nIMPORTANT: The learner wants explanations in '+({en:'English',es:'Spanish',pt:'Brazilian Portuguese',it:'Italian',fr:'French'}[EX])+'. Write ALL explanations, corrections and comments for the learner in that language instead of German (example sentences in the target language stay as they are).';if(S.name)prompt=String(prompt).replace(/\bJonas\b/g,S.name);/* Herkunft aus dem Profil mitgeben, statt eine anzunehmen */if(S.origin&&(S.origin.c||S.origin.other)){const X=S.origin.c&&ORIGINS[S.origin.c];prompt+='\n\n'+(S.name||'Jonas')+' kommt aus '+(X?X[1].replace(/^(die|der) /,''):S.origin.other)+(S.origin.city?' ('+S.origin.city+')':'')+'.';}if(S.gender)prompt+=S.gender==='f'?T('\n\nWICHTIG: ')+(S.name||T('Die lernende Person'))+T(' ist eine Frau. Sprich sie mit weiblichen Formen an (z. B. „estás cansada“, „bienvenida“) und erwarte von ihr weibliche Formen, wenn sie über sich spricht. Im Deutschen: „sie/ihr“ statt „er/ihm“.'):'\n\n'+(S.name||T('Die lernende Person'))+T(' ist ein Mann – männliche Formen verwenden.');
   if(useClaude())return claudeAsk(prompt,{json,history});
   const key=S.settings.geminiKey;if(!key)throw new Error(T('Kein Gemini-API-Key hinterlegt (Einstellungen).'));
   const tried=[S.settings.geminiModel||'gemini-flash-latest'];for(const f of FALLBACK)if(!tried.includes(f))tried.push(f);
