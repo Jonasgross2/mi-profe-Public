@@ -622,9 +622,14 @@ function vHome(m){
   const apply=st=>{const wc=m.querySelector('.weekcard');if(!wc)return;wc.classList.toggle('tight',st>=1);wc.style.display=st>=2?'none':'';m.classList.toggle('homecompact',st>=3);};
   /* Beim App-Start (Startbildschirm sichtbar) vorläufig messen; endgültig kurz vor dem Ausblenden (HOMEFIT) – dann gilt die Stufe für die ganze Sitzung,
      auch beim Zurückwechseln auf die Startseite (iOS meldet beim Aufbau zeitweise falsche Höhen). Neu nur beim Drehen (Breite ändert sich). */
-  if(HOMESTATE!=null)apply(HOMESTATE);else fit(true);
-  HOMEFIT=()=>{if(m.isConnected)HOMESTATE=fit(true);};const w0=innerWidth;
-  const onRs=()=>{if(!m.isConnected){if(innerWidth!==w0)HOMESTATE=null;return window.removeEventListener('resize',onRs);}if(innerWidth!==w0)HOMESTATE=fit(true);else if(document.getElementById('boot'))fit(true);};window.addEventListener('resize',onRs);
+  /* Stufe pro Inhalt merken (mit/ohne „Angefangen“-Karte), sonst wird die Seite zu lang, wenn die Karte später dazukommt.
+     Bekannte Stufe anwenden und trotzdem sofort nachprüfen – nur kompakter, nie größer (kein Springen). */
+  const sig=(m.querySelector('.card.resume')?'r':'')+(m.querySelector('.card.hero')?'h':'');if(!HOMESTATE||typeof HOMESTATE!=='object')HOMESTATE={};
+  const tighten=()=>{const mn=m.closest('main')||m,wc=m.querySelector('.weekcard');if(!wc)return;let st=HOMESTATE[sig]||0;
+    while(st<3&&mn.scrollHeight>mn.clientHeight){st++;apply(st);}HOMESTATE[sig]=st;};
+  if(HOMESTATE[sig]!=null){apply(HOMESTATE[sig]);tighten();}else fit(true);
+  HOMEFIT=()=>{if(m.isConnected)HOMESTATE[sig]=fit(true);};const w0=innerWidth;
+  const onRs=()=>{if(!m.isConnected){if(innerWidth!==w0)HOMESTATE=null;return window.removeEventListener('resize',onRs);}if(innerWidth!==w0){HOMESTATE={};HOMESTATE[sig]=fit(true);}else if(document.getElementById('boot'))fit(true);};window.addEventListener('resize',onRs);
 }
 const stat=(n,l)=>h('div',{class:'card stat'},h('div',{class:'n'},n),h('div',{class:'l'},l));
 
