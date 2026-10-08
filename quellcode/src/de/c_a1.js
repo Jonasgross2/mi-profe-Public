@@ -590,3 +590,313 @@ resumen:`<h3>Cômodos e andares</h3><p class="es-t">das Wohnzimmer · das Schlaf
 <h3>es gibt + acusativo</h3><p class="es-t">Es gibt einen Tisch / eine Lampe / ein Bett / keine Möbel. · Gibt es einen Balkon?</p>
 <h3>Pronomes</h3><table><tr><th></th><th>nom.</th><th>acus.</th></tr><tr><td>der</td><td class="es-t">er</td><td class="es-t">ihn</td></tr><tr><td>die</td><td class="es-t">sie</td><td class="es-t">sie</td></tr><tr><td>das</td><td class="es-t">es</td><td class="es-t">es</td></tr><tr><td>Pl.</td><td class="es-t">sie</td><td class="es-t">sie</td></tr></table><p class="es-t">Wie findest du den Tisch? – Ich finde ihn schön.</p>
 <h3>Anúncios</h3><p>Zi. = cômodo · Kü. = cozinha · Blk. = varanda · OG = andar · KM / NK / warm = aluguel frio / despesas / total</p>`});
+
+/* ================= KAPITEL 6 · TAGESABLAUF & ZEIT ================= */
+LANGS.de.course.units.push({id:'k6',n:'6',level:'A1',title:'Tagesablauf & Zeit',sub:'Horas · dias da semana · meses e datas · rotina · verbos separáveis',
+goals:['Wie spät ist es? – Es ist halb drei.','offizielle und informelle Uhrzeit','Wochentage, Tageszeiten, Monate, Jahreszeiten','Datum: am ersten Mai','um, am, im, von … bis, ab','trennbare Verben: aufstehen, anfangen, einkaufen …','Satzklammer: Ich stehe um sieben Uhr auf.','Öffnungszeiten verstehen'],
+situacion:{title:'Combinar um encontro',npc:'Jana',scene:'A Jana quer ir ao cinema com você nesta semana. Vocês combinam o dia e a hora.',role:'Du bist Jana, Kollegin, locker, du duzt. Du möchtest diese Woche ins Kino gehen. Du kannst nicht am Montag (Sport) und nicht am Mittwoch (Kurs). Schlag Uhrzeiten vor (19 Uhr oder 20:30 Uhr). Frag: Wann hast du Zeit? Wann stehst du am Samstag auf? Sprich sehr einfaches Deutsch (A1).',goal:'Combine com a Jana um dia e uma hora para o cinema. Diga quando você pode e quando não pode.'},
+placement:[
+ {t:'mc',q:'14:30 – informal:',opts:['halb drei','halb zwei','drei Uhr dreißig'],a:0,why:'<i>halb drei</i> = meia hora <b>antes</b> das três.'},
+ {t:'gap',q:'Ich ___ um sieben Uhr ___. (aufstehen)',a:['stehe','auf']},
+ {t:'mc',q:'„na segunda-feira“',opts:['am Montag','im Montag','um Montag'],a:0},
+ {t:'mc',q:'„em julho“',opts:['im Juli','am Juli','um Juli'],a:0},
+ {t:'mc',q:'„Der Kurs fängt um neun Uhr an.“ Quando começa o curso?',opts:['às 9h','às 19h','até as 9h'],a:0},
+ {t:'gap',q:'Heute ist der ___ Mai. (1.)',a:['erste']}],
+lessons:[
+{id:'l1',title:'Que horas são?',desc:'Wie spät ist es? · Viertel, halb',steps:[
+ {t:'vocab',title:'Horas',items:[['die Uhr','o relógio / hora (8 Uhr)'],['Wie spät ist es?','Que horas são?'],['Wie viel Uhr ist es?','Que horas são?'],['Es ist drei Uhr.','São três horas.'],['die Stunde','a hora (duração)'],['die Minute','o minuto'],['halb','meia (… e meia)'],['das Viertel','o quarto (de hora)'],['nach','depois / e (horas)'],['vor','antes / para (horas)'],['um … Uhr','às … horas'],['früh','cedo'],['spät','tarde'],['pünktlich','pontual']]},
+ {t:'info',title:'Hora oficial e informal',html:`<p><b>Oficial</b> (rádio, estação, trabalho) – como no Brasil, 0–24h: <span class="es-t">Es ist vierzehn Uhr dreißig.</span> (14:30)</p>
+ <p><b>Informal</b> (no dia a dia) – 1–12h:</p>
+ <table><tr><td>3:05</td><td class="es-t">fünf nach drei</td></tr>
+ <tr><td>3:15</td><td class="es-t">Viertel nach drei</td></tr>
+ <tr><td>3:30</td><td class="es-t"><b>halb vier</b></td></tr>
+ <tr><td>3:45</td><td class="es-t">Viertel vor vier</td></tr>
+ <tr><td>3:50</td><td class="es-t">zehn vor vier</td></tr></table>
+ <div class="ojo">Cuidado! <span class="es-t">halb vier</span> = 3:30 (meia hora <b>antes</b> das quatro), e <b>não</b> 4:30. É o erro clássico de brasileiros – e você chega uma hora atrasado 😉</div>
+ <p>A que horas? → <span class="es-t"><b>um</b> acht Uhr</span> (às 8h). Duração: <span class="es-t">eine Stunde, zwei Stunden</span>.</p>`},
+ {t:'mc',q:'„Viertel vor neun“',opts:['8:45','9:15','9:45'],a:0},
+ {t:'mc',q:'„halb sieben“',opts:['6:30','7:30','7:00'],a:0,why:'<i>halb sieben</i> = meia hora antes das sete.'},
+ {t:'mc',q:'10:15 – informal:',opts:['Viertel nach zehn','Viertel vor zehn','halb zehn'],a:0},
+ {t:'listen',es:'Es ist zwanzig nach acht.',de:'São oito e vinte.'},
+ {t:'listen',es:'Der Zug kommt um siebzehn Uhr fünfundvierzig.',de:'O trem chega às 17:45.'},
+ {t:'gap',q:'Wie ___ ist es? – Es ist halb zwölf.',a:['spät']},
+ {t:'gap',q:'Das Meeting ist ___ zehn Uhr. (às)',a:['um']},
+ {t:'tr',de:'São três e quinze. (informal)',a:['Es ist Viertel nach drei.']}
+]},
+{id:'l2',title:'Dias, meses, datas',desc:'Montag … Sonntag · Januar … Dezember · am ersten Mai',steps:[
+ {t:'vocab',title:'Dias da semana',items:[['der Montag','a segunda-feira'],['der Dienstag','a terça-feira'],['der Mittwoch','a quarta-feira'],['der Donnerstag','a quinta-feira'],['der Freitag','a sexta-feira'],['der Samstag','o sábado'],['der Sonntag','o domingo'],['das Wochenende','o fim de semana'],['die Woche','a semana'],['heute','hoje'],['morgen','amanhã'],['gestern','ontem']]},
+ {t:'vocab',title:'Partes do dia',items:[['der Morgen','a manhã (cedo)'],['der Vormittag','a manhã (até o meio-dia)'],['der Mittag','o meio-dia'],['der Nachmittag','a tarde'],['der Abend','a noite (começo)'],['die Nacht','a noite (madrugada)'],['morgens','de manhã (sempre)'],['abends','à noite (sempre)']]},
+ {t:'vocab',title:'Meses e estações',items:[['der Januar','janeiro'],['der Februar','fevereiro'],['der März','março'],['der April','abril'],['der Mai','maio'],['der Juni','junho'],['der Juli','julho'],['der August','agosto'],['der September','setembro'],['der Oktober','outubro'],['der November','novembro'],['der Dezember','dezembro'],['der Monat','o mês'],['der Frühling','a primavera'],['der Sommer','o verão'],['der Herbst','o outono'],['der Winter','o inverno']]},
+ {t:'info',title:'um, am, im',html:`<table><tr><td class="es-t"><b>um</b> 8 Uhr</td><td>horas</td></tr>
+ <tr><td class="es-t"><b>am</b> Montag, am Wochenende, am Abend, am 1. Mai</td><td>dias, partes do dia, datas</td></tr>
+ <tr><td class="es-t"><b>im</b> Juli, im Sommer</td><td>meses, estações</td></tr>
+ <tr><td class="es-t"><b>von</b> 9 <b>bis</b> 17 Uhr</td><td>de … até …</td></tr>
+ <tr><td class="es-t"><b>ab</b> Montag</td><td>a partir de</td></tr></table>
+ <div class="ex">Exceção: <span class="es-t">in der Nacht</span> (de madrugada).</div>
+ <div class="ojo">Lembre: no hemisfério norte, <span class="es-t">im Dezember</span> é <b>inverno</b> e <span class="es-t">im Juli</span> é <b>verão</b>!</div>`},
+ {t:'info',title:'Datas: der erste, der zweite …',html:`<p>Para datas se usam números ordinais (com ponto na escrita):</p>
+ <table><tr><td>1.</td><td class="es-t">der erste</td><td>3.</td><td class="es-t">der dritte</td></tr><tr><td>2.</td><td class="es-t">der zweite</td><td>7.</td><td class="es-t">der siebte</td></tr><tr><td>4.–19.</td><td>+ <b>-te</b>: <span class="es-t">der vierte, der zehnte</span></td><td>20.+</td><td>+ <b>-ste</b>: <span class="es-t">der zwanzigste</span></td></tr></table>
+ <p><span class="es-t">Heute ist der 3. Mai.</span> = der dritte Mai · <span class="es-t">Wann hast du Geburtstag? – Am 12. Juni.</span> = am zwölften Juni</p>`},
+ {t:'mc',q:'„no fim de semana“',opts:['am Wochenende','im Wochenende','um Wochenende'],a:0},
+ {t:'mc',q:'„no inverno“',opts:['im Winter','am Winter','um Winter'],a:0},
+ {t:'gap',q:'Ich arbeite ___ Montag ___ Freitag. (de … a …)',a:['von','bis']},
+ {t:'gap',q:'Mein Geburtstag ist ___ 7. August. (no dia)',a:['am']},
+ {t:'match',q:'Ligue.',pairs:[['der Dienstag','terça'],['der Donnerstag','quinta'],['der Mittwoch','quarta'],['der Herbst','outono'],['gestern','ontem']]},
+ {t:'mc',q:'Uma placa: „Praxis Dr. Wolf – Mo–Fr 8–12 Uhr, Di + Do auch 15–18 Uhr“. Você pode ir na quarta à tarde?',opts:['Nein','Ja'],a:0},
+ {t:'tr',de:'Amanhã é sábado.',a:['Morgen ist Samstag.']}
+]},
+{id:'l3',title:'A rotina: verbos separáveis',desc:'aufstehen, anfangen, einkaufen … · Satzklammer',steps:[
+ {t:'info',title:'Verbos separáveis',html:`<p>Muitos verbos alemães têm um prefixo que <b>se separa</b> e vai para o <b>fim da frase</b>:</p>
+ <table><tr><th>infinitivo</th><th>na frase</th></tr>
+ <tr><td class="es-t"><b>auf</b>stehen</td><td class="es-t">Ich stehe um sieben Uhr <b>auf</b>.</td></tr>
+ <tr><td class="es-t"><b>an</b>fangen</td><td class="es-t">Der Kurs fängt um neun <b>an</b>.</td></tr>
+ <tr><td class="es-t"><b>ein</b>kaufen</td><td class="es-t">Am Samstag kaufe ich <b>ein</b>.</td></tr>
+ <tr><td class="es-t"><b>an</b>rufen</td><td class="es-t">Rufst du mich morgen <b>an</b>?</td></tr></table>
+ <p>Isso se chama <b>Satzklammer</b> (“parêntese da frase”): o verbo na posição 2, o prefixo no fim – tudo o mais fica no meio.</p>
+ <div class="ex"><span class="es-t">Ich <b>rufe</b> dich heute Abend nach dem Training <b>an</b>.</span></div>`},
+ {t:'vocab',title:'Rotina',items:[['aufstehen','levantar-se'],['frühstücken','tomar café da manhã'],['duschen','tomar banho'],['anfangen','começar'],['aufhören','parar / terminar'],['arbeiten','trabalhar'],['einkaufen','fazer compras'],['kochen','cozinhar'],['fernsehen','ver televisão'],['anrufen','telefonar'],['abholen','buscar (alguém/algo)'],['mitkommen','vir junto'],['schlafen','dormir'],['ins Bett gehen','ir para a cama'],['immer','sempre'],['oft','muitas vezes'],['manchmal','às vezes'],['nie','nunca'],['zuerst','primeiro'],['dann','depois / então'],['danach','depois disso']]},
+ {t:'mc',q:'Qual frase está correta?',opts:['Ich stehe um sechs Uhr auf.','Ich aufstehe um sechs Uhr.','Ich stehe auf um sechs Uhr.'],a:0},
+ {t:'gap',q:'Wann ___ der Film ___? (anfangen)',a:['fängt','an'],why:'<i>anfangen</i>: a → ä com du/er (<i>du fängst an, er fängt an</i>).'},
+ {t:'gap',q:'Am Samstag ___ ich im Supermarkt ___. (einkaufen)',a:['kaufe','ein']},
+ {t:'gap',q:'Tom ___ abends oft ___. (fernsehen)',a:['sieht','fern'],why:'<i>sehen</i> muda: <i>du siehst, er sieht</i>.'},
+ {t:'order',es:'Ich rufe dich morgen an',de:'Eu te ligo amanhã.'},
+ {t:'order',es:'Kommst du mit',de:'Você vem junto?'},
+ {t:'read',title:'Leitura: Ein Tag von Lucas',text:`Ich stehe {meistens|na maioria das vezes} um halb sieben auf. Zuerst dusche ich, dann frühstücke ich: Kaffee und ein Brötchen. Um acht Uhr fahre ich mit der U-Bahn zur Arbeit. Die Arbeit fängt um halb neun an. Mittags esse ich mit Jana in der {Kantine|cantina}. Um siebzehn Uhr höre ich auf. Montags und donnerstags habe ich Deutschkurs. Abends kaufe ich manchmal ein oder ich koche mit Tom. Ich sehe nie fern – ich lese lieber. Um elf Uhr gehe ich ins Bett.`,de:`Na maioria das vezes eu me levanto às seis e meia. Primeiro tomo banho, depois tomo café: café e um pãozinho. Às oito vou de metrô para o trabalho. O trabalho começa às oito e meia. Ao meio-dia como com a Jana na cantina. Às 17h eu paro. Às segundas e quintas tenho curso de alemão. À noite às vezes faço compras ou cozinho com o Tom. Nunca vejo televisão – prefiro ler. Às onze vou para a cama.`},
+ {t:'mc',q:'Wann fängt die Arbeit an?',opts:['um 8:30 Uhr','um 6:30 Uhr','um 8 Uhr'],a:0},
+ {t:'mc',q:'Richtig oder falsch? Lucas sieht abends oft fern.',opts:['falsch','richtig'],a:0},
+ {t:'mc',q:'Wann hat Lucas Deutschkurs?',opts:['montags und donnerstags','jeden Tag','am Wochenende'],a:0},
+ {t:'tr',de:'Eu me levanto às sete.',a:['Ich stehe um sieben Uhr auf.','Ich stehe um sieben auf.']},
+ {t:'tr',de:'O curso começa às nove.',a:['Der Kurs fängt um neun Uhr an.','Der Kurs fängt um neun an.','Der Kurs beginnt um neun Uhr.','Der Kurs beginnt um neun.']}
+]},
+{id:'l4',title:'Combinar e cancelar',desc:'Hast du Zeit? · Termine · Ich kann leider nicht.',steps:[
+ {t:'vocab',title:'Combinar',items:[['Hast du Zeit?','Você tem tempo?'],['die Zeit','o tempo'],['der Termin','o compromisso / horário marcado'],['die Verabredung','o encontro (combinado)'],['Wann?','Quando?'],['Geht es am …?','Dá na …?'],['Das geht.','Dá. / Pode ser.'],['Das passt gut.','Fica bom.'],['Ich kann leider nicht.','Infelizmente não posso.'],['vielleicht','talvez'],['das Kino','o cinema'],['der Film','o filme'],['Bis dann!','Até lá!'],['die Entschuldigung','a desculpa'],['Entschuldigung!','Desculpe!']]},
+ {t:'dialog',place:'Büro',title:'Cinema com a Jana',scene:'No intervalo, a Jana fala com você.',lines:[
+  {n:'Jana',es:'Lucas, hast du diese Woche Zeit? Ich möchte ins Kino gehen.',de:'Lucas, você tem tempo nesta semana? Quero ir ao cinema.'},
+  {you:true,opts:[{es:'Ja, gern! Wann?',ok:true},{es:'Ja, gern! Wo wohnst du?',ok:false,why:'A pergunta importante agora é <b>quando</b>.'}]},
+  {n:'Jana',es:'Geht es am Dienstag?',de:'Dá na terça?'},
+  {you:true,opts:[{es:'Am Dienstag kann ich leider nicht. Aber am Freitag geht es.',ok:true},{es:'Am Dienstag kann ich leider nicht. Aber im Freitag geht es.',ok:false,why:'Dias da semana: <b>am</b> Freitag.'}]},
+  {n:'Jana',es:'Super. Der Film fängt um halb neun an.',de:'Ótimo. O filme começa às oito e meia.'},
+  {you:true,opts:[{es:'Gut, dann treffen wir uns um acht Uhr am Kino.',ok:true},{es:'Gut, dann treffen wir uns um halb neun um neun Uhr.',ok:false,why:'Combine um horário claro – antes do filme.'}]},
+  {n:'Jana',es:'Perfekt. Bis Freitag!',de:'Perfeito. Até sexta!'}]},
+ {t:'read',hideText:true,title:'Recado do consultório',intro:'Ouça a mensagem.',text:`Guten Tag, hier ist die Praxis Doktor Wolf. Ihr Termin am Mittwoch um zehn Uhr geht leider nicht. Die Ärztin ist krank. Neuer Termin: Freitag, Viertel nach neun. Bitte bringen Sie Ihre {Versichertenkarte|carteirinha do plano de saúde} mit. Vielen Dank, auf Wiederhören.`,de:`Bom dia, aqui é o consultório do doutor Wolf. Infelizmente sua consulta na quarta às dez horas não vai dar. A médica está doente. Nova consulta: sexta-feira, nove e quinze. Por favor, traga sua carteirinha do plano de saúde. Muito obrigado, até logo.`},
+ {t:'mc',q:'Wann ist der neue Termin?',opts:['Freitag, 9:15 Uhr','Mittwoch, 10 Uhr','Freitag, 9:45 Uhr'],a:0},
+ {t:'mc',q:'Richtig oder falsch? Die Ärztin ist krank.',opts:['richtig','falsch'],a:0},
+ {t:'info',title:'Cancelar por escrito',html:`<p>Mensagem curta para desmarcar – <b>3 pontos</b>: pedir desculpas, dizer o motivo, propor outro horário.</p>
+ <div class="ex es-t">Liebe Jana,<br>es tut mir leid, ich kann heute leider nicht ins Kino kommen. Ich bin krank. Geht es vielleicht am Sonntag?<br>Viele Grüße<br>Lucas</div>
+ <p><span class="es-t">Es tut mir leid.</span> = Sinto muito.</p>`},
+ {t:'free',task:'Escreva para o Tom (~30 palavras): 1) você não pode jantar com ele hoje, 2) por quê, 3) proponha outro dia e horário.',hint:'Hallo Tom, es tut mir leid, ich kann heute leider nicht … Ich muss … / Ich habe … Geht es am … um …? Viele Grüße',focus:'Wochentage, Uhrzeit (am, um), können, trennbare Verben, Entschuldigung',model:'Hallo Tom,\nes tut mir leid, ich kann heute Abend leider nicht mit dir essen. Ich habe um sieben Uhr einen Termin. Geht es am Donnerstag um halb acht?\nViele Grüße\nLucas'},
+ {t:'speak',es:'Es tut mir leid, am Montag kann ich leider nicht. Geht es am Dienstag?',de:'Sinto muito, na segunda infelizmente não posso. Dá na terça?',tip:'<i>leid</i> soa “lait” – <b>ei</b> = “ai”, e o <b>d</b> no fim soa como “t”.'}
+]}],
+resumen:`<h3>Horas</h3><table><tr><td>3:15</td><td class="es-t">Viertel nach drei</td></tr><tr><td>3:30</td><td class="es-t">halb vier</td></tr><tr><td>3:45</td><td class="es-t">Viertel vor vier</td></tr><tr><td>15:30</td><td class="es-t">fünfzehn Uhr dreißig (oficial)</td></tr></table>
+<h3>Preposições de tempo</h3><p><span class="es-t">um</span> 8 Uhr · <span class="es-t">am</span> Montag / am Abend / am 1. Mai · <span class="es-t">im</span> Juli / im Sommer · <span class="es-t">von … bis</span> · <span class="es-t">ab</span> Montag</p>
+<h3>Datas</h3><p class="es-t">der erste · der zweite · der dritte · der vierte … der zwanzigste · am zwölften Juni</p>
+<h3>Verbos separáveis</h3><p class="es-t">aufstehen → Ich stehe um sieben Uhr auf. · anfangen → Der Kurs fängt um neun an. · einkaufen · anrufen · fernsehen · mitkommen · aufhören</p>
+<h3>Combinar</h3><p class="es-t">Hast du Zeit? · Geht es am …? · Das passt gut. · Ich kann leider nicht. · Es tut mir leid.</p>`});
+
+/* ================= KAPITEL 7 · FREIZEIT ================= */
+LANGS.de.course.units.push({id:'k7',n:'7',level:'A1',title:'Freizeit',sub:'Hobbies · tempo (clima) · können e wollen · convites e festas',
+goals:['Hobbys: Sport, Musik, Lesen …','gern – lieber – am liebsten','Modalverben: können, wollen','Satzklammer mit Modalverb: Ich kann gut schwimmen.','Das Wetter: Es regnet. Die Sonne scheint.','Einladungen: Party, Geburtstag, Glückwunsch','Antworten: zusagen, absagen'],
+situacion:{title:'Planos para o fim de semana',npc:'Tom',scene:'Sexta à noite na WG. O Tom pergunta o que você vai fazer no fim de semana.',role:'Du bist Tom, Mitbewohner, sportlich, du duzt. Du willst am Samstag wandern gehen (im Taunus) oder, wenn es regnet, ins Schwimmbad. Frag nach Hobbys: Was machst du gern? Kannst du schwimmen? Willst du mitkommen? Sprich sehr einfaches Deutsch (A1).',goal:'Conte do que você gosta de fazer, o que você sabe fazer e decida com o Tom o que vocês fazem no sábado.'},
+placement:[
+ {t:'mc',q:'„Eu sei nadar.“',opts:['Ich kann schwimmen.','Ich kann schwimme.','Ich schwimmen kann.'],a:0},
+ {t:'gap',q:'Tom ___ am Samstag wandern. (wollen)',a:['will']},
+ {t:'mc',q:'„Está chovendo.“',opts:['Es regnet.','Es ist Regen.','Es hat Regen.'],a:0},
+ {t:'mc',q:'Ich spiele gern Tennis, aber ich spiele ___ Fußball.',opts:['lieber','gerner','mehr gern'],a:0},
+ {t:'mc',q:'Aniversário de um amigo. Você diz:',opts:['Herzlichen Glückwunsch!','Gute Besserung!','Guten Appetit!'],a:0},
+ {t:'gap',q:'___ du Gitarre spielen? (können)',a:['Kannst']}],
+lessons:[
+{id:'l1',title:'Hobbies',desc:'Was machst du gern? · gern, lieber, am liebsten',steps:[
+ {t:'vocab',title:'Tempo livre',items:[['die Freizeit','o tempo livre'],['das Hobby','o hobby'],['lesen','ler'],['Musik hören','ouvir música'],['singen','cantar'],['tanzen','dançar'],['Sport machen','fazer esporte'],['Fußball spielen','jogar futebol'],['schwimmen','nadar'],['laufen / joggen','correr'],['Rad fahren','andar de bicicleta'],['wandern','fazer trilha / caminhada'],['reisen','viajar'],['fotografieren','fotografar'],['Gitarre spielen','tocar violão'],['Freunde treffen','encontrar amigos'],['ins Kino gehen','ir ao cinema'],['spazieren gehen','passear'],['der Verein','o clube / a associação'],['das Schwimmbad','a piscina (pública)']]},
+ {t:'info',title:'gern – lieber – am liebsten',html:`<table><tr><td class="es-t">Ich spiele <b>gern</b> Fußball.</td><td>Gosto de jogar futebol.</td></tr>
+ <tr><td class="es-t">Ich schwimme <b>lieber</b>.</td><td>Prefiro nadar.</td></tr>
+ <tr><td class="es-t">Ich tanze <b>am liebsten</b>.</td><td>O que eu mais gosto é dançar.</td></tr></table>
+ <div class="ex">Perguntas: <span class="es-t">Was machst du gern? Was machst du in deiner Freizeit? Was machst du am liebsten?</span></div>
+ <div class="ojo">Verbos com mudança: <span class="es-t">lesen → du liest, er liest</span> · <span class="es-t">fahren → du fährst, er fährt</span> · <span class="es-t">laufen → du läufst, er läuft</span> · <span class="es-t">treffen → du triffst, er trifft</span></div>`},
+ {t:'match',q:'Ligue.',pairs:[['wandern','fazer trilha'],['Rad fahren','andar de bicicleta'],['singen','cantar'],['spazieren gehen','passear'],['der Verein','o clube']]},
+ {t:'gap',q:'Jana ___ gern Krimis. (lesen)',a:['liest']},
+ {t:'gap',q:'Fährst du gern Rad? – Ja, aber ich laufe ___. (prefiro)',a:['lieber']},
+ {t:'mc',q:'„O que você faz no seu tempo livre?“',opts:['Was machst du in deiner Freizeit?','Was machst du in deine Freizeit?','Was du machst in der Freizeit?'],a:0},
+ {t:'tr',de:'Eu gosto de ouvir música.',a:['Ich höre gern Musik.']},
+ {t:'tr',de:'O que eu mais gosto é ler.',a:['Ich lese am liebsten.','Am liebsten lese ich.']},
+ {t:'speak',es:'In meiner Freizeit spiele ich gern Fußball und ich höre viel Musik.',de:'No meu tempo livre gosto de jogar futebol e ouço muita música.',tip:'<i>Freizeit</i>: <b>ei</b> = “ai”, <b>z</b> = “ts” → “fraitsait”.'}
+]},
+{id:'l2',title:'können e wollen',desc:'Ich kann … · Ich will … · Satzklammer',steps:[
+ {t:'info',title:'Verbos modais',html:`<table><tr><th></th><th>können <span class="muted">(poder / saber)</span></th><th>wollen <span class="muted">(querer)</span></th></tr>
+ <tr><td>ich</td><td class="es-t">kann</td><td class="es-t">will</td></tr>
+ <tr><td>du</td><td class="es-t">kannst</td><td class="es-t">willst</td></tr>
+ <tr><td>er / sie</td><td class="es-t">kann</td><td class="es-t">will</td></tr>
+ <tr><td>wir</td><td class="es-t">können</td><td class="es-t">wollen</td></tr>
+ <tr><td>ihr</td><td class="es-t">könnt</td><td class="es-t">wollt</td></tr>
+ <tr><td>sie / Sie</td><td class="es-t">können</td><td class="es-t">wollen</td></tr></table>
+ <p>Atenção: <b>ich</b> e <b>er/sie</b> são iguais e <b>sem -t</b>: <span class="es-t">ich kann, er kann</span>.</p>
+ <p>O segundo verbo vai no <b>infinitivo</b>, no <b>fim da frase</b> (Satzklammer):</p>
+ <div class="ex"><span class="es-t">Ich <b>kann</b> sehr gut <b>schwimmen</b>.</span><br><span class="es-t"><b>Willst</b> du am Samstag <b>mitkommen</b>?</span></div>
+ <div class="ojo"><span class="es-t">können</span> = poder <b>e</b> saber fazer: <span class="es-t">Ich kann Gitarre spielen.</span> = Eu sei tocar violão. <span class="es-t">wollen</span> é forte (“querer”) – para pedir algo, use <span class="es-t">möchten</span>.</div>`},
+ {t:'mc',q:'Qual frase está correta?',opts:['Ich kann gut tanzen.','Ich kann tanzen gut.','Ich kann gut tanze.'],a:0},
+ {t:'gap',q:'Tom ___ sehr gut kochen. (können)',a:['kann']},
+ {t:'gap',q:'Wir ___ am Wochenende nach Berlin fahren. (wollen)',a:['wollen']},
+ {t:'gap',q:'___ ihr Deutsch sprechen? (können)',a:['Könnt']},
+ {t:'order',es:'Willst du am Samstag mitkommen',de:'Você quer vir junto no sábado?'},
+ {t:'order',es:'Ich kann leider nicht schwimmen',de:'Infelizmente eu não sei nadar.'},
+ {t:'tr',de:'Você sabe tocar violão? (informal)',a:['Kannst du Gitarre spielen?']},
+ {t:'tr',de:'Ela quer viajar.',a:['Sie will reisen.']}
+]},
+{id:'l3',title:'O tempo',desc:'Es regnet. Die Sonne scheint. Es ist kalt.',steps:[
+ {t:'vocab',title:'Tempo',items:[['das Wetter','o tempo (clima)'],['die Sonne','o sol'],['Die Sonne scheint.','O sol está brilhando.'],['der Regen','a chuva'],['Es regnet.','Está chovendo.'],['der Schnee','a neve'],['Es schneit.','Está nevando.'],['der Wind','o vento'],['die Wolke','a nuvem'],['warm','quente / morno'],['heiß','muito quente'],['kalt','frio'],['kühl','fresco'],['schön','bonito (tempo bom)'],['schlecht','ruim'],['der Grad','o grau'],['minus','menos (abaixo de zero)']]},
+ {t:'info',title:'Falar do tempo',html:`<table><tr><td class="es-t">Wie ist das Wetter?</td><td>Como está o tempo?</td></tr>
+ <tr><td class="es-t">Es ist schön / kalt / warm.</td><td>Está bonito / frio / quente.</td></tr>
+ <tr><td class="es-t">Es regnet. Es schneit.</td><td>Está chovendo. Está nevando.</td></tr>
+ <tr><td class="es-t">Es sind 25 Grad.</td><td>Faz 25 graus.</td></tr>
+ <tr><td class="es-t">Es ist minus fünf Grad.</td><td>Faz cinco graus abaixo de zero.</td></tr></table>
+ <div class="ex">Sempre com <b>es</b> – como “está” em português, mas o <b>es</b> é obrigatório.</div>
+ <div class="ojo">Para um brasileiro, 15 graus é frio 🥶 – para um alemão, <span class="es-t">15 Grad</span> no verão já é <span class="es-t">kühl</span>, mas na primavera é <span class="es-t">schön warm</span>!</div>`},
+ {t:'mc',q:'„Está nevando.“',opts:['Es schneit.','Es ist Schnee.','Schneit.'],a:0},
+ {t:'gap',q:'Heute ___ die Sonne. Es ist warm. (scheinen)',a:['scheint']},
+ {t:'read',hideText:true,title:'Previsão do tempo no rádio',intro:'Ouça a previsão do tempo.',text:`Und jetzt das Wetter für Frankfurt und Umgebung. Heute bleibt es kalt, nur acht Grad, und am Nachmittag regnet es. Morgen, am Samstag, scheint die Sonne. Es wird warm, bis zu achtzehn Grad. Am Sonntag gibt es viele Wolken und Wind.`,de:`E agora o tempo para Frankfurt e região. Hoje continua frio, só oito graus, e à tarde chove. Amanhã, sábado, o sol brilha. Vai esquentar, até dezoito graus. No domingo há muitas nuvens e vento.`},
+ {t:'mc',q:'Wie ist das Wetter am Samstag?',opts:['Die Sonne scheint.','Es regnet.','Es schneit.'],a:0},
+ {t:'mc',q:'Wie warm ist es heute?',opts:['8 Grad','18 Grad','80 Grad'],a:0},
+ {t:'mc',q:'Wann ist das Wetter gut zum Wandern?',opts:['am Samstag','heute','am Sonntag'],a:0},
+ {t:'tr',de:'Hoje está frio e está chovendo.',a:['Heute ist es kalt und es regnet.','Heute ist es kalt und regnet es.']}
+]},
+{id:'l4',title:'Convites e festas',desc:'Einladung · Geburtstag · zusagen, absagen',steps:[
+ {t:'vocab',title:'Festas',items:[['die Party','a festa'],['das Fest','a festa / a festividade'],['feiern','comemorar'],['einladen','convidar'],['die Einladung','o convite'],['der Geburtstag','o aniversário'],['Herzlichen Glückwunsch!','Parabéns!'],['Alles Gute zum Geburtstag!','Feliz aniversário!'],['gratulieren','dar os parabéns'],['das Geschenk','o presente'],['mitbringen','levar (junto)'],['der Gast, die Gäste','o convidado, os convidados'],['zusagen','confirmar (que vai)'],['absagen','cancelar / recusar'],['Ich komme gern!','Vou com prazer!'],['Leider kann ich nicht kommen.','Infelizmente não posso ir.']]},
+ {t:'read',title:'Leitura: Eine Einladung',text:`Liebe Kolleginnen und Kollegen,
+am Freitag, den 14. Juni, werde ich dreißig! Das möchte ich mit euch feiern. Die Party ist bei mir zu Hause, in der Gartenstraße 8, ab neunzehn Uhr. Es gibt Pizza und Getränke. Ihr müsst nichts mitbringen – nur gute Laune! Bitte sagt mir bis Mittwoch Bescheid, ob ihr kommt.
+Viele Grüße
+Jana`,de:`Queridas colegas e queridos colegas,
+na sexta-feira, 14 de junho, eu faço trinta anos! Quero comemorar com vocês. A festa é na minha casa, na Gartenstraße 8, a partir das 19 horas. Tem pizza e bebidas. Vocês não precisam levar nada – só bom humor! Por favor, me avisem até quarta-feira se vocês vêm.
+Abraços,
+Jana`},
+ {t:'mc',q:'Warum feiert Jana?',opts:['Sie hat Geburtstag.','Sie hat eine neue Wohnung.','Sie hat einen neuen Job.'],a:0},
+ {t:'mc',q:'Richtig oder falsch? Die Gäste müssen Essen mitbringen.',opts:['falsch','richtig'],a:0},
+ {t:'mc',q:'Bis wann soll man antworten?',opts:['bis Mittwoch','bis Freitag','bis zum 14. Juni'],a:0},
+ {t:'info',title:'Responder a um convite',html:`<table><tr><th>sim</th><th>não</th></tr>
+ <tr><td class="es-t">Vielen Dank für die Einladung! Ich komme gern.</td><td class="es-t">Vielen Dank für die Einladung, aber leider kann ich nicht kommen.</td></tr>
+ <tr><td class="es-t">Soll ich etwas mitbringen?</td><td class="es-t">Ich bin am Freitag in Hamburg. / Ich muss arbeiten.</td></tr>
+ <tr><td class="es-t">Bis Freitag!</td><td class="es-t">Ich wünsche dir eine schöne Party!</td></tr></table>`},
+ {t:'dialog',place:'Gartenstraße 8',title:'Na festa da Jana',scene:'Você chega à festa de aniversário da Jana com um presente.',lines:[
+  {n:'Jana',es:'Hallo Lucas! Schön, dass du da bist!',de:'Oi, Lucas! Que bom que você veio!'},
+  {you:true,opts:[{es:'Hallo Jana! Herzlichen Glückwunsch zum Geburtstag! Das ist für dich.',ok:true},{es:'Hallo Jana! Gute Besserung!',ok:false,why:'<i>Gute Besserung</i> se diz para quem está doente.'}]},
+  {n:'Jana',es:'Oh, ein Geschenk! Danke! Was möchtest du trinken?',de:'Ah, um presente! Obrigada! O que você quer beber?'},
+  {you:true,opts:[{es:'Ein Wasser, bitte. Ich muss noch Auto fahren.',ok:true},{es:'Ich will Bier! Schnell!',ok:false,why:'Um pouco educado demais… não 😉 Use <i>möchte</i> ou <i>gern</i>.'}]},
+  {n:'Jana',es:'Kein Problem. Komm, ich stelle dir meine Freunde vor!',de:'Sem problema. Vem, vou te apresentar meus amigos!'}]},
+ {t:'free',task:'Responda ao convite da Jana (~30 palavras): 1) agradeça, 2) diga que vai (ou não) e por quê, 3) pergunte se deve levar algo / deseje uma boa festa.',hint:'Liebe Jana, vielen Dank für die Einladung! Ich komme gern / Leider kann ich nicht … Soll ich … mitbringen? Viele Grüße',focus:'Einladung beantworten, können, mitbringen (trennbar), Datum',model:'Liebe Jana,\nvielen Dank für die Einladung! Ich komme sehr gern. Soll ich etwas mitbringen? Ich kann einen Kuchen backen. Ich freue mich auf Freitag!\nViele Grüße\nLucas'}
+]}],
+resumen:`<h3>Hobbies</h3><p class="es-t">lesen · Musik hören · Sport machen · schwimmen · wandern · Rad fahren · tanzen · Freunde treffen</p><p class="es-t">gern – lieber – am liebsten</p>
+<h3>Modais + infinitivo no fim</h3><table><tr><th></th><th>können</th><th>wollen</th></tr><tr><td>ich / er</td><td class="es-t">kann</td><td class="es-t">will</td></tr><tr><td>du</td><td class="es-t">kannst</td><td class="es-t">willst</td></tr><tr><td>wir / sie</td><td class="es-t">können</td><td class="es-t">wollen</td></tr><tr><td>ihr</td><td class="es-t">könnt</td><td class="es-t">wollt</td></tr></table><p class="es-t">Ich kann gut schwimmen. · Willst du mitkommen?</p>
+<h3>Tempo</h3><p class="es-t">Wie ist das Wetter? · Die Sonne scheint. · Es regnet. · Es schneit. · Es ist kalt. · Es sind 20 Grad.</p>
+<h3>Convites</h3><p class="es-t">Herzlichen Glückwunsch! · Vielen Dank für die Einladung! · Ich komme gern. · Leider kann ich nicht kommen.</p>`});
+
+/* ================= KAPITEL 8 · IN DER STADT ================= */
+LANGS.de.course.units.push({id:'k8',n:'8',level:'A1',title:'In der Stadt',sub:'Lugares · transporte · dativo · pedir e dar direções · imperativo · müssen, dürfen',
+goals:['Orte: Bahnhof, Post, Bank, Apotheke …','Verkehrsmittel: mit dem Bus, mit der U-Bahn','Dativ nach mit, zu, in, bei, von, aus','Wie komme ich zum Bahnhof?','links, rechts, geradeaus','Imperativ: Gehen Sie … / Geh …','müssen, dürfen · Schilder verstehen','Am Bahnhof: Fahrkarte, Gleis, umsteigen'],
+situacion:{title:'Perdido na cidade',npc:'Passantin',scene:'Você está na Konstablerwache, no centro de Frankfurt, e procura o museu Städel.',role:'Du bist eine Passantin in Frankfurt, hilfsbereit. Du siezt. Erkläre den Weg zum Städel-Museum: geradeaus bis zum Main, dann über die Brücke, dann rechts, ca. 15 Minuten zu Fuß – oder mit der U-Bahn bis Schweizer Platz. Sprich sehr einfaches Deutsch (A1), langsam.',goal:'Pergunte o caminho até o museu, pergunte se é longe e se dá para ir de metrô. Agradeça.'},
+placement:[
+ {t:'mc',q:'„Eu vou de ônibus.“',opts:['Ich fahre mit dem Bus.','Ich fahre mit der Bus.','Ich fahre mit den Bus.'],a:0},
+ {t:'mc',q:'„Como chego à estação?“',opts:['Wie komme ich zum Bahnhof?','Wie komme ich zu der Bahnhof?','Wie komme ich in Bahnhof?'],a:0},
+ {t:'gap',q:'___ Sie geradeaus und dann links! (gehen – imperativo)',a:['Gehen']},
+ {t:'mc',q:'Placa: „Rauchen verboten“',opts:['Aqui não se pode fumar.','Aqui se pode fumar.','Aqui se vende cigarro.'],a:0},
+ {t:'gap',q:'Hier ___ man nicht parken. (dürfen)',a:['darf']},
+ {t:'gap',q:'Ich ___ heute zum Arzt gehen. (müssen)',a:['muss']}],
+lessons:[
+{id:'l1',title:'Lugares na cidade',desc:'Bahnhof, Post, Apotheke … · Wo ist …?',steps:[
+ {t:'vocab',title:'Na cidade',items:[['die Stadt','a cidade'],['das Zentrum','o centro'],['die Straße','a rua'],['der Platz','a praça / o lugar'],['die Ecke','a esquina'],['der Bahnhof','a estação de trem'],['die Haltestelle','o ponto (de ônibus)'],['der Flughafen','o aeroporto'],['die Post','os correios'],['die Bank','o banco'],['die Apotheke','a farmácia'],['das Krankenhaus','o hospital'],['die Polizei','a polícia'],['das Rathaus','a prefeitura'],['das Museum','o museu'],['der Park','o parque'],['die Kirche','a igreja'],['das Hotel','o hotel'],['der Parkplatz','o estacionamento'],['in der Nähe','perto'],['weit','longe'],['hier','aqui'],['dort','ali / lá']]},
+ {t:'info',title:'Onde fica? – o dativo com „in“',html:`<p>Para dizer <b>onde</b> algo está, <span class="es-t">in</span> pede o <b>dativo</b>. O artigo muda:</p>
+ <table><tr><th></th><th>nominativo</th><th>dativo (onde?)</th></tr>
+ <tr><td>m</td><td class="es-t">der Park</td><td class="es-t">in <b>dem</b> Park = <b>im</b> Park</td></tr>
+ <tr><td>f</td><td class="es-t">die Stadt</td><td class="es-t">in <b>der</b> Stadt</td></tr>
+ <tr><td>n</td><td class="es-t">das Zentrum</td><td class="es-t">in <b>dem</b> Zentrum = <b>im</b> Zentrum</td></tr>
+ <tr><td>Pl.</td><td class="es-t">die Geschäfte</td><td class="es-t">in <b>den</b> Geschäfte<b>n</b></td></tr></table>
+ <div class="ex"><span class="es-t">Wo ist die Apotheke? – Im Zentrum, in der Bergerstraße.</span></div>
+ <div class="ojo">Você já conhece: <span class="es-t">im Juli, am Montag</span> – também dativo (<i>in dem → im, an dem → am</i>).</div>`},
+ {t:'mc',q:'Wo kauft man Medikamente?',opts:['in der Apotheke','in der Post','im Rathaus'],a:0},
+ {t:'mc',q:'Ich wohne ___ Zentrum.',opts:['im','in der','in den'],a:0,why:'<i>das Zentrum</i> → in dem = <b>im</b>.'},
+ {t:'gap',q:'Der Bus hält ___ der Haltestelle „Römer“. (em – an + dativo, feminino)',a:['an']},
+ {t:'gap',q:'Tom ist ___ Park. (no)',a:['im']},
+ {t:'match',q:'Ligue.',pairs:[['die Haltestelle','o ponto de ônibus'],['das Krankenhaus','o hospital'],['das Rathaus','a prefeitura'],['in der Nähe','perto'],['die Ecke','a esquina']]},
+ {t:'tr',de:'A farmácia é perto.',a:['Die Apotheke ist in der Nähe.']}
+]},
+{id:'l2',title:'Transporte',desc:'mit dem Bus · Fahrkarte · umsteigen',steps:[
+ {t:'vocab',title:'Meios de transporte',items:[['der Bus','o ônibus'],['die U-Bahn','o metrô'],['die S-Bahn','o trem urbano'],['die Straßenbahn','o bonde'],['der Zug','o trem'],['das Auto','o carro'],['das Fahrrad','a bicicleta'],['das Taxi','o táxi'],['das Flugzeug','o avião'],['zu Fuß','a pé'],['fahren','ir (de veículo)'],['fliegen','voar'],['die Fahrkarte','a passagem / o bilhete'],['das Ticket','o bilhete'],['der Fahrplan','o horário (de transporte)'],['abfahren','partir'],['ankommen','chegar'],['einsteigen','embarcar / entrar'],['aussteigen','descer / sair'],['umsteigen','fazer baldeação'],['das Gleis','a plataforma (número)'],['die Verspätung','o atraso']]},
+ {t:'info',title:'mit + dativo',html:`<p><b>mit</b> sempre pede o dativo:</p>
+ <table><tr><td class="es-t">der Bus</td><td class="es-t">mit <b>dem</b> Bus</td></tr>
+ <tr><td class="es-t">die U-Bahn</td><td class="es-t">mit <b>der</b> U-Bahn</td></tr>
+ <tr><td class="es-t">das Auto</td><td class="es-t">mit <b>dem</b> Auto</td></tr>
+ <tr><td class="es-t">die Freunde</td><td class="es-t">mit <b>den</b> Freunde<b>n</b></td></tr></table>
+ <p>Mas: <span class="es-t">zu Fuß</span> (a pé) – sem <i>mit</i>.</p>
+ <div class="ex"><b>fahren</b> = ir com um veículo; <b>gehen</b> = ir a pé. <span class="es-t">Ich fahre mit dem Zug nach Berlin.</span> · <span class="es-t">Ich gehe zu Fuß.</span></div>`},
+ {t:'mc',q:'Ich fahre ___ U-Bahn zur Arbeit.',opts:['mit der','mit dem','mit die'],a:0},
+ {t:'mc',q:'Sie fährt ___ Fahrrad.',opts:['mit dem','mit der','mit das'],a:0},
+ {t:'gap',q:'In Mainz muss ich ___. (fazer baldeação)',a:['umsteigen']},
+ {t:'read',hideText:true,title:'Aviso na estação',intro:'Ouça o aviso na estação central (Hauptbahnhof).',text:`Achtung an Gleis sieben! Der ICE nach Berlin, Abfahrt vierzehn Uhr zwölf, hat heute zwanzig Minuten Verspätung. Der Zug fährt heute von Gleis neun ab. Ich wiederhole: Der ICE nach Berlin fährt heute von Gleis neun.`,de:`Atenção na plataforma sete! O ICE para Berlim, partida às 14h12, está hoje com vinte minutos de atraso. O trem parte hoje da plataforma nove. Repito: o ICE para Berlim parte hoje da plataforma nove.`},
+ {t:'mc',q:'Von welchem Gleis fährt der Zug nach Berlin?',opts:['von Gleis 9','von Gleis 7','von Gleis 14'],a:0},
+ {t:'mc',q:'Richtig oder falsch? Der Zug ist pünktlich.',opts:['falsch','richtig'],a:0},
+ {t:'dialog',place:'Fahrkartenschalter',title:'Comprar uma passagem',scene:'No guichê da estação central. Você quer ir a Heidelberg no sábado.',lines:[
+  {n:'Mitarbeiter',es:'Guten Tag, was kann ich für Sie tun?',de:'Bom dia, em que posso ajudar?'},
+  {you:true,opts:[{es:'Eine Fahrkarte nach Heidelberg, bitte.',ok:true},{es:'Eine Fahrkarte in Heidelberg, bitte.',ok:false,why:'Para cidades (destino): <b>nach</b> Heidelberg.'}]},
+  {n:'Mitarbeiter',es:'Einfach oder hin und zurück?',de:'Só ida ou ida e volta?'},
+  {you:true,opts:[{es:'Hin und zurück, bitte. Muss ich umsteigen?',ok:true},{es:'Einfach zurück, bitte.',ok:false,why:'<i>einfach</i> = só ida; <i>hin und zurück</i> = ida e volta.'}]},
+  {n:'Mitarbeiter',es:'Ja, in Mannheim. Der Zug fährt um neun Uhr zehn von Gleis vier. Das macht achtunddreißig Euro.',de:'Sim, em Mannheim. O trem sai às 9h10 da plataforma quatro. São trinta e oito euros.'},
+  {you:true,opts:[{es:'Kann ich mit Karte bezahlen?',ok:true},{es:'Wo ist Gleis Mannheim?',ok:false,why:'Mannheim é a cidade da baldeação; a plataforma é a <b>4</b>.'}]}]},
+ {t:'tr',de:'Eu vou a pé.',a:['Ich gehe zu Fuß.']},
+ {t:'tr',de:'Ela vai de trem para Berlim.',a:['Sie fährt mit dem Zug nach Berlin.']}
+]},
+{id:'l3',title:'Pedir e dar direções',desc:'Wie komme ich zum …? · links, rechts, geradeaus · Imperativ',steps:[
+ {t:'vocab',title:'Direções',items:[['Wie komme ich zum / zur …?','Como chego ao / à …?'],['links','à esquerda'],['rechts','à direita'],['geradeaus','em frente / reto'],['die erste / zweite Straße','a primeira / segunda rua'],['bis zur Ampel','até o semáforo'],['die Ampel','o semáforo'],['über die Straße','atravessando a rua'],['neben','ao lado de'],['vor','em frente a / antes de'],['hinter','atrás de'],['zwischen','entre'],['gegenüber','em frente (do outro lado)'],['Entschuldigung, …','Com licença, …']]},
+ {t:'info',title:'zu + dativo: zum, zur',html:`<p>Para dizer <b>para onde</b> (pessoa ou lugar, não cidade), use <b>zu</b> + dativo:</p>
+ <table><tr><td class="es-t">der Bahnhof</td><td class="es-t">zu dem → <b>zum</b> Bahnhof</td></tr>
+ <tr><td class="es-t">die Post</td><td class="es-t">zu der → <b>zur</b> Post</td></tr>
+ <tr><td class="es-t">das Museum</td><td class="es-t">zu dem → <b>zum</b> Museum</td></tr></table>
+ <p>Cidades e países: <span class="es-t">nach Berlin, nach Österreich</span>. Para casa: <span class="es-t">nach Hause</span>. Em casa: <span class="es-t">zu Hause</span>.</p>
+ <div class="ex">Outras preposições com dativo: <span class="es-t">bei</span> (na casa de / em): <span class="es-t">beim Arzt, bei Jana</span> · <span class="es-t">von</span> (de): <span class="es-t">vom Bahnhof</span> · <span class="es-t">aus</span> (de dentro): <span class="es-t">aus dem Haus</span>.</div>`},
+ {t:'info',title:'O imperativo',html:`<table><tr><th></th><th>Sie (formal)</th><th>du (informal)</th></tr>
+ <tr><td>gehen</td><td class="es-t">Gehen Sie geradeaus!</td><td class="es-t">Geh geradeaus!</td></tr>
+ <tr><td>nehmen</td><td class="es-t">Nehmen Sie den Bus!</td><td class="es-t">Nimm den Bus!</td></tr>
+ <tr><td>kommen</td><td class="es-t">Kommen Sie bitte mit!</td><td class="es-t">Komm bitte mit!</td></tr>
+ <tr><td>sein</td><td class="es-t">Seien Sie pünktlich!</td><td class="es-t">Sei pünktlich!</td></tr></table>
+ <p><b>Sie</b>: verbo + Sie. <b>du</b>: forma do <i>du</i> sem <b>-st</b> e sem o pronome (<i>du gehst → geh!</i>, <i>du nimmst → nimm!</i>).</p>
+ <div class="ojo">Com <b>bitte</b> fica educado: <span class="es-t">Warten Sie bitte hier.</span></div>`},
+ {t:'mc',q:'Wie komme ich ___ Post?',opts:['zur','zum','zu die'],a:0},
+ {t:'mc',q:'Wie komme ich ___ Bahnhof?',opts:['zum','zur','nach'],a:0},
+ {t:'mc',q:'Ich fahre am Wochenende ___ Hamburg.',opts:['nach','zu','in der'],a:0},
+ {t:'gap',q:'___ Sie die zweite Straße rechts! (nehmen)',a:['Nehmen']},
+ {t:'gap',q:'Tom, ___ bitte das Fenster zu! (machen – du)',a:['mach|mache']},
+ {t:'dialog',place:'Konstablerwache',title:'Onde fica a farmácia?',scene:'Você precisa de uma farmácia e pergunta a um senhor na rua.',lines:[
+  {you:true,opts:[{es:'Entschuldigung, wo ist hier eine Apotheke?',ok:true},{es:'Hallo, Apotheke wo?',ok:false,why:'Comece com <i>Entschuldigung</i> e faça a frase completa.'}]},
+  {n:'Mann',es:'Gehen Sie hier geradeaus bis zur Ampel. Dann links. Die Apotheke ist neben der Bank.',de:'Siga em frente até o semáforo. Depois à esquerda. A farmácia fica ao lado do banco.'},
+  {you:true,opts:[{es:'Also geradeaus, dann links, neben der Bank. Ist das weit?',ok:true},{es:'Also rechts und dann geradeaus?',ok:false,why:'Ele disse: em frente, depois à <b>esquerda</b> (links).'}]},
+  {n:'Mann',es:'Nein, nur fünf Minuten zu Fuß.',de:'Não, só cinco minutos a pé.'},
+  {you:true,opts:[{es:'Vielen Dank!',ok:true},{es:'Bitte schön!',ok:false,why:'Quem agradece é você: <i>Vielen Dank!</i>'}]}]},
+ {t:'tr',de:'Com licença, como chego ao museu?',a:['Entschuldigung, wie komme ich zum Museum?']},
+ {t:'tr',de:'Vire à direita! (formal)',a:['Gehen Sie rechts!','Gehen Sie nach rechts!','Biegen Sie rechts ab!']}
+]},
+{id:'l4',title:'Regras e placas',desc:'müssen, dürfen · Schilder · Post und Bank',steps:[
+ {t:'info',title:'müssen e dürfen',html:`<table><tr><th></th><th>müssen <span class="muted">(ter que)</span></th><th>dürfen <span class="muted">(poder – ter permissão)</span></th></tr>
+ <tr><td>ich / er / sie</td><td class="es-t">muss</td><td class="es-t">darf</td></tr>
+ <tr><td>du</td><td class="es-t">musst</td><td class="es-t">darfst</td></tr>
+ <tr><td>wir / sie / Sie</td><td class="es-t">müssen</td><td class="es-t">dürfen</td></tr>
+ <tr><td>ihr</td><td class="es-t">müsst</td><td class="es-t">dürft</td></tr></table>
+ <div class="ex"><span class="es-t">Hier darf man nicht rauchen.</span> = Aqui não se pode fumar.<br><span class="es-t">Sie müssen eine Fahrkarte kaufen.</span> = O senhor tem que comprar um bilhete.</div>
+ <p><b>man</b> = “se” / “a gente” (geral): <span class="es-t">Hier darf man parken.</span></p>
+ <div class="ojo"><span class="es-t">können</span> = é possível / sei fazer; <span class="es-t">dürfen</span> = tenho permissão. Na placa é sempre <i>dürfen</i>.</div>`},
+ {t:'vocab',title:'Placas e serviços',items:[['verboten','proibido'],['rauchen','fumar'],['parken','estacionar'],['der Eingang','a entrada'],['der Ausgang','a saída'],['geöffnet','aberto'],['geschlossen','fechado'],['Vorsicht!','Cuidado!'],['Achtung!','Atenção!'],['der Brief','a carta'],['die Briefmarke','o selo'],['das Paket','o pacote'],['schicken','enviar'],['das Geld','o dinheiro'],['das Konto','a conta (bancária)'],['überweisen','transferir (dinheiro)']]},
+ {t:'mc',q:'Placa: „Eingang nur für Mitarbeiter“. Você pode entrar?',opts:['Não, só funcionários.','Sim, é a entrada principal.','Sim, mas só de manhã.'],a:0},
+ {t:'mc',q:'Placa no museu: „Fotografieren verboten!“',opts:['Hier darf man nicht fotografieren.','Hier muss man fotografieren.','Hier kann man Fotos kaufen.'],a:0},
+ {t:'mc',q:'Placa na loja: „Wegen Urlaub geschlossen bis 15.8.“',opts:['A loja está fechada até 15/8 por férias.','A loja abre só em agosto pela manhã.','A loja tem promoção de férias.'],a:0},
+ {t:'gap',q:'Du ___ hier nicht parken. Das ist verboten. (dürfen)',a:['darfst']},
+ {t:'gap',q:'Wir ___ morgen früh aufstehen. (müssen)',a:['müssen']},
+ {t:'order',es:'Hier darf man nicht rauchen',de:'Aqui não se pode fumar.'},
+ {t:'dialog',place:'Post',title:'Nos correios',scene:'Você quer mandar um pacote para a sua família no seu país.',lines:[
+  {n:'Mitarbeiterin',es:'Guten Tag! Bitte schön?',de:'Bom dia! Pois não?'},
+  {you:true,opts:[{es:'Ich möchte dieses Paket nach Brasilien schicken.',ok:true},{es:'Ich möchte dieses Paket in Brasilien schicken.',ok:false,why:'Destino (país): <b>nach</b> Brasilien.'}]},
+  {n:'Mitarbeiterin',es:'Gern. Sie müssen dieses Formular ausfüllen.',de:'Pois não. O senhor precisa preencher este formulário.'},
+  {you:true,opts:[{es:'Okay. Was kostet das?',ok:true},{es:'Darf ich das Formular essen?',ok:false,why:'😄 Pergunte o preço: <i>Was kostet das?</i>'}]},
+  {n:'Mitarbeiterin',es:'Das kostet achtundvierzig Euro neunundneunzig.',de:'Custa quarenta e oito euros e noventa e nove.'}]},
+ {t:'tr',de:'Você tem que preencher o formulário. (informal)',a:['Du musst das Formular ausfüllen.']},
+ {t:'free',task:'Seu amigo vai visitar você. Escreva (~30 palavras) como ele chega da estação até a sua casa: meio de transporte, onde descer, o caminho.',hint:'Nimm am Bahnhof die U-Bahn / den Bus … Steig an der Haltestelle … aus. Dann geh … links / rechts … Ich wohne neben …',focus:'Imperativ (du), mit + Dativ, trennbare Verben (aussteigen, umsteigen), links/rechts/geradeaus',model:'Hallo Rafael,\nnimm am Hauptbahnhof die U-Bahn Nummer 4. Steig an der Haltestelle „Bornheim Mitte“ aus. Dann geh geradeaus und die zweite Straße links. Ich wohne neben der Bäckerei, Nummer 12.\nBis Samstag!'}
+]}],
+resumen:`<h3>Dativo (onde? com quem? com quê?)</h3><table><tr><th></th><th>nom.</th><th>dat.</th></tr><tr><td>m</td><td class="es-t">der</td><td class="es-t">dem (im, am, zum, beim, vom)</td></tr><tr><td>f</td><td class="es-t">die</td><td class="es-t">der (zur)</td></tr><tr><td>n</td><td class="es-t">das</td><td class="es-t">dem</td></tr><tr><td>Pl.</td><td class="es-t">die</td><td class="es-t">den …n</td></tr></table>
+<p>Sempre dativo: <span class="es-t">mit, zu, bei, von, aus, nach</span> · lugar (onde?): <span class="es-t">in, an, auf, neben, vor, hinter, zwischen</span></p>
+<h3>Para onde?</h3><p class="es-t">zum Bahnhof · zur Post · nach Berlin · nach Hause · (zu Hause = em casa)</p>
+<h3>Imperativo</h3><p class="es-t">Gehen Sie geradeaus! · Nehmen Sie den Bus! · Geh! · Nimm! · Komm! · Sei pünktlich!</p>
+<h3>müssen / dürfen</h3><p class="es-t">ich muss, du musst · ich darf, du darfst · Hier darf man nicht rauchen.</p>`});
