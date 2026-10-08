@@ -379,3 +379,214 @@ resumen:`<h3>Artigos</h3><table><tr><th></th><th>der (m)</th><th>die (f)</th><th
 <h3>Possessivos</h3><p class="es-t">mein/meine · dein/deine · sein/seine (dele) · ihr/ihre (dela) · unser/unsere · Ihr/Ihre (formal)</p>
 <h3>Plural</h3><p class="es-t">Kind → Kinder · Bruder → Brüder · Schwester → Schwestern · Freund → Freunde · Handy → Handys</p>
 <h3>E-mail</h3><p class="es-t">Hallo … / Liebe … / Lieber … – Viele Grüße · Sehr geehrte … – Mit freundlichen Grüßen</p>`});
+
+/* ================= KAPITEL 4 · ESSEN & EINKAUFEN ================= */
+LANGS.de.course.units.push({id:'k4',n:'4',level:'A1',title:'Essen & Einkaufen',sub:'Comida e bebida · gostar · acusativo · preços · supermercado e restaurante',
+goals:['Lebensmittel und Getränke','gern / nicht gern · Ich mag …','Akkusativ: den / einen / keinen','essen, nehmen, mögen, möchten','Was kostet …? – Preise und Mengen','Im Supermarkt, auf dem Markt, in der Bäckerei','Im Restaurant bestellen und bezahlen: Zusammen oder getrennt?'],
+situacion:{title:'No restaurante',npc:'Kellnerin',scene:'Você janta com a Jana num restaurante em Frankfurt. A garçonete chega.',role:'Du bist Kellnerin in einem Restaurant in Frankfurt, freundlich, schnell. Du siezt die Gäste. Frag: Was möchten Sie trinken? Was möchten Sie essen? Empfiehl das Tagesgericht (Schnitzel mit Kartoffelsalat, 13,90 €) oder eine Gemüsesuppe (7,50 €). Am Ende: Zusammen oder getrennt? Nenne den Preis. Sprich sehr einfaches Deutsch (A1).',goal:'Peça uma bebida e um prato, pergunte o preço, peça a conta e pague (separado).'},
+placement:[
+ {t:'mc',q:'„Eu gosto de tomar café.“',opts:['Ich trinke gern Kaffee.','Ich gern trinke Kaffee.','Ich habe gern Kaffee.'],a:0},
+ {t:'gap',q:'Ich kaufe ___ Apfel. (um – der Apfel)',a:['einen']},
+ {t:'gap',q:'Was ___ du? – Ich nehme die Suppe. (nehmen)',a:['nimmst']},
+ {t:'mc',q:'„Quanto custa o queijo?“',opts:['Was kostet der Käse?','Wie viel ist Käse kosten?','Was der Käse kostet?'],a:0},
+ {t:'mc',q:'No restaurante, o garçom pergunta „Zusammen oder getrennt?“. Ele quer saber …',opts:['se vocês pagam juntos ou separado','se vocês querem sentar juntos','se a comida está boa'],a:0},
+ {t:'gap',q:'Ich ___ gern einen Tee. (gostaria – möchten)',a:['möchte']}],
+lessons:[
+{id:'l1',title:'Comida e bebida',desc:'Brot, Käse, Obst … · gern',steps:[
+ {t:'vocab',title:'Alimentos',items:[['das Brot','o pão'],['das Brötchen','o pãozinho'],['die Butter','a manteiga'],['der Käse','o queijo'],['die Wurst','a linguiça / os frios'],['das Ei','o ovo'],['das Fleisch','a carne'],['das Hähnchen','o frango'],['der Fisch','o peixe'],['der Reis','o arroz'],['die Kartoffel','a batata'],['die Nudeln (Pl.)','o macarrão'],['das Gemüse','os legumes / as verduras'],['der Salat','a salada'],['die Tomate','o tomate'],['das Obst','as frutas'],['der Apfel','a maçã'],['die Banane','a banana'],['die Birne','a pera'],['der Zucker','o açúcar'],['das Salz','o sal'],['das Öl','o óleo']]},
+ {t:'vocab',title:'Bebidas',items:[['das Wasser','a água'],['der Saft','o suco'],['der Kaffee','o café'],['der Tee','o chá'],['die Milch','o leite'],['das Bier','a cerveja'],['der Wein','o vinho'],['die Flasche','a garrafa'],['das Glas','o copo'],['die Tasse','a xícara']]},
+ {t:'info',title:'gern – gostar de fazer algo',html:`<p>Para dizer que você <b>gosta de fazer</b> algo, use o verbo + <b>gern</b>:</p>
+ <table><tr><td class="es-t">Ich trinke gern Kaffee.</td><td>Eu gosto de tomar café.</td></tr>
+ <tr><td class="es-t">Ich esse nicht gern Fisch.</td><td>Eu não gosto de comer peixe.</td></tr>
+ <tr><td class="es-t">Isst du gern Fleisch?</td><td>Você gosta de carne?</td></tr></table>
+ <p>Com um substantivo, sem verbo: <b>mögen</b> → <span class="es-t">Ich mag Käse. Magst du Obst?</span></p>
+ <div class="ojo"><b>essen</b> muda o radical: <span class="es-t">ich esse, du isst, er/sie isst</span>. <b>mögen</b>: <span class="es-t">ich mag, du magst, er/sie mag, wir mögen</span>.</div>`},
+ {t:'mc',q:'„Você gosta de comer peixe?“',opts:['Isst du gern Fisch?','Du isst gern Fisch?','Gern isst du Fisch?'],a:0,why:'Pergunta de sim/não: verbo na posição 1, <i>gern</i> depois do sujeito.'},
+ {t:'match',q:'Ligue.',pairs:[['das Obst','as frutas'],['das Gemüse','os legumes'],['der Saft','o suco'],['das Brötchen','o pãozinho'],['die Wurst','os frios']]},
+ {t:'gap',q:'Tom ___ gern Pizza. (essen)',a:['isst']},
+ {t:'gap',q:'Ich ___ keinen Fisch. (mögen)',a:['mag']},
+ {t:'tr',de:'Eu gosto de tomar chá.',a:['Ich trinke gern Tee.']},
+ {t:'tr',de:'Ela não gosta de carne.',a:['Sie isst nicht gern Fleisch.','Sie mag kein Fleisch.','Sie mag Fleisch nicht.']},
+ {t:'listen',es:'Ich trinke gern Orangensaft.',de:'Eu gosto de tomar suco de laranja.'}
+]},
+{id:'l2',title:'O acusativo',desc:'den / einen / keinen · nehmen, kaufen, brauchen',steps:[
+ {t:'info',title:'Acusativo: só o masculino muda',html:`<p>Quando um substantivo é o <b>objeto direto</b> (quem/o que é comprado, comido, procurado …), ele fica no <b>acusativo</b>. A boa notícia: <b>só o masculino muda</b>.</p>
+ <table><tr><th></th><th>nominativo (sujeito)</th><th>acusativo (objeto)</th></tr>
+ <tr><td>masculino</td><td class="es-t">der / ein / kein Apfel</td><td class="es-t"><b>den / einen / keinen</b> Apfel</td></tr>
+ <tr><td>feminino</td><td class="es-t">die / eine / keine Banane</td><td class="es-t">die / eine / keine Banane</td></tr>
+ <tr><td>neutro</td><td class="es-t">das / ein / kein Ei</td><td class="es-t">das / ein / kein Ei</td></tr>
+ <tr><td>plural</td><td class="es-t">die / – / keine Eier</td><td class="es-t">die / – / keine Eier</td></tr></table>
+ <div class="ex"><span class="es-t">Der Kaffee ist gut.</span> (sujeito) – <span class="es-t">Ich trinke <b>den</b> Kaffee.</span> (objeto)</div>
+ <div class="ex">Também os possessivos: <span class="es-t">Ich suche mein<b>en</b> Schlüssel.</span></div>
+ <p>Verbos com acusativo: <span class="es-t">kaufen, nehmen, brauchen, suchen, haben, essen, trinken, möchten, bestellen</span>.</p>`},
+ {t:'info',title:'nehmen e möchten',html:`<table><tr><th></th><th>nehmen <span class="muted">(pegar/escolher)</span></th><th>möchten <span class="muted">(gostaria)</span></th></tr>
+ <tr><td>ich</td><td class="es-t">nehme</td><td class="es-t">möchte</td></tr>
+ <tr><td>du</td><td class="es-t">n<b>imm</b>st</td><td class="es-t">möchtest</td></tr>
+ <tr><td>er / sie</td><td class="es-t">n<b>imm</b>t</td><td class="es-t">möchte</td></tr>
+ <tr><td>wir</td><td class="es-t">nehmen</td><td class="es-t">möchten</td></tr>
+ <tr><td>sie / Sie</td><td class="es-t">nehmen</td><td class="es-t">möchten</td></tr></table>
+ <p><b>möchten</b> é a forma educada de querer: <span class="es-t">Ich möchte einen Kaffee.</span> Ainda mais educado: <span class="es-t">Ich hätte gern einen Kaffee.</span></p>`},
+ {t:'vocab',title:'Verbos',items:[['kaufen','comprar'],['brauchen','precisar de'],['suchen','procurar'],['nehmen','pegar / escolher / tomar'],['möchten','gostaria de / querer'],['mögen','gostar de'],['essen','comer'],['trinken','beber'],['kochen','cozinhar'],['schmecken','ter gosto / estar gostoso']]},
+ {t:'mc',q:'Ich brauche ___ Salat. (der Salat)',opts:['einen','ein','eine'],a:0,why:'Masculino no acusativo: <b>einen</b>.'},
+ {t:'mc',q:'Ich kaufe ___ Milch. (die Milch)',opts:['die','den','der'],a:0,why:'Feminino não muda: <b>die</b>.'},
+ {t:'gap',q:'Wir haben ___ Brot mehr. (das Brot – nenhum)',a:['kein']},
+ {t:'gap',q:'Lucas sucht ___ Käse. (der Käse – o)',a:['den']},
+ {t:'gap',q:'Was ___ du? – Ich nehme den Fisch. (nehmen)',a:['nimmst']},
+ {t:'gap',q:'Jana ___ einen Tee. (möchten)',a:['möchte']},
+ {t:'order',es:'Ich möchte einen Apfelsaft',de:'Eu gostaria de um suco de maçã.'},
+ {t:'tr',de:'Eu preciso de um ovo.',a:['Ich brauche ein Ei.']},
+ {t:'tr',de:'Você toma o café? (informal)',a:['Nimmst du den Kaffee?','Trinkst du den Kaffee?']}
+]},
+{id:'l3',title:'Fazer compras',desc:'Was kostet …? · Preise · Mengen · bezahlen',steps:[
+ {t:'vocab',title:'Compras',items:[['einkaufen','fazer compras'],['der Supermarkt','o supermercado'],['der Markt','a feira'],['die Bäckerei','a padaria'],['das Geschäft','a loja'],['die Kasse','o caixa'],['Was kostet …?','Quanto custa …?'],['Was kosten …?','Quanto custam …?'],['der Preis','o preço'],['der Euro','o euro'],['der Cent','o centavo'],['teuer','caro'],['billig','barato'],['günstig','em conta / barato'],['das Angebot','a oferta / promoção'],['das Kilo','o quilo'],['das Gramm','o grama'],['der Liter','o litro'],['die Packung','o pacote'],['bezahlen','pagar'],['bar','em dinheiro'],['mit Karte','com cartão'],['die Tüte','a sacola']]},
+ {t:'info',title:'Preços',html:`<table><tr><td>1,50 €</td><td class="es-t">ein Euro fünfzig</td></tr><tr><td>2,99 €</td><td class="es-t">zwei Euro neunundneunzig</td></tr><tr><td>0,80 €</td><td class="es-t">achtzig Cent</td></tr><tr><td>12,00 €</td><td class="es-t">zwölf Euro</td></tr></table>
+ <p><span class="es-t">Was kostet das Brot? – Drei Euro zwanzig.</span><br><span class="es-t">Was kosten die Äpfel? – Ein Kilo kostet zwei Euro.</span></p>
+ <div class="ex">Mengen sem “de”: <span class="es-t">ein Kilo Äpfel</span> (um quilo <b>de</b> maçãs), <span class="es-t">eine Flasche Wasser</span>, <span class="es-t">200 Gramm Käse</span>.</div>
+ <div class="ojo">Na Alemanha muita gente ainda paga em dinheiro. No caixa: <span class="es-t">Bar oder mit Karte?</span> E a sacola custa extra: <span class="es-t">Brauchen Sie eine Tüte?</span></div>`},
+ {t:'listen',es:'Das macht vier Euro achtzig.',de:'Dá quatro euros e oitenta.'},
+ {t:'listen',es:'Ein Kilo Tomaten kostet zwei Euro fünfzig.',de:'Um quilo de tomates custa dois euros e cinquenta.'},
+ {t:'mc',q:'„3,49 €“',opts:['drei Euro neunundvierzig','drei Euro vierundneunzig','dreißig Euro neunundvierzig'],a:0},
+ {t:'gap',q:'Was ___ die Bananen? (kosten)',a:['kosten'],why:'<i>die Bananen</i> é plural → <b>kosten</b>.'},
+ {t:'dialog',place:'Wochenmarkt',title:'Na feira',scene:'Sábado de manhã, feira em Frankfurt. Você quer frutas e queijo.',lines:[
+  {n:'Verkäufer',es:'Guten Morgen! Was möchten Sie?',de:'Bom dia! O que o senhor deseja?'},
+  {you:true,opts:[{es:'Ein Kilo Äpfel, bitte.',ok:true},{es:'Ein Kilo von Äpfel, bitte.',ok:false,why:'Sem “von”: <i>ein Kilo Äpfel</i>.'}]},
+  {n:'Verkäufer',es:'Gern. Noch etwas?',de:'Pois não. Mais alguma coisa?'},
+  {you:true,opts:[{es:'Ja, 200 Gramm Käse. Was kostet das?',ok:true},{es:'Nein, ich habe keinen Hunger.',ok:false,why:'Você ainda queria queijo 😉'}]},
+  {n:'Verkäufer',es:'Zusammen macht das sechs Euro dreißig.',de:'Tudo junto dá seis euros e trinta.'},
+  {you:true,opts:[{es:'Hier, bitte. Zehn Euro.',ok:true},{es:'Das ist sehr billig. Tschüss!',ok:false,why:'Primeiro é preciso pagar!'}]},
+  {n:'Verkäufer',es:'Und drei Euro siebzig zurück. Danke schön!',de:'E três euros e setenta de troco. Muito obrigado!'}]},
+ {t:'read',hideText:true,title:'Aviso no supermercado',intro:'Ouça o aviso pelo alto-falante.',text:`Liebe Kundinnen und Kunden! Heute im Angebot: ein Kilo Bananen für nur ein Euro neunundzwanzig. Und frische Brötchen von unserer Bäckerei: zehn Stück für zwei Euro fünfzig. Unser Supermarkt schließt heute um zwanzig Uhr. Vielen Dank für Ihren Einkauf!`,de:`Queridos clientes! Hoje em promoção: um quilo de bananas por apenas 1,29 €. E pãezinhos frescos da nossa padaria: dez unidades por 2,50 €. Nosso supermercado fecha hoje às 20 horas. Muito obrigado pela sua compra!`},
+ {t:'mc',q:'Richtig oder falsch? Bananen sind heute im Angebot.',opts:['richtig','falsch'],a:0},
+ {t:'mc',q:'Was kosten zehn Brötchen?',opts:['2,50 €','1,29 €','10,00 €'],a:0},
+ {t:'mc',q:'Richtig oder falsch? Der Supermarkt schließt um 22 Uhr.',opts:['falsch','richtig'],a:0},
+ {t:'mc',q:'Você quer comprar pão fresco no domingo de manhã. Qual anúncio serve?',opts:['Bäckerei Schmitt – auch sonntags 7–11 Uhr geöffnet','Supermarkt Preisfuchs – Mo–Sa 8–20 Uhr'],a:0,why:'Na Alemanha, quase todas as lojas fecham no domingo – algumas padarias abrem de manhã.'}
+]},
+{id:'l4',title:'No café e no restaurante',desc:'bestellen · Ich hätte gern … · Die Rechnung, bitte!',steps:[
+ {t:'vocab',title:'Restaurante',items:[['das Restaurant','o restaurante'],['das Café','o café (lugar)'],['die Speisekarte','o cardápio'],['bestellen','pedir'],['Ich hätte gern …','Eu queria … (educado)'],['Was möchten Sie trinken?','O que o senhor deseja beber?'],['das Essen','a comida'],['das Getränk','a bebida'],['der Hunger','a fome'],['der Durst','a sede'],['Guten Appetit!','Bom apetite!'],['Das schmeckt gut!','Está gostoso!'],['Die Rechnung, bitte!','A conta, por favor!'],['zusammen','junto'],['getrennt','separado'],['Stimmt so.','Pode ficar com o troco.'],['das Frühstück','o café da manhã'],['das Mittagessen','o almoço'],['das Abendessen','o jantar']]},
+ {t:'info',title:'Pedir e pagar',html:`<table><tr><th>garçom</th><th>você</th></tr>
+ <tr><td class="es-t">Was möchten Sie?</td><td class="es-t">Ich hätte gern eine Suppe. / Ich nehme den Salat.</td></tr>
+ <tr><td class="es-t">Und zu trinken?</td><td class="es-t">Ein Wasser, bitte.</td></tr>
+ <tr><td class="es-t">Schmeckt es Ihnen?</td><td class="es-t">Ja, sehr gut, danke!</td></tr>
+ <tr><td class="es-t">Zusammen oder getrennt?</td><td class="es-t">Getrennt, bitte.</td></tr></table>
+ <div class="ojo">Na Alemanha é normal cada um pagar a sua parte – o garçom pergunta <span class="es-t">Zusammen oder getrennt?</span>. A gorjeta (5–10 %) se dá na hora: a conta é 18,40 € e você diz <span class="es-t">Zwanzig, bitte. / Stimmt so.</span></div>`},
+ {t:'mc',q:'A conta é 9,60 €. Você dá 10 € e quer deixar o resto de gorjeta. Você diz:',opts:['Stimmt so.','Getrennt, bitte.','Guten Appetit!'],a:0},
+ {t:'mc',q:'Forma mais educada de pedir:',opts:['Ich hätte gern einen Kaffee.','Ich will Kaffee.','Kaffee!'],a:0},
+ {t:'gap',q:'Ich habe ___. Ich möchte etwas trinken. (sede)',a:['Durst']},
+ {t:'dialog',place:'Café am Main',title:'No café',scene:'Você e a Jana entram num café depois do trabalho.',lines:[
+  {n:'Kellner',es:'Hallo! Was darf es sein?',de:'Olá! O que vai ser?'},
+  {you:true,opts:[{es:'Ich hätte gern einen Cappuccino und ein Stück Apfelkuchen.',ok:true},{es:'Ich habe einen Cappuccino.',ok:false,why:'<i>Ich habe</i> = eu tenho. Para pedir: <i>Ich hätte gern …</i> ou <i>Ich möchte …</i>'}]},
+  {n:'Jana',es:'Und für mich einen Tee, bitte.',de:'E para mim um chá, por favor.'},
+  {n:'Kellner',es:'Gern. … So, bitte schön. Guten Appetit!',de:'Pois não. … Aqui está. Bom apetite!'},
+  {you:true,opts:[{es:'Danke! Der Kuchen schmeckt sehr gut.',ok:true},{es:'Danke! Die Rechnung schmeckt gut.',ok:false,why:'😄 <i>die Rechnung</i> é a conta.'}]},
+  {you:true,opts:[{es:'Die Rechnung, bitte!',ok:true},{es:'Die Speisekarte, bitte!',ok:false,why:'Vocês já comeram – agora é a conta.'}]},
+  {n:'Kellner',es:'Zusammen oder getrennt?',de:'Junto ou separado?'},
+  {you:true,opts:[{es:'Getrennt, bitte.',ok:true},{es:'Ja, bitte.',ok:false,why:'É uma pergunta de “ou”: responda <i>zusammen</i> ou <i>getrennt</i>.'}]},
+  {n:'Kellner',es:'Der Cappuccino und der Kuchen: sieben Euro vierzig.',de:'O cappuccino e o bolo: sete euros e quarenta.'},
+  {you:true,opts:[{es:'Acht Euro, bitte. Stimmt so.',ok:true},{es:'Sieben Euro vierzig zurück.',ok:false,why:'Você é quem paga 😉 – <i>Acht Euro, stimmt so.</i>'}]}]},
+ {t:'tr',de:'Eu queria uma água, por favor.',a:['Ich hätte gern ein Wasser, bitte.','Ich möchte ein Wasser, bitte.','Ich hätte gern Wasser, bitte.']},
+ {t:'tr',de:'A conta, por favor!',a:['Die Rechnung, bitte!']},
+ {t:'speak',es:'Ich hätte gern einen Kaffee mit Milch, bitte.',de:'Eu queria um café com leite, por favor.',tip:'<i>hätte</i>: o <b>ä</b> é um “é” aberto e curto.'},
+ {t:'free',task:'Escreva uma mensagem curta (~30 palavras) para o Tom: 1) você vai ao supermercado, 2) o que você compra, 3) pergunte o que ele precisa.',hint:'Hallo Tom, ich gehe heute in den Supermarkt. Ich kaufe … Brauchst du …? / Was brauchst du? Viele Grüße',focus:'Akkusativ (einen/eine/ein), Lebensmittel, brauchen, kaufen',model:'Hallo Tom,\nich gehe heute in den Supermarkt. Ich kaufe Brot, einen Käse, Tomaten und eine Flasche Milch. Brauchst du auch etwas? Vielleicht Kaffee oder Eier?\nViele Grüße\nLucas'}
+]}],
+resumen:`<h3>gern / mögen</h3><p class="es-t">Ich trinke gern Kaffee. · Ich esse nicht gern Fisch. · Ich mag Käse.</p>
+<h3>Acusativo – só o masculino muda</h3><table><tr><th></th><th>nominativo</th><th>acusativo</th></tr><tr><td>m</td><td class="es-t">der / ein / kein</td><td class="es-t">den / einen / keinen</td></tr><tr><td>f</td><td class="es-t">die / eine / keine</td><td class="es-t">die / eine / keine</td></tr><tr><td>n</td><td class="es-t">das / ein / kein</td><td class="es-t">das / ein / kein</td></tr><tr><td>Pl.</td><td class="es-t">die / – / keine</td><td class="es-t">die / – / keine</td></tr></table>
+<h3>Verbos com mudança</h3><p class="es-t">essen: du isst, er isst · nehmen: du nimmst, er nimmt · mögen: ich mag, du magst · möchten: ich möchte, du möchtest</p>
+<h3>Compras</h3><p class="es-t">Was kostet …? / Was kosten …? · ein Kilo Äpfel · eine Flasche Wasser · Bar oder mit Karte?</p>
+<h3>Restaurante</h3><p class="es-t">Ich hätte gern … · Die Rechnung, bitte! · Zusammen oder getrennt? · Stimmt so.</p>`});
+
+/* ================= KAPITEL 5 · WOHNEN ================= */
+LANGS.de.course.units.push({id:'k5',n:'5',level:'A1',title:'Wohnen',sub:'Casa e quartos · móveis · adjetivos · es gibt · ihn/sie/es · anúncios de apartamento',
+goals:['Die Wohnung: Zimmer, Küche, Bad, Balkon …','Möbel und Geräte','Adjektive: groß, klein, hell, ruhig, teuer …','Farben','es gibt + Akkusativ','Wie findest du …? – Ich finde ihn / sie / es …','Wohnungsanzeigen verstehen (Zi., Kü., NK …)','Miete, Vermieter, umziehen'],
+situacion:{title:'Visitar um apartamento',npc:'Frau Klein',scene:'Você procura um apartamento só seu e visita um de 2 cômodos em Frankfurt-Bornheim.',role:'Du bist Frau Klein, Vermieterin, ca. 60, freundlich und genau. Du siezt die Person. Zeig die Wohnung: 2 Zimmer, 55 m², Küche mit Herd und Kühlschrank, Bad mit Dusche, kleiner Balkon, 3. Stock ohne Aufzug, 850 € warm. Beantworte Fragen. Frag, wann die Person einziehen möchte. Sprich sehr einfaches Deutsch (A1).',goal:'Pergunte sobre os cômodos, o tamanho, o aluguel e se há varanda. Diga o que você acha do apartamento.'},
+placement:[
+ {t:'mc',q:'„Na cozinha tem uma mesa.“',opts:['In der Küche gibt es einen Tisch.','In der Küche es gibt einen Tisch.','In der Küche gibt einen Tisch.'],a:0},
+ {t:'gap',q:'Wie findest du den Stuhl? – Ich finde ___ schön.',a:['ihn']},
+ {t:'mc',q:'„2-Zi.-Whg., 55 m², Blk.“ – o que é „Blk.“?',opts:['Balkon','Block','Blick'],a:0},
+ {t:'mc',q:'O contrário de „laut“:',opts:['ruhig','hell','teuer'],a:0},
+ {t:'gap',q:'Die Wohnung ist nicht groß, sie ist ___.',a:['klein']},
+ {t:'mc',q:'„Warmmiete“ é …',opts:['o aluguel com aquecimento e despesas','o aluguel no verão','o aluguel sem despesas'],a:0}],
+lessons:[
+{id:'l1',title:'O apartamento',desc:'Zimmer, Küche, Bad … · Adjektive',steps:[
+ {t:'vocab',title:'Cômodos',items:[['die Wohnung','o apartamento'],['das Haus','a casa'],['das Zimmer','o quarto / o cômodo'],['das Wohnzimmer','a sala'],['das Schlafzimmer','o quarto de dormir'],['die Küche','a cozinha'],['das Bad','o banheiro'],['die Toilette','o vaso / o banheiro'],['der Flur','o corredor'],['der Balkon','a varanda'],['der Garten','o jardim'],['der Keller','o porão'],['der Stock','o andar'],['das Erdgeschoss','o térreo'],['der Aufzug','o elevador'],['die Treppe','a escada']]},
+ {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso'],['laut','barulhento'],['neu','novo'],['alt','velho'],['schön','bonito'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
+ {t:'info',title:'Andares e lugares',html:`<p>No Brasil o “primeiro andar” às vezes é o térreo – na Alemanha <b>nunca</b>:</p>
+ <table><tr><td class="es-t">im Erdgeschoss (EG)</td><td>no térreo</td></tr><tr><td class="es-t">im ersten Stock</td><td>no 1º andar (acima do térreo)</td></tr><tr><td class="es-t">im dritten Stock</td><td>no 3º andar</td></tr><tr><td class="es-t">oben / unten</td><td>em cima / embaixo</td></tr><tr><td class="es-t">links / rechts</td><td>à esquerda / à direita</td></tr></table>
+ <div class="ex">O adjetivo depois de <b>sein</b> não muda: <span class="es-t">Die Wohnung ist hell. Das Zimmer ist klein. Die Zimmer sind klein.</span></div>`},
+ {t:'match',q:'Ligue os opostos.',pairs:[['groß','klein'],['hell','dunkel'],['laut','ruhig'],['teuer','billig'],['neu','alt']]},
+ {t:'mc',q:'Onde se cozinha?',opts:['in der Küche','im Bad','im Flur'],a:0},
+ {t:'mc',q:'„im ersten Stock“ é …',opts:['um andar acima do térreo','o térreo','o porão'],a:0},
+ {t:'gap',q:'Meine Wohnung ist im dritten ___. Es gibt keinen Aufzug.',a:['Stock']},
+ {t:'tr',de:'O quarto é pequeno, mas claro.',a:['Das Zimmer ist klein, aber hell.','Das Schlafzimmer ist klein, aber hell.']},
+ {t:'listen',es:'Die Küche ist sehr gemütlich.',de:'A cozinha é muito aconchegante.'}
+]},
+{id:'l2',title:'Móveis e cores',desc:'Tisch, Bett, Schrank … · es gibt',steps:[
+ {t:'vocab',title:'Móveis e aparelhos',items:[['die Möbel (Pl.)','os móveis'],['der Tisch','a mesa'],['der Stuhl','a cadeira'],['das Bett','a cama'],['der Schrank','o armário'],['das Sofa','o sofá'],['das Regal','a estante'],['die Lampe','a luminária'],['der Teppich','o tapete'],['der Kühlschrank','a geladeira'],['der Herd','o fogão'],['die Waschmaschine','a máquina de lavar'],['die Dusche','o chuveiro'],['das Fenster','a janela'],['die Tür','a porta'],['das Licht','a luz']]},
+ {t:'vocab',title:'Cores',items:[['die Farbe','a cor'],['weiß','branco'],['schwarz','preto'],['rot','vermelho'],['blau','azul'],['grün','verde'],['gelb','amarelo'],['grau','cinza'],['braun','marrom']]},
+ {t:'info',title:'es gibt – tem / há',html:`<p><b>es gibt</b> + <b>acusativo</b> = “tem / há” (existência):</p>
+ <table><tr><td class="es-t">In der Küche gibt es <b>einen</b> Tisch.</td><td>Na cozinha tem uma mesa.</td></tr>
+ <tr><td class="es-t">Es gibt eine Waschmaschine.</td><td>Tem uma máquina de lavar.</td></tr>
+ <tr><td class="es-t">Gibt es einen Balkon?</td><td>Tem varanda?</td></tr>
+ <tr><td class="es-t">Es gibt <b>keinen</b> Aufzug.</td><td>Não tem elevador.</td></tr></table>
+ <div class="ojo">Não use <i>haben</i> para isso: “Die Küche hat einen Tisch” é possível, mas o normal é <span class="es-t">In der Küche gibt es einen Tisch.</span></div>`},
+ {t:'mc',q:'„Tem uma geladeira?“',opts:['Gibt es einen Kühlschrank?','Es gibt einen Kühlschrank?','Hat es einen Kühlschrank?'],a:0},
+ {t:'gap',q:'Im Schlafzimmer gibt es ___ Bett und ___ Schrank. (uma – das Bett · um – der Schrank)',a:['ein','einen']},
+ {t:'gap',q:'Leider gibt es ___ Balkon. (nenhum – der Balkon)',a:['keinen']},
+ {t:'mc',q:'Qual artigo? ___ Bett',opts:['das','der','die'],a:0},
+ {t:'mc',q:'Qual artigo? ___ Lampe',opts:['die','der','das'],a:0},
+ {t:'order',es:'Im Wohnzimmer gibt es ein Sofa',de:'Na sala tem um sofá.'},
+ {t:'tr',de:'Tem elevador?',a:['Gibt es einen Aufzug?']},
+ {t:'tr',de:'O sofá é cinza.',a:['Das Sofa ist grau.']}
+]},
+{id:'l3',title:'O que você acha?',desc:'Wie findest du …? – ihn / sie / es',steps:[
+ {t:'info',title:'Pronomes no acusativo',html:`<p>Para não repetir a palavra, use um pronome. No acusativo, de novo, <b>só o masculino muda</b>:</p>
+ <table><tr><th></th><th>nominativo</th><th>acusativo</th></tr>
+ <tr><td>der Tisch</td><td class="es-t">er</td><td class="es-t"><b>ihn</b></td></tr>
+ <tr><td>die Lampe</td><td class="es-t">sie</td><td class="es-t">sie</td></tr>
+ <tr><td>das Sofa</td><td class="es-t">es</td><td class="es-t">es</td></tr>
+ <tr><td>die Stühle</td><td class="es-t">sie</td><td class="es-t">sie</td></tr></table>
+ <div class="ex"><span class="es-t">Wie findest du den Tisch? – Ich finde <b>ihn</b> schön.</span><br><span class="es-t">Wie findest du die Wohnung? – Ich finde <b>sie</b> zu teuer.</span></div>
+ <p>Também para pessoas: <span class="es-t">mich, dich, ihn, sie, uns, euch, sie/Sie</span> – <span class="es-t">Kannst du mich anrufen?</span></p>
+ <div class="ojo">Em alemão, objetos também são <b>er/sie/es</b> – conforme o artigo! <span class="es-t">der Tisch → er</span>, mesmo sendo uma coisa.</div>`},
+ {t:'vocab',title:'Opinião',items:[['Wie findest du …?','O que você acha de …?'],['Ich finde ihn / sie / es …','Eu acho ele / ela … (objeto)'],['zu','demais (zu teuer = caro demais)'],['sehr','muito'],['ziemlich','bastante'],['ein bisschen','um pouco'],['super','ótimo'],['toll','legal / incrível'],['nicht so schön','não muito bonito']]},
+ {t:'mc',q:'Wie findest du den Schrank? – Ich finde … praktisch.',opts:['ihn','sie','es'],a:0,why:'<i>der Schrank</i> → acusativo <b>ihn</b>.'},
+ {t:'mc',q:'Wie findest du das Bad? – Ich finde … zu klein.',opts:['es','ihn','sie'],a:0},
+ {t:'gap',q:'Die Küche ist toll! Ich finde ___ sehr modern.',a:['sie']},
+ {t:'gap',q:'Der Balkon ist groß. ___ ist sehr schön. (nominativo)',a:['Er']},
+ {t:'dialog',place:'WG-Küche',title:'Um sofá novo',scene:'O Tom comprou um sofá usado para a sala da WG.',lines:[
+  {n:'Tom',es:'Schau mal, das Sofa ist neu! Wie findest du es?',de:'Olha, o sofá é novo! O que você acha dele?'},
+  {you:true,opts:[{es:'Ich finde es sehr gemütlich!',ok:true},{es:'Ich finde ihn sehr gemütlich!',ok:false,why:'<i>das Sofa</i> é neutro → <b>es</b>.'}]},
+  {n:'Tom',es:'Und die Farbe?',de:'E a cor?'},
+  {you:true,opts:[{es:'Die Farbe finde ich nicht so schön. Grau ist ein bisschen dunkel.',ok:true},{es:'Die Farbe ist sehr laut.',ok:false,why:'<i>laut</i> = barulhento. Para cor: <i>dunkel, hell, schön …</i>'}]},
+  {n:'Tom',es:'Ja, stimmt. Aber es war billig: nur fünfzig Euro!',de:'É verdade. Mas foi barato: só cinquenta euros!'}]},
+ {t:'tr',de:'Eu acho a cozinha prática. (die Küche)',a:['Ich finde die Küche praktisch.']},
+ {t:'tr',de:'O que você acha da mesa? – Eu acho ela feia.',a:['Wie findest du den Tisch? – Ich finde ihn hässlich.','Wie findest du den Tisch? Ich finde ihn hässlich.']}
+]},
+{id:'l4',title:'Procurar apartamento',desc:'Wohnungsanzeigen · Miete · umziehen',steps:[
+ {t:'vocab',title:'Aluguel',items:[['mieten','alugar (como inquilino)'],['vermieten','alugar (como dono)'],['der Vermieter / die Vermieterin','o locador / a locadora'],['die Miete','o aluguel'],['die Nebenkosten (Pl.)','as despesas (água, aquecimento …)'],['warm','com despesas incluídas (aluguel)'],['der Quadratmeter','o metro quadrado'],['die Anzeige','o anúncio'],['umziehen','mudar de casa'],['einziehen','mudar para (entrar)'],['frei','livre / disponível'],['ab sofort','a partir de agora'],['besichtigen','visitar (um imóvel)']]},
+ {t:'info',title:'Ler anúncios de apartamento',html:`<p>Os anúncios usam muitas abreviações:</p>
+ <table><tr><td class="es-t">2-Zi.-Whg.</td><td>apartamento de 2 cômodos (sem contar cozinha e banheiro!)</td></tr>
+ <tr><td class="es-t">Kü., Bad, Blk.</td><td>cozinha, banheiro, varanda</td></tr>
+ <tr><td class="es-t">55 m²</td><td class="es-t">55 Quadratmeter</td></tr>
+ <tr><td class="es-t">3. OG</td><td>3º andar (Obergeschoss)</td></tr>
+ <tr><td class="es-t">KM / NK / WM</td><td>aluguel frio / despesas / aluguel quente (total)</td></tr>
+ <tr><td class="es-t">ab sofort frei</td><td>disponível já</td></tr></table>
+ <div class="ojo">Na Alemanha, muitas vezes o apartamento vem <b>sem cozinha</b> (sem armários, sem fogão)! Pergunte: <span class="es-t">Gibt es eine Küche?</span></div>`},
+ {t:'read',title:'Leitura: Zwei Anzeigen',intro:'Você procura um apartamento barato e tranquilo, com varanda, para você sozinho.',text:`A) Bornheim: schöne 2-Zi.-Whg., 55 m², Kü., Bad mit Dusche, Blk., 3. OG, kein Aufzug, ruhig. 650 € KM + 150 € NK. Ab 1. Mai frei.
+
+B) Innenstadt: moderne 4-Zi.-Whg., 110 m², große Kü., 2 Bäder, Garten, EG. 1.600 € warm. Ideal für Familien. Ab sofort frei.`,de:`A) Bornheim: bonito apartamento de 2 cômodos, 55 m², cozinha, banheiro com chuveiro, varanda, 3º andar, sem elevador, tranquilo. 650 € de aluguel + 150 € de despesas. Livre a partir de 1º de maio.
+
+B) Centro: apartamento moderno de 4 cômodos, 110 m², cozinha grande, 2 banheiros, jardim, térreo. 1.600 € com tudo. Ideal para famílias. Livre já.`},
+ {t:'mc',q:'Qual anúncio combina com você?',opts:['A','B'],a:0},
+ {t:'mc',q:'Wie viel kostet Wohnung A warm?',opts:['800 €','650 €','150 €'],a:0,why:'650 € (KM) + 150 € (NK) = 800 € warm.'},
+ {t:'mc',q:'Richtig oder falsch? Wohnung A hat einen Aufzug.',opts:['falsch','richtig'],a:0},
+ {t:'mc',q:'Uma placa na entrada do prédio diz: „Bitte Haustür nach 22 Uhr abschließen!“ O que você deve fazer?',opts:['trancar a porta do prédio depois das 22h','não fazer barulho depois das 22h','fechar as janelas às 22h'],a:0},
+ {t:'read',hideText:true,title:'Recado da locadora',intro:'Ouça a mensagem na secretária eletrônica.',text:`Guten Tag, hier ist Frau Klein. Sie möchten die Wohnung in der Bergerstraße besichtigen? Das geht am Donnerstag um achtzehn Uhr. Die Wohnung ist im dritten Stock. Bitte rufen Sie mich zurück. Meine Nummer ist null sechs neun, vier fünf sechs, sieben acht. Auf Wiederhören!`,de:`Bom dia, aqui é a senhora Klein. O senhor quer visitar o apartamento na Bergerstraße? Pode ser na quinta-feira às 18 horas. O apartamento fica no terceiro andar. Por favor, me ligue de volta. Meu número é 069 456 78. Até logo!`},
+ {t:'mc',q:'Wann ist die Besichtigung?',opts:['am Donnerstag um 18 Uhr','am Dienstag um 8 Uhr','am Donnerstag um 8 Uhr'],a:0},
+ {t:'mc',q:'Wo ist die Wohnung?',opts:['im dritten Stock','im Erdgeschoss','im ersten Stock'],a:0},
+ {t:'info',title:'Auf Wiederhören!',html:`<p>No telefone não se diz <i>Auf Wiedersehen</i> (até a vista), mas <span class="es-t">Auf Wiederhören!</span> (“até a próxima vez que eu ouvir você”).</p>`},
+ {t:'free',task:'Descreva o seu apartamento ou quarto (~30–40 palavras): cômodos, móveis e o que você acha dele.',hint:'Meine Wohnung hat … Zimmer. Es gibt einen/eine/ein … Das Wohnzimmer ist … Ich finde die Wohnung …',focus:'es gibt + Akkusativ, Adjektive, Möbel, finden + ihn/sie/es',model:'Ich wohne in einer WG in Frankfurt. Mein Zimmer ist klein, aber hell. Es gibt ein Bett, einen Schrank und einen Tisch. Die Küche ist groß und gemütlich. Es gibt keinen Balkon. Ich finde die Wohnung sehr schön.'}
+]}],
+resumen:`<h3>Cômodos e andares</h3><p class="es-t">das Wohnzimmer · das Schlafzimmer · die Küche · das Bad · der Flur · der Balkon · im Erdgeschoss · im ersten Stock</p>
+<h3>es gibt + acusativo</h3><p class="es-t">Es gibt einen Tisch / eine Lampe / ein Bett / keine Möbel. · Gibt es einen Balkon?</p>
+<h3>Pronomes</h3><table><tr><th></th><th>nom.</th><th>acus.</th></tr><tr><td>der</td><td class="es-t">er</td><td class="es-t">ihn</td></tr><tr><td>die</td><td class="es-t">sie</td><td class="es-t">sie</td></tr><tr><td>das</td><td class="es-t">es</td><td class="es-t">es</td></tr><tr><td>Pl.</td><td class="es-t">sie</td><td class="es-t">sie</td></tr></table><p class="es-t">Wie findest du den Tisch? – Ich finde ihn schön.</p>
+<h3>Anúncios</h3><p>Zi. = cômodo · Kü. = cozinha · Blk. = varanda · OG = andar · KM / NK / warm = aluguel frio / despesas / total</p>`});
