@@ -1,5 +1,6 @@
 /* Neustart (Sprachwechsel, Update …): erst Startbildschirm mit Drehsymbol zeigen, dann neu laden – sonst wirkt die App kurz eingefroren */
-function bootScreen(){let b=document.getElementById('boot');if(!b){b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">🇪🇸</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
+function bootScreen(){let b=document.getElementById('boot');if(!b){/* Flagge der Sprache, die gleich geladen wird */let f='🌍';try{const c=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}').lang;const P=((window.PACKS&&PACKS.learn)||[]).find(x=>x.code===c)||LANGS[c];if(P)f=P.flag;}catch(e){}
+  b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">'+f+'</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
 /* Startbildschirm ruhig ausblenden: mindestens 1 s ab dem Öffnen (länger, wenn die App länger braucht) und 0,3 s nach dem Aufbau, dann 0,4 s weiches Ausblenden */
 let bootHiding=false,HOMEFIT=null,HOMESTATE=null; /* HOMESTATE: Kompakt-Stufe der Startseite (0–3), einmal pro Sitzung entschieden */function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
   setTimeout(()=>{if(HOMEFIT)HOMEFIT();bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(300,1000-(Date.now()-(window.__t0||Date.now()))));} /* eigene Stoppuhr (__t0 im Sicherheitsnetz) – performance.now() startet auf iOS zu früh */ 
@@ -548,7 +549,7 @@ function vLearnPick(){const bt=document.getElementById('boot');document.body.inn
     UI_LANGS.length>1?h('div',{class:'uisel'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',title:n,onclick:()=>{if(c!==UI)setUI(c,true);}},f))):null,
     h('div',{class:'muted small',style:'margin-bottom:6px'},T('Schritt 1 von 2')),h('div',{style:'font-size:44px;margin-bottom:6px'},'🌍'),
     h('h1',{style:'margin:0 0 6px'},T('Was möchtest du lernen?')),h('p',{class:'muted',style:'margin:0 0 18px'},T('Du kannst später jederzeit wechseln – jede Sprache hat ihren eigenen Fortschritt.')),
-    h('div',{class:'learngrid'},...avail.map(L=>h('button',{class:'learntile',onclick:()=>pick(L.code)},h('span',{class:'lf'},L.flag),h('b',{},T(L.name)),h('span',{class:'muted small'},T('A1 bis C2')))),
+    h('div',{class:'learngrid'},...avail.map(L=>h('button',{class:'learntile',onclick:()=>pick(L.code)},h('span',{class:'lf'},L.flag),h('b',{},T(L.name)),L.stufen?h('span',{class:'muted small'},L.stufen[0]===L.stufen[1]?L.stufen[0]:T('{A} bis {B}').replace('{A}',L.stufen[0]).replace('{B}',L.stufen[1])):null)),
       ...planned.map(([c,n,f])=>h('button',{class:'learntile soon',onclick:()=>toast(T(n)+T(' ist noch in Arbeit'))},h('span',{class:'lf'},f),h('b',{},T(n)),h('span',{class:'muted small'},T('bald'))))))));}
 function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
@@ -562,7 +563,7 @@ function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=
     again?null:h('button',{class:'linkbtn',style:'display:block;margin:0 auto 6px;text-decoration:none;color:var(--muted)',onclick:()=>{try{sessionStorage.removeItem('mp-learn-ok');}catch(e){}vLearnPick();}},T('← Schritt 2 von 2 · ')+LANG.flag+' '+T(LANG.name)),
     h('div',{style:'font-size:48px;margin-bottom:6px'},'👋'),h('h1',{style:'margin:0 0 6px'},again?T('Name ändern'):TP('¡Hola!')),
     h('p',{class:'muted',style:'margin:0 0 18px'},again?T('So begrüße ich dich und so heißt du in den Übungen.'):fmt(T('Ich bin dein Lehrer für {L}. Wie heißt du?'))),
-    inp,inp2,h('p',{class:'muted small',style:'margin:16px 0 8px'},T('Wie soll ich dich ansprechen? (wichtig für die Endungen)')),LANG.genderEx?h('div',{class:'gsel'},gb):null,
+    inp,inp2,LANG.genderEx?h('p',{class:'muted small',style:'margin:16px 0 8px'},T('Wie soll ich dich ansprechen? (wichtig für die Endungen)')):null,LANG.genderEx?h('div',{class:'gsel'},gb):null,
     !again&&LANG.roleNote?h('p',{class:'muted small',style:'margin:14px 0 0'},'🎭 '+T(LANG.roleNote)):null,
     h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?T('Speichern'):T('Los geht’s →')),
     again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('lang')},T('Abbrechen')):null)));
@@ -590,7 +591,7 @@ function planItems(){const nx=nextLesson();const done=Object.values(S.lessons).f
     S.mistakes.length||doneDay('mistakes')?{id:'mistakes',ic:'✏️',t:S.mistakes.length?T('Fehler üben (')+S.mistakes.length+')':T('Fehler üben'),d:T('Falsche Antworten noch einmal.'),r:'mistakes',fn:S.mistakes.length?()=>{RESUME='mistakes';go('mistakes');}:null,b:T('Üben →'),min:5,done:doneDay('mistakes')}:null].filter(Boolean);
   return all;}
 function dayPlan(){const plan=planItems().filter(x=>planOn(x.id));
-  if(!S.placement)plan.unshift({id:'placement',ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis C2, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.'),r:'placement',b:T('Test starten →'),min:15,done:false});
+  if(!S.placement)plan.unshift({id:'placement',ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis C2, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.').replace(/A1(.*)C2/,(x,mid)=>{const a=(LEVELS[0]||{}).label||'A1',b=(LEVELS[LEVELS.length-1]||{}).label||'C2';return a===b?a:a+mid+b;}),r:'placement',b:T('Test starten →'),min:15,done:false});
   return plan;}
 /* Plan-Eintrag öffnen: Vokabeln fragen erst nach der Art (je nach verfügbarer Zeit) */
 function planGo(x){x.fn&&!x.done?x.fn():go(x.r);}
