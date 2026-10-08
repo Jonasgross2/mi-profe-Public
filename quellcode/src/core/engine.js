@@ -745,10 +745,13 @@ const looksDe=t=>{if(LOOK_L.indexOf('de')>=0&&(/[äöß]/.test(t)||/(^|[^g])ü/.
 function speakable(t){t=t.replace(/\s*\([^)]*\)/g,'').replace(/\s*=\s*[^·]*/g,' ').replace(/\s*\+\s*[A-ZÄÖÜ][\wäöüß]*\.?(\s+[A-ZÄÖÜ][\wäöüß]*\.?)*/g,'').replace(/✓/g,'');
   t=t.split(/\s+–\s+/).filter(x=>!looksDe(x)).join(' – ').replace(/\s*\+\s*/g,', ');return t.replace(/\s+·\s*$/,'').replace(/\s{2,}/g,' ').trim();}
 function addSpeakTo(el){const t=speakable(el.textContent);if(!t||looksDe(t))return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}
+/* Artikel in Farbe (nur Kurse mit LANG.artColor, z. B. Deutsch: der blau, die rot, das grün, Plural grau) */
+function artW(es){const A=LANG.artColor;const m=A&&String(es).match(/^(\S+)(\s+)([\s\S]*)$/);if(!m||!A[m[1]])return es;
+  const cls=/\(Pl\.?\)|\bPl\.$/.test(m[3])?'p':A[m[1]];return [h('span',{class:'art a-'+cls},m[1]),m[2]+m[3]];}
 const cleanWord=es=>es.length<=28&&!/[…\/(]/.test(es);
 function lessonWords(l){const w=[];for(const s of l.steps)if(s.t==='vocab')w.push(...s.items);return w.filter(x=>cleanWord(x[0]));}
 /* Vokabeln mit „/“ in einzelne richtige Formen auflösen: „el / la estudiante“, „el/la becario/a“, „encantado / encantada“, „el ingeniero / la ingeniera“ */
-function vocabForms(es){es=String(es).trim();if(es.indexOf('/')<0)return[es];const out=[];
+function vocabForms(es){es=String(es).trim().replace(/\s*\(Pl\.?\)$/,'');/* „die Eltern (Pl.)“: Hinweis gehört nicht zur Antwort */if(es.indexOf('/')<0)return[es];const out=[];
   let m=es.match(/^(el|un)\s*\/\s*(la|una)\s+(.+)$/i);if(m){const rest=m[3];const g=rest.match(/^(\S+?)(o|or|e)?\/(a|ora)(\b.*)$/);
     if(g){out.push(m[1]+' '+g[1]+(g[2]||'')+g[4],m[2]+' '+g[1]+(g[3]==='ora'&&!g[2]?'ora':g[2]==='or'?'ora':g[3])+g[4]);}else out.push(m[1]+' '+rest,m[2]+' '+rest);}
   else if(/\s\/\s/.test(es)){es.split(/\s\/\s/).forEach(p=>out.push(p.trim()));}
@@ -770,7 +773,7 @@ function vWords(m,id){const u=unitById(id);const w=allUnitWords(u);
     h('p',{class:'sub'},w.length+T(' Wörter & Ausdrücke. ')),h('div',{class:'row',style:'margin-bottom:14px'},
       h('button',{class:'btn primary',onclick:()=>{const n=addVocab(w,u.id);toast(n?n+T(' Wörter zum Trainer hinzugefügt'):T('Schon alle im Trainer'));}},T('Alle in den Vokabeltrainer')),
       h('button',{class:'btn',onclick:()=>startCram(w,u)},T('Jetzt abfragen'))),
-    h('div',{class:'vlist'},w.map(([es,de,em])=>h('div',{class:'vrow'},spk(es),picEl(es,em),h('span',{class:'es'},es),h('span',{class:'de'},de)))));}
+    h('div',{class:'vlist'},w.map(([es,de,em])=>h('div',{class:'vrow'},spk(es),picEl(es,em),h('span',{class:'es'},artW(es)),h('span',{class:'de'},de)))));}
 
 /* ---------- Abschlusstest (statt ganzer Einheit) ---------- */
 function vCheck(m,id){const u=unitById(id);if(!u)return vUnits(m);
@@ -974,7 +977,7 @@ info(el,s,ctx){const box=h('div',{class:'info',html:s.html});const tb=trToggle(b
   el.querySelectorAll('.info .es-t').forEach(addSpeakTo);el.append(actionBar(()=>{ctx.next();return false;},ctx,{label:T('Verstanden →')}));},
 vocab(el,s,ctx){const n=addVocab(s.items,ctx.unit?.id);
   el.append(kind(T('Neue Wörter')),h('h2',{style:'margin-top:0'},s.title||T('Wortschatz')),s.note?h('p',{class:'muted'},s.note):null,
-    h('div',{class:'vlist'},s.items.map(([es,de,em])=>h('div',{class:'vrow'},spk(es),picEl(es,em),h('span',{class:'es'},es),h('span',{class:'de'},de)))),
+    h('div',{class:'vlist'},s.items.map(([es,de,em])=>h('div',{class:'vrow'},spk(es),picEl(es,em),h('span',{class:'es'},artW(es)),h('span',{class:'de'},de)))),
     h('p',{class:'muted small'},n?'✓ '+n+T(' neue Wörter im Vokabeltrainer gespeichert.'):T('Diese Wörter sind schon im Vokabeltrainer.')));
   el.append(actionBar(()=>{ctx.next();return false;},ctx,{label:T('Weiter →')}));},
 mc(el,s,ctx){let sel=null;const all=s.opts.map((o,i)=>[o,i]);const opts=s.keep?all:s.keepLast?shuffle(all.slice(0,-1)).concat([all[all.length-1]]):shuffle(all);
@@ -1243,7 +1246,7 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   const draw=()=>{const q=strip(inp.value.toLowerCase().trim());out.innerHTML='';
     const hits=all.filter(([w,u])=>(q?strip((w[0]+' '+w[1]).toLowerCase()).includes(q):unitLevel(u)===lv)&&(!mine||S.srs[w[0]]));
     info.textContent=(q?hits.length+T(' Treffer in allen Stufen'):hits.length+T(' Wörter in ')+LEVELS.find(L=>L.id===lv).title)+(mine?T(' · nur gesammelte'):'');
-    out.append(...hits.slice(0,300).map(([w,u])=>h('div',{class:'vrow drow'},spk(w[0]),picEl(w[0],w[2])||h('span',{class:'pic'}),h('div',{class:'dw'},h('div',{class:'es'},w[0]),h('div',{class:'de'},w[1])),h('span',{class:'pill'},'U'+u.n))));
+    out.append(...hits.slice(0,300).map(([w,u])=>h('div',{class:'vrow drow'},spk(w[0]),picEl(w[0],w[2])||h('span',{class:'pic'}),h('div',{class:'dw'},h('div',{class:'es'},artW(w[0])),h('div',{class:'de'},w[1])),h('span',{class:'pill'},'U'+u.n))));
     if(!hits.length)out.append(h('p',{class:'muted'},mine?T('Noch keine gesammelten Wörter hier – sie kommen mit den Lektionen.'):T('Nichts gefunden.')));};
   inp.oninput=draw;
   m.append(inp,levelSeg(lv,'ref/w',L=>{const n=all.filter(([,u])=>unitLevel(u)===L.id).length;return n+T(' W.');}),h('div',{class:'row'},tog),info,out,h('p',{class:'muted small',style:'margin-top:16px'},T('Lektionen „Häufige Wörter“: Häufigkeit aus FrequencyWords (OpenSubtitles, CC BY-SA 4.0), Übersetzungen aus WikDict/Wiktionary (CC BY-SA 3.0), bearbeitet.')));draw();}
@@ -1319,7 +1322,7 @@ function vVocabStats(m,all,src){const td=today();m.append(backTo(T('Vokabeln'),'
     h('p',{class:'muted small',style:'margin:4px 2px 12px'},T('Abstand: lernend < 7 Tage · gefestigt 7–20 · sicher ≥ 21')),
     Object.keys(log).length?bars(hist,T('Wiederholt – letzte 14 Tage'),T('Ø ')+Math.round(hist.reduce((a,r)=>a+r.v,0)/14)+T(' pro Tag')):null,
     hard.length?h('div',{class:'card statcard'},h('div',{class:'kind',style:'margin:0 0 6px'},T('Schwierigste Wörter')),
-      h('div',{class:'hardlist'},hard.map(c=>h('div',{class:'hardrow'},spk(c.es),h('span',{class:'es'},c.es),h('span',{class:'muted small'},trc(c.de)),h('span',{class:'pill warn'},(c.ag||0)>=(c.lapses||0)?c.ag+'× '+T('Nochmal'):c.lapses+'× '+T('zurückgefallen')))))):null);}
+      h('div',{class:'hardlist'},hard.map(c=>h('div',{class:'hardrow'},spk(c.es),h('span',{class:'es'},artW(c.es)),h('span',{class:'muted small'},trc(c.de)),h('span',{class:'pill warn'},(c.ag||0)>=(c.lapses||0)?c.ag+'× '+T('Nochmal'):c.lapses+'× '+T('zurückgefallen')))))):null);}
 function newListId(){return 'l'+Date.now().toString(36);}
 /* eigene Wörter üben: zufällige Auswahl (max. 20), pro Wort zufällig Karte (beide Richtungen), Tippen oder Hören – ohne Einfluss auf die Wiederholungsplanung */
 /* Auswahl gewichtet: oft falsch, zuletzt falsch, lange nicht oder nie geübt → häufiger dran (gewichtete Zufallsauswahl) */
@@ -1451,8 +1454,8 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
       kinds[i]={md:mode==='mix'?(exLike?['flip','type']:['flip','flip','type','listen'])[Math.floor(Math.random()*(exLike?2:4))]:mode,rev:Math.random()<0.5};}/* gemerkt, damit ↶ dieselbe Aufgabe zeigt */
     const md=kinds[i].md;
     if(md==='flip'){let shown=false;const rev=kinds[i].rev; /* Richtung zufällig: Spanisch → Deutsch oder Deutsch → Spanisch */
-      const card=rev?h('div',{class:'card flash'},h('div',{class:'big'},(pic(c.es,c.em)?pic(c.es,c.em)+' ':'')+trc(c.de)),h('div',{id:'ans',style:'visibility:hidden'},h('div',{class:'big',style:'font-size:24px;margin-top:6px'},c.es),spk(c.es)))
-        :h('div',{class:'card flash'},h('div',{class:'big'},c.es),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
+      const card=rev?h('div',{class:'card flash'},h('div',{class:'big'},(pic(c.es,c.em)?pic(c.es,c.em)+' ':'')+trc(c.de)),h('div',{id:'ans',style:'visibility:hidden'},h('div',{class:'big',style:'font-size:24px;margin-top:6px'},artW(c.es)),spk(c.es)))
+        :h('div',{class:'card flash'},h('div',{class:'big'},artW(c.es)),spk(c.es),h('div',{class:'muted',id:'ans',style:'visibility:hidden;font-size:20px'},(pic(c.es,c.em)?pic(c.es,c.em)+'  ':'')+trc(c.de)));
       stage.append(kind(rev?fmt(T('Wie heißt das {ON}?')):T('Was bedeutet das?')),card);if(!rev)setTimeout(()=>say(c.es),200);
       const row=h('div',{class:'actions'});const reveal=h('button',{class:'btn primary'},T('Aufdecken'));
       reveal.onclick=()=>{shown=true;$('#ans').style.visibility='visible';if(rev)say(c.es);row.innerHTML='';row.className='rates';row.append(

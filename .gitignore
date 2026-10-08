@@ -3,3 +3,6 @@ quellcode/dist/
 quellcode/pruefung/
 server/invites.txt
 server/.wrangler/
+
+# lokale Referenzlisten (z. B. Goethe-Wortliste A1) – nicht veröffentlichen
+quellcode/quellen/
