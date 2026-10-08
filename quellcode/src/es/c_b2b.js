@@ -28,7 +28,7 @@ lessons:[
  {t:'mc',q:'Si ___ más paciente, no habría discutido con él. (Ich bin generell ungeduldig.)',opts:['fuera','hubiera sido','sería'],a:0},
  {t:'gap',q:'Si no ___ (yo, venir) a Barcelona, no ___ (hablar) español tan bien ahora.',a:['hubiera venido','hablaría']},
  {t:'gap',q:'Si hubieras comprado las entradas, ahora ___ (nosotros, estar) en el concierto.',a:['estaríamos']},
- {t:'tr',de:'Wenn ich Medizin studiert hätte, wäre ich jetzt Ärztin.',a:['Si hubiera estudiado Medicina, ahora sería médica.']},
+ {t:'tr',de:'Wenn ich Medizin studiert hätte, wäre ich jetzt Ärztin.',a:['Si hubiera estudiado Medicina, ahora sería médica.','Si hubiese estudiado Medicina, ahora sería médica.']},
  {t:'listen',es:'Si no hubiera perdido el autobús aquel día, no te habría conocido.',de:'Wenn ich an jenem Tag nicht den Bus verpasst hätte, hätte ich dich nicht kennengelernt.'}]},
 {id:'l3',title:'Bedauern & Vorwürfe',desc:'ojalá hubiera · deberías haber',steps:[
  {t:'info',title:'Was man bereut – und anderen vorwirft',html:`<table><tr><th>Ausdruck</th><th>Beispiel</th></tr>

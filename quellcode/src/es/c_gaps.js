@@ -107,7 +107,7 @@ lessons:[
  {t:'mc',q:'2026 =',opts:['dos mil veintiséis','veinte veintiséis','dos mil y veintiséis'],a:0},
  {t:'gap',q:'Mi cumpleaños es ___ ___ de marzo. (am 3.)',a:['el','tres']},
  {t:'gap',q:'En España las vacaciones de verano son en julio y ___. (August)',a:['agosto']},
- {t:'tr',de:'Ich bin am 7. Juni geboren.',a:['Nací el siete de junio.']},
+ {t:'tr',de:'Ich bin am 7. Juni geboren.',a:['Nací el siete de junio.','Nací el 7 de junio.']},
  {t:'listen',es:'El curso empieza el quince de enero.',de:'Der Kurs beginnt am 15. Januar.'},
  {t:'speak',es:'Hoy es lunes, cinco de octubre de dos mil veintiséis.',de:'Heute ist Montag, der 5. Oktober 2026.'}]},
 {id:'l2',title:'Akzente: wann á, é, í?',desc:'Betonung & Akzentregeln',steps:[

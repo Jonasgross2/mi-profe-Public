@@ -25,7 +25,7 @@ lessons:[
  <p><b>jugar</b> (u→ue): <span class="es-t">juego, juegas, juega, jugamos, jugáis, juegan</span> – Sport immer mit <b>al</b>: <span class="es-t">juego al tenis</span>.</p>`},
  {t:'gap',q:'Los fines de semana ___ (yo, salir) con mis amigos y ___ (hacer) deporte.',a:['salgo','hago']},
  {t:'conj',verb:'jugar',de:'spielen',forms:['juego','juegas','juega','jugamos','jugáis','juegan']},
- {t:'tr',de:'Ich liebe die Natur, aber der Lärm stört mich.',a:['Me encanta la naturaleza, pero me molesta el ruido.']}
+ {t:'tr',de:'Ich liebe die Natur, aber der Lärm stört mich.',a:['Me encanta la naturaleza, pero me molesta el ruido.','Me gusta mucho la naturaleza, pero me molesta el ruido.','Amo la naturaleza, pero me molesta el ruido.']}
 ]},
 {id:'l2',title:'Ein Hotelzimmer reservieren',desc:'Quería reservar una habitación doble',steps:[
  {t:'vocab',title:'Im Hotel',items:[['la habitación doble / individual','das Doppel- / Einzelzimmer'],['exterior / interior','zur Straße / zum Innenhof'],['tranquila / ruidosa','ruhig / laut'],['con ducha / con baño','mit Dusche / mit Bad'],['el aire acondicionado','die Klimaanlage'],['la calefacción','die Heizung'],['la piscina','das Schwimmbad'],['el desayuno incluido','Frühstück inklusive'],['la recepción','die Rezeption'],['la ubicación','die Lage'],['el precio','der Preis'],['quería …','ich hätte gern / ich wollte …']]},
@@ -123,7 +123,7 @@ lessons:[
  {t:'mc',q:'„Heute kann ich nicht, ich habe eine Besprechung.“',opts:['Hoy no puedo, tengo una reunión.','Hoy no sé, tengo una reunión.','Hoy no podo, tengo una reunión.'],a:0},
  {t:'gap',q:'No ___ (yo, saber) hablar francés, pero lo entiendo.',a:['sé']},
  {t:'tr',de:'Mein Job ist kreativ und ich habe flexible Arbeitszeiten.',a:['Mi trabajo es creativo y tengo un horario flexible.','Mi trabajo es creativo y mis horarios son flexibles.','Mi trabajo es creativo y tengo horarios flexibles.']},
- {t:'tr',de:'Weißt du, wie man dieses Programm benutzt?',a:['¿Sabes usar este programa?']}
+ {t:'tr',de:'Weißt du, wie man dieses Programm benutzt?',a:['¿Sabes usar este programa?','¿Sabes cómo se usa este programa?','¿Sabes cómo usar este programa?']}
 ]},
 {id:'l2',title:'Vergleiche',desc:'más … que · tan … como · el más …',steps:[
  {t:'info',title:'Vergleichen',html:`<table><tr><td>+</td><td class="es-t">Lucas es más joven que Carlos.</td></tr><tr><td>–</td><td class="es-t">Valentina gana menos que Lucas.</td></tr>
@@ -221,7 +221,7 @@ lessons:[
   {n:'Sr. Torres',es:'Perfecto. ¿Dónde quedamos?',de:'Perfekt. Wo treffen wir uns?'},
   {you:true,opts:[{es:'En nuestra oficina, si le parece bien.',ok:true},{es:'En nuestra oficina, si te parezco bien.',ok:false,why:'Er siezt dich → <i>si le parece bien</i>.'}]}]},
  {t:'tr',de:'Wie wäre es, wenn wir uns am Freitag treffen?',a:['¿Qué tal si quedamos el viernes?','¿Qué te parece si quedamos el viernes?','¿Por qué no quedamos el viernes?','¿Qué tal si nos vemos el viernes?','¿Qué te parece si nos vemos el viernes?']},
- {t:'tr',de:'Ausgerechnet am Samstag kann ich nicht.',a:['Justo el sábado no puedo.']}
+ {t:'tr',de:'Ausgerechnet am Samstag kann ich nicht.',a:['Justo el sábado no puedo.','Precisamente el sábado no puedo.']}
 ]},
 {id:'l2',title:'Pläne: ir a + Infinitiv',desc:'Voy a visitar a un cliente',steps:[
  {t:'info',title:'Das „futuro próximo“',html:`<p>Für Pläne und nahe Zukunft: <b>ir</b> (konjugiert) + <b>a</b> + Infinitiv.</p>
@@ -257,7 +257,7 @@ lessons:[
  {t:'mc',q:'Du zeigst auf eine Jacke weit hinten im Laden:',opts:['aquella chaqueta','esta chaqueta','aquel chaqueta'],a:0},
  {t:'mc',q:'Du hältst Schuhe in der Hand:',opts:['estos zapatos','esos zapatos','estas zapatos'],a:0},
  {t:'listen',es:'¿Cuánto cuesta esa chaqueta de cuero?',de:'Wie viel kostet die Lederjacke da?'},
- {t:'tr',de:'Diese blaue Hose gefällt mir.',a:['Me gustan estos pantalones azules.']}
+ {t:'tr',de:'Diese blaue Hose gefällt mir.',a:['Me gustan estos pantalones azules.','Me gusta este pantalón azul.']}
 ]},
 {id:'l4',title:'Wetter & Smalltalk',desc:'Hace calor · ¡Qué frío hace! · ¿Verdad?',steps:[
  {t:'info',title:'Über das Wetter sprechen',html:`<table><tr><td class="es-t">Hace calor / frío / sol / viento.</td><td>Es ist heiß / kalt / sonnig / windig.</td></tr>

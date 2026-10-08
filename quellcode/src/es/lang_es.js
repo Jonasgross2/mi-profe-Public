@@ -12,6 +12,7 @@ defineLang('es',{name:'Spanisch',flag:'🇪🇸',native:'Español',into:'ins Spa
   storySeries:'Nuevo en Barcelona',storyIntro:'Ben zieht nach Barcelona.',
   mark:/[ñ¿¡áéíóú]|^(el|la|los|las|un|una|unos|unas)\s/i, /* erkennt beim Import von Wortlisten, welche Seite Spanisch ist */
   sampleWords:[['la mesa',{de:'der Tisch',en:'the table',pt:'a mesa'}],['el perro',{de:'der Hund',en:'the dog',pt:'o cão'}]],
+  roleNote:'Im Kurs spielst du eine Rolle: Du bist neu in Barcelona und machst dort einen Master. In freien Aufgaben schreibst du einfach über dich selbst.',
   key:'espanol-lehrer-v1',gist:'mi-profe-fortschritt.json',
   course:window.COURSE,placement:window.PLACEMENT,stories:window.STORIES||[],levels:window.LEVELS,levelOf:window.LEVEL_OF,emoji:window.EMOJI});
 

@@ -45,7 +45,7 @@ lessons:[
  {t:'gap',q:'Me gustaría que ___ (vosotros, conocer) a mi familia.',a:['conocierais']},
  {t:'gap',q:'Gasta dinero como si ___ (ser) millonario.',a:['fuera']},
  {t:'vocab',title:'Träume & Lebensentwürfe',items:[['tocar la lotería','im Lotto gewinnen','🎰'],['dar la vuelta al mundo','eine Weltreise machen','🌍'],['montar un negocio','ein Geschäft gründen','🏪'],['cambiar de vida','sein Leben ändern','🔄'],['echar raíces','Wurzeln schlagen','🌳'],['el sueño','der Traum','💭'],['la meta','das Ziel','🎯'],['arriesgarse','etwas riskieren','🎲'],['arrepentirse (de)','bereuen','😔'],['valer la pena','sich lohnen','✅']]},
- {t:'tr',de:'Wenn ich im Lotto gewinnen würde, würde ich eine Weltreise machen.',a:['Si me tocara la lotería, daría la vuelta al mundo.']},
+ {t:'tr',de:'Wenn ich im Lotto gewinnen würde, würde ich eine Weltreise machen.',a:['Si me tocara la lotería, daría la vuelta al mundo.','Si ganara la lotería, daría la vuelta al mundo.','Si me tocara la lotería, haría un viaje alrededor del mundo.']},
  {t:'speak',es:'Ojalá tuviera más tiempo para viajar, pero ahora tengo que trabajar.',de:'Wenn ich doch mehr Zeit zum Reisen hätte, aber jetzt muss ich arbeiten.'}]},
 {id:'l4',title:'Lesen: Otra vida',desc:'Kolumne · eigener Text',steps:[
  {t:'read',title:'Si pudiera empezar de nuevo',text:`A veces me pregunto qué haría si pudiera empezar de nuevo. Quizá estudiaría música en lugar de {Derecho|Jura}, o me iría a vivir a Lisboa, donde siempre me he sentido en casa. Si no tuviera hipoteca ni hijos, seguramente me arriesgaría más.

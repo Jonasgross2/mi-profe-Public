@@ -84,7 +84,7 @@ lessons:[
  {t:'gap',q:'Cuando ___ (tú, tener) tiempo, ven a verme.',a:['tengas']},
  {t:'gap',q:'Cuando ___ (nosotros, terminar) el máster, buscaremos trabajo.',a:['terminemos']},
  {t:'order',es:'Cuando sepa la fecha, te lo digo.',de:'Wenn ich das Datum weiß, sage ich es dir.'},
- {t:'tr',de:'Wenn du in Berlin bist, ruf mich an.',a:['Cuando estés en Berlín, llámame.']},
+ {t:'tr',de:'Wenn du in Berlin bist, ruf mich an.',a:['Cuando estés en Berlín, llámame.','Llámame cuando estés en Berlín.']},
  {t:'listen',es:'Cuando llegues al aeropuerto, mándame un mensaje.',de:'Wenn du am Flughafen ankommst, schick mir eine Nachricht.'}]},
 {id:'l2',title:'Sobald, bis, bevor',desc:'en cuanto · hasta que · antes de que',steps:[
  {t:'info',title:'Weitere Zeit-Konjunktionen',html:`<table><tr><th>Konjunktion</th><th>Bedeutung</th><th>Zukunft</th></tr>
@@ -226,7 +226,7 @@ lessons:[
  {t:'gap',q:'Haz ___ quieras.',a:['lo que']},
  {t:'gap',q:'El libro ___ me recomendaste es buenísimo.',a:['que']},
  {t:'order',es:'La ciudad donde nací es muy pequeña.',de:'Die Stadt, in der ich geboren bin, ist sehr klein.'},
- {t:'tr',de:'Das ist die Wohnung, die ich gemietet habe.',a:['Este es el piso que he alquilado.','Es el piso que he alquilado.','Este es el piso que alquilé.']}]},
+ {t:'tr',de:'Das ist die Wohnung, die ich gemietet habe.',a:['Este es el piso que he alquilado.','Es el piso que he alquilado.','Este es el piso que alquilé.','Este es el apartamento que he alquilado.']}]},
 {id:'l2',title:'Mit wem? Über was?',desc:'el que · con quien · en la que',steps:[
  {t:'info',title:'Relativsätze mit Präposition',html:`<p>Steht eine Präposition davor, braucht <i>que</i> einen Artikel – oder man nimmt <i>quien</i> für Personen:</p>
  <table><tr><th></th><th>Beispiel</th></tr>

@@ -52,8 +52,8 @@ function persStr(t){if(!/Jonas|Gross|erre, o, e/.test(t))return t;const sur=S.su
   return t.replace(/„Gross“ – du sagst, dass man das Doppel-S mit zwei S schreibt\./,'Ein Doppel-S buchstabierst du „dos eses“.').replace(/“Gross” – you say that the double S is written with two S's\./,'You spell a double S as “dos eses”.')
    .replace(/^Gross: [a-zñ, ]+\.$/,sp+': '+spellName(sp)+'.').replace(/^Ge, erre, o, ese, ese\.$/,()=>{const x=spellName(sp);return x.charAt(0).toUpperCase()+x.slice(1)+'.';})
    .replace(/^Je, erre, o, es, es\.$/,()=>{const x=[...sp.toLowerCase()].filter(c=>GSPELL[c]).map(c=>GSPELL[c]).join(', ');return x.charAt(0).toUpperCase()+x.slice(1)+'.';}).replace('Deinen Nachnamen buchstabieren',sur?'Deinen Nachnamen buchstabieren':'Deinen Namen buchstabieren').replace('Spelling your surname',sur?'Spelling your surname':'Spelling your name')
-   .replace(/\bJonas Gross\b/g,nm+(sur?' '+sur:'')).replace(/, señor Gross/g,', '+(f?'señora':'señor')+(sur?' '+sur:''))
-   .replace(/, (Herr|Mr) Gross/g,(m,w)=>sur?', '+(w==='Herr'?(f?'Frau':'Herr'):(f?'Ms':'Mr'))+' '+sur:'').replace(/\bJonas\b/g,nm);}
+   .replace(/\bJonas Gross\b/g,nm+(sur?' '+sur:'')).replace(/, señor Gross/g,S.gender==='x'?', '+(sur?nm.split(' ')[0]+' '+sur:nm):', '+(f?'señora':'señor')+(sur?' '+sur:''))
+   .replace(/, (Herr|Mr) Gross/g,(m,w)=>!sur?'':S.gender==='x'?', '+nm.split(' ')[0]+' '+sur:', '+(w==='Herr'?(f?'Frau':'Herr'):(f?'Ms':'Mr'))+' '+sur).replace(/\bJonas\b/g,nm);}
 function personalize(o){if(typeof o==='string')return persStr(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=personalize(o[i]);return o;}
   if(o&&typeof o==='object'){/* ohne Nachnamen im Profil fragt die Rezeption nach dem Namen statt dem Nachnamen */
     if(o.n&&o.es==='¿Cómo se escribe tu apellido?'&&!S.surname){o.es='¿Cómo se escribe tu nombre?';o.de=EX==='de'?'Wie schreibt man deinen Namen?':'How do you spell your name?';}
@@ -237,7 +237,7 @@ function wordCmp(c,x,typo){ // c,x normalized strings
   return worst;}
 function compare(input,answers,opts={}){
   answers=[].concat(answers).flatMap(a=>String(a).split('|'));
-  if(isF())answers=answers.flatMap(a=>{const f=a.includes(' ')?femFirst(a):femWord(a);return f===a?[a]:a.includes(' ')?[f,a]:[a,f];});const typo=opts.typo!==false;
+  if(isF()||S.gender==='x'&&LANG.code==='es')answers=answers.flatMap(a=>{const f=a.includes(' ')?femFirst(a):femWord(a);return f===a?[a]:a.includes(' ')?[f,a]:[a,f];});const typo=opts.typo!==false;
   const inp=norm(input);if(!inp)return{status:'bad',right:answers[0],note:T('Keine Antwort.')};
   const cands=[inp];if(opts.pron!==false&&PRON.test(inp))cands.push(inp.replace(PRON,''));
   let best=null;
@@ -318,7 +318,7 @@ async function claudeAsk(prompt,{json,history}){
     if(json)return await SAMPLE.json(input,opt);return (await SAMPLE(input,opt)).text;}
   catch(e){throw new Error(CL_ERR[e&&e.code]||(T('Claude: ')+((e&&e.message)||e&&e.code||T('Fehler'))));}}
 /* ---------- gemini ---------- */
-async function gemini(prompt,{json=true,history=null}={}){if(EX!=='de')prompt=String(prompt)+'\n\nIMPORTANT: The learner wants explanations in '+({en:'English',es:'Spanish',pt:'Brazilian Portuguese',it:'Italian',fr:'French'}[EX])+'. Write ALL explanations, corrections and comments for the learner in that language instead of German (example sentences in the target language stay as they are).';if(S.name)prompt=String(prompt).replace(/\bJonas\b/g,S.name);/* Herkunft aus dem Profil mitgeben, statt eine anzunehmen */if(S.origin&&(S.origin.c||S.origin.other)){const X=S.origin.c&&ORIGINS[S.origin.c];prompt+='\n\n'+(S.name||'Jonas')+' kommt aus '+(X?X[1].replace(/^(die|der) /,''):S.origin.other)+(S.origin.city?' ('+S.origin.city+')':'')+'.';}if(S.gender)prompt+=S.gender==='f'?T('\n\nWICHTIG: ')+(S.name||T('Die lernende Person'))+T(' ist eine Frau. Sprich sie mit weiblichen Formen an (z. B. „estás cansada“, „bienvenida“) und erwarte von ihr weibliche Formen, wenn sie über sich spricht. Im Deutschen: „sie/ihr“ statt „er/ihm“.'):'\n\n'+(S.name||T('Die lernende Person'))+T(' ist ein Mann – männliche Formen verwenden.');
+async function gemini(prompt,{json=true,history=null}={}){if(EX!=='de')prompt=String(prompt)+'\n\nIMPORTANT: The learner wants explanations in '+({en:'English',es:'Spanish',pt:'Brazilian Portuguese',it:'Italian',fr:'French'}[EX])+'. Write ALL explanations, corrections and comments for the learner in that language instead of German (example sentences in the target language stay as they are).';if(S.name)prompt=String(prompt).replace(/\bJonas\b/g,S.name);/* Herkunft aus dem Profil mitgeben, statt eine anzunehmen */if(S.origin&&(S.origin.c||S.origin.other)){const X=S.origin.c&&ORIGINS[S.origin.c];prompt+='\n\n'+(S.name||'Jonas')+' kommt aus '+(X?X[1].replace(/^(die|der) /,''):S.origin.other)+(S.origin.city?' ('+S.origin.city+')':'')+'.';}if(S.gender==='x')prompt+='\n\n'+(S.name||T('Die lernende Person'))+T(' möchte keine Angabe zum Geschlecht machen. Sprich die Person möglichst neutral an und akzeptiere männliche und weibliche Formen, wenn sie über sich spricht.');else if(S.gender)prompt+=S.gender==='f'?T('\n\nWICHTIG: ')+(S.name||T('Die lernende Person'))+T(' ist eine Frau. Sprich sie mit weiblichen Formen an (z. B. „estás cansada“, „bienvenida“) und erwarte von ihr weibliche Formen, wenn sie über sich spricht. Im Deutschen: „sie/ihr“ statt „er/ihm“.'):'\n\n'+(S.name||T('Die lernende Person'))+T(' ist ein Mann – männliche Formen verwenden.');
   if(useClaude())return claudeAsk(prompt,{json,history});
   const key=S.settings.geminiKey;if(!key)throw new Error(T('Kein Gemini-API-Key hinterlegt (Einstellungen).'));
   const tried=[S.settings.geminiModel||'gemini-flash-latest'];for(const f of FALLBACK)if(!tried.includes(f))tried.push(f);
@@ -533,7 +533,7 @@ function vLearnPick(){const bt=document.getElementById('boot');document.body.inn
       ...planned.map(([c,n,f])=>h('button',{class:'learntile soon',onclick:()=>toast(T(n)+T(' ist noch in Arbeit'))},h('span',{class:'lf'},f),h('b',{},T(n)),h('span',{class:'muted small'},T('bald'))))))));}
 function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
-  let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('b',{},l),ex?h('span',{},ex):null);return b;});
+  let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]],['x',T('🙂 keine Angabe'),T('beide Formen zählen')]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('div',{style:'font-size:20px;line-height:1.2'},l.split(' ')[0]),h('b',{},l.split(' ').slice(1).join(' ')),ex?h('span',{},ex):null);return b;});
   const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const v2=inp2.value.trim().replace(/\s+/g,' ').slice(0,40);const changed=v!==S.name||g!==S.gender||v2!==(S.surname||'');S.name=v;S.gender=g;if(v2)S.surname=v2;else delete S.surname;save();
     const back=again?'lang':'home';if(IN_ARTIFACT)CUR=back;else history.replaceState(null,'','#'+back);
     if(changed&&!IN_ARTIFACT)reloadApp();else{if(changed){personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}}route();}};
@@ -544,6 +544,7 @@ function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=
     h('div',{style:'font-size:48px;margin-bottom:6px'},'👋'),h('h1',{style:'margin:0 0 6px'},again?T('Name ändern'):T('¡Hola!')),
     h('p',{class:'muted',style:'margin:0 0 18px'},again?T('So begrüße ich dich und so heißt du in den Übungen.'):fmt(T('Ich bin dein Lehrer für {L}. Wie heißt du?'))),
     inp,inp2,h('p',{class:'muted small',style:'margin:16px 0 8px'},T('Wie soll ich dich ansprechen? (wichtig für die Endungen)')),LANG.genderEx?h('div',{class:'gsel'},gb):null,
+    !again&&LANG.roleNote?h('p',{class:'muted small',style:'margin:14px 0 0'},'🎭 '+T(LANG.roleNote)):null,
     h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?T('Speichern'):T('Los geht’s →')),
     again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('lang')},T('Abbrechen')):null)));
   setTimeout(()=>inp.focus(),80);}
@@ -636,6 +637,9 @@ function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.
 let lastLv=null;/* zuletzt angesehene Stufe – beim Zurückkommen auf „Kurs“ wieder dort, beim App-Start dort, wo es weitergeht */
 function vUnits(m,lv){
   const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):T('A1'));lastLv=lv;
+  /* einmaliger Hinweis: die Kurs-Geschichte ist eine Rolle (Steckbrief LANG.roleNote) */
+  if(LANG.roleNote&&!S.settings.roleSeen)m.append(h('div',{class:'card',style:'padding:10px 14px;margin-bottom:12px;display:flex;gap:10px;align-items:flex-start'},h('span',{},'🎭'),h('span',{class:'small',style:'flex:1'},T(LANG.roleNote)),
+    h('button',{class:'btn ghost small',title:T('Ausblenden'),onclick:e=>{S.settings.roleSeen=1;save();e.currentTarget.parentNode.remove();}},'×')));
   m.append(h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},T('Kurs')),h('button',{class:'btn small',onclick:()=>go('placement')},T('🎯 Test')),h('button',{class:'btn small',onclick:()=>go('ref/g')},T('📄 Grammatik'))));
   const pctOf=Ls=>{const us=COURSE.units.filter(u=>Ls.some(L=>L.id===unitLevel(u))&&u.status!=='soon');return Math.round((us.length?us.reduce((a,u)=>a+lessonPct(u),0)/us.length:0)*100)+'%';};
   m.append(levelTabs(lv,'units',pctOf));
@@ -699,11 +703,15 @@ function speakable(t){t=t.replace(/\s*\([^)]*\)/g,'').replace(/\s*=\s*[^·]*/g,'
 function addSpeakTo(el){const t=speakable(el.textContent);if(!t||looksDe(t))return;const b=spk(t);b.style.marginLeft='6px';b.style.width='24px';b.style.height='24px';b.style.fontSize='11px';el.append(b);}
 const cleanWord=es=>es.length<=28&&!/[…\/(]/.test(es);
 function lessonWords(l){const w=[];for(const s of l.steps)if(s.t==='vocab')w.push(...s.items);return w.filter(x=>cleanWord(x[0]));}
+/* Synonyme: andere Kurswörter mit genau derselben deutschen Bedeutung (ganzer Text inkl. Klammern, damit z. B. ser/estar getrennt bleiben) */
+let DE_IDX=null;const deKeys=de=>{const k=norm(de);return k.length>2?[k]:[];};
+function synOf(es,de){if(!DE_IDX){DE_IDX={};COURSE.units.forEach(u=>(u.lessons||[]).forEach(l=>l.steps.forEach(s=>{if(s.t==='vocab')(s.items||[]).forEach(w=>deKeys(w[1]).forEach(k=>{(DE_IDX[k]=DE_IDX[k]||[]).push(w[0]);}));})));}
+  const out=[];deKeys(de).forEach(k=>(DE_IDX[k]||[]).forEach(x=>{if(norm(x)!==norm(es)&&out.indexOf(x)<0)out.push(x);}));return out;}
 function vocabStep(u,mode,es,de,em){const p=pic(es,em);
   if(mode==='mc'){const others=shuffle(allUnitWords(u).map(x=>x[0]).filter(x=>x!==es&&cleanWord(x))).slice(0,2);return{t:'mc',kind:T('Was heißt das?'),q:(p?p+' ':'')+esc(de),opts:[es,...others],a:0};}
   if(mode==='mcde'){const others=shuffle(allUnitWords(u).filter(x=>x[0]!==es&&x[1]!==de).map(x=>x[1])).slice(0,2);return{t:'mc',kind:T('Was bedeutet das?'),q:(p?p+' ':'')+esc(es),opts:[de,...others],a:0};}
   if(mode==='listen')return{t:'listen',es,de};
-  return{t:'tr',kind:fmt(T('Wie heißt das {ON}?')),de:(p?p+'  ':'')+de,a:[es]};}
+  return{t:'tr',kind:fmt(T('Wie heißt das {ON}?')),de:(p?p+'  ':'')+de,a:[es].concat(synOf(es,de))};}
 const vocabItem=(u,w,mode)=>({s:vocabStep(u,mode,w[0],w[1],w[2]),ref:T('W|')+u.id+'|'+mode+'|'+w[0]});
 function allUnitWords(u){const w=[];for(const l of u.lessons)for(const s of l.steps)if(s.t==='vocab')w.push(...s.items);return w;}
 function vWords(m,id){const u=unitById(id);const w=allUnitWords(u);
@@ -1392,7 +1400,8 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
     if(md==='listen'){stage.append(kind(T('Hör zu und schreib das Wort')),h('div',{class:'row',style:'margin-bottom:14px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.55)},T('🐢 Langsam'))),inp,keys(()=>inp));setTimeout(()=>say(c.es),200);}
     else stage.append(kind(fmt(T('Wie heißt das {ON}?'))),picEl(c.es,c.em,'qpic'),h('p',{class:'q',style:'font-size:26px'},trc(c.de)),inp,keys(()=>inp));
     setTimeout(()=>inp.focus(),50);
-    stage.append(actionBar(()=>{const r=compare(inp.value,c.es,{pron:false});inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
+    stage.append(actionBar(()=>{let r=compare(inp.value,c.es,{pron:false});
+      if(r.status==='bad'&&md!=='listen'){const sy=synOf(c.es,c.de);if(sy.length&&compare(inp.value,sy,{pron:false}).status==='ok')r={status:'ok',right:c.es,note:T('Auch richtig ✓ – gesucht war: ')+c.es};}inp.readOnly=true;inp.classList.add(r.status==='bad'?'wrong':'right');
       feedback(stage,r,{t:'v'},inp.value,null);if(md==='listen')stage.append(h('p',{class:'muted'},'= '+trc(c.de)));if(r.status!=='bad')say(c.es);res(c,r.status);},{next:nxt}));}
   function end(){stage.innerHTML='';upd();if(opt.pk)pauseDel(opt.pk);const pct=Math.round(100*okc/Math.max(seen.size,1));if(srs&&seen.size){S.vocabDay=today();save();}const np=opt.again?null:dayPlan().find(x=>!x.done&&x.r!=='vocab');const more=srs?reviewSet():[];
     stage.append(h('div',{class:'card',style:'text-align:center;padding:36px'},h('div',{style:'font-size:44px'},'🗂️'),h('h1',{},T('¡Hecho!')),h('p',{class:'sub'},pct+T('% gewusst · ')+seen.size+T(' Karten')),
@@ -1548,7 +1557,7 @@ function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & P
   const orig=(()=>{const o=S.origin||{};const X=ORIGINS[o.c||'DE'];return (o.other?'🌍 '+o.other:X[0]+' '+T(X[1].replace(/^die /,'')))+(o.city?' · '+o.city:'');})();
   const prow=(txt,r)=>h('div',{class:'row',style:'flex-wrap:nowrap'},h('div',{style:'flex:1;min-width:0;font-weight:600'},txt),h('button',{class:'btn small',onclick:()=>go(r)},T('Ändern')));
   m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Profil')),h('div',{class:'card',style:'padding:10px 16px;display:grid;gap:8px'},
-    prow('👤 '+S.name+(S.surname?' '+S.surname:'')+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):''),'name'),prow(orig,'origin')));}
+    prow('👤 '+S.name+(S.surname?' '+S.surname:'')+(S.gender==='f'?T(' · weiblich'):S.gender==='m'?T(' · männlich'):S.gender==='x'?T(' · keine Angabe'):''),'name'),prow(orig,'origin')));}
 /* Ländername in der App-Sprache (de/es/en aus ORIGINS, pt über ui_tr oder Englisch) */
 function originName(X){const de=X[1].replace(/^(die|der) /,'');if(UI==='de')return de;if(UI==='es'){const e=X[2].replace(/^(el|los) /,'');return e.charAt(0).toUpperCase()+e.slice(1);}
   if(UI==='pt'&&T(de)!==de)return T(de);return X[6].replace(/^the /,'');}

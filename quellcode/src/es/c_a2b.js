@@ -78,7 +78,7 @@ lessons:[
  {t:'listen',es:'Tome una pastilla cada ocho horas.',de:'Nehmen Sie alle acht Stunden eine Tablette.'},
  {t:'read',title:'Consejos para el estrés de los exámenes',text:`Los exámenes son estresantes para todos. Aquí tienes cinco consejos. Primero, {organiza|organisiere} tu tiempo: haz un plan para cada día. Segundo, {duerme|schlafe} siete u ocho horas. Sin descanso no puedes aprender. Tercero, {come|iss} bien y bebe mucha agua; el café no es la solución. Cuarto, haz deporte: un {paseo|Spaziergang} de veinte minutos ayuda mucho. Y por último, {habla|sprich} con tus compañeros: no estás solo.`,de:'Prüfungen sind für alle stressig. Hier hast du fünf Tipps. Erstens: Organisiere deine Zeit, mach einen Plan für jeden Tag. Zweitens: Schlaf sieben oder acht Stunden. Ohne Erholung kannst du nicht lernen. Drittens: Iss gut und trink viel Wasser; Kaffee ist nicht die Lösung. Viertens: Mach Sport, ein Spaziergang von zwanzig Minuten hilft viel. Und zuletzt: Sprich mit deinen Kommilitonen, du bist nicht allein.'},
  {t:'mc',q:'Laut Text: Was ist „nicht die Lösung“?',opts:['el café','el deporte','el agua'],a:0},
- {t:'tr',de:'Schlaf acht Stunden und mach Sport.',a:['Duerme ocho horas y haz deporte.']}]}
+ {t:'tr',de:'Schlaf acht Stunden und mach Sport.',a:['Duerme ocho horas y haz deporte.','Duerme 8 horas y haz deporte.','Duerme ocho horas y haz ejercicio.']}]}
 ],
 placement:[
  {t:'mc',q:'„Mir tun die Füße weh.“',opts:['Me duelen los pies.','Me duele los pies.','Tengo dolor los pies.'],a:0},
@@ -231,7 +231,7 @@ Primero se corta el pan en {rebanadas|Scheiben} y se {tuesta|röstet} un poco. D
   {you:true,opts:[{es:'¿Cuántos huevos echo?',ok:true},{es:'¿Cuántas huevos echo?',ok:false,why:'<i>el huevo</i> ist männlich → <b>cuántos</b>.'}]},
   {n:'Nuria',es:'Seis. Y ahora lo más difícil: darle la vuelta. ¡Hazlo tú!',de:'Sechs. Und jetzt das Schwierigste: sie umdrehen. Mach du es!'}]},
  {t:'match',q:'Rezept-Schritte',pairs:[['Primero','se pelan las patatas'],['Después','se fríen en aceite'],['Luego','se mezclan con los huevos'],['Al final','se le da la vuelta']]},
- {t:'tr',de:'Man braucht vier Eier und ein bisschen Salz.',a:['Se necesitan cuatro huevos y un poco de sal.']},
+ {t:'tr',de:'Man braucht vier Eier und ein bisschen Salz.',a:['Se necesitan cuatro huevos y un poco de sal.','Hacen falta cuatro huevos y un poco de sal.','Necesitas cuatro huevos y un poco de sal.']},
  {t:'free',task:'Erklär ein einfaches Gericht aus Deutschland (z. B. Kartoffelsalat oder Pfannkuchen) mit se + Verb: Zutaten und 4–5 Schritte.',hint:'Se necesitan … · Primero se … · Después se … · Luego se … · Al final se …',focus:'se + Verb, Mengenangaben, Reihenfolge',model:'Para hacer tortitas alemanas se necesitan 250 gramos de harina, tres huevos, medio litro de leche y una pizca de sal. Primero se mezclan la harina y la leche. Después se añaden los huevos y la sal. Luego se calienta un poco de aceite en la sartén. Al final se fríen las tortitas y se sirven con azúcar o con manzana.'}]}
 ],
 placement:[
@@ -292,7 +292,7 @@ lessons:[
  {t:'mc',q:'– ¿Nos mandas las fotos? – Sí, ___ mando esta noche.',opts:['os las','os los','las os'],a:0},
  {t:'gap',q:'– ¿Le compras las flores a tu madre? – Sí, ___ ___ compro mañana.',a:['se','las']},
  {t:'gap',q:'– ¿Me dejas el libro? – Sí, ___ ___ dejo.',a:['te','lo']},
- {t:'tr',de:'Die Torte? Ich bringe sie dir morgen.',a:['¿La tarta? Te la traigo mañana.']},
+ {t:'tr',de:'Die Torte? Ich bringe sie dir morgen.',a:['¿La tarta? Te la traigo mañana.','¿La tarta? Te la llevo mañana.']},
  {t:'listen',es:'¿Las llaves? Se las he dado a Marc.',de:'Die Schlüssel? Ich habe sie Marc gegeben.'}]},
 {id:'l4',title:'Um Gefallen bitten',desc:'¿Me prestas …? · ¿Te importa …?',steps:[
  {t:'vocab',title:'Bitten & antworten',items:[['¿Me prestas …?','Leihst du mir …?','🤲'],['¿Me dejas …?','Lässt du mich … / Leihst du mir …?','🤲'],['¿Puedes …?','Kannst du …?','🙋'],['¿Te importa + Infinitiv?','Macht es dir etwas aus, …?','🙏'],['¿Te importa si …?','Stört es dich, wenn …?','🙏'],['¿Podría …?','Könnten Sie …? (höflich)','🎩'],['Sí, claro.','Ja, klar.','👍'],['¡Por supuesto!','Selbstverständlich!','👌'],['Lo siento, es que …','Tut mir leid, aber …','🙇'],['Ahora mismo no puedo.','Gerade kann ich nicht.','⏱️']]},

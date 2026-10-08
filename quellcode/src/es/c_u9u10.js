@@ -17,7 +17,7 @@ lessons:[
  {t:'mc',q:'La oficina ___ cerca de la estación.',opts:['está','es','hay'],a:0,keep:true},
  {t:'gap',q:'Mi habitación ___ exterior y ___ amueblada.',a:['es','está']},
  {t:'match',q:'Wohin gehört das?',pairs:[['la cama','la habitación'],['el escritorio','el despacho'],['la ducha','el baño'],['el sofá','el salón'],['la nevera','la cocina']]},
- {t:'tr',de:'Die Wohnung ist im dritten Stock und hat einen Balkon.',a:['El piso está en la tercera planta y tiene un balcón.','El piso está en el tercer piso y tiene un balcón.','El piso está en la tercera planta y tiene balcón.','El piso está en el tercer piso y tiene balcón.']}
+ {t:'tr',de:'Die Wohnung ist im dritten Stock und hat einen Balkon.',a:['El piso está en la tercera planta y tiene un balcón.','El piso está en el tercer piso y tiene un balcón.','El piso está en la tercera planta y tiene balcón.','El piso está en el tercer piso y tiene balcón.','El apartamento está en la tercera planta y tiene un balcón.']}
 ]},
 {id:'l2',title:'Das Imperfekt',desc:'buscaba · tenía · era · iba · veía',steps:[
  {t:'info',title:'Imperfekt: Formen',html:`<table><tr><th></th><th>-ar (buscar)</th><th>-er / -ir (tener, vivir)</th></tr>
@@ -74,7 +74,7 @@ lessons:[
  {t:'gap',q:'Vivo en el ___ (3.) piso y mi oficina está en la ___ (1.) planta.',a:['tercer','primera']},
  {t:'gap',q:'Para alquilar un piso ___ ___ pagar una fianza. (man muss)',a:['hay','que']},
  {t:'mc',q:'„Die meisten Studierenden wohnen in einer WG.“',opts:['La mayoría de los estudiantes vive en un piso compartido.','La mayoría de estudiantes viven en un piso compartido mucho.','Mayoría de los estudiantes vive en un piso compartido.'],a:0},
- {t:'tr',de:'Man muss die Kaution bezahlen.',a:['Hay que pagar la fianza.']},
+ {t:'tr',de:'Man muss die Kaution bezahlen.',a:['Hay que pagar la fianza.','Se tiene que pagar la fianza.','Hay que pagar el depósito.']},
  {t:'listen',es:'Más de la mitad de los trabajadores prefiere el teletrabajo.',de:'Mehr als die Hälfte der Angestellten bevorzugt Homeoffice.'}
 ]},
 {id:'l5',title:'Lesen: Nuevas formas de trabajo',desc:'Text · früher vs. heute',steps:[
@@ -138,7 +138,7 @@ lessons:[
  {t:'gap',q:'Mis amigos ___ (venir) a Barcelona en octubre.',a:['vinieron']},
  {t:'mc',q:'Indefinido von „decir“ (ellos):',opts:['dijeron','dijieron','decieron'],a:0,why:'Nach <b>j</b> fällt das i weg: <i>dijeron, produjeron</i>.'},
  {t:'match',q:'Infinitiv und Form (yo)',pairs:[['poner','puse'],['querer','quise'],['dar','di'],['ver','vi'],['venir','vine'],['decir','dije']]},
- {t:'tr',de:'Es war ein sehr schöner Tag.',a:['Fue un día muy bonito.']}
+ {t:'tr',de:'Es war ein sehr schöner Tag.',a:['Fue un día muy bonito.','Fue un día precioso.']}
 ]},
 {id:'l3',title:'Eine Biografie erzählen',desc:'Nací en … · A los 10 años … · Hace un mes …',steps:[
  {t:'vocab',title:'Biografie',items:[['nacer (nací)','geboren werden (ich wurde geboren)'],['mudarse (nos mudamos)','umziehen (wir zogen um)'],['ir a la escuela / al colegio','zur Schule gehen'],['terminar el instituto','das Abitur machen / die Schule beenden'],['hacer un intercambio','einen Austausch machen'],['estudiar … en …','… in … studieren'],['empezar a trabajar','anfangen zu arbeiten'],['hace dos años','vor zwei Jahren'],['dos años después','zwei Jahre später'],['desde 2023','seit 2023']]},

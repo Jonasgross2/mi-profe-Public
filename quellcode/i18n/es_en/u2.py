@@ -117,6 +117,7 @@ EN = [
 "Name: <i>Soy / Me llamo …</i> or simply the name.",
 "Those are the German letter names. In Spanish e.g. R = <i>erre</i>, S = <i>ese</i>, G = <i>ge</i>.",
 "Perfect. How old are you?",
+"Say your age – choose a grammatically correct answer.",
 "Age always with <b>tener</b>: <i>tengo … años</i>.",
 "About yourself: <i>tengo</i>.",
 "And what do you do for a living?",

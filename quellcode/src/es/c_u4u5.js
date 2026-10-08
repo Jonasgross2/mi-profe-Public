@@ -91,7 +91,7 @@ lessons:[
  {t:'info',title:'Mengenangaben',html:`<table><tr><td>1 kg</td><td class="es-t">un kilo de patatas</td></tr><tr><td>100 g</td><td class="es-t">cien gramos de jamón</td></tr><tr><td>½ l</td><td class="es-t">medio litro de zumo</td></tr><tr><td>1½ kg</td><td class="es-t">un kilo y medio de carne</td></tr><tr><td></td><td class="es-t">una botella de agua · una lata de cerveza · un paquete de café</td></tr></table>
  <div class="ojo">Zwischen Menge und Produkt steht immer <b>de</b>.</div>`},
  {t:'tr',de:'ein halber Liter Milch',a:['medio litro de leche']},
- {t:'tr',de:'Die Rechnung, bitte.',a:['La cuenta, por favor.']}
+ {t:'tr',de:'Die Rechnung, bitte.',a:['La cuenta, por favor.','¿Me trae la cuenta, por favor?','La cuenta, por favor']}
 ]},
 {id:'l5',title:'Lesen: El menú del día',desc:'Text verstehen · Nationalitäten · eigene Gewohnheiten',steps:[
  {t:'read',title:'El menú del día',text:`En España, muchas personas que {trabajan|arbeiten} en la oficina comen fuera de casa. Una opción muy {popular|beliebt} es el «menú del día». Por un {precio fijo|Festpreis} – normalmente entre 12 y 16 euros – tienes un primer plato, un segundo plato, el postre o un café, pan y una {bebida|Getränk}.
@@ -145,7 +145,7 @@ lessons:[
  {t:'gap',q:'En el centro hay ___ (viel) gente y ___ (viele) turistas.',a:['mucha','muchos']},
  {t:'gap',q:'El metro es ___ (sehr) rápido y trabajo ___ (viel).',a:['muy','mucho']},
  {t:'tr',de:'In meinem Viertel gibt es viele Parks.',a:['En mi barrio hay muchos parques.']},
- {t:'tr',de:'Die Universität ist sehr weit weg.',a:['La universidad está muy lejos.']}
+ {t:'tr',de:'Die Universität ist sehr weit weg.',a:['La universidad está muy lejos.','La uni está muy lejos.']}
 ]},
 {id:'l2',title:'Verkehrsmittel',desc:'Voy en metro · ir a / ir en',steps:[
  {t:'info',title:'Das Verb ir (gehen, fahren)',html:`<table><tr><td>yo</td><td class="es-t">voy</td></tr><tr><td>tú</td><td class="es-t">vas</td></tr><tr><td>él / ella / usted</td><td class="es-t">va</td></tr><tr><td>nosotros/-as</td><td class="es-t">vamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">vais</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">van</td></tr></table>
@@ -183,7 +183,7 @@ lessons:[
   {n:'Señor',es:'De nada. ¡Que vaya bien!',de:'Gern geschehen. Alles Gute!'}]},
  {t:'listen',es:'Gira a la derecha y sigue hasta el final de la calle.',de:'Bieg rechts ab und geh bis zum Ende der Straße.'},
  {t:'tr',de:'Zuerst geradeaus, dann links abbiegen.',a:['Primero todo recto, después gira a la izquierda.','Primero sigue todo recto y después gira a la izquierda.','Primero todo recto y luego a la izquierda.','Primero todo recto, luego gira a la izquierda.','Primero sigue todo recto, luego gira a la izquierda.']},
- {t:'tr',de:'Das Hotel ist neben dem Museum.',a:['El hotel está al lado del museo.']}
+ {t:'tr',de:'Das Hotel ist neben dem Museum.',a:['El hotel está al lado del museo.','El hotel está junto al museo.']}
 ]},
 {id:'l4',title:'Lesen: Barcelona & Konnektoren',desc:'porque · pero · por eso',steps:[
  {t:'read',title:'Barcelona, ciudad de negocios',text:`Barcelona es una ciudad muy {atractiva|attraktiv} para hacer negocios. Tiene un {puerto|Hafen} muy importante, un aeropuerto internacional y más de 300 {ferias|Messen} y congresos al año, como el Mobile World Congress.

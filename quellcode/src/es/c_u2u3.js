@@ -95,7 +95,7 @@ lessons:[
   {n:'Recepción',es:'¿Cómo se escribe tu apellido?',de:'Wie schreibt man deinen Nachnamen?'},
   {you:true,opts:[{es:'Ge, erre, o, ese, ese.',ok:true},{es:'Je, erre, o, es, es.',ok:false,why:'Das sind die deutschen Buchstabennamen. Auf Spanisch z. B. R = <i>erre</i>, S = <i>ese</i>, G = <i>ge</i>.'}]},
   {n:'Recepción',es:'Perfecto. ¿Cuántos años tienes?',de:'Perfekt. Wie alt bist du?'},
-  {you:true,opts:[{es:'Tengo veinticuatro años.',ok:true},{es:'Soy veinticuatro años.',ok:false,why:'Alter immer mit <b>tener</b>: <i>tengo … años</i>.'},{es:'Tienes veinticuatro años.',ok:false,why:'Über dich selbst: <i>tengo</i>.'}]},
+  {you:true,prompt:'Sag dein Alter – wähle eine grammatisch richtige Antwort.',opts:[{es:'Tengo veinticuatro años.',ok:true},{es:'Tengo treinta y dos años.',ok:true},{es:'Soy veinticuatro años.',ok:false,why:'Alter immer mit <b>tener</b>: <i>tengo … años</i>.'},{es:'Tienes veinticuatro años.',ok:false,why:'Über dich selbst: <i>tengo</i>.'}]},
   {n:'Recepción',es:'¿Y a qué te dedicas?',de:'Und was machst du beruflich?'},
   {you:true,opts:[{es:'Soy estudiante. Estudio un máster en la universidad.',ok:true},{es:'Soy un estudiante. Estudio un máster en la universidad.',ok:false,why:'Bei Berufen kein Artikel: <i>Soy estudiante</i>.'}]},
   {n:'Recepción',es:'¡Ah! Tenemos descuento para estudiantes. ¿Y tu correo electrónico?',de:'Ah! Wir haben Studentenrabatt. Und deine E-Mail?'},
@@ -193,7 +193,7 @@ lessons:[
  {t:'gap',q:'– ¿Cómo ___ (tú)? – ___ bien, gracias.',a:['estás','estoy']},
  {t:'gap',q:'Nosotros ___ en la biblioteca y ___ estudiantes de la universidad.',a:['estamos','somos']},
  {t:'tr',de:'Meine Eltern sind in Mannheim.',a:['Mis padres están en Mannheim.']},
- {t:'tr',de:'Wie geht es euch?',a:['¿Cómo estáis?','¿Qué tal estáis?']}
+ {t:'tr',de:'Wie geht es euch?',a:['¿Cómo estáis?','¿Qué tal estáis?','¿Qué tal?']}
 ]},
 {id:'l4',title:'gustar, interesar, molestar',desc:'Me gusta la rutina · Le interesan los idiomas',steps:[
  {t:'info',title:'Me gusta … – „es gefällt mir“',html:`<p><b>gustar</b> funktioniert anders als im Deutschen: Wörtlich heißt es „etwas gefällt mir“. Das Verb richtet sich nach der Sache, die gefällt:</p>
