@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261008-2249";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
+<script>window.PWA=true;window.APP_VERSION="20261008-2305";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -415,7 +415,9 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .card.resume{padding:6px 6px 6px 14px;margin-bottom:10px;cursor:pointer}.card.resume .btn.small{flex:none}
 
 .btn.undo{font-size:15px;font-weight:600;line-height:1;min-height:36px;padding:6px 12px;border:1.5px solid var(--line);border-radius:10px;flex:none;white-space:nowrap}
-.synccode{font-family:ui-monospace,Menlo,monospace;font-size:22px;font-weight:700;letter-spacing:.06em;padding:10px 14px;border:1.5px dashed var(--accent);border-radius:12px;text-align:center;margin-bottom:6px;user-select:all;-webkit-user-select:all}
+.stack{display:flex;flex-direction:column;gap:8px}.stack>.btn{width:100%;justify-content:center}
+.codeinp{font-size:16px;letter-spacing:.04em}.codeinp::placeholder{letter-spacing:0}
+.synccode{font-family:ui-monospace,Menlo,monospace;font-size:24px;font-weight:700;letter-spacing:.08em;padding:12px 14px;background:var(--accent-soft,rgba(0,0,0,.04));border-radius:12px;text-align:center;margin-bottom:6px;user-select:all;-webkit-user-select:all}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <div id="boot"><div class="bootlogo">🇪🇸</div><div class="bootspin"></div></div>
@@ -926,6 +928,19 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Wie funktioniert das?": "How does it work?",
+"Fortschritt automatisch sichern und auf allen Geräten abgleichen – ohne Konto.": "Back up your progress automatically and keep all your devices in sync – no account needed.",
+"Erstes Gerät": "First device",
+"Mit dem Einladungscode, den du bekommen hast:": "With the invitation code you were given:",
+"Schon auf einem anderen Gerät eingerichtet?": "Already set up on another device?",
+"Dein Sync-Code": "Your sync code",
+"Nur für deine eigenen Geräte – nicht an andere weitergeben.": "Only for your own devices – don't share it with others.",
+"Keine Internetverbindung – die App funktioniert trotzdem, der Abgleich kommt später.": "No internet connection – the app still works, syncing will happen later.",
+"Texte korrigieren, Gespräche und „Warum?“ – ohne eigenen Schlüssel.": "Text corrections, conversations and “Why?” – no key of your own needed.",
+"Hier ist noch ein GitHub-Schlüssel gespeichert. Den brauchst du nicht mehr – der Abgleich läuft über deinen Sync-Code.": "A GitHub key is still saved here. You don't need it anymore – syncing now runs via your sync code.",
+"GitHub-Sync entfernen": "Remove GitHub sync",
+"GitHub-Sync entfernt": "GitHub sync removed",
+"Statt Sync-Code: eigenes GitHub-Konto (für Fortgeschrittene)": "Instead of a sync code: your own GitHub account (advanced)",
 "Einladungscode, z. B. SOL-4821": "Invitation code, e.g. SOL-4821",
 "Einladung prüfen": "Check invitation",
 "Zuerst den Code eingeben": "Enter the code first",
@@ -1851,6 +1866,19 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Wie funktioniert das?": "¿Cómo funciona?",
+"Fortschritt automatisch sichern und auf allen Geräten abgleichen – ohne Konto.": "Guarda tu progreso automáticamente y sincronízalo en todos tus dispositivos, sin cuenta.",
+"Erstes Gerät": "Primer dispositivo",
+"Mit dem Einladungscode, den du bekommen hast:": "Con el código de invitación que te han dado:",
+"Schon auf einem anderen Gerät eingerichtet?": "¿Ya lo tienes en otro dispositivo?",
+"Dein Sync-Code": "Tu código de sincronización",
+"Nur für deine eigenen Geräte – nicht an andere weitergeben.": "Solo para tus propios dispositivos: no lo compartas con nadie.",
+"Keine Internetverbindung – die App funktioniert trotzdem, der Abgleich kommt später.": "Sin conexión a internet: la app funciona igual, la sincronización se hará más tarde.",
+"Texte korrigieren, Gespräche und „Warum?“ – ohne eigenen Schlüssel.": "Corregir textos, conversaciones y «¿Por qué?», sin clave propia.",
+"Hier ist noch ein GitHub-Schlüssel gespeichert. Den brauchst du nicht mehr – der Abgleich läuft über deinen Sync-Code.": "Aquí todavía hay una clave de GitHub guardada. Ya no la necesitas: la sincronización funciona con tu código.",
+"GitHub-Sync entfernen": "Quitar sincronización con GitHub",
+"GitHub-Sync entfernt": "Sincronización con GitHub eliminada",
+"Statt Sync-Code: eigenes GitHub-Konto (für Fortgeschrittene)": "En lugar del código: tu propia cuenta de GitHub (avanzado)",
 "Einladungscode, z. B. SOL-4821": "Código de invitación, p. ej. SOL-4821",
 "Einladung prüfen": "Comprobar invitación",
 "Zuerst den Code eingeben": "Introduce primero el código",
@@ -2776,6 +2804,19 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Wie funktioniert das?": "Como funciona?",
+"Fortschritt automatisch sichern und auf allen Geräten abgleichen – ohne Konto.": "Salva o teu progresso automaticamente e sincroniza-o em todos os dispositivos – sem conta.",
+"Erstes Gerät": "Primeiro dispositivo",
+"Mit dem Einladungscode, den du bekommen hast:": "Com o código de convite que recebeste:",
+"Schon auf einem anderen Gerät eingerichtet?": "Já configurado noutro dispositivo?",
+"Dein Sync-Code": "O teu código de sincronização",
+"Nur für deine eigenen Geräte – nicht an andere weitergeben.": "Só para os teus próprios dispositivos – não o partilhes com ninguém.",
+"Keine Internetverbindung – die App funktioniert trotzdem, der Abgleich kommt später.": "Sem ligação à internet – a app funciona na mesma, a sincronização acontece mais tarde.",
+"Texte korrigieren, Gespräche und „Warum?“ – ohne eigenen Schlüssel.": "Correção de textos, conversas e «Porquê?» – sem chave própria.",
+"Hier ist noch ein GitHub-Schlüssel gespeichert. Den brauchst du nicht mehr – der Abgleich läuft über deinen Sync-Code.": "Ainda há uma chave do GitHub guardada aqui. Já não precisas dela – a sincronização funciona com o teu código.",
+"GitHub-Sync entfernen": "Remover sincronização do GitHub",
+"GitHub-Sync entfernt": "Sincronização do GitHub removida",
+"Statt Sync-Code: eigenes GitHub-Konto (für Fortgeschrittene)": "Em vez do código: a tua própria conta do GitHub (avançado)",
 "Einladungscode, z. B. SOL-4821": "Código de convite, ex.: SOL-4821",
 "Einladung prüfen": "Verificar convite",
 "Zuerst den Code eingeben": "Digite o código primeiro",
@@ -4777,33 +4818,39 @@ function vChat(m,id){const u=unitById(id);const sit=u.situacion;
 
 /* ---------- settings ---------- */
 /* Einladung (für Sync per Code und KI über den Server): einmal eingeben oder per Link ?einladung=CODE */
-function inviteBox(after){const st=S.settings;const inp=h('input',{class:'inp',placeholder:T('Einladungscode, z. B. SOL-4821'),autocapitalize:'characters',style:'font-size:16px;text-transform:uppercase'});const out=h('div');
+function codeInp(ph){const i=h('input',{class:'inp codeinp',placeholder:ph,autocapitalize:'characters',autocomplete:'off',spellcheck:'false'});i.oninput=()=>{const p=i.selectionStart;i.value=i.value.toUpperCase();try{i.setSelectionRange(p,p);}catch(e){}};return i;}
+function inviteBox(after){const st=S.settings;const inp=codeInp(T('Einladungscode, z. B. SOL-4821'));const out=h('div');
   const ok=h('button',{class:'btn primary'},T('Einladung prüfen'));ok.onclick=async()=>{const v=inp.value.trim().toUpperCase();if(!v)return toast(T('Zuerst den Code eingeben'));ok.disabled=true;out.innerHTML='';
     try{const j=await srvPost('/api/check',{invite:v});st.invite=v;st.inviteName=j.name;save(true);toast(T('Willkommen, ')+j.name+' ✓');(after||route)();}catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));}ok.disabled=false;};
-  return h('div',{},h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px'},inp,ok),out);}
+  return h('div',{class:'stack'},inp,ok,out);}
 function srvSyncCard(){const st=S.settings;const out=h('div');const box=h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},T('☁️ Geräte verbinden')));
-  const info=h('p',{class:'muted'},T('Dein Fortschritt wird automatisch gesichert und auf allen deinen Geräten abgeglichen – ohne Konto und ohne Passwort. Er liegt auf dem Mi-profe-Server (Cloudflare); wer deinen Sync-Code kennt, kann ihn sehen – also nur an eigene Geräte geben.'));
-  const run=async(btn)=>{if(btn)btn.disabled=true;out.innerHTML='';try{await syncNow({throw:true});toast(T('✓ Synchronisiert'));}catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));}if(btn)btn.disabled=false;};
-  if(!st.syncCode){const inp=h('input',{class:'inp',placeholder:T('Sync-Code, z. B. SOL-4821-KXPA'),autocapitalize:'characters',style:'font-size:16px;text-transform:uppercase'});
+  const info=h('details',{class:'howto'},h('summary',{},T('Wie funktioniert das?')),h('p',{class:'muted small'},T('Dein Fortschritt wird automatisch gesichert und auf allen deinen Geräten abgeglichen – ohne Konto und ohne Passwort. Er liegt auf dem Mi-profe-Server (Cloudflare); wer deinen Sync-Code kennt, kann ihn sehen – also nur an eigene Geräte geben.')));
+  const run=async(btn)=>{if(btn)btn.disabled=true;out.innerHTML='';try{await syncNow({throw:true});toast(T('✓ Synchronisiert'));}catch(e){out.append(h('div',{class:'fb bad'},'✗ '+netMsg(e)));}if(btn)btn.disabled=false;};
+  if(!st.syncCode){const inp=codeInp(T('Sync-Code, z. B. SOL-4821-KXPA'));
     const neu=h('button',{class:'btn primary'},T('Sicherung einschalten'));neu.onclick=async()=>{neu.disabled=true;try{const j=await srvPost('/api/sync/new',{invite:st.invite});st.syncCode=j.code;save(true);await run();route();}catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));neu.disabled=false;}};
     const con=h('button',{class:'btn'},T('Verbinden'));con.onclick=async()=>{const v=inp.value.trim().toUpperCase();if(!/^[A-Z]+-\d{4}-[A-Z]{4}$/.test(v))return toast(T('Der Code sieht so aus: SOL-4821-KXPA'));st.syncCode=v;save(true);await run(con);if(!syncState.at){st.syncCode='';save(true);}else route();};
     /* neue Sicherung nur mit Einladung; ein weiteres Gerät verbinden geht auch nur mit dem Sync-Code */
-    box.append(info,h('p',{class:'small'},T('Erstes Gerät: Sicherung einschalten – du bekommst einen Sync-Code. Weitere Geräte: diesen Code hier eingeben.')),
-      st.invite?h('div',{class:'row',style:'margin-bottom:10px'},neu):h('div',{style:'margin-bottom:12px'},h('p',{class:'small',style:'margin:0 0 6px'},T('Für eine neue Sicherung brauchst du einen Einladungscode (von der Person, die dir die App gegeben hat).')),inviteBox()),
-      h('div',{class:'kind',style:'margin:8px 0 6px'},T('Code von einem anderen Gerät')),h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px'},inp,con),out);return box;}
+    box.append(h('p',{class:'small',style:'margin:0 0 12px'},T('Fortschritt automatisch sichern und auf allen Geräten abgleichen – ohne Konto.')),
+      h('div',{class:'kind'},T('Erstes Gerät')),
+      st.invite?h('div',{class:'stack'},neu):h('div',{},h('p',{class:'muted small',style:'margin:0 0 6px'},T('Mit dem Einladungscode, den du bekommen hast:')),inviteBox()),
+      h('div',{class:'kind',style:'margin-top:16px'},T('Schon auf einem anderen Gerät eingerichtet?')),
+      h('div',{class:'stack'},inp,con),out,info);return box;}
   const link=location.origin+location.pathname+'?sync='+encodeURIComponent(st.syncCode);
   const share=h('button',{class:'btn'},T('🔗 Link fürs andere Gerät'));share.onclick=async()=>{try{if(navigator.share){await navigator.share({title:'Mi profe',text:T('Mi profe auf diesem Gerät verbinden'),url:link});return;}}catch(e){return;}
     try{await navigator.clipboard.writeText(link);toast(T('Link kopiert ✓'));}catch(e){prompt(T('Link kopieren:'),link);}};
   const sync=h('button',{class:'btn primary'},T('Jetzt synchronisieren'));sync.onclick=()=>run(sync);
-  box.append(h('p',{class:'small',style:'margin:0 0 6px'},T('Dein Sync-Code (auf anderen Geräten eingeben oder den Link öffnen):')),
-    h('div',{class:'synccode'},st.syncCode),h('p',{class:'muted small',id:'syncstat'},syncLabel()),
-    h('div',{class:'row'},sync,share,h('button',{class:'btn ghost',onclick:async()=>{if(!await askConfirm(T('Dieses Gerät vom Sync trennen? Dein Fortschritt bleibt hier und auf dem Server erhalten.'),T('Trennen')))return;st.syncCode='';save(true);route();}},T('Trennen'))),out,info);return box;}
+  box.append(h('div',{class:'kind'},T('Dein Sync-Code')),h('div',{class:'synccode'},st.syncCode),h('p',{class:'muted small keep',id:'syncstat',style:'text-align:center;margin:0 0 12px'},syncLabel()),
+    h('div',{class:'stack'},sync,share),out,
+    h('p',{class:'muted small keep',style:'margin:10px 0 4px'},T('Nur für deine eigenen Geräte – nicht an andere weitergeben.')),
+    h('div',{class:'row',style:'justify-content:space-between;align-items:center'},info,h('button',{class:'btn ghost small',onclick:async()=>{if(!await askConfirm(T('Dieses Gerät vom Sync trennen? Dein Fortschritt bleibt hier und auf dem Server erhalten.'),T('Trennen')))return;st.syncCode='';save(true);route();}},T('Trennen'))));return box;}
+/* Netzwerkfehler (fetch: „Load failed“/„Failed to fetch“) verständlich anzeigen */
+function netMsg(e){const m=String(e&&e.message||e);return /load failed|failed to fetch|networkerror|network/i.test(m)?T('Keine Internetverbindung – die App funktioniert trotzdem, der Abgleich kommt später.'):m;}
 function srvAICard(){const st=S.settings;const box=h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},T('🤖 KI über Einladung')));
-  const info=h('p',{class:'muted'},T('Mit einer Einladung kannst du die KI (Texte korrigieren, Gespräche, „Warum?“) ohne eigenen Schlüssel nutzen – mit einem Tageslimit. Hinweis: Die Anfragen gehen an Google Gemini; dort keine persönlichen Daten eintippen.'));
-  if(!st.invite){box.append(info,inviteBox());return box;}
+  const info=h('details',{class:'howto'},h('summary',{},T('Wie funktioniert das?')),h('p',{class:'muted small'},T('Mit einer Einladung kannst du die KI (Texte korrigieren, Gespräche, „Warum?“) ohne eigenen Schlüssel nutzen – mit einem Tageslimit. Hinweis: Die Anfragen gehen an Google Gemini; dort keine persönlichen Daten eintippen.')));
+  if(!st.invite){box.append(h('p',{class:'small',style:'margin:0 0 12px'},T('Texte korrigieren, Gespräche und „Warum?“ – ohne eigenen Schlüssel.')),inviteBox(),info);return box;}
   box.append(h('div',{class:'fb ok',style:'margin:0 0 8px'},T('✓ KI aktiv')+(st.inviteName?' · '+st.inviteName:'')+(AI_LEFT!=null?' · '+T('heute noch ')+AI_LEFT+T(' Anfragen'):'')),
-    st.geminiKey?h('p',{class:'muted small'},T('Du hast zusätzlich einen eigenen Schlüssel eingetragen – der wird bevorzugt.')):null,info,
-    h('button',{class:'btn ghost',onclick:async()=>{if(!await askConfirm(T('Einladung auf diesem Gerät entfernen? KI und neue Sync-Codes gehen dann nicht mehr.'),T('Entfernen')))return;st.invite='';st.inviteName='';save(true);route();}},T('Einladung entfernen')));return box;}
+    st.geminiKey?h('p',{class:'muted small'},T('Du hast zusätzlich einen eigenen Schlüssel eingetragen – der wird bevorzugt.')):null,
+    h('div',{class:'row',style:'justify-content:space-between;align-items:center'},info,h('button',{class:'btn ghost small',onclick:async()=>{if(!await askConfirm(T('Einladung auf diesem Gerät entfernen? KI und neue Sync-Codes gehen dann nicht mehr.'),T('Entfernen')))return;st.invite='';st.inviteName='';save(true);route();}},T('Einladung entfernen'))));return box;}
 function vSettingsAll(m){const st=S.settings;
   const voiceSel=h('select',{class:'inp',style:'font-size:15px'});const fillV=()=>{loadVoices();voiceSel.innerHTML='';voiceSel.append(h('option',{value:''},T('Automatisch (beste Stimme)')));voices.forEach(v=>voiceSel.append(h('option',{value:v.name,selected:v.name===st.voice},v.name+' ('+v.lang+')'+(vQual(v)===2?T(' · Premium'):vQual(v)===1?T(' · Erweitert'):''))));};fillV();setTimeout(fillV,500);
   voiceSel.onchange=()=>{st.voice=voiceSel.value;save();say((LANG.sampleSay||[T('Hola')])[0]);};
@@ -4843,14 +4890,20 @@ function vSettingsAll(m){const st=S.settings;
       try{await syncNow({throw:true,quiet:true});sout.append(h('div',{class:'fb ok'},T('✓ Synchronisiert. Auf deinen anderen Geräten denselben Schlüssel eintragen – dann haben alle denselben Stand.')));}
       catch(e){sout.append(h('div',{class:'fb bad'},'✗ '+e.message));}
       con.disabled=false;con.textContent=T('Jetzt synchronisieren');};
-    m.append(h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},T('☁️ Geräte synchronisieren (GitHub)')),
+    const ghT=T('☁️ Geräte synchronisieren (GitHub)');
+    /* mit Sync-Code über den Mi-profe-Server ist GitHub überflüssig: nur noch ein alter Schlüssel zum Entfernen */
+    if(SRV()&&useCode()){if(st.ghToken)m.append(h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0;font-size:16px'},ghT),h('p',{class:'small',style:'margin:0 0 8px'},T('Hier ist noch ein GitHub-Schlüssel gespeichert. Den brauchst du nicht mehr – der Abgleich läuft über deinen Sync-Code.')),
+        h('button',{class:'btn ghost small',onclick:()=>{st.ghToken='';st.gistId='';save(true);toast(T('GitHub-Sync entfernt'));route();}},T('GitHub-Sync entfernen'))));}
+    else{const gb=[
       h('p',{class:'muted'},T('Damit Mac, PC und iPhone denselben Stand haben. Dein Fortschritt wird als private Datei (Secret Gist) in deinem GitHub-Account gespeichert und automatisch abgeglichen: beim Öffnen, nach dem Lernen und wenn du zur App zurückkehrst. Der Gemini-Key wird dabei nicht übertragen.')),
       h('ol',{class:'small',style:'padding-left:18px'},
         h('li',{},T('Bei GitHub anmelden und '),h('a',{href:'https://github.com/settings/tokens/new?scopes=gist&description=Mi%20profe%20Sync',target:'_blank'},T('diesen Link öffnen')),T(' (Token-Seite, Häkchen „gist“ ist schon gesetzt).')),
         h('li',{},T('Bei „Expiration“ am besten „No expiration“ oder 1 Jahr wählen → ganz unten „Generate token“.')),
         h('li',{},T('Den Schlüssel kopieren, hier einfügen, „Verbinden“ klicken – und auf jedem Gerät dasselbe tun.'))),
       h('div',{class:'field'},h('label',{},T('GitHub-Zugangsschlüssel (nur Berechtigung „gist“)')),tok),
-      h('div',{class:'row'},con,st.ghToken?h('button',{class:'btn ghost',onclick:()=>{st.ghToken='';st.gistId='';save(true);toast(T('Sync auf diesem Gerät beendet'));route();}},T('Sync beenden')):null,h('span',{class:'muted small'},syncLabel())),sout));}
+      h('div',{class:'row'},con,st.ghToken?h('button',{class:'btn ghost',onclick:()=>{st.ghToken='';st.gistId='';save(true);toast(T('Sync auf diesem Gerät beendet'));route();}},T('Sync beenden')):null,h('span',{class:'muted small'},syncLabel())),sout];
+    /* mit Server: GitHub nur noch als eingeklappte Alternative */
+    m.append(h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'+(SRV()?';font-size:16px':'')},ghT),SRV()&&!st.ghToken?h('details',{class:'howto'},h('summary',{},T('Statt Sync-Code: eigenes GitHub-Konto (für Fortgeschrittene)')),...gb):gb));}}
   const file=h('input',{type:'file',accept:'.json',class:'hide'});file.onchange=async()=>{try{const d=JSON.parse(await file.files[0].text());if(!d.srs&&!d.lessons)throw 0;const k=S.settings.geminiKey,gt=S.settings.ghToken,gi=S.settings.gistId;S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),d);S.settings=Object.assign({},DEFAULT.settings,d.settings||{});if(!S.settings.geminiKey)S.settings.geminiKey=k;S.settings.ghToken=gt;S.settings.gistId=gi;save();toast(T('Backup geladen ✓'));route();}catch(e){toast(T('Datei ungültig'));}};
   m.append(h('div',{class:'card'},h('h2',{style:'margin-top:0'},T('💾 Fortschritt sichern')),h('p',{class:'muted'},T('Dein Fortschritt liegt im Browser. Wenn du Browser-Daten löschst oder den Browser wechselst, ist er weg – also ab und zu ein Backup machen. Auch nützlich, wenn ich dir eine neue Version der App schicke (die übernimmt den Fortschritt aber normalerweise automatisch, solange du denselben Browser nutzt).')),
     h('div',{class:'row'},h('button',{class:'btn',onclick:async()=>{const d=JSON.parse(JSON.stringify(S));d.settings.geminiKey='';d.settings.ghToken='';d.settings.gistId='';const txt=JSON.stringify(d,null,1);const fn='mi-profe-'+LANG.code+'-fortschritt-'+today()+'.json';
@@ -4908,7 +4961,7 @@ function vSettings(m,sec){
   const s=SETSEC.find(x=>x[0]===sec);
   if(s){const tmp=h('div');vSettingsAll(tmp);const want=s[4].map(x=>T(x));const cards=[...tmp.children].filter(el=>want.includes(el.querySelector('h2')?.textContent||''));
     /* lange Erklärtexte einklappen, damit die Seite ohne Scrollen auskommt */
-    cards.forEach(el=>{const info=[...el.children].filter(x=>x.matches('p.muted,ol'));if(!info.length)return;const d=h('details',{class:'howto'},h('summary',{},T('Anleitung & Infos')));info[0].before(d);d.append(...info);});
+    cards.forEach(el=>{const info=[...el.children].filter(x=>x.matches('p.muted:not(.keep),ol'));if(!info.length)return;const d=h('details',{class:'howto'},h('summary',{},T('Anleitung & Infos')));info[0].before(d);d.append(...info);});
     m.append(backTo(T('Mehr'),'settings'),h('h1',{},s[2]),...cards.map(el=>{if(cards.length===1)el.querySelector('h2')?.remove();return el;}));return;}
   const upd=async()=>{toast(T('Suche nach Update …'));try{const r=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(r)await r.update();
     const html=await (await fetch(location.pathname+'?v='+Date.now(),{cache:'no-store'})).text();const v=(html.match(/APP_VERSION="([^"]+)"/)||[])[1];
