@@ -579,7 +579,7 @@ function planItems(){const nx=nextLesson();const done=Object.values(S.lessons).f
     ns||storyToday?{id:'story',ic:'📖',t:ns&&!storyToday?T('Geschichte: ')+ns.title:T('Geschichte lesen'),d:T('Erst hören, dann lesen – ca. 5 Minuten.'),r:ns?'story/'+ns.id:'ref/s',b:T('Lesen →'),min:5,done:!!storyToday}:null,
     FQ?{id:'freq',ic:'📚',t:T('Häufige Wörter'),d:T('30 Alltagswörter · ')+UW+' '+cu.n,r:'lesson/'+cu.id+'/'+FQ.id,b:T('Üben →'),min:5,done:S.lessons[cu.id+'.'+FQ.id]?.date===td}:null,
     cu?{id:'shadow',ic:'🎧',t:T('Aussprache'),d:T('7 Sätze nachsprechen · ')+UW+' '+cu.n,r:'shadow/'+cu.id,b:T('Starten →'),min:4,done:doneDay('shadow')}:null,
-    S.mistakes.length||doneDay('mistakes')?{id:'mistakes',ic:'✏️',t:S.mistakes.length?T('Fehler üben (')+S.mistakes.length+')':T('Fehler üben'),d:T('Falsche Antworten noch einmal.'),r:'mistakes',b:T('Üben →'),min:5,done:doneDay('mistakes')}:null].filter(Boolean);
+    S.mistakes.length||doneDay('mistakes')?{id:'mistakes',ic:'✏️',t:S.mistakes.length?T('Fehler üben (')+S.mistakes.length+')':T('Fehler üben'),d:T('Falsche Antworten noch einmal.'),r:'mistakes',fn:S.mistakes.length?()=>{RESUME='mistakes';go('mistakes');}:null,b:T('Üben →'),min:5,done:doneDay('mistakes')}:null].filter(Boolean);
   return all;}
 function dayPlan(){const plan=planItems().filter(x=>planOn(x.id));
   if(!S.placement)plan.unshift({id:'placement',ic:'🎯',t:T('Einstufungstest machen'),d:T('In Etappen von A1 bis C2, je ca. 5 Minuten. Danach weiß ich, was du schon kannst und wo wir einsteigen.'),r:'placement',b:T('Test starten →'),min:15,done:false});
@@ -1174,8 +1174,8 @@ function vNum(m){const all=!!S.settings.numAll;m.innerHTML='';m.append(backTo(T(
   if(!K.length){m.append(h('div',{class:'card'},T('Zahlen kommen in Unidad 1, Lektion 2 – danach geht es hier los. Oder oben „Alles“ wählen.')));return;}
   m.append(h('div',{class:'card',style:'padding:14px 16px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Dabei')),h('div',{class:'chips'},NAMES.map(([ks,n])=>{const on=ks.some(k=>K.includes(k));return h('span',{class:'chip'+(on?'':' done'),style:on?'':'opacity:.45'},(on?'✓ ':'🔒 ')+n);}))),
     h('div',{style:'margin-top:14px'},pauseBtn('num',()=>goN()),h('button',{class:'btn'+(pauseGet('num')?'':' primary'),style:'width:100%;min-height:48px',onclick:()=>{pauseDel('num');goN();}},T('15 Aufgaben üben →'))));
-  function goN(){m.innerHTML='';play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps:numItems(15,all),pk:'num',onBack:()=>vNum(m),onDone:()=>({label:T('Noch eine Runde →'),fn:goN})});}
-  if(RESUME==='num'&&pauseGet('num')){RESUME=null;goN();}}
+  function goN(direct){m.innerHTML='';play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps:numItems(15,all),pk:'num',onBack:()=>direct===true?goBack('home'):vNum(m),onDone:()=>({label:T('Noch eine Runde →'),fn:goN})});}
+  if(RESUME==='num'){RESUME=null;goN(true);}}
 
 /* Gemischte Wiederholung: Aufgaben der letzten 3 Runden werden gemieden (S.mixSeen), dazu ein paar frisch erzeugte Vokabelaufgaben */
 function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
@@ -1191,7 +1191,7 @@ function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
   return out;}
 function vMix(m){const steps=mixSteps(15);
   if(steps.length<5){m.append(h('h1',{},T('Gemischte Wiederholung')),h('div',{class:'card'},T('Schließ zuerst ein paar Lektionen ab – dann mische ich hier Aufgaben aus allen bisherigen Lektionen durcheinander.')));return;}
-  play(m,{title:T('Gemischte Wiederholung · 15 Aufgaben aus allen ')+UWS+'',steps,pk:'mix',onBack:()=>go('home'),onDone:()=>{S.lastMix=today();save();return null;}});}
+  play(m,{title:T('Gemischte Wiederholung · 15 Aufgaben aus allen ')+UWS+'',steps,pk:'mix',onBack:()=>goBack('home'),onDone:()=>{S.lastMix=today();save();return null;}});}
 
 /* ---------- Nachschlagen: Wörterbuch & Grammatik ---------- */
 const storyFor=st=>unitById(st.after);
@@ -1270,8 +1270,8 @@ function vVerbs(m){const all=!!S.settings.verbsAll;m.innerHTML='';m.append(backT
   m.append(h('h1',{},T('Verben-Trainer')),learnSeg('verbsAll',()=>vVerbs(m)),
     h('p',{class:'sub'},(all?T('Verben aus dem ganzen Kurs'):T('Verben aus den Unidades, die du angefangen hast'))+' ('+gen.length+'). '+T('Du siehst nur den Infinitiv – überleg selbst: -ar, -er oder -ir? Stammwechsel? Bei Fehlern zeige ich das Muster.')+(tables.length?' '+T('Dazu andere Zeitformen aus gelernten Lektionen.'):'')));
   if(!gen.length&&!tables.length){m.append(h('div',{class:'card'},T('Noch keine Verben – fang eine Unidad an. Oder oben „Alles“ wählen.')));return;}
-  const go8=()=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:verbRound(all),pk:'verbs',onBack:()=>vVerbs(m),onDone:()=>({label:T('Noch 8 Verben →'),fn:go8})});};
-  if(RESUME==='verbs'&&pauseGet('verbs')){RESUME=null;return go8();}
+  const go8=direct=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:verbRound(all),pk:'verbs',onBack:()=>direct===true?goBack('home'):vVerbs(m),onDone:()=>({label:T('Noch 8 Verben →'),fn:go8})});};
+  if(RESUME==='verbs'){RESUME=null;return go8(true);}
   m.append(pauseBtn('verbs',go8),h('button',{class:'btn'+(pauseGet('verbs')?'':' primary'),style:'width:100%;min-height:48px',onclick:()=>{pauseDel('verbs');go8();}},T('8 Verben üben →')));}
 
 /* ---------- vocab trainer ---------- */
@@ -1502,8 +1502,9 @@ function rightOf(s){const first=a=>String([].concat(a)[0]||'').split('|')[0];
   if(s.t==='match')return(s.pairs||[]).map(p=>p[0]+' = '+p[1]).join(' · ');return '';}
 function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')));
   const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
-  function goM(){m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,pk:'mistakes',steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}
-  if(RESUME==='mistakes'&&pauseGet('mistakes')){RESUME=null;return goM();}
+  /* direct = von woanders gestartet (Startseite) → Zurück dorthin, sonst zurück zum Fehlerheft */
+  function goM(direct){m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,pk:'mistakes',steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>direct?goBack('home'):go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}
+  if(RESUME==='mistakes'){RESUME=null;if(list.length)return goM(true);}
   if(!list.length){m.append(h('div',{class:'card'},T('Keine offenen Fehler. ¡Muy bien! 🎉')));return;}
   const n=Math.min(list.length,20);
   m.append(h('div',{class:'card mistakehead'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap'},h('b',{},list.length+(list.length===1?T(' offener Fehler'):T(' offene Fehler'))),h('span',{class:'muted small'},T('richtig geübt = weg'))),
