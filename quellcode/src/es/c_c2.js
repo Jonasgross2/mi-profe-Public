@@ -222,7 +222,7 @@ lessons:[
  {t:'dialog',place:'Cena en el piso',title:'Eltern zu Besuch',scene:'Deine Eltern, Nuria und du am Tisch. Es gibt Paella.',lines:[
   {n:'Nuria',es:'Jonas, pregúntales a tus padres qué les parece Barcelona.',de:'Jonas, frag deine Eltern, wie sie Barcelona finden.'},
   {you:true,opts:[{es:'Dicen que les encanta, aunque mi padre añade que hay demasiada gente en las Ramblas. O sea, que es un poco agobiante.',ok:true},{es:'Ellos dicen: «Nos gusta mucho, pero hay demasiadas personas en las Ramblas, es un poco agobiante para nosotros, dice mi padre».',ok:false,why:'Beim Vermitteln: indirekte Rede und sinngemäß zusammenfassen, nicht wörtlich mit Anführungszeichen.'}]},
-  {n:'Nuria',es:'¡Normal! Oye, diles que su hijo es el peor fregando platos de todo Gràcia.',de:'Normal! Hey, sag ihnen, dass ihr Sohn der schlechteste Abspüler in ganz Gràcia ist.'},
+  {n:'Nuria',es:'¡Normal! Oye, diles que en todo Gràcia nadie friega los platos peor que tú.',de:'Normal! Hey, sag ihnen, dass in ganz Gràcia niemand schlechter abspült als du.'},
   {you:true,opts:[{es:'Mi madre dice que en casa era igual, o lo que es lo mismo, que no es culpa de Barcelona.',ok:true},{es:'Mi madre dice que en casa era igual, mejor dicho, que no es culpa de Barcelona.',ok:false,why:'Hier ist es keine Korrektur, sondern eine Umschreibung → <i>o lo que es lo mismo</i>.'}]},
   {n:'Nuria',es:'¡Ja, ja! Bueno, en pocas palabras: ¡bienvenidos y que aprovechen!',de:'Haha! Na gut, kurz gesagt: Willkommen und guten Appetit!'}]},
  {t:'speak',es:'Lo que mis padres vienen a decir es que están muy orgullosos de que me haya atrevido a venir.',de:'Was meine Eltern damit sagen wollen, ist, dass sie sehr stolz sind, dass ich mich getraut habe herzukommen.'}]},

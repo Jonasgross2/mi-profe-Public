@@ -45,14 +45,19 @@ document.title=fmt(T('Mi profe · {L} lernen'));
 const NAME=()=>S.name||'';
 /* Nachname: steht nie fest im Kurs. „Jonas Gross“ / „señor Gross“ / Buchstabieren werden aus S.name + optional S.surname gebaut. */
 const SPELL={a:'a',b:'be',c:'ce',d:'de',e:'e',f:'efe',g:'ge',h:'hache',i:'i',j:'jota',k:'ka',l:'ele',m:'eme',n:'ene','ñ':'eñe',o:'o',p:'pe',q:'cu',r:'erre',s:'ese',t:'te',u:'u',v:'uve',w:'uve doble',x:'equis',y:'i griega',z:'zeta','ä':'a con diéresis','ö':'o con diéresis','ü':'u con diéresis','ß':'doble ese','á':'a con tilde','é':'e con tilde','í':'i con tilde','ó':'o con tilde','ú':'u con tilde'};
+/* deutsche Buchstabennamen – für die falsche Antwort beim Buchstabieren */
+const GSPELL={a:'a',b:'be',c:'tse',d:'de',e:'e',f:'ef',g:'gue',h:'ha',i:'i',j:'jot',k:'ka',l:'el',m:'em',n:'en',o:'o',p:'pe',q:'ku',r:'er',s:'es',t:'te',u:'u',v:'fau',w:'ve',x:'iks',y:'ípsilon',z:'tset','ä':'a','ö':'o','ü':'u','ß':'es-tset'};
 const spellName=w=>[...w.toLowerCase()].filter(c=>SPELL[c]).map(c=>SPELL[c]).join(', ');
-function persStr(t){if(!/Jonas|Gross/.test(t))return t;const sur=S.surname||'',f=S.gender==='f',nm=S.name||'Jonas',sp=sur||nm.split(' ')[0];
+function persStr(t){if(!/Jonas|Gross|erre, o, e/.test(t))return t;const sur=S.surname||'',f=S.gender==='f',nm=S.name||'Jonas',sp=sur||nm.split(' ')[0];
   return t.replace(/„Gross“ – du sagst, dass man das Doppel-S mit zwei S schreibt\./,'Ein Doppel-S buchstabierst du „dos eses“.').replace(/“Gross” – you say that the double S is written with two S's\./,'You spell a double S as “dos eses”.')
-   .replace(/^Gross: [a-zñ, ]+\.$/,sp+': '+spellName(sp)+'.').replace('Deinen Nachnamen buchstabieren',sur?'Deinen Nachnamen buchstabieren':'Deinen Namen buchstabieren').replace('Spelling your surname',sur?'Spelling your surname':'Spelling your name')
+   .replace(/^Gross: [a-zñ, ]+\.$/,sp+': '+spellName(sp)+'.').replace(/^Ge, erre, o, ese, ese\.$/,()=>{const x=spellName(sp);return x.charAt(0).toUpperCase()+x.slice(1)+'.';})
+   .replace(/^Je, erre, o, es, es\.$/,()=>{const x=[...sp.toLowerCase()].filter(c=>GSPELL[c]).map(c=>GSPELL[c]).join(', ');return x.charAt(0).toUpperCase()+x.slice(1)+'.';}).replace('Deinen Nachnamen buchstabieren',sur?'Deinen Nachnamen buchstabieren':'Deinen Namen buchstabieren').replace('Spelling your surname',sur?'Spelling your surname':'Spelling your name')
    .replace(/\bJonas Gross\b/g,nm+(sur?' '+sur:'')).replace(/, señor Gross/g,', '+(f?'señora':'señor')+(sur?' '+sur:''))
    .replace(/, (Herr|Mr) Gross/g,(m,w)=>sur?', '+(w==='Herr'?(f?'Frau':'Herr'):(f?'Ms':'Mr'))+' '+sur:'').replace(/\bJonas\b/g,nm);}
 function personalize(o){if(typeof o==='string')return persStr(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=personalize(o[i]);return o;}
-  if(o&&typeof o==='object'){for(const k of Object.keys(o))o[k]=personalize(o[k]);}return o;}
+  if(o&&typeof o==='object'){/* ohne Nachnamen im Profil fragt die Rezeption nach dem Namen statt dem Nachnamen */
+    if(o.n&&o.es==='¿Cómo se escribe tu apellido?'&&!S.surname){o.es='¿Cómo se escribe tu nombre?';o.de=EX==='de'?'Wie schreibt man deinen Namen?':'How do you spell your name?';}
+    for(const k of Object.keys(o))o[k]=personalize(o[k]);}return o;}
 /* Kursinhalte in der Erklärsprache: COURSE_TR[Lernsprache][EX] = {deutscher Text: Übersetzung}. Fehlt etwas, bleibt Deutsch. */
 const CT=EX!=='de'&&window.COURSE_TR&&COURSE_TR[LANG.code]&&COURSE_TR[LANG.code][EX]||null;
 const LESEN={en:'Reading: ',pt:'Leitura: ',es:'Lectura: '}[EX];
@@ -63,14 +68,17 @@ if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);if(window.READI
 personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);
 /* Ansprache: Bei „weiblich“ werden Sätze über die lernende Person selbst (estoy/soy … , ¡Encantado!) in die weibliche Form gesetzt
    und beim Prüfen beide Formen akzeptiert. Vokabeln bleiben unverändert (sie sind Schlüssel im Vokabeltrainer). */
-const FEMO=/^(cansad|encantad|content|preocupad|resfriad|maread|nervios|ocupad|aburrid|enfadad|casad|divorciad|solter|interesad|acostumbrad|dispuest|list|segur|hart|perdid|sorprendid|emocionad|tranquil|alt|baj|delgad|moren|rubi|simpátic|antipátic|tímid|ordenad|caótic|vag|ingenier|informátic|médic|alumn|abogad|sentad|levantad|duchad|vestid|nacid|mudad|graduad|enamorad|invitad|equivocad|despiert|obligad|encargad|guap|gord|delgad|abiert|cansad|enferm|agotad|orgullos|preparad|convencid|embarazad|relajad|estresad|agradecid|decepcionad|ilusionad|agobiad)o(s?)$/i;
+const FEMO=/^(cansad|encantad|content|preocupad|resfriad|maread|nervios|ocupad|aburrid|enfadad|casad|divorciad|solter|interesad|acostumbrad|dispuest|list|segur|hart|perdid|sorprendid|emocionad|tranquil|alt|baj|delgad|organizad|pequeñ|moren|rubi|simpátic|antipátic|tímid|ordenad|caótic|vag|ingenier|informátic|médic|alumn|abogad|sentad|levantad|duchad|vestid|nacid|mudad|graduad|enamorad|invitad|equivocad|despiert|obligad|encargad|guap|gord|delgad|abiert|cansad|enferm|agotad|orgullos|preparad|convencid|embarazad|relajad|estresad|agradecid|decepcionad|ilusionad|agobiad)o(s?)$/i;
 const FEMX={'alemán':'alemana','inglés':'inglesa','francés':'francesa','español':T('española'),'trabajador':'trabajadora','programador':'programadora','diseñador':T('diseñadora'),'consultor':'consultora','auditor':'auditora','profesor':'profesora','director':'directora','alemanes':'alemanas'};
 const femWord=w=>FEMO.test(w)?w.replace(/o(s?)$/,'a$1'):FEMX[w.toLowerCase()]?(w[0]===w[0].toUpperCase()?FEMX[w.toLowerCase()][0].toUpperCase()+FEMX[w.toLowerCase()].slice(1):FEMX[w.toLowerCase()]):w;
 const femFirst=s=>String(s).replace(/\b(estoy|soy|me siento|me encuentro|sigo|quedo|estuve|he estado|me he vuelto|me volví|me quedé|me he quedado|me puse)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w));
+/* nur für Sätze, die die lernende Person selbst sagt (Dialog-Antworten, Nachsprechen): auch era/estaría/me pongo … + Adjektiv */
+const femSelf=s=>femFirst(s).replace(/\b(era|fui|estaba|estaría|sería|me pongo|me ponía|me pondría|me he puesto|me vuelvo|me volvía|me sentía|me sentí|me encontraba|me quedaba)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w)).replace(/\b([Ee])ncantado\b/g,'$1ncantada');
 const isF=()=>S.gender==='f'&&LANG.code==='es';
 function femCourse(o,inVocab){if(typeof o==='string'){let t=femFirst(o);if(S.name){const n=S.name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');t=t.replace(new RegExp('\\bQuerido ('+n+')\\b','g'),'Querida $1').replace(new RegExp('\\bdel ('+n+') que\\b','g'),'de la $1 que');}return t;}if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=femCourse(o[i],inVocab);return o;}
-  if(o&&typeof o==='object'){if(o.t==='vocab')return o;if(o.you&&o.opts)o.opts.forEach(x=>{x.es=femFirst(x.es).replace(/\b([Ee])ncantado\b/g,'$1ncantada');});
-    if(o.t==='speak'&&o.es)o.es=o.es.replace(/\b([Ee])ncantado\b/g,'$1ncantada');for(const k of Object.keys(o))if(k!=='items')o[k]=femCourse(o[k]);}return o;}
+  if(o&&typeof o==='object'){if(o.t==='vocab')return o;if(o.you&&o.opts)o.opts.forEach(x=>{x.es=femSelf(x.es);});
+    if(o.t==='speak'&&o.es)o.es=femSelf(o.es);
+    if(o.n&&typeof o.es==='string')o.es=o.es.replace(/\b([Bb])ienvenido\b/g,'$1ienvenida');/* Begrüßung der lernenden Person */for(const k of Object.keys(o))if(k!=='items')o[k]=femCourse(o[k]);}return o;}
 if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}
 /* Herkunft (Profil): Inhalte gehen von Deutschland/Mannheim aus. S.origin={c:'AT',city:'Wien',other:'…'} ersetzt nur Herkunftsangaben
    (soy alemán, ¿Eres alemán?, Alemania, Mannheim, Hablo alemán, Deutschland/Germany …) – nicht Vokabellisten, nicht die Geschichten (Ben). */
@@ -157,6 +165,8 @@ function compare(input,answers,opts={}){
       if(pre>=3)return{status:'bad',right:a,note:T('Nur die Endung von „')+inp.split(' ')[d[0]]+T('“ stimmt nicht – richtig ist „')+norm(a).split(' ')[d[0]]+T('“. Die Endung zeigt Person, Zeit oder Geschlecht – deshalb zählt das als Fehler.')};}}
   return{status:'bad',right:answers[0],note:''};
 }
+/* KI-Text sicher anzeigen: HTML-Tags weg, **fett** / *kursiv* aus Markdown umwandeln */
+function aiH(t,cls){const x=esc(String(t||'').replace(/<[^>]+>/g,'')).replace(/\*\*([^*]+)\*\*/g,'<b>$1</b>').replace(/\*([^*\n]+)\*/g,'<i>$1</i>');return h('span',cls?{class:cls,html:x}:{html:x});}
 function diffHtml(your,right){ // word level diff
   const a=String(your).trim().split(/\s+/),b=String(right).trim().split(/\s+/);
   const out=[];let i=0,j=0;
@@ -757,7 +767,7 @@ function feedback(el,res,step,your,ctx){
   if(res.status==='bad'&&hasAI()&&your&&ctx){const ab=h('button',{class:'btn small',style:'margin-top:10px'},'🤖 '+AIN()+T(': Ist meine Antwort auch richtig? / Warum?'));
     ab.onclick=async()=>{ab.disabled=true;ab.textContent=AIN()+T(' denkt nach…');
       try{const q=step.q||step.de||step.es||'';const r=await gemini(TEACHER+`\n\nAufgabe (Typ ${step.t}): ${q}\nMusterlösung(en): ${[].concat(step.a||res.right).join(' / ')}\nAntwort von Jonas: ${your}\n\nIst die Antwort von Jonas ebenfalls korrekt und passend (auch wenn sie von der Musterlösung abweicht)? Antworte als JSON: {"korrekt": true|false, "erklaerung": "kurze Erklärung auf Deutsch, was falsch ist und warum (max. 3 Sätze)", "korrigiert": "Jonas' Satz korrigiert"}`);
-        const ai=h('div',{class:'fb ai'},h('b',{class:'h'},r.korrekt?'🤖 '+AIN()+T(': Deine Antwort ist auch richtig!'):'🤖 '+AIN()+T(' erklärt')),h('div',{},r.erklaerung||''),r.korrigiert&&!r.korrekt?h('div',{class:'es-t',style:'margin-top:4px'},'→ '+r.korrigiert):null);
+        const ai=h('div',{class:'fb ai'},h('b',{class:'h'},r.korrekt?'🤖 '+AIN()+T(': Deine Antwort ist auch richtig!'):'🤖 '+AIN()+T(' erklärt')),h('div',{},aiH(r.erklaerung)),r.korrigiert&&!r.korrekt?h('div',{class:'es-t',style:'margin-top:4px'},'→ ',aiH(r.korrigiert)):null);
         ab.replaceWith(ai);if(r.korrekt&&ctx.upgrade)ctx.upgrade();}
       catch(e){ab.disabled=false;ab.textContent=T('Fehler: ')+e.message;}};box.append(h('div',{},ab));}
   el.append(box);return box;}
@@ -912,10 +922,10 @@ free(el,s,ctx){el.append(kind(T('Freies Schreiben')),h('p',{class:'q'},s.task),s
     if(!hasAI()){out.innerHTML='';out.append(h('div',{class:'fb ai'},h('b',{class:'h'},T('Musterlösung')),h('div',{class:'es-t'},s.model),h('p',{class:'small muted'},T('Vergleiche selbst. Mit einem Gemini-Key (Einstellungen) bekommst du hier eine echte Korrektur.'))));return;}
     ai.disabled=true;ai.textContent=AIN()+T(' korrigiert…');
     try{const r=await gemini(TEACHER+`\n\nAufgabe: ${s.task}\nLernziel/Grammatik dieser Lektion: ${s.focus||''}\nText von Jonas:\n"""${ta.value}"""\n\nKorrigiere den Text. Antworte als JSON: {"note": Zahl 1-10, "lob": "1 kurzer Satz, was gut ist", "korrigiert": "vollständig korrigierter Text", "fehler": [{"falsch":"...","richtig":"...","erklaerung":"kurz auf Deutsch"}], "tipp": "1 Tipp zum Weiterlernen"}`);
-      out.innerHTML='';out.append(h('div',{class:'fb ai'},h('b',{class:'h'},T('🤖 Note: ')+r.note+'/10 · '+(r.lob||'')),
-        h('div',{class:'es-t',style:'margin:6px 0',html:diffHtmlLong(ta.value,r.korrigiert||'')}),
-        (r.fehler||[]).length?h('ul',{style:'margin:6px 0;padding-left:18px'},(r.fehler||[]).map(f=>h('li',{},h('span',{class:'es-t'},h('del',{style:'color:var(--bad)'},f.falsch),' → ',h('b',{style:'color:var(--ok)'},f.richtig)),' – ',f.erklaerung))):h('div',{},T('Keine Fehler gefunden 🎉')),
-        r.tipp?h('div',{class:'small',style:'margin-top:6px'},'💡 '+r.tipp):null,h('details',{style:'margin-top:8px'},h('summary',{class:'small'},T('Musterlösung aus dem Kurs')),h('div',{class:'es-t'},s.model))));}
+      out.innerHTML='';out.append(h('div',{class:'fb ai'},h('b',{class:'h'},T('🤖 Note: ')+r.note+'/10 · ',aiH(r.lob)),
+        h('div',{class:'es-t',style:'margin:6px 0',html:diffHtmlLong(ta.value,String(r.korrigiert||'').replace(/<[^>]+>/g,''))}),
+        (r.fehler||[]).length?h('ul',{style:'margin:6px 0;padding-left:18px'},(r.fehler||[]).map(f=>h('li',{},h('span',{class:'es-t'},h('del',{style:'color:var(--bad)'},aiH(f.falsch)),' → ',h('b',{style:'color:var(--ok)'},aiH(f.richtig))),' – ',aiH(f.erklaerung)))):h('div',{},T('Keine Fehler gefunden 🎉')),
+        r.tipp?h('div',{class:'small',style:'margin-top:6px'},'💡 ',aiH(r.tipp)):null,h('details',{style:'margin-top:8px'},h('summary',{class:'small'},T('Musterlösung aus dem Kurs')),h('div',{class:'es-t'},s.model))));}
     catch(e){out.innerHTML='';out.append(h('div',{class:'fb bad'},AIN()+T('-Fehler: ')+e.message),h('div',{class:'fb ai'},h('b',{class:'h'},T('Musterlösung')),h('div',{class:'es-t'},s.model)));}
     ai.disabled=false;ai.textContent=T('🤖 Erneut korrigieren');};
   el.append(h('div',{class:'actions'},ai,h('span',{class:'spacer'}),h('button',{class:'btn',onclick:()=>{window.__cleanupStep&&window.__cleanupStep();ctx.next();}},T('Weiter →'))));}
@@ -1365,14 +1375,14 @@ function vChat(m,id){const u=unitById(id);const sit=u.situacion;
   const chat=h('div',{class:'chat'});const hist=[];const sys=TEACHER+`\n\nROLLENSPIEL: ${sit.role}\nSzene: ${sit.scene}\nZiel von Jonas: ${sit.goal}\nWortschatz/Grammatik bis ${UW} ${u.n}: ${u.goals.join(', ')}.\nRegeln: Spiele deine Rolle auf Spanisch, natürlich aber einfach (A1/A2), 1–3 kurze Sätze pro Antwort, stelle Rückfragen, damit das Gespräch weitergeht. Wenn Jonas einen Fehler macht, gib eine kurze Korrektur auf Deutsch im Feld "korrektur" (sonst null). Wenn das Ziel erreicht ist, beende das Gespräch freundlich und setze "fertig": true.\nAntworte NUR als JSON: {"antwort_es":"...","antwort_de":"deutsche Übersetzung","korrektur":null oder {"richtig":"korrigierter Satz von Jonas","erklaerung":"kurz"},"fertig":false}`;
   const inp=h('input',{class:'inp',placeholder:fmt(T('Deine Antwort {ON} …')),autocomplete:'off',spellcheck:'false'});const send=h('button',{class:'btn primary'},T('Senden'));
   m.append(chat,h('div',{class:'row',style:'flex-wrap:nowrap'},inp,send),keys(()=>inp),h('p',{class:'muted small'},fmt(T('Tipp: Wenn du nicht weiterweißt, schreib auf {EX} „Hilfe: …“ – der Lehrer hilft dir.'))));
-  function bubble(me,es,de,corr){const b=h('div',{class:'msg'+(me?' me':'')},h('div',{class:'who'},me?T('Du'):sit.npc||T('Profe')),h('div',{class:'row',style:'gap:8px;flex-wrap:nowrap'},me?null:spk(es),h('span',{class:'es-t'},es)),de?h('div',{class:'tr'},de):null);chat.append(b);
-    if(corr)chat.append(h('div',{class:'fb warn',style:'align-self:flex-end;max-width:82%;margin:0'},'✏️ ',h('span',{class:'es-t'},corr.richtig),h('div',{class:'small'},corr.erklaerung)));b.scrollIntoView({behavior:'smooth',block:'end'});}
+  function bubble(me,es,de,corr){const b=h('div',{class:'msg'+(me?' me':'')},h('div',{class:'who'},me?T('Du'):sit.npc||T('Profe')),h('div',{class:'row',style:'gap:8px;flex-wrap:nowrap'},me?null:spk(es),h('span',{class:'es-t'},me?es:aiH(es))),de?h('div',{class:'tr'},aiH(de)):null);chat.append(b);
+    if(corr)chat.append(h('div',{class:'fb warn',style:'align-self:flex-end;max-width:82%;margin:0'},'✏️ ',h('span',{class:'es-t'},aiH(corr.richtig)),h('div',{class:'small'},aiH(corr.erklaerung))));b.scrollIntoView({behavior:'smooth',block:'end'});}
   async function turn(text){if(text){bubble(true,text);hist.push({role:'user',parts:[{text}]});}
     else hist.push({role:'user',parts:[{text:T('(Beginne das Gespräch mit deiner ersten Zeile.)')}]});
     send.disabled=true;send.textContent='…';
     try{const r=await gemini(sys,{history:hist});hist.push({role:'model',parts:[{text:JSON.stringify(r)}]});bubble(false,r.antwort_es,r.antwort_de,null);
-      if(r.korrektur&&chat.children.length>1){const last=[...chat.querySelectorAll('.msg.me')].pop();if(last)last.after(h('div',{class:'fb warn',style:'align-self:flex-end;max-width:82%;margin:0'},'✏️ ',h('span',{class:'es-t'},r.korrektur.richtig),h('div',{class:'small'},r.korrektur.erklaerung)));}
-      say(r.antwort_es);if(r.fertig)chat.append(h('div',{class:'fb ok'},T('🎉 Ziel erreicht! ¡Muy bien!')));}
+      if(r.korrektur&&chat.children.length>1){const last=[...chat.querySelectorAll('.msg.me')].pop();if(last)last.after(h('div',{class:'fb warn',style:'align-self:flex-end;max-width:82%;margin:0'},'✏️ ',h('span',{class:'es-t'},aiH(r.korrektur.richtig)),h('div',{class:'small'},aiH(r.korrektur.erklaerung))));}
+      say(String(r.antwort_es||'').replace(/<[^>]+>|[*_]/g,''));if(r.fertig)chat.append(h('div',{class:'fb ok'},T('🎉 Ziel erreicht! ¡Muy bien!')));}
     catch(e){chat.append(h('div',{class:'fb bad'},AIN()+T('-Fehler: ')+e.message));}
     send.disabled=false;send.textContent=T('Senden');inp.focus();}
   send.onclick=()=>{const t=inp.value.trim();if(!t)return;inp.value='';turn(t);};inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();send.click();}};

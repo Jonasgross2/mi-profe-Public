@@ -36,7 +36,7 @@ EN = [
 "Your parents, Nuria and you at the table. There's paella.",
 "Jonas, ask your parents what they think of Barcelona.",
 "When mediating: reported speech and summarising the gist, not quoting word for word.",
-"Of course! Hey, tell them their son is the worst dishwasher in all of Gràcia.",
+"Typical! Hey, tell them that nobody in all of Gràcia washes up worse than you.",
 "Here it's not a correction but a rephrasing → <i>o lo que es lo mismo</i>.",
 "Haha! OK, in short: welcome and enjoy your meal!",
 "What my parents mean is that they're very proud that I dared to come here.",

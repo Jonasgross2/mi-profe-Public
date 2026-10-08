@@ -115,7 +115,7 @@ EN = [
 "You're signing up at a gym. The employee fills in a form.",
 "Hello, good afternoon. Your name, please?",
 "Name: <i>Soy / Me llamo …</i> or simply the name.",
-"G = <i>ge</i>, S = <i>ese</i>.",
+"Those are the German letter names. In Spanish e.g. R = <i>erre</i>, S = <i>ese</i>, G = <i>ge</i>.",
 "Perfect. How old are you?",
 "Age always with <b>tener</b>: <i>tengo … años</i>.",
 "About yourself: <i>tengo</i>.",
