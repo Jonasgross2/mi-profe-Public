@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261008-1132";</script>
+<script>window.PWA=true;window.APP_VERSION="20261008-1136";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -3670,7 +3670,7 @@ function vHome(m){
   const pl=pauseList();if(pl.length){const p=pl[0];const del=h('button',{class:'btn ghost small',title:T('Verwerfen'),onclick:e=>{e.stopPropagation();pauseDel(p.key);route();}},'×');
     /* einzeilig, damit „Deine Woche“ meist noch auf die Startseite passt */
     m.append(h('div',{class:'card resume',onclick:()=>resumeGo(p)},h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px;align-items:center'},
-      h('div',{style:'flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'},h('span',{class:'kind',style:'margin:0 6px 0 0;display:inline'},T('Angefangen')),h('b',{},p.title.split(' · ')[0]),h('span',{class:'muted small'},' · '+pauseInfo(p)+(pl.length>1?' · +'+(pl.length-1):''))),
+      h('div',{style:'flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis'},h('span',{class:'kind',style:'margin:0 6px 0 0;display:inline'},T('Angefangen')),h('b',{},pauseTitle(p)),h('span',{class:'muted small'},' · '+pauseInfo(p)+(pl.length>1?' · +'+(pl.length-1):''))),
       h('button',{class:'btn primary small',onclick:e=>{e.stopPropagation();resumeGo(p);}},T('▶ Weiter')),del)));}
   /* Tagesplan: feste Bausteine mit Zeitschätzung, die erste offene Aufgabe wird groß angezeigt */
   const plan=dayPlan();
@@ -3882,6 +3882,10 @@ let RESUME=null;
 function resumeGo(p){if(p.cards)return resumeVocab(p);RESUME=p.key;if(curRoute()===p.route)route();else go(p.route);}
 function resumeVocab(p){runVocab(p.cards,p.mode,p.srs,{pk:p.key,resume:p,myIds:p.myIds,again:p.myIds?()=>myRun(p.myIds.map(e=>S.srs[vkey(e)]).filter(c=>c&&!c.del)):null});}
 const pauseInfo=p=>(p.pos!=null?p.pos+1:p.i+1)+' / '+p.n;
+/* Titel immer in der aktuellen Sprache neu bauen (gespeicherter Titel wäre in der Sprache von damals) */
+function pauseTitle(p){const k=p.key||'',a=k.split('/');if(p.cards)return p.myIds?T('Meine Wörter'):T('Vokabeln');
+  if(a[0]==='lesson'||a[0]==='round'){const u=unitById(a[1]),l=u&&u.lessons.find(x=>x.id===a[2]);if(l)return UW+' '+u.n+' · '+l.title+(a[0]==='round'?T(' · Runde ')+a[3]:'');}
+  return {mix:T('Gemischte Wiederholung'),verbs:T('Verben-Trainer'),num:T('Zahlen & Uhrzeit'),mistakes:T('Fehler üben')}[k]||p.title||'';}
 function pauseBtn(k,start,label){const p=pauseGet(k);return p?h('button',{class:'btn primary',style:'width:100%;min-height:48px;margin-bottom:8px',onclick:start},T('▶ Weitermachen')+' ('+pauseInfo(p)+')'):null;}
 function play(m,cfg){
   let queue=cfg.steps.slice();let pos=0;let firstTry=new Map();let retried=new Set();let gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
