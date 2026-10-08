@@ -793,18 +793,23 @@ function resumeVocab(p){runVocab(p.cards,p.mode,p.srs,{pk:p.key,resume:p,myIds:p
 const pauseInfo=p=>(p.pos!=null?p.pos+1:p.i+1)+' / '+p.n;
 function pauseBtn(k,start,label){const p=pauseGet(k);return p?h('button',{class:'btn primary',style:'width:100%;min-height:48px;margin-bottom:8px',onclick:start},T('▶ Weitermachen')+' ('+pauseInfo(p)+')'):null;}
 function play(m,cfg){
-  let queue=cfg.steps.slice();let pos=0;const firstTry=new Map();let retried=new Set();let gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
+  let queue=cfg.steps.slice();let pos=0;let firstTry=new Map();let retried=new Set();let gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
+  /* ↶ Rückgängig (nur bei Übungen mit Zwischenspeicher, nicht in Tests): Zustand bei jeder Aufgabe merken, zurück = vorige Aufgabe neu */
+  const hist=[];const cp=o=>o==null?o:JSON.parse(JSON.stringify(o));
+  const undoB=h('button',{class:'btn ghost undo hide',title:T('Rückgängig'),onclick:()=>{if(hist.length<2)return;hist.pop();const h0=hist.pop();
+    pos=h0.pos;queue=h0.queue;firstTry=h0.ft;retried=new Set(h0.rt.map(i=>queue[i]).filter(Boolean));S.mistakes=h0.mis;S.stats=h0.stats;S.streak=h0.streak;save();speechSynthesis.cancel();show();}},'↶ '+T('zurück'));
   /* cfg.pk = Schlüssel zum Zwischenspeichern; gespeicherter Stand wird automatisch fortgesetzt (cfg.fresh = neu anfangen) */
   const sv=cfg.pk&&!cfg.fresh&&pauseGet(cfg.pk);
   if(sv){queue=sv.steps;pos=sv.pos;(sv.ft||[]).forEach(([a,b])=>firstTry.set(a,b));retried=new Set((sv.rt||[]).map(i=>queue[i]).filter(Boolean));gradeable=sv.g;}
   const top=h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:async()=>{if(cfg.pk&&pos>0){toast(T('Gespeichert – später geht es hier weiter.'));return cfg.onBack();}
-    if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),h('span',{class:'muted small',id:'pcount'}));
+    if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pcount'}));
   const stage=h('div',{class:'step'});
   m.append(h('div',{class:'player'},h('div',{class:'muted small',style:'margin-bottom:6px'},cfg.title),
     sv?h('div',{class:'muted small',style:'margin:-2px 0 6px'},T('⏸ Fortgesetzt, wo du aufgehört hast · '),h('button',{class:'linkbtn',onclick:()=>{pauseDel(cfg.pk);m.innerHTML='';play(m,Object.assign({},cfg,{fresh:true}));}},T('↺ neu anfangen'))):null,top,stage));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*pos/queue.length)+'%';$('#pcount').textContent=Math.min(pos+1,queue.length)+' / '+queue.length;}
   function next(){pos++;if(pos>=queue.length)return finish();show();}
-  function show(){upd();stage.innerHTML='';stage.className='step';void stage.offsetWidth;stage.className='step';
+  function show(){if(cfg.pk){hist.push({pos,queue:queue.slice(),ft:new Map(firstTry),rt:[...retried].map(x=>queue.indexOf(x)),mis:cp(S.mistakes),stats:cp(S.stats),streak:cp(S.streak)});if(hist.length>30)hist.shift();undoB.classList.toggle('hide',hist.length<2);}
+    upd();stage.innerHTML='';stage.className='step';void stage.offsetWidth;stage.className='step';
     if(cfg.pk&&pos>0)pauseSet(cfg.pk,{route:curRoute(),title:cfg.title,steps:queue,pos,ft:[...firstTry],rt:[...retried].map(x=>queue.indexOf(x)),g:gradeable,n:queue.length});
     const it=queue[pos];const isRetry=retried.has(it)&&firstTry.has(it.ref);
     if(isRetry)stage.append(h('div',{class:'pill acc',style:'margin-bottom:10px'},T('↻ Noch mal – das war vorhin falsch')));
@@ -814,7 +819,7 @@ function play(m,cfg){
         if(status==='bad'){logMistake(it.ref,your);if(!cfg.noRetry&&!retried.has(it)){retried.add(it);queue.push(it);}}
         else if(cfg.mistakeMode){S.mistakes=S.mistakes.filter(x=>x.ref!==it.ref);save();}}
       if(cfg.onAnswer)cfg.onAnswer(it,status);},next});}
-  function finish(){$('.ptop .bar i').style.width='100%';if(cfg.pk)pauseDel(cfg.pk);
+  function finish(){$('.ptop .bar i').style.width='100%';if(cfg.pk)pauseDel(cfg.pk);undoB.classList.add('hide');
     const vals=[...firstTry.values()];const score=gradeable?vals.filter(v=>v!=='bad').length/Math.max(gradeable,vals.length||1):1;
     const after=cfg.onDone?cfg.onDone({score,firstTry}):null;stage.innerHTML='';
     const pct=Math.round(score*100);
@@ -1362,7 +1367,7 @@ function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es
 /* opt: {again:()=>…} = „Noch eine Runde“ statt Tagesplan (eigene Listen). Zurück (✕ und Ende) = Seite, von der die Runde gestartet wurde. */
 function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fromL=navLabel(from)||T('Vokabeln');const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
   const rs=opt.resume;if(rs){i=rs.i;okc=rs.okc;(rs.seen||[]).forEach(x=>seen.add(x));}
-  const undoB=h('button',{class:'btn ghost small hide',title:T('Rückgängig'),onclick:()=>undo()},'↶');
+  const undoB=h('button',{class:'btn ghost undo hide',title:T('Rückgängig'),onclick:()=>undo()},'↶ '+T('zurück'));
   const stage=h('div',{class:'step'});m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>{if(opt.pk&&i>0&&i<q.length)toast(T('Gespeichert – später geht es hier weiter.'));go(from);}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'})),stage));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;undoB.classList.toggle('hide',!hist.length);}
   const failed=new Set(rs&&rs.failed||[]);

@@ -401,3 +401,5 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .learntile.soon{opacity:.55}
 @media (hover:hover){.learntile:not(.soon):hover{background:var(--accent-soft)}}
 .card.resume{padding:10px 12px;margin-bottom:12px;cursor:pointer}.card.resume .btn.small{flex:none}
+
+.btn.undo{font-size:15px;font-weight:600;line-height:1;min-height:36px;padding:6px 12px;border:1.5px solid var(--line);border-radius:10px;flex:none;white-space:nowrap}
