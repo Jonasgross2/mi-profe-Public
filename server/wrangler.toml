@@ -1,0 +1,13 @@
+# Cloudflare Worker für Mi profe (Sync per Code + KI für Freunde & Familie). Anleitung: server/README.md
+name = "mi-profe"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# KV-Speicher: id kommt aus `npx wrangler kv namespace create DATA` (Ausgabe hier eintragen)
+[[kv_namespaces]]
+binding = "DATA"
+id = "HIER_KV_ID_EINTRAGEN"
+
+[vars]
+AI_LIMIT = "60"
+# GEMINI_KEY und INVITES sind Geheimnisse: `npx wrangler secret put GEMINI_KEY` bzw. `… INVITES` – nie hier eintragen

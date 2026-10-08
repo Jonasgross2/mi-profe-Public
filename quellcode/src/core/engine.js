@@ -331,7 +331,7 @@ async function claudeAsk(prompt,{json,history}){
 /* ---------- gemini ---------- */
 async function gemini(prompt,{json=true,history=null}={}){if(EX!=='de')prompt=String(prompt)+'\n\nIMPORTANT: The learner wants explanations in '+({en:'English',es:'Spanish',pt:'Brazilian Portuguese',it:'Italian',fr:'French'}[EX])+'. Write ALL explanations, corrections and comments for the learner in that language instead of German (example sentences in the target language stay as they are).';if(S.name)prompt=String(prompt).replace(/\bJonas\b/g,S.name);/* Herkunft aus dem Profil mitgeben, statt eine anzunehmen */if(S.origin&&(S.origin.c||S.origin.other)){const X=S.origin.c&&ORIGINS[S.origin.c];prompt+='\n\n'+(S.name||'Jonas')+' kommt aus '+(X?X[1].replace(/^(die|der) /,''):S.origin.other)+(S.origin.city?' ('+S.origin.city+')':'')+'.';}if(S.gender==='x')prompt+='\n\n'+(S.name||T('Die lernende Person'))+T(' möchte keine Angabe zum Geschlecht machen. Sprich die Person möglichst neutral an und akzeptiere männliche und weibliche Formen, wenn sie über sich spricht.');else if(S.gender)prompt+=S.gender==='f'?T('\n\nWICHTIG: ')+(S.name||T('Die lernende Person'))+T(' ist eine Frau. Sprich sie mit weiblichen Formen an (z. B. „estás cansada“, „bienvenida“) und erwarte von ihr weibliche Formen, wenn sie über sich spricht. Im Deutschen: „sie/ihr“ statt „er/ihm“.'):'\n\n'+(S.name||T('Die lernende Person'))+T(' ist ein Mann – männliche Formen verwenden.');
   if(useClaude())return claudeAsk(prompt,{json,history});
-  const key=S.settings.geminiKey;if(!key)throw new Error(T('Kein Gemini-API-Key hinterlegt (Einstellungen).'));
+  const key=S.settings.geminiKey;if(!key&&!srvAI())throw new Error(T('Kein Gemini-API-Key hinterlegt (Einstellungen).'));
   const tried=[S.settings.geminiModel||'gemini-flash-latest'];for(const f of FALLBACK)if(!tried.includes(f))tried.push(f);
   let lastErr;
   for(const model of tried){try{const out=await geminiCall(model,key,prompt,{json,history});if(model!==S.settings.geminiModel){S.settings.geminiModel=model;save();}return out;}
@@ -359,14 +359,20 @@ async function geminiCall(model,key,prompt,{json,history}){
   if(history&&prompt)body.systemInstruction={parts:[{text:prompt}]};
   if(json)body.generationConfig.responseMimeType='application/json';
   const base='https://generativelanguage.googleapis.com/v1beta/models/'+encodeURIComponent(model)+':generateContent';
-  const r=await gfetch(base,key,JSON.stringify(body));
+  /* ohne eigenen Schlüssel: über den Mi-profe-Server mit Einladungscode (text/plain = ohne CORS-Vorabanfrage) */
+  const r=key?await gfetch(base,key,JSON.stringify(body)):await fetch(SRV()+'/api/ai',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({invite:S.settings.invite,model,body})}).catch(e=>{const x=new Error(T('Keine Verbindung zum Mi-profe-Server.'));x.network=true;throw x;});
+  if(!key){const l=r.headers.get('X-AI-Left');if(l!=null)AI_LEFT=+l;}
   const j=await r.json().catch(()=>({}));
   if(!r.ok){const e=new Error((j.error&&j.error.message)||('HTTP '+r.status));e.modelProblem=r.status===404||/no longer available|not found|not supported|deprecated/i.test(e.message);throw e;}
   const t=(((j.candidates||[])[0]||{}).content||{}).parts?.map(p=>p.text||'').join('')||'';
   if(!json)return t;
   try{return JSON.parse(t.replace(/^```json\s*|```\s*$/g,''));}catch(e){throw new Error(T('Antwort von Gemini nicht lesbar.'));}
 }
-const hasAI=()=>useClaude()||!!S.settings.geminiKey;
+const hasAI=()=>useClaude()||!!S.settings.geminiKey||srvAI();
+/* ---------- Mi-profe-Server (Cloudflare Worker, server/worker.js): Sync per Code + KI per Einladung. Adresse kommt aus build.py (MP_SERVER) ---------- */
+const SRV=()=>window.MP_SERVER||'';const srvAI=()=>!!(SRV()&&S.settings.invite);let AI_LEFT=null;
+async function srvPost(path,data){let r;try{r=await fetch(SRV()+path,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(data)});}catch(e){throw new Error(T('Keine Verbindung zum Mi-profe-Server.'));}
+  const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error((j.error&&(j.error.message||j.error))||('HTTP '+r.status));return j;}
 const TEACHER=LANG.teacher||T('Du bist ein geduldiger Sprachlehrer.');
 
 /* ---------- progress ---------- */
@@ -1529,6 +1535,34 @@ function vChat(m,id){const u=unitById(id);const sit=u.situacion;
   turn(null);}
 
 /* ---------- settings ---------- */
+/* Einladung (für Sync per Code und KI über den Server): einmal eingeben oder per Link ?einladung=CODE */
+function inviteBox(after){const st=S.settings;const inp=h('input',{class:'inp',placeholder:T('Einladungscode, z. B. SOL-4821'),autocapitalize:'characters',style:'font-size:16px;text-transform:uppercase'});const out=h('div');
+  const ok=h('button',{class:'btn primary'},T('Einladung prüfen'));ok.onclick=async()=>{const v=inp.value.trim().toUpperCase();if(!v)return toast(T('Zuerst den Code eingeben'));ok.disabled=true;out.innerHTML='';
+    try{const j=await srvPost('/api/check',{invite:v});st.invite=v;st.inviteName=j.name;save(true);toast(T('Willkommen, ')+j.name+' ✓');(after||route)();}catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));}ok.disabled=false;};
+  return h('div',{},h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px'},inp,ok),out);}
+function srvSyncCard(){const st=S.settings;const out=h('div');const box=h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},T('☁️ Geräte verbinden')));
+  const info=h('p',{class:'muted'},T('Dein Fortschritt wird automatisch gesichert und auf allen deinen Geräten abgeglichen – ohne Konto und ohne Passwort. Er liegt auf dem Mi-profe-Server (Cloudflare); wer deinen Sync-Code kennt, kann ihn sehen – also nur an eigene Geräte geben.'));
+  const run=async(btn)=>{if(btn)btn.disabled=true;out.innerHTML='';try{await syncNow({throw:true});toast(T('✓ Synchronisiert'));}catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));}if(btn)btn.disabled=false;};
+  if(!st.syncCode){const inp=h('input',{class:'inp',placeholder:T('Sync-Code, z. B. SOL-4821-KXPA'),autocapitalize:'characters',style:'font-size:16px;text-transform:uppercase'});
+    const neu=h('button',{class:'btn primary'},T('Sicherung einschalten'));neu.onclick=async()=>{neu.disabled=true;try{const j=await srvPost('/api/sync/new',{invite:st.invite});st.syncCode=j.code;save(true);await run();route();}catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));neu.disabled=false;}};
+    const con=h('button',{class:'btn'},T('Verbinden'));con.onclick=async()=>{const v=inp.value.trim().toUpperCase();if(!/^[A-Z]+-\d{4}-[A-Z]{4}$/.test(v))return toast(T('Der Code sieht so aus: SOL-4821-KXPA'));st.syncCode=v;save(true);await run(con);if(!syncState.at){st.syncCode='';save(true);}else route();};
+    /* neue Sicherung nur mit Einladung; ein weiteres Gerät verbinden geht auch nur mit dem Sync-Code */
+    box.append(info,h('p',{class:'small'},T('Erstes Gerät: Sicherung einschalten – du bekommst einen Sync-Code. Weitere Geräte: diesen Code hier eingeben.')),
+      st.invite?h('div',{class:'row',style:'margin-bottom:10px'},neu):h('div',{style:'margin-bottom:12px'},h('p',{class:'small',style:'margin:0 0 6px'},T('Für eine neue Sicherung brauchst du einen Einladungscode (von der Person, die dir die App gegeben hat).')),inviteBox()),
+      h('div',{class:'kind',style:'margin:8px 0 6px'},T('Code von einem anderen Gerät')),h('div',{class:'row',style:'flex-wrap:nowrap;gap:8px'},inp,con),out);return box;}
+  const link=location.origin+location.pathname+'?sync='+encodeURIComponent(st.syncCode);
+  const share=h('button',{class:'btn'},T('🔗 Link fürs andere Gerät'));share.onclick=async()=>{try{if(navigator.share){await navigator.share({title:'Mi profe',text:T('Mi profe auf diesem Gerät verbinden'),url:link});return;}}catch(e){return;}
+    try{await navigator.clipboard.writeText(link);toast(T('Link kopiert ✓'));}catch(e){prompt(T('Link kopieren:'),link);}};
+  const sync=h('button',{class:'btn primary'},T('Jetzt synchronisieren'));sync.onclick=()=>run(sync);
+  box.append(h('p',{class:'small',style:'margin:0 0 6px'},T('Dein Sync-Code (auf anderen Geräten eingeben oder den Link öffnen):')),
+    h('div',{class:'synccode'},st.syncCode),h('p',{class:'muted small',id:'syncstat'},syncLabel()),
+    h('div',{class:'row'},sync,share,h('button',{class:'btn ghost',onclick:async()=>{if(!await askConfirm(T('Dieses Gerät vom Sync trennen? Dein Fortschritt bleibt hier und auf dem Server erhalten.'),T('Trennen')))return;st.syncCode='';save(true);route();}},T('Trennen'))),out,info);return box;}
+function srvAICard(){const st=S.settings;const box=h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},T('🤖 KI über Einladung')));
+  const info=h('p',{class:'muted'},T('Mit einer Einladung kannst du die KI (Texte korrigieren, Gespräche, „Warum?“) ohne eigenen Schlüssel nutzen – mit einem Tageslimit. Hinweis: Die Anfragen gehen an Google Gemini; dort keine persönlichen Daten eintippen.'));
+  if(!st.invite){box.append(info,inviteBox());return box;}
+  box.append(h('div',{class:'fb ok',style:'margin:0 0 8px'},T('✓ KI aktiv')+(st.inviteName?' · '+st.inviteName:'')+(AI_LEFT!=null?' · '+T('heute noch ')+AI_LEFT+T(' Anfragen'):'')),
+    st.geminiKey?h('p',{class:'muted small'},T('Du hast zusätzlich einen eigenen Schlüssel eingetragen – der wird bevorzugt.')):null,info,
+    h('button',{class:'btn ghost',onclick:async()=>{if(!await askConfirm(T('Einladung auf diesem Gerät entfernen? KI und neue Sync-Codes gehen dann nicht mehr.'),T('Entfernen')))return;st.invite='';st.inviteName='';save(true);route();}},T('Einladung entfernen')));return box;}
 function vSettingsAll(m){const st=S.settings;
   const voiceSel=h('select',{class:'inp',style:'font-size:15px'});const fillV=()=>{loadVoices();voiceSel.innerHTML='';voiceSel.append(h('option',{value:''},T('Automatisch (beste Stimme)')));voices.forEach(v=>voiceSel.append(h('option',{value:v.name,selected:v.name===st.voice},v.name+' ('+v.lang+')'+(vQual(v)===2?T(' · Premium'):vQual(v)===1?T(' · Erweitert'):''))));};fillV();setTimeout(fillV,500);
   voiceSel.onchange=()=>{st.voice=voiceSel.value;save();say((LANG.sampleSay||[T('Hola')])[0]);};
@@ -1543,6 +1577,7 @@ function vSettingsAll(m){const st=S.settings;
     IS_IOS?h('label',{class:'row',style:'margin-top:8px'},mix,T('Musik anderer Apps nie unterbrechen')):null,
     IS_IOS?h('span',{class:'muted small'},T('Aus (Standard): App immer hörbar, auch stumm geschaltet – andere Musik wird dabei pausiert. An: Musik läuft immer weiter, die App ist dann nur mit Ton-Schalter hörbar.')):null,
     h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Darstellung')),theme)));
+  if(SRV()){m.append(srvSyncCard(),srvAICard());}
   const key=h('input',{class:'inp',type:'password',value:st.geminiKey,placeholder:T('AIza…'),style:'font-size:15px'});
   const model=h('input',{class:'inp',value:st.geminiModel,style:'font-size:15px'});const out=h('div');
   const test=h('button',{class:'btn'},T('Verbindung testen'));
@@ -1581,7 +1616,7 @@ function vSettingsAll(m){const st=S.settings;
         if(IN_ARTIFACT){const dl=await window.claude.use('downloads').catch(()=>null);if(!dl){toast(T('Download hier nicht verfügbar'));return;}try{await dl.save({filename:fn,data:txt});}catch(e){toast(T('Download abgebrochen'));}return;}
         const a=h('a',{href:URL.createObjectURL(new Blob([txt],{type:'application/json'})),download:fn});document.body.append(a);a.click();a.remove();}},T('⬇️ Backup herunterladen')),
       h('button',{class:'btn',onclick:()=>file.click()},T('⬆️ Backup laden')),file,h('span',{class:'spacer'}),
-      h('button',{class:'btn ghost',style:'color:var(--bad)',onclick:async()=>{if(await askConfirm(T('Wirklich den ganzen Fortschritt zurücksetzen?'),T('Zurücksetzen'))){const k=S.settings;S=JSON.parse(JSON.stringify(DEFAULT));S.settings=k;save(true);if(k.ghToken&&k.gistId){gh('/gists/'+k.gistId,{method:'PATCH',body:JSON.stringify({files:{[GIST_FILE]:{content:JSON.stringify(payload())}}})}).catch(()=>{});}route();}}},T('Alles zurücksetzen')))));
+      h('button',{class:'btn ghost',style:'color:var(--bad)',onclick:async()=>{if(await askConfirm(T('Wirklich den ganzen Fortschritt zurücksetzen?'),T('Zurücksetzen'))){const k=S.settings;S=JSON.parse(JSON.stringify(DEFAULT));S.settings=k;save(true);if(k.ghToken&&k.gistId){gh('/gists/'+k.gistId,{method:'PATCH',body:JSON.stringify({files:{[GIST_FILE]:{content:JSON.stringify(payload())}}})}).catch(()=>{});}if(useCode())fetch(codeUrl(),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload())}).catch(()=>{});route();}}},T('Alles zurücksetzen')))));
 }
 
 
@@ -1618,8 +1653,8 @@ function vOrigin(m){const o=Object.assign({c:'DE',city:'',other:''},S.origin||{}
       if(sel==='XX'&&!v.other)return toast(T('Gib dein Land ein'));S.origin=v;S.profT=Date.now();save();if(IN_ARTIFACT){toast(T('Gespeichert'));return;}location.hash='lang';reloadApp();}},T('Speichern')));}
 /* Unterseiten von „Mehr“: welche Karten aus vSettingsAll gezeigt werden (Erkennung über die – ggf. übersetzte – Überschrift) */
 const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/dunkel'),['🔊 Aussprache']],
-  ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 Gemini (optional)']],
-  ['sync','☁️',T('Sync & Backup'),T('Geräte abgleichen & sichern'),['☁️ Geräte synchronisieren (GitHub)','💾 Fortschritt sichern']]];
+  ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 KI über Einladung','🤖 Gemini (optional)']],
+  ['sync','☁️',T('Sync & Backup'),T('Geräte abgleichen & sichern'),['☁️ Geräte verbinden','☁️ Geräte synchronisieren (GitHub)','💾 Fortschritt sichern']]];
 function vPlanSet(m){const P=Object.assign({},PLAN_DEF,S.plan||{});
   const L=[['vocab','🗂️',T('Vokabeln wiederholen'),T('bis zum Tagesziel')],['lesson','📚',T('Nächste Lektion'),T('Lernen, Üben, Festigen, Tests')],['mix','🔀',T('Gemischte Wiederholung'),T('15 Aufgaben aus allem Gelernten')],
     ['story','📖',T('Geschichte'),T('wenn eine neue freigeschaltet ist')],['freq','📚',T('Häufige Wörter'),T('der aktuellen ')+UW],['shadow','🎧',T('Aussprache'),T('7 Sätze Shadowing')],['mistakes','✏️',T('Fehler üben'),T('wenn es offene Fehler gibt')]];
@@ -1645,7 +1680,9 @@ function vSettings(m,sec){
 /* ---------- Sync über GitHub Gist ---------- */
 const GIST_FILE=LANG.gist,GIST_DESC=T('Mi profe – Lernfortschritt (Sync)');
 let syncState={status:'',at:null},syncTimer=null,syncBusy=false;
-function syncLabel(){const st=S.settings;if(!st.ghToken)return T('Fortschritt nur auf diesem Gerät');
+const useCode=()=>!!(SRV()&&S.settings.syncCode);const syncOn=()=>!!S.settings.ghToken||useCode();
+const codeUrl=()=>SRV()+'/api/sync/'+encodeURIComponent(S.settings.syncCode)+'/'+encodeURIComponent(GIST_FILE);
+function syncLabel(){const st=S.settings;if(!syncOn())return T('Fortschritt nur auf diesem Gerät');
   if(syncState.status==='busy')return T('☁️ synchronisiere…');if(syncState.status==='error')return T('⚠️ Sync-Fehler (offline?)');
   return syncState.at?T('☁️ synchronisiert ')+new Date(syncState.at).toLocaleTimeString(T('de-DE'),{hour:'2-digit',minute:'2-digit'}):T('☁️ Sync aktiv');}
 function setSync(st){syncState.status=st;if(st==='ok')syncState.at=Date.now();const e=document.getElementById('syncstat');if(e)e.textContent=syncLabel();}
@@ -1679,29 +1716,38 @@ async function gh(path,opt={}){const r=await fetch('https://api.github.com'+path
 async function findOrCreateGist(){
   for(let page=1;page<=5;page++){const list=await gh('/gists?per_page=100&page='+page);const g=list.find(x=>x.files&&Object.keys(x.files).some(f=>f.startsWith('mi-profe-fortschritt')));if(g)return g.id;if(list.length<100)break;}
   const g=await gh('/gists',{method:'POST',body:JSON.stringify({description:GIST_DESC,public:false,files:{[GIST_FILE]:{content:JSON.stringify(payload())}}})});return g.id;}
-async function syncNow(opts={}){const st=S.settings;if(!st.ghToken||syncBusy)return false;syncBusy=true;setSync('busy');
-  try{if(!st.gistId){st.gistId=await findOrCreateGist();save(true);}
-    const g=await gh('/gists/'+st.gistId);let remote={};const f=g.files&&g.files[GIST_FILE];
-    if(f){let txt=f.content;if(f.truncated&&f.raw_url)txt=await (await fetch(f.raw_url)).text();try{remote=JSON.parse(txt||'{}');}catch(e){remote={};}}
+async function syncNow(opts={}){const st=S.settings;if(!syncOn()||syncBusy)return false;syncBusy=true;setSync('busy');
+  try{let remote={};
+    if(useCode()){/* Sync-Code: Fortschritt dieser Lernsprache vom Mi-profe-Server */const r=await fetch(codeUrl(),{cache:'no-store'});
+      if(r.status===404)throw new Error(T('Sync-Code unbekannt – bitte prüfen.'));if(!r.ok)throw new Error(T('Server-Fehler ')+r.status);remote=await r.json().catch(()=>({}));}
+    else{if(!st.gistId){st.gistId=await findOrCreateGist();save(true);}
+    const g=await gh('/gists/'+st.gistId);const f=g.files&&g.files[GIST_FILE];
+    if(f){let txt=f.content;if(f.truncated&&f.raw_url)txt=await (await fetch(f.raw_url)).text();try{remote=JSON.parse(txt||'{}');}catch(e){remote={};}}}
     const before=JSON.stringify(payload());const settings=S.settings;
     const merged=mergeState(payload(),remote);S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),merged);S.settings=settings;
     try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
     const after=JSON.stringify(payload());
-    if(after!==JSON.stringify(remote))await gh('/gists/'+st.gistId,{method:'PATCH',body:JSON.stringify({files:{[GIST_FILE]:{content:after}}})});
+    if(after!==JSON.stringify(remote)){if(useCode()){const r=await fetch(codeUrl(),{method:'PUT',headers:{'Content-Type':'application/json'},body:after});if(!r.ok)throw new Error(T('Server-Fehler ')+r.status);}
+      else await gh('/gists/'+st.gistId,{method:'PATCH',body:JSON.stringify({files:{[GIST_FILE]:{content:after}}})});}
     setSync('ok');
     if(before!==after&&!opts.quiet){const r=curRoute().split('/')[0];if(['home','units','unit','vocab','mistakes','placement','settings','words','resumen'].includes(r))route();}
     return true;}
   catch(e){setSync('error');console.warn(T('Sync'),e);if(opts.throw)throw e;return false;}
   finally{syncBusy=false;}}
-window.__sync={schedule(){if(!S.settings.ghToken)return;clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow({quiet:true}),4000);}};
-window.addEventListener('focus',()=>{if(S.settings.ghToken)syncNow();});
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&S.settings.ghToken){clearTimeout(syncTimer);syncNow({quiet:true});}});
+/* Abgleich nach dem Lernen: GitHub nach 4 s Ruhe, Server-Code nach 30 s (schont den kostenlosen Speicher), immer beim Verlassen der App */
+window.__sync={schedule(){if(!syncOn())return;clearTimeout(syncTimer);syncTimer=setTimeout(()=>syncNow({quiet:true}),useCode()?30000:4000);}};
+window.addEventListener('focus',()=>{if(syncOn())syncNow();});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&syncOn()){clearTimeout(syncTimer);syncNow({quiet:true});}});
 
 window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,numItems};
 /* App-Gefühl: kein Pinch-/Doppeltipp-Zoom */
 ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
 document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
-setTimeout(()=>{if(S.settings.ghToken)syncNow();},300);
+/* Einladungs- und Verbinden-Links: ?einladung=CODE schaltet den Server frei, ?sync=CODE verbindet dieses Gerät */
+{const q=new URLSearchParams(location.search);const inv=q.get('einladung'),sc=q.get('sync');
+  if(inv||sc){if(inv)S.settings.invite=inv.trim().toUpperCase();if(sc)S.settings.syncCode=sc.trim().toUpperCase();save(true);
+    try{history.replaceState(null,'',location.pathname+location.hash);}catch(e){}setTimeout(()=>toast(sc?T('Gerät wird verbunden …'):T('Einladung gespeichert ✓')),800);}}
+setTimeout(()=>{if(syncOn())syncNow();},300);
 /* Service Worker: App kommt sofort aus dem Speicher; Updates im Hintergrund prüfen (beim Start und beim Zurückkehren in die App).
    Hat eine neue Version übernommen → Hinweis zum Neuladen (nicht automatisch, damit keine Lektion abbricht). */
 if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)&&window.PWA){const hadCtl=!!navigator.serviceWorker.controller;

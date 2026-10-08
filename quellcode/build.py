@@ -2,6 +2,8 @@ import pathlib, time
 base=pathlib.Path(__file__).resolve().parent
 s=base/'src'
 VERSION=time.strftime('%Y%m%d-%H%M')
+# Adresse des Mi-profe-Servers (server/, Cloudflare Worker) für Sync per Code und KI per Einladung – leer = Funktionen ausgeblendet
+SERVER_URL=''
 # ===== Pakete: die Web-App lädt nur, was gebraucht wird (Lernsprache + ggf. Erklärsprache); die Mac-Einzeldateien enthalten alles =====
 # Ordner: src/core/ = gemeinsam (Logik, Design, Register, Oberflächentexte) · src/<lern>/ = Inhalte einer Lernsprache · src/<lern>/tr_<ex>.js = Erklärsprache
 # Neue Lernsprache: Ordner src/<code>/ + Eintrag hier (Dateien in Ladereihenfolge, Definition defineLang zuletzt). Erklärsprachen: automatisch aus src/<lern>/tr_<ex>.js
@@ -60,7 +62,7 @@ def page(pwa):
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="'''+VERSION+'''";</script>''' if pwa else '''<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇸</text></svg>">'''
+<script>window.PWA=true;window.APP_VERSION="'''+VERSION+'''";window.MP_SERVER="'''+SERVER_URL+'''";</script>''' if pwa else '''<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇸</text></svg>">'''
     inl=lambda fs:'\n'.join(f'<script>{(s/f).read_text()}</script>' for f in fs)
     scripts=inl(['core/lang.js'])+'\n'+LOADER+inl(['core/ui_tr.js','core/engine.js']) if pwa else inl(ALL)
     return f'''<!doctype html>
