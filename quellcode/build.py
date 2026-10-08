@@ -3,7 +3,7 @@ base=pathlib.Path(__file__).resolve().parent
 s=base/'src'
 VERSION=time.strftime('%Y%m%d-%H%M')
 # Adresse des Mi-profe-Servers (server/, Cloudflare Worker) für Sync per Code und KI per Einladung – leer = Funktionen ausgeblendet
-SERVER_URL=''
+SERVER_URL='https://mi-profe.miprofe-app.workers.dev'
 # ===== Pakete: die Web-App lädt nur, was gebraucht wird (Lernsprache + ggf. Erklärsprache); die Mac-Einzeldateien enthalten alles =====
 # Ordner: src/core/ = gemeinsam (Logik, Design, Register, Oberflächentexte) · src/<lern>/ = Inhalte einer Lernsprache · src/<lern>/tr_<ex>.js = Erklärsprache
 # Neue Lernsprache: Ordner src/<code>/ + Eintrag hier (Dateien in Ladereihenfolge, Definition defineLang zuletzt). Erklärsprachen: automatisch aus src/<lern>/tr_<ex>.js

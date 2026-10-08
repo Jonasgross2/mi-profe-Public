@@ -363,7 +363,7 @@ async function geminiCall(model,key,prompt,{json,history}){
   const r=key?await gfetch(base,key,JSON.stringify(body)):await fetch(SRV()+'/api/ai',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify({invite:S.settings.invite,model,body})}).catch(e=>{const x=new Error(T('Keine Verbindung zum Mi-profe-Server.'));x.network=true;throw x;});
   if(!key){const l=r.headers.get('X-AI-Left');if(l!=null)AI_LEFT=+l;}
   const j=await r.json().catch(()=>({}));
-  if(!r.ok){const e=new Error((j.error&&j.error.message)||('HTTP '+r.status));e.modelProblem=r.status===404||/no longer available|not found|not supported|deprecated/i.test(e.message);throw e;}
+  if(!r.ok){const e=new Error((j.error&&j.error.message)||('HTTP '+r.status));e.modelProblem=r.status===404||r.status===503||/no longer available|not found|not supported|deprecated|high demand|overloaded|unavailable/i.test(e.message);/* Modell fehlt oder ist überlastet → nächstes Modell probieren */throw e;}
   const t=(((j.candidates||[])[0]||{}).content||{}).parts?.map(p=>p.text||'').join('')||'';
   if(!json)return t;
   try{return JSON.parse(t.replace(/^```json\s*|```\s*$/g,''));}catch(e){throw new Error(T('Antwort von Gemini nicht lesbar.'));}

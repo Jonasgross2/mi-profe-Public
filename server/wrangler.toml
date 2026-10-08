@@ -6,7 +6,7 @@ compatibility_date = "2026-10-01"
 # KV-Speicher: id kommt aus `npx wrangler kv namespace create DATA` (Ausgabe hier eintragen)
 [[kv_namespaces]]
 binding = "DATA"
-id = "HIER_KV_ID_EINTRAGEN"
+id = "8390c2a45fa14862859302b13fec989d"
 
 [vars]
 AI_LIMIT = "60"
