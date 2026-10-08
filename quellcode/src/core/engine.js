@@ -69,6 +69,10 @@ const LESEN={en:'Reading: ',pt:'Leitura: ',es:'Lectura: '}[EX];
 const trc=s=>!CT||s==null?s:CT[s]!=null?CT[s]:LESEN&&typeof s==='string'&&s.startsWith('Lesen: ')?LESEN+s.slice(7):s;
 function trContent(o){if(typeof o==='string')return trc(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=trContent(o[i]);return o;}
   if(o&&typeof o==='object'){for(const k of Object.keys(o))if(k!=='role'&&k!=='id')o[k]=trContent(o[k]);}return o;}
+/* deutsche Originalbedeutung jeder Kursvokabel (vor der Übersetzung gemerkt): Karten speichern immer Deutsch, angezeigt wird über trc() in der Erklärsprache */
+const VOC_DE={};COURSE.units.forEach(u=>(u.lessons||[]).forEach(l=>l.steps.forEach(s=>{if(s.t==='vocab')(s.items||[]).forEach(w=>{if(VOC_DE[w[0]]==null)VOC_DE[w[0]]=w[1];});})));
+/* alte Karten, die in einer anderen Erklärsprache angelegt wurden: wieder auf die deutsche Bedeutung (bei jedem Start, auch nach Sync) */
+{let ch=0;Object.values(S.srs||{}).forEach(c=>{if(c&&!String(c.unit).startsWith('my:')&&VOC_DE[c.es]!=null&&c.de!==VOC_DE[c.es]){c.de=VOC_DE[c.es];ch++;}});if(ch)try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);if(window.READINGS)trContent(window.READINGS);}
 personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);
 /* Ansprache: Bei „weiblich“ werden Sätze über die lernende Person selbst (estoy/soy … , ¡Encantado!) in die weibliche Form gesetzt
@@ -370,7 +374,7 @@ function bumpDay(correct){const d=today();S.stats.answers++;if(correct)S.stats.c
   if(S.streak.last!==d){S.streak.count=(S.streak.last===addDays(d,-1))?S.streak.count+1:1;S.streak.last=d;}save();}
 function streakNow(){const d=today();return(S.streak.last===d||S.streak.last===addDays(d,-1))?S.streak.count:0;}
 function vkey(es){return es;}
-function addVocab(items,unit){let n=0;for(const[es,de,em]of items){const k=vkey(es);if(!S.srs[k]){S.srs[k]={es,de,unit,box:0,due:today(),t:Date.now()};if(em)S.srs[k].em=em;n++;}}if(n)save();return n;}
+function addVocab(items,unit){let n=0;for(const[es,de,em]of items){const k=vkey(es);if(!S.srs[k]){S.srs[k]={es,de:VOC_DE[es]!=null?VOC_DE[es]:de,unit,box:0,due:today(),t:Date.now()};if(em)S.srs[k].em=em;n++;}}if(n)save();return n;}
 /* Eigene Wörter: normale Karten mit unit 'my:<liste>'; gelöscht = del:true (damit der Sync sie nicht zurückholt). Listen in S.mylists {id:{name,daily,t,del}} */
 const MY='my:';
 function myLists(){return Object.entries(S.mylists||{}).filter(([,l])=>!l.del).map(([id,l])=>Object.assign({id},l)).sort((a,b)=>(a.c||0)-(b.c||0));}
@@ -725,8 +729,8 @@ function vocabForms(es){es=String(es).trim();if(es.indexOf('/')<0)return[es];con
   return out.length?out.concat([es]):[es];}
 /* Synonyme: andere Kurswörter mit genau derselben deutschen Bedeutung (ganzer Text inkl. Klammern, damit z. B. ser/estar getrennt bleiben) */
 let DE_IDX=null;const deKeys=de=>{const k=norm(de);return k.length>2?[k]:[];};
-function synOf(es,de){if(!DE_IDX){DE_IDX={};COURSE.units.forEach(u=>(u.lessons||[]).forEach(l=>l.steps.forEach(s=>{if(s.t==='vocab')(s.items||[]).forEach(w=>deKeys(w[1]).forEach(k=>{(DE_IDX[k]=DE_IDX[k]||[]).push(w[0]);}));})));}
-  const out=[];deKeys(de).forEach(k=>(DE_IDX[k]||[]).forEach(x=>{if(norm(x)!==norm(es)&&out.indexOf(x)<0)out.push(x);}));return out;}
+function synOf(es,de){if(!DE_IDX){DE_IDX={};Object.keys(VOC_DE).forEach(e=>deKeys(VOC_DE[e]).forEach(k=>{(DE_IDX[k]=DE_IDX[k]||[]).push(e);}));}
+  if(VOC_DE[es]!=null)de=VOC_DE[es];const out=[];deKeys(de).forEach(k=>(DE_IDX[k]||[]).forEach(x=>{if(norm(x)!==norm(es)&&out.indexOf(x)<0)out.push(x);}));return out;}
 function vocabStep(u,mode,es,de,em){const p=pic(es,em);
   if(mode==='mc'){const others=shuffle(allUnitWords(u).map(x=>x[0]).filter(x=>x!==es&&cleanWord(x))).slice(0,2);return{t:'mc',kind:T('Was heißt das?'),q:(p?p+' ':'')+esc(de),opts:[es,...others],a:0};}
   if(mode==='mcde'){const others=shuffle(allUnitWords(u).filter(x=>x[0]!==es&&x[1]!==de).map(x=>x[1])).slice(0,2);return{t:'mc',kind:T('Was bedeutet das?'),q:(p?p+' ':'')+esc(es),opts:[de,...others],a:0};}
@@ -993,7 +997,7 @@ conj(el,s,ctx){const P=s.persons||LANG.persons||[T('1. Sg.'),T('2. Sg.'),T('3. S
   el.append(actionBar(()=>{let worst='ok';const res=inputs.map(([inp,i])=>compare(inp.value,s.forms[i],{pron:false,typo:false}));
     if(attempt===1&&!ctx.noPrompt&&res.some(r=>r.status==='bad')&&inputs.some(([i])=>i.value.trim())){attempt=2;
       inputs.forEach(([inp],k)=>{inp.classList.remove('wrong','right');if(res[k].status==='bad')inp.classList.add('wrong');else{inp.classList.add('right');inp.readOnly=true;}});
-      retryBox(el,T('Die rot markierten Formen stimmen noch nicht – versuch es noch einmal.'),s.prompt||LANG.conjTip||T('Tipp: Stamm + Endung.'));
+      retryBox(el,T('Die rot markierten Formen stimmen noch nicht – versuch es noch einmal.'),s.prompt||(LANG.conjTip?T(LANG.conjTip):T('Tipp: Stamm + Endung.')));
       inputs.find(([i])=>!i.readOnly)?.[0].focus();return false;}
     $('.retry',el)?.remove();
     inputs.forEach(([inp,i],k)=>{const r=res[k];inp.readOnly=true;inp.classList.remove('wrong','right');inp.classList.add(r.status==='bad'?'wrong':'right');
@@ -1252,7 +1256,9 @@ function vReading(m,id){const r=(window.READINGS||[]).find(x=>x.id===id);if(!r)r
 /* Verben-Trainer: Präsens zu Verben aus den Vokabellisten angefangener Unidades (Formen bildet LANG.conjugate – man muss die Regel selbst anwenden)
    + andere Zeitformen aus gelernten Lektionen. Fehler-Ref V|unit|infinitiv. „Alles“ = ganzer Kurs. */
 const startedU=u=>Object.keys(S.lessons).some(k=>k.startsWith(u.id+'.'))||!!S.checks[u.id]?.pass;
-function verbStep(u,inf,de){if(!LANG.conjugate)return null;const r=LANG.conjugate(inf);if(!r)return null;return{t:'conj',verb:inf,de,forms:r.forms,tense:T('Präsens'),why:r.why};}
+function verbStep(u,inf,de){if(!LANG.conjugate)return null;const r=LANG.conjugate(inf);if(!r)return null;/* Hinweis aus dem Konjugations-Generator stückweise übersetzen (Bausteine in LANG.whyParts) */
+  let why=r.why;if(UI!=='de')(LANG.whyParts||[]).forEach(p=>{why=why.split(p).join(T(p));});
+  return{t:'conj',verb:inf,de:VOC_DE[inf]!=null?trc(VOC_DE[inf]):de,forms:r.forms,tense:T('Präsens'),why};}
 function verbPool(all){const gen=[],seen=new Set(),tables=[];
   for(const u of COURSE.units){const st=all||startedU(u);
     for(const l of u.lessons){if(st&&(!l.freq||all||rnd(u.id+'.'+l.id)>=1))for(const s of l.steps)if(s.t==='vocab')for(const [es,de] of s.items){const w=es.trim();if(seen.has(w)||!/^[a-záéíóúñü]+(ar|er|ir|ír)(se)?$/.test(w)||!/n\b/.test(String(de).split(',')[0]))continue;
