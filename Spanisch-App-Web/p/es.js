@@ -6034,3 +6034,61 @@ function conjugate(inf){var v=String(inf||'').trim().toLowerCase(),refl=false;
 var WHY_PARTS=['unregelmäßig – auswendig lernen','regelmäßig auf -','Stammwechsel ','(nicht bei nosotros/vosotros)','1. Person auf -zco (sonst regelmäßig)','y vor o/e','g → j vor o','c → z vor o','sonst regelmäßig','Akzent auf ','(außer nosotros/vosotros)','reflexiv: ','wie '];
 defineLang('es',{conjugate:conjugate,whyParts:WHY_PARTS});
 })();
+;
+/* Spanisch: Zahlen, Uhrzeit, Datum, Preise für „Zahlen & Uhrzeit“ (LANG.numbers). Die Engine wählt Aufgabenart und Werte,
+   hier steht nur, wie man es auf Spanisch sagt/schreibt. unlock = nach welcher Lektion die Aufgabenart freigeschaltet ist. */
+(function(){
+var U=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
+var TT=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
+var H=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
+function word(n){if(n<30)return U[n];if(n<100)return TT[Math.floor(n/10)]+(n%10?' y '+U[n%10]:'');
+  if(n<1000)return n===100?'cien':H[Math.floor(n/100)]+(n%100?' '+word(n%100):'');
+  var k=Math.floor(n/1000);return(k===1?'mil':word(k).replace(/uno$/,'ún').replace(/veintiún$/,'veintiún')+' mil').replace(/^ún mil/,'un mil')+(n%1000?' '+word(n%1000):'');}
+var wordUn=function(n){return word(n).replace(/veintiuno$/,'veintiún').replace(/uno$/,'un');}; /* vor Nomen: un euro, veintiún euros */
+var MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+/* Uhrzeit → Liste richtiger Antworten (erste = Standard zum Vorlesen) */
+function time(hh,mm){var h=hh%12||12,m=mm;var hw=function(x){return x===1?'una':word(x);};
+  if(m>30){h=h%12+1;m=60-m;return[(h===1?'Es la ':'Son las ')+hw(h)+' menos '+(m===15?'cuarto':word(m))];}
+  var base=(h===1?'Es la ':'Son las ')+hw(h);
+  if(m===0)return[base+' en punto',base];if(m===15)return[base+' y cuarto',base+' y quince'];if(m===30)return[base+' y media',base+' y treinta'];return[base+' y '+word(m)];}
+/* Datum (Tag, Monat 1–12) → richtige Antworten */
+function date(d,mo){var M=MESES[mo-1];return['el '+word(d)+' de '+M,word(d)+' de '+M].concat(d===1?['el primero de '+M]:[]);}
+/* Preis in Euro → vorgelesener Satz */
+function price(e,c){return(e===1?'Un euro':wordUn(e).replace(/^./,function(x){return x.toUpperCase();})+' euros')+(c?' con '+word(c):'')+'.';}
+defineLang('es',{numbers:{word:word,time:time,date:date,price:price,
+  unlock:{small:['u1','l2'],to20:['u2','l3'],big:['u2','l3'],time:['u4','l3'],price:['u4','l4'],date:['u6','l2']}}});
+})();
+;
+/* Spanisch: weibliche Formen für Sätze über die lernende Person (LANG.gender). Die Engine geht den Kurs durch und ruft:
+   first(s) – Sätze, die mit estoy/soy … + Adjektiv beginnen (überall), self(s) – zusätzlich era/estaría/me pongo … (nur eigene Sätze),
+   word(w) – ein einzelnes Wort, npc(s) – Zeilen von Nebenfiguren an die lernende Person (¡Bienvenido!), named(s,name) – Anrede mit Namen. */
+(function(){
+var FEMO=/^(cansad|encantad|content|preocupad|resfriad|maread|nervios|ocupad|aburrid|enfadad|casad|divorciad|solter|interesad|acostumbrad|dispuest|list|segur|hart|perdid|sorprendid|emocionad|tranquil|alt|baj|delgad|organizad|pequeñ|moren|rubi|simpátic|antipátic|tímid|ordenad|caótic|vag|ingenier|informátic|médic|alumn|abogad|sentad|levantad|duchad|vestid|nacid|mudad|graduad|enamorad|invitad|equivocad|despiert|obligad|encargad|guap|gord|delgad|abiert|cansad|enferm|agotad|orgullos|preparad|convencid|embarazad|relajad|estresad|agradecid|decepcionad|ilusionad|agobiad)o(s?)$/i;
+var FEMX={'alemán':'alemana','inglés':'inglesa','francés':'francesa','español':'española','trabajador':'trabajadora','programador':'programadora','diseñador':'diseñadora','consultor':'consultora','auditor':'auditora','profesor':'profesora','director':'directora','alemanes':'alemanas'};
+var femWord=w=>FEMO.test(w)?w.replace(/o(s?)$/,'a$1'):FEMX[w.toLowerCase()]?(w[0]===w[0].toUpperCase()?FEMX[w.toLowerCase()][0].toUpperCase()+FEMX[w.toLowerCase()].slice(1):FEMX[w.toLowerCase()]):w;
+var femFirst=s=>String(s).replace(/\b(estoy|soy|me siento|me encuentro|sigo|quedo|estuve|he estado|me he vuelto|me volví|me quedé|me he quedado|me puse)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w));
+/* nur für Sätze, die die lernende Person selbst sagt (Dialog-Antworten, Nachsprechen): auch era/estaría/me pongo … + Adjektiv */
+var femSelf=s=>femFirst(s).replace(/\b(era|fui|estaba|estaría|sería|me pongo|me ponía|me pondría|me he puesto|me vuelvo|me volvía|me sentía|me sentí|me encontraba|me quedaba)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w)).replace(/\b([Ee])ncantado\b/g,'$1ncantada');
+var npc=function(s){return s.replace(/\b([Bb])ienvenido\b/g,'$1ienvenida');};
+var named=function(t,name){var n=name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return t.replace(new RegExp('\\bQuerido ('+n+')\\b','g'),'Querida $1').replace(new RegExp('\\bdel ('+n+') que\\b','g'),'de la $1 que');};
+defineLang('es',{gender:{first:femFirst,self:femSelf,word:femWord,npc:npc,named:named}});
+})();
+;
+/* Spanisch: Personalisierung (LANG.personal). Die Kursinhalte sind für die Kurs-Person LANG.persona (Jonas Gross) geschrieben;
+   die Engine ersetzt Vor- und Nachnamen allgemein, hier stehen nur die spanischen Teile: Buchstabieren, señor/señora, Rezeption.
+   P = {nm: Vorname(n), sur: Nachname, g: 'm'|'f'|'x', ex: Erklärsprache}. test = welche Texte überhaupt betroffen sind. */
+(function(){
+var SPELL={a:'a',b:'be',c:'ce',d:'de',e:'e',f:'efe',g:'ge',h:'hache',i:'i',j:'jota',k:'ka',l:'ele',m:'eme',n:'ene','ñ':'eñe',o:'o',p:'pe',q:'cu',r:'erre',s:'ese',t:'te',u:'u',v:'uve',w:'uve doble',x:'equis',y:'i griega',z:'zeta','ä':'a con diéresis','ö':'o con diéresis','ü':'u con diéresis','ß':'doble ese','á':'a con tilde','é':'e con tilde','í':'i con tilde','ó':'o con tilde','ú':'u con tilde'};
+/* deutsche Buchstabennamen – für die falsche Antwort beim Buchstabieren */
+var GSPELL={a:'a',b:'be',c:'tse',d:'de',e:'e',f:'ef',g:'gue',h:'ha',i:'i',j:'jot',k:'ka',l:'el',m:'em',n:'en',o:'o',p:'pe',q:'ku',r:'er',s:'es',t:'te',u:'u',v:'fau',w:'ve',x:'iks',y:'ípsilon',z:'tset','ä':'a','ö':'o','ü':'u','ß':'es-tset'};
+var spell=function(w,M){return w.toLowerCase().split('').filter(function(c){return M[c];}).map(function(c){return M[c];}).join(', ');};
+var cap=function(x){return x.charAt(0).toUpperCase()+x.slice(1)+'.';};
+function str(t,P){var sp=P.sur||P.nm.split(' ')[0];
+  return t.replace(/„Gross“ – du sagst, dass man das Doppel-S mit zwei S schreibt\./,'Ein Doppel-S buchstabierst du „dos eses“.').replace(/“Gross” – you say that the double S is written with two S's\./,'You spell a double S as “dos eses”.')
+   .replace(/^Gross: [a-zñ, ]+\.$/,sp+': '+spell(sp,SPELL)+'.').replace(/^Ge, erre, o, ese, ese\.$/,function(){return cap(spell(sp,SPELL));})
+   .replace(/^Je, erre, o, es, es\.$/,function(){return cap(spell(sp,GSPELL));})
+   .replace(/, señor Gross/g,P.g==='x'?', '+(P.sur?P.nm.split(' ')[0]+' '+P.sur:P.nm):', '+(P.g==='f'?'señora':'señor')+(P.sur?' '+P.sur:''));}
+/* ohne Nachnamen im Profil fragt die Rezeption nach dem Namen statt dem Nachnamen */
+function obj(o,P){if(o.n&&o.es==='¿Cómo se escribe tu apellido?'&&!P.sur){o.es='¿Cómo se escribe tu nombre?';o.de=P.ex==='de'?'Wie schreibt man deinen Namen?':'How do you spell your name?';}}
+defineLang('es',{persona:{name:'Jonas',surname:'Gross'},personal:{test:/erre, o, e/,str:str,obj:obj}});
+})();

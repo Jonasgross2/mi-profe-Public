@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261008-1149";</script>
+<script>window.PWA=true;window.APP_VERSION="20261008-1206";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -924,6 +924,7 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Zahlen kommen in {U}, Lektion {L} – danach geht es hier los. Oder oben „Alles“ wählen.": "Numbers come in {U}, lesson {L} – then you can start here. Or choose “Everything” above.",
 "unregelmäßig – auswendig lernen": "irregular – learn by heart",
 "regelmäßig auf -": "regular in -",
 "Stammwechsel ": "stem change ",
@@ -1807,6 +1808,7 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Zahlen kommen in {U}, Lektion {L} – danach geht es hier los. Oder oben „Alles“ wählen.": "Los números llegan en la {U}, lección {L}; después empiezas aquí. O elige «Todo» arriba.",
 "unregelmäßig – auswendig lernen": "irregular: apréndelo de memoria",
 "regelmäßig auf -": "regular en -",
 "Stammwechsel ": "cambio de raíz ",
@@ -2690,6 +2692,7 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Zahlen kommen in {U}, Lektion {L} – danach geht es hier los. Oder oben „Alles“ wählen.": "Os números chegam na {U}, lição {L} – depois começas aqui. Ou escolhe «Tudo» acima.",
 "unregelmäßig – auswendig lernen": "irregular – decore",
 "regelmäßig auf -": "regular em -",
 "Stammwechsel ": "mudança de raiz ",
@@ -3161,20 +3164,18 @@ load();
 document.title=fmt(T('Mi profe · {L} lernen'));
 /* Name: wird beim ersten Öffnen abgefragt. Die Inhalte sind für „Jonas“ geschrieben – für andere Namen wird er überall ersetzt. */
 const NAME=()=>S.name||'';
-/* Nachname: steht nie fest im Kurs. „Jonas Gross“ / „señor Gross“ / Buchstabieren werden aus S.name + optional S.surname gebaut. */
-const SPELL={a:'a',b:'be',c:'ce',d:'de',e:'e',f:'efe',g:'ge',h:'hache',i:'i',j:'jota',k:'ka',l:'ele',m:'eme',n:'ene','ñ':'eñe',o:'o',p:'pe',q:'cu',r:'erre',s:'ese',t:'te',u:'u',v:'uve',w:'uve doble',x:'equis',y:'i griega',z:'zeta','ä':'a con diéresis','ö':'o con diéresis','ü':'u con diéresis','ß':'doble ese','á':'a con tilde','é':'e con tilde','í':'i con tilde','ó':'o con tilde','ú':'u con tilde'};
-/* deutsche Buchstabennamen – für die falsche Antwort beim Buchstabieren */
-const GSPELL={a:'a',b:'be',c:'tse',d:'de',e:'e',f:'ef',g:'gue',h:'ha',i:'i',j:'jot',k:'ka',l:'el',m:'em',n:'en',o:'o',p:'pe',q:'ku',r:'er',s:'es',t:'te',u:'u',v:'fau',w:'ve',x:'iks',y:'ípsilon',z:'tset','ä':'a','ö':'o','ü':'u','ß':'es-tset'};
-const spellName=w=>[...w.toLowerCase()].filter(c=>SPELL[c]).map(c=>SPELL[c]).join(', ');
-function persStr(t){if(!/Jonas|Gross|erre, o, e/.test(t))return t;const sur=S.surname||'',f=S.gender==='f',nm=S.name||'Jonas',sp=sur||nm.split(' ')[0];
-  return t.replace(/„Gross“ – du sagst, dass man das Doppel-S mit zwei S schreibt\./,'Ein Doppel-S buchstabierst du „dos eses“.').replace(/“Gross” – you say that the double S is written with two S's\./,'You spell a double S as “dos eses”.')
-   .replace(/^Gross: [a-zñ, ]+\.$/,sp+': '+spellName(sp)+'.').replace(/^Ge, erre, o, ese, ese\.$/,()=>{const x=spellName(sp);return x.charAt(0).toUpperCase()+x.slice(1)+'.';})
-   .replace(/^Je, erre, o, es, es\.$/,()=>{const x=[...sp.toLowerCase()].filter(c=>GSPELL[c]).map(c=>GSPELL[c]).join(', ');return x.charAt(0).toUpperCase()+x.slice(1)+'.';}).replace('Deinen Nachnamen buchstabieren',sur?'Deinen Nachnamen buchstabieren':'Deinen Namen buchstabieren').replace('Spelling your surname',sur?'Spelling your surname':'Spelling your name')
-   .replace(/\bJonas Gross\b/g,nm+(sur?' '+sur:'')).replace(/, señor Gross/g,S.gender==='x'?', '+(sur?nm.split(' ')[0]+' '+sur:nm):', '+(f?'señora':'señor')+(sur?' '+sur:''))
-   .replace(/, (Herr|Mr) Gross/g,(m,w)=>!sur?'':S.gender==='x'?', '+nm.split(' ')[0]+' '+sur:', '+(w==='Herr'?(f?'Frau':'Herr'):(f?'Ms':'Mr'))+' '+sur).replace(/\bJonas\b/g,nm);}
+/* Nachname: steht nie fest im Kurs. Inhalte sind für die Kurs-Person LANG.persona (z. B. „Jonas Gross“) geschrieben: Vor-/Nachname werden aus
+   S.name + optional S.surname gebaut; sprachspezifisches (Buchstabieren, señor/señora …) macht das Paket (LANG.personal: test, str, obj). */
+const PN=LANG.persona||{name:'Jonas',surname:'Gross'},PERS=LANG.personal||{};
+const rxe=x=>String(x).replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const RX_FULL=new RegExp('\\b'+rxe(PN.name)+' '+rxe(PN.surname)+'\\b','g'),RX_HERR=new RegExp(', (Herr|Mr) '+rxe(PN.surname),'g'),RX_NAME=new RegExp('\\b'+rxe(PN.name)+'\\b','g');
+function persStr(t){if(!(t.indexOf(PN.name)>=0||t.indexOf(PN.surname)>=0||PERS.test&&PERS.test.test(t)))return t;const sur=S.surname||'',f=S.gender==='f',nm=S.name||PN.name;
+  const P={nm,sur,g:S.gender,ex:EX};if(PERS.str)t=PERS.str(t,P);
+  return t.replace('Deinen Nachnamen buchstabieren',sur?'Deinen Nachnamen buchstabieren':'Deinen Namen buchstabieren').replace('Spelling your surname',sur?'Spelling your surname':'Spelling your name')
+   .replace(RX_FULL,nm+(sur?' '+sur:''))
+   .replace(RX_HERR,(m,w)=>!sur?'':S.gender==='x'?', '+nm.split(' ')[0]+' '+sur:', '+(w==='Herr'?(f?'Frau':'Herr'):(f?'Ms':'Mr'))+' '+sur).replace(RX_NAME,nm);}
 function personalize(o){if(typeof o==='string')return persStr(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=personalize(o[i]);return o;}
-  if(o&&typeof o==='object'){/* ohne Nachnamen im Profil fragt die Rezeption nach dem Namen statt dem Nachnamen */
-    if(o.n&&o.es==='¿Cómo se escribe tu apellido?'&&!S.surname){o.es='¿Cómo se escribe tu nombre?';o.de=EX==='de'?'Wie schreibt man deinen Namen?':'How do you spell your name?';}
+  if(o&&typeof o==='object'){if(PERS.obj)PERS.obj(o,{nm:S.name||PN.name,sur:S.surname||'',g:S.gender,ex:EX});
     for(const k of Object.keys(o))o[k]=personalize(o[k]);}return o;}
 /* Kursinhalte in der Erklärsprache: COURSE_TR[Lernsprache][EX] = {deutscher Text: Übersetzung}. Fehlt etwas, bleibt Deutsch. */
 const CT=EX!=='de'&&window.COURSE_TR&&COURSE_TR[LANG.code]&&COURSE_TR[LANG.code][EX]||null;
@@ -3190,17 +3191,14 @@ if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);if(window.READI
 personalize(COURSE);personalize(PLACEMENT);personalize(STORIES);
 /* Ansprache: Bei „weiblich“ werden Sätze über die lernende Person selbst (estoy/soy … , ¡Encantado!) in die weibliche Form gesetzt
    und beim Prüfen beide Formen akzeptiert. Vokabeln bleiben unverändert (sie sind Schlüssel im Vokabeltrainer). */
-const FEMO=/^(cansad|encantad|content|preocupad|resfriad|maread|nervios|ocupad|aburrid|enfadad|casad|divorciad|solter|interesad|acostumbrad|dispuest|list|segur|hart|perdid|sorprendid|emocionad|tranquil|alt|baj|delgad|organizad|pequeñ|moren|rubi|simpátic|antipátic|tímid|ordenad|caótic|vag|ingenier|informátic|médic|alumn|abogad|sentad|levantad|duchad|vestid|nacid|mudad|graduad|enamorad|invitad|equivocad|despiert|obligad|encargad|guap|gord|delgad|abiert|cansad|enferm|agotad|orgullos|preparad|convencid|embarazad|relajad|estresad|agradecid|decepcionad|ilusionad|agobiad)o(s?)$/i;
-const FEMX={'alemán':'alemana','inglés':'inglesa','francés':'francesa','español':T('española'),'trabajador':'trabajadora','programador':'programadora','diseñador':T('diseñadora'),'consultor':'consultora','auditor':'auditora','profesor':'profesora','director':'directora','alemanes':'alemanas'};
-const femWord=w=>FEMO.test(w)?w.replace(/o(s?)$/,'a$1'):FEMX[w.toLowerCase()]?(w[0]===w[0].toUpperCase()?FEMX[w.toLowerCase()][0].toUpperCase()+FEMX[w.toLowerCase()].slice(1):FEMX[w.toLowerCase()]):w;
-const femFirst=s=>String(s).replace(/\b(estoy|soy|me siento|me encuentro|sigo|quedo|estuve|he estado|me he vuelto|me volví|me quedé|me he quedado|me puse)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w));
-/* nur für Sätze, die die lernende Person selbst sagt (Dialog-Antworten, Nachsprechen): auch era/estaría/me pongo … + Adjektiv */
-const femSelf=s=>femFirst(s).replace(/\b(era|fui|estaba|estaría|sería|me pongo|me ponía|me pondría|me he puesto|me vuelvo|me volvía|me sentía|me sentí|me encontraba|me quedaba)((?: (?:muy|un poco|bastante|tan|más|menos|demasiado|súper))?) ([a-záéíóúñü]+)/gi,(m,a,b,w)=>a+b+' '+femWord(w)).replace(/\b([Ee])ncantado\b/g,'$1ncantada');
-const isF=()=>S.gender==='f'&&LANG.code==='es';
-function femCourse(o,inVocab){if(typeof o==='string'){let t=femFirst(o);if(S.name){const n=S.name.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');t=t.replace(new RegExp('\\bQuerido ('+n+')\\b','g'),'Querida $1').replace(new RegExp('\\bdel ('+n+') que\\b','g'),'de la $1 que');}return t;}if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=femCourse(o[i],inVocab);return o;}
-  if(o&&typeof o==='object'){if(o.t==='vocab')return o;if(o.you&&o.opts)o.opts.forEach(x=>{x.es=femSelf(x.es);});
-    if(o.t==='speak'&&o.es)o.es=femSelf(o.es);
-    if(o.n&&typeof o.es==='string')o.es=o.es.replace(/\b([Bb])ienvenido\b/g,'$1ienvenida');/* Begrüßung der lernenden Person */for(const k of Object.keys(o))if(k!=='items')o[k]=femCourse(o[k]);}return o;}
+/* Ansprache „weiblich“: Sätze über die lernende Person in die weibliche Form, beim Prüfen beide Formen akzeptieren.
+   Die Regeln stehen im Sprachpaket (LANG.gender: first, self, word, npc, named) – ohne sie bleibt der Kurs unverändert. Vokabeln bleiben (Schlüssel im Vokabeltrainer). */
+const GEN=LANG.gender||null;
+const isF=()=>S.gender==='f'&&!!GEN;
+function femCourse(o,inVocab){if(typeof o==='string'){let t=GEN.first(o);if(S.name&&GEN.named)t=GEN.named(t,S.name);return t;}if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=femCourse(o[i],inVocab);return o;}
+  if(o&&typeof o==='object'){if(o.t==='vocab')return o;if(o.you&&o.opts)o.opts.forEach(x=>{x.es=GEN.self(x.es);});
+    if(o.t==='speak'&&o.es)o.es=GEN.self(o.es);
+    if(o.n&&typeof o.es==='string'&&GEN.npc)o.es=GEN.npc(o.es);/* Begrüßung der lernenden Person */for(const k of Object.keys(o))if(k!=='items')o[k]=femCourse(o[k]);}return o;}
 if(isF()){femCourse(COURSE);femCourse(PLACEMENT);}
 /* Herkunft (Profil): Inhalte gehen von Deutschland/Mannheim aus. S.origin={c:'AT',city:'Wien',other:'…'} ersetzt nur Herkunftsangaben
    (soy alemán, ¿Eres alemán?, Alemania, Mannheim, Hablo alemán, Deutschland/Germany …) – nicht Vokabellisten, nicht die Geschichten (Ben). */
@@ -3361,7 +3359,7 @@ function wordCmp(c,x,typo){ // c,x normalized strings
   return worst;}
 function compare(input,answers,opts={}){
   answers=[].concat(answers).flatMap(a=>String(a).split('|'));
-  if(isF()||S.gender==='x'&&LANG.code==='es')answers=answers.flatMap(a=>{const f=a.includes(' ')?femFirst(a):femWord(a);return f===a?[a]:a.includes(' ')?[f,a]:[a,f];});const typo=opts.typo!==false;
+  if(isF()||S.gender==='x'&&GEN)answers=answers.flatMap(a=>{const f=a.includes(' ')?GEN.first(a):GEN.word(a);return f===a?[a]:a.includes(' ')?[f,a]:[a,f];});const typo=opts.typo!==false;
   const inp=norm(input);if(!inp)return{status:'bad',right:answers[0],note:T('Keine Antwort.')};
   const cands=[inp];if(opts.pron!==false&&PRON.test(inp))cands.push(inp.replace(PRON,''));
   let best=null;
@@ -4241,27 +4239,17 @@ function vShadow(m,id){const u=unitById(id);const all=unitSentences(u);const N=7
 
 /* ---------- interleaved review ---------- */
 /* ---------- Zahlen, Uhrzeit, Datum, Preise: jedes Mal neue Werte (Ref N|typ|wert → im Fehlerheft wiederholbar) ---------- */
-const NUM_U=['cero','uno','dos','tres','cuatro','cinco','seis','siete','ocho','nueve','diez','once','doce','trece','catorce','quince','dieciséis','diecisiete','dieciocho','diecinueve','veinte','veintiuno','veintidós','veintitrés','veinticuatro','veinticinco','veintiséis','veintisiete','veintiocho','veintinueve'];
-const NUM_T=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'];
-const NUM_H=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
-function numEs(n){if(n<30)return NUM_U[n];if(n<100)return NUM_T[Math.floor(n/10)]+(n%10?' y '+NUM_U[n%10]:'');
-  if(n<1000)return n===100?'cien':NUM_H[Math.floor(n/100)]+(n%100?' '+numEs(n%100):'');
-  const k=Math.floor(n/1000);return(k===1?'mil':numEs(k).replace(/uno$/,'ún').replace(/veintiún$/,'veintiún')+' mil').replace(/^ún mil/,'un mil')+(n%1000?' '+numEs(n%1000):'');}
-const numUn=n=>numEs(n).replace(/veintiuno$/,'veintiún').replace(/uno$/,'un'); /* vor Nomen: un euro, veintiún euros */
-const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-function horaEs(hh,mm){let h=hh%12||12,m=mm,pre='';const hw=x=>x===1?'una':numEs(x);
-  if(m>30){h=h%12+1;m=60-m;const t=(h===1?'Es la ':'Son las ')+hw(h)+' menos '+(m===15?'cuarto':numEs(m));return[t];}
-  const base=(h===1?'Es la ':'Son las ')+hw(h);
-  if(m===0)return[base+' en punto',base];if(m===15)return[base+' y cuarto',base+' y quince'];if(m===30)return[base+' y media',base+' y treinta'];return[base+' y '+numEs(m)];}
+/* Zahlen & Uhrzeit: wie man es in der Lernsprache sagt, steht im Paket (LANG.numbers: word, time, date, price, unlock) */
+const NUMS=LANG.numbers||null;const numEs=n=>NUMS.word(n);const horaEs=(h,m)=>NUMS.time(h,m);
 const rint=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
 /* freigeschaltet nach Kursfortschritt: Zahlen ab U1, große Zahlen ab U2 L3, Uhrzeit & Preise ab U4, Datum ab U6 */
 /* gelernt = Lektion mindestens einmal gemacht (Runde 1) oder Abschlusstest der Unidad bestanden */
 const learnedL=(uid,lid)=>rnd(uid+'.'+lid)>=1||!!S.checks[uid]?.pass;
 /* Zahlen-Aufgaben nach gelernten Lektionen: U1 L2 Zahlen 0–10 · U2 L3 bis 20 & große Zahlen · U4 L3 Uhrzeit · U4 L4 Preise · U6 L2 Datum. all = auch Neues */
-function numKinds(all){const K=[];const L=(u,l)=>all||learnedL(u,l);
-  if(L('u1','l2'))K.push('numw','numl');if(L('u2','l3'))K.push('bigw','bigl');if(L('u4','l3'))K.push('time','timel');if(L('u4','l4'))K.push('price');if(L('u6','l2'))K.push('date');return K;}
+function numKinds(all){const K=[];if(!NUMS)return K;const UL=NUMS.unlock||{};const L=k=>all||!UL[k]||learnedL(UL[k][0],UL[k][1]);
+  if(L('small'))K.push('numw','numl');if(L('big'))K.push('bigw','bigl');if(L('time'))K.push('time','timel');if(L('price'))K.push('price');if(L('date'))K.push('date');return K;}
 let NUM_ALL=false;
-function numVal(kind){if(kind==='numw'||kind==='numl')return rint(0,NUM_ALL||learnedL('u2','l3')?20:10)+'';if(kind==='bigw'||kind==='bigl')return(Math.random()<.5?rint(21,99):Math.random()<.6?rint(100,999):rint(1000,2100))+'';
+function numVal(kind){const t20=(NUMS.unlock||{}).to20;if(kind==='numw'||kind==='numl')return rint(0,NUM_ALL||!t20||learnedL(t20[0],t20[1])?20:10)+'';if(kind==='bigw'||kind==='bigl')return(Math.random()<.5?rint(21,99):Math.random()<.6?rint(100,999):rint(1000,2100))+'';
   if(kind==='time'||kind==='timel')return rint(0,23)+':'+String(rint(0,11)*5).padStart(2,'0');if(kind==='date')return rint(1,28)+'.'+rint(1,12);
   return rint(1,40)+','+String(rint(0,19)*5).padStart(2,'0');}
 const near=(n,max)=>{const c=new Set([n+10,n-10,n+1,n-1,+String(n).split('').reverse().join(''),n%10===6?n+1:n%10===7?n-1:n+20]);if(Math.floor(n/10)===6)c.add(n+10);if(Math.floor(n/10)===7)c.add(n-10);
@@ -4274,8 +4262,8 @@ function numStep(kind,v){
   if(kind==='timel'){const o=new Set([v]);while(o.size<3){const d=rint(-1,1)*60+rint(-2,2)*15;const t=((hh*60+mm+d)%1440+1440)%1440;o.add(Math.floor(t/60)+':'+String(t%60).padStart(2,'0'));}
     return{t:'mc',kind:T('Uhrzeit hören'),q:T('Wie spät ist es?'),say:horaEs(hh,mm)[0]+'.',autoSay:true,opts:[...o].map(x=>x.replace(/^(\d+):/,(a,b)=>(+b%12||12)+':')),a:0};}
   if(kind==='date'){const[d,mo]=v.split('.').map(Number);return{t:'tr',kind:T('Datum'),de:T('Wie sagt man das Datum? 📅 ')+d+'. '+[T('Januar'),T('Februar'),T('März'),T('April'),T('Mai'),T('Juni'),T('Juli'),T('August'),T('September'),T('Oktober'),T('November'),T('Dezember')][mo-1],
-    a:['el '+numEs(d)+' de '+MESES[mo-1]+'|'+numEs(d)+' de '+MESES[mo-1]+(d===1?'|el primero de '+MESES[mo-1]:'')]};}
-  const[e,c]=v.split(',').map(Number);const say=(e===1?'Un euro':numUn(e).replace(/^./,x=>x.toUpperCase())+' euros')+(c?' con '+numEs(c):'')+'.';
+    a:[NUMS.date(d,mo).join('|')]};}
+  const[e,c]=v.split(',').map(Number);const say=NUMS.price(e,c);
   const fmtP=(E,C)=>E+','+String(C).padStart(2,'0')+' €';const o=new Set([fmtP(e,c)]);
   for(const[E,C]of shuffle([[e,(c+50)%100],[e+10,c],[Math.max(1,e-10),c],[e,c===0?5:0],[+String(e).split('').reverse().join('')||e+2,c]]))if(o.size<3)o.add(fmtP(E,C));
   return{t:'mc',kind:T('Preise hören'),q:T('Wie viel kostet es?'),say,autoSay:true,opts:[...o],a:0};}
@@ -4283,8 +4271,8 @@ function numItems(n,all){NUM_ALL=!!all;const K=numKinds(all);if(!K.length)return
 /* Umschalter „Nur Gelerntes | Alles“ (Zahlen & Verben), gemerkt in S.settings */
 const learnSeg=(key,re)=>h('div',{class:'seg two',style:'margin:4px 0 14px'},[[false,T('Nur Gelerntes')],[true,T('Alles (auch Neues)')]].map(([v,l])=>h('button',{class:!!S.settings[key]===v?'on':'',onclick:()=>{S.settings[key]=v;save();re();}},h('b',{},l))));
 function vNum(m){const all=!!S.settings.numAll;m.innerHTML='';m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},T('Zahlen & Uhrzeit')),h('p',{class:'sub'},T('Jedes Mal neue Werte – 15 Aufgaben.')),learnSeg('numAll',()=>vNum(m)));
-  const K=numKinds(all);const NAMES=[[['numw','numl'],learnedL('u2','l3')||all?T('Zahlen bis 20'):T('Zahlen bis 10')],[['bigw','bigl'],T('große Zahlen')],[['time','timel'],T('Uhrzeit')],[['price'],T('Preise')],[['date'],T('Datum')]];
-  if(!K.length){m.append(h('div',{class:'card'},T('Zahlen kommen in Unidad 1, Lektion 2 – danach geht es hier los. Oder oben „Alles“ wählen.')));return;}
+  const K=numKinds(all);const NAMES=[[['numw','numl'],(()=>{const t=(NUMS&&NUMS.unlock||{}).to20;return !t||learnedL(t[0],t[1])||all;})()?T('Zahlen bis 20'):T('Zahlen bis 10')],[['bigw','bigl'],T('große Zahlen')],[['time','timel'],T('Uhrzeit')],[['price'],T('Preise')],[['date'],T('Datum')]];
+  if(!K.length){m.append(h('div',{class:'card'},(()=>{const sm=(NUMS&&NUMS.unlock||{}).small||['',''];const u=unitById(sm[0]);return T('Zahlen kommen in {U}, Lektion {L} – danach geht es hier los. Oder oben „Alles“ wählen.').replace('{U}',UW+' '+(u?u.n:'')).replace('{L}',String(sm[1]).replace(/\D/g,''));})()));return;}
   m.append(h('div',{class:'card',style:'padding:14px 16px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Dabei')),h('div',{class:'chips'},NAMES.map(([ks,n])=>{const on=ks.some(k=>K.includes(k));return h('span',{class:'chip'+(on?'':' done'),style:on?'':'opacity:.45'},(on?'✓ ':'🔒 ')+n);}))),
     h('div',{style:'margin-top:14px'},pauseBtn('num',()=>goN()),h('button',{class:'btn'+(pauseGet('num')?'':' primary'),style:'width:100%;min-height:48px',onclick:()=>{pauseDel('num');goN();}},T('15 Aufgaben üben →'))));
   function goN(direct){m.innerHTML='';play(m,{title:T('Zahlen & Uhrzeit · jedes Mal neue Werte'),steps:numItems(15,all),pk:'num',onBack:()=>direct===true?goBack('home'):vNum(m),onDone:()=>({label:T('Noch eine Runde →'),fn:goN})});}
@@ -4316,7 +4304,7 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
       tiles(mtile('📖',T('Geschichten'),T('Serie „')+(LANG.storySeries||'')+'“',()=>go('ref/s'),nNew?nNew+T(' neu'):null),mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
-        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')),mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num')),mtile('📰',T('Lesetexte'),T('C1 & C2 · ')+(window.READINGS||[]).length+T(' Texte'),()=>go('ref/r'))));return;}
+        mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),LANG.conjugate?mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')):null,NUMS?mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num')):null,mtile('📰',T('Lesetexte'),T('C1 & C2 · ')+(window.READINGS||[]).length+T(' Texte'),()=>go('ref/r'))));return;}
   m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik'),r:T('Lesetexte')}[tab]||T('Bibliothek')));
   if(tab==='s'){const S2=S.stories||{};
     m.append(h('p',{class:'sub'},'„'+(LANG.storySeries||'')+'“ – '+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik bis zur angegebenen ')+UW+T('. Tipp: erst nur hören, dann lesen.')));
