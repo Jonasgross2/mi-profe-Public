@@ -72,7 +72,7 @@ window.PLACEMENT=[
 {u:'u9',t:'mc',q:'„Die Hälfte der Studierenden …“',opts:['La mitad de los estudiantes …','El medio de los estudiantes …','La media de estudiantes …'],a:0},
 {u:'u10',t:'gap',q:'Ayer ___ (yo, trabajar) hasta las ocho.',a:['trabajé']},
 {u:'u10',t:'mc',q:'Indefinido von „hacer“ (él):',opts:['hizo','hació','hice'],a:0},
-{u:'u10',t:'mc',q:'En 2025 ___ tres meses en Singapur.',opts:['estuve','he estado','estaba'],a:0},
+{u:'u10',t:'mc',q:'En 2025 ___ tres meses en Londres.',opts:['estuve','he estado','estaba'],a:0},
 {u:'u10',t:'gap',q:'El año pasado mis padres ___ (ir) a México.',a:['fueron']},
 {u:'u10',t:'mc',q:'Hoy ___ mucho. (heute – noch nicht vorbei)',opts:['he trabajado','trabajé','trabajaba'],a:0},
 {u:'u10',t:'mc',q:'„Ich bin bereit zu reisen.“',opts:['Estoy dispuesto a viajar.','Soy dispuesto a viajar.','Tengo dispuesto a viajar.'],a:0}

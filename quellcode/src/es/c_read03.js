@@ -12,7 +12,7 @@ Somos Ana y Marco, de Italia. Somos estudiantes {de intercambio|Austausch-} en l
  {t:'mc',q:'¿Quién no habla catalán?',opts:['Tom','Núria','Nadie'],a:0},
  {t:'mc',q:'¿De dónde son Ana y Marco?',opts:['de Italia','de Inglaterra','de Barcelona'],a:0},
  {t:'mc',q:'Für wen wäre Jonas der perfekte Tandempartner?',opts:['Núria – sie lernt Deutsch.','Tom – er lernt Französisch.','Ana y Marco – tocan la guitarra.'],a:0},
- {t:'free',task:'Schreib dein eigenes Profil für die Bolsa de intercambio (4–5 Sätze).',hint:'Hola, me llamo … Soy de … Estudio … Hablo … Busco una persona para …',focus:'ser, -ar-Verben, para + Infinitiv',model:'Hola, me llamo Jonas y soy de Alemania. Estudio un máster en la UPC. Hablo alemán, inglés y un poco de español. Busco una persona para practicar español. ¡Yo te ayudo con el alemán!'}
+ {t:'free',task:'Schreib dein eigenes Profil für die Bolsa de intercambio (4–5 Sätze).',hint:'Hola, me llamo … Soy de … Estudio … Hablo … Busco una persona para …',focus:'ser, -ar-Verben, para + Infinitiv',model:'Hola, me llamo Jonas y soy de Alemania. Estudio un máster en Barcelona. Hablo alemán, inglés y un poco de español. Busco una persona para practicar español. ¡Yo te ayudo con el alemán!'}
 ]});
 U('u2').lessons.push({id:'lr',title:'Lesen: Perfil profesional',desc:'Ein berufliches Profil verstehen',steps:[
  {t:'read',title:'Perfil profesional',intro:'Ein Profil auf einem beruflichen Netzwerk.',text:`Me llamo Marta Vidal Roca y tengo 29 años. Vivo en Barcelona, en el barrio de Poblenou. Soy ingeniera {informática|Informatik-} y trabajo como {analista de ciberseguridad|Cybersecurity-Analystin} en una consultora internacional.

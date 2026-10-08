@@ -133,7 +133,7 @@ lessons:[
  {t:'mc',q:'„Ich bin gerade angekommen.“',opts:['Acabo de llegar.','Acabo llegar.','He acabado a llegar.'],a:0},
  {t:'mc',q:'„Ich habe aufgehört, Fleisch zu essen.“',opts:['He dejado de comer carne.','He dejado comer carne.','He parado a comer carne.'],a:0},
  {t:'gap',q:'Mañana vuelvo ___ intentarlo.',a:['a']},
- {t:'gap',q:'¿Cuándo empezaste ___ trabajar en EY?',a:['a']},
+ {t:'gap',q:'¿Cuándo empezaste ___ trabajar en la empresa?',a:['a']},
  {t:'gap',q:'El tren acaba ___ salir. ¡Qué mala suerte!',a:['de']},
  {t:'tr',de:'Ich habe gerade gegessen.',a:['Acabo de comer.']},
  {t:'listen',es:'Acabo de terminar el informe, ahora vuelvo a revisarlo.',de:'Ich habe gerade den Bericht fertig gemacht, jetzt prüfe ich ihn noch mal.'}]},

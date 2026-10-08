@@ -155,7 +155,7 @@ lessons:[
  {t:'vocab',title:'Länder',items:[['Alemania','Deutschland'],['España','Spanien'],['Austria','Österreich'],['Suiza','die Schweiz'],['Holanda','die Niederlande'],['Francia','Frankreich'],['Italia','Italien'],['Inglaterra','England'],['Estados Unidos','die USA'],['México','Mexiko'],['Argentina','Argentinien'],['Colombia','Kolumbien'],['Perú','Peru'],['Chile','Chile']]},
  {t:'gap',q:'– ¿De dónde ___? – ___ de Alemania, de Mannheim.',a:['eres','soy'],why:'tú → <i>eres</i>, yo → <i>soy</i>.'},
  {t:'gap',q:'Laia y Marc ___ de Cataluña.',a:['son']},
- {t:'gap',q:'Nosotros ___ estudiantes de la UPC.',a:['somos']},
+ {t:'gap',q:'Nosotros ___ estudiantes de la universidad.',a:['somos']},
  {t:'mc',q:'Wähle den richtigen Satz:',opts:['Messi no es de Barcelona, es de Argentina.','Messi es no de Barcelona, es de Argentina.','No Messi es de Barcelona.'],a:0,why:'<b>no</b> steht direkt vor dem Verb.'},
  {t:'order',es:'¿De dónde es usted?',de:'Woher kommen Sie?'},
  {t:'tr',de:'Ich bin aus Deutschland, aus Mannheim.',a:['Soy de Alemania, de Mannheim.']},
@@ -209,11 +209,11 @@ lessons:[
   {n:'Carla',es:'Yo hablo catalán, castellano e inglés. No hablo alemán.',de:'Ich spreche Katalanisch, Spanisch und Englisch. Ich spreche kein Deutsch.'},
   {you:true,prompt:'Ihr sprecht beide Englisch. Reagiere darauf …',opts:[{es:'¡Yo también hablo inglés!',ok:true},{es:'¡Yo tampoco hablo inglés!',ok:false,why:'<i>tampoco</i> = auch nicht – passt nur zu einem verneinten Satz. Carla spricht Englisch, also: <i>también</i> (auch).'},{es:'Yo también hablo catalán.',ok:false,why:'Du sprichst ja kein Katalanisch 😉'}]},
   {n:'Carla',es:'¡Genial! ¿Y para qué estudias español?',de:'Super! Und wozu lernst du Spanisch?'},
-  {you:true,opts:[{es:'Para estudiar un máster en la UPC.',ok:true},{es:'Porque estudiar un máster.',ok:false,why:'„Um zu“ = <b>para</b> + Infinitiv.'},{es:'Para estudio un máster.',ok:false,why:'Nach <b>para</b> kommt der Infinitiv: <i>para estudiar</i>.'}]},
+  {you:true,opts:[{es:'Para estudiar un máster en la universidad.',ok:true},{es:'Porque estudiar un máster.',ok:false,why:'„Um zu“ = <b>para</b> + Infinitiv.'},{es:'Para estudio un máster.',ok:false,why:'Nach <b>para</b> kommt der Infinitiv: <i>para estudiar</i>.'}]},
   {n:'Carla',es:'¡Genial! Bienvenido a Barcelona.',de:'Super! Willkommen in Barcelona.'}]},
  {t:'tr',de:'Ich spreche kein Französisch. – Ich auch nicht.',a:['No hablo francés. – Yo tampoco.','No hablo francés. Yo tampoco.','Yo no hablo francés. Yo tampoco.']},
  {t:'tr',de:'Sie arbeiten, aber ich nicht.',a:['Ellos trabajan, pero yo no.','Trabajan, pero yo no.','Ellas trabajan, pero yo no.']},
- {t:'free',task:'Stell dich in 4–6 Sätzen vor: Name, Herkunft, Wohnort, Sprachen, wozu du Spanisch lernst, was du (nicht) machst.',hint:'Me llamo … Soy de … Hablo … Estudio español para … No practico … pero …',focus:'ser, Verben auf -ar, para + Infinitiv, no/también/tampoco',model:'Hola, me llamo Jonas. Soy de Alemania, pero ahora vivo en Barcelona. Hablo alemán, inglés y un poco de español. Estudio un máster en la UPC. Estudio español para hablar con mis compañeros y para trabajar en España. Practico deporte, pero no toco un instrumento.'}
+ {t:'free',task:'Stell dich in 4–6 Sätzen vor: Name, Herkunft, Wohnort, Sprachen, wozu du Spanisch lernst, was du (nicht) machst.',hint:'Me llamo … Soy de … Hablo … Estudio español para … No practico … pero …',focus:'ser, Verben auf -ar, para + Infinitiv, no/también/tampoco',model:'Hola, me llamo Jonas. Soy de Alemania, pero ahora vivo en Barcelona. Hablo alemán, inglés y un poco de español. Estudio un máster en la universidad. Estudio español para hablar con mis compañeros y para trabajar en España. Practico deporte, pero no toco un instrumento.'}
 ]}],
 resumen:`<h3>Substantive & Artikel</h3><table><tr><th></th><th>männlich</th><th>weiblich</th></tr><tr><td>Sg.</td><td class="es-t">el / un producto</td><td class="es-t">la / una empresa</td></tr><tr><td>Pl.</td><td class="es-t">los / unos productos</td><td class="es-t">las / unas empresas</td></tr></table>
 <p>-o → meist m · -a, -dad, -ción → meist w · Ausnahmen: el día, el programa, la foto. Plural: Vokal + s, Konsonant + es.</p>

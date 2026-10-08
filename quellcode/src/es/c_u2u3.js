@@ -1,7 +1,7 @@
 /* ================= UNIDAD 2 · METAS PROFESIONALES ================= */
 COURSE.units.push({id:'u2',n:'2',title:'Metas profesionales',sub:'Jemanden vorstellen · buchstabieren · Alter · Telefon & E-Mail · Studium & Beruf · Tätigkeiten beschreiben',
 goals:['este / esta / estos / estas','encantado/-a','Alphabet & buchstabieren','Berufe (m/w)','Zahlen ab 11','tener + Alter','Telefon, E-Mail, Adresse','Verben auf -er / -ir','de + el = del'],
-situacion:{title:'Networking auf einer Tech-Messe',npc:'Sra. Ruiz',scene:'Du bist auf einer Tech-Messe in der Fira de Barcelona (Montjuïc) und suchst ein Praktikum. Am Stand einer Firma spricht dich eine Recruiterin an.',role:'Du bist Elena Ruiz, Recruiterin bei einer Software-Firma in Barcelona (Poblenou). Du siezt Jonas zuerst, bietest dann aber das Du an. Du fragst nach Studium, Alter, Erfahrung, Sprachen und Kontaktdaten (móvil, correo).',goal:'Stell dich vor, sag, was du studierst und wo du gearbeitet hast (EY, Wirtschaftsprüfung/IT), und gib deine Handynummer und E-Mail-Adresse (buchstabieren!) an.'},
+situacion:{title:'Networking auf einer Tech-Messe',npc:'Sra. Ruiz',scene:'Du bist auf einer Tech-Messe in der Fira de Barcelona (Montjuïc) und suchst ein Praktikum. Am Stand einer Firma spricht dich eine Recruiterin an.',role:'Du bist Elena Ruiz, Recruiterin bei einer Software-Firma in Barcelona (Poblenou). Du siezt Jonas zuerst, bietest dann aber das Du an. Du fragst nach Studium, Alter, Erfahrung, Sprachen und Kontaktdaten (móvil, correo).',goal:'Stell dich vor, sag, was du studierst oder arbeitest, und gib deine Handynummer und E-Mail-Adresse (buchstabieren!) an.'},
 lessons:[
 {id:'l1',title:'Jemanden vorstellen',desc:'Este es Marc · Encantado · Mucho gusto',steps:[
  {t:'info',title:'Este, esta, estos, estas',html:`<p>Um jemanden vorzustellen, benutzt man <b>Demonstrativpronomen</b> (dies/das ist …):</p>
@@ -97,7 +97,7 @@ lessons:[
   {n:'Recepción',es:'Perfecto. ¿Cuántos años tienes?',de:'Perfekt. Wie alt bist du?'},
   {you:true,opts:[{es:'Tengo veinticuatro años.',ok:true},{es:'Soy veinticuatro años.',ok:false,why:'Alter immer mit <b>tener</b>: <i>tengo … años</i>.'},{es:'Tienes veinticuatro años.',ok:false,why:'Über dich selbst: <i>tengo</i>.'}]},
   {n:'Recepción',es:'¿Y a qué te dedicas?',de:'Und was machst du beruflich?'},
-  {you:true,opts:[{es:'Soy estudiante. Estudio un máster en la UPC.',ok:true},{es:'Soy un estudiante. Estudio un máster en la UPC.',ok:false,why:'Bei Berufen kein Artikel: <i>Soy estudiante</i>.'}]},
+  {you:true,opts:[{es:'Soy estudiante. Estudio un máster en la universidad.',ok:true},{es:'Soy un estudiante. Estudio un máster en la universidad.',ok:false,why:'Bei Berufen kein Artikel: <i>Soy estudiante</i>.'}]},
   {n:'Recepción',es:'¡Ah! Tenemos descuento para estudiantes. ¿Y tu correo electrónico?',de:'Ah! Wir haben Studentenrabatt. Und deine E-Mail?'},
   {you:true,opts:[{es:'Jonas arroba correo punto com.',ok:true},{es:'Jonas a correo coma com.',ok:false,why:'„.“ = <i>punto</i>, „@“ = <i>arroba</i>.'}]},
   {n:'Recepción',es:'Muy bien. ¡Bienvenido!',de:'Sehr gut. Willkommen!'}]},
@@ -118,7 +118,7 @@ lessons:[
  {t:'gap',q:'Yo ___ (responder) a los correos de los clientes.',a:['respondo']},
  {t:'mc',q:'Was macht jemand, der „lleva la contabilidad“?',opts:['die Buchhaltung','den Terminkalender','die Webseite'],a:0},
  {t:'tr',de:'Ich bin verantwortlich für den Kontakt mit Kunden.',a:['Soy responsable del contacto con clientes.','Soy responsable del contacto con los clientes.']},
- {t:'free',task:'Beschreibe in 4–6 Sätzen deine Arbeit bei EY (oder einen Job, den du dir wünschst): Was machst du, wo, wofür bist du verantwortlich, mit wem sprichst du?',hint:'Trabajo como … en … · Soy responsable de/del … · Reviso … · Hablo con clientes · Escribo …',focus:'Verben auf -ar/-er/-ir, Berufe, ser responsable de, del',model:'Trabajo como auditor de IT en EY, una empresa internacional en Mannheim. Reviso los sistemas informáticos de los clientes. Soy responsable del contacto con algunos clientes. Escribo informes y respondo a muchos correos. A veces asisto a reuniones con el equipo.'}
+ {t:'free',task:'Beschreibe in 4–6 Sätzen deine Arbeit (oder einen Job, den du dir wünschst): Was machst du, wo, wofür bist du verantwortlich, mit wem sprichst du?',hint:'Trabajo como … en … · Soy responsable de/del … · Reviso … · Hablo con clientes · Escribo …',focus:'Verben auf -ar/-er/-ir, Berufe, ser responsable de, del',model:'Trabajo como analista en una empresa internacional en Mannheim. Reviso los sistemas informáticos de los clientes. Soy responsable del contacto con algunos clientes. Escribo informes y respondo a muchos correos. A veces asisto a reuniones con el equipo.'}
 ]}],
 resumen:`<h3>Jemanden vorstellen</h3><table><tr><td class="es-t">Este es el señor Vega. / Esta es Paula.</td><td class="es-t">Encantado / Encantada / Mucho gusto.</td></tr><tr><td class="es-t">Estos son Andrés y Pablo. / Estas son Ana y Elena.</td><td></td></tr></table>
 <h3>Buchstabieren</h3><p class="es-t">¿Cómo se escribe …? · ¿Con hache? · ¿Con acento o sin acento? · ¿Con mayúscula?</p>
@@ -191,7 +191,7 @@ lessons:[
  {t:'mc',q:'Mis padres ___ muy simpáticos.',opts:['son','están'],a:0,keep:true,why:'Charaktereigenschaft → <b>ser</b>.'},
  {t:'mc',q:'¿Dónde ___ la Sagrada Família?',opts:['está','es'],a:0,keep:true},
  {t:'gap',q:'– ¿Cómo ___ (tú)? – ___ bien, gracias.',a:['estás','estoy']},
- {t:'gap',q:'Nosotros ___ en la biblioteca y ___ estudiantes de la UPC.',a:['estamos','somos']},
+ {t:'gap',q:'Nosotros ___ en la biblioteca y ___ estudiantes de la universidad.',a:['estamos','somos']},
  {t:'tr',de:'Meine Eltern sind in Mannheim.',a:['Mis padres están en Mannheim.']},
  {t:'tr',de:'Wie geht es euch?',a:['¿Cómo estáis?','¿Qué tal estáis?']}
 ]},

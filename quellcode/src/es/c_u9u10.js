@@ -30,7 +30,7 @@ lessons:[
  {t:'conj',verb:'vivir',de:'wohnen',tense:'Imperfekt',forms:['vivía','vivías','vivía','vivíamos','vivíais','vivían']},
  {t:'conj',verb:'ser',de:'sein',tense:'Imperfekt',forms:['era','eras','era','éramos','erais','eran']},
  {t:'conj',verb:'ir',de:'gehen',tense:'Imperfekt',forms:['iba','ibas','iba','íbamos','ibais','iban']},
- {t:'gap',q:'Antes yo ___ (vivir) en Mannheim y ___ (trabajar) en EY.',a:['vivía','trabajaba']},
+ {t:'gap',q:'Antes yo ___ (vivir) en Mannheim y ___ (trabajar) en una consultora.',a:['vivía','trabajaba']},
  {t:'gap',q:'Cuando ___ (ser) niño, ___ (ir) al colegio en bicicleta.',a:['era','iba']},
  {t:'gap',q:'En mi barrio antes ___ (haber) muchas tiendas pequeñas.',a:['había'],why:'hay → <b>había</b>.'},
  {t:'gap',q:'Mis abuelos ___ (ver) la tele todas las noches.',a:['veían']},
@@ -87,7 +87,7 @@ Pero no todo es mejor: algunas personas tienen problemas para {desconectar|absch
  {t:'mc',q:'¿Cómo eran las reuniones antes?',opts:['Siempre presenciales.','Por videollamada.','No había reuniones.'],a:0},
  {t:'mc',q:'¿Qué problema tiene el teletrabajo según el texto?',opts:['Algunas personas no pueden desconectar.','Es muy caro.','Los jefes no lo permiten.'],a:0},
  {t:'gap',q:'Antes cada persona ___ (tener) su propio escritorio.',a:['tenía']},
- {t:'free',task:'Vergleiche in 5–7 Sätzen dein Leben früher (Mannheim, Bachelor, EY) mit jetzt in Barcelona. Benutze das Imperfekt für früher und das Präsens für jetzt.',hint:'Antes vivía en … · Cuando trabajaba en EY, … · Normalmente iba … · Ahora … · Actualmente …',focus:'Imperfekt (Gewohnheiten früher) vs. Präsens',model:'Antes vivía en Mannheim y estudiaba en la DHBW. Cuando trabajaba en EY, me levantaba muy temprano e iba a la oficina en tren. Los fines de semana visitaba a mi familia. Ahora vivo en Barcelona y estudio un máster en la UPC. Actualmente tengo más tiempo libre y voy mucho a la playa. Antes hablaba poco español, pero ahora lo hablo todos los días.'}
+ {t:'free',task:'Vergleiche in 5–7 Sätzen dein Leben früher (Wohnort, Schule oder Studium, Arbeit) mit heute. Benutze das Imperfekt für früher und das Präsens für jetzt.',hint:'Antes vivía en … · Cuando trabajaba en …, … · Normalmente iba … · Ahora … · Actualmente …',focus:'Imperfekt (Gewohnheiten früher) vs. Präsens',model:'Antes vivía en Mannheim y estudiaba en la universidad. Cuando trabajaba en una consultora, me levantaba muy temprano e iba a la oficina en tren. Los fines de semana visitaba a mi familia. Ahora vivo en Barcelona y estudio un máster. Actualmente tengo más tiempo libre y voy mucho a la playa. Antes hablaba poco español, pero ahora lo hablo todos los días.'}
 ]}],
 resumen:`<h3>Häuser & Büros</h3><p class="es-t">la oficina · el despacho · la recepción · la cocina · la puerta · la ventana · la terraza · el balcón · el escritorio · la silla · la estantería · el armario · el ascensor · la planta baja · la primera planta</p>
 <h3>Beschreiben</h3><table><tr><th>ser</th><th>estar (Zustand)</th><th>estar (Lage)</th></tr><tr><td class="es-t">moderno, tranquilo, luminoso, exterior, caro</td><td class="es-t">en buen estado, reformado, amueblado, limpio</td><td class="es-t">en la zona comercial, cerca de la estación, bien comunicado</td></tr></table>
@@ -99,7 +99,7 @@ resumen:`<h3>Häuser & Büros</h3><p class="es-t">la oficina · el despacho · l
 /* ================= UNIDAD 10 · LLEGAR A LA META ================= */
 COURSE.units.push({id:'u10',n:'10',title:'Llegar a la meta',sub:'Angaben zur Biografie · berufliche Fähigkeiten · Berufserfahrung · Bewerbung · Vorstellungsgespräch',
 goals:['Indefinido regelmäßig (trabajé, aprendí)','Indefinido unregelmäßig (fui, estuve, hice, tuve …)','Zeitangaben: ayer, el año pasado, hace dos años','Biografie erzählen','Perfekt oder Indefinido?','Fähigkeiten: ser / estar / tener / saber','Bewerbung & Vorstellungsgespräch'],
-situacion:{title:'Vorstellungsgespräch für ein Praktikum',npc:'Sra. Ferrer',scene:'Videointerview mit Sra. Ferrer, Personalleiterin einer Cybersecurity-Beratung in Barcelona, für ein Praktikum (prácticas) im Bereich IT-Audit.',role:'Du bist Laura Ferrer, Personalleiterin. Führe ein höfliches Vorstellungsgespräch (usted). Frag nach Ausbildung und Lebenslauf (¿Dónde estudió? ¿Cuándo terminó …?), Berufserfahrung (Indefinido & Perfekt: ¿Ha hecho prácticas alguna vez? ¿Qué hizo en EY?), Stärken, Sprachen und warum er bei euch arbeiten möchte. Stell auch eine Frage wie „¿Por qué quiere dejar su puesto actual?“ – wenn er sagt, er studiert, passe dich an.',goal:'Erzähl deinen Lebenslauf im Indefinido (Bachelor in Mannheim, EY seit 2023, Singapur 2025, Umzug nach Barcelona 2026), nenne deine Stärken und erkläre, warum du das Praktikum willst.'},
+situacion:{title:'Vorstellungsgespräch für ein Praktikum',npc:'Sra. Ferrer',scene:'Videointerview mit Sra. Ferrer, Personalleiterin einer Cybersecurity-Beratung in Barcelona, für ein Praktikum (prácticas) im Bereich IT-Audit.',role:'Du bist Laura Ferrer, Personalleiterin. Führe ein höfliches Vorstellungsgespräch (usted). Frag nach Ausbildung und Lebenslauf (¿Dónde estudió? ¿Cuándo terminó …?), Berufserfahrung (Indefinido & Perfekt: ¿Ha hecho prácticas alguna vez? ¿Qué hizo en su último trabajo?), Stärken, Sprachen und warum er bei euch arbeiten möchte. Stell auch eine Frage wie „¿Por qué quiere dejar su puesto actual?“ – wenn er sagt, er studiert, passe dich an.',goal:'Erzähl deinen Lebenslauf im Indefinido (Ausbildung oder Studium, Jobs oder Praktika, Auslandsaufenthalte, Umzug), nenne deine Stärken und erkläre, warum du das Praktikum willst.'},
 lessons:[
 {id:'l1',title:'Indefinido: regelmäßig',desc:'trabajé · aprendí · viví',steps:[
  {t:'info',title:'Das Indefinido',html:`<p>Das <b>Indefinido</b> erzählt <b>abgeschlossene Ereignisse</b> in einem abgeschlossenen Zeitraum der Vergangenheit – die Erzählzeit für Biografien.</p>
@@ -114,9 +114,9 @@ lessons:[
  {t:'gap',q:'Ayer ___ (yo, trabajar) hasta las ocho.',a:['trabajé']},
  {t:'gap',q:'El año pasado mis padres ___ (viajar) a México.',a:['viajaron']},
  {t:'gap',q:'¿Cuándo ___ (tú, terminar) tus estudios?',a:['terminaste']},
- {t:'gap',q:'En 2023 ___ (yo, empezar) a trabajar en EY.',a:['empecé'],why:'empezar → <b>empecé</b> (z → c vor e).'},
+ {t:'gap',q:'En 2023 ___ (yo, empezar) a trabajar en una consultora.',a:['empecé'],why:'empezar → <b>empecé</b> (z → c vor e).'},
  {t:'mc',q:'„Er lernte Spanisch in Granada.“',opts:['Aprendió español en Granada.','Aprendío español en Granada.','Aprendo español en Granada.'],a:0},
- {t:'tr',de:'Ich wohnte drei Monate in Singapur.',a:['Viví tres meses en Singapur.','Yo viví tres meses en Singapur.','Viví en Singapur tres meses.']}
+ {t:'tr',de:'Ich wohnte drei Monate in London.',a:['Viví tres meses en Londres.','Yo viví tres meses en Londres.','Viví en Londres tres meses.']}
 ]},
 {id:'l2',title:'Indefinido: unregelmäßig',desc:'fui · estuve · hice · tuve · pude',steps:[
  {t:'info',title:'Die wichtigsten unregelmäßigen Formen',html:`<table><tr><th>ser / ir</th><th>estar</th><th>tener</th><th>hacer</th></tr>
@@ -132,7 +132,7 @@ lessons:[
  {t:'conj',verb:'ser / ir',de:'sein / gehen',tense:'Indefinido',forms:['fui','fuiste','fue','fuimos','fuisteis','fueron']},
  {t:'conj',verb:'tener',de:'haben',tense:'Indefinido',forms:['tuve','tuviste','tuvo','tuvimos','tuvisteis','tuvieron']},
  {t:'conj',verb:'hacer',de:'machen',tense:'Indefinido',forms:['hice','hiciste','hizo','hicimos','hicisteis','hicieron']},
- {t:'gap',q:'El verano pasado ___ (yo, estar) en Singapur y ___ (hacer) unas prácticas.',a:['estuve','hice']},
+ {t:'gap',q:'El verano pasado ___ (yo, estar) en Londres y ___ (hacer) unas prácticas.',a:['estuve','hice']},
  {t:'gap',q:'¿Qué ___ (tú, hacer) ayer? – ___ (ir) al cine con Laia.',a:['hiciste','Fui']},
  {t:'gap',q:'No ___ (yo, poder) ir a la reunión porque ___ (tener) un problema.',a:['pude','tuve']},
  {t:'gap',q:'Mis amigos ___ (venir) a Barcelona en octubre.',a:['vinieron']},
@@ -165,10 +165,10 @@ Inés murió muy joven, en 1934, y la empresa pasó a su familia. En 1985 su hij
  {t:'mc',q:'Hoy ___ mucho.',opts:['he trabajado','trabajé'],a:0,keep:true,why:'<i>hoy</i> = Zeitraum noch nicht vorbei → Perfekt.'},
  {t:'mc',q:'Ayer ___ al médico.',opts:['fui','he ido'],a:0,keep:true,why:'<i>ayer</i> = abgeschlossen → Indefinido.'},
  {t:'mc',q:'¿___ alguna vez en México?',opts:['Has estado','Estuviste'],a:0,keep:true,why:'Erfahrung ohne Zeitpunkt (<i>alguna vez</i>) → Perfekt.'},
- {t:'mc',q:'En 2025 ___ tres meses en Singapur.',opts:['estuve','he estado'],a:0,keep:true},
+ {t:'mc',q:'En 2025 ___ tres meses en Londres.',opts:['estuve','he estado'],a:0,keep:true},
  {t:'mc',q:'Esta semana ___ dos exámenes.',opts:['he tenido','tuve'],a:0,keep:true},
  {t:'mc',q:'La semana pasada ___ una película muy buena.',opts:['vi','he visto'],a:0,keep:true},
- {t:'gap',q:'– ¿Has hecho prácticas alguna vez? – Sí, ___ (hacer) unas prácticas en EY hace tres años.',a:['hice']},
+ {t:'gap',q:'– ¿Has hecho prácticas alguna vez? – Sí, ___ (hacer) unas prácticas en una empresa hace tres años.',a:['hice']},
  {t:'gap',q:'Todavía no ___ ___ (yo, ver) el Camp Nou.',a:['he','visto']},
  {t:'tr',de:'Letztes Jahr habe ich meinen Bachelor abgeschlossen.',a:['El año pasado terminé mi grado.','El año pasado terminé el grado.','El año pasado terminé mis estudios.','El año pasado terminé mi bachelor.','El año pasado terminé la carrera.','El año pasado terminé mi carrera.']}
 ]},
@@ -183,15 +183,15 @@ Inés murió muy joven, en 1934, y la empresa pasó a su familia. En 1985 su hij
  {t:'gap',q:'___ una persona muy organizada y ___ acostumbrado a trabajar en equipo.',a:['Soy','estoy']},
  {t:'dialog',place:'Entrevista online',title:'Das Vorstellungsgespräch',scene:'Videointerview für ein Praktikum im Bereich IT-Audit in Barcelona.',lines:[
   {n:'Sra. Ferrer',es:'Buenos días, señor Gross. Cuénteme un poco sobre su formación.',de:'Guten Morgen, Herr Gross. Erzählen Sie mir ein wenig über Ihre Ausbildung.'},
-  {you:true,opts:[{es:'Estudié Informática Empresarial en Mannheim y terminé el grado en 2026.',ok:true},{es:'Estudio Informática Empresarial en Mannheim y terminé el grado en 2026 hace.',ok:false,why:'Abgeschlossenes Studium → Indefinido <i>estudié</i>; „hace“ passt hier nicht.'},{es:'He estudiado Informática Empresarial en Mannheim en 2023.',ok:false,why:'Mit Jahreszahl (abgeschlossen) → Indefinido.'}]},
+  {you:true,opts:[{es:'Estudié Informática en Mannheim y terminé el grado en 2026.',ok:true},{es:'Estudio Informática en Mannheim y terminé el grado en 2026 hace.',ok:false,why:'Abgeschlossenes Studium → Indefinido <i>estudié</i>; „hace“ passt hier nicht.'},{es:'He estudiado Informática en Mannheim en 2023.',ok:false,why:'Mit Jahreszahl (abgeschlossen) → Indefinido.'}]},
   {n:'Sra. Ferrer',es:'¿Y tiene experiencia profesional?',de:'Und haben Sie Berufserfahrung?'},
-  {you:true,opts:[{es:'Sí, trabajé tres años en EY como auditor de IT. En 2025 estuve tres meses en Singapur.',ok:true},{es:'Sí, trabajaba tres años en EY. En 2025 estaba tres meses en Singapur.',ok:false,why:'Abgeschlossener Zeitraum mit Dauer (tres años, tres meses) → Indefinido: <i>trabajé, estuve</i>.'}]},
+  {you:true,opts:[{es:'Sí, trabajé tres años en una consultora como analista. En 2025 estuve tres meses en Londres.',ok:true},{es:'Sí, trabajaba tres años en una consultora. En 2025 estaba tres meses en Londres.',ok:false,why:'Abgeschlossener Zeitraum mit Dauer (tres años, tres meses) → Indefinido: <i>trabajé, estuve</i>.'}]},
   {n:'Sra. Ferrer',es:'Muy interesante. ¿Cuáles son sus puntos fuertes?',de:'Sehr interessant. Was sind Ihre Stärken?'},
   {you:true,opts:[{es:'Soy organizado, sé trabajar en equipo y estoy acostumbrado a hablar con clientes.',ok:true},{es:'Estoy organizado, sé trabajar en equipo y soy acostumbrado a hablar con clientes.',ok:false,why:'Charakter → <i>soy organizado</i>; Gewohnheit → <i>estoy acostumbrado</i>.'}]},
   {n:'Sra. Ferrer',es:'¿Y por qué quiere hacer las prácticas con nosotros?',de:'Und warum möchten Sie das Praktikum bei uns machen?'},
   {you:true,opts:[{es:'Porque me interesa mucho la ciberseguridad y quiero ser parte de un buen equipo.',ok:true},{es:'Porque me interesan mucho la ciberseguridad.',ok:false,why:'<i>la ciberseguridad</i> ist Singular → <i>me interesa</i>.'}]},
   {n:'Sra. Ferrer',es:'Perfecto. Le escribiremos la próxima semana. ¡Muchas gracias!',de:'Perfekt. Wir schreiben Ihnen nächste Woche. Vielen Dank!'}]},
- {t:'free',task:'Schreib eine kurze Bewerbung (6–8 Sätze) für ein Praktikum bei einer Tech-Firma in Barcelona: wer du bist, was du studiert und gearbeitet hast (Indefinido), deine Stärken und warum du dich bewirbst.',hint:'Estimados señores: · En relación con la oferta publicada en … · Estudié … · De 2023 a 2026 trabajé … · Soy … / Estoy acostumbrado a … / Tengo conocimientos de … · Quedo a su disposición … · Atentamente, Jonas Gross',focus:'Indefinido, Fähigkeiten mit ser/estar/tener/saber, formelles Anschreiben',model:'Estimados señores: En relación con la oferta de prácticas publicada en su página web, les envío mi currículum. Estudié Informática Empresarial en la DHBW Mannheim y terminé el grado en septiembre de 2026. De 2023 a 2026 trabajé en EY como auditor de sistemas y en 2025 estuve tres meses en Singapur. Ahora estudio un máster en la UPC. Soy una persona organizada y comunicativa, sé trabajar en equipo y tengo conocimientos de redes y ciberseguridad. Considero que mi experiencia es adecuada para el puesto. Quedo a su disposición para una entrevista. Atentamente, Jonas Gross'}
+ {t:'free',task:'Schreib eine kurze Bewerbung (6–8 Sätze) für ein Praktikum bei einer Tech-Firma in Barcelona: wer du bist, was du studiert und gearbeitet hast (Indefinido), deine Stärken und warum du dich bewirbst.',hint:'Estimados señores: · En relación con la oferta publicada en … · Estudié … · De 2023 a 2026 trabajé … · Soy … / Estoy acostumbrado a … / Tengo conocimientos de … · Quedo a su disposición … · Atentamente, Jonas Gross',focus:'Indefinido, Fähigkeiten mit ser/estar/tener/saber, formelles Anschreiben',model:'Estimados señores: En relación con la oferta de prácticas publicada en su página web, les envío mi currículum. Estudié Informática en la Universidad de Mannheim y terminé el grado en septiembre de 2026. De 2023 a 2026 trabajé en una consultora como analista de sistemas y en 2025 estuve tres meses en Londres. Ahora estudio un máster en Barcelona. Soy una persona organizada y comunicativa, sé trabajar en equipo y tengo conocimientos de redes y ciberseguridad. Considero que mi experiencia es adecuada para el puesto. Quedo a su disposición para una entrevista. Atentamente, Jonas Gross'}
 ]}],
 resumen:`<h3>Biografie</h3><p class="es-t">Nací en … · A los 10 años nos mudamos a … · Fui a la escuela de … a … · Hice un intercambio el año pasado. · Terminé el instituto dos años después. · Hace un mes empecé a trabajar.</p>
 <h3>Indefinido – regelmäßig</h3><table><tr><td>-ar: -é, -aste, -ó, -amos, -asteis, -aron</td></tr><tr><td>-er/-ir: -í, -iste, -ió, -imos, -isteis, -ieron</td></tr></table>
