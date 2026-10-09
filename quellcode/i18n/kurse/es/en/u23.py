@@ -69,7 +69,6 @@ EN = [
 "download",
 "mention, comment",
 "explain",
-"answer, reply",
 "complain",
 "insist",
 "promise",

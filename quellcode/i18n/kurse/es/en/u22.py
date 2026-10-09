@@ -25,7 +25,6 @@ EN = [
 "stay in touch",
 "do … again",
 "farewell party",
-"pack your suitcases",
 "Take care!",
 "I'll miss you.",
 "I'll give you my address so that you come and visit me in Germany.",

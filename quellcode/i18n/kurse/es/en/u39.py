@@ -86,7 +86,6 @@ EN = [
 "fall, crash",
 "kick",
 "firefighter",
-"draw",
 "end, extreme",
 "invitation",
 "clarify, clear up",

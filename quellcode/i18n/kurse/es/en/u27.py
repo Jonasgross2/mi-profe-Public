@@ -101,7 +101,6 @@ EN = [
 "translation",
 "behaviour",
 "smart, elegant",
-"desert",
 "mine",
 "knowledge",
 "certainly",

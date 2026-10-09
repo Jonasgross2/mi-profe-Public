@@ -108,7 +108,6 @@ EN = [
 "ray, lightning",
 "appearance",
 "side (of the body)",
-"tie",
 "drama",
 "\"That makes sense.\"",
 "\"I'm worn out.\"",

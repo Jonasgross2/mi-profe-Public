@@ -62,7 +62,6 @@ EN = [
 "unemployment",
 "inequality",
 "gentrification",
-"town hall, city council",
 "mayor",
 "citizens",
 "protest",

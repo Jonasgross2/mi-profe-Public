@@ -61,7 +61,6 @@ EN = [
 "bank transfer",
 "direct debit",
 "fee, commission",
-"cash machine, ATM",
 "withdraw money",
 "credit card",
 "charge (to an account)",
