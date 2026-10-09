@@ -1227,7 +1227,7 @@ const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):'A1';};
 function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
-      tiles(mtile('📖',T('Geschichten'),LANG.storySeries?T('Serie „')+LANG.storySeries+'“':T('Zum Hören & Lesen'),()=>go('ref/s'),nNew?nNew+T(' neu'):null),mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
+      tiles(STORIES.length?mtile('📖',T('Geschichten'),LANG.storySeries?T('Serie „')+LANG.storySeries+'“':T('Zum Hören & Lesen'),()=>go('ref/s'),nNew?nNew+T(' neu'):null):null,mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
         mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),LANG.conjugate?mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')):null,NUMS?mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num')):null,(window.READINGS||[]).length?mtile('📰',T('Lesetexte'),T('C1 & C2 · ')+(window.READINGS||[]).length+T(' Texte'),()=>go('ref/r')):null));return;}
   m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik'),r:T('Lesetexte')}[tab]||T('Bibliothek')));
   if(tab==='s'){const S2=S.stories||{};
