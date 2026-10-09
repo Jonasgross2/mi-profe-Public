@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261009-0836";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
+<script>window.PWA=true;window.APP_VERSION="20261009-0838";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -934,6 +934,16 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"regelmäßig: -e, -st, -t, -en, -t, -en": "regular: -e, -st, -t, -en, -t, -en",
+"regelmäßig: -e, -st, -t, -n, -t, -n": "regular: -e, -st, -t, -n, -t, -n",
+"(mit -e- nach t/d: du ": "(extra -e- after t/d: du ",
+"Vokalwechsel ": "vowel change ",
+" nur bei du und er/sie/es": " only with du and er/sie/es",
+"trennbar: ": "separable: ",
+" steht am Ende (ich ": " goes to the end (ich ",
+"Verben auf -eln: ich ": "verbs in -eln: ich ",
+"Verben auf -ern: wir/sie nur -n": "verbs in -ern: wir/sie only -n",
+"Du siehst nur den Infinitiv – überleg selbst: regelmäßig? Vokalwechsel (e → i, a → ä)? Trennbar (anrufen → ich rufe an)? Bei Fehlern zeige ich das Muster.": "You only see the infinitive – think: regular? Vowel change (e → i, a → ä)? Separable (anrufen → ich rufe an)? If you make a mistake, I'll show the pattern.",
 " ist noch im Aufbau – es gibt erst die ersten Lektionen. Trotzdem ausprobieren?": " is still being built – only the first lessons are ready. Try it anyway?",
 "Ausprobieren": "Try it",
 "auf Deutsch": "in German",
@@ -1880,6 +1890,16 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"regelmäßig: -e, -st, -t, -en, -t, -en": "regular: -e, -st, -t, -en, -t, -en",
+"regelmäßig: -e, -st, -t, -n, -t, -n": "regular: -e, -st, -t, -n, -t, -n",
+"(mit -e- nach t/d: du ": "(con -e- tras t/d: du ",
+"Vokalwechsel ": "cambio de vocal ",
+" nur bei du und er/sie/es": " solo con du y er/sie/es",
+"trennbar: ": "separable: ",
+" steht am Ende (ich ": " va al final (ich ",
+"Verben auf -eln: ich ": "verbos en -eln: ich ",
+"Verben auf -ern: wir/sie nur -n": "verbos en -ern: wir/sie solo -n",
+"Du siehst nur den Infinitiv – überleg selbst: regelmäßig? Vokalwechsel (e → i, a → ä)? Trennbar (anrufen → ich rufe an)? Bei Fehlern zeige ich das Muster.": "Solo ves el infinitivo – piensa: ¿regular? ¿Cambio de vocal (e → i, a → ä)? ¿Separable (anrufen → ich rufe an)? Si fallas, te muestro el patrón.",
 " ist noch im Aufbau – es gibt erst die ersten Lektionen. Trotzdem ausprobieren?": " todavía está en construcción: solo hay las primeras lecciones. ¿Probarlo de todos modos?",
 "Ausprobieren": "Probar",
 "auf Deutsch": "en alemán",
@@ -2826,6 +2846,16 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"regelmäßig: -e, -st, -t, -en, -t, -en": "regular: -e, -st, -t, -en, -t, -en",
+"regelmäßig: -e, -st, -t, -n, -t, -n": "regular: -e, -st, -t, -n, -t, -n",
+"(mit -e- nach t/d: du ": "(com -e- depois de t/d: du ",
+"Vokalwechsel ": "mudança de vogal ",
+" nur bei du und er/sie/es": " só com du e er/sie/es",
+"trennbar: ": "separável: ",
+" steht am Ende (ich ": " vai para o fim (ich ",
+"Verben auf -eln: ich ": "verbos em -eln: ich ",
+"Verben auf -ern: wir/sie nur -n": "verbos em -ern: wir/sie só -n",
+"Du siehst nur den Infinitiv – überleg selbst: regelmäßig? Vokalwechsel (e → i, a → ä)? Trennbar (anrufen → ich rufe an)? Bei Fehlern zeige ich das Muster.": "Você só vê o infinitivo – pense: regular? Mudança de vogal (e → i, a → ä)? Separável (anrufen → ich rufe an)? Se errar, eu mostro o padrão.",
 " ist noch im Aufbau – es gibt erst die ersten Lektionen. Trotzdem ausprobieren?": " ainda está em construção – só há as primeiras lições. Experimentar mesmo assim?",
 "Ausprobieren": "Experimentar",
 "auf Deutsch": "em alemão",
@@ -4598,15 +4628,15 @@ function verbStep(u,inf,de){if(!LANG.conjugate)return null;const r=LANG.conjugat
   return{t:'conj',verb:inf,de:VOC_DE[inf]!=null?trc(VOC_DE[inf]):de,forms:r.forms,tense:T('Präsens'),why};}
 function verbPool(all){const gen=[],seen=new Set(),tables=[];
   for(const u of COURSE.units){const st=all||startedU(u);
-    for(const l of u.lessons){if(st&&(!l.freq||all||rnd(u.id+'.'+l.id)>=1))for(const s of l.steps)if(s.t==='vocab')for(const [es,de] of s.items){const w=es.trim();if(seen.has(w)||!(LANG.infinitive||/(?!)/).test(w)||!/n\b/.test(String(de).split(',')[0]))continue;
+    for(const l of u.lessons){if(st&&(!l.freq||all||rnd(u.id+'.'+l.id)>=1))for(const s of l.steps)if(s.t==='vocab')for(const [es,de] of s.items){const w=es.trim();if(seen.has(w)||!(LANG.infinitive||/(?!)/).test(w)||!(LANG.verbMeaning||/n\b/).test(String(de).split(',')[0]))continue;
         const st2=verbStep(u,w,de);if(st2){seen.add(w);gen.push({s:st2,ref:'V|'+u.id+'|'+w});}}
       if(all||learnedL(u.id,l.id))l.steps.forEach((s,i)=>{if(s.t==='conj'&&s.tense)tables.push({s,ref:u.id+'|'+l.id+'|'+i});});}}
   return{gen,tables};}
 function verbRound(all){const{gen,tables}=verbPool(all);const t=shuffle(tables).slice(0,gen.length?2:8);return shuffle(shuffle(gen).slice(0,8-t.length).concat(t));}
 function vVerbs(m){const all=!!S.settings.verbsAll;m.innerHTML='';m.append(backTo(T('Bibliothek'),'ref'));const{gen,tables}=verbPool(all);
   m.append(h('h1',{},T('Verben-Trainer')),learnSeg('verbsAll',()=>vVerbs(m)),
-    h('p',{class:'sub'},(all?T('Verben aus dem ganzen Kurs'):T('Verben aus den Unidades, die du angefangen hast'))+' ('+gen.length+'). '+T('Du siehst nur den Infinitiv – überleg selbst: -ar, -er oder -ir? Stammwechsel? Bei Fehlern zeige ich das Muster.')+(tables.length?' '+T('Dazu andere Zeitformen aus gelernten Lektionen.'):'')));
-  if(!gen.length&&!tables.length){m.append(h('div',{class:'card'},T('Noch keine Verben – fang eine Unidad an. Oder oben „Alles“ wählen.').split('Unidad').join(UW)));return;}
+    h('p',{class:'sub'},(all?T('Verben aus dem ganzen Kurs'):T('Verben aus den Unidades, die du angefangen hast').replace(/Unidades/,LANG.units))+' ('+gen.length+'). '+T(LANG.verbHint||'Du siehst nur den Infinitiv – überleg selbst: -ar, -er oder -ir? Stammwechsel? Bei Fehlern zeige ich das Muster.')+(tables.length?' '+T('Dazu andere Zeitformen aus gelernten Lektionen.'):'')));
+  if(!gen.length&&!tables.length){m.append(h('div',{class:'card'},T('Noch keine Verben – fang eine Unidad an. Oder oben „Alles“ wählen.').replace(/Unidade?/,UW)));return;}
   const go8=direct=>{m.innerHTML='';play(m,{title:T('Verben-Trainer · 8 Verben'),steps:verbRound(all),pk:'verbs',onBack:()=>direct===true?goBack('home'):vVerbs(m),onDone:()=>({label:T('Noch 8 Verben →'),fn:go8})});};
   if(RESUME==='verbs'){RESUME=null;return go8(true);}
   m.append(pauseBtn('verbs',go8),h('button',{class:'btn'+(pauseGet('verbs')?'':' primary'),style:'width:100%;min-height:48px',onclick:()=>{pauseDel('verbs');go8();}},T('8 Verben üben →')));}
