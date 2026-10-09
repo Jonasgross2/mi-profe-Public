@@ -469,8 +469,8 @@ const tiles=(...k)=>h('div',{class:'mtiles'},...k);
 let NAVSTACK=[],NAVRESET=false;
 const PLAYR=['lesson','round','check','mix','reading'];
 const pageKey=r=>{const p=r.split('/');return PLAYR.includes(p[0])?'play':p[0]==='units'?'units':p[0]==='unit'?'unit/'+p[1]:p[0]==='ref'&&p[1]?'ref/'+p[1]:p[0]==='ref'?'ref':p[0]==='vocab'&&p[1]==='stats'?'vocab/stats':r;};
-function trackNav(r){if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NAVSTACK.length;
-  if(n>=2&&pageKey(NAVSTACK[n-2])===pageKey(r))NAVSTACK.pop();
+function trackNav(r){NAVBACK=false;if(NAVRESET){NAVSTACK=[r];NAVRESET=false;return;}const n=NAVSTACK.length;
+  if(n>=2&&pageKey(NAVSTACK[n-2])===pageKey(r)){NAVSTACK.pop();NAVBACK=true;}
   if(NAVSTACK.length&&pageKey(NAVSTACK[NAVSTACK.length-1])===pageKey(r))NAVSTACK[NAVSTACK.length-1]=r;else NAVSTACK.push(r);
   if(NAVSTACK.length>40)NAVSTACK.shift();}
 const prevRoute=()=>{for(let i=NAVSTACK.length-2;i>=0;i--)if(pageKey(NAVSTACK[i])!=='play')return NAVSTACK[i];return null;};
@@ -579,10 +579,15 @@ function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=
     h('button',{class:'btn primary',style:'margin-top:14px;width:100%',onclick:ok},again?T('Speichern'):T('Los geht’s →')),
     again?h('button',{class:'btn ghost',style:'margin-top:6px;width:100%',onclick:()=>go('lang')},T('Abbrechen')):null)));
   setTimeout(()=>inp.focus(),80);}
-function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=false;trackNav(curRoute());const parts=curRoute().split('/');
+/* Scroll-Stelle pro Seite merken: beim Zurückgehen (Verlauf, ← Knopf, Wischgeste) steht man wieder an derselben Stelle, sonst oben */
+var NAVBACK=false,LASTR=null,SCROLLPOS={};
+function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=false;
+  {const om=document.querySelector('.main');if(LASTR)SCROLLPOS[LASTR]=Math.max(window.scrollY||0,om?om.scrollTop:0);}
+  trackNav(curRoute());const RT=curRoute();LASTR=RT;const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
   const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum,reading:vReading}[parts[0]]||vHome;
-  v(m,...parts.slice(1));window.scrollTo(0,0);m.scrollTop=0;hideBoot();}
+  v(m,...parts.slice(1));const y=NAVBACK&&SCROLLPOS[RT]||0;window.scrollTo(0,y);m.scrollTop=y;
+  if(y)requestAnimationFrame(()=>{if(curRoute()===RT){m.scrollTop=y;window.scrollTo(0,y);}});hideBoot();}
 
 /* ---------- views ---------- */
 /* Tagesplan: Bausteine mit id; welche täglich dazugehören, stellt man unter Mehr → Mein Tagesplan ein (S.plan, synchronisiert über planT) */
