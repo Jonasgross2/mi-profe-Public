@@ -55,7 +55,6 @@ EN = [
 "trigger",
 "favour, encourage",
 "aggravate",
-"alleviate, ease",
 "remedy, fix",
 "get round, circumvent",
 "delimit, narrow down",

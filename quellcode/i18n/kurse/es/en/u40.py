@@ -85,8 +85,6 @@ EN = [
 "take a dig",
 "wink; allusion",
 "wink",
-"shrug your shoulders",
-"frown",
 "roll your eyes",
 "bite your tongue",
 "laugh out loud",
