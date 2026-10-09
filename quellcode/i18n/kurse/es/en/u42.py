@@ -113,7 +113,6 @@ EN = [
 "mask",
 "signed",
 "emotional",
-"poem",
 "representative",
 "Roman",
 "fascinating",
