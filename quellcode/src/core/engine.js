@@ -689,7 +689,7 @@ function vUnits(m,lv){
   m.append(h('p',{class:'muted small',style:'margin:10px 0 12px'},L.sub),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>unitLevel(u)===lv).map(unitCard)));
 }
 function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
-  const st=unitStatus(u);const ck=S.checks[u.id];const LS=u.lessons.filter(l=>!l.ab),AB=u.lessons.filter(l=>l.ab&&!l.freq),FQ=u.lessons.find(l=>l.freq);const ust=STORIES.filter(x=>x.after===u.id);
+  const st=unitStatus(u);const ck=S.checks[u.id];const LS=u.lessons.filter(l=>!l.ab),AB=u.lessons.filter(l=>l.ab&&!l.freq&&!l.plus),FQ=u.lessons.find(l=>l.freq),PL=u.lessons.filter(l=>l.plus);const ust=STORIES.filter(x=>x.after===u.id);
   m.append(h('div',{class:'row',style:'margin-bottom:4px'},h('button',{class:'btn ghost small',onclick:()=>goBack('units/'+unitLevel(u))},'← '+backLabel(T('Kurs'))),h('span',{class:'pill acc'},levelOf(u).title)),
     h('h1',{class:'uh1',style:'margin-bottom:4px'},''+UW+' '+u.n+' · '+u.title),
     h('div',{class:'seg two'},h('button',{class:tab!=='x'?'on':'',onclick:()=>go('unit/'+u.id)},h('b',{},T('Lektionen')),h('span',{},Math.round(lessonPct(u)*100)+'%')),
@@ -700,6 +700,8 @@ function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
         mtile('📄',T('Resumen'),T('Alles auf einen Blick'),()=>go('resumen/'+u.id)),mtile('🗂️',T('Wortschatz'),allUnitWords(u).length+T(' Wörter'),()=>go('words/'+u.id)),
         mtile('🎧',T('Shadowing'),T('Sätze nachsprechen'),()=>go('shadow/'+u.id)),
         FQ?mtile('📚',T('Häufige Wörter'),T('30 Alltagswörter'),()=>go('lesson/'+u.id+'/'+FQ.id),S.lessons[u.id+'.'+FQ.id]?.done?'✓':null):null,
+        /* freiwillige Zusatzlektionen (plus:true, ab:true): zählen nicht für Fortschritt/Tagesplan, z. B. „Vocabulario A1“ nach dem Plan Curricular */
+        ...PL.map(l=>mtile(l.icon||'📗',l.title,l.desc||'',()=>go('lesson/'+u.id+'/'+l.id),S.lessons[u.id+'.'+l.id]?.done?'✓':null)),
         u.situacion?mtile('💬',T('Gespräch'),u.situacion.title+(hasAI()?'':T(' · braucht KI')),()=>go('chat/'+u.id)):null,
         AB.length?mtile('📎',T('Übungsblätter'),AB.length+T(' aus deinem DHBW-Kurs'),()=>go('unit/'+u.id+'/ab')):null));return;}
   if(tab==='ab'){m.innerHTML='';m.append(backTo(''+UW+' '+u.n,'unit/'+u.id),h('h1',{},T('Übungsblätter')),h('p',{class:'sub'},T('Deine Arbeitsblätter aus dem DHBW-Kurs – freiwillig, zum Vertiefen.')),
