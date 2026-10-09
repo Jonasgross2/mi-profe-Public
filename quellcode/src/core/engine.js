@@ -498,13 +498,22 @@ const pic=(es,em)=>{if(em)return em;let k=String(es).toLowerCase().replace(/[¿?
   if(EMOJI[k])return EMOJI[k];k=k.replace(LANG.articles||/^(el|la|los|las|un|una)\s+/,'').trim();return EMOJI[k]||'';};
 const picEl=(es,em,cls)=>{const p=pic(es,em);return p?h('span',{class:cls||'pic','aria-hidden':'true'},p):null;};
 /* nächster Schritt: Einheiten, die laut Test sitzen, bekommen zuerst einen kurzen Check statt aller Lektionen */
-function nextLesson(){for(const u of COURSE.units){if(u.status==='soon'||S.checks[u.id]?.pass)continue;
-  if(S.placement&&unitStatus(u)==='sicher'&&lessonPct(u)<1&&!S.checks[u.id])return{u,check:true};
+/* Nächste Aufgabe im Kurs. Vorne = ab der am weitesten bearbeiteten Unidad (frontier): dort geht es der Reihe nach weiter.
+   Was in früheren Unidades noch offen ist (später ergänzte Lektionen, nicht gefestigte Runden, Abschlusstests), kommt in „Nachholen“ (catchUp),
+   damit man nie an den Anfang zurückgeschickt wird. Wer neu anfängt, merkt davon nichts (frontier = 0). */
+function nextIn(units,behind){for(const u of units){if(u.status==='soon')continue;const passed=!!S.checks[u.id]?.pass;
   const L=u.lessons.filter(l=>!l.ab);const K=l=>u.id+'.'+l.id;
+  if(passed){if(behind)for(const l of L)if(rnd(K(l))<1)return{u,l,n:1};continue;}
+  if(S.placement&&unitStatus(u)==='sicher'&&lessonPct(u)<1&&!S.checks[u.id])return{u,check:true};
   for(const l of L){const r=rnd(K(l));if(r<1)return{u,l,n:1};if(r<2)return{u,l,n:2};}
   for(const l of L)if(rnd(K(l))<3&&r3ready(K(l)))return{u,l,n:3};
-  if(L.every(l=>rnd(K(l))>=3)&&!S.checks[u.id]?.pass)return{u,test:true};}
+  if(L.every(l=>rnd(K(l))>=3)&&!passed)return{u,test:true};}
   return null;}
+function frontier(){let f=0;COURSE.units.forEach((u,i)=>{if(S.checks[u.id]||u.lessons.some(l=>!l.ab&&rnd(u.id+'.'+l.id)>=1))f=i;});return f;}
+function nextLesson(){return nextIn(COURSE.units.slice(frontier()),false);}
+function catchUp(){const B=COURSE.units.slice(0,frontier());const nx=nextIn(B,true);if(!nx)return null;
+  let n=0;B.forEach(u=>{if(u.status==='soon')return;const passed=!!S.checks[u.id]?.pass;u.lessons.filter(l=>!l.ab).forEach(l=>{const r=rnd(u.id+'.'+l.id);if(passed?r<1:r<3)n++;});});
+  return Object.assign(nx,{count:Math.max(1,n),ids:new Set(B.map(u=>u.id))});}
 const nxTitle=nx=>nx.check?''+UW+' '+nx.u.n+T(' · Abschlusstest'):nx.test?''+UW+' '+nx.u.n+T(' · Abschlusstest'):''+UW+' '+nx.u.n+' · '+nx.l.title+(nx.n>1?' · '+RN[nx.n]:'');
 const nxDesc=nx=>nx.check?T('Laut Test sitzt ')+nx.u.title+T(' – bestehst du den Abschlusstest, ist sie abgehakt.'):nx.test?T('Alle Lektionen gefestigt – zeig, dass du die ')+UW+T(' kannst (ab 80 % bestanden).'):nx.n===2?T('Runde 2 von 3: dieselben Inhalte, neu gemischt und mit Vokabelübungen.'):nx.n===3?T('Runde 3 von 3: nur selbst schreiben & hören – mit einem Tag Abstand.'):nx.l.desc;
 const nxRoute=nx=>nx.check||nx.test?'check/'+nx.u.id:nx.n>1?'round/'+nx.u.id+'/'+nx.l.id+'/'+nx.n:'lesson/'+nx.u.id+'/'+nx.l.id;
@@ -591,7 +600,7 @@ function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=fals
 
 /* ---------- views ---------- */
 /* Tagesplan: Bausteine mit id; welche täglich dazugehören, stellt man unter Mehr → Mein Tagesplan ein (S.plan, synchronisiert über planT) */
-const PLAN_DEF={vocab:true,lesson:true,mix:true,story:true,freq:false,shadow:false,mistakes:false};
+const PLAN_DEF={vocab:true,lesson:true,catchup:true,mix:true,story:true,freq:false,shadow:false,mistakes:false};
 const planOn=id=>Object.assign({},PLAN_DEF,S.plan||{})[id];
 const doneDay=k=>(S.day||{})[k]===today();
 function markDay(k){S.day=S.day||{};S.day[k]=today();save();}
@@ -600,6 +609,8 @@ function planItems(){const nx=nextLesson();const done=Object.values(S.lessons).f
   const all=[
     Object.keys(S.srs).length?{id:'vocab',ic:'🗂️',t:T('Vokabeln wiederholen'),d:vocabLeft()?T('Noch ')+vocabLeft()+T(' Karten bis zum Tagesziel (')+vocabGoal()+').':T('Tagesziel erreicht.'),r:'vocab',fn:vocabPick,b:T('Wiederholen →'),min:Math.max(2,Math.round(vocabLeft()/4)),done:!vocabLeft()}:null,
     nx||Object.values(S.lessons).some(x=>x.date===td)?{id:'lesson',ic:nx&&(nx.check||nx.test)?'🏆':'📚',t:nx?nxTitle(nx):T('Lektion'),d:nx?nxDesc(nx):T('Alles fertig!'),r:nx?nxRoute(nx):'units',b:nx&&(nx.check||nx.test)?T('Test starten →'):T('Los geht’s →'),min:10,done:Object.values(S.lessons).some(x=>x.date===td&&!x.freqL)}:null,
+    (()=>{const cu2=catchUp();if(!cu2)return null;return{id:'catchup',ic:'↩️',t:T('Nachholen: ')+nxTitle(cu2),d:fmt(T('{N} offene Lektionen in früheren {UNITS} – neu dazugekommen oder noch nicht gefestigt.')).replace('{N}',cu2.count).replace('{UNITS}',LANG.units),r:nxRoute(cu2),b:T('Los geht’s →'),min:10,
+      done:Object.entries(S.lessons).some(([k,v])=>v.date===td&&cu2.ids.has(k.split('.')[0]))};})(),
     done>=2?{id:'mix',ic:'🔀',t:T('Gemischte Wiederholung'),d:T('15 Aufgaben quer durch alles, was du schon gelernt hast.'),r:'mix',b:T('Starten →'),min:5,done:S.lastMix===td}:null,
     ns||storyToday?{id:'story',ic:'📖',t:ns&&!storyToday?T('Geschichte: ')+ns.title:T('Geschichte lesen'),d:T('Erst hören, dann lesen – ca. 5 Minuten.'),r:ns?'story/'+ns.id:'ref/s',b:T('Lesen →'),min:5,done:!!storyToday}:null,
     FQ?{id:'freq',ic:'📚',t:T('Häufige Wörter'),d:T('30 Alltagswörter · ')+UW+' '+cu.n,r:'lesson/'+cu.id+'/'+FQ.id,b:T('Üben →'),min:5,done:S.lessons[cu.id+'.'+FQ.id]?.date===td}:null,
@@ -1697,7 +1708,7 @@ const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/
   ['ki','🤖',T('KI-Lehrer'),T('Gemini für Texte & Gespräche'),['🤖 KI-Lehrer: Claude ist aktiv','🤖 KI über Einladung','🤖 Gemini (optional)']],
   ['sync','☁️',T('Sync & Backup'),T('Geräte abgleichen & sichern'),['☁️ Geräte verbinden','☁️ Geräte synchronisieren (GitHub)','💾 Fortschritt sichern']]];
 function vPlanSet(m){const P=Object.assign({},PLAN_DEF,S.plan||{});
-  const L=[['vocab','🗂️',T('Vokabeln wiederholen'),T('bis zum Tagesziel')],['lesson','📚',T('Nächste Lektion'),T('Lernen, Üben, Festigen, Tests')],['mix','🔀',T('Gemischte Wiederholung'),T('15 Aufgaben aus allem Gelernten')],
+  const L=[['vocab','🗂️',T('Vokabeln wiederholen'),T('bis zum Tagesziel')],['lesson','📚',T('Nächste Lektion'),T('Lernen, Üben, Festigen, Tests')],['catchup','↩️',T('Nachholen'),T('Offenes aus früheren Lektionen')],['mix','🔀',T('Gemischte Wiederholung'),T('15 Aufgaben aus allem Gelernten')],
     ['story','📖',T('Geschichte'),T('wenn eine neue freigeschaltet ist')],['freq','📚',T('Häufige Wörter'),T('der aktuellen ')+UW],['shadow','🎧',T('Aussprache'),T('7 Sätze Shadowing')],['mistakes','✏️',T('Fehler üben'),T('wenn es offene Fehler gibt')]];
   m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Mein Tagesplan')),h('p',{class:'sub'},T('Angehakt = jeden Tag im Plan auf der Startseite. Der Rest steht unter „Extras“. Reihenfolge: leicht → schwer.')),
     h('div',{class:'card planset'},L.map(([id,ic,t,d])=>{const cb=h('input',{type:'checkbox',checked:!!P[id]});

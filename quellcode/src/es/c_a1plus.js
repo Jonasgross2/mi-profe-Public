@@ -1,8 +1,8 @@
-/* Vocabulario A1 – freiwillige Zusatzlektionen (Extras-Kachel, plus:true + ab:true: zählen nicht für Fortschritt und Tagesplan).
+/* Vocabulario A1 – zusätzliche Pflichtlektionen am Ende der Unidad (für Lernende, die schon weiter sind, erscheinen sie unter „Nachholen“).
    Schließen die Lücken zur A1-Liste des Plan Curricular (Instituto Cervantes, „Nociones específicas A1“), passend zum Thema der Unidad.
    Abdeckung prüfen: python3 test/a1_check.py --kurs es --liste quellen/pcic_a1_es.json --bis u5 */
 (function(){
-function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(Object.assign({ab:true,plus:true,icon:'📗'},l));}
+function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(l);}
 P('u0',{id:'lx',title:'Vocabulario A1: en clase',desc:'Wörter für den Unterricht',steps:[
  {t:'vocab',title:'En clase',items:[['el ejercicio','die Übung'],['la actividad','die Aktivität / Aufgabe'],['la lección','die Lektion'],['la página','die Seite'],['la pregunta','die Frage'],['la respuesta','die Antwort'],['entender','verstehen'],['comprender','verstehen, begreifen'],['repetir','wiederholen'],['los deberes','die Hausaufgaben'],['en parejas','zu zweit'],['en grupos','in Gruppen'],['el diccionario','das Wörterbuch'],['el papel','das Papier'],['el bolígrafo','der Kugelschreiber'],['el lápiz','der Bleistift'],['la goma','der Radiergummi'],['la fotocopia','die Kopie'],['la pizarra','die Tafel']]},
  {t:'match',q:'Ordne zu.',pairs:[['el bolígrafo','der Kugelschreiber'],['la pizarra','die Tafel'],['los deberes','die Hausaufgaben'],['la pregunta','die Frage'],['repetir','wiederholen']]},

@@ -1449,11 +1449,11 @@ add('u8',{id:'ab1',title:'📎 Übungsblatt: ¿Cuándo quedamos?',desc:'Aus dein
 ]});
 })();
 ;
-/* Vocabulario A1 – freiwillige Zusatzlektionen (Extras-Kachel, plus:true + ab:true: zählen nicht für Fortschritt und Tagesplan).
+/* Vocabulario A1 – zusätzliche Pflichtlektionen am Ende der Unidad (für Lernende, die schon weiter sind, erscheinen sie unter „Nachholen“).
    Schließen die Lücken zur A1-Liste des Plan Curricular (Instituto Cervantes, „Nociones específicas A1“), passend zum Thema der Unidad.
    Abdeckung prüfen: python3 test/a1_check.py --kurs es --liste quellen/pcic_a1_es.json --bis u5 */
 (function(){
-function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(Object.assign({ab:true,plus:true,icon:'📗'},l));}
+function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(l);}
 P('u0',{id:'lx',title:'Vocabulario A1: en clase',desc:'Wörter für den Unterricht',steps:[
  {t:'vocab',title:'En clase',items:[['el ejercicio','die Übung'],['la actividad','die Aktivität / Aufgabe'],['la lección','die Lektion'],['la página','die Seite'],['la pregunta','die Frage'],['la respuesta','die Antwort'],['entender','verstehen'],['comprender','verstehen, begreifen'],['repetir','wiederholen'],['los deberes','die Hausaufgaben'],['en parejas','zu zweit'],['en grupos','in Gruppen'],['el diccionario','das Wörterbuch'],['el papel','das Papier'],['el bolígrafo','der Kugelschreiber'],['el lápiz','der Bleistift'],['la goma','der Radiergummi'],['la fotocopia','die Kopie'],['la pizarra','die Tafel']]},
  {t:'match',q:'Ordne zu.',pairs:[['el bolígrafo','der Kugelschreiber'],['la pizarra','die Tafel'],['los deberes','die Hausaufgaben'],['la pregunta','die Frage'],['repetir','wiederholen']]},
@@ -2125,11 +2125,11 @@ resumen:`<h3>Futur</h3><p class="es-t">trabajaré · trabajarás · trabajará �
 <h3>Höflich</h3><p class="es-t">Me gustaría … · ¿Podría …? · Deberías …</p>
 <h3>por / para</h3><table><tr><td class="es-t">para: Ziel, Empfänger, Frist</td><td class="es-t">por: Grund, durch, Tageszeit, Mittel</td></tr></table>`});
 ;
-/* Vocabulario A2 – freiwillige Zusatzlektionen (Extras-Kachel, plus:true + ab:true: zählen nicht für Fortschritt und Tagesplan).
+/* Vocabulario A2 – zusätzliche Pflichtlektionen am Ende der Unidad (für Lernende, die schon weiter sind, erscheinen sie unter „Nachholen“).
    Schließen die Lücken zur A2-Liste des Plan Curricular (Instituto Cervantes, „Nociones específicas A2“), passend zum Thema der Unidad.
    Abdeckung prüfen: python3 test/a1_check.py --kurs es --liste quellen/pcic_a2_es.json --bis u15 */
 (function(){
-function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(Object.assign({ab:true,plus:true,icon:'📘'},l));}
+function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(l);}
 P('u6',{id:'lx',title:'Vocabulario A2: viajes y ocio',desc:'Reisen, Unterkunft, Freizeit',steps:[
  {t:'vocab',title:'De viaje',items:[['hacer las maletas','die Koffer packen'],['la mochila','der Rucksack'],['el / la guía turístico/a','der Reiseführer / die Reiseführerin'],['la pensión completa','die Vollpension'],['la media pensión','die Halbpension'],['el piloto / la piloto','der Pilot / die Pilotin'],['el azafato / la azafata','der Flugbegleiter / die Flugbegleiterin'],['la moto','das Motorrad'],['el / la ciclista','der Radfahrer / die Radfahrerin'],['la isla','die Insel'],['el bosque','der Wald'],['el desierto','die Wüste'],['el castillo','die Burg, das Schloss'],['el palacio','der Palast'],['la estatua','die Statue']]},
  {t:'vocab',title:'Tiempo libre',items:[['la afición','das Hobby, die Leidenschaft'],['el parque de atracciones','der Freizeitpark'],['el zoo','der Zoo'],['la ópera','die Oper'],['el musical','das Musical'],['jugar a las cartas','Karten spielen'],['el ajedrez','das Schach']]},
@@ -2830,11 +2830,11 @@ resumen:`<h3>Gefühle</h3><p class="es-t">me alegra / me molesta / me preocupa /
 <h3>Bewertungen</h3><p class="es-t">es importante / necesario / mejor / una pena que + Subj. · es importante + Inf. (allgemein)</p><p>Tatsache: <span class="es-t">es verdad / obvio / está claro que + Ind.</span></p>
 <h3>Umwelt</h3><p class="es-t">el medio ambiente · el cambio climático · reciclar · ahorrar agua · la sequía · sostenible</p>`});
 ;
-/* Vocabulario B1 – freiwillige Zusatzlektionen (Extras-Kachel, plus:true + ab:true: zählen nicht für Fortschritt und Tagesplan).
+/* Vocabulario B1 – zusätzliche Pflichtlektionen am Ende der Unidad (für Lernende, die schon weiter sind, erscheinen sie unter „Nachholen“).
    Schließen die Lücken zur B1-Liste des Plan Curricular (Instituto Cervantes, „Nociones específicas B1“), passend zum Thema der Unidad.
    Abdeckung prüfen: python3 test/a1_check.py --kurs es --liste quellen/pcic_b1_es.json (lokal) */
 (function(){
-function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(Object.assign({ab:true,plus:true,icon:'📙'},l));}
+function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(l);}
 P('u16',{id:'lx',title:'Vocabulario B1: cuerpo, salud y deporte',desc:'Körper, Arzt & Klinik, Ernährung, Sport',steps:[
  {t:'vocab',title:'El cuerpo',items:[['el músculo','der Muskel'],['el hueso','der Knochen'],['el corazón','das Herz'],['el pulmón','die Lunge'],['la cintura','die Taille'],['la barriga','der Bauch'],['el tobillo','der Knöchel'],['el codo','der Ellbogen'],['la postura','die Haltung']]},
  {t:'vocab',title:'Médicos y tratamientos',items:[['la clínica','die Klinik'],['el / la dentista','der Zahnarzt / die Zahnärztin'],['el cirujano / la cirujana','der Chirurg / die Chirurgin'],['el psicólogo / la psicóloga','der Psychologe / die Psychologin'],['ingresar en el hospital','ins Krankenhaus eingeliefert werden'],['el análisis de sangre','die Blutuntersuchung'],['la vacuna','der Impfstoff'],['el antibiótico','das Antibiotikum'],['la aspirina','das Aspirin'],['el termómetro','das Fieberthermometer'],['la tirita','das Pflaster'],['curar','heilen'],['agotado / agotada','erschöpft']]},

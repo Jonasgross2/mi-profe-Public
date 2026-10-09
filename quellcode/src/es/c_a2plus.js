@@ -1,8 +1,8 @@
-/* Vocabulario A2 – freiwillige Zusatzlektionen (Extras-Kachel, plus:true + ab:true: zählen nicht für Fortschritt und Tagesplan).
+/* Vocabulario A2 – zusätzliche Pflichtlektionen am Ende der Unidad (für Lernende, die schon weiter sind, erscheinen sie unter „Nachholen“).
    Schließen die Lücken zur A2-Liste des Plan Curricular (Instituto Cervantes, „Nociones específicas A2“), passend zum Thema der Unidad.
    Abdeckung prüfen: python3 test/a1_check.py --kurs es --liste quellen/pcic_a2_es.json --bis u15 */
 (function(){
-function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(Object.assign({ab:true,plus:true,icon:'📘'},l));}
+function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(l);}
 P('u6',{id:'lx',title:'Vocabulario A2: viajes y ocio',desc:'Reisen, Unterkunft, Freizeit',steps:[
  {t:'vocab',title:'De viaje',items:[['hacer las maletas','die Koffer packen'],['la mochila','der Rucksack'],['el / la guía turístico/a','der Reiseführer / die Reiseführerin'],['la pensión completa','die Vollpension'],['la media pensión','die Halbpension'],['el piloto / la piloto','der Pilot / die Pilotin'],['el azafato / la azafata','der Flugbegleiter / die Flugbegleiterin'],['la moto','das Motorrad'],['el / la ciclista','der Radfahrer / die Radfahrerin'],['la isla','die Insel'],['el bosque','der Wald'],['el desierto','die Wüste'],['el castillo','die Burg, das Schloss'],['el palacio','der Palast'],['la estatua','die Statue']]},
  {t:'vocab',title:'Tiempo libre',items:[['la afición','das Hobby, die Leidenschaft'],['el parque de atracciones','der Freizeitpark'],['el zoo','der Zoo'],['la ópera','die Oper'],['el musical','das Musical'],['jugar a las cartas','Karten spielen'],['el ajedrez','das Schach']]},

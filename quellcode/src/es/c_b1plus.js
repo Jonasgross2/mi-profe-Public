@@ -1,8 +1,8 @@
-/* Vocabulario B1 – freiwillige Zusatzlektionen (Extras-Kachel, plus:true + ab:true: zählen nicht für Fortschritt und Tagesplan).
+/* Vocabulario B1 – zusätzliche Pflichtlektionen am Ende der Unidad (für Lernende, die schon weiter sind, erscheinen sie unter „Nachholen“).
    Schließen die Lücken zur B1-Liste des Plan Curricular (Instituto Cervantes, „Nociones específicas B1“), passend zum Thema der Unidad.
    Abdeckung prüfen: python3 test/a1_check.py --kurs es --liste quellen/pcic_b1_es.json (lokal) */
 (function(){
-function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(Object.assign({ab:true,plus:true,icon:'📙'},l));}
+function P(uid,l){var u=COURSE.units.filter(function(x){return x.id===uid;})[0];if(u)u.lessons.push(l);}
 P('u16',{id:'lx',title:'Vocabulario B1: cuerpo, salud y deporte',desc:'Körper, Arzt & Klinik, Ernährung, Sport',steps:[
  {t:'vocab',title:'El cuerpo',items:[['el músculo','der Muskel'],['el hueso','der Knochen'],['el corazón','das Herz'],['el pulmón','die Lunge'],['la cintura','die Taille'],['la barriga','der Bauch'],['el tobillo','der Knöchel'],['el codo','der Ellbogen'],['la postura','die Haltung']]},
  {t:'vocab',title:'Médicos y tratamientos',items:[['la clínica','die Klinik'],['el / la dentista','der Zahnarzt / die Zahnärztin'],['el cirujano / la cirujana','der Chirurg / die Chirurgin'],['el psicólogo / la psicóloga','der Psychologe / die Psychologin'],['ingresar en el hospital','ins Krankenhaus eingeliefert werden'],['el análisis de sangre','die Blutuntersuchung'],['la vacuna','der Impfstoff'],['el antibiótico','das Antibiotikum'],['la aspirina','das Aspirin'],['el termómetro','das Fieberthermometer'],['la tirita','das Pflaster'],['curar','heilen'],['agotado / agotada','erschöpft']]},
