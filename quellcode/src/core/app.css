@@ -411,3 +411,13 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .art{font-weight:700}.a-m{color:#2563eb}.a-f{color:#dc2626}.a-n{color:#16a34a}.a-p{color:#7c3aed}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .a-m{color:#60a5fa}:root:not([data-theme="light"]) .a-f{color:#f87171}:root:not([data-theme="light"]) .a-n{color:#4ade80}:root:not([data-theme="light"]) .a-p{color:#a78bfa}}
 :root[data-theme="dark"] .a-m{color:#60a5fa}:root[data-theme="dark"] .a-f{color:#f87171}:root[data-theme="dark"] .a-n{color:#4ade80}:root[data-theme="dark"] .a-p{color:#a78bfa}
+
+/* Kurs-Seite: Kopf mit Stufen-Reitern bleibt oben stehen, die Liste scrollt darunter („wird von der Leiste aufgegessen“);
+   .main bekommt dort kein Innenabstand oben (sonst klebt der Kopf je nach Browser zu tief), den Abstand hat der Kopf selbst */
+.main.stickhead{padding-top:0}
+.ustick{position:sticky;top:0;z-index:6;background:var(--bg);margin:0 -36px;padding:28px 36px 10px}
+.card.unit.mastered{opacity:.62}
+@media (min-width:1024px) and (max-height:900px){.ustick{padding-top:20px}}
+@media (max-width:1023px){.ustick{margin:0 -16px;padding:calc(20px + env(safe-area-inset-top,0px)) 16px 10px}}
+@media (min-width:701px) and (max-width:1023px){.ustick{margin-left:-32px;margin-right:-32px;padding-left:32px;padding-right:32px}}
+.vhiderow{text-align:center;margin-top:14px}.vhiderow .linkbtn{color:var(--muted);text-decoration:none;font-size:12.5px}
