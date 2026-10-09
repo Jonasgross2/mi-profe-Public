@@ -492,10 +492,12 @@ const LGROUPS=[...new Set(LEVELS.map(L=>L.label))];
 const lastPart={};
 function levelTabs(cur,base,cnt){const C=LEVELS.find(L=>L.id===cur)||LEVELS[0];const parts=LEVELS.filter(L=>L.label===C.label);lastPart[C.label]=C.id;
   const top=h('div',{class:'seg',style:'grid-template-columns:repeat('+LGROUPS.length+',1fr)'},LGROUPS.map(g=>{const Ls=LEVELS.filter(L=>L.label===g);
-    return h('button',{class:g===C.label?'on':'',onclick:()=>go(base+'/'+(lastPart[g]||Ls[0].id))},h('b',{},g),h('span',{},cnt(Ls)));}));
-  if(parts.length<2)return top;
-  return h('div',{},top,h('div',{class:'seg sub',style:'grid-template-columns:repeat('+parts.length+',1fr)'},parts.map((L,i)=>h('button',{class:L.id===cur?'on':'',onclick:()=>go(base+'/'+L.id)},h('b',{},T('Teil ')+(i+1)),h('span',{},cnt([L]))))));}
-const levelUnits=lv=>COURSE.units.filter(u=>unitLevel(u)===lv&&u.status!=='soon');
+    return h('button',{class:g===C.label?'on':'',onclick:()=>go(base+'/'+Ls[0].id)},h('b',{},g),h('span',{},cnt(Ls)));}));
+  return top;}/* Teil 1 / Teil 2 einer Stufe stehen untereinander in einer Liste (Zwischenüberschriften), keine eigenen Reiter mehr */
+/* gehören zwei Stufen-Kennungen zur selben GER-Stufe (A2a/A2b → A2)? */
+const sameLv=(a,b)=>{const la=LEVELS.find(L=>L.id===a),lb=LEVELS.find(L=>L.id===b);return !!(la&&lb&&la.label===lb.label);};
+const lvFirst=id=>{const L=LEVELS.find(x=>x.id===id);return L?LEVELS.find(x=>x.label===L.label).id:id;};
+const levelUnits=lv=>COURSE.units.filter(u=>sameLv(unitLevel(u),lv)&&u.status!=='soon');
 /* Bild (Emoji) zu einem Wort: ausdrücklich angegeben, sonst aus LANG.emoji (EMOJI), notfalls ohne Artikel (LANG.articles) */
 const pic=(es,em)=>{if(em)return em;let k=String(es).toLowerCase().replace(/[¿?¡!]/g,'').replace(/\(.*?\)/g,'').split(' / ')[0].replace(/\s*….*$/,'').trim();
   if(EMOJI[k])return EMOJI[k];k=k.replace(LANG.articles||/^(el|la|los|las|un|una)\s+/,'').trim();return EMOJI[k]||'';};
@@ -692,7 +694,7 @@ function unitCard(u){const st=unitStatus(u);const pct=lessonPct(u);const soon=u.
       h('span',{class:'muted small upct'},soon?'':Math.round(pct*100)+'%')));}
 let lastLv=null;/* zuletzt angesehene Stufe – beim Zurückkommen auf „Kurs“ wieder dort, beim App-Start dort, wo es weitergeht */
 function vUnits(m,lv){
-  const cur=nextLesson();lv=LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):'A1');lastLv=lv;
+  const cur=nextLesson();lv=lvFirst(LEVELS.find(L=>L.id===lv)?lv:lastLv||(cur?unitLevel(cur.u):'A1'));lastLv=lv;
   const pctOf=Ls=>{const us=COURSE.units.filter(u=>Ls.some(L=>L.id===unitLevel(u))&&u.status!=='soon');return Math.round((us.length?us.reduce((a,u)=>a+lessonPct(u),0)/us.length:0)*100)+'%';};
   /* Kopf (Titel + Stufen-Reiter) bleibt oben stehen, die Unidades scrollen darunter durch */
   const head=h('div',{class:'ustick'},h('div',{class:'row'},h('h1',{style:'margin:0;flex:1'},T('Kurs')),h('button',{class:'btn small',onclick:()=>go('placement')},T('🎯 Test')),h('button',{class:'btn small',onclick:()=>go('ref/g')},T('📄 Grammatik'))),
@@ -701,8 +703,10 @@ function vUnits(m,lv){
   /* einmaliger Hinweis: die Kurs-Geschichte ist eine Rolle (Steckbrief LANG.roleNote) */
   if(LANG.roleNote&&!S.settings.roleSeen)m.append(h('div',{class:'card',style:'padding:6px 6px 6px 12px;margin:10px 0 0;display:flex;gap:8px;align-items:center'},h('span',{},'🎭'),h('span',{style:'flex:1;font-size:12.5px;line-height:1.35'},T(LANG.roleNote)),
     h('button',{class:'btn ghost small',style:'flex:none',title:T('Ausblenden'),onclick:e=>{S.settings.roleSeen=1;save();e.currentTarget.parentNode.remove();}},'×')));
-  const L=LEVELS.find(x=>x.id===lv);const us=COURSE.units.filter(u=>unitLevel(u)===lv);
-  m.append(h('p',{class:'muted small',style:'margin:10px 0 12px'},L.sub),h('div',{class:'grid',style:'gap:8px'},us.map(unitCard)));
+  const parts=LEVELS.filter(x=>sameLv(x.id,lv));const us=COURSE.units.filter(u=>sameLv(unitLevel(u),lv));
+  parts.forEach(L=>{const pu=us.filter(u=>unitLevel(u)===L.id);if(!pu.length)return;
+    if(parts.length>1)m.append(h('div',{class:'kind',style:'margin:14px 0 2px'},L.title));
+    m.append(h('p',{class:'muted small',style:'margin:'+(parts.length>1?'0':'10px')+' 0 10px'},L.sub),h('div',{class:'grid',style:'gap:8px'},pu.map(unitCard)));});
   /* beim Öffnen direkt zur ersten noch nicht gemeisterten Unidad der Stufe springen (Fertiges liegt darüber, leicht ausgegraut, erreichbar durch Hochscrollen;
      bei kurzen Listen nur so weit, wie es geht);
      beim Zurückkehren gilt die gemerkte Scroll-Stelle */
@@ -716,8 +720,9 @@ function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
   const st=unitStatus(u);const ck=S.checks[u.id];const LS=u.lessons.filter(l=>!l.ab),AB=u.lessons.filter(l=>l.ab&&!l.freq&&!l.plus),FQ=u.lessons.find(l=>l.freq),PL=u.lessons.filter(l=>l.plus);const ust=STORIES.filter(x=>x.after===u.id);
   m.append(h('div',{class:'row',style:'margin-bottom:4px'},h('button',{class:'btn ghost small',onclick:()=>goBack('units/'+unitLevel(u))},'← '+backLabel(T('Kurs'))),h('span',{class:'pill acc'},levelOf(u).title)),
     h('h1',{class:'uh1',style:'margin-bottom:4px'},''+UW+' '+u.n+' · '+u.title),
-    h('div',{class:'seg two'},h('button',{class:tab!=='x'?'on':'',onclick:()=>go('unit/'+u.id)},h('b',{},T('Lektionen')),h('span',{},Math.round(lessonPct(u)*100)+'%')),
-      h('button',{class:tab==='x'?'on':'',onclick:()=>go('unit/'+u.id+'/x')},h('b',{},T('Extras')),h('span',{},(ust.length?T('Geschichte · '):'')+T('Wörter · Sprechen')))));
+    h('div',{class:'stick'},h('div',{class:'seg two',style:'margin-top:0'},h('button',{class:tab!=='x'?'on':'',onclick:()=>go('unit/'+u.id)},h('b',{},T('Lektionen')),h('span',{},Math.round(lessonPct(u)*100)+'%')),
+      h('button',{class:tab==='x'?'on':'',onclick:()=>go('unit/'+u.id+'/x')},h('b',{},T('Extras')),h('span',{},(ust.length?T('Geschichte · '):'')+T('Wörter · Sprechen'))))));
+  stickMain(m,'stickpage');
   if(tab==='x'){
     m.append(h('p',{class:'muted small xgoals',style:'margin:12px 0 0'},T('Das lernst du: ')+u.goals.join(' · ')),
       tiles(...ust.map(x=>mtile('📖',T('Geschichte'),x.title,()=>go('story/'+x.id),S.stories?.[x.id]?'✓':T('neu'))),
@@ -901,15 +906,16 @@ function play(m,cfg){
   const top=h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:async()=>{if(cfg.pk&&pos>0){toast(T('Gespeichert – später geht es hier weiter.'));return cfg.onBack();}
     if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pcount'}));
   const stage=h('div',{class:'step'});
-  m.append(h('div',{class:'player'},h('div',{class:'muted small',style:'margin-bottom:6px'},cfg.title),
-    top,stage));
+  /* Leiste (✕, Fortschritt, ↶) klebt oben, „Prüfen/Weiter“ unten (außer bei Lesetexten) – .main.stickplay */
+  stickMain(m,'stickplay');
+  m.append(h('div',{class:'player'},top,h('div',{class:'muted small ptitle'},cfg.title),stage));
   if(sv)setTimeout(()=>toast(T('Weiter, wo du aufgehört hast')+' · '+(pos+1)+' / '+queue.length),300);
   function upd(){$('.ptop .bar i').style.width=Math.round(100*pos/queue.length)+'%';$('#pcount').textContent=Math.min(pos+1,queue.length)+' / '+queue.length;}
   function next(){pos++;if(pos>=queue.length)return finish();show();}
   function show(){if(cfg.pk){hist.push({pos,queue:queue.slice(),ft:new Map(firstTry),rt:[...retried].map(x=>queue.indexOf(x)),mis:cp(S.mistakes),stats:cp(S.stats),streak:cp(S.streak)});if(hist.length>30)hist.shift();undoB.classList.toggle('hide',hist.length<2);}
     upd();if(!queue[pos])return finish();/* leere Aufgabenliste (z. B. Runde 3 einer Lese-Lektion) */stage.innerHTML='';stage.className='step';void stage.offsetWidth;stage.className='step';
     if(cfg.pk&&pos>0)pauseSet(cfg.pk,{route:curRoute(),title:cfg.title,steps:queue,pos,ft:[...firstTry],rt:[...retried].map(x=>queue.indexOf(x)),g:gradeable,n:queue.length});
-    const it=queue[pos];const isRetry=retried.has(it)&&firstTry.has(it.ref);
+    const it=queue[pos];stage.setAttribute('data-t',(it.s||it).t||'');const isRetry=retried.has(it)&&firstTry.has(it.ref);
     if(isRetry)stage.append(h('div',{class:'pill acc',style:'margin-bottom:10px'},T('↻ Noch mal – das war vorhin falsch')));
     /* Verständnisfrage ohne ihren Text (Fehlerheft, Mix): Text zum Aufklappen dazu */
     if(cfg.mistakeMode||cfg.pk==='mix'){const cx=ctxOf(it.ref);if(cx)stage.append(ctxBox(cx));}
@@ -947,6 +953,8 @@ let lastInput=null;document.addEventListener('focusin',e=>{if(e.target.matches&&
 const isField=t=>t&&t.matches&&t.matches('input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select');
 document.addEventListener('focusin',e=>{if(isField(e.target))document.body.classList.add('typing');});
 document.addEventListener('focusout',e=>{if(isField(e.target))setTimeout(()=>{if(!isField(document.activeElement))document.body.classList.remove('typing');},50);});
+/* feste Leisten: Hauptbereich ohne Innenabstand oben (sonst klebt die Leiste je nach Browser zu tief), den Abstand übernimmt das CSS */
+function stickMain(m,cls){const mm=m&&m.closest?m.closest('.main')||m:m;if(mm&&mm.classList)mm.classList.add(cls);}
 function actionBar(onCheck,ctx,opts={}){
   const btn=h('button',{class:'btn primary'},opts.label||T('Prüfen'));const bar=h('div',{class:'actions'},opts.extra||null,btn);
   let state='check';
@@ -1248,17 +1256,18 @@ function vMix(m){const steps=mixSteps(15);
 const storyFor=st=>unitById(st.after);
 const storyOpen=st=>{const u=storyFor(st);return !u||lessonPct(u)>0||S.checks[u.id]?.pass||(unitStatus(u)&&unitStatus(u)!==T('neu'));};
 function nextStory(){return STORIES.find(st=>storyOpen(st)&&!S.stories?.[st.id]);}
-const levelSeg=(cur,base,cnt)=>h('div',{style:'margin:4px 0 12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,'')));
+const levelSeg=(cur,base,cnt)=>h('div',{class:'stick',style:'margin-top:4px;margin-bottom:12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,'')));
 const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):'A1';};
-function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
+function vRef(m,tab,lv){lv=lvFirst(LEVELS.find(L=>L.id===lv)?lv:curLevel());
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
       tiles(STORIES.length?mtile('📖',T('Geschichten'),LANG.storySeries?T('Serie „')+LANG.storySeries+'“':T('Zum Hören & Lesen'),()=>go('ref/s'),nNew?nNew+T(' neu'):null):null,mtile('🔎',T('Wörterbuch'),T('Alle Wörter suchen'),()=>go('ref/w')),
         mtile('📄',T('Grammatik'),T('Alle Zusammenfassungen'),()=>go('ref/g')),LANG.conjugate?mtile('🔁',T('Verben'),T('Konjugations-Trainer'),()=>go('verbs')):null,NUMS?mtile('🔢',T('Zahlen & Uhrzeit'),T('Jedes Mal neue Werte'),()=>go('num')):null,(window.READINGS||[]).length?mtile('📰',T('Lesetexte'),T('C1 & C2 · ')+(window.READINGS||[]).length+T(' Texte'),()=>go('ref/r')):null));return;}
+  stickMain(m,'stickpage');
   m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik'),r:T('Lesetexte')}[tab]||T('Bibliothek')));
   if(tab==='s'){const S2=S.stories||{};
     m.append(h('p',{class:'sub'},(LANG.storySeries?'„'+LANG.storySeries+'“ – ':'')+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik bis zur angegebenen ')+UW+T('. Tipp: erst nur hören, dann lesen.')));
-    m.append(levelSeg(lv,'ref/s',L=>STORIES.filter(st=>unitLevel(storyFor(st))===L.id).length+T(' Gesch.')),h('div',{class:'grid',style:'gap:8px'},STORIES.filter(st=>unitLevel(storyFor(st))===lv).map(st=>{const done=S2[st.id];const open=storyOpen(st);
+    m.append(levelSeg(lv,'ref/s',L=>STORIES.filter(st=>unitLevel(storyFor(st))===L.id).length+T(' Gesch.')),h('div',{class:'grid',style:'gap:8px'},STORIES.filter(st=>sameLv(unitLevel(storyFor(st)),lv)).map(st=>{const done=S2[st.id];const open=storyOpen(st);
         return h('div',{class:'lesson'+(done?' done':''),onclick:()=>go('story/'+st.id)},h('div',{class:'ic'},done?'✓':'📖'),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},st.title),h('div',{class:'ld'},st.sub+T(' · ab ')+UW+' '+storyFor(st).n)),
           done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
   if(tab==='r'){const D=S.readings||{};const L=lv==='C2'?'C2':'C1';const R=(window.READINGS||[]).filter(r=>r.level===L);
@@ -1267,7 +1276,7 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
       h('div',{class:'grid',style:'gap:8px;margin-top:12px'},R.map(r=>{const u=unitById(r.after);const done=D[r.id];const open=!u||lessonPct(u)>0||S.checks[u.id]?.pass||(unitStatus(u)&&unitStatus(u)!==T('neu'));
         return h('div',{class:'lesson'+(done?' done':''),onclick:()=>go('reading/'+r.id)},h('div',{class:'ic'},done?'✓':r.level),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},r.title),h('div',{class:'ld'},T(r.kind)+(u?T(' · ab ')+UW+' '+u.n:''))),
           done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
-  if(tab==='g'){m.append(levelSeg(lv,'ref/g',L=>COURSE.units.filter(u=>unitLevel(u)===L.id).length+T(' Unid.')),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>unitLevel(u)===lv&&u.resumen).map(u=>
+  if(tab==='g'){m.append(levelSeg(lv,'ref/g',L=>COURSE.units.filter(u=>unitLevel(u)===L.id).length+T(' Unid.')),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>sameLv(unitLevel(u),lv)&&u.resumen).map(u=>
       h('div',{class:'lesson lrow',onclick:()=>go('resumen/'+u.id)},h('div',{class:'ic'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},u.title),h('div',{class:'ld'},u.goals.join(' · ')))))));return;}
   const all=[];const seen=new Set();for(const u of COURSE.units)for(const w of allUnitWords(u))if(!seen.has(w[0])){seen.add(w[0]);all.push([w,u]);}
   let mine=!!S.settings.dictMine;
@@ -1275,8 +1284,8 @@ function vRef(m,tab,lv){lv=LEVELS.find(L=>L.id===lv)?lv:curLevel();
   const tog=h('button',{class:'chip'+(mine?' on':''),onclick:()=>{mine=!mine;S.settings.dictMine=mine;save(true);tog.classList.toggle('on',mine);draw();}},h('span',{},'⭐'),h('span',{},T('Nur meine Wörter')));
   const info=h('div',{class:'muted small',style:'margin:8px 0'});const out=h('div',{class:'vlist'});
   const draw=()=>{const q=strip(inp.value.toLowerCase().trim());out.innerHTML='';
-    const hits=all.filter(([w,u])=>(q?strip((w[0]+' '+w[1]).toLowerCase()).includes(q):unitLevel(u)===lv)&&(!mine||S.srs[w[0]]));
-    info.textContent=(q?hits.length+T(' Treffer in allen Stufen'):hits.length+T(' Wörter in ')+LEVELS.find(L=>L.id===lv).title)+(mine?T(' · nur gesammelte'):'');
+    const hits=all.filter(([w,u])=>(q?strip((w[0]+' '+w[1]).toLowerCase()).includes(q):sameLv(unitLevel(u),lv))&&(!mine||S.srs[w[0]]));
+    info.textContent=(q?hits.length+T(' Treffer in allen Stufen'):hits.length+T(' Wörter in ')+LEVELS.find(L=>L.id===lv).label)+(mine?T(' · nur gesammelte'):'');
     out.append(...hits.slice(0,300).map(([w,u])=>h('div',{class:'vrow drow'},spk(w[0]),picEl(w[0],w[2])||h('span',{class:'pic'}),h('div',{class:'dw'},h('div',{class:'es'},artW(w[0])),h('div',{class:'de'},w[1])),h('span',{class:'pill'},'U'+u.n))));
     if(!hits.length)out.append(h('p',{class:'muted'},mine?T('Noch keine gesammelten Wörter hier – sie kommen mit den Lektionen.'):T('Nichts gefunden.')));};
   inp.oninput=draw;
@@ -1473,6 +1482,7 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
   const stage=h('div',{class:'step'});
   /* Wort ganz aus dem Vokabelheft nehmen (nur Kurswörter): kommt nicht mehr dran, steht unter Vokabeln → Ausgeblendet */
   const hideB=h('button',{class:'linkbtn vhide',onclick:()=>{const c=q[i];const k=c&&S.srs[vkey(c.es)];if(!k)return;snap(c);setHidden(k,true);toast(T('Ausgeblendet – unter Vokabeln → Ausgeblendet kannst du es zurückholen.'));nxt();}},'🙈 '+T('Wort ausblenden'));
+  stickMain(m,'stickplay');
   m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>{if(opt.pk&&i>0&&i<q.length)toast(T('Gespeichert – später geht es hier weiter.'));go(from);}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'})),stage,h('div',{class:'vhiderow'},hideB)));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;undoB.classList.toggle('hide',!hist.length);}
   const failed=new Set(rs&&rs.failed||[]);
