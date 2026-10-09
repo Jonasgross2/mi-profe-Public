@@ -82,7 +82,6 @@ EN = [
 "deny",
 "leak",
 "official source",
-"exercise",
 "consequence",
 "audience, hearing",
 "jewel",

@@ -84,7 +84,6 @@ EN = [
 "defeat, win",
 "gentle, mild",
 "wild, brave; bravo!",
-"factory",
 "border",
 "betray",
 "take revenge",

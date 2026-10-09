@@ -20,7 +20,6 @@ EN = [
 "the delay",
 "to cancel",
 "to miss the flight",
-"the return ticket",
 "the accommodation",
 "the youth hostel",
 "“I missed the flight.”",

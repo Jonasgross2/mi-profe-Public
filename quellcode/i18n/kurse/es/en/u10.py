@@ -88,7 +88,6 @@ EN = [
 "look, glance",
 "commander",
 "sitting, seated",
-"south",
 "missing, disappeared",
 "cause",
 "skin, fur",

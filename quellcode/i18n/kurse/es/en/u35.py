@@ -101,7 +101,6 @@ EN = [
 "put to bed",
 "turn to, go to",
 "copy, imitate",
-"hamburger",
 "device",
 "passenger",
 "furious",

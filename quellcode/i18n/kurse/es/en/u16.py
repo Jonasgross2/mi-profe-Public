@@ -76,7 +76,6 @@ EN = [
 "fall down",
 "hide",
 "vary, change",
-"road, highway",
 "find out, learn",
 "engine, motor",
 "prosecutor",

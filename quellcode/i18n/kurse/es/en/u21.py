@@ -91,7 +91,6 @@ EN = [
 "world, worldwide",
 "deliver, hand over",
 "protection",
-"copy",
 "revenge",
 "bet",
 "slow",

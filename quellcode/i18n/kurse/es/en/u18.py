@@ -74,7 +74,6 @@ EN = [
 "high season",
 "brochure",
 "tourist office",
-"postcard",
 "try the local food",
 "get up early",
 "sunset",

@@ -88,7 +88,6 @@ EN = [
 "pound",
 "salad",
 "collection",
-"beard",
 "request, application",
 "go mad",
 "courage, bravery",

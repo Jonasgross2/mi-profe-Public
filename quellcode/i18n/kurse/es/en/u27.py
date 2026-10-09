@@ -77,7 +77,6 @@ EN = [
 "trade union",
 "profile",
 "work experience",
-"be unemployed",
 "available",
 "contact",
 "circumstance, fact",

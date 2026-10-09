@@ -82,7 +82,6 @@ EN = [
 "believing, religious",
 "atheist",
 "secular",
-"church",
 "mosque",
 "synagogue",
 "pilgrim",

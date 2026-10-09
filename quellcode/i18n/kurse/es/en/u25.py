@@ -53,7 +53,6 @@ EN = [
 "feelings & judgements + subjunctive, opinion",
 "Nature, extreme weather, sustainability",
 "forest",
-"river",
 "coast",
 "heatwave",
 "forest fire",

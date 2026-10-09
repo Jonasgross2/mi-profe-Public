@@ -26,7 +26,6 @@ EN = [
 "half a kilo",
 "a hundred grams",
 "a litre",
-"a dozen eggs",
 "a tablespoon",
 "a pinch of salt",
 "a little",

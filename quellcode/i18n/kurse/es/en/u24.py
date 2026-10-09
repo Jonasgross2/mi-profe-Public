@@ -55,7 +55,6 @@ EN = [
 "viewing",
 "requirement",
 "responsible",
-"sociable",
 "clean",
 "untidy",
 "punctual",

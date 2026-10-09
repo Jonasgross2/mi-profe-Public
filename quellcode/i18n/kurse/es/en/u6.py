@@ -20,7 +20,6 @@ EN = [
 "to go out with friends",
 "to read a book",
 "to go on a trip",
-"the mountains",
 "nature",
 "to love (something)",
 "hardly ever",
