@@ -140,3 +140,5 @@ W('u41','Präzise Verben & Nuancen','Synonyme für C2: genauer sagen, was man me
 ['vislumbrar','erahnen'],['entrever','durchblicken lassen'],['aducir','anführen (Gründe)'],['esgrimir','ins Feld führen (Argument)'],['recalcar','betonen'],['abogar por','sich einsetzen für'],['desdeñar','verschmähen'],['menospreciar','geringschätzen'],['ensalzar','preisen'],['enaltecer','verherrlichen'],
 ['ostensible','offensichtlich'],['fehaciente','glaubwürdig, beweiskräftig'],['ineludible','unumgänglich'],['exhaustivo','erschöpfend'],['somero','oberflächlich, knapp'],['ambiguo','mehrdeutig'],['tácito','stillschweigend'],['pertinente','angebracht, relevant'],['ecuánime','ausgeglichen, unparteiisch'],['perspicaz','scharfsinnig']]);
 }
+/* DELE-Übungstests (id 'lz', aus c_a1plus/c_a2plus/c_b1plus/c_b2plus) immer als letzte Lektion der Unidad – auch nach „Wortschatz: …“ */
+COURSE.units.forEach(function(u){var i=u.lessons.map(function(l){return l.id;}).indexOf('lz');if(i>=0)u.lessons.push(u.lessons.splice(i,1)[0]);});
