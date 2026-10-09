@@ -443,3 +443,4 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .hidcard{padding:14px 16px}.hidlist{display:flex;flex-direction:column}
 .hidrow{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
 .hidrow .hw{min-width:0}.hidrow .es{font-weight:600}.hidrow .muted{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mrow.hid .mq{opacity:.55}.hidg{margin:12px 0 2px}.hidlist .hidg:first-child{margin-top:4px}
