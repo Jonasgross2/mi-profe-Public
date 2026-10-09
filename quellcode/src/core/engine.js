@@ -1362,7 +1362,9 @@ function vVocabStats(m,all,src){const td=today();m.append(backTo(T('Vokabeln'),'
     h('p',{class:'muted small',style:'margin:4px 2px 12px'},T('Abstand: lernend < 7 Tage · gefestigt 7–20 · sicher ≥ 21')),
     Object.keys(log).length?bars(hist,T('Wiederholt – letzte 14 Tage'),T('Ø ')+Math.round(hist.reduce((a,r)=>a+r.v,0)/14)+T(' pro Tag')):null,
     hard.length?h('div',{class:'card statcard'},h('div',{class:'kind',style:'margin:0 0 6px'},T('Schwierigste Wörter')),
-      h('div',{class:'hardlist'},hard.map(c=>h('div',{class:'hardrow'},spk(c.es),h('span',{class:'es'},artW(c.es)),h('span',{class:'muted small'},trc(c.de)),h('span',{class:'pill warn'},(c.ag||0)>=(c.lapses||0)?c.ag+'× '+T('Nochmal'):c.lapses+'× '+T('zurückgefallen')))))):null);}
+      h('div',{class:'hardlist'},hard.map(c=>h('div',{class:'hardrow'},spk(c.es),h('span',{class:'es'},artW(c.es)),h('span',{class:'muted small'},trc(c.de)),h('span',{class:'pill warn'},(c.ag||0)>=(c.lapses||0)?c.ag+'× '+T('Nochmal'):c.lapses+'× '+T('zurückgefallen')))))):null);
+  /* ausgeblendete Wörter: eigener Knopf am Ende der Statistik */
+  if(src!=='mine'){const nh=hiddenCards().length;m.append(h('button',{class:'btn',style:'width:100%;margin-top:12px',onclick:()=>go('vocab/hidden')},'🙈 '+T('Ausgeblendete Wörter')+' ('+nh+')'));}}
 function newListId(){return 'l'+Date.now().toString(36);}
 /* eigene Wörter üben: zufällige Auswahl (max. 20), pro Wort zufällig Karte (beide Richtungen), Tippen oder Hören – ohne Einfluss auf die Wiederholungsplanung */
 /* Auswahl gewichtet: oft falsch, zuletzt falsch, lange nicht oder nie geübt → häufiger dran (gewichtete Zufallsauswahl) */
@@ -1466,14 +1468,17 @@ function vVocab(m,sub,lid){if(sub==='mine')return lid?vMyList(m,lid):vMyLists(m)
         h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('⚙ Ziel ändern'))),pick);})():null));
   m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter einer ')+UW+T(' üben'),()=>go('vocab/units')),mtile('📊',T('Statistik'),total?T('Morgen fällig: ')+all.filter(c=>c.due===addDays(today(),1)).length:T('Noch keine Karten'),()=>go('vocab/stats')),
     mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✍️',T('Meine Wörter'),myLists().length?srsCards().filter(c=>String(c.unit).startsWith(MY)).length+T(' eigene Wörter'):T('Eigene Listen anlegen'),()=>go('vocab/mine'))));
-  const nh=hiddenCards().length;if(nh)m.append(h('p',{class:'small',style:'margin:12px 0 0;text-align:center'},h('button',{class:'linkbtn',style:'color:var(--muted)',onclick:()=>go('vocab/hidden')},'🙈 '+nh+' '+(nh===1?T('ausgeblendetes Wort'):T('ausgeblendete Wörter')))));
 }
 function vVocabHidden(m){const hs=hiddenCards().sort((a,b)=>(b.t||0)-(a.t||0));
-  m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Ausgeblendete Wörter')),h('p',{class:'sub'},T('Diese Wörter kommen nicht mehr in der Wiederholung dran. Mit ↩ holst du sie zurück – dein Lernstand bleibt erhalten.')));
-  if(!hs.length){m.append(h('div',{class:'card'},T('Keine ausgeblendeten Wörter.')));return;}
-  m.append(h('div',{class:'row',style:'justify-content:flex-end;margin-bottom:8px'},h('button',{class:'btn small',onclick:()=>{hs.forEach(c=>setHidden(c,false));toast(T('Alle Wörter sind wieder im Vokabelheft.'));go('vocab');}},T('↩ Alle zurückholen'))),
-    h('div',{class:'hardlist'},hs.map(c=>h('div',{class:'hardrow'},spk(c.es),h('span',{class:'es'},artW(c.es)),h('span',{class:'muted small'},trc(c.de)),
-      h('button',{class:'btn ghost small',title:T('Zurückholen'),onclick:e=>{setHidden(c,false);e.currentTarget.parentNode.remove();toast(T('Wieder im Vokabelheft.'));if(!hiddenCards().length)go('vocab');}},'↩')))));}
+  m.append(backTo(T('Statistik'),'vocab/stats'),h('h1',{},T('Ausgeblendete Wörter')),h('p',{class:'sub'},T('Diese Wörter kommen nicht mehr in der Wiederholung dran. Holst du eins zurück, bleibt dein Lernstand erhalten.')));
+  if(!hs.length){m.append(h('div',{class:'card',style:'text-align:center'},h('div',{style:'font-size:28px'},'🙈'),h('p',{class:'muted',style:'margin:6px 0 0'},T('Keine ausgeblendeten Wörter.'))));return;}
+  const cnt=h('span',{class:'kind',style:'margin:0'},hs.length+' '+(hs.length===1?T('Wort'):T('Wörter')));
+  const list=h('div',{class:'hidlist'},hs.map(c=>h('div',{class:'hidrow'},spk(c.es),h('div',{class:'hw'},h('div',{class:'es'},artW(c.es)),h('div',{class:'muted small'},trc(c.de))),
+    h('button',{class:'btn small',onclick:e=>{setHidden(c,false);e.currentTarget.closest('.hidrow').remove();toast(T('Wieder im Vokabelheft.'));const n=hiddenCards().length;
+      if(!n)return goBack('vocab/stats');cnt.textContent=n+' '+(n===1?T('Wort'):T('Wörter'));}},'↩ '+T('Zurückholen')))));
+  m.append(h('div',{class:'card hidcard'},h('div',{class:'row',style:'justify-content:space-between;margin-bottom:6px'},cnt,
+    h('button',{class:'btn ghost small',onclick:async()=>{const all=hiddenCards();if(!await askConfirm(fmt(T('Alle {N} ausgeblendeten Wörter zurück ins Vokabelheft holen?')).replace('{N}',all.length),T('Alle zurückholen')))return;
+      all.forEach(c=>setHidden(c,false));toast(T('Alle Wörter sind wieder im Vokabelheft.'));goBack('vocab/stats');}},'↩ '+T('Alle zurückholen'))),list));}
 function startCram(items,u){addVocab(items,u.id);runVocab(shuffle(items.map(([es,de,em])=>({es,de,em}))).slice(0,20),'type',false);}
 /* opt: {again:()=>…} = „Noch eine Runde“ statt Tagesplan (eigene Listen). Zurück (✕ und Ende) = Seite, von der die Runde gestartet wurde. */
 function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fromL=navLabel(from)||T('Vokabeln');const m=shell();let q=cards.slice();let i=0,okc=0;const seen=new Set();
@@ -1481,7 +1486,9 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
   const undoB=h('button',{class:'btn ghost undo hide',title:T('Rückgängig'),onclick:()=>undo()},'↶ '+T('zurück'));
   const stage=h('div',{class:'step'});
   /* Wort ganz aus dem Vokabelheft nehmen (nur Kurswörter): kommt nicht mehr dran, steht unter Vokabeln → Ausgeblendet */
-  const hideB=h('button',{class:'linkbtn vhide',onclick:()=>{const c=q[i];const k=c&&S.srs[vkey(c.es)];if(!k)return;snap(c);setHidden(k,true);toast(T('Ausgeblendet – unter Vokabeln → Ausgeblendet kannst du es zurückholen.'));nxt();}},'🙈 '+T('Wort ausblenden'));
+  const hideB=h('button',{class:'linkbtn vhide',onclick:async()=>{const c=q[i];const k=c&&S.srs[vkey(c.es)];if(!k)return;const at=i;
+    if(!await askConfirm(T('„{W}“ wirklich ausblenden? Das Wort kommt dann nicht mehr in der Wiederholung dran. Zurückholen kannst du es unter Vokabeln → Statistik.').replace('{W}',c.es),T('Ausblenden'))||i!==at)return;
+    snap(c);setHidden(k,true);toast(T('Ausgeblendet – mit ↶ zurück machst du es rückgängig.'));nxt();}},'🙈 '+T('Wort ausblenden'));
   stickMain(m,'stickplay');
   m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>{if(opt.pk&&i>0&&i<q.length)toast(T('Gespeichert – später geht es hier weiter.'));go(from);}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'})),stage,h('div',{class:'vhiderow'},hideB)));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;undoB.classList.toggle('hide',!hist.length);}
