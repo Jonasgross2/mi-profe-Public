@@ -614,9 +614,27 @@ function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=fals
   trackNav(curRoute());const RT=curRoute();LASTR=RT;const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
   const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum,reading:vReading}[parts[0]]||vHome;
-  v(m,...parts.slice(1));const y=NAVBACK&&SCROLLPOS[RT]||0;window.scrollTo(0,y);m.scrollTop=y;
+  v(m,...parts.slice(1));autoHead(m,parts[0]);const y=NAVBACK&&SCROLLPOS[RT]||0;window.scrollTo(0,y);m.scrollTop=y;
   if(y)requestAnimationFrame(()=>{if(curRoute()===RT){m.scrollTop=y;window.scrollTo(0,y);}});hideBoot();}
 
+/* Fester Seitenkopf für alle normalen Seiten (alle Kurse): Zurück-Knopf + Überschrift (+ Suchfeld, + Reiter .stick) wandern in einen
+   Kopf, der oben stehen bleibt; der Rest (Untertitel, Inhalt) scrollt darunter durch. Nicht auf Start, in Übungen (stickplay) und
+   auf der Kurs-Seite (eigener Kopf). Reiter weiter unten auf der Seite (.stick) werden in den Kopf verschoben. */
+function autoHead(m,base){if(base==='home'||!m||!m.classList||m.classList.contains('stickplay')||m.classList.contains('stickhead'))return;
+  const isBack=e=>e.tagName==='BUTTON'&&/^←/.test(e.textContent.trim());
+  const isBackRow=e=>e.classList.contains('row')&&e.firstElementChild&&isBack(e.firstElementChild)&&!e.querySelector('h1');
+  const isTitle=e=>e.tagName==='H1'||(e.classList.contains('row')&&!!e.querySelector(':scope > h1'));
+  const kids=[...m.children];let i=0,title=false;
+  while(i<kids.length){const e=kids[i];
+    if(!title&&(isBack(e)||isBackRow(e))){i++;continue;}
+    if(!title&&isTitle(e)){title=true;i++;continue;}
+    if(title&&e.tagName==='INPUT'&&e.classList.contains('inp')){i++;continue;}
+    if(title&&e.classList.contains('seg')){i++;continue;}/* Umschalter direkt unter der Überschrift (z. B. Statistik: Alle | Kurs | Meine Wörter) */
+    break;}
+  if(!title)return;
+  const head=h('div',{class:'ustick phead'});kids.slice(0,i).forEach(e=>head.append(e));
+  const st=[...m.children].find(e=>e.classList.contains('stick'));if(st){st.classList.remove('stick');head.append(st);}
+  m.prepend(head);m.classList.remove('stickpage');m.classList.add('stickhead');}
 /* ---------- views ---------- */
 /* Tagesplan: Bausteine mit id; welche täglich dazugehören, stellt man unter Mehr → Mein Tagesplan ein (S.plan, synchronisiert über planT) */
 const PLAN_DEF={vocab:true,lesson:true,catchup:true,mix:true,story:true,freq:false,shadow:false,mistakes:false};
@@ -1358,9 +1376,22 @@ function vVocabStats(m,all,src){const td=today();m.append(backTo(T('Vokabeln'),'
   /* Umschalter Alle | Kurs | Meine Wörter – nur wenn es eigene Wörter in der Wiederholung gibt */
   if(myLists().length){src=src==='kurs'||src==='mine'?src:'';m.append(h('div',{class:'seg',style:'grid-template-columns:repeat(3,1fr);margin-bottom:12px'},[['',T('Alle')],['kurs',T('Kurs')],['mine',T('Meine Wörter')]].map(([k,l])=>h('button',{class:k===src?'on':'',onclick:()=>go('vocab/stats'+(k?'/'+k:''))},h('span',{},l)))));
     if(src)all=all.filter(c=>src==='mine'?isMy(c):!isMy(c));
-    if(src==='mine'){m.append(h('div',{class:'card statcard'},h('div',{class:'kind',style:'margin:0 0 6px'},T('Eigene Listen – freies Üben')),
-      myLists().map(l=>{const cs=myActive(l.id);return h('div',{style:'margin:8px 0'},h('b',{},l.name),h('span',{class:'muted small'},' · '+cs.length+(cs.length===1?T(' Wort'):T(' Wörter'))+(l.daily===false?T(' · nur gezielt'):T(' · in der Wiederholung'))),
-        h('div',{class:'small'},(myPractice(cs)||T('Noch nicht frei geübt'))+' · '+myDueOf(cs).length+T(' dran')));})));
+    if(src==='mine'){
+      /* Übersicht eigene Listen (freies Üben): Stufe pro Wort – neu (nie geübt), wackelig (zuletzt falsch), geübt, sicher (Abstand ≥ 20 Tage) */
+      const pst=c=>!c.pl?0:c.pw?1:(c.ps||0)>=3?3:2;const PCOL=['var(--muted)','var(--bad)','var(--gold)','var(--ok)'];const PLAB=[T('neu'),T('wackelig'),T('geübt'),T('sicher')];
+      const cnt=cs=>{const r=[0,0,0,0];cs.forEach(c=>r[pst(c)]++);return r;};
+      const sbar=r=>{const t=r.reduce((a,b)=>a+b,0)||1;return h('div',{class:'pbar'},r.map((v,i)=>v?h('i',{style:'width:'+(100*v/t)+'%;background:'+PCOL[i]}):null));};
+      const Ls=myLists();const tot=cnt(Ls.flatMap(l=>myActive(l.id)));
+      m.append(h('div',{class:'stattiles'},tot.map((n,i)=>h('div',{class:'card stat'},h('div',{class:'n',style:'color:'+PCOL[i]},n),h('div',{class:'l'},PLAB[i])))),
+        h('p',{class:'muted small',style:'margin:4px 2px 12px'},T('Freies Üben: sicher = nächster Abstand ab 20 Tagen · wackelig = zuletzt falsch')));
+      Ls.forEach(l=>{const cs=myActive(l.id);const r=cnt(cs);const due=myDueOf(cs).length;
+        m.append(h('div',{class:'card statcard mystat',onclick:()=>go('vocab/mine/'+l.id)},
+          h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},h('div',{style:'min-width:0'},h('b',{},l.name),
+              h('div',{class:'muted small'},cs.length+(cs.length===1?T(' Wort'):T(' Wörter'))+(l.daily===false?T(' · nur gezielt'):T(' · in der Wiederholung')))),
+            cs.length?h('button',{class:'btn small primary',style:'flex:none',onclick:e=>{e.stopPropagation();myRun(cs);}},'▶ '+(due?due+T(' dran'):T('Lernen'))):null),
+          cs.length?sbar(r):null,
+          cs.length?h('div',{class:'plegend'},r.map((v,i)=>h('span',{},h('i',{style:'background:'+PCOL[i]}),v+' '+PLAB[i]))):null,
+          h('div',{class:'small',style:'margin-top:6px'},myPractice(cs)||T('Noch nicht frei geübt'))));});
       if(!all.length)return hidBtn();m.append(h('div',{class:'kind',style:'margin:14px 2px 6px'},T('In der täglichen Wiederholung')));}}
   const dueNow=new Set(dueCards());
   if(!all.length){m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return hidBtn();}
