@@ -1607,7 +1607,7 @@ placement:[
  {t:'gap',q:'Du musst dich mehr ___. (bewegen)',a:['bewegen']}],
 lessons:[
 {id:'l1',title:'Esporte e movimento',desc:'joggen, trainieren, der Verein …',steps:[
- {t:'vocab',title:'Esporte',items:[['joggen','correr (cooper)'],['trainieren','treinar'],['das Training','o treino'],['das Fitnessstudio','a academia'],['der Verein','o clube / a associação'],['die Mannschaft','o time'],['das Spiel','o jogo'],['verlieren','perder'],['der Ball','a bola'],['Fußball spielen','jogar futebol'],['Rad fahren','andar de bicicleta'],['der Berg','a montanha'],['fit','em forma'],['die Bewegung','o movimento / a atividade física'],['gesund','saudável'],['ungesund','não saudável'],['das Gewicht','o peso'],['abnehmen','emagrecer'],['zunehmen','engordar']]},
+ {t:'vocab',title:'Esporte',items:[['joggen','correr (cooper)'],['trainieren','treinar'],['das Training','o treino'],['das Fitnessstudio','a academia'],['der Verein','o clube / a associação'],['die Mannschaft','o time'],['das Spiel','o jogo'],['der Ball','a bola'],['Fußball spielen','jogar futebol'],['Rad fahren','andar de bicicleta'],['der Berg','a montanha'],['fit','em forma'],['die Bewegung','o movimento / a atividade física'],['gesund','saudável'],['ungesund','não saudável'],['das Gewicht','o peso'],['abnehmen','emagrecer'],['zunehmen','engordar']]},
  {t:'mc',q:'Lucas spielt jeden Dienstag Fußball. Er ist in einem ___.',opts:['Verein','Fitnessstudio','Berg'],a:0},
  {t:'mc',q:'Unsere Mannschaft hat 3:1 ___. Super!',opts:['gewonnen','verloren','trainiert'],a:0},
  {t:'gap',q:'Ich esse zu viel Schokolade. Ich habe zwei Kilo ___. (zunehmen – Perfekt)',a:['zugenommen']},
@@ -1752,7 +1752,7 @@ placement:[
  {t:'mc',q:'Wo kauft man Seife und Creme?',opts:['in der Drogerie','in der Reinigung','in der Werkstatt'],a:0}],
 lessons:[
 {id:'l1',title:'Roupas e acessórios',desc:'die Jeans, der Anzug, die Brille … · eng, bequem',steps:[
- {t:'vocab',title:'Roupas e acessórios',items:[['die Jeans','o jeans'],['der Anzug','o terno'],['der Stiefel','a bota'],['der Gürtel','o cinto'],['die Kette','o colar / a corrente'],['der Ring','o anel'],['die Brille','os óculos'],['der Schirm','o guarda-chuva'],['die Geldbörse','a carteira'],['das Paar','o par'],['eng','apertado'],['bequem','confortável'],['weich','macio'],['hart','duro'],['dünn','fino'],['dick','grosso / gordo'],['bunt','colorido'],['gestreift','listrado'],['kariert','xadrez']]},
+ {t:'vocab',title:'Roupas e acessórios',items:[['die Jeans','o jeans'],['der Anzug','o terno'],['der Stiefel','a bota'],['der Gürtel','o cinto'],['die Kette','o colar / a corrente'],['der Ring','o anel'],['die Brille','os óculos'],['der Schirm','o guarda-chuva'],['das Paar','o par'],['eng','apertado'],['bequem','confortável'],['weich','macio'],['hart','duro'],['dünn','fino'],['dick','grosso / gordo'],['bunt','colorido'],['gestreift','listrado'],['kariert','xadrez']]},
  {t:'mc',q:'Die Schuhe sind zu ___. Sie tun mir weh.',opts:['eng','weit','bunt'],a:0},
  {t:'mc',q:'Ich habe ein neues ___ Stiefel gekauft.',opts:['Paar','Ring','Anzug'],a:0},
  {t:'mc',q:'Lucas kann ohne ___ nicht gut lesen.',opts:['Brille','Kette','Geldbörse'],a:0},
@@ -1904,3 +1904,223 @@ resumen:`<h3>Dativo (Wem?)</h3><table><tr><td>masc./neutro</td><td class="es-t">
 <p>Verbos com dativo: <span class="es-t">helfen, danken, gratulieren, gehören, gefallen, schmecken, passen, antworten</span></p>
 <h3>wenn (verbo no final)</h3><p class="es-t">Wenn du Zeit hast, kannst du mir helfen. · Ich koche, wenn Freunde kommen.</p>
 <h3>Felicitações</h3><p class="es-t">Herzlichen Glückwunsch! · Alles Gute! · Frohe Weihnachten! · Guten Rutsch! · Frohes neues Jahr!</p>`});
+
+/* ================= KAPITEL 19 · ARBEIT & BEWERBUNG ================= */
+LANGS.de.course.units.push({id:'k19',n:'19',level:'A2',title:'Arbeit & Bewerbung',sub:'Formação e experiência · currículo · entrevista de emprego · perguntas indiretas: ob, wann, wo … · ab, bis, nach, während',
+goals:['Ausbildung, Studium, Berufserfahrung beschreiben','Ein Lebenslauf: von … bis …, nach dem Studium','Indirekte Fragen: Können Sie mir sagen, ob / wann …?','Ein Vorstellungsgespräch','Ziele und Träume im Beruf'],
+situacion:{title:'Entrevista de emprego',npc:'Frau Neumann',scene:'Você se candidatou a uma vaga de desenvolvedor numa empresa em Mainz. A entrevista é por vídeo.',role:'Du bist Frau Neumann, Personalchefin einer IT-Firma in Mainz, freundlich und professionell. Du siezt. Frag nach Ausbildung, Berufserfahrung, Deutschkenntnissen und warum er die Stelle möchte. Beantworte seine Fragen zu Arbeitszeit, Homeoffice und Gehalt kurz. Sprich einfaches Deutsch (A2), benutze indirekte Fragen (Können Sie mir sagen, …?).',goal:'Fale da sua formação e experiência, explique por que quer a vaga e faça duas perguntas indiretas (Können Sie mir sagen, ob …?).'},
+placement:[
+ {t:'mc',q:'Können Sie mir sagen, ___',opts:['wann der Kurs beginnt?','wann beginnt der Kurs?','beginnt der Kurs wann?'],a:0},
+ {t:'mc',q:'Ich weiß nicht, ___ ich die Stelle bekomme.',opts:['ob','wenn','dass'],a:0},
+ {t:'mc',q:'„a experiência profissional“',opts:['die Berufserfahrung','die Berufsausbildung','das Berufsziel'],a:0},
+ {t:'gap',q:'___ dem Studium habe ich ein Praktikum gemacht. (depois de)',a:['Nach']},
+ {t:'mc',q:'Von 2018 ___ 2022 habe ich in São Paulo gearbeitet.',opts:['bis','ab','seit'],a:0},
+ {t:'mc',q:'„Eu tenho bons conhecimentos de inglês.“',opts:['Ich habe gute Englischkenntnisse.','Ich habe gute Englischwissen.','Ich kenne gut Englisch.'],a:0}],
+lessons:[
+{id:'l1',title:'Formação e experiência',desc:'die Ausbildung, das Zeugnis, die Erfahrung …',steps:[
+ {t:'vocab',title:'Formação',items:[['die Ausbildung','a formação técnica / o curso profissionalizante'],['die Universität','a universidade'],['das Fach','a matéria / a disciplina'],['der Abschluss','a formatura / o diploma'],['das Zeugnis','o boletim / o certificado'],['die Erfahrung','a experiência'],['die Berufserfahrung','a experiência profissional'],['die Kenntnisse (Pl.)','os conhecimentos'],['der Lebenslauf','o currículo'],['die Bewerbung','a candidatura'],['sich bewerben','candidatar-se'],['das Vorstellungsgespräch','a entrevista de emprego'],['das Gehalt','o salário'],['der Vertrag','o contrato'],['das Projekt','o projeto'],['beenden','terminar / concluir'],['versuchen','tentar'],['der Rentner / die Rentnerin','o aposentado / a aposentada']]},
+ {t:'mc',q:'Nach der Schule hat Jana eine ___ als Bankkauffrau gemacht.',opts:['Ausbildung','Universität','Kenntnisse'],a:0},
+ {t:'mc',q:'Für die Bewerbung brauche ich einen ___ und meine Zeugnisse.',opts:['Lebenslauf','Vertrag','Abschluss'],a:0},
+ {t:'gap',q:'Lucas hat sich bei einer Firma in Mainz ___. (sich bewerben – Perfekt)',a:['beworben']},
+ {t:'match',q:'Ligue.',pairs:[['das Gehalt','o salário'],['der Vertrag','o contrato'],['das Zeugnis','o certificado'],['die Erfahrung','a experiência'],['versuchen','tentar']]},
+ {t:'info',title:'Tempo no currículo',html:`<table><tr><td class="es-t">von 2015 <b>bis</b> 2019</td><td>de 2015 a 2019</td></tr>
+ <tr><td class="es-t"><b>seit</b> 2023</td><td>desde 2023 (e continua)</td></tr>
+ <tr><td class="es-t"><b>ab</b> 1. März</td><td>a partir de 1º de março</td></tr>
+ <tr><td class="es-t"><b>nach</b> dem Studium</td><td>depois da faculdade (+ dativo)</td></tr>
+ <tr><td class="es-t"><b>vor</b> der Ausbildung</td><td>antes da formação (+ dativo)</td></tr>
+ <tr><td class="es-t"><b>während</b> des Studiums</td><td>durante a faculdade</td></tr></table>`},
+ {t:'gap',q:'Ich kann ___ dem 1. Juni anfangen. (a partir de)',a:['ab']},
+ {t:'gap',q:'___ 2023 arbeite ich in Frankfurt. (desde)',a:['Seit']},
+ {t:'tr',de:'Depois da faculdade eu trabalhei dois anos em São Paulo.',a:['Nach dem Studium habe ich zwei Jahre in São Paulo gearbeitet.']}
+]},
+{id:'l2',title:'Perguntas indiretas',desc:'Können Sie mir sagen, ob / wann …?',steps:[
+ {t:'info',title:'Perguntas indiretas',html:`<p>Para perguntar de forma mais educada, comece com <span class="es-t">Können Sie mir sagen, …? / Wissen Sie, …? / Ich möchte wissen, …</span> – e o verbo vai para o <b>final</b>:</p>
+ <table><tr><td class="es-t">Wann beginnt die Arbeit?</td><td class="es-t">Können Sie mir sagen, <b>wann</b> die Arbeit <b>beginnt</b>?</td></tr>
+ <tr><td class="es-t">Wo ist das Büro?</td><td class="es-t">Wissen Sie, <b>wo</b> das Büro <b>ist</b>?</td></tr>
+ <tr><td class="es-t">Gibt es Homeoffice?</td><td class="es-t">Ich möchte wissen, <b>ob</b> es Homeoffice <b>gibt</b>.</td></tr></table>
+ <div class="ex">Perguntas com sim/não → <b>ob</b> (= se). Perguntas com W- → a palavra W fica: <b>wann, wo, wie, was, warum, wie viel</b> …</div>
+ <div class="ojo"><b>ob</b> = „se“ (pergunta) · <b>wenn</b> = „se / quando“ (condição). <span class="es-t">Ich weiß nicht, ob er kommt.</span> ≠ <span class="es-t">Wenn er kommt, …</span></div>`},
+ {t:'mc',q:'Wissen Sie, ___ die Stelle noch frei ist?',opts:['ob','wenn','wann ist'],a:0},
+ {t:'mc',q:'Können Sie mir sagen, wie viel ___?',opts:['man hier verdient','verdient man hier','man verdient hier'],a:0},
+ {t:'gap',q:'Ich möchte wissen, ___ ich im Homeoffice arbeiten kann. (se)',a:['ob']},
+ {t:'gap',q:'Können Sie mir sagen, wann das Gespräch ___? (beginnen)',a:['beginnt']},
+ {t:'order',es:'Wissen Sie wo die Personalabteilung ist',de:'O senhor sabe onde fica o departamento de pessoal?'},
+ {t:'tr',de:'O senhor pode me dizer quando eu posso começar?',a:['Können Sie mir sagen, wann ich anfangen kann?','Können Sie mir sagen, wann ich beginnen kann?']},
+ {t:'tr',de:'Eu não sei se ele vem.',a:['Ich weiß nicht, ob er kommt.']},
+ {t:'speak',es:'Können Sie mir sagen, ob ich auch im Homeoffice arbeiten kann?',de:'O senhor pode me dizer se eu também posso trabalhar em home office?',tip:'Pergunta de sim/não → <b>ob</b>, verbo no final: <i>kann</i>.'}
+]},
+{id:'l3',title:'A entrevista',desc:'Vorstellungsgespräch · Ziele und Träume',steps:[
+ {t:'vocab',title:'Na entrevista',items:[['die Situation','a situação'],['der Stress','o estresse'],['stressig','estressante'],['das Ziel','o objetivo / a meta'],['der Traum','o sonho'],['unbedingt','de qualquer jeito / sem falta'],['notwendig','necessário'],['nützlich','útil'],['freiwillig','voluntário'],['beraten','aconselhar / dar consultoria'],['die Stärke','o ponto forte'],['die Schwäche','o ponto fraco'],['zuverlässig','confiável'],['flexibel','flexível'],['im Team arbeiten','trabalhar em equipe']]},
+ {t:'dialog',place:'Videocall',title:'Entrevista de emprego',scene:'A Sra. Neumann, da área de RH, entrevista você para uma vaga em Mainz.',lines:[
+  {n:'Frau Neumann',es:'Guten Tag, Herr Souza. Erzählen Sie doch bitte kurz etwas über sich.',de:'Boa tarde, Sr. Souza. Conte, por favor, um pouco sobre o senhor.'},
+  {you:true,opts:[{es:'Gern. Ich habe in São Paulo Informatik studiert und dann drei Jahre als Programmierer gearbeitet. Seit 2023 lebe ich in Frankfurt.',ok:true},{es:'Gern. Ich studiere Informatik in São Paulo seit drei Jahre.',ok:false,why:'Fale da formação no passado (Perfekt) e use <i>seit</i> + dativo: <i>seit drei Jahren</i>.'}]},
+  {n:'Frau Neumann',es:'Warum möchten Sie bei uns arbeiten?',de:'Por que o senhor quer trabalhar conosco?'},
+  {you:true,opts:[{es:'Weil Ihre Projekte sehr interessant sind und ich gern im Team arbeite.',ok:true},{es:'Weil das Gehalt ist gut.',ok:false,why:'Depois de <i>weil</i> o verbo vai para o final – e é melhor falar dos projetos 😉'}]},
+  {n:'Frau Neumann',es:'Haben Sie noch Fragen an uns?',de:'O senhor tem mais perguntas para nós?'},
+  {you:true,opts:[{es:'Ja. Können Sie mir sagen, ob man auch im Homeoffice arbeiten kann?',ok:true},{es:'Ja. Kann man im Homeoffice arbeiten, können Sie mir sagen?',ok:false,why:'Pergunta indireta: <i>Können Sie mir sagen, <b>ob</b> man … arbeiten <b>kann</b>?</i>'}]}]},
+ {t:'mc',q:'Was ist eine Stärke?',opts:['Ich bin zuverlässig.','Ich komme oft zu spät.','Ich arbeite nicht gern im Team.'],a:0},
+ {t:'gap',q:'Mein ___ ist es, in zwei Jahren Teamleiter zu sein. (objetivo)',a:['Ziel']},
+ {t:'mc',q:'„Ich möchte unbedingt in Deutschland bleiben.“ bedeutet:',opts:['Ich möchte sehr gern / auf jeden Fall bleiben.','Ich möchte vielleicht bleiben.','Ich möchte nicht bleiben.'],a:0},
+ {t:'tr',de:'Meu ponto forte é que eu sou flexível.',a:['Meine Stärke ist, dass ich flexibel bin.']}
+]},
+{id:'l4',title:'Ler e escrever: anúncio e candidatura',desc:'Stellenanzeige · kurze Bewerbung per E-Mail',steps:[
+ {t:'read',title:'Leitura: Stellenanzeige',text:`Wir suchen ab sofort eine/n Softwareentwickler/in (Vollzeit, 40 Std./Woche).
+Ihre Aufgaben: Sie entwickeln Apps für unsere Kunden und arbeiten in einem internationalen Team.
+Sie haben: ein abgeschlossenes Studium (Informatik oder ähnlich), mindestens zwei Jahre Berufserfahrung, gute Englischkenntnisse. Deutschkenntnisse (A2/B1) sind nützlich, aber nicht notwendig.
+Wir bieten: ein gutes Gehalt, flexible Arbeitszeiten, zwei Tage Homeoffice pro Woche und einen kostenlosen Deutschkurs.
+Bewerbung bitte per E-Mail an jobs@appwerk-mainz.de`,de:`Procuramos a partir de agora um(a) desenvolvedor(a) de software (tempo integral, 40 h/semana).
+Suas tarefas: você desenvolve apps para nossos clientes e trabalha numa equipe internacional.
+Você tem: faculdade concluída (informática ou similar), pelo menos dois anos de experiência profissional, bom inglês. Conhecimentos de alemão (A2/B1) são úteis, mas não necessários.
+Oferecemos: um bom salário, horários flexíveis, dois dias de home office por semana e um curso de alemão gratuito.
+Candidatura por e-mail para jobs@appwerk-mainz.de`},
+ {t:'mc',q:'Muss man gut Deutsch sprechen?',opts:['Nein, das ist nicht notwendig.','Ja, man braucht B1.','Ja, man braucht C1.'],a:0},
+ {t:'mc',q:'Wie viele Tage kann man zu Hause arbeiten?',opts:['zwei Tage pro Woche','jeden Tag','gar nicht'],a:0},
+ {t:'mc',q:'Richtig oder falsch? Die Firma bezahlt einen Deutschkurs.',opts:['richtig','falsch'],a:0},
+ {t:'free',task:'Escreva uma e-mail curta de candidatura (~40 palavras) para o anúncio: 1) para qual vaga você se candidata, 2) sua formação e experiência, 3) a partir de quando você pode começar.',hint:'Sehr geehrte Damen und Herren, ich bewerbe mich für die Stelle als … Ich habe … studiert und … Jahre als … gearbeitet. Ich kann ab … anfangen. Mit freundlichen Grüßen',focus:'Perfekt, Zeitangaben (seit, ab, von … bis), formelle E-Mail',model:'Sehr geehrte Damen und Herren,\nich bewerbe mich für die Stelle als Softwareentwickler. Ich habe in São Paulo Informatik studiert und vier Jahre als Programmierer gearbeitet. Seit 2023 lebe ich in Frankfurt. Ich kann ab dem 1. Mai anfangen.\nMit freundlichen Grüßen\nLucas Souza'}
+]}],
+resumen:`<h3>Tempo</h3><p class="es-t">von … bis … · seit 2023 · ab 1. März · nach dem Studium · vor der Ausbildung · während des Studiums</p>
+<h3>Perguntas indiretas (verbo no final)</h3><table><tr><td class="es-t">Können Sie mir sagen, wann die Arbeit beginnt?</td></tr><tr><td class="es-t">Ich möchte wissen, ob es Homeoffice gibt.</td></tr></table><p><b>ob</b> = se (pergunta sim/não) · <b>wenn</b> = se/quando (condição)</p>
+<h3>Candidatura</h3><p class="es-t">der Lebenslauf · die Bewerbung · sich bewerben (hat sich beworben) · das Vorstellungsgespräch · die Berufserfahrung · die Kenntnisse</p>`});
+
+/* ================= KAPITEL 20 · ÄMTER, POST & BANK ================= */
+LANGS.de.course.units.push({id:'k20',n:'20',level:'A2',title:'Ämter, Post & Bank',sub:'Órgãos públicos · formulários · correio · banco · achados e perdidos · verbos com preposição: warten auf, denken an …',
+goals:['Auf dem Amt: das Formular, unterschreiben, die Gebühr','Post und Pakete: der Empfänger, abholen, bestätigen','Bank: das Konto, überweisen, die Karte sperren','Verben mit Präposition: warten auf, denken an, sich kümmern um','Etwas verloren: das Fundbüro'],
+situacion:{title:'No Bürgeramt',npc:'Sachbearbeiterin',scene:'Você precisa fazer o registro do novo endereço (Ummeldung) no Bürgeramt depois da mudança.',role:'Du bist Sachbearbeiterin im Bürgeramt Frankfurt, sachlich, aber geduldig. Du siezt. Frag nach Ausweis/Pass, Wohnungsgeberbestätigung (Bestätigung vom Vermieter) und dem Datum des Einzugs. Erkläre, dass er das Formular unterschreiben muss und dass die Ummeldung kostenlos ist. Wenn ein Dokument fehlt: Er soll einen neuen Termin online buchen. Sprich einfaches Deutsch (A2).',goal:'Explique que você se mudou, entregue os documentos, pergunte se precisa pagar e o que fazer se faltar um documento.'},
+placement:[
+ {t:'mc',q:'Ich warte ___ den Bus.',opts:['auf','für','an'],a:0},
+ {t:'mc',q:'„Por favor, assine aqui.“',opts:['Bitte unterschreiben Sie hier.','Bitte schreiben Sie unter hier.','Bitte unterschrift hier.'],a:0},
+ {t:'gap',q:'Ich denke oft ___ meine Familie in Brasilien.',a:['an']},
+ {t:'mc',q:'Meine Kreditkarte ist weg. Ich muss sie ___.',opts:['sperren','überweisen','unterschreiben'],a:0},
+ {t:'mc',q:'Wo fragt man nach einer verlorenen Tasche?',opts:['im Fundbüro','im Bürgeramt','in der Reinigung'],a:0},
+ {t:'gap',q:'Kannst du dich ___ die Katze kümmern? (cuidar de)',a:['um']}],
+lessons:[
+{id:'l1',title:'Órgãos públicos e formulários',desc:'das Formular, unterschreiben, die Gebühr',steps:[
+ {t:'vocab',title:'No órgão público',items:[['das Amt','o órgão público / a repartição'],['das Bürgeramt','o centro de atendimento ao cidadão'],['die Behörde','a autoridade / o órgão'],['die Anmeldung','o registro / a inscrição'],['ummelden','atualizar o registro (endereço)'],['die Aufenthaltserlaubnis','a autorização de residência'],['die Gebühr','a taxa'],['die Wartenummer','a senha (fila)'],['der Zettel','o papelzinho / o bilhete'],['notieren','anotar'],['die Erlaubnis','a permissão'],['das Stockwerk','o andar']]},
+ {t:'mc',q:'Bitte füllen Sie das ___ aus und unterschreiben Sie unten.',opts:['Formular','Stockwerk','Amt'],a:0},
+ {t:'mc',q:'Mein Pass ist nur noch bis März ___.',opts:['gültig','kostenlos','notwendig'],a:0},
+ {t:'gap',q:'Für den neuen Ausweis muss man eine ___ von 37 Euro bezahlen. (taxa)',a:['Gebühr']},
+ {t:'match',q:'Ligue.',pairs:[['die Unterschrift','a assinatura'],['der Zettel','o papelzinho'],['notieren','anotar'],['das Stockwerk','o andar']]},
+ {t:'read',hideText:true,title:'Ouvir: Im Bürgeramt',intro:'Você está esperando no Bürgeramt. Ouça o aviso.',text:`Liebe Kundinnen und Kunden, bitte ziehen Sie am Eingang eine Wartenummer. Für Ausweise und Pässe gehen Sie bitte in den zweiten Stock, Zimmer 204. Ummeldungen machen wir im Erdgeschoss. Bitte haben Sie alle Dokumente bereit: Ihren Ausweis oder Pass und die Bestätigung von Ihrem Vermieter. Heute schließen wir schon um 13 Uhr.`,de:`Prezados clientes, por favor peguem uma senha na entrada. Para carteiras de identidade e passaportes, vão ao segundo andar, sala 204. Atualizações de endereço fazemos no térreo. Por favor, tenham todos os documentos em mãos: sua identidade ou passaporte e a declaração do seu locador. Hoje fechamos já às 13h.`},
+ {t:'mc',q:'Wo macht man die Ummeldung?',opts:['im Erdgeschoss','im zweiten Stock','in Zimmer 204'],a:0},
+ {t:'mc',q:'Was braucht man für die Ummeldung?',opts:['den Pass und die Bestätigung vom Vermieter','nur eine Wartenummer','ein Foto'],a:0},
+ {t:'tr',de:'Onde eu tenho que assinar?',a:['Wo muss ich unterschreiben?']}
+]},
+{id:'l2',title:'Correio e banco',desc:'der Empfänger, abholen · das Konto, überweisen',steps:[
+ {t:'vocab',title:'Correio e banco',items:[['der Empfänger / die Empfängerin','o destinatário / a destinatária'],['die Sendung','a encomenda / o programa (TV, rádio)'],['die Sendungsnummer','o código de rastreio'],['bestätigen','confirmar'],['die Bestätigung','a confirmação'],['die Filiale','a agência / a filial'],['die Überweisung','a transferência'],['abheben','sacar (dinheiro)'],['der Geldautomat','o caixa eletrônico'],['die Kreditkarte','o cartão de crédito'],['sperren','bloquear'],['die Geheimzahl','a senha (PIN)'],['der Kredit','o empréstimo'],['kriegen','receber / conseguir (coloquial)'],['drücken','apertar']]},
+ {t:'mc',q:'Ich habe die Miete schon ___.',opts:['überwiesen','abgehoben','gesperrt'],a:0},
+ {t:'mc',q:'Am ___ kann man Geld abheben.',opts:['Geldautomaten','Empfänger','Kredit'],a:0},
+ {t:'gap',q:'Meine Karte ist gestohlen! Ich muss sie sofort ___. (bloquear)',a:['sperren']},
+ {t:'mc',q:'„Ich hab ein Paket gekriegt.“ – kriegen ist hier:',opts:['bekommen (umgangssprachlich)','schicken','öffnen'],a:0},
+ {t:'dialog',place:'Post',title:'Buscar um pacote',scene:'Você não estava em casa e recebeu um aviso: o pacote está na agência dos correios.',lines:[
+  {n:'Mitarbeiter',es:'Guten Tag, was kann ich für Sie tun?',de:'Bom dia, como posso ajudar?'},
+  {you:true,opts:[{es:'Guten Tag, ich möchte ein Paket abholen. Hier ist die Benachrichtigung.',ok:true},{es:'Guten Tag, ich möchte ein Paket abheben.',ok:false,why:'<i>abheben</i> = sacar dinheiro. Pacote → <i>abholen</i>.'}]},
+  {n:'Mitarbeiter',es:'Danke. Haben Sie Ihren Ausweis dabei?',de:'Obrigado. O senhor está com sua identidade?'},
+  {you:true,opts:[{es:'Ja, hier ist mein Pass.',ok:true},{es:'Ja, ich bin mein Pass.',ok:false,why:'<i>Hier ist mein Pass.</i>'}]},
+  {n:'Mitarbeiter',es:'Gut. Bitte unterschreiben Sie hier. – So, hier ist Ihr Paket.',de:'Certo. Por favor, assine aqui. – Pronto, aqui está seu pacote.'},
+  {you:true,opts:[{es:'Vielen Dank! Schönen Tag noch!',ok:true},{es:'Bitte schön!',ok:false,why:'Quem agradece é você: <i>Vielen Dank!</i>'}]}]},
+ {t:'tr',de:'Eu gostaria de abrir uma conta.',a:['Ich möchte ein Konto eröffnen.','Ich möchte gern ein Konto eröffnen.','Ich würde gern ein Konto eröffnen.']},
+ {t:'tr',de:'Você pode confirmar o horário?',a:['Kannst du den Termin bestätigen?','Können Sie den Termin bestätigen?']}
+]},
+{id:'l3',title:'Verbos com preposição',desc:'warten auf, denken an, sich kümmern um …',steps:[
+ {t:'info',title:'Verbos com preposição fixa',html:`<p>Muitos verbos alemães vêm com uma preposição fixa – é melhor aprender juntos:</p>
+ <table><tr><td class="es-t">warten <b>auf</b> + Akk.</td><td>esperar por</td><td class="es-t">Ich warte auf den Bus.</td></tr>
+ <tr><td class="es-t">denken <b>an</b> + Akk.</td><td>pensar em</td><td class="es-t">Ich denke an dich.</td></tr>
+ <tr><td class="es-t">sich freuen <b>auf</b> + Akk.</td><td>estar ansioso por</td><td class="es-t">Ich freue mich auf den Urlaub.</td></tr>
+ <tr><td class="es-t">sich freuen <b>über</b> + Akk.</td><td>ficar feliz com</td><td class="es-t">Ich freue mich über das Geschenk.</td></tr>
+ <tr><td class="es-t">sich kümmern <b>um</b> + Akk.</td><td>cuidar de</td><td class="es-t">Sie kümmert sich um die Kinder.</td></tr>
+ <tr><td class="es-t">sprechen <b>über</b> + Akk.</td><td>falar sobre</td><td class="es-t">Wir sprechen über das Projekt.</td></tr>
+ <tr><td class="es-t">sich interessieren <b>für</b> + Akk.</td><td>interessar-se por</td><td class="es-t">Er interessiert sich für Kunst.</td></tr>
+ <tr><td class="es-t">fragen <b>nach</b> + Dat.</td><td>perguntar por</td><td class="es-t">Er fragt nach dem Weg.</td></tr>
+ <tr><td class="es-t">sich anmelden <b>für</b> + Akk.</td><td>inscrever-se em</td><td class="es-t">Ich melde mich für den Kurs an.</td></tr></table>
+ <div class="ojo">A preposição em português muitas vezes é outra: „pensar <b>em</b>“ = denken <b>an</b>, „esperar <b>por</b>“ = warten <b>auf</b>.</div>`},
+ {t:'mc',q:'Wir warten schon seit einer Stunde ___ das Paket.',opts:['auf','für','an'],a:0},
+ {t:'mc',q:'Interessierst du dich ___ Fußball?',opts:['für','über','an'],a:0},
+ {t:'gap',q:'Ich freue mich ___ deinen Besuch nächste Woche! (futuro)',a:['auf']},
+ {t:'gap',q:'Wer kümmert sich ___ die Pflanzen, wenn du im Urlaub bist?',a:['um']},
+ {t:'gap',q:'Ein Tourist hat ___ dem Weg zum Bahnhof gefragt.',a:['nach']},
+ {t:'order',es:'Im Meeting haben wir über das neue Projekt gesprochen',de:'Na reunião falamos sobre o novo projeto.'},
+ {t:'tr',de:'Eu penso muito na minha família.',a:['Ich denke oft an meine Familie.','Ich denke viel an meine Familie.']},
+ {t:'tr',de:'Ela cuida da mãe dela.',a:['Sie kümmert sich um ihre Mutter.']}
+]},
+{id:'l4',title:'Achados e perdidos',desc:'das Fundbüro · Verlustmeldung',steps:[
+ {t:'vocab',title:'Perdi algo',items:[['das Fundbüro','os achados e perdidos'],['die Fundsachen (Pl.)','os objetos achados'],['verlieren','perder'],['finden','achar'],['die Geldbörse','a carteira'],['die Webseite','o site'],['der Service','o atendimento / o serviço'],['die Mailbox','a caixa postal (celular)'],['informieren','informar'],['zumachen','fechar']]},
+ {t:'read',title:'Leitura: Fundbüro Frankfurt',text:`Sie haben etwas in Bus oder Bahn verloren? Melden Sie es online auf unserer Webseite oder kommen Sie ins Fundbüro (Mainzer Landstraße 323, Erdgeschoss). Öffnungszeiten: Montag bis Freitag 8 bis 15 Uhr, Donnerstag bis 18 Uhr. Am Wochenende machen wir zu. Bitte bringen Sie Ihren Ausweis mit. Für Fundsachen bis 50 Euro Wert bezahlen Sie eine Gebühr von 5 Euro. Wir informieren Sie per E-Mail, wenn wir Ihre Sache gefunden haben.`,de:`Você perdeu algo no ônibus ou no trem? Comunique online no nosso site ou venha aos achados e perdidos (Mainzer Landstraße 323, térreo). Horário: segunda a sexta das 8h às 15h, quinta até as 18h. No fim de semana fechamos. Por favor, traga sua identidade. Para objetos de até 50 euros de valor você paga uma taxa de 5 euros. Nós informamos por e-mail quando acharmos o seu objeto.`},
+ {t:'mc',q:'Wann kann man am Donnerstag ins Fundbüro gehen?',opts:['von 8 bis 18 Uhr','von 8 bis 15 Uhr','gar nicht'],a:0},
+ {t:'mc',q:'Wie erfährt man, dass die Sache gefunden wurde?',opts:['per E-Mail','per Brief','auf der Mailbox'],a:0},
+ {t:'mc',q:'Richtig oder falsch? Am Samstag ist das Fundbüro geöffnet.',opts:['falsch','richtig'],a:0},
+ {t:'free',task:'Você esqueceu a mochila no trem. Escreva uma mensagem curta (~30–40 palavras) para os achados e perdidos: 1) o que você perdeu e onde/quando, 2) como é a mochila e o que tinha dentro, 3) como podem entrar em contato com você.',hint:'Sehr geehrte Damen und Herren, am … habe ich im Zug … meinen Rucksack verloren. Er ist … Darin waren … Bitte informieren Sie mich per E-Mail / unter der Nummer … Mit freundlichen Grüßen',focus:'Perfekt, Adjektivendungen, Präpositionen, formelle Nachricht',model:'Sehr geehrte Damen und Herren,\nam Montag habe ich im Zug von Frankfurt nach Mainz meinen Rucksack verloren. Er ist schwarz und ziemlich groß. Darin waren mein Laptop und ein blauer Schirm. Bitte informieren Sie mich per E-Mail oder unter 0151 234 567.\nMit freundlichen Grüßen\nLucas Souza'}
+]}],
+resumen:`<h3>Órgãos públicos</h3><p class="es-t">das Formular ausfüllen · unterschreiben · die Gebühr · der Ausweis · gültig · ummelden · die Wartenummer</p>
+<h3>Correio e banco</h3><p class="es-t">ein Paket abholen · der Empfänger · das Konto · Geld überweisen / abheben · die Karte sperren</p>
+<h3>Verbos com preposição</h3><table><tr><td class="es-t">warten auf · denken an · sich freuen auf/über · sich kümmern um · sprechen über · sich interessieren für · fragen nach · sich anmelden für</td></tr></table>`});
+
+/* ================= KAPITEL 21 · FREIZEIT, KULTUR & MEDIEN ================= */
+LANGS.de.course.units.push({id:'k21',n:'21',level:'A2',title:'Freizeit, Kultur & Medien',sub:'Teatro, arte, música · TV, revistas, internet · jemand, niemand, etwas, nichts, überall · welch- / was für ein',
+goals:['Kultur: das Theater, die Ausstellung, das Instrument','Medien: die Sendung, die Zeitschrift, surfen, chatten','Meinungen: spannend, langweilig, berühmt, beliebt','jemand / niemand / etwas / nichts / überall / nirgends','Welcher Film? – Was für ein Film?','Einen Freizeittipp geben'],
+situacion:{title:'O que vamos fazer no sábado?',npc:'Jana',scene:'Você e a Jana querem sair no sábado. Cada um tem uma ideia diferente.',role:'Du bist Jana, Lucas’ Kollegin und Freundin in Frankfurt, sportlich und kulturinteressiert. Du duzt. Schlag eine Ausstellung im Städel-Museum vor, Lucas mag vielleicht lieber Kino oder ein Konzert. Diskutiert: Was ist spannend, was langweilig? Was für eine Ausstellung? Wann, wo, wie teuer? Am Ende einigt ihr euch. Benutze jemand/niemand/etwas/nichts und „Was für ein …?“. Sprich einfaches Deutsch (A2).',goal:'Proponha uma atividade, dê sua opinião (spannend, langweilig …), pergunte „Was für …?“ e cheguem a um acordo.'},
+placement:[
+ {t:'mc',q:'Ist ___ zu Hause? – Nein, niemand.',opts:['jemand','etwas','nichts'],a:0},
+ {t:'mc',q:'___ Film möchtest du sehen? – Den neuen Krimi.',opts:['Welchen','Welcher','Was für'],a:0},
+ {t:'mc',q:'Ich habe ___ gehört, die Musik war zu laut.',opts:['nichts','niemand','nirgends'],a:0},
+ {t:'gap',q:'___ für eine Zeitschrift liest du? (Was)',a:['Was']},
+ {t:'mc',q:'Der Film war so ___, ich bin fast eingeschlafen.',opts:['langweilig','spannend','aufregend'],a:0},
+ {t:'mc',q:'„O ator é muito famoso.“',opts:['Der Schauspieler ist sehr berühmt.','Der Schauspieler ist sehr beliebt.','Der Schauspieler ist sehr bekannt gemacht.'],a:0}],
+lessons:[
+{id:'l1',title:'Cultura e opiniões',desc:'das Theater, die Ausstellung · spannend, berühmt',steps:[
+ {t:'vocab',title:'Cultura',items:[['das Theater','o teatro'],['die Oper','a ópera'],['die Kunst','a arte'],['die Ausstellung','a exposição'],['das Instrument','o instrumento'],['das Klavier','o piano'],['die Gitarre','o violão / a guitarra'],['der Schauspieler / die Schauspielerin','o ator / a atriz'],['spannend','emocionante / com suspense'],['langweilig','chato'],['aufregend','empolgante'],['berühmt','famoso'],['beliebt','popular / querido'],['fantastisch','fantástico'],['furchtbar','horrível'],['komisch','engraçado / estranho']]},
+ {t:'mc',q:'Im Städel-Museum gibt es eine neue ___ mit Bildern von Picasso.',opts:['Ausstellung','Sendung','Zeitschrift'],a:0},
+ {t:'mc',q:'Der Krimi war so ___ – ich wollte wissen, wer der Mörder ist!',opts:['spannend','langweilig','furchtbar'],a:0},
+ {t:'gap',q:'Jana spielt seit zehn Jahren ___. Sie hat ein Klavier zu Hause. (piano)',a:['Klavier']},
+ {t:'match',q:'Ligue.',pairs:[['berühmt','famoso'],['beliebt','popular'],['langweilig','chato'],['komisch','engraçado / estranho'],['der Eintritt','a entrada']]},
+ {t:'info',title:'Welcher? – Was für ein?',html:`<table><tr><td class="es-t"><b>Welcher</b> Film? – <b>Der</b> neue Krimi.</td><td>Qual (de um grupo conhecido)? → resposta com <b>der/die/das</b></td></tr>
+ <tr><td class="es-t"><b>Was für ein</b> Film? – <b>Ein</b> Krimi.</td><td>Que tipo de …? → resposta com <b>ein/eine</b></td></tr></table>
+ <div class="ex"><span class="es-t">welcher / welche / welches</span> mudam como <i>der/die/das</i>: <span class="es-t">Welchen Film siehst du?</span> · <span class="es-t">Was für eine Ausstellung ist das?</span></div>`},
+ {t:'mc',q:'___ Musik hörst du gern? – Rock und Samba.',opts:['Was für','Welche','Welcher'],a:0},
+ {t:'mc',q:'___ Jacke gehört dir, die rote oder die blaue?',opts:['Welche','Was für eine','Welcher'],a:0},
+ {t:'tr',de:'Que tipo de filme você gosta de ver?',a:['Was für Filme siehst du gern?','Was für einen Film siehst du gern?','Was für Filme schaust du gern?']}
+]},
+{id:'l2',title:'Mídia',desc:'die Sendung, die Zeitschrift, surfen, chatten',steps:[
+ {t:'vocab',title:'Mídia',items:[['das Programm','a programação'],['die Nachrichten (Pl.)','o noticiário'],['die Zeitschrift','a revista'],['der Titel','o título'],['das Interview','a entrevista'],['der Bericht','a reportagem'],['berichten','relatar'],['das Blog','o blog'],['surfen','navegar (internet) / surfar'],['chatten','conversar online'],['der Witz','a piada'],['das Rätsel','o enigma / as palavras cruzadas'],['das Quiz','o quiz'],['die Kamera','a câmera'],['das Comic','a história em quadrinhos']]},
+ {t:'mc',q:'Um 20 Uhr kommen im Fernsehen die ___.',opts:['Nachrichten','Rätsel','Comics'],a:0},
+ {t:'mc',q:'Abends ___ Lucas mit seiner Familie in Brasilien.',opts:['chattet','surft','berichtet'],a:0},
+ {t:'gap',q:'Im Zug lese ich gern eine ___. (revista)',a:['Zeitschrift']},
+ {t:'read',title:'Leitura: Fernsehprogramm',text:`20:00 Tagesschau – Nachrichten
+20:15 Tatort: „Tod am Main“ – Krimi aus Frankfurt. Kommissarin Weber sucht einen Mörder in der Bankenwelt. Sehr spannend!
+21:45 Wer weiß es? – Das große Quiz mit Fragen aus Sport, Kunst und Geschichte.
+22:30 Musik am Abend – Interview mit der berühmten Sängerin Lena Hoffmann und Live-Konzert.
+23:45 Comedy-Nacht – die besten Witze des Jahres`,de:`20:00 Tagesschau – noticiário
+20:15 Tatort: „Morte no Meno“ – série policial de Frankfurt. A comissária Weber procura um assassino no mundo dos bancos. Muito emocionante!
+21:45 Wer weiß es? – o grande quiz com perguntas de esporte, arte e história.
+22:30 Música à noite – entrevista com a famosa cantora Lena Hoffmann e show ao vivo.
+23:45 Noite de comédia – as melhores piadas do ano`},
+ {t:'mc',q:'Sie möchten etwas lachen. Was sehen Sie?',opts:['Comedy-Nacht','Tatort','Tagesschau'],a:0},
+ {t:'mc',q:'Wann gibt es ein Interview?',opts:['um 22:30 Uhr','um 20:15 Uhr','um 21:45 Uhr'],a:0},
+ {t:'tr',de:'Eu leio as notícias na internet.',a:['Ich lese die Nachrichten im Internet.']}
+]},
+{id:'l3',title:'Alguém, ninguém, algo, nada',desc:'jemand, niemand, etwas, nichts, überall, nirgends',steps:[
+ {t:'info',title:'Pronomes indefinidos',html:`<table><tr><th>pessoas</th><th>coisas</th><th>lugares</th></tr>
+ <tr><td class="es-t">jemand = alguém</td><td class="es-t">etwas = algo</td><td class="es-t">irgendwo = em algum lugar</td></tr>
+ <tr><td class="es-t">niemand = ninguém</td><td class="es-t">nichts = nada</td><td class="es-t">nirgends = em lugar nenhum</td></tr>
+ <tr><td class="es-t">alle = todos</td><td class="es-t">alles = tudo</td><td class="es-t">überall = em todo lugar</td></tr></table>
+ <div class="ojo">Em alemão só existe <b>uma</b> negação: <span class="es-t">Ich habe <b>nichts</b> gesehen.</span> = Eu não vi nada. (nunca „nicht nichts“!)</div>
+ <div class="ex"><span class="es-t">Hast du etwas gegessen? – Nein, nichts.</span> · <span class="es-t">Ist jemand da? – Nein, niemand.</span></div>`},
+ {t:'mc',q:'Ich habe meinen Schlüssel gesucht, aber ich habe ihn ___ gefunden.',opts:['nirgends','niemand','nichts'],a:0},
+ {t:'mc',q:'Hat ___ meine Brille gesehen?',opts:['jemand','etwas','überall'],a:0},
+ {t:'gap',q:'Im Kino war ___ – der Film war furchtbar. (ninguém)',a:['niemand']},
+ {t:'gap',q:'Möchtest du ___ trinken? (algo)',a:['etwas']},
+ {t:'gap',q:'In Frankfurt gibt es ___ Baustellen. (em todo lugar)',a:['überall']},
+ {t:'tr',de:'Eu não entendi nada.',a:['Ich habe nichts verstanden.']},
+ {t:'tr',de:'Alguém pode me ajudar?',a:['Kann mir jemand helfen?']},
+ {t:'speak',es:'Ich habe überall gesucht, aber ich habe meinen Schlüssel nirgends gefunden.',de:'Procurei em todo lugar, mas não achei minha chave em lugar nenhum.',tip:'Só uma negação: <i>nirgends</i> – sem <i>nicht</i>.'}
+]},
+{id:'l4',title:'Ouvir e escrever: dica de lazer',desc:'Radiotipp · Nachricht an einen Freund',steps:[
+ {t:'vocab',title:'Lazer',items:[['der Zoo','o zoológico'],['der Zirkus','o circo'],['das Pferd','o cavalo'],['der Sportplatz','o campo de esportes'],['der Volleyball','o vôlei'],['der Basketball','o basquete'],['der Ski','o esqui'],['basteln','fazer trabalhos manuais'],['der Wettbewerb','a competição / o concurso']]},
+ {t:'read',hideText:true,title:'Ouvir: Freizeittipps im Radio',intro:'Ouça as dicas de fim de semana da rádio.',text:`Und hier unsere Tipps fürs Wochenende! Für Familien: Am Samstag gibt es im Zoo ein großes Fest – Kinder unter zwölf Jahren haben freien Eintritt, und um 15 Uhr dürfen sie auf Pferden reiten. Für Sportfans: Am Sonntag findet am Sportplatz Bornheim ein Volleyball-Wettbewerb statt. Jeder darf mitspielen, Anmeldung bis Freitag. Und für alle, die gern basteln: Die Stadtbibliothek bietet am Samstag von 10 bis 13 Uhr einen kostenlosen Workshop an.`,de:`E aqui as nossas dicas para o fim de semana! Para famílias: no sábado tem uma grande festa no zoológico – crianças com menos de doze anos não pagam entrada, e às 15h elas podem andar a cavalo. Para os fãs de esporte: no domingo acontece no campo de Bornheim uma competição de vôlei. Todo mundo pode jogar, inscrição até sexta. E para todos que gostam de trabalhos manuais: a biblioteca municipal oferece no sábado das 10h às 13h um workshop gratuito.`},
+ {t:'mc',q:'Wer bezahlt im Zoo keinen Eintritt?',opts:['Kinder unter zwölf Jahren','alle Familien','Sportfans'],a:0},
+ {t:'mc',q:'Bis wann muss man sich für den Volleyball-Wettbewerb anmelden?',opts:['bis Freitag','bis Samstag','bis Sonntag'],a:0},
+ {t:'mc',q:'Was kostet der Workshop in der Bibliothek?',opts:['nichts','5 Euro','12 Euro'],a:0},
+ {t:'free',task:'Escreva uma mensagem (~30–40 palavras) para o Tom: 1) proponha uma das atividades do rádio, 2) diga por que você acha interessante, 3) combine hora e lugar para se encontrarem.',hint:'Hallo Tom, hast du am … Zeit? Am Sonntag gibt es … Ich finde das …, weil … Wollen wir uns um … am … treffen? Bis dann!',focus:'Vorschläge machen, weil/wenn, Zeit- und Ortsangaben',model:'Hallo Tom,\nhast du am Sonntag Zeit? Am Sportplatz Bornheim gibt es einen Volleyball-Wettbewerb. Ich finde das super, weil jeder mitspielen darf. Wollen wir uns um zehn Uhr vor dem Sportplatz treffen? Ich melde uns bis Freitag an.\nBis dann!\nLucas'}
+]}],
+resumen:`<h3>Cultura e opinião</h3><p class="es-t">das Theater · die Ausstellung · das Instrument · spannend · langweilig · aufregend · berühmt · beliebt · komisch</p>
+<h3>Welcher? – Was für ein?</h3><p class="es-t">Welcher Film? – Der neue Krimi. · Was für ein Film? – Ein Krimi.</p>
+<h3>Indefinidos (uma só negação!)</h3><table><tr><td class="es-t">jemand – niemand – alle</td></tr><tr><td class="es-t">etwas – nichts – alles</td></tr><tr><td class="es-t">irgendwo – nirgends – überall</td></tr></table>`});
