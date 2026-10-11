@@ -1,5 +1,5 @@
 /* ===== Deutschkurs: Übersetzungen der deutschen Beispiele in Erklärungen & Resumen (antippen → Blase, nur bei Erklärsprache Portugiesisch) =====
-   Schlüssel = deutscher Text wie in der Erklärung (mit „Lucas“), Wert = Portugiesisch. Stand: A1–B1, B2 bis Kapitel 45. Neue Erklärungen → hier ergänzen.
+   Schlüssel = deutscher Text wie in der Erklärung (mit „Lucas“), Wert = Portugiesisch. Stand: A1–B2. Neue Erklärungen → hier ergänzen.
    Absichtlich ohne: Satzbausteine, einzelne Formen, Tabellen mit eigener Portugiesisch-Spalte. */
 window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "Wie heißt du?": "Como você se chama?",
@@ -648,5 +648,27 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "anstelle des Autos": "em vez do carro",
 "bezüglich Ihrer Anfrage": "com relação ao seu pedido",
 "zugunsten der Umwelt": "em favor do meio ambiente",
-"Aus diesen Gründen bin ich überzeugt, dass …": "Por esses motivos, estou convencido de que …"
+"Aus diesen Gründen bin ich überzeugt, dass …": "Por esses motivos, estou convencido de que …",
+"die Stadt, wo ich wohne": "a cidade onde moro",
+"Wer in der Stadt wohnt, braucht kein Auto. · Das ist alles, was ich weiß. · das Beste, was … · Die Miete steigt, was mich ärgert. · etwas, worauf ich mich freue · die Stadt, wo ich wohne": "Quem mora na cidade não precisa de carro. · Isso é tudo o que eu sei. · a melhor coisa que … · O aluguel sobe, o que me irrita. · algo pelo qual estou ansioso · a cidade onde moro",
+"bezahlbarer Wohnraum · die Gentrifizierung · verdrängen · pendeln · der Nahverkehr · das Lastenrad · ausbauen": "moradia acessível · a gentrificação · expulsar · fazer o trajeto casa-trabalho · o transporte público · a bicicleta de carga · ampliar",
+"Ein großer Vorteil ist, dass … · Ein Nachteil ist allerdings … · Wenn ich die Vor- und Nachteile abwäge, komme ich zu dem Schluss, dass …": "Uma grande vantagem é que … · Uma desvantagem, porém, é … · Pesando prós e contras, chego à conclusão de que …",
+"Ich hätte kommen sollen": "Eu deveria ter vindo",
+"…, dass ich früher hätte kommen sollen.": "…, que eu deveria ter vindo antes.",
+"Die Mieten stiegen stark. Folglich zogen viele weg.": "Os aluguéis subiram muito. Consequentemente, muitos se mudaram.",
+"Er bekam die Zusage. Daraufhin kündigte er.": "Ele recebeu a confirmação. Em seguida, pediu demissão.",
+"Ich wollte nach London. Stattdessen bin ich in Frankfurt gelandet.": "Eu queria ir para Londres. Em vez disso, fui parar em Frankfurt.",
+"Die Stelle war gut bezahlt. Zudem gab es Homeoffice.": "A vaga era bem paga. Além disso, havia home office.",
+"Der Anfang war hart. Dennoch habe ich nie aufgegeben.": "O começo foi duro. Mesmo assim, nunca desisti.",
+"Ich bin müde. Ich habe nämlich kaum geschlafen.": "Estou cansado. É que quase não dormi.",
+"Ich hätte früher Deutsch lernen sollen. · Du hättest mich anrufen können! · …, dass ich früher hätte kommen sollen.": "Eu deveria ter aprendido alemão antes. · Você podia ter me ligado! · …, que eu deveria ter vindo antes.",
+"folglich · somit · daraufhin · stattdessen · zudem · dennoch · nämlich (depois do verbo) · im Nachhinein · rückblickend": "consequentemente · portanto · em seguida · em vez disso · além disso · mesmo assim · é que · em retrospecto · olhando para trás",
+"auswandern · der Neuanfang · der Wendepunkt · sich anpassen an · die Wurzeln · die Identität · zweisprachig · vertraut": "emigrar · o recomeço · o ponto de virada · adaptar-se a · as raízes · a identidade · bilíngue · familiar",
+"Mein Vortrag besteht aus drei Teilen. · Zunächst … Anschließend … Zum Schluss …": "A minha apresentação tem três partes. · Primeiro … Em seguida … Por fim …",
+"In meinem Heimatland ist die Situation ganz anders: …": "No meu país, a situação é bem diferente: …",
+"Vielen Dank für deinen interessanten Vortrag. Besonders überzeugend fand ich … · Mich würde noch interessieren, …": "Muito obrigado pela sua apresentação interessante. Achei especialmente convincente … · Eu ainda gostaria de saber …",
+"Da bin ich anderer Meinung. · Das mag sein, aber … · Ich gebe dir recht, was … betrifft.": "Aí tenho outra opinião. · Pode ser, mas … · Concordo com você no que diz respeito a …",
+"Wir sind uns also einig, dass … · Wir sehen das unterschiedlich, aber …": "Então concordamos que … · Vemos isso de forma diferente, mas …",
+"Mein Vortrag besteht aus drei Teilen. · In meinem Heimatland … · Das mag sein, aber … · Ich gebe dir recht, was … betrifft. · Wir sind uns also einig, dass …": "A minha apresentação tem três partes. · No meu país … · Pode ser, mas … · Concordo com você no que diz respeito a … · Então concordamos que …",
+"berücksichtigen · sich auswirken auf · beitragen zu · gewährleisten · erheblich · erforderlich · gegebenenfalls · darüber hinaus · letztendlich": "levar em conta · ter efeito sobre · contribuir para · garantir · considerável · necessário · se for o caso · além disso · no fim das contas"
 });
