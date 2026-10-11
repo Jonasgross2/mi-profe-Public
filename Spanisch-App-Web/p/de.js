@@ -176,7 +176,7 @@ lessons:[
  {t:'speak',es:'Guten Tag! Ich heiße Lucas. Freut mich!',de:'Bom dia! Eu me chamo Lucas. Prazer!',tip:'O <b>ß</b> em <i>heiße</i> soa como “ss” – um s forte, sem zumbido.'}
 ]},
 {id:'l2',title:'Como vai? e despedir-se',desc:'Wie geht’s? · Tschüss! · Auf Wiedersehen!',steps:[
- {t:'vocab',title:'Perguntar como a pessoa está',items:[['Wie geht’s?','Tudo bem? / Como vai?'],['Wie geht es dir?','Como você está? (informal)'],['Wie geht es Ihnen?','Como o senhor / a senhora está?'],['gut','bem'],['sehr gut','muito bem'],['es geht','mais ou menos'],['nicht so gut','não muito bem'],['schlecht','mal'],['danke','obrigado / obrigada'],['bitte','por favor / de nada']]},
+ {t:'vocab',title:'Perguntar como a pessoa está',items:[['Wie geht’s?','Tudo bem? / Como vai?'],['Wie geht es dir?','Como você está? (informal)'],['Wie geht es Ihnen?','Como o senhor / a senhora está?'],['gut','bem'],['sehr gut','muito bem'],['es geht','mais ou menos'],['nicht so gut','não muito bem'],['schlecht','mal / ruim'],['danke','obrigado / obrigada'],['bitte','por favor / de nada']]},
  {t:'info',title:'Wie geht’s? – Gut, danke!',html:`<table><tr><th>Pergunta</th><th>Resposta</th></tr>
  <tr><td class="es-t">Wie geht’s?</td><td class="es-t">Gut, danke! Und dir?</td></tr>
  <tr><td class="es-t">Wie geht es dir? <span class="muted">(du)</span></td><td class="es-t">Sehr gut, danke. Und dir?</td></tr>
@@ -642,7 +642,7 @@ placement:[
 lessons:[
 {id:'l1',title:'O apartamento',desc:'Zimmer, Küche, Bad … · Adjektive',steps:[
  {t:'vocab',title:'Cômodos',items:[['die Wohnung','o apartamento'],['das Haus','a casa'],['das Zimmer','o quarto / o cômodo'],['das Wohnzimmer','a sala'],['das Schlafzimmer','o quarto de dormir'],['die Küche','a cozinha'],['das Bad','o banheiro'],['die Toilette','o vaso / o banheiro'],['der Flur','o corredor'],['der Balkon','a varanda'],['der Garten','o jardim'],['der Keller','o porão'],['der Stock','o andar'],['das Erdgeschoss','o térreo'],['der Aufzug','o elevador'],['die Treppe','a escada']]},
- {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso / calmo'],['laut','barulhento'],['neu','novo'],['alt','velho'],['schön','bonito'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
+ {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso / calmo'],['laut','barulhento'],['neu','novo'],['alt','velho / idoso; (idade)'],['schön','bonito; (tempo) bom'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
  {t:'info',title:'Andares e lugares',html:`<p>No Brasil o “primeiro andar” às vezes é o térreo – na Alemanha <b>nunca</b>:</p>
  <table><tr><td class="es-t">im Erdgeschoss (EG)</td><td>no térreo</td></tr><tr><td class="es-t">im ersten Stock</td><td>no 1º andar (acima do térreo)</td></tr><tr><td class="es-t">im dritten Stock</td><td>no 3º andar</td></tr><tr><td class="es-t">oben / unten</td><td>em cima / embaixo</td></tr><tr><td class="es-t">links / rechts</td><td>à esquerda / à direita</td></tr></table>
  <div class="ex">O adjetivo depois de <b>sein</b> não muda: <span class="es-t">Die Wohnung ist hell. Das Zimmer ist klein. Die Zimmer sind klein.</span></div>`},
@@ -698,7 +698,7 @@ lessons:[
  {t:'tr',de:'O que você acha da mesa? – Eu acho ela feia.',a:['Wie findest du den Tisch? – Ich finde ihn hässlich.','Wie findest du den Tisch? Ich finde ihn hässlich.']}
 ]},
 {id:'l4',title:'Procurar apartamento',desc:'Wohnungsanzeigen · Miete · umziehen',steps:[
- {t:'vocab',title:'Aluguel',items:[['mieten','alugar (como inquilino)'],['vermieten','alugar (como dono)'],['der Vermieter / die Vermieterin','o locador / a locadora'],['die Miete','o aluguel'],['die Nebenkosten (Pl.)','as despesas (água, aquecimento …)'],['warm','com despesas incluídas (aluguel)'],['der Quadratmeter','o metro quadrado'],['die Anzeige','o anúncio'],['umziehen','mudar de casa'],['einziehen','mudar para (entrar)'],['frei','livre / disponível'],['ab sofort','a partir de agora'],['besichtigen','visitar (um imóvel)']]},
+ {t:'vocab',title:'Aluguel',items:[['mieten','alugar (como inquilino)'],['vermieten','alugar (como dono)'],['der Vermieter / die Vermieterin','o locador / a locadora'],['die Miete','o aluguel'],['die Nebenkosten (Pl.)','as despesas (água, aquecimento …)'],['warm','quente / morno; (aluguel) com despesas'],['der Quadratmeter','o metro quadrado'],['die Anzeige','o anúncio'],['umziehen','mudar de casa'],['einziehen','mudar para (entrar)'],['frei','livre / disponível'],['ab sofort','a partir de agora'],['besichtigen','visitar (lugar, imóvel)']]},
  {t:'info',title:'Ler anúncios de apartamento',html:`<p>Os anúncios usam muitas abreviações:</p>
  <table><tr><td class="es-t">2-Zi.-Whg.</td><td>apartamento de 2 cômodos (sem contar cozinha e banheiro!)</td></tr>
  <tr><td class="es-t">Kü., Bad, Blk.</td><td>cozinha, banheiro, varanda</td></tr>
@@ -740,7 +740,7 @@ placement:[
  {t:'gap',q:'Heute ist der ___ Mai. (1.)',a:['erste']}],
 lessons:[
 {id:'l1',title:'Que horas são?',desc:'Wie spät ist es? · Viertel, halb',steps:[
- {t:'vocab',title:'Horas',items:[['die Uhr','o relógio / hora (8 Uhr)'],['Wie spät ist es?','Que horas são?'],['Wie viel Uhr ist es?','Que horas são?'],['Es ist drei Uhr.','São três horas.'],['die Stunde','a hora (duração)'],['die Minute','o minuto'],['halb','meia (… e meia)'],['das Viertel','o quarto (de hora)'],['nach','depois / e (horas)'],['vor','antes / para (horas)'],['um … Uhr','às … horas'],['früh','cedo'],['spät','tarde'],['pünktlich','pontual']]},
+ {t:'vocab',title:'Horas',items:[['die Uhr','o relógio / hora (8 Uhr)'],['Wie spät ist es?','Que horas são?'],['Wie viel Uhr ist es?','Que horas são?'],['Es ist drei Uhr.','São três horas.'],['die Stunde','a hora (duração)'],['die Minute','o minuto'],['halb','meia (… e meia)'],['das Viertel','o quarto (de hora)'],['nach','depois / e (horas)'],['vor','antes / para (horas); em frente a'],['um … Uhr','às … horas'],['früh','cedo'],['spät','tarde'],['pünktlich','pontual']]},
  {t:'info',title:'Hora oficial e informal',html:`<p><b>Oficial</b> (rádio, estação, trabalho) – como no Brasil, 0–24h: <span class="es-t">Es ist vierzehn Uhr dreißig.</span> (14:30)</p>
  <p><b>Informal</b> (no dia a dia) – 1–12h:</p>
  <table><tr><td>3:05</td><td class="es-t">fünf nach drei</td></tr>
@@ -805,7 +805,7 @@ lessons:[
  {t:'tr',de:'O curso começa às nove.',a:['Der Kurs fängt um neun Uhr an.','Der Kurs fängt um neun an.','Der Kurs beginnt um neun Uhr.','Der Kurs beginnt um neun.']}
 ]},
 {id:'l4',title:'Combinar e cancelar',desc:'Hast du Zeit? · Termine · Ich kann leider nicht.',steps:[
- {t:'vocab',title:'Combinar',items:[['Hast du Zeit?','Você tem tempo?'],['die Zeit','o tempo'],['der Termin','o compromisso / horário marcado'],['die Verabredung','o encontro (combinado)'],['Wann?','Quando?'],['Geht es am …?','Dá na …?'],['Das geht.','Dá. / Pode ser.'],['Das passt gut.','Fica bom.'],['Ich kann leider nicht.','Infelizmente não posso.'],['vielleicht','talvez'],['das Kino','o cinema'],['der Film','o filme'],['Bis dann!','Até lá!'],['die Entschuldigung','a desculpa'],['Entschuldigung!','Desculpe!']]},
+ {t:'vocab',title:'Combinar',items:[['Hast du Zeit?','Você tem tempo?'],['die Zeit','o tempo'],['der Termin','o compromisso / a consulta (horário marcado)'],['die Verabredung','o encontro (combinado)'],['Wann?','Quando?'],['Geht es am …?','Dá na …?'],['Das geht.','Dá. / Pode ser.'],['Das passt gut.','Fica bom.'],['Ich kann leider nicht.','Infelizmente não posso.'],['vielleicht','talvez'],['das Kino','o cinema'],['der Film','o filme'],['Bis dann!','Até lá!'],['die Entschuldigung','a desculpa'],['Entschuldigung!','Desculpe!']]},
  {t:'dialog',place:'Büro',title:'Cinema com a Jana',scene:'No intervalo, a Jana fala com você.',lines:[
   {n:'Jana',es:'Lucas, hast du diese Woche Zeit? Ich möchte ins Kino gehen.',de:'Lucas, você tem tempo nesta semana? Quero ir ao cinema.'},
   {you:true,opts:[{es:'Ja, gern! Wann?',ok:true},{es:'Ja, gern! Wo wohnst du?',ok:false,why:'A pergunta importante agora é <b>quando</b>.'}]},
@@ -880,7 +880,7 @@ lessons:[
  {t:'tr',de:'Ela quer viajar.',a:['Sie will reisen.']}
 ]},
 {id:'l3',title:'O tempo',desc:'Es regnet. Die Sonne scheint. Es ist kalt.',steps:[
- {t:'vocab',title:'Tempo',items:[['das Wetter','o tempo (clima)'],['die Sonne','o sol'],['Die Sonne scheint.','O sol está brilhando.'],['der Regen','a chuva'],['Es regnet.','Está chovendo.'],['der Schnee','a neve'],['Es schneit.','Está nevando.'],['der Wind','o vento'],['die Wolke','a nuvem'],['warm','quente / morno'],['heiß','muito quente'],['kalt','frio'],['kühl','fresco'],['schön','bonito (tempo bom)'],['schlecht','ruim'],['der Grad','o grau'],['minus','menos (abaixo de zero)']]},
+ {t:'vocab',title:'Tempo',items:[['das Wetter','o tempo (clima)'],['die Sonne','o sol'],['Die Sonne scheint.','O sol está brilhando.'],['der Regen','a chuva'],['Es regnet.','Está chovendo.'],['der Schnee','a neve'],['Es schneit.','Está nevando.'],['der Wind','o vento'],['die Wolke','a nuvem'],['warm','quente / morno; (aluguel) com despesas'],['heiß','muito quente'],['kalt','frio'],['kühl','fresco'],['schön','bonito; (tempo) bom'],['schlecht','mal / ruim'],['der Grad','o grau'],['minus','menos (abaixo de zero)']]},
  {t:'info',title:'Falar do tempo',html:`<table><tr><td class="es-t">Wie ist das Wetter?</td><td>Como está o tempo?</td></tr>
  <tr><td class="es-t">Es ist schön / kalt / warm.</td><td>Está bonito / frio / quente.</td></tr>
  <tr><td class="es-t">Es regnet. Es schneit.</td><td>Está chovendo. Está nevando.</td></tr>
@@ -982,7 +982,7 @@ lessons:[
  {t:'match',q:'Ligue as palavras novas.',pairs:[['die Autobahn', 'a rodovia'], ['der Lkw', 'o caminhão'], ['eilig', 'com pressa'], ['der Absender', 'o remetente'], ['erlauben', 'permitir']]}
 ]},
 {id:'l3',title:'Pedir e dar direções',desc:'Wie komme ich zum …? · links, rechts, geradeaus · Imperativ',steps:[
- {t:'vocab',title:'Direções',items:[['Wie komme ich zum / zur …?','Como chego ao / à …?'],['links','à esquerda'],['rechts','à direita'],['geradeaus','em frente / reto'],['die erste / zweite Straße','a primeira / segunda rua'],['bis zur Ampel','até o semáforo'],['die Ampel','o semáforo'],['über die Straße','atravessando a rua'],['neben','ao lado de'],['vor','em frente a / antes de'],['hinter','atrás de'],['zwischen','entre'],['gegenüber','em frente (do outro lado)'],['Entschuldigung, …','Com licença, …']]},
+ {t:'vocab',title:'Direções',items:[['Wie komme ich zum / zur …?','Como chego ao / à …?'],['links','à esquerda'],['rechts','à direita'],['geradeaus','em frente / reto'],['die erste / zweite Straße','a primeira / segunda rua'],['bis zur Ampel','até o semáforo'],['die Ampel','o semáforo'],['über die Straße','atravessando a rua'],['neben','ao lado de'],['vor','antes / para (horas); em frente a'],['hinter','atrás de'],['zwischen','entre'],['gegenüber','em frente (do outro lado)'],['Entschuldigung, …','Com licença, …']]},
  {t:'info',title:'zu + dativo: zum, zur',html:`<p>Para dizer <b>para onde</b> (pessoa ou lugar, não cidade), use <b>zu</b> + dativo:</p>
  <table><tr><td class="es-t">der Bahnhof</td><td class="es-t">zu dem → <b>zum</b> Bahnhof</td></tr>
  <tr><td class="es-t">die Post</td><td class="es-t">zu der → <b>zur</b> Post</td></tr>
@@ -1165,7 +1165,7 @@ lessons:[
  {t:'listen',es:'Mir tut der Hals weh.',de:'Minha garganta dói.'}
 ]},
 {id:'l2',title:'No médico',desc:'Was fehlt Ihnen? · Termin · sollen · Gute Besserung',steps:[
- {t:'vocab',title:'Saúde',items:[['krank','doente'],['gesund','saudável'],['das Fieber','a febre'],['der Schnupfen','o resfriado (nariz)'],['der Husten','a tosse'],['die Erkältung','o resfriado'],['die Schmerzen (Pl.)','as dores'],['der Arzt / die Ärztin','o médico / a médica'],['die Praxis','o consultório'],['der Termin','a consulta (horário)'],['das Wartezimmer','a sala de espera'],['die Versichertenkarte','a carteirinha do plano de saúde'],['das Rezept','a receita'],['das Medikament','o remédio'],['die Tablette','o comprimido'],['die Krankmeldung','o atestado médico'],['Was fehlt Ihnen?','O que o senhor tem?'],['Gute Besserung!','Melhoras!']]},
+ {t:'vocab',title:'Saúde',items:[['krank','doente'],['gesund','saudável'],['das Fieber','a febre'],['der Schnupfen','o resfriado (nariz)'],['der Husten','a tosse'],['die Erkältung','o resfriado'],['die Schmerzen (Pl.)','as dores'],['der Arzt / die Ärztin','o médico / a médica'],['die Praxis','o consultório'],['der Termin','o compromisso / a consulta (horário marcado)'],['das Wartezimmer','a sala de espera'],['die Versichertenkarte','a carteirinha do plano de saúde'],['das Rezept','a receita'],['das Medikament','o remédio'],['die Tablette','o comprimido'],['die Krankmeldung','o atestado médico'],['Was fehlt Ihnen?','O que o senhor tem?'],['Gute Besserung!','Melhoras!']]},
  {t:'info',title:'sollen – o conselho de outra pessoa',html:`<table><tr><th></th><th>sollen</th></tr><tr><td>ich / er / sie</td><td class="es-t">soll</td></tr><tr><td>du</td><td class="es-t">sollst</td></tr><tr><td>wir / sie / Sie</td><td class="es-t">sollen</td></tr><tr><td>ihr</td><td class="es-t">sollt</td></tr></table>
  <p><b>sollen</b> = “dever” quando <b>outra pessoa</b> diz o que fazer (médico, chefe):</p>
  <div class="ex"><span class="es-t">Die Ärztin sagt, ich soll im Bett bleiben.</span> = A médica diz que eu devo ficar de cama.<br><span class="es-t">Was soll ich machen?</span> = O que eu devo fazer?</div>
@@ -1259,7 +1259,7 @@ lessons:[
  {t:'tr',de:'Nas férias vamos para as montanhas.',a:['Im Urlaub fahren wir in die Berge.','Im Urlaub gehen wir in die Berge.']}
 ]},
 {id:'l2',title:'No hotel',desc:'Einzelzimmer, Doppelzimmer · Rezeption',steps:[
- {t:'vocab',title:'Hotel',items:[['das Hotel','o hotel'],['die Rezeption','a recepção'],['das Einzelzimmer','o quarto de solteiro'],['das Doppelzimmer','o quarto de casal'],['die Nacht, die Nächte','a noite, as noites'],['übernachten','pernoitar'],['die Übernachtung','a diária / o pernoite'],['das Frühstück','o café da manhã'],['die Halbpension','a meia pensão'],['der Schlüssel','a chave'],['frei','livre'],['besetzt','ocupado'],['die Dusche','o chuveiro'],['reservieren','reservar'],['die Reservierung','a reserva'],['das WLAN','o Wi-Fi'],['der Fernseher','a televisão (aparelho)']]},
+ {t:'vocab',title:'Hotel',items:[['das Hotel','o hotel'],['die Rezeption','a recepção'],['das Einzelzimmer','o quarto de solteiro'],['das Doppelzimmer','o quarto de casal'],['die Nacht, die Nächte','a noite, as noites'],['übernachten','pernoitar'],['die Übernachtung','a diária / o pernoite'],['das Frühstück','o café da manhã'],['die Halbpension','a meia pensão'],['der Schlüssel','a chave'],['frei','livre / disponível'],['besetzt','ocupado'],['die Dusche','o chuveiro'],['reservieren','reservar'],['die Reservierung','a reserva'],['das WLAN','o Wi-Fi'],['der Fernseher','a televisão (aparelho)']]},
  {t:'dialog',place:'Hotel am Hafen',title:'Na recepção',scene:'Você chega a um hotel em Hamburgo.',lines:[
   {n:'Rezeption',es:'Guten Abend! Willkommen im Hotel am Hafen.',de:'Boa noite! Bem-vindo ao Hotel am Hafen.'},
   {you:true,opts:[{es:'Guten Abend. Ich habe ein Einzelzimmer reserviert. Mein Name ist Souza.',ok:true},{es:'Guten Abend. Ich habe einen Schlüssel.',ok:false,why:'Você ainda não tem a chave – diga que você <b>reservou</b> um quarto.'}]},
@@ -1276,7 +1276,7 @@ lessons:[
 ]},
 {id:'l3',title:'Aeroporto e passeios',desc:'Abflug, Ankunft, Zoll · Sehenswürdigkeiten, Führung, Eintritt',steps:[
  {t:'vocab',title:'Aeroporto',items:[['der Flughafen','o aeroporto'],['das Flugzeug','o avião'],['fliegen','voar'],['abfliegen','decolar / partir (avião)'],['der Abflug','a partida (do voo)'],['die Ankunft','a chegada'],['landen','pousar'],['der Flug','o voo'],['der Zoll','a alfândega'],['der Schalter','o balcão / o guichê'],['gültig','válido'],['die Auskunft','a informação'],['die Ansage','o anúncio (alto-falante)'],['der Anschluss','a conexão']]},
- {t:'vocab',title:'Passear',items:[['die Sehenswürdigkeit','o ponto turístico'],['besichtigen','visitar (um lugar)'],['besuchen','visitar (pessoas / lugares)'],['die Führung','a visita guiada'],['der Reiseführer','o guia (pessoa ou livro)'],['der Eintritt','a entrada (preço)'],['der Erwachsene','o adulto'],['das Kind, die Kinder','a criança'],['international','internacional'],['kulturell','cultural'],['das Bild','o quadro / a imagem'],['der Hafen','o porto']]},
+ {t:'vocab',title:'Passear',items:[['die Sehenswürdigkeit','o ponto turístico'],['besichtigen','visitar (lugar, imóvel)'],['besuchen','visitar (pessoas / lugares)'],['die Führung','a visita guiada'],['der Reiseführer','o guia (pessoa ou livro)'],['der Eintritt','a entrada (preço)'],['der Erwachsene','o adulto'],['das Kind, die Kinder','a criança'],['international','internacional'],['kulturell','cultural'],['das Bild','o quadro / a imagem'],['der Hafen','o porto']]},
  {t:'read',hideText:true,title:'Aviso no aeroporto',intro:'Ouça o aviso no aeroporto de Frankfurt.',text:`Achtung, eine Durchsage für alle Passagiere nach Lissabon: Ihr Flug L H elf siebzig hat dreißig Minuten Verspätung. Der neue Abflug ist um fünfzehn Uhr vierzig. Bitte gehen Sie zu Gate B zwölf.`,de:`Atenção, um aviso para todos os passageiros para Lisboa: o seu voo LH 1170 está trinta minutos atrasado. A nova partida é às 15h40. Por favor, dirijam-se ao portão B12.`},
  {t:'mc',q:'Wann fliegt das Flugzeug nach Lissabon jetzt ab?',opts:['um 15:40 Uhr','um 15:10 Uhr','um 11:70 Uhr'],a:0},
  {t:'mc',q:'Zu welchem Gate sollen die Passagiere gehen?',opts:['B12','B30','L11'],a:0},
@@ -2578,6 +2578,193 @@ Bei einer Störung erscheint auf dem Display ein Code. Die Liste der Codes finde
 resumen:`<h3>Pronomes relativos</h3><table><tr><td></td><td>masc.</td><td>fem.</td><td>neutro</td><td>plural</td></tr><tr><td>nom.</td><td class="es-t">der</td><td class="es-t">die</td><td class="es-t">das</td><td class="es-t">die</td></tr><tr><td>acus.</td><td class="es-t">den</td><td class="es-t">die</td><td class="es-t">das</td><td class="es-t">die</td></tr><tr><td>dat.</td><td class="es-t">dem</td><td class="es-t">der</td><td class="es-t">dem</td><td class="es-t">denen</td></tr></table>
 <p class="es-t">Der Nachbar, der oben wohnt … · den ich kenne … · dem ich helfe … · mit dem ich spiele …</p>
 <h3>Casa</h3><p class="es-t">einrichten · die Steckdose · einschalten · installieren · anschließen · die Anleitung · die Störung · Rücksicht nehmen auf · der Lärm</p>`});
+
+/* ================= KAPITEL 28 · GESUNDHEIT & ERNÄHRUNG ================= */
+LANGS.de.course.units.push({id:'k28',n:'28',level:'B1',title:'Gesundheit & Ernährung',sub:'Alimentação saudável · no hospital · zu + infinitivo · um … zu / damit (finalidade)',
+goals:['Über Ernährung und Gewohnheiten sprechen','Im Krankenhaus: Untersuchung, Operation, Notaufnahme','Infinitiv mit zu: Ich habe vor, gesünder zu essen.','Ziele ausdrücken: um … zu / damit','Ein Rezept verstehen und weitergeben'],
+situacion:{title:'Na consulta: hábitos saudáveis',npc:'Dr. Wolf',scene:'O check-up mostrou que você está com o colesterol alto. A médica conversa com você sobre alimentação e exercício.',role:'Du bist Dr. Wolf, Hausärztin in Frankfurt, freundlich und direkt. Du siezt. Die Blutwerte von Lucas zeigen zu viel Cholesterin. Frag nach seinen Essgewohnheiten und nach Sport, gib Tipps mit „Versuchen Sie, … zu …“ und „Um … zu …“, frag, was er sich vornimmt. Schlag eine Ernährungsberatung vor, die von der Krankenkasse bezahlt wird. Sprich natürliches Deutsch auf B1-Niveau.',goal:'Conte como você come e se exercita, diga o que pretende mudar (Ich habe vor, … zu …) e pergunte sobre a orientação nutricional.'},
+placement:[
+ {t:'mc',q:'Ich habe vor, mehr Sport ___.',opts:['zu machen','machen','zu mache'],a:0},
+ {t:'mc',q:'Ich gehe joggen, ___ fit zu bleiben.',opts:['um','damit','für'],a:0},
+ {t:'mc',q:'Ich koche viel Gemüse, ___ meine Kinder gesund essen.',opts:['damit','um','zu'],a:0},
+ {t:'gap',q:'Es ist wichtig, genug Wasser ___ trinken.',a:['zu']},
+ {t:'mc',q:'„a alimentação“',opts:['die Ernährung','die Erziehung','die Erholung'],a:0},
+ {t:'gap',q:'Vergiss nicht, die Tabletten ___. (nehmen + zu)',a:['zu nehmen']}],
+lessons:[
+{id:'l1',title:'Alimentação',desc:'die Ernährung, die Zutaten, zubereiten …',steps:[
+ {t:'vocab',title:'Comer bem',items:[['die Ernährung','a alimentação'],['sich ernähren','alimentar-se'],['die Mahlzeit','a refeição'],['das Nahrungsmittel','o alimento'],['die Zutaten (Pl.)','os ingredientes'],['zubereiten','preparar'],['roh','cru'],['salzig','salgado'],['fett','gorduroso'],['das Fett','a gordura'],['vegetarisch','vegetariano'],['die Diät','a dieta'],['das Vitamin','a vitamina'],['das Gewürz','o tempero'],['der Essig','o vinagre'],['das Mehl','a farinha'],['die Zwiebel','a cebola'],['die Karotte','a cenoura'],['der Pilz','o cogumelo'],['die Erholung','o descanso, a recuperação'],['erschöpft','esgotado']]},
+ {t:'mc',q:'Ich esse kein Fleisch und keinen Fisch. Ich bin ___.',opts:['Vegetarier','Diät','fett'],a:0},
+ {t:'mc',q:'Für den Kuchen brauchst du Mehl, Zucker, Eier und Butter. Das sind die ___.',opts:['Zutaten','Mahlzeiten','Gewürze'],a:0},
+ {t:'gap',q:'Sushi isst man mit ___ Fisch. (cru)',a:['rohem|rohen']},
+ {t:'match',q:'Ligue.',pairs:[['die Zwiebel','a cebola'],['das Gewürz','o tempero'],['die Mahlzeit','a refeição'],['erschöpft','esgotado'],['zubereiten','preparar']]},
+ {t:'read',title:'Leitura: Essen in Deutschland',text:`Viele Deutsche essen drei Mahlzeiten am Tag, aber die wichtigste ist oft nicht das Mittagessen, sondern das Frühstück. Mittags essen viele Berufstätige in der Kantine oder nur schnell ein Brötchen. Abends gibt es häufig „Abendbrot“: Brot mit Käse, Wurst und etwas Gemüse – also eine kalte Mahlzeit. Für Menschen aus Brasilien, wo man mittags warm und reichlich isst, ist das am Anfang ungewöhnlich. Immer mehr Deutsche ernähren sich übrigens vegetarisch: Laut Umfragen sind es etwa zehn Prozent.`,de:`Muitos alemães fazem três refeições por dia, mas a mais importante muitas vezes não é o almoço, e sim o café da manhã. No almoço, muitos trabalhadores comem na cantina ou só um pãozinho rápido. À noite muitas vezes tem „Abendbrot“: pão com queijo, frios e um pouco de legumes – ou seja, uma refeição fria. Para quem vem do Brasil, onde se almoça quente e bem, isso é estranho no começo. Aliás, cada vez mais alemães são vegetarianos: segundo pesquisas, cerca de dez por cento.`},
+ {t:'mc',q:'Was ist „Abendbrot“?',opts:['eine kalte Mahlzeit mit Brot','ein warmes Mittagessen','ein Kuchen am Nachmittag'],a:0},
+ {t:'mc',q:'Wie viele Deutsche ernähren sich vegetarisch?',opts:['etwa zehn Prozent','die Hälfte','fast niemand'],a:0},
+ {t:'tr',de:'Eu tento me alimentar de forma saudável.',a:['Ich versuche, mich gesund zu ernähren.']}
+]},
+{id:'l2',title:'zu + infinitivo',desc:'Ich habe vor, … zu … · Es ist wichtig, … zu …',steps:[
+ {t:'info',title:'Infinitivo com zu',html:`<p>Depois de muitos verbos e expressões vem <b>zu + infinitivo</b> no final da frase:</p>
+ <table><tr><td class="es-t">Ich habe vor, gesünder <b>zu essen</b>.</td><td>Pretendo comer de forma mais saudável.</td></tr>
+ <tr><td class="es-t">Ich versuche, weniger Zucker <b>zu essen</b>.</td><td>Tento comer menos açúcar.</td></tr>
+ <tr><td class="es-t">Es ist wichtig, genug <b>zu schlafen</b>.</td><td>É importante dormir o suficiente.</td></tr>
+ <tr><td class="es-t">Hast du Lust, mit mir joggen <b>zu gehen</b>?</td><td>Você está a fim de correr comigo?</td></tr>
+ <tr><td class="es-t">Vergiss nicht, die Tabletten <b>zu nehmen</b>.</td><td>Não esqueça de tomar os comprimidos.</td></tr></table>
+ <div class="ex">Verbos separáveis: o <b>zu</b> fica no meio – <span class="es-t">Ich habe vergessen, dich <b>anzurufen</b>.</span></div>
+ <div class="ojo">Depois de modais (<i>können, müssen, wollen …</i>) <b>sem</b> zu: <span class="es-t">Ich will gesünder essen.</span></div>`},
+ {t:'mc',q:'Ich habe keine Zeit, jeden Tag ___.',opts:['zu kochen','kochen','kochen zu'],a:0},
+ {t:'mc',q:'Ich muss mehr Wasser ___.',opts:['trinken','zu trinken','trinke'],a:0},
+ {t:'gap',q:'Es ist gesund, viel Obst ___ essen.',a:['zu']},
+ {t:'gap',q:'Ich habe vergessen, Brot ___. (einkaufen + zu)',a:['einzukaufen']},
+ {t:'gap',q:'Hör endlich auf, so viel ___! (rauchen + zu)',a:['zu rauchen']},
+ {t:'order',es:'Ich habe vor nächste Woche mit dem Rauchen aufzuhören',de:'Pretendo parar de fumar na semana que vem.'},
+ {t:'tr',de:'Não é fácil acordar cedo.',a:['Es ist nicht leicht, früh aufzustehen.','Es ist nicht einfach, früh aufzustehen.']},
+ {t:'speak',es:'Ich habe mir vorgenommen, weniger Süßigkeiten zu essen und öfter Rad zu fahren.',de:'Decidi comer menos doces e andar de bicicleta com mais frequência.',tip:'<i>zu essen</i>, <i>Rad zu fahren</i> – o zu vem antes do infinitivo.'}
+]},
+{id:'l3',title:'No hospital – um … zu / damit',desc:'die Untersuchung, die Operation · Ziele ausdrücken',steps:[
+ {t:'vocab',title:'Hospital e tratamento',items:[['die Untersuchung','o exame'],['untersuchen','examinar'],['die Operation','a cirurgia'],['operieren','operar'],['die Notaufnahme','o pronto-socorro'],['die Infektion','a infecção'],['die Therapie','a terapia'],['die Spritze','a injeção'],['die Salbe','a pomada'],['das Schmerzmittel','o analgésico'],['der Pfleger / die Pflegerin','o enfermeiro / a enfermeira'],['die Krankenkasse','o plano de saúde (seguro)'],['der Muskel','o músculo'],['der Atem','a respiração, o fôlego'],['schwitzen','suar'],['körperlich','físico'],['die Schwangerschaft','a gravidez'],['süchtig','viciado'],['schädlich','prejudicial'],['giftig','venenoso, tóxico']]},
+ {t:'info',title:'Finalidade: um … zu / damit',html:`<table><tr><td class="es-t"><b>um</b> … <b>zu</b> + infinitivo</td><td>mesma pessoa nas duas partes</td><td class="es-t">Ich mache Sport, <b>um</b> fit <b>zu</b> bleiben.</td></tr>
+ <tr><td class="es-t"><b>damit</b> + oração</td><td>pessoas diferentes (ou opcional com a mesma)</td><td class="es-t">Ich koche gesund, <b>damit</b> meine Kinder gut essen.</td></tr></table>
+ <div class="ex">Pergunta: <span class="es-t">Wozu? / Warum?</span> = Para quê? – <span class="es-t">Um gesund zu bleiben.</span></div>`},
+ {t:'mc',q:'Ich gehe zum Arzt, ___ mich untersuchen zu lassen.',opts:['um','damit','dass'],a:0},
+ {t:'mc',q:'Die Ärztin gibt mir eine Salbe, ___ die Haut besser heilt.',opts:['damit','um','zu'],a:0},
+ {t:'gap',q:'Viele Leute fahren Rad, ___ Geld ___ sparen.',a:['um','zu']},
+ {t:'mc',q:'Mitten in der Nacht hatte Lucas starke Bauchschmerzen. Wohin ist er gefahren?',opts:['in die Notaufnahme','in die Apotheke','zur Krankenkasse'],a:0},
+ {t:'tr',de:'Eu durmo cedo para estar descansado amanhã.',a:['Ich gehe früh schlafen, um morgen ausgeruht zu sein.','Ich gehe früh ins Bett, um morgen ausgeruht zu sein.']},
+ {t:'tr',de:'Eu falo devagar para que você me entenda.',a:['Ich spreche langsam, damit du mich verstehst.']}
+]},
+{id:'l4',title:'Ler e escrever: receita e conselhos',desc:'Rezept · Forumsbeitrag',steps:[
+ {t:'read',title:'Leitura: Rezept für Gemüsesuppe (4 Personen)',text:`Zutaten: 2 Zwiebeln, 3 Karotten, 2 Kartoffeln, 200 g Pilze, 1 Liter Wasser, 2 EL Öl, Salz, Pfeffer, Gewürze nach Geschmack.
+Zubereitung: Zuerst die Zwiebeln klein schneiden und in Öl anbraten. Dann das Gemüse waschen, schneiden und dazugeben. Nach fünf Minuten das Wasser hinzufügen und alles 20 Minuten kochen lassen. Am Ende mit Salz, Pfeffer und Gewürzen abschmecken. Tipp: Die Suppe schmeckt am nächsten Tag noch besser. Wer mag, kann sie mit Brot servieren.`,de:`Ingredientes: 2 cebolas, 3 cenouras, 2 batatas, 200 g de cogumelos, 1 litro de água, 2 colheres de sopa de óleo, sal, pimenta, temperos a gosto.\nPreparo: Primeiro corte as cebolas em pedaços pequenos e refogue no óleo. Depois lave os legumes, corte e acrescente. Depois de cinco minutos coloque a água e deixe tudo cozinhar por 20 minutos. No final, tempere com sal, pimenta e temperos. Dica: a sopa fica ainda melhor no dia seguinte. Quem quiser pode servir com pão.`},
+ {t:'mc',q:'Was macht man zuerst?',opts:['die Zwiebeln schneiden und anbraten','das Wasser kochen','die Pilze waschen'],a:0},
+ {t:'mc',q:'Wie lange kocht die Suppe?',opts:['20 Minuten','5 Minuten','eine Stunde'],a:0},
+ {t:'free',task:'No fórum „Gesund leben in Deutschland“, uma pessoa recém-chegada pergunta como manter hábitos saudáveis. Escreva uma resposta (~80 palavras): 1) o que você faz (alimentação, esporte), 2) o que foi difícil no começo, 3) dois conselhos (Versuch, … zu … / um … zu …).',hint:'Hallo! Ich versuche, … Am Anfang war es schwierig, … Mein Tipp: Versuch, … zu … Um … zu …, solltest du …',focus:'zu + Infinitiv, um … zu / damit, Ratschläge',model:'Hallo! Ich bin vor zwei Jahren nach Deutschland gekommen und hatte am Anfang die gleichen Probleme. Weil es im Winter so früh dunkel wird, hatte ich keine Lust, Sport zu machen, und habe viel Schokolade gegessen. Mittlerweile gehe ich zweimal pro Woche schwimmen. Mein Tipp: Versuch, einen Sportverein zu finden – dort lernst du auch Leute kennen. Und koch am Wochenende für die ganze Woche vor, um nicht jeden Tag Fertiggerichte zu essen. Viel Erfolg!'}
+]}],
+resumen:`<h3>zu + infinitivo</h3><p class="es-t">Ich habe vor, … zu essen. · Ich versuche, … · Es ist wichtig, … · Vergiss nicht, … · anzurufen / einzukaufen (separáveis)</p><p>Depois de modais: sem zu.</p>
+<h3>Finalidade</h3><table><tr><td class="es-t">um … zu</td><td>mesmo sujeito: Ich mache Sport, um fit zu bleiben.</td></tr><tr><td class="es-t">damit</td><td>sujeitos diferentes: …, damit meine Kinder gesund essen.</td></tr></table>
+<h3>Saúde</h3><p class="es-t">die Ernährung · die Mahlzeit · die Zutaten · die Untersuchung · die Operation · die Notaufnahme · die Krankenkasse · das Schmerzmittel</p>`});
+
+/* ================= KAPITEL 29 · REISEN & MOBILITÄT ================= */
+LANGS.de.course.units.push({id:'k29',n:'29',level:'B1',title:'Reisen & Mobilität',sub:'Trânsito e carro · viagens e paisagens · Plusquamperfekt · nachdem / bevor',
+goals:['Im Straßenverkehr: Umleitung, Strafzettel, überholen','Reisen planen und beschreiben: Strecke, Aussicht, Saison','Plusquamperfekt: Ich hatte das Ticket schon gekauft.','nachdem / bevor / während','Eine Reise erzählen – mit Pannen'],
+situacion:{title:'Alugar um carro',npc:'Mitarbeiter',scene:'Você quer alugar um carro por um fim de semana para viajar até a costa do mar do Norte.',role:'Du arbeitest bei einer Autovermietung am Frankfurter Hauptbahnhof, freundlich und genau. Du siezt. Frag nach Führerschein, Zeitraum, Größe des Autos; erkläre Versicherung, Tankregel („voll abholen, voll zurückbringen“), Kilometergrenze und was bei einem Unfall oder einem Strafzettel passiert. Sprich natürliches Deutsch auf B1-Niveau.',goal:'Reserve o carro, pergunte sobre seguro, combustível e o que fazer em caso de acidente.'},
+placement:[
+ {t:'mc',q:'Als wir am Bahnhof ankamen, ___ der Zug schon ___.',opts:['war … abgefahren','ist … abgefahren','hatte … abgefahren'],a:0},
+ {t:'mc',q:'___ ich gegessen hatte, ging ich spazieren.',opts:['Nachdem','Bevor','Während'],a:0},
+ {t:'mc',q:'___ du losfährst, musst du tanken.',opts:['Bevor','Nachdem','Seit'],a:0},
+ {t:'gap',q:'Ich hatte das Hotel schon ___. (buchen)',a:['gebucht']},
+ {t:'mc',q:'Die Straße ist gesperrt. Es gibt eine ___.',opts:['Umleitung','Einbahnstraße','Kurve'],a:0},
+ {t:'mc',q:'„a multa (de estacionamento)“',opts:['der Strafzettel','die Strafe','der Stempel'],a:0}],
+lessons:[
+{id:'l1',title:'No trânsito',desc:'die Umleitung, überholen, der Strafzettel …',steps:[
+ {t:'vocab',title:'Trânsito',items:[['das Fahrzeug','o veículo'],['das Motorrad','a moto'],['der Radfahrer / die Radfahrerin','o ciclista / a ciclista'],['der Fußgänger / die Fußgängerin','o pedestre'],['die Fußgängerzone','o calçadão'],['die Fahrbahn','a pista'],['die Einbahnstraße','a rua de mão única'],['die Umleitung','o desvio'],['die Kurve','a curva'],['steil','íngreme'],['abbiegen','virar, dobrar'],['überholen','ultrapassar'],['bremsen','frear'],['die Bremse','o freio'],['sich anschnallen','pôr o cinto'],['das Benzin','a gasolina'],['die Geschwindigkeit','a velocidade'],['das Kennzeichen','a placa (do carro)'],['der Strafzettel','a multa (de trânsito)'],['der Führerschein','a carteira de motorista']]},
+ {t:'mc',q:'Hier darf man nur in eine Richtung fahren. Das ist eine ___.',opts:['Einbahnstraße','Umleitung','Fußgängerzone'],a:0},
+ {t:'mc',q:'Auf der Autobahn darf man nur links ___.',opts:['überholen','abbiegen','bremsen'],a:0},
+ {t:'gap',q:'Bitte ___ Sie sich ___, wir fahren los! (pôr o cinto)',a:['schnallen','an']},
+ {t:'match',q:'Ligue.',pairs:[['die Umleitung','o desvio'],['das Kennzeichen','a placa'],['der Strafzettel','a multa'],['bremsen','frear'],['steil','íngreme']]},
+ {t:'read',title:'Leitura: Regeln für Radfahrer',text:`Wer in Deutschland Rad fährt, muss einige Regeln kennen. Radfahrer müssen den Radweg benutzen, wenn es einen gibt. In der Fußgängerzone darf man meistens nicht fahren, sondern muss das Rad schieben. Wer abbiegen will, zeigt das mit der Hand an. Nachts braucht das Fahrrad Licht vorne und hinten. Mit dem Handy in der Hand zu fahren, ist verboten und kostet 55 Euro. Übrigens: Auch Radfahrer können einen Strafzettel bekommen, zum Beispiel wenn sie bei Rot über die Ampel fahren.`,de:`Quem anda de bicicleta na Alemanha precisa conhecer algumas regras. Ciclistas têm que usar a ciclovia quando há uma. No calçadão normalmente não se pode pedalar, é preciso empurrar a bicicleta. Quem quer virar indica com a mão. À noite a bicicleta precisa de luz na frente e atrás. Andar com o celular na mão é proibido e custa 55 euros. Aliás: ciclistas também podem levar multa, por exemplo quando passam no sinal vermelho.`},
+ {t:'mc',q:'Was muss man in der Fußgängerzone meistens tun?',opts:['das Rad schieben','langsam fahren','klingeln'],a:0},
+ {t:'mc',q:'Was kostet Radfahren mit dem Handy in der Hand?',opts:['55 Euro','nichts','5 Euro'],a:0},
+ {t:'tr',de:'Na próxima esquina você precisa virar à direita.',a:['An der nächsten Kreuzung musst du rechts abbiegen.','An der nächsten Ecke musst du rechts abbiegen.','An der nächsten Kreuzung müssen Sie rechts abbiegen.']}
+]},
+{id:'l2',title:'Plusquamperfekt',desc:'Ich hatte schon … · Der Zug war schon abgefahren.',steps:[
+ {t:'info',title:'O Plusquamperfekt',html:`<p>Para dizer que algo aconteceu <b>antes</b> de outra coisa no passado: <b>hatte/war</b> + particípio (= „tinha feito“).</p>
+ <table><tr><td class="es-t">Als wir ankamen, <b>war</b> der Zug schon <b>abgefahren</b>.</td><td>Quando chegamos, o trem já tinha partido.</td></tr>
+ <tr><td class="es-t">Ich <b>hatte</b> das Hotel schon <b>gebucht</b>, aber dann wurde ich krank.</td><td>Eu já tinha reservado o hotel, mas aí fiquei doente.</td></tr></table>
+ <div class="ex">Mesma regra do Perfekt: verbos de movimento/mudança com <b>sein</b> (<span class="es-t">war gefahren, war passiert</span>), os outros com <b>haben</b> (<span class="es-t">hatte gekauft</span>).</div>
+ <div class="ojo"><b>nachdem</b> (depois que) quase sempre leva Plusquamperfekt: <span class="es-t">Nachdem wir gegessen <b>hatten</b>, gingen wir zum Strand.</span> · <b>bevor</b> (antes que): <span class="es-t">Bevor wir losfuhren, tankten wir.</span> · <b>während</b> (enquanto): <span class="es-t">Während ich fuhr, schlief Tom.</span></div>`},
+ {t:'mc',q:'Ich ___ meinen Pass zu Hause vergessen.',opts:['hatte','war','habe gewesen'],a:0},
+ {t:'mc',q:'Als ich ankam, ___ meine Freunde schon gegangen.',opts:['waren','hatten','wurden'],a:0},
+ {t:'gap',q:'Nachdem wir das Auto ___ hatten, fuhren wir los. (tanken)',a:['getankt']},
+ {t:'gap',q:'___ wir abfahren, müssen wir die Koffer packen. (antes que)',a:['Bevor']},
+ {t:'gap',q:'___ Tom fuhr, las ich die Karte. (enquanto)',a:['Während']},
+ {t:'order',es:'Nachdem wir zwei Stunden im Stau gestanden hatten machten wir eine Pause',de:'Depois de ficarmos duas horas no engarrafamento, fizemos uma pausa.'},
+ {t:'tr',de:'Quando cheguei, o show já tinha começado.',a:['Als ich ankam, hatte das Konzert schon angefangen.','Als ich ankam, hatte das Konzert schon begonnen.']},
+ {t:'tr',de:'Antes de viajarmos, compramos um mapa.',a:['Bevor wir losfuhren, kauften wir eine Karte.','Bevor wir losgefahren sind, haben wir eine Karte gekauft.','Bevor wir abfuhren, kauften wir eine Karte.']}
+]},
+{id:'l3',title:'Viajar e paisagens',desc:'die Strecke, die Aussicht, die Küste …',steps:[
+ {t:'vocab',title:'Viagem',items:[['die Strecke','o trecho, o percurso'],['die Entfernung','a distância'],['die Rückfahrt','a viagem de volta'],['die Rundfahrt','o passeio (circuito)'],['der Aufenthalt','a estadia'],['die Saison','a temporada'],['das Souvenir','a lembrancinha'],['das Visum','o visto'],['voraussichtlich','previsto, provavelmente'],['die Aussicht','a vista; a perspectiva'],['die Küste','o litoral'],['das Ufer','a margem'],['der Hügel','a colina'],['das Gebirge','a cordilheira, as montanhas'],['die Burg','o castelo (fortaleza)'],['das Denkmal','o monumento'],['der Turm','a torre']]},
+ {t:'mc',q:'Vom Turm hat man eine tolle ___ über die ganze Stadt.',opts:['Aussicht','Strecke','Saison'],a:0},
+ {t:'mc',q:'Der Zug kommt ___ um 18 Uhr an – wenn es keine Verspätung gibt.',opts:['voraussichtlich','rückwärts','steil'],a:0},
+ {t:'gap',q:'Im Sommer ist ___, da sind die Hotels teurer. (alta temporada → die Haupt___)',a:['Hauptsaison|Saison']},
+ {t:'dialog',place:'Autovermietung',title:'Alugar um carro',scene:'Você quer alugar um carro por um fim de semana.',lines:[
+  {n:'Mitarbeiter',es:'Guten Tag! Für welchen Zeitraum möchten Sie ein Auto mieten?',de:'Bom dia! Para qual período o senhor quer alugar um carro?'},
+  {you:true,opts:[{es:'Von Freitagabend bis Sonntag. Wir wollen an die Nordseeküste fahren.',ok:true},{es:'Ich will ein Auto.',ok:false,why:'Responda à pergunta: o período (von … bis …).'}]},
+  {n:'Mitarbeiter',es:'Gut. Sie bekommen das Auto vollgetankt und bringen es bitte auch vollgetankt zurück.',de:'Certo. O senhor recebe o carro com tanque cheio e, por favor, devolve também cheio.'},
+  {you:true,opts:[{es:'Verstanden. Und was passiert, wenn wir einen Unfall haben?',ok:true},{es:'Verstanden. Und was passiert, wenn wir einen Unfall hatten gehabt?',ok:false,why:'Aqui basta o presente: <i>wenn wir einen Unfall haben</i>.'}]},
+  {n:'Mitarbeiter',es:'Sie sind versichert. Sie zahlen höchstens 500 Euro selbst. Rufen Sie in jedem Fall die Polizei und uns an.',de:'O senhor tem seguro. Paga no máximo 500 euros. Em todo caso, ligue para a polícia e para nós.'},
+  {you:true,opts:[{es:'Gut, dann nehme ich das Angebot. Brauchen Sie meinen Führerschein?',ok:true},{es:'Gut, dann nehme ich das Angebot. Brauchen Sie meinen Strafzettel?',ok:false,why:'Para alugar, você mostra a carteira de motorista: <i>der Führerschein</i>.'}]}]},
+ {t:'tr',de:'A distância até a costa é de 500 quilômetros.',a:['Die Entfernung bis zur Küste beträgt 500 Kilometer.','Die Entfernung bis zur Küste ist 500 Kilometer.','Bis zur Küste sind es 500 Kilometer.']}
+]},
+{id:'l4',title:'Escrever: uma viagem com imprevistos',desc:'Reisebericht (Präteritum + Plusquamperfekt)',steps:[
+ {t:'read',title:'Leitura: Pech auf der Rückfahrt',text:`Letzten Sonntag wollten Jana und ich mit dem Zug aus Hamburg zurückfahren. Wir hatten die Tickets schon Wochen vorher gekauft. Als wir am Bahnhof ankamen, stand auf der Anzeige: „Zug fällt aus“. Ein Baum war wegen des Sturms auf die Strecke gefallen. Nachdem wir eine Stunde gewartet hatten, fuhr endlich ein Ersatzzug – aber nur bis Hannover. Dort mussten wir umsteigen. Insgesamt waren wir neun Stunden unterwegs! Immerhin bekamen wir später einen Teil des Geldes zurück.`,de:`No domingo passado a Jana e eu queríamos voltar de trem de Hamburgo. Tínhamos comprado as passagens semanas antes. Quando chegamos à estação, estava escrito no painel: „Trem cancelado“. Uma árvore tinha caído nos trilhos por causa da tempestade. Depois de esperarmos uma hora, finalmente saiu um trem substituto – mas só até Hannover. Lá tivemos que fazer baldeação. No total ficamos nove horas viajando! Pelo menos depois recebemos parte do dinheiro de volta.`},
+ {t:'mc',q:'Warum fiel der Zug aus?',opts:['Ein Baum war auf die Strecke gefallen.','Der Lokführer war krank.','Es gab einen Streik.'],a:0},
+ {t:'mc',q:'Wie lange waren sie insgesamt unterwegs?',opts:['neun Stunden','eine Stunde','zwei Tage'],a:0},
+ {t:'free',task:'Conte (~80–100 palavras) uma viagem em que algo deu errado: 1) para onde e com quem, 2) o que aconteceu (Präteritum + Plusquamperfekt, nachdem/bevor), 3) como terminou.',hint:'Letztes Jahr fuhr ich mit … nach … Wir hatten … schon … Als wir … , war … schon … Nachdem … , … Am Ende …',focus:'Präteritum, Plusquamperfekt, nachdem/bevor/während, Verkehr',model:'Letzten Sommer fuhr ich mit Tom mit dem Auto an die Ostsee. Wir hatten ein Ferienhaus gebucht und freuten uns sehr. Nach drei Stunden hatten wir plötzlich eine Panne: Ein Reifen war kaputt. Während Tom den Pannendienst anrief, machte ich Picknick am Straßenrand. Nachdem der Mechaniker den Reifen gewechselt hatte, fuhren wir weiter. Als wir ankamen, war es schon dunkel, und die Vermieterin hatte den Schlüssel unter die Matte gelegt. Am Ende war es trotzdem ein toller Urlaub!'}
+]}],
+resumen:`<h3>Plusquamperfekt</h3><p class="es-t">hatte + particípio: Ich hatte das Hotel gebucht. · war + particípio: Der Zug war abgefahren.</p>
+<h3>Tempo</h3><table><tr><td class="es-t">nachdem</td><td>depois que (+ Plusquamperfekt)</td></tr><tr><td class="es-t">bevor</td><td>antes que</td></tr><tr><td class="es-t">während</td><td>enquanto</td></tr></table>
+<h3>Trânsito</h3><p class="es-t">abbiegen · überholen · bremsen · sich anschnallen · die Umleitung · die Einbahnstraße · der Strafzettel · der Führerschein</p>`});
+
+/* ================= KAPITEL 30 · MEDIEN & TECHNIK ================= */
+LANGS.de.course.units.push({id:'k30',n:'30',level:'B1',title:'Medien & Technik',sub:'Internet e aparelhos · notícias e publicidade · Konjunktiv II (seria, teria, iria) · worauf? – darauf',
+goals:['Über Technik und digitales Leben sprechen','Nachrichten, Werbung und Umfragen verstehen','Konjunktiv II: Wünsche und Ratschläge (Ich würde …, Wenn ich … hätte …)','wo(r)- und da(r)-: Worauf wartest du? – Darauf.','Einen Forumsbeitrag mit Meinung schreiben'],
+situacion:{title:'Uma semana sem celular?',npc:'Jana',scene:'A Jana leu que uma escola em Frankfurt proibiu os celulares. Vocês discutem se isso faz sentido.',role:'Du bist Jana, Lucas’ Kollegin, du findest Handys an Schulen eher schädlich. Du duzt. Diskutiere mit Lucas: Vorteile und Nachteile von Smartphones, Handyverbot an Schulen, wie viel Zeit ihr selbst am Handy verbringt. Benutze Konjunktiv II (Wenn ich Lehrerin wäre, würde ich …) und wo(r)-/da(r)- (Worüber ärgerst du dich? – Darüber, dass …). Sprich natürliches Deutsch auf B1-Niveau.',goal:'Dê sua opinião com argumentos, use „Wenn ich …, würde ich …“ e reaja às opiniões da Jana.'},
+placement:[
+ {t:'mc',q:'Wenn ich mehr Zeit ___, würde ich ein Instrument lernen.',opts:['hätte','habe','hatte'],a:0},
+ {t:'mc',q:'An deiner Stelle ___ ich das Handy ausschalten.',opts:['würde','werde','wurde'],a:0},
+ {t:'mc',q:'___ wartest du? – Auf den Bus.',opts:['Worauf','Wofür','Auf was'],a:0},
+ {t:'gap',q:'Ich freue mich auf den Urlaub. – Ich freue mich auch ___.',a:['darauf']},
+ {t:'gap',q:'Es ___ schön, wenn du mitkommen würdest. (sein – Konjunktiv II)',a:['wäre']},
+ {t:'mc',q:'„publicar“',opts:['veröffentlichen','verbreiten','vergleichen'],a:0}],
+lessons:[
+{id:'l1',title:'Vida digital',desc:'digital, das Netzwerk, die Festplatte …',steps:[
+ {t:'vocab',title:'Tecnologia',items:[['digital','digital'],['elektronisch','eletrônico'],['virtuell','virtual'],['die Technik','a técnica, a tecnologia'],['technisch','técnico'],['die Technologie','a tecnologia'],['das Netz','a rede'],['das Netzwerk','a rede (de contatos/computadores)'],['der Virus','o vírus'],['die Festplatte','o disco rígido'],['der Monitor','o monitor'],['der Lautsprecher','o alto-falante'],['die Fernbedienung','o controle remoto'],['die Batterie','a pilha, a bateria'],['kopieren','copiar'],['die Kopie','a cópia'],['einfügen','colar, inserir'],['die Kommunikation','a comunicação'],['der Anrufbeantworter','a secretária eletrônica']]},
+ {t:'mc',q:'Wo ist die ___? Ich will den Fernseher ausmachen.',opts:['Fernbedienung','Festplatte','Batterie'],a:0},
+ {t:'mc',q:'Ich habe den Text ___ und in die E-Mail eingefügt.',opts:['kopiert','gelöscht','gedruckt'],a:0},
+ {t:'gap',q:'Mein Computer ist langsam. Vielleicht hat er einen ___. (vírus)',a:['Virus']},
+ {t:'match',q:'Ligue.',pairs:[['die Festplatte','o disco rígido'],['der Lautsprecher','o alto-falante'],['einfügen','colar'],['virtuell','virtual'],['das Netzwerk','a rede']]},
+ {t:'tr',de:'Você pode me mandar uma cópia do documento?',a:['Kannst du mir eine Kopie des Dokuments schicken?','Kannst du mir eine Kopie vom Dokument schicken?','Können Sie mir eine Kopie des Dokuments schicken?']}
+]},
+{id:'l2',title:'Konjunktiv II: desejos e conselhos',desc:'Ich würde … · Wenn ich … hätte … · Es wäre …',steps:[
+ {t:'info',title:'Konjunktiv II no presente',html:`<p>Para <b>desejos, hipóteses e conselhos</b> („seria, teria, faria“):</p>
+ <table><tr><td class="es-t">sein → ich <b>wäre</b></td><td class="es-t">haben → ich <b>hätte</b></td><td class="es-t">können → ich <b>könnte</b></td></tr>
+ <tr><td class="es-t">müssen → ich <b>müsste</b></td><td class="es-t">dürfen → ich <b>dürfte</b></td><td>os outros: <span class="es-t"><b>würde</b> + infinitivo</span></td></tr></table>
+ <div class="ex"><span class="es-t">Wenn ich mehr Zeit <b>hätte</b>, <b>würde</b> ich mehr lesen.</span> = Se eu tivesse mais tempo, leria mais.<br><span class="es-t">Ich <b>wäre</b> gern Pilot.</span> = Eu gostaria de ser piloto.<br><span class="es-t">An deiner Stelle <b>würde</b> ich das Handy ausschalten.</span> = No seu lugar, eu desligaria o celular.</div>
+ <div class="ojo">Irreal (não é verdade agora): <span class="es-t">Wenn ich reich <b>wäre</b> …</span> (mas não sou). Real: <span class="es-t">Wenn ich Zeit <b>habe</b> …</span></div>`},
+ {t:'mc',q:'Wenn ich du ___, würde ich weniger am Handy sein.',opts:['wäre','bin','war'],a:0},
+ {t:'mc',q:'___ du mir bitte das Passwort sagen?',opts:['Könntest','Kannst gewesen','Konntest'],a:0},
+ {t:'gap',q:'Wenn ich ein neues Laptop ___, ___ ich schneller arbeiten. (haben / können)',a:['hätte','könnte']},
+ {t:'gap',q:'Ich ___ gern eine Woche ohne Internet leben – aber nur im Urlaub! (würde/möchte → Konjunktiv II von „werden“)',a:['würde']},
+ {t:'order',es:'Wenn ich mehr Geld hätte würde ich ein neues Handy kaufen',de:'Se eu tivesse mais dinheiro, compraria um celular novo.'},
+ {t:'tr',de:'Seria ótimo se você pudesse vir.',a:['Es wäre toll, wenn du kommen könntest.','Es wäre super, wenn du kommen könntest.','Es wäre schön, wenn du kommen könntest.']},
+ {t:'speak',es:'Wenn ich Lehrerin wäre, würde ich Handys im Unterricht verbieten.',de:'Se eu fosse professora, proibiria celulares na aula.',tip:'<i>wäre</i> (ser) e <i>würde … verbieten</i>.'}
+]},
+{id:'l3',title:'Notícias e publicidade – wo(r)/da(r)',desc:'die Meldung, die Werbung · Worüber? – Darüber.',steps:[
+ {t:'vocab',title:'Mídia',items:[['die Meldung','a notícia (curta)'],['der Beitrag','a contribuição; a matéria'],['veröffentlichen','publicar'],['der Journalist / die Journalistin','o jornalista / a jornalista'],['der Leser / die Leserin','o leitor / a leitora'],['das Magazin','a revista'],['das Forum','o fórum'],['die Werbung','a publicidade'],['die Umfrage','a pesquisa (de opinião)'],['die Statistik','a estatística'],['die Mehrheit','a maioria'],['die Minderheit','a minoria'],['positiv','positivo'],['negativ','negativo']]},
+ {t:'info',title:'wo(r)- e da(r)-',html:`<p>Com verbos com preposição (<span class="es-t">warten auf, sich freuen über, denken an …</span>), para <b>coisas</b> se usa:</p>
+ <table><tr><td>pergunta</td><td class="es-t"><b>Wo</b>rauf wartest du? · <b>Wor</b>über ärgerst du dich? · <b>Wo</b>mit fährst du?</td></tr>
+ <tr><td>resposta</td><td class="es-t"><b>Dar</b>auf warte ich auch. · Ich ärgere mich <b>dar</b>über, dass … · <b>Da</b>mit fahre ich.</td></tr></table>
+ <div class="ex">Antes de vogal entra <b>r</b>: <span class="es-t">wor-auf, dar-über</span>. Para <b>pessoas</b>: preposição + pronome – <span class="es-t">Auf wen wartest du? – Auf ihn.</span></div>`},
+ {t:'mc',q:'___ denkst du gerade? – An meinen Urlaub.',opts:['Woran','Wofür','An was für'],a:0},
+ {t:'mc',q:'Ärgerst du dich über die Werbung? – Ja, ich ärgere mich oft ___.',opts:['darüber','darauf','dafür'],a:0},
+ {t:'mc',q:'Auf ___ wartest du? – Auf meine Freundin.',opts:['wen','was','wo'],a:0},
+ {t:'gap',q:'___ interessierst du dich? – Für Technik. (wo(r)- + für)',a:['Wofür']},
+ {t:'read',title:'Leitura: Umfrage zur Handynutzung',text:`Eine neue Umfrage zeigt: Die Mehrheit der Deutschen zwischen 18 und 30 Jahren verbringt mehr als vier Stunden pro Tag am Smartphone. 60 Prozent schauen morgens als Erstes aufs Handy, noch bevor sie aufstehen. Gleichzeitig sagt fast die Hälfte, dass sie gern weniger Zeit online verbringen würde. Viele ärgern sich vor allem über Werbung und darüber, dass sie ständig erreichbar sein müssen. Nur eine kleine Minderheit hat schon einmal eine Woche ganz ohne Handy gelebt – und die meisten von ihnen fanden das positiv.`,de:`Uma nova pesquisa mostra: a maioria dos alemães entre 18 e 30 anos passa mais de quatro horas por dia no smartphone. 60 por cento olham o celular logo de manhã, antes mesmo de levantar. Ao mesmo tempo, quase a metade diz que gostaria de passar menos tempo online. Muitos se irritam principalmente com a publicidade e com o fato de terem que estar sempre disponíveis. Só uma pequena minoria já viveu uma semana inteira sem celular – e a maioria deles achou isso positivo.`},
+ {t:'mc',q:'Was möchte fast die Hälfte der jungen Leute?',opts:['weniger Zeit online verbringen','ein neues Handy','mehr Werbung'],a:0},
+ {t:'mc',q:'Wie fanden die meisten eine Woche ohne Handy?',opts:['positiv','schrecklich','langweilig'],a:0},
+ {t:'tr',de:'Com o que você está ansioso? – Com as férias.',a:['Worauf freust du dich? – Auf den Urlaub.','Worauf freust du dich? – Auf die Ferien.']}
+]},
+{id:'l4',title:'Escrever: opinião no fórum',desc:'Forumsbeitrag „Handyverbot an Schulen?“',steps:[
+ {t:'info',title:'Dar e justificar opinião',html:`<table><tr><td class="es-t">Meiner Meinung nach …</td><td>Na minha opinião …</td></tr>
+ <tr><td class="es-t">Ich bin dafür / dagegen, dass …</td><td>Sou a favor / contra que …</td></tr>
+ <tr><td class="es-t">Einerseits … andererseits …</td><td>Por um lado … por outro …</td></tr>
+ <tr><td class="es-t">Ein Vorteil / Nachteil ist, dass …</td><td>Uma vantagem / desvantagem é que …</td></tr>
+ <tr><td class="es-t">Wenn ich … wäre, würde ich …</td><td>Se eu fosse …, eu …</td></tr></table>`},
+ {t:'free',task:'Num fórum se discute: „Sollten Handys an Schulen verboten werden?“. Escreva sua opinião (~80 palavras): 1) sua posição, 2) uma vantagem e uma desvantagem, 3) o que você faria (Wenn ich … wäre, würde ich …).',hint:'Meiner Meinung nach … Einerseits …, andererseits … Ein Nachteil ist, dass … Wenn ich Lehrer wäre, würde ich …',focus:'Meinung, Konnektoren, Konjunktiv II, dass-Sätze',model:'Meiner Meinung nach sollten Handys im Unterricht verboten werden, aber nicht in der Pause. Einerseits können Smartphones beim Lernen helfen, zum Beispiel mit Wörterbuch-Apps. Andererseits lenken sie die Schüler stark ab, und viele schauen ständig auf soziale Netzwerke. Ein weiterer Nachteil ist, dass Kinder sich in der Pause kaum noch unterhalten. Wenn ich Lehrer wäre, würde ich die Handys am Anfang der Stunde einsammeln. So könnten sich alle besser konzentrieren.'}
+]}],
+resumen:`<h3>Konjunktiv II</h3><table><tr><td class="es-t">wäre · hätte · könnte · müsste · dürfte · würde + infinitivo</td></tr></table><p class="es-t">Wenn ich mehr Zeit hätte, würde ich mehr lesen. · An deiner Stelle würde ich … · Es wäre schön, wenn …</p>
+<h3>wo(r)- / da(r)-</h3><p class="es-t">Worauf wartest du? – Darauf. · Worüber ärgerst du dich? – Darüber, dass … · Auf wen? – Auf ihn. (pessoas)</p>
+<h3>Mídia e técnica</h3><p class="es-t">veröffentlichen · die Meldung · die Werbung · die Umfrage · die Mehrheit · digital · das Netzwerk · kopieren · einfügen</p>`});
 ;
 /* ================= GESCHICHTEN: „Camila in Hamburg“ – Serie zum Lesen & Hören (Deutschkurs) =================
    Camila Ribeiro, Krankenpflegerin aus Recife, beginnt in einem Hamburger Krankenhaus. Eigene Figur (nicht die Kurs-Person Lucas),
@@ -2746,7 +2933,10 @@ window.FREQ_DE=[
 ];
 {
 const per=20;let i=0;
-for(const u of LANGS.de.course.units){if(u.status==='soon')continue;const items=FREQ_DE.slice(i,i+per);i+=per;if(items.length<10)break;
+/* Wörter, die der Kurs schon als Vokabel hat, überspringen (sonst doppelte Karten, wenn neue Kapitel dazukommen) */
+const inCourse=new Set();LANGS.de.course.units.forEach(u=>u.lessons.forEach(l=>l.steps.forEach(st=>{if(st.t==='vocab')st.items.forEach(it=>inCourse.add(it[0]));})));
+const FQ=FREQ_DE.filter(w=>!inCourse.has(w[0]));
+for(const u of LANGS.de.course.units){if(u.status==='soon')continue;const items=FQ.slice(i,i+per);i+=per;if(items.length<10)break;
   const steps=[];for(let k=0;k<items.length;k+=10)steps.push({t:'vocab',title:'Palavras frequentes ('+(k/10+1)+')',items:items.slice(k,k+10)});
   steps.push({t:'match',q:'O que significa …?',pairs:items.filter((_,j)=>j%4===1).slice(0,5)});
   u.lessons.push({id:'lf',title:'Palavras frequentes',desc:'20 palavras muito usadas no dia a dia',ab:true,freq:true,steps});/* ab: freiwillig, nicht in Liste/Fortschritt/Abschlusstest – Kachel unter Extras */}

@@ -46,7 +46,7 @@ lessons:[
  {t:'speak',es:'Guten Tag! Ich heiße Lucas. Freut mich!',de:'Bom dia! Eu me chamo Lucas. Prazer!',tip:'O <b>ß</b> em <i>heiße</i> soa como “ss” – um s forte, sem zumbido.'}
 ]},
 {id:'l2',title:'Como vai? e despedir-se',desc:'Wie geht’s? · Tschüss! · Auf Wiedersehen!',steps:[
- {t:'vocab',title:'Perguntar como a pessoa está',items:[['Wie geht’s?','Tudo bem? / Como vai?'],['Wie geht es dir?','Como você está? (informal)'],['Wie geht es Ihnen?','Como o senhor / a senhora está?'],['gut','bem'],['sehr gut','muito bem'],['es geht','mais ou menos'],['nicht so gut','não muito bem'],['schlecht','mal'],['danke','obrigado / obrigada'],['bitte','por favor / de nada']]},
+ {t:'vocab',title:'Perguntar como a pessoa está',items:[['Wie geht’s?','Tudo bem? / Como vai?'],['Wie geht es dir?','Como você está? (informal)'],['Wie geht es Ihnen?','Como o senhor / a senhora está?'],['gut','bem'],['sehr gut','muito bem'],['es geht','mais ou menos'],['nicht so gut','não muito bem'],['schlecht','mal / ruim'],['danke','obrigado / obrigada'],['bitte','por favor / de nada']]},
  {t:'info',title:'Wie geht’s? – Gut, danke!',html:`<table><tr><th>Pergunta</th><th>Resposta</th></tr>
  <tr><td class="es-t">Wie geht’s?</td><td class="es-t">Gut, danke! Und dir?</td></tr>
  <tr><td class="es-t">Wie geht es dir? <span class="muted">(du)</span></td><td class="es-t">Sehr gut, danke. Und dir?</td></tr>
@@ -512,7 +512,7 @@ placement:[
 lessons:[
 {id:'l1',title:'O apartamento',desc:'Zimmer, Küche, Bad … · Adjektive',steps:[
  {t:'vocab',title:'Cômodos',items:[['die Wohnung','o apartamento'],['das Haus','a casa'],['das Zimmer','o quarto / o cômodo'],['das Wohnzimmer','a sala'],['das Schlafzimmer','o quarto de dormir'],['die Küche','a cozinha'],['das Bad','o banheiro'],['die Toilette','o vaso / o banheiro'],['der Flur','o corredor'],['der Balkon','a varanda'],['der Garten','o jardim'],['der Keller','o porão'],['der Stock','o andar'],['das Erdgeschoss','o térreo'],['der Aufzug','o elevador'],['die Treppe','a escada']]},
- {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso / calmo'],['laut','barulhento'],['neu','novo'],['alt','velho'],['schön','bonito'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
+ {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso / calmo'],['laut','barulhento'],['neu','novo'],['alt','velho / idoso; (idade)'],['schön','bonito; (tempo) bom'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
  {t:'info',title:'Andares e lugares',html:`<p>No Brasil o “primeiro andar” às vezes é o térreo – na Alemanha <b>nunca</b>:</p>
  <table><tr><td class="es-t">im Erdgeschoss (EG)</td><td>no térreo</td></tr><tr><td class="es-t">im ersten Stock</td><td>no 1º andar (acima do térreo)</td></tr><tr><td class="es-t">im dritten Stock</td><td>no 3º andar</td></tr><tr><td class="es-t">oben / unten</td><td>em cima / embaixo</td></tr><tr><td class="es-t">links / rechts</td><td>à esquerda / à direita</td></tr></table>
  <div class="ex">O adjetivo depois de <b>sein</b> não muda: <span class="es-t">Die Wohnung ist hell. Das Zimmer ist klein. Die Zimmer sind klein.</span></div>`},
@@ -568,7 +568,7 @@ lessons:[
  {t:'tr',de:'O que você acha da mesa? – Eu acho ela feia.',a:['Wie findest du den Tisch? – Ich finde ihn hässlich.','Wie findest du den Tisch? Ich finde ihn hässlich.']}
 ]},
 {id:'l4',title:'Procurar apartamento',desc:'Wohnungsanzeigen · Miete · umziehen',steps:[
- {t:'vocab',title:'Aluguel',items:[['mieten','alugar (como inquilino)'],['vermieten','alugar (como dono)'],['der Vermieter / die Vermieterin','o locador / a locadora'],['die Miete','o aluguel'],['die Nebenkosten (Pl.)','as despesas (água, aquecimento …)'],['warm','com despesas incluídas (aluguel)'],['der Quadratmeter','o metro quadrado'],['die Anzeige','o anúncio'],['umziehen','mudar de casa'],['einziehen','mudar para (entrar)'],['frei','livre / disponível'],['ab sofort','a partir de agora'],['besichtigen','visitar (um imóvel)']]},
+ {t:'vocab',title:'Aluguel',items:[['mieten','alugar (como inquilino)'],['vermieten','alugar (como dono)'],['der Vermieter / die Vermieterin','o locador / a locadora'],['die Miete','o aluguel'],['die Nebenkosten (Pl.)','as despesas (água, aquecimento …)'],['warm','quente / morno; (aluguel) com despesas'],['der Quadratmeter','o metro quadrado'],['die Anzeige','o anúncio'],['umziehen','mudar de casa'],['einziehen','mudar para (entrar)'],['frei','livre / disponível'],['ab sofort','a partir de agora'],['besichtigen','visitar (lugar, imóvel)']]},
  {t:'info',title:'Ler anúncios de apartamento',html:`<p>Os anúncios usam muitas abreviações:</p>
  <table><tr><td class="es-t">2-Zi.-Whg.</td><td>apartamento de 2 cômodos (sem contar cozinha e banheiro!)</td></tr>
  <tr><td class="es-t">Kü., Bad, Blk.</td><td>cozinha, banheiro, varanda</td></tr>
@@ -610,7 +610,7 @@ placement:[
  {t:'gap',q:'Heute ist der ___ Mai. (1.)',a:['erste']}],
 lessons:[
 {id:'l1',title:'Que horas são?',desc:'Wie spät ist es? · Viertel, halb',steps:[
- {t:'vocab',title:'Horas',items:[['die Uhr','o relógio / hora (8 Uhr)'],['Wie spät ist es?','Que horas são?'],['Wie viel Uhr ist es?','Que horas são?'],['Es ist drei Uhr.','São três horas.'],['die Stunde','a hora (duração)'],['die Minute','o minuto'],['halb','meia (… e meia)'],['das Viertel','o quarto (de hora)'],['nach','depois / e (horas)'],['vor','antes / para (horas)'],['um … Uhr','às … horas'],['früh','cedo'],['spät','tarde'],['pünktlich','pontual']]},
+ {t:'vocab',title:'Horas',items:[['die Uhr','o relógio / hora (8 Uhr)'],['Wie spät ist es?','Que horas são?'],['Wie viel Uhr ist es?','Que horas são?'],['Es ist drei Uhr.','São três horas.'],['die Stunde','a hora (duração)'],['die Minute','o minuto'],['halb','meia (… e meia)'],['das Viertel','o quarto (de hora)'],['nach','depois / e (horas)'],['vor','antes / para (horas); em frente a'],['um … Uhr','às … horas'],['früh','cedo'],['spät','tarde'],['pünktlich','pontual']]},
  {t:'info',title:'Hora oficial e informal',html:`<p><b>Oficial</b> (rádio, estação, trabalho) – como no Brasil, 0–24h: <span class="es-t">Es ist vierzehn Uhr dreißig.</span> (14:30)</p>
  <p><b>Informal</b> (no dia a dia) – 1–12h:</p>
  <table><tr><td>3:05</td><td class="es-t">fünf nach drei</td></tr>
@@ -675,7 +675,7 @@ lessons:[
  {t:'tr',de:'O curso começa às nove.',a:['Der Kurs fängt um neun Uhr an.','Der Kurs fängt um neun an.','Der Kurs beginnt um neun Uhr.','Der Kurs beginnt um neun.']}
 ]},
 {id:'l4',title:'Combinar e cancelar',desc:'Hast du Zeit? · Termine · Ich kann leider nicht.',steps:[
- {t:'vocab',title:'Combinar',items:[['Hast du Zeit?','Você tem tempo?'],['die Zeit','o tempo'],['der Termin','o compromisso / horário marcado'],['die Verabredung','o encontro (combinado)'],['Wann?','Quando?'],['Geht es am …?','Dá na …?'],['Das geht.','Dá. / Pode ser.'],['Das passt gut.','Fica bom.'],['Ich kann leider nicht.','Infelizmente não posso.'],['vielleicht','talvez'],['das Kino','o cinema'],['der Film','o filme'],['Bis dann!','Até lá!'],['die Entschuldigung','a desculpa'],['Entschuldigung!','Desculpe!']]},
+ {t:'vocab',title:'Combinar',items:[['Hast du Zeit?','Você tem tempo?'],['die Zeit','o tempo'],['der Termin','o compromisso / a consulta (horário marcado)'],['die Verabredung','o encontro (combinado)'],['Wann?','Quando?'],['Geht es am …?','Dá na …?'],['Das geht.','Dá. / Pode ser.'],['Das passt gut.','Fica bom.'],['Ich kann leider nicht.','Infelizmente não posso.'],['vielleicht','talvez'],['das Kino','o cinema'],['der Film','o filme'],['Bis dann!','Até lá!'],['die Entschuldigung','a desculpa'],['Entschuldigung!','Desculpe!']]},
  {t:'dialog',place:'Büro',title:'Cinema com a Jana',scene:'No intervalo, a Jana fala com você.',lines:[
   {n:'Jana',es:'Lucas, hast du diese Woche Zeit? Ich möchte ins Kino gehen.',de:'Lucas, você tem tempo nesta semana? Quero ir ao cinema.'},
   {you:true,opts:[{es:'Ja, gern! Wann?',ok:true},{es:'Ja, gern! Wo wohnst du?',ok:false,why:'A pergunta importante agora é <b>quando</b>.'}]},
@@ -750,7 +750,7 @@ lessons:[
  {t:'tr',de:'Ela quer viajar.',a:['Sie will reisen.']}
 ]},
 {id:'l3',title:'O tempo',desc:'Es regnet. Die Sonne scheint. Es ist kalt.',steps:[
- {t:'vocab',title:'Tempo',items:[['das Wetter','o tempo (clima)'],['die Sonne','o sol'],['Die Sonne scheint.','O sol está brilhando.'],['der Regen','a chuva'],['Es regnet.','Está chovendo.'],['der Schnee','a neve'],['Es schneit.','Está nevando.'],['der Wind','o vento'],['die Wolke','a nuvem'],['warm','quente / morno'],['heiß','muito quente'],['kalt','frio'],['kühl','fresco'],['schön','bonito (tempo bom)'],['schlecht','ruim'],['der Grad','o grau'],['minus','menos (abaixo de zero)']]},
+ {t:'vocab',title:'Tempo',items:[['das Wetter','o tempo (clima)'],['die Sonne','o sol'],['Die Sonne scheint.','O sol está brilhando.'],['der Regen','a chuva'],['Es regnet.','Está chovendo.'],['der Schnee','a neve'],['Es schneit.','Está nevando.'],['der Wind','o vento'],['die Wolke','a nuvem'],['warm','quente / morno; (aluguel) com despesas'],['heiß','muito quente'],['kalt','frio'],['kühl','fresco'],['schön','bonito; (tempo) bom'],['schlecht','mal / ruim'],['der Grad','o grau'],['minus','menos (abaixo de zero)']]},
  {t:'info',title:'Falar do tempo',html:`<table><tr><td class="es-t">Wie ist das Wetter?</td><td>Como está o tempo?</td></tr>
  <tr><td class="es-t">Es ist schön / kalt / warm.</td><td>Está bonito / frio / quente.</td></tr>
  <tr><td class="es-t">Es regnet. Es schneit.</td><td>Está chovendo. Está nevando.</td></tr>
@@ -852,7 +852,7 @@ lessons:[
  {t:'match',q:'Ligue as palavras novas.',pairs:[['die Autobahn', 'a rodovia'], ['der Lkw', 'o caminhão'], ['eilig', 'com pressa'], ['der Absender', 'o remetente'], ['erlauben', 'permitir']]}
 ]},
 {id:'l3',title:'Pedir e dar direções',desc:'Wie komme ich zum …? · links, rechts, geradeaus · Imperativ',steps:[
- {t:'vocab',title:'Direções',items:[['Wie komme ich zum / zur …?','Como chego ao / à …?'],['links','à esquerda'],['rechts','à direita'],['geradeaus','em frente / reto'],['die erste / zweite Straße','a primeira / segunda rua'],['bis zur Ampel','até o semáforo'],['die Ampel','o semáforo'],['über die Straße','atravessando a rua'],['neben','ao lado de'],['vor','em frente a / antes de'],['hinter','atrás de'],['zwischen','entre'],['gegenüber','em frente (do outro lado)'],['Entschuldigung, …','Com licença, …']]},
+ {t:'vocab',title:'Direções',items:[['Wie komme ich zum / zur …?','Como chego ao / à …?'],['links','à esquerda'],['rechts','à direita'],['geradeaus','em frente / reto'],['die erste / zweite Straße','a primeira / segunda rua'],['bis zur Ampel','até o semáforo'],['die Ampel','o semáforo'],['über die Straße','atravessando a rua'],['neben','ao lado de'],['vor','antes / para (horas); em frente a'],['hinter','atrás de'],['zwischen','entre'],['gegenüber','em frente (do outro lado)'],['Entschuldigung, …','Com licença, …']]},
  {t:'info',title:'zu + dativo: zum, zur',html:`<p>Para dizer <b>para onde</b> (pessoa ou lugar, não cidade), use <b>zu</b> + dativo:</p>
  <table><tr><td class="es-t">der Bahnhof</td><td class="es-t">zu dem → <b>zum</b> Bahnhof</td></tr>
  <tr><td class="es-t">die Post</td><td class="es-t">zu der → <b>zur</b> Post</td></tr>
@@ -1035,7 +1035,7 @@ lessons:[
  {t:'listen',es:'Mir tut der Hals weh.',de:'Minha garganta dói.'}
 ]},
 {id:'l2',title:'No médico',desc:'Was fehlt Ihnen? · Termin · sollen · Gute Besserung',steps:[
- {t:'vocab',title:'Saúde',items:[['krank','doente'],['gesund','saudável'],['das Fieber','a febre'],['der Schnupfen','o resfriado (nariz)'],['der Husten','a tosse'],['die Erkältung','o resfriado'],['die Schmerzen (Pl.)','as dores'],['der Arzt / die Ärztin','o médico / a médica'],['die Praxis','o consultório'],['der Termin','a consulta (horário)'],['das Wartezimmer','a sala de espera'],['die Versichertenkarte','a carteirinha do plano de saúde'],['das Rezept','a receita'],['das Medikament','o remédio'],['die Tablette','o comprimido'],['die Krankmeldung','o atestado médico'],['Was fehlt Ihnen?','O que o senhor tem?'],['Gute Besserung!','Melhoras!']]},
+ {t:'vocab',title:'Saúde',items:[['krank','doente'],['gesund','saudável'],['das Fieber','a febre'],['der Schnupfen','o resfriado (nariz)'],['der Husten','a tosse'],['die Erkältung','o resfriado'],['die Schmerzen (Pl.)','as dores'],['der Arzt / die Ärztin','o médico / a médica'],['die Praxis','o consultório'],['der Termin','o compromisso / a consulta (horário marcado)'],['das Wartezimmer','a sala de espera'],['die Versichertenkarte','a carteirinha do plano de saúde'],['das Rezept','a receita'],['das Medikament','o remédio'],['die Tablette','o comprimido'],['die Krankmeldung','o atestado médico'],['Was fehlt Ihnen?','O que o senhor tem?'],['Gute Besserung!','Melhoras!']]},
  {t:'info',title:'sollen – o conselho de outra pessoa',html:`<table><tr><th></th><th>sollen</th></tr><tr><td>ich / er / sie</td><td class="es-t">soll</td></tr><tr><td>du</td><td class="es-t">sollst</td></tr><tr><td>wir / sie / Sie</td><td class="es-t">sollen</td></tr><tr><td>ihr</td><td class="es-t">sollt</td></tr></table>
  <p><b>sollen</b> = “dever” quando <b>outra pessoa</b> diz o que fazer (médico, chefe):</p>
  <div class="ex"><span class="es-t">Die Ärztin sagt, ich soll im Bett bleiben.</span> = A médica diz que eu devo ficar de cama.<br><span class="es-t">Was soll ich machen?</span> = O que eu devo fazer?</div>
@@ -1129,7 +1129,7 @@ lessons:[
  {t:'tr',de:'Nas férias vamos para as montanhas.',a:['Im Urlaub fahren wir in die Berge.','Im Urlaub gehen wir in die Berge.']}
 ]},
 {id:'l2',title:'No hotel',desc:'Einzelzimmer, Doppelzimmer · Rezeption',steps:[
- {t:'vocab',title:'Hotel',items:[['das Hotel','o hotel'],['die Rezeption','a recepção'],['das Einzelzimmer','o quarto de solteiro'],['das Doppelzimmer','o quarto de casal'],['die Nacht, die Nächte','a noite, as noites'],['übernachten','pernoitar'],['die Übernachtung','a diária / o pernoite'],['das Frühstück','o café da manhã'],['die Halbpension','a meia pensão'],['der Schlüssel','a chave'],['frei','livre'],['besetzt','ocupado'],['die Dusche','o chuveiro'],['reservieren','reservar'],['die Reservierung','a reserva'],['das WLAN','o Wi-Fi'],['der Fernseher','a televisão (aparelho)']]},
+ {t:'vocab',title:'Hotel',items:[['das Hotel','o hotel'],['die Rezeption','a recepção'],['das Einzelzimmer','o quarto de solteiro'],['das Doppelzimmer','o quarto de casal'],['die Nacht, die Nächte','a noite, as noites'],['übernachten','pernoitar'],['die Übernachtung','a diária / o pernoite'],['das Frühstück','o café da manhã'],['die Halbpension','a meia pensão'],['der Schlüssel','a chave'],['frei','livre / disponível'],['besetzt','ocupado'],['die Dusche','o chuveiro'],['reservieren','reservar'],['die Reservierung','a reserva'],['das WLAN','o Wi-Fi'],['der Fernseher','a televisão (aparelho)']]},
  {t:'dialog',place:'Hotel am Hafen',title:'Na recepção',scene:'Você chega a um hotel em Hamburgo.',lines:[
   {n:'Rezeption',es:'Guten Abend! Willkommen im Hotel am Hafen.',de:'Boa noite! Bem-vindo ao Hotel am Hafen.'},
   {you:true,opts:[{es:'Guten Abend. Ich habe ein Einzelzimmer reserviert. Mein Name ist Souza.',ok:true},{es:'Guten Abend. Ich habe einen Schlüssel.',ok:false,why:'Você ainda não tem a chave – diga que você <b>reservou</b> um quarto.'}]},
@@ -1146,7 +1146,7 @@ lessons:[
 ]},
 {id:'l3',title:'Aeroporto e passeios',desc:'Abflug, Ankunft, Zoll · Sehenswürdigkeiten, Führung, Eintritt',steps:[
  {t:'vocab',title:'Aeroporto',items:[['der Flughafen','o aeroporto'],['das Flugzeug','o avião'],['fliegen','voar'],['abfliegen','decolar / partir (avião)'],['der Abflug','a partida (do voo)'],['die Ankunft','a chegada'],['landen','pousar'],['der Flug','o voo'],['der Zoll','a alfândega'],['der Schalter','o balcão / o guichê'],['gültig','válido'],['die Auskunft','a informação'],['die Ansage','o anúncio (alto-falante)'],['der Anschluss','a conexão']]},
- {t:'vocab',title:'Passear',items:[['die Sehenswürdigkeit','o ponto turístico'],['besichtigen','visitar (um lugar)'],['besuchen','visitar (pessoas / lugares)'],['die Führung','a visita guiada'],['der Reiseführer','o guia (pessoa ou livro)'],['der Eintritt','a entrada (preço)'],['der Erwachsene','o adulto'],['das Kind, die Kinder','a criança'],['international','internacional'],['kulturell','cultural'],['das Bild','o quadro / a imagem'],['der Hafen','o porto']]},
+ {t:'vocab',title:'Passear',items:[['die Sehenswürdigkeit','o ponto turístico'],['besichtigen','visitar (lugar, imóvel)'],['besuchen','visitar (pessoas / lugares)'],['die Führung','a visita guiada'],['der Reiseführer','o guia (pessoa ou livro)'],['der Eintritt','a entrada (preço)'],['der Erwachsene','o adulto'],['das Kind, die Kinder','a criança'],['international','internacional'],['kulturell','cultural'],['das Bild','o quadro / a imagem'],['der Hafen','o porto']]},
  {t:'read',hideText:true,title:'Aviso no aeroporto',intro:'Ouça o aviso no aeroporto de Frankfurt.',text:`Achtung, eine Durchsage für alle Passagiere nach Lissabon: Ihr Flug L H elf siebzig hat dreißig Minuten Verspätung. Der neue Abflug ist um fünfzehn Uhr vierzig. Bitte gehen Sie zu Gate B zwölf.`,de:`Atenção, um aviso para todos os passageiros para Lisboa: o seu voo LH 1170 está trinta minutos atrasado. A nova partida é às 15h40. Por favor, dirijam-se ao portão B12.`},
  {t:'mc',q:'Wann fliegt das Flugzeug nach Lissabon jetzt ab?',opts:['um 15:40 Uhr','um 15:10 Uhr','um 11:70 Uhr'],a:0},
  {t:'mc',q:'Zu welchem Gate sollen die Passagiere gehen?',opts:['B12','B30','L11'],a:0},

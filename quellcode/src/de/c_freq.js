@@ -64,7 +64,10 @@ window.FREQ_DE=[
 ];
 {
 const per=20;let i=0;
-for(const u of LANGS.de.course.units){if(u.status==='soon')continue;const items=FREQ_DE.slice(i,i+per);i+=per;if(items.length<10)break;
+/* Wörter, die der Kurs schon als Vokabel hat, überspringen (sonst doppelte Karten, wenn neue Kapitel dazukommen) */
+const inCourse=new Set();LANGS.de.course.units.forEach(u=>u.lessons.forEach(l=>l.steps.forEach(st=>{if(st.t==='vocab')st.items.forEach(it=>inCourse.add(it[0]));})));
+const FQ=FREQ_DE.filter(w=>!inCourse.has(w[0]));
+for(const u of LANGS.de.course.units){if(u.status==='soon')continue;const items=FQ.slice(i,i+per);i+=per;if(items.length<10)break;
   const steps=[];for(let k=0;k<items.length;k+=10)steps.push({t:'vocab',title:'Palavras frequentes ('+(k/10+1)+')',items:items.slice(k,k+10)});
   steps.push({t:'match',q:'O que significa …?',pairs:items.filter((_,j)=>j%4===1).slice(0,5)});
   u.lessons.push({id:'lf',title:'Palavras frequentes',desc:'20 palavras muito usadas no dia a dia',ab:true,freq:true,steps});/* ab: freiwillig, nicht in Liste/Fortschritt/Abschlusstest – Kachel unter Extras */}
