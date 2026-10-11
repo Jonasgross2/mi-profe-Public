@@ -250,6 +250,8 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
   .unit .t{font-size:16px}
 }
 
+.seg button.soon b{color:var(--muted)}
+.soonlv{text-align:center;padding:28px 20px;margin-top:14px} .soonlv .soonic{font-size:40px;line-height:1;margin-bottom:8px} .soonlv h3{margin:0 0 8px} .soonlv p{margin:0 auto 12px;max-width:440px;line-height:1.45} .soonlv .soonct{font-weight:600}
 .seg.two{grid-template-columns:repeat(2,1fr);margin-top:10px}
 .lrow{padding:12px 14px}
 @media (max-width:700px){.lrow .ld{display:none}.lrow .rounds{margin-top:6px}}

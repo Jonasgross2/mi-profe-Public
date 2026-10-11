@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261011-2152";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
+<script>window.PWA=true;window.APP_VERSION="20261011-2158";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -262,6 +262,8 @@ textarea.inp{min-height:120px;resize:vertical;font-size:16px}
   .unit .t{font-size:16px}
 }
 
+.seg button.soon b{color:var(--muted)}
+.soonlv{text-align:center;padding:28px 20px;margin-top:14px} .soonlv .soonic{font-size:40px;line-height:1;margin-bottom:8px} .soonlv h3{margin:0 0 8px} .soonlv p{margin:0 auto 12px;max-width:440px;line-height:1.45} .soonlv .soonct{font-weight:600}
 .seg.two{grid-template-columns:repeat(2,1fr);margin-top:10px}
 .lrow{padding:12px 14px}
 @media (max-width:700px){.lrow .ld{display:none}.lrow .rounds{margin-top:6px}}
@@ -971,6 +973,10 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"{LV} ist in Vorbereitung": "{LV} is in preparation",
+"Die Inhalte dieser Stufe werden gerade sorgfältig ausgearbeitet und kommen nach und nach dazu. Bis dahin kannst du mit den bisherigen Stufen weiterlernen und wiederholen.": "The content for this level is being carefully prepared and will be added step by step. Until then, you can keep learning and reviewing with the earlier levels.",
+"Fragen oder Wünsche zu dieser Stufe? Wende dich gern direkt an {N}.": "Questions or requests about this level? Feel free to contact {N} directly.",
+"Weiter mit {LV}": "Continue with {LV}",
 "Einstufungstest · ": "Placement test · ",
 "Ein paar Fragen pro Stufe (ca. 5 Minuten je Etappe). Bestehst du eine Stufe, geht es eine höher – sonst eine tiefer, bis klar ist, wo du einsteigst.": "A few questions per level (about 5 minutes per stage). If you pass a level, you move up one – otherwise down one, until it's clear where you should start.",
 "Wo stehst du ungefähr?": "Roughly where are you?",
@@ -1969,6 +1975,10 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"{LV} ist in Vorbereitung": "{LV} está en preparación",
+"Die Inhalte dieser Stufe werden gerade sorgfältig ausgearbeitet und kommen nach und nach dazu. Bis dahin kannst du mit den bisherigen Stufen weiterlernen und wiederholen.": "Los contenidos de este nivel se están elaborando con cuidado y se irán añadiendo poco a poco. Mientras tanto, puedes seguir aprendiendo y repasando con los niveles anteriores.",
+"Fragen oder Wünsche zu dieser Stufe? Wende dich gern direkt an {N}.": "¿Preguntas o deseos sobre este nivel? Escribe directamente a {N}.",
+"Weiter mit {LV}": "Seguir con {LV}",
 "Einstufungstest · ": "Prueba de nivel · ",
 "Ein paar Fragen pro Stufe (ca. 5 Minuten je Etappe). Bestehst du eine Stufe, geht es eine höher – sonst eine tiefer, bis klar ist, wo du einsteigst.": "Unas preguntas por nivel (unos 5 minutos por etapa). Si apruebas un nivel, subes uno; si no, bajas uno, hasta que quede claro dónde empiezas.",
 "Wo stehst du ungefähr?": "¿Más o menos en qué nivel estás?",
@@ -2967,6 +2977,10 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"{LV} ist in Vorbereitung": "O {LV} está em preparação",
+"Die Inhalte dieser Stufe werden gerade sorgfältig ausgearbeitet und kommen nach und nach dazu. Bis dahin kannst du mit den bisherigen Stufen weiterlernen und wiederholen.": "Os conteúdos deste nível estão sendo preparados com cuidado e serão adicionados aos poucos. Até lá, você pode continuar aprendendo e revisando com os níveis anteriores.",
+"Fragen oder Wünsche zu dieser Stufe? Wende dich gern direkt an {N}.": "Dúvidas ou pedidos sobre este nível? Fale diretamente com {N}.",
+"Weiter mit {LV}": "Continuar com o {LV}",
 "Einstufungstest · ": "Teste de nivelamento · ",
 "Ein paar Fragen pro Stufe (ca. 5 Minuten je Etappe). Bestehst du eine Stufe, geht es eine höher – sonst eine tiefer, bis klar ist, wo du einsteigst.": "Algumas perguntas por nível (cerca de 5 minutos por etapa). Se você passar num nível, sobe um – senão desce um, até ficar claro onde você começa.",
 "Wo stehst du ungefähr?": "Mais ou menos em que nível você está?",
@@ -3998,9 +4012,16 @@ const levelOf=u=>LEVELS.find(L=>L.id===unitLevel(u))||LEVELS[0];
 /* Stufen-Reiter: oben A1 … C2 (GER-Stufe = L.label), darunter „Teil 1 | Teil 2“, wenn eine Stufe mehrere Teile hat. cnt(Liste von Teilstufen) → Text unter dem Namen */
 const LGROUPS=[...new Set(LEVELS.map(L=>L.label))];
 const lastPart={};
+/* Stufe „in Vorbereitung“: im Steckbrief LEVELS-Eintrag mit soon:true (noch ohne Inhalte) → Reiter „bald“, Seite zeigt soonCard (optional Ansprechperson LANG.contact) */
+const lvSoon=g=>LEVELS.filter(L=>L.label===g).every(L=>L.soon);
+function soonCard(g){const ready=LGROUPS.filter(x=>!lvSoon(x));const last=ready[ready.length-1];
+  return h('div',{class:'card soonlv'},h('div',{class:'soonic'},'🛠️'),h('h3',{},T('{LV} ist in Vorbereitung').replace('{LV}',g)),
+    h('p',{class:'muted'},T('Die Inhalte dieser Stufe werden gerade sorgfältig ausgearbeitet und kommen nach und nach dazu. Bis dahin kannst du mit den bisherigen Stufen weiterlernen und wiederholen.')),
+    LANG.contact?h('p',{class:'soonct'},T('Fragen oder Wünsche zu dieser Stufe? Wende dich gern direkt an {N}.').replace('{N}',LANG.contact)):null,
+    last?h('button',{class:'btn',onclick:()=>go('units/'+LEVELS.find(L=>L.label===last).id)},T('Weiter mit {LV}').replace('{LV}',last)):null);}
 function levelTabs(cur,base,cnt){const C=LEVELS.find(L=>L.id===cur)||LEVELS[0];const parts=LEVELS.filter(L=>L.label===C.label);lastPart[C.label]=C.id;
   const top=h('div',{class:'seg',style:'grid-template-columns:repeat('+LGROUPS.length+',1fr)'},LGROUPS.map(g=>{const Ls=LEVELS.filter(L=>L.label===g);
-    return h('button',{class:g===C.label?'on':'',onclick:()=>go(base+'/'+Ls[0].id)},h('b',{},g),h('span',{},cnt(Ls)));}));
+    return h('button',{class:(g===C.label?'on':'')+(lvSoon(g)?' soon':''),onclick:()=>go(base+'/'+Ls[0].id)},h('b',{},g),h('span',{},lvSoon(g)?T('bald'):cnt(Ls)));}));
   return top;}/* Teil 1 / Teil 2 einer Stufe stehen untereinander in einer Liste (Zwischenüberschriften), keine eigenen Reiter mehr */
 /* gehören zwei Stufen-Kennungen zur selben GER-Stufe (A2a/A2b → A2)? */
 const sameLv=(a,b)=>{const la=LEVELS.find(L=>L.id===a),lb=LEVELS.find(L=>L.id===b);return !!(la&&lb&&la.label===lb.label);};
@@ -4244,6 +4265,7 @@ function vUnits(m,lv){
   parts.forEach(L=>{const pu=us.filter(u=>unitLevel(u)===L.id);if(!pu.length)return;
     if(parts.length>1)m.append(h('div',{class:'kind',style:'margin:14px 0 2px'},L.title));
     m.append(h('p',{class:'muted small',style:'margin:'+(parts.length>1?'0':'10px')+' 0 10px'},L.sub),h('div',{class:'grid',style:'gap:8px'},pu.map(unitCard)));});
+  if(parts.length&&lvSoon(parts[0].label))m.append(soonCard(parts[0].label));
   /* beim Öffnen direkt zur ersten noch nicht gemeisterten Unidad der Stufe springen (Fertiges liegt darüber, leicht ausgegraut, erreichbar durch Hochscrollen;
      bei kurzen Listen nur so weit, wie es geht);
      beim Zurückkehren gilt die gemerkte Scroll-Stelle */
@@ -4797,7 +4819,8 @@ function vMix(m){const steps=mixSteps(15);
 const storyFor=st=>unitById(st.after);
 const storyOpen=st=>{const u=storyFor(st);return !u||lessonPct(u)>0||S.checks[u.id]?.pass||(unitStatus(u)&&unitStatus(u)!==T('neu'));};
 function nextStory(){return STORIES.find(st=>storyOpen(st)&&!S.stories?.[st.id]);}
-const levelSeg=(cur,base,cnt)=>h('div',{class:'stick',style:'margin-top:4px;margin-bottom:12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,'')));
+const levelSeg=(cur,base,cnt)=>{const f=document.createDocumentFragment();f.append(h('div',{class:'stick',style:'margin-top:4px;margin-bottom:12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,''))));
+  const g=(LEVELS.find(L=>L.id===cur)||LEVELS[0]).label;if(lvSoon(g))f.append(soonCard(g));return f;};
 const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):'A1';};
 function vRef(m,tab,lv){lv=lvFirst(LEVELS.find(L=>L.id===lv)?lv:curLevel());
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;

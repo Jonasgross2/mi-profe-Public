@@ -493,9 +493,16 @@ const levelOf=u=>LEVELS.find(L=>L.id===unitLevel(u))||LEVELS[0];
 /* Stufen-Reiter: oben A1 … C2 (GER-Stufe = L.label), darunter „Teil 1 | Teil 2“, wenn eine Stufe mehrere Teile hat. cnt(Liste von Teilstufen) → Text unter dem Namen */
 const LGROUPS=[...new Set(LEVELS.map(L=>L.label))];
 const lastPart={};
+/* Stufe „in Vorbereitung“: im Steckbrief LEVELS-Eintrag mit soon:true (noch ohne Inhalte) → Reiter „bald“, Seite zeigt soonCard (optional Ansprechperson LANG.contact) */
+const lvSoon=g=>LEVELS.filter(L=>L.label===g).every(L=>L.soon);
+function soonCard(g){const ready=LGROUPS.filter(x=>!lvSoon(x));const last=ready[ready.length-1];
+  return h('div',{class:'card soonlv'},h('div',{class:'soonic'},'🛠️'),h('h3',{},T('{LV} ist in Vorbereitung').replace('{LV}',g)),
+    h('p',{class:'muted'},T('Die Inhalte dieser Stufe werden gerade sorgfältig ausgearbeitet und kommen nach und nach dazu. Bis dahin kannst du mit den bisherigen Stufen weiterlernen und wiederholen.')),
+    LANG.contact?h('p',{class:'soonct'},T('Fragen oder Wünsche zu dieser Stufe? Wende dich gern direkt an {N}.').replace('{N}',LANG.contact)):null,
+    last?h('button',{class:'btn',onclick:()=>go('units/'+LEVELS.find(L=>L.label===last).id)},T('Weiter mit {LV}').replace('{LV}',last)):null);}
 function levelTabs(cur,base,cnt){const C=LEVELS.find(L=>L.id===cur)||LEVELS[0];const parts=LEVELS.filter(L=>L.label===C.label);lastPart[C.label]=C.id;
   const top=h('div',{class:'seg',style:'grid-template-columns:repeat('+LGROUPS.length+',1fr)'},LGROUPS.map(g=>{const Ls=LEVELS.filter(L=>L.label===g);
-    return h('button',{class:g===C.label?'on':'',onclick:()=>go(base+'/'+Ls[0].id)},h('b',{},g),h('span',{},cnt(Ls)));}));
+    return h('button',{class:(g===C.label?'on':'')+(lvSoon(g)?' soon':''),onclick:()=>go(base+'/'+Ls[0].id)},h('b',{},g),h('span',{},lvSoon(g)?T('bald'):cnt(Ls)));}));
   return top;}/* Teil 1 / Teil 2 einer Stufe stehen untereinander in einer Liste (Zwischenüberschriften), keine eigenen Reiter mehr */
 /* gehören zwei Stufen-Kennungen zur selben GER-Stufe (A2a/A2b → A2)? */
 const sameLv=(a,b)=>{const la=LEVELS.find(L=>L.id===a),lb=LEVELS.find(L=>L.id===b);return !!(la&&lb&&la.label===lb.label);};
@@ -739,6 +746,7 @@ function vUnits(m,lv){
   parts.forEach(L=>{const pu=us.filter(u=>unitLevel(u)===L.id);if(!pu.length)return;
     if(parts.length>1)m.append(h('div',{class:'kind',style:'margin:14px 0 2px'},L.title));
     m.append(h('p',{class:'muted small',style:'margin:'+(parts.length>1?'0':'10px')+' 0 10px'},L.sub),h('div',{class:'grid',style:'gap:8px'},pu.map(unitCard)));});
+  if(parts.length&&lvSoon(parts[0].label))m.append(soonCard(parts[0].label));
   /* beim Öffnen direkt zur ersten noch nicht gemeisterten Unidad der Stufe springen (Fertiges liegt darüber, leicht ausgegraut, erreichbar durch Hochscrollen;
      bei kurzen Listen nur so weit, wie es geht);
      beim Zurückkehren gilt die gemerkte Scroll-Stelle */
@@ -1292,7 +1300,8 @@ function vMix(m){const steps=mixSteps(15);
 const storyFor=st=>unitById(st.after);
 const storyOpen=st=>{const u=storyFor(st);return !u||lessonPct(u)>0||S.checks[u.id]?.pass||(unitStatus(u)&&unitStatus(u)!==T('neu'));};
 function nextStory(){return STORIES.find(st=>storyOpen(st)&&!S.stories?.[st.id]);}
-const levelSeg=(cur,base,cnt)=>h('div',{class:'stick',style:'margin-top:4px;margin-bottom:12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,'')));
+const levelSeg=(cur,base,cnt)=>{const f=document.createDocumentFragment();f.append(h('div',{class:'stick',style:'margin-top:4px;margin-bottom:12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,''))));
+  const g=(LEVELS.find(L=>L.id===cur)||LEVELS[0]).label;if(lvSoon(g))f.append(soonCard(g));return f;};
 const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):'A1';};
 function vRef(m,tab,lv){lv=lvFirst(LEVELS.find(L=>L.id===lv)?lv:curLevel());
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
