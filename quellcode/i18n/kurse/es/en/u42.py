@@ -231,7 +231,6 @@ EN = [
 "application (formal)",
 "file, record",
 "narrator",
-"metaphor",
 "symbol",
 "evoke",
 "nuance",
