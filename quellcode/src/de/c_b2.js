@@ -247,3 +247,201 @@ Lorenz betonte, die Politik müsse handeln. Sie schlägt vor, mehr Treffpunkte z
 resumen:`<h3>Konjunktiv I</h3><p class="es-t">er sei · er habe · er werde · er könne · es gebe · Sie sagen, sie hätten keine Zeit. · Er sagt, er habe den Bericht gelesen.</p>
 <h3>Zitieren</h3><p class="es-t">behaupten · betonen · mitteilen · laut der Studie · der Studie zufolge</p>
 <h3>Diskutieren</h3><p class="es-t">Ich bin der Auffassung, dass … · Da muss ich Ihnen widersprechen. · Davon bin ich nicht überzeugt. · Was halten Sie von einem Kompromiss?</p>`});
+
+/* ================= KAPITEL 40 · WIRTSCHAFT & KONSUM ================= */
+LANGS.de.course.units.push({id:'k40',n:'40',level:'B2',title:'Wirtschaft & Konsum',sub:'Economia e empresas · consumo consciente · atributos com particípio (das von uns entwickelte Produkt) · reclamação formal',
+goals:['Über Unternehmen, Märkte und wirtschaftliche Entwicklungen sprechen','Konsumverhalten und Nachhaltigkeit diskutieren','Erweiterte Partizipialattribute verstehen und in Relativsätze umformen','Eine formelle Reklamation schreiben'],
+situacion:{title:'Reclamação por telefone',npc:'Frau Seidel',scene:'O notebook que você comprou numa loja online parou de funcionar depois de três semanas. Você liga para o atendimento ao cliente.',role:'Du bist Frau Seidel vom Kundenservice des Onlineshops „Technikwelt“. Du siezt. Lucas ruft an, weil sein vor drei Wochen gekaufter Laptop nicht mehr startet. Frag nach Bestellnummer und Fehlerbeschreibung. Biete zuerst nur eine Reparatur an (Dauer: vier Wochen). Wenn Lucas freundlich, aber bestimmt auf sein Recht besteht (Gewährleistung, er braucht den Laptop für die Arbeit), biete einen Umtausch oder die Erstattung des Kaufpreises an. Benutze Partizipialattribute (das von Ihnen gekaufte Gerät, die angegebene Adresse). Sprich natürliches Deutsch auf B2-Niveau.',goal:'Descreva o problema, recuse com educação a primeira proposta, argumente com os seus direitos e consiga uma troca ou o reembolso.'},
+placement:[
+ {t:'mc',q:'Das ___ Produkt verkauft sich sehr gut. (= das Produkt, das von uns entwickelt wurde)',opts:['von uns entwickelte','von uns entwickelnde','uns entwickelt'],a:0},
+ {t:'mc',q:'Die seit Monaten ___ Preise machen vielen Menschen Sorgen.',opts:['steigenden','gestiegene','steigende'],a:0},
+ {t:'mc',q:'Der ___ des Unternehmens ist im letzten Jahr um 10 % gestiegen.',opts:['Umsatz','Verbraucher','Verlust'],a:0},
+ {t:'gap',q:'Die Firma hat keine Kunden mehr und ist ___ gegangen. (faliu)',a:['pleite']},
+ {t:'mc',q:'„o consumidor“',opts:['der Verbraucher','der Verkäufer','der Vertreter'],a:0},
+ {t:'mc',q:'Ich möchte den Kaufpreis ___ bekommen.',opts:['erstattet','erstellt','ersetzt'],a:0}],
+lessons:[
+{id:'l1',title:'Economia e empresas',desc:'der Umsatz, der Gewinn, die Nachfrage …',steps:[
+ {t:'vocab',title:'Economia',items:[['wirtschaftlich','econômico'],['das Unternehmen','a empresa'],['der Konzern','o grupo empresarial, a multinacional'],['der Umsatz','o faturamento'],['der Gewinn','o lucro; o prêmio'],['der Verlust','o prejuízo, a perda'],['die Nachfrage','a demanda, a procura'],['die Inflation','a inflação'],['die Aktie','a ação (na bolsa)'],['die Börse','a bolsa de valores'],['investieren','investir'],['die Investition','o investimento'],['pleitegehen','falir'],['die Insolvenz','a insolvência, a falência'],['der Standort','a localização (da empresa)'],['die Branche','o setor, o ramo'],['der Export','a exportação']]},
+ {t:'mc',q:'Die Firma hat dieses Jahr mehr verkauft – der ___ ist gestiegen.',opts:['Umsatz','Verlust','Standort'],a:0},
+ {t:'mc',q:'Wenn viele Menschen ein Produkt kaufen wollen, ist die ___ groß.',opts:['Nachfrage','Inflation','Insolvenz'],a:0},
+ {t:'gap',q:'Lucas arbeitet in der IT-___. (o ramo)',a:['Branche']},
+ {t:'match',q:'Ligue.',pairs:[['der Gewinn','o lucro'],['der Verlust','o prejuízo'],['die Aktie','a ação'],['der Wettbewerb','a concorrência'],['investieren','investir']]},
+ {t:'tr',de:'A empresa investe muito dinheiro em pesquisa.',a:['Das Unternehmen investiert viel Geld in Forschung.','Das Unternehmen investiert viel Geld in die Forschung.','Die Firma investiert viel Geld in Forschung.','Die Firma investiert viel Geld in die Forschung.']},
+ {t:'speak',es:'Wegen der hohen Inflation ist die Nachfrage nach günstigen Produkten deutlich gestiegen.',de:'Por causa da inflação alta, a procura por produtos baratos aumentou bastante.',tip:'<i>die Nachfrage nach</i> + dativo = a procura por.'}
+]},
+{id:'l2',title:'Atributos com particípio',desc:'das von uns entwickelte Produkt · die steigenden Preise',steps:[
+ {t:'info',title:'Erweiterte Partizipialattribute',html:`<p>Em textos formais, uma <b>oração relativa</b> vira muitas vezes um <b>atributo antes do substantivo</b>. O particípio funciona como adjetivo (com terminação!) e tudo o que pertence a ele vem antes:</p>
+ <table><tr><th>oração relativa</th><th>atributo com particípio</th></tr>
+ <tr><td class="es-t">das Produkt, das von uns entwickelt wurde</td><td class="es-t">das von uns entwickelte Produkt</td></tr>
+ <tr><td class="es-t">die Preise, die seit Monaten steigen</td><td class="es-t">die seit Monaten steigenden Preise</td></tr>
+ <tr><td class="es-t">der Laptop, den ich online gekauft habe</td><td class="es-t">der online gekaufte Laptop</td></tr>
+ <tr><td class="es-t">Kunden, die sich beschweren</td><td class="es-t">sich beschwerende Kunden</td></tr></table>
+ <div class="ex"><b>Partizip II</b> (gekauft, entwickelt) = passivo/terminado · <b>Partizip I</b> (steigend, wachsend) = ativo/acontecendo agora.<br>Para ler: encontre o <b>artigo</b>, pule até o <b>substantivo</b> e depois leia o meio: <span class="es-t">die (seit Jahren stark wachsende) Nachfrage</span>.</div>`},
+ {t:'mc',q:'„die Ware, die gestern geliefert wurde“ =',opts:['die gestern gelieferte Ware','die gestern liefernde Ware','die gestern geliefert Ware'],a:0},
+ {t:'mc',q:'„die Zahl der Menschen, die online einkaufen“ =',opts:['die Zahl der online einkaufenden Menschen','die Zahl der online eingekauften Menschen','die Zahl der Menschen online einkaufend'],a:0},
+ {t:'mc',q:'Wie heißt der Relativsatz? „das im Vertrag genannte Datum“',opts:['das Datum, das im Vertrag genannt wird','das Datum, das den Vertrag nennt','das Datum, das im Vertrag nennt'],a:0},
+ {t:'gap',q:'Der von mir ___ Artikel ist kaputt. (bestellen)',a:['bestellte']},
+ {t:'gap',q:'Wir suchen eine gut Englisch ___ Mitarbeiterin. (sprechen – Partizip I)',a:['sprechende']},
+ {t:'gap',q:'Bitte schicken Sie die Ware an die von mir ___ Adresse. (angeben)',a:['angegebene']},
+ {t:'order',es:'Die seit Jahren steigende Nachfrage nach Secondhand-Kleidung überrascht viele Händler',de:'A procura por roupas de segunda mão, que cresce há anos, surpreende muitos comerciantes.'},
+ {t:'tr',de:'o produto vendido no mundo inteiro (atributo com particípio)',a:['das weltweit verkaufte Produkt','das in der ganzen Welt verkaufte Produkt']}
+]},
+{id:'l3',title:'Consumo consciente',desc:'der Verbraucher, fair, die Lieferkette …',steps:[
+ {t:'vocab',title:'Consumo',items:[['der Verbraucher / die Verbraucherin','o consumidor / a consumidora'],['das Konsumverhalten','o comportamento de consumo'],['der Onlinehandel','o comércio online'],['der Händler / die Händlerin','o comerciante'],['die Lieferkette','a cadeia de fornecimento'],['fair gehandelt','de comércio justo'],['die Marke','a marca'],['das Etikett','a etiqueta'],['der Fehlkauf','a compra errada'],['sich verschulden','endividar-se'],['die Gewährleistung','a garantia legal'],['die Erstattung','o reembolso'],['erstatten','reembolsar'],['der Umtausch','a troca'],['verzichten auf','abrir mão de, renunciar a'],['die Wegwerfgesellschaft','a sociedade do descartável']]},
+ {t:'read',title:'Leitura: Reparieren statt wegwerfen',text:`Smartphone kaputt? Neu kaufen! So denken immer weniger Menschen in Deutschland. Die Zahl der sogenannten Repair-Cafés, in denen Ehrenamtliche kostenlos defekte Geräte reparieren, hat sich in den letzten zehn Jahren mehr als verdoppelt. Auch der Handel mit gebrauchter Kleidung wächst: Fast jeder dritte Verbraucher hat im letzten Jahr Secondhand-Mode gekauft.
+Für die Wirtschaft ist das eine Herausforderung. Viele Hersteller verdienen ihr Geld mit Produkten, die schnell ersetzt werden. Ein im letzten Jahr beschlossenes EU-Gesetz soll das ändern: Hersteller müssen Ersatzteile künftig mindestens sieben Jahre lang anbieten.
+Kritiker sagen allerdings, das allein reiche nicht. Solange Reparaturen teurer seien als neue Geräte, werde sich das Konsumverhalten kaum ändern.`,de:`Celular quebrado? Compra um novo! Cada vez menos pessoas na Alemanha pensam assim. O número dos chamados Repair-Cafés, onde voluntários consertam aparelhos com defeito de graça, mais que dobrou nos últimos dez anos. O comércio de roupas usadas também cresce: quase um em cada três consumidores comprou moda de segunda mão no último ano.\nPara a economia, isso é um desafio. Muitos fabricantes ganham dinheiro com produtos que são substituídos rapidamente. Uma lei da UE aprovada no ano passado deve mudar isso: no futuro, os fabricantes precisam oferecer peças de reposição por pelo menos sete anos.\nCríticos dizem, porém, que isso sozinho não bastaria. Enquanto consertos forem mais caros que aparelhos novos, o comportamento de consumo dificilmente vai mudar.`},
+ {t:'mc',q:'Was passiert in einem Repair-Café?',opts:['Freiwillige reparieren kostenlos Geräte.','Man kauft gebrauchte Kleidung.','Man trinkt Kaffee und arbeitet.'],a:0},
+ {t:'mc',q:'Was regelt das neue EU-Gesetz?',opts:['Ersatzteile müssen sieben Jahre angeboten werden.','Neue Geräte werden billiger.','Reparaturen sind kostenlos.'],a:0},
+ {t:'mc',q:'Was meinen die Kritiker?',opts:['Reparaturen sind oft zu teuer.','Das Gesetz ist zu streng.','Niemand kauft Secondhand.'],a:0},
+ {t:'gap',q:'Ein im letzten Jahr ___ Gesetz soll das ändern. (beschließen)',a:['beschlossenes']},
+ {t:'tr',de:'Eu abro mão de roupas novas.',a:['Ich verzichte auf neue Kleidung.','Ich verzichte auf neue Klamotten.']}
+]},
+{id:'l4',title:'Escrever: reclamação formal',desc:'Reklamation an einen Onlineshop (ca. 100 Wörter)',steps:[
+ {t:'info',title:'Reclamar por escrito',html:`<table><tr><td>Assunto</td><td class="es-t">Reklamation – Bestellung Nr. 48213 vom 2. Mai</td></tr>
+ <tr><td>Situação</td><td class="es-t">Am 2. Mai habe ich bei Ihnen einen Laptop bestellt, der am 5. Mai geliefert wurde.</td></tr>
+ <tr><td>Problema</td><td class="es-t">Leider startet das Gerät seit gestern nicht mehr.</td></tr>
+ <tr><td>Exigência</td><td class="es-t">Ich bitte Sie daher, mir umgehend ein neues Gerät zu schicken oder den Kaufpreis zu erstatten.</td></tr>
+ <tr><td>Prazo</td><td class="es-t">Ich erwarte Ihre Antwort bis zum 20. Mai.</td></tr></table>
+ <div class="ex">Na Alemanha, a <b>Gewährleistung</b> (garantia legal) vale 2 anos. Nos primeiros 12 meses, presume-se que o defeito já existia na compra.</div>`},
+ {t:'mc',q:'Welcher Satz passt am besten in eine formelle Reklamation?',opts:['Ich bitte Sie, mir den Kaufpreis zu erstatten.','Gebt mir sofort mein Geld zurück!','Na ja, vielleicht könnt ihr was machen.'],a:0},
+ {t:'gap',q:'Ich bitte Sie, mir ___ ein neues Gerät zu schicken. (imediatamente)',a:['umgehend']},
+ {t:'free',task:'Escreva uma reclamação formal para a loja online (~100 palavras): 1) o que você comprou e quando, 2) qual é o problema, 3) o que você já tentou, 4) o que você exige e até quando.',hint:'Sehr geehrte Damen und Herren, am … habe ich bei Ihnen … bestellt. Leider … Ich habe bereits … Ich bitte Sie daher, … Ich erwarte Ihre Antwort bis … Mit freundlichen Grüßen',focus:'formelle Sprache, Partizipialattribute, Infinitiv mit zu',model:'Sehr geehrte Damen und Herren,\nam 2. Mai habe ich bei Ihnen einen Laptop des Modells „ProBook 14“ bestellt (Bestellnummer 48213). Das am 5. Mai gelieferte Gerät funktionierte zunächst einwandfrei. Seit gestern startet es jedoch nicht mehr. Ich habe bereits versucht, den Akku vollständig zu laden und das Gerät zurückzusetzen – leider ohne Erfolg.\nDa ich den Laptop dringend für meine Arbeit benötige, bitte ich Sie, mir umgehend ein neues Gerät zu schicken oder den Kaufpreis zu erstatten. Eine Reparatur, die mehrere Wochen dauert, kommt für mich nicht in Frage.\nIch erwarte Ihre Antwort bis zum 20. Mai.\nMit freundlichen Grüßen\nLucas Souza'}
+]}],
+resumen:`<h3>Partizipialattribute</h3><p class="es-t">das von uns entwickelte Produkt · die seit Monaten steigenden Preise · der online gekaufte Laptop · die von mir angegebene Adresse</p>
+<h3>Wirtschaft</h3><p class="es-t">der Umsatz · der Gewinn · der Verlust · die Nachfrage · die Branche · investieren · pleitegehen</p>
+<h3>Reklamation</h3><p class="es-t">Ich bitte Sie, mir den Kaufpreis zu erstatten. · die Gewährleistung · der Umtausch · Ich erwarte Ihre Antwort bis …</p>`});
+
+/* ================= KAPITEL 41 · GESUNDHEIT & PSYCHE ================= */
+LANGS.de.course.units.push({id:'k41',n:'41',level:'B2',title:'Gesundheit & Psyche',sub:'Estresse e bem-estar · sistema de saúde · modais para suposições (er dürfte, sie muss …) · Futur II (er wird … gewesen sein)',
+goals:['Über Stress, Belastung und psychische Gesundheit sprechen','Modalverben subjektiv: Vermutungen und Behauptungen (muss, dürfte, kann, soll, will)','Futur II: Vermutungen über die Vergangenheit','Einen Ratgebertext verstehen und Tipps geben'],
+situacion:{title:'Conversa com o médico',npc:'Dr. Yilmaz',scene:'Há semanas você dorme mal e se sente esgotado. Você vai à sua médica de família, a Dra. Yilmaz.',role:'Du bist Dr. Elif Yilmaz, Hausärztin in Frankfurt. Du siezt. Lucas kommt, weil er seit Wochen schlecht schläft, müde und gereizt ist. Frag genau nach (seit wann, Arbeit, Schlaf, Sport, Ernährung, Privatleben). Äußere vorsichtige Vermutungen (Das dürfte mit dem Stress zusammenhängen; Sie werden in letzter Zeit viel gearbeitet haben). Erkläre Möglichkeiten: Krankschreibung, Entspannungskurs (zahlt die Krankenkasse), Überweisung zu einer Psychotherapeutin. Sprich natürliches Deutsch auf B2-Niveau.',goal:'Descreva os sintomas com detalhes, responda às perguntas e decida com a médica o que fazer.'},
+placement:[
+ {t:'mc',q:'Er ist nicht im Büro. Er ___ krank sein. (provavelmente)',opts:['dürfte','soll','will'],a:0},
+ {t:'mc',q:'Sie ___ sehr reich sein – das sagen jedenfalls alle. (dizem que)',opts:['soll','will','muss'],a:0},
+ {t:'mc',q:'Er ___ den Text allein geschrieben haben. Aber das glaube ich nicht. (ele afirma)',opts:['will','soll','dürfte'],a:0},
+ {t:'gap',q:'Jana ist noch nicht da. Sie ___ den Zug verpasst haben. (Futur II: werden)',a:['wird']},
+ {t:'mc',q:'„esgotado, sobrecarregado (não dá conta)“',opts:['überfordert','überzeugt','überrascht'],a:0},
+ {t:'mc',q:'Diese Krankheit ist ___. Bleiben Sie bitte zu Hause.',opts:['ansteckend','chronisch','psychisch'],a:0}],
+lessons:[
+{id:'l1',title:'Estresse e bem-estar',desc:'die Belastung, überfordert, abschalten …',steps:[
+ {t:'vocab',title:'Psique e estresse',items:[['die Psyche','a psique'],['psychisch','psíquico, mental'],['die Belastung','a carga, a sobrecarga'],['überfordert','sobrecarregado'],['die Erschöpfung','o esgotamento'],['das Burn-out','o burnout'],['die Depression','a depressão'],['der Psychotherapeut / die Psychotherapeutin','o psicoterapeuta / a psicoterapeuta'],['die Achtsamkeit','a atenção plena'],['abschalten','desligar(-se), relaxar'],['die Auszeit','a pausa, o tempo para si'],['gereizt','irritado'],['die Schlafstörung','o distúrbio do sono'],['das Selbstwertgefühl','a autoestima'],['vorbeugen','prevenir'],['ausgeglichen','equilibrado']]},
+ {t:'mc',q:'Nach der Arbeit kann ich einfach nicht ___. Ich denke immer an meine Projekte.',opts:['abschalten','vorbeugen','überfordern'],a:0},
+ {t:'mc',q:'Seit Wochen schläft er schlecht. Er hat ___.',opts:['Schlafstörungen','Achtsamkeit','eine Auszeit'],a:0},
+ {t:'gap',q:'Sport kann Stress ___. (prevenir)',a:['vorbeugen']},
+ {t:'match',q:'Ligue.',pairs:[['überfordert','sobrecarregado'],['gereizt','irritado'],['ausgeglichen','equilibrado'],['die Erschöpfung','o esgotamento'],['die Auszeit','a pausa']]},
+ {t:'tr',de:'Preciso de uma pausa.',a:['Ich brauche eine Auszeit.']},
+ {t:'speak',es:'In letzter Zeit fühle ich mich oft überfordert und kann abends nicht mehr abschalten.',de:'Ultimamente me sinto muitas vezes sobrecarregado e não consigo mais relaxar à noite.',tip:'<i>abschalten</i> é separável: <i>ich schalte ab</i>, mas com modal: <i>ich kann nicht abschalten</i>.'}
+]},
+{id:'l2',title:'Modais para suposições',desc:'muss · dürfte · kann · soll · will',steps:[
+ {t:'info',title:'Uso subjetivo dos modais',html:`<p>Os modais também expressam <b>o quanto o falante tem certeza</b> – ou que a informação vem de outra pessoa:</p>
+ <table><tr><th>modal</th><th>significado</th><th>exemplo</th></tr>
+ <tr><td><b>muss</b></td><td>quase certeza (~90 %)</td><td class="es-t">Er muss krank sein. Er fehlt nie.</td></tr>
+ <tr><td><b>dürfte</b></td><td>provável (~75 %)</td><td class="es-t">Das dürfte am Stress liegen.</td></tr>
+ <tr><td><b>kann / könnte</b></td><td>possível (~50 %)</td><td class="es-t">Sie könnte im Meeting sein.</td></tr>
+ <tr><td><b>soll</b></td><td>dizem que (outra pessoa afirma)</td><td class="es-t">Der neue Chef soll sehr streng sein.</td></tr>
+ <tr><td><b>will</b></td><td>ele próprio afirma (duvidoso)</td><td class="es-t">Er will nie krank gewesen sein.</td></tr></table>
+ <div class="ex">Sobre o <b>passado</b>: modal + particípio + <i>haben/sein</i>: <span class="es-t">Sie muss den Termin vergessen haben.</span> · <span class="es-t">Er soll lange im Krankenhaus gewesen sein.</span></div>`},
+ {t:'mc',q:'Das Licht ist an. Tom ___ zu Hause sein. (quase certeza)',opts:['muss','soll','will'],a:0},
+ {t:'mc',q:'Laut Zeitung ___ das neue Medikament sehr wirksam sein.',opts:['soll','will','muss'],a:0},
+ {t:'mc',q:'Max sagt, er habe den Marathon in drei Stunden geschafft. → Max ___ den Marathon in drei Stunden geschafft haben.',opts:['will','soll','dürfte'],a:0},
+ {t:'mc',q:'„Wahrscheinlich ist sie schon zu Hause.“ =',opts:['Sie dürfte schon zu Hause sein.','Sie will schon zu Hause sein.','Sie soll schon zu Hause sein.'],a:0},
+ {t:'gap',q:'Der Kollege fehlt schon wieder. Er ___ wirklich überlastet sein. (quase certeza)',a:['muss']},
+ {t:'gap',q:'Sie ___ den Termin vergessen haben. (possivelmente – könnte)',a:['könnte']},
+ {t:'order',es:'Die Ärztin soll schon lange in dieser Praxis arbeiten',de:'Dizem que a médica trabalha há muito tempo neste consultório.'},
+ {t:'tr',de:'Ele deve ter perdido o ônibus. (quase certeza)',a:['Er muss den Bus verpasst haben.']}
+]},
+{id:'l3',title:'Sistema de saúde – Futur II',desc:'die Diagnose, die Nebenwirkung · Er wird es vergessen haben.',steps:[
+ {t:'vocab',title:'No médico',items:[['der Hausarzt / die Hausärztin','o médico / a médica de família'],['die Diagnose','o diagnóstico'],['die Behandlung','o tratamento'],['behandeln','tratar'],['verschreiben','receitar'],['die Nebenwirkung','o efeito colateral'],['chronisch','crônico'],['ansteckend','contagioso'],['die Impfung','a vacina(ção)'],['impfen','vacinar'],['die Vorsorgeuntersuchung','o exame preventivo'],['die Krankschreibung','o atestado médico'],['krankschreiben','dar atestado'],['die Wartezeit','o tempo de espera']]},
+ {t:'info',title:'Futur II: suposições sobre o passado',html:`<p><b>werden</b> + particípio + <b>haben/sein</b> expressa uma <b>suposição</b> sobre algo que já aconteceu (muitas vezes com <i>wohl</i>, <i>sicher</i>, <i>bestimmt</i>):</p>
+ <table><tr><td class="es-t">Er ist nicht gekommen. Er wird den Termin vergessen haben.</td><td>Ele não veio. Deve ter esquecido o compromisso.</td></tr>
+ <tr><td class="es-t">Sie wird wohl schon nach Hause gegangen sein.</td><td>Ela provavelmente já foi para casa.</td></tr></table>
+ <div class="ex">Raramente: futuro concluído – <span class="es-t">Bis Freitag werde ich den Bericht geschrieben haben.</span> (Até sexta terei escrito o relatório.)</div>`},
+ {t:'mc',q:'Die Praxis ist zu. Die Ärztin ___ schon in den Urlaub gefahren sein.',opts:['wird','hat','ist'],a:0},
+ {t:'mc',q:'„Er hat wohl viel gearbeitet.“ =',opts:['Er wird viel gearbeitet haben.','Er wird viel arbeiten.','Er wurde viel gearbeitet.'],a:0},
+ {t:'gap',q:'Lucas hat Kopfschmerzen. Er wird zu wenig getrunken ___.',a:['haben']},
+ {t:'gap',q:'Der Arzt hat mir ein Medikament ___. (receitar – particípio)',a:['verschrieben']},
+ {t:'mc',q:'Das Medikament kann Müdigkeit verursachen. Das ist eine ___.',opts:['Nebenwirkung','Diagnose','Impfung'],a:0},
+ {t:'tr',de:'A médica me deu atestado por uma semana.',a:['Die Ärztin hat mich eine Woche krankgeschrieben.','Die Ärztin hat mich für eine Woche krankgeschrieben.']}
+]},
+{id:'l4',title:'Ler e escrever: guia contra o estresse',desc:'Ratgeber · Antwort mit Tipps',steps:[
+ {t:'read',title:'Leitura: Wenn der Akku leer ist',text:`Ständig erreichbar, immer mehr Aufgaben, kaum Pausen: Laut einer Umfrage einer großen Krankenkasse fühlt sich fast jeder zweite Beschäftigte in Deutschland häufig gestresst. Die Zahl der Krankschreibungen wegen psychischer Erkrankungen hat sich in den letzten 15 Jahren mehr als verdoppelt.
+„Stress an sich ist nicht schädlich“, erklärt die Psychologin Dr. Anna Brandt. „Problematisch wird es, wenn es keine Erholungsphasen mehr gibt.“ Warnsignale seien zum Beispiel Schlafstörungen, Gereiztheit oder das Gefühl, nicht mehr abschalten zu können.
+Brandt empfiehlt, feste Feierabendzeiten einzuhalten und das Diensthandy abends auszuschalten. Auch Bewegung an der frischen Luft und regelmäßige soziale Kontakte könnten vorbeugen. Wer über Wochen erschöpft sei, solle jedoch nicht zögern, ärztliche Hilfe in Anspruch zu nehmen.`,de:`Sempre disponível, cada vez mais tarefas, quase sem pausas: segundo uma pesquisa de um grande plano de saúde, quase um em cada dois trabalhadores na Alemanha se sente estressado com frequência. O número de atestados por doenças psíquicas mais que dobrou nos últimos 15 anos.\n„O estresse em si não é prejudicial“, explica a psicóloga Dra. Anna Brandt. „Fica problemático quando não há mais fases de recuperação.“ Sinais de alerta seriam, por exemplo, distúrbios do sono, irritabilidade ou a sensação de não conseguir mais se desligar.\nBrandt recomenda respeitar horários fixos de fim de expediente e desligar o celular do trabalho à noite. Movimento ao ar livre e contatos sociais regulares também poderiam prevenir. Quem estiver esgotado por semanas, porém, não deveria hesitar em buscar ajuda médica.`},
+ {t:'mc',q:'Was ist laut Dr. Brandt das eigentliche Problem?',opts:['Es gibt keine Erholungsphasen mehr.','Jeder Stress ist gefährlich.','Die Menschen arbeiten zu wenig.'],a:0},
+ {t:'mc',q:'Welches Warnsignal wird genannt?',opts:['nicht mehr abschalten können','zu viel Sport','Hunger'],a:0},
+ {t:'mc',q:'Was soll man tun, wenn man wochenlang erschöpft ist?',opts:['ärztliche Hilfe suchen','mehr arbeiten','das Handy kaufen'],a:0},
+ {t:'free',task:'A sua colega Jana escreveu: „Ich bin total erschöpft, kann nachts nicht schlafen und denke nur an die Arbeit.“ Responda (~120 palavras): 1) mostre compreensão e faça uma suposição sobre a causa (dürfte, muss …), 2) dê três conselhos, 3) ofereça ajuda concreta.',hint:'Liebe Jana, das tut mir leid … Das dürfte mit … zusammenhängen. Du musst in letzter Zeit … An deiner Stelle würde ich … Außerdem … Wenn du willst, …',focus:'subjektive Modalverben, Futur II, Ratschläge',model:'Liebe Jana,\nes tut mir wirklich leid, dass es dir so schlecht geht. Das dürfte mit dem großen Projekt zusammenhängen – du musst in den letzten Wochen fast jeden Abend gearbeitet haben.\nAn deiner Stelle würde ich zuerst mit Frau Dr. Hoffmann sprechen. Sie wird sicher verstehen, dass du nicht alles allein schaffen kannst. Außerdem solltest du dein Diensthandy abends ausschalten und dir feste Feierabendzeiten setzen. Und wenn du nach ein paar Wochen immer noch nicht schlafen kannst, geh bitte zu deiner Hausärztin.\nWenn du willst, können wir am Samstag zusammen im Taunus wandern gehen. Frische Luft und Bewegung helfen mir immer, abzuschalten.\nAlles Liebe\nLucas'}
+]}],
+resumen:`<h3>Modalverben subjektiv</h3><p class="es-t">Er muss krank sein. · Das dürfte am Stress liegen. · Sie könnte im Meeting sein. · Er soll sehr streng sein. · Er will nie krank gewesen sein.</p>
+<h3>Futur II</h3><p class="es-t">Er wird den Termin vergessen haben. · Sie wird schon nach Hause gegangen sein.</p>
+<h3>Gesundheit</h3><p class="es-t">überfordert · abschalten · die Belastung · vorbeugen · verschreiben · die Nebenwirkung · krankschreiben</p>`});
+
+/* ================= KAPITEL 42 · MEDIEN & KOMMUNIKATION ================= */
+LANGS.de.course.units.push({id:'k42',n:'42',level:'B2',title:'Medien & Kommunikation',sub:'Imprensa e fake news · estilo nominal (bei der Ankunft = wenn ich ankomme) · fazer uma apresentação',
+goals:['Über Presse, Quellen und Falschmeldungen sprechen','Nominalisierung: Verbalstil ↔ Nominalstil (bei, nach, vor, wegen, zur …)','Eine Präsentation strukturieren und halten','Einen Artikel kritisch lesen und kommentieren'],
+situacion:{title:'Apresentação no trabalho',npc:'Frau Dr. Hoffmann',scene:'Você apresenta para a sua chefe, a Dra. Hoffmann, e para a equipe uma proposta: uma nova ferramenta de comunicação interna para a empresa.',role:'Du bist Frau Dr. Hoffmann, Abteilungsleiterin in einer Softwarefirma in Frankfurt. Du siezt. Lucas hält eine kurze Präsentation über ein neues internes Kommunikationstool (statt vieler E-Mails). Hör zu, unterbrich höchstens einmal mit einer kurzen Verständnisfrage und stell danach kritische Fragen: Kosten, Datenschutz, Einarbeitung der Mitarbeitenden, ältere Kolleginnen und Kollegen, die keine neuen Tools wollen. Benutze Nominalstil (die Einführung des Tools, zur Verbesserung der Kommunikation). Sprich natürliches Deutsch auf B2-Niveau.',goal:'Apresente com estrutura (introdução, pontos, conclusão), responda às perguntas críticas e defenda a sua proposta.'},
+placement:[
+ {t:'mc',q:'„Wenn wir ankommen, rufen wir an.“ = ___ rufen wir an.',opts:['Bei unserer Ankunft','Zu unserer Ankunft','Mit unserer Ankunft'],a:0},
+ {t:'mc',q:'„Weil es stark regnete, …“ = ___ …',opts:['Wegen des starken Regens','Trotz des starken Regens','Bei starkem Regnen'],a:0},
+ {t:'mc',q:'„Damit die Qualität besser wird, …“ = ___ der Qualität …',opts:['Zur Verbesserung','Bei der Verbesserung','Nach der Verbesserung'],a:0},
+ {t:'gap',q:'Viele Falschmeldungen werden über soziale Medien ___. (espalhadas)',a:['verbreitet']},
+ {t:'mc',q:'„a fonte (de informação)“',opts:['die Quelle','die Quote','die Qual'],a:0},
+ {t:'mc',q:'Mein Vortrag ___ sich in drei Teile.',opts:['gliedert','teilt mit','handelt'],a:0}],
+lessons:[
+{id:'l1',title:'Imprensa e fake news',desc:'die Quelle, seriös, recherchieren, verbreiten …',steps:[
+ {t:'vocab',title:'Mídia e informação',items:[['die Presse','a imprensa'],['die Pressefreiheit','a liberdade de imprensa'],['der Journalismus','o jornalismo'],['die Quelle','a fonte'],['seriös','sério, confiável'],['recherchieren','pesquisar, apurar'],['die Recherche','a apuração, a pesquisa'],['die Schlagzeile','a manchete'],['die Falschmeldung','a notícia falsa'],['verbreiten','espalhar, divulgar'],['die Glaubwürdigkeit','a credibilidade'],['glaubwürdig','confiável, crível'],['manipulieren','manipular'],['der Algorithmus','o algoritmo'],['die Filterblase','a bolha (de filtro)'],['die Zensur','a censura'],['objektiv','objetivo'],['einseitig','unilateral, parcial']]},
+ {t:'mc',q:'Bevor man eine Nachricht teilt, sollte man die ___ prüfen.',opts:['Quelle','Zensur','Schlagzeile'],a:0},
+ {t:'mc',q:'Der Artikel zeigt nur eine Seite des Problems. Er ist sehr ___.',opts:['einseitig','seriös','objektiv'],a:0},
+ {t:'gap',q:'Gute Journalisten ___ gründlich, bevor sie schreiben. (apuram)',a:['recherchieren']},
+ {t:'match',q:'Ligue.',pairs:[['die Falschmeldung','a notícia falsa'],['die Schlagzeile','a manchete'],['verbreiten','espalhar'],['die Glaubwürdigkeit','a credibilidade'],['die Filterblase','a bolha']]},
+ {t:'tr',de:'A liberdade de imprensa é importante para a democracia.',a:['Die Pressefreiheit ist wichtig für die Demokratie.']},
+ {t:'speak',es:'Durch Algorithmen sehen wir oft nur Meinungen, die unserer eigenen ähneln – wir leben in einer Filterblase.',de:'Por causa dos algoritmos, muitas vezes só vemos opiniões parecidas com a nossa – vivemos numa bolha.',tip:'<i>ähneln</i> + dativo: <i>unserer eigenen (Meinung)</i>.'}
+]},
+{id:'l2',title:'Estilo nominal',desc:'wenn wir ankommen → bei unserer Ankunft',steps:[
+ {t:'info',title:'Verbalstil ↔ Nominalstil',html:`<p>Textos formais (jornais, ciência, administração) transformam <b>orações</b> em <b>substantivos com preposição</b>. O texto fica mais curto e mais denso:</p>
+ <table><tr><th>oração (Verbalstil)</th><th>substantivo (Nominalstil)</th></tr>
+ <tr><td class="es-t">wenn wir ankommen</td><td class="es-t">bei unserer Ankunft</td></tr>
+ <tr><td class="es-t">nachdem er das Studium beendet hatte</td><td class="es-t">nach Beendigung des Studiums</td></tr>
+ <tr><td class="es-t">bevor die Sitzung beginnt</td><td class="es-t">vor Beginn der Sitzung</td></tr>
+ <tr><td class="es-t">weil es stark regnete</td><td class="es-t">wegen des starken Regens</td></tr>
+ <tr><td class="es-t">obwohl die Kritik groß war</td><td class="es-t">trotz der großen Kritik</td></tr>
+ <tr><td class="es-t">damit die Kommunikation besser wird</td><td class="es-t">zur Verbesserung der Kommunikation</td></tr>
+ <tr><td class="es-t">indem man Daten analysiert</td><td class="es-t">durch die Analyse von Daten</td></tr>
+ <tr><td class="es-t">während er studierte</td><td class="es-t">während seines Studiums</td></tr></table>
+ <div class="ex">Formação: <b>-ung</b> (verbessern → die Verbesserung), infinitivo (<span class="es-t">das Lesen</span>), radical (<span class="es-t">beginnen → der Beginn</span>, <span class="es-t">ankommen → die Ankunft</span>). O sujeito/objeto vira <b>genitivo</b> ou <b>von</b>: <span class="es-t">die Analyse der Daten / von Daten</span>.</div>`},
+ {t:'mc',q:'„Bevor Sie das Gerät benutzen, lesen Sie die Anleitung.“ = ___ des Geräts …',opts:['Vor der Benutzung','Nach der Benutzung','Bei Benutzen'],a:0},
+ {t:'mc',q:'„Nachdem sie angekommen war, …“ =',opts:['Nach ihrer Ankunft','Vor ihrer Ankunft','Bei ihrem Ankommen nach'],a:0},
+ {t:'mc',q:'„durch die Einführung des neuen Systems“ =',opts:['indem man das neue System einführt','obwohl man das System einführt','bevor man das System einführt'],a:0},
+ {t:'gap',q:'Wenn Sie Fragen haben, … → ___ Fragen wenden Sie sich bitte an …',a:['Bei']},
+ {t:'gap',q:'Weil die Nachfrage gestiegen ist → wegen der gestiegenen ___',a:['Nachfrage']},
+ {t:'gap',q:'damit die Arbeit erleichtert wird → zur ___ der Arbeit',a:['Erleichterung']},
+ {t:'order',es:'Nach Abschluss der Recherche wurde der Artikel veröffentlicht',de:'Depois de concluída a apuração, o artigo foi publicado.'},
+ {t:'tr',de:'Durante a reunião, os celulares devem estar desligados. (während + genitivo)',a:['Während der Besprechung müssen die Handys ausgeschaltet sein.','Während des Meetings müssen die Handys ausgeschaltet sein.','Während der Sitzung müssen die Handys ausgeschaltet sein.']}
+]},
+{id:'l3',title:'Fazer uma apresentação',desc:'Mein Vortrag gliedert sich in … · Damit komme ich zu …',steps:[
+ {t:'info',title:'Frases para apresentações',html:`<table><tr><td>Introdução</td><td class="es-t">Ich möchte Ihnen heute ein neues Konzept vorstellen. · Mein Vortrag gliedert sich in drei Teile.</td></tr>
+ <tr><td>Transição</td><td class="es-t">Damit komme ich zum zweiten Punkt. · Lassen Sie mich kurz auf … eingehen.</td></tr>
+ <tr><td>Recursos visuais</td><td class="es-t">Wie Sie auf dieser Folie sehen, … · Die Grafik verdeutlicht, dass …</td></tr>
+ <tr><td>Exemplo / ênfase</td><td class="es-t">Ein Beispiel dafür ist … · Ich möchte betonen, dass …</td></tr>
+ <tr><td>Conclusão</td><td class="es-t">Abschließend möchte ich zusammenfassen: … · Vielen Dank für Ihre Aufmerksamkeit. Haben Sie Fragen?</td></tr></table>`},
+ {t:'vocab',title:'Apresentação',items:[['die Präsentation','a apresentação'],['die Folie','o slide'],['gliedern','estruturar, dividir'],['die Gliederung','a estrutura, o roteiro'],['eingehen auf','abordar, entrar em (um assunto)'],['verdeutlichen','deixar claro, ilustrar'],['zusammenfassen','resumir'],['die Einführung','a introdução, a implantação'],['einführen','introduzir, implantar']]},
+ {t:'mc',q:'Sie sind mit dem ersten Teil fertig. Was sagen Sie?',opts:['Damit komme ich zum zweiten Punkt.','Jetzt ist Schluss.','Der erste Punkt war gut, oder?'],a:0},
+ {t:'mc',q:'Wie beenden Sie einen Vortrag höflich?',opts:['Vielen Dank für Ihre Aufmerksamkeit. Haben Sie Fragen?','Das war’s, tschüss.','Fragen bitte per E-Mail.'],a:0},
+ {t:'gap',q:'Wie Sie auf dieser ___ sehen, sind die Kosten gering. (slide)',a:['Folie']},
+ {t:'gap',q:'Lassen Sie mich kurz auf die Kosten ___. (abordar)',a:['eingehen']},
+ {t:'speak',es:'Ich möchte Ihnen heute ein neues Tool vorstellen, das unsere interne Kommunikation deutlich verbessern könnte.',de:'Hoje eu gostaria de apresentar a vocês uma nova ferramenta que poderia melhorar bastante a nossa comunicação interna.',tip:'Na oração relativa, o verbo conjugado (<i>könnte</i>) vai para o final.'}
+]},
+{id:'l4',title:'Ler e comentar',desc:'Artikel über Falschmeldungen · Kommentar',steps:[
+ {t:'read',title:'Leitura: Gefälschte Nachrichten erkennen',text:`Ein angebliches Foto vom überfluteten Flughafen, ein erfundenes Zitat einer Politikerin: Falschmeldungen verbreiten sich im Netz oft schneller als die Wahrheit. Nach Angaben einer Medienstudie hat bereits jeder zweite Jugendliche mindestens einmal eine Falschmeldung geteilt – meist ohne es zu merken.
+Durch den Einsatz künstlicher Intelligenz wird die Erkennung immer schwieriger. Gefälschte Bilder und Videos sind heute kaum noch von echten zu unterscheiden. Experten raten deshalb zur Überprüfung der Quelle: Wer hat die Nachricht veröffentlicht? Berichten auch seriöse Medien darüber? Wann wurde das Foto aufgenommen?
+Mehrere Bundesländer haben inzwischen auf die Entwicklung reagiert: Seit diesem Schuljahr gehört Medienkompetenz zum Pflichtunterricht. Kritiker bemängeln allerdings, dass es an ausgebildeten Lehrkräften fehle.`,de:`Uma suposta foto do aeroporto inundado, uma citação inventada de uma política: notícias falsas muitas vezes se espalham na internet mais rápido que a verdade. Segundo um estudo de mídia, um em cada dois jovens já compartilhou pelo menos uma vez uma notícia falsa – na maioria das vezes sem perceber.\nCom o uso da inteligência artificial, identificá-las fica cada vez mais difícil. Imagens e vídeos falsificados hoje quase não se distinguem dos verdadeiros. Por isso, especialistas aconselham verificar a fonte: quem publicou a notícia? Mídias sérias também noticiam isso? Quando a foto foi tirada?\nVários estados já reagiram a essa evolução: desde este ano letivo, competência midiática faz parte das aulas obrigatórias. Críticos reclamam, porém, que faltariam professores formados para isso.`},
+ {t:'mc',q:'Was haben viele Jugendliche laut Studie schon getan?',opts:['eine Falschmeldung geteilt','einen Artikel geschrieben','eine Zeitung abonniert'],a:0},
+ {t:'mc',q:'Warum wird die Erkennung schwieriger?',opts:['wegen künstlicher Intelligenz','wegen der Pressefreiheit','wegen der Lehrkräfte'],a:0},
+ {t:'mc',q:'„Experten raten zur Überprüfung der Quelle.“ bedeutet:',opts:['Man soll prüfen, woher die Nachricht kommt.','Man soll keine Nachrichten lesen.','Man soll die Quelle löschen.'],a:0},
+ {t:'mc',q:'Was kritisieren die Kritiker?',opts:['Es fehlen ausgebildete Lehrkräfte.','Medienkompetenz ist unwichtig.','Der Unterricht ist zu lang.'],a:0},
+ {t:'free',task:'Escreva um comentário (~150 palavras) sobre o artigo: 1) resuma o problema com suas palavras, 2) diga se a escola deve ensinar competência midiática e por quê, 3) dê duas dicas práticas para reconhecer fake news, 4) conclusão. Tente usar pelo menos duas formas nominais (zur Überprüfung, bei der Nutzung …).',hint:'Der Artikel beschäftigt sich mit … Meiner Meinung nach … Bei der Nutzung sozialer Medien sollte man … Zur Überprüfung einer Nachricht … Abschließend …',focus:'Nominalstil, Argumentation, Konnektoren',model:'Der Artikel beschäftigt sich mit der schnellen Verbreitung von Falschmeldungen im Internet. Besonders Jugendliche teilen oft Nachrichten, ohne deren Herkunft zu prüfen, und durch künstliche Intelligenz wird die Erkennung immer schwieriger.\nMeiner Meinung nach ist Medienkompetenz als Schulfach längst überfällig. Junge Menschen informieren sich fast ausschließlich über soziale Medien, lernen aber kaum, Quellen kritisch zu bewerten. Trotz des Mangels an Lehrkräften sollten Schulen deshalb sofort damit beginnen – zur Not mit Unterstützung von Journalistinnen und Journalisten.\nZur Überprüfung einer Nachricht helfen zwei einfache Fragen: Wer hat sie veröffentlicht, und berichten auch seriöse Medien darüber? Außerdem kann man bei verdächtigen Fotos eine Bildersuche machen.\nAbschließend lässt sich sagen: Bei der Nutzung sozialer Medien ist ein gesundes Misstrauen die beste Verteidigung.'}
+]}],
+resumen:`<h3>Nominalstil</h3><p class="es-t">bei unserer Ankunft · nach Beendigung des Studiums · vor Beginn der Sitzung · wegen des Regens · trotz der Kritik · zur Verbesserung der Kommunikation · durch die Analyse von Daten</p>
+<h3>Präsentation</h3><p class="es-t">Mein Vortrag gliedert sich in drei Teile. · Damit komme ich zum zweiten Punkt. · Wie Sie auf dieser Folie sehen, … · Vielen Dank für Ihre Aufmerksamkeit.</p>
+<h3>Medien</h3><p class="es-t">die Quelle · seriös · recherchieren · die Falschmeldung · verbreiten · die Glaubwürdigkeit · einseitig</p>`});
