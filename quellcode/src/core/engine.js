@@ -770,7 +770,10 @@ function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
       h('div',{style:'flex:1'},h('div',{class:'lt'},l.title),h('div',{class:'ld'},l.desc)),r?.done?h('span',{class:'pill ok'},Math.round(r.best*100)+'%'):null);})));return;}
   if(st&&!ck?.pass)m.append(h('p',{class:'muted small',style:'margin:12px 0 0'},T('Einstufung: ')+(st==='sicher'?T('sitzt – mach direkt den Abschlusstest.'):st===T('auffrischen')?T('auffrischen – Erklärungen kannst du überfliegen.'):T('neu lernen – nimm dir Zeit.'))));
   const L=h('div',{class:'grid',style:'gap:8px;margin-top:12px'});
-  LS.forEach((l,i)=>{const k=u.id+'.'+l.id;const rr=rnd(k);const nr=rr<1?1:rr<2?2:rr<3?3:2;const wait=nr===3&&!r3ready(k);
+  /* Zwischenüberschriften, wenn es mehrere Arten gibt: Lektionen · Wortschatz (lx/ly/lw) · Prüfungstraining (lz) */
+  const kindOf=l=>l.id==='lz'?'z':/^l[xyw]$/.test(l.id)?'w':'l';const KN={l:T('Lektionen'),w:T('Wortschatz'),z:T('Prüfungstraining')};
+  const multi=new Set(LS.map(kindOf)).size>1;let lastK=null;
+  LS.forEach((l,i)=>{const k=u.id+'.'+l.id;if(multi&&kindOf(l)!==lastK){lastK=kindOf(l);L.append(h('div',{class:'kind',style:'margin:'+(i?'10px':'0')+' 2px 0'},KN[lastK]));}const rr=rnd(k);const nr=rr<1?1:rr<2?2:rr<3?3:2;const wait=nr===3&&!r3ready(k);
     const open=j=>{if(j>1&&rr<j-1){toast(T('Erst „')+RN[j-1]+T('“ abschließen'));return;}if(j===3&&rr<3&&!r3ready(k)){toast(T('„Festigen“ ist ab morgen frei'));return;}go(j===1?'lesson/'+u.id+'/'+l.id:'round/'+u.id+'/'+l.id+'/'+j);};
     L.append(h('div',{class:'lesson lrow'+(rr>=3?' done':''),onclick:()=>open(wait?2:nr)},h('div',{class:'ic'},rr>=3?'✓':i+1),
       h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},l.title),h('div',{class:'ld'},l.desc),
@@ -1603,28 +1606,42 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
 function vPlacement(m){
   if(S.placement&&!m.dataset.restart){m.append(h('h1',{},T('Einstufungstest')),h('p',{class:'sub'},T('Gemacht am ')+S.placement.date+'.'),placementTable(),
     h('div',{class:'row',style:'margin-top:16px'},h('button',{class:'btn',onclick:()=>{m.innerHTML='';m.dataset.restart=1;vPlacement(m);}},T('Neuen Test machen (andere Fragen)')),h('button',{class:'btn primary',onclick:()=>go('units')},T('Zum Kurs →'))));return;}
-  m.append(h('h1',{},T('Einstufungstest')),h('p',{class:'sub'},T('Der Test läuft in Etappen: ')+LEVELS.map(L=>L.title).join(' → ')+T('. Pro ')+UW+T(' 3 Fragen, jede Etappe dauert ca. 5 Minuten, bei jedem Durchgang neu gemischt.')),
-    h('div',{class:'card',style:'margin-bottom:16px'},h('p',{style:'margin:0'},T('Nach jeder Etappe siehst du dein Zwischenergebnis. Liegt eine Etappe unter 60 %, höre ich dort auf – alles danach lernst du neu. Was „sitzt“, hakst du später mit dem Abschlusstest ab.')),
-      h('p',{class:'muted small',style:'margin:8px 0 0'},T('Kein Stress: Wenn du etwas nicht weißt, wähl „Weiß ich nicht“ bzw. lass die Lücke leer – das hilft der Einstufung mehr als Raten.'))),
-    h('button',{class:'btn primary',onclick:()=>runStage(m,0,{})},T('Test starten →')));}
-function runStage(m,li,results){const L=LEVELS[li];m.innerHTML='';window.scrollTo(0,0);m.scrollTop=0;
-  const byU={};PLACEMENT.forEach((s,i)=>{(byU[s.u]=byU[s.u]||[]).push(i);});
-  const units=levelUnits(L.id).filter(u=>byU[u.id]);
-  const steps=units.flatMap(u=>shuffle(byU[u.id]).slice(0,3)).map(i=>{const s=PLACEMENT[i];return{s:s.t==='mc'&&!s.opts.includes(T('Weiß ich nicht'))?Object.assign({},s,{opts:s.opts.concat([T('Weiß ich nicht')]),keepLast:true}):s,ref:'P||'+i,unit:s.u};});
-  const per={};let sc=0,cont=false;const nextL=LEVELS[li+1];
-  play(m,{title:T('Einstufungstest · Etappe ')+(li+1)+T(' von ')+LEVELS.length+' · '+L.title,steps:shuffle(steps),noRetry:true,noPrompt:true,onBack:()=>go('placement'),
-    onAnswer:(it,st)=>{const u=it.unit;per[u]=per[u]||{n:0,ok:0};per[u].n++;if(st!=='bad')per[u].ok++;},
-    onDone:()=>{let n=0,ok=0;for(const u of units){const p=per[u.id];if(p){results[u.id]=p.ok/p.n;n+=p.n;ok+=p.ok;}}
-      sc=n?ok/n:0;cont=sc>=0.6&&!!nextL&&levelUnits(nextL.id).some(u=>byU[u.id]);
-      S.placement={date:today(),results:Object.assign({},results),ts:Date.now(),upTo:L.id};save();
-      return cont?{label:T('Weiter mit ')+nextL.title+' →',fn:()=>runStage(m,li+1,results)}:{label:T('Ergebnis ansehen →'),fn:()=>go('placement')};},
-    extraEnd:()=>h('div',{class:'fb '+(cont?'ok':'ai'),style:'text-align:left'},h('b',{class:'h'},L.title+': '+Math.round(sc*100)+T(' % richtig')),
-      h('div',{},cont?T('Stark! Als Nächstes teste ich ')+nextL.title+T('. Du kannst auch hier aufhören – das bisherige Ergebnis ist gespeichert.'):nextL?T('Hier höre ich auf – ab dieser Stufe steigen wir ein und lernen neu.'):T('Das war die letzte Etappe.')))});}
+  /* Start: Selbsteinschätzung → der Test beginnt auf dieser Stufe (eine Etappe pro GER-Stufe, ca. 12 Fragen) und wandert nach oben bzw. unten */
+  const byU=placeByUnit();const labs=LGROUPS.filter(g=>lvUnitsOf(g).some(u=>byU[u.id]));
+  m.append(h('h1',{},T('Einstufungstest')),h('p',{class:'sub'},T('Ein paar Fragen pro Stufe (ca. 5 Minuten je Etappe). Bestehst du eine Stufe, geht es eine höher – sonst eine tiefer, bis klar ist, wo du einsteigst.')),
+    h('div',{class:'card',style:'margin-bottom:12px'},h('div',{class:'kind',style:'margin:0 0 8px'},T('Wo stehst du ungefähr?')),
+      h('div',{class:'chips'},h('button',{class:'chip',onclick:()=>{toast(T('Dann fängst du einfach vorne an.'));go('units');}},T('Ganz neu')),
+        labs.map(g=>h('button',{class:'chip',onclick:()=>runStage(m,g,{},{start:g,done:[]})},g))),
+      h('p',{class:'muted small',style:'margin:10px 0 0'},T('Unsicher? Nimm lieber die niedrigere Stufe – der Test geht von selbst weiter nach oben.'))),
+    h('p',{class:'muted small'},T('Kein Stress: Wenn du etwas nicht weißt, wähl „Weiß ich nicht“ bzw. lass die Lücke leer – das hilft der Einstufung mehr als Raten.')));}
+const placeByUnit=()=>{const byU={};PLACEMENT.forEach((s,i)=>{(byU[s.u]=byU[s.u]||[]).push(i);});return byU;};
+const lvUnitsOf=g=>COURSE.units.filter(u=>u.status!=='soon'&&LEVELS.some(L=>L.label===g&&L.id===unitLevel(u)));
+/* eine Etappe = eine GER-Stufe g; ctx.start = Startstufe, ctx.done = schon getestete Stufen mit Ergebnis */
+function runStage(m,g,results,ctx){m.innerHTML='';window.scrollTo(0,0);m.scrollTop=0;
+  const byU=placeByUnit();const units=lvUnitsOf(g).filter(u=>byU[u.id]);
+  const per=Math.min(3,Math.max(1,Math.ceil(12/Math.max(1,units.length))));
+  const steps=units.flatMap(u=>shuffle(byU[u.id]).slice(0,per)).map(i=>{const s=PLACEMENT[i];return{s:s.t==='mc'&&!s.opts.includes(T('Weiß ich nicht'))?Object.assign({},s,{opts:s.opts.concat([T('Weiß ich nicht')]),keepLast:true}):s,ref:'P||'+i,unit:s.u};});
+  const labs=LGROUPS.filter(x=>lvUnitsOf(x).some(u=>byU[u.id]));const gi=labs.indexOf(g);
+  const per2={};let sc=0,nxt=null,dir=0;
+  play(m,{title:T('Einstufungstest · ')+g,steps:shuffle(steps),noRetry:true,noPrompt:true,onBack:()=>go('placement'),
+    onAnswer:(it,st)=>{const u=it.unit;per2[u]=per2[u]||{n:0,ok:0};per2[u].n++;if(st!=='bad')per2[u].ok++;},
+    onDone:()=>{let n=0,ok=0;for(const u of units){const p=per2[u.id];if(p){results[u.id]=p.ok/p.n;n+=p.n;ok+=p.ok;}}
+      sc=n?ok/n:0;ctx.done.push([g,sc]);const tested=x=>ctx.done.some(d=>d[0]===x);
+      if(sc>=0.6){const up=labs[gi+1];if(up&&!tested(up)){nxt=up;dir=1;}}
+      else{const dn=labs[gi-1];if(dn&&!tested(dn)){nxt=dn;dir=-1;}}
+      /* Stufen unter der niedrigsten bestandenen, die nie getestet wurden, gelten als „sitzt“ (Abschlusstest hakt sie ab) */
+      const passed=ctx.done.filter(d=>d[1]>=0.6).map(d=>labs.indexOf(d[0]));const assumed=[];
+      if(passed.length){const lo=Math.min.apply(null,passed);labs.slice(0,lo).filter(x=>!tested(x)).forEach(x=>lvUnitsOf(x).forEach(u=>{if(results[u.id]==null||assumed.includes(u.id)){results[u.id]=0.8;assumed.push(u.id);}}));}
+      S.placement={date:today(),results:Object.assign({},results),ts:Date.now(),upTo:g,assumed};save();
+      return nxt?{label:(dir>0?T('Weiter mit '):T('Zur Sicherheit: ')) +nxt+' →',fn:()=>runStage(m,nxt,results,ctx)}:{label:T('Ergebnis ansehen →'),fn:()=>go('placement')};},
+    extraEnd:()=>h('div',{class:'fb '+(sc>=0.6?'ok':'ai'),style:'text-align:left'},h('b',{class:'h'},g+': '+Math.round(sc*100)+T(' % richtig')),
+      h('div',{},dir>0?T('Stark! Als Nächstes teste ich ')+nxt+T('. Du kannst auch hier aufhören – das bisherige Ergebnis ist gespeichert.'):dir<0?T('Das war noch etwas schwer – ich prüfe kurz ')+nxt+T(', damit du nicht zu hoch einsteigst.'):sc>=0.6?T('Das war die höchste Stufe, die es zu testen gibt.'):T('Hier höre ich auf – ab dieser Stufe steigen wir ein und lernen neu.')))});}
 function placementTable(){const r=S.placement?.results||{};const t=h('div',{class:'card'});
   for(const L of LEVELS){const us=levelUnits(L.id).filter(u=>r[u.id]!=null);if(!us.length)continue;
     t.append(h('div',{class:'kind',style:'margin-top:12px'},L.title),h('div',{class:'grid',style:'gap:8px'},us.map(u=>{const p=r[u.id];const st=unitStatus(u);
       return h('div',{class:'row'},h('span',{style:'width:90px',class:'muted'},''+UW+' '+u.n),h('span',{style:'flex:1;min-width:120px'},u.title),h('div',{class:'bar',style:'width:120px'},h('i',{style:'width:'+Math.round(p*100)+'%;background:'+(st==='sicher'?'var(--ok)':st===T('auffrischen')?'var(--gold)':'var(--info)')})),
         h('span',{class:'pill '+(st==='sicher'?'ok':st===T('auffrischen')?'warn':'new'),style:'width:100px;text-align:center'},st==='sicher'?T('sitzt ✓'):st===T('auffrischen')?T('auffrischen'):T('neu lernen')));})));}
+  const asm=S.placement?.assumed||[];if(asm.length)t.append(h('p',{class:'muted small',style:'margin:12px 0 0'},T('Stufen unter deinem Einstieg habe ich nicht abgefragt – sie gelten als „sitzt“. Mit dem Abschlusstest der Unidad hakst du sie schnell ab.')));
   const untested=LEVELS.filter(L=>levelUnits(L.id).length&&!levelUnits(L.id).some(u=>r[u.id]!=null));
   if(untested.length&&Object.keys(r).length)t.append(h('p',{class:'muted small',style:'margin:14px 0 0'},T('Nicht mehr getestet: ')+untested.map(L=>L.title).join(', ')+T(' – das lernst du neu.')));
   const rec=COURSE.units.find(u=>u.status!=='soon'&&(r[u.id]==null||r[u.id]<0.8));
