@@ -40,7 +40,7 @@ lessons:[
  <tr><td class="es-t">in Anspruch nehmen</td><td>utilizar (um serviço), tomar (tempo)</td></tr>
  <tr><td class="es-t">Maßnahmen ergreifen</td><td>tomar medidas</td></tr>
  <tr><td class="es-t">in Kraft treten</td><td>entrar em vigor</td></tr></table>
- <div class="ex">Muitas têm forma <b>passiva</b> com outro verbo: <span class="es-t">eine Frage stellen → in Frage stellen (questionar)</span> · <span class="es-t">zur Diskussion stellen → zur Diskussion stehen</span>.</div>`},
+ <div class="ex">Muitas têm forma <b>passiva</b> com outro verbo: <span class="es-t">eine Frage stellen → in Frage stellen</span> (questionar) · <span class="es-t">zur Diskussion stellen → zur Diskussion stehen</span>.</div>`},
  {t:'vocab',title:'Expressões com substantivo + verbo',items:[['eine Entscheidung treffen','tomar uma decisão'],['Verantwortung übernehmen','assumir a responsabilidade'],['in Frage kommen','ser uma opção'],['in Frage stellen','questionar, pôr em dúvida'],['zur Verfügung stehen','estar à disposição'],['zur Verfügung stellen','pôr à disposição'],['eine Rolle spielen','ter um papel, ser importante'],['in Kontakt treten mit','entrar em contato com'],['Kritik üben an','criticar'],['zum Ausdruck bringen','expressar'],['in Anspruch nehmen','utilizar, tomar (tempo)'],['Maßnahmen ergreifen','tomar medidas'],['in Kraft treten','entrar em vigor'],['einen Beitrag leisten','dar uma contribuição'],['zur Sprache bringen','trazer à tona (um assunto)']]},
  {t:'mc',q:'Das Gesetz ___ am 1. Januar in Kraft.',opts:['tritt','kommt','stellt'],a:0},
  {t:'mc',q:'Das Gehalt ___ für mich nicht die wichtigste Rolle.',opts:['spielt','macht','nimmt'],a:0},
@@ -445,3 +445,220 @@ Mehrere Bundesländer haben inzwischen auf die Entwicklung reagiert: Seit diesem
 resumen:`<h3>Nominalstil</h3><p class="es-t">bei unserer Ankunft · nach Beendigung des Studiums · vor Beginn der Sitzung · wegen des Regens · trotz der Kritik · zur Verbesserung der Kommunikation · durch die Analyse von Daten</p>
 <h3>Präsentation</h3><p class="es-t">Mein Vortrag gliedert sich in drei Teile. · Damit komme ich zum zweiten Punkt. · Wie Sie auf dieser Folie sehen, … · Vielen Dank für Ihre Aufmerksamkeit.</p>
 <h3>Medien</h3><p class="es-t">die Quelle · seriös · recherchieren · die Falschmeldung · verbreiten · die Glaubwürdigkeit · einseitig</p>`});
+
+/* ================= KAPITEL 43 · NATUR & KLIMA ================= */
+LANGS.de.course.units.push({id:'k43',n:'43',level:'B2',title:'Natur & Klima',sub:'Mudança climática e catástrofes naturais · biodiversidade · preposições com genitivo (aufgrund, infolge, angesichts, innerhalb …) · carta de leitor',
+goals:['Über Klimawandel, Wetterextreme und Artenschutz sprechen','Präpositionen mit Genitiv: aufgrund, infolge, angesichts, innerhalb, außerhalb, mithilfe, anstelle, bezüglich','Ursachen und Folgen in Texten erkennen und benennen','Einen Leserbrief mit Stellungnahme schreiben'],
+situacion:{title:'Debate na rádio',npc:'Moderator Jens Kühn',scene:'Uma rádio de Frankfurt faz um debate com ouvintes sobre o plano da cidade de proibir carros no centro para proteger o clima. Você liga e entra no ar.',role:'Du bist Jens Kühn, Moderator der Radiosendung „Frankfurt diskutiert“. Du siezt. Thema: Die Stadt will die Innenstadt bis 2030 autofrei machen – aufgrund der Hitzesommer und der Luftverschmutzung. Begrüße Lucas als Anrufer, frag nach seiner Meinung und seinen Erfahrungen (Hitze in der Stadt, Radfahren, öffentlicher Verkehr). Spiel danach den Advocatus Diaboli: Was ist mit Handwerkern, Lieferdiensten, älteren Menschen? Lies zwischendurch eine kritische Hörermeinung vor. Benutze Präpositionen mit Genitiv (angesichts der Hitze, innerhalb der Innenstadt, infolge des Klimawandels). Sprich natürliches Deutsch auf B2-Niveau.',goal:'Dê a sua opinião sobre um centro sem carros, com causas e consequências, e responda às objeções do apresentador.'},
+placement:[
+ {t:'mc',q:'___ des starken Regens wurde das Konzert abgesagt.',opts:['Aufgrund','Trotz','Mithilfe'],a:0},
+ {t:'mc',q:'Bitte bezahlen Sie die Rechnung ___ von 14 Tagen.',opts:['innerhalb','außer','infolge'],a:0},
+ {t:'mc',q:'___ der steigenden Temperaturen pflanzt die Stadt mehr Bäume.',opts:['Angesichts','Anstelle','Außerhalb'],a:0},
+ {t:'gap',q:'Viele Tierarten sind vom ___ bedroht. (a extinção)',a:['Aussterben']},
+ {t:'mc',q:'„a seca“',opts:['die Dürre','die Flut','der Sturm'],a:0},
+ {t:'mc',q:'Der Leserbrief bezieht sich ___ Ihren Artikel vom 3. Mai.',opts:['auf','an','über'],a:0}],
+lessons:[
+{id:'l1',title:'Clima e catástrofes',desc:'die Dürre, die Überschwemmung, der Klimawandel …',steps:[
+ {t:'vocab',title:'Clima extremo',items:[['der Klimawandel','a mudança climática'],['die Erderwärmung','o aquecimento global'],['der Treibhauseffekt','o efeito estufa'],['das Treibhausgas','o gás de efeito estufa'],['der Ausstoß','a emissão'],['die Dürre','a seca'],['die Hitzewelle','a onda de calor'],['die Überschwemmung','a inundação'],['das Hochwasser','a cheia, a enchente'],['der Waldbrand','o incêndio florestal'],['der Meeresspiegel','o nível do mar'],['schmelzen','derreter'],['der Gletscher','a geleira'],['die Folge','a consequência'],['die Ursache','a causa'],['verursachen','causar'],['eindämmen','conter, frear']]},
+ {t:'mc',q:'Es hat seit drei Monaten nicht geregnet. Die Bauern leiden unter der ___.',opts:['Dürre','Überschwemmung','Hitzewelle'],a:0},
+ {t:'mc',q:'Durch die Erderwärmung steigt der ___.',opts:['Meeresspiegel','Gletscher','Ausstoß'],a:0},
+ {t:'gap',q:'Die Gletscher in den Alpen ___ immer schneller. (derretem)',a:['schmelzen']},
+ {t:'match',q:'Ligue.',pairs:[['die Ursache','a causa'],['die Folge','a consequência'],['der Waldbrand','o incêndio florestal'],['das Hochwasser','a enchente'],['eindämmen','conter']]},
+ {t:'tr',de:'Os carros causam muitos gases de efeito estufa.',a:['Autos verursachen viele Treibhausgase.','Die Autos verursachen viele Treibhausgase.']},
+ {t:'speak',es:'Der Klimawandel verursacht immer häufiger Hitzewellen, Dürren und Überschwemmungen.',de:'A mudança climática causa cada vez mais ondas de calor, secas e inundações.',tip:'<i>immer häufiger</i> = cada vez mais frequentemente (immer + comparativo).'}
+]},
+{id:'l2',title:'Preposições com genitivo',desc:'aufgrund · infolge · angesichts · innerhalb · mithilfe …',steps:[
+ {t:'info',title:'Preposições da linguagem formal',html:`<p>Em textos formais, muitas preposições pedem <b>genitivo</b>:</p>
+ <table><tr><th>preposição</th><th>significado</th><th>exemplo</th></tr>
+ <tr><td><b>aufgrund</b></td><td>por causa de (causa)</td><td class="es-t">aufgrund des Regens</td></tr>
+ <tr><td><b>infolge</b></td><td>em consequência de</td><td class="es-t">infolge der Dürre</td></tr>
+ <tr><td><b>angesichts</b></td><td>diante de, em vista de</td><td class="es-t">angesichts der hohen Temperaturen</td></tr>
+ <tr><td><b>innerhalb / außerhalb</b></td><td>dentro de / fora de</td><td class="es-t">innerhalb eines Jahres · außerhalb der Stadt</td></tr>
+ <tr><td><b>mithilfe</b></td><td>com a ajuda de</td><td class="es-t">mithilfe neuer Technologien</td></tr>
+ <tr><td><b>anstelle / statt</b></td><td>em vez de</td><td class="es-t">anstelle des Autos</td></tr>
+ <tr><td><b>bezüglich / hinsichtlich</b></td><td>com relação a</td><td class="es-t">bezüglich Ihrer Anfrage</td></tr>
+ <tr><td><b>zugunsten</b></td><td>em favor de</td><td class="es-t">zugunsten der Umwelt</td></tr></table>
+ <div class="ex">Já conhecidas: <b>wegen, trotz, während</b> + genitivo. Sem artigo no plural, usa-se <b>von</b>: <span class="es-t">innerhalb von zwei Wochen</span>, <span class="es-t">aufgrund von Problemen</span>.</div>`},
+ {t:'mc',q:'___ der Überschwemmung mussten 2000 Menschen ihre Häuser verlassen.',opts:['Infolge','Anstelle','Innerhalb'],a:0},
+ {t:'mc',q:'Die Stadt baut einen Park ___ des alten Parkplatzes.',opts:['anstelle','aufgrund','angesichts'],a:0},
+ {t:'mc',q:'___ von drei Tagen haben wir eine Antwort bekommen.',opts:['Innerhalb','Außerhalb','Infolge'],a:0},
+ {t:'gap',q:'Mithilfe ___ Satelliten kann man Waldbrände früh erkennen. (artigo genitivo plural)',a:['der']},
+ {t:'gap',q:'Aufgrund ___ Hitzewelle sind die Schwimmbäder voll. (die Hitzewelle)',a:['der']},
+ {t:'gap',q:'Wir wohnen ___ der Stadt, auf dem Land. (fora de)',a:['außerhalb']},
+ {t:'order',es:'Angesichts der Klimakrise müssen wir unseren Lebensstil ändern',de:'Diante da crise climática, precisamos mudar o nosso estilo de vida.'},
+ {t:'tr',de:'Por causa da seca, a colheita foi ruim. (aufgrund)',a:['Aufgrund der Dürre war die Ernte schlecht.']}
+]},
+{id:'l3',title:'Natureza e biodiversidade',desc:'die Artenvielfalt, aussterben, schützen …',steps:[
+ {t:'vocab',title:'Natureza',items:[['die Artenvielfalt','a biodiversidade'],['die Art','a espécie; o tipo'],['aussterben','extinguir-se'],['bedroht','ameaçado'],['der Lebensraum','o habitat'],['das Naturschutzgebiet','a reserva natural'],['der Regenwald','a floresta tropical'],['die Biene','a abelha'],['das Insekt','o inseto'],['die Ressource','o recurso'],['nachwachsend','renovável (matéria-prima)'],['die Nachhaltigkeit','a sustentabilidade'],['der ökologische Fußabdruck','a pegada ecológica']]},
+ {t:'read',title:'Leitura: Stille Wiesen',text:`Wer heute im Sommer über eine Wiese läuft, hört deutlich weniger Summen als noch vor dreißig Jahren. Einer Langzeitstudie zufolge ist die Zahl der Insekten in Teilen Deutschlands seit 1990 um mehr als 70 Prozent zurückgegangen. Als Hauptursachen gelten die intensive Landwirtschaft, der Einsatz von Pestiziden und der Verlust natürlicher Lebensräume.
+Die Folgen betreffen nicht nur Bienen und Schmetterlinge. Infolge des Insektensterbens finden auch viele Vogelarten nicht mehr genug Nahrung. Und ohne Bestäuber sind auch die Ernten vieler Obstsorten in Gefahr.
+Doch es gibt Hoffnung: Innerhalb weniger Jahre haben zahlreiche Städte ihre Grünflächen in blühende Wiesen verwandelt. Auch auf Balkonen kann jeder etwas tun – anstelle von Geranien empfehlen Experten heimische Wildblumen.`,de:`Quem hoje caminha num prado no verão ouve bem menos zumbido do que há trinta anos. Segundo um estudo de longo prazo, o número de insetos em partes da Alemanha diminuiu mais de 70 por cento desde 1990. As principais causas seriam a agricultura intensiva, o uso de pesticidas e a perda de habitats naturais.\nAs consequências não afetam só abelhas e borboletas. Em consequência da morte dos insetos, muitas espécies de pássaros também não encontram mais comida suficiente. E sem polinizadores, as colheitas de muitas frutas também estão em perigo.\nMas há esperança: em poucos anos, numerosas cidades transformaram suas áreas verdes em prados floridos. Também nas varandas todos podem fazer algo – em vez de gerânios, especialistas recomendam flores silvestres nativas.`},
+ {t:'mc',q:'Um wie viel ist die Zahl der Insekten zurückgegangen?',opts:['um mehr als 70 Prozent','um 30 Prozent','um die Hälfte'],a:0},
+ {t:'mc',q:'Was ist laut Text eine Hauptursache?',opts:['die intensive Landwirtschaft','zu viele Vögel','der Regen'],a:0},
+ {t:'mc',q:'Warum finden Vögel weniger Nahrung?',opts:['wegen des Insektensterbens','wegen der Städte','wegen der Wildblumen'],a:0},
+ {t:'mc',q:'Was kann man auf dem Balkon tun?',opts:['heimische Wildblumen pflanzen','Pestizide benutzen','Geranien kaufen'],a:0},
+ {t:'gap',q:'Viele Tierarten sind vom Aussterben ___. (ameaçadas)',a:['bedroht']}
+]},
+{id:'l4',title:'Escrever: carta de leitor',desc:'Leserbrief zur autofreien Innenstadt (ca. 150 Wörter)',steps:[
+ {t:'read',title:'Leitura: Zeitungsmeldung',text:`Frankfurt soll bis 2030 eine weitgehend autofreie Innenstadt bekommen. Das hat der Stadtrat am Donnerstag beschlossen. Angesichts der Hitzesommer und der hohen Luftverschmutzung sollen Parkplätze in Grünflächen und Radwege umgewandelt werden. Anwohner, Lieferdienste und Menschen mit Behinderung dürfen weiterhin hineinfahren. Der Einzelhandel befürchtet allerdings, dass aufgrund fehlender Parkplätze weniger Kundschaft in die Innenstadt kommt.`,de:`Frankfurt deve ter até 2030 um centro praticamente sem carros. Foi o que a Câmara Municipal decidiu na quinta-feira. Diante dos verões quentes e da alta poluição do ar, estacionamentos devem ser transformados em áreas verdes e ciclovias. Moradores, serviços de entrega e pessoas com deficiência poderão continuar entrando. O comércio, porém, teme que, pela falta de estacionamentos, menos clientes venham ao centro.`},
+ {t:'mc',q:'Wer darf weiterhin mit dem Auto in die Innenstadt fahren?',opts:['Anwohner und Lieferdienste','alle Touristen','niemand'],a:0},
+ {t:'mc',q:'Was befürchtet der Einzelhandel?',opts:['weniger Kundschaft','mehr Verkehr','höhere Mieten'],a:0},
+ {t:'info',title:'Estrutura da carta de leitor',html:`<table><tr><td>Referência</td><td class="es-t">Zu Ihrem Artikel „Autofreie Innenstadt bis 2030“ vom 12. Juni</td></tr>
+ <tr><td>Opinião</td><td class="es-t">Mit großem Interesse habe ich gelesen, dass … Ich halte diese Entscheidung für …</td></tr>
+ <tr><td>Argumentos</td><td class="es-t">Zum einen …, zum anderen … · Hinzu kommt, dass …</td></tr>
+ <tr><td>Contra-argumento</td><td class="es-t">Zwar …, aber … · Man darf allerdings nicht vergessen, dass …</td></tr>
+ <tr><td>Conclusão</td><td class="es-t">Aus diesen Gründen bin ich überzeugt, dass …</td></tr></table>`},
+ {t:'free',task:'Escreva uma carta de leitor (~150 palavras) sobre a notícia: 1) referência ao artigo, 2) sua opinião, 3) dois argumentos com causa e consequência, 4) um contra-argumento e a sua resposta, 5) conclusão. Use pelo menos duas preposições com genitivo.',hint:'Zu Ihrem Artikel … Ich halte die Entscheidung für … Zum einen … aufgrund … Zum anderen … Zwar befürchten …, aber … Aus diesen Gründen …',focus:'Präpositionen mit Genitiv, Argumentation, zwar … aber',model:'Zu Ihrem Artikel „Autofreie Innenstadt bis 2030“ vom 12. Juni\nMit großem Interesse habe ich gelesen, dass Frankfurt die Innenstadt weitgehend autofrei machen will. Ich halte diese Entscheidung für mutig und richtig.\nZum einen leiden wir aufgrund der zunehmenden Hitzewellen jeden Sommer mehr unter der Hitze in der Stadt. Bäume und Grünflächen anstelle von Parkplätzen würden die Temperaturen spürbar senken. Zum anderen wäre die Luft innerhalb weniger Jahre deutlich sauberer, was vor allem Kindern und älteren Menschen zugutekäme.\nZwar befürchtet der Einzelhandel weniger Kundschaft, aber Erfahrungen aus Städten wie Kopenhagen zeigen das Gegenteil: In Fußgängerzonen bleiben die Menschen länger und kaufen mehr. Wichtig ist allerdings, dass Busse und Bahnen ausgebaut werden.\nAus diesen Gründen bin ich überzeugt, dass die autofreie Innenstadt für alle ein Gewinn ist.\nLucas Souza, Frankfurt-Bockenheim'}
+]}],
+resumen:`<h3>Präpositionen mit Genitiv</h3><p class="es-t">aufgrund des Regens · infolge der Dürre · angesichts der Hitze · innerhalb eines Jahres · außerhalb der Stadt · mithilfe neuer Technologien · anstelle des Autos · bezüglich Ihrer Anfrage</p>
+<h3>Klima</h3><p class="es-t">der Klimawandel · die Dürre · die Überschwemmung · der Waldbrand · die Ursache · die Folge · verursachen · eindämmen</p>
+<h3>Natur</h3><p class="es-t">die Artenvielfalt · aussterben · bedroht · der Lebensraum · die Nachhaltigkeit</p>`});
+
+/* ================= KAPITEL 44 · KUNST & KULTUR ================= */
+LANGS.de.course.units.push({id:'k44',n:'44',level:'B2',title:'Kunst & Kultur',sub:'Arte, exposições e cinema · als ob (como se) · partículas modais (doch, ja, mal, eben, halt) · resenha',
+goals:['Über Kunstwerke, Ausstellungen und Filme sprechen und sie bewerten','Irreale Vergleichssätze: als ob / als wenn / als + Konjunktiv II','Modalpartikeln im Gespräch: doch, ja, mal, eben, halt, eigentlich, wohl','Eine Rezension schreiben'],
+situacion:{title:'No museu',npc:'Lea',scene:'Você vai com a Lea, a namorada do Tom, a uma exposição de arte contemporânea no Städel Museum. Ela adora; você não está tão convencido.',role:'Du bist Lea, Freundin von Lucas’ Mitbewohner Tom, Kunststudentin in Frankfurt. Du duzt. Ihr seid zusammen in einer Ausstellung moderner Kunst im Städel. Du bist begeistert, erklärst Werke (eine fast leere weiße Leinwand, eine Installation aus alten Fernsehern) und fragst Lucas, was er sieht und fühlt. Wenn er skeptisch ist („Das sieht aus, als ob ein Kind es gemalt hätte“), argumentiere leidenschaftlich, aber mit Humor. Benutze viele Modalpartikeln (doch, ja, mal, halt, eben, eigentlich) und als ob. Sprich natürliches, lockeres Deutsch auf B2-Niveau.',goal:'Descreva o que você vê, diga a sua opinião (com „als ob“), discorde com humor e combine com a Lea o que fazer depois.'},
+placement:[
+ {t:'mc',q:'Er tut so, ___ er alles wüsste.',opts:['als ob','wie wenn','ob als'],a:0},
+ {t:'mc',q:'Sie sieht aus, als ___ sie nicht geschlafen.',opts:['hätte','habe gehabt','hat'],a:0},
+ {t:'mc',q:'Komm ___ her! Ich will dir was zeigen.',opts:['mal','ja','eben'],a:0},
+ {t:'mc',q:'Das weißt du ___ schon – ich habe es dir gestern gesagt.',opts:['doch','mal','halt'],a:0},
+ {t:'gap',q:'Das Gemälde wirkt, als ___ es gestern gemalt worden. (sein – Konj. II)',a:['wäre']},
+ {t:'mc',q:'„a exposição“',opts:['die Ausstellung','die Aufstellung','die Vorstellung'],a:0}],
+lessons:[
+{id:'l1',title:'Arte e exposições',desc:'die Ausstellung, das Werk, abstrakt …',steps:[
+ {t:'vocab',title:'Artes visuais',items:[['ausstellen','expor'],['das Kunstwerk','a obra de arte'],['das Werk','a obra'],['die Skulptur','a escultura'],['die Installation','a instalação'],['die Leinwand','a tela'],['abstrakt','abstrato'],['zeitgenössisch','contemporâneo'],['der Maler / die Malerin','o pintor / a pintora'],['der Bildhauer / die Bildhauerin','o escultor / a escultora'],['das Motiv','o motivo, o tema'],['die Darstellung','a representação'],['wirken','parecer, causar efeito'],['beeindruckend','impressionante'],['provokant','provocador'],['geschmacklos','de mau gosto']]},
+ {t:'mc',q:'Das Museum zeigt eine ___ mit Werken von Paula Modersohn-Becker.',opts:['Ausstellung','Darstellung','Leinwand'],a:0},
+ {t:'mc',q:'Auf dem Bild sieht man keine Personen, nur Farben und Formen. Es ist ___.',opts:['abstrakt','zeitgenössisch','geschmacklos'],a:0},
+ {t:'gap',q:'Das Gemälde stellt eine Szene am Main ___. (representa)',a:['dar']},
+ {t:'match',q:'Ligue.',pairs:[['die Skulptur','a escultura'],['das Kunstwerk','a obra de arte'],['beeindruckend','impressionante'],['ausstellen','expor'],['das Motiv','o tema']]},
+ {t:'tr',de:'O quadro parece muito triste. (wirken)',a:['Das Bild wirkt sehr traurig.','Das Gemälde wirkt sehr traurig.']},
+ {t:'speak',es:'Die Installation hat mich sehr beeindruckt, obwohl ich zeitgenössische Kunst normalerweise schwierig finde.',de:'A instalação me impressionou muito, embora eu normalmente ache arte contemporânea difícil.',tip:'<i>beeindrucken</i> + acusativo: <i>hat mich beeindruckt</i>.'}
+]},
+{id:'l2',title:'als ob – como se',desc:'Er tut so, als ob … · Es sieht aus, als wäre …',steps:[
+ {t:'info',title:'Comparações irreais',html:`<p>Para dizer „<b>como se</b>“ (algo que não é real), usa-se <b>als ob / als wenn</b> + <b>Konjunktiv II</b> (verbo no final) – ou só <b>als</b> com o verbo logo depois:</p>
+ <table><tr><td class="es-t">Er tut so, als ob er alles wüsste.</td><td>Ele age como se soubesse tudo.</td></tr>
+ <tr><td class="es-t">Er tut so, als wüsste er alles.</td><td>(mesmo sentido – verbo logo depois de <i>als</i>)</td></tr>
+ <tr><td class="es-t">Das Bild sieht aus, als hätte ein Kind es gemalt.</td><td>O quadro parece que foi pintado por uma criança.</td></tr>
+ <tr><td class="es-t">Sie redet, als wäre sie die Chefin.</td><td>Ela fala como se fosse a chefe.</td></tr></table>
+ <div class="ex">Verbos típicos antes: <span class="es-t">so tun · aussehen · wirken · sich anhören · sich anfühlen · klingen</span>.<br>Passado: <span class="es-t">Er tut so, als ob er nichts gehört hätte.</span></div>`},
+ {t:'mc',q:'Die Musik klingt, als ob sie aus den Achtzigern ___.',opts:['wäre','ist','sei gewesen'],a:0},
+ {t:'mc',q:'Er tut so, als ___ er mich nicht kennen.',opts:['würde','wird','hätte'],a:0},
+ {t:'mc',q:'Welcher Satz ist richtig?',opts:['Du siehst aus, als hättest du ein Gespenst gesehen.','Du siehst aus, als du hättest ein Gespenst gesehen.','Du siehst aus, als ob hättest du ein Gespenst gesehen.'],a:0},
+ {t:'gap',q:'Es fühlt sich an, als ___ wir schon Sommer. (haben – Konj. II)',a:['hätten']},
+ {t:'gap',q:'Sie tut so, als ob sie keine Zeit ___. (haben – Konj. II)',a:['hätte']},
+ {t:'order',es:'Der Film wirkt als wäre er mit dem Handy gedreht worden',de:'O filme parece que foi gravado com o celular.'},
+ {t:'tr',de:'Ele age como se fosse o chefe.',a:['Er tut so, als ob er der Chef wäre.','Er tut so, als wäre er der Chef.','Er tut so, als wenn er der Chef wäre.']}
+]},
+{id:'l3',title:'Partículas modais',desc:'doch · ja · mal · eben/halt · eigentlich · wohl',steps:[
+ {t:'info',title:'Modalpartikeln',html:`<p>Pequenas palavras que não se traduzem literalmente, mas dão <b>tom</b> à frase – muito usadas na fala:</p>
+ <table><tr><th>partícula</th><th>efeito</th><th>exemplo</th></tr>
+ <tr><td><b>doch</b></td><td>reforço; „mas você sabe“; pedido insistente</td><td class="es-t">Komm doch mit! · Das ist doch klar!</td></tr>
+ <tr><td><b>ja</b></td><td>algo conhecido; surpresa</td><td class="es-t">Das weißt du ja. · Das ist ja toll!</td></tr>
+ <tr><td><b>mal</b></td><td>suaviza pedidos</td><td class="es-t">Schau mal! · Kannst du mal kurz helfen?</td></tr>
+ <tr><td><b>eben / halt</b></td><td>„é assim, fazer o quê“</td><td class="es-t">Das ist halt so. · Dann nehmen wir eben den Bus.</td></tr>
+ <tr><td><b>eigentlich</b></td><td>„na verdade“; pergunta mais leve</td><td class="es-t">Was machst du eigentlich am Wochenende?</td></tr>
+ <tr><td><b>wohl</b></td><td>suposição</td><td class="es-t">Er ist wohl krank.</td></tr>
+ <tr><td><b>denn</b></td><td>interesse em perguntas</td><td class="es-t">Wie heißt du denn?</td></tr></table>`},
+ {t:'mc',q:'Bitte freundlich: „Kannst du ___ das Fenster aufmachen?“',opts:['mal','ja','halt'],a:0},
+ {t:'mc',q:'Der Zug ist weg. – Na gut, dann fahren wir ___ mit dem nächsten.',opts:['eben','denn','doch'],a:0},
+ {t:'mc',q:'Überraschung: „Du sprichst ___ super Deutsch!“',opts:['ja','mal','eben'],a:0},
+ {t:'mc',q:'Leichte Frage: „Woher kennt ihr euch ___?“',opts:['eigentlich','halt','eben'],a:0},
+ {t:'gap',q:'Warum kommst du nicht mit? Komm ___ mit! (convite insistente)',a:['doch']},
+ {t:'dialog',place:'Im Städel',title:'Arte ou brincadeira?',scene:'Você e a Lea estão diante de uma tela quase toda branca.',lines:[
+  {n:'Lea',es:'Schau mal, das ist mein Lieblingsbild! Ist das nicht wunderschön?',de:'Olha só, esse é o meu quadro favorito! Não é lindo?'},
+  {you:true,opts:[{es:'Ehrlich gesagt sieht es aus, als hätte jemand vergessen, es fertig zu malen.',ok:true},{es:'Ich sehe es aus, als ob weiß.',ok:false,why:'Estrutura: „Es sieht aus, als hätte …“ / „als ob … hätte“ – com Konjunktiv II.'}]},
+  {n:'Lea',es:'Ach komm, das ist doch gerade der Punkt! Die Leere soll uns ja zum Nachdenken bringen.',de:'Ah, para, esse é justamente o ponto! O vazio deve nos fazer pensar.'},
+  {you:true,opts:[{es:'Na ja, vielleicht verstehe ich moderne Kunst halt nicht. Was kostet so ein Bild eigentlich?',ok:true},{es:'Doch halt mal ja.',ok:false,why:'Partículas não funcionam sozinhas – elas acompanham uma frase completa.'}]},
+  {n:'Lea',es:'Über eine Million! Komm, wir gehen jetzt mal ins Café, dann erkläre ich dir alles in Ruhe.',de:'Mais de um milhão! Vem, vamos agora ao café, aí te explico tudo com calma.'}]},
+ {t:'tr',de:'Olha só! (com partícula)',a:['Schau mal!','Guck mal!']}
+]},
+{id:'l4',title:'Escrever: resenha',desc:'Rezension eines Films oder einer Ausstellung (ca. 150 Wörter)',steps:[
+ {t:'vocab',title:'Cinema e crítica',items:[['die Rezension','a resenha'],['der Regisseur / die Regisseurin','o diretor / a diretora (de cinema)'],['die Hauptrolle','o papel principal'],['der Darsteller / die Darstellerin','o ator / a atriz'],['die Handlung spielt in …','a história se passa em …'],['gelungen','bem-sucedido, bem-feito'],['überzeugend','convincente'],['die Szene','a cena']]},
+ {t:'read',title:'Leitura: Filmkritik',text:`„Die Brücke am Main“ – ein Film, der unter die Haut geht
+Regisseurin Mira Holtz erzählt in ihrem neuen Film die Geschichte zweier Brüder, die sich nach zwanzig Jahren in Frankfurt wiedersehen. Die Handlung spielt an nur einem Wochenende, und doch erfährt man fast alles über eine Familie, die an ihren Geheimnissen zerbricht.
+Besonders überzeugend ist Karim Sayed in der Hauptrolle: Er spielt so natürlich, als würde er gar nicht spielen. Auch die Bilder sind gelungen – die Stadt wirkt grau und kalt, als hätte sie selbst ihre Hoffnung verloren.
+Schwächen hat der Film allerdings im letzten Drittel: Das Ende ist leider ziemlich vorhersehbar, und manche Dialoge klingen, als hätte man sie aus einem Lehrbuch abgeschrieben.
+Fazit: trotzdem ein mutiger, spannender Film, den man im Kino sehen sollte. Vier von fünf Sternen.`,de:`„A ponte sobre o Meno“ – um filme que mexe com a gente\nA diretora Mira Holtz conta em seu novo filme a história de dois irmãos que se reencontram em Frankfurt depois de vinte anos. A história se passa em um único fim de semana e, mesmo assim, ficamos sabendo quase tudo sobre uma família que se despedaça por causa dos seus segredos.\nEspecialmente convincente é Karim Sayed no papel principal: ele atua de forma tão natural como se nem estivesse atuando. As imagens também são bem-feitas – a cidade parece cinza e fria, como se ela mesma tivesse perdido a esperança.\nO filme tem pontos fracos, porém, no último terço: o final infelizmente é bastante previsível, e alguns diálogos soam como se tivessem sido copiados de um livro didático.\nConclusão: mesmo assim, um filme corajoso e emocionante, que vale a pena ver no cinema. Quatro de cinco estrelas.`},
+ {t:'mc',q:'Worum geht es im Film?',opts:['um zwei Brüder, die sich wiedersehen','um eine Brücke, die gebaut wird','um eine Regisseurin'],a:0},
+ {t:'mc',q:'Was lobt die Kritik besonders?',opts:['den Hauptdarsteller','das Ende','die Dialoge'],a:0},
+ {t:'mc',q:'Was kritisiert die Rezension?',opts:['das vorhersehbare Ende','die Bilder','die Länge der Handlung'],a:0},
+ {t:'free',task:'Escreva uma resenha (~150 palavras) de um filme, série, livro ou exposição de que você gostou (ou não): 1) título e tema, 2) do que se trata (sem contar o final!), 3) o que é bom – com uma comparação com „als ob“, 4) pontos fracos, 5) conclusão e nota.',hint:'„…“ – … In dem Film / Buch geht es um … Die Handlung spielt in … Besonders gelungen ist … Er/Sie spielt, als ob … Schwächen hat … allerdings … Fazit: …',focus:'als ob + Konjunktiv II, Bewertungen, Adjektive',model:'„Central do Brasil“ – eine Reise, die man nicht vergisst\nIn dem Film von Walter Salles geht es um Dora, eine ältere Frau, die am Bahnhof in Rio Briefe für Menschen schreibt, die nicht schreiben können. Eines Tages muss sie einem kleinen Jungen helfen, seinen Vater im Nordosten Brasiliens zu finden.\nBesonders gelungen ist die Hauptdarstellerin Fernanda Montenegro: Sie spielt so ehrlich, als ob sie ihr eigenes Leben erzählen würde. Auch die Landschaften sind beeindruckend – manchmal wirkt der Film, als wäre er ein Dokumentarfilm.\nSchwächen hat der Film eigentlich nur am Anfang, der etwas langsam ist. Wer Action erwartet, wird enttäuscht sein.\nFazit: ein berührender Film über Einsamkeit und Freundschaft, den man unbedingt gesehen haben sollte. Fünf von fünf Sternen.'}
+]}],
+resumen:`<h3>als ob / als + Konjunktiv II</h3><p class="es-t">Er tut so, als ob er alles wüsste. · Er tut so, als wüsste er alles. · Es sieht aus, als hätte ein Kind es gemalt.</p>
+<h3>Modalpartikeln</h3><p class="es-t">Komm doch mit! · Das weißt du ja. · Schau mal! · Das ist halt so. · Was machst du eigentlich …? · Er ist wohl krank.</p>
+<h3>Kunst & Film</h3><p class="es-t">die Ausstellung · das Kunstwerk · abstrakt · zeitgenössisch · wirken · die Rezension · die Hauptrolle · gelungen · vorhersehbar</p>`});
+
+/* ================= KAPITEL 45 · RECHT & POLITIK ================= */
+LANGS.de.course.units.push({id:'k45',n:'45',level:'B2',title:'Recht & Politik',sub:'Direitos, leis e tribunal · participação política · conectores: indem, ohne dass, anstatt dass, falls/sofern · carta formal a um órgão público',
+goals:['Über Rechte, Gesetze und Gerichte sprechen','Konnektoren: indem / dadurch, dass · ohne … zu / ohne dass · (an)statt … zu / (an)statt dass · falls / sofern','Politische Beteiligung und Bürgerrechte diskutieren','Einen formellen Brief an eine Behörde schreiben (Widerspruch)'],
+situacion:{title:'Consulta jurídica',npc:'Frau Brenner',scene:'O seu senhorio quer aumentar o aluguel em 20 % e ficar com parte da caução. Você vai a uma consulta na associação de inquilinos (Mieterverein).',role:'Du bist Frau Brenner, Juristin beim Mieterverein Frankfurt. Du siezt. Lucas kommt zur Beratung: Sein Vermieter will die Miete um 20 Prozent erhöhen und behauptet, Lucas müsse für einen Wasserschaden zahlen. Frag nach Details (Mietvertrag, letzte Erhöhung, wer hat den Schaden verursacht). Erkläre seine Rechte (Mieterhöhung höchstens 15–20 % in drei Jahren, Mietspiegel, Fristen) und was er tun kann (schriftlich widersprechen, Fotos, Fristen beachten). Benutze Konnektoren: indem, ohne dass, anstatt zu, falls, sofern. Sprich natürliches Deutsch auf B2-Niveau.',goal:'Explique o seu problema com clareza, faça perguntas sobre os seus direitos e combine os próximos passos.'},
+placement:[
+ {t:'mc',q:'Man kann Energie sparen, ___ man das Licht ausschaltet.',opts:['indem','ohne dass','anstatt'],a:0},
+ {t:'mc',q:'Er hat den Vertrag unterschrieben, ___ ihn zu lesen.',opts:['ohne','indem','falls'],a:0},
+ {t:'mc',q:'___ zu klagen, sollten Sie zuerst mit dem Vermieter sprechen.',opts:['Anstatt','Indem','Sofern'],a:0},
+ {t:'mc',q:'___ Sie Fragen haben, rufen Sie uns an.',opts:['Falls','Ohne dass','Indem'],a:0},
+ {t:'gap',q:'Sie hat ___ Anwalt genommen. (um advogado – acusativo)',a:['einen']},
+ {t:'mc',q:'„o tribunal“',opts:['das Gericht','das Gerücht','das Gewicht'],a:0}],
+lessons:[
+{id:'l1',title:'Direito e justiça',desc:'das Gericht, der Anwalt, klagen …',steps:[
+ {t:'vocab',title:'Justiça',items:[['der Richter / die Richterin','o juiz / a juíza'],['der Anwalt / die Anwältin','o advogado / a advogada'],['klagen','processar, entrar com ação'],['die Klage','a ação judicial'],['der Prozess','o processo (judicial)'],['das Urteil','a sentença'],['verurteilen','condenar'],['der / die Angeklagte','o réu / a ré'],['schuldig','culpado'],['unschuldig','inocente'],['die Strafe','a pena, a multa'],['der Zeuge / die Zeugin','a testemunha'],['das Verbrechen','o crime'],['der Täter / die Täterin','o autor do crime'],['das Opfer','a vítima'],['der Widerspruch','o recurso administrativo; a contradição'],]},
+ {t:'mc',q:'Der Richter hat den Angeklagten zu zwei Jahren Haft ___.',opts:['verurteilt','geklagt','bezeugt'],a:0},
+ {t:'mc',q:'Sie hat den Unfall gesehen und ist jetzt ___ vor Gericht.',opts:['Zeugin','Täterin','Richterin'],a:0},
+ {t:'gap',q:'Welches Amt ist für Wohngeld ___? (responsável)',a:['zuständig']},
+ {t:'match',q:'Ligue.',pairs:[['das Urteil','a sentença'],['schuldig','culpado'],['das Opfer','a vítima'],['klagen','processar'],['das Verbrechen','o crime']]},
+ {t:'tr',de:'Ela processou o seu antigo empregador.',a:['Sie hat ihren ehemaligen Arbeitgeber verklagt.','Sie hat gegen ihren ehemaligen Arbeitgeber geklagt.','Sie hat ihren früheren Arbeitgeber verklagt.']},
+ {t:'speak',es:'Falls der Vermieter nicht reagiert, werde ich mir einen Anwalt nehmen.',de:'Caso o senhorio não reaja, vou contratar um advogado.',tip:'<i>sich einen Anwalt nehmen</i> = contratar um advogado.'}
+]},
+{id:'l2',title:'Conectores: modo e alternativa',desc:'indem · ohne … zu / ohne dass · anstatt … zu / anstatt dass',steps:[
+ {t:'info',title:'indem, ohne, anstatt',html:`<table><tr><th>conector</th><th>significado</th><th>exemplo</th></tr>
+ <tr><td><b>indem</b> / <b>dadurch, dass</b></td><td>como? de que modo? (= -ndo)</td><td class="es-t">Man kann sich wehren, indem man schriftlich widerspricht.</td></tr>
+ <tr><td><b>ohne … zu</b></td><td>sem (mesmo sujeito)</td><td class="es-t">Er hat unterschrieben, ohne den Vertrag zu lesen.</td></tr>
+ <tr><td><b>ohne dass</b></td><td>sem que (outro sujeito)</td><td class="es-t">Der Vermieter hat die Miete erhöht, ohne dass wir informiert wurden.</td></tr>
+ <tr><td><b>(an)statt … zu</b></td><td>em vez de (mesmo sujeito)</td><td class="es-t">Anstatt zu klagen, haben wir einen Kompromiss gesucht.</td></tr>
+ <tr><td><b>(an)statt dass</b></td><td>em vez de (outro sujeito)</td><td class="es-t">Anstatt dass die Stadt hilft, steigen die Gebühren.</td></tr></table>
+ <div class="ex"><b>indem</b> responde à pergunta <i>Wie?</i>: <span class="es-t">Wie kann man Geld sparen? – Indem man weniger online einkauft.</span><br>Com <b>zu</b>, o sujeito das duas partes é o mesmo; com <b>dass</b>, há sujeitos diferentes.</div>`},
+ {t:'mc',q:'Wie kann man bei der Wahl mitbestimmen? – ___ man wählen geht.',opts:['Indem','Ohne dass','Anstatt'],a:0},
+ {t:'mc',q:'Sie ist gegangen, ___ sich zu verabschieden.',opts:['ohne','indem','dass'],a:0},
+ {t:'mc',q:'Das Gesetz wurde beschlossen, ___ die Bürger gefragt wurden.',opts:['ohne dass','ohne zu','indem'],a:0},
+ {t:'mc',q:'___ selbst zu kochen, bestellt er jeden Abend Pizza.',opts:['Anstatt','Ohne dass','Indem'],a:0},
+ {t:'gap',q:'Man kann die Frist verlängern, ___ man einen Antrag stellt.',a:['indem']},
+ {t:'gap',q:'Er hat die Strafe bezahlt, ohne Widerspruch ___. (einlegen)',a:['einzulegen']},
+ {t:'order',es:'Anstatt sich zu beschweren sollten die Bürger selbst aktiv werden',de:'Em vez de reclamar, os cidadãos deveriam agir eles mesmos.'},
+ {t:'tr',de:'Ele saiu sem pagar.',a:['Er ist gegangen, ohne zu bezahlen.','Er ist gegangen, ohne zu zahlen.']},
+ {t:'tr',de:'Aprende-se uma língua falando muito. (indem)',a:['Man lernt eine Sprache, indem man viel spricht.']}
+]},
+{id:'l3',title:'Participação política – falls / sofern',desc:'die Bürgerinitiative, die Petition, sofern …',steps:[
+ {t:'vocab',title:'Participação',items:[['die Bürgerinitiative','a iniciativa cidadã'],['die Petition','a petição'],['der Volksentscheid','o plebiscito'],['das Wahlrecht','o direito de voto'],['die Wahlbeteiligung','a participação eleitoral'],['die Mitbestimmung','a participação nas decisões'],['der Abgeordnete / die Abgeordnete','o deputado / a deputada'],['die Opposition','a oposição'],['die Koalition','a coalizão'],['der Bescheid','a notificação (oficial)'],['einlegen','interpor (recurso)']]},
+ {t:'info',title:'Condições: falls, sofern, soweit',html:`<table><tr><td><b>falls</b> = wenn (caso)</td><td class="es-t">Falls Sie den Bescheid nicht akzeptieren, können Sie Widerspruch einlegen.</td></tr>
+ <tr><td><b>sofern</b> = desde que, contanto que</td><td class="es-t">Sie dürfen wählen, sofern Sie 18 Jahre alt sind.</td></tr>
+ <tr><td><b>soweit</b> = até onde, na medida em que</td><td class="es-t">Soweit ich weiß, ist die Frist schon abgelaufen.</td></tr></table>
+ <div class="ex">Também sem conector, com o verbo no início: <span class="es-t">Haben Sie Fragen, rufen Sie uns an.</span> (= Wenn Sie Fragen haben, …)</div>`},
+ {t:'mc',q:'Ausländer aus EU-Ländern dürfen bei Kommunalwahlen wählen, ___ sie hier gemeldet sind.',opts:['sofern','ohne dass','anstatt'],a:0},
+ {t:'mc',q:'___ ich weiß, braucht man dafür 1000 Unterschriften.',opts:['Soweit','Falls','Indem'],a:0},
+ {t:'gap',q:'Gegen den ___ der Behörde kann man innerhalb eines Monats Widerspruch einlegen. (notificação)',a:['Bescheid']},
+ {t:'gap',q:'Die Wahl___ war dieses Mal sehr hoch: 78 Prozent. (participação)',a:['beteiligung']},
+ {t:'read',title:'Leitura: Eine Petition für mehr Radwege',text:`Anfang des Jahres starteten zwei Studentinnen aus Frankfurt eine Online-Petition für sichere Radwege. Innerhalb von drei Monaten unterschrieben mehr als 40.000 Menschen – weit mehr, als die beiden erwartet hatten. Daraufhin musste sich der Stadtrat mit dem Thema beschäftigen.
+„Wir haben gezeigt, dass man etwas verändern kann, indem man sich organisiert“, sagt Initiatorin Hanna Weiß. Anstatt nur zu klagen, hätten sie konkrete Vorschläge gemacht und Gespräche mit allen Parteien geführt.
+Nach langen Diskussionen einigten sich Regierung und Opposition auf einen Kompromiss: Bis 2028 sollen 50 Kilometer neue Radwege entstehen, sofern der Haushalt es erlaubt. Kritikern geht das nicht weit genug.`,de:`No começo do ano, duas estudantes de Frankfurt lançaram uma petição online por ciclovias seguras. Em três meses, mais de 40.000 pessoas assinaram – muito mais do que as duas esperavam. Com isso, a Câmara Municipal teve de tratar do assunto.\n„Mostramos que dá para mudar algo se organizando“, diz a idealizadora Hanna Weiß. Em vez de só reclamar, elas teriam feito propostas concretas e conversado com todos os partidos.\nDepois de longas discussões, governo e oposição chegaram a um meio-termo: até 2028 devem surgir 50 quilômetros de novas ciclovias, desde que o orçamento permita. Para os críticos, isso não vai longe o suficiente.`},
+ {t:'mc',q:'Was war das Ergebnis der Petition?',opts:['Der Stadtrat musste das Thema behandeln.','Alle Autos wurden verboten.','Die Studentinnen wurden Abgeordnete.'],a:0},
+ {t:'mc',q:'Wie haben die Initiatorinnen gearbeitet?',opts:['mit konkreten Vorschlägen und Gesprächen','nur mit Klagen vor Gericht','ohne andere Menschen'],a:0},
+ {t:'mc',q:'Unter welcher Bedingung werden die Radwege gebaut?',opts:['sofern genug Geld im Haushalt ist','falls es nicht regnet','ohne Bedingung'],a:0}
+]},
+{id:'l4',title:'Escrever: recurso a um órgão público',desc:'Widerspruch gegen einen Bescheid (ca. 120 Wörter)',steps:[
+ {t:'read',title:'Leitura: Bescheid der Stadt',text:`Sehr geehrter Herr Souza,
+für das Parken Ihres Fahrzeugs im Halteverbot in der Leipziger Straße am 14. März um 9:20 Uhr wird ein Verwarnungsgeld von 55 Euro festgesetzt. Bitte überweisen Sie den Betrag innerhalb von zwei Wochen. Gegen diesen Bescheid können Sie innerhalb eines Monats schriftlich Widerspruch einlegen.
+Mit freundlichen Grüßen
+Ordnungsamt der Stadt Frankfurt am Main`,de:`Prezado Sr. Souza,\npelo estacionamento do seu veículo em local proibido na Leipziger Straße em 14 de março às 9h20, fica estabelecida uma multa de 55 euros. Por favor, transfira o valor em até duas semanas. Contra esta notificação, o senhor pode interpor recurso por escrito em até um mês.\nAtenciosamente,\nDepartamento de Ordem Pública da Cidade de Frankfurt am Main`},
+ {t:'mc',q:'Wie lange hat Lucas Zeit für einen Widerspruch?',opts:['einen Monat','zwei Wochen','eine Woche'],a:0},
+ {t:'mc',q:'Warum soll Lucas zahlen?',opts:['Er hat im Halteverbot geparkt.','Er ist zu schnell gefahren.','Er hat keine Steuern bezahlt.'],a:0},
+ {t:'info',title:'Escrever um Widerspruch',html:`<table><tr><td>Assunto</td><td class="es-t">Widerspruch gegen Ihren Bescheid vom 20. März, Aktenzeichen 4711/26</td></tr>
+ <tr><td>Introdução</td><td class="es-t">hiermit lege ich fristgerecht Widerspruch gegen den oben genannten Bescheid ein.</td></tr>
+ <tr><td>Motivo</td><td class="es-t">Zur Begründung möchte ich Folgendes anführen: …</td></tr>
+ <tr><td>Provas</td><td class="es-t">Als Nachweis lege ich … bei.</td></tr>
+ <tr><td>Pedido</td><td class="es-t">Ich bitte Sie daher, den Bescheid aufzuheben.</td></tr></table>`},
+ {t:'free',task:'Escreva um Widerspruch (~120 palavras) contra a multa: 1) assunto e referência, 2) motivo (por exemplo: o carro não era seu / a placa de proibição só foi colocada no dia / você estava descarregando uma mudança com autorização), 3) provas, 4) pedido formal. Use pelo menos um conector desta unidade (indem, ohne dass, anstatt, sofern …).',hint:'Widerspruch gegen Ihren Bescheid vom … Sehr geehrte Damen und Herren, hiermit lege ich … Zur Begründung … ohne dass … Als Nachweis lege ich … bei. Ich bitte Sie daher, … Mit freundlichen Grüßen',focus:'formelle Sprache, Konnektoren, Nominalstil',model:'Widerspruch gegen Ihren Bescheid vom 20. März, Aktenzeichen 4711/26\nSehr geehrte Damen und Herren,\nhiermit lege ich fristgerecht Widerspruch gegen den oben genannten Bescheid ein.\nZur Begründung möchte ich Folgendes anführen: Am 14. März bin ich in die Leipziger Straße 12 umgezogen. Für das Parken während des Umzugs hatte ich bei Ihnen eine Halteverbotszone beantragt und genehmigt bekommen. Trotzdem wurde mein Fahrzeug verwarnt, ohne dass die Genehmigung berücksichtigt wurde. Offenbar hat die Kontrolleurin das Schild am Fahrzeug übersehen.\nAls Nachweis lege ich eine Kopie der Genehmigung sowie zwei Fotos bei.\nIch bitte Sie daher, den Bescheid aufzuheben. Sofern Sie weitere Unterlagen benötigen, stehe ich Ihnen gern zur Verfügung.\nMit freundlichen Grüßen\nLucas Souza'}
+]}],
+resumen:`<h3>Konnektoren</h3><p class="es-t">indem man widerspricht · ohne den Vertrag zu lesen · ohne dass wir informiert wurden · anstatt zu klagen · anstatt dass die Stadt hilft · falls · sofern · soweit ich weiß</p>
+<h3>Recht</h3><p class="es-t">das Gericht · der Anwalt · klagen · das Urteil · schuldig · der Zeuge · zuständig · der Widerspruch · der Bescheid</p>
+<h3>Beteiligung</h3><p class="es-t">die Petition · unterschreiben · die Wahlbeteiligung · die Opposition · die Koalition · die Behörde</p>`});
