@@ -938,7 +938,7 @@ placement:[
  {t:'gap',q:'Ich ___ heute zum Arzt gehen. (müssen)',a:['muss']}],
 lessons:[
 {id:'l1',title:'Lugares na cidade',desc:'Bahnhof, Post, Apotheke … · Wo ist …?',steps:[
- {t:'vocab',title:'Na cidade',items:[['die Stadt','a cidade'],['das Zentrum','o centro'],['die Straße','a rua'],['der Platz','a praça / o lugar'],['die Ecke','a esquina / o canto'],['der Bahnhof','a estação de trem'],['die Haltestelle','o ponto (de ônibus)'],['der Flughafen','o aeroporto'],['die Post','os correios'],['die Bank','o banco'],['die Apotheke','a farmácia'],['das Krankenhaus','o hospital'],['die Polizei','a polícia'],['das Rathaus','a prefeitura'],['das Museum','o museu'],['der Park','o parque'],['die Kirche','a igreja'],['das Hotel','o hotel'],['der Parkplatz','o estacionamento'],['in der Nähe','perto'],['weit','longe'],['hier','aqui'],['dort','ali / lá']]},
+ {t:'vocab',title:'Na cidade',items:[['die Stadt','a cidade'],['das Zentrum','o centro'],['die Straße','a rua'],['der Platz','a praça / o lugar'],['die Ecke','a esquina / o canto'],['der Bahnhof','a estação de trem'],['die Haltestelle','o ponto (de ônibus)'],['der Flughafen','o aeroporto'],['die Post','os correios'],['die Bank','o banco'],['die Apotheke','a farmácia'],['das Krankenhaus','o hospital'],['die Polizei','a polícia'],['das Rathaus','a prefeitura'],['das Museum','o museu'],['der Park','o parque'],['die Kirche','a igreja'],['das Hotel','o hotel'],['der Parkplatz','o estacionamento'],['in der Nähe','perto'],['weit','longe / largo'],['hier','aqui'],['dort','ali / lá']]},
  {t:'info',title:'Onde fica? – o dativo com „in“',html:`<p>Para dizer <b>onde</b> algo está, <span class="es-t">in</span> pede o <b>dativo</b>. O artigo muda:</p>
  <table><tr><th></th><th>nominativo</th><th>dativo (onde?)</th></tr>
  <tr><td>m</td><td class="es-t">der Park</td><td class="es-t">in <b>dem</b> Park = <b>im</b> Park</td></tr>
@@ -1667,3 +1667,240 @@ resumen:`<h3>Verbos reflexivos</h3><table><tr><td class="es-t">ich fühle mich �
 <p class="es-t">sich bewegen · sich ausruhen · sich verletzen · sich beeilen · sich freuen auf · sich ärgern über · sich interessieren für</p><p>Perfekt: <span class="es-t">Ich habe mich verletzt.</span></p>
 <h3>seit / vor + dativo</h3><p class="es-t">seit drei Tagen (e continua) · vor einer Woche (já passou)</p>
 <h3>Emergência</h3><p class="es-t">112 Notruf · 110 Polizei · 116 117 ärztlicher Bereitschaftsdienst</p>`});
+
+/* ================= KAPITEL 16 · UNTERWEGS & URLAUB ================= */
+LANGS.de.course.units.push({id:'k16',n:'16',level:'A2',title:'Unterwegs & Urlaub',sub:'Planejar viagens · hospedagem · natureza e tempo · Präteritum dos modais: konnte, musste, wollte · no carro',
+goals:['Eine Reise planen: verreisen, die Unterkunft, die Ermäßigung','Präteritum der Modalverben: Ich konnte nicht kommen, ich musste arbeiten.','Natur und Wetter: der Wald, der Strand, bewölkt, das Gewitter','Mit dem Auto: die Werkstatt, der Reifen, die Kreuzung','Durchsagen am Bahnhof verstehen','Eine Postkarte / Nachricht aus dem Urlaub schreiben'],
+situacion:{title:'Na recepção do albergue',npc:'Rezeptionist',scene:'Você chega com um amigo a um albergue (Jugendherberge) em Hamburgo. Vocês reservaram duas camas para duas noites.',role:'Du arbeitest an der Rezeption einer Jugendherberge in Hamburg, freundlich und locker. Du duzt die Gäste. Frag nach dem Namen und der Buchung, erkläre: Frühstück 7–10 Uhr, Bettwäsche kostet 5 Euro extra, Studenten bekommen eine Ermäßigung. Empfiehl einen kostenlosen Rundgang durch den Hafen um 11 Uhr. Sprich einfaches Deutsch (A2), benutze auch Präteritum (war, konnte, musste).',goal:'Faça o check-in, pergunte pelo café da manhã e por descontos e informe-se sobre o passeio grátis.'},
+placement:[
+ {t:'mc',q:'„Eu não pude vir ontem.“',opts:['Ich konnte gestern nicht kommen.','Ich könnte gestern nicht kommen.','Ich kannte gestern nicht kommen.'],a:0},
+ {t:'gap',q:'Letzte Woche ___ ich viel arbeiten. (müssen – Präteritum)',a:['musste']},
+ {t:'mc',q:'Der Himmel ist grau, die Sonne scheint nicht. Es ist ___.',opts:['bewölkt','trocken','nass'],a:0},
+ {t:'mc',q:'Mein Auto ist kaputt. Ich bringe es in die ___.',opts:['Werkstatt','Unterkunft','Kreuzung'],a:0},
+ {t:'mc',q:'„Estudantes têm desconto.“',opts:['Studenten bekommen eine Ermäßigung.','Studenten bekommen einen Rabattschein.','Studenten sind kostenlos.'],a:0},
+ {t:'gap',q:'Als Kind ___ ich Pilot werden. (wollen – Präteritum)',a:['wollte']}],
+lessons:[
+{id:'l1',title:'Planejar a viagem',desc:'verreisen · die Unterkunft · die Ermäßigung',steps:[
+ {t:'vocab',title:'Viajar',items:[['verreisen','viajar (sair de viagem)'],['die Unterkunft','a hospedagem'],['die Jugendherberge','o albergue da juventude'],['der Campingplatz','o camping'],['das Zelt','a barraca'],['der Rucksack','a mochila'],['der Rundgang','o passeio a pé (guiado)'],['die Tour','o passeio / o tour'],['der Tourist / die Touristin','o turista / a turista'],['der Stadtplan','o mapa da cidade'],['die Hauptstadt','a capital'],['die Ermäßigung','o desconto'],['kostenlos','gratuito'],['die Grenze','a fronteira'],['der Reisepass','o passaporte'],]},
+ {t:'mc',q:'Wir haben wenig Geld. Wir übernachten in einer ___.',opts:['Jugendherberge','Hauptstadt','Grenze'],a:0},
+ {t:'mc',q:'Der Eintritt ins Museum ist am Sonntag ___. Man muss nichts bezahlen.',opts:['kostenlos','teuer','ermäßigt'],a:0},
+ {t:'gap',q:'Mit dem Studentenausweis bekommst du eine ___. (desconto)',a:['Ermäßigung']},
+ {t:'match',q:'Ligue.',pairs:[['das Zelt','a barraca'],['der Rucksack','a mochila'],['der Stadtplan','o mapa da cidade'],['die Unterkunft','a hospedagem'],['die Grenze','a fronteira']]},
+ {t:'read',title:'Leitura: Ein Wochenende in Hamburg',text:`Hamburg für junge Leute: Übernachten Sie in der Jugendherberge am Hafen – ab 29 € pro Nacht mit Frühstück. Studenten bekommen 10 % Ermäßigung. Jeden Tag um 11 Uhr gibt es einen kostenlosen Rundgang durch die Speicherstadt (auf Deutsch und Englisch). Eine Hafenrundfahrt mit dem Schiff kostet 20 €. Tipp: Mit der Hamburg-Card fahren Sie mit Bus und Bahn kostenlos und bezahlen in vielen Museen weniger.`,de:`Hamburgo para jovens: pernoite no albergue no porto – a partir de 29 € por noite com café da manhã. Estudantes têm 10 % de desconto. Todo dia às 11h tem um passeio a pé gratuito pela Speicherstadt (em alemão e inglês). Um passeio de barco pelo porto custa 20 €. Dica: com o Hamburg-Card você anda de ônibus e trem de graça e paga menos em muitos museus.`},
+ {t:'mc',q:'Was kostet der Rundgang durch die Speicherstadt?',opts:['nichts','29 €','20 €'],a:0},
+ {t:'mc',q:'Was bekommt man mit der Hamburg-Card?',opts:['kostenlose Fahrten mit Bus und Bahn','ein kostenloses Zimmer','eine kostenlose Hafenrundfahrt'],a:0},
+ {t:'tr',de:'Nós vamos viajar no verão.',a:['Wir verreisen im Sommer.','Im Sommer verreisen wir.']}
+]},
+{id:'l2',title:'Eu tive que … – modais no passado',desc:'konnte, musste, wollte, durfte, sollte',steps:[
+ {t:'info',title:'Präteritum dos verbos modais',html:`<p>No passado, os verbos modais quase sempre usam o <b>Präteritum</b> (não o Perfekt). Sem trema e com <b>-te</b>:</p>
+ <table><tr><th></th><th>können</th><th>müssen</th><th>wollen</th><th>dürfen</th><th>sollen</th></tr>
+ <tr><td>ich / er / sie</td><td class="es-t">konnte</td><td class="es-t">musste</td><td class="es-t">wollte</td><td class="es-t">durfte</td><td class="es-t">sollte</td></tr>
+ <tr><td>du</td><td class="es-t">konntest</td><td class="es-t">musstest</td><td class="es-t">wolltest</td><td class="es-t">durftest</td><td class="es-t">solltest</td></tr>
+ <tr><td>wir / sie / Sie</td><td class="es-t">konnten</td><td class="es-t">mussten</td><td class="es-t">wollten</td><td class="es-t">durften</td><td class="es-t">sollten</td></tr></table>
+ <div class="ex"><span class="es-t">Ich <b>konnte</b> gestern nicht kommen, ich <b>musste</b> arbeiten.</span> = Ontem não pude vir, tive que trabalhar.</div>
+ <div class="ojo">Cuidado: <span class="es-t">ich konnte</span> (pude) ≠ <span class="es-t">ich könnte</span> (poderia – pedido educado, cap. 14).</div>`},
+ {t:'mc',q:'Warum warst du nicht auf der Party? – Ich ___ arbeiten.',opts:['musste','muss','müsste'],a:0},
+ {t:'mc',q:'Als Kind ___ ich nicht allein in die Stadt fahren.',opts:['durfte','darf','dürfte'],a:0},
+ {t:'gap',q:'Wir ___ den Zug nicht nehmen, er war voll. (können)',a:['konnten']},
+ {t:'gap',q:'___ du nicht zum Arzt gehen? (sollen – Präteritum, du)',a:['Solltest']},
+ {t:'gap',q:'Lucas ___ eigentlich nach Berlin fahren, aber es gab keine Tickets mehr. (wollen)',a:['wollte']},
+ {t:'order',es:'Im Urlaub konnten wir jeden Tag schwimmen',de:'Nas férias pudemos nadar todo dia.'},
+ {t:'tr',de:'Ontem eu não pude dormir.',a:['Gestern konnte ich nicht schlafen.','Ich konnte gestern nicht schlafen.']},
+ {t:'tr',de:'Nós tivemos que esperar duas horas.',a:['Wir mussten zwei Stunden warten.']},
+ {t:'speak',es:'Letztes Jahr wollte ich nach Italien fahren, aber ich musste arbeiten.',de:'No ano passado eu queria ir para a Itália, mas tive que trabalhar.',tip:'<i>wollte</i>, <i>musste</i> – sem trema no passado.'}
+]},
+{id:'l3',title:'Natureza e tempo',desc:'der Wald, der Strand, bewölkt, das Gewitter',steps:[
+ {t:'vocab',title:'Natureza e tempo',items:[['die Natur','a natureza'],['die Landschaft','a paisagem'],['der Wald','a floresta'],['der Fluss','o rio'],['die Insel','a ilha'],['der Strand','a praia'],['das Schiff','o navio / o barco'],['der Himmel','o céu'],['bewölkt','nublado'],['das Gewitter','a tempestade (com trovões)'],['der Sturm','a tempestade (vento)'],['nass','molhado'],['trocken','seco'],['die Temperatur','a temperatura'],['vorsichtig','cuidadoso'],['das Tier','o animal'],['der Vogel','o pássaro']]},
+ {t:'mc',q:'Es regnet und es donnert. Es gibt ein ___.',opts:['Gewitter','Wolke','Strand'],a:0},
+ {t:'mc',q:'Nach dem Regen ist die Straße ___.',opts:['nass','trocken','bewölkt'],a:0},
+ {t:'gap',q:'Am Wochenende sind wir im ___ gewandert. Da gibt es viele Bäume. (floresta)',a:['Wald']},
+ {t:'match',q:'Ligue.',pairs:[['der Strand','a praia'],['die Insel','a ilha'],['der Fluss','o rio'],['der Vogel','o pássaro'],['der Himmel','o céu']]},
+ {t:'read',hideText:true,title:'Ouvir: Wetterbericht',intro:'Ouça a previsão do tempo para o fim de semana.',text:`Und jetzt das Wetter für das Wochenende. Am Samstag ist es im Norden bewölkt, aber trocken, bei 18 Grad. Im Süden scheint die Sonne, bis 25 Grad. Am Sonntag kommen von Westen Gewitter, vor allem am Nachmittag. Bitte seien Sie vorsichtig, wenn Sie in den Bergen wandern. Am Montag wird es kühler: nur noch 14 Grad und viel Regen.`,de:`E agora o tempo para o fim de semana. No sábado, no norte, fica nublado, mas seco, com 18 graus. No sul faz sol, até 25 graus. No domingo chegam tempestades do oeste, principalmente à tarde. Por favor, tenham cuidado se forem fazer trilha nas montanhas. Na segunda esfria: só 14 graus e muita chuva.`},
+ {t:'mc',q:'Wie ist das Wetter am Samstag im Norden?',opts:['bewölkt, aber trocken','sonnig und 25 Grad','Gewitter'],a:0},
+ {t:'mc',q:'Wann soll man in den Bergen vorsichtig sein?',opts:['am Sonntagnachmittag','am Samstagmorgen','am Montag'],a:0},
+ {t:'tr',de:'Amanhã vai ficar nublado.',a:['Morgen ist es bewölkt.','Morgen wird es bewölkt.']}
+]},
+{id:'l4',title:'De carro e de trem',desc:'die Werkstatt, der Reifen · Durchsagen · Urlaubsgrüße',steps:[
+ {t:'vocab',title:'No caminho',items:[['der Wagen','o carro'],['der Reifen','o pneu'],['die Werkstatt','a oficina'],['die Panne','a pane / o defeito'],['die Kreuzung','o cruzamento'],['tanken','abastecer'],['die Tankstelle','o posto de gasolina'],['der Motorroller','a scooter'],['der Stau','o engarrafamento'],['die Durchsage','o aviso (alto-falante)'],['die Abfahrt','a partida']]},
+ {t:'read',hideText:true,title:'Ouvir: Durchsage am Bahnhof',intro:'Você está na estação de Frankfurt e quer pegar o trem para Hamburgo.',text:`Achtung an Gleis 7: Der ICE 576 nach Hamburg, Abfahrt 14:12 Uhr, hat heute etwa 20 Minuten Verspätung. Der Zug fährt heute ausnahmsweise von Gleis 9. Reisende nach Hannover steigen bitte in Kassel in den Regionalexpress um. Wir bitten um Entschuldigung.`,de:`Atenção na plataforma 7: o ICE 576 para Hamburgo, partida 14h12, está hoje com cerca de 20 minutos de atraso. O trem sai hoje excepcionalmente da plataforma 9. Passageiros para Hannover, por favor, troquem em Kassel para o Regional-Express. Pedimos desculpas.`},
+ {t:'mc',q:'Von welchem Gleis fährt der Zug nach Hamburg heute?',opts:['Gleis 9','Gleis 7','Gleis 14'],a:0},
+ {t:'mc',q:'Wann fährt der Zug ungefähr ab?',opts:['um 14:32 Uhr','um 14:12 Uhr','um 13:52 Uhr'],a:0},
+ {t:'dialog',place:'Werkstatt',title:'Na oficina',scene:'O pneu do carro da Jana furou. Você leva o carro à oficina.',lines:[
+  {n:'Mechaniker',es:'Guten Tag! Was ist denn mit dem Wagen?',de:'Bom dia! O que houve com o carro?'},
+  {you:true,opts:[{es:'Guten Tag. Ein Reifen ist kaputt. Könnten Sie ihn heute noch reparieren?',ok:true},{es:'Guten Tag. Der Wagen hat Reifen.',ok:false,why:'Diga o problema: <i>Ein Reifen ist kaputt.</i>'}]},
+  {n:'Mechaniker',es:'Heute wird es schwierig. Morgen um zehn ist er fertig.',de:'Hoje vai ser difícil. Amanhã às dez fica pronto.'},
+  {you:true,opts:[{es:'Okay, das passt. Was kostet das ungefähr?',ok:true},{es:'Okay, ich passe morgen.',ok:false,why:'<i>Das passt (mir).</i> – a pessoa não „passt“.'}]},
+  {n:'Mechaniker',es:'Ein neuer Reifen kostet etwa 90 Euro.',de:'Um pneu novo custa uns 90 euros.'},
+  {you:true,opts:[{es:'Gut, dann bis morgen. Auf Wiedersehen!',ok:true},{es:'Gut, dann bis gestern!',ok:false,why:'Amanhã = <i>morgen</i>.'}]}]},
+ {t:'free',task:'Você está de férias. Escreva uma mensagem (~30–40 palavras) para a Jana: 1) onde você está e com quem, 2) como está o tempo, 3) o que você fez / não pôde fazer (konnte, musste, wollte).',hint:'Hallo Jana, liebe Grüße aus …! Ich bin mit … hier. Das Wetter ist … Gestern wollten wir …, aber … Wir konnten … Bis bald!',focus:'Präteritum der Modalverben, Wetter, Perfekt',model:'Hallo Jana,\nliebe Grüße aus Hamburg! Ich bin mit Tom hier. Das Wetter ist leider bewölkt, aber trocken. Gestern wollten wir eine Hafenrundfahrt machen, aber es gab ein Gewitter. Wir konnten nur ins Museum gehen.\nBis bald!\nLucas'}
+]}],
+resumen:`<h3>Präteritum dos modais (sem trema)</h3><table><tr><td class="es-t">konnte · musste · wollte · durfte · sollte</td></tr><tr><td class="es-t">ich konnte, du konntest, wir konnten</td></tr></table><p>Cuidado: <span class="es-t">konnte</span> (pude) ≠ <span class="es-t">könnte</span> (poderia).</p>
+<h3>Viagem</h3><p class="es-t">verreisen · die Unterkunft · die Jugendherberge · übernachten · die Ermäßigung · kostenlos · der Rundgang</p>
+<h3>Tempo</h3><p class="es-t">bewölkt · das Gewitter · der Sturm · nass · trocken · minus 5 Grad</p>
+<h3>Carro</h3><p class="es-t">die Werkstatt · der Reifen · die Panne · tanken · der Stau</p>`});
+
+/* ================= KAPITEL 17 · EINKAUFEN & KLEIDUNG ================= */
+LANGS.de.course.units.push({id:'k17',n:'17',level:'A2',title:'Einkaufen & Kleidung',sub:'Roupas e acessórios · terminações dos adjetivos · comparar: besser, am besten · drogaria e lavanderia · trocar produtos',
+goals:['Kleidung und Accessoires: die Jeans, der Anzug, die Brille','Adjektivendungen: der neue Mantel, ein neuer Mantel','Vergleichen: billiger als, so teuer wie, am günstigsten','In der Drogerie und in der Reinigung','Etwas umtauschen oder reklamieren'],
+situacion:{title:'Trocar uma jaqueta',npc:'Verkäuferin',scene:'Você comprou uma jaqueta ontem, mas em casa percebeu que ela é pequena demais. Você volta à loja com o comprovante.',role:'Du bist Verkäuferin in einem Kleidungsgeschäft in Frankfurt, freundlich. Du siezt. Frag, was das Problem ist und ob der Kunde den Kassenbon hat. Biete eine größere Größe oder eine andere Farbe an; Geld zurück gibt es nur mit Kassenbon innerhalb von 14 Tagen. Benutze Adjektive mit Endungen und Vergleiche (größer, bequemer). Sprich einfaches Deutsch (A2).',goal:'Explique o problema, peça para trocar por um tamanho maior e pergunte se dá para receber o dinheiro de volta.'},
+placement:[
+ {t:'mc',q:'Ich suche einen ___ Mantel.',opts:['warmen','warme','warmer'],a:0},
+ {t:'mc',q:'Der ___ Pullover gefällt mir.',opts:['blaue','blauen','blauer'],a:0},
+ {t:'mc',q:'Die Jeans ist ___ als die Hose.',opts:['billiger','billig','am billigsten'],a:0},
+ {t:'gap',q:'Dieses Geschäft ist am ___. (gut – Superlativ)',a:['besten']},
+ {t:'mc',q:'Die Hose ist zu klein. Ich möchte sie ___.',opts:['umtauschen','umziehen','umsteigen'],a:0},
+ {t:'mc',q:'Wo kauft man Seife und Creme?',opts:['in der Drogerie','in der Reinigung','in der Werkstatt'],a:0}],
+lessons:[
+{id:'l1',title:'Roupas e acessórios',desc:'die Jeans, der Anzug, die Brille … · eng, bequem',steps:[
+ {t:'vocab',title:'Roupas e acessórios',items:[['die Jeans','o jeans'],['der Anzug','o terno'],['der Stiefel','a bota'],['der Gürtel','o cinto'],['die Kette','o colar / a corrente'],['der Ring','o anel'],['die Brille','os óculos'],['der Schirm','o guarda-chuva'],['die Geldbörse','a carteira'],['das Paar','o par'],['eng','apertado'],['bequem','confortável'],['weich','macio'],['hart','duro'],['dünn','fino'],['dick','grosso / gordo'],['bunt','colorido'],['gestreift','listrado'],['kariert','xadrez']]},
+ {t:'mc',q:'Die Schuhe sind zu ___. Sie tun mir weh.',opts:['eng','weit','bunt'],a:0},
+ {t:'mc',q:'Ich habe ein neues ___ Stiefel gekauft.',opts:['Paar','Ring','Anzug'],a:0},
+ {t:'mc',q:'Lucas kann ohne ___ nicht gut lesen.',opts:['Brille','Kette','Geldbörse'],a:0},
+ {t:'match',q:'Ligue.',pairs:[['der Anzug','o terno'],['der Schirm','o guarda-chuva'],['bequem','confortável'],['gestreift','listrado'],['die Geldbörse','a carteira']]},
+ {t:'gap',q:'Für das Vorstellungsgespräch trägt Lucas einen ___. (terno)',a:['Anzug']},
+ {t:'tr',de:'Este casaco é muito confortável.',a:['Diese Jacke ist sehr bequem.','Die Jacke ist sehr bequem.']},
+ {t:'speak',es:'Die Jeans ist zu eng. Haben Sie die auch eine Nummer größer?',de:'O jeans está apertado demais. Vocês têm um número maior?',tip:'<i>eine Nummer größer</i> = um número maior.'}
+]},
+{id:'l2',title:'Terminações dos adjetivos',desc:'der neue Mantel · ein neuer Mantel',steps:[
+ {t:'info',title:'Adjetivo antes do substantivo',html:`<p>Antes do substantivo, o adjetivo ganha uma terminação. No A2 basta saber o nominativo e o acusativo:</p>
+ <table><tr><th></th><th>com der/die/das</th><th>com ein/eine/kein</th></tr>
+ <tr><td>masc. (nom.)</td><td class="es-t">der neu<b>e</b> Mantel</td><td class="es-t">ein neu<b>er</b> Mantel</td></tr>
+ <tr><td>masc. (acus.)</td><td class="es-t">den neu<b>en</b> Mantel</td><td class="es-t">einen neu<b>en</b> Mantel</td></tr>
+ <tr><td>fem.</td><td class="es-t">die neu<b>e</b> Jacke</td><td class="es-t">eine neu<b>e</b> Jacke</td></tr>
+ <tr><td>neutro</td><td class="es-t">das neu<b>e</b> Hemd</td><td class="es-t">ein neu<b>es</b> Hemd</td></tr>
+ <tr><td>plural</td><td class="es-t">die neu<b>en</b> Schuhe</td><td class="es-t">keine neu<b>en</b> Schuhe</td></tr></table>
+ <div class="ex">Dica: depois de <b>ein</b> sem terminação, o adjetivo „mostra“ o gênero: ein neu<b>er</b> (der), ein neu<b>es</b> (das).</div>
+ <div class="ojo">Depois de <b>sein</b>, sem terminação: <span class="es-t">Der Mantel ist neu.</span></div>`},
+ {t:'mc',q:'Wie findest du den ___ Rock?',opts:['roten','rote','roter'],a:0},
+ {t:'mc',q:'Das ist ein ___ Hemd.',opts:['schönes','schöne','schönen'],a:0},
+ {t:'mc',q:'Ich brauche eine ___ Brille.',opts:['neue','neuen','neuer'],a:0},
+ {t:'gap',q:'Ich kaufe einen ___ Schirm. (groß)',a:['großen']},
+ {t:'gap',q:'Die ___ Stiefel sind sehr bequem. (schwarz)',a:['schwarzen']},
+ {t:'gap',q:'Mein Bruder trägt immer ein ___ T-Shirt. (bunt)',a:['buntes']},
+ {t:'order',es:'Ich suche eine warme Jacke für den Winter',de:'Procuro um casaco quente para o inverno.'},
+ {t:'tr',de:'Eu gosto do vestido azul.',a:['Mir gefällt das blaue Kleid.','Das blaue Kleid gefällt mir.']}
+]},
+{id:'l3',title:'Comparar',desc:'billiger als · so teuer wie · am günstigsten',steps:[
+ {t:'vocab',title:'Comprar e comparar',items:[['die Qualität','a qualidade'],['das Produkt','o produto'],['der Unterschied','a diferença'],['verschieden','diferente / variado'],['der Flohmarkt','o brechó / a feira de usados'],['reduziert','com desconto (remarcado)'],['umtauschen','trocar (produto)'],['der Kassenbon','o cupom fiscal'],['reklamieren','reclamar (produto)']]},
+ {t:'info',title:'Comparativo e superlativo',html:`<table><tr><th>normal</th><th>comparativo (+er)</th><th>superlativo</th></tr>
+ <tr><td class="es-t">billig</td><td class="es-t">billig<b>er</b></td><td class="es-t">am billig<b>sten</b></td></tr>
+ <tr><td class="es-t">schön</td><td class="es-t">schön<b>er</b></td><td class="es-t">am schön<b>sten</b></td></tr>
+ <tr><td class="es-t">alt / groß / warm</td><td class="es-t">ä<b>lter</b> / grö<b>ßer</b> / wä<b>rmer</b></td><td class="es-t">am ältesten / am größten / am wärmsten</td></tr>
+ <tr><td class="es-t">gut</td><td class="es-t"><b>besser</b></td><td class="es-t">am <b>besten</b></td></tr>
+ <tr><td class="es-t">gern</td><td class="es-t"><b>lieber</b></td><td class="es-t">am <b>liebsten</b></td></tr>
+ <tr><td class="es-t">viel</td><td class="es-t"><b>mehr</b></td><td class="es-t">am <b>meisten</b></td></tr></table>
+ <div class="ex"><span class="es-t">Die Jeans ist billiger <b>als</b> die Hose.</span> (diferente) · <span class="es-t">Die Jeans ist <b>so</b> teuer <b>wie</b> die Hose.</span> (igual)</div>`},
+ {t:'mc',q:'Der Mantel kostet 120 €, die Jacke 80 €. Die Jacke ist ___ als der Mantel.',opts:['billiger','teurer','so billig'],a:0},
+ {t:'mc',q:'Welcher Pullover gefällt dir ___?',opts:['am besten','am guten','besser als'],a:0},
+ {t:'gap',q:'Mein Bruder ist zwei Jahre ___ als ich. (alt)',a:['älter']},
+ {t:'gap',q:'Diese Schuhe sind genauso bequem ___ meine alten.',a:['wie']},
+ {t:'gap',q:'Ich trinke lieber Tee, aber am ___ trinke ich Kaffee. (gern)',a:['liebsten']},
+ {t:'read',title:'Leitura: Drei Angebote',text:`A) Kaufhaus Zentrum: Winterjacke, sehr warm, gute Qualität – statt 149 € jetzt 99 €.
+B) Sportgeschäft Aktiv: Regenjacke, leicht und bequem, in vielen Farben – 69 €.
+C) Flohmarkt am Mainufer (jeden Samstag): Jacken, Mäntel und Stiefel, gebraucht, ab 10 €. Umtauschen geht leider nicht.`,de:`A) Loja de departamentos Zentrum: jaqueta de inverno, muito quente, boa qualidade – de 149 € por 99 €.
+B) Loja de esportes Aktiv: jaqueta de chuva, leve e confortável, em muitas cores – 69 €.
+C) Feira de usados à beira do Meno (todo sábado): jaquetas, casacos e botas, usados, a partir de 10 €. Infelizmente não é possível trocar.`},
+ {t:'mc',q:'Wo ist eine Jacke am billigsten?',opts:['auf dem Flohmarkt','im Kaufhaus Zentrum','im Sportgeschäft'],a:0},
+ {t:'mc',q:'Wo kann man die Jacke nicht umtauschen?',opts:['auf dem Flohmarkt','im Kaufhaus','im Sportgeschäft'],a:0},
+ {t:'tr',de:'O vermelho é mais bonito que o preto.',a:['Der rote ist schöner als der schwarze.','Das rote ist schöner als das schwarze.','Die rote ist schöner als die schwarze.']}
+]},
+{id:'l4',title:'Drogaria, lavanderia e trocas',desc:'die Seife, die Creme · die Reinigung · umtauschen',steps:[
+ {t:'vocab',title:'Drogaria e lavanderia',items:[['die Drogerie','a drogaria (higiene e cosméticos)'],['die Kosmetik','os cosméticos'],['die Creme','o creme'],['die Seife','o sabonete'],['das Shampoo','o xampu'],['die Zahnpasta','a pasta de dente'],['das Parfüm','o perfume'],['das Handtuch','a toalha'],['die Reinigung','a lavanderia (lavagem a seco)'],['die Wäsche','a roupa (para lavar)'],['waschen','lavar'],['schmutzig','sujo'],['sauber','limpo'],['der Fleck','a mancha'],['ändern','mudar / ajustar']]},
+ {t:'mc',q:'Mein Anzug ist schmutzig. Ich bringe ihn in die ___.',opts:['Reinigung','Drogerie','Werkstatt'],a:0},
+ {t:'mc',q:'Die Hose ist zu lang. Die Schneiderin kann sie ___.',opts:['ändern','umtauschen','waschen'],a:0},
+ {t:'dialog',place:'Geschäft',title:'Trocar a jaqueta',scene:'Você comprou uma jaqueta ontem, mas ela é pequena demais.',lines:[
+  {n:'Verkäuferin',es:'Guten Tag, kann ich Ihnen helfen?',de:'Bom dia, posso ajudar?'},
+  {you:true,opts:[{es:'Ja, ich habe gestern diese Jacke gekauft. Sie ist leider zu eng.',ok:true},{es:'Ja, ich habe gestern diese Jacke gekauft. Er ist zu eng.',ok:false,why:'<i>die Jacke</i> → pronome <b>sie</b>.'}]},
+  {n:'Verkäuferin',es:'Haben Sie den Kassenbon?',de:'O senhor tem o cupom fiscal?'},
+  {you:true,opts:[{es:'Ja, hier ist er. Kann ich die Jacke in einer größeren Größe umtauschen?',ok:true},{es:'Ja, hier ist er. Kann ich die Jacke umziehen?',ok:false,why:'Trocar produto = <i>umtauschen</i>; <i>umziehen</i> = mudar de casa / trocar de roupa.'}]},
+  {n:'Verkäuferin',es:'Natürlich. In L haben wir sie nur noch in Grau. Ist das okay?',de:'Claro. Em G só temos em cinza. Tudo bem?'},
+  {you:true,opts:[{es:'Grau finde ich sogar schöner. Danke!',ok:true},{es:'Grau finde ich sogar schönste.',ok:false,why:'Comparação: <i>schöner</i>; superlativo seria <i>am schönsten</i>.'}]}]},
+ {t:'free',task:'Você comprou um produto pela internet e ele chegou com defeito. Escreva uma e-mail curta (~30–40 palavras) para a loja: 1) o que você comprou e quando, 2) qual é o problema, 3) o que você quer (trocar ou o dinheiro de volta).',hint:'Sehr geehrte Damen und Herren, am … habe ich … gekauft. Leider … Ich möchte … umtauschen / Bitte schicken Sie mir … Mit freundlichen Grüßen',focus:'Perfekt, Adjektivendungen, weil, höfliche Bitte',model:'Sehr geehrte Damen und Herren,\nam 3. März habe ich bei Ihnen eine schwarze Regenjacke gekauft. Leider ist der Reißverschluss kaputt. Ich möchte die Jacke gern umtauschen. Könnten Sie mir bitte eine neue Jacke schicken?\nMit freundlichen Grüßen\nLucas Souza'}
+]}],
+resumen:`<h3>Terminações dos adjetivos</h3><table><tr><td></td><td>der/die/das</td><td>ein/eine</td></tr><tr><td>masc. nom.</td><td class="es-t">der neue Mantel</td><td class="es-t">ein neuer Mantel</td></tr><tr><td>masc. acus.</td><td class="es-t">den neuen Mantel</td><td class="es-t">einen neuen Mantel</td></tr><tr><td>fem.</td><td class="es-t">die neue Jacke</td><td class="es-t">eine neue Jacke</td></tr><tr><td>neutro</td><td class="es-t">das neue Hemd</td><td class="es-t">ein neues Hemd</td></tr><tr><td>plural</td><td class="es-t">die neuen Schuhe</td><td class="es-t">keine neuen Schuhe</td></tr></table>
+<h3>Comparar</h3><p class="es-t">billiger als · so teuer wie · am billigsten · gut – besser – am besten · gern – lieber – am liebsten · viel – mehr – am meisten</p>
+<h3>Trocar</h3><p class="es-t">Kann ich das umtauschen? · Hier ist der Kassenbon. · Eine Nummer größer, bitte.</p>`});
+
+/* ================= KAPITEL 18 · FESTE & ESSEN ================= */
+LANGS.de.course.units.push({id:'k18',n:'18',level:'A2',title:'Feste & Essen',sub:'Festas e presentes · dativo: Wem schenkst du …? · verbos com dativo · cozinhar · wenn (quando/se)',
+goals:['Feste in Deutschland: Geburtstag, Hochzeit, Weihnachten, Silvester','Dativ: Ich schenke meiner Mutter ein Buch.','Verben mit Dativ: helfen, danken, gratulieren, gehören, schmecken','In der Küche: der Topf, die Gabel, scharf','Nebensätze mit wenn','Ein Festival / eine Feier organisieren'],
+situacion:{title:'Planejar um presente',npc:'Tom',scene:'O aniversário de 30 anos da Jana é no sábado. Você e o Tom, seu ex-colega de apartamento, combinam o presente e a festa.',role:'Du bist Tom, Lucas’ Freund und ehemaliger Mitbewohner in Frankfurt, locker und lustig. Du duzt. Ihr plant ein Geschenk für Janas 30. Geburtstag am Samstag. Mach Vorschläge (ein Buch, Konzertkarten, ein Kochkurs), frag Lucas nach seiner Meinung und wer was organisiert. Benutze Dativ (Wir schenken ihr …) und wenn-Sätze. Sprich einfaches Deutsch (A2).',goal:'Proponha um presente, diga o que vocês dão a ela (ihr …) e combine quem organiza o quê.'},
+placement:[
+ {t:'mc',q:'Ich schenke ___ Mutter Blumen.',opts:['meiner','meine','meinen'],a:0},
+ {t:'mc',q:'Kannst du ___ helfen?',opts:['mir','mich','ich'],a:0},
+ {t:'gap',q:'Wir gratulieren ___ zum Geburtstag. (du)',a:['dir']},
+ {t:'mc',q:'___ ich Zeit habe, koche ich gern.',opts:['Wenn','Dass','Denn'],a:0},
+ {t:'mc',q:'Wem gehört das Handy? – Es gehört ___.',opts:['ihm','ihn','er'],a:0},
+ {t:'mc',q:'Das Essen ist sehr ___. Ich brauche Wasser!',opts:['scharf','süß','weich'],a:0}],
+lessons:[
+{id:'l1',title:'Festas',desc:'Geburtstag, Hochzeit, Weihnachten · Glückwünsche',steps:[
+ {t:'vocab',title:'Festas',items:[['die Feier','a comemoração'],['Weihnachten','o Natal'],['Ostern','a Páscoa'],['Silvester','o réveillon'],['Neujahr','o Ano-Novo'],['schenken','dar de presente'],['der Wunsch','o desejo'],['wünschen','desejar'],['die Torte','a torta / o bolo de festa'],['die Süßigkeiten (Pl.)','os doces'],['die Kerze','a vela'],['der Gast','o convidado'],['organisieren','organizar'],['stattfinden','acontecer / ser realizado'],['das Festival','o festival'],['die Band','a banda'],['der Fan','o fã'],['das Plakat','o cartaz']]},
+ {t:'info',title:'Felicitações',html:`<table><tr><td class="es-t">Herzlichen Glückwunsch zum Geburtstag!</td><td>Feliz aniversário!</td></tr>
+ <tr><td class="es-t">Alles Gute!</td><td>Tudo de bom!</td></tr>
+ <tr><td class="es-t">Frohe Weihnachten!</td><td>Feliz Natal!</td></tr>
+ <tr><td class="es-t">Frohe Ostern!</td><td>Feliz Páscoa!</td></tr>
+ <tr><td class="es-t">Guten Rutsch (ins neue Jahr)!</td><td>Boas entradas! (antes do réveillon)</td></tr>
+ <tr><td class="es-t">Frohes neues Jahr!</td><td>Feliz Ano-Novo!</td></tr></table>
+ <div class="ojo">Na Alemanha dá azar dar parabéns <b>antes</b> do dia do aniversário! E quem faz aniversário muitas vezes leva bolo para o trabalho.</div>`},
+ {t:'mc',q:'Am 31. Dezember sagt man: ___',opts:['Guten Rutsch!','Frohe Ostern!','Gute Besserung!'],a:0},
+ {t:'mc',q:'Das Konzert ___ am Samstag im Park ___.',opts:['findet … statt','ist … statt','macht … statt'],a:0},
+ {t:'gap',q:'Ich ___ dir alles Gute zum Geburtstag! (desejar)',a:['wünsche']},
+ {t:'match',q:'Ligue.',pairs:[['die Hochzeit','o casamento'],['die Kerze','a vela'],['die Torte','o bolo de festa'],['Silvester','o réveillon'],['der Gast','o convidado']]},
+ {t:'read',title:'Leitura: Mainfest',text:`Am ersten Augustwochenende findet am Mainufer wieder das große Mainfest statt. Von Freitag bis Montag spielen über 30 Bands, auch für Kinder gibt es viel Programm. Der Eintritt ist frei. Am Samstag um 22 Uhr gibt es ein Feuerwerk über dem Fluss. Tipp: Kommen Sie mit Bus und Bahn – Parkplätze gibt es kaum. Fans der Band „Die Frankfurter“ aufgepasst: Das Konzert am Sonntag beginnt schon um 18 Uhr!`,de:`No primeiro fim de semana de agosto acontece de novo, à beira do Meno, a grande festa Mainfest. De sexta a segunda tocam mais de 30 bandas, e também tem muita programação para crianças. A entrada é grátis. No sábado às 22h tem fogos de artifício sobre o rio. Dica: venha de ônibus e trem – quase não há vagas para estacionar. Fãs da banda „Die Frankfurter“, atenção: o show no domingo já começa às 18h!`},
+ {t:'mc',q:'Was kostet der Eintritt zum Mainfest?',opts:['nichts','30 Euro','18 Euro'],a:0},
+ {t:'mc',q:'Wann gibt es das Feuerwerk?',opts:['am Samstag um 22 Uhr','am Sonntag um 18 Uhr','am Freitag um 22 Uhr'],a:0},
+ {t:'tr',de:'Feliz aniversário!',a:['Herzlichen Glückwunsch zum Geburtstag!','Alles Gute zum Geburtstag!']}
+]},
+{id:'l2',title:'Wem? – o dativo',desc:'Ich schenke meiner Mutter … · helfen, danken, gehören',steps:[
+ {t:'info',title:'Quem recebe? → dativo',html:`<p>Com <b>schenken, geben, schicken, zeigen, erklären</b> existem duas pessoas/coisas: <b>quem recebe</b> (dativo) e <b>o quê</b> (acusativo):</p>
+ <div class="ex"><span class="es-t">Ich schenke <b>meiner Mutter</b> (Wem?) <b>einen Schal</b> (Was?).</span></div>
+ <table><tr><th></th><th>artigo (dativo)</th><th>pronome (dativo)</th></tr>
+ <tr><td>masc. / neutro</td><td class="es-t">dem / einem / meinem Vater</td><td class="es-t">ihm</td></tr>
+ <tr><td>fem.</td><td class="es-t">der / einer / meiner Mutter</td><td class="es-t">ihr</td></tr>
+ <tr><td>plural</td><td class="es-t">den / meinen Eltern (+n)</td><td class="es-t">ihnen</td></tr></table>
+ <p>Pronomes: <span class="es-t">mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen</span>.</p>
+ <p>Alguns verbos sempre pedem dativo: <span class="es-t">helfen, danken, gratulieren, gehören, gefallen, schmecken, passen, antworten</span>.</p>
+ <div class="ex"><span class="es-t">Kannst du <b>mir</b> helfen?</span> · <span class="es-t">Das Buch gehört <b>ihm</b>.</span> · <span class="es-t">Wir gratulieren <b>dir</b>!</span></div>`},
+ {t:'mc',q:'Was schenkst du ___ Bruder?',opts:['deinem','deinen','dein'],a:0},
+ {t:'mc',q:'Jana hat Geburtstag. Wir schenken ___ Konzertkarten.',opts:['ihr','sie','ihm'],a:0},
+ {t:'gap',q:'Ich danke ___ für die Einladung! (Sie – formal)',a:['Ihnen']},
+ {t:'gap',q:'Wem gehört der Rucksack? – Er gehört ___. (eu)',a:['mir']},
+ {t:'gap',q:'Ich zeige ___ Eltern die Fotos. (meine – dativo plural)',a:['meinen']},
+ {t:'order',es:'Kannst du mir bitte das Salz geben',de:'Você pode me passar o sal, por favor?'},
+ {t:'tr',de:'Eu dou um livro para o meu pai.',a:['Ich schenke meinem Vater ein Buch.','Ich gebe meinem Vater ein Buch.']},
+ {t:'tr',de:'A sopa está gostosa para você? (informal)',a:['Schmeckt dir die Suppe?']}
+]},
+{id:'l3',title:'Na cozinha – wenn',desc:'der Topf, das Messer, scharf · Nebensätze mit wenn',steps:[
+ {t:'vocab',title:'Cozinha e louça',items:[['das Gericht','o prato (comida)'],['die Portion','a porção'],['scharf','apimentado / afiado'],['das Rindfleisch','a carne de boi'],['die Bohne','o feijão'],['die Zitrone','o limão'],['das Eis','o sorvete / o gelo'],['der Teller','o prato (louça)'],['die Gabel','o garfo'],['das Messer','a faca'],['der Löffel','a colher'],['der Topf','a panela'],['die Pfanne','a frigideira'],['das Geschirr','a louça'],['abwaschen','lavar a louça'],['probieren','provar'],['schneiden','cortar'],]},
+ {t:'info',title:'wenn',html:`<p><b>wenn</b> = quando (algo que se repete) / se (condição). O verbo vai para o <b>final</b>:</p>
+ <div class="ex"><span class="es-t">Ich koche brasilianisch, <b>wenn</b> Freunde zu Besuch <b>kommen</b>.</span></div>
+ <div class="ex"><span class="es-t"><b>Wenn</b> du Zeit <b>hast</b>, <b>kannst</b> du mir helfen.</span> – começando com <b>wenn</b>, a segunda parte começa com o verbo.</div>
+ <div class="ojo">Para uma vez só no passado se usa <b>als</b> (B1). No A2 basta <b>wenn</b> para o presente e para „sempre que“.</div>`},
+ {t:'mc',q:'___ es regnet, bleiben wir zu Hause.',opts:['Wenn','Weil','Dass'],a:0},
+ {t:'mc',q:'Wenn ich müde bin, ___',opts:['trinke ich einen Kaffee.','ich trinke einen Kaffee.','ich einen Kaffee trinke.'],a:0},
+ {t:'gap',q:'Feijoada ist ein brasilianisches ___ mit Bohnen und Fleisch. (prato)',a:['Gericht']},
+ {t:'gap',q:'Kannst du nach dem Essen das Geschirr ___? (lavar a louça)',a:['abwaschen']},
+ {t:'match',q:'Ligue.',pairs:[['der Löffel','a colher'],['die Gabel','o garfo'],['das Messer','a faca'],['der Topf','a panela'],['der Teller','o prato (louça)']]},
+ {t:'read',title:'Leitura: Lucas kocht für seine Kollegen',text:`Wenn Lucas Heimweh hat, kocht er Feijoada. Für sein Team hat er am Freitag einen großen Topf mitgebracht: schwarze Bohnen, Rindfleisch, Wurst, dazu Reis und Orangen. „Das Gericht ist nicht scharf“, hat er gesagt, „aber es ist sehr schwer – nach einer Portion möchte man schlafen!“ Jana hat zweimal genommen. Frau Hoffmann wollte das Rezept haben. Nur Herr Albers hat nichts gegessen, weil er kein Fleisch isst.`,de:`Quando o Lucas está com saudade de casa, ele cozinha feijoada. Para a equipe dele, na sexta ele levou uma panela grande: feijão-preto, carne de boi, linguiça, com arroz e laranja. „O prato não é apimentado“, ele disse, „mas é muito pesado – depois de uma porção a gente quer dormir!“ A Jana repetiu. A Sra. Hoffmann quis a receita. Só o Sr. Albers não comeu nada, porque não come carne.`},
+ {t:'mc',q:'Wann kocht Lucas Feijoada?',opts:['wenn er Heimweh hat','jeden Freitag','wenn er Geburtstag hat'],a:0},
+ {t:'mc',q:'Warum hat Herr Albers nichts gegessen?',opts:['Er isst kein Fleisch.','Das Essen war zu scharf.','Er war nicht da.'],a:0},
+ {t:'tr',de:'Quando faz sol, eu como sorvete.',a:['Wenn die Sonne scheint, esse ich ein Eis.','Wenn die Sonne scheint, esse ich Eis.','Ich esse ein Eis, wenn die Sonne scheint.','Ich esse Eis, wenn die Sonne scheint.']}
+]},
+{id:'l4',title:'Ler e escrever: convite de aniversário',desc:'Einladung schreiben · Zu- und Absage',steps:[
+ {t:'read',title:'Leitura: Einladung zum 30.',text:`Liebe Freundinnen und Freunde,
+ich werde 30 – und das möchte ich mit euch feiern! Die Party findet am Samstag, den 12. Oktober, ab 20 Uhr im Café Lindenblatt statt (Berger Straße 88). Für Essen ist gesorgt, aber über eine Flasche Wein oder Saft freue ich mich. Bitte keine Geschenke – wenn ihr mir etwas schenken wollt, gebt etwas in die Spendenbox für das Tierheim.
+Sagt mir bitte bis Mittwoch Bescheid, ob ihr kommt.
+Eure Jana`,de:`Queridas amigas e queridos amigos,
+vou fazer 30 – e quero comemorar com vocês! A festa acontece no sábado, 12 de outubro, a partir das 20h, no Café Lindenblatt (Berger Straße 88). A comida está garantida, mas uma garrafa de vinho ou suco me deixa feliz. Por favor, nada de presentes – se vocês quiserem me dar algo, coloquem algo na caixa de doação para o abrigo de animais.
+Por favor, me avisem até quarta-feira se vocês vêm.
+Beijos, Jana`},
+ {t:'mc',q:'Was soll man mitbringen?',opts:['etwas zu trinken','ein Geschenk','etwas zu essen'],a:0},
+ {t:'mc',q:'Was möchte Jana statt Geschenken?',opts:['Geld für das Tierheim','Blumen','Konzertkarten'],a:0},
+ {t:'mc',q:'Bis wann soll man Bescheid sagen?',opts:['bis Mittwoch','bis Samstag','bis zum 12. Oktober'],a:0},
+ {t:'free',task:'Responda ao convite da Jana (~30–40 palavras): 1) dê os parabéns e agradeça, 2) diga se você vai e com quem / ou por que não pode, 3) diga o que você leva.',hint:'Liebe Jana, vielen Dank für die Einladung! Ich komme gern / Leider kann ich nicht, weil … Ich bringe … mit. Wenn du Hilfe brauchst, … Bis Samstag! / Alles Gute!',focus:'Dativ (dir, ihr), wenn, weil, Glückwünsche',model:'Liebe Jana,\nvielen Dank für die Einladung! Natürlich komme ich gern – ich bringe Tom mit, wenn das okay ist. Wir bringen eine Flasche Wein und brasilianische Süßigkeiten mit. Wenn du Hilfe brauchst, sag Bescheid!\nBis Samstag,\nLucas'}
+]}],
+resumen:`<h3>Dativo (Wem?)</h3><table><tr><td>masc./neutro</td><td class="es-t">dem / einem / meinem – ihm</td></tr><tr><td>fem.</td><td class="es-t">der / einer / meiner – ihr</td></tr><tr><td>plural</td><td class="es-t">den / meinen …-n – ihnen</td></tr></table>
+<p class="es-t">Ich schenke meiner Mutter einen Schal. · mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen</p>
+<p>Verbos com dativo: <span class="es-t">helfen, danken, gratulieren, gehören, gefallen, schmecken, passen, antworten</span></p>
+<h3>wenn (verbo no final)</h3><p class="es-t">Wenn du Zeit hast, kannst du mir helfen. · Ich koche, wenn Freunde kommen.</p>
+<h3>Felicitações</h3><p class="es-t">Herzlichen Glückwunsch! · Alles Gute! · Frohe Weihnachten! · Guten Rutsch! · Frohes neues Jahr!</p>`});
