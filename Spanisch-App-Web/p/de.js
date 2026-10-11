@@ -2765,6 +2765,187 @@ lessons:[
 resumen:`<h3>Konjunktiv II</h3><table><tr><td class="es-t">wäre · hätte · könnte · müsste · dürfte · würde + infinitivo</td></tr></table><p class="es-t">Wenn ich mehr Zeit hätte, würde ich mehr lesen. · An deiner Stelle würde ich … · Es wäre schön, wenn …</p>
 <h3>wo(r)- / da(r)-</h3><p class="es-t">Worauf wartest du? – Darauf. · Worüber ärgerst du dich? – Darüber, dass … · Auf wen? – Auf ihn. (pessoas)</p>
 <h3>Mídia e técnica</h3><p class="es-t">veröffentlichen · die Meldung · die Werbung · die Umfrage · die Mehrheit · digital · das Netzwerk · kopieren · einfügen</p>`});
+
+/* ================= KAPITEL 31 · BEZIEHUNGEN & GEFÜHLE ================= */
+LANGS.de.course.units.push({id:'k31',n:'31',level:'B1',title:'Beziehungen & Gefühle',sub:'Amor, amizade e conflitos · sentimentos · obwohl / trotzdem · declinação -n (den Kollegen, dem Nachbarn)',
+goals:['Gefühle beschreiben: enttäuscht, mutig, eifersüchtig','Beziehungen: sich verlieben, sich streiten, sich versöhnen','obwohl (Nebensatz) und trotzdem (Hauptsatz)','n-Deklination: der Kollege → den Kollegen','Einen persönlichen Rat schreiben'],
+situacion:{title:'Ouvir uma amiga',npc:'Jana',scene:'A Jana brigou com o namorado, o Felix, e quer desabafar com você depois do trabalho.',role:'Du bist Jana, Lucas’ Kollegin und gute Freundin. Du duzt. Du hast dich mit deinem Freund Felix gestritten, weil er ohne dich mit Freunden in den Urlaub fahren will. Erzähl, wie du dich fühlst (enttäuscht, wütend), und frag Lucas um Rat. Reagiere auf seine Ratschläge. Benutze obwohl/trotzdem. Sprich natürliches Deutsch auf B1-Niveau.',goal:'Escute, mostre empatia, pergunte detalhes e dê um conselho (Ich an deiner Stelle würde …).'},
+placement:[
+ {t:'mc',q:'___ es regnet, gehen wir spazieren.',opts:['Obwohl','Trotzdem','Weil'],a:0},
+ {t:'mc',q:'Es regnet. ___ gehen wir spazieren.',opts:['Trotzdem','Obwohl','Denn'],a:0},
+ {t:'mc',q:'Ich habe gestern mit ___ gesprochen.',opts:['dem Kollegen','dem Kollege','den Kollege'],a:0},
+ {t:'gap',q:'Kennst du den neuen ___? (o vizinho – acusativo)',a:['Nachbarn']},
+ {t:'mc',q:'„fazer as pazes“',opts:['sich versöhnen','sich verlieben','sich trennen'],a:0},
+ {t:'mc',q:'Er ist ___, wenn seine Freundin mit anderen Männern tanzt.',opts:['eifersüchtig','mutig','tolerant'],a:0}],
+lessons:[
+{id:'l1',title:'Sentimentos',desc:'enttäuscht, mutig, die Laune …',steps:[
+ {t:'vocab',title:'Sentimentos e caráter',items:[['die Laune','o humor (estado)'],['gute / schlechte Laune haben','estar de bom / mau humor'],['die Enttäuschung','a decepção'],['ängstlich','medroso, ansioso'],['fröhlich','alegre'],['mutig','corajoso'],['der Mut','a coragem'],['frech','atrevido'],['tolerant','tolerante'],['optimistisch','otimista'],['ärgerlich','irritante; irritado'],['heimlich','em segredo'],['schimpfen','xingar, dar bronca'],['loben','elogiar'],['die Überzeugung','a convicção'],['unheimlich','sinistro; (coloquial) muito']]},
+ {t:'mc',q:'Mein Chef hat mich heute vor allen Kollegen ___. Das war schön!',opts:['gelobt','geschimpft','enttäuscht'],a:0},
+ {t:'mc',q:'Morgens bin ich oft schlecht gelaunt. Ich habe schlechte ___.',opts:['Laune','Überzeugung','Enttäuschung'],a:0},
+ {t:'gap',q:'Es war sehr ___ von dir, allein nach Deutschland zu kommen! (corajoso)',a:['mutig']},
+ {t:'match',q:'Ligue.',pairs:[['fröhlich','alegre'],['frech','atrevido'],['heimlich','em segredo'],['die Enttäuschung','a decepção'],['loben','elogiar']]},
+ {t:'tr',de:'Ela está de bom humor hoje.',a:['Sie hat heute gute Laune.','Sie ist heute gut gelaunt.']}
+]},
+{id:'l2',title:'Amor e conflitos – obwohl / trotzdem',desc:'sich verlieben, sich streiten, sich versöhnen',steps:[
+ {t:'vocab',title:'Relacionamentos',items:[['sich verlieben in','apaixonar-se por'],['zusammenkommen','começar a namorar'],['sich streiten','brigar'],['sich versöhnen','fazer as pazes'],['sich trennen','separar-se'],['Schluss machen','terminar (namoro)'],['die Hochzeit feiern','celebrar o casamento'],['gemeinsam','juntos'],['vermissen','sentir falta']]},
+ {t:'info',title:'obwohl e trotzdem',html:`<p>Os dois expressam uma <b>contradição</b> („embora / mesmo assim“), mas a ordem das palavras é diferente:</p>
+ <table><tr><td class="es-t"><b>obwohl</b> + verbo no final</td><td class="es-t">Obwohl sie sich oft streiten, lieben sie sich.</td><td>Embora briguem muito, eles se amam.</td></tr>
+ <tr><td class="es-t"><b>trotzdem</b> + verbo logo depois</td><td class="es-t">Sie streiten sich oft. Trotzdem lieben sie sich.</td><td>Eles brigam muito. Mesmo assim se amam.</td></tr></table>
+ <div class="ex">Preposição <b>trotz</b> + genitivo (ou dativo na fala): <span class="es-t">Trotz des Regens gehen wir spazieren.</span></div>`},
+ {t:'mc',q:'___ Felix müde war, ist er mit Jana ins Kino gegangen.',opts:['Obwohl','Trotzdem','Deshalb'],a:0},
+ {t:'mc',q:'Lucas vermisst seine Familie. ___ möchte er in Deutschland bleiben.',opts:['Trotzdem','Obwohl','Weil'],a:0},
+ {t:'gap',q:'Sie haben sich versöhnt, ___ der Streit sehr schlimm war.',a:['obwohl']},
+ {t:'gap',q:'Ich hatte keine Zeit. ___ habe ich dir geholfen.',a:['Trotzdem']},
+ {t:'order',es:'Obwohl sie in verschiedenen Städten wohnen sehen sie sich jedes Wochenende',de:'Embora morem em cidades diferentes, eles se veem todo fim de semana.'},
+ {t:'tr',de:'Embora eu esteja cansado, vou à festa.',a:['Obwohl ich müde bin, gehe ich zur Party.','Obwohl ich müde bin, komme ich zur Party.']},
+ {t:'speak',es:'Obwohl wir uns manchmal streiten, verstehen wir uns sehr gut.',de:'Embora às vezes a gente brigue, nos entendemos muito bem.',tip:'Depois de <i>obwohl</i> o verbo vai para o final: <i>streiten</i>.'}
+]},
+{id:'l3',title:'Declinação -n',desc:'der Kollege → den Kollegen · der Nachbar → dem Nachbarn',steps:[
+ {t:'info',title:'n-Deklination',html:`<p>Alguns substantivos <b>masculinos</b> ganham <b>-(e)n</b> em todos os casos, menos no nominativo singular:</p>
+ <table><tr><th>nominativo</th><th>acusativo / dativo / genitivo</th></tr>
+ <tr><td class="es-t">der Kollege</td><td class="es-t">den / dem / des Kolleg<b>en</b></td></tr>
+ <tr><td class="es-t">der Nachbar</td><td class="es-t">den / dem / des Nachbar<b>n</b></td></tr>
+ <tr><td class="es-t">der Mensch</td><td class="es-t">den / dem / des Mensch<b>en</b></td></tr>
+ <tr><td class="es-t">der Student · der Kunde · der Junge · der Herr</td><td class="es-t">den Student<b>en</b> · dem Kund<b>en</b> · den Jung<b>en</b> · Herr<b>n</b> Müller</td></tr></table>
+ <div class="ex">Dica: masculinos terminados em <b>-e</b> para pessoas/animais (der Kollege, der Junge, der Löwe) e palavras de origem estrangeira em <b>-ent, -ant, -ist</b> (der Student, der Praktikant, der Journalist).</div>`},
+ {t:'mc',q:'Ich habe ___ gestern im Supermarkt getroffen.',opts:['meinen Nachbarn','meinen Nachbar','meinem Nachbar'],a:0},
+ {t:'mc',q:'Der Brief ist für ___ Müller.',opts:['Herrn','Herr','Herren'],a:0},
+ {t:'gap',q:'Kannst du ___ Kollegen bitte Bescheid sagen? (dativo: dem)',a:['dem']},
+ {t:'gap',q:'Die Ärztin hat mit dem ___ gesprochen. (der Patient)',a:['Patienten']},
+ {t:'gap',q:'Wir haben einen neuen ___ im Team. (der Praktikant – acusativo)',a:['Praktikanten']},
+ {t:'tr',de:'Eu ajudo o meu colega.',a:['Ich helfe meinem Kollegen.']}
+]},
+{id:'l4',title:'Escrever: um conselho',desc:'Antwort auf eine Nachricht',steps:[
+ {t:'read',title:'Leitura: Nachricht von Tom',text:`Hey Lucas,
+ich brauche deinen Rat. Lea und ich sind jetzt seit einem Jahr zusammen. Sie hat ein Jobangebot in München bekommen und will es annehmen. Obwohl ich mich für sie freue, bin ich auch traurig und ein bisschen eifersüchtig auf ihre neuen Kollegen. Fernbeziehung? Ich weiß nicht, ob ich das kann. Trotzdem will ich sie nicht verlieren. Was würdest du an meiner Stelle machen?
+Tom`,de:`E aí, Lucas,\npreciso do seu conselho. A Lea e eu estamos juntos há um ano. Ela recebeu uma proposta de emprego em Munique e quer aceitar. Embora eu fique feliz por ela, também estou triste e um pouco ciumento dos novos colegas dela. Relacionamento a distância? Não sei se consigo. Mesmo assim não quero perdê-la. O que você faria no meu lugar?\nTom`},
+ {t:'mc',q:'Warum ist Tom traurig?',opts:['Lea will nach München ziehen.','Lea hat Schluss gemacht.','Er hat seinen Job verloren.'],a:0},
+ {t:'mc',q:'Was möchte Tom nicht?',opts:['Lea verlieren','nach München ziehen','mit Lucas sprechen'],a:0},
+ {t:'free',task:'Responda ao Tom (~80 palavras): 1) mostre que entende os sentimentos dele, 2) dê dois conselhos (Ich an deiner Stelle würde … / Du solltest …), 3) conte uma experiência sua ou de alguém que você conhece.',hint:'Lieber Tom, ich kann gut verstehen, dass … Obwohl …, … An deiner Stelle würde ich … Außerdem solltest du … Meine Cousine …',focus:'obwohl/trotzdem, Konjunktiv II, Ratschläge, n-Deklination',model:'Lieber Tom,\nich kann gut verstehen, dass du traurig bist. Obwohl eine Fernbeziehung schwierig ist, kann sie funktionieren. An deiner Stelle würde ich offen mit Lea darüber sprechen, was ihr beide wollt. Außerdem solltest du sie so oft wie möglich besuchen – mit dem Zug sind es nur vier Stunden. Meine Cousine hat zwei Jahre eine Fernbeziehung gehabt, und heute sind sie verheiratet. Eifersucht hilft übrigens nicht – vertrau ihr!\nViele Grüße\nLucas'}
+]}],
+resumen:`<h3>obwohl / trotzdem / trotz</h3><p class="es-t">Obwohl wir uns streiten, lieben wir uns. · Wir streiten uns. Trotzdem lieben wir uns. · Trotz des Regens …</p>
+<h3>n-Deklination</h3><p class="es-t">der Kollege → den/dem/des Kollegen · der Nachbar → Nachbarn · der Mensch → Menschen · der Student → Studenten · Herr → Herrn</p>
+<h3>Relacionamentos</h3><p class="es-t">sich verlieben in · sich streiten · sich versöhnen · sich trennen · Schluss machen · die Laune · mutig · enttäuscht</p>`});
+
+/* ================= KAPITEL 32 · UMWELT ================= */
+LANGS.de.course.units.push({id:'k32',n:'32',level:'B1',title:'Umwelt',sub:'Meio ambiente e clima · energia e reciclagem · Passiv com modais (muss getrennt werden) · deshalb / deswegen',
+goals:['Über Umweltprobleme und Klima sprechen','Energie sparen, Müll vermeiden, recyceln','Passiv mit Modalverben: Der Müll muss getrennt werden.','Folgen ausdrücken: deshalb, deswegen, darum, sodass','Einen Vorschlag für das Haus / die Firma machen'],
+situacion:{title:'Reunião sobre o escritório verde',npc:'Frau Dr. Hoffmann',scene:'A empresa quer ficar mais sustentável. A chefe pede ideias à equipe.',role:'Du bist Frau Dr. Hoffmann, Teamleiterin. Du siezt Lucas in der Besprechung. Die Firma möchte umweltfreundlicher werden. Bitte um Vorschläge (Strom sparen, Papier, Kantine, Dienstreisen), frag nach Kosten und Umsetzung, sei offen, aber kritisch. Benutze Passiv mit Modalverben (Das müsste geprüft werden) und deshalb/deswegen. Sprich natürliches Deutsch auf B1-Niveau.',goal:'Faça pelo menos duas propostas concretas, justifique (deshalb …) e responda às perguntas sobre custos.'},
+placement:[
+ {t:'mc',q:'Der Müll ___ getrennt werden.',opts:['muss','müssen','wird'],a:0},
+ {t:'mc',q:'Es gab einen Sturm. ___ fuhren keine Züge.',opts:['Deshalb','Obwohl','Weil'],a:0},
+ {t:'gap',q:'Die Fenster können geöffnet ___. (Passiv)',a:['werden']},
+ {t:'mc',q:'„a poluição ambiental“',opts:['die Umweltverschmutzung','der Umweltschutz','die Umleitung'],a:0},
+ {t:'mc',q:'Ich fahre mit dem Rad, ___ ich die Umwelt schützen will.',opts:['weil','deshalb','trotzdem'],a:0},
+ {t:'gap',q:'Wir müssen Energie ___. (economizar)',a:['sparen']}],
+lessons:[
+{id:'l1',title:'Meio ambiente e clima',desc:'die Umwelt, das Klima, die Hitze …',steps:[
+ {t:'vocab',title:'Meio ambiente',items:[['die Umwelt','o meio ambiente'],['der Umweltschutz','a proteção ambiental'],['die Umweltverschmutzung','a poluição ambiental'],['verschmutzen','poluir'],['das Klima','o clima'],['die Hitze','o calor (forte)'],['die Kälte','o frio'],['der Nebel','a neblina'],['feucht','úmido'],['mild','ameno'],['die Katastrophe','a catástrofe'],['zerstören','destruir'],['die Landwirtschaft','a agricultura'],['der Bauer / die Bäuerin','o agricultor / a agricultora'],['die Ernte','a colheita'],['das Gras','a grama, o capim'],['der Rasen','o gramado'],['blühen','florescer'],['das Haustier','o animal de estimação'],['füttern','alimentar (animal)']]},
+ {t:'mc',q:'Im Sommer 2023 gab es eine extreme ___: über 38 Grad!',opts:['Hitze','Kälte','Ernte'],a:0},
+ {t:'mc',q:'Autos und Fabriken ___ die Luft.',opts:['verschmutzen','schützen','blühen'],a:0},
+ {t:'gap',q:'Im Frühling ___ die Bäume. (florescer)',a:['blühen']},
+ {t:'match',q:'Ligue.',pairs:[['der Nebel','a neblina'],['die Ernte','a colheita'],['feucht','úmido'],['füttern','alimentar (animal)'],['zerstören','destruir']]},
+ {t:'tr',de:'A proteção ambiental é importante para mim.',a:['Umweltschutz ist mir wichtig.','Der Umweltschutz ist mir wichtig.','Umweltschutz ist für mich wichtig.']}
+]},
+{id:'l2',title:'Energia e lixo – Passiv com modais',desc:'muss getrennt werden · kann recycelt werden',steps:[
+ {t:'vocab',title:'Energia e lixo',items:[['der Abfall','o lixo, o resíduo'],['der Abfalleimer','a lixeira'],['die Müllabfuhr','a coleta de lixo'],['entsorgen','descartar'],['recyceln','reciclar'],['das Plastik','o plástico'],['der Kunststoff','o material sintético'],['verbrauchen','consumir'],['der Verbrauch','o consumo'],['sparsam','econômico'],['das Kraftwerk','a usina'],['die Solaranlage','o sistema de energia solar'],['erneuerbar','renovável'],['vermeiden','evitar']]},
+ {t:'info',title:'Passiv com verbos modais',html:`<p>Modal (posição 2) + <b>particípio + werden</b> (no final):</p>
+ <table><tr><td class="es-t">Man muss den Müll trennen.</td><td class="es-t">Der Müll <b>muss</b> getrennt <b>werden</b>.</td></tr>
+ <tr><td class="es-t">Man kann Glas recyceln.</td><td class="es-t">Glas <b>kann</b> recycelt <b>werden</b>.</td></tr>
+ <tr><td class="es-t">Man darf hier nichts wegwerfen.</td><td class="es-t">Hier <b>darf</b> nichts weggeworfen <b>werden</b>.</td></tr>
+ <tr><td class="es-t">Man sollte Energie sparen.</td><td class="es-t">Energie <b>sollte</b> gespart <b>werden</b>.</td></tr></table>`},
+ {t:'mc',q:'Batterien dürfen nicht in den Hausmüll geworfen ___.',opts:['werden','wird','worden'],a:0},
+ {t:'mc',q:'Plastikflaschen ___ recycelt werden.',opts:['können','kann','werden'],a:0},
+ {t:'gap',q:'Das Licht muss am Abend ausgeschaltet ___.',a:['werden']},
+ {t:'gap',q:'Alte Medikamente sollten in der Apotheke ___ werden. (entsorgen)',a:['entsorgt']},
+ {t:'order',es:'Im Büro sollte mehr Strom gespart werden',de:'No escritório deveria se economizar mais energia.'},
+ {t:'tr',de:'O lixo tem que ser separado.',a:['Der Müll muss getrennt werden.']},
+ {t:'tr',de:'Plástico deveria ser evitado.',a:['Plastik sollte vermieden werden.']}
+]},
+{id:'l3',title:'Consequências – deshalb',desc:'deshalb, deswegen, darum, sodass',steps:[
+ {t:'info',title:'Consequência',html:`<table><tr><td class="es-t"><b>deshalb / deswegen / darum</b> + verbo logo depois</td><td class="es-t">Das Wetter war schlecht. <b>Deshalb</b> sind wir zu Hause geblieben.</td></tr>
+ <tr><td class="es-t"><b>sodass</b> + verbo no final</td><td class="es-t">Es regnete stark, <b>sodass</b> die Straßen überflutet waren.</td></tr></table>
+ <div class="ex">Compare: causa → <span class="es-t">weil / denn</span> · consequência → <span class="es-t">deshalb / sodass</span>.<br><span class="es-t">Ich fahre Rad, <b>weil</b> es gesund ist.</span> = <span class="es-t">Radfahren ist gesund. <b>Deshalb</b> fahre ich Rad.</span></div>`},
+ {t:'mc',q:'Der Strom ist teuer. ___ schalte ich das Licht immer aus.',opts:['Deshalb','Weil','Obwohl'],a:0},
+ {t:'mc',q:'Es war sehr neblig, ___ der Flug Verspätung hatte.',opts:['sodass','deshalb','trotzdem'],a:0},
+ {t:'gap',q:'Ich habe kein Auto. ___ fahre ich viel mit dem Rad. (por isso)',a:['Deshalb|Deswegen|Darum']},
+ {t:'read',title:'Leitura: Ein Viertel ohne Autos',text:`In Freiburg gibt es ein Stadtviertel, in dem fast keine Autos fahren: Vauban. Die Bewohner haben sich vor über 20 Jahren entschieden, ohne eigenes Auto zu leben. Deshalb gibt es breite Wege für Fußgänger und Radfahrer, viele Spielplätze und eine Straßenbahn direkt ins Zentrum. Wer trotzdem ein Auto braucht, muss es in einer Garage am Rand des Viertels parken – und dafür bezahlen. Viele Häuser haben Solaranlagen auf dem Dach, sodass sie mehr Energie produzieren, als sie verbrauchen.`,de:`Em Friburgo existe um bairro onde quase não circulam carros: Vauban. Os moradores decidiram há mais de 20 anos viver sem carro próprio. Por isso há caminhos largos para pedestres e ciclistas, muitos parquinhos e um bonde direto para o centro. Quem mesmo assim precisa de carro tem que estacioná-lo numa garagem na borda do bairro – e pagar por isso. Muitas casas têm painéis solares no telhado, de modo que produzem mais energia do que consomem.`},
+ {t:'mc',q:'Wo müssen Autofahrer in Vauban parken?',opts:['in einer Garage am Rand','vor dem Haus','im Zentrum'],a:0},
+ {t:'mc',q:'Was produzieren viele Häuser?',opts:['mehr Energie, als sie verbrauchen','gar keine Energie','Müll'],a:0},
+ {t:'tr',de:'Eu quero proteger o meio ambiente, por isso compro menos plástico.',a:['Ich will die Umwelt schützen, deshalb kaufe ich weniger Plastik.','Ich will die Umwelt schützen. Deshalb kaufe ich weniger Plastik.','Ich möchte die Umwelt schützen, deshalb kaufe ich weniger Plastik.']}
+]},
+{id:'l4',title:'Escrever: uma proposta',desc:'E-Mail mit Vorschlägen',steps:[
+ {t:'dialog',place:'Besprechung',title:'Escritório mais verde',scene:'A chefe pede ideias para tornar a empresa mais sustentável.',lines:[
+  {n:'Frau Dr. Hoffmann',es:'Wir möchten umweltfreundlicher werden. Haben Sie Vorschläge?',de:'Queremos ser mais sustentáveis. O senhor tem sugestões?'},
+  {you:true,opts:[{es:'Ja. Viele Computer laufen die ganze Nacht. Sie sollten abends automatisch ausgeschaltet werden.',ok:true},{es:'Ja. Die Computer müssen ausgeschaltet.',ok:false,why:'Passiv com modal: <i>… müssen ausgeschaltet <b>werden</b></i>.'}]},
+  {n:'Frau Dr. Hoffmann',es:'Gute Idee. Und was ist mit dem Papier?',de:'Boa ideia. E quanto ao papel?'},
+  {you:true,opts:[{es:'Wir drucken sehr viel. Deshalb würde ich vorschlagen, dass Dokumente nur noch digital verschickt werden.',ok:true},{es:'Wir drucken sehr viel, deshalb ich würde vorschlagen …',ok:false,why:'Depois de <i>deshalb</i> vem o verbo: <i>deshalb <b>würde</b> ich …</i>'}]},
+  {n:'Frau Dr. Hoffmann',es:'Das müsste aber mit allen Abteilungen besprochen werden.',de:'Mas isso teria que ser discutido com todos os departamentos.'},
+  {you:true,opts:[{es:'Natürlich. Ich kann bis Freitag eine kurze Präsentation vorbereiten.',ok:true},{es:'Das ist nicht mein Problem.',ok:false,why:'Mostre iniciativa e ofereça um próximo passo.'}]}]},
+ {t:'free',task:'Escreva uma e-mail (~80 palavras) para a administração do seu prédio com propostas para proteger o meio ambiente: 1) o problema que você vê, 2) duas propostas (Passiv com modais), 3) peça uma reunião dos moradores.',hint:'Sehr geehrte Damen und Herren, mir ist aufgefallen, dass … Deshalb schlage ich vor, … Außerdem könnte … werden. Wäre es möglich, eine Bewohnerversammlung …? Mit freundlichen Grüßen',focus:'Passiv mit Modalverben, deshalb/sodass, formelle E-Mail',model:'Sehr geehrte Damen und Herren,\nmir ist aufgefallen, dass in unserem Haus der Müll oft nicht richtig getrennt wird. Deshalb schlage ich vor, dass an den Mülltonnen deutliche Schilder in mehreren Sprachen angebracht werden. Außerdem könnte das Licht im Treppenhaus mit Bewegungsmeldern gesteuert werden, sodass weniger Strom verbraucht wird. Wäre es möglich, im nächsten Monat eine Bewohnerversammlung zu diesem Thema zu organisieren?\nMit freundlichen Grüßen\nLucas Souza'}
+]}],
+resumen:`<h3>Passiv com modais</h3><p class="es-t">Der Müll muss getrennt werden. · Glas kann recycelt werden. · Hier darf nichts weggeworfen werden. · Energie sollte gespart werden.</p>
+<h3>Consequência</h3><p class="es-t">Deshalb / Deswegen / Darum + verbo · …, sodass + verbo no final</p>
+<h3>Meio ambiente</h3><p class="es-t">die Umwelt · der Umweltschutz · verschmutzen · entsorgen · recyceln · verbrauchen · sparsam · erneuerbar · vermeiden</p>`});
+
+/* ================= KAPITEL 33 · BILDUNG & WEITERBILDUNG ================= */
+LANGS.de.course.units.push({id:'k33',n:'33',level:'B1',title:'Bildung & Weiterbildung',sub:'Escola, faculdade e cursos · línguas · conectores duplos: sowohl … als auch, weder … noch, je … desto',
+goals:['Über Schule, Studium und Kurse sprechen','Sprachen lernen: Muttersprache, Fremdsprache, Dialekt','Zweiteilige Konnektoren: sowohl … als auch, weder … noch, entweder … oder, nicht nur … sondern auch','je … desto: Je mehr ich übe, desto besser spreche ich.','Sich für einen Kurs anmelden – Voraussetzungen klären'],
+situacion:{title:'Informar-se sobre um curso',npc:'Frau Jansen (VHS)',scene:'Você quer se inscrever num curso de preparação para a prova B1 na Volkshochschule.',role:'Du bist Frau Jansen, Beraterin an der Volkshochschule Frankfurt, freundlich und genau. Du siezt. Frag nach Vorkenntnissen und Zielen, erkläre den Intensivkurs (vier Wochen, Montag bis Freitag) und den Abendkurs (zehn Wochen, zweimal pro Woche), Preise, Einstufungstest als Voraussetzung, Anmeldeschluss. Benutze zweiteilige Konnektoren. Sprich natürliches Deutsch auf B1-Niveau.',goal:'Explique o seu objetivo, compare os dois cursos e pergunte sobre requisitos, preço e prazo.'},
+placement:[
+ {t:'mc',q:'Ich spreche ___ Englisch ___ Spanisch.',opts:['sowohl … als auch','weder … als auch','entweder … sondern'],a:0},
+ {t:'mc',q:'Er hat ___ Zeit ___ Geld.',opts:['weder … noch','sowohl … noch','entweder … oder'],a:0},
+ {t:'mc',q:'Je mehr du übst, ___ besser wirst du.',opts:['desto','als','so'],a:0},
+ {t:'gap',q:'Wir fahren ___ mit dem Zug oder mit dem Bus. (ou … ou)',a:['entweder']},
+ {t:'mc',q:'„a língua materna“',opts:['die Muttersprache','die Fremdsprache','die Aussprache'],a:0},
+ {t:'gap',q:'Sie spricht nicht nur Deutsch, ___ auch Japanisch.',a:['sondern']}],
+lessons:[
+{id:'l1',title:'Escola e faculdade',desc:'das Semester, das Referat, die Nachhilfe …',steps:[
+ {t:'vocab',title:'Estudar',items:[['das Semester','o semestre'],['das Seminar','o seminário'],['das Referat','a apresentação (trabalho oral)'],['die Klassenarbeit','a prova (escola)'],['durchfallen','ser reprovado'],['die Nachhilfe','a aula particular (reforço)'],['der / die Studierende','o / a estudante (universitário)'],['der Professor / die Professorin','o professor / a professora (universidade)'],['die Hochschule','a instituição de ensino superior'],['das Lexikon','a enciclopédia'],['nachschlagen','consultar (dicionário)'],['die Methode','o método'],['die Voraussetzung','o requisito'],['erforderlich','necessário, exigido'],['die Teilnahme','a participação'],['teilnehmen an','participar de'],['der Teilnehmer / die Teilnehmerin','o participante / a participante']]},
+ {t:'mc',q:'Mein Sohn ist in Mathe schlecht. Er bekommt zweimal pro Woche ___.',opts:['Nachhilfe','ein Referat','ein Semester'],a:0},
+ {t:'mc',q:'Wenn du ein Wort nicht kennst, kannst du es im Wörterbuch ___.',opts:['nachschlagen','durchfallen','teilnehmen'],a:0},
+ {t:'gap',q:'Für den Kurs ist ein Einstufungstest ___. (necessário)',a:['erforderlich|notwendig|nötig']},
+ {t:'match',q:'Ligue.',pairs:[['das Referat','a apresentação'],['durchfallen','ser reprovado'],['die Voraussetzung','o requisito'],['teilnehmen an','participar de'],['das Lexikon','a enciclopédia']]},
+ {t:'tr',de:'Eu gostaria de participar do curso.',a:['Ich möchte gern an dem Kurs teilnehmen.','Ich möchte am Kurs teilnehmen.','Ich würde gern an dem Kurs teilnehmen.','Ich möchte an dem Kurs teilnehmen.']}
+]},
+{id:'l2',title:'Línguas',desc:'die Muttersprache, der Dialekt, die Aussprache …',steps:[
+ {t:'vocab',title:'Línguas',items:[['die Muttersprache','a língua materna'],['die Fremdsprache','a língua estrangeira'],['die Zweitsprache','a segunda língua'],['der Dialekt','o dialeto'],['die Aussprache','a pronúncia'],['aussprechen','pronunciar'],['fließend','fluente'],['der Intensivkurs','o curso intensivo'],['der Übersetzer / die Übersetzerin','o tradutor / a tradutora']]},
+ {t:'mc',q:'Portugiesisch ist Lucas’ ___.',opts:['Muttersprache','Fremdsprache','Zweitsprache'],a:0},
+ {t:'mc',q:'In Bayern verstehe ich manche Leute kaum. Sie sprechen ___.',opts:['Dialekt','fließend','Aussprache'],a:0},
+ {t:'gap',q:'Wie spricht man dieses Wort ___? (pronunciar)',a:['aus']},
+ {t:'read',title:'Leitura: Mehrsprachig in Frankfurt',text:`In Frankfurt haben fast 40 Prozent der Menschen eine andere Muttersprache als Deutsch. In vielen Schulklassen werden sowohl Türkisch als auch Arabisch, Polnisch oder Portugiesisch gesprochen. Früher sollten Kinder zu Hause nur Deutsch sprechen. Heute sagen Experten: Je besser ein Kind seine Muttersprache spricht, desto leichter lernt es auch weitere Sprachen. Deshalb bieten manche Schulen nicht nur Deutschkurse, sondern auch Unterricht in der Herkunftssprache an.`,de:`Em Frankfurt, quase 40 por cento das pessoas têm outra língua materna que não o alemão. Em muitas turmas escolares se fala tanto turco quanto árabe, polonês ou português. Antigamente, as crianças deveriam falar só alemão em casa. Hoje os especialistas dizem: quanto melhor uma criança fala a língua materna, mais fácil ela aprende outras línguas. Por isso algumas escolas oferecem não só cursos de alemão, mas também aulas na língua de origem.`},
+ {t:'mc',q:'Was sagen Experten heute?',opts:['Eine gute Muttersprache hilft beim Lernen anderer Sprachen.','Kinder sollen nur Deutsch sprechen.','Dialekte sind schlecht.'],a:0},
+ {t:'mc',q:'Was bieten manche Schulen an?',opts:['Unterricht in der Herkunftssprache','nur Deutschkurse','keine Sprachkurse'],a:0},
+ {t:'tr',de:'Ela fala alemão fluentemente.',a:['Sie spricht fließend Deutsch.','Sie spricht Deutsch fließend.']}
+]},
+{id:'l3',title:'Conectores duplos',desc:'sowohl … als auch · weder … noch · je … desto',steps:[
+ {t:'info',title:'Conectores de duas partes',html:`<table><tr><td class="es-t">sowohl … als auch</td><td>tanto … quanto</td><td class="es-t">Ich lerne sowohl Deutsch als auch Englisch.</td></tr>
+ <tr><td class="es-t">weder … noch</td><td>nem … nem</td><td class="es-t">Er spricht weder Deutsch noch Englisch.</td></tr>
+ <tr><td class="es-t">entweder … oder</td><td>ou … ou</td><td class="es-t">Entweder mache ich den Abendkurs oder den Intensivkurs.</td></tr>
+ <tr><td class="es-t">nicht nur … sondern auch</td><td>não só … mas também</td><td class="es-t">Der Kurs ist nicht nur gut, sondern auch günstig.</td></tr>
+ <tr><td class="es-t">zwar … aber</td><td>é verdade que … mas</td><td class="es-t">Der Kurs ist zwar teuer, aber sehr gut.</td></tr>
+ <tr><td class="es-t">je … desto</td><td>quanto mais … mais</td><td class="es-t">Je mehr ich übe, desto besser spreche ich.</td></tr></table>
+ <div class="ex"><b>je</b> + comparativo + verbo no final, <b>desto</b> + comparativo + verbo logo depois.</div>`},
+ {t:'mc',q:'Der Intensivkurs ist ___ teuer, ___ man lernt sehr schnell.',opts:['zwar … aber','weder … noch','sowohl … als auch'],a:0},
+ {t:'mc',q:'Ich habe ___ Zeit ___ Lust auf den Kurs. Ich gehe nicht hin.',opts:['weder … noch','entweder … oder','sowohl … als auch'],a:0},
+ {t:'gap',q:'Je früher du anfängst, ___ schneller bist du fertig.',a:['desto']},
+ {t:'gap',q:'Für die Stelle braucht man ___ Englisch- als auch Deutschkenntnisse.',a:['sowohl']},
+ {t:'gap',q:'Wir können ___ heute oder morgen lernen.',a:['entweder']},
+ {t:'order',es:'Je länger ich in Deutschland lebe desto besser verstehe ich die Kultur',de:'Quanto mais tempo vivo na Alemanha, melhor entendo a cultura.'},
+ {t:'tr',de:'Eu não falo nem italiano nem francês.',a:['Ich spreche weder Italienisch noch Französisch.']},
+ {t:'speak',es:'Der Kurs ist nicht nur interessant, sondern auch sehr praktisch für meinen Beruf.',de:'O curso não é só interessante, mas também muito prático para a minha profissão.',tip:'<i>nicht nur … sondern auch</i>.'}
+]},
+{id:'l4',title:'Escrever: inscrição num curso',desc:'Anfrage an die Volkshochschule',steps:[
+ {t:'read',title:'Leitura: Kursangebot VHS',text:`Prüfungsvorbereitung Deutsch B1
+A) Intensivkurs: 4 Wochen, Montag bis Freitag, 9–13 Uhr, 380 €. Für Teilnehmende, die schnell zur Prüfung wollen.
+B) Abendkurs: 10 Wochen, dienstags und donnerstags, 18–21 Uhr, 290 €. Ideal für Berufstätige.
+Voraussetzung für beide Kurse: Einstufungstest (kostenlos, online). Die Prüfungsgebühr ist nicht im Kurspreis enthalten. Anmeldeschluss: 15. September.`,de:`Preparação para a prova de alemão B1\nA) Curso intensivo: 4 semanas, de segunda a sexta, das 9h às 13h, 380 €. Para participantes que querem fazer a prova rápido.\nB) Curso noturno: 10 semanas, terças e quintas, das 18h às 21h, 290 €. Ideal para quem trabalha.\nRequisito para os dois cursos: teste de nivelamento (gratuito, online). A taxa da prova não está incluída no preço do curso. Prazo de inscrição: 15 de setembro.`},
+ {t:'mc',q:'Welcher Kurs passt für Lucas, der tagsüber arbeitet?',opts:['B','A','keiner'],a:0},
+ {t:'mc',q:'Was ist im Kurspreis nicht enthalten?',opts:['die Prüfungsgebühr','der Einstufungstest','das Kursbuch'],a:0},
+ {t:'free',task:'Escreva uma e-mail (~80 palavras) para a VHS: 1) em qual curso você quer se inscrever e por quê, 2) seus conhecimentos atuais, 3) duas perguntas (material, o que acontece se faltar a uma aula, desconto …).',hint:'Sehr geehrte Damen und Herren, ich interessiere mich für … , weil … Ich lerne seit … Deutsch und … Könnten Sie mir sagen, ob … ? Außerdem möchte ich wissen, … Mit freundlichen Grüßen',focus:'formelle Anfrage, zweiteilige Konnektoren, indirekte Fragen',model:'Sehr geehrte Damen und Herren,\nich interessiere mich für den Abendkurs zur Prüfungsvorbereitung B1, weil ich tagsüber arbeite. Ich lerne seit zwei Jahren Deutsch und kann mich sowohl im Alltag als auch im Beruf gut verständigen, aber beim Schreiben mache ich noch viele Fehler. Könnten Sie mir sagen, ob das Kursbuch im Preis enthalten ist? Außerdem möchte ich wissen, ob es eine Ermäßigung gibt, wenn die Firma einen Teil bezahlt.\nMit freundlichen Grüßen\nLucas Souza'}
+]}],
+resumen:`<h3>Conectores duplos</h3><table><tr><td class="es-t">sowohl … als auch</td><td>tanto … quanto</td></tr><tr><td class="es-t">weder … noch</td><td>nem … nem</td></tr><tr><td class="es-t">entweder … oder</td><td>ou … ou</td></tr><tr><td class="es-t">nicht nur … sondern auch</td><td>não só … mas também</td></tr><tr><td class="es-t">zwar … aber</td><td>é verdade que … mas</td></tr><tr><td class="es-t">je … desto</td><td>quanto mais … mais</td></tr></table>
+<h3>Estudar</h3><p class="es-t">das Semester · das Referat · durchfallen · die Nachhilfe · nachschlagen · die Voraussetzung · teilnehmen an · die Muttersprache · fließend</p>`});
 ;
 /* ================= GESCHICHTEN: „Camila in Hamburg“ – Serie zum Lesen & Hören (Deutschkurs) =================
    Camila Ribeiro, Krankenpflegerin aus Recife, beginnt in einem Hamburger Krankenhaus. Eigene Figur (nicht die Kurs-Person Lucas),
