@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261011-2116";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
+<script>window.PWA=true;window.APP_VERSION="20261011-2129";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -494,7 +494,7 @@ window.selectLang=function(){let code='es';try{code=(JSON.parse(localStorage.get
   if(L.code!=='es')for(const u of L.course.units)for(const q of u.placement||[])L.placement.push(Object.assign({u:u.id},q));
   window.COURSE=L.course;window.PLACEMENT=L.placement;window.STORIES=L.stories;window.LEVELS=L.levels;window.LEVEL_OF=L.levelOf;window.EMOJI=L.emoji;};
 </script>
-<script>window.PACKS={"learn": [{"code": "es", "name": "Spanisch", "flag": "🇪🇸", "stufen": ["A1", "C2"]}, {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "stufen": ["A1", "B1"], "beta": true}], "ex": {"es": ["en"]}, "base": {"es": "de", "de": "pt"}};
+<script>window.PACKS={"learn": [{"code": "es", "name": "Spanisch", "flag": "🇪🇸", "stufen": ["A1", "C2"]}, {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "stufen": ["A1", "B2"], "beta": true}], "ex": {"es": ["en"]}, "base": {"es": "de", "de": "pt"}};
 /* Lader (ES5): gleiche Logik wie engine.js (App-Sprache → Erklärsprache), lädt das Lernsprachen-Paket und ggf. das Erklärsprachen-Paket synchron */
 (function(){var sh=null;try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');}catch(e){}
 var nav=(navigator.language||'de').toLowerCase(),ui=sh&&sh.ui||(sh?'de':nav.indexOf('de')===0?'de':nav.indexOf('es')===0?'es':nav.indexOf('pt')===0?'pt':'en');

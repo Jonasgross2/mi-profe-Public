@@ -1,5 +1,5 @@
 /* ===== Deutschkurs: Übersetzungen der deutschen Beispiele in Erklärungen & Resumen (antippen → Blase, nur bei Erklärsprache Portugiesisch) =====
-   Schlüssel = deutscher Text wie in der Erklärung (mit „Lucas“), Wert = Portugiesisch. Stand: A1–B1. Neue Erklärungen → hier ergänzen.
+   Schlüssel = deutscher Text wie in der Erklärung (mit „Lucas“), Wert = Portugiesisch. Stand: A1–B1, B2 bis Kapitel 39. Neue Erklärungen → hier ergänzen.
    Absichtlich ohne: Satzbausteine, einzelne Formen, Tabellen mit eigener Portugiesisch-Spalte. */
 window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "Wie heißt du?": "Como você se chama?",
@@ -517,5 +517,37 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "guter Wein · mit gutem Wein · mit frischer Milch · kaltes Wasser": "vinho bom · com vinho bom · com leite fresco · água gelada",
 "die Bühne · das Publikum · auftreten · die Veranstaltung · der Roman · die Fortsetzung · empfehlen · der Feiertag · sich verkleiden · unentschieden": "o palco · o público · apresentar-se · o evento · o romance · a continuação · recomendar · o feriado · fantasiar-se · empate",
 "Wie wäre es, wenn wir …? · Ich schlage vor, dass … · Das ist eine gute Idee, aber … · Ich würde lieber … · Ich möchte heute über … sprechen. · Zum Schluss … · Vielen Dank fürs Zuhören.": "Que tal se a gente …? · Proponho que … · É uma boa ideia, mas … · Eu preferiria … · Hoje eu gostaria de falar sobre … · Para concluir … · Muito obrigado pela atenção.",
-"die Frist · spätestens · die Unterlagen · beantragen · verlängern · fällig · falls · möglichst · zunächst · endgültig · zurechtkommen": "o prazo · o mais tardar · os documentos · solicitar · prorrogar · vencido · caso · o mais … possível · primeiro · definitivo · se virar"
+"die Frist · spätestens · die Unterlagen · beantragen · verlängern · fällig · falls · möglichst · zunächst · endgültig · zurechtkommen": "o prazo · o mais tardar · os documentos · solicitar · prorrogar · vencido · caso · o mais … possível · primeiro · definitivo · se virar",
+"eine Frage stellen → in Frage stellen (questionar)": "fazer uma pergunta → questionar",
+"zur Diskussion stellen → zur Diskussion stehen": "pôr em discussão → estar em discussão",
+"Bewerbung als Teamleiter Softwareentwicklung": "Candidatura para líder de equipe de desenvolvimento de software",
+"Sehr geehrte Damen und Herren, mit großem Interesse habe ich Ihre Stellenausschreibung gelesen.": "Prezados senhores e senhoras, li o seu anúncio de vaga com grande interesse.",
+"Derzeit arbeite ich als … bei … und bin dort verantwortlich für …": "Atualmente trabalho como … na … e lá sou responsável por …",
+"Besonders reizt mich an der Stelle, dass … · Ich bringe … mit.": "O que mais me atrai na vaga é que … · Eu trago …",
+"Über eine Einladung zu einem persönlichen Gespräch freue ich mich sehr. Mit freundlichen Grüßen": "Ficarei muito feliz com um convite para uma entrevista pessoal. Atenciosamente",
+"eine Entscheidung treffen · Verantwortung übernehmen · in Frage kommen · zur Verfügung stehen/stellen · eine Rolle spielen · Kritik üben an · Maßnahmen ergreifen · in Kraft treten · in Anspruch nehmen · einen Beitrag leisten": "tomar uma decisão · assumir a responsabilidade · ser uma opção · estar/pôr à disposição · ter um papel · criticar · tomar medidas · entrar em vigor · utilizar, tomar (tempo) · dar uma contribuição",
+"Zu meinen Stärken zählt … · Ich suche eine neue Herausforderung. · Meine Gehaltsvorstellung liegt bei …": "Entre os meus pontos fortes está … · Procuro um novo desafio. · A minha pretensão salarial é de …",
+"der Werdegang · die Beförderung · die Führungskraft · belastbar · teamfähig · die Kündigungsfrist · das Arbeitszeugnis": "a trajetória · a promoção · o/a líder · resistente à pressão · que sabe trabalhar em equipe · o aviso prévio · a carta de referência",
+"Die Grafik zeigt, wie viele Menschen in Deutschland KI-Programme nutzen. Die Daten stammen aus einer Umfrage von 2025.": "O gráfico mostra quantas pessoas na Alemanha usam programas de IA. Os dados vêm de uma pesquisa de 2025.",
+"Der Anteil ist von 15 auf 45 Prozent gestiegen. · Die Zahl hat sich verdreifacht.": "A parcela subiu de 15 para 45 por cento. · O número triplicou.",
+"Im Vergleich zu den Älteren nutzen Jüngere KI deutlich häufiger.": "Em comparação com os mais velhos, os mais jovens usam IA com muito mais frequência.",
+"Die Mehrheit (knapp 60 Prozent) … · Nur eine Minderheit …": "A maioria (pouco menos de 60 por cento) … · Só uma minoria …",
+"von 15 auf 45 Prozent": "de 15 para 45 por cento",
+"um 30 Prozentpunkte": "em 30 pontos percentuais",
+"Das lässt sich lösen. · Das ist lösbar. · Das ist zu lösen. · Der Antrag ist bis Freitag abzugeben.": "Isso pode ser resolvido. · Isso é solucionável. · Isso pode/deve ser resolvido. · O requerimento deve ser entregue até sexta.",
+"machbar · vorstellbar · vorhersehbar · erkennbar · vergleichbar · nachvollziehbar · vermeidbar · erneuerbar": "viável · imaginável · previsível · reconhecível · comparável · compreensível · evitável · renovável",
+"Die Grafik zeigt … · Der Anteil ist von 15 auf 45 Prozent gestiegen. · Die Mehrheit … · im Vergleich zu …": "O gráfico mostra … · A parcela subiu de 15 para 45 por cento. · A maioria … · em comparação com …",
+"Die Ministerin sagt: „Wir haben genug Geld.“ → Die Ministerin sagt, man habe genug Geld.": "A ministra diz: „Temos dinheiro suficiente.“ → A ministra diz que haveria dinheiro suficiente.",
+"Sie sagen, sie hätten keine Zeit.": "Eles dizem que não teriam tempo.",
+"Er sagt, er habe den Bericht gelesen.": "Ele diz que teria lido o relatório.",
+"Sie sagt, sie sei krank gewesen.": "Ela diz que teria estado doente.",
+"Er hat gesagt, dass er keine Zeit hat / hätte.": "Ele disse que não tem / teria tempo.",
+"Ich bin der Auffassung, dass … · Ich vertrete die Meinung, dass …": "Sou da opinião de que … · Defendo a opinião de que …",
+"Da haben Sie zwar recht, aber … · Das stimmt teilweise, allerdings …": "Nisso o senhor tem razão, mas … · Isso é verdade em parte, porém …",
+"Da muss ich Ihnen widersprechen. · Das sehe ich anders. · Davon bin ich nicht überzeugt.": "Aí preciso discordar do senhor. · Vejo isso de outra forma. · Não estou convencido disso.",
+"Darf ich kurz unterbrechen? · Lassen Sie mich bitte ausreden.": "Posso interromper rapidinho? · Deixe-me terminar de falar, por favor.",
+"Was halten Sie von einem Kompromiss? · Wir könnten uns darauf einigen, dass …": "O que o senhor acha de um meio-termo? · Poderíamos concordar que …",
+"er sei · er habe · er werde · er könne · es gebe · Sie sagen, sie hätten keine Zeit. · Er sagt, er habe den Bericht gelesen.": "ele seria · ele teria · ele iria · ele poderia · haveria · Eles dizem que não teriam tempo. · Ele diz que teria lido o relatório.",
+"behaupten · betonen · mitteilen · laut der Studie · der Studie zufolge": "afirmar · enfatizar · informar · segundo o estudo · de acordo com o estudo",
+"Ich bin der Auffassung, dass … · Da muss ich Ihnen widersprechen. · Davon bin ich nicht überzeugt. · Was halten Sie von einem Kompromiss?": "Sou da opinião de que … · Aí preciso discordar do senhor. · Não estou convencido disso. · O que o senhor acha de um meio-termo?"
 });
