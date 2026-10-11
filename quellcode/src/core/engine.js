@@ -771,7 +771,7 @@ function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
   if(st&&!ck?.pass)m.append(h('p',{class:'muted small',style:'margin:12px 0 0'},T('Einstufung: ')+(st==='sicher'?T('sitzt – mach direkt den Abschlusstest.'):st===T('auffrischen')?T('auffrischen – Erklärungen kannst du überfliegen.'):T('neu lernen – nimm dir Zeit.'))));
   const L=h('div',{class:'grid',style:'gap:8px;margin-top:12px'});
   /* Zwischenüberschriften, wenn es mehrere Arten gibt: Lektionen · Wortschatz (lx/ly/lw) · Prüfungstraining (lz) */
-  const kindOf=l=>l.id==='lz'?'z':/^l[xyw]$/.test(l.id)?'w':'l';const KN={l:T('Lektionen'),w:T('Wortschatz'),z:T('Prüfungstraining')};
+  const kindOf=l=>l.id==='lz'?'z':/^l[vxyw]$/.test(l.id)?'w':'l';const KN={l:T('Lektionen'),w:T('Wortschatz'),z:T('Prüfungstraining')};
   const multi=new Set(LS.map(kindOf)).size>1;let lastK=null;
   LS.forEach((l,i)=>{const k=u.id+'.'+l.id;if(multi&&kindOf(l)!==lastK){lastK=kindOf(l);L.append(h('div',{class:'kind',style:'margin:'+(i?'10px':'0')+' 2px 0'},KN[lastK]));}const rr=rnd(k);const nr=rr<1?1:rr<2?2:rr<3?3:2;const wait=nr===3&&!r3ready(k);
     const open=j=>{if(j>1&&rr<j-1){toast(T('Erst „')+RN[j-1]+T('“ abschließen'));return;}if(j===3&&rr<3&&!r3ready(k)){toast(T('„Festigen“ ist ab morgen frei'));return;}go(j===1?'lesson/'+u.id+'/'+l.id:'round/'+u.id+'/'+l.id+'/'+j);};
