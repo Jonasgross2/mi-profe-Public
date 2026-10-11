@@ -789,7 +789,8 @@ function vResumen(m,id){const u=unitById(id);m.append(backTo(UW+' '+u.n,'unit/'+
   h('h1',{},T('Resumen · ')+UW+' '+u.n));const box=h('div',{class:'card info resumen',html:u.resumen});const tb=trToggle(box);if(tb)m.append(h('div',{class:'row',style:'justify-content:flex-end;margin-bottom:6px'},tb));m.append(box);
   m.querySelectorAll('.resumen .es-t, .resumen td.es').forEach(addSpeakTo);}
 /* Übersetzungen der spanischen Beispiele in Erklärungen (INFO_TR in c_info_tr.js, Schlüssel = Originaltext mit „Jonas“) */
-const infoKey=t=>String(t).replace(S.surname?new RegExp((S.name||'Jonas')+' '+S.surname,'g'):/$^/,'Jonas').replace(new RegExp('\\b'+(S.name||'Jonas').replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','g'),'Jonas').replace(/\s+/g,' ').trim();
+/* Schlüssel mit dem Namen der Kurs-Person (Steckbrief persona.name, Spanisch: Jonas, Deutsch: Lucas) – der eigene Name wird zurückübersetzt */
+const infoKey=t=>String(t).replace(S.surname?new RegExp((S.name||PN.name)+' '+S.surname,'g'):/$^/,PN.name).replace(new RegExp('\\b'+(S.name||PN.name).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\b','g'),PN.name).replace(/\s+/g,' ').trim();
 function trToggle(box){const TRI=EX===EX_BASE&&window.INFO_TR||null;/* INFO_TR = Beispiele in der Ausgangssprache der Erklärungen */if(!TRI)return null;
   const pop=(e,d)=>{const r=e.getBoundingClientRect();const p=h('div',{class:'glpop trpop'},d);document.body.append(p);
       p.style.left=Math.max(8,Math.min(r.left,window.innerWidth-p.offsetWidth-8))+'px';p.style.top=(r.bottom+6)+'px';
