@@ -642,7 +642,7 @@ placement:[
 lessons:[
 {id:'l1',title:'O apartamento',desc:'Zimmer, Küche, Bad … · Adjektive',steps:[
  {t:'vocab',title:'Cômodos',items:[['die Wohnung','o apartamento'],['das Haus','a casa'],['das Zimmer','o quarto / o cômodo'],['das Wohnzimmer','a sala'],['das Schlafzimmer','o quarto de dormir'],['die Küche','a cozinha'],['das Bad','o banheiro'],['die Toilette','o vaso / o banheiro'],['der Flur','o corredor'],['der Balkon','a varanda'],['der Garten','o jardim'],['der Keller','o porão'],['der Stock','o andar'],['das Erdgeschoss','o térreo'],['der Aufzug','o elevador'],['die Treppe','a escada']]},
- {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso'],['laut','barulhento'],['neu','novo'],['alt','velho'],['schön','bonito'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
+ {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso / calmo'],['laut','barulhento'],['neu','novo'],['alt','velho'],['schön','bonito'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
  {t:'info',title:'Andares e lugares',html:`<p>No Brasil o “primeiro andar” às vezes é o térreo – na Alemanha <b>nunca</b>:</p>
  <table><tr><td class="es-t">im Erdgeschoss (EG)</td><td>no térreo</td></tr><tr><td class="es-t">im ersten Stock</td><td>no 1º andar (acima do térreo)</td></tr><tr><td class="es-t">im dritten Stock</td><td>no 3º andar</td></tr><tr><td class="es-t">oben / unten</td><td>em cima / embaixo</td></tr><tr><td class="es-t">links / rechts</td><td>à esquerda / à direita</td></tr></table>
  <div class="ex">O adjetivo depois de <b>sein</b> não muda: <span class="es-t">Die Wohnung ist hell. Das Zimmer ist klein. Die Zimmer sind klein.</span></div>`},
@@ -1637,7 +1637,7 @@ lessons:[
  {t:'speak',es:'Ich bewege mich zu wenig. Ab Montag gehe ich zweimal pro Woche joggen.',de:'Eu me movimento pouco. A partir de segunda vou correr duas vezes por semana.',tip:'<i>ich bewege <b>mich</b></i> – o pronome vem logo depois do verbo.'}
 ]},
 {id:'l3',title:'Médico, farmácia, emergência',desc:'seit + Dativ · in der Apotheke · der Notruf',steps:[
- {t:'vocab',title:'Saúde',items:[['die Erkältung','o resfriado'],['die Grippe','a gripe'],['der Husten','a tosse'],['husten','tossir'],['das Fieber','a febre'],['die Halsschmerzen (Pl.)','a dor de garganta'],['die Apotheke','a farmácia'],['das Medikament','o remédio'],['die Tablette','o comprimido'],['der Hustensaft','o xarope para tosse'],['das Rezept','a receita'],['die Praxis','o consultório'],['die Sprechstunde','o horário de atendimento'],['der Zahnarzt / die Zahnärztin','o dentista / a dentista'],['der Unfall','o acidente'],['die Verletzung','o ferimento'],['der Krankenwagen','a ambulância'],['der Notruf','a chamada de emergência'],['das Krankenhaus','o hospital']]},
+ {t:'vocab',title:'Saúde',items:[['die Krankheit','a doença'],['die Erkältung','o resfriado'],['die Grippe','a gripe'],['der Husten','a tosse'],['husten','tossir'],['das Fieber','a febre'],['die Halsschmerzen (Pl.)','a dor de garganta'],['die Apotheke','a farmácia'],['das Medikament','o remédio'],['die Tablette','o comprimido'],['der Hustensaft','o xarope para tosse'],['das Rezept','a receita'],['die Praxis','o consultório'],['die Sprechstunde','o horário de atendimento'],['der Zahnarzt / die Zahnärztin','o dentista / a dentista'],['der Unfall','o acidente'],['die Verletzung','o ferimento'],['der Krankenwagen','a ambulância'],['der Notruf','a chamada de emergência'],['das Krankenhaus','o hospital']]},
  {t:'info',title:'seit e vor',html:`<table><tr><td class="es-t"><b>seit</b> + dativo</td><td>desde / há (e continua)</td><td class="es-t">Ich habe <b>seit</b> drei Tag<b>en</b> Husten.</td></tr>
  <tr><td class="es-t"><b>vor</b> + dativo</td><td>há … (no passado, terminou)</td><td class="es-t">Ich war <b>vor</b> einer Woche beim Arzt.</td></tr></table>
  <div class="ex">Dativo: <span class="es-t">seit einem Tag, seit einer Woche, seit zwei Monaten</span> (plural + <b>-n</b>). <span class="es-t">Seit wann …?</span> = Desde quando …?</div>
@@ -1950,7 +1950,7 @@ lessons:[
  {t:'speak',es:'Können Sie mir sagen, ob ich auch im Homeoffice arbeiten kann?',de:'O senhor pode me dizer se eu também posso trabalhar em home office?',tip:'Pergunta de sim/não → <b>ob</b>, verbo no final: <i>kann</i>.'}
 ]},
 {id:'l3',title:'A entrevista',desc:'Vorstellungsgespräch · Ziele und Träume',steps:[
- {t:'vocab',title:'Na entrevista',items:[['die Situation','a situação'],['der Stress','o estresse'],['stressig','estressante'],['das Ziel','o objetivo / a meta'],['der Traum','o sonho'],['unbedingt','de qualquer jeito / sem falta'],['notwendig','necessário'],['nützlich','útil'],['freiwillig','voluntário'],['beraten','aconselhar / dar consultoria'],['die Stärke','o ponto forte'],['die Schwäche','o ponto fraco'],['zuverlässig','confiável'],['flexibel','flexível'],['im Team arbeiten','trabalhar em equipe']]},
+ {t:'vocab',title:'Na entrevista',items:[['die Situation','a situação'],['der Stress','o estresse'],['stressig','estressante'],['das Ziel','o objetivo / a meta'],['unbedingt','de qualquer jeito / sem falta'],['notwendig','necessário'],['nützlich','útil'],['freiwillig','voluntário'],['beraten','aconselhar / dar consultoria'],['die Stärke','o ponto forte'],['die Schwäche','o ponto fraco'],['zuverlässig','confiável'],['flexibel','flexível'],['im Team arbeiten','trabalhar em equipe']]},
  {t:'dialog',place:'Videocall',title:'Entrevista de emprego',scene:'A Sra. Neumann, da área de RH, entrevista você para uma vaga em Mainz.',lines:[
   {n:'Frau Neumann',es:'Guten Tag, Herr Souza. Erzählen Sie doch bitte kurz etwas über sich.',de:'Boa tarde, Sr. Souza. Conte, por favor, um pouco sobre o senhor.'},
   {you:true,opts:[{es:'Gern. Ich habe in São Paulo Informatik studiert und dann drei Jahre als Programmierer gearbeitet. Seit 2023 lebe ich in Frankfurt.',ok:true},{es:'Gern. Ich studiere Informatik in São Paulo seit drei Jahre.',ok:false,why:'Fale da formação no passado (Perfekt) e use <i>seit</i> + dativo: <i>seit drei Jahren</i>.'}]},
@@ -2124,3 +2124,240 @@ lessons:[
 resumen:`<h3>Cultura e opinião</h3><p class="es-t">das Theater · die Ausstellung · das Instrument · spannend · langweilig · aufregend · berühmt · beliebt · komisch</p>
 <h3>Welcher? – Was für ein?</h3><p class="es-t">Welcher Film? – Der neue Krimi. · Was für ein Film? – Ein Krimi.</p>
 <h3>Indefinidos (uma só negação!)</h3><table><tr><td class="es-t">jemand – niemand – alle</td></tr><tr><td class="es-t">etwas – nichts – alles</td></tr><tr><td class="es-t">irgendwo – nirgends – überall</td></tr></table>`});
+
+/* ================= KAPITEL 22 · MENSCHEN & BEZIEHUNGEN ================= */
+LANGS.de.course.units.push({id:'k22',n:'22',level:'A2',title:'Menschen & Beziehungen',sub:'Descrever pessoas · caráter · família e filhos · dar opinião, concordar e discordar · conselhos: Du solltest …',
+goals:['Personen beschreiben: Aussehen und Charakter','Familie und Kinder: der Kindergarten, das Taschengeld','Meinung sagen: Ich bin einverstanden. Das ist mir egal.','Ratschläge geben: Du solltest … (Konjunktiv II von sollen)','Früher und heute: damals'],
+situacion:{title:'Conselho para um amigo',npc:'Tom',scene:'O Tom está nervoso: ele vai conhecer os pais da namorada no domingo e pede conselhos a você.',role:'Du bist Tom, Lucas’ Freund in Frankfurt. Du duzt. Du bist nervös, weil du am Sonntag die Eltern deiner Freundin Lea kennenlernst. Der Vater ist sehr streng, die Mutter sehr nett. Frag Lucas um Rat (Was soll ich anziehen? Was soll ich mitbringen? Worüber soll ich reden?). Reagiere auf seine Ratschläge mit „Ich bin einverstanden“ oder „Das finde ich nicht so gut, weil …“. Sprich einfaches Deutsch (A2).',goal:'Dê ao Tom pelo menos três conselhos com „Du solltest …“ e reaja às dúvidas dele.'},
+placement:[
+ {t:'mc',q:'„Você deveria dormir mais.“',opts:['Du solltest mehr schlafen.','Du sollst mehr schlafen.','Du solltest mehr schläfst.'],a:0},
+ {t:'mc',q:'Mein Chef ist sehr ___. Wir dürfen nie zu spät kommen.',opts:['streng','faul','blond'],a:0},
+ {t:'mc',q:'Wollen wir Pizza bestellen? – ___',opts:['Ja, einverstanden!','Ja, ich bin einverstehen.','Ja, das ist mir einverstanden.'],a:0},
+ {t:'gap',q:'Kino oder Theater? – Das ist mir ___. (tanto faz)',a:['egal']},
+ {t:'mc',q:'„Naquela época eu morava em São Paulo.“',opts:['Damals habe ich in São Paulo gewohnt.','Dann habe ich in São Paulo gewohnt.','Damit habe ich in São Paulo gewohnt.'],a:0},
+ {t:'mc',q:'Lena ist ___. Im Juni bekommt sie ein Baby.',opts:['schwanger','schwach','streng'],a:0}],
+lessons:[
+{id:'l1',title:'Descrever pessoas',desc:'Aussehen und Charakter',steps:[
+ {t:'vocab',title:'Aparência e caráter',items:[['das Gesicht','o rosto'],['blond','loiro'],['stark','forte'],['schwach','fraco'],['sympathisch','simpático'],['nett','legal / gentil'],['klug','inteligente / esperto'],['intelligent','inteligente'],['faul','preguiçoso'],['fleißig','esforçado / trabalhador'],['streng','rígido / severo'],['nervös','nervoso'],['ehrlich','honesto'],['blöd','bobo / chato (coloquial)'],['reich','rico'],['arm','pobre'],['lügen','mentir'],['die Lüge','a mentira'],['wahr','verdadeiro']]},
+ {t:'mc',q:'Jana hilft immer allen. Sie ist sehr ___.',opts:['nett','faul','blöd'],a:0},
+ {t:'mc',q:'Mein Bruder macht nie seine Hausaufgaben. Er ist ___.',opts:['faul','fleißig','streng'],a:0},
+ {t:'gap',q:'Das ist nicht ___! Du lügst! (verdadeiro)',a:['wahr']},
+ {t:'match',q:'Opostos.',pairs:[['stark','schwach'],['reich','arm'],['faul','fleißig'],['nervös','ruhig'],['die Wahrheit','die Lüge']]},
+ {t:'read',title:'Leitura: Meine neue Kollegin',text:`Seit Montag haben wir eine neue Kollegin im Team: Mira. Sie ist Mitte zwanzig, hat lange blonde Haare und ein sehr freundliches Gesicht. Mira kommt aus Polen und spricht fantastisch Deutsch – viel besser als ich! Sie ist klug und sehr fleißig, aber auch lustig: In der Pause erzählt sie die besten Witze. Nur am Morgen ist sie ein bisschen nervös, weil sie noch nicht alle Kollegen kennt. Ich finde sie total sympathisch.`,de:`Desde segunda temos uma colega nova na equipe: a Mira. Ela tem uns vinte e cinco anos, cabelo loiro comprido e um rosto muito simpático. A Mira vem da Polônia e fala alemão fantasticamente – muito melhor que eu! Ela é inteligente e muito esforçada, mas também engraçada: no intervalo ela conta as melhores piadas. Só de manhã ela fica um pouco nervosa, porque ainda não conhece todos os colegas. Eu acho ela super simpática.`},
+ {t:'mc',q:'Wie sieht Mira aus?',opts:['Sie hat lange blonde Haare.','Sie hat kurze schwarze Haare.','Sie trägt eine Brille.'],a:0},
+ {t:'mc',q:'Warum ist Mira am Morgen nervös?',opts:['Sie kennt noch nicht alle Kollegen.','Ihr Deutsch ist schlecht.','Sie ist faul.'],a:0},
+ {t:'tr',de:'Meu chefe é rígido, mas justo.',a:['Mein Chef ist streng, aber fair.','Meine Chefin ist streng, aber fair.']},
+ {t:'speak',es:'Meine beste Freundin ist sehr sympathisch, klug und ehrlich.',de:'Minha melhor amiga é muito simpática, inteligente e honesta.',tip:'Depois de <i>ist</i>: adjetivo <b>sem</b> terminação.'}
+]},
+{id:'l2',title:'Família e filhos',desc:'der Kindergarten, das Taschengeld, der Haushalt',steps:[
+ {t:'vocab',title:'Família e casa',items:[['der Ehepartner / die Ehepartnerin','o cônjuge'],['schwanger','grávida'],['der Babysitter / die Babysitterin','a babá / o babá'],['der Kindergarten','o jardim de infância'],['das Taschengeld','a mesada'],['der Haushalt','as tarefas de casa'],['putzen','limpar / faxinar'],['leihen','emprestar / pegar emprestado'],['streiten','brigar / discutir'],['sich verstehen','dar-se bem'],['erziehen','educar (filhos)'],['zuhören','escutar (com atenção)'],['reden','conversar / falar']]},
+ {t:'mc',q:'Die Kinder sind von 8 bis 14 Uhr im ___.',opts:['Kindergarten','Haushalt','Taschengeld'],a:0},
+ {t:'mc',q:'Kannst du mir 20 Euro ___? Ich gebe sie dir morgen zurück.',opts:['leihen','putzen','zuhören'],a:0},
+ {t:'gap',q:'Am Samstag ___ wir immer die ganze Wohnung. (putzen)',a:['putzen']},
+ {t:'gap',q:'Lucas und Tom ___ sich sehr gut. (sich verstehen)',a:['verstehen']},
+ {t:'read',hideText:true,title:'Ouvir: Gespräch über Taschengeld',intro:'Ouça a conversa entre duas mães no parquinho.',text:`– Sag mal, Sabine, wie viel Taschengeld bekommt eigentlich deine Tochter? – Lina ist jetzt zehn, sie bekommt 15 Euro im Monat. Dafür muss sie aber auch im Haushalt helfen: Sie räumt ihr Zimmer auf und bringt den Müll runter. – 15 Euro? Mein Sohn will 20, weil seine Freunde so viel bekommen. – Das finde ich ein bisschen viel. Aber am wichtigsten ist, dass die Kinder lernen, mit Geld umzugehen.`,de:`– Fala aí, Sabine, quanto de mesada a sua filha recebe? – A Lina tem dez anos agora, ela recebe 15 euros por mês. Mas em troca ela tem que ajudar nas tarefas de casa: arruma o quarto e leva o lixo para baixo. – 15 euros? Meu filho quer 20, porque os amigos dele recebem isso. – Acho um pouco demais. Mas o mais importante é que as crianças aprendam a lidar com dinheiro.`},
+ {t:'mc',q:'Wie viel Taschengeld bekommt Lina?',opts:['15 Euro im Monat','20 Euro im Monat','10 Euro in der Woche'],a:0},
+ {t:'mc',q:'Was macht Lina im Haushalt?',opts:['Sie räumt ihr Zimmer auf und bringt den Müll runter.','Sie kocht und putzt das Bad.','Sie geht einkaufen.'],a:0},
+ {t:'tr',de:'Você pode me emprestar sua bicicleta?',a:['Kannst du mir dein Fahrrad leihen?','Kannst du mir dein Rad leihen?']}
+]},
+{id:'l3',title:'Opinião e conselhos',desc:'einverstanden, egal · Du solltest …',steps:[
+ {t:'vocab',title:'Opinião',items:[['die Meinung','a opinião'],['meiner Meinung nach','na minha opinião'],['einverstanden','de acordo'],['egal','tanto faz'],['der Vorschlag','a sugestão / a proposta'],['vorschlagen','sugerir'],['die Ahnung','a noção / a ideia'],['Keine Ahnung!','Não faço ideia!'],['raten','aconselhar / adivinhar'],['der Rat','o conselho'],['wahrscheinlich','provavelmente'],['besonders','especialmente'],['wenigstens','pelo menos']]},
+ {t:'info',title:'Concordar, discordar e aconselhar',html:`<table><tr><th>concordar</th><th>discordar</th></tr>
+ <tr><td class="es-t">Ich bin einverstanden.</td><td class="es-t">Da bin ich anderer Meinung.</td></tr>
+ <tr><td class="es-t">Das finde ich auch.</td><td class="es-t">Das finde ich nicht so gut, weil …</td></tr>
+ <tr><td class="es-t">Gute Idee!</td><td class="es-t">Ich weiß nicht …</td></tr></table>
+ <p><b>Conselho</b> com <span class="es-t">sollte</span> (Konjunktiv II de <i>sollen</i>):</p>
+ <table><tr><td class="es-t">ich / er / sie sollte</td><td class="es-t">du solltest</td><td class="es-t">wir / sie / Sie sollten</td></tr></table>
+ <div class="ex"><span class="es-t">Du <b>solltest</b> mehr schlafen.</span> = Você deveria dormir mais. · <span class="es-t">An deiner Stelle würde ich …</span> = No seu lugar, eu …</div>`},
+ {t:'mc',q:'Du bist immer müde. Du ___ früher ins Bett gehen.',opts:['solltest','sollst','sollte'],a:0},
+ {t:'mc',q:'Wollen wir am Samstag wandern? – ___',opts:['Gute Idee, ich bin einverstanden!','Gute Idee, ich bin egal!','Ich habe keine Meinung nach.'],a:0},
+ {t:'gap',q:'Weißt du, wann der Bus kommt? – Keine ___! (ideia)',a:['Ahnung']},
+ {t:'gap',q:'Ihr ___ unbedingt das Museum besuchen! (sollen – conselho, ihr)',a:['solltet']},
+ {t:'dialog',place:'Café',title:'Conselho para o Tom',scene:'O Tom vai conhecer os pais da namorada no domingo e está nervoso.',lines:[
+  {n:'Tom',es:'Am Sonntag lerne ich Leas Eltern kennen. Ich bin so nervös! Was soll ich machen?',de:'No domingo vou conhecer os pais da Lea. Estou tão nervoso! O que eu faço?'},
+  {you:true,opts:[{es:'Du solltest pünktlich sein und Blumen für ihre Mutter mitbringen.',ok:true},{es:'Du sollst pünktlich sein.',ok:false,why:'Para conselho, o mais educado é <i>Du <b>solltest</b> …</i>'}]},
+  {n:'Tom',es:'Und worüber soll ich mit ihrem Vater reden? Er ist sehr streng.',de:'E sobre o que eu falo com o pai dela? Ele é muito rígido.'},
+  {you:true,opts:[{es:'Frag ihn doch nach seinem Hobby. Lea sagt, er liebt Fußball, oder?',ok:true},{es:'Das ist mir egal.',ok:false,why:'O Tom pediu ajuda – <i>Das ist mir egal</i> soa grosseiro aqui.'}]},
+  {n:'Tom',es:'Stimmt! Und vielleicht sollte ich einen Anzug tragen?',de:'Verdade! E talvez eu devesse usar um terno?'},
+  {you:true,opts:[{es:'Na ja, ein Anzug ist vielleicht zu viel. Ein schönes Hemd reicht wahrscheinlich.',ok:true},{es:'Ja, ich bin einverstehen.',ok:false,why:'A forma certa é <i>einverstanden</i> – e aqui talvez valha discordar com educação.'}]}]},
+ {t:'tr',de:'Na minha opinião, você deveria aprender mais alemão.',a:['Meiner Meinung nach solltest du mehr Deutsch lernen.']}
+]},
+{id:'l4',title:'Antes e hoje',desc:'damals · früher – heute · E-Mail an einen alten Freund',steps:[
+ {t:'vocab',title:'Tempo',items:[['damals','naquela época'],['zuletzt','por último / da última vez'],['vorgestern','anteontem'],['übermorgen','depois de amanhã'],['aktuell','atual'],['direkt','direto / diretamente'],['das Ding','a coisa / o troço']]},
+ {t:'read',title:'Leitura: Früher und heute',text:`Früher habe ich in São Paulo mit meinen Eltern und meiner Schwester gewohnt. Damals hatte ich kein Auto und bin jeden Tag zwei Stunden mit dem Bus zur Uni gefahren. Heute wohne ich allein in Frankfurt und fahre mit dem Fahrrad ins Büro – nur zehn Minuten! Früher war ich ziemlich schüchtern, heute rede ich viel mehr, auch auf Deutsch. Was ich vermisse? Das Essen von meiner Mutter, das Wetter und natürlich meine Freunde.`,de:`Antigamente eu morava em São Paulo com meus pais e minha irmã. Naquela época eu não tinha carro e ia todo dia duas horas de ônibus para a faculdade. Hoje moro sozinho em Frankfurt e vou de bicicleta para o escritório – só dez minutos! Antes eu era bem tímido, hoje falo muito mais, também em alemão. Do que eu sinto falta? Da comida da minha mãe, do clima e, claro, dos meus amigos.`},
+ {t:'mc',q:'Wie ist Lucas früher zur Uni gefahren?',opts:['mit dem Bus','mit dem Fahrrad','mit dem Auto'],a:0},
+ {t:'mc',q:'Was hat sich bei Lucas geändert?',opts:['Er redet heute mehr.','Er ist heute schüchterner.','Er wohnt heute mit seiner Schwester.'],a:0},
+ {t:'free',task:'Escreva uma e-mail (~40 palavras) para um amigo antigo do Brasil: 1) como era a sua vida antes (damals / früher), 2) como ela é hoje, 3) faça uma pergunta sobre a vida dele.',hint:'Lieber …, wie geht es dir? Früher habe ich …, damals war ich … Heute … Und du? Was machst du …? Viele Grüße',focus:'Perfekt/Präteritum (war, hatte), damals – heute, Fragen',model:'Lieber Rafael,\nwie geht es dir? Früher habe ich bei meinen Eltern gewohnt, damals war ich noch Student. Heute arbeite ich als Programmierer in Frankfurt und habe eine eigene Wohnung. Und du? Spielst du immer noch Fußball?\nViele Grüße\nLucas'}
+]}],
+resumen:`<h3>Caráter</h3><p class="es-t">nett · sympathisch · klug · fleißig · faul · streng · nervös · ruhig · ehrlich</p>
+<h3>Opinião</h3><p class="es-t">Meiner Meinung nach … · Ich bin einverstanden. · Da bin ich anderer Meinung. · Das ist mir egal. · Keine Ahnung!</p>
+<h3>Conselho: sollte</h3><p class="es-t">ich sollte · du solltest · er sollte · wir sollten · ihr solltet · sie/Sie sollten</p><p class="es-t">Du solltest mehr schlafen. · An deiner Stelle würde ich …</p>
+<h3>Antes e hoje</h3><p class="es-t">früher · damals · heute · vorgestern · übermorgen</p>`});
+
+/* ================= KAPITEL 23 · LERNEN & ZUKUNFT ================= */
+LANGS.de.course.units.push({id:'k23',n:'23',level:'A2',title:'Lernen & Zukunft',sub:'Escola e cursos · na sala de aula · futuro com werden · planos e sonhos',
+goals:['Schule und Kurs: die Tafel, das Heft, übersetzen','Im Unterricht: in Gruppen arbeiten, raten, zuhören','Zukunft mit werden: Ich werde … machen.','Pläne mit Zeitangaben: übermorgen, nächstes Jahr','Über Pläne und Träume schreiben'],
+situacion:{title:'Planos para o futuro',npc:'Herr Yilmaz',scene:'No fim do curso de alemão, o seu professor conversa com cada aluno sobre os planos para o próximo ano.',role:'Du bist Herr Yilmaz, Deutschlehrer an einer Volkshochschule in Frankfurt, freundlich und motivierend. Du duzt die Kursteilnehmer. Frag Lucas: Was hat dir im Kurs gefallen? Was war schwer? Was wirst du nächstes Jahr machen – B1-Kurs, Prüfung, neuer Job? Benutze Futur mit werden und wenn-Sätze. Sprich einfaches Deutsch (A2).',goal:'Conte o que foi fácil e difícil no curso e diga pelo menos três planos com „Ich werde …“.'},
+placement:[
+ {t:'mc',q:'„Eu vou fazer a prova no ano que vem.“',opts:['Ich werde nächstes Jahr die Prüfung machen.','Ich werde nächstes Jahr die Prüfung mache.','Ich wird nächstes Jahr die Prüfung machen.'],a:0},
+ {t:'gap',q:'Morgen ___ es regnen. (werden)',a:['wird']},
+ {t:'mc',q:'Der Lehrer schreibt an die ___.',opts:['Tafel','Schere','Reihe'],a:0},
+ {t:'mc',q:'Kannst du diesen Satz ins Portugiesische ___?',opts:['übersetzen','übernachten','überweisen'],a:0},
+ {t:'mc',q:'„depois de amanhã“',opts:['übermorgen','vorgestern','morgen früh'],a:0},
+ {t:'gap',q:'Bist du gut auf die Prüfung ___? (vorbereiten – particípio)',a:['vorbereitet']}],
+lessons:[
+{id:'l1',title:'Na sala de aula',desc:'die Tafel, das Heft, übersetzen …',steps:[
+ {t:'vocab',title:'Escola e curso',items:[['die Tafel','o quadro (lousa)'],['das Heft','o caderno'],['das Blatt','a folha'],['die Schere','a tesoura'],['der Kurs','o curso'],['die Hausaufgabe','o dever de casa'],['die Gruppe','o grupo'],['die Reihe','a fila / a vez'],['Ich bin an der Reihe.','É a minha vez.'],['übersetzen','traduzir'],['erklären','explicar'],['wiederholen','repetir / revisar'],['die Cafeteria','a cafeteria'],['wach','acordado'],['vorbereitet','preparado']]},
+ {t:'mc',q:'Bitte arbeitet in ___ zu dritt.',opts:['Gruppen','Reihen','Heften'],a:0},
+ {t:'mc',q:'Wer ist jetzt an der ___? – Lucas, du!',opts:['Reihe','Tafel','Gruppe'],a:0},
+ {t:'gap',q:'Kannst du das bitte noch einmal ___? Ich habe es nicht verstanden. (explicar)',a:['erklären']},
+ {t:'match',q:'Ligue.',pairs:[['die Tafel','o quadro'],['das Heft','o caderno'],['die Schere','a tesoura'],['übersetzen','traduzir'],['wach','acordado']]},
+ {t:'info',title:'Frases úteis na aula',html:`<table><tr><td class="es-t">Wie sagt man … auf Deutsch?</td><td>Como se diz … em alemão?</td></tr>
+ <tr><td class="es-t">Was bedeutet …?</td><td>O que significa …?</td></tr>
+ <tr><td class="es-t">Können Sie das bitte wiederholen?</td><td>Pode repetir, por favor?</td></tr>
+ <tr><td class="es-t">Können Sie das bitte an die Tafel schreiben?</td><td>Pode escrever no quadro, por favor?</td></tr>
+ <tr><td class="es-t">Ich habe eine Frage.</td><td>Tenho uma pergunta.</td></tr></table>`},
+ {t:'tr',de:'O que significa „Feierabend“?',a:['Was bedeutet „Feierabend“?','Was bedeutet Feierabend?']},
+ {t:'tr',de:'Você pode traduzir o texto?',a:['Kannst du den Text übersetzen?','Können Sie den Text übersetzen?']}
+]},
+{id:'l2',title:'O futuro com werden',desc:'Ich werde … machen.',steps:[
+ {t:'info',title:'Futur I: werden + infinitivo',html:`<p>Para planos e previsões: <b>werden</b> (posição 2) + <b>infinitivo</b> (no final):</p>
+ <table><tr><td>ich</td><td class="es-t">werde</td></tr><tr><td>du</td><td class="es-t">wirst</td></tr><tr><td>er / sie / es</td><td class="es-t">wird</td></tr><tr><td>wir</td><td class="es-t">werden</td></tr><tr><td>ihr</td><td class="es-t">werdet</td></tr><tr><td>sie / Sie</td><td class="es-t">werden</td></tr></table>
+ <div class="ex"><span class="es-t">Ich <b>werde</b> nächstes Jahr die B1-Prüfung <b>machen</b>.</span> · <span class="es-t">Morgen <b>wird</b> es <b>regnen</b>.</span></div>
+ <div class="ojo">Na conversa, os alemães usam muitas vezes o <b>presente</b> + expressão de tempo: <span class="es-t">Morgen fahre ich nach Berlin.</span> O <i>werden</i> deixa a frase mais firme (plano, promessa, previsão).</div>`},
+ {t:'mc',q:'Nächsten Sommer ___ wir nach Brasilien fliegen.',opts:['werden','wird','werdet'],a:0},
+ {t:'mc',q:'Ich werde dich morgen ___.',opts:['anrufen','anrufe','angerufen'],a:0},
+ {t:'gap',q:'___ du am Wochenende arbeiten? (werden)',a:['Wirst']},
+ {t:'gap',q:'Jana ___ im Herbst eine Ausbildung zur Grafikerin anfangen. (werden)',a:['wird']},
+ {t:'order',es:'Ich werde übermorgen die Hausaufgaben machen',de:'Vou fazer o dever de casa depois de amanhã.'},
+ {t:'tr',de:'Amanhã vai fazer sol.',a:['Morgen wird die Sonne scheinen.','Morgen scheint die Sonne.']},
+ {t:'tr',de:'Nós vamos nos mudar no ano que vem.',a:['Wir werden nächstes Jahr umziehen.','Nächstes Jahr werden wir umziehen.','Nächstes Jahr ziehen wir um.']},
+ {t:'speak',es:'Nächstes Jahr werde ich einen B1-Kurs machen und vielleicht die Prüfung schreiben.',de:'No ano que vem vou fazer um curso B1 e talvez fazer a prova.',tip:'<i>werde</i> na posição 2, os infinitivos no final.'}
+]},
+{id:'l3',title:'Planos e sonhos',desc:'unternehmen, der Traum, wahrscheinlich',steps:[
+ {t:'vocab',title:'Planos',items:[['unternehmen','fazer (programa) / empreender'],['der Plan','o plano'],['planen','planejar'],['der Traum','o sonho'],['träumen','sonhar'],['bauen','construir'],['der Apparat','o aparelho'],['der Fotoapparat','a câmera fotográfica'],['drinnen','dentro (de casa)'],['drüben','do outro lado / lá'],['vorwärts','para a frente'],['sicher','com certeza / seguro']]},
+ {t:'mc',q:'Was wollen wir am Wochenende ___? – Wandern!',opts:['unternehmen','bauen','träumen'],a:0},
+ {t:'mc',q:'Es regnet. Wir bleiben lieber ___.',opts:['drinnen','drüben','vorwärts'],a:0},
+ {t:'gap',q:'Mein ___ ist ein kleines Haus am Meer. (sonho)',a:['Traum']},
+ {t:'mc',q:'„Ich komme wahrscheinlich.“ bedeutet:',opts:['Ich komme sehr wahrscheinlich, aber nicht 100 %.','Ich komme auf keinen Fall.','Ich komme bestimmt nicht.'],a:0},
+ {t:'read',title:'Leitura: Pläne für das nächste Jahr',text:`Wir haben im Deutschkurs gefragt: Was werdet ihr nächstes Jahr machen?
+Mira (Polen): „Ich werde die B1-Prüfung machen, weil ich in einer Klinik arbeiten möchte.“
+Ahmed (Syrien): „Wahrscheinlich werde ich eine Ausbildung als Elektriker anfangen. Und ich will den Führerschein machen.“
+Lucas (Brasilien): „Ich werde weiter Deutsch lernen und vielleicht ein Haus bauen – nein, Spaß! Aber ich werde sicher meine Familie in São Paulo besuchen.“`,de:`Perguntamos no curso de alemão: o que vocês vão fazer no ano que vem?
+Mira (Polônia): „Vou fazer a prova B1, porque quero trabalhar numa clínica.“
+Ahmed (Síria): „Provavelmente vou começar uma formação de eletricista. E quero tirar a carteira de motorista.“
+Lucas (Brasil): „Vou continuar aprendendo alemão e talvez construir uma casa – não, brincadeira! Mas com certeza vou visitar minha família em São Paulo.“`},
+ {t:'mc',q:'Warum möchte Mira die B1-Prüfung machen?',opts:['Sie möchte in einer Klinik arbeiten.','Sie möchte studieren.','Sie möchte nach Polen zurück.'],a:0},
+ {t:'mc',q:'Was wird Lucas sicher machen?',opts:['seine Familie besuchen','ein Haus bauen','eine Ausbildung anfangen'],a:0},
+ {t:'tr',de:'Provavelmente eu vou viajar no verão.',a:['Wahrscheinlich werde ich im Sommer verreisen.','Ich werde im Sommer wahrscheinlich verreisen.','Wahrscheinlich verreise ich im Sommer.']}
+]},
+{id:'l4',title:'Escrever: meus planos',desc:'Ein Text über Pläne und Ziele',steps:[
+ {t:'info',title:'Escrever sobre planos',html:`<table><tr><td class="es-t">Nächstes Jahr werde ich …</td><td>No ano que vem vou …</td></tr>
+ <tr><td class="es-t">Mein Ziel ist es, …</td><td>Meu objetivo é …</td></tr>
+ <tr><td class="es-t">Ich möchte unbedingt …</td><td>Quero muito …</td></tr>
+ <tr><td class="es-t">Wenn ich genug Geld habe, …</td><td>Se eu tiver dinheiro suficiente, …</td></tr>
+ <tr><td class="es-t">Vielleicht / Wahrscheinlich …</td><td>Talvez / Provavelmente …</td></tr></table>`},
+ {t:'free',task:'Escreva um pequeno texto (~40–50 palavras) para o jornal do curso: „Meine Pläne für das nächste Jahr“. 1) estudos / trabalho, 2) viagens ou família, 3) um sonho.',hint:'Nächstes Jahr werde ich … Mein Ziel ist es, … Wenn ich Zeit habe, … Mein großer Traum ist …',focus:'Futur mit werden, wenn/weil, Zeitangaben',model:'Nächstes Jahr werde ich einen B1-Kurs machen, weil ich im Job mehr Deutsch sprechen möchte. Im Sommer werde ich wahrscheinlich nach São Paulo fliegen und meine Familie besuchen. Wenn ich genug Geld habe, kaufe ich mir ein Fahrrad für Touren. Mein großer Traum ist eine Reise durch ganz Europa.'}
+]}],
+resumen:`<h3>Na aula</h3><p class="es-t">die Tafel · das Heft · das Blatt · die Gruppe · Ich bin an der Reihe. · übersetzen · erklären · wiederholen</p>
+<h3>Futur I: werden + infinitivo</h3><table><tr><td class="es-t">ich werde · du wirst · er wird · wir werden · ihr werdet · sie/Sie werden</td></tr></table><p class="es-t">Ich werde nächstes Jahr die Prüfung machen. · Morgen wird es regnen.</p>
+<h3>Tempo</h3><p class="es-t">vorgestern · gestern · heute · morgen · übermorgen · nächstes Jahr · wahrscheinlich · vielleicht · sicher</p>`});
+
+/* ================= KAPITEL 24 · PRÜFUNGSTRAINING A2 ================= */
+LANGS.de.course.units.push({id:'k24',n:'24',level:'A2',title:'Prüfungstraining A2',sub:'Simulado no formato da prova A2 do Goethe-Institut: ler, ouvir, escrever, falar',
+goals:['Lesen: Zeitungstext, Informationstafel, E-Mail, Anzeigen','Hören: Radio, Gespräche, Ansagen, Interview','Schreiben: SMS (20–30 Wörter) und E-Mail (30–40 Wörter)','Sprechen: Fragen zur Person, über sich erzählen, gemeinsam etwas planen'],
+situacion:{title:'Prova oral (simulação)',npc:'Prüfer',scene:'Prova oral do nível A2. O examinador conduz as três partes; a sua parceira de prova se chama Ana.',role:'Du bist Prüfer bei einer mündlichen Deutschprüfung A2. Du siezt. Teil 1: Stell Fragen zur Person mit Stichwörtern (Geburtstag? Wohnort? Beruf? Hobbys? Familie?). Teil 2: Bitte die Person, über das Thema „Wochenende“ zu erzählen (Was machen Sie am Wochenende? Mit wem? Was haben Sie letztes Wochenende gemacht? Was machen Sie nicht gern?). Teil 3: Spiel die Partnerin Ana: Ihr wollt zusammen eine Freundin im Krankenhaus besuchen und müsst einen Termin am Samstag finden (du hast von 9–11 Uhr Sport und ab 15 Uhr Besuch). Sprich klar und einfach (A2).',goal:'Responda às perguntas pessoais, conte sobre o seu fim de semana (presente e passado) e combine um horário com a Ana.'},
+placement:[
+ {t:'mc',q:'In der Prüfung schreiben Sie eine SMS mit ca. …',opts:['20–30 Wörtern','100 Wörtern','5 Wörtern'],a:0},
+ {t:'mc',q:'Sie müssen einen Termin finden. Was sagen Sie?',opts:['Passt es dir um elf Uhr?','Ich passe um elf Uhr.','Um elf Uhr bin ich passend.'],a:0},
+ {t:'mc',q:'Schild im Kaufhaus: „Damenmode – 2. Stock“. Wo kaufen Sie einen Rock?',opts:['im 2. Stock','im Erdgeschoss','im Untergeschoss'],a:0},
+ {t:'gap',q:'Letztes Wochenende ___ ich meine Freunde besucht. (haben)',a:['habe']}],
+lessons:[
+{id:'l1',title:'Ler (Lesen)',desc:'4 partes: artigo, painel, e-mail, anúncios',steps:[
+ {t:'info',title:'A prova A2 do Goethe-Institut',html:`<p>A prova <b>Goethe-Zertifikat A2</b> tem quatro partes:</p>
+ <table><tr><th>parte</th><th>duração</th><th>o que é</th></tr>
+ <tr><td>Lesen (ler)</td><td>~30 min</td><td>4 partes: artigo de jornal, painel de informações, e-mail, anúncios</td></tr>
+ <tr><td>Hören (ouvir)</td><td>~30 min</td><td>4 partes: rádio e avisos, conversas, telefonemas, entrevista</td></tr>
+ <tr><td>Schreiben (escrever)</td><td>~30 min</td><td>SMS (20–30 palavras) e e-mail (30–40 palavras), cada uma com 3 pontos</td></tr>
+ <tr><td>Sprechen (falar)</td><td>~15 min</td><td>perguntas sobre você, contar sobre você, planejar algo com outra pessoa</td></tr></table>
+ <div class="ex">Para passar: cerca de <b>60 %</b> dos pontos. Os textos abaixo são simulados próprios no estilo da prova.</div>`},
+ {t:'read',kind:'Lesen · Teil 1',title:'Zeitungstext: Ein Café für alle',text:`In der Leipziger Straße hat letzten Monat ein besonderes Café aufgemacht: Im „Café Miteinander“ arbeiten Menschen mit und ohne Behinderung zusammen. Die Idee hatte Sandra Klein (42). „Mein Bruder sitzt im Rollstuhl und hat lange keine Arbeit gefunden“, erzählt sie. Heute arbeiten zwölf Personen im Café, sie backen Kuchen, machen Kaffee und bedienen die Gäste. Die Preise sind günstig: Ein Stück Kuchen kostet 2,50 Euro. Am Wochenende gibt es Frühstück bis 14 Uhr. Montags ist das Café geschlossen.`,de:`Na Leipziger Straße abriu no mês passado um café especial: no „Café Miteinander“ trabalham juntas pessoas com e sem deficiência. A ideia foi de Sandra Klein (42). „Meu irmão é cadeirante e por muito tempo não achou trabalho“, ela conta. Hoje doze pessoas trabalham no café: fazem bolos, preparam café e atendem os clientes. Os preços são baixos: uma fatia de bolo custa 2,50 euros. No fim de semana tem café da manhã até as 14h. Às segundas o café fica fechado.`},
+ {t:'mc',kind:'Lesen · Teil 1',q:'Warum hatte Sandra Klein die Idee für das Café?',opts:['Ihr Bruder hat keine Arbeit gefunden.','Sie backt gern Kuchen.','Sie hatte kein Geld.'],a:0},
+ {t:'mc',kind:'Lesen · Teil 1',q:'Wann kann man am Samstag frühstücken?',opts:['bis 14 Uhr','den ganzen Tag','gar nicht'],a:0},
+ {t:'read',kind:'Lesen · Teil 2',title:'Informationstafel: Kaufhaus',text:`Untergeschoss: Lebensmittel · Getränke · Haushalt
+Erdgeschoss: Kosmetik · Parfüm · Schmuck · Information
+1. Stock: Damenmode · Schuhe · Taschen
+2. Stock: Herrenmode · Sportbekleidung
+3. Stock: Kinder · Spielwaren · Schreibwaren (Hefte, Stifte)
+4. Stock: Elektro · Handys · Computer · Restaurant`,de:`Subsolo: alimentos · bebidas · utilidades domésticas
+Térreo: cosméticos · perfumes · joias · informações
+1º andar: moda feminina · sapatos · bolsas
+2º andar: moda masculina · roupas esportivas
+3º andar: infantil · brinquedos · papelaria (cadernos, canetas)
+4º andar: eletrônicos · celulares · computadores · restaurante`},
+ {t:'mc',kind:'Lesen · Teil 2',q:'Sie brauchen ein neues Ladekabel für Ihr Handy.',opts:['4. Stock','Erdgeschoss','Untergeschoss'],a:0},
+ {t:'mc',kind:'Lesen · Teil 2',q:'Sie möchten Ihrer Mutter eine Kette schenken.',opts:['Erdgeschoss','1. Stock','3. Stock'],a:0},
+ {t:'mc',kind:'Lesen · Teil 2',q:'Ihr Sohn braucht Hefte für die Schule.',opts:['3. Stock','Untergeschoss','2. Stock'],a:0},
+ {t:'read',kind:'Lesen · Teil 3',title:'E-Mail',text:`Liebe Ana,
+vielen Dank für deine Einladung zum Grillen am Samstag! Ich komme sehr gern, aber erst um sieben, weil ich bis sechs arbeiten muss. Soll ich etwas mitbringen? Ich kann einen Kartoffelsalat machen – oder lieber einen Kuchen? Und noch eine Frage: Darf ich meinen Freund Marco mitbringen? Er ist neu in der Stadt und kennt noch niemanden.
+Liebe Grüße
+Lucas`,de:`Querida Ana,
+muito obrigado pelo convite para o churrasco no sábado! Vou com muito prazer, mas só às sete, porque preciso trabalhar até as seis. Devo levar alguma coisa? Posso fazer uma salada de batata – ou prefere um bolo? E mais uma pergunta: posso levar meu amigo Marco? Ele é novo na cidade e ainda não conhece ninguém.
+Abraços
+Lucas`},
+ {t:'mc',kind:'Lesen · Teil 3',q:'Warum kommt Lucas erst um sieben?',opts:['Er muss arbeiten.','Er macht einen Kuchen.','Er holt Marco ab.'],a:0},
+ {t:'mc',kind:'Lesen · Teil 3',q:'Was möchte Lucas wissen?',opts:['ob er einen Freund mitbringen darf','wo Ana wohnt','wann die Party beginnt'],a:0},
+ {t:'read',kind:'Lesen · Teil 4',title:'Anzeigen',text:`a) Gitarrenunterricht für Anfänger – auch online. 1. Stunde kostenlos! Tel. 069 77 21
+b) Verkaufe Kinderfahrrad, 20 Zoll, blau, fast neu, 60 €. Nur Abholung.
+c) Deutsch-Konversation am Abend: Jeden Mittwoch 19–21 Uhr im Café Lindenblatt, kostenlos, alle Niveaus willkommen.
+d) Fahrradwerkstatt sucht Aushilfe für Samstag, 12 €/Stunde, Erfahrung nicht nötig.`,de:`a) Aulas de violão para iniciantes – também online. 1ª aula grátis! Tel. 069 77 21
+b) Vendo bicicleta infantil, aro 20, azul, quase nova, 60 €. Só retirada.
+c) Conversação em alemão à noite: toda quarta das 19h às 21h no Café Lindenblatt, grátis, todos os níveis são bem-vindos.
+d) Oficina de bicicletas procura ajudante para sábado, 12 €/hora, experiência não é necessária.`},
+ {t:'mc',kind:'Lesen · Teil 4',q:'Mira möchte nach der Arbeit mehr Deutsch sprechen. Welche Anzeige passt?',opts:['c','a','d'],a:0},
+ {t:'mc',kind:'Lesen · Teil 4',q:'Ahmed sucht einen Job am Wochenende.',opts:['d','b','c'],a:0},
+ {t:'mc',kind:'Lesen · Teil 4',q:'Sandra möchte ein Instrument lernen, hat aber wenig Geld.',opts:['a','c','b'],a:0}
+]},
+{id:'l2',title:'Ouvir (Hören)',desc:'4 partes: rádio, conversas, telefone, entrevista',steps:[
+ {t:'read',hideText:true,kind:'Hören · Teil 1',title:'Radio: Verkehrsmeldung',intro:'Ouça a notícia no rádio.',text:`Und nun die Verkehrsmeldungen: Auf der A5 zwischen Frankfurt-Nord und Bad Homburg gibt es nach einem Unfall zehn Kilometer Stau. Bitte fahren Sie über die B3. In der Frankfurter Innenstadt ist die Zeil am Samstag wegen eines Stadtfests von 10 bis 22 Uhr für Autos gesperrt. Die U-Bahn fährt an diesem Tag alle fünf Minuten.`,de:`E agora as informações de trânsito: na A5, entre Frankfurt-Nord e Bad Homburg, há dez quilômetros de engarrafamento depois de um acidente. Por favor, vá pela B3. No centro de Frankfurt, a Zeil fica fechada para carros no sábado das 10h às 22h por causa de uma festa da cidade. O metrô vai passar a cada cinco minutos nesse dia.`},
+ {t:'mc',kind:'Hören · Teil 1',q:'Warum ist die Zeil am Samstag gesperrt?',opts:['wegen eines Stadtfests','wegen eines Unfalls','wegen einer Baustelle'],a:0},
+ {t:'read',hideText:true,kind:'Hören · Teil 2',title:'Gespräch: Was macht Jana wann?',intro:'A Jana conta à mãe sobre a semana dela. O que ela faz em cada dia?',text:`– Na, Jana, wie sieht deine Woche aus? – Voll! Am Montag habe ich abends Yoga, wie immer. Am Dienstag muss ich lange arbeiten, wir haben ein wichtiges Projekt. Mittwoch gehe ich mit Lucas ins Kino – endlich! Und am Donnerstag kommt der Handwerker, weil die Heizung kaputt ist. – Und Freitag? – Freitag habe ich frei, da besuche ich dich!`,de:`– E aí, Jana, como está a sua semana? – Cheia! Na segunda à noite tenho ioga, como sempre. Na terça preciso trabalhar até tarde, temos um projeto importante. Na quarta vou ao cinema com o Lucas – finalmente! E na quinta vem o técnico, porque o aquecimento está quebrado. – E sexta? – Sexta estou de folga, aí vou visitar você!`},
+ {t:'match',kind:'Hören · Teil 2',q:'O que a Jana faz em cada dia?',pairs:[['Montag','Yoga'],['Dienstag','lange arbeiten'],['Mittwoch','Kino'],['Donnerstag','Handwerker kommt'],['Freitag','Mutter besuchen']]},
+ {t:'read',hideText:true,kind:'Hören · Teil 3',title:'Am Telefon',intro:'Ouça o recado na secretária eletrônica.',text:`Hallo Lucas, hier ist Frau Weber von der Sprachschule. Leider ist Ihr Kurs am Donnerstag ausgefallen, weil die Lehrerin krank ist. Wir machen die Stunde nächste Woche am Dienstag um 18 Uhr nach. Der Raum ist nicht mehr 12, sondern 15, im ersten Stock. Bitte rufen Sie uns kurz zurück, ob Sie kommen können. Danke und bis bald!`,de:`Olá Lucas, aqui é a Sra. Weber da escola de idiomas. Infelizmente a sua aula de quinta foi cancelada porque a professora está doente. Vamos repor a aula na semana que vem, na terça às 18h. A sala não é mais a 12, e sim a 15, no primeiro andar. Por favor, ligue de volta rapidinho para dizer se você pode vir. Obrigada e até logo!`},
+ {t:'mc',kind:'Hören · Teil 3',q:'Wann ist die neue Stunde?',opts:['nächsten Dienstag um 18 Uhr','am Donnerstag um 18 Uhr','nächsten Dienstag um 15 Uhr'],a:0},
+ {t:'mc',kind:'Hören · Teil 3',q:'Was soll Lucas machen?',opts:['zurückrufen','eine E-Mail schreiben','in Raum 12 gehen'],a:0},
+ {t:'read',hideText:true,kind:'Hören · Teil 4',title:'Interview im Radio',intro:'Ouça a entrevista com uma professora de alemão. Responda: ja ou nein?',text:`– Frau Özdemir, Sie unterrichten seit zwanzig Jahren Deutsch an der Volkshochschule. Was ist für Ihre Kursteilnehmer am schwersten? – Ganz klar: die Artikel, der, die, das. Viele lernen am Anfang die Wörter ohne Artikel, und später ist das ein Problem. – Was raten Sie? – Immer den Artikel mitlernen und viel sprechen, auch mit Fehlern! Ich sage immer: Wer nicht spricht, lernt nicht. – Unterrichten Sie auch online? – Seit der Pandemie ja, aber ich finde den Unterricht im Kursraum schöner.`,de:`– Sra. Özdemir, a senhora dá aulas de alemão há vinte anos na Volkshochschule. O que é mais difícil para os seus alunos? – Sem dúvida: os artigos, der, die, das. Muitos aprendem as palavras sem artigo no começo, e depois isso vira um problema. – O que a senhora aconselha? – Aprender sempre o artigo junto e falar muito, mesmo com erros! Eu sempre digo: quem não fala, não aprende. – A senhora também dá aulas online? – Desde a pandemia, sim, mas acho mais bonita a aula na sala.`},
+ {t:'mc',kind:'Hören · Teil 4',q:'Frau Özdemir sagt, die Artikel sind am schwersten. (ja / nein)',opts:['ja','nein'],a:0},
+ {t:'mc',kind:'Hören · Teil 4',q:'Man soll nur sprechen, wenn man keine Fehler macht. (ja / nein)',opts:['nein','ja'],a:0},
+ {t:'mc',kind:'Hören · Teil 4',q:'Frau Özdemir unterrichtet lieber online. (ja / nein)',opts:['nein','ja'],a:0}
+]},
+{id:'l3',title:'Escrever (Schreiben)',desc:'SMS · e-mail',steps:[
+ {t:'info',title:'Schreiben – como é',html:`<p><b>Teil 1:</b> uma SMS ou mensagem curta para um amigo (<b>20–30 palavras</b>) sobre <b>3 pontos</b>.</p>
+ <p><b>Teil 2:</b> uma e-mail mais formal, por exemplo para o professor ou o chefe (<b>30–40 palavras</b>), também com <b>3 pontos</b>.</p>
+ <div class="ex">Conta: responder a <b>todos</b> os pontos, saudação e despedida adequadas, frases ligadas (und, aber, weil, dass, deshalb …).</div>`},
+ {t:'free',kind:'Schreiben · Teil 1',task:'Você está no ônibus e vai chegar atrasado ao encontro com a sua amiga Lea no cinema. Escreva uma SMS (20–30 palavras): 1) peça desculpas e diga por que vai se atrasar, 2) diga quando você chega, 3) peça que ela já compre os ingressos.',hint:'Hallo Lea, sorry, ich komme … später, weil … Ich bin um … da. Kannst du schon …? Bis gleich!',focus:'weil, Uhrzeit, Bitte mit können, alle 3 Punkte',model:'Hallo Lea,\nsorry, ich komme zwanzig Minuten später, weil der Bus Verspätung hat. Ich bin um Viertel nach acht da. Kannst du schon die Karten kaufen? Ich bezahle dich dann.\nBis gleich!\nLucas'},
+ {t:'free',kind:'Schreiben · Teil 2',task:'O seu professor de alemão, o Sr. Yilmaz, organiza uma excursão do curso para Heidelberg no sábado. Escreva para ele (30–40 palavras): 1) agradeça pela organização, 2) diga que você não pode ir e por quê, 3) pergunte o que você precisa estudar para a próxima aula.',hint:'Lieber Herr Yilmaz, vielen Dank für … Leider kann ich am Samstag nicht mitkommen, weil … Könnten Sie mir sagen, was … ? Viele Grüße',focus:'halbformelle E-Mail, weil, indirekte Frage (was/ob …), Konjunktiv II höflich',model:'Lieber Herr Yilmaz,\nvielen Dank, dass Sie den Ausflug nach Heidelberg organisieren! Leider kann ich am Samstag nicht mitkommen, weil meine Schwester aus Brasilien zu Besuch ist. Könnten Sie mir sagen, was ich für die nächste Stunde lernen soll?\nViele Grüße\nLucas Souza'},
+ {t:'free',kind:'Schreiben · Teil 1',task:'O seu vizinho, Herr Kaya, perguntou se você pode cuidar das plantas dele. Escreva uma mensagem curta (20–30 palavras): 1) diga que sim, 2) pergunte quando você deve buscar a chave, 3) pergunte com que frequência regar.',hint:'Hallo Herr Kaya, natürlich mache ich das gern! Wann soll ich …? Und wie oft …? Viele Grüße',focus:'Fragen mit W-Wörtern, sollen, Höflichkeit',model:'Hallo Herr Kaya,\nnatürlich kümmere ich mich gern um Ihre Pflanzen! Wann soll ich den Schlüssel abholen? Und wie oft muss ich die Blumen gießen?\nViele Grüße\nLucas'}
+]},
+{id:'l4',title:'Falar (Sprechen)',desc:'perguntas · contar · planejar juntos',steps:[
+ {t:'info',title:'Sprechen – as três partes',html:`<table><tr><th>parte</th><th>o que fazer</th></tr>
+ <tr><td>Teil 1</td><td>Você recebe cartões com palavras (ex. <i>Geburtstag?</i>, <i>Wohnort?</i>) e faz perguntas ao seu parceiro – e responde às perguntas dele.</td></tr>
+ <tr><td>Teil 2</td><td>Você recebe um tema (ex. <i>Wochenende</i>) com 4 perguntas e <b>conta</b> sobre a sua vida (~1–2 minutos).</td></tr>
+ <tr><td>Teil 3</td><td>Vocês dois têm agendas diferentes e precisam <b>combinar</b> um horário para algo juntos.</td></tr></table>`},
+ {t:'tr',kind:'Sprechen · Teil 1',de:'Cartão „Geburtstag?“ – pergunte ao parceiro: (Quando é o seu aniversário?)',a:['Wann hast du Geburtstag?','Wann haben Sie Geburtstag?','Wann ist dein Geburtstag?','Wann ist Ihr Geburtstag?']},
+ {t:'tr',kind:'Sprechen · Teil 1',de:'Cartão „Sprachen?“ – pergunte: (Que línguas você fala?)',a:['Welche Sprachen sprichst du?','Welche Sprachen sprechen Sie?']},
+ {t:'tr',kind:'Sprechen · Teil 1',de:'Cartão „Lieblingsessen?“ – pergunte: (Qual é a sua comida favorita?)',a:['Was ist dein Lieblingsessen?','Was ist Ihr Lieblingsessen?','Was isst du am liebsten?','Was essen Sie am liebsten?']},
+ {t:'speak',kind:'Sprechen · Teil 2',es:'Am Wochenende schlafe ich gern lange. Samstags spiele ich Fußball im Verein. Letztes Wochenende bin ich mit Freunden nach Heidelberg gefahren. Ich putze nicht gern die Wohnung.',de:'No fim de semana eu gosto de dormir até tarde. Aos sábados jogo futebol no clube. No último fim de semana fui com amigos para Heidelberg. Não gosto de limpar o apartamento.',tip:'Responda às 4 perguntas do cartão: o que faz, com quem, o que fez no último fim de semana (Perfekt), o que não gosta.'},
+ {t:'free',kind:'Sprechen · Teil 2',task:'Tema „Wohnen“: prepare por escrito o que você contaria (~50 palavras): Wo wohnen Sie? Wie ist Ihre Wohnung? Mit wem wohnen Sie? Was gefällt Ihnen (nicht)?',hint:'Ich wohne in … Meine Wohnung ist … Ich wohne allein / mit … Mir gefällt, dass … Nicht so gut finde ich …',focus:'zusammenhängend erzählen, dass/weil, Adjektive, Wo/Wohin',model:'Ich wohne in Frankfurt-Bornheim, im dritten Stock. Meine Wohnung hat zwei Zimmer, eine kleine Küche und einen Balkon. Ich wohne allein. Mir gefällt, dass die Wohnung hell und ruhig ist. Nicht so gut finde ich, dass es keinen Aufzug gibt und die Miete ziemlich hoch ist.'},
+ {t:'dialog',kind:'Sprechen · Teil 3',place:'Prüfung',title:'Planejar juntos',scene:'Você e a Ana querem visitar juntos uma amiga no hospital no sábado. Na sua agenda: 10–12h compras, a partir das 18h festa. Encontrem um horário.',lines:[
+  {n:'Ana',es:'Wann wollen wir Mira am Samstag im Krankenhaus besuchen? Geht es bei dir um zehn?',de:'Quando vamos visitar a Mira no hospital no sábado? Para você dá às dez?'},
+  {you:true,opts:[{es:'Um zehn kann ich leider nicht, da gehe ich einkaufen. Wie wäre es um zwölf?',ok:true},{es:'Nein.',ok:false,why:'Na prova, explique e faça uma contraproposta: <i>Wie wäre es um …?</i>'}]},
+  {n:'Ana',es:'Um zwölf habe ich bis eins Sport. Passt es dir um halb zwei?',de:'Ao meio-dia tenho esporte até a uma. Fica bom para você à uma e meia?'},
+  {you:true,opts:[{es:'Ja, um halb zwei passt mir gut. Sollen wir Blumen mitbringen?',ok:true},{es:'Ja, um halb zwei passe ich gut.',ok:false,why:'<i>Das passt mir.</i> – com dativo.'}]},
+  {n:'Ana',es:'Gute Idee! Ich kaufe die Blumen, und du bringst Schokolade mit?',de:'Boa ideia! Eu compro as flores e você leva chocolate?'},
+  {you:true,opts:[{es:'Einverstanden! Dann treffen wir uns um Viertel nach eins vor dem Krankenhaus.',ok:true},{es:'Einverstanden! Dann treffen wir uns.',ok:false,why:'Para fechar bem: diga <b>onde</b> e <b>quando</b> vocês se encontram.'}]}]},
+ {t:'info',title:'Parabéns! 🎉',html:`<p>Você chegou ao fim do nível <b>A2</b>! Se você acertou cerca de 60 % deste simulado, você está pronto para a prova <b>Goethe-Zertifikat A2</b> (ou <b>telc Deutsch A2</b>, de formato parecido).</p>
+ <div class="ex">Com o A2 você se vira no dia a dia na Alemanha. Próximo passo: <b>B1</b> – o nível que muitas empresas e o visto de residência permanente pedem.</div>`}
+]}],
+resumen:`<h3>Formato da prova A2</h3><table><tr><td>Lesen</td><td>~30 min · artigo, painel de informações, e-mail, anúncios</td></tr><tr><td>Hören</td><td>~30 min · rádio/avisos, conversa, telefone, entrevista (ja/nein)</td></tr><tr><td>Schreiben</td><td>~30 min · SMS (20–30 palavras) + e-mail (30–40 palavras), 3 pontos cada</td></tr><tr><td>Sprechen</td><td>~15 min · perguntas pessoais, contar sobre um tema, planejar juntos</td></tr></table>
+<h3>Planejar juntos</h3><p class="es-t">Geht es bei dir um …? · Wie wäre es um …? · Um … kann ich leider nicht, da … · Das passt mir gut. · Einverstanden! · Treffen wir uns um … vor …</p>`});
