@@ -808,7 +808,7 @@ placement:[
  {t:'gap',q:'Ich ___ heute zum Arzt gehen. (müssen)',a:['muss']}],
 lessons:[
 {id:'l1',title:'Lugares na cidade',desc:'Bahnhof, Post, Apotheke … · Wo ist …?',steps:[
- {t:'vocab',title:'Na cidade',items:[['die Stadt','a cidade'],['das Zentrum','o centro'],['die Straße','a rua'],['der Platz','a praça / o lugar'],['die Ecke','a esquina'],['der Bahnhof','a estação de trem'],['die Haltestelle','o ponto (de ônibus)'],['der Flughafen','o aeroporto'],['die Post','os correios'],['die Bank','o banco'],['die Apotheke','a farmácia'],['das Krankenhaus','o hospital'],['die Polizei','a polícia'],['das Rathaus','a prefeitura'],['das Museum','o museu'],['der Park','o parque'],['die Kirche','a igreja'],['das Hotel','o hotel'],['der Parkplatz','o estacionamento'],['in der Nähe','perto'],['weit','longe'],['hier','aqui'],['dort','ali / lá']]},
+ {t:'vocab',title:'Na cidade',items:[['die Stadt','a cidade'],['das Zentrum','o centro'],['die Straße','a rua'],['der Platz','a praça / o lugar'],['die Ecke','a esquina / o canto'],['der Bahnhof','a estação de trem'],['die Haltestelle','o ponto (de ônibus)'],['der Flughafen','o aeroporto'],['die Post','os correios'],['die Bank','o banco'],['die Apotheke','a farmácia'],['das Krankenhaus','o hospital'],['die Polizei','a polícia'],['das Rathaus','a prefeitura'],['das Museum','o museu'],['der Park','o parque'],['die Kirche','a igreja'],['das Hotel','o hotel'],['der Parkplatz','o estacionamento'],['in der Nähe','perto'],['weit','longe'],['hier','aqui'],['dort','ali / lá']]},
  {t:'info',title:'Onde fica? – o dativo com „in“',html:`<p>Para dizer <b>onde</b> algo está, <span class="es-t">in</span> pede o <b>dativo</b>. O artigo muda:</p>
  <table><tr><th></th><th>nominativo</th><th>dativo (onde?)</th></tr>
  <tr><td>m</td><td class="es-t">der Park</td><td class="es-t">in <b>dem</b> Park = <b>im</b> Park</td></tr>
@@ -821,7 +821,7 @@ lessons:[
  {t:'mc',q:'Ich wohne ___ Zentrum.',opts:['im','in der','in den'],a:0,why:'<i>das Zentrum</i> → in dem = <b>im</b>.'},
  {t:'gap',q:'Der Bus hält ___ der Haltestelle „Römer“. (em – an + dativo, feminino)',a:['an']},
  {t:'gap',q:'Tom ist ___ Park. (no)',a:['im']},
- {t:'match',q:'Ligue.',pairs:[['die Haltestelle','o ponto de ônibus'],['das Krankenhaus','o hospital'],['das Rathaus','a prefeitura'],['in der Nähe','perto'],['die Ecke','a esquina']]},
+ {t:'match',q:'Ligue.',pairs:[['die Haltestelle','o ponto de ônibus'],['das Krankenhaus','o hospital'],['das Rathaus','a prefeitura'],['in der Nähe','perto'],['die Ecke','a esquina / o canto']]},
  {t:'tr',de:'A farmácia é perto.',a:['Die Apotheke ist in der Nähe.']}
 ]},
 {id:'l2',title:'Transporte',desc:'mit dem Bus · Fahrkarte · umsteigen',steps:[
@@ -1055,7 +1055,7 @@ lessons:[
  {t:'tr',de:'O que eu devo fazer?',a:['Was soll ich machen?','Was soll ich tun?']}
 ]},
 {id:'l3',title:'Roupas',desc:'Jacke, Hose, Schuhe · Größe · Farbe',steps:[
- {t:'vocab',title:'Roupas',items:[['die Kleidung','a roupa'],['die Jacke','o casaco / a jaqueta'],['der Mantel','o sobretudo'],['die Hose','a calça'],['das Hemd','a camisa'],['das T-Shirt','a camiseta'],['der Pullover','o suéter / a blusa de frio'],['das Kleid','o vestido'],['der Rock','a saia'],['der Schuh, die Schuhe','o sapato, os sapatos'],['die Mütze','a touca / o gorro'],['die Tasche','a bolsa'],['die Größe','o tamanho'],['anprobieren','experimentar (roupa)'],['die Umkleidekabine','o provador'],['tragen','vestir / usar'],['das Kaufhaus','a loja de departamentos']]},
+ {t:'vocab',title:'Roupas',items:[['die Kleidung','a roupa'],['die Jacke','o casaco / a jaqueta'],['der Mantel','o sobretudo'],['die Hose','a calça'],['das Hemd','a camisa'],['das T-Shirt','a camiseta'],['der Pullover','o suéter / a blusa de frio'],['das Kleid','o vestido'],['der Rock','a saia'],['der Schuh, die Schuhe','o sapato, os sapatos'],['die Mütze','a touca / o gorro'],['die Tasche','a bolsa'],['die Größe','o tamanho'],['anprobieren','experimentar (roupa)'],['die Umkleidekabine','o provador'],['tragen','vestir / usar / carregar'],['das Kaufhaus','a loja de departamentos']]},
  {t:'info',title:'Comprar roupa',html:`<table><tr><th>vendedor(a)</th><th>você</th></tr>
  <tr><td class="es-t">Kann ich Ihnen helfen?</td><td class="es-t">Ja, ich suche eine Jacke.</td></tr>
  <tr><td class="es-t">Welche Größe haben Sie?</td><td class="es-t">Größe M / 40.</td></tr>
