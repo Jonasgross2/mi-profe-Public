@@ -23,6 +23,6 @@ defineLang('de',{name:'Deutsch',flag:'🇩🇪',native:'Deutsch',into:'ins Deuts
   /* Lob-Wendungen der Oberfläche (dort auf Spanisch) auf Deutsch */
   praise:{'¡Muy bien!':'Sehr gut!','¡Hola!':'Hallo!','¡Excelente!':'Ausgezeichnet!','¡Sigue así!':'Weiter so!','¡Correcto!':'Richtig!','¡Perfecto!':'Perfekt!','¡Eso es!':'Genau!','¡Hecho!':'Geschafft!','¡Bien hecho!':'Gut gemacht!','¡Genial!':'Super!','¡OJO!':'ACHTUNG!'},
   key:'mi-profe-de-v1',gist:'mi-profe-fortschritt-de.json',
-  levels:[{id:'A1',label:'A1',title:'Iniciante',sub:'Primeiros passos'},{id:'A2',label:'A2',title:'Básico',sub:'Vida no dia a dia: moradia, trabalho, saúde, serviços, lazer'}],
+  levels:[{id:'A1',label:'A1',title:'Iniciante',sub:'Primeiros passos'},{id:'A2',label:'A2',title:'Básico',sub:'Vida no dia a dia: moradia, trabalho, saúde, serviços, lazer'},{id:'B1',label:'B1',title:'Intermediário',sub:'Contar, argumentar, trabalhar e conviver com independência'}],
   levelOf:{},emoji:{}
 });
