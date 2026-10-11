@@ -4175,7 +4175,7 @@ lessons:[
  {t:'gap',q:'Lo conseguiremos, cueste lo que ___.',a:['cueste']},
  {t:'gap',q:'Vayas donde ___, llévate un paraguas.',a:['vayas']},
  {t:'tr',de:'Ob du willst oder nicht, du musst kommen.',a:['Quieras o no, tienes que venir.','Quieras o no, tienes que venir tú.']}]},
-{id:'l2',title:'Der Futuro de subjuntivo',desc:'quien fuere · a donde fueres',steps:[
+{id:'l2',title:'Futuro de subjuntivo',desc:'quien fuere · a donde fueres',steps:[
  {t:'info',title:'Eine fast verschwundene Form',html:`<p>Der <b>Futuro de subjuntivo</b> wird heute fast nur noch in Gesetzestexten und Redewendungen benutzt. Bildung wie Imperf. Subj., aber mit <b>-re</b>: <span class="es-t">hablare, tuviere, fuere, hubiere</span>.</p>
  <table><tr><th>Wo?</th><th>Beispiel</th><th>heute normal</th></tr>
  <tr><td>Sprichwort</td><td class="es-t">Adonde fueres, haz lo que vieres.</td><td class="es-t">Adonde vayas, haz lo que veas.</td></tr>
