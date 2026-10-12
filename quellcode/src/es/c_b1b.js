@@ -105,7 +105,7 @@ lessons:[
  <tr><td class="es-t">Estudio español <b>para trabajar</b> en España.</td><td class="es-t">Te lo explico <b>para que lo entiendas</b>.</td></tr>
  <tr><td>ich lerne – ich arbeite</td><td>ich erkläre – du verstehst</td></tr></table>
  <div class="ex"><i>para que</i> steht <b>immer</b> mit Subjuntivo. Deutsch: „damit“.</div>`},
- {t:'vocab',title:'Abschied & Kontakt',items:[['despedirse (de)','sich verabschieden (von)','👋'],['la despedida','der Abschied','🥲'],['echar de menos','vermissen','💭'],['mantener el contacto','in Kontakt bleiben','📱'],['volver a + Inf.','wieder … tun','🔁'],['la fiesta de despedida','die Abschiedsparty','🎉'],['hacer las maletas','die Koffer packen','🧳'],['el vuelo','der Flug','✈️'],['el recuerdo','die Erinnerung','📸'],['¡Que te vaya bien!','Mach’s gut!','🍀']]},
+ {t:'vocab',title:'Abschied & Kontakt',items:[['despedirse (de)','sich verabschieden (von)','👋'],['la despedida','der Abschied','🥲'],['echar de menos','vermissen','💭'],['mantener el contacto','in Kontakt bleiben','📱'],['volver a + Inf.','wieder … tun','🔁'],['la fiesta de despedida','die Abschiedsparty','🎉'],['hacer las maletas','die Koffer packen','🧳'],['el vuelo','der Flug','✈️'],['el recuerdo','die Erinnerung','📸'],['¡Que te vaya bien!','Mach’s gut! / Viel Erfolg!','🍀']]},
  {t:'mc',q:'Te dejo mi número para que me ___.',opts:['llames','llamas','llamar'],a:0},
  {t:'mc',q:'Ahorro dinero para ___ a Sudamérica.',opts:['viajar','que viaje','viajo'],a:0},
  {t:'gap',q:'Hablo despacio para que todos me ___ (entender).',a:['entiendan']},
@@ -182,7 +182,7 @@ lessons:[
  {t:'mc',q:'Nuria: «¡Compra leche!» → Nuria me pide que ___ leche.',opts:['compre','compro','comprar'],a:0},
  {t:'gap',q:'Mi madre siempre me dice que ___ (yo, llevar) chaqueta.',a:['lleve']},
  {t:'gap',q:'«¿Te gusta Barcelona?» → Me preguntó ___ me gustaba Barcelona.',a:['si']},
- {t:'vocab',title:'Erzählen & reagieren',items:[['contar','erzählen','🗣️'],['preguntar','fragen','❓'],['pedir','bitten','🙏'],['avisar','Bescheid sagen','📢'],['el cotilleo','der Klatsch','🤫'],['¡No me digas!','Was du nicht sagst!','😮'],['¿En serio?','Echt jetzt?','🤨'],['el mensaje de voz','die Sprachnachricht','🎙️'],['por lo visto','anscheinend','👀'],['enterarse (de)','erfahren','💡']]},
+ {t:'vocab',title:'Erzählen & reagieren',items:[['contar','erzählen','🗣️'],['preguntar','fragen','❓'],['pedir','bitten','🙏'],['avisar','Bescheid sagen','📢'],['el cotilleo','der Klatsch','🤫'],['¡No me digas!','Was du nicht sagst!','😮'],['¿En serio?','Im Ernst? / Echt jetzt?','🤨'],['el mensaje de voz','die Sprachnachricht','🎙️'],['por lo visto','anscheinend','👀'],['enterarse (de)','erfahren','💡']]},
  {t:'tr',de:'Sie hat mich gefragt, ob ich Hunger habe.',a:['Me ha preguntado si tengo hambre.','Me preguntó si tenía hambre.']}]},
 {id:'l4',title:'Neuigkeiten aus der WG',desc:'Dialog & Nachricht weitergeben',steps:[
  {t:'dialog',place:'Salón del piso',title:'Was hat Nuria gesagt?',scene:'Du kommst aus Valencia zurück. Pablo ist neugierig.',lines:[

@@ -530,7 +530,7 @@ function catchUp(){const B=COURSE.units.slice(0,frontier());const nx=nextIn(B,tr
   let n=0;B.forEach(u=>{if(u.status==='soon')return;const passed=!!S.checks[u.id]?.pass;u.lessons.filter(l=>!l.ab).forEach(l=>{const r=rnd(u.id+'.'+l.id);if(passed?r<1:r<3)n++;});});
   return Object.assign(nx,{count:Math.max(1,n),ids:new Set(B.map(u=>u.id))});}
 const nxTitle=nx=>nx.check?''+UW+' '+nx.u.n+T(' · Abschlusstest'):nx.test?''+UW+' '+nx.u.n+T(' · Abschlusstest'):''+UW+' '+nx.u.n+' · '+nx.l.title+(nx.n>1?' · '+RN[nx.n]:'');
-const nxDesc=nx=>nx.check?T('Laut Test sitzt ')+nx.u.title+T(' – bestehst du den Abschlusstest, ist sie abgehakt.'):nx.test?T('Alle Lektionen gefestigt – zeig, dass du die ')+UW+T(' kannst (ab 80 % bestanden).'):nx.n===2?T('Runde 2 von 3: dieselben Inhalte, neu gemischt und mit Vokabelübungen.'):nx.n===3?T('Runde 3 von 3: nur selbst schreiben & hören – mit einem Tag Abstand.'):nx.l.desc;
+const nxDesc=nx=>nx.check?T('Laut Test sitzt ')+nx.u.title+T(' – mit bestandenem Abschlusstest ist das erledigt.'):nx.test?T('Alle Lektionen gefestigt – zeig im Abschlusstest, was du kannst (ab 80 % bestanden).'):nx.n===2?T('Runde 2 von 3: dieselben Inhalte, neu gemischt und mit Vokabelübungen.'):nx.n===3?T('Runde 3 von 3: nur selbst schreiben & hören – mit einem Tag Abstand.'):nx.l.desc;
 const nxRoute=nx=>nx.check||nx.test?'check/'+nx.u.id:nx.n>1?'round/'+nx.u.id+'/'+nx.l.id+'/'+nx.n:'lesson/'+nx.u.id+'/'+nx.l.id;
 function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.ref!==ref);S.mistakes.unshift({ref,your:String(your||'').slice(0,200),date:today()});S.mistakes=S.mistakes.slice(0,150);save();}
 /* Verständnisfrage einer Geschichte → Aufgabe (mc / richtig-falsch / Lücke) */
@@ -887,11 +887,11 @@ function freqSteps(u,l){const W=l.steps.filter(s=>s.t==='vocab').flatMap(s=>s.it
 function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.id===lid);if(!l)return vUnits(m);
   const steps=l.freq?freqSteps(u,l):l.steps.map((s,i)=>({s,ref:uid+'|'+lid+'|'+i}));
   play(m,{title:''+UW+' '+u.n+' · '+l.title,steps,unit:u,pk:'lesson/'+uid+'/'+lid,onBack:()=>goBack('unit/'+uid),
-    onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};if(l.freq)S.lessons[k].freqL=1;save();return{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)};}
+    onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};if(l.freq)S.lessons[k].freqL=1;save();return{label:UW+' '+u.n+' →',fn:()=>go('unit/'+uid)};}
       const was=rnd(k);setRound(k,1,res.score);
       if(was<2&&(res.score>=0.9||shortLesson(l))){setRound(k,shortLesson(l)?3:2,res.score);}
       const nx=nextLesson();const r=rnd(k);
-      return r>=2?(nx?{label:T('Weiter: ')+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)}):{label:T('Runde 2: Üben →'),fn:()=>go('round/'+uid+'/'+lid+'/2')};},
+      return r>=2?(nx?{label:T('Weiter: ')+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:UW+' '+u.n+' →',fn:()=>go('unit/'+uid)}):{label:T('Runde 2: Üben →'),fn:()=>go('round/'+uid+'/'+lid+'/2')};},
     extraEnd:(res)=>{const r=rnd(uid+'.'+lid);return l.ab?null:shortLesson(l)?h('div',{class:'fb ok'},T('Diese Lektion braucht keine Extra-Runden – erledigt ✓')):res.score>=0.9&&r===2&&S.lessons[uid+'.'+lid].d2===today()?h('div',{class:'fb ok'},T('Stark! Über 90 % – „Üben“ überspringst du. „Festigen“ wird morgen frei.')):null;}});}
 function roundSteps(u,l,n){const G=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+i}));const words=shuffle(lessonWords(l));
   if(n===2){const ex=shuffle(G.filter(x=>['mc','gap','tr','conj','order','match','listen'].includes(x.s.t))).slice(0,8);
@@ -906,7 +906,7 @@ function vRound(m,uid,lid,n){n=+n;const u=unitById(uid);const l=u?.lessons.find(
       else if(n===3&&res.score>=0.6){S.lessons[k].d2=today();save();fb='fast';}
       else if(n===3){S.lessons[k].r=1;S.lessons[k].d2=today();save();fb='back';}
       const nx=nextLesson();
-      return fb?(nx?{label:T('Weiter: ')+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)}):!ok?{label:T('Noch mal →'),fn:()=>{m.innerHTML='';vRound(m,uid,lid,n);}}:nx?{label:T('Weiter: ')+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:T('Zur ')+UW+' →',fn:()=>go('unit/'+uid)};},
+      return fb?(nx?{label:T('Weiter: ')+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:UW+' '+u.n+' →',fn:()=>go('unit/'+uid)}):!ok?{label:T('Noch mal →'),fn:()=>{m.innerHTML='';vRound(m,uid,lid,n);}}:nx?{label:T('Weiter: ')+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:UW+' '+u.n+' →',fn:()=>go('unit/'+uid)};},
     extraEnd:()=>fb==='fast'?h('div',{class:'fb warn'},T('Knapp unter 80 % – morgen kommt noch eine Runde „Festigen“. Wiederholung mit Abstand ist genau das, was hilft.'))
       :fb==='back'?h('div',{class:'fb warn'},T('Das sitzt noch nicht – ich schicke dich zurück zu „Üben“. Danach morgen noch mal „Festigen“.'))
       :!ok?h('div',{class:'fb warn'},T('Unter 60 % – die Runde zählt noch nicht. Versuch es noch einmal oder schau dir die Lektion vorher kurz an.'))
@@ -1294,7 +1294,7 @@ function mixSteps(n){const pool=[],words=[];const seen=new Set(S.mixSeen||[]);
   return out;}
 function vMix(m){const steps=mixSteps(15);
   if(steps.length<5){m.append(h('h1',{},T('Gemischte Wiederholung')),h('div',{class:'card'},T('Schließ zuerst ein paar Lektionen ab – dann mische ich hier Aufgaben aus allen bisherigen Lektionen durcheinander.')));return;}
-  play(m,{title:T('Gemischte Wiederholung · 15 Aufgaben aus allen ')+UWS+'',steps,pk:'mix',onBack:()=>goBack('home'),onDone:()=>{S.lastMix=today();save();return null;}});}
+  play(m,{title:T('Gemischte Wiederholung · 15 Aufgaben aus dem ganzen Kurs'),steps,pk:'mix',onBack:()=>goBack('home'),onDone:()=>{S.lastMix=today();save();return null;}});}
 
 /* ---------- Nachschlagen: Wörterbuch & Grammatik ---------- */
 const storyFor=st=>unitById(st.after);
@@ -1311,7 +1311,7 @@ function vRef(m,tab,lv){lv=lvFirst(LEVELS.find(L=>L.id===lv)?lv:curLevel());
   stickMain(m,'stickpage');
   m.append(backTo(T('Bibliothek'),'ref'),h('h1',{},{s:T('Geschichten'),w:T('Wörterbuch'),g:T('Grammatik'),r:T('Lesetexte')}[tab]||T('Bibliothek')));
   if(tab==='s'){const S2=S.stories||{};
-    m.append(h('p',{class:'sub'},(LANG.storySeries?'„'+LANG.storySeries+'“ – ':'')+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik bis zur angegebenen ')+UW+T('. Tipp: erst nur hören, dann lesen.')));
+    m.append(h('p',{class:'sub'},(LANG.storySeries?'„'+LANG.storySeries+'“ – ':'')+(T(LANG.storyIntro||'')||'')+T(' Jede Geschichte nutzt nur Grammatik, die bis zur angegebenen Stelle im Kurs vorkommt. Tipp: erst nur hören, dann lesen.')));
     m.append(levelSeg(lv,'ref/s',L=>STORIES.filter(st=>unitLevel(storyFor(st))===L.id).length+T(' Gesch.')),h('div',{class:'grid',style:'gap:8px'},STORIES.filter(st=>sameLv(unitLevel(storyFor(st)),lv)).map(st=>{const done=S2[st.id];const open=storyOpen(st);
         return h('div',{class:'lesson'+(done?' done':''),onclick:()=>go('story/'+st.id)},h('div',{class:'ic'},done?'✓':'📖'),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},st.title),h('div',{class:'ld'},st.sub+T(' · ab ')+UW+' '+storyFor(st).n)),
           done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
@@ -1514,7 +1514,7 @@ function vVocab(m,sub,lid){if(sub==='mine')return lid?vMyList(m,lid):vMyLists(m)
   const boxes=[0,0,0,0];all.forEach(c=>{boxes[cardStage(c)]++;});
   if(sub==='stats')return vVocabStats(m,all,lid);
   if(sub==='hidden')return vVocabHidden(m,lid);
-  if(sub==='units'){m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Nach ')+UW+T(' üben')),h('p',{class:'sub'},T('Wörter einer ')+UW+T(' abfragen – zählt nicht für die Wiederholungsplanung.')),
+  if(sub==='units'){m.append(backTo(T('Vokabeln'),'vocab'),h('h1',{},T('Nach ')+UW+T(' üben')),h('p',{class:'sub'},T('Wörter pro ')+UW+T(' abfragen – zählt nicht für die Wiederholungsplanung.')),
     h('div',{class:'grid',style:'gap:8px'},LEVELS.map(L=>{const us=COURSE.units.filter(u=>unitLevel(u)===L.id&&all.some(c=>c.unit===u.id));if(!us.length)return null;
       return h('div',{},h('div',{class:'kind',style:'margin:8px 0 6px'},L.title),h('div',{class:'chips'},us.map(u=>{const w=all.filter(c=>c.unit===u.id);return h('button',{class:'chip',onclick:()=>runVocab(shuffle(w).slice(0,20),'type',false)},h('span',{},'U'+u.n),h('span',{},u.title+' ('+w.length+')'));})));})));
     if(!all.length)m.append(h('div',{class:'card'},T('Noch keine Wörter gesammelt.')));return;}
@@ -1529,7 +1529,7 @@ function vVocab(m,sub,lid){if(sub==='mine')return lid?vMyList(m,lid):vMyLists(m)
     total?(()=>{const pick=h('div',{class:'goalpick hide'},[10,20,30,50,100].map(n=>h('button',{class:'chip'+(n===vocabGoal()?' on':''),onclick:()=>{S.vocabGoal=n;S.vocabGoalT=Date.now();save();route();}},n+'')));
       return h('div',{class:'goalrow'},h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},vocabToday()>=vocabGoal()?h('span',{class:'small',style:'color:var(--ok);font-weight:600'},T('Tagesziel ')+vocabGoal()+' / '+vocabGoal()+' ✓'):h('span',{class:'muted small'},T('Tagesziel ')+vocabToday()+' / '+vocabGoal()),
         h('button',{class:'linkbtn',onclick:()=>pick.classList.toggle('hide')},T('⚙ Ziel ändern'))),pick);})():null));
-  m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter einer ')+UW+T(' üben'),()=>go('vocab/units')),mtile('📊',T('Statistik'),total?T('Morgen fällig: ')+all.filter(c=>c.due===addDays(today(),1)).length:T('Noch keine Karten'),()=>go('vocab/stats')),
+  m.append(tiles(mtile('📚',T('Nach ')+UW+'',T('Wörter pro ')+UW+T(' üben'),()=>go('vocab/units')),mtile('📊',T('Statistik'),total?T('Morgen fällig: ')+all.filter(c=>c.due===addDays(today(),1)).length:T('Noch keine Karten'),()=>go('vocab/stats')),
     mtile('🎧',T('Aussprache üben'),T('Shadowing · ')+UW+' '+curUnit().n,()=>go('shadow/'+curUnit().id)),mtile('✍️',T('Meine Wörter'),myLists().length?srsCards().filter(c=>String(c.unit).startsWith(MY)).length+T(' eigene Wörter'):T('Eigene Listen anlegen'),()=>go('vocab/mine'))));
 }
 function vVocabHidden(m,src){src=src==='kurs'||src==='mine'?src:'';
@@ -1836,7 +1836,7 @@ const SETSEC=[['stimme','🔊',T('Stimme & Darstellung'),T('Tempo, Stimme, hell/
   ['sync','☁️',T('Sync & Backup'),T('Geräte abgleichen & sichern'),['☁️ Geräte verbinden','☁️ Geräte synchronisieren (GitHub)','💾 Fortschritt sichern']]];
 function vPlanSet(m){const P=Object.assign({},PLAN_DEF,S.plan||{});
   const L=[['vocab','🗂️',T('Vokabeln wiederholen'),T('bis zum Tagesziel')],['lesson','📚',T('Nächste Lektion'),T('Lernen, Üben, Festigen, Tests')],['catchup','↩️',T('Nachholen'),T('Offenes aus früheren Lektionen')],['mix','🔀',T('Gemischte Wiederholung'),T('15 Aufgaben aus allem Gelernten')],
-    ['story','📖',T('Geschichte'),T('wenn eine neue freigeschaltet ist')],['freq','📚',T('Häufige Wörter'),T('der aktuellen ')+UW],['shadow','🎧',T('Aussprache'),T('7 Sätze Shadowing')],['mistakes','✏️',T('Fehler üben'),T('wenn es offene Fehler gibt')]];
+    ['story','📖',T('Geschichte'),T('wenn eine neue freigeschaltet ist')],['freq','📚',T('Häufige Wörter'),T('passend zu deinem Kursstand')],['shadow','🎧',T('Aussprache'),T('7 Sätze Shadowing')],['mistakes','✏️',T('Fehler üben'),T('wenn es offene Fehler gibt')]];
   m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Mein Tagesplan')),h('p',{class:'sub'},T('Angehakt = jeden Tag im Plan auf der Startseite. Der Rest steht unter „Extras“. Reihenfolge: leicht → schwer.')),
     h('div',{class:'card planset'},L.map(([id,ic,t,d])=>{const cb=h('input',{type:'checkbox',checked:!!P[id]});
       cb.onchange=()=>{S.plan=Object.assign({},PLAN_DEF,S.plan||{},{[id]:cb.checked});S.planT=Date.now();save();};

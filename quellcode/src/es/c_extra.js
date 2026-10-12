@@ -82,7 +82,7 @@ add('u4',{id:'ab1',title:'📎 Übungsblatt: La hora',desc:'Aus deinem Kurs (Sem
  {t:'gap',q:'– ¿Sabes cuándo cierra la biblioteca? – Creo que a las ___ menos diez. (9:50)',a:['diez']}
 ]});
 add('u4',{id:'ab2',title:'📎 Übungsblatt: ¿Algo más? · ¿Qué comen los españoles?',desc:'Aus deinem Kurs (Semester 4) · Verpackungen, Mengen, Essgewohnheiten, aunque',steps:[
- {t:'vocab',title:'Verpackungen',items:[['la botella','die Flasche'],['la lata','die Dose'],['el paquete','die Packung'],['la bolsa','die Tüte'],['la barra de pan','das Baguette / Stangenbrot'],['las ofertas de la semana','die Wochenangebote'],['¿Algo más?','Sonst noch etwas?']]},
+ {t:'vocab',title:'Verpackungen',items:[['la botella','die Flasche'],['la lata','die Dose'],['el paquete','das Paket / die Packung'],['la bolsa','die Tüte'],['la barra de pan','das Baguette / Stangenbrot'],['las ofertas de la semana','die Wochenangebote'],['¿Algo más?','Sonst noch etwas?']]},
  {t:'match',q:'Welche Verpackung passt?',pairs:[['una lata de','cerveza / sardinas'],['una botella de','aceite / vino'],['un paquete de','café / mantequilla'],['una bolsa de','magdalenas / croquetas'],['una barra de','pan']]},
  {t:'tr',de:'eine Flasche Olivenöl und zwei Packungen Kaffee',a:['una botella de aceite de oliva y dos paquetes de café','una botella de aceite y dos paquetes de café']},
  {t:'read',title:'Los españoles y el almuerzo',intro:'Zusammenfassung des Artikels aus deinem Übungsblatt.',text:`Según un estudio, la mayoría de los trabajadores españoles come el menú del día en un restaurante o en la {cantina|Kantine} de la empresa, porque no tienen tiempo para volver a casa. Cuanto más grande es la ciudad, más gente come fuera.

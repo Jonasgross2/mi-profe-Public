@@ -18,5 +18,8 @@ for K in sorted(p for p in (base / 'kurse').iterdir() if p.is_dir()):
             if len(tr) != len(texts): sys.exit(f'{kurs}/{ziel}/{f.name}: {len(tr)} Übersetzungen, aber {len(texts)} Texte')
             for a, b in zip(texts, tr):
                 if b and b != a: out[a] = b; n += 1
+        # Hand-Übersetzungen ganzer Texte, die die Extraktoren nicht finden (z. B. spanische Aufgabe mit deutschem Hinweis in Klammern): <ziel>/manual.json = {Originaltext: Übersetzung}
+        if (d / 'manual.json').exists():
+            man = json.load(open(d / 'manual.json')); out.update(man); n += len(man)
         js = '/* automatisch erzeugt von i18n/gen.py – nicht von Hand ändern */\nwindow.COURSE_TR=window.COURSE_TR||{};COURSE_TR.%s=COURSE_TR.%s||{};COURSE_TR.%s.%s=' % (kurs, kurs, kurs, ziel) + json.dumps(out, ensure_ascii=False) + ';\n'
         (base.parent / 'src' / kurs / f'tr_{ziel}.js').write_text(js); print(kurs, '→', ziel, n, 'Übersetzungen')

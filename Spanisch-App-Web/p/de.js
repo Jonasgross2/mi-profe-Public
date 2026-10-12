@@ -2686,7 +2686,7 @@ lessons:[
  {t:'vocab',title:'Viagem',items:[['die Strecke','o trecho, o percurso'],['die Entfernung','a distância'],['die Rückfahrt','a viagem de volta'],['die Rundfahrt','o passeio (circuito)'],['der Aufenthalt','a estadia'],['die Saison','a temporada'],['das Souvenir','a lembrancinha'],['das Visum','o visto'],['voraussichtlich','previsto, provavelmente'],['die Aussicht','a vista; a perspectiva'],['die Küste','o litoral'],['das Ufer','a margem'],['der Hügel','a colina'],['das Gebirge','a cordilheira, as montanhas'],['die Burg','o castelo (fortaleza)'],['das Denkmal','o monumento'],['der Turm','a torre']]},
  {t:'mc',q:'Vom Turm hat man eine tolle ___ über die ganze Stadt.',opts:['Aussicht','Strecke','Saison'],a:0},
  {t:'mc',q:'Der Zug kommt ___ um 18 Uhr an – wenn es keine Verspätung gibt.',opts:['voraussichtlich','rückwärts','steil'],a:0},
- {t:'gap',q:'Im Sommer ist ___, da sind die Hotels teurer. (alta temporada → die Haupt___)',a:['Hauptsaison|Saison']},
+ {t:'gap',q:'Im Sommer ist ___, da sind die Hotels teurer. (alta temporada → die Haupt…)',a:['Hauptsaison|Saison']},
  {t:'dialog',place:'Autovermietung',title:'Alugar um carro',scene:'Você quer alugar um carro por um fim de semana.',lines:[
   {n:'Mitarbeiter',es:'Guten Tag! Für welchen Zeitraum möchten Sie ein Auto mieten?',de:'Bom dia! Para qual período o senhor quer alugar um carro?'},
   {you:true,opts:[{es:'Von Freitagabend bis Sonntag. Wir wollen an die Nordseeküste fahren.',ok:true},{es:'Ich will ein Auto.',ok:false,why:'Responda à pergunta: o período (von … bis …).'}]},
