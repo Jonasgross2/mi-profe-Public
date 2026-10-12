@@ -39,7 +39,7 @@ QS={
 p=pathlib.Path(__file__).parent/'src'/'es'/'c_stories.js'
 out=[];cur=None;n=0
 for ln in p.read_text(encoding='utf-8').split('\n'):
-    m=re.match(r"^\{id:'(s\d+)'",ln)
+    m=re.match(r"^,?\{id:'(s\d+)'",ln)
     if m: cur=m.group(1)
     if ln.startswith('qs:[') and cur in QS:
         ln='qs:'+json.dumps(QS[cur],ensure_ascii=False)+ln[ln.rindex(']')+1:];n+=1
