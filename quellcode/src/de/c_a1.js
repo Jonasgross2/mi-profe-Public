@@ -129,7 +129,7 @@ lessons:[
  <tr><td><b>ö</b></td><td>diga “ê” com os lábios de “ô”</td><td class="es-t">schön · hören</td></tr>
  <tr><td><b>ü</b></td><td>diga “i” com os lábios de “u”</td><td class="es-t">Tschüss · müde</td></tr>
  <tr><td><b>ch</b> depois de a, o, u</td><td>raspado na garganta</td><td class="es-t">acht · Buch</td></tr>
- <tr><td><b>ch</b> depois de e, i, ä, ö, ü</td><td>como um gato bravo: “rrr” soprado</td><td class="es-t">ich · sprechen</td></tr></table>
+ <tr><td><b>ch</b> depois de e, i, ä, ö, ü</td><td>um chiado suave com a língua no céu da boca, como um gato bravo: “hhh” (sem r!)</td><td class="es-t">ich · sprechen</td></tr></table>
  <div class="ojo">Sem teclado alemão: <b>ä = ae</b>, <b>ö = oe</b>, <b>ü = ue</b>, <b>ß = ss</b>. Mas na app use os botões acima do campo de texto.</div>`},
  {t:'vocab',title:'Soletrar',items:[['das Alphabet','o alfabeto'],['Wie schreibt man das?','Como se escreve isso?'],['Können Sie das bitte buchstabieren?','O senhor pode soletrar, por favor?'],['Wie bitte?','Como? / Desculpe? (não entendi)'],['Noch einmal, bitte.','Mais uma vez, por favor.'],['langsam','devagar']]},
  {t:'info',title:'O alfabeto',html:`<p class="es-t">A (a) · B (be) · C (tse) · D (de) · E (e) · F (éf) · G (gue) · H (rá) · I (i) · J (iót) · K (ka) · L (él) · M (ém) · N (én) · O (o) · P (pe) · Q (ku) · R (ér) · S (és) · T (te) · U (u) · V (fau) · W (ve) · X (iks) · Y (ípsilon) · Z (tsét)</p>
@@ -189,7 +189,7 @@ lessons:[
  <table><tr><td class="es-t">zwanzig</td><td>20</td><td class="es-t">sechzig</td><td>60</td></tr><tr><td class="es-t">dreißig</td><td>30 <span class="muted">(com ß!)</span></td><td class="es-t">siebzig</td><td>70</td></tr><tr><td class="es-t">vierzig</td><td>40</td><td class="es-t">achtzig</td><td>80</td></tr><tr><td class="es-t">fünfzig</td><td>50</td><td class="es-t">neunzig</td><td>90</td></tr></table>
  <p><span class="es-t">hundert</span> = 100 · <span class="es-t">hunderteins</span> = 101 · <span class="es-t">zweihundert</span> = 200 · <span class="es-t">tausend</span> = 1000</p>
  <div class="ojo">Com 21, 31, 41 … é <span class="es-t">ein</span>und…, não “eins”: <span class="es-t">einundzwanzig</span>.</div>`},
- {t:'vocab',title:'Idade',items:[['Wie alt bist du?','Quantos anos você tem? (informal)'],['Wie alt sind Sie?','Quantos anos o senhor / a senhora tem?'],['Ich bin 28 Jahre alt.','Eu tenho 28 anos.'],['das Jahr, die Jahre','o ano, os anos'],['alt','velho / idoso; (idade)'],['jung','jovem'],['das Alter','a idade'],['der Geburtstag','o aniversário']]},
+ {t:'vocab',title:'Idade',items:[['Wie alt bist du?','Quantos anos você tem? (informal)'],['Wie alt sind Sie?','Quantos anos o senhor / a senhora tem?'],['Ich bin 28 Jahre alt.','Eu tenho 28 anos.'],['das Jahr, die Jahre','o ano, os anos'],['alt','velho, idoso (idade: 28 Jahre alt)'],['jung','jovem'],['das Alter','a idade'],['der Geburtstag','o aniversário']]},
  {t:'info',title:'A idade com „sein“',html:`<p>Em português a gente <b>tem</b> anos. Em alemão a gente <b>é</b> anos “velho”:</p>
  <div class="ex"><span class="es-t">Ich bin 28 Jahre alt.</span> = Eu tenho 28 anos. <span class="muted">(literalmente: “eu sou 28 anos velho”)</span></div>
  <div class="ojo">Nunca “Ich habe 28 Jahre” – esse é o erro mais comum de quem fala português!</div>`},
@@ -357,16 +357,16 @@ lessons:[
 ]},
 {id:'l4',title:'Ler e escrever: uma e-mail',desc:'Lesen · Hören · eine kurze E-Mail schreiben',steps:[
  {t:'read',title:'Leitura: Eine E-Mail an Tom',intro:'O Lucas escreve para o Tom sobre a visita da família.',text:`Hallo Tom,
-im Mai {kommen|vêm} meine Eltern nach Frankfurt! Mein Vater heißt Paulo, er ist 58 Jahre alt. Meine Mutter heißt Rita, sie ist 54. Sie wohnen in São Paulo. Mein Bruder Rafael kommt {leider|infelizmente} nicht. Er hat zwei Kinder und {keine Zeit|não tem tempo}.
+im Mai {kommen|vêm} meine Eltern nach Frankfurt! Mein Vater heißt Paulo, er ist 58 Jahre alt. Meine Mutter heißt Rita, sie ist 54. Sie wohnen in São Paulo. Mein Bruder Pedro kommt {leider|infelizmente} nicht. Er hat zwei Kinder und {keine Zeit|não tem tempo}.
 Hast du am Samstag Zeit? Wir {grillen|fazemos churrasco} im Garten!
 Viele Grüße
 Lucas`,de:`Oi, Tom,
-em maio meus pais vêm para Frankfurt! Meu pai se chama Paulo, ele tem 58 anos. Minha mãe se chama Rita, ela tem 54. Eles moram em São Paulo. Meu irmão Rafael infelizmente não vem. Ele tem dois filhos e não tem tempo.
+em maio meus pais vêm para Frankfurt! Meu pai se chama Paulo, ele tem 58 anos. Minha mãe se chama Rita, ela tem 54. Eles moram em São Paulo. Meu irmão Pedro infelizmente não vem. Ele tem dois filhos e não tem tempo.
 Você tem tempo no sábado? Vamos fazer churrasco no jardim!
 Abraços,
 Lucas`},
  {t:'mc',q:'Richtig oder falsch? Die Eltern von Lucas wohnen in Frankfurt.',opts:['falsch','richtig'],a:0},
- {t:'mc',q:'Richtig oder falsch? Rafael hat Kinder.',opts:['richtig','falsch'],a:0},
+ {t:'mc',q:'Richtig oder falsch? Pedro hat Kinder.',opts:['richtig','falsch'],a:0},
  {t:'mc',q:'Wie alt ist der Vater?',opts:['58','54','28'],a:0},
  {t:'read',hideText:true,title:'Conversa no trabalho',intro:'Ouça a conversa entre a Jana e um colega.',text:`Jana, hast du Kinder? – Ja, ich habe eine Tochter. Sie heißt Mia und ist vier Jahre alt. – Oh, schön! Und hast du auch Geschwister? – Nein, ich habe keine Geschwister. Aber ich habe viele Freunde.`,de:`Jana, você tem filhos? – Sim, tenho uma filha. Ela se chama Mia e tem quatro anos. – Ah, que legal! E você também tem irmãos? – Não, não tenho irmãos. Mas tenho muitos amigos.`},
  {t:'mc',q:'Wie alt ist Mia?',opts:['vier','vierzehn','zwei'],a:0},
@@ -512,7 +512,7 @@ placement:[
 lessons:[
 {id:'l1',title:'O apartamento',desc:'Zimmer, Küche, Bad … · Adjektive',steps:[
  {t:'vocab',title:'Cômodos',items:[['die Wohnung','o apartamento'],['das Haus','a casa'],['das Zimmer','o quarto / o cômodo'],['das Wohnzimmer','a sala'],['das Schlafzimmer','o quarto de dormir'],['die Küche','a cozinha'],['das Bad','o banheiro'],['die Toilette','o vaso / o banheiro'],['der Flur','o corredor'],['der Balkon','a varanda'],['der Garten','o jardim'],['der Keller','o porão'],['der Stock','o andar'],['das Erdgeschoss','o térreo'],['der Aufzug','o elevador'],['die Treppe','a escada']]},
- {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso / calmo'],['laut','barulhento; segundo (laut + dativo)'],['neu','novo'],['alt','velho / idoso; (idade)'],['schön','bonito; (tempo) bom'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
+ {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso / calmo'],['laut','barulhento; segundo (laut + dativo)'],['neu','novo'],['alt','velho, idoso (idade: 28 Jahre alt)'],['schön','bonito; (tempo) bom'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
  {t:'info',title:'Andares e lugares',html:`<p>No Brasil o “primeiro andar” às vezes é o térreo – na Alemanha <b>nunca</b>:</p>
  <table><tr><td class="es-t">im Erdgeschoss (EG)</td><td>no térreo</td></tr><tr><td class="es-t">im ersten Stock</td><td>no 1º andar (acima do térreo)</td></tr><tr><td class="es-t">im dritten Stock</td><td>no 3º andar</td></tr><tr><td class="es-t">oben / unten</td><td>em cima / embaixo</td></tr><tr><td class="es-t">links / rechts</td><td>à esquerda / à direita</td></tr></table>
  <div class="ex">O adjetivo depois de <b>sein</b> não muda: <span class="es-t">Die Wohnung ist hell. Das Zimmer ist klein. Die Zimmer sind klein.</span></div>`},
@@ -682,9 +682,9 @@ lessons:[
   {n:'Jana',es:'Geht es am Dienstag?',de:'Dá na terça?'},
   {you:true,opts:[{es:'Am Dienstag kann ich leider nicht. Aber am Freitag geht es.',ok:true},{es:'Am Dienstag kann ich leider nicht. Aber im Freitag geht es.',ok:false,why:'Dias da semana: <b>am</b> Freitag.'}]},
   {n:'Jana',es:'Super. Der Film fängt um halb neun an.',de:'Ótimo. O filme começa às oito e meia.'},
-  {you:true,opts:[{es:'Gut, dann treffen wir uns um acht Uhr am Kino.',ok:true},{es:'Gut, dann treffen wir uns um halb neun um neun Uhr.',ok:false,why:'Combine um horário claro – antes do filme.'}]},
+  {you:true,opts:[{es:'Gut, dann treffen wir uns um acht Uhr vor dem Kino.',ok:true},{es:'Gut, dann treffen wir uns um halb neun um neun Uhr.',ok:false,why:'Combine um horário claro – antes do filme.'}]},
   {n:'Jana',es:'Perfekt. Bis Freitag!',de:'Perfeito. Até sexta!'}]},
- {t:'read',hideText:true,title:'Recado do consultório',intro:'Ouça a mensagem.',text:`Guten Tag, hier ist die Praxis Doktor Wolf. Ihr Termin am Mittwoch um zehn Uhr geht leider nicht. Die Ärztin ist krank. Neuer Termin: Freitag, Viertel nach neun. Bitte bringen Sie Ihre {Versichertenkarte|carteirinha do plano de saúde} mit. Vielen Dank, auf Wiederhören.`,de:`Bom dia, aqui é o consultório do doutor Wolf. Infelizmente sua consulta na quarta às dez horas não vai dar. A médica está doente. Nova consulta: sexta-feira, nove e quinze. Por favor, traga sua carteirinha do plano de saúde. Muito obrigado, até logo.`},
+ {t:'read',hideText:true,title:'Recado do consultório',intro:'Ouça a mensagem.',text:`Guten Tag, hier ist die Praxis Doktor Wolf. Ihr Termin am Mittwoch um zehn Uhr geht leider nicht. Die Ärztin ist krank. Neuer Termin: Freitag, Viertel nach neun. Bitte bringen Sie Ihre {Versichertenkarte|carteirinha do plano de saúde} mit. Vielen Dank, auf Wiederhören.`,de:`Bom dia, aqui é o consultório da doutora Wolf. Infelizmente sua consulta na quarta às dez horas não vai dar. A médica está doente. Nova consulta: sexta-feira, nove e quinze. Por favor, traga sua carteirinha do plano de saúde. Muito obrigado, até logo.`},
  {t:'mc',q:'Wann ist der neue Termin?',opts:['Freitag, 9:15 Uhr','Mittwoch, 10 Uhr','Freitag, 9:45 Uhr'],a:0},
  {t:'mc',q:'Richtig oder falsch? Die Ärztin ist krank.',opts:['richtig','falsch'],a:0},
  {t:'info',title:'Cancelar por escrito',html:`<p>Mensagem curta para desmarcar – <b>3 pontos</b>: pedir desculpas, dizer o motivo, propor outro horário.</p>
@@ -771,24 +771,24 @@ lessons:[
  {t:'read',title:'Leitura: Eine Einladung',text:`Liebe Kolleginnen und Kollegen,
 am Freitag, den 14. Juni, werde ich dreißig! Das möchte ich mit euch feiern. Die Party ist bei mir zu Hause, in der Gartenstraße 8, ab neunzehn Uhr. Es gibt Pizza und Getränke. Ihr müsst nichts mitbringen – nur gute Laune! Bitte sagt mir bis Mittwoch Bescheid, ob ihr kommt.
 Viele Grüße
-Jana`,de:`Queridas colegas e queridos colegas,
+Sarah`,de:`Queridas colegas e queridos colegas,
 na sexta-feira, 14 de junho, eu faço trinta anos! Quero comemorar com vocês. A festa é na minha casa, na Gartenstraße 8, a partir das 19 horas. Tem pizza e bebidas. Vocês não precisam levar nada – só bom humor! Por favor, me avisem até quarta-feira se vocês vêm.
 Abraços,
-Jana`},
- {t:'mc',q:'Warum feiert Jana?',opts:['Sie hat Geburtstag.','Sie hat eine neue Wohnung.','Sie hat einen neuen Job.'],a:0},
+Sarah`},
+ {t:'mc',q:'Warum feiert Sarah?',opts:['Sie hat Geburtstag.','Sie hat eine neue Wohnung.','Sie hat einen neuen Job.'],a:0},
  {t:'mc',q:'Richtig oder falsch? Die Gäste müssen Essen mitbringen.',opts:['falsch','richtig'],a:0},
  {t:'mc',q:'Bis wann soll man antworten?',opts:['bis Mittwoch','bis Freitag','bis zum 14. Juni'],a:0},
  {t:'info',title:'Responder a um convite',html:`<table><tr><th>sim</th><th>não</th></tr>
  <tr><td class="es-t">Vielen Dank für die Einladung! Ich komme gern.</td><td class="es-t">Vielen Dank für die Einladung, aber leider kann ich nicht kommen.</td></tr>
  <tr><td class="es-t">Soll ich etwas mitbringen?</td><td class="es-t">Ich bin am Freitag in Hamburg. / Ich muss arbeiten.</td></tr>
  <tr><td class="es-t">Bis Freitag!</td><td class="es-t">Ich wünsche dir eine schöne Party!</td></tr></table>`},
- {t:'dialog',place:'Gartenstraße 8',title:'Na festa da Jana',scene:'Você chega à festa de aniversário da Jana com um presente.',lines:[
-  {n:'Jana',es:'Hallo Lucas! Schön, dass du da bist!',de:'Oi, Lucas! Que bom que você veio!'},
-  {you:true,opts:[{es:'Hallo Jana! Herzlichen Glückwunsch zum Geburtstag! Das ist für dich.',ok:true},{es:'Hallo Jana! Gute Besserung!',ok:false,why:'<i>Gute Besserung</i> se diz para quem está doente.'}]},
-  {n:'Jana',es:'Oh, ein Geschenk! Danke! Was möchtest du trinken?',de:'Ah, um presente! Obrigada! O que você quer beber?'},
-  {you:true,opts:[{es:'Ein Wasser, bitte. Ich muss noch Auto fahren.',ok:true},{es:'Ich will Bier! Schnell!',ok:false,why:'Um pouco educado demais… não 😉 Use <i>möchte</i> ou <i>gern</i>.'}]},
-  {n:'Jana',es:'Kein Problem. Komm, ich stelle dir meine Freunde vor!',de:'Sem problema. Vem, vou te apresentar meus amigos!'}]},
- {t:'free',task:'Responda ao convite da Jana (~30 palavras): 1) agradeça, 2) diga que vai (ou não) e por quê, 3) pergunte se deve levar algo / deseje uma boa festa.',hint:'Liebe Jana, vielen Dank für die Einladung! Ich komme gern / Leider kann ich nicht … Soll ich … mitbringen? Viele Grüße',focus:'Einladung beantworten, können, mitbringen (trennbar), Datum',model:'Liebe Jana,\nvielen Dank für die Einladung! Ich komme sehr gern. Soll ich etwas mitbringen? Ich kann einen Kuchen backen. Ich freue mich auf Freitag!\nViele Grüße\nLucas'}
+ {t:'dialog',place:'Gartenstraße 8',title:'Na festa da Sarah',scene:'Você chega à festa de aniversário da Sarah com um presente.',lines:[
+  {n:'Sarah',es:'Hallo Lucas! Schön, dass du da bist!',de:'Oi, Lucas! Que bom que você veio!'},
+  {you:true,opts:[{es:'Hallo Sarah! Herzlichen Glückwunsch zum Geburtstag! Das ist für dich.',ok:true},{es:'Hallo Sarah! Gute Besserung!',ok:false,why:'<i>Gute Besserung</i> se diz para quem está doente.'}]},
+  {n:'Sarah',es:'Oh, ein Geschenk! Danke! Was möchtest du trinken?',de:'Ah, um presente! Obrigada! O que você quer beber?'},
+  {you:true,opts:[{es:'Ein Wasser, bitte. Ich muss noch Auto fahren.',ok:true},{es:'Ich will Bier! Schnell!',ok:false,why:'Direto demais – soa mal-educado 😉 Use <i>möchte</i> ou <i>gern</i>.'}]},
+  {n:'Sarah',es:'Kein Problem. Komm, ich stelle dir meine Freunde vor!',de:'Sem problema. Vem, vou te apresentar meus amigos!'}]},
+ {t:'free',task:'Responda ao convite da Sarah (~30 palavras): 1) agradeça, 2) diga que vai (ou não) e por quê, 3) pergunte se deve levar algo / deseje uma boa festa.',hint:'Liebe Sarah, vielen Dank für die Einladung! Ich komme gern / Leider kann ich nicht … Soll ich … mitbringen? Viele Grüße',focus:'Einladung beantworten, können, mitbringen (trennbar), Datum',model:'Liebe Sarah,\nvielen Dank für die Einladung! Ich komme sehr gern. Soll ich etwas mitbringen? Ich kann einen Kuchen backen. Ich freue mich auf Freitag!\nViele Grüße\nLucas'}
 ]}],
 resumen:`<h3>Hobbies</h3><p class="es-t">lesen · Musik hören · Sport machen · schwimmen · wandern · Rad fahren · tanzen · Freunde treffen</p><p class="es-t">gern – lieber – am liebsten</p>
 <h3>Modais + infinitivo no fim</h3><table><tr><th></th><th>können</th><th>wollen</th></tr><tr><td>ich / er</td><td class="es-t">kann</td><td class="es-t">will</td></tr><tr><td>du</td><td class="es-t">kannst</td><td class="es-t">willst</td></tr><tr><td>wir / sie</td><td class="es-t">können</td><td class="es-t">wollen</td></tr><tr><td>ihr</td><td class="es-t">könnt</td><td class="es-t">wollt</td></tr></table><p class="es-t">Ich kann gut schwimmen. · Willst du mitkommen?</p>
@@ -914,7 +914,7 @@ resumen:`<h3>Dativo (onde? com quem? com quê?)</h3><table><tr><th></th><th>nom.
 /* ================= KAPITEL 9 · ARBEIT & BERUF ================= */
 LANGS.de.course.units.push({id:'k9',n:'9',level:'A1',title:'Arbeit & Beruf',sub:'Profissões · no trabalho · ao telefone · und, aber, oder, denn · Perfekt · war, hatte',
 goals:['Berufe: Was sind Sie von Beruf?','Ich arbeite als … bei …','Am Arbeitsplatz: Büro, Computer, Pause, Urlaub','Telefonieren: Kann ich bitte … sprechen?','und, aber, oder, denn','Perfekt: Ich habe gearbeitet. Ich bin gefahren.','war und hatte','Eine E-Mail an den Chef: krank'],
-situacion:{title:'Conversa com a chefe',npc:'Frau Dr. Hoffmann',scene:'Segunda-feira de manhã. A sua chefe pergunta como foi o fim de semana e combina o trabalho da semana.',role:'Du bist Frau Dr. Hoffmann, Teamleiterin in einer Softwarefirma in Frankfurt, freundlich, aber beschäftigt. Du duzt Lucas (in der Firma duzen sich alle). Frag: Wie war dein Wochenende? Was hast du gemacht? Dann: Hast du diese Woche Zeit für ein Meeting? Am Mittwoch um 10 Uhr? Sprich sehr einfaches Deutsch (A1), benutze einfache Perfekt-Formen.',goal:'Conte o que você fez no fim de semana (Perfekt) e combine um horário para a reunião.'},
+situacion:{title:'Conversa com a chefe',npc:'Frau Dr. Hoffmann',scene:'Segunda-feira de manhã. A sua chefe pergunta como foi o fim de semana e combina o trabalho da semana.',role:'Du bist Frau Dr. Hoffmann, Teamleiterin in einer Softwarefirma in Frankfurt, freundlich, aber beschäftigt. Du siezt Lucas. Frag: Wie war Ihr Wochenende? Was haben Sie gemacht? Dann: Haben Sie diese Woche Zeit für ein Meeting? Am Mittwoch um 10 Uhr? Sprich sehr einfaches Deutsch (A1), benutze einfache Perfekt-Formen.',goal:'Conte o que você fez no fim de semana (Perfekt) e combine um horário para a reunião.'},
 placement:[
  {t:'mc',q:'„O que o senhor faz? (profissão)“',opts:['Was sind Sie von Beruf?','Was machen Sie Beruf?','Wer sind Sie von Beruf?'],a:0},
  {t:'gap',q:'Ich arbeite ___ Programmierer bei einer Softwarefirma.',a:['als']},
@@ -1065,7 +1065,7 @@ lessons:[
  <tr><td></td><td class="es-t">Die nehme ich.</td></tr></table>
  <div class="ex"><span class="es-t">die</span>, <span class="es-t">der</span>, <span class="es-t">das</span> também servem como pronome “esse/essa”: <span class="es-t">Die Jacke? Die nehme ich.</span></div>
  <div class="ojo">No inverno alemão você vai precisar de <span class="es-t">eine warme Jacke, eine Mütze und gute Schuhe</span> 🧥🧣</div>`},
- {t:'mc',q:'Was trägt man im Winter?',opts:['einen Mantel und eine Mütze','ein T-Shirt','einen Rock und kein Mantel'],a:0},
+ {t:'mc',q:'Was trägt man im Winter?',opts:['einen Mantel und eine Mütze','ein T-Shirt','einen Rock und keinen Mantel'],a:0},
  {t:'gap',q:'Kann ich die Hose ___? (experimentar)',a:['anprobieren']},
  {t:'gap',q:'Die Schuhe sind zu klein. Haben Sie eine andere ___? (tamanho)',a:['Größe']},
  {t:'match',q:'Ligue.',pairs:[['das Hemd','a camisa'],['der Rock','a saia'],['die Hose','a calça'],['das Kleid','o vestido'],['die Mütze','o gorro']]},
@@ -1254,7 +1254,7 @@ Paula`},
  {t:'tr',kind:'Sprechen · Teil 2',de:'Tema „Freizeit“, palavra „Wochenende“ – faça uma pergunta: (O que você faz no fim de semana?)',a:['Was machst du am Wochenende?','Was machen Sie am Wochenende?']},
  {t:'tr',kind:'Sprechen · Teil 2',de:'Tema „Familie“, palavra „Geschwister“ – faça uma pergunta: (Você tem irmãos?)',a:['Hast du Geschwister?','Haben Sie Geschwister?']},
  {t:'tr',kind:'Sprechen · Teil 3',de:'Figura: uma janela 🪟 – peça educadamente que abram: (Você pode abrir a janela, por favor?)',a:['Kannst du bitte das Fenster aufmachen?','Können Sie bitte das Fenster aufmachen?','Kannst du bitte das Fenster öffnen?','Können Sie bitte das Fenster öffnen?','Kannst du das Fenster bitte aufmachen?','Können Sie das Fenster bitte aufmachen?']},
- {t:'tr',kind:'Sprechen · Teil 3',de:'Figura: uma caneta 🖊️ – peça a caneta emprestada: (Você me dá a caneta, por favor?)',a:['Kannst du mir bitte den Kuli geben?','Können Sie mir bitte den Kuli geben?','Kannst du mir bitte den Stift geben?','Können Sie mir bitte den Stift geben?','Gib mir bitte den Kuli.','Gib mir bitte den Stift.']},
+ {t:'tr',kind:'Sprechen · Teil 3',de:'Figura: uma caneta 🖊️ – peça a caneta emprestada: (Você me dá a caneta, por favor?)',a:['Kannst du mir bitte den Kuli geben?','Können Sie mir bitte den Kuli geben?','Kannst du mir bitte den Stift geben?','Können Sie mir bitte den Stift geben?','Gib mir bitte den Kuli.','Gib mir bitte den Stift.','Kannst du mir bitte den Kugelschreiber geben?','Können Sie mir bitte den Kugelschreiber geben?','Gib mir bitte den Kugelschreiber.']},
  {t:'tr',kind:'Sprechen · Teil 3',de:'Figura: um café ☕ – peça um café: (Eu queria um café, por favor.)',a:['Ich hätte gern einen Kaffee, bitte.','Ich möchte einen Kaffee, bitte.','Einen Kaffee, bitte.','Ich hätte gern einen Kaffee.']},
  {t:'info',title:'Parabéns! 🎉',html:`<p>Você chegou ao fim do nível <b>A1</b>. Se você acertou cerca de 60 % deste simulado, você está pronto para a prova <b>Goethe-Zertifikat A1</b> (ou <b>telc Deutsch A1</b>, que tem formato parecido).</p>
  <div class="ex">Dica: faça a gemischte Wiederholung (revisão mista) e os vocabulários todos os dias até a prova. Informações e inscrição: no site do Goethe-Institut ou de uma Volkshochschule perto de você.</div>`}
