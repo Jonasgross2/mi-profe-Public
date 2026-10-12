@@ -11,7 +11,7 @@ lessons:[
  <tr><td class="es-t">Es tranquilo / luminoso.</td><td class="es-t">Está reformado.</td><td class="es-t">Está en la zona comercial.</td></tr>
  <tr><td class="es-t">Es exterior / interior.</td><td class="es-t">Está amueblado.</td><td class="es-t">Está cerca de la estación.</td></tr>
  <tr><td class="es-t">Es barato / caro.</td><td class="es-t">Está limpio.</td><td class="es-t">Está bien comunicado.</td></tr></table>
- <div class="ex">Gleiches Adjektiv, andere Bedeutung: <span class="es-t">El piso es limpio</span> klingt komisch – Sauberkeit ist ein Zustand: <span class="es-t">El piso está limpio.</span></div>`},
+ <div class="ex">Gleiches Adjektiv, andere Bedeutung: <span class="es-t">Es limpio</span> = er ist reinlich (Eigenschaft einer Person), <span class="es-t">Está limpio</span> = es ist (gerade) sauber. Für die Wohnung also: <span class="es-t">El piso está limpio.</span></div>`},
  {t:'mc',q:'El piso ___ muy luminoso.',opts:['es','está'],a:0,keep:true,why:'Eigenschaft der Wohnung → <b>ser</b>.'},
  {t:'mc',q:'La cocina ___ equipada.',opts:['está','es'],a:0,keep:true,why:'Zustand (ausgestattet) → <b>estar</b>.'},
  {t:'mc',q:'La oficina ___ cerca de la estación.',opts:['está','es','hay'],a:0,keep:true},

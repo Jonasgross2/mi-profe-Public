@@ -14,7 +14,7 @@ W('u16','Stadt & Reisen','Sehenswürdigkeiten, Unterkunft, unterwegs',[
 
 W('u17','Ereignisse & Erzählen','Zeitangaben, Missgeschicke, Reaktionen',[
 ['de repente','plötzlich'],['al principio','am Anfang'],['al final','am Ende'],['mientras tanto','währenddessen'],['de pronto','auf einmal'],['por casualidad','zufällig'],['menos mal','zum Glück'],['el susto','der Schreck'],['darse cuenta de','merken'],['ocurrir','passieren, geschehen'],
-['el malentendido','das Missverständnis'],['quedarse en blanco','ein Blackout haben'],['equivocarse de','sich vertun (bei)'],['olvidarse de','vergessen'],['tener mala suerte','Pech haben'],['por suerte','zum Glück'],['la anécdota','die Anekdote'],['el recuerdo','die Erinnerung'],['acordarse de','sich erinnern an'],['contar','erzählen'],
+['el malentendido','das Missverständnis'],['quedarse en blanco','einen Blackout haben'],['equivocarse de','sich vertun (bei)'],['olvidarse de','vergessen'],['tener mala suerte','Pech haben'],['por suerte','zum Glück'],['la anécdota','die Anekdote'],['el recuerdo','die Erinnerung'],['acordarse de','sich erinnern an'],['contar','erzählen'],
 ['¡Qué fuerte!','Krass!'],['¡No me digas!','Was du nicht sagst!'],['¡Qué vergüenza!','Wie peinlich!'],['¡Qué mala pata!','So ein Pech!'],['pasarlo fatal','eine schlimme Zeit haben'],['pasarlo genial','viel Spaß haben'],['de golpe','auf einen Schlag'],['a la mañana siguiente','am nächsten Morgen'],['aquella noche','in jener Nacht'],['hace años','vor Jahren']]);
 
 W('u18','Wohnen & Haushalt','Wohnung, Reparaturen, Nachbarn',[

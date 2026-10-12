@@ -176,7 +176,7 @@ lessons:[
  {t:'mc',q:'Höflich nach dem Weg fragen:',opts:['Perdone, ¿sabe dónde está la estación?','Oye, ¿dónde hay la estación?','Perdone, ¿dónde es la estación?'],a:0},
  {t:'dialog',place:'Plaça de Catalunya',title:'Wo ist der Bahnhof?',scene:'Du suchst den Weg zur Metro. Du sprichst einen Passanten an.',lines:[
   {you:true,prompt:'Sprich den Passanten höflich an.',opts:[{es:'Perdone, ¿hay una estación de metro cerca de aquí?',ok:true},{es:'Perdone, ¿está una estación de metro cerca de aquí?',ok:false,why:'Unbestimmt (eine Station) → <b>hay</b>.'}]},
-  {n:'Señor',es:'Sí, está muy cerca. Sigue todo recto y gira la segunda calle a la izquierda.',de:'Ja, ganz nah. Geh geradeaus und bieg in die zweite Straße links ab.'},
+  {n:'Señor',es:'Sí, está muy cerca. Sigue todo recto y toma la segunda calle a la izquierda.',de:'Ja, ganz nah. Geh geradeaus und bieg in die zweite Straße links ab.'},
   {you:true,prompt:'Wiederhole zur Sicherheit.',opts:[{es:'Todo recto y la segunda a la izquierda, ¿no?',ok:true},{es:'Todo recto y la segunda a la derecha, ¿no?',ok:false,why:'Er hat <i>izquierda</i> (links) gesagt.'}]},
   {n:'Señor',es:'Eso es. La estación está enfrente de un banco.',de:'Genau. Die Station ist gegenüber von einer Bank.'},
   {you:true,opts:[{es:'¡Muchas gracias!',ok:true},{es:'¡De nada!',ok:false,why:'<i>De nada</i> sagt man, wenn sich jemand bei <b>dir</b> bedankt.'}]},

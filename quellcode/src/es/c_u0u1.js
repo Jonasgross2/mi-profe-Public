@@ -2,7 +2,7 @@ window.COURSE={units:[]};
 /* ================= UNIDAD 0 · EL PRIMER DÍA ================= */
 COURSE.units.push({id:'u0',n:'0',title:'El primer día',sub:'Begrüßen · sich vorstellen · nach dem Befinden fragen · Aussprache',
 goals:['Hola, buenos días …','¿Cómo te llamas? / ¿Cómo se llama usted?','¿Qué tal? – Bien, ¿y tú?','tú vs. usted','Verabschiedungen','Aussprache: c, ch, g, h, j, ll, ñ, qu, r/rr, v, y, z'],
-situacion:{title:'Erster Tag an der Uni',npc:'Laia',scene:'Erster Tag im Master an der Uni (UPC). Vor dem Hörsaal A5 spricht dich eine Kommilitonin an.',role:'Du bist Laia, 24, Masterstudentin aus Girona, freundlich und neugierig. Du duzt Jonas.',goal:'Begrüße Laia, stell dich vor (Name), frag, wie es ihr geht, und verabschiede dich passend.'},
+situacion:{title:'Erster Tag an der Uni',npc:'Laia',scene:'Erster Tag im Master an der Uni. Vor dem Hörsaal A5 spricht dich eine Kommilitonin an.',role:'Du bist Laia, 24, Masterstudentin aus Girona, freundlich und neugierig. Du duzt Jonas.',goal:'Begrüße Laia, stell dich vor (Name), frag, wie es ihr geht, und verabschiede dich passend.'},
 lessons:[
 {id:'l1',title:'Begrüßen & vorstellen',desc:'Hola, buenos días, ¿cómo te llamas?',steps:[
  {t:'info',title:'Begrüßung nach Tageszeit',html:`<p>Im Spanischen hängt die Begrüßung von der Uhrzeit ab – und Spanier essen spät, deshalb verschieben sich die Grenzen:</p>
@@ -210,7 +210,7 @@ lessons:[
   {you:true,prompt:'Ihr sprecht beide Englisch. Reagiere darauf …',opts:[{es:'¡Yo también hablo inglés!',ok:true},{es:'¡Yo tampoco hablo inglés!',ok:false,why:'<i>tampoco</i> = auch nicht – passt nur zu einem verneinten Satz. Carla spricht Englisch, also: <i>también</i> (auch).'},{es:'Yo también hablo catalán.',ok:false,why:'Du sprichst ja kein Katalanisch 😉'}]},
   {n:'Carla',es:'¡Genial! ¿Y para qué estudias español?',de:'Super! Und wozu lernst du Spanisch?'},
   {you:true,opts:[{es:'Para estudiar un máster en la universidad.',ok:true},{es:'Porque estudiar un máster.',ok:false,why:'„Um zu“ = <b>para</b> + Infinitiv.'},{es:'Para estudio un máster.',ok:false,why:'Nach <b>para</b> kommt der Infinitiv: <i>para estudiar</i>.'}]},
-  {n:'Carla',es:'¡Genial! Bienvenido a Barcelona.',de:'Super! Willkommen in Barcelona.'}]},
+  {n:'Carla',es:'¡Qué bien! Bienvenido a Barcelona.',de:'Super! Willkommen in Barcelona.'}]},
  {t:'tr',de:'Ich spreche kein Französisch. – Ich auch nicht.',a:['No hablo francés. – Yo tampoco.','No hablo francés. Yo tampoco.','Yo no hablo francés. Yo tampoco.']},
  {t:'tr',de:'Sie arbeiten, aber ich nicht.',a:['Ellos trabajan, pero yo no.','Trabajan, pero yo no.','Ellas trabajan, pero yo no.']},
  {t:'free',task:'Stell dich in 4–6 Sätzen vor: Name, Herkunft, Wohnort, Sprachen, wozu du Spanisch lernst, was du (nicht) machst.',hint:'Me llamo … Soy de … Hablo … Estudio español para … No practico … pero …',focus:'ser, Verben auf -ar, para + Infinitiv, no/también/tampoco',model:'Hola, me llamo Jonas. Soy de Alemania, pero ahora vivo en Barcelona. Hablo alemán, inglés y un poco de español. Estudio un máster en la universidad. Estudio español para hablar con mis compañeros y para trabajar en España. Practico deporte, pero no toco un instrumento.'}

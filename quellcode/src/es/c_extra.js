@@ -148,7 +148,7 @@ Por la tarde voy a la biblioteca para estudiar. Allí me quedo hasta las siete. 
  {t:'conj',verb:'vestirse',de:'sich anziehen (e→i)',forms:['me visto','te vistes','se viste','nos vestimos','os vestís','se visten']},
  {t:'conj',verb:'almorzar',de:'zu Mittag essen (o→ue)',forms:['almuerzo','almuerzas','almuerza','almorzamos','almorzáis','almuerzan']},
  {t:'conj',verb:'empezar',de:'anfangen (e→ie)',forms:['empiezo','empiezas','empieza','empezamos','empezáis','empiezan']},
- {t:'gap',task:'Javiers Wochenende – ergänze die Verben:',q:'Normalmente me ___ (despertarse) entre las nueve y las diez y me ___ (ducharse). Después, ___ (salir) de casa.',a:['despierto','ducho','salgo']},
+ {t:'gap',task:'Javiers Wochenende – ergänze die Verben:',q:'Los fines de semana me ___ (despertarse) entre las diez y las once y me ___ (ducharse). Después, ___ (salir) de casa.',a:['despierto','ducho','salgo']},
  {t:'gap',q:'Ya ___ (conocer) muchos lugares de México. Cuando voy a un restaurante, siempre ___ (pedir) comida típica.',a:['conozco','pido']},
  {t:'gap',q:'Mis amigos y yo ___ (volver) por la noche a casa. Después, ___ (poner) la tele y me ___ (acostarse) sobre las once.',a:['volvemos','pongo','acuesto']},
  {t:'info',kind:'Übungsblatt',title:'La rutina de Sara – was ist unlogisch?',html:`<div class="ex es-t">Me llamo Sara y soy enfermera en el Hospital Clínic de Barcelona. Me levanto a las once y media porque empiezo a trabajar a las cuatro de la tarde. […] A las cuatro menos cuarto salgo de casa. Si el metro va bien, necesito media hora para llegar al hospital. Soy una persona muy puntual y nunca llego tarde al trabajo.</div>`},
