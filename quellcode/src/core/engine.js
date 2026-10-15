@@ -853,7 +853,7 @@ function vWords(m,id){const u=unitById(id);const w=allUnitWords(u);
     h('p',{class:'sub'},w.length+T(' Wörter & Ausdrücke. ')),h('div',{class:'row',style:'margin-bottom:14px'},
       h('button',{class:'btn primary',onclick:()=>{const n=addVocab(w,u.id);toast(n?n+T(' Wörter zum Trainer hinzugefügt'):T('Schon alle im Trainer'));}},T('Alle in den Vokabeltrainer')),
       h('button',{class:'btn',onclick:()=>startCram(w,u)},T('Jetzt abfragen'))),
-    h('div',{class:'vlist'},w.map(([es,de,em])=>h('div',{class:'vrow'},spk(es),picEl(es,em),h('span',{class:'es'},artW(es)),h('span',{class:'de'},de)))));}
+    h('div',{class:'vlist'},w.map(([es,de,em])=>h('div',{class:'vrow'},spk(es),picEl(es,em)||(w.some(x=>pic(x[0],x[2]))?h('span',{class:'pic'}):null),h('span',{class:'es'},artW(es)),h('span',{class:'de'},de)))));}
 
 /* ---------- Abschlusstest (statt ganzer Einheit) ---------- */
 function vCheck(m,id){const u=unitById(id);if(!u)return vUnits(m);
@@ -1060,7 +1060,7 @@ info(el,s,ctx){const box=h('div',{class:'info',html:s.html});const tb=trToggle(b
   el.querySelectorAll('.info .es-t').forEach(addSpeakTo);el.append(actionBar(()=>{ctx.next();return false;},ctx,{label:T('Verstanden →')}));},
 vocab(el,s,ctx){const n=addVocab(s.items,ctx.unit?.id);
   el.append(kind(T('Neue Wörter')),h('h2',{style:'margin-top:0'},s.title||T('Wortschatz')),s.note?h('p',{class:'muted'},s.note):null,
-    h('div',{class:'vlist'},s.items.map(([es,de,em])=>h('div',{class:'vrow'},spk(es),picEl(es,em),h('span',{class:'es'},artW(es)),h('span',{class:'de'},de)))),
+    h('div',{class:'vlist'},s.items.map(([es,de,em])=>h('div',{class:'vrow'},spk(es),picEl(es,em)||(s.items.some(x=>pic(x[0],x[2]))?h('span',{class:'pic'}):null),h('span',{class:'es'},artW(es)),h('span',{class:'de'},de)))),
     h('p',{class:'muted small'},n?'✓ '+n+T(' neue Wörter im Vokabeltrainer gespeichert.'):T('Diese Wörter sind schon im Vokabeltrainer.')));
   el.append(actionBar(()=>{ctx.next();return false;},ctx,{label:T('Weiter →')}));},
 mc(el,s,ctx){let sel=null;const all=s.opts.map((o,i)=>[o,i]);const opts=s.keep?all:s.keepLast?shuffle(all.slice(0,-1)).concat([all[all.length-1]]):shuffle(all);
