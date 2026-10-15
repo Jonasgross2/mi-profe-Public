@@ -938,6 +938,22 @@ function ctxOf(ref){const p=String(ref||'').split('|');
   for(let k=i-1;k>=0&&k>=i-8;k--){const s=l.steps[k];if(s.t==='read'&&s.text)return{title:s.title||'',text:s.text};if(s.t==='vocab'||s.t==='info')break;}return null;}
 function ctxBox(cx){const html=esc(String(cx.text).replace(/\{([^|}]+)\|[^}]*\}/g,'$1')).split(/\n\s*\n/).map(x=>'<p>'+x.replace(/\n/g,'<br>')+'</p>').join('');
   return h('details',{class:'card ctxbox',style:'padding:10px 14px;margin:0 0 12px'},h('summary',{class:'small',style:'cursor:pointer;font-weight:600'},T('📖 Text zum Nachlesen')+(cx.title?' · '+cx.title:'')),h('div',{class:'es-t',style:'margin-top:8px;font-size:15px',html}));}
+/* „Kann gerade nicht hören“: Hör-Aufgaben für eine Stunde aussetzen (nur dieses Gerät), ohne Fehler zu zählen */
+const NOLISTEN='mi-profe-nolisten';
+function noListen(){try{return +localStorage.getItem(NOLISTEN)>Date.now();}catch(e){return false;}}
+function setNoListen(ms){try{if(ms)localStorage.setItem(NOLISTEN,String(Date.now()+ms));else localStorage.removeItem(NOLISTEN);}catch(e){}}
+const isListenStep=s=>!!s&&(s.t==='listen'||(s.t==='mc'&&!!s.autoSay));
+/* Knopf → Auswahl, wie lange: nur diese Aufgabe / 15 Min. / 1 Stunde / heute */
+function noListenBtn(onSkip){const box=h('div',{class:'nolisten'});
+  const go=(ms,msg)=>{if(ms)setNoListen(ms);speechSynthesis.cancel();window.__cleanupStep&&window.__cleanupStep();if(msg)toast(msg);onSkip();};
+  const endOfDay=()=>{const d=new Date();d.setHours(24,0,0,0);return d-Date.now();};
+  const open=()=>{box.innerHTML='';box.append(h('div',{class:'muted small',style:'margin-bottom:6px'},'🎧 '+T('Hör-Aufgaben überspringen – wie lange?')),
+    h('div',{class:'chips'},
+      h('button',{class:'chip',onclick:()=>go(0,null)},T('Nur diese Aufgabe')),
+      h('button',{class:'chip',onclick:()=>go(15*60000,T('Hör-Aufgaben sind für 15 Minuten pausiert.'))},T('15 Minuten')),
+      h('button',{class:'chip',onclick:()=>go(3600000,T('Hör-Aufgaben sind für 1 Stunde pausiert.'))},T('1 Stunde')),
+      h('button',{class:'chip',onclick:()=>go(endOfDay(),T('Hör-Aufgaben sind für heute pausiert.'))},T('Für heute'))));};
+  box.append(h('button',{class:'btn ghost small',onclick:open},'🎧 '+T('Kann gerade nicht hören')));return box;}
 function play(m,cfg){if(!['lesson','round','check','mix','reading','story','placement'].includes(curRoute().split('/')[0]))runEnter();
   let queue=cfg.steps.slice();let pos=0;let firstTry=new Map();let retried=new Set();let gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
   /* ↶ Rückgängig (nur bei Übungen mit Zwischenspeicher, nicht in Tests): Zustand bei jeder Aufgabe merken, zurück = vorige Aufgabe neu */
@@ -959,16 +975,20 @@ function play(m,cfg){if(!['lesson','round','check','mix','reading','story','plac
   function show(){if(cfg.pk){hist.push({pos,queue:queue.slice(),ft:new Map(firstTry),rt:[...retried].map(x=>queue.indexOf(x)),mis:cp(S.mistakes),stats:cp(S.stats),streak:cp(S.streak)});if(hist.length>30)hist.shift();undoB.classList.toggle('hide',hist.length<2);}
     upd();if(!queue[pos])return finish();/* leere Aufgabenliste (z. B. Runde 3 einer Lese-Lektion) */stage.innerHTML='';stage.className='step';void stage.offsetWidth;stage.className='step';
     if(cfg.pk&&pos>0)pauseSet(cfg.pk,{route:curRoute(),title:cfg.title,steps:queue,pos,ft:[...firstTry],rt:[...retried].map(x=>queue.indexOf(x)),g:gradeable,n:queue.length});
-    const it=queue[pos];stage.setAttribute('data-t',(it.s||it).t||'');const isRetry=retried.has(it)&&firstTry.has(it.ref);
+    const it=queue[pos];
+    const skipL=()=>{if(GRADED.has(it.s.t)&&!firstTry.has(it.ref))gradeable=Math.max(0,gradeable-1);queue.splice(pos,1);if(pos>=queue.length)return finish();show();};
+    if(it.s&&isListenStep(it.s)&&noListen())return skipL();
+    stage.setAttribute('data-t',(it.s||it).t||'');const isRetry=retried.has(it)&&firstTry.has(it.ref);
     if(isRetry)stage.append(h('div',{class:'pill acc',style:'margin-bottom:10px'},T('↻ Noch mal – das war vorhin falsch')));
     /* Verständnisfrage ohne ihren Text (Fehlerheft, Mix): Text zum Aufklappen dazu */
     if(cfg.mistakeMode||cfg.pk==='mix'){const cx=ctxOf(it.ref);if(cx)stage.append(ctxBox(cx));}
     window.__cur=it;const R=RENDER[it.s.t];if(!R){stage.append(T('Unbekannter Schritt ')+it.s.t);return next();}
-    R(stage,it.s,{unit:cfg.unit,ref:it.ref,noPrompt:!!cfg.noPrompt,done:(status,your)=>{
+    R(stage,it.s,{unit:cfg.unit,ref:it.ref,noPrompt:!!cfg.noPrompt,done:(status,your)=>{const nlb=stage.querySelector('.nolisten');if(nlb)nlb.remove();
       if(GRADED.has(it.s.t)){if(!firstTry.has(it.ref)){firstTry.set(it.ref,status);bumpDay(status!=='bad');}
         if(status==='bad'){logMistake(it.ref,your);if(!cfg.noRetry&&!retried.has(it)){retried.add(it);queue.push(it);}}
         else if(cfg.mistakeMode){S.mistakes=S.mistakes.filter(x=>x.ref!==it.ref);save();}}
-      if(cfg.onAnswer)cfg.onAnswer(it,status);},next});}
+      if(cfg.onAnswer)cfg.onAnswer(it,status);},next});
+    if(isListenStep(it.s))stage.append(noListenBtn(()=>{if(cfg.pk)hist.pop();skipL();}));}
   function finish(){$('.ptop .bar i').style.width='100%';if(cfg.pk)pauseDel(cfg.pk);undoB.classList.add('hide');
     const vals=[...firstTry.values()];const score=gradeable?vals.filter(v=>v!=='bad').length/Math.max(gradeable,vals.length||1):1;
     const after=cfg.onDone?cfg.onDone({score,firstTry}):null;stage.innerHTML='';
@@ -1570,7 +1590,7 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
   function snap(c){const k=vkey(c.es);hist.push({i,ql:q.length,okc,seen:new Set(seen),failed:new Set(failed),k,card:cp(S.srs[k]),stats:cp(S.stats),streak:cp(S.streak),vlog:cp(S.vlog)});if(hist.length>30)hist.shift();}
   function undo(){const h0=hist.pop();if(!h0)return;speechSynthesis.cancel();i=h0.i;q.length=h0.ql;kinds.length=Math.min(kinds.length,h0.ql);okc=h0.okc;seen.clear();h0.seen.forEach(x=>seen.add(x));failed.clear();h0.failed.forEach(x=>failed.add(x));
     if(h0.card)S.srs[h0.k]=h0.card;S.stats=h0.stats;S.streak=h0.streak;S.vlog=h0.vlog;save();show();}
-  function res(c,st,rating){snap(c);const first=!seen.has(c.es);if(first){seen.add(c.es);if(st!=='bad')okc++;
+  function res(c,st,rating){snap(c);{const nlb=stage.querySelector('.nolisten');if(nlb)nlb.remove();}const first=!seen.has(c.es);if(first){seen.add(c.es);if(st!=='bad')okc++;
       /* freies Üben eigener Wörter: richtig/falsch (pk/pn), zuletzt geübt (pl), zuletzt falsch (pw), eigener Abstand (ps Stufe, pd wieder dran) – ohne Einfluss auf die Planung */
       const k=!srs&&S.srs[vkey(c.es)];if(k&&isMy(k)){const r=rating||(st==='bad'?'again':st==='near'?'hard':'good');const ok=r!=='again';if(ok)k.pk=(k.pk||0)+1;else k.pn=(k.pn||0)+1;k.pw=!ok;k.pl=today();
         const d=pNext(k,r);k.ps=r==='again'?0:r==='hard'?(k.ps||0):r==='easy'?(k.ps||0)+2:(k.ps||0)+1;k.pd=addDays(today(),d);k.t=Date.now();}
@@ -1583,6 +1603,7 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
     /* 'mix' (eigene Listen): pro Karte zufällig Karte (beide Richtungen), Tippen oder Hören */
     if(!kinds[i]){const exLike=(EX_MARK[EX]||/(?!)/).test(c.es)&&!(LANG.mark||/(?!)/).test(c.es);/* sieht nach Deutsch aus → nie vorlesen lassen */
       kinds[i]={md:mode==='mix'?(exLike?['flip','type']:['flip','flip','type','listen'])[Math.floor(Math.random()*(exLike?2:4))]:mode,rev:Math.random()<0.5};}/* gemerkt, damit ↶ dieselbe Aufgabe zeigt */
+    if(kinds[i].md==='listen'&&noListen())kinds[i].md='type';
     const md=kinds[i].md;
     if(md==='flip'){let shown=false;const rev=kinds[i].rev; /* Richtung zufällig: Spanisch → Deutsch oder Deutsch → Spanisch */
       const card=rev?h('div',{class:'card flash'},h('div',{class:'big'},(pic(c.es,c.em)?pic(c.es,c.em)+' ':'')+trc(c.de)),h('div',{id:'ans',style:'visibility:hidden'},h('div',{class:'big',style:'font-size:24px;margin-top:6px'},artW(c.es)),spk(c.es)))
@@ -1596,7 +1617,7 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
       const myI=i;const kh=e=>{if(!stage.isConnected||i!==myI||!row.isConnected)return document.removeEventListener('keydown',kh);if(e.key===' '||e.key==='Enter'){e.preventDefault();if(!shown)reveal.click();}else if(shown&&['1','2','3'].includes(e.key)){document.removeEventListener('keydown',kh);row.children[+e.key-1].click();}};
       document.addEventListener('keydown',kh);return;}
     const inp=h('input',{class:'inp',autocomplete:'off',spellcheck:'false',placeholder:fmt(T('{ON} …'))});
-    if(md==='listen'){stage.append(kind(T('Hör zu und schreib das Wort')),h('div',{class:'row',style:'margin-bottom:14px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.55)},T('🐢 Langsam'))),inp,keys(()=>inp));setTimeout(()=>say(c.es),200);}
+    if(md==='listen'){stage.append(kind(T('Hör zu und schreib das Wort')),h('div',{class:'row',style:'margin-bottom:14px'},spk(c.es,true),h('button',{class:'btn small',onclick:()=>say(c.es,0.55)},T('🐢 Langsam'))),inp,keys(()=>inp));setTimeout(()=>say(c.es),200);stage.append(noListenBtn(()=>{kinds[i].md='type';show();}));}
     else stage.append(kind(fmt(T('Wie heißt das {ON}?'))),picEl(c.es,c.em,'qpic'),h('p',{class:'q',style:'font-size:26px'},trc(c.de)),inp,keys(()=>inp));
     setTimeout(()=>inp.focus(),50);
     stage.append(actionBar(()=>{let r=compare(inp.value,vocabForms(c.es),{pron:false});if(r.status!=='bad')r.right=c.es;
@@ -1746,6 +1767,7 @@ function vSettingsAll(m){const st=S.settings;
   m.append(h('div',{class:'card',style:'margin-bottom:16px'},h('h2',{style:'margin-top:0'},T('🔊 Aussprache')),
     h('div',{class:'field'},h('label',{},T('Stimme')),voiceSel,h('span',{class:'muted small'},(T(LANG.voiceHint||'')||''))),
     h('div',{class:'field'},h('label',{},T('Sprechtempo')),rate),
+    noListen()?h('div',{class:'row',style:'margin:4px 0 10px'},h('span',{class:'muted small'},'🎧 '+T('Hör-Aufgaben sind gerade pausiert.')),h('button',{class:'btn small',onclick:e=>{setNoListen(false);e.target.parentNode.remove();toast(T('Hör-Aufgaben sind wieder an.'));}},T('Wieder einschalten'))):null,
     h('label',{class:'row'},tr,T('Übersetzungen in Dialogen sofort zeigen')),
     IS_IOS?h('label',{class:'row',style:'margin-top:8px'},mix,T('Musik anderer Apps nie unterbrechen')):null,
     IS_IOS?h('span',{class:'muted small'},T('Aus (Standard): App immer hörbar, auch stumm geschaltet – andere Musik wird dabei pausiert. An: Musik läuft immer weiter, die App ist dann nur mit Ton-Schalter hörbar.')):null,
