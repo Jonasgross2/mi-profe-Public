@@ -61,7 +61,7 @@ lessons:[
  {t:'dialog',place:'Bäckerei',title:'Na padaria',scene:'De manhã cedo você compra pão. A vendedora é mais velha – aqui se usa <b>Sie</b>.',lines:[
   {n:'Verkäuferin',es:'Guten Morgen! Wie geht es Ihnen?',de:'Bom dia! Como o senhor está?'},
   {you:true,opts:[{es:'Guten Morgen! Gut, danke. Und Ihnen?',ok:true},{es:'Guten Abend! Gut, danke.',ok:false,why:'É de manhã: <i>Guten Morgen!</i>'},{es:'Gut, danke. Und dir?',ok:false,why:'Ela usa <b>Sie</b> – responda com <i>Und Ihnen?</i>'}]},
-  {n:'Verkäuferin',es:'Auch gut, danke! Was möchten Sie?',de:'Também bem, obrigada! O que o senhor deseja?'},
+  {n:'Verkäuferin',es:'Auch gut, danke! Was möchten Sie?',de:'Bem também, obrigada! O que o senhor deseja?'},
   {you:true,opts:[{es:'Zwei Brötchen, bitte.',ok:true},{es:'Tschüss!',ok:false,why:'Você ainda nem comprou o pão 😉'}]},
   {n:'Verkäuferin',es:'Bitte schön. Schönen Tag noch!',de:'Aqui está. Tenha um bom dia!'},
   {you:true,opts:[{es:'Danke, Ihnen auch! Auf Wiedersehen!',ok:true},{es:'Freut mich! Wie heißen Sie?',ok:false,why:'Ela está se despedindo – despeça-se também.'}]}]},
@@ -94,7 +94,7 @@ lessons:[
  {t:'gap',q:'___ du Englisch? (sprechen)',a:['Sprichst|sprichst'],why:'<i>sprechen</i>: e → i com <b>du</b>: <i>du sprichst</i>.'},
  {t:'mc',q:'Qual frase está correta?',opts:['Ich wohne in Frankfurt.','Wohne in Frankfurt.','Ich wohnst in Frankfurt.'],a:0,why:'O pronome <i>ich</i> é obrigatório, e com <i>ich</i> o verbo termina em <b>-e</b>.'},
  {t:'order',es:'Ich komme aus Brasilien',de:'Eu sou do Brasil.'},
- {t:'dialog',place:'WG-Küche',title:'Na república (WG)',scene:'Você mora numa <b>WG</b> (república de estudantes/jovens). Um colega de casa novo chega.',lines:[
+ {t:'dialog',place:'WG-Küche',title:'Na república (WG)',scene:'Você mora numa <b>WG</b> (república de estudantes/jovens). Um novo colega de casa chega.',lines:[
   {n:'Tom',es:'Hi! Ich bin Tom. Du bist neu hier, oder? Woher kommst du?',de:'Oi! Eu sou o Tom. Você é novo aqui, né? De onde você é?'},
   {you:true,opts:[{es:'Ich komme aus Brasilien, aus São Paulo.',ok:true},{es:'Ich wohne in Frankfurt.',ok:false,why:'Ele perguntou <b>de onde</b> você é (woher), não onde você mora.'},{es:'Ich heiße Brasilien.',ok:false,why:'😄 <i>heißen</i> é para o nome.'}]},
   {n:'Tom',es:'Cool! Und was sprichst du?',de:'Legal! E que línguas você fala?'},
@@ -178,7 +178,7 @@ lessons:[
  {t:'listen',es:'achtzehn',de:'18'},
  {t:'gap',q:'Meine ___ ist 0171 234 56 78. (número de celular)',a:['Handynummer|Telefonnummer|Nummer']},
  {t:'tr',de:'Qual é o seu telefone? (informal)',a:['Wie ist deine Telefonnummer?','Wie ist deine Handynummer?','Wie ist deine Nummer?']},
- {t:'speak',es:'Meine Handynummer ist null eins sieben zwei, drei vier fünf, sechs sieben acht.',de:'Meu celular é 0172 345 678.',tip:'Diga os números de um em um ou em pares – ninguém espera números longos no telefone.'}
+ {t:'speak',es:'Meine Handynummer ist null eins sieben zwei, drei vier fünf, sechs sieben acht.',de:'Meu celular é 0172 345 678.',tip:'Diga os números de um em um ou em pares – ninguém espera que você diga números longos de uma vez.'}
 ]},
 {id:'l2',title:'Até 100 e mais · idade',desc:'einundzwanzig · Wie alt bist du?',steps:[
  {t:'info',title:'Os números “ao contrário”',html:`<p>De 21 a 99 o alemão diz primeiro a <b>unidade</b>, depois a <b>dezena</b> – com <b>und</b> no meio, tudo junto:</p>
@@ -190,7 +190,7 @@ lessons:[
  <p><span class="es-t">hundert</span> = 100 · <span class="es-t">hunderteins</span> = 101 · <span class="es-t">zweihundert</span> = 200 · <span class="es-t">tausend</span> = 1000</p>
  <div class="ojo">Com 21, 31, 41 … é <span class="es-t">ein</span>und…, não “eins”: <span class="es-t">einundzwanzig</span>.</div>`},
  {t:'vocab',title:'Idade',items:[['Wie alt bist du?','Quantos anos você tem? (informal)'],['Wie alt sind Sie?','Quantos anos o senhor / a senhora tem?'],['Ich bin 28 Jahre alt.','Eu tenho 28 anos.'],['das Jahr, die Jahre','o ano, os anos'],['alt','velho, idoso (idade: 28 Jahre alt)'],['jung','jovem'],['das Alter','a idade'],['der Geburtstag','o aniversário']]},
- {t:'info',title:'A idade com „sein“',html:`<p>Em português a gente <b>tem</b> anos. Em alemão a gente <b>é</b> anos “velho”:</p>
+ {t:'info',title:'A idade com „sein“',html:`<p>Em português a gente <b>tem</b> anos. Em alemão a gente <b>é</b> “x anos velho”:</p>
  <div class="ex"><span class="es-t">Ich bin 28 Jahre alt.</span> = Eu tenho 28 anos. <span class="muted">(literalmente: “eu sou 28 anos velho”)</span></div>
  <div class="ojo">Nunca “Ich habe 28 Jahre” – esse é o erro mais comum de quem fala português!</div>`},
  {t:'mc',q:'Como se diz 45?',opts:['fünfundvierzig','vierundfünfzig','vierzigfünf'],a:0,why:'Primeiro a unidade (fünf), depois <i>und</i>, depois a dezena (vierzig).'},
@@ -208,7 +208,7 @@ lessons:[
  <div class="ex es-t">Lucas Souza<br>Bergerstraße 12<br>60316 Frankfurt am Main</div>
  <p><span class="es-t">Wo wohnen Sie? – In der Bergerstraße 12.</span></p>
  <div class="ojo"><span class="es-t">Straße</span> muitas vezes vira <b>str.</b> e se escreve junto com o nome: <span class="es-t">Bergerstraße</span>. Em formulários: <span class="es-t">Vorname</span> = primeiro nome, <span class="es-t">Familienname / Nachname</span> = sobrenome.</div>`},
- {t:'info',title:'Data de nascimento',html:`<p>Em formulários a data é escrita como no Brasil – <b>dia.mês.ano</b>, com pontos: <span class="es-t">14.03.1997</span>.</p>
+ {t:'info',title:'Data de nascimento',html:`<p>Em formulários a data é escrita como em português – <b>dia.mês.ano</b>, com pontos: <span class="es-t">14.03.1997</span>.</p>
  <p><span class="es-t">Wann sind Sie geboren? – Am 14. März 1997.</span> <span class="muted">(Os meses vêm no capítulo 6.)</span></p>
  <p><span class="es-t">Wo sind Sie geboren? – In São Paulo.</span></p>`},
  {t:'gap',q:'Formulário para a colega: Jana Wolf, Hamburger Allee 5, 60486 Frankfurt. Vorname: ___ · Familienname: ___ · Postleitzahl: ___',a:['Jana','Wolf','60486'],why:'<i>Vorname</i> = primeiro nome, <i>Familienname</i> = sobrenome, <i>Postleitzahl</i> = CEP.'},
@@ -275,7 +275,7 @@ placement:[
  {t:'mc',q:'„a mãe“:',opts:['die Mutter','der Mutter','das Mutter'],a:0},
  {t:'mc',q:'„Eu não tenho irmãos.“',opts:['Ich habe keine Geschwister.','Ich habe nicht Geschwister.','Ich habe kein Geschwister.'],a:0},
  {t:'gap',q:'Das ist ___ Bruder. (meu)',a:['mein']},
- {t:'gap',q:'Das ist ___ Schwester. (meu)',a:['meine']},
+ {t:'gap',q:'Das ist ___ Schwester. (minha)',a:['meine']},
  {t:'mc',q:'Plural de „das Kind“:',opts:['die Kinder','die Kinds','die Kinden'],a:0},
  {t:'mc',q:'Anna hat ein Kind. Das ist … Sohn.',opts:['ihr','sein','dein'],a:0}],
 lessons:[
@@ -355,7 +355,7 @@ lessons:[
  {t:'tr',de:'Você tem filhos? (informal)',a:['Hast du Kinder?']},
  {t:'speak',es:'Das ist meine Familie: mein Vater, meine Mutter und mein Bruder.',de:'Esta é a minha família: meu pai, minha mãe e meu irmão.',tip:'<i>Vater</i>: o <b>v</b> soa como “f” – “fáter”.'}
 ]},
-{id:'l4',title:'Ler e escrever: uma e-mail',desc:'Lesen · Hören · eine kurze E-Mail schreiben',steps:[
+{id:'l4',title:'Ler e escrever: um e-mail',desc:'Lesen · Hören · eine kurze E-Mail schreiben',steps:[
  {t:'read',title:'Leitura: Eine E-Mail an Tom',intro:'O Lucas escreve para o Tom sobre a visita da família.',text:`Hallo Tom,
 im Mai {kommen|vêm} meine Eltern nach Frankfurt! Mein Vater heißt Paulo, er ist 58 Jahre alt. Meine Mutter heißt Rita, sie ist 54. Sie wohnen in São Paulo. Mein Bruder Pedro kommt {leider|infelizmente} nicht. Er hat zwei Kinder und {keine Zeit|não tem tempo}.
 Hast du am Samstag Zeit? Wir {grillen|fazemos churrasco} im Garten!
@@ -371,11 +371,11 @@ Lucas`},
  {t:'read',hideText:true,title:'Conversa no trabalho',intro:'Ouça a conversa entre a Jana e um colega.',text:`Jana, hast du Kinder? – Ja, ich habe eine Tochter. Sie heißt Mia und ist vier Jahre alt. – Oh, schön! Und hast du auch Geschwister? – Nein, ich habe keine Geschwister. Aber ich habe viele Freunde.`,de:`Jana, você tem filhos? – Sim, tenho uma filha. Ela se chama Mia e tem quatro anos. – Ah, que legal! E você também tem irmãos? – Não, não tenho irmãos. Mas tenho muitos amigos.`},
  {t:'mc',q:'Wie alt ist Mia?',opts:['vier','vierzehn','zwei'],a:0},
  {t:'mc',q:'Richtig oder falsch? Jana hat einen Bruder.',opts:['falsch','richtig'],a:0},
- {t:'info',title:'E-mail curta: começar e terminar',html:`<table><tr><th></th><th>informal (du)</th><th>formal (Sie)</th></tr>
+ {t:'info',title:'E-mail curto: começar e terminar',html:`<table><tr><th></th><th>informal (du)</th><th>formal (Sie)</th></tr>
  <tr><td>começo</td><td class="es-t">Hallo Tom, / Liebe Jana, / Lieber Tom,</td><td class="es-t">Sehr geehrte Frau Weber, / Sehr geehrter Herr Becker,</td></tr>
  <tr><td>fim</td><td class="es-t">Viele Grüße / Liebe Grüße</td><td class="es-t">Mit freundlichen Grüßen</td></tr></table>
  <div class="ex">Depois da saudação vem vírgula, e a frase seguinte começa com <b>letra minúscula</b>: <span class="es-t">Hallo Tom, im Mai kommen …</span></div>`},
- {t:'free',task:'Escreva uma e-mail curta (cerca de 30 palavras) para uma amiga alemã sobre a sua família: 1) quem é da sua família, 2) idade e onde moram, 3) pergunte sobre a família dela.',hint:'Liebe …, meine Familie ist … Mein Vater/Meine Mutter heißt … und ist … Jahre alt. Sie wohnen in … Hast du Geschwister? Viele Grüße …',focus:'Possessivartikel, haben, ein/kein, Zahlen, E-Mail-Anrede und Gruß',model:'Liebe Jana,\nmeine Familie wohnt in São Paulo. Mein Vater heißt Paulo, er ist 58. Meine Mutter Rita ist 54. Ich habe einen Bruder, er hat zwei Kinder. Hast du Geschwister?\nViele Grüße\nLucas'}
+ {t:'free',task:'Escreva um e-mail curto (cerca de 30 palavras) para uma amiga alemã sobre a sua família: 1) quem é da sua família, 2) idade e onde moram, 3) pergunte sobre a família dela.',hint:'Liebe …, meine Familie ist … Mein Vater/Meine Mutter heißt … und ist … Jahre alt. Sie wohnen in … Hast du Geschwister? Viele Grüße …',focus:'Possessivartikel, haben, ein/kein, Zahlen, E-Mail-Anrede und Gruß',model:'Liebe Jana,\nmeine Familie wohnt in São Paulo. Mein Vater heißt Paulo, er ist 58. Meine Mutter Rita ist 54. Ich habe einen Bruder, er hat zwei Kinder. Hast du Geschwister?\nViele Grüße\nLucas'}
 ]}],
 resumen:`<h3>Artigos</h3><table><tr><th></th><th>der (m)</th><th>die (f)</th><th>das (n)</th><th>die (Pl.)</th></tr><tr><td>definido</td><td class="es-t">der Bruder</td><td class="es-t">die Schwester</td><td class="es-t">das Kind</td><td class="es-t">die Kinder</td></tr><tr><td>indefinido</td><td class="es-t">ein</td><td class="es-t">eine</td><td class="es-t">ein</td><td>–</td></tr><tr><td>negação</td><td class="es-t">kein</td><td class="es-t">keine</td><td class="es-t">kein</td><td class="es-t">keine</td></tr><tr><td>com haben</td><td class="es-t">einen / keinen</td><td class="es-t">eine / keine</td><td class="es-t">ein / kein</td><td class="es-t">– / keine</td></tr></table>
 <h3>Possessivos</h3><p class="es-t">mein/meine · dein/deine · sein/seine (dele) · ihr/ihre (dela) · unser/unsere · Ihr/Ihre (formal)</p>
@@ -445,7 +445,7 @@ lessons:[
  {t:'vocab',title:'Compras',items:[['einkaufen','fazer compras'],['der Supermarkt','o supermercado'],['der Markt','a feira'],['die Bäckerei','a padaria'],['das Geschäft','a loja'],['die Kasse','o caixa'],['Was kostet …?','Quanto custa …?'],['Was kosten …?','Quanto custam …?'],['der Preis','o preço'],['der Euro','o euro'],['der Cent','o centavo'],['teuer','caro'],['billig','barato'],['günstig','em conta / barato'],['das Angebot','a oferta / promoção'],['das Kilo','o quilo'],['das Gramm','o grama'],['der Liter','o litro'],['die Packung','o pacote'],['bezahlen','pagar'],['bar','em dinheiro'],['mit Karte','com cartão'],['die Tüte','a sacola']]},
  {t:'info',title:'Preços',html:`<table><tr><td>1,50 €</td><td class="es-t">ein Euro fünfzig</td></tr><tr><td>2,99 €</td><td class="es-t">zwei Euro neunundneunzig</td></tr><tr><td>0,80 €</td><td class="es-t">achtzig Cent</td></tr><tr><td>12,00 €</td><td class="es-t">zwölf Euro</td></tr></table>
  <p><span class="es-t">Was kostet das Brot? – Drei Euro zwanzig.</span><br><span class="es-t">Was kosten die Äpfel? – Ein Kilo kostet zwei Euro.</span></p>
- <div class="ex">Mengen sem “de”: <span class="es-t">ein Kilo Äpfel</span> (um quilo <b>de</b> maçãs), <span class="es-t">eine Flasche Wasser</span>, <span class="es-t">200 Gramm Käse</span>.</div>
+ <div class="ex">Quantidades sem “de”: <span class="es-t">ein Kilo Äpfel</span> (um quilo <b>de</b> maçãs), <span class="es-t">eine Flasche Wasser</span>, <span class="es-t">200 Gramm Käse</span>.</div>
  <div class="ojo">Na Alemanha muita gente ainda paga em dinheiro. No caixa: <span class="es-t">Bar oder mit Karte?</span> E a sacola custa extra: <span class="es-t">Brauchen Sie eine Tüte?</span></div>`},
  {t:'listen',es:'Das macht vier Euro achtzig.',de:'Dá quatro euros e oitenta.'},
  {t:'listen',es:'Ein Kilo Tomaten kostet zwei Euro fünfzig.',de:'Um quilo de tomates custa dois euros e cinquenta.'},
@@ -513,7 +513,7 @@ lessons:[
 {id:'l1',title:'O apartamento',desc:'Zimmer, Küche, Bad … · Adjektive',steps:[
  {t:'vocab',title:'Cômodos',items:[['die Wohnung','o apartamento'],['das Haus','a casa'],['das Zimmer','o quarto / o cômodo'],['das Wohnzimmer','a sala'],['das Schlafzimmer','o quarto de dormir'],['die Küche','a cozinha'],['das Bad','o banheiro'],['die Toilette','o vaso / o banheiro'],['der Flur','o corredor'],['der Balkon','a varanda'],['der Garten','o jardim'],['der Keller','o porão'],['der Stock','o andar'],['das Erdgeschoss','o térreo'],['der Aufzug','o elevador'],['die Treppe','a escada']]},
  {t:'vocab',title:'Adjetivos',items:[['groß','grande'],['klein','pequeno'],['hell','claro / iluminado'],['dunkel','escuro'],['ruhig','tranquilo / silencioso / calmo'],['laut','barulhento; segundo (laut + dativo)'],['neu','novo'],['alt','velho, idoso (idade: 28 Jahre alt)'],['schön','bonito; (tempo) bom'],['hässlich','feio'],['modern','moderno'],['praktisch','prático'],['teuer','caro'],['billig','barato'],['gemütlich','aconchegante']]},
- {t:'info',title:'Andares e lugares',html:`<p>No Brasil o “primeiro andar” às vezes é o térreo – na Alemanha <b>nunca</b>:</p>
+ {t:'info',title:'Andares e lugares',html:`<p>Como em português, o <b>térreo</b> não conta: o 1º andar fica <b>acima</b> do térreo:</p>
  <table><tr><td class="es-t">im Erdgeschoss (EG)</td><td>no térreo</td></tr><tr><td class="es-t">im ersten Stock</td><td>no 1º andar (acima do térreo)</td></tr><tr><td class="es-t">im dritten Stock</td><td>no 3º andar</td></tr><tr><td class="es-t">oben / unten</td><td>em cima / embaixo</td></tr><tr><td class="es-t">links / rechts</td><td>à esquerda / à direita</td></tr></table>
  <div class="ex">O adjetivo depois de <b>sein</b> não muda: <span class="es-t">Die Wohnung ist hell. Das Zimmer ist klein. Die Zimmer sind klein.</span></div>`},
  {t:'match',q:'Ligue os opostos.',pairs:[['groß','klein'],['hell','dunkel'],['laut','ruhig'],['teuer','billig'],['neu','alt']]},
@@ -568,7 +568,7 @@ lessons:[
  {t:'tr',de:'O que você acha da mesa? – Eu acho ela feia.',a:['Wie findest du den Tisch? – Ich finde ihn hässlich.','Wie findest du den Tisch? Ich finde ihn hässlich.']}
 ]},
 {id:'l4',title:'Procurar apartamento',desc:'Wohnungsanzeigen · Miete · umziehen',steps:[
- {t:'vocab',title:'Aluguel',items:[['mieten','alugar (como inquilino)'],['vermieten','alugar (como dono)'],['der Vermieter / die Vermieterin','o locador / a locadora'],['die Miete','o aluguel'],['die Nebenkosten (Pl.)','as despesas (água, aquecimento …)'],['warm','quente / morno; (aluguel) com despesas'],['der Quadratmeter','o metro quadrado'],['die Anzeige','o anúncio'],['umziehen','mudar de casa'],['einziehen','mudar para (entrar)'],['frei','livre / disponível'],['ab sofort','a partir de agora'],['besichtigen','visitar (lugar, imóvel)']]},
+ {t:'vocab',title:'Aluguel',items:[['mieten','alugar (como inquilino)'],['vermieten','alugar (como dono)'],['der Vermieter / die Vermieterin','o locador / a locadora'],['die Miete','o aluguel'],['die Nebenkosten (Pl.)','as despesas (água, aquecimento …)'],['warm','quente / morno; (aluguel) com despesas'],['der Quadratmeter','o metro quadrado'],['die Anzeige','o anúncio'],['umziehen','mudar de casa'],['einziehen','mudar-se (para a casa nova)'],['frei','livre / disponível'],['ab sofort','a partir de agora'],['besichtigen','visitar (lugar, imóvel)']]},
  {t:'info',title:'Ler anúncios de apartamento',html:`<p>Os anúncios usam muitas abreviações:</p>
  <table><tr><td class="es-t">2-Zi.-Whg.</td><td>apartamento de 2 cômodos (sem contar cozinha e banheiro!)</td></tr>
  <tr><td class="es-t">Kü., Bad, Blk.</td><td>cozinha, banheiro, varanda</td></tr>
@@ -589,7 +589,7 @@ B) Centro: apartamento moderno de 4 cômodos, 110 m², cozinha grande, 2 banheir
  {t:'read',hideText:true,title:'Recado da locadora',intro:'Ouça a mensagem na secretária eletrônica.',text:`Guten Tag, hier ist Frau Klein. Sie möchten die Wohnung in der Bergerstraße besichtigen? Das geht am Donnerstag um achtzehn Uhr. Die Wohnung ist im dritten Stock. Bitte rufen Sie mich zurück. Meine Nummer ist null sechs neun, vier fünf sechs, sieben acht. Auf Wiederhören!`,de:`Bom dia, aqui é a senhora Klein. O senhor quer visitar o apartamento na Bergerstraße? Pode ser na quinta-feira às 18 horas. O apartamento fica no terceiro andar. Por favor, me ligue de volta. Meu número é 069 456 78. Até logo!`},
  {t:'mc',q:'Wann ist die Besichtigung?',opts:['am Donnerstag um 18 Uhr','am Dienstag um 8 Uhr','am Donnerstag um 8 Uhr'],a:0},
  {t:'mc',q:'Wo ist die Wohnung?',opts:['im dritten Stock','im Erdgeschoss','im ersten Stock'],a:0},
- {t:'info',title:'Auf Wiederhören!',html:`<p>No telefone não se diz <i>Auf Wiedersehen</i> (até a vista), mas <span class="es-t">Auf Wiederhören!</span> (“até a próxima vez que eu ouvir você”).</p>`},
+ {t:'info',title:'Auf Wiederhören!',html:`<p>No telefone não se diz <i>Auf Wiedersehen</i> (literalmente “até nos vermos de novo”), mas <span class="es-t">Auf Wiederhören!</span> (“até nos ouvirmos de novo”).</p>`},
  {t:'free',task:'Descreva o seu apartamento ou quarto (~30–40 palavras): cômodos, móveis e o que você acha dele.',hint:'Meine Wohnung hat … Zimmer. Es gibt einen/eine/ein … Das Wohnzimmer ist … Ich finde die Wohnung …',focus:'es gibt + Akkusativ, Adjektive, Möbel, finden + ihn/sie/es',model:'Ich wohne in einer WG in Frankfurt. Mein Zimmer ist klein, aber hell. Es gibt ein Bett, einen Schrank und einen Tisch. Die Küche ist groß und gemütlich. Es gibt keinen Balkon. Ich finde die Wohnung sehr schön.'}
 ]}],
 resumen:`<h3>Cômodos e andares</h3><p class="es-t">das Wohnzimmer · das Schlafzimmer · die Küche · das Bad · der Flur · der Balkon · im Erdgeschoss · im ersten Stock</p>
@@ -611,14 +611,14 @@ placement:[
 lessons:[
 {id:'l1',title:'Que horas são?',desc:'Wie spät ist es? · Viertel, halb',steps:[
  {t:'vocab',title:'Horas',items:[['die Uhr','o relógio / hora (8 Uhr)'],['Wie spät ist es?','Que horas são?'],['Wie viel Uhr ist es?','Que horas são?'],['Es ist drei Uhr.','São três horas.'],['die Stunde','a hora (duração)'],['die Minute','o minuto'],['halb','meia (… e meia)'],['das Viertel','o quarto (de hora)'],['nach','depois / e (horas)'],['vor','antes / para (horas); em frente a'],['um … Uhr','às … horas'],['früh','cedo'],['spät','tarde'],['pünktlich','pontual']]},
- {t:'info',title:'Hora oficial e informal',html:`<p><b>Oficial</b> (rádio, estação, trabalho) – como no Brasil, 0–24h: <span class="es-t">Es ist vierzehn Uhr dreißig.</span> (14:30)</p>
+ {t:'info',title:'Hora oficial e informal',html:`<p><b>Oficial</b> (rádio, estação, trabalho) – de 0 a 24h: <span class="es-t">Es ist vierzehn Uhr dreißig.</span> (14:30)</p>
  <p><b>Informal</b> (no dia a dia) – 1–12h:</p>
  <table><tr><td>3:05</td><td class="es-t">fünf nach drei</td></tr>
  <tr><td>3:15</td><td class="es-t">Viertel nach drei</td></tr>
  <tr><td>3:30</td><td class="es-t"><b>halb vier</b></td></tr>
  <tr><td>3:45</td><td class="es-t">Viertel vor vier</td></tr>
  <tr><td>3:50</td><td class="es-t">zehn vor vier</td></tr></table>
- <div class="ojo">Cuidado! <span class="es-t">halb vier</span> = 3:30 (meia hora <b>antes</b> das quatro), e <b>não</b> 4:30. É o erro clássico de brasileiros – e você chega uma hora atrasado 😉</div>
+ <div class="ojo">Cuidado! <span class="es-t">halb vier</span> = 3:30 (meia hora <b>antes</b> das quatro), e <b>não</b> 4:30. É o erro clássico de quem fala português – e você chega uma hora atrasado 😉</div>
  <p>A que horas? → <span class="es-t"><b>um</b> acht Uhr</span> (às 8h). Duração: <span class="es-t">eine Stunde, zwei Stunden</span>.</p>`},
  {t:'mc',q:'„Viertel vor neun“',opts:['8:45','9:15','9:45'],a:0},
  {t:'mc',q:'„halb sieben“',opts:['6:30','7:30','7:00'],a:0,why:'<i>halb sieben</i> = meia hora antes das sete.'},
@@ -667,7 +667,7 @@ lessons:[
  {t:'gap',q:'Tom ___ abends oft ___. (fernsehen)',a:['sieht','fern'],why:'<i>sehen</i> muda: <i>du siehst, er sieht</i>.'},
  {t:'order',es:'Ich rufe dich morgen an',de:'Eu te ligo amanhã.'},
  {t:'order',es:'Kommst du mit',de:'Você vem junto?'},
- {t:'read',title:'Leitura: Ein Tag von Lucas',text:`Ich stehe {meistens|na maioria das vezes} um halb sieben auf. Zuerst dusche ich, dann frühstücke ich: Kaffee und ein Brötchen. Um acht Uhr fahre ich mit der U-Bahn zur Arbeit. Die Arbeit fängt um halb neun an. Mittags esse ich mit Jana in der {Kantine|cantina}. Um siebzehn Uhr höre ich auf. Montags und donnerstags habe ich Deutschkurs. Abends kaufe ich manchmal ein oder ich koche mit Tom. Ich sehe nie fern – ich lese lieber. Um elf Uhr gehe ich ins Bett.`,de:`Na maioria das vezes eu me levanto às seis e meia. Primeiro tomo banho, depois tomo café: café e um pãozinho. Às oito vou de metrô para o trabalho. O trabalho começa às oito e meia. Ao meio-dia como com a Jana na cantina. Às 17h eu paro. Às segundas e quintas tenho curso de alemão. À noite às vezes faço compras ou cozinho com o Tom. Nunca vejo televisão – prefiro ler. Às onze vou para a cama.`},
+ {t:'read',title:'Leitura: Ein Tag von Lucas',text:`Ich stehe {meistens|na maioria das vezes} um halb sieben auf. Zuerst dusche ich, dann frühstücke ich: Kaffee und ein Brötchen. Um acht Uhr fahre ich mit der U-Bahn zur Arbeit. Die Arbeit fängt um halb neun an. Mittags esse ich mit Jana in der {Kantine|cantina}. Um siebzehn Uhr höre ich auf. Montags und donnerstags habe ich Deutschkurs. Abends kaufe ich manchmal ein oder ich koche mit Tom. Ich sehe nie fern – ich lese lieber. Um elf Uhr gehe ich ins Bett.`,de:`Na maioria das vezes eu me levanto às seis e meia. Primeiro tomo banho, depois tomo café: café e um pãozinho. Às oito vou de metrô para o trabalho. O trabalho começa às oito e meia. Ao meio-dia como com a Jana na cantina. Às 17h eu paro de trabalhar. Às segundas e quintas tenho curso de alemão. À noite às vezes faço compras ou cozinho com o Tom. Nunca vejo televisão – prefiro ler. Às onze vou para a cama.`},
  {t:'mc',q:'Wann fängt die Arbeit an?',opts:['um 8:30 Uhr','um 6:30 Uhr','um 8 Uhr'],a:0},
  {t:'mc',q:'Richtig oder falsch? Lucas sieht abends oft fern.',opts:['falsch','richtig'],a:0},
  {t:'mc',q:'Wann hat Lucas Deutschkurs?',opts:['montags und donnerstags','jeden Tag','am Wochenende'],a:0},
@@ -757,7 +757,7 @@ lessons:[
  <tr><td class="es-t">Es sind 25 Grad.</td><td>Faz 25 graus.</td></tr>
  <tr><td class="es-t">Es ist minus fünf Grad.</td><td>Faz cinco graus abaixo de zero.</td></tr></table>
  <div class="ex">Sempre com <b>es</b> – como “está” em português, mas o <b>es</b> é obrigatório.</div>
- <div class="ojo">Para um brasileiro, 15 graus é frio 🥶 – para um alemão, <span class="es-t">15 Grad</span> no verão já é <span class="es-t">kühl</span>, mas na primavera é <span class="es-t">schön warm</span>!</div>`},
+ <div class="ojo">Para quem vem de um país quente, 15 graus é frio 🥶 – para um alemão, <span class="es-t">15 Grad</span> no verão já é <span class="es-t">kühl</span>, mas na primavera é <span class="es-t">schön warm</span>!</div>`},
  {t:'mc',q:'„Está nevando.“',opts:['Es schneit.','Es ist Schnee.','Schneit.'],a:0},
  {t:'gap',q:'Heute ___ die Sonne. Es ist warm. (scheinen)',a:['scheint']},
  {t:'read',hideText:true,title:'Previsão do tempo no rádio',intro:'Ouça a previsão do tempo.',text:`Und jetzt das Wetter für Frankfurt und Umgebung. Heute bleibt es kalt, nur acht Grad, und am Nachmittag regnet es. Morgen, am Samstag, scheint die Sonne. Es wird warm, bis zu achtzehn Grad. Am Sonntag gibt es viele Wolken und Wind.`,de:`E agora o tempo para Frankfurt e região. Hoje continua frio, só oito graus, e à tarde chove. Amanhã, sábado, o sol brilha. Vai esquentar, até dezoito graus. No domingo há muitas nuvens e vento.`},
@@ -825,7 +825,7 @@ lessons:[
  {t:'tr',de:'A farmácia é perto.',a:['Die Apotheke ist in der Nähe.']}
 ]},
 {id:'l2',title:'Transporte',desc:'mit dem Bus · Fahrkarte · umsteigen',steps:[
- {t:'vocab',title:'Meios de transporte',items:[['der Bus','o ônibus'],['die U-Bahn','o metrô'],['die S-Bahn','o trem urbano'],['die Straßenbahn','o bonde'],['der Zug','o trem'],['das Auto','o carro'],['das Fahrrad','a bicicleta'],['das Taxi','o táxi'],['das Flugzeug','o avião'],['zu Fuß','a pé'],['fahren','ir (de veículo)'],['fliegen','voar'],['die Fahrkarte','a passagem / o bilhete'],['das Ticket','o bilhete'],['der Fahrplan','o horário (de transporte)'],['abfahren','partir'],['ankommen','chegar'],['einsteigen','embarcar / entrar'],['aussteigen','descer / sair'],['umsteigen','fazer baldeação'],['das Gleis','a plataforma (número)'],['die Verspätung','o atraso']]},
+ {t:'vocab',title:'Meios de transporte',items:[['der Bus','o ônibus'],['die U-Bahn','o metrô'],['die S-Bahn','o trem urbano'],['die Straßenbahn','o bonde'],['der Zug','o trem'],['das Auto','o carro'],['das Fahrrad','a bicicleta'],['das Taxi','o táxi'],['das Flugzeug','o avião'],['zu Fuß','a pé'],['fahren','ir (de veículo)'],['fliegen','voar'],['die Fahrkarte','a passagem / o bilhete'],['das Ticket','o ingresso / a passagem'],['der Fahrplan','o horário (de transporte)'],['abfahren','partir'],['ankommen','chegar'],['einsteigen','embarcar / entrar'],['aussteigen','descer / sair'],['umsteigen','fazer baldeação'],['das Gleis','a plataforma (número)'],['die Verspätung','o atraso']]},
  {t:'info',title:'mit + dativo',html:`<p><b>mit</b> sempre pede o dativo:</p>
  <table><tr><td class="es-t">der Bus</td><td class="es-t">mit <b>dem</b> Bus</td></tr>
  <tr><td class="es-t">die U-Bahn</td><td class="es-t">mit <b>der</b> U-Bahn</td></tr>
@@ -886,7 +886,7 @@ lessons:[
  <tr><td>du</td><td class="es-t">musst</td><td class="es-t">darfst</td></tr>
  <tr><td>wir / sie / Sie</td><td class="es-t">müssen</td><td class="es-t">dürfen</td></tr>
  <tr><td>ihr</td><td class="es-t">müsst</td><td class="es-t">dürft</td></tr></table>
- <div class="ex"><span class="es-t">Hier darf man nicht rauchen.</span> = Aqui não se pode fumar.<br><span class="es-t">Sie müssen eine Fahrkarte kaufen.</span> = O senhor tem que comprar um bilhete.</div>
+ <div class="ex"><span class="es-t">Hier darf man nicht rauchen.</span> = Aqui não se pode fumar.<br><span class="es-t">Sie müssen eine Fahrkarte kaufen.</span> = O senhor tem que comprar uma passagem.</div>
  <p><b>man</b> = “se” / “a gente” (geral): <span class="es-t">Hier darf man parken.</span></p>
  <div class="ojo"><span class="es-t">können</span> = é possível / sei fazer; <span class="es-t">dürfen</span> = tenho permissão. Na placa é sempre <i>dürfen</i>.</div>`},
  {t:'vocab',title:'Placas e serviços',items:[['verboten','proibido'],['rauchen','fumar'],['parken','estacionar'],['der Eingang','a entrada'],['der Ausgang','a saída'],['geöffnet','aberto'],['geschlossen','fechado'],['Vorsicht!','Cuidado!'],['Achtung!','Atenção!'],['der Brief','a carta'],['die Briefmarke','o selo'],['das Paket','o pacote'],['schicken','enviar'],['das Geld','o dinheiro'],['das Konto','a conta (bancária)'],['überweisen','transferir (dinheiro)']]},
@@ -999,7 +999,7 @@ B) O supermercado Preisfuchs procura vendedor(a), de segunda a sexta, das 8h às
  {t:'mc',q:'Richtig oder falsch? Für Stelle B muss man anrufen.',opts:['falsch','richtig'],a:0},
  {t:'info',title:'E-mail formal: doente',html:`<div class="ex es-t">Sehr geehrte Frau Hoffmann,<br>leider kann ich heute nicht zur Arbeit kommen. Ich bin krank und gehe heute zum Arzt. Ich schicke Ihnen morgen die Krankmeldung. Das Meeting um zehn Uhr kann vielleicht Jana machen.<br>Mit freundlichen Grüßen<br>Lucas Souza</div>
  <div class="ojo">Na Alemanha, a partir do 3º dia doente (às vezes já no 1º) é preciso um atestado do médico: <span class="es-t">die Krankmeldung</span>. Avise o trabalho <b>antes</b> do expediente começar.</div>`},
- {t:'free',task:'Escreva uma e-mail formal (~30 palavras) para a sua chefe, a Sra. Hoffmann: 1) você não pode ir trabalhar hoje, 2) o motivo, 3) quando você volta / o que acontece com o seu trabalho.',hint:'Sehr geehrte Frau Hoffmann, leider kann ich heute nicht … Ich bin … / Ich muss … Morgen bin ich wieder … Mit freundlichen Grüßen',focus:'formelle E-Mail (Anrede/Gruß, Sie), können, denn, Zeitangaben',model:'Sehr geehrte Frau Hoffmann,\nleider kann ich heute nicht ins Büro kommen, denn ich habe Fieber. Ich gehe heute zum Arzt. Ich hoffe, ich bin am Donnerstag wieder da.\nMit freundlichen Grüßen\nLucas Souza'}
+ {t:'free',task:'Escreva um e-mail formal (~30 palavras) para a sua chefe, a Sra. Hoffmann: 1) você não pode ir trabalhar hoje, 2) o motivo, 3) quando você volta / o que acontece com o seu trabalho.',hint:'Sehr geehrte Frau Hoffmann, leider kann ich heute nicht … Ich bin … / Ich muss … Morgen bin ich wieder … Mit freundlichen Grüßen',focus:'formelle E-Mail (Anrede/Gruß, Sie), können, denn, Zeitangaben',model:'Sehr geehrte Frau Hoffmann,\nleider kann ich heute nicht ins Büro kommen, denn ich habe Fieber. Ich gehe heute zum Arzt. Ich hoffe, ich bin am Donnerstag wieder da.\nMit freundlichen Grüßen\nLucas Souza'}
 ]}],
 resumen:`<h3>Profissão</h3><p class="es-t">Was sind Sie von Beruf? – Ich bin Lehrerin. (sem artigo) · Ich arbeite als Koch bei … / in …</p>
 <h3>Conectores (verbo continua na posição 2)</h3><p class="es-t">und · aber · oder · denn</p>
@@ -1035,7 +1035,7 @@ lessons:[
  {t:'listen',es:'Mir tut der Hals weh.',de:'Minha garganta dói.'}
 ]},
 {id:'l2',title:'No médico',desc:'Was fehlt Ihnen? · Termin · sollen · Gute Besserung',steps:[
- {t:'vocab',title:'Saúde',items:[['krank','doente'],['gesund','saudável'],['das Fieber','a febre'],['der Schnupfen','o resfriado (nariz)'],['der Husten','a tosse'],['die Erkältung','o resfriado'],['die Schmerzen (Pl.)','as dores'],['der Arzt / die Ärztin','o médico / a médica'],['die Praxis','o consultório'],['der Termin','o compromisso / a consulta (horário marcado)'],['das Wartezimmer','a sala de espera'],['die Versichertenkarte','a carteirinha do plano de saúde'],['das Rezept','a receita'],['das Medikament','o remédio'],['die Tablette','o comprimido'],['die Krankmeldung','o atestado médico'],['Was fehlt Ihnen?','O que o senhor tem?'],['Gute Besserung!','Melhoras!']]},
+ {t:'vocab',title:'Saúde',items:[['krank','doente'],['gesund','saudável'],['das Fieber','a febre'],['der Schnupfen','a coriza (nariz escorrendo)'],['der Husten','a tosse'],['die Erkältung','o resfriado'],['die Schmerzen (Pl.)','as dores'],['der Arzt / die Ärztin','o médico / a médica'],['die Praxis','o consultório'],['der Termin','o compromisso / a consulta (horário marcado)'],['das Wartezimmer','a sala de espera'],['die Versichertenkarte','a carteirinha do plano de saúde'],['das Rezept','a receita'],['das Medikament','o remédio'],['die Tablette','o comprimido'],['die Krankmeldung','o atestado médico'],['Was fehlt Ihnen?','O que o senhor tem?'],['Gute Besserung!','Melhoras!']]},
  {t:'info',title:'sollen – o conselho de outra pessoa',html:`<table><tr><th></th><th>sollen</th></tr><tr><td>ich / er / sie</td><td class="es-t">soll</td></tr><tr><td>du</td><td class="es-t">sollst</td></tr><tr><td>wir / sie / Sie</td><td class="es-t">sollen</td></tr><tr><td>ihr</td><td class="es-t">sollt</td></tr></table>
  <p><b>sollen</b> = “dever” quando <b>outra pessoa</b> diz o que fazer (médico, chefe):</p>
  <div class="ex"><span class="es-t">Die Ärztin sagt, ich soll im Bett bleiben.</span> = A médica diz que eu devo ficar de cama.<br><span class="es-t">Was soll ich machen?</span> = O que eu devo fazer?</div>
@@ -1077,7 +1077,7 @@ lessons:[
  <tr><td class="es-t">passen</td><td class="es-t">Die Hose passt <b>mir</b> nicht.</td><td>A calça não serve em mim.</td></tr>
  <tr><td class="es-t">helfen</td><td class="es-t">Kann ich <b>Ihnen</b> helfen?</td><td>Posso ajudar o senhor?</td></tr>
  <tr><td class="es-t">gehören</td><td class="es-t">Die Tasche gehört <b>ihr</b>.</td><td>A bolsa é dela.</td></tr>
- <tr><td class="es-t">danken</td><td class="es-t">Ich danke <b>dir</b>!</td><td>Obrigado a você!</td></tr></table>
+ <tr><td class="es-t">danken</td><td class="es-t">Ich danke <b>dir</b>!</td><td>Eu agradeço a você!</td></tr></table>
  <div class="ojo">Com <b>gefallen</b>, a coisa é o sujeito: <span class="es-t">Die Schuhe gefall<b>en</b> mir.</span> (plural → gefallen). Pergunta: <span class="es-t">Wie gefällt dir das Kleid?</span></div>`},
  {t:'mc',q:'„Gosto dos sapatos.“',opts:['Die Schuhe gefallen mir.','Die Schuhe gefällt mir.','Ich gefalle die Schuhe.'],a:0},
  {t:'gap',q:'Wie gefällt ___ die Jacke, Tom? (a você)',a:['dir']},
@@ -1217,7 +1217,7 @@ lessons:[
  {t:'mc',q:'Was kostet die Reparatur?',opts:['240 €','214 €','18 €'],a:0}
 ]},
 {id:'l2',title:'Ler (Lesen)',desc:'bilhetes, anúncios, placas',steps:[
- {t:'read',kind:'Lesen · Teil 1',title:'Uma e-mail',text:`Liebe Sandra,
+ {t:'read',kind:'Lesen · Teil 1',title:'Um e-mail',text:`Liebe Sandra,
 ich habe am Samstag Geburtstag und mache eine kleine Party. Kommst du? Wir fangen um sieben Uhr an. Kannst du bitte einen Salat mitbringen? Getränke habe ich genug. Meine neue Adresse: Lindenstraße 3, zweiter Stock. Leider gibt es keinen Aufzug!
 Liebe Grüße
 Paula`,de:`Querida Sandra,
@@ -1257,7 +1257,7 @@ Paula`},
  {t:'tr',kind:'Sprechen · Teil 3',de:'Figura: uma caneta 🖊️ – peça a caneta emprestada: (Você me dá a caneta, por favor?)',a:['Kannst du mir bitte den Kuli geben?','Können Sie mir bitte den Kuli geben?','Kannst du mir bitte den Stift geben?','Können Sie mir bitte den Stift geben?','Gib mir bitte den Kuli.','Gib mir bitte den Stift.','Kannst du mir bitte den Kugelschreiber geben?','Können Sie mir bitte den Kugelschreiber geben?','Gib mir bitte den Kugelschreiber.']},
  {t:'tr',kind:'Sprechen · Teil 3',de:'Figura: um café ☕ – peça um café: (Eu queria um café, por favor.)',a:['Ich hätte gern einen Kaffee, bitte.','Ich möchte einen Kaffee, bitte.','Einen Kaffee, bitte.','Ich hätte gern einen Kaffee.']},
  {t:'info',title:'Parabéns! 🎉',html:`<p>Você chegou ao fim do nível <b>A1</b>. Se você acertou cerca de 60 % deste simulado, você está pronto para a prova <b>Goethe-Zertifikat A1</b> (ou <b>telc Deutsch A1</b>, que tem formato parecido).</p>
- <div class="ex">Dica: faça a gemischte Wiederholung (revisão mista) e os vocabulários todos os dias até a prova. Informações e inscrição: no site do Goethe-Institut ou de uma Volkshochschule perto de você.</div>`}
+ <div class="ex">Dica: faça a revisão mista e os vocabulários todos os dias até a prova. Informações e inscrição: no site do Goethe-Institut ou de uma Volkshochschule perto de você.</div>`}
 ]}],
 resumen:`<h3>Formato da prova A1</h3><table><tr><td>Hören</td><td>~20 min · 3 partes: conversas (2×), avisos (1×), recados (2×)</td></tr><tr><td>Lesen</td><td>25 min · bilhetes/e-mails (richtig/falsch), anúncios (a/b), placas (richtig/falsch)</td></tr><tr><td>Schreiben</td><td>20 min · formulário (5 campos) + mensagem (~30 palavras, 3 pontos)</td></tr><tr><td>Sprechen</td><td>15 min · apresentar-se, perguntar/responder, pedir</td></tr></table>
 <h3>Pedidos educados</h3><p class="es-t">Können Sie bitte …? · Kannst du mir bitte … geben? · Ich hätte gern … · Ich möchte …</p>

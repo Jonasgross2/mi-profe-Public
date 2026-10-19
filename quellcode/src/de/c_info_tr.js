@@ -343,7 +343,7 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "Ich schenke meiner Mutter einen Schal. · mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen": "Dou um cachecol para a minha mãe. · me, te, lhe, lhe, nos, vos, lhes, ao senhor",
 "helfen, danken, gratulieren, gehören, gefallen, schmecken, passen, antworten": "ajudar, agradecer, dar parabéns, pertencer, agradar, ter gosto, servir, responder",
 "Wenn du Zeit hast, kannst du mir helfen. · Ich koche, wenn Freunde kommen.": "Se você tiver tempo, pode me ajudar. · Cozinho quando os amigos vêm.",
-"Herzlichen Glückwunsch! · Alles Gute! · Frohe Weihnachten! · Guten Rutsch! · Frohes neues Jahr!": "Parabéns! · Tudo de bom! · Feliz Natal! · Boas entradas! · Feliz Ano-Novo!",
+"Herzlichen Glückwunsch! · Alles Gute! · Frohe Weihnachten! · Guten Rutsch! · Frohes neues Jahr!": "Parabéns! · Tudo de bom! · Feliz Natal! · Boa virada! · Feliz Ano-Novo!",
 "Ich schenke meiner Mutter (Wem?) einen Schal (Was?).": "Dou para a minha mãe (para quem?) um cachecol (o quê?).",
 "mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen": "me, te, lhe, lhe, nos, vos, lhes, ao senhor",
 "Kannst du mir helfen?": "Você pode me ajudar?",
