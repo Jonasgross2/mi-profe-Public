@@ -116,7 +116,6 @@ EN = [
 "exact, just",
 "maximum",
 "classic",
-"comment, remark",
 "exciting",
 "wall",
 "version",

@@ -177,7 +177,6 @@ EN = [
 "active",
 "hide",
 "admire",
-"chicken, hen",
 "button",
 "appreciate, value",
 "delicate",

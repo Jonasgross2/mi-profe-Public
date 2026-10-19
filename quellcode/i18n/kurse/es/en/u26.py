@@ -119,7 +119,6 @@ EN = [
 "cruel",
 "confuse, mistake",
 "cell",
-"grass, herb",
 "mystery, riddle",
 "private, special",
 "identity",
@@ -143,6 +142,5 @@ EN = [
 "lovable",
 "convicted, condemned",
 "warning, notice",
-"stick, hit",
 "<h3>Imperfect subjunctive</h3><p>3rd pl. preterite − <b>ron</b> + <b>ra</b>: <span class=\"es-t\">hablaron → hablara · tuvieron → tuviera · fueron → fuera · hicieron → hiciera</span></p><p class=\"es-t\">-ra, -ras, -ra, -ramos (with accent: habláramos), -rais, -ran</p>\n<h3>Unreal condition</h3><p class=\"es-t\">Si tuviera tiempo, iría. (si + imperf. subj. → conditional)</p>\n<h3>Wishes & comparisons</h3><p class=\"es-t\">Ojalá viniera. · Me gustaría que vinieras. · Habla como si fuera el jefe.</p>"
 ]

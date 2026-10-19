@@ -108,7 +108,7 @@ EN = [
 "customs",
 "the passenger",
 "the carriage",
-"to start (a car)",
+"to start, to pull away; to pull out",
 "to accelerate",
 "to brake",
 "the indicator",

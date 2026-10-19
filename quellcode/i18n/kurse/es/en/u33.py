@@ -197,7 +197,6 @@ EN = [
 "capacity, ability",
 "commission, order",
 "bring closer",
-"necklace, collar",
 "pathetic",
 "rule, norm",
 "ridiculous",

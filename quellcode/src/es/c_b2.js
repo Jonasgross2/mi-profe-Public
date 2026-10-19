@@ -84,7 +84,7 @@ lessons:[
  {t:'gap',q:'El profesor nos dijo que ___ (nosotros, leer) el capítulo 3. (Aufforderung)',a:['leyéramos']},
  {t:'gap',q:'Te recomendé que no ___ (tú, ir) en agosto.',a:['fueras']},
  {t:'order',es:'Le pedí que me ayudara con la mudanza.',de:'Ich bat ihn, mir beim Umzug zu helfen.'},
- {t:'tr',de:'Sie wollte, dass wir früher kommen.',a:['Quería que viniéramos antes.','Quería que llegáramos antes.','Ella quería que viniéramos antes.']}]},
+ {t:'tr',de:'Sie wollte, dass wir früher kommen.',a:['Quería que viniéramos antes.','Quería que llegáramos antes.','Ella quería que viniéramos antes.','Quería que viniéramos más temprano.','Quería que llegáramos más temprano.']}]},
 {id:'l2',title:'Es überraschte mich, dass …',desc:'me sorprendió que · era normal que',steps:[
  {t:'info',title:'Gefühle, Bewertungen, Zweifel – in der Vergangenheit',html:`<table><tr><th>Präsens</th><th>Vergangenheit</th></tr>
  <tr><td class="es-t">Me sorprende que <b>sea</b> tan fácil.</td><td class="es-t">Me sorprendió que <b>fuera</b> tan fácil.</td></tr>
@@ -161,10 +161,10 @@ lessons:[
  {t:'mc',q:'___ no tenía hambre, no cené.',opts:['Como','Porque','Así que'],a:0},
  {t:'mc',q:'Me duele la espalda, ___ voy al fisio.',opts:['así que','ya que','como'],a:0},
  {t:'mc',q:'___ la huelga, no hay metro hoy.',opts:['Debido a','Ya que','Como'],a:0},
- {t:'gap',q:'No puedo ir, ___ que tengo que trabajar. (formell: da)',a:['ya']},
+ {t:'gap',q:'No puedo ir, ___ que tengo que trabajar. (formell: da)',a:['ya','puesto']},
  {t:'gap',q:'Hacía mucho calor, ___ que nos quedamos en casa.',a:['así']},
  {t:'match',q:'Grund oder Folge?',pairs:[['como','Grund'],['por lo tanto','Folge'],['ya que','Grund'],['de modo que','Folge'],['puesto que','Grund']]},
- {t:'tr',de:'Da ich nicht schlafen konnte, habe ich ein Buch gelesen.',a:['Como no podía dormir, leí un libro.','Como no podía dormir, he leído un libro.']}]},
+ {t:'tr',de:'Da ich nicht schlafen konnte, habe ich ein Buch gelesen.',a:['Como no podía dormir, leí un libro.','Como no podía dormir, he leído un libro.','Ya que no podía dormir, leí un libro.','Puesto que no podía dormir, leí un libro.']}]},
 {id:'l3',title:'Gesund leben',desc:'Wortschatz · Dialog',steps:[
  {t:'vocab',title:'Gesundheit & Lebensstil',items:[['llevar una vida sana','gesund leben','🥗'],['el sedentarismo','der Bewegungsmangel','🪑'],['hacer ejercicio','Sport treiben','🏃'],['estirar','dehnen','🧘'],['la postura','die Haltung, die Position','🧍'],['tener dolor de espalda','Rückenschmerzen haben','🤕'],['el estrés','der Stress','😫'],['desconectar','abschalten','📴'],['dormir a pierna suelta','tief und fest schlafen','😴'],['picar entre horas','zwischendurch naschen','🍫'],['la alimentación','die Ernährung','🍎'],['el/la fisioterapeuta','der/die Physiotherapeut/in','💆']]},
  {t:'dialog',place:'Consulta de fisioterapia',title:'Ausreden',scene:'Álex hat deinen Rücken untersucht.',lines:[
@@ -210,7 +210,7 @@ lessons:[
  {t:'gap',q:'Las fotos fueron ___ (hacer) por un turista.',a:['hechas']},
  {t:'gap',q:'El ladrón fue detenido ___ la policía.',a:['por']},
  {t:'gap',q:'Las ventanas ___ (estar) abiertas cuando llegamos.',a:['estaban']},
- {t:'tr',de:'Das Buch wurde 1605 geschrieben.',a:['El libro fue escrito en 1605.']}]},
+ {t:'tr',de:'Das Buch wurde 1605 geschrieben.',a:['El libro fue escrito en 1605.','El libro se escribió en 1605.']}]},
 {id:'l2',title:'Hier spricht man …',desc:'se vende · se dice que',steps:[
  {t:'info',title:'Passiv und Unpersönliches mit se',html:`<table><tr><th>Form</th><th>Beispiel</th><th>Deutsch</th></tr>
  <tr><td>Passiv mit se (Verb passt sich an)</td><td class="es-t">Se <b>vende</b> piso. · Se <b>venden</b> pisos.</td><td>Wohnung(en) zu verkaufen</td></tr>
@@ -224,7 +224,7 @@ lessons:[
  {t:'gap',q:'En España se ___ (cenar) muy tarde.',a:['cena']},
  {t:'gap',q:'El año pasado se ___ (vender) más bicis que coches. (Indefinido)',a:['vendieron']},
  {t:'order',es:'Se calcula que la obra estará terminada en 2030.',de:'Man schätzt, dass das Bauwerk 2030 fertig sein wird.'},
- {t:'tr',de:'Hier darf man nicht rauchen.',a:['Aquí no se puede fumar.','No se puede fumar aquí.']}]},
+ {t:'tr',de:'Hier darf man nicht rauchen.',a:['Aquí no se puede fumar.','No se puede fumar aquí.','Aquí está prohibido fumar.']}]},
 {id:'l3',title:'Nachrichtensprache',desc:'según · al parecer · se calcula',steps:[
  {t:'vocab',title:'Medien & Nachrichten',items:[['la noticia','die Nachricht','📰'],['el titular','die Schlagzeile','🗞️'],['el/la periodista','der/die Journalist/in','🎤'],['según','laut, nach','📌'],['al parecer','anscheinend','👀'],['se calcula que','man schätzt, dass','🔢'],['la fuente','die Quelle','🔗'],['el bulo / la noticia falsa','die Falschmeldung','🚫'],['investigar','untersuchen, forschen','🔬'],['el descubrimiento','die Entdeckung','💡'],['publicar','veröffentlichen, posten','📤'],['la huelga','der Streik','✊']]},
  {t:'info',title:'Distanziert berichten',html:`<p class="es-t">Según el periódico, … · Al parecer, … · Se calcula que … · Fuentes de la policía informan de que …</p>
@@ -244,7 +244,7 @@ Se calcula que cada año llegan a la ciudad más de tres millones de pasajeros d
  {t:'mc',q:'¿Por qué fue aprobada la medida?',opts:['por las quejas de los vecinos','por un accidente','porque lo pidieron las navieras'],a:0},
  {t:'mc',q:'„Las terminales serán trasladadas“ ist …',opts:['Passiv im Futur','Passiv mit se','Zustand mit estar'],a:0},
  {t:'gap',q:'Se ___ (calcular) que llegan tres millones de pasajeros.',a:['calcula']},
- {t:'free',task:'Schreib eine kurze Nachrichtenmeldung (5–7 Sätze) über etwas, das in deiner Stadt oder Uni passiert ist (echt oder erfunden).',hint:'Según … · Al parecer … · Se calcula que … · fue + Partizip · se ha + Partizip',focus:'Passiv mit ser und se, Nachrichtensprache',model:'La Universidad de Mannheim anunció ayer que se abrirá una nueva biblioteca en 2027. Según la rectora, el edificio fue diseñado por un equipo de arquitectos jóvenes. Se calcula que tendrá espacio para 800 estudiantes. Al parecer, también se instalarán paneles solares en el tejado. Los estudiantes han recibido la noticia con alegría, ya que la biblioteca actual siempre está llena.'}]}
+ {t:'free',task:'Schreib eine kurze Nachrichtenmeldung (5–7 Sätze) über etwas, das in deiner Stadt oder Uni passiert ist (echt oder erfunden).',hint:'Según … · Al parecer … · Se calcula que … · fue + Partizip · se ha + Partizip',focus:'Passiv mit ser und se, Nachrichtensprache',model:'El Ayuntamiento de Mannheim anunció ayer que se abrirá una nueva biblioteca en 2027. Según la alcaldesa, el edificio fue diseñado por un equipo de arquitectos jóvenes. Se calcula que tendrá espacio para 800 estudiantes. Al parecer, también se instalarán paneles solares en el tejado. Los vecinos han recibido la noticia con alegría, ya que la biblioteca actual siempre está llena.'}]}
 ],
 placement:[
  {t:'mc',q:'La catedral ___ construida en el siglo XIV.',opts:['fue','estuvo','era'],a:0},

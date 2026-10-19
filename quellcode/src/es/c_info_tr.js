@@ -1551,7 +1551,7 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "dar": "geben / machen",
 "un paso, por hecho, a conocer, lugar a, la razón": "einen Schritt machen, als gegeben annehmen, bekannt geben, Anlass geben zu, recht geben",
 "llevar": "führen / bringen",
-"a cabo, la contraria, razón (Am.), las riendas": "durchführen, widersprechen, recht haben (Am.), die Zügel in der Hand haben",
+"a cabo, la contraria, razón, las riendas": "durchführen, widersprechen, recht haben, die Zügel in der Hand haben",
 "hacer": "machen",
 "hincapié en, frente a, caso a, falta": "betonen, sich stellen, beachten, nötig sein",
 "luchar contra molinos de viento": "gegen Windmühlen kämpfen",

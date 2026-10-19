@@ -19,7 +19,7 @@ lessons:[
  {t:'gap',q:'Fue en 1992 ___ se celebraron los Juegos Olímpicos en Barcelona.',a:['cuando']},
  {t:'gap',q:'Fue así ___ aprendí a cocinar: mirando a mi abuela.',a:['como']},
  {t:'order',es:'Lo que pasa es que no tengo tiempo.',de:'Die Sache ist die, dass ich keine Zeit habe.'},
- {t:'tr',de:'Es war Nuria, die mir die Wohnung gezeigt hat.',a:['Fue Nuria quien me enseñó el piso.','Fue Nuria la que me enseñó el piso.']}]},
+ {t:'tr',de:'Es war Nuria, die mir die Wohnung gezeigt hat.',a:['Fue Nuria quien me enseñó el piso.','Fue Nuria la que me enseñó el piso.','Fue Nuria quien me mostró el piso.','Fue Nuria la que me mostró el piso.']}]},
 {id:'l2',title:'Das Gute daran …',desc:'lo bueno · lo caro que es',steps:[
  {t:'info',title:'lo + Adjektiv',html:`<table><tr><th>Form</th><th>Bedeutung</th><th>Beispiel</th></tr>
  <tr><td class="es-t">lo + Adj.</td><td>das …e (daran)</td><td class="es-t"><b>Lo bueno</b> es que es gratis. · <b>Lo peor</b> fue la espera.</td></tr>
@@ -31,7 +31,7 @@ lessons:[
  {t:'gap',q:'Lo ___ (malo) es que cierra a las seis.',a:['malo']},
  {t:'gap',q:'¡Mira lo ___ (rápido) que corre ese niño!',a:['rápido']},
  {t:'gap',q:'___ de mañana sigue en pie, ¿no? (die Sache mit morgen)',a:['Lo']},
- {t:'tr',de:'Du weißt nicht, wie schön diese Stadt ist.',a:['No sabes lo bonita que es esta ciudad.']},
+ {t:'tr',de:'Du weißt nicht, wie schön diese Stadt ist.',a:['No sabes lo bonita que es esta ciudad.','No sabes lo bella que es esta ciudad.','No te imaginas lo bonita que es esta ciudad.']},
  {t:'listen',es:'Lo increíble es lo bien conservados que están los frescos después de ochocientos años.',de:'Das Unglaubliche ist, wie gut erhalten die Fresken nach achthundert Jahren sind.'}]},
 {id:'l3',title:'Satzstellung & Kunst',desc:'Dislokation · Museumsbesuch',steps:[
  {t:'info',title:'Thema nach vorn: Dislokation',html:`<p>Im gesprochenen Spanisch stellt man das Thema oft nach vorn und wiederholt es mit einem Pronomen:</p>
@@ -70,7 +70,7 @@ resumen:`<h3>Spaltsätze</h3><p class="es-t">Fue Laia quien … · Es aquí dond
 
 COURSE.units.push({id:'u36',n:'38',level:'C1b',title:'Por muy difícil que sea',sub:'Konzessiv für Fortgeschrittene (por muy … que, aun + Gerundium, y eso que, si bien) · Folge (tan … que, de ahí que + Subj., con lo que) · Wissenschaft & Ethik',
 goals:['por muy + Adj./Adv. + que + Subj.','por más / mucho que + Subj.','aun + Gerundium, aun así','y eso que (+ Ind.: obwohl doch)','si bien (formell: wenn auch)','Folge: tan/tanto … que, de ahí que + Subj., con lo que, de tal modo que'],
-situacion:{title:'Diskussion über KI und Arbeit',npc:'Dr. Puig',scene:'Bei einem Abendvortrag der UPC über künstliche Intelligenz und Arbeitswelt sitzt du neben Dr. Puig, einer Forscherin. In der Pause diskutiert ihr.',role:'Du bist Dr. Puig, Informatikerin an der UPC, freundlich und skeptisch gegenüber Technik-Hype. Ihr wechselt nach kurzer Zeit zum tú. Diskutiere, ob KI Jobs vernichtet oder schafft. Bring Gegenargumente mit Konzessiv-Konstruktionen (Por muy avanzada que sea…, Si bien es cierto que…, y eso que…) und zieh Schlüsse (de ahí que…).',goal:'Argumentiere mit por muy … que, si bien, aun así und ziehe Schlussfolgerungen mit de ahí que + Subj. oder tan … que.'},
+situacion:{title:'Diskussion über KI und Arbeit',npc:'Dr. Soler',scene:'Bei einem Abendvortrag der UPC über künstliche Intelligenz und Arbeitswelt sitzt du neben Dr. Soler, einer Forscherin. In der Pause diskutiert ihr.',role:'Du bist Dr. Soler, Informatikerin an der UPC, freundlich und skeptisch gegenüber Technik-Hype. Ihr wechselt nach kurzer Zeit zum tú. Diskutiere, ob KI Jobs vernichtet oder schafft. Bring Gegenargumente mit Konzessiv-Konstruktionen (Por muy avanzada que sea…, Si bien es cierto que…, y eso que…) und zieh Schlüsse (de ahí que…).',goal:'Argumentiere mit por muy … que, si bien, aun así und ziehe Schlussfolgerungen mit de ahí que + Subj. oder tan … que.'},
 lessons:[
 {id:'l1',title:'So … auch immer',desc:'por muy … que · por más que',steps:[
  {t:'info',title:'Starke Konzessivsätze',html:`<table><tr><th>Struktur</th><th>Beispiel</th><th>Deutsch</th></tr>
@@ -83,7 +83,7 @@ lessons:[
  {t:'gap',q:'Por muy ___ (temprano) que salgas, habrá tráfico.',a:['temprano']},
  {t:'gap',q:'Por más que ___ (tú, insistir), no cambiaré de opinión.',a:['insistas']},
  {t:'gap',q:'Por muy ___ (inteligente) que sean las máquinas, necesitan supervisión.',a:['inteligentes']},
- {t:'tr',de:'So schwer es auch sein mag, wir schaffen es.',a:['Por muy difícil que sea, lo conseguiremos.','Por difícil que sea, lo conseguiremos.']}]},
+ {t:'tr',de:'So schwer es auch sein mag, wir schaffen es.',a:['Por muy difícil que sea, lo conseguiremos.','Por difícil que sea, lo conseguiremos.','Por muy difícil que sea, lo lograremos.']}]},
 {id:'l2',title:'Obwohl doch …',desc:'aun · y eso que · si bien',steps:[
  {t:'info',title:'Weitere Konzessiv-Mittel',html:`<table><tr><th>Mittel</th><th>Register</th><th>Beispiel</th></tr>
  <tr><td class="es-t">aun + Gerundium</td><td>neutral</td><td class="es-t">Aun estando cansado, siguió trabajando.</td></tr>
@@ -96,24 +96,24 @@ lessons:[
  {t:'gap',q:'Aun ___ (saber) la respuesta, no dijo nada. (Gerundium)',a:['sabiendo']},
  {t:'gap',q:'___ a las críticas, el proyecto siguió adelante. (formell: trotz)',a:['Pese']},
  {t:'vocab',title:'Wissenschaft & Technik',items:[['la investigación','die Forschung','🔬'],['el/la investigador/a','der/die Forscher/in','🧑‍🔬'],['el avance','der Fortschritt','📈'],['los datos','die Daten','📊'],['el algoritmo','der Algorithmus','🧮'],['automatizar','automatisieren','🤖'],['el puesto de trabajo','der Arbeitsplatz','💼'],['la ética','die Ethik','⚖️'],['el sesgo','die Verzerrung, der Bias','🎯'],['la privacidad','die Privatsphäre','🔒'],['regular por ley','gesetzlich regeln','📜'],['a costa de','auf Kosten von','💸']]},
- {t:'tr',de:'Er hat die Prüfung bestanden, obwohl er doch kaum gelernt hat.',a:['Aprobó el examen, y eso que apenas estudió.','Aprobó el examen, y eso que casi no estudió.']}]},
+ {t:'tr',de:'Er hat die Prüfung bestanden, obwohl er doch kaum gelernt hat.',a:['Aprobó el examen, y eso que apenas estudió.','Aprobó el examen, y eso que casi no estudió.','Ha aprobado el examen, y eso que apenas ha estudiado.','Aprobó el examen, aunque apenas estudió.']}]},
 {id:'l3',title:'So …, dass … / Daher …',desc:'tan … que · de ahí que · con lo que',steps:[
  {t:'info',title:'Folgen ausdrücken',html:`<table><tr><th>Struktur</th><th>Modus</th><th>Beispiel</th></tr>
  <tr><td class="es-t">tan + Adj. + que / tanto/a + Nomen + que</td><td>Ind.</td><td class="es-t">Estaba tan cansado que me dormí en el metro.</td></tr>
  <tr><td class="es-t">de tal modo / manera que</td><td>Ind.</td><td class="es-t">Lo explicó de tal manera que todos lo entendieron.</td></tr>
  <tr><td class="es-t">de ahí que</td><td><b>Subj.</b></td><td class="es-t">No hay datos fiables; de ahí que el debate <b>sea</b> tan difícil.</td></tr>
  <tr><td class="es-t">con lo que / por lo que</td><td>Ind.</td><td class="es-t">Perdió el tren, con lo que llegó tarde.</td></tr></table>
- <div class="ex"><i>de ahí que</i> („daher“) steht – überraschend – mit <b>Subjuntivo</b>, weil die Ursache schon bekannt ist und nur noch bewertet wird.</div>`},
+ <div class="ex"><i>de ahí que</i> („daher“) steht – überraschend – mit <b>Subjuntivo</b>, weil die Folge meist als schon bekannt gilt – der Satz erklärt vor allem ihre Ursache.</div>`},
  {t:'mc',q:'Los datos no son claros; de ahí que los expertos no se ___.',opts:['pongan de acuerdo','ponen de acuerdo','pondrán de acuerdo'],a:0},
  {t:'mc',q:'Había ___ gente que no pudimos entrar.',opts:['tanta','tan','tanto'],a:0},
  {t:'gap',q:'Hablaba tan ___ (rápido) que nadie le entendía.',a:['rápido']},
  {t:'gap',q:'El algoritmo tiene un sesgo; de ahí que ___ (discriminar) a algunos candidatos.',a:['discrimine']},
- {t:'dialog',place:'Pausa de una conferencia en la UPC',title:'KI und Arbeit',scene:'Dr. Puig nimmt sich einen Kaffee.',lines:[
-  {n:'Dr. Puig',es:'Dicen que la IA va a destruir millones de empleos. ¿Tú qué crees?',de:'Man sagt, die KI wird Millionen Jobs vernichten. Was glaubst du?'},
+ {t:'dialog',place:'Pausa de una conferencia en la UPC',title:'KI und Arbeit',scene:'Dr. Soler nimmt sich einen Kaffee.',lines:[
+  {n:'Dr. Soler',es:'Dicen que la IA va a destruir millones de empleos. ¿Tú qué crees?',de:'Man sagt, die KI wird Millionen Jobs vernichten. Was glaubst du?'},
   {you:true,opts:[{es:'Si bien es cierto que muchas tareas se automatizarán, también surgirán trabajos nuevos.',ok:true},{es:'Y eso que es cierto que muchas tareas se automatizarán, también surgirán trabajos nuevos.',ok:false,why:'<i>y eso que</i> steht nachgestellt; am Satzanfang formell: <i>si bien</i>.'}]},
-  {n:'Dr. Puig',es:'Ya, pero por muy optimistas que seamos, no todo el mundo podrá reciclarse.',de:'Schon, aber so optimistisch wir auch sein mögen, nicht jeder wird sich umschulen können.'},
+  {n:'Dr. Soler',es:'Ya, pero por muy optimistas que seamos, no todo el mundo podrá reciclarse.',de:'Schon, aber so optimistisch wir auch sein mögen, nicht jeder wird sich umschulen können.'},
   {you:true,opts:[{es:'Tienes razón; de ahí que la formación sea tan importante.',ok:true},{es:'Tienes razón; de ahí que la formación es tan importante.',ok:false,why:'<i>de ahí que</i> → Subjuntivo: <i>sea</i>.'}]},
-  {n:'Dr. Puig',es:'Exacto. Y aun siendo una investigadora del tema, a mí también me da un poco de miedo.',de:'Genau. Und obwohl ich zu dem Thema forsche, macht es mir auch ein bisschen Angst.'}]}]},
+  {n:'Dr. Soler',es:'Exacto. Y aun siendo una investigadora del tema, a mí también me da un poco de miedo.',de:'Genau. Und obwohl ich zu dem Thema forsche, macht es mir auch ein bisschen Angst.'}]}]},
 {id:'l4',title:'Lesen: Progreso y precaución',desc:'Essay · Stellungnahme',steps:[
  {t:'read',title:'¿Progreso a cualquier precio?',text:`Pocas tecnologías han avanzado tan rápido como la inteligencia artificial. En apenas unos años, los sistemas han pasado de reconocer imágenes a redactar textos, diagnosticar enfermedades o componer música. Si bien estos avances abren posibilidades enormes, también plantean preguntas que todavía no sabemos responder.
 
@@ -166,7 +166,7 @@ lessons:[
  {t:'gap',q:'crecer → el ___',a:['crecimiento']},
  {t:'gap',q:'proponer → la ___',a:['propuesta']},
  {t:'mc',q:'Nominalisiert: „Wenn die Stadt den Verkehr reduziert, …“',opts:['La reducción del tráfico en la ciudad …','Reduciendo la ciudad el tráfico …','El reducir tráfico ciudad …'],a:0},
- {t:'tr',de:'Die Verbesserung der öffentlichen Verkehrsmittel ist dringend.',a:['La mejora del transporte público es urgente.']}]},
+ {t:'tr',de:'Die Verbesserung der öffentlichen Verkehrsmittel ist dringend.',a:['La mejora del transporte público es urgente.','La mejora de los transportes públicos es urgente.']}]},
 {id:'l3',title:'Gerundium & Zeichensetzung',desc:'häufige Fehler',steps:[
  {t:'info',title:'Gerundium: wann richtig, wann falsch?',html:`<table><tr><th>richtig</th><th>falsch</th></tr>
  <tr><td>gleichzeitig: <span class="es-t">Entró <b>cantando</b>.</span></td><td>als Folge danach: <s>Se cayó, rompiéndose la pierna.</s> → <span class="es-t">Se cayó y se rompió la pierna.</span></td></tr>

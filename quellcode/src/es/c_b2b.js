@@ -58,7 +58,7 @@ A veces me pregunto qué habría pasado si no hubiera perdido aquel avión. Quiz
  {t:'mc',q:'¿Qué habría pasado si el autor hubiera llegado a tiempo?',opts:['Probablemente ahora viviría en Londres.','Habría conocido antes a Amparo.','Habría enseñado inglés en Londres.'],a:0},
  {t:'mc',q:'¿Cómo ve hoy el autor aquel atasco?',opts:['como lo mejor que le pasó','como un gran error','como algo sin importancia'],a:0},
  {t:'gap',q:'Si no ___ (conocer) a Amparo, no habría descubierto que le encanta enseñar.',a:['hubiera conocido']},
- {t:'free',task:'Erzähl von einem Moment, der dein Leben verändert hat. Was wäre passiert, wenn es anders gelaufen wäre? (7–9 Sätze)',hint:'Si no hubiera … , ahora … · habría … · Me arrepiento de … · Ojalá hubiera … · A toro pasado …',focus:'irreale Vergangenheit, gemischte Bedingungen, Bedauern',model:'Hace dos años, un profesor me recomendó que pidiera una beca para hacer el máster en el extranjero. Al principio no quería, porque me daba miedo dejar a mi familia y a mis amigos. Si no hubiera seguido su consejo, ahora no estaría en Barcelona. Tampoco hablaría español tan bien ni habría conocido a Nuria y a Pablo. Me arrepiento de no haber venido aún antes. Ojalá hubiera tenido el valor de hacer un Erasmus durante el grado. A toro pasado, fue la mejor decisión de mi vida.'}]}
+ {t:'free',task:'Erzähl von einem Moment, der dein Leben verändert hat. Was wäre passiert, wenn es anders gelaufen wäre? (7–9 Sätze)',hint:'Si no hubiera … , ahora … · habría … · Me arrepiento de … · Ojalá hubiera … · A toro pasado …',focus:'irreale Vergangenheit, gemischte Bedingungen, Bedauern',model:'Hace un año, una compañera de la consultora me recomendó que pidiera una beca para hacer el máster en el extranjero. Al principio no quería, porque me daba miedo dejar mi trabajo, a mi familia y a mis amigos. Si no hubiera seguido su consejo, ahora no estaría en Barcelona. Tampoco hablaría español tan bien ni habría conocido a Nuria y a Pablo. Me arrepiento de no haber venido aún antes. Ojalá hubiera tenido el valor de hacer un Erasmus durante el grado. A toro pasado, fue la mejor decisión de mi vida.'}]}
 ],
 placement:[
  {t:'mc',q:'Si lo ___, te lo habría dicho.',opts:['hubiera sabido','habría sabido','sabría'],a:0},
@@ -109,7 +109,7 @@ lessons:[
  <tr><td class="es-t">despierto</td><td>aufgeweckt</td><td>wach</td></tr>
  <tr><td class="es-t">orgulloso</td><td>hochmütig</td><td>stolz (auf etwas)</td></tr></table>`},
  {t:'mc',q:'„Die Paella ist lecker.“',opts:['La paella está rica.','La paella es rica.','La paella está rico.'],a:0},
- {t:'mc',q:'„Bist du fertig? Wir gehen.“',opts:['¿Estás listo? Nos vamos.','¿Eres listo? Nos vamos.','¿Estás lista nos vamos?'],a:0},
+ {t:'mc',q:'„Bist du fertig? Wir gehen.“',opts:['¿Estás listo? Nos vamos.','¿Eres listo? Nos vamos.','¿Tienes listo? Nos vamos.'],a:0},
  {t:'gap',q:'Hoy no voy a clase, ___ malo. (ich bin krank)',a:['estoy']},
  {t:'gap',q:'Esta película ___ muy aburrida. (sie ist langweilig)',a:['es']},
  {t:'gap',q:'Mis padres ___ muy orgullosos de mí.',a:['están']}]},
@@ -153,7 +153,7 @@ lessons:[
  {t:'gap',q:'Con la noticia, todos nos ___ (quedarse) sin palabras.',a:['quedamos']},
  {t:'gap',q:'La fábrica se ___ (convertir) en un museo. (Indefinido)',a:['convirtió']},
  {t:'gap',q:'Me ___ (ponerse) muy nervioso antes de los exámenes. (immer)',a:['pongo']},
- {t:'tr',de:'Er ist sehr ernst geworden.',a:['Se ha vuelto muy serio.']}]},
+ {t:'tr',de:'Er ist sehr ernst geworden.',a:['Se ha vuelto muy serio.','Él se ha vuelto muy serio.','Se volvió muy serio.']}]},
 {id:'l2',title:'anfangen, schaffen, am Ende …',desc:'ponerse a · llegar a · acabar + Gerundium',steps:[
  {t:'info',title:'Periphrasen für Fortgeschrittene',html:`<table><tr><th>Form</th><th>Bedeutung</th><th>Beispiel</th></tr>
  <tr><td class="es-t">ponerse a + Inf.</td><td>(plötzlich) anfangen</td><td class="es-t">Se puso a llorar.</td></tr>
@@ -215,9 +215,9 @@ lessons:[
  {t:'mc',q:'Mi hermana es muy ordenada; yo, ___, soy un desastre.',opts:['en cambio','es decir','por último'],a:0},
  {t:'mc',q:'El plan es caro; ___, creo que merece la pena.',opts:['no obstante','es decir','en primer lugar'],a:0},
  {t:'mc',q:'Llegará el 15, ___, dentro de dos semanas.',opts:['es decir','en cambio','no obstante'],a:0},
- {t:'gap',q:'En ___, la propuesta tiene más ventajas que inconvenientes. (Fazit)',a:['definitiva','resumen','conclusión']},
+ {t:'gap',q:'En ___, la propuesta tiene más ventajas que inconvenientes. (Fazit)',a:['definitiva','resumen','conclusión','suma']},
  {t:'match',q:'Funktion zuordnen',pairs:[['en primer lugar','Aufzählen'],['no obstante','Gegensatz'],['o sea','Erklären'],['en suma','Fazit'],['sin ir más lejos','Beispiel']]},
- {t:'tr',de:'Einerseits ist es praktisch; andererseits ist es teuer.',a:['Por un lado es práctico; por otro (lado), es caro.','Por una parte es práctico; por otra, es caro.']}]},
+ {t:'tr',de:'Einerseits ist es praktisch; andererseits ist es teuer.',a:['Por un lado es práctico; por otro, es caro.','Por un lado es práctico; por otro lado, es caro.','Por una parte es práctico; por otra, es caro.','Por una parte es práctico; por otra parte, es caro.']}]},
 {id:'l2',title:'Wahrscheinlich …',desc:'estará · habrá llegado · serían las diez',steps:[
  {t:'info',title:'Vermutungen mit Zeitformen',html:`<table><tr><th>Vermutung über …</th><th>Form</th><th>Beispiel</th></tr>
  <tr><td>jetzt</td><td>Futur</td><td class="es-t">¿Dónde está Pablo? – <b>Estará</b> en casa.</td></tr>
@@ -250,7 +250,7 @@ Cabe destacar, en cambio, que en los países donde se ha probado, como Islandia,
  {t:'mc',q:'„es decir“ im zweiten Absatz …',opts:['erklärt den vorigen Gedanken genauer','leitet einen Gegensatz ein','zieht ein Fazit'],a:0},
  {t:'mc',q:'B2-Mix: Si ___ cuatro días a la semana, tendría más tiempo libre.',opts:['trabajara','trabajo','trabajaría'],a:0},
  {t:'mc',q:'B2-Mix: Me sorprendió que la empresa ___ el modelo.',opts:['mantuviera','mantiene','mantenga'],a:0},
- {t:'free',task:'Schreib einen Argumentationstext (8–10 Sätze): ¿Deberían las universidades permitir la inteligencia artificial en los exámenes? Mit Einleitung, Pro, Contra und Fazit.',hint:'En primer lugar … · Además … · No obstante … · Hay quien opina que … · es decir … · Si … , … · En definitiva …',focus:'Diskursmarker, Konzessiv/Kausal, Subjuntivo, irreale Bedingungen',model:'La inteligencia artificial ha llegado a las aulas y plantea una pregunta difícil: ¿debería estar permitida en los exámenes? En primer lugar, es una herramienta que usaremos en nuestra vida profesional, así que tiene sentido aprender a usarla. Además, si se permitiera, los exámenes podrían centrarse más en el razonamiento. No obstante, hay quien opina que los estudiantes dejarían de pensar por sí mismos. Es cierto que existe el riesgo de que algunos hagan trampa. Por otra parte, prohibirla no impediría que la usen en casa. Por eso, en mi opinión, sería mejor cambiar el tipo de examen, es decir, evaluar más proyectos y presentaciones orales. En definitiva, no se trata de prohibir, sino de enseñar a usar la IA con responsabilidad.'}]}
+ {t:'free',task:'Schreib einen Argumentationstext (8–10 Sätze): ¿Deberían las universidades permitir la inteligencia artificial en los exámenes? Mit Einleitung, Pro, Contra und Fazit.',hint:'En primer lugar … · Además … · No obstante … · Hay quien opina que … · es decir … · Si … , … · En definitiva …',focus:'Diskursmarker, Konzessiv/Kausal, Subjuntivo, irreale Bedingungen',model:'La inteligencia artificial ha llegado a las aulas y plantea una pregunta difícil: ¿debería estar permitida en los exámenes? En primer lugar, es una herramienta que usaremos en nuestra vida profesional, así que tiene sentido aprender a usarla. Además, si se permitiera, los exámenes podrían centrarse más en el razonamiento. No obstante, hay quien opina que los estudiantes dejarían de pensar por sí mismos. Es cierto que existe el riesgo de que algunos hagan trampa. Por otra parte, prohibirla no impediría que la usaran en casa. Por eso, en mi opinión, sería mejor cambiar el tipo de examen, es decir, evaluar más proyectos y presentaciones orales. En definitiva, no se trata de prohibir, sino de enseñar a usar la IA con responsabilidad.'}]}
 ],
 placement:[
  {t:'mc',q:'Mi hermano es muy alto; yo, ___, soy bajito.',opts:['en cambio','es decir','en definitiva'],a:0},

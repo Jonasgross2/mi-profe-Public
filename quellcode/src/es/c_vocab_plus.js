@@ -137,7 +137,7 @@ W('u40','Recht & Literatur','Gericht, Verwaltung, literarische Sprache',[
 
 W('u41','Präzise Verben & Nuancen','Synonyme für C2: genauer sagen, was man meint',[
 ['acarrear','mit sich bringen (Folgen)'],['conllevar','mit sich bringen'],['suponer','bedeuten, darstellen'],['desencadenar','auslösen'],['propiciar','begünstigen'],['agravar','verschlimmern'],['paliar','lindern'],['subsanar','beheben, nachbessern'],['soslayar','umgehen'],['acotar','eingrenzen'],
-['vislumbrar','erahnen'],['entrever','durchblicken lassen'],['aducir','anführen (Gründe)'],['esgrimir','ins Feld führen (Argument)'],['recalcar','betonen'],['abogar por','sich einsetzen für'],['desdeñar','verschmähen'],['menospreciar','geringschätzen'],['ensalzar','preisen'],['enaltecer','verherrlichen'],
+['vislumbrar','erahnen'],['entrever','undeutlich sehen, erahnen'],['aducir','anführen (Gründe)'],['esgrimir','ins Feld führen (Argument)'],['recalcar','betonen'],['abogar por','sich einsetzen für'],['desdeñar','verschmähen'],['menospreciar','geringschätzen'],['ensalzar','preisen'],['enaltecer','verherrlichen'],
 ['ostensible','offensichtlich'],['fehaciente','glaubwürdig, beweiskräftig'],['ineludible','unumgänglich'],['exhaustivo','erschöpfend'],['somero','oberflächlich, knapp'],['ambiguo','mehrdeutig'],['tácito','stillschweigend'],['pertinente','angebracht, relevant'],['ecuánime','ausgeglichen, unparteiisch'],['perspicaz','scharfsinnig']]);
 }
 /* DELE-Übungstests (id 'lz', aus c_a1plus/c_a2plus/c_b1plus/c_b2plus) immer als letzte Lektion der Unidad – auch nach „Wortschatz: …“ */

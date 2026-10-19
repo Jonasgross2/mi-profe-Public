@@ -15,7 +15,7 @@ lessons:[
  {t:'mc',q:'„Venía a pedirle un favor“ bedeutet …',opts:['Ich möchte Sie um einen Gefallen bitten.','Ich kam früher, um Sie zu bitten.','Ich werde Sie um einen Gefallen bitten.'],a:0},
  {t:'gap',q:'¿Te ___ (importar) bajar un poco la música?',a:['importaría']},
  {t:'gap',q:'Perdone, ___ (yo, querer) saber si este asiento está libre. (Imperfekt)',a:['quería']},
- {t:'tr',de:'Ich wollte Sie fragen, ob Sie morgen Zeit hätten.',a:['Quería preguntarle si tendría tiempo mañana.','Quería preguntarle si mañana tendría tiempo.']}]},
+ {t:'tr',de:'Ich wollte Sie fragen, ob Sie morgen Zeit hätten.',a:['Quería preguntarle si tendría tiempo mañana.','Quería preguntarle si mañana tendría tiempo.','Quería preguntarle si tenía tiempo mañana.','Quería preguntarle si mañana tenía tiempo.']}]},
 {id:'l2',title:'Na, das ist ja toll!',desc:'Ironie · ¡Menudo …! · ¿Será posible?',steps:[
  {t:'info',title:'Ironie, Ausrufe und Staunen',html:`<table><tr><th>Mittel</th><th>Beispiel</th><th>gemeint</th></tr>
  <tr><td>ironisches Lob</td><td class="es-t">¡Qué puntual! (bei 40 Min. Verspätung)</td><td>Du bist viel zu spät.</td></tr>
@@ -27,7 +27,7 @@ lessons:[
  {t:'mc',q:'Dein Freund kommt 40 Minuten zu spät. Du sagst: „¡Qué puntual!“ Das ist …',opts:['ironisch','ein Kompliment','eine Frage'],a:0},
  {t:'mc',q:'„Ist der dreist!“',opts:['¡Vaya cara que tiene!','¡Vaya cara tiene que!','¡Qué cara tan tiene!'],a:0},
  {t:'mc',q:'„¿Serás capaz de decírselo?“ drückt aus …',opts:['Empörung/Vorwurf: Du wirst es doch nicht wagen!','eine Zukunftsplanung','eine höfliche Bitte'],a:0},
- {t:'gap',q:'¡___ lío has montado! (Was für ein Durcheinander!)',a:['Menudo','Vaya']},
+ {t:'gap',q:'¡___ lío has montado! (Was für ein Durcheinander!)',a:['Menudo','Vaya','Qué']},
  {t:'gap',q:'¡Qué ___ coches hay hoy en la ciudad! (wie viele)',a:['de']},
  {t:'listen',es:'¡Menuda nochecita! El perro de la vecina ha estado ladrando desde las cinco. ¿Será posible?',de:'Was für eine Nacht! Der Hund der Nachbarin hat seit fünf Uhr gebellt. Kann das wahr sein?'}]},
 {id:'l3',title:'Zwischen den Zeilen',desc:'Andeutungen · Nachbarschaftsgespräch',steps:[
@@ -66,7 +66,7 @@ goals:['häufige refranes verstehen und passend benutzen','Kollokationen: Verb +
 situacion:{title:'Sant Joan mit Abuelo Ramón',npc:'Ramón',scene:'In der Nacht von Sant Joan sitzt du am Strand neben Ramón, Nurias Großvater (82). Er spricht fast nur in Sprichwörtern und erzählt von früher.',role:'Du bist Ramón, Großvater von Nuria, 82, gutmütig, weise und voller refranes (Más vale tarde que nunca, A quien madruga Dios le ayuda, No hay mal que cien años dure…). Ihr siezt euch erst, du bietest das tú an. Erzähl von Sant Joan früher, frag Jonas nach deutschen Traditionen und kommentiere alles mit Sprichwörtern. Freu dich, wenn er selbst eins benutzt.',goal:'Versteh Ramóns Sprichwörter und benutze selbst mindestens zwei passende refranes oder kulturelle Anspielungen.'},
 lessons:[
 {id:'l1',title:'Sprichwörter',desc:'Más vale tarde que nunca …',steps:[
- {t:'vocab',title:'Häufige refranes',items:[['Más vale tarde que nunca.','Besser spät als nie.','⏰'],['A quien madruga, Dios le ayuda.','Morgenstund hat Gold im Mund.','🌅'],['No hay mal que por bien no venga.','Alles hat sein Gutes.','🍀'],['Del dicho al hecho hay mucho trecho.','Leichter gesagt als getan.','🛤️'],['En casa del herrero, cuchillo de palo.','Der Schuster hat die schlechtesten Schuhe.','🔨'],['Ojos que no ven, corazón que no siente.','Was ich nicht weiß, macht mich nicht heiß.','🙈'],['Dime con quién andas y te diré quién eres.','Sag mir, mit wem du gehst …','👥'],['Más vale pájaro en mano que ciento volando.','Lieber den Spatz in der Hand …','🐦'],['Perro ladrador, poco mordedor.','Hunde, die bellen, beißen nicht.','🐕'],['Cada maestrillo tiene su librillo.','Jeder hat seine eigene Methode.','📒'],['A buen entendedor, pocas palabras bastan.','Dem Kundigen genügen wenige Worte.','💡'],['No hay mal que cien años dure.','Alles Schlechte geht vorbei.','⌛']]},
+ {t:'vocab',title:'Häufige refranes',items:[['Más vale tarde que nunca.','Besser spät als nie.','⏰'],['A quien madruga, Dios le ayuda.','Morgenstund hat Gold im Mund.','🌅'],['No hay mal que por bien no venga.','Alles hat sein Gutes.','🍀'],['Del dicho al hecho hay mucho trecho.','Leichter gesagt als getan.','🛤️'],['En casa del herrero, cuchillo de palo.','Der Schuster hat die schlechtesten Schuhe.','🔨'],['Ojos que no ven, corazón que no siente.','Was ich nicht weiß, macht mich nicht heiß.','🙈'],['Dime con quién andas y te diré quién eres.','Sag mir, mit wem du umgehst, und ich sage dir, wer du bist.','👥'],['Más vale pájaro en mano que ciento volando.','Lieber den Spatz in der Hand als die Taube auf dem Dach.','🐦'],['Perro ladrador, poco mordedor.','Hunde, die bellen, beißen nicht.','🐕'],['Cada maestrillo tiene su librillo.','Jeder hat seine eigene Methode.','📒'],['A buen entendedor, pocas palabras bastan.','Dem Kundigen genügen wenige Worte.','💡'],['No hay mal que cien años dure.','Alles Schlechte geht vorbei.','⌛']]},
  {t:'match',q:'Sprichwort → Situation',pairs:[['Más vale tarde que nunca.','Er kommt endlich, wenn auch spät.'],['En casa del herrero, cuchillo de palo.','Die Friseurin hat selbst einen schlechten Haarschnitt.'],['Perro ladrador, poco mordedor.','Er droht viel, tut aber nichts.'],['Del dicho al hecho hay mucho trecho.','Er verspricht viel, macht aber nichts.']]},
  {t:'mc',q:'Der IT-Experte hat selbst einen uralten Laptop:',opts:['En casa del herrero, cuchillo de palo.','A quien madruga, Dios le ayuda.','Más vale tarde que nunca.'],a:0},
  {t:'gap',q:'No hay mal que por bien no ___.',a:['venga']},
@@ -77,21 +77,21 @@ lessons:[
  <tr><td class="es-t">tomar</td><td class="es-t">una decisión, medidas, el pelo, en serio, en cuenta</td></tr>
  <tr><td class="es-t">poner</td><td class="es-t">en marcha, en duda, de manifiesto, fin a, en práctica</td></tr>
  <tr><td class="es-t">dar</td><td class="es-t">un paso, por hecho, a conocer, lugar a, la razón</td></tr>
- <tr><td class="es-t">llevar</td><td class="es-t">a cabo, la contraria, razón (Am.), las riendas</td></tr>
+ <tr><td class="es-t">llevar</td><td class="es-t">a cabo, la contraria, razón, las riendas</td></tr>
  <tr><td class="es-t">hacer</td><td class="es-t">hincapié en, frente a, caso a, falta</td></tr></table>
  <div class="ex">Auf C2-Niveau zählt nicht nur, ob ein Satz korrekt ist, sondern ob er <b>idiomatisch</b> ist. <i>hacer una decisión</i> versteht jeder – aber man sagt <i>tomar</i>.</div>`},
- {t:'mc',q:'Das Projekt ___ en marcha el año pasado.',opts:['se puso','se tomó','se hizo'],a:0},
+ {t:'mc',q:'El proyecto ___ en marcha el año pasado.',opts:['se puso','se tomó','se hizo'],a:0},
  {t:'mc',q:'El informe ___ hincapié en la falta de datos.',opts:['hace','pone','da'],a:0},
  {t:'gap',q:'Siempre me ___ (llevar) la contraria. (er widerspricht mir immer)',a:['lleva']},
  {t:'gap',q:'Hay que ___ en cuenta todos los factores.',a:['tener','tomar']},
  {t:'gap',q:'La empresa ___ (llevar) a cabo un estudio en 2024. (Indefinido)',a:['llevó']},
  {t:'match',q:'Was gehört zusammen?',pairs:[['dar','un paso'],['poner','fin a'],['hacer','frente a'],['llevar','a cabo'],['tomar','medidas']]},
- {t:'tr',de:'Wir müssen Maßnahmen ergreifen.',a:['Tenemos que tomar medidas.','Hay que tomar medidas.']}]},
+ {t:'tr',de:'Wir müssen Maßnahmen ergreifen.',a:['Tenemos que tomar medidas.','Hay que tomar medidas.','Debemos tomar medidas.','Tenemos que adoptar medidas.']}]},
 {id:'l3',title:'Feste & Anspielungen',desc:'Sant Joan · Don Quijote',steps:[
  {t:'info',title:'Kulturelle Anspielungen im Alltag',html:`<table><tr><th>Ausdruck</th><th>Herkunft</th><th>Bedeutung</th></tr>
  <tr><td class="es-t">luchar contra molinos de viento</td><td>Don Quijote</td><td>gegen Windmühlen kämpfen</td></tr>
  <tr><td class="es-t">ser un quijote</td><td>Don Quijote</td><td>ein Idealist sein</td></tr>
- <tr><td class="es-t">ir a por uvas</td><td>Nochevieja (12 Trauben)</td><td>nicht bei der Sache sein</td></tr>
+ <tr><td class="es-t">ir a por uvas</td><td>Weinlese</td><td>nicht bei der Sache sein</td></tr>
  <tr><td class="es-t">ser más largo que un día sin pan</td><td>Alltag</td><td>endlos lang sein</td></tr>
  <tr><td class="es-t">quedarse para vestir santos</td><td>Kirche</td><td>(veraltet) unverheiratet bleiben</td></tr>
  <tr><td class="es-t">hacer el agosto</td><td>Ernte</td><td>ein Riesengeschäft machen</td></tr></table>`},
@@ -140,7 +140,7 @@ lessons:[
  {t:'gap',q:'___ lo que digan, voy a hacerlo. (sagen)',a:['Digan']},
  {t:'gap',q:'Lo conseguiremos, cueste lo que ___.',a:['cueste']},
  {t:'gap',q:'Vayas donde ___, llévate un paraguas.',a:['vayas']},
- {t:'tr',de:'Ob du willst oder nicht, du musst kommen.',a:['Quieras o no, tienes que venir.','Quieras o no, tienes que venir tú.']}]},
+ {t:'tr',de:'Ob du willst oder nicht, du musst kommen.',a:['Quieras o no, tienes que venir.','Quieras o no, tienes que venir tú.','Quieras o no quieras, tienes que venir.']}]},
 {id:'l2',title:'Futuro de subjuntivo',desc:'quien fuere · a donde fueres',steps:[
  {t:'info',title:'Eine fast verschwundene Form',html:`<p>Der <b>Futuro de subjuntivo</b> wird heute fast nur noch in Gesetzestexten und Redewendungen benutzt. Bildung wie Imperf. Subj., aber mit <b>-re</b>: <span class="es-t">hablare, tuviere, fuere, hubiere</span>.</p>
  <table><tr><th>Wo?</th><th>Beispiel</th><th>heute normal</th></tr>
@@ -201,7 +201,7 @@ lessons:[
  {t:'mc',q:'Nos vemos a las ocho, ___, a las ocho y media.',opts:['mejor dicho','a saber','en síntesis'],a:0},
  {t:'gap',q:'El curso tiene tres niveles, a ___: básico, intermedio y avanzado.',a:['saber']},
  {t:'gap',q:'___ otro modo: no hay presupuesto. (anders gesagt)',a:['Dicho de']},
- {t:'tr',de:'Kurz gesagt: Es hat sich gelohnt.',a:['En pocas palabras, ha valido la pena.','En pocas palabras: ha merecido la pena.','En resumen, ha valido la pena.']}]},
+ {t:'tr',de:'Kurz gesagt: Es hat sich gelohnt.',a:['En pocas palabras, ha valido la pena.','En pocas palabras: ha merecido la pena.','En resumen, ha valido la pena.','En pocas palabras, valió la pena.']}]},
 {id:'l2',title:'Übersetzungsfallen',desc:'Deutsch ↔ Spanisch',steps:[
  {t:'info',title:'Sinngemäß statt wörtlich',html:`<table><tr><th>Deutsch</th><th>wörtlich (falsch/seltsam)</th><th>idiomatisch</th></tr>
  <tr><td>Ich bin fertig. (erschöpft)</td><td><s>Estoy listo.</s></td><td class="es-t">Estoy agotado / hecho polvo.</td></tr>
@@ -215,7 +215,7 @@ lessons:[
  {t:'mc',q:'„Ich freue mich auf den Urlaub.“',opts:['Tengo muchas ganas de que lleguen las vacaciones.','Me alegro a las vacaciones.','Estoy feliz sobre las vacaciones.'],a:0},
  {t:'mc',q:'„Ich komme eventuell später.“',opts:['Quizás llegue más tarde.','Eventualmente llego más tarde.','Llego eventual más tarde.'],a:0},
  {t:'gap',q:'Después de la mudanza estoy hecho ___. (fix und fertig)',a:['polvo']},
- {t:'tr',de:'Ich bin total erschöpft.',a:['Estoy agotado.','Estoy hecho polvo.','Estoy reventado.','Estoy agotada.']},
+ {t:'tr',de:'Ich bin total erschöpft.',a:['Estoy agotado.','Estoy hecho polvo.','Estoy reventado.','Estoy agotada.','Estoy totalmente agotado.','Estoy agotadísimo.']},
  {t:'listen',es:'Dicho de otro modo, traducir no es cambiar palabras, sino trasladar ideas.',de:'Anders gesagt: Übersetzen heißt nicht, Wörter auszutauschen, sondern Ideen zu übertragen.'}]},
 {id:'l3',title:'Vermitteln',desc:'Dialog beim Abendessen',steps:[
  {t:'vocab',title:'Sprachmittlung',items:[['hacer de intérprete','dolmetschen','🗣️'],['traducir al pie de la letra','wörtlich übersetzen','📏'],['captar el sentido','den Sinn erfassen','🎯'],['suavizar','abmildern','🪶'],['matizar','präzisieren, nuancieren','🎨'],['lo que viene a decir es que …','was er/sie damit sagen will, ist …','💡'],['transmitir','übermitteln','📡'],['perderse en la traducción','in der Übersetzung verloren gehen','🌫️'],['un falso amigo','ein falscher Freund','🎭'],['el matiz','die Nuance','🔍']]},
@@ -243,7 +243,7 @@ Un abrazo del Jonas que, por fin, sueña en español.`,de:`Lieber Jonas vom erst
  {t:'mc',q:'B2: Si lo ___ sabido, te lo habría dicho.',opts:['hubiera','habría','había'],a:0},
  {t:'mc',q:'C1: Por muy difícil que ___, lo intentaré.',opts:['sea','es','fuera a'],a:0},
  {t:'mc',q:'C2: Adonde ___, haz lo que vieres.',opts:['fueres','fueras','vayas a'],a:0},
- {t:'free',task:'Schreib dir selbst einen Brief (10–12 Sätze): an dein „Ich vom ersten Spanisch-Tag“. Was würdest du dir raten? Was hast du gelernt? Benutze Strukturen aus allen Stufen.',hint:'Si pudiera … · Vas a … · Aprenderás que … · Pase lo que pase … · Dicho de otro modo … · No es por nada, pero … · Más vale tarde que nunca …',focus:'freie Produktion auf C2-Niveau, Register, Stil',model:'Querido Jonas de hace tres años: ahora mismo piensas que el español es imposible y que nunca podrás hablar con fluidez. Déjame quitarte esa idea. Aprenderás que equivocarse no es un fracaso, sino parte del camino. Habrá días en que no entiendas nada y otros en que te sorprendas contando un chiste. Si pudiera darte un consejo, sería que hablaras más y te preocuparas menos. No es por nada, pero esas tardes en la biblioteca repitiendo listas de verbos no te sirvieron tanto como una sola noche charlando en una terraza. Pase lo que pase, no dejes de leer: las historias te enseñarán más que cualquier manual. Y cuando por fin entiendas una indirecta de la señora Rovira, sabrás que lo has conseguido. Dicho de otro modo: disfruta del viaje. Un abrazo de tu yo del futuro.'}]}
+ {t:'free',task:'Schreib dir selbst einen Brief (10–12 Sätze): an dein „Ich vom ersten Spanisch-Tag“. Was würdest du dir raten? Was hast du gelernt? Benutze Strukturen aus allen Stufen.',hint:'Si pudiera … · Vas a … · Aprenderás que … · Pase lo que pase … · Dicho de otro modo … · No es por nada, pero … · Más vale tarde que nunca …',focus:'freie Produktion auf C2-Niveau, Register, Stil',model:'Querido Jonas del primer día: ahora mismo piensas que el español es imposible y que nunca podrás hablar con fluidez. Déjame quitarte esa idea. Aprenderás que equivocarse no es un fracaso, sino parte del camino. Habrá días en que no entiendas nada y otros en que te sorprendas contando un chiste. Si pudiera darte un consejo, sería que hablaras más y te preocuparas menos. No es por nada, pero esas tardes en la biblioteca repitiendo listas de verbos no te sirvieron tanto como una sola noche charlando en una terraza. Pase lo que pase, no dejes de leer: las historias te enseñarán más que cualquier manual. Y cuando por fin entiendas una indirecta de la señora Rovira, sabrás que lo has conseguido. Dicho de otro modo: disfruta del viaje. Un abrazo de tu yo del futuro.'}]}
 ],
 placement:[
  {t:'mc',q:'Subió un 100 %, ___, se duplicó.',opts:['o lo que es lo mismo','mejor dicho','a saber'],a:0},

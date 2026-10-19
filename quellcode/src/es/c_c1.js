@@ -97,7 +97,7 @@ lessons:[
  <div class="ex">Spanisch ist direkter als Deutsch bei Bitten (<i>Ponme un café</i>), aber bei Kritik wird gern abgeschwächt: <span class="es-t">No está mal, pero igual podríamos …</span></div>`},
  {t:'mc',q:'Höflichere Kritik:',opts:['El informe está bien, aunque igual habría que revisar los datos.','El informe está fatal.','El informe es un rollo.'],a:0},
  {t:'mc',q:'„Das war total seltsam.“',opts:['Fue de lo más raro.','Fue más bien raro.','Fue algo raro.'],a:0},
- {t:'gap',q:'Estoy cansad___. (-ísimo, ich bin todmüde)',a:['ísimo']},
+ {t:'gap',q:'Estoy cansad___. (-ísimo, ich bin todmüde)',a:['ísimo','ísima']},
  {t:'dialog',place:'Bar después del trabajo',title:'Danis Freitag',scene:'Dani bestellt zwei cañas und legt los.',lines:[
   {n:'Dani',es:'Tío, estoy hasta las narices. El jefe me ha tenido currando hasta las siete.',de:'Alter, ich hab die Nase voll. Der Chef hat mich bis sieben schuften lassen.'},
   {you:true,opts:[{es:'¡Qué rollo! ¿Y eso? ¿Metiste la pata con algo?',ok:true},{es:'¡Qué rollo! ¿Y eso? ¿Metiste el pie con algo?',ok:false,why:'Die Wendung lautet <i>meter la pata</i>.'}]},
@@ -113,7 +113,7 @@ Luego conocí a una argentina que usaba «vos» en lugar de «tú» y a un mexic
 
 Hoy, más que «hablar bien», intento hablar de forma adecuada: saber cuándo puedo decir «tío, qué guay» y cuándo es mejor un «me parece estupendo». Y, dicho sea de paso, ya no me pierdo cuando alguien me dice «quillo».`,de:`Als ich nach Barcelona kam, hatte ich ein Spanisch „aus dem Lehrbuch“ gelernt und dachte, ich würde alles verstehen. Irrtum. An der Uni mischten meine Kommilitonen Spanisch und Katalanisch im selben Satz: „Ens veiem luego, ¿vale?“. Im Radio verschluckte ein andalusischer Moderator die Hälfte der Konsonanten, und eine Kommilitonin, die aus Sevilla ist, sagte alle naslang „quillo“.\n\nDann lernte ich eine Argentinierin kennen, die „vos“ statt „tú“ benutzte, und einen Mexikaner, für den „coger“ beim Bus furchtbar klang. Ich brauchte Monate, um zu verstehen, dass es nicht ein richtiges Spanisch und andere falsche gibt, sondern viele gleich gültige Varietäten. Was es aber gibt, sind Register: Wir sprechen mit einem Freund in der Bar nicht so wie mit einem Professor in der Sprechstunde.\n\nHeute versuche ich weniger, „gut“ zu sprechen, als angemessen zu sprechen: zu wissen, wann ich „tío, qué guay“ sagen kann und wann ein „me parece estupendo“ besser ist. Und nebenbei bemerkt verliere ich nicht mehr den Faden, wenn jemand „quillo“ zu mir sagt.`},
  {t:'mc',q:'¿Qué aprendió el autor?',opts:['que hay muchas variedades válidas y distintos registros','que el español de manual es el único correcto','que en Barcelona solo se habla catalán'],a:0},
- {t:'mc',q:'En México, el autor aprendió que …',opts:['«coger» puede sonar mal','«vos» se usa en lugar de «tú»','«quillo» es un saludo'],a:0},
+ {t:'mc',q:'Gracias a un mexicano, el autor aprendió que …',opts:['«coger» puede sonar mal','«vos» se usa en lugar de «tú»','«quillo» es un saludo'],a:0},
  {t:'free',task:'Schreib dieselbe Nachricht zweimal (je 3–4 Sätze): einmal umgangssprachlich an einen Freund, einmal formell an deine Professorin. Inhalt: Du kannst morgen nicht zum Treffen kommen, weil du krank bist, und schlägst einen neuen Termin vor.',hint:'informell: tío, no puedo, estoy fatal, ¿te va bien …? · formell: Estimada profesora: · Lamento comunicarle que … · ¿Le vendría bien …? · Un cordial saludo',focus:'Registerwechsel',model:'Informal: ¡Tío! Mañana no puedo ir, estoy fatal con fiebre. ¡Qué rollo! ¿Te va bien el jueves? Te invito a una caña para compensar.\n\nFormal: Estimada profesora Vidal: Lamento comunicarle que mañana no podré asistir a la tutoría, ya que me encuentro enfermo. ¿Le vendría bien el jueves a la misma hora? Un cordial saludo, Jonas'}]}
 ],
 placement:[
@@ -144,7 +144,7 @@ lessons:[
  {t:'mc',q:'Saldremos a las ocho, a no ser que ___ tráfico.',opts:['haya','hay','habrá'],a:0},
  {t:'gap',q:'En caso de que ___ (usted, necesitar) ayuda, pulse este botón.',a:['necesite']},
  {t:'gap',q:'Te ayudo con la mudanza con tal de que me ___ (invitar) a cenar.',a:['invites']},
- {t:'tr',de:'Wir kommen, es sei denn, es regnet.',a:['Vendremos, a no ser que llueva.','Iremos, a no ser que llueva.','Vendremos, salvo que llueva.']}]},
+ {t:'tr',de:'Wir kommen, es sei denn, es regnet.',a:['Vendremos, a no ser que llueva.','Iremos, a no ser que llueva.','Vendremos, salvo que llueva.','Vendremos, a menos que llueva.','Iremos, salvo que llueva.']}]},
 {id:'l2',title:'De haberlo sabido …',desc:'de + Infinitiv · como + Subj.',steps:[
  {t:'info',title:'Kompakte Bedingungen',html:`<table><tr><th>Form</th><th>= si …</th><th>Beispiel</th></tr>
  <tr><td class="es-t">de + Infinitiv</td><td>si + Imperf. Subj.</td><td class="es-t">De tener más tiempo, viajaría más.</td></tr>
@@ -156,8 +156,8 @@ lessons:[
  {t:'mc',q:'„Wehe, du kommst zu spät!“',opts:['¡Como llegues tarde…!','¡Como llegas tarde…!','¡Cuando llegues tarde…!'],a:0},
  {t:'gap',q:'De ___ (saber) que estabas enfermo, te habría llamado.',a:['haber sabido']},
  {t:'gap',q:'Como no te ___ (dar) prisa, perderemos el avión.',a:['des']},
- {t:'gap',q:'De ___ (ser) tú, aceptaría la oferta. (= si fuera tú)',a:['ser']},
- {t:'tr',de:'Hätte ich das gewusst, wäre ich nicht gekommen.',a:['De haberlo sabido, no habría venido.','Si lo hubiera sabido, no habría venido.']}]},
+ {t:'gap',q:'De ___ (tener) más dinero, me compraría un piso. (= si tuviera)',a:['tener']},
+ {t:'tr',de:'Hätte ich das gewusst, wäre ich nicht gekommen.',a:['De haberlo sabido, no habría venido.','Si lo hubiera sabido, no habría venido.','De haberlo sabido, no hubiera venido.','Si lo hubiera sabido, no hubiera venido.']}]},
 {id:'l3',title:'Verhandeln',desc:'Wortschatz · Gehaltsgespräch',steps:[
  {t:'vocab',title:'Arbeitsvertrag & Verhandlung',items:[['el contrato indefinido','der unbefristete Vertrag','📄'],['el sueldo bruto / neto','das Brutto-/Nettogehalt','💶'],['las pagas extra','die Sonderzahlungen','🎁'],['el periodo de prueba','die Probezeit','⏳'],['negociar','verhandeln','🤝'],['la contraoferta','das Gegenangebot','↔️'],['ceder','nachgeben','🫳'],['llegar a un acuerdo','sich einigen','✅'],['el teletrabajo','das Homeoffice','🏠'],['los días de vacaciones','die Urlaubstage','🌴'],['estar dispuesto a','bereit sein zu','🙋'],['la condición','die Bedingung','📌']]},
  {t:'dialog',place:'Oficina de una start-up en el 22@',title:'Die Verhandlung',scene:'Herr Ferrer schiebt dir einen Vertragsentwurf hin.',lines:[
