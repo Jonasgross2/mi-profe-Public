@@ -742,7 +742,7 @@ function vocabPick(){const pv=pauseGet('vocab');if(pv)return resumeVocab(Object.
     h('div',{class:'picklist'},opt('🃏',T('Karten'),T('Aufdecken & selbst bewerten – am schnellsten'),8,'flip'),opt('✍️',T('Tippen'),T('Wort schreiben – am gründlichsten'),18,'type'),opt('🎧',T('Hören'),T('Hören & schreiben'),15,'listen')),
     h('button',{class:'btn ghost',style:'width:100%;margin-top:8px',onclick:close},T('Abbrechen'))));
   ov.onclick=e=>{if(e.target===ov)close();};document.body.append(ov);}
-/* Datenschutz & Info (Mehr → Knopf unten): was wo gespeichert wird, Quellen & Lizenzen. Gilt für alle Kurse. */
+/* Datenschutz & Info (Kachel unter Mehr): was wo gespeichert wird, Quellen & Lizenzen. Gilt für alle Kurse. */
 function vPrivacy(m){const P=(t,x)=>h('div',{class:'card',style:'margin-bottom:12px'},h('h2',{style:'margin-top:0'},t),...x.map(y=>h('p',{class:'small',style:'margin:0 0 8px'},y)));
   m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Datenschutz & Info')),
     h('p',{class:'sub'},T('Kein Konto, keine Werbung, kein Tracking, keine Cookies. Hier steht, welche Daten wo landen.')),
@@ -1978,8 +1978,9 @@ function vSettings(m,sec){
     if(v&&v!==window.APP_VERSION){toast(T('Neue Version gefunden – lade neu …'));if(window.caches)for(const k of await caches.keys())await caches.delete(k);setTimeout(()=>reloadApp(),600);}else toast(T('Du hast schon die neueste Version ✓'));}catch(e){toast(T('Keine Verbindung – später noch mal versuchen'));}};
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):T('Offline-Datei');
   m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),mtile('📅',T('Mein Tagesplan'),T('Was täglich dran ist'),()=>go('settings/plan')),
-    ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0])))),
-    h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),h('button',{class:'btn small ghost',onclick:()=>go('privacy')},'🔒 '+T('Datenschutz & Info')),canInstall()?h('button',{class:'btn small ghost',onclick:()=>vInstall(true)},T('📲 Als App installieren')):null,window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
+    ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0]))),mtile('🔒',T('Datenschutz & Info'),T('Daten, Quellen, Kontakt'),()=>go('privacy'))),
+    h('div',{class:'verline'},canInstall()?h('button',{class:'btn small',style:'width:100%;margin-bottom:8px',onclick:()=>vInstall(true)},T('📲 Als App installieren')):null,
+      h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;gap:8px'},h('span',{class:'muted small',style:'white-space:nowrap'},T('Version ')+ver),window.PWA?h('button',{class:'btn small ghost',style:'white-space:nowrap;padding-left:6px;padding-right:6px',onclick:upd},'🔄 '+T('Nach Update suchen')):null)));}
 
 /* ---------- Sync über GitHub Gist ---------- */
 const GIST_FILE=LANG.gist,GIST_DESC=T('Mi profe – Lernfortschritt (Sync)');
