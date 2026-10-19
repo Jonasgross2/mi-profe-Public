@@ -43,7 +43,9 @@ for _f in ALL_DIST:
 if _errs:
   print('ABBRUCH – Syntax, die ältere iPhones nicht kennen:');print('\n'.join(_errs[:30]));_sys.exit(1)
 import json as _json
-MANIFEST='window.PACKS='+_json.dumps({'learn':[dict({'code':k,'name':v['name'],'flag':v['flag'],'stufen':v.get('stufen'),'app':v.get('app','Mi profe'),'akzent':v.get('farbe','#c4472b')},**({'beta':True} if v.get('beta') else {})) for k,v in PACKS.items()],'ex':EXMAP,'base':{k:v.get('base','de') for k,v in PACKS.items()}},ensure_ascii=False)+';window.THEMES='+_json.dumps(THEMES)+';'
+# Oberflächen-Übersetzungen: pro App-Sprache ein eigenes Paket p/ui-<code>.js (die Web-App lädt nur das gebrauchte; Deutsch braucht keins)
+_ut=(s/'core'/'ui_tr.js').read_text(encoding='utf-8');UI_TR_D=_json.loads(_ut[_ut.index('window.UI_TR=')+len('window.UI_TR='):].rstrip().rstrip(';'))
+MANIFEST='window.PACKS='+_json.dumps({'learn':[dict({'code':k,'name':v['name'],'flag':v['flag'],'stufen':v.get('stufen'),'app':v.get('app','Mi profe'),'akzent':v.get('farbe','#c4472b')},**({'beta':True} if v.get('beta') else {})) for k,v in PACKS.items()],'ex':EXMAP,'base':{k:v.get('base','de') for k,v in PACKS.items()}},ensure_ascii=False)+';window.THEMES='+_json.dumps(THEMES)+';window.UI_TR={};window.UI_LIST='+_json.dumps(list(UI_TR_D))+';'
 LOADER='''<script>'''+MANIFEST+'''
 /* Lader (ES5): gleiche Logik wie engine.js (App-Sprache → Erklärsprache), lädt das Lernsprachen-Paket und ggf. das Erklärsprachen-Paket synchron */
 (function(){var sh=null;try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');}catch(e){}
@@ -53,7 +55,7 @@ var codes=PACKS.learn.map(function(x){return x.code;}),lang=sh&&sh.lang||'es';if
 var base=PACKS.base&&PACKS.base[lang]||'de';/* Ausgangssprache der Erklärungen im Kurs */
 var exl=[base].concat(PACKS.ex[lang]||[]).filter(function(c){return c!==lang;}),ex=sh&&sh.ex,old=!!(sh&&sh.name);
 if(exl.indexOf(ex)<0)ex=exl.indexOf(ui)>=0?ui:(ui!==base&&!old&&exl.indexOf('en')>=0?'en':base);
-var v='?v='+window.APP_VERSION;document.write('<script src="p/'+lang+'.js'+v+'"><\/script>');if(ex!==base)document.write('<script src="p/tr-'+lang+'-'+ex+'.js'+v+'"><\/script>');})();</script>
+var v='?v='+window.APP_VERSION;document.write('<script src="p/'+lang+'.js'+v+'"><\/script>');if(ui!=='de'&&UI_LIST.indexOf(ui)>=0)document.write('<script src="p/ui-'+ui+'.js'+v+'"><\/script>');if(ex!==base)document.write('<script src="p/tr-'+lang+'-'+ex+'.js'+v+'"><\/script>');})();</script>
 '''
 GUARD=r'''<script>/* Sicherheitsnetz (ES5): Wenn die App nicht startet, statt leerem Bildschirm eine Meldung mit Fehlertext, Neu-laden- und Sprache-zurück-Knopf. Fortschritt bleibt unberührt. */
 window.__t0=Date.now();(function(){var err='';window.addEventListener('error',function(e){if(!err)err=((e&&e.message)||'')+(e&&e.lineno?' (Zeile '+e.lineno+':'+e.colno+')':'');});
@@ -77,7 +79,7 @@ def page(pwa):
 <link rel="icon" href="icon-192.png">
 <script>window.PWA=true;window.APP_VERSION="'''+VERSION+'''";window.MP_SERVER="'''+SERVER_URL+'''";</script>''' if pwa else '''<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇸</text></svg>">'''
     inl=lambda fs:'\n'.join(f'<script>{(s/f).read_text()}</script>' for f in fs)
-    scripts=inl(['core/lang.js'])+'\n'+LOADER+inl(['core/ui_tr.js','core/engine.js']) if pwa else inl(ALL_DIST)
+    scripts=inl(['core/lang.js'])+'\n'+LOADER+inl(['core/engine.js']) if pwa else inl(ALL_DIST)
     return f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Mi profe</title>
@@ -99,6 +101,8 @@ for old in pk.glob('*.js'):old.unlink()
 PACKFILES=[]
 for k,v in PACKS.items():
     (pk/f'{k}.js').write_text(';\n'.join((s/f).read_text() for f in v['files']));PACKFILES.append(f'p/{k}.js')
+for _c,_d in UI_TR_D.items():
+    (pk/f'ui-{_c}.js').write_text('window.UI_TR=window.UI_TR||{};UI_TR['+_json.dumps(_c)+']='+_json.dumps(_d,ensure_ascii=False,separators=(',',':'))+';');PACKFILES.append(f'p/ui-{_c}.js')
 for f,ln,ex in TRS:
     (pk/f'tr-{ln}-{ex}.js').write_text((s/f).read_text());PACKFILES.append(f'p/tr-{ln}-{ex}.js')
 (w/'manifest.webmanifest').write_text('''{

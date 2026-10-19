@@ -4,9 +4,9 @@ function learnPacks(){let beta=false;try{const q=new URLSearchParams(location.se
   const cur=window.LANG&&LANG.code;return window.PACKS?PACKS.learn.filter(L=>!L.beta||beta||L.code===cur):Object.values(LANGS).filter(L=>L.course&&L.course.units.length).map(L=>({code:L.code,name:L.name,flag:L.flag}));}
 function bootScreen(){let b=document.getElementById('boot');if(!b){/* Flagge der Sprache, die gleich geladen wird */let f='🌍';try{const c=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}').lang;const P=((window.PACKS&&PACKS.learn)||[]).find(x=>x.code===c)||LANGS[c];if(P)f=P.flag;}catch(e){}
   b=document.createElement('div');b.id='boot';b.innerHTML='<div class="bootlogo">'+f+'</div><div class="bootspin"></div>';document.body.appendChild(b);}return b;}
-/* Startbildschirm ruhig ausblenden: mindestens 1 s ab dem Öffnen (länger, wenn die App länger braucht) und 0,3 s nach dem Aufbau, dann 0,4 s weiches Ausblenden */
+/* Startbildschirm ruhig ausblenden: mindestens 0,45 s ab dem Öffnen (länger, wenn die App länger braucht) und 0,15 s nach dem Aufbau, dann 0,25 s weiches Ausblenden (vorher 1 s + 0,4 s – wirkte beim Start aus dem Speicher träge) */
 let bootHiding=false,HOMEFIT=null,HOMESTATE=null; /* HOMESTATE: Kompakt-Stufe der Startseite (0–3), einmal pro Sitzung entschieden */function hideBoot(){const bt=document.getElementById('boot');if(!bt||bootHiding)return;bootHiding=true;
-  setTimeout(()=>{if(HOMEFIT)HOMEFIT();bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},420);},Math.max(300,1000-(Date.now()-(window.__t0||Date.now()))));} /* eigene Stoppuhr (__t0 im Sicherheitsnetz) – performance.now() startet auf iOS zu früh */ 
+  setTimeout(()=>{if(HOMEFIT)HOMEFIT();bt.classList.add('out');setTimeout(()=>{bt.remove();bootHiding=false;},270);},Math.max(150,450-(Date.now()-(window.__t0||Date.now()))));} /* eigene Stoppuhr (__t0 im Sicherheitsnetz) – performance.now() startet auf iOS zu früh */ 
 function reloadApp(){bootScreen();setTimeout(()=>location.reload(),60);}
 /* ===== Mi profe · Engine (sprachunabhängig – alles Sprachspezifische steht im Paket LANG, siehe lang.js) ===== */
 (function(){
@@ -24,7 +24,7 @@ const TP=k=>{let r=T(k);const P=LANG.praise;if(P)for(const a in P)r=r.split(a).j
 /* Hinweiskästen (.ojo) beginnen mit „¡OJO!“ – in anderen Lernsprachen aus LANG.praise (z. B. 'ACHTUNG!') */
 if(LANG.praise&&LANG.praise['¡OJO!'])document.documentElement.style.setProperty('--ojo',JSON.stringify(LANG.praise['¡OJO!']+' '));
 for(const L of LEVELS){L.title=T(L.title);L.sub=T(L.sub);}
-const UI_LANGS=[['de','🇩🇪','Deutsch'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['pt','🇧🇷','Português']].filter(([c])=>c==='de'||window.UI_TR&&UI_TR[c]);
+const UI_LANGS=[['de','🇩🇪','Deutsch'],['en','🇬🇧','English'],['es','🇪🇸','Español'],['pt','🇧🇷','Português']].filter(([c])=>c==='de'||(window.UI_LIST||Object.keys(window.UI_TR||{})).indexOf(c)>=0);/* Web-App: nur die gewählte Sprache ist geladen (p/ui-<code>.js), UI_LIST nennt alle */
 function setUI(code,withEx){let sh={};try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'{}')||{};}catch(e){}sh.ui=code;if(withEx)delete sh.ex;try{localStorage.setItem('mi-profe-shared',JSON.stringify(sh));}catch(e){}reloadApp();}
 const fmt=s=>{const r=String(s).replace(/\{L\}/g,T(LANG.name)).replace(/\{INTO\}/g,T(LANG.into||'')).replace(/\{ON\}/g,T(LANG.onLang||'')).replace(/\{EX\}/g,T(EX_NAMES[EX]||EX));return r.charAt(0).toUpperCase()+r.slice(1);};
 const KEY=LANG.key;const SHARED='mi-profe-shared';
@@ -1444,6 +1444,7 @@ function nextStory(){return STORIES.find(st=>storyOpen(st)&&!S.stories?.[st.id])
 const levelSeg=(cur,base,cnt)=>{const f=document.createDocumentFragment();f.append(h('div',{class:'stick',style:'margin-top:4px;margin-bottom:12px'},levelTabs(cur,base,Ls=>Ls.reduce((a,L)=>a+parseInt(cnt(L))||0,0)+String(cnt(Ls[0])).replace(/^\d+/,''))));
   const g=(LEVELS.find(L=>L.id===cur)||LEVELS[0]).label;if(lvSoon(g))f.append(soonCard(g));return f;};
 const curLevel=()=>{const n=nextLesson();return n?unitLevel(n.u):'A1';};
+let DICT=null;
 function vRef(m,tab,lv){lv=lvFirst(LEVELS.find(L=>L.id===lv)?lv:curLevel());
   if(!tab){const nNew=STORIES.filter(st=>storyOpen(st)&&!S.stories?.[st.id]).length;
     m.append(h('h1',{},T('Bibliothek')),h('p',{class:'sub'},T('Lesen, hören, nachschlagen.')),
@@ -1464,18 +1465,20 @@ function vRef(m,tab,lv){lv=lvFirst(LEVELS.find(L=>L.id===lv)?lv:curLevel());
           done?h('span',{class:'pill ok'},Math.round(done.score*100)+' %'):open?h('span',{class:'pill acc'},T('neu')):h('span',{class:'pill'},T('später')));})));return;}
   if(tab==='g'){m.append(levelSeg(lv,'ref/g',L=>COURSE.units.filter(u=>unitLevel(u)===L.id).length+T(' Unid.')),h('div',{class:'grid',style:'gap:8px'},COURSE.units.filter(u=>sameLv(unitLevel(u),lv)&&u.resumen).map(u=>
       h('div',{class:'lesson lrow',onclick:()=>go('resumen/'+u.id)},h('div',{class:'ic'},u.n),h('div',{style:'flex:1;min-width:0'},h('div',{class:'lt'},u.title),h('div',{class:'ld'},u.goals.join(' · ')))))));return;}
-  const all=[];const seen=new Set();for(const u of COURSE.units)for(const w of allUnitWords(u))if(!seen.has(w[0])){seen.add(w[0]);all.push([w,u]);}
+  /* Wortliste + Suchschlüssel einmal pro Sitzung (Kurs ändert sich zur Laufzeit nicht) – sonst bei jedem Tastendruck ~10 000× normalize */
+  if(!DICT){DICT=[];const seen=new Set();for(const u of COURSE.units){const ul=unitLevel(u);for(const w of allUnitWords(u))if(!seen.has(w[0])){seen.add(w[0]);DICT.push([w,u,strip((w[0]+' '+w[1]).toLowerCase()),ul]);}}}
+  const all=DICT;
   let mine=!!S.settings.dictMine;
   const inp=h('input',{class:'inp',type:'search',placeholder:fmt(T('Suchen – {L} oder {EX}')),autocomplete:'off',spellcheck:'false',autocorrect:'off',autocapitalize:'off'});
   const tog=h('button',{class:'chip'+(mine?' on':''),onclick:()=>{mine=!mine;S.settings.dictMine=mine;save(true);tog.classList.toggle('on',mine);draw();}},h('span',{},'⭐'),h('span',{},T('Nur meine Wörter')));
   const info=h('div',{class:'muted small',style:'margin:8px 0'});const out=h('div',{class:'vlist'});
   const draw=()=>{const q=strip(inp.value.toLowerCase().trim());out.innerHTML='';
-    const hits=all.filter(([w,u])=>(q?strip((w[0]+' '+w[1]).toLowerCase()).includes(q):sameLv(unitLevel(u),lv))&&(!mine||S.srs[w[0]]));
+    const hits=all.filter(([w,u,k,ul])=>(q?k.includes(q):sameLv(ul,lv))&&(!mine||S.srs[w[0]]));
     info.textContent=(q?hits.length+T(' Treffer in allen Stufen'):hits.length+T(' Wörter in ')+LEVELS.find(L=>L.id===lv).label)+(mine?T(' · nur gesammelte'):'');
     out.append(...hits.slice(0,300).map(([w,u])=>h('div',{class:'vrow drow'},spk(w[0]),picEl(w[0],w[2])||h('span',{class:'pic'}),h('div',{class:'dw'},h('div',{class:'es'},artW(w[0])),h('div',{class:'de'},w[1])),h('span',{class:'pill'},'U'+u.n))));
     if(!hits.length)out.append(h('p',{class:'muted'},mine?T('Noch keine gesammelten Wörter hier – sie kommen mit den Lektionen.'):T('Nichts gefunden.')));};
   inp.oninput=draw;
-  m.append(inp,levelSeg(lv,'ref/w',L=>{const n=all.filter(([,u])=>unitLevel(u)===L.id).length;return n+T(' W.');}),h('div',{class:'row'},tog),info,out,h('p',{class:'muted small',style:'margin-top:16px'},T('Lektionen „Häufige Wörter“: Häufigkeit aus FrequencyWords (OpenSubtitles, CC BY-SA 4.0), Übersetzungen aus WikDict/Wiktionary (CC BY-SA 3.0), bearbeitet.')));draw();}
+  m.append(inp,levelSeg(lv,'ref/w',L=>{const n=all.filter(x=>x[3]===L.id).length;return n+T(' W.');}),h('div',{class:'row'},tog),info,out,h('p',{class:'muted small',style:'margin-top:16px'},T('Lektionen „Häufige Wörter“: Häufigkeit aus FrequencyWords (OpenSubtitles, CC BY-SA 4.0), Übersetzungen aus WikDict/Wiktionary (CC BY-SA 3.0), bearbeitet.')));draw();}
 /* Geschichte: 1) nur hören (Text versteckt) → Fragen ohne Auflösung; alles richtig = fertig.
    2) sonst mit Text noch mal hören/lesen → nur die falschen Fragen wiederholen (mit Auflösung). */
 function vStory(m,id){const st=STORIES.find(x=>x.id===id);if(!st)return vRef(m,'s');const u=storyFor(st);
