@@ -458,3 +458,25 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .swc{position:relative}.swcustom{background:conic-gradient(#e2574c,#e0a526,#4caf50,#1f9bd1,#6d4fb8,#e2574c);color:#fff;font-size:20px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 .swpick{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;border:0;padding:0}
 .ptop .rep{flex:none;padding:4px 8px;opacity:.6;font-size:15px}.ptop .rep:hover{opacity:1}
+
+/* Barrierefreiheit: sichtbarer Tastatur-Fokus (nicht beim Tippen mit Finger/Maus); Felder zeigen ihn über den Rahmen */
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px}
+.inp:focus-visible{outline:none}
+[role=button]{cursor:pointer}
+/* Tippflächen am Handy ≥ 44 px, ohne das Layout zu ändern: kleine Knöpfe bekommen eine unsichtbar größere Fläche */
+@media (pointer:coarse){
+  .btn.small,.speak,.rd,.linkbtn,.chip,.seg button,.kshift{position:relative}
+  .btn.small::after,.speak::after,.chip::after,.seg button::after,.kshift::after{content:'';position:absolute;top:-5px;bottom:-5px;left:-3px;right:-3px}
+  .speak:not(.big)::after{top:-7px;bottom:-7px;left:-7px;right:-7px}
+  .linkbtn::after{content:'';position:absolute;top:-11px;bottom:-11px;left:-2px;right:-2px}
+  .rd::after{content:'';position:absolute;top:-3px;bottom:-9px;left:-2px;right:-2px}/* nicht weit nach oben: darüber liegt der Lektionstitel (eigenes Ziel) */
+  input[type=range]{min-height:36px}
+}
+/* Handy-Leiste: Beschriftung abschneiden statt überlappen (z. B. bei größerer Systemschrift) */
+.mobile-nav .ml{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+/* Schalter in Farbe des Schemas; Häkchen-Zeilen: Kästchen groß genug und neben dem Text (lange Texte rutschten in eine eigene Zeile) */
+input[type=checkbox],input[type=radio],input[type=range]{accent-color:var(--accent)}
+label.row{flex-wrap:nowrap;cursor:pointer}
+label.row>input[type=checkbox]{flex:none;width:20px;height:20px;margin:0}
+/* Handy-Leiste behält ihre Schriftgröße (wie die Tab-Leiste am iPhone), sonst passen die Namen bei großer Textgröße nicht */
+.mobile-nav{-webkit-text-size-adjust:100%;text-size-adjust:100%}

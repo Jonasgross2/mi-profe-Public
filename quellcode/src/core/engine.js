@@ -84,6 +84,14 @@ function applyLook(){const id=colorId();let a=accentOf(id);const old=document.ge
   const D='--bg:'+dbg+';--surface:'+d.s+';--surface2:'+d.s2+';--line:'+mixC('#383838',a2,.09)+';--accent:'+a2+';--accent-ink:'+dbg+';--accent-soft:'+d.soft+';--accent-strong:'+mixC(a2,'#ffffff',.25)+';';
   const st=document.createElement('style');st.id='lookcss';st.textContent=':root{'+L+'}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){'+D+'}}:root[data-theme="dark"]{'+D+'}';document.head.appendChild(st);}
 applyLook();
+/* Textgröße am Handy (alle Kurse): S.settings.text = ''/'auto' (wie System: iPhone-Textgröße über -apple-system-body, 100–135 %) oder '100'/'115'/'130'.
+   text-size-adjust vergrößert nur Schrift, kein Zoom – Layout bleibt bedienbar. Am Computer wirkt es nicht (dort Browser-Zoom). */
+const TOUCH=!!(window.matchMedia&&matchMedia('(pointer:coarse)').matches);
+function sysTextPct(){try{if(!(window.CSS&&CSS.supports&&CSS.supports('font','-apple-system-body')))return 100;const p=document.createElement('span');p.style.font='-apple-system-body';
+  p.style.position='absolute';p.style.visibility='hidden';document.documentElement.appendChild(p);const px=parseFloat(getComputedStyle(p).fontSize)||17;p.remove();return Math.max(100,Math.min(135,Math.round(px/17*100)));}catch(e){return 100;}}
+function applyTextSize(){const v=S.settings.text;const pct=!TOUCH?100:v&&v!=='auto'?+v||100:sysTextPct();const st=document.documentElement.style;
+  st.setProperty('-webkit-text-size-adjust',pct+'%');st.setProperty('text-size-adjust',pct+'%');}
+applyTextSize();document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&!S.settings.text)applyTextSize();});/* iPhone-Textgröße geändert, während die App im Hintergrund war */
 /* Name: wird beim ersten Öffnen abgefragt. Die Inhalte sind für „Jonas“ geschrieben – für andere Namen wird er überall ersetzt. */
 const NAME=()=>S.name||'';
 /* Nachname: steht nie fest im Kurs. Inhalte sind für die Kurs-Person LANG.persona (z. B. „Jonas Gross“) geschrieben: Vor-/Nachname werden aus
@@ -257,13 +265,16 @@ const h=(tag,attrs={},...kids)=>{const e=document.createElement(tag);
   if((tag==='input'&&(!attrs||!attrs.type||attrs.type==='text'||attrs.type==='password'))||tag==='textarea'){e.setAttribute('autocorrect','off');e.setAttribute('autocapitalize','off');e.setAttribute('autocomplete','off');e.setAttribute('spellcheck','false');}
   for(const[k,v]of Object.entries(attrs||{})){if(v==null||v===false)continue;
     if(k==='class')e.className=v;else if(k==='html')e.innerHTML=v;else if(k.startsWith('on'))e.addEventListener(k.slice(2),v);else e.setAttribute(k,v===true?'':v);}
+  /* Barrierefreiheit: anklickbare Karten/Zeilen (div mit onclick) sind für Tastatur und VoiceOver Knöpfe (Enter/Leertaste) */
+  if(attrs&&attrs.onclick&&tag!=='button'&&tag!=='a'&&tag!=='input'&&tag!=='label'&&!attrs.role){e.setAttribute('role','button');e.tabIndex=0;
+    e.addEventListener('keydown',ev=>{if(ev.target===e&&(ev.key==='Enter'||ev.key===' ')){ev.preventDefault();e.click();}});}
   for(const k of kids.flat()){if(k==null||k===false)continue;e.append(k.nodeType?k:document.createTextNode(String(k)));}return e;};
 const cap=s=>String(s).charAt(0).toUpperCase()+String(s).slice(1);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const addDays=(ds,n)=>{const d=new Date(ds+'T12:00:00');d.setDate(d.getDate()+n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-function toast(t,ms){const e=h('div',{class:'toast'},t);document.body.append(e);setTimeout(()=>e.remove(),ms||2200);}
+function toast(t,ms){const e=h('div',{class:'toast',role:'status','aria-live':'polite'},t);document.body.append(e);setTimeout(()=>e.remove(),ms||2200);}
 
 /* ---------- answer checking ---------- */
 const PRON=LANG.pron||/(?!)/;
@@ -581,7 +592,7 @@ function shell(){
   const NAVD=NAV;const mini=S.settings.side==='mini';
   const nav=h('div',{class:'nav'},NAVD.map(([r,ic,l])=>h('button',{class:route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round','placement'].includes(route))||(r==='ref'&&['verbs','story'].includes(route))?'active':'',title:l,onclick:()=>{NAVRESET=true;go(r);}},h('span',{class:'ni'},ic),h('span',{class:'nl'},l),r==='vocab'&&due?h('span',{class:'badge'},due):null)));
   const SHORT={home:T('Start'),units:T('Kurs'),vocab:T('Vokabeln'),ref:T('Bibliothek'),mistakes:T('Fehler'),settings:T('Mehr')};
-  const mnav=h('nav',{class:'mobile-nav'},NAV.map(([r,ic,l])=>h('button',{class:(route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round','placement'].includes(route))||(r==='ref'&&['verbs','story'].includes(route)))?'active':'',onclick:()=>{NAVRESET=true;go(r);},'aria-label':l},h('span',{class:'mi'},ic),h('span',{class:'ml'},SHORT[r]),r==='vocab'&&due?h('span',{class:'mbadge'},due):null)));
+  const mnav=h('nav',{class:'mobile-nav'},NAV.map(([r,ic,l])=>h('button',{class:(route===r||(r==='units'&&['unit','lesson','resumen','chat','shadow','words','check','round','placement'].includes(route))||(r==='ref'&&['verbs','story'].includes(route)))?'active':'',onclick:()=>{NAVRESET=true;go(r);},'aria-label':l+(r==='vocab'&&due?' ('+due+')':'')},h('span',{class:'mi'},ic),h('span',{class:'ml'},SHORT[r]),r==='vocab'&&due?h('span',{class:'mbadge'},due):null)));
   const main=h('main',{class:'main',id:'main'});
   const tog=h('button',{class:'sidetog',title:mini?T('Leiste ausklappen'):T('Leiste einklappen'),'aria-label':mini?T('Leiste ausklappen'):T('Leiste einklappen'),onclick:()=>{S.settings.side=mini?'':'mini';save(true);go(curRoute());}},mini?'»':'«');
   const app=h('div',{class:'app'+(mini?' mini':'')},h('aside',{class:'side'},h('div',{class:'brand'},h('span',{class:'bt'},T('Mi profe '),h('span',{class:'flag'},LANG.flag)),tog),nav,
@@ -1905,6 +1916,8 @@ function vSettingsAll(m){const st=S.settings;
     IS_IOS?h('label',{class:'row',style:'margin-top:8px'},mix,T('Musik anderer Apps nie unterbrechen')):null,
     IS_IOS?h('span',{class:'muted small'},T('Aus (Standard): App immer hörbar, auch stumm geschaltet – andere Musik wird dabei pausiert. An: Musik läuft immer weiter, die App ist dann nur mit Ton-Schalter hörbar.')):null,
     h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Darstellung')),theme),
+    TOUCH?h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Textgröße')),(()=>{const sel=h('select',{class:'inp',style:'font-size:15px'},[['auto',T('Wie System')],['100',T('Normal')],['115',T('Groß')],['130',T('Sehr groß')]].map(([v,l])=>h('option',{value:v,selected:(st.text||'auto')===v},l)));
+      sel.onchange=()=>{st.text=sel.value==='auto'?'':sel.value;save();applyTextSize();HOMESTATE=null;route();};return sel;})()):null,
     h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Farben')),
       h('div',{class:'swatches'},THEMES_UI.filter(([id])=>id==='flag'||window.THEMES&&THEMES[id]).map(([id,l])=>h('button',{class:'swatch'+(colorId()===id?' on':''),onclick:()=>{
         if(id==='flag')delete st.color;else st.color=id;save();applyLook();installPrep();route();}},
@@ -2088,6 +2101,23 @@ window.addEventListener('focus',()=>{if(syncOn())syncNow();});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&syncOn()){clearTimeout(syncTimer);syncNow({quiet:true});}});
 
 window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,numItems};
+/* Barrierefreiheit (alle Kurse, ohne jede Ansicht einzeln anzufassen): neue Elemente bekommen Namen für VoiceOver/Screenreader –
+   Knöpfe nur mit Symbol (✕, 🔊, ⚑, ⏮, Flaggen …) den title bzw. eine Bezeichnung, Eingabefelder ohne Beschriftung den Platzhalter
+   (Lücken „Lücke n“), Leisten aria-current; Fenster (.overlay) sind Dialoge, Esc schließt sie wie ein Tipp daneben. */
+const A11Y_SYM={'✕':'Schließen','×':'Schließen','🔊':'Vorlesen','⏮':'Von vorn','⇧':'Großbuchstaben','⚑':'Aufgabe melden','«':'Leiste einklappen','»':'Leiste ausklappen'};
+function a11y(root){if(!root||root.nodeType!==1)return;const q=sel=>root.matches&&root.matches(sel)?[root,...root.querySelectorAll(sel)]:[...root.querySelectorAll(sel)];
+  q('button,[role=button],a').forEach(e=>{if(e.hasAttribute('aria-label'))return;const t=(e.textContent||'').trim();if(/[A-Za-zÀ-ÿ0-9]/.test(t))return;
+    const l=e.getAttribute('title')||(A11Y_SYM[t]&&T(A11Y_SYM[t]));if(l)e.setAttribute('aria-label',l);});
+  q('input,select,textarea').forEach(e=>{if(e.type==='hidden'||e.hasAttribute('aria-label')||e.closest('label')||e.id&&document.querySelector('label[for="'+e.id+'"]'))return;
+    let l=e.getAttribute('placeholder')||e.getAttribute('title');
+    if(!l&&e.classList.contains('gapi')){const st=e.closest('.step')||document;const all=[...st.querySelectorAll('input.gapi')];l=T('Lücke')+(all.length>1?' '+(all.indexOf(e)+1):'');}
+    if(!l){const p=e.previousElementSibling;const pt=p&&(p.textContent||'').trim();l=pt&&pt.length<60?pt:e.type==='range'?T('Sprechtempo'):T('Deine Antwort');}
+    e.setAttribute('aria-label',l);});
+  q('.nav,.mobile-nav').forEach(n=>{if(n.tagName!=='NAV')n.setAttribute('role','navigation');n.querySelectorAll('button').forEach(b=>{if(b.classList.contains('active'))b.setAttribute('aria-current','page');});});
+  q('.overlay').forEach(ov=>{ov.setAttribute('role','dialog');ov.setAttribute('aria-modal','true');const hd=ov.querySelector('h2,h3,p');if(hd&&!ov.hasAttribute('aria-label'))ov.setAttribute('aria-label',(hd.textContent||'').trim().slice(0,80));
+    setTimeout(()=>{if(ov.isConnected&&!ov.contains(document.activeElement)){const f=ov.querySelector('textarea,input:not([type=hidden]),button.primary,button');if(f&&f.tagName==='BUTTON')f.focus({preventScroll:true});}},60);});}
+if(window.MutationObserver)new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)a11y(n);}).observe(document.body,{childList:true,subtree:true});
+document.addEventListener('keydown',e=>{if(e.key!=='Escape')return;const ovs=document.querySelectorAll('.overlay');const ov=ovs[ovs.length-1];if(ov){e.preventDefault();ov.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
 /* App-Gefühl: kein Pinch-/Doppeltipp-Zoom */
 ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
 document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
