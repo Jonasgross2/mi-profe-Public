@@ -7,8 +7,8 @@ SERVER_URL='https://mi-profe.miprofe-app.workers.dev'
 # ===== Pakete: die Web-App lädt nur, was gebraucht wird (Lernsprache + ggf. Erklärsprache); die Mac-Einzeldateien enthalten alles =====
 # Ordner: src/core/ = gemeinsam (Logik, Design, Register, Oberflächentexte) · src/<lern>/ = Inhalte einer Lernsprache · src/<lern>/tr_<ex>.js = Erklärsprache
 # Neue Lernsprache: Ordner src/<code>/ + Eintrag hier (Dateien in Ladereihenfolge, Definition defineLang zuletzt). Erklärsprachen: automatisch aus src/<lern>/tr_<ex>.js
-PACKS={'es': {'name': 'Spanisch', 'flag': '🇪🇸', 'files': ['es/c_u0u1.js', 'es/c_u2u3.js', 'es/c_read03.js', 'es/c_u4u5.js', 'es/c_u6u8.js', 'es/c_u9u10.js', 'es/c_extra.js', 'es/c_a1plus.js', 'es/c_gaps.js', 'es/c_a2b.js', 'es/c_a2plus.js', 'es/c_b1.js', 'es/c_b1b.js', 'es/c_b1plus.js', 'es/c_b2.js', 'es/c_b2b.js', 'es/c_b2plus.js', 'es/c_c1.js', 'es/c_c1b.js', 'es/c_c1plus.js', 'es/c_c2.js', 'es/c_c2plus.js', 'es/c_vocab_plus.js', 'es/c_vocab_freq.js', 'es/c_info_tr.js', 'es/c_stories.js', 'es/c_reading.js', 'es/placement.js', 'es/levels.js', 'es/lang_es.js', 'es/conj_es.js', 'es/num_es.js', 'es/fem_es.js', 'es/pers_es.js', 'es/origin_es.js'], 'base': 'de', 'stufen': ['A1', 'C2'], 'app': 'Mi profe', 'zeichen': 'ñ', 'farben': {'akzent': '#c4472b', 'icon': ['#c4472b', '#ffffff', '#e0a526']}}, 'de': {'name': 'Deutsch', 'flag': '🇩🇪', 'files': ['de/lang_de.js', 'de/fem_de.js', 'de/pers_de.js', 'de/num_de.js', 'de/conj_de.js', 'de/c_a1.js', 'de/c_a2.js', 'de/c_b1.js', 'de/c_b2.js', 'de/c_stories.js', 'de/c_freq.js', 'de/c_info_tr.js'], 'base': 'pt', 'stufen': ['A1', 'B2'], 'app': 'Mein Lehrer', 'zeichen': 'ß', 'farben': {'akzent': '#b3202a', 'icon': ['#1c1c1c', '#ffce00', '#dd0000']}}}
-# Farbschemata (Mehr → Stimme & Darstellung): 'flag' = Flaggenfarben der Lernsprache (PACKS[..]['farben']), sonst eine Akzentfarbe – Rest leitet die App ab
+PACKS={'es': {'name': 'Spanisch', 'flag': '🇪🇸', 'files': ['es/c_u0u1.js', 'es/c_u2u3.js', 'es/c_read03.js', 'es/c_u4u5.js', 'es/c_u6u8.js', 'es/c_u9u10.js', 'es/c_extra.js', 'es/c_a1plus.js', 'es/c_gaps.js', 'es/c_a2b.js', 'es/c_a2plus.js', 'es/c_b1.js', 'es/c_b1b.js', 'es/c_b1plus.js', 'es/c_b2.js', 'es/c_b2b.js', 'es/c_b2plus.js', 'es/c_c1.js', 'es/c_c1b.js', 'es/c_c1plus.js', 'es/c_c2.js', 'es/c_c2plus.js', 'es/c_vocab_plus.js', 'es/c_vocab_freq.js', 'es/c_info_tr.js', 'es/c_stories.js', 'es/c_reading.js', 'es/placement.js', 'es/levels.js', 'es/lang_es.js', 'es/conj_es.js', 'es/num_es.js', 'es/fem_es.js', 'es/pers_es.js', 'es/origin_es.js'], 'base': 'de', 'stufen': ['A1', 'C2'], 'app': 'Mi profe', 'farbe': '#c4472b'}, 'de': {'name': 'Deutsch', 'flag': '🇩🇪', 'files': ['de/lang_de.js', 'de/fem_de.js', 'de/pers_de.js', 'de/num_de.js', 'de/conj_de.js', 'de/c_a1.js', 'de/c_a2.js', 'de/c_b1.js', 'de/c_b2.js', 'de/c_stories.js', 'de/c_freq.js', 'de/c_info_tr.js'], 'base': 'pt', 'stufen': ['A1', 'B2'], 'app': 'Mein Lehrer', 'farbe': '#b3202a'}}
+# Farbschemata (Mehr → Stimme & Darstellung): 'flag' = Farbe der Lernsprache (PACKS[..]['farbe'], aus der Flagge), sonst eine Akzentfarbe – Rest leitet die App ab
 THEMES={'ozean':'#1f6fa8','wald':'#2f7d4f','lavendel':'#6d4fb8','sonne':'#a85d08','graphit':'#3d4652','rose':'#b83a6b','terra':'#c4472b'}
 TRS=[]   # (Pfad, Lernsprache, Erklärsprache) – src/es/tr_en.js → Erklärsprache en für Lernsprache es
 for k in PACKS:
@@ -33,7 +33,7 @@ for _f in ALL:
 if _errs:
   print('ABBRUCH – Syntax, die ältere iPhones nicht kennen:');print('\n'.join(_errs[:30]));_sys.exit(1)
 import json as _json
-MANIFEST='window.PACKS='+_json.dumps({'learn':[dict({'code':k,'name':v['name'],'flag':v['flag'],'stufen':v.get('stufen'),'app':v.get('app','Mi profe'),'akzent':v.get('farben',{}).get('akzent','#c4472b')},**({'beta':True} if v.get('beta') else {})) for k,v in PACKS.items()],'ex':EXMAP,'base':{k:v.get('base','de') for k,v in PACKS.items()}},ensure_ascii=False)+';window.THEMES='+_json.dumps(THEMES)+';'
+MANIFEST='window.PACKS='+_json.dumps({'learn':[dict({'code':k,'name':v['name'],'flag':v['flag'],'stufen':v.get('stufen'),'app':v.get('app','Mi profe'),'akzent':v.get('farbe','#c4472b')},**({'beta':True} if v.get('beta') else {})) for k,v in PACKS.items()],'ex':EXMAP,'base':{k:v.get('base','de') for k,v in PACKS.items()}},ensure_ascii=False)+';window.THEMES='+_json.dumps(THEMES)+';'
 LOADER='''<script>'''+MANIFEST+'''
 /* Lader (ES5): gleiche Logik wie engine.js (App-Sprache → Erklärsprache), lädt das Lernsprachen-Paket und ggf. das Erklärsprachen-Paket synchron */
 (function(){var sh=null;try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');}catch(e){}
@@ -63,7 +63,7 @@ def page(pwa):
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Mi profe">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" href="icon-512.png">
 <link rel="icon" href="icon-192.png">
 <script>window.PWA=true;window.APP_VERSION="'''+VERSION+'''";window.MP_SERVER="'''+SERVER_URL+'''";</script>''' if pwa else '''<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇸</text></svg>">'''
     inl=lambda fs:'\n'.join(f'<script>{(s/f).read_text()}</script>' for f in fs)
@@ -107,29 +107,11 @@ for f,ln,ex in TRS:
     {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
   ]
 }''')
-# App-Symbole und Manifeste pro Kurs und Farbschema: icons/<kurs>-<schema>-<größe>.png, manifest-<kurs>-<schema>.webmanifest
-# Symbole zeichnet icon.swift (macOS); neu nur, wenn sich Kurs-Angaben/Schemata ändern (icons/stamp.json)
-import subprocess as _sp, tempfile as _tf
-ic=w/'icons';ic.mkdir(exist_ok=True)
-def _icfg(k,v,t):
-    f=v.get('farben',{'akzent':'#c4472b','icon':['#c4472b','#ffffff','#e0a526']})
-    return f['icon'] if t=='flag' else [THEMES[t],'#ffffff',f['icon'][2]]
-_want={f'{k}-{t}':[v.get('zeichen','?')]+_icfg(k,v,t) for k,v in PACKS.items() for t in ['flag']+list(THEMES)}
-_stamp=ic/'stamp.json';_old=_json.loads(_stamp.read_text()) if _stamp.exists() else {}
-_todo=[n for n,c in _want.items() if _old.get(n)!=c or not (ic/f'{n}-512.png').exists()]
-if _todo:
-    _bin=pathlib.Path(_tf.gettempdir())/'mi-profe-icon'
-    if _sp.run(['swiftc','-O',str(base/'icon.swift'),'-o',str(_bin)],capture_output=True).returncode: print('WARNUNG: icon.swift ließ sich nicht übersetzen – Symbole nicht erneuert')
-    else:
-        for n in _todo:
-            for sz in (180,192,512): _sp.run([str(_bin)]+_want[n]+[str(sz),str(ic/f'{n}-{sz}.png')],check=True)
-            _old[n]=_want[n]
-        _stamp.write_text(_json.dumps(_old,ensure_ascii=False,indent=0))
-for n in _want:
-    k=n.split('-')[0];v=PACKS[k];acc=_want[n][1]
-    (w/f'manifest-{n}.webmanifest').write_text(_json.dumps({'id':'./','name':v.get('app','Mi profe'),'short_name':v.get('app','Mi profe'),'lang':v.get('base','de'),'start_url':'./','scope':'./','display':'standalone',
-      'background_color':'#ffffff','theme_color':acc,'icons':[{'src':f'icons/{n}-192.png','sizes':'192x192','type':'image/png'},{'src':f'icons/{n}-512.png','sizes':'512x512','type':'image/png'},
-      {'src':f'icons/{n}-512.png','sizes':'512x512','type':'image/png','purpose':'maskable'}]},ensure_ascii=False,indent=1))
+# Ein Symbol für alle Kurse (icon-*.png); Manifest pro Kurs nur wegen des Namens: manifest-<kurs>.webmanifest (die App legt es in den Cache, der Service Worker liefert es unter manifest.webmanifest)
+for k,v in PACKS.items():
+    (w/f'manifest-{k}.webmanifest').write_text(_json.dumps({'id':'./','name':v.get('app','Mi profe'),'short_name':v.get('app','Mi profe'),'lang':v.get('base','de'),'start_url':'./','scope':'./','display':'standalone',
+      'background_color':'#faf6f1','theme_color':v.get('farbe','#c4472b'),'icons':[{'src':'icon-192.png','sizes':'192x192','type':'image/png'},{'src':'icon-512.png','sizes':'512x512','type':'image/png'},
+      {'src':'icon-512.png','sizes':'512x512','type':'image/png','purpose':'maskable'}]},ensure_ascii=False,indent=1))
 (w/'sw.js').write_text('''const CACHE='mi-profe-'''+VERSION+'''';
 const FILES='''+_json.dumps(['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./apple-touch-icon.png']+['./'+f+'?v='+VERSION for f in PACKFILES])+''';
 /* Cache zuerst: App startet sofort aus dem Speicher. Neue Versionen kommen über ein neues sw.js (install lädt frisch), die Seite zeigt dann „Neue Version – tippen“. */

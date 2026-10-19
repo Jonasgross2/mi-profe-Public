@@ -1,14 +1,13 @@
 """Neuen Kurs (Lernsprache) anlegen: Ordner src/<code>/ mit Steckbrief, Stufen und einer Beispiel-Unidad + Eintrag in PACKS (build.py).
 Danach erscheint der Kurs sofort in der Sprachauswahl („Was möchtest du lernen?“ bzw. Mehr → Sprache & Profil).
 
-  python3 neuer_kurs.py <code> <Name auf Deutsch> <Flagge> [--stimme it-IT] [--basis de] [--app NAME] [--zeichen Z] [--farben #akzent,#iconfond,#zeichen,#punkt]
-  z. B.  python3 neuer_kurs.py it Italienisch 🇮🇹 --stimme it-IT --app "Il mio prof" --zeichen à --farben "#2e8b57,#2e8b57,#ffffff,#d62828"
+  python3 neuer_kurs.py <code> <Name auf Deutsch> <Flagge> [--stimme it-IT] [--basis de] [--app NAME] [--farbe #hex]
+  z. B.  python3 neuer_kurs.py it Italienisch 🇮🇹 --stimme it-IT --app "Il mio prof" --farbe "#2e8b57"
 
 <code> = Sprachcode der Lernsprache (it, fr, pt, en, de …), --basis = Sprache, in der die Erklärungen geschrieben werden (Standard de).
 Danach: Inhalte in src/<code>/c_*.js schreiben (Format wie src/es/, Felder siehe CLAUDE.md „Sprachpaket-Schnittstelle“),
 neue Dateien in build.py bei PACKS['<code>']['files'] eintragen (Steckbrief lang_<code>.js bleibt vorn), python3 build.py.
---app = Name der App in der Lernsprache („Mein Lehrer“), --zeichen = typischer Buchstabe fürs App-Symbol, --farben = Flaggenfarben
-(Akzent der App; Symbol: Hintergrund, Zeichen, Punkt) = Farbschema „Flagge“. Symbole/Manifeste erzeugt build.py (icon.swift).
+--app = Name der App in der Lernsprache („Mein Lehrer“), --farbe = Farbe aus der Flagge (Farbschema „Flagge“, Standard des Kurses).
 'stufen' in PACKS = von–bis für die Sprachauswahl (z. B. ['A1','B1']), mitziehen, wenn der Kurs wächst.
 Läuft im Ordner quellcode/. Ändert nichts, wenn es den Ordner schon gibt."""
 import ast, pathlib, re, sys
@@ -20,7 +19,7 @@ def opt(name, default):
         i = args.index(name); v = args[i + 1]; del args[i:i + 2]; return v
     return default
 voice = opt('--stimme', ''); basis = opt('--basis', 'de')
-app = opt('--app', 'Mi profe'); zeichen = opt('--zeichen', 'A'); farben = opt('--farben', '#c4472b,#c4472b,#ffffff,#e0a526').split(',')
+app = opt('--app', 'Mi profe'); farbe = opt('--farbe', '#c4472b')
 if len(args) != 3: sys.exit(__doc__)
 code, name, flag = args
 if not re.fullmatch(r'[a-z]{2,3}', code): sys.exit('Sprachcode bitte als 2–3 Kleinbuchstaben, z. B. it')
@@ -68,6 +67,6 @@ D.mkdir(parents=True)
 (D / f'lang_{code}.js').write_text(lang_js, encoding='utf-8')
 (D / 'c_a1.js').write_text(unit_js, encoding='utf-8')
 packs[code] = {'name': name, 'flag': flag, 'files': [f'{code}/lang_{code}.js', f'{code}/c_a1.js'], 'base': basis, 'stufen': ['A1', 'A1'],
-               'app': app, 'zeichen': zeichen, 'farben': {'akzent': farben[0], 'icon': farben[1:4]}}
+               'app': app, 'farbe': farbe}
 bp.write_text(src.replace(line, 'PACKS=' + repr(packs)), encoding='utf-8')
 print(f'Angelegt: src/{code}/lang_{code}.js, src/{code}/c_a1.js · PACKS[{code!r}] in build.py · jetzt: python3 build.py')
