@@ -16,7 +16,9 @@ selectLang();
 let UI='de';try{const sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');const nav=(navigator.language||'de').toLowerCase();
   UI=sh&&sh.ui||(sh?'de':nav.startsWith('de')?'de':nav.startsWith('es')?'es':nav.startsWith('pt')?'pt':'en');}catch(e){}
 if(UI!=='de'&&!(window.UI_TR&&UI_TR[UI]))UI='de';document.documentElement.lang=UI;
-const TR=UI==='de'?null:UI_TR[UI];const T=s=>TR&&TR[s]!=null?TR[s]:s;
+/* Name der App je Kurs (PACKS[..].app in build.py, z. B. „Mein Lehrer“): ersetzt „Mi profe“ in allen Oberflächentexten */
+const PK_CUR=(window.PACKS&&PACKS.learn||[]).find(x=>x.code===LANG.code)||{},APP=PK_CUR.app||LANG.appName||'Mi profe';
+const TR=UI==='de'?null:UI_TR[UI];const T=s=>{const r=TR&&TR[s]!=null?TR[s]:s;return APP==='Mi profe'||typeof r!=='string'?r:r.split('Mi profe').join(APP);};
 /* Lob in der Lernsprache (¡Muy bien!, ¡Hola! …): Texte enthalten die spanischen Wendungen; ein anderes Paket ersetzt sie über LANG.praise {'¡Muy bien!':'Sehr gut!', …} */
 const TP=k=>{let r=T(k);const P=LANG.praise;if(P)for(const a in P)r=r.split(a).join(P[a]);return r;};
 /* Hinweiskästen (.ojo) beginnen mit „¡OJO!“ – in anderen Lernsprachen aus LANG.praise (z. B. 'ACHTUNG!') */
@@ -57,6 +59,24 @@ function save(noSync){S.updated=Date.now();const js=JSON.stringify(S);try{localS
   saveShared();if(!noSync&&window.__sync)window.__sync.schedule();}
 load();
 document.title=fmt(T('Mi profe · {L} lernen'));
+/* Farbschema & App-Symbol: S.settings.color gilt für alle Kurse; leer/'flag' = Flaggenfarben der Lernsprache (PACKS[..].akzent). Hell/Dunkel wird aus der einen Farbe abgeleitet.
+   Symbol/Manifest: icons/<kurs>-<schema>-*.png, manifest-<kurs>-<schema>.webmanifest (build.py) – das Handy übernimmt sie beim Installieren. */
+const THEMES_UI=[['flag','Flagge'],['ozean','Ozean'],['wald','Wald'],['lavendel','Lavendel'],['sonne','Sonne'],['graphit','Graphit'],['rose','Rosé'],['terra','Terrakotta']];
+function colorId(){const c=S.settings.color;return c&&window.THEMES&&THEMES[c]?c:'flag';}
+function accentOf(id){return id==='flag'?(PK_CUR.akzent||'#c4472b'):THEMES[id];}
+function hx(c){const v=parseInt(c.slice(1),16);return[v>>16&255,v>>8&255,v&255];}
+function mixC(a,b,t){const B=hx(b);return '#'+hx(a).map((x,i)=>('0'+Math.round(x*(1-t)+B[i]*t).toString(16)).slice(-2)).join('');}
+function lum(c){const v=hx(c).map(x=>{x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);});return .2126*v[0]+.7152*v[1]+.0722*v[2];}
+function applyLook(){const id=colorId(),a=accentOf(id),old=document.getElementById('lookcss');if(old)old.remove();
+  const set=(sel,attr,v)=>{const e=document.querySelector(sel);if(e)e.setAttribute(attr,v);};set('meta[name=theme-color]','content',a);
+  if(window.PWA){const n=LANG.code+'-'+id;set('link[rel=manifest]','href','manifest-'+n+'.webmanifest');set('link[rel=apple-touch-icon]','href','icons/'+n+'-180.png');
+    set('link[rel=icon]','href','icons/'+n+'-192.png');set('meta[name=apple-mobile-web-app-title]','content',APP);}
+  if(a.toLowerCase()==='#c4472b')return;/* Terrakotta = Grundfarben aus app.css */
+  const a2=mixC(a,'#ffffff',.3),dbg=mixC('#161616',a2,.05);
+  const L='--bg:'+mixC('#fbfaf8',a,.035)+';--surface2:'+mixC('#f2f0ed',a,.06)+';--line:'+mixC('#e3dfdb',a,.09)+';--accent:'+a+';--accent-ink:'+(lum(a)>.4?'#1b1714':'#ffffff')+';--accent-soft:'+mixC('#ffffff',a,.15)+';--accent-strong:'+mixC(a,'#000000',.18)+';';
+  const D='--bg:'+dbg+';--surface:'+mixC('#1f1f1f',a2,.06)+';--surface2:'+mixC('#282828',a2,.07)+';--line:'+mixC('#383838',a2,.09)+';--accent:'+a2+';--accent-ink:'+dbg+';--accent-soft:'+mixC('#1d1d1d',a2,.2)+';--accent-strong:'+mixC(a2,'#ffffff',.25)+';';
+  const st=document.createElement('style');st.id='lookcss';st.textContent=':root{'+L+'}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){'+D+'}}:root[data-theme="dark"]{'+D+'}';document.head.appendChild(st);}
+applyLook();
 /* Name: wird beim ersten Öffnen abgefragt. Die Inhalte sind für „Jonas“ geschrieben – für andere Namen wird er überall ersetzt. */
 const NAME=()=>S.name||'';
 /* Nachname: steht nie fest im Kurs. Inhalte sind für die Kurs-Person LANG.persona (z. B. „Jonas Gross“) geschrieben: Vor-/Nachname werden aus
@@ -602,7 +622,7 @@ function installUrl(){const st=S.settings,q=[];
 function installPrep(){if(!canInstall()||!IS_IOS)return;const base=location.origin+location.pathname,u=installUrl();if(u===base)return;
   try{history.replaceState(history.state,'',u+location.hash);}catch(e){}
   const l=document.querySelector('link[rel=manifest]');if(!l)return;
-  const man={name:'Mi profe – Sprachen lernen',short_name:'Mi profe',start_url:u,scope:base,display:'standalone',background_color:'#faf6f1',theme_color:'#c4472b',icons:[192,512].map(n=>({src:base+'icon-'+n+'.png',sizes:n+'x'+n,type:'image/png'}))};
+  const ic=LANG.code+'-'+colorId(),man={name:APP,short_name:APP,start_url:u,scope:base,display:'standalone',background_color:'#ffffff',theme_color:accentOf(colorId()),icons:[192,512].map(n=>({src:base+'icons/'+ic+'-'+n+'.png',sizes:n+'x'+n,type:'image/png'}))};
   try{l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'}));}catch(e){}}
 function vInstall(fromMenu){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}installPrep();
   const done=()=>{try{localStorage.setItem('mi-profe-inst','1');}catch(e){}if(fromMenu)go('settings');else route();};
@@ -1816,7 +1836,13 @@ function vSettingsAll(m){const st=S.settings;
     h('label',{class:'row'},tr,T('Übersetzungen in Dialogen sofort zeigen')),
     IS_IOS?h('label',{class:'row',style:'margin-top:8px'},mix,T('Musik anderer Apps nie unterbrechen')):null,
     IS_IOS?h('span',{class:'muted small'},T('Aus (Standard): App immer hörbar, auch stumm geschaltet – andere Musik wird dabei pausiert. An: Musik läuft immer weiter, die App ist dann nur mit Ton-Schalter hörbar.')):null,
-    h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Darstellung')),theme)));
+    h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Darstellung')),theme),
+    h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Farben')),
+      h('div',{class:'swatches'},THEMES_UI.filter(([id])=>id==='flag'||window.THEMES&&THEMES[id]).map(([id,l])=>h('button',{class:'swatch'+(colorId()===id?' on':''),onclick:()=>{
+        if(id==='flag')delete st.color;else st.color=id;save();applyLook();installPrep();route();if(STANDALONE)toast(T('Neues App-Symbol? Dafür die App einmal neu zum Home-Bildschirm hinzufügen.'));}},
+        h('span',{class:'swc',style:'background:'+accentOf(id)},id==='flag'?LANG.flag:''),h('span',{class:'small'},T(l))))),
+      h('span',{class:'muted small'},T('„Flagge“ = Farben der Lernsprache (Standard). Eine andere Farbe bleibt auch beim Kurswechsel.')),
+      window.PWA?h('div',{class:'row',style:'margin-top:8px;gap:10px'},h('img',{class:'icprev',src:'icons/'+LANG.code+'-'+colorId()+'-192.png',alt:''}),h('span',{class:'muted small',style:'flex:1;min-width:0'},T('App-Symbol – wird beim Installieren übernommen.'))):null)));
   if(SRV()){m.append(srvSyncCard(),srvAICard());}
   const key=h('input',{class:'inp',type:'password',value:st.geminiKey,placeholder:T('AIza…'),style:'font-size:15px'});
   const model=h('input',{class:'inp',value:st.geminiModel,style:'font-size:15px'});const out=h('div');

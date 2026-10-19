@@ -1,0 +1,28 @@
+{
+ "name": "Mein Lehrer",
+ "short_name": "Mein Lehrer",
+ "lang": "pt",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#ffffff",
+ "theme_color": "#a85d08",
+ "icons": [
+  {
+   "src": "icons/de-sonne-192.png",
+   "sizes": "192x192",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/de-sonne-512.png",
+   "sizes": "512x512",
+   "type": "image/png"
+  },
+  {
+   "src": "icons/de-sonne-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}
