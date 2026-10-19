@@ -6,7 +6,7 @@ EN = [
 "quedarse + adj.: result (quedarse sorprendido, sin trabajo)",
 "convertirse en + noun",
 "verb phrases: ponerse a, llegar a, acabar + gerund, estar a punto de",
-"At a party you meet Lucía, an old friend from your first Erasmus semester five years ago. You talk about how you and your mutual friends have changed.",
+"At a party you meet Lucía, an old friend from a language course in Salamanca five years ago. You talk about how you and your mutual friends have changed.",
 "Describe changes in yourself and others with ponerse, volverse, hacerse, quedarse and convertirse en.",
 "become – but how?",
 "ponerse · volverse · hacerse",

@@ -62,7 +62,7 @@ EN = [
 "the belly",
 "the ankle",
 "the elbow",
-"posture",
+"attitude, position",
 "clinic",
 "the dentist (m / f)",
 "the surgeon (m / f)",

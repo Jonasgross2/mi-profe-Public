@@ -200,7 +200,6 @@ EN = [
 "warn; notice",
 "allude to",
 "question, call into question",
-"qualify, nuance",
 "approach",
 "approach, method",
 "theoretical framework",

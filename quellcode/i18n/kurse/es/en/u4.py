@@ -120,7 +120,7 @@ EN = [
 "From a university Spanish course (semester 4) · packaging, quantities, eating habits, aunque",
 "the bottle",
 "the can",
-"the packet",
+"the parcel / the packet",
 "the bag",
 "the baguette",
 "the weekly offers",

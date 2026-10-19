@@ -6,7 +6,7 @@ EN = [
 "acabar de + infinitive (to have just done)",
 "volver a / dejar de / empezar a + infinitive",
 "seguir + gerund · llevar + time + gerund",
-"You're signing up for a new Spanish course at the UPC language centre and sorting out dates.",
+"You're signing up for a new Spanish course at the university language centre and sorting out dates.",
 "Give your date of birth, say how long you've been learning Spanish (llevo … estudiando) and ask for the start and end dates of the course.",
 "el 5 de octubre de 2026",
 "January",

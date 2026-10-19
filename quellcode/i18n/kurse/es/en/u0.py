@@ -7,7 +7,7 @@ EN = [
 "Saying goodbye",
 "Pronunciation: c, ch, g, h, j, ll, ñ, qu, r/rr, v, y, z",
 "First day at university",
-"First day of your master's at university (UPC). In front of lecture hall A5 a fellow student starts talking to you.",
+"First day of your master's at university. In front of lecture hall A5 a fellow student starts talking to you.",
 "Greet Laia, introduce yourself (name), ask how she is and say goodbye appropriately.",
 "Greeting & introducing yourself",
 "Hola, buenos días, ¿cómo te llamas?",

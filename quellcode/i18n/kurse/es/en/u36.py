@@ -6,7 +6,7 @@ EN = [
 "de + infinitive: De tener tiempo, iría · De haberlo sabido, …",
 "como + subj.: Como no vengas, me enfado",
 "setting conditions in negotiations",
-"The company in Munich wasn't your only option: a start-up in Barcelona wants to hire you. You're negotiating salary, working from home and holidays with the founder, Mr Ferrer.",
+"A start-up in Barcelona wants to hire you after your master's. You're negotiating salary, working from home and holidays with the founder, Mr Ferrer.",
 "Negotiate with conditions: Acepto siempre que…, Podría… con tal de que…, A no ser que…, En caso de que…",
 "Provided that …",
 "siempre que · con tal de que · a no ser que",

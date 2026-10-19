@@ -134,8 +134,6 @@ EN = [
 "wound",
 "Health & body (2)",
 "surgery, consultation",
-"health centre",
-"prescription",
 "prescribe",
 "X-ray",
 "health insurance",

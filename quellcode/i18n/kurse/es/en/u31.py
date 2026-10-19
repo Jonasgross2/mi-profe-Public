@@ -138,7 +138,6 @@ EN = [
 "scam, swindle",
 "online shop",
 "shipping, delivery",
-"parcel",
 "tracking",
 "file a complaint",
 "customer service",

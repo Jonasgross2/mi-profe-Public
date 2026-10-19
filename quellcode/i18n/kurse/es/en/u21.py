@@ -23,7 +23,6 @@ EN = [
 "in my opinion",
 "from my point of view",
 "I (don't) agree",
-"it depends",
 "on the one hand … on the other hand",
 "besides, moreover",
 "holiday flat",

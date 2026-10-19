@@ -43,7 +43,7 @@ EN = [
 "the heating",
 "the swimming pool",
 "breakfast included",
-"the reception",
+"the reception, the front desk",
 "the location",
 "the price",
 "I'd like / I wanted …",

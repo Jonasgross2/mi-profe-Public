@@ -100,7 +100,7 @@ EN = [
 "bitter",
 "bland",
 "taste",
-"If I had time, I would water the plants.",
+"If I have time tomorrow, I'll water the plants.",
 "Flat, repairs, neighbours",
 "landlord / landlady",
 "rental contract, lease",

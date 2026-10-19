@@ -18,7 +18,7 @@ EN = [
 "the gate",
 "to check in (luggage)",
 "the delay",
-"to cancel",
+"cancel",
 "to miss the flight",
 "the accommodation",
 "the youth hostel",
