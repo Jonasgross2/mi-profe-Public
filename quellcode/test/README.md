@@ -13,3 +13,7 @@ jede Unidad, Einstufungstest, Geschichten, 80 Zahlenaufgaben (feste Zufallszahle
 `xx.js` ist ein Mini-Kurs mit allen Aufgabentypen und nur den Pflichtangaben. Testaufbau: Kopie von `Spanisch-App-Web/` als `serve/xx/`,
 `xx.js` nach `serve/xx/p/`, in `serve/xx/index.html` bei `window.PACKS.learn` `{"code":"xx","name":"Testisch","flag":"🏳️"}` ergänzen,
 dann `await XXTEST('f','de')` aus `snap.js` → keine Fehler auf allen Seiten und in allen Schritten.
+
+## 3. Rundum-Test der echten Kurse (vor einer Veröffentlichung)
+`smoke.js` öffnet für mehrere Profile (Kurs, Erklärsprache, App-Sprache, Ansprache) alle Seiten, alle Unidades/Lektionen/Runden/Tests/Geschichten/Lesetexte und zeichnet jeden Übungsschritt; meldet Fehler und Texte mit „undefined/NaN/[object Object]“.
+Ablauf: `smoke.js` vorübergehend nach `Spanisch-App-Web/zz-smoke.js` kopieren (nicht committen), Server „app“ starten, im Browser `http://localhost:8765/` per `<script src="/zz-smoke.js">` laden, `await SMOKE()` → alle Fehlerzahlen 0 (Details in `SMOKE_RES`). Dauert einige Minuten (Browserfenster sichtbar lassen, sonst wird es gedrosselt). Stand 19.10.2026: 5 Profile, je 1315 (es) bzw. 1072 (de) Seiten und 2317/1851 Schritte, 0 Fehler.
