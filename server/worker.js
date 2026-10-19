@@ -7,10 +7,13 @@
      INVITES     – Einladungen „Name:CODE,Name:CODE“, z. B. „Oma:SOL-4821,Ben:LUNA-7733“ (Geheimnis)
      AI_LIMIT    – KI-Anfragen pro Einladung und Tag (Standard 60)
      ORIGINS     – erlaubte Webseiten, Komma-getrennt (Standard: GitHub Pages + localhost)
+     FEEDBACK_KEY   – Geheimnis zum Lesen der Rückmeldungen: <Server>/api/feedback?key=… (Geheimnis)
+     FEEDBACK_LIMIT – Rückmeldungen pro Tag insgesamt (Standard 100, Schutz gegen Spam)
    Speicher: KV-Namespace mit dem Namen DATA.
      code:<SYNC>          → {invite, created}      (Sync-Code existiert)
      data:<SYNC>:<datei>  → Fortschritt (JSON-Text) pro Lernsprache (Dateiname = LANG.gist)
      ai:<INVITE>:<datum>  → Anzahl KI-Anfragen an diesem Tag
+     fb:<zeit>:<zufall>   → Rückmeldung {t, text, name, invite, ctx} (180 Tage), fbn:<datum> = Anzahl heute
 
    API (alles JSON):
      POST /api/check           {invite}                 → {ok, name, limit}
@@ -18,6 +21,8 @@
      GET  /api/sync/<code>/<datei>                      → gespeicherter Fortschritt oder {} (404 = Code unbekannt)
      PUT  /api/sync/<code>/<datei>   Body = Fortschritt → {ok, t}
      POST /api/ai              {invite, model, body}    → Antwort von Gemini (Header X-AI-Left = verbleibende Anfragen heute)
+     POST /api/feedback        {text, name, invite, ctx} → {ok}   (ohne Einladung möglich, Tageslimit)
+     GET  /api/feedback?key=FEEDBACK_KEY[&done=<id>]      → HTML-Liste der Rückmeldungen (done = als erledigt löschen)
 */
 const DEFAULT_ORIGINS = ['https://jonasgross2.github.io', 'http://localhost:8765', 'http://localhost:8767'];
 const MAX_DATA = 4 * 1024 * 1024;               // 4 MB pro Datei (KV erlaubt 25 MB)
@@ -97,6 +102,31 @@ async function handle(req, env) {
     });
     if (r.ok) await env.DATA.put(ck, String(used + 1), { expirationTtl: 3 * 86400 });
     return new Response(await r.text(), { status: r.status, headers: { 'Content-Type': 'application/json; charset=utf-8', 'X-AI-Left': String(Math.max(0, limit - used - (r.ok ? 1 : 0))) } });
+  }
+  if (p[1] === 'feedback') {
+    if (req.method === 'POST') {
+      const b = await body(); const text = String(b.text || '').trim().slice(0, 2000);
+      if (!text) return json({ error: 'Nachricht ist leer' }, 400);
+      const lim = +(env.FEEDBACK_LIMIT || 100), ck = 'fbn:' + today(), n = +(await env.DATA.get(ck) || 0);
+      if (n >= lim) return json({ error: 'Heute sind schon sehr viele Nachrichten eingegangen – bitte morgen noch mal.' }, 429);
+      await env.DATA.put(ck, String(n + 1), { expirationTtl: 2 * 86400 });
+      const inv = normCode(b.invite);
+      const rec = { t: Date.now(), text, name: String(b.name || '').slice(0, 60), invite: INV[inv] ? INV[inv] + ' (' + inv + ')' : '', ctx: JSON.stringify(b.ctx || {}).slice(0, 3000) };
+      await env.DATA.put('fb:' + new Date().toISOString() + ':' + rnd(1)[0].toString(36), JSON.stringify(rec), { expirationTtl: 180 * 86400 });
+      return json({ ok: true });
+    }
+    if (req.method === 'GET') {
+      if (!env.FEEDBACK_KEY || url.searchParams.get('key') !== env.FEEDBACK_KEY) return json({ error: 'kein Zugriff' }, 403);
+      const del = url.searchParams.get('done'); if (del && del.startsWith('fb:')) await env.DATA.delete(del);
+      const l = await env.DATA.list({ prefix: 'fb:' }); const items = [];
+      for (const k of l.keys.slice(-200).reverse()) { if (k.name === del) continue; const v = await env.DATA.get(k.name); if (v) items.push([k.name, JSON.parse(v)]); }
+      const esc = x => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+      const key = encodeURIComponent(env.FEEDBACK_KEY);
+      const html = '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mi profe – Rückmeldungen</title>' +
+        '<style>body{font:15px -apple-system,system-ui,sans-serif;max-width:760px;margin:20px auto;padding:0 14px;color:#222;background:#faf6f1}.c{background:#fff;border:1px solid #e6dbcf;border-radius:12px;padding:10px 14px;margin:10px 0}.m{color:#776;font-size:12px}p{white-space:pre-wrap}pre{white-space:pre-wrap;font-size:12px;background:#f3ece3;padding:6px 8px;border-radius:8px}a{color:#c4472b}</style>' +
+        '<h1>Rückmeldungen (' + items.length + ')</h1>' + (items.length ? items.map(([k, r]) => '<div class="c"><div class="m">' + esc(new Date(r.t).toLocaleString('de-DE', { timeZone: 'Europe/Berlin' })) + ' · ' + esc(r.name || '–') + (r.invite ? ' · ' + esc(r.invite) : '') + '</div><p>' + esc(r.text) + '</p><pre>' + esc(r.ctx) + '</pre><a href="?key=' + key + '&done=' + encodeURIComponent(k) + '">✓ erledigt (löschen)</a></div>').join('') : '<p>Keine offenen Rückmeldungen.</p>');
+      return new Response(html, { headers: { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' } });
+    }
   }
   return json({ error: 'nicht gefunden' }, 404);
 }

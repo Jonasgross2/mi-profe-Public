@@ -748,9 +748,10 @@ function vPrivacy(m){const P=(t,x)=>h('div',{class:'card',style:'margin-bottom:1
     h('p',{class:'sub'},T('Kein Konto, keine Werbung, kein Tracking, keine Cookies. Hier steht, welche Daten wo landen.')),
     P(T('📱 Auf deinem Gerät'),[T('Lernfortschritt, Name, Ansprache, Herkunft und Einstellungen liegen im Speicher deines Browsers bzw. der installierten App. Sie verlassen das Gerät nur, wenn du unten genannte Funktionen einschaltest.'),T('Löschen: Browserdaten dieser Seite löschen bzw. die App entfernen. Vorher sichern, wenn du den Fortschritt behalten willst (Mehr → Sync & Backup).')]),
     P(T('☁️ Sync (nur wenn du ihn einschaltest)'),[T('Mit Sync-Code: Fortschritt, Name und Einstellungen werden auf dem Mi-profe-Server gespeichert (Cloudflare; Rechenzentren auch außerhalb der EU). Abrufbar nur mit deinem Sync-Code – gib ihn nur an eigene Geräte.'),T('Mit GitHub: dieselben Daten in einem privaten Gist in deinem eigenen GitHub-Konto.')]),
+    P(T('⚑ Rückmeldungen (nur wenn du eine schickst)'),[T('Deine Nachricht, dein Vorname, ggf. deine Einladung und die gemeldete Aufgabe werden auf dem Mi-profe-Server gespeichert, damit Jonas sie lesen kann, und nach spätestens 180 Tagen gelöscht.')]),
     P(T('🤖 KI-Lehrer (nur wenn du ihn nutzt)'),[T('Deine Texte und Antworten (mit deinem Vornamen) gehen an Google Gemini – über den Mi-profe-Server, wenn du eine Einladung hast, sonst direkt mit deinem eigenen Schlüssel. Es gelten die Bedingungen von Google.')]),
     P(T('🌐 Hosting & Vorlesen'),[T('Die App liegt bei GitHub Pages; GitHub verarbeitet beim Aufruf technisch nötige Daten wie die IP-Adresse. Vorlesen und Aufnahmen laufen über dein Gerät – Aufnahmen werden nicht hochgeladen.')]),
-    P(T('✉️ Fragen & Löschen'),[T('Fragen, Fehler oder der Wunsch, deine Sync-Daten auf dem Server zu löschen: wende dich an Jonas.')]),
+    (()=>{const c=P(T('✉️ Fragen & Löschen'),[T('Fragen, Fehler oder der Wunsch, deine Sync-Daten auf dem Server zu löschen: wende dich an Jonas.')]);if(SRV())c.append(h('button',{class:'btn',onclick:()=>reportBox(null)},T('✉️ Nachricht an Jonas')),h('p',{class:'muted small',style:'margin:8px 0 0'},T('In jeder Übung kannst du außerdem mit ⚑ oben eine Aufgabe melden.')));return c;})(),
     P(T('📚 Quellen & Lizenzen'),[T('Alle Lerntexte sind eigene Texte. Orientierung: Plan Curricular des Instituto Cervantes, Wortlisten des Goethe-Instituts und Prüfungsformate (DELE, Goethe-Zertifikat) – ohne übernommene Aufgaben.'),T('Häufige Wörter: FrequencyWords (OpenSubtitles) und WikDict/Wiktionary, Lizenz CC BY-SA 4.0.')]));}
 /* Sicherungs-Erinnerung: ohne Sync nach 3 erledigten Lektionen einmal, danach alle 14 Tage (Safari am iPhone löscht Seiten nach 7 Tagen ohne Besuch) */
 function backupAsk(){if(IN_ARTIFACT||syncOn())return;const st=S.settings,n=Object.values(S.lessons).filter(x=>x.done).length;if(n<3||st.bkAsk&&Date.now()-st.bkAsk<14*864e5)return;
@@ -1044,6 +1045,19 @@ function noListenBtn(onSkip){const box=h('div',{class:'nolisten'});
       h('button',{class:'chip',onclick:()=>go(3600000,T('Hör-Aufgaben sind für 1 Stunde pausiert.'))},T('1 Stunde')),
       h('button',{class:'chip',onclick:()=>go(endOfDay(),T('Hör-Aufgaben sind für heute pausiert.'))},T('Für heute'))));};
   box.append(h('button',{class:'btn ghost small',onclick:open},'🎧 '+T('Kann gerade nicht hören')));return box;}
+/* Rückmeldung an Jonas (Server /api/feedback): aus Übungen mit der Aufgabe als Kontext (⚑), sonst allgemein (Datenschutz & Info). Ohne Server ausgeblendet. */
+function reportBox(ctx){const ov=h('div',{class:'overlay'}),close=()=>ov.remove(),task=!!(ctx&&(ctx.ref||ctx.card));
+  const ta=h('textarea',{class:'inp',rows:4,placeholder:task?T('Was stimmt an dieser Aufgabe nicht?'):T('Deine Nachricht …'),style:'font-size:16px;width:100%;resize:vertical'});
+  ta.onkeydown=e=>e.stopPropagation();/* Tastenkürzel der Übung nicht auslösen */
+  const send=h('button',{class:'btn primary'},T('Senden')),out=h('div');
+  send.onclick=async()=>{const v=ta.value.trim();if(!v)return toast(T('Schreib kurz, was nicht passt.'));send.disabled=true;out.innerHTML='';
+    try{await srvPost('/api/feedback',{text:v.slice(0,2000),name:S.name||'',invite:S.settings.invite||'',ctx:Object.assign({lang:LANG.code,ui:UI,ex:EX,ver:window.APP_VERSION||'',route:curRoute()},ctx||{})});close();toast(T('Danke! Die Nachricht ist angekommen.'));}
+    catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));send.disabled=false;}};
+  ov.append(h('div',{class:'card',style:'max-width:420px;width:100%'},h('h2',{style:'margin-top:0'},task?T('⚑ Aufgabe melden'):T('✉️ Nachricht an Jonas')),
+    h('p',{class:'muted small',style:'margin:0 0 8px'},task?T('Die Aufgabe wird automatisch mitgeschickt – schreib einfach, was falsch oder unklar ist.'):T('Fragen, Wünsche, Fehler – alles willkommen.')),ta,out,
+    h('div',{class:'row',style:'justify-content:flex-end;margin-top:10px'},h('button',{class:'btn',onclick:close},T('Abbrechen')),send)));
+  ov.onclick=e=>{if(e.target===ov)close();};document.body.append(ov);setTimeout(()=>ta.focus(),50);}
+const reportBtn=fn=>SRV()?h('button',{class:'btn ghost small rep',title:T('Aufgabe melden'),onclick:()=>reportBox(fn())},'⚑'):null;
 function play(m,cfg){if(!['lesson','round','check','mix','reading','story','placement'].includes(curRoute().split('/')[0]))runEnter();
   let queue=cfg.steps.slice();let pos=0;let firstTry=new Map();let retried=new Set();let gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
   /* ↶ Rückgängig (nur bei Übungen mit Zwischenspeicher, nicht in Tests): Zustand bei jeder Aufgabe merken, zurück = vorige Aufgabe neu */
@@ -1054,7 +1068,8 @@ function play(m,cfg){if(!['lesson','round','check','mix','reading','story','plac
   const sv=cfg.pk&&!cfg.fresh&&pauseGet(cfg.pk);
   if(sv){queue=sv.steps;pos=sv.pos;(sv.ft||[]).forEach(([a,b])=>firstTry.set(a,b));retried=new Set((sv.rt||[]).map(i=>queue[i]).filter(Boolean));gradeable=sv.g;}
   const top=h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:async()=>{if(cfg.pk&&pos>0){toast(T('Gespeichert – später geht es hier weiter.'));return cfg.onBack();}
-    if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pcount'}));
+    if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pcount'}),
+    reportBtn(()=>{const c=queue[pos]||{},st=c.s||{};return{ref:c.ref||'',t:st.t||'',step:JSON.stringify(st).slice(0,900)};}));
   const stage=h('div',{class:'step'});
   /* Leiste (✕, Fortschritt, ↶) klebt oben, „Prüfen/Weiter“ unten (außer bei Lesetexten) – .main.stickplay */
   stickMain(m,'stickplay');
@@ -1672,7 +1687,7 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
     if(!await askConfirm((isMy(k)?T('„{W}“ wirklich ausblenden? Es bleibt in deiner Liste, kommt aber nicht mehr dran. Zurückholen kannst du es in der Liste oder unter Vokabeln → Statistik.'):T('„{W}“ wirklich ausblenden? Das Wort kommt dann nicht mehr in der Wiederholung dran. Zurückholen kannst du es unter Vokabeln → Statistik.')).replace('{W}',c.es),T('Ausblenden'))||i!==at)return;
     snap(c);setHidden(k,true);toast(T('Ausgeblendet – mit ↶ zurück machst du es rückgängig.'));nxt();}},T('Wort ausblenden'));
   stickMain(m,'stickplay');runEnter();
-  m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>{if(opt.pk&&i>0&&i<q.length)toast(T('Gespeichert – später geht es hier weiter.'));go(from);}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'})),stage,h('div',{class:'vhiderow'},hideB)));
+  m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>{if(opt.pk&&i>0&&i<q.length)toast(T('Gespeichert – später geht es hier weiter.'));go(from);}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'}),reportBtn(()=>{const c=q[i]||{};return{card:(c.es||'')+' = '+(c.de||''),mode,unit:c.unit||''};})),stage,h('div',{class:'vhiderow'},hideB)));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;undoB.classList.toggle('hide',!hist.length);}
   const failed=new Set(rs&&rs.failed||[]);
   /* Rückgängig: Zustand vor jeder Antwort merken (Karte, Zähler, Statistik) und bei ↶ wiederherstellen */

@@ -41,3 +41,13 @@ Ein Code pro Person ist sinnvoll: dann hat jede Person ihr eigenes Tageslimit.
 ## Testen ohne Cloudflare
 Der Code nutzt nur Web-Standards (`fetch`, `Request`, `Response`). Im Browser lässt er sich mit einem nachgebauten Speicher prüfen:
 `const W=(await import('./worker.js')).default; const KV={}; const ENV={DATA:{get:k=>Promise.resolve(KV[k]??null),put:(k,v)=>{KV[k]=v}},INVITES:'Test:SOL-1234'}; await W.fetch(new Request('https://x/api/check',{method:'POST',body:'{"invite":"SOL-1234"}'}),ENV)`
+
+## Rückmeldungen (Feedback-Knopf)
+Die App hat in jeder Übung oben rechts ⚑ „Aufgabe melden“ und unter Mehr → Datenschutz & Info „Nachricht an Jonas“. Die Nachrichten landen im KV (`fb:…`, 180 Tage).
+Einrichten (einmal):
+```
+npx wrangler secret put FEEDBACK_KEY    # langes Zufallswort, z. B. aus: openssl rand -hex 16
+npx wrangler deploy
+```
+Lesen: `https://<dein-worker>.workers.dev/api/feedback?key=<FEEDBACK_KEY>` (Lesezeichen) – pro Nachricht „✓ erledigt (löschen)“.
+Optional `FEEDBACK_LIMIT` (Standard 100 Nachrichten pro Tag insgesamt).

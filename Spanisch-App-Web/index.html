@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="icon-512.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261019-1342";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
+<script>window.PWA=true;window.APP_VERSION="20261019-1347";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -469,6 +469,7 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .swc{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.08)}.swatch.on .swc{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--ink)}.swatch.on{font-weight:600}
 .swc{position:relative}.swcustom{background:conic-gradient(#e2574c,#e0a526,#4caf50,#1f9bd1,#6d4fb8,#e2574c);color:#fff;font-size:20px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.5)}
 .swpick{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;border:0;padding:0}
+.ptop .rep{flex:none;padding:4px 8px;opacity:.6;font-size:15px}.ptop .rep:hover{opacity:1}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <div id="boot"><div class="bootlogo">🇪🇸</div><div class="bootspin"></div></div>
@@ -911,7 +912,6 @@ window.UI_TR={
 "Für freie Gespräche brauchst du KI: entweder diese App über den claude.ai-Link öffnen (nutzt dein Claude-Abo) oder einen kostenlosen Gemini-Key in den Einstellungen. Alles andere funktioniert ohne.": "For free conversations you need AI: either open this app via the claude.ai link (uses your Claude plan) or add a free Gemini key in the settings. Everything else works without it.",
 "Zu den Einstellungen": "To the settings",
 "Deine Antwort {ON} …": "Your answer {ON} …",
-"Senden": "Send",
 "(Beginne das Gespräch mit deiner ersten Zeile.)": "(Start the conversation with your first line.)",
 "🎉 Ziel erreicht! ¡Muy bien!": "🎉 Goal reached! ¡Muy bien!",
 "Automatisch (beste Stimme)": "Automatic (best voice)",
@@ -978,6 +978,19 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Was stimmt an dieser Aufgabe nicht?": "What's wrong with this exercise?",
+"Deine Nachricht …": "Your message …",
+"Senden": "Send",
+"Schreib kurz, was nicht passt.": "Briefly write what's wrong.",
+"Danke! Die Nachricht ist angekommen.": "Thanks! Your message has arrived.",
+"⚑ Aufgabe melden": "⚑ Report exercise",
+"✉️ Nachricht an Jonas": "✉️ Message to Jonas",
+"Die Aufgabe wird automatisch mitgeschickt – schreib einfach, was falsch oder unklar ist.": "The exercise is sent along automatically – just write what's wrong or unclear.",
+"Fragen, Wünsche, Fehler – alles willkommen.": "Questions, wishes, bugs – all welcome.",
+"Aufgabe melden": "Report exercise",
+"In jeder Übung kannst du außerdem mit ⚑ oben eine Aufgabe melden.": "In every exercise you can also report a task with ⚑ at the top.",
+"⚑ Rückmeldungen (nur wenn du eine schickst)": "⚑ Feedback (only if you send some)",
+"Deine Nachricht, dein Vorname, ggf. deine Einladung und die gemeldete Aufgabe werden auf dem Mi-profe-Server gespeichert, damit Jonas sie lesen kann, und nach spätestens 180 Tagen gelöscht.": "Your message, first name, invitation (if any) and the reported exercise are stored on the Mi profe server so Jonas can read them, and deleted after 180 days at the latest.",
 "Daten, Quellen, Kontakt": "Data, sources, contact",
 "Datenschutz & Info": "Privacy & info",
 "Kein Konto, keine Werbung, kein Tracking, keine Cookies. Hier steht, welche Daten wo landen.": "No account, no ads, no tracking, no cookies. Here's which data ends up where.",
@@ -1993,7 +2006,6 @@ window.UI_TR={
 "Für freie Gespräche brauchst du KI: entweder diese App über den claude.ai-Link öffnen (nutzt dein Claude-Abo) oder einen kostenlosen Gemini-Key in den Einstellungen. Alles andere funktioniert ohne.": "Para conversaciones libres necesitas IA: abre esta app con el enlace de claude.ai (usa tu plan de Claude) o añade una clave gratuita de Gemini en los ajustes. Todo lo demás funciona sin ella.",
 "Zu den Einstellungen": "A los ajustes",
 "Deine Antwort {ON} …": "Tu respuesta {ON} …",
-"Senden": "Enviar",
 "(Beginne das Gespräch mit deiner ersten Zeile.)": "(Empieza la conversación con tu primera frase.)",
 "🎉 Ziel erreicht! ¡Muy bien!": "🎉 ¡Objetivo cumplido! ¡Muy bien!",
 "Automatisch (beste Stimme)": "Automática (mejor voz)",
@@ -2060,6 +2072,19 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Was stimmt an dieser Aufgabe nicht?": "¿Qué falla en este ejercicio?",
+"Deine Nachricht …": "Tu mensaje…",
+"Senden": "Enviar",
+"Schreib kurz, was nicht passt.": "Escribe brevemente qué falla.",
+"Danke! Die Nachricht ist angekommen.": "¡Gracias! El mensaje ha llegado.",
+"⚑ Aufgabe melden": "⚑ Informar sobre el ejercicio",
+"✉️ Nachricht an Jonas": "✉️ Mensaje a Jonas",
+"Die Aufgabe wird automatisch mitgeschickt – schreib einfach, was falsch oder unklar ist.": "El ejercicio se envía automáticamente: solo escribe qué está mal o no se entiende.",
+"Fragen, Wünsche, Fehler – alles willkommen.": "Preguntas, deseos, errores: todo es bienvenido.",
+"Aufgabe melden": "Informar sobre el ejercicio",
+"In jeder Übung kannst du außerdem mit ⚑ oben eine Aufgabe melden.": "En cada ejercicio también puedes informar de una tarea con ⚑ arriba.",
+"⚑ Rückmeldungen (nur wenn du eine schickst)": "⚑ Comentarios (solo si envías alguno)",
+"Deine Nachricht, dein Vorname, ggf. deine Einladung und die gemeldete Aufgabe werden auf dem Mi-profe-Server gespeichert, damit Jonas sie lesen kann, und nach spätestens 180 Tagen gelöscht.": "Tu mensaje, tu nombre, tu invitación (si la tienes) y el ejercicio se guardan en el servidor de Mi profe para que Jonas pueda leerlos, y se borran como muy tarde a los 180 días.",
 "Daten, Quellen, Kontakt": "Datos, fuentes, contacto",
 "Datenschutz & Info": "Privacidad e información",
 "Kein Konto, keine Werbung, kein Tracking, keine Cookies. Hier steht, welche Daten wo landen.": "Sin cuenta, sin publicidad, sin rastreo, sin cookies. Aquí ves qué datos van a dónde.",
@@ -3075,7 +3100,6 @@ window.UI_TR={
 "Für freie Gespräche brauchst du KI: entweder diese App über den claude.ai-Link öffnen (nutzt dein Claude-Abo) oder einen kostenlosen Gemini-Key in den Einstellungen. Alles andere funktioniert ohne.": "Para conversas livres você precisa de IA: abra este app pelo link do claude.ai (usa seu plano do Claude) ou adicione uma chave gratuita do Gemini nas configurações. Todo o resto funciona sem isso.",
 "Zu den Einstellungen": "Para as configurações",
 "Deine Antwort {ON} …": "Sua resposta {ON} …",
-"Senden": "Enviar",
 "(Beginne das Gespräch mit deiner ersten Zeile.)": "(Comece a conversa com a sua primeira frase.)",
 "🎉 Ziel erreicht! ¡Muy bien!": "🎉 Objetivo alcançado! ¡Muy bien!",
 "Automatisch (beste Stimme)": "Automática (melhor voz)",
@@ -3142,6 +3166,19 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Was stimmt an dieser Aufgabe nicht?": "O que está errado neste exercício?",
+"Deine Nachricht …": "Sua mensagem…",
+"Senden": "Enviar",
+"Schreib kurz, was nicht passt.": "Escreva rapidinho o que não está certo.",
+"Danke! Die Nachricht ist angekommen.": "Obrigado! A mensagem chegou.",
+"⚑ Aufgabe melden": "⚑ Relatar exercício",
+"✉️ Nachricht an Jonas": "✉️ Mensagem para o Jonas",
+"Die Aufgabe wird automatisch mitgeschickt – schreib einfach, was falsch oder unklar ist.": "O exercício é enviado automaticamente – é só escrever o que está errado ou confuso.",
+"Fragen, Wünsche, Fehler – alles willkommen.": "Dúvidas, desejos, erros – tudo é bem-vindo.",
+"Aufgabe melden": "Relatar exercício",
+"In jeder Übung kannst du außerdem mit ⚑ oben eine Aufgabe melden.": "Em cada exercício você também pode relatar uma tarefa com ⚑ no topo.",
+"⚑ Rückmeldungen (nur wenn du eine schickst)": "⚑ Feedback (só se você enviar)",
+"Deine Nachricht, dein Vorname, ggf. deine Einladung und die gemeldete Aufgabe werden auf dem Mi-profe-Server gespeichert, damit Jonas sie lesen kann, und nach spätestens 180 Tagen gelöscht.": "Sua mensagem, seu primeiro nome, seu convite (se houver) e o exercício relatado ficam no servidor do Mi profe para o Jonas ler, e são apagados em no máximo 180 dias.",
 "Daten, Quellen, Kontakt": "Dados, fontes, contato",
 "Datenschutz & Info": "Privacidade e informações",
 "Kein Konto, keine Werbung, kein Tracking, keine Cookies. Hier steht, welche Daten wo landen.": "Sem conta, sem anúncios, sem rastreamento, sem cookies. Aqui você vê quais dados vão para onde.",
@@ -4514,9 +4551,10 @@ function vPrivacy(m){const P=(t,x)=>h('div',{class:'card',style:'margin-bottom:1
     h('p',{class:'sub'},T('Kein Konto, keine Werbung, kein Tracking, keine Cookies. Hier steht, welche Daten wo landen.')),
     P(T('📱 Auf deinem Gerät'),[T('Lernfortschritt, Name, Ansprache, Herkunft und Einstellungen liegen im Speicher deines Browsers bzw. der installierten App. Sie verlassen das Gerät nur, wenn du unten genannte Funktionen einschaltest.'),T('Löschen: Browserdaten dieser Seite löschen bzw. die App entfernen. Vorher sichern, wenn du den Fortschritt behalten willst (Mehr → Sync & Backup).')]),
     P(T('☁️ Sync (nur wenn du ihn einschaltest)'),[T('Mit Sync-Code: Fortschritt, Name und Einstellungen werden auf dem Mi-profe-Server gespeichert (Cloudflare; Rechenzentren auch außerhalb der EU). Abrufbar nur mit deinem Sync-Code – gib ihn nur an eigene Geräte.'),T('Mit GitHub: dieselben Daten in einem privaten Gist in deinem eigenen GitHub-Konto.')]),
+    P(T('⚑ Rückmeldungen (nur wenn du eine schickst)'),[T('Deine Nachricht, dein Vorname, ggf. deine Einladung und die gemeldete Aufgabe werden auf dem Mi-profe-Server gespeichert, damit Jonas sie lesen kann, und nach spätestens 180 Tagen gelöscht.')]),
     P(T('🤖 KI-Lehrer (nur wenn du ihn nutzt)'),[T('Deine Texte und Antworten (mit deinem Vornamen) gehen an Google Gemini – über den Mi-profe-Server, wenn du eine Einladung hast, sonst direkt mit deinem eigenen Schlüssel. Es gelten die Bedingungen von Google.')]),
     P(T('🌐 Hosting & Vorlesen'),[T('Die App liegt bei GitHub Pages; GitHub verarbeitet beim Aufruf technisch nötige Daten wie die IP-Adresse. Vorlesen und Aufnahmen laufen über dein Gerät – Aufnahmen werden nicht hochgeladen.')]),
-    P(T('✉️ Fragen & Löschen'),[T('Fragen, Fehler oder der Wunsch, deine Sync-Daten auf dem Server zu löschen: wende dich an Jonas.')]),
+    (()=>{const c=P(T('✉️ Fragen & Löschen'),[T('Fragen, Fehler oder der Wunsch, deine Sync-Daten auf dem Server zu löschen: wende dich an Jonas.')]);if(SRV())c.append(h('button',{class:'btn',onclick:()=>reportBox(null)},T('✉️ Nachricht an Jonas')),h('p',{class:'muted small',style:'margin:8px 0 0'},T('In jeder Übung kannst du außerdem mit ⚑ oben eine Aufgabe melden.')));return c;})(),
     P(T('📚 Quellen & Lizenzen'),[T('Alle Lerntexte sind eigene Texte. Orientierung: Plan Curricular des Instituto Cervantes, Wortlisten des Goethe-Instituts und Prüfungsformate (DELE, Goethe-Zertifikat) – ohne übernommene Aufgaben.'),T('Häufige Wörter: FrequencyWords (OpenSubtitles) und WikDict/Wiktionary, Lizenz CC BY-SA 4.0.')]));}
 /* Sicherungs-Erinnerung: ohne Sync nach 3 erledigten Lektionen einmal, danach alle 14 Tage (Safari am iPhone löscht Seiten nach 7 Tagen ohne Besuch) */
 function backupAsk(){if(IN_ARTIFACT||syncOn())return;const st=S.settings,n=Object.values(S.lessons).filter(x=>x.done).length;if(n<3||st.bkAsk&&Date.now()-st.bkAsk<14*864e5)return;
@@ -4810,6 +4848,19 @@ function noListenBtn(onSkip){const box=h('div',{class:'nolisten'});
       h('button',{class:'chip',onclick:()=>go(3600000,T('Hör-Aufgaben sind für 1 Stunde pausiert.'))},T('1 Stunde')),
       h('button',{class:'chip',onclick:()=>go(endOfDay(),T('Hör-Aufgaben sind für heute pausiert.'))},T('Für heute'))));};
   box.append(h('button',{class:'btn ghost small',onclick:open},'🎧 '+T('Kann gerade nicht hören')));return box;}
+/* Rückmeldung an Jonas (Server /api/feedback): aus Übungen mit der Aufgabe als Kontext (⚑), sonst allgemein (Datenschutz & Info). Ohne Server ausgeblendet. */
+function reportBox(ctx){const ov=h('div',{class:'overlay'}),close=()=>ov.remove(),task=!!(ctx&&(ctx.ref||ctx.card));
+  const ta=h('textarea',{class:'inp',rows:4,placeholder:task?T('Was stimmt an dieser Aufgabe nicht?'):T('Deine Nachricht …'),style:'font-size:16px;width:100%;resize:vertical'});
+  ta.onkeydown=e=>e.stopPropagation();/* Tastenkürzel der Übung nicht auslösen */
+  const send=h('button',{class:'btn primary'},T('Senden')),out=h('div');
+  send.onclick=async()=>{const v=ta.value.trim();if(!v)return toast(T('Schreib kurz, was nicht passt.'));send.disabled=true;out.innerHTML='';
+    try{await srvPost('/api/feedback',{text:v.slice(0,2000),name:S.name||'',invite:S.settings.invite||'',ctx:Object.assign({lang:LANG.code,ui:UI,ex:EX,ver:window.APP_VERSION||'',route:curRoute()},ctx||{})});close();toast(T('Danke! Die Nachricht ist angekommen.'));}
+    catch(e){out.append(h('div',{class:'fb bad'},'✗ '+e.message));send.disabled=false;}};
+  ov.append(h('div',{class:'card',style:'max-width:420px;width:100%'},h('h2',{style:'margin-top:0'},task?T('⚑ Aufgabe melden'):T('✉️ Nachricht an Jonas')),
+    h('p',{class:'muted small',style:'margin:0 0 8px'},task?T('Die Aufgabe wird automatisch mitgeschickt – schreib einfach, was falsch oder unklar ist.'):T('Fragen, Wünsche, Fehler – alles willkommen.')),ta,out,
+    h('div',{class:'row',style:'justify-content:flex-end;margin-top:10px'},h('button',{class:'btn',onclick:close},T('Abbrechen')),send)));
+  ov.onclick=e=>{if(e.target===ov)close();};document.body.append(ov);setTimeout(()=>ta.focus(),50);}
+const reportBtn=fn=>SRV()?h('button',{class:'btn ghost small rep',title:T('Aufgabe melden'),onclick:()=>reportBox(fn())},'⚑'):null;
 function play(m,cfg){if(!['lesson','round','check','mix','reading','story','placement'].includes(curRoute().split('/')[0]))runEnter();
   let queue=cfg.steps.slice();let pos=0;let firstTry=new Map();let retried=new Set();let gradeable=cfg.steps.filter(x=>GRADED.has(x.s.t)).length;
   /* ↶ Rückgängig (nur bei Übungen mit Zwischenspeicher, nicht in Tests): Zustand bei jeder Aufgabe merken, zurück = vorige Aufgabe neu */
@@ -4820,7 +4871,8 @@ function play(m,cfg){if(!['lesson','round','check','mix','reading','story','plac
   const sv=cfg.pk&&!cfg.fresh&&pauseGet(cfg.pk);
   if(sv){queue=sv.steps;pos=sv.pos;(sv.ft||[]).forEach(([a,b])=>firstTry.set(a,b));retried=new Set((sv.rt||[]).map(i=>queue[i]).filter(Boolean));gradeable=sv.g;}
   const top=h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:async()=>{if(cfg.pk&&pos>0){toast(T('Gespeichert – später geht es hier weiter.'));return cfg.onBack();}
-    if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pcount'}));
+    if(await askConfirm(T('Lektion abbrechen? Der Fortschritt dieser Lektion geht verloren.'),T('Abbrechen & zurück')))cfg.onBack();}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pcount'}),
+    reportBtn(()=>{const c=queue[pos]||{},st=c.s||{};return{ref:c.ref||'',t:st.t||'',step:JSON.stringify(st).slice(0,900)};}));
   const stage=h('div',{class:'step'});
   /* Leiste (✕, Fortschritt, ↶) klebt oben, „Prüfen/Weiter“ unten (außer bei Lesetexten) – .main.stickplay */
   stickMain(m,'stickplay');
@@ -5438,7 +5490,7 @@ function runVocab(cards,mode,srs,opt){opt=opt||{};const from=curRoute();const fr
     if(!await askConfirm((isMy(k)?T('„{W}“ wirklich ausblenden? Es bleibt in deiner Liste, kommt aber nicht mehr dran. Zurückholen kannst du es in der Liste oder unter Vokabeln → Statistik.'):T('„{W}“ wirklich ausblenden? Das Wort kommt dann nicht mehr in der Wiederholung dran. Zurückholen kannst du es unter Vokabeln → Statistik.')).replace('{W}',c.es),T('Ausblenden'))||i!==at)return;
     snap(c);setHidden(k,true);toast(T('Ausgeblendet – mit ↶ zurück machst du es rückgängig.'));nxt();}},T('Wort ausblenden'));
   stickMain(m,'stickplay');runEnter();
-  m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>{if(opt.pk&&i>0&&i<q.length)toast(T('Gespeichert – später geht es hier weiter.'));go(from);}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'})),stage,h('div',{class:'vhiderow'},hideB)));
+  m.append(h('div',{class:'player'},h('div',{class:'ptop'},h('button',{class:'btn ghost small',onclick:()=>{if(opt.pk&&i>0&&i<q.length)toast(T('Gespeichert – später geht es hier weiter.'));go(from);}},'✕'),h('div',{class:'bar'},h('i',{style:'width:0'})),undoB,h('span',{class:'muted small',id:'pc'}),reportBtn(()=>{const c=q[i]||{};return{card:(c.es||'')+' = '+(c.de||''),mode,unit:c.unit||''};})),stage,h('div',{class:'vhiderow'},hideB)));
   function upd(){$('.ptop .bar i').style.width=Math.round(100*i/q.length)+'%';$('#pc').textContent=Math.min(i+1,q.length)+' / '+q.length;undoB.classList.toggle('hide',!hist.length);}
   const failed=new Set(rs&&rs.failed||[]);
   /* Rückgängig: Zustand vor jeder Antwort merken (Karte, Zähler, Statistik) und bei ↶ wiederherstellen */
