@@ -73,11 +73,15 @@ function applyLook(){const id=colorId();let a=accentOf(id);const old=document.ge
     if(window.caches)fetch('manifest-'+LANG.code+'.webmanifest').then(r=>r.ok?caches.open('mi-profe-look').then(c=>c.put('manifest.webmanifest',r)):0).catch(()=>{});
     set('meta[name=apple-mobile-web-app-title]','content',APP);}
   if(a.toLowerCase()==='#c4472b')return;/* Terrakotta = Grundfarben aus app.css */
-  /* lesbar halten (vor allem eigene Farben): zu hell → abdunkeln, im Dunkelmodus zu dunkel → aufhellen */
-  for(let k=0;k<12&&lum(a)>.22;k++)a=mixC(a,'#000000',.12);
-  let a2=mixC(a,'#ffffff',.3);for(let k=0;k<12&&lum(a2)<.16;k++)a2=mixC(a2,'#ffffff',.15);const dbg=mixC('#161616',a2,.05);
-  const L='--bg:'+mixC('#fbfaf8',a,.035)+';--surface2:'+mixC('#f2f0ed',a,.06)+';--line:'+mixC('#e3dfdb',a,.09)+';--accent:'+a+';--accent-ink:'+(lum(a)>.4?'#1b1714':'#ffffff')+';--accent-soft:'+mixC('#ffffff',a,.15)+';--accent-strong:'+mixC(a,'#000000',.18)+';';
-  const D='--bg:'+dbg+';--surface:'+mixC('#1f1f1f',a2,.06)+';--surface2:'+mixC('#282828',a2,.07)+';--line:'+mixC('#383838',a2,.09)+';--accent:'+a2+';--accent-ink:'+dbg+';--accent-soft:'+mixC('#1d1d1d',a2,.2)+';--accent-strong:'+mixC(a2,'#ffffff',.25)+';';
+  /* lesbar halten (WCAG AA 4,5:1, vor allem eigene Farben): Akzent als Text auf Weiß/Hintergrund/zarter Fläche und weiße Schrift auf Akzent – sonst schrittweise abdunkeln; im Dunkelmodus aufhellen */
+  const cr=(x,y)=>{const p=lum(x),q=lum(y);return(Math.max(p,q)+.05)/(Math.min(p,q)+.05);},ok=(c,l)=>l.every(b=>cr(c,b)>=4.6);
+  const dl=a=>({bg:mixC('#fbfaf8',a,.035),s2:mixC('#f2f0ed',a,.06),soft:mixC('#ffffff',a,.1)});
+  for(let k=0;k<40;k++){const x=dl(a);if(ok(a,['#ffffff',x.bg,x.s2,x.soft]))break;a=mixC(a,'#000000',.05);}
+  const dd=a2=>{const bg=mixC('#161616',a2,.05);return{bg:bg,s:mixC('#1f1f1f',a2,.06),s2:mixC('#282828',a2,.07),soft:mixC('#1d1d1d',a2,.16)};};
+  let a2=mixC(a,'#ffffff',.3);for(let k=0;k<40;k++){const x=dd(a2);if(ok(a2,[x.bg,x.s,x.s2,x.soft]))break;a2=mixC(a2,'#ffffff',.08);}
+  const l=dl(a),d=dd(a2),dbg=d.bg;
+  const L='--bg:'+l.bg+';--surface2:'+l.s2+';--line:'+mixC('#e3dfdb',a,.09)+';--accent:'+a+';--accent-ink:#ffffff;--accent-soft:'+l.soft+';--accent-strong:'+mixC(a,'#000000',.18)+';';
+  const D='--bg:'+dbg+';--surface:'+d.s+';--surface2:'+d.s2+';--line:'+mixC('#383838',a2,.09)+';--accent:'+a2+';--accent-ink:'+dbg+';--accent-soft:'+d.soft+';--accent-strong:'+mixC(a2,'#ffffff',.25)+';';
   const st=document.createElement('style');st.id='lookcss';st.textContent=':root{'+L+'}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){'+D+'}}:root[data-theme="dark"]{'+D+'}';document.head.appendChild(st);}
 applyLook();
 /* Name: wird beim ersten Öffnen abgefragt. Die Inhalte sind für „Jonas“ geschrieben – für andere Namen wird er überall ersetzt. */
