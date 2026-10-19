@@ -21,7 +21,7 @@ lessons:[
  {t:'mc',q:'Am Anfang war das Wetter für mich schwierig, aber ich habe mich daran ___.',opts:['gewöhnt','erinnert','getrennt'],a:0},
  {t:'gap',q:'Der Sohn meiner Schwester ist mein ___. (sobrinho)',a:['Neffe']},
  {t:'match',q:'Ligue.',pairs:[['die Kindheit','a infância'],['der Enkel','o neto'],['die Gewohnheit','o hábito'],['der Abschied','a despedida'],['ursprünglich','originalmente']]},
- {t:'tr',de:'Desde então eu moro em Frankfurt.',a:['Seitdem wohne ich in Frankfurt.']},
+ {t:'tr',de:'Desde então eu moro em Frankfurt.',a:['Seitdem wohne ich in Frankfurt.','Seitdem lebe ich in Frankfurt.','Ich wohne seitdem in Frankfurt.','Ich lebe seitdem in Frankfurt.']},
  {t:'speak',es:'Ich bin in São Paulo aufgewachsen. In meiner Kindheit habe ich viel Zeit bei meinen Großeltern verbracht.',de:'Cresci em São Paulo. Na minha infância passei muito tempo na casa dos meus avós.',tip:'<i>aufwachsen</i> → Perfekt com <b>sein</b>: <i>ich bin aufgewachsen</i>.'}
 ]},
 {id:'l2',title:'Contar no passado: Präteritum',desc:'ging, kam, sah, machte …',steps:[
@@ -62,7 +62,7 @@ Am schönsten waren die Abende. Wenn es dunkel wurde, saßen wir auf der Veranda
  {t:'tr',de:'Quando cheguei à Alemanha, eu quase não falava alemão.',a:['Als ich nach Deutschland kam, sprach ich kaum Deutsch.','Als ich nach Deutschland gekommen bin, habe ich kaum Deutsch gesprochen.']}
 ]},
 {id:'l4',title:'Escrever: uma lembrança',desc:'Forumsbeitrag (ca. 80 Wörter)',steps:[
- {t:'read',title:'Leitura: Forum „Mein schönstes Ferienerlebnis“',text:`Nina_88: Als ich fünfzehn war, fuhr ich mit meiner Klasse nach Paris. Ich hatte vorher noch nie das Meer oder eine so große Stadt gesehen. Wir übernachteten in einer einfachen Jugendherberge, aber das war uns egal. Am letzten Abend gingen wir auf den Eiffelturm. Die Lichter der Stadt waren unglaublich! Seitdem reise ich sehr gern. Mittlerweile war ich in zwölf Ländern – aber an Paris denke ich immer noch am liebsten.`,de:`Nina_88: Quando eu tinha quinze anos, fui com a minha turma para Paris. Eu nunca tinha visto o mar nem uma cidade tão grande. Dormimos num albergue simples, mas não ligamos. Na última noite subimos na Torre Eiffel. As luzes da cidade eram inacreditáveis! Desde então eu adoro viajar. Hoje já estive em doze países – mas Paris ainda é o lugar em que eu mais gosto de pensar.`},
+ {t:'read',title:'Leitura: Forum „Mein schönstes Ferienerlebnis“',text:`Nina_88: Als ich fünfzehn war, fuhr ich mit meiner Klasse nach Paris. Ich war vorher noch nie im Ausland gewesen und hatte noch nie eine so große Stadt gesehen. Wir übernachteten in einer einfachen Jugendherberge, aber das war uns egal. Am letzten Abend gingen wir auf den Eiffelturm. Die Lichter der Stadt waren unglaublich! Seitdem reise ich sehr gern. Mittlerweile war ich in zwölf Ländern – aber an Paris denke ich immer noch am liebsten.`,de:`Nina_88: Quando eu tinha quinze anos, fui com a minha turma para Paris. Eu nunca tinha ido ao exterior nem visto uma cidade tão grande. Dormimos num albergue simples, mas não ligamos. Na última noite subimos na Torre Eiffel. As luzes da cidade eram inacreditáveis! Desde então eu adoro viajar. Hoje já estive em doze países – mas Paris ainda é o lugar em que eu mais gosto de pensar.`},
  {t:'mc',q:'Wie alt war Nina bei der Reise?',opts:['fünfzehn','zwölf','achtundachtzig'],a:0},
  {t:'mc',q:'Was hat sich seit der Reise geändert?',opts:['Sie reist sehr gern.','Sie wohnt in Paris.','Sie arbeitet in einer Jugendherberge.'],a:0},
  {t:'free',task:'Escreva um post para o fórum „Eine Erinnerung, die ich nie vergesse“ (~80 palavras): 1) quando e onde aconteceu, 2) o que aconteceu (Präteritum), 3) por que é importante para você hoje.',hint:'Als ich … war, … Damals wohnte ich … Eines Tages … Wenn ich heute daran denke, … Seitdem …',focus:'Präteritum, als/wenn, seitdem, zusammenhängend erzählen',model:'Als ich acht Jahre alt war, verbrachte ich die Ferien bei meinen Großeltern am Meer. Eines Tages gingen mein Opa und ich sehr früh fischen. Wir saßen stundenlang im Boot und fingen nichts, aber er erzählte mir Geschichten aus seiner Jugend. Am Ende fing ich einen kleinen Fisch, und wir lachten beide. Mein Opa ist leider letztes Jahr gestorben. Wenn ich heute ans Meer denke, denke ich immer an diesen Morgen.'}
@@ -201,7 +201,7 @@ Bei einer Störung erscheint auf dem Display ein Code. Die Liste der Codes finde
   {you:true,opts:[{es:'Das verstehe ich. Könnten Sie das Gerät vielleicht ab Mitternacht ausschalten oder auf eine leisere Stufe stellen?',ok:true},{es:'Das ist nicht mein Problem.',ok:false,why:'Mostre compreensão e proponha um meio-termo.'}]},
   {n:'Herr Wagner',es:'Es gibt einen Nachtmodus, der viel leiser ist. Den probiere ich ab heute aus.',de:'Tem um modo noturno que é bem mais silencioso. Vou testar a partir de hoje.'},
   {you:true,opts:[{es:'Super, vielen Dank für Ihr Verständnis! Sagen Sie Bescheid, wenn ich auch mal Rücksicht nehmen soll.',ok:true},{es:'Super, dann bin ich zufrieden.',ok:false,why:'Termine de forma simpática – agradeça e ofereça o mesmo.'}]}]},
- {t:'tr',de:'Por favor, tenham consideração com os vizinhos.',a:['Bitte nehmen Sie Rücksicht auf die Nachbarn.','Bitte nehmt Rücksicht auf die Nachbarn.']}
+ {t:'tr',de:'Por favor, tenham consideração com os vizinhos.',a:['Bitte nehmen Sie Rücksicht auf die Nachbarn.','Bitte nehmt Rücksicht auf die Nachbarn.','Nehmen Sie bitte Rücksicht auf die Nachbarn.','Nehmt bitte Rücksicht auf die Nachbarn.']}
 ]},
 {id:'l4',title:'Escrever: reclamação',desc:'Beschwerde an die Hausverwaltung',steps:[
  {t:'info',title:'Reclamar por escrito',html:`<table><tr><td class="es-t">Ich wende mich an Sie, weil …</td><td>Escrevo ao senhor porque …</td></tr>
@@ -236,7 +236,7 @@ lessons:[
  {t:'read',title:'Leitura: Essen in Deutschland',text:`Viele Deutsche essen drei Mahlzeiten am Tag, aber die wichtigste ist oft nicht das Mittagessen, sondern das Frühstück. Mittags essen viele Berufstätige in der Kantine oder nur schnell ein Brötchen. Abends gibt es häufig „Abendbrot“: Brot mit Käse, Wurst und etwas Gemüse – also eine kalte Mahlzeit. Für Menschen aus Brasilien, wo man mittags warm und reichlich isst, ist das am Anfang ungewöhnlich. Immer mehr Deutsche ernähren sich übrigens vegetarisch: Laut Umfragen sind es etwa zehn Prozent.`,de:`Muitos alemães fazem três refeições por dia, mas a mais importante muitas vezes não é o almoço, e sim o café da manhã. No almoço, muitos trabalhadores comem na cantina ou só um pãozinho rápido. À noite muitas vezes tem „Abendbrot“: pão com queijo, frios e um pouco de legumes – ou seja, uma refeição fria. Para quem vem do Brasil, onde o almoço é quente e farto, isso é estranho no começo. Aliás, cada vez mais alemães são vegetarianos: segundo pesquisas, cerca de dez por cento.`},
  {t:'mc',q:'Was ist „Abendbrot“?',opts:['eine kalte Mahlzeit mit Brot','ein warmes Mittagessen','ein Kuchen am Nachmittag'],a:0},
  {t:'mc',q:'Wie viele Deutsche ernähren sich vegetarisch?',opts:['etwa zehn Prozent','die Hälfte','fast niemand'],a:0},
- {t:'tr',de:'Eu tento me alimentar de forma saudável.',a:['Ich versuche, mich gesund zu ernähren.']}
+ {t:'tr',de:'Eu tento me alimentar de forma saudável.',a:['Ich versuche, mich gesund zu ernähren.','Ich versuche, gesund zu essen.']}
 ]},
 {id:'l2',title:'zu + infinitivo',desc:'Ich habe vor, … zu … · Es ist wichtig, … zu …',steps:[
  {t:'info',title:'Infinitivo com zu',html:`<p>Depois de muitos verbos e expressões vem <b>zu + infinitivo</b> no final da frase:</p>
@@ -348,7 +348,7 @@ situacion:{title:'Uma semana sem celular?',npc:'Jana',scene:'A Jana leu que uma 
 placement:[
  {t:'mc',q:'Wenn ich mehr Zeit ___, würde ich ein Instrument lernen.',opts:['hätte','habe','hatte'],a:0},
  {t:'mc',q:'An deiner Stelle ___ ich das Handy ausschalten.',opts:['würde','werde','wurde'],a:0},
- {t:'mc',q:'___ wartest du? – Auf den Bus.',opts:['Worauf','Wofür','Auf was'],a:0},
+ {t:'mc',q:'___ wartest du? – Auf den Bus.',opts:['Worauf','Wofür','Woauf'],a:0},
  {t:'gap',q:'Ich freue mich auf den Urlaub. – Ich freue mich auch ___.',a:['darauf']},
  {t:'gap',q:'Es ___ schön, wenn du mitkommen würdest. (sein – Konjunktiv II)',a:['wäre']},
  {t:'mc',q:'„publicar“',opts:['veröffentlichen','verbreiten','vergleichen'],a:0}],
@@ -369,7 +369,7 @@ lessons:[
  <div class="ojo">Irreal (não é verdade agora): <span class="es-t">Wenn ich reich <b>wäre</b> …</span> (mas não sou). Real: <span class="es-t">Wenn ich Zeit <b>habe</b> …</span></div>`},
  {t:'mc',q:'Wenn ich du ___, würde ich weniger am Handy sein.',opts:['wäre','bin','war'],a:0},
  {t:'mc',q:'___ du mir bitte das Passwort sagen?',opts:['Könntest','Kannst gewesen','Konntest'],a:0},
- {t:'gap',q:'Wenn ich ein neues Laptop ___, ___ ich schneller arbeiten. (haben / können)',a:['hätte','könnte']},
+ {t:'gap',q:'Wenn ich einen neuen Laptop ___, ___ ich schneller arbeiten. (haben / können)',a:['hätte','könnte']},
  {t:'gap',q:'Ich ___ gern eine Woche ohne Internet leben – aber nur im Urlaub! (werden – Konjunktiv II)',a:['würde']},
  {t:'order',es:'Wenn ich mehr Geld hätte würde ich ein neues Handy kaufen',alt:['Ich würde ein neues Handy kaufen wenn ich mehr Geld hätte'],de:'Se eu tivesse mais dinheiro, compraria um celular novo.'},
  {t:'tr',de:'Seria ótimo se você pudesse vir.',a:['Es wäre toll, wenn du kommen könntest.','Es wäre super, wenn du kommen könntest.','Es wäre schön, wenn du kommen könntest.']},
@@ -433,7 +433,7 @@ lessons:[
  {t:'gap',q:'Sie haben sich versöhnt, ___ der Streit sehr schlimm war.',a:['obwohl']},
  {t:'gap',q:'Ich hatte keine Zeit. ___ habe ich dir geholfen.',a:['Trotzdem']},
  {t:'order',es:'Obwohl sie in verschiedenen Städten wohnen sehen sie sich jedes Wochenende',alt:['Sie sehen sich jedes Wochenende obwohl sie in verschiedenen Städten wohnen'],de:'Embora morem em cidades diferentes, eles se veem todo fim de semana.'},
- {t:'tr',de:'Embora eu esteja cansado, vou à festa.',a:['Obwohl ich müde bin, gehe ich zur Party.','Obwohl ich müde bin, komme ich zur Party.']},
+ {t:'tr',de:'Embora eu esteja cansado, vou à festa.',a:['Obwohl ich müde bin, gehe ich zur Party.','Obwohl ich müde bin, komme ich zur Party.','Ich gehe zur Party, obwohl ich müde bin.','Obwohl ich müde bin, gehe ich auf die Party.']},
  {t:'speak',es:'Obwohl wir uns manchmal streiten, verstehen wir uns sehr gut.',de:'Embora às vezes a gente brigue, nos entendemos muito bem.',tip:'Depois de <i>obwohl</i> o verbo vai para o final: <i>streiten</i>.'}
 ]},
 {id:'l3',title:'Declinação -n',desc:'der Kollege → den Kollegen · der Nachbar → dem Nachbarn',steps:[
@@ -589,7 +589,7 @@ goals:['Über Wahlen, Parteien und Politik sprechen','Gesellschaft: Integration,
 situacion:{title:'Assembleia do bairro',npc:'Herr Wagner',scene:'Na assembleia do bairro se discute se a rua principal deve virar zona de pedestres. O Sr. Wagner, da associação de moradores, pede a sua opinião.',role:'Du bist Herr Wagner, ca. 55 Jahre, Sprecher der Bürgerinitiative im Stadtteil Bornheim in Frankfurt. Du siezt. Bei der Bürgerversammlung geht es um die Frage, ob die Berger Straße eine Fußgängerzone werden soll. Du bist eher dafür, nennst aber auch Gegenargumente (Geschäfte, Lieferverkehr, Parkplätze). Frag Lucas nach seiner Meinung, nach Erfahrungen aus Brasilien und ob er sich engagieren möchte. Benutze wegen/trotz/während + Genitiv und Konjunktiv II Vergangenheit (Man hätte die Bürger früher fragen sollen). Sprich natürliches Deutsch auf B1-Niveau.',goal:'Dê a sua opinião com argumentos (wegen, trotz …), compare com a sua cidade e diga se você quer participar.'},
 placement:[
  {t:'mc',q:'___ des Regens fand die Demonstration statt.',opts:['Trotz','Wegen','Während'],a:0},
- {t:'mc',q:'___ der Wahl dürfen keine Plakate mehr aufgehängt werden.',opts:['Während','Trotz','Obwohl'],a:0},
+ {t:'mc',q:'___ der Versammlung darf nicht telefoniert werden.',opts:['Während','Trotz','Obwohl'],a:0},
  {t:'mc',q:'Wenn ich Zeit gehabt hätte, ___ ich zur Versammlung gegangen.',opts:['wäre','hätte','würde'],a:0},
  {t:'gap',q:'Ich ___ dich angerufen, aber ich hatte deine Nummer nicht. (haben – Konjunktiv II)',a:['hätte']},
  {t:'mc',q:'„o governo“',opts:['die Regierung','die Wahl','die Partei'],a:0},
@@ -610,7 +610,7 @@ lessons:[
 ]},
 {id:'l2',title:'Sociedade e participação',desc:'das Ehrenamt, die Integration, protestieren …',steps:[
  {t:'vocab',title:'Sociedade',items:[['die Gesellschaft','a sociedade; a companhia'],['die Integration','a integração'],['integrieren','integrar'],['die Migration','a migração'],['der Migrant / die Migrantin','o migrante / a migrante'],['das Asyl','o asilo'],['gleichberechtigt','com direitos iguais'],['die Gewalt','a violência'],['sich engagieren','engajar-se'],['das Ehrenamt','o trabalho voluntário'],['ehrenamtlich','voluntário (sem pagamento)'],['spenden','doar'],['die Spende','a doação'],['die Organisation','a organização'],['die Versammlung','a assembleia, a reunião'],['die Demonstration','a manifestação'],['protestieren','protestar'],['der Protest','o protesto'],['fordern','exigir'],['die Forderung','a exigência, a reivindicação'],['fördern','incentivar, apoiar'],['die Förderung','o incentivo, o apoio']]},
- {t:'mc',q:'Meine Nachbarin hilft jeden Samstag in der Tafel. Sie bekommt kein Geld, sie macht das ___.',opts:['ehrenamtlich','gleichberechtigt','politisch'],a:0},
+ {t:'mc',q:'Meine Nachbarin hilft jeden Samstag bei der Tafel. Sie bekommt kein Geld, sie macht das ___.',opts:['ehrenamtlich','gleichberechtigt','politisch'],a:0},
  {t:'mc',q:'Tausende Menschen ___ gegen die neue Autobahn.',opts:['protestierten','förderten','spendeten'],a:0},
  {t:'mc',q:'Die Stadt ___ Sprachkurse für Migranten – sie bezahlt einen Teil.',opts:['fördert','fordert','protestiert'],a:0},
  {t:'gap',q:'Nach dem Erdbeben haben viele Menschen Geld ___. (doar – Partizip)',a:['gespendet']},
@@ -757,7 +757,7 @@ lessons:[
  {t:'gap',q:'Heute gibt es ___ Fisch auf dem Markt. (frisch – der Fisch, Akk.)',a:['frischen']},
  {t:'gap',q:'Ein ___ Kind spielt Klavier. (klein – das Kind)',a:['kleines']},
  {t:'tr',de:'Ontem eu vi um filme muito bom.',a:['Gestern habe ich einen sehr guten Film gesehen.','Ich habe gestern einen sehr guten Film gesehen.','Gestern sah ich einen sehr guten Film.']},
- {t:'tr',de:'Nós moramos numa casa velha com um jardim grande.',a:['Wir wohnen in einem alten Haus mit einem großen Garten.']}
+ {t:'tr',de:'Nós moramos numa casa velha com um jardim grande.',a:['Wir wohnen in einem alten Haus mit einem großen Garten.','Wir wohnen in einem alten Haus mit großem Garten.']}
 ]},
 {id:'l4',title:'Particípio como adjetivo',desc:'das renovierte Museum · die lachenden Kinder',steps:[
  {t:'info',title:'Particípio como adjetivo',html:`<p>Os particípios podem ficar <b>antes do substantivo</b> – com as terminações normais do adjetivo.</p>
@@ -854,7 +854,7 @@ Bernd, 52: Wer soll das bezahlen? Die Stadt hat kein Personal, um Verbote zu kon
  {t:'read',hideText:true,kind:'Hören · Teil 1',title:'Nachricht auf der Mailbox',intro:'Ouça a mensagem na caixa postal.',text:`Hallo Lucas, hier ist Jana. Du, wegen morgen: Das Meeting mit dem Kunden ist von zehn auf halb neun vorverlegt worden. Kannst du bitte die Präsentation mitbringen? Ich habe meinen Laptop zu Hause vergessen. Und denk daran, dass wir uns nicht im Büro treffen, sondern direkt beim Kunden in Eschborn. Bis morgen!`,de:`Oi Lucas, aqui é a Jana. Olha, sobre amanhã: a reunião com o cliente foi antecipada das dez para as oito e meia. Você pode levar a apresentação, por favor? Esqueci meu notebook em casa. E lembre que não vamos nos encontrar no escritório, e sim direto no cliente em Eschborn. Até amanhã!`},
  {t:'mc',kind:'Hören · Teil 1',q:'Wann beginnt das Meeting?',opts:['um halb neun','um zehn','um halb zehn'],a:0},
  {t:'mc',kind:'Hören · Teil 1',q:'Wo treffen sich Jana und Lucas?',opts:['beim Kunden in Eschborn','im Büro','am Bahnhof'],a:0},
- {t:'read',hideText:true,kind:'Hören · Teil 2',title:'Führung durch die Altstadt',intro:'Você faz uma visita guiada por Frankfurt. Ouça a guia.',text:`Herzlich willkommen zu unserer Führung! Wir stehen hier auf dem Römerberg, dem Herz der Frankfurter Altstadt. Das Gebäude mit den drei Giebeln ist der Römer, seit fast 600 Jahren das Rathaus der Stadt. Im Zweiten Weltkrieg wurde die Altstadt fast vollständig zerstört. Die schönen Fachwerkhäuser gegenüber sehen alt aus, wurden aber erst in den 1980er-Jahren wieder aufgebaut. Gleich gehen wir weiter zum Dom, wo früher die deutschen Kaiser gekrönt wurden. Wer möchte, kann dort auf den Turm steigen – das kostet drei Euro extra. Die Führung endet in etwa anderthalb Stunden am Mainufer. Bitte bleiben Sie in der Gruppe, denn hier ist es oft sehr voll.`,de:`Sejam bem-vindos à nossa visita guiada! Estamos aqui no Römerberg, o coração do centro histórico de Frankfurt. O prédio com as três empenas é o Römer, há quase 600 anos a prefeitura da cidade. Na Segunda Guerra Mundial o centro histórico foi quase totalmente destruído. As bonitas casas em enxaimel em frente parecem antigas, mas só foram reconstruídas nos anos 1980. Logo seguimos para a catedral, onde antigamente os imperadores alemães eram coroados. Quem quiser pode subir na torre – custa três euros a mais. A visita termina em mais ou menos uma hora e meia na margem do Meno. Por favor, fiquem no grupo, porque aqui costuma estar muito cheio.`},
+ {t:'read',hideText:true,kind:'Hören · Teil 2',title:'Führung durch die Altstadt',intro:'Você faz uma visita guiada por Frankfurt. Ouça a guia.',text:`Herzlich willkommen zu unserer Führung! Wir stehen hier auf dem Römerberg, dem Herz der Frankfurter Altstadt. Das Gebäude mit den drei Giebeln ist der Römer, seit über 600 Jahren das Rathaus der Stadt. Im Zweiten Weltkrieg wurde die Altstadt fast vollständig zerstört. Die schönen Fachwerkhäuser gegenüber sehen alt aus, wurden aber erst in den 1980er-Jahren wieder aufgebaut. Gleich gehen wir weiter zum Dom, wo früher die deutschen Kaiser gekrönt wurden. Wer möchte, kann dort auf den Turm steigen – das kostet drei Euro extra. Die Führung endet in etwa anderthalb Stunden am Mainufer. Bitte bleiben Sie in der Gruppe, denn hier ist es oft sehr voll.`,de:`Sejam bem-vindos à nossa visita guiada! Estamos aqui no Römerberg, o coração do centro histórico de Frankfurt. O prédio com as três empenas é o Römer, há mais de 600 anos a prefeitura da cidade. Na Segunda Guerra Mundial o centro histórico foi quase totalmente destruído. As bonitas casas em enxaimel em frente parecem antigas, mas só foram reconstruídas nos anos 1980. Logo seguimos para a catedral, onde antigamente os imperadores alemães eram coroados. Quem quiser pode subir na torre – custa três euros a mais. A visita termina em mais ou menos uma hora e meia na margem do Meno. Por favor, fiquem no grupo, porque aqui costuma estar muito cheio.`},
  {t:'mc',kind:'Hören · Teil 2',q:'Was ist der Römer heute?',opts:['das Rathaus','ein Museum','eine Kirche'],a:0},
  {t:'mc',kind:'Hören · Teil 2',q:'Die Fachwerkhäuser …',opts:['wurden in den 1980er-Jahren neu gebaut.','sind 600 Jahre alt.','wurden nie zerstört.'],a:0},
  {t:'mc',kind:'Hören · Teil 2',q:'Was kostet extra?',opts:['der Turm des Doms','die ganze Führung','die Fahrt am Main'],a:0},
