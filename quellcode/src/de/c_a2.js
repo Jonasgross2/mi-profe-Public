@@ -94,7 +94,7 @@ Um abraço, Lucas`},
  {t:'mc',q:'Wohin kommt eine Zeitung?',opts:['in die blaue Tonne','in die gelbe Tonne','zum Container an der Ecke'],a:0},
  {t:'mc',q:'Wo darf Lucas sein Fahrrad abstellen?',opts:['im Keller','im Treppenhaus','vor der Tür'],a:0},
  {t:'mc',q:'Die Heizung ist kaputt. Was macht Lucas?',opts:['Er ruft Herrn Kaya an.','Er schreibt der Vermieterin.','Er bringt sie zum Container.'],a:0},
- {t:'tr',de:'Eu acho que a cozinha é pequena demais.',a:['Ich finde, dass die Küche zu klein ist.','Ich glaube, dass die Küche zu klein ist.']}
+ {t:'tr',de:'Eu acho que a cozinha é pequena demais.',a:['Ich finde, dass die Küche zu klein ist.','Ich glaube, dass die Küche zu klein ist.','Ich finde die Küche zu klein.']}
 ]},
 {id:'l4',title:'Ler e escrever: festa de inauguração',desc:'Einladung zur Einweihungsparty · Antwort',steps:[
  {t:'vocab',title:'Convites',items:[['die Einweihungsparty','a festa de inauguração (da casa)'],['einladen','convidar'],['die Einladung','o convite'],['feiern','comemorar'],['Bescheid sagen','avisar'],['sich freuen auf','estar ansioso por'],['leider','infelizmente']]},
@@ -156,7 +156,7 @@ lessons:[
  {t:'gap',q:'Ich bin zu spät, weil ich den Bus verpasst ___. (haben)',a:['habe']},
  {t:'order',es:'Weil das Wetter schön ist gehen wir in den Park',alt:['Wir gehen in den Park weil das Wetter schön ist'],de:'Como o tempo está bonito, vamos ao parque.'},
  {t:'mc',q:'Warum lernst du Deutsch? – ___',opts:['Weil ich in Frankfurt wohne.','Weil ich wohne in Frankfurt.','Denn ich in Frankfurt wohne.'],a:0},
- {t:'tr',de:'Eu não vou à festa porque tenho que trabalhar. (weil)',a:['Ich gehe nicht zur Party, weil ich arbeiten muss.','Ich komme nicht zur Party, weil ich arbeiten muss.']},
+ {t:'tr',de:'Eu não vou à festa porque tenho que trabalhar. (weil)',a:['Ich gehe nicht zur Party, weil ich arbeiten muss.','Ich komme nicht zur Party, weil ich arbeiten muss.','Ich gehe nicht auf die Party, weil ich arbeiten muss.','Ich komme nicht auf die Party, weil ich arbeiten muss.']},
  {t:'speak',es:'Ich lerne Deutsch, weil ich in Frankfurt arbeite und neue Freunde finden möchte.',de:'Eu estudo alemão porque trabalho em Frankfurt e quero fazer novos amigos.',tip:'Depois de <b>weil</b>: verbo no final – <i>arbeite</i>, <i>möchte</i>.'}
 ]},
 {id:'l3',title:'Pedidos educados e compromissos',desc:'Könnten Sie …? · Hätten Sie Zeit? · verschieben, absagen',steps:[
@@ -220,7 +220,7 @@ lessons:[
  {t:'read',title:'Leitura: Lucas und der Sport',text:`In Brasilien hat Lucas jeden Tag Fußball gespielt. In Frankfurt hatte er am Anfang keine Zeit für Sport, weil er so viel arbeiten musste. Jetzt ist er in einem Fußballverein. Die Mannschaft trainiert dienstags und donnerstags, am Samstag gibt es oft ein Spiel. Lucas sagt: „Im Verein habe ich auch viele Freunde gefunden. Und mein Deutsch ist besser geworden – auf dem Platz spricht niemand Englisch!“`,de:`No Brasil, o Lucas jogava futebol todo dia. Em Frankfurt, no começo, ele não tinha tempo para esporte, porque precisava trabalhar muito. Agora ele está num clube de futebol. O time treina às terças e quintas, e no sábado muitas vezes tem jogo. O Lucas diz: „No clube também fiz muitos amigos. E o meu alemão melhorou – no campo ninguém fala inglês!“`},
  {t:'mc',q:'Warum hatte Lucas am Anfang keine Zeit für Sport?',opts:['Er musste viel arbeiten.','Er war krank.','Es gab keinen Verein.'],a:0},
  {t:'mc',q:'Wann trainiert die Mannschaft?',opts:['dienstags und donnerstags','jeden Tag','nur am Samstag'],a:0},
- {t:'tr',de:'Eu vou à academia duas vezes por semana.',a:['Ich gehe zweimal pro Woche ins Fitnessstudio.','Ich gehe zweimal in der Woche ins Fitnessstudio.']}
+ {t:'tr',de:'Eu vou à academia duas vezes por semana.',a:['Ich gehe zweimal pro Woche ins Fitnessstudio.','Ich gehe zweimal in der Woche ins Fitnessstudio.','Ich gehe zweimal die Woche ins Fitnessstudio.','Zweimal pro Woche gehe ich ins Fitnessstudio.']}
 ]},
 {id:'l2',title:'Verbos reflexivos',desc:'sich bewegen, sich fühlen, sich freuen …',steps:[
  {t:'info',title:'sich',html:`<p>Alguns verbos alemães usam um pronome reflexivo (como „se“ em português):</p>
@@ -323,7 +323,7 @@ lessons:[
  {t:'read',hideText:true,title:'Ouvir: Wetterbericht',intro:'Ouça a previsão do tempo para o fim de semana.',text:`Und jetzt das Wetter für das Wochenende. Am Samstag ist es im Norden bewölkt, aber trocken, bei 18 Grad. Im Süden scheint die Sonne, bis 25 Grad. Am Sonntag kommen von Westen Gewitter, vor allem am Nachmittag. Bitte seien Sie vorsichtig, wenn Sie in den Bergen wandern. Am Montag wird es kühler: nur noch 14 Grad und viel Regen.`,de:`E agora o tempo para o fim de semana. No sábado, no norte, fica nublado, mas seco, com 18 graus. No sul faz sol, até 25 graus. No domingo chegam tempestades do oeste, principalmente à tarde. Por favor, tenham cuidado se forem fazer trilha nas montanhas. Na segunda esfria: só 14 graus e muita chuva.`},
  {t:'mc',q:'Wie ist das Wetter am Samstag im Norden?',opts:['bewölkt, aber trocken','sonnig und 25 Grad','Gewitter'],a:0},
  {t:'mc',q:'Wann soll man in den Bergen vorsichtig sein?',opts:['am Sonntagnachmittag','am Samstagmorgen','am Montag'],a:0},
- {t:'tr',de:'Amanhã vai ficar nublado.',a:['Morgen ist es bewölkt.','Morgen wird es bewölkt.']}
+ {t:'tr',de:'Amanhã vai ficar nublado.',a:['Morgen ist es bewölkt.','Morgen wird es bewölkt.','Es wird morgen bewölkt.','Morgen wird es wolkig.']}
 ]},
 {id:'l4',title:'De carro e de trem',desc:'die Werkstatt, der Reifen · Durchsagen · Urlaubsgrüße',steps:[
  {t:'vocab',title:'No caminho',items:[['der Wagen','o carro'],['der Reifen','o pneu'],['die Werkstatt','a oficina'],['die Panne','a pane / o defeito'],['die Kreuzung','o cruzamento'],['tanken','abastecer'],['die Tankstelle','o posto de gasolina'],['der Motorroller','a scooter'],['der Stau','o engarrafamento'],['die Durchsage','o aviso (alto-falante)'],['die Abfahrt','a partida']]},
@@ -363,7 +363,7 @@ lessons:[
  {t:'mc',q:'Lucas kann ohne ___ nicht gut lesen.',opts:['Brille','Kette','Geldbörse'],a:0},
  {t:'match',q:'Ligue.',pairs:[['der Anzug','o terno'],['der Schirm','o guarda-chuva'],['bequem','confortável'],['gestreift','listrado'],['die Geldbörse','a carteira']]},
  {t:'gap',q:'Für das Vorstellungsgespräch trägt Lucas einen ___. (terno)',a:['Anzug']},
- {t:'tr',de:'Este casaco é muito confortável.',a:['Diese Jacke ist sehr bequem.','Die Jacke ist sehr bequem.']},
+ {t:'tr',de:'Este casaco é muito confortável.',a:['Diese Jacke ist sehr bequem.','Die Jacke ist sehr bequem.','Dieser Mantel ist sehr bequem.']},
  {t:'speak',es:'Die Jeans ist zu eng. Haben Sie die auch eine Nummer größer?',de:'O jeans está apertado demais. Vocês têm um número maior?',tip:'<i>eine Nummer größer</i> = um número maior.'}
 ]},
 {id:'l2',title:'Terminações dos adjetivos',desc:'der neue Mantel · ein neuer Mantel',steps:[
@@ -383,7 +383,7 @@ lessons:[
  {t:'gap',q:'Die ___ Stiefel sind sehr bequem. (schwarz)',a:['schwarzen']},
  {t:'gap',q:'Mein Bruder trägt immer ein ___ T-Shirt. (bunt)',a:['buntes']},
  {t:'order',es:'Ich suche eine warme Jacke für den Winter',alt:['Für den Winter suche ich eine warme Jacke', 'Ich suche für den Winter eine warme Jacke'],de:'Procuro um casaco quente para o inverno.'},
- {t:'tr',de:'Eu gosto do vestido azul.',a:['Mir gefällt das blaue Kleid.','Das blaue Kleid gefällt mir.']}
+ {t:'tr',de:'Eu gosto do vestido azul.',a:['Mir gefällt das blaue Kleid.','Das blaue Kleid gefällt mir.','Ich mag das blaue Kleid.']}
 ]},
 {id:'l3',title:'Comparar',desc:'billiger als · so teuer wie · am günstigsten',steps:[
  {t:'vocab',title:'Comprar e comparar',items:[['die Qualität','a qualidade'],['das Produkt','o produto'],['der Unterschied','a diferença'],['verschieden','diferente / variado'],['der Flohmarkt','o brechó / a feira de usados'],['reduziert','com desconto (remarcado)'],['umtauschen','trocar (produto)'],['der Kassenbon','o cupom fiscal'],['reklamieren','reclamar (produto)']]},
@@ -536,7 +536,7 @@ lessons:[
  <tr><td class="es-t"><b>während</b> des Studiums</td><td>durante a faculdade</td></tr></table>`},
  {t:'gap',q:'Ich kann ___ dem 1. Juni anfangen. (a partir de)',a:['ab']},
  {t:'gap',q:'___ 2023 arbeite ich in Frankfurt. (desde)',a:['Seit']},
- {t:'tr',de:'Depois da faculdade eu trabalhei dois anos em São Paulo.',a:['Nach dem Studium habe ich zwei Jahre in São Paulo gearbeitet.']}
+ {t:'tr',de:'Depois da faculdade eu trabalhei dois anos em São Paulo.',a:['Nach dem Studium habe ich zwei Jahre in São Paulo gearbeitet.','Nach dem Studium habe ich zwei Jahre lang in São Paulo gearbeitet.','Ich habe nach dem Studium zwei Jahre in São Paulo gearbeitet.']}
 ]},
 {id:'l2',title:'Perguntas indiretas',desc:'Können Sie mir sagen, ob / wann …?',steps:[
  {t:'info',title:'Perguntas indiretas',html:`<p>Para perguntar de forma mais educada, comece com <span class="es-t">Können Sie mir sagen, …? / Wissen Sie, …? / Ich möchte wissen, …</span> – e o verbo vai para o <b>final</b>:</p>
@@ -566,7 +566,7 @@ lessons:[
  {t:'mc',q:'Was ist eine Stärke?',opts:['Ich bin zuverlässig.','Ich komme oft zu spät.','Ich arbeite nicht gern im Team.'],a:0},
  {t:'gap',q:'Mein ___ ist es, in zwei Jahren Teamleiter zu sein. (objetivo)',a:['Ziel']},
  {t:'mc',q:'„Ich möchte unbedingt in Deutschland bleiben.“ bedeutet:',opts:['Ich möchte sehr gern / auf jeden Fall bleiben.','Ich möchte vielleicht bleiben.','Ich möchte nicht bleiben.'],a:0},
- {t:'tr',de:'Meu ponto forte é que eu sou flexível.',a:['Meine Stärke ist, dass ich flexibel bin.']}
+ {t:'tr',de:'Meu ponto forte é que eu sou flexível.',a:['Meine Stärke ist, dass ich flexibel bin.','Meine Stärke ist: Ich bin flexibel.']}
 ]},
 {id:'l4',title:'Ler e escrever: anúncio e candidatura',desc:'Stellenanzeige · kurze Bewerbung per E-Mail',steps:[
  {t:'read',title:'Leitura: Stellenanzeige',text:`Wir suchen ab sofort eine/n Softwareentwickler/in (Vollzeit, 40 Std./Woche).
@@ -680,12 +680,12 @@ lessons:[
  {t:'info',title:'Welcher? – Was für ein?',html:`<table><tr><td class="es-t"><b>Welcher</b> Film? – <b>Der</b> neue Krimi.</td><td>Qual (de um grupo conhecido)? → resposta com <b>der/die/das</b></td></tr>
  <tr><td class="es-t"><b>Was für ein</b> Film? – <b>Ein</b> Krimi.</td><td>Que tipo de …? → resposta com <b>ein/eine</b></td></tr></table>
  <div class="ex"><span class="es-t">welcher / welche / welches</span> mudam como <i>der/die/das</i>: <span class="es-t">Welchen Film siehst du?</span> · <span class="es-t">Was für eine Ausstellung ist das?</span></div>`},
- {t:'mc',q:'___ Musik hörst du gern? – Rock und Samba.',opts:['Was für','Welche','Welcher'],a:0},
+ {t:'mc',q:'___ Musik hörst du gern? – Rock und Samba.',opts:['Was für','Welcher','Was'],a:0,why:'<i>Was für</i> pergunta pelo tipo. (<i>Welche Musik …?</i> também seria possível – <i>Welcher</i> está no caso errado.)'},
  {t:'mc',q:'___ Jacke gehört dir, die rote oder die blaue?',opts:['Welche','Was für eine','Welcher'],a:0},
- {t:'tr',de:'Que tipo de filme você gosta de ver?',a:['Was für Filme siehst du gern?','Was für einen Film siehst du gern?','Was für Filme schaust du gern?']}
+ {t:'tr',de:'Que tipo de filme você gosta de ver?',a:['Was für Filme siehst du gern?','Was für einen Film siehst du gern?','Was für Filme schaust du gern?','Was für Filme guckst du gern?']}
 ]},
 {id:'l2',title:'Mídia',desc:'die Sendung, die Zeitschrift, surfen, chatten',steps:[
- {t:'vocab',title:'Mídia',items:[['das Programm','a programação'],['die Nachrichten (Pl.)','o noticiário'],['die Zeitschrift','a revista'],['der Titel','o título'],['das Interview','a entrevista'],['der Bericht','a reportagem'],['berichten','relatar'],['das Blog','o blog'],['surfen','navegar (internet) / surfar'],['chatten','conversar online'],['der Witz','a piada'],['das Rätsel','o enigma / as palavras cruzadas'],['das Quiz','o quiz'],['die Kamera','a câmera'],['das Comic','a história em quadrinhos']]},
+ {t:'vocab',title:'Mídia',items:[['das Programm','a programação'],['die Nachrichten (Pl.)','o noticiário'],['die Zeitschrift','a revista'],['der Titel','o título'],['das Interview','a entrevista'],['der Bericht','a reportagem'],['berichten','relatar'],['das Blog','o blog'],['surfen','navegar (internet) / surfar'],['chatten','conversar online'],['der Witz','a piada'],['das Rätsel','o enigma / as palavras cruzadas'],['das Quiz','o quiz'],['die Kamera','a câmera'],['der Comic','a história em quadrinhos']]},
  {t:'mc',q:'Um 20 Uhr kommen im Fernsehen die ___.',opts:['Nachrichten','Rätsel','Comics'],a:0},
  {t:'mc',q:'Abends ___ Lucas mit seiner Familie in Brasilien.',opts:['chattet','surft','berichtet'],a:0},
  {t:'gap',q:'Im Zug lese ich gern eine ___. (revista)',a:['Zeitschrift']},
@@ -715,7 +715,7 @@ lessons:[
  {t:'gap',q:'Möchtest du ___ trinken? (algo)',a:['etwas']},
  {t:'gap',q:'In Frankfurt gibt es ___ Baustellen. (em todo lugar)',a:['überall']},
  {t:'tr',de:'Eu não entendi nada.',a:['Ich habe nichts verstanden.']},
- {t:'tr',de:'Alguém pode me ajudar?',a:['Kann mir jemand helfen?']},
+ {t:'tr',de:'Alguém pode me ajudar?',a:['Kann mir jemand helfen?','Kann jemand mir helfen?','Kann mir bitte jemand helfen?']},
  {t:'speak',es:'Ich habe überall gesucht, aber ich habe meinen Schlüssel nirgends gefunden.',de:'Procurei em todo lugar, mas não achei minha chave em lugar nenhum.',tip:'Só uma negação: <i>nirgends</i> – sem <i>nicht</i>.'}
 ]},
 {id:'l4',title:'Ouvir e escrever: dica de lazer',desc:'Radiotipp · Nachricht an einen Freund',steps:[
@@ -785,7 +785,7 @@ lessons:[
   {you:true,opts:[{es:'Frag ihn doch nach seinem Hobby. Lea sagt, er liebt Fußball, oder?',ok:true},{es:'Das ist mir egal.',ok:false,why:'O Tom pediu ajuda – <i>Das ist mir egal</i> soa grosseiro aqui.'}]},
   {n:'Tom',es:'Stimmt! Und vielleicht sollte ich einen Anzug tragen?',de:'Verdade! E talvez eu devesse usar um terno?'},
   {you:true,opts:[{es:'Na ja, ein Anzug ist vielleicht zu viel. Ein schönes Hemd reicht wahrscheinlich.',ok:true},{es:'Ja, ich bin einverstehen.',ok:false,why:'A forma certa é <i>einverstanden</i> – e aqui talvez valha discordar com educação.'}]}]},
- {t:'tr',de:'Na minha opinião, você deveria aprender mais alemão.',a:['Meiner Meinung nach solltest du mehr Deutsch lernen.']}
+ {t:'tr',de:'Na minha opinião, você deveria aprender mais alemão.',a:['Meiner Meinung nach solltest du mehr Deutsch lernen.','Ich finde, du solltest mehr Deutsch lernen.']}
 ]},
 {id:'l4',title:'Antes e hoje',desc:'damals · früher – heute · E-Mail an einen alten Freund',steps:[
  {t:'vocab',title:'Tempo',items:[['damals','naquela época'],['zuletzt','por último / da última vez'],['vorgestern','anteontem'],['übermorgen','depois de amanhã'],['aktuell','atual'],['direkt','direto / diretamente'],['das Ding','a coisa / o troço']]},
@@ -940,7 +940,7 @@ d) Oficina de bicicletas procura ajudante para sábado, 12 €/hora, experiênci
  {t:'info',title:'Schreiben – como é',html:`<p><b>Teil 1:</b> uma SMS ou mensagem curta para um amigo (<b>20–30 palavras</b>) sobre <b>3 pontos</b>.</p>
  <p><b>Teil 2:</b> um e-mail mais formal, por exemplo para o professor ou o chefe (<b>30–40 palavras</b>), também com <b>3 pontos</b>.</p>
  <div class="ex">Conta: responder a <b>todos</b> os pontos, saudação e despedida adequadas, frases ligadas (und, aber, weil, dass, deshalb …).</div>`},
- {t:'free',kind:'Schreiben · Teil 1',task:'Você está no ônibus e vai chegar atrasado ao encontro com a sua amiga Lea no cinema. Escreva uma SMS (20–30 palavras): 1) peça desculpas e diga por que vai se atrasar, 2) diga quando você chega, 3) peça que ela já compre os ingressos.',hint:'Hallo Lea, sorry, ich komme … später, weil … Ich bin um … da. Kannst du schon …? Bis gleich!',focus:'weil, Uhrzeit, Bitte mit können, alle 3 Punkte',model:'Hallo Lea,\nsorry, ich komme zwanzig Minuten später, weil der Bus Verspätung hat. Ich bin um Viertel nach acht da. Kannst du schon die Karten kaufen? Ich bezahle dich dann.\nBis gleich!\nLucas'},
+ {t:'free',kind:'Schreiben · Teil 1',task:'Você está no ônibus e vai chegar atrasado ao encontro com a sua amiga Lea no cinema. Escreva uma SMS (20–30 palavras): 1) peça desculpas e diga por que vai se atrasar, 2) diga quando você chega, 3) peça que ela já compre os ingressos.',hint:'Hallo Lea, sorry, ich komme … später, weil … Ich bin um … da. Kannst du schon …? Bis gleich!',focus:'weil, Uhrzeit, Bitte mit können, alle 3 Punkte',model:'Hallo Lea,\nsorry, ich komme zwanzig Minuten später, weil der Bus Verspätung hat. Ich bin um Viertel nach acht da. Kannst du schon die Karten kaufen? Ich gebe dir das Geld dann zurück.\nBis gleich!\nLucas'},
  {t:'free',kind:'Schreiben · Teil 2',task:'O seu professor de alemão, o Sr. Yilmaz, organiza uma excursão do curso para Heidelberg no sábado. Escreva para ele (30–40 palavras): 1) agradeça pela organização, 2) diga que você não pode ir e por quê, 3) pergunte o que você precisa estudar para a próxima aula.',hint:'Lieber Herr Yilmaz, vielen Dank für … Leider kann ich am Samstag nicht mitkommen, weil … Könnten Sie mir sagen, was … ? Viele Grüße',focus:'halbformelle E-Mail, weil, indirekte Frage (was/ob …), Konjunktiv II höflich',model:'Lieber Herr Yilmaz,\nvielen Dank, dass Sie den Ausflug nach Heidelberg organisieren! Leider kann ich am Samstag nicht mitkommen, weil mein Bruder aus Brasilien zu Besuch ist. Könnten Sie mir sagen, was ich für die nächste Stunde lernen soll?\nViele Grüße\nLucas Souza'},
  {t:'free',kind:'Schreiben · Teil 1',task:'O seu vizinho, Herr Kaya, perguntou se você pode cuidar das plantas dele. Escreva uma mensagem curta (20–30 palavras): 1) diga que sim, 2) pergunte quando você deve buscar a chave, 3) pergunte com que frequência regar.',hint:'Hallo Herr Kaya, natürlich mache ich das gern! Wann soll ich …? Und wie oft …? Viele Grüße',focus:'Fragen mit W-Wörtern, sollen, Höflichkeit',model:'Hallo Herr Kaya,\nnatürlich kümmere ich mich gern um Ihre Pflanzen! Wann soll ich den Schlüssel abholen? Und wie oft muss ich die Blumen gießen?\nViele Grüße\nLucas'}
 ]},
