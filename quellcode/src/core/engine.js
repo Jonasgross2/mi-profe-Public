@@ -47,7 +47,8 @@ function load(){try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
   if(!sh){let es={};try{es=JSON.parse(localStorage.getItem(LANGS.es&&LANGS.es.key||'espanol-lehrer-v1'))||{};}catch(e){}sh={name:es.name,gender:es.gender,settings:es.settings};}
   if(sh.name)S.name=sh.name;if(sh.surname)S.surname=sh.surname;else if(sh.name)delete S.surname;if(sh.gender)S.gender=sh.gender;if(sh.settings)S.settings=sh.settings;
   S=Object.assign(JSON.parse(JSON.stringify(DEFAULT)),S);S.settings=Object.assign({},DEFAULT.settings,S.settings||{});if(!S.settings.geminiModel||S.settings.geminiModel==='gemini-2.5-flash')S.settings.geminiModel='gemini-flash-latest';}
-function saveShared(){try{localStorage.setItem(SHARED,JSON.stringify({lang:LANG.code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}}
+/* Kurs nur speichern, wenn er schon gewählt ist – sonst überspringt der erste Start „Was möchtest du lernen?“ */
+function saveShared(){try{localStorage.setItem(SHARED,JSON.stringify({lang:learnChosen()?LANG.code:undefined,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}}
 /* Speicher voll? Erst die Zwischenstände (angefangene Übungen) opfern, dann noch einmal – sonst einmal deutlich warnen statt still Fortschritt zu verlieren */
 let SAVE_WARNED=false;
 function save(noSync){S.updated=Date.now();const js=JSON.stringify(S);try{localStorage.setItem(KEY,js);}catch(e){
