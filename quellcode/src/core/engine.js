@@ -587,6 +587,35 @@ function learnChosen(){try{if(sessionStorage.getItem('mp-learn-ok'))return true;
 async function betaTry(c,n,pick){const B=window.PACKS&&PACKS.learn.find(L=>L.code===c&&L.beta);if(!B)return toast(T(n)+T(' ist noch in Arbeit'));
   if(!await askConfirm(T(n)+T(' ist noch im Aufbau – es gibt erst die ersten Lektionen. Trotzdem ausprobieren?'),T('Ausprobieren')))return;
   try{localStorage.setItem('mi-profe-beta','1');}catch(e){}pick(c);}
+/* Als App installieren: einmal vor dem ersten Start im Handy-Browser (und unter Mehr). Android: echter Installieren-Knopf (beforeinstallprompt).
+   iPhone: Anleitung; die installierte App hat dort einen eigenen Speicher → Einladung/Sync-Code/beta kommen über die Adresse und ein eigenes Manifest (start_url) mit (installPrep). */
+const STANDALONE=(()=>{try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;}catch(e){return false;}})();
+let INSTALL_EV=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();INSTALL_EV=e;});
+function canInstall(){return !!window.PWA&&!STANDALONE&&!IN_ARTIFACT&&(IS_IOS||/Android/.test(navigator.userAgent));}
+function installSeen(){try{return !!localStorage.getItem('mi-profe-inst');}catch(e){return true;}}
+function installPrep(){if(!canInstall()||!IS_IOS)return;const st=S.settings,q=[];
+  if(st.invite)q.push('einladung='+encodeURIComponent(st.invite));if(st.syncCode)q.push('sync='+encodeURIComponent(st.syncCode));try{if(localStorage.getItem('mi-profe-beta')==='1')q.push('beta=1');}catch(e){}
+  if(!q.length)return;const base=location.origin+location.pathname,u=base+'?'+q.join('&');
+  try{history.replaceState(history.state,'',u+location.hash);}catch(e){}
+  const l=document.querySelector('link[rel=manifest]');if(!l)return;
+  const man={name:'Mi profe – Sprachen lernen',short_name:'Mi profe',start_url:u,scope:base,display:'standalone',background_color:'#faf6f1',theme_color:'#c4472b',icons:[192,512].map(n=>({src:base+'icon-'+n+'.png',sizes:n+'x'+n,type:'image/png'}))};
+  try{l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'}));}catch(e){}}
+function vInstall(fromMenu){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}installPrep();
+  const done=()=>{try{localStorage.setItem('mi-profe-inst','1');}catch(e){}if(fromMenu)go('settings');else route();};
+  const out=h('div');const step=(n,t)=>h('div',{style:'display:flex;gap:10px;align-items:flex-start;text-align:left;margin:0 0 12px'},h('b',{class:'instn'},n),h('span',{style:'flex:1;min-width:0'},t));
+  let body;
+  if(INSTALL_EV){const b=h('button',{class:'btn primary',style:'width:100%'},T('📲 Jetzt installieren'));
+    b.onclick=async()=>{const ev=INSTALL_EV;INSTALL_EV=null;try{ev.prompt();const c=await ev.userChoice;if(c&&c.outcome==='accepted'){b.remove();out.append(h('div',{class:'fb ok'},T('✓ Installiert – öffne Mi profe jetzt über das Symbol auf deinem Startbildschirm.')));}}catch(e){}};
+    body=h('div',{},b,out);}
+  else if(IS_IOS)body=h('div',{},step('1',T('Tippe in Safari auf „Teilen“ (Quadrat mit Pfeil nach oben – bei neueren iPhones zuerst auf „…“).')),
+    step('2',T('Wähle „Zum Home-Bildschirm“ (eventuell etwas nach unten scrollen) und tippe auf „Hinzufügen“.')),
+    step('3',T('Öffne Mi profe ab jetzt über das neue Symbol auf deinem Home-Bildschirm.')));
+  else body=h('div',{},step('1',T('Tippe oben rechts auf das Browser-Menü ⋮.')),step('2',T('Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.')),
+    step('3',T('Öffne Mi profe ab jetzt über das neue Symbol auf deinem Startbildschirm.')));
+  document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
+    h('div',{style:'font-size:48px;margin-bottom:6px'},'📲'),h('h1',{style:'margin:0 0 6px'},T('Als App installieren')),
+    h('p',{class:'muted',style:'margin:0 0 18px'},T('Dann startet Mi profe wie eine normale App: mit eigenem Symbol, ohne Browserleiste und auch ohne Internet.')),
+    body,h('button',{class:'btn ghost',style:'margin-top:14px;width:100%',onclick:done},fromMenu?T('← Zurück'):T('Im Browser weiter')))));}
 function vLearnPick(){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}
   const avail=learnPacks();
   const planned=(window.LANG_PLANNED||[]).filter(([c])=>!avail.some(L=>L.code===c));
@@ -598,7 +627,7 @@ function vLearnPick(){const bt=document.getElementById('boot');document.body.inn
     h('h1',{style:'margin:0 0 6px'},T('Was möchtest du lernen?')),h('p',{class:'muted',style:'margin:0 0 18px'},T('Du kannst später jederzeit wechseln – jede Sprache hat ihren eigenen Fortschritt.')),
     h('div',{class:'learngrid'},...avail.map(L=>h('button',{class:'learntile',onclick:()=>pick(L.code)},h('span',{class:'lf'},L.flag),h('b',{},T(L.name)),L.stufen?h('span',{class:'muted small'},L.stufen[0]===L.stufen[1]?L.stufen[0]:T('{A} bis {B}').replace('{A}',L.stufen[0]).replace('{B}',L.stufen[1])):null)),
       ...planned.map(([c,n,f])=>h('button',{class:'learntile soon',onclick:()=>betaTry(c,n,pick)},h('span',{class:'lf'},f),h('b',{},T(n)),h('span',{class:'muted small'},T('bald'))))))));}
-function vWelcome(again){if(!again&&!learnChosen())return vLearnPick();const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
+function vWelcome(again){if(!again&&canInstall()&&!installSeen())return vInstall();if(!again&&!learnChosen())return vLearnPick();const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
   let g=S.gender||'';const GX=LANG.genderEx||['',''];const gb=[['m',T('👨 männlich'),GX[0]],['f',T('👩 weiblich'),GX[1]],['x',T('🙂 keine Angabe'),T('beide Formen zählen')]].map(([k,l,ex])=>{const b=h('button',{class:'gbtn'+(g===k?' on':''),onclick:()=>{g=k;gb.forEach(x=>x.classList.toggle('on',x===b));}},h('div',{style:'font-size:20px;line-height:1.2'},l.split(' ')[0]),h('b',{},l.split(' ').slice(1).join(' ')),ex?h('span',{},ex):null);return b;});
   const ok=()=>{const v=inp.value.trim().replace(/\s+/g,' ').slice(0,30);if(!v){toast(T('Gib deinen Namen ein'));return;}if(!g&&LANG.genderEx){toast(T('Wähl noch, wie ich dich ansprechen soll'));return;}const v2=inp2.value.trim().replace(/\s+/g,' ').slice(0,40);const changed=v!==S.name||g!==S.gender||v2!==(S.surname||'');S.name=v;S.gender=g;if(v2)S.surname=v2;else delete S.surname;if(changed)S.profT=Date.now();save();
@@ -1877,7 +1906,7 @@ function vSettings(m,sec){
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):T('Offline-Datei');
   m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),mtile('📅',T('Mein Tagesplan'),T('Was täglich dran ist'),()=>go('settings/plan')),
     ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0])))),
-    h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
+    h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),canInstall()?h('button',{class:'btn small ghost',onclick:()=>vInstall(true)},T('📲 Als App installieren')):null,window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
 
 /* ---------- Sync über GitHub Gist ---------- */
 const GIST_FILE=LANG.gist,GIST_DESC=T('Mi profe – Lernfortschritt (Sync)');
@@ -1946,9 +1975,11 @@ window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,nu
 ['gesturestart','gesturechange','gestureend'].forEach(ev=>document.addEventListener(ev,e=>e.preventDefault(),{passive:false}));
 document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
 /* Einladungs- und Verbinden-Links: ?einladung=CODE schaltet den Server frei, ?sync=CODE verbindet dieses Gerät */
-{const q=new URLSearchParams(location.search);const inv=q.get('einladung'),sc=q.get('sync');
-  if(inv||sc){if(inv)S.settings.invite=inv.trim().toUpperCase();if(sc)S.settings.syncCode=sc.trim().toUpperCase();save(true);
-    try{history.replaceState(null,'',location.pathname+location.hash);}catch(e){}setTimeout(()=>toast(sc?T('Gerät wird verbunden …'):T('Einladung gespeichert ✓')),800);}}
+{learnPacks();/* merkt ?beta=1, bevor die Adresse geleert wird */const q=new URLSearchParams(location.search);const inv=q.get('einladung'),sc=q.get('sync');
+  if(inv||sc){const st=S.settings,ni=inv&&inv.trim().toUpperCase(),ns=sc&&sc.trim().toUpperCase(),neu=ni&&ni!==st.invite||ns&&ns!==st.syncCode;
+    if(ni)st.invite=ni;if(ns)st.syncCode=ns;if(neu)save(true);
+    try{history.replaceState(null,'',location.pathname+location.hash);}catch(e){}if(neu)setTimeout(()=>toast(ns?T('Gerät wird verbunden …'):T('Einladung gespeichert ✓')),800);}
+  installPrep();}
 setTimeout(()=>{if(syncOn())syncNow();},300);
 /* Service Worker: App kommt sofort aus dem Speicher; Updates im Hintergrund prüfen (beim Start und beim Zurückkehren in die App).
    Hat eine neue Version übernommen → Hinweis zum Neuladen (nicht automatisch, damit keine Lektion abbricht). */
