@@ -41,7 +41,7 @@ lessons:[
  {t:'gap',q:'Wir ___ den ganzen Tag am Strand. (bleiben)',a:['blieben']},
  {t:'gap',q:'Ich ___ nicht, dass du Geburtstag hast. (wissen)',a:['wusste']},
  {t:'gap',q:'Sie ___ einen Brief an ihre Familie. (schreiben)',a:['schrieb']},
- {t:'order',es:'Nach dem Essen gingen wir im Park spazieren',de:'Depois do almoço fomos passear no parque.'},
+ {t:'order',es:'Nach dem Essen gingen wir im Park spazieren',alt:['Wir gingen nach dem Essen im Park spazieren', 'Im Park gingen wir nach dem Essen spazieren'],de:'Depois do almoço fomos passear no parque.'},
  {t:'tr',de:'Ontem eu encontrei uma amiga antiga. (Präteritum)',a:['Gestern traf ich eine alte Freundin.','Ich traf gestern eine alte Freundin.']}
 ]},
 {id:'l3',title:'als, wenn ou wann?',desc:'als (uma vez) · wenn (sempre que) · wann (pergunta)',steps:[
@@ -107,7 +107,7 @@ lessons:[
  {t:'gap',q:'Das Problem ___ gestern gelöst. (werden – Präteritum)',a:['wurde']},
  {t:'gap',q:'Die neuen Computer werden morgen ___. (liefern)',a:['geliefert']},
  {t:'gap',q:'Die Fabrik wurde 1950 ___. (bauen)',a:['gebaut']},
- {t:'order',es:'Die Bewerbungen werden von der Personalabteilung geprüft',de:'As candidaturas são analisadas pelo departamento de pessoal.'},
+ {t:'order',es:'Die Bewerbungen werden von der Personalabteilung geprüft',alt:['Von der Personalabteilung werden die Bewerbungen geprüft'],de:'As candidaturas são analisadas pelo departamento de pessoal.'},
  {t:'tr',de:'O escritório é limpo toda noite.',a:['Das Büro wird jeden Abend geputzt.','Das Büro wird jeden Abend gereinigt.']},
  {t:'tr',de:'O contrato foi assinado ontem.',a:['Der Vertrag wurde gestern unterschrieben.']}
 ]},
@@ -252,7 +252,7 @@ lessons:[
  {t:'gap',q:'Es ist gesund, viel Obst ___ essen.',a:['zu']},
  {t:'gap',q:'Ich habe vergessen, Brot ___. (einkaufen + zu)',a:['einzukaufen']},
  {t:'gap',q:'Hör endlich auf, so viel ___! (rauchen + zu)',a:['zu rauchen']},
- {t:'order',es:'Ich habe vor nächste Woche mit dem Rauchen aufzuhören',de:'Pretendo parar de fumar na semana que vem.'},
+ {t:'order',es:'Ich habe vor nächste Woche mit dem Rauchen aufzuhören',alt:['Ich habe vor mit dem Rauchen nächste Woche aufzuhören'],de:'Pretendo parar de fumar na semana que vem.'},
  {t:'tr',de:'Não é fácil acordar cedo.',a:['Es ist nicht leicht, früh aufzustehen.','Es ist nicht einfach, früh aufzustehen.']},
  {t:'speak',es:'Ich habe mir vorgenommen, weniger Süßigkeiten zu essen und öfter Rad zu fahren.',de:'Decidi comer menos doces e andar de bicicleta com mais frequência.',tip:'<i>zu essen</i>, <i>Rad zu fahren</i> – o zu vem antes do infinitivo.'}
 ]},
@@ -313,7 +313,7 @@ lessons:[
  {t:'gap',q:'Nachdem wir das Auto ___ hatten, fuhren wir los. (tanken)',a:['getankt']},
  {t:'gap',q:'___ wir abfahren, müssen wir die Koffer packen. (antes que)',a:['Bevor']},
  {t:'gap',q:'___ Tom fuhr, las ich die Karte. (enquanto)',a:['Während']},
- {t:'order',es:'Nachdem wir zwei Stunden im Stau gestanden hatten machten wir eine Pause',de:'Depois de ficarmos duas horas no engarrafamento, fizemos uma pausa.'},
+ {t:'order',es:'Nachdem wir zwei Stunden im Stau gestanden hatten machten wir eine Pause',alt:['Wir machten eine Pause nachdem wir zwei Stunden im Stau gestanden hatten'],de:'Depois de ficarmos duas horas no engarrafamento, fizemos uma pausa.'},
  {t:'tr',de:'Quando cheguei, o show já tinha começado.',a:['Als ich ankam, hatte das Konzert schon angefangen.','Als ich ankam, hatte das Konzert schon begonnen.']},
  {t:'tr',de:'Antes de viajarmos, compramos um mapa.',a:['Bevor wir losfuhren, kauften wir eine Karte.','Bevor wir losgefahren sind, haben wir eine Karte gekauft.','Bevor wir abfuhren, kauften wir eine Karte.']}
 ]},
@@ -371,7 +371,7 @@ lessons:[
  {t:'mc',q:'___ du mir bitte das Passwort sagen?',opts:['Könntest','Kannst gewesen','Konntest'],a:0},
  {t:'gap',q:'Wenn ich ein neues Laptop ___, ___ ich schneller arbeiten. (haben / können)',a:['hätte','könnte']},
  {t:'gap',q:'Ich ___ gern eine Woche ohne Internet leben – aber nur im Urlaub! (werden – Konjunktiv II)',a:['würde']},
- {t:'order',es:'Wenn ich mehr Geld hätte würde ich ein neues Handy kaufen',de:'Se eu tivesse mais dinheiro, compraria um celular novo.'},
+ {t:'order',es:'Wenn ich mehr Geld hätte würde ich ein neues Handy kaufen',alt:['Ich würde ein neues Handy kaufen wenn ich mehr Geld hätte'],de:'Se eu tivesse mais dinheiro, compraria um celular novo.'},
  {t:'tr',de:'Seria ótimo se você pudesse vir.',a:['Es wäre toll, wenn du kommen könntest.','Es wäre super, wenn du kommen könntest.','Es wäre schön, wenn du kommen könntest.']},
  {t:'speak',es:'Wenn ich Lehrer wäre, würde ich Handys im Unterricht verbieten.',de:'Se eu fosse professor(a), proibiria celulares na aula.',tip:'<i>wäre</i> (ser) e <i>würde … verbieten</i>.'}
 ]},
@@ -432,7 +432,7 @@ lessons:[
  {t:'mc',q:'Lucas vermisst seine Familie. ___ möchte er in Deutschland bleiben.',opts:['Trotzdem','Obwohl','Weil'],a:0},
  {t:'gap',q:'Sie haben sich versöhnt, ___ der Streit sehr schlimm war.',a:['obwohl']},
  {t:'gap',q:'Ich hatte keine Zeit. ___ habe ich dir geholfen.',a:['Trotzdem']},
- {t:'order',es:'Obwohl sie in verschiedenen Städten wohnen sehen sie sich jedes Wochenende',de:'Embora morem em cidades diferentes, eles se veem todo fim de semana.'},
+ {t:'order',es:'Obwohl sie in verschiedenen Städten wohnen sehen sie sich jedes Wochenende',alt:['Sie sehen sich jedes Wochenende obwohl sie in verschiedenen Städten wohnen'],de:'Embora morem em cidades diferentes, eles se veem todo fim de semana.'},
  {t:'tr',de:'Embora eu esteja cansado, vou à festa.',a:['Obwohl ich müde bin, gehe ich zur Party.','Obwohl ich müde bin, komme ich zur Party.']},
  {t:'speak',es:'Obwohl wir uns manchmal streiten, verstehen wir uns sehr gut.',de:'Embora às vezes a gente brigue, nos entendemos muito bem.',tip:'Depois de <i>obwohl</i> o verbo vai para o final: <i>streiten</i>.'}
 ]},
@@ -494,7 +494,7 @@ lessons:[
  {t:'mc',q:'Plastikflaschen ___ recycelt werden.',opts:['können','kann','werden'],a:0},
  {t:'gap',q:'Das Licht muss am Abend ausgeschaltet ___.',a:['werden']},
  {t:'gap',q:'Alte Medikamente sollten in der Apotheke ___ werden. (entsorgen)',a:['entsorgt']},
- {t:'order',es:'Im Büro sollte mehr Strom gespart werden',de:'No escritório, mais energia deveria ser economizada.'},
+ {t:'order',es:'Im Büro sollte mehr Strom gespart werden',alt:['Mehr Strom sollte im Büro gespart werden'],de:'No escritório, mais energia deveria ser economizada.'},
  {t:'tr',de:'O lixo tem que ser separado.',a:['Der Müll muss getrennt werden.']},
  {t:'tr',de:'Plástico deveria ser evitado.',a:['Plastik sollte vermieden werden.']}
 ]},
@@ -641,7 +641,7 @@ lessons:[
  {t:'gap',q:'Trotz ___ Kälte waren viele Menschen auf der Straße. (die Kälte)',a:['der']},
  {t:'gap',q:'Wegen ___ Streiks fällt mein Flug aus. (ein Streik)',a:['eines']},
  {t:'gap',q:'Sie müssen das Formular ___ einer Woche abgeben. (dentro de)',a:['innerhalb']},
- {t:'order',es:'Wegen der Baustelle ist die Straße bis Freitag gesperrt',de:'Por causa da obra, a rua está fechada até sexta.'},
+ {t:'order',es:'Wegen der Baustelle ist die Straße bis Freitag gesperrt',alt:['Die Straße ist wegen der Baustelle bis Freitag gesperrt', 'Die Straße ist bis Freitag wegen der Baustelle gesperrt', 'Bis Freitag ist die Straße wegen der Baustelle gesperrt'],de:'Por causa da obra, a rua está fechada até sexta.'},
  {t:'tr',de:'Apesar do mau tempo, muitas pessoas foram votar.',a:['Trotz des schlechten Wetters sind viele Menschen wählen gegangen.','Trotz des schlechten Wetters gingen viele Menschen wählen.','Trotz des schlechten Wetters sind viele Leute wählen gegangen.','Trotz des schlechten Wetters gingen viele Leute wählen.']},
  {t:'tr',de:'Durante a reunião, ele não disse nada.',a:['Während der Versammlung hat er nichts gesagt.','Während der Besprechung hat er nichts gesagt.','Während der Sitzung hat er nichts gesagt.','Während der Versammlung sagte er nichts.','Während der Besprechung sagte er nichts.']}
 ]},
@@ -657,7 +657,7 @@ lessons:[
  {t:'gap',q:'Wenn ich mehr gelernt ___, hätte ich die Prüfung bestanden.',a:['hätte']},
  {t:'gap',q:'Ohne den Stau ___ wir pünktlich angekommen.',a:['wären']},
  {t:'gap',q:'Ich hätte dich gern ___. (besuchen – particípio)',a:['besucht']},
- {t:'order',es:'Wenn ich das gewusst hätte wäre ich mitgekommen',de:'Se eu tivesse sabido disso, teria ido junto.'},
+ {t:'order',es:'Wenn ich das gewusst hätte wäre ich mitgekommen',alt:['Ich wäre mitgekommen wenn ich das gewusst hätte'],de:'Se eu tivesse sabido disso, teria ido junto.'},
  {t:'tr',de:'Eu teria votado, mas eu não tinha passaporte alemão.',a:['Ich hätte gewählt, aber ich hatte keinen deutschen Pass.','Ich hätte gern gewählt, aber ich hatte keinen deutschen Pass.']},
  {t:'tr',de:'Nós teríamos ficado mais tempo.',a:['Wir wären länger geblieben.']},
  {t:'dialog',place:'Bürgerversammlung',title:'Depois da assembleia',scene:'O Sr. Wagner, da associação de moradores, conversa com você depois da assembleia sobre a zona de pedestres.',lines:[
@@ -774,7 +774,7 @@ lessons:[
  {t:'gap',q:'Ich esse gern ___ Kartoffeln. (braten – Partizip II)',a:['gebratene']},
  {t:'gap',q:'Bitte beantworten Sie die ___ Fragen. (folgen – Partizip I)',a:['folgenden']},
  {t:'tr',de:'O museu renovado é muito bonito.',a:['Das renovierte Museum ist sehr schön.']},
- {t:'order',es:'Das gestern gekaufte Ticket ist leider nicht mehr gültig',de:'O ingresso comprado ontem infelizmente não é mais válido.'}
+ {t:'order',es:'Das gestern gekaufte Ticket ist leider nicht mehr gültig',alt:['Leider ist das gestern gekaufte Ticket nicht mehr gültig'],de:'O ingresso comprado ontem infelizmente não é mais válido.'}
 ]},
 {id:'l5',title:'Festas, esporte e tempo livre',desc:'der Karneval, das Stadion, faulenzen …',steps:[
  {t:'vocab',title:'Tempo livre',items:[['der Feiertag','o feriado'],['der Karneval / der Fasching','o carnaval'],['das Kostüm','a fantasia; o tailleur'],['sich verkleiden','fantasiar-se'],['faulenzen','ficar à toa'],['die Langeweile','o tédio'],['die Sportart','a modalidade esportiva'],['das Stadion','o estádio'],['der Gegner / die Gegnerin','o adversário / a adversária'],['das Tor','o gol; o portão'],['unentschieden','empatado'],['jubeln','comemorar (gritando de alegria)']]},

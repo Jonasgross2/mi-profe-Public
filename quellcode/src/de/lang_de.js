@@ -15,7 +15,8 @@ defineLang('de',{name:'Deutsch',flag:'🇩🇪',native:'Deutsch',into:'ins Deuts
   accentNote:'Quase! Atenção ao trema (ä, ö, ü) e ao ß – eles mudam a pronúncia e às vezes o sentido (schon ≠ schön).',
   articles:/^(der|die|das|ein|eine)\s+/i,
   artColor:{der:'m',die:'f',das:'n'}, /* Vokabeln: der blau, die rot, das grün, Plural (Pl.) lila */
-  norm:s=>s.replace(/ß/g,'ss').replace(/ae/g,'ä').replace(/oe/g,'ö').replace(/ue/g,'ü'), /* Antwortprüfung: ss = ß, ae/oe/ue = ä/ö/ü (ohne deutsche Tastatur) */
+  norm:s=>s.replace(/ß/g,'ss').replace(/ae/g,'ä').replace(/oe/g,'ö').replace(/ue/g,'ü').replace(/[’‘'`´]/g,'')
+    .replace(/\bgerne\b/g,'gern').replace(/\btschüs\b/g,'tschüss').replace(/\b(zu|nach)hause\b/g,'$1 hause').replace(/\bemail/g,'e-mail').replace(/\bok\b(?![a-zäöüß])|\bo\.k\./g,'okay'), /* Antwortprüfung: ss = ß, ae/oe/ue = ä/ö/ü (ohne deutsche Tastatur), geht’s = geht's = gehts; gleichwertige Schreibungen: gern/gerne, Tschüs/Tschüss, zu Hause/zuhause, E-Mail/Email, okay/OK */
   mark:/[äöüßÄÖÜ]|^(der|die|das|ein|eine)\s/i, /* erkennt beim Import von Wortlisten, welche Seite Deutsch ist */
   sampleWords:[['der Tisch',{pt:'a mesa',en:'the table',de:'der Tisch'}],['die Katze',{pt:'o gato',en:'the cat',de:'die Katze'}]],
   roleNote:'No curso você faz um papel: você acabou de se mudar para Frankfurt para trabalhar. Nas tarefas livres, escreva simplesmente sobre você.',

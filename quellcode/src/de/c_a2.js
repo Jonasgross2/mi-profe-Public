@@ -55,7 +55,7 @@ Um abraço, Lucas`},
  {t:'gap',q:'Ich stelle die Blumen auf ___ Balkon. (der)',a:['den']},
  {t:'gap',q:'Die Katze schläft unter ___ Bett. (das)',a:['dem']},
  {t:'gap',q:'Wir gehen heute Abend ___ Kino. (in + das)',a:['ins']},
- {t:'order',es:'Das Regal steht zwischen dem Fenster und der Tür',de:'A estante fica entre a janela e a porta.'},
+ {t:'order',es:'Das Regal steht zwischen dem Fenster und der Tür',alt:['Zwischen dem Fenster und der Tür steht das Regal', 'Das Regal steht zwischen der Tür und dem Fenster', 'Zwischen der Tür und dem Fenster steht das Regal'],de:'A estante fica entre a janela e a porta.'},
  {t:'dialog',place:'Neue Wohnung',title:'Onde fica o quê?',scene:'O Tom ajuda você a arrumar o apartamento novo.',lines:[
   {n:'Tom',es:'So, wohin stellen wir das Regal?',de:'E aí, onde a gente coloca a estante?'},
   {you:true,opts:[{es:'Stell es bitte in die Ecke, neben das Fenster.',ok:true},{es:'Stell es bitte in der Ecke, neben dem Fenster.',ok:false,why:'<i>stellen</i> = movimento → Wohin? → acusativo: <b>in die</b> Ecke, <b>neben das</b> Fenster.'}]},
@@ -80,7 +80,7 @@ Um abraço, Lucas`},
  {t:'mc',q:'Frau Becker sagt, dass man den Müll trennen ___.',opts:['muss','muss man','müssen'],a:0},
  {t:'mc',q:'Ich weiß, ___',opts:['dass du am Samstag eine Party machst.','dass du machst am Samstag eine Party.','dass machst du am Samstag eine Party.'],a:0},
  {t:'gap',q:'Es ist wichtig, dass man im Treppenhaus leise ___. (sein)',a:['ist']},
- {t:'order',es:'Ich glaube dass der Hausmeister im Erdgeschoss wohnt',de:'Eu acho que o zelador mora no térreo.'},
+ {t:'order',es:'Ich glaube dass der Hausmeister im Erdgeschoss wohnt',alt:['Dass der Hausmeister im Erdgeschoss wohnt glaube ich'],de:'Eu acho que o zelador mora no térreo.'},
  {t:'match',q:'Onde vai o lixo?',pairs:[['die Zeitung','das Altpapier'],['die Bananenschale','der Biomüll'],['die Weinflasche','das Altglas'],['der Joghurtbecher','die Gelbe Tonne']]},
  {t:'read',title:'Leitura: Hausordnung (trecho)',text:`HAUSORDNUNG – Bornheimer Straße 12
 1. Ruhezeiten: Bitte seien Sie von 22 bis 7 Uhr und am Sonntag leise.
@@ -138,7 +138,7 @@ lessons:[
  {t:'gap',q:'Kannst du mir das Dokument per E-Mail schicken? Dann ___ ich es ___. (ausdrucken)',a:['drucke','aus']},
  {t:'match',q:'Ligue.',pairs:[['speichern','salvar'],['löschen','apagar'],['herunterladen','baixar'],['der Bildschirm','a tela'],['die Datei','o arquivo']]},
  {t:'gap',q:'Oh nein! Ich habe die Datei nicht ___. (speichern – Perfekt)',a:['gespeichert']},
- {t:'order',es:'Klick bitte auf den Link und lade die Datei herunter',de:'Clique no link, por favor, e baixe o arquivo.'},
+ {t:'order',es:'Klick bitte auf den Link und lade die Datei herunter',alt:['Bitte klick auf den Link und lade die Datei herunter', 'Klick auf den Link und lade bitte die Datei herunter', 'Klick auf den Link und lade die Datei bitte herunter'],de:'Clique no link, por favor, e baixe o arquivo.'},
  {t:'tr',de:'O Wi-Fi não funciona.',a:['Das WLAN funktioniert nicht.']},
  {t:'tr',de:'Eu apaguei o arquivo.',a:['Ich habe die Datei gelöscht.']}
 ]},
@@ -154,7 +154,7 @@ lessons:[
  {t:'mc',q:'Ich arbeite heute im Homeoffice, denn ___',opts:['meine Tochter ist krank.','meine Tochter krank ist.','krank ist meine Tochter.'],a:0},
  {t:'gap',q:'Lucas lernt viel, weil er die Prüfung bestehen ___. (wollen)',a:['will']},
  {t:'gap',q:'Ich bin zu spät, weil ich den Bus verpasst ___. (haben)',a:['habe']},
- {t:'order',es:'Weil das Wetter schön ist gehen wir in den Park',de:'Como o tempo está bonito, vamos ao parque.'},
+ {t:'order',es:'Weil das Wetter schön ist gehen wir in den Park',alt:['Wir gehen in den Park weil das Wetter schön ist'],de:'Como o tempo está bonito, vamos ao parque.'},
  {t:'mc',q:'Warum lernst du Deutsch? – ___',opts:['Weil ich in Frankfurt wohne.','Weil ich wohne in Frankfurt.','Denn ich in Frankfurt wohne.'],a:0},
  {t:'tr',de:'Eu não vou à festa porque tenho que trabalhar. (weil)',a:['Ich gehe nicht zur Party, weil ich arbeiten muss.','Ich komme nicht zur Party, weil ich arbeiten muss.']},
  {t:'speak',es:'Ich lerne Deutsch, weil ich in Frankfurt arbeite und neue Freunde finden möchte.',de:'Eu estudo alemão porque trabalho em Frankfurt e quero fazer novos amigos.',tip:'Depois de <b>weil</b>: verbo no final – <i>arbeite</i>, <i>möchte</i>.'}
@@ -236,7 +236,7 @@ lessons:[
  {t:'gap',q:'Beim Fußball hat Lucas ___ am Knie verletzt.',a:['sich']},
  {t:'gap',q:'Ihr müsst ___ beeilen, der Zug fährt gleich!',a:['euch']},
  {t:'mc',q:'„Interessiert ihr euch für Sport?“ – ___',opts:['Ja, wir interessieren uns sehr für Fußball.','Ja, wir interessieren sich für Fußball.','Ja, wir interessieren für Fußball.'],a:0},
- {t:'order',es:'Nach dem Training ruhe ich mich aus',de:'Depois do treino eu descanso.'},
+ {t:'order',es:'Nach dem Training ruhe ich mich aus',alt:['Ich ruhe mich nach dem Training aus'],de:'Depois do treino eu descanso.'},
  {t:'tr',de:'Estou ansioso pelo fim de semana. (sich freuen auf)',a:['Ich freue mich auf das Wochenende.','Ich freue mich aufs Wochenende.']},
  {t:'tr',de:'Ele se irrita com o chefe.',a:['Er ärgert sich über den Chef.','Er ärgert sich über seinen Chef.']},
  {t:'speak',es:'Ich bewege mich zu wenig. Ab Montag gehe ich zweimal pro Woche joggen.',de:'Eu me movimento pouco. A partir de segunda vou correr duas vezes por semana.',tip:'<i>ich bewege <b>mich</b></i> – o pronome vem logo depois do verbo.'}
@@ -309,7 +309,7 @@ lessons:[
  {t:'gap',q:'Wir ___ den Zug nicht nehmen, er war voll. (können)',a:['konnten']},
  {t:'gap',q:'___ du nicht zum Arzt gehen? (sollen – Präteritum, du)',a:['Solltest']},
  {t:'gap',q:'Lucas ___ eigentlich nach Berlin fahren, aber es gab keine Tickets mehr. (wollen)',a:['wollte']},
- {t:'order',es:'Im Urlaub konnten wir jeden Tag schwimmen',de:'Nas férias pudemos nadar todo dia.'},
+ {t:'order',es:'Im Urlaub konnten wir jeden Tag schwimmen',alt:['Wir konnten im Urlaub jeden Tag schwimmen', 'Jeden Tag konnten wir im Urlaub schwimmen', 'Wir konnten jeden Tag im Urlaub schwimmen'],de:'Nas férias pudemos nadar todo dia.'},
  {t:'tr',de:'Ontem eu não pude dormir.',a:['Gestern konnte ich nicht schlafen.','Ich konnte gestern nicht schlafen.']},
  {t:'tr',de:'Nós tivemos que esperar duas horas.',a:['Wir mussten zwei Stunden warten.']},
  {t:'speak',es:'Letztes Jahr wollte ich nach Italien fahren, aber ich musste arbeiten.',de:'No ano passado eu queria ir para a Itália, mas tive que trabalhar.',tip:'<i>wollte</i>, <i>musste</i> – sem trema no passado.'}
@@ -382,7 +382,7 @@ lessons:[
  {t:'gap',q:'Ich kaufe einen ___ Schirm. (groß)',a:['großen']},
  {t:'gap',q:'Die ___ Stiefel sind sehr bequem. (schwarz)',a:['schwarzen']},
  {t:'gap',q:'Mein Bruder trägt immer ein ___ T-Shirt. (bunt)',a:['buntes']},
- {t:'order',es:'Ich suche eine warme Jacke für den Winter',de:'Procuro um casaco quente para o inverno.'},
+ {t:'order',es:'Ich suche eine warme Jacke für den Winter',alt:['Für den Winter suche ich eine warme Jacke', 'Ich suche für den Winter eine warme Jacke'],de:'Procuro um casaco quente para o inverno.'},
  {t:'tr',de:'Eu gosto do vestido azul.',a:['Mir gefällt das blaue Kleid.','Das blaue Kleid gefällt mir.']}
 ]},
 {id:'l3',title:'Comparar',desc:'billiger als · so teuer wie · am günstigsten',steps:[
@@ -471,7 +471,7 @@ lessons:[
  {t:'gap',q:'Ich danke ___ für die Einladung! (Sie – formal)',a:['Ihnen']},
  {t:'gap',q:'Wem gehört der Rucksack? – Er gehört ___. (eu)',a:['mir']},
  {t:'gap',q:'Ich zeige ___ Eltern die Fotos. (meine – dativo plural)',a:['meinen']},
- {t:'order',es:'Kannst du mir bitte das Salz geben',de:'Você pode me passar o sal, por favor?'},
+ {t:'order',es:'Kannst du mir bitte das Salz geben',alt:['Kannst du mir das Salz bitte geben'],de:'Você pode me passar o sal, por favor?'},
  {t:'tr',de:'Eu dou um livro para o meu pai.',a:['Ich schenke meinem Vater ein Buch.','Ich gebe meinem Vater ein Buch.']},
  {t:'tr',de:'A sopa está gostosa para você? (informal)',a:['Schmeckt dir die Suppe?']}
 ]},
@@ -643,7 +643,7 @@ lessons:[
  {t:'gap',q:'Ich freue mich ___ deinen Besuch nächste Woche! (futuro)',a:['auf']},
  {t:'gap',q:'Wer kümmert sich ___ die Pflanzen, wenn du im Urlaub bist?',a:['um']},
  {t:'gap',q:'Ein Tourist hat ___ dem Weg zum Bahnhof gefragt.',a:['nach']},
- {t:'order',es:'Im Meeting haben wir über das neue Projekt gesprochen',de:'Na reunião falamos sobre o novo projeto.'},
+ {t:'order',es:'Im Meeting haben wir über das neue Projekt gesprochen',alt:['Wir haben im Meeting über das neue Projekt gesprochen', 'Über das neue Projekt haben wir im Meeting gesprochen'],de:'Na reunião falamos sobre o novo projeto.'},
  {t:'tr',de:'Eu penso muito na minha família.',a:['Ich denke oft an meine Familie.','Ich denke viel an meine Familie.']},
  {t:'tr',de:'Ela cuida da mãe dela.',a:['Sie kümmert sich um ihre Mutter.']}
 ]},
@@ -834,7 +834,7 @@ lessons:[
  {t:'mc',q:'Ich werde dich morgen ___.',opts:['anrufen','anrufe','angerufen'],a:0},
  {t:'gap',q:'___ du am Wochenende arbeiten? (werden)',a:['Wirst']},
  {t:'gap',q:'Jana ___ im Herbst eine Ausbildung zur Grafikerin anfangen. (werden)',a:['wird']},
- {t:'order',es:'Ich werde übermorgen die Hausaufgaben machen',de:'Vou fazer o dever de casa depois de amanhã.'},
+ {t:'order',es:'Ich werde übermorgen die Hausaufgaben machen',alt:['Übermorgen werde ich die Hausaufgaben machen', 'Die Hausaufgaben werde ich übermorgen machen'],de:'Vou fazer o dever de casa depois de amanhã.'},
  {t:'tr',de:'Amanhã vai fazer sol.',a:['Morgen wird die Sonne scheinen.','Morgen scheint die Sonne.']},
  {t:'tr',de:'Nós vamos nos mudar no ano que vem.',a:['Wir werden nächstes Jahr umziehen.','Nächstes Jahr werden wir umziehen.','Nächstes Jahr ziehen wir um.']},
  {t:'speak',es:'Nächstes Jahr werde ich einen B1-Kurs machen und vielleicht die Prüfung schreiben.',de:'No ano que vem vou fazer um curso B1 e talvez fazer a prova.',tip:'<i>werde</i> na posição 2, os infinitivos no final.'}

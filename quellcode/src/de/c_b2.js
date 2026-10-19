@@ -49,7 +49,7 @@ lessons:[
  {t:'gap',q:'Ein Umzug nach München kommt für mich leider nicht in ___.',a:['Frage']},
  {t:'gap',q:'Die Regierung muss endlich Maßnahmen ___. (tomar)',a:['ergreifen']},
  {t:'match',q:'Qual verbo combina?',pairs:[['eine Entscheidung','treffen'],['einen Antrag','stellen'],['einen Beitrag','leisten'],['Rücksicht','nehmen'],['in Kontakt','treten']]},
- {t:'order',es:'Ich möchte das Thema Homeoffice in der nächsten Besprechung zur Sprache bringen',de:'Eu gostaria de trazer o tema home office à tona na próxima reunião.'},
+ {t:'order',es:'Ich möchte das Thema Homeoffice in der nächsten Besprechung zur Sprache bringen',alt:['In der nächsten Besprechung möchte ich das Thema Homeoffice zur Sprache bringen', 'Ich möchte in der nächsten Besprechung das Thema Homeoffice zur Sprache bringen'],de:'Eu gostaria de trazer o tema home office à tona na próxima reunião.'},
  {t:'tr',de:'A reunião vai tomar muito tempo.',a:['Die Besprechung wird viel Zeit in Anspruch nehmen.','Das Meeting wird viel Zeit in Anspruch nehmen.']},
  {t:'tr',de:'Quem assume a responsabilidade pelo projeto?',a:['Wer übernimmt die Verantwortung für das Projekt?']}
 ]},
@@ -133,7 +133,7 @@ lessons:[
  {t:'gap',q:'Deine Argumente sind gut ___. (dá para entender o raciocínio)',a:['nachvollziehbar']},
  {t:'gap',q:'Das Projekt ___ sich in drei Monaten umsetzen.',a:['lässt']},
  {t:'gap',q:'Die Rechnung ist innerhalb von 14 Tagen zu ___. (bezahlen)',a:['bezahlen']},
- {t:'order',es:'Die Folgen dieser Technologie sind heute noch nicht vorhersehbar',de:'As consequências dessa tecnologia ainda não são previsíveis hoje.'},
+ {t:'order',es:'Die Folgen dieser Technologie sind heute noch nicht vorhersehbar',alt:['Heute sind die Folgen dieser Technologie noch nicht vorhersehbar'],de:'As consequências dessa tecnologia ainda não são previsíveis hoje.'},
  {t:'tr',de:'Isso não dá para explicar facilmente. (sich lassen)',a:['Das lässt sich nicht leicht erklären.','Das lässt sich nicht einfach erklären.']},
  {t:'tr',de:'O formulário deve ser preenchido completamente. (sein + zu)',a:['Das Formular ist vollständig auszufüllen.']}
 ]},
@@ -211,7 +211,7 @@ lessons:[
  {t:'gap',q:'Die Ärztin sagt, man ___ mehr Sport machen. (sollen – Konj. I)',a:['solle']},
  {t:'gap',q:'Er behauptet, er ___ davon nichts gewusst. (haben – Konj. I)',a:['habe']},
  {t:'gap',q:'Die Polizei teilte mit, es ___ keine Verletzten. (geben – Konj. I)',a:['gebe']},
- {t:'order',es:'Die Forscherin betonte es gebe noch viele offene Fragen',de:'A pesquisadora enfatizou que ainda haveria muitas questões em aberto.'},
+ {t:'order',es:'Die Forscherin betonte es gebe noch viele offene Fragen',alt:['Es gebe noch viele offene Fragen betonte die Forscherin'],de:'A pesquisadora enfatizou que ainda haveria muitas questões em aberto.'},
  {t:'tr',de:'O ministro diz que a situação é difícil. (Konjunktiv I)',a:['Der Minister sagt, die Situation sei schwierig.','Der Minister sagt, die Lage sei schwierig.']},
  {t:'tr',de:'Ela disse que tinha estado doente. (Konjunktiv I)',a:['Sie sagte, sie sei krank gewesen.','Sie hat gesagt, sie sei krank gewesen.']}
 ]},
@@ -348,7 +348,7 @@ lessons:[
  {t:'mc',q:'„Wahrscheinlich ist sie schon zu Hause.“ =',opts:['Sie dürfte schon zu Hause sein.','Sie will schon zu Hause sein.','Sie soll schon zu Hause sein.'],a:0},
  {t:'gap',q:'Der Kollege fehlt schon wieder. Er ___ wirklich überlastet sein. (quase certeza)',a:['muss']},
  {t:'gap',q:'Sie ___ den Termin vergessen haben. (possivelmente – könnte)',a:['könnte']},
- {t:'order',es:'Die Ärztin soll schon lange in dieser Praxis arbeiten',de:'Dizem que a médica trabalha há muito tempo neste consultório.'},
+ {t:'order',es:'Die Ärztin soll schon lange in dieser Praxis arbeiten',alt:['Die Ärztin soll in dieser Praxis schon lange arbeiten', 'In dieser Praxis soll die Ärztin schon lange arbeiten'],de:'Dizem que a médica trabalha há muito tempo neste consultório.'},
  {t:'tr',de:'Ele deve ter perdido o ônibus. (quase certeza)',a:['Er muss den Bus verpasst haben.']}
 ]},
 {id:'l3',title:'Sistema de saúde – Futur II',desc:'die Diagnose, die Nebenwirkung · Er wird es vergessen haben.',steps:[
@@ -416,7 +416,7 @@ lessons:[
  {t:'gap',q:'Wenn Sie Fragen haben, … → ___ Fragen wenden Sie sich bitte an …',a:['Bei']},
  {t:'gap',q:'Weil die Nachfrage gestiegen ist → wegen der gestiegenen ___',a:['Nachfrage']},
  {t:'gap',q:'damit die Arbeit erleichtert wird → zur ___ der Arbeit',a:['Erleichterung']},
- {t:'order',es:'Nach Abschluss der Recherche wurde der Artikel veröffentlicht',de:'Depois de concluída a apuração, o artigo foi publicado.'},
+ {t:'order',es:'Nach Abschluss der Recherche wurde der Artikel veröffentlicht',alt:['Der Artikel wurde nach Abschluss der Recherche veröffentlicht'],de:'Depois de concluída a apuração, o artigo foi publicado.'},
  {t:'tr',de:'Durante a reunião, os celulares devem estar desligados. (während + genitivo)',a:['Während der Besprechung müssen die Handys ausgeschaltet sein.','Während des Meetings müssen die Handys ausgeschaltet sein.','Während der Sitzung müssen die Handys ausgeschaltet sein.']}
 ]},
 {id:'l3',title:'Fazer uma apresentação',desc:'Mein Vortrag gliedert sich in … · Damit komme ich zu …',steps:[
@@ -485,7 +485,7 @@ lessons:[
  {t:'gap',q:'Mithilfe ___ Satelliten kann man Waldbrände früh erkennen. (artigo genitivo plural)',a:['der']},
  {t:'gap',q:'Aufgrund ___ Hitzewelle sind die Schwimmbäder voll. (die Hitzewelle)',a:['der']},
  {t:'gap',q:'Wir wohnen ___ der Stadt, auf dem Land. (fora de)',a:['außerhalb']},
- {t:'order',es:'Angesichts der Klimakrise müssen wir unseren Lebensstil ändern',de:'Diante da crise climática, precisamos mudar o nosso estilo de vida.'},
+ {t:'order',es:'Angesichts der Klimakrise müssen wir unseren Lebensstil ändern',alt:['Wir müssen angesichts der Klimakrise unseren Lebensstil ändern'],de:'Diante da crise climática, precisamos mudar o nosso estilo de vida.'},
  {t:'tr',de:'Por causa da seca, a colheita foi ruim. (aufgrund)',a:['Aufgrund der Dürre war die Ernte schlecht.']}
 ]},
 {id:'l3',title:'Natureza e biodiversidade',desc:'die Artenvielfalt, aussterben, schützen …',steps:[
@@ -624,7 +624,7 @@ lessons:[
  {t:'mc',q:'___ selbst zu kochen, bestellt er jeden Abend Pizza.',opts:['Anstatt','Ohne dass','Indem'],a:0},
  {t:'gap',q:'Man kann die Frist verlängern, ___ man einen Antrag stellt.',a:['indem']},
  {t:'gap',q:'Er hat die Strafe bezahlt, ohne Widerspruch ___. (einlegen)',a:['einzulegen']},
- {t:'order',es:'Anstatt sich zu beschweren sollten die Bürger selbst aktiv werden',de:'Em vez de reclamar, os cidadãos deveriam agir eles mesmos.'},
+ {t:'order',es:'Anstatt sich zu beschweren sollten die Bürger selbst aktiv werden',alt:['Die Bürger sollten selbst aktiv werden anstatt sich zu beschweren', 'Die Bürger sollten anstatt sich zu beschweren selbst aktiv werden'],de:'Em vez de reclamar, os cidadãos deveriam agir eles mesmos.'},
  {t:'tr',de:'Ele saiu sem pagar.',a:['Er ist gegangen, ohne zu bezahlen.','Er ist gegangen, ohne zu zahlen.']},
  {t:'tr',de:'Aprende-se uma língua falando muito. (indem)',a:['Man lernt eine Sprache, indem man viel spricht.']}
 ]},
@@ -764,7 +764,7 @@ lessons:[
  {t:'mc',q:'Ich weiß, dass ich mehr ___.',opts:['hätte üben sollen','üben sollen hätte','hätte geübt sollen'],a:0},
  {t:'gap',q:'Wir hätten die Wohnung nicht nehmen ___. (dever – modal)',a:['sollen']},
  {t:'gap',q:'Sie hätte länger bleiben ___, aber sie wollte nicht. (poder – modal)',a:['können']},
- {t:'order',es:'Im Nachhinein hätte ich mich besser auf den Winter vorbereiten sollen',de:'Em retrospecto, eu deveria ter me preparado melhor para o inverno.'},
+ {t:'order',es:'Im Nachhinein hätte ich mich besser auf den Winter vorbereiten sollen',alt:['Ich hätte mich im Nachhinein besser auf den Winter vorbereiten sollen'],de:'Em retrospecto, eu deveria ter me preparado melhor para o inverno.'},
  {t:'tr',de:'Você deveria ter me contado isso.',a:['Du hättest mir das sagen sollen.','Das hättest du mir sagen sollen.','Du hättest mir das erzählen sollen.']},
  {t:'speak',es:'Im Nachhinein hätte ich mir mehr Zeit für die Wohnungssuche nehmen sollen.',de:'Olhando para trás, eu deveria ter tirado mais tempo para procurar apartamento.',tip:'<i>sich Zeit nehmen für</i> = tirar tempo para.'}
 ]},

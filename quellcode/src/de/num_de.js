@@ -10,7 +10,7 @@ function word(n){if(n<100)return w99(n);
   var k=Math.floor(n/1000),rest=n%1000;return(k===1?'':word(k).replace(/eins$/,'ein'))+'tausend'+(rest?word(rest):'');}
 /* Uhrzeit → Liste richtiger Antworten (erste = umgangssprachlich, zum Vorlesen), auch offiziell (15:30 = fünfzehn Uhr dreißig) */
 function time(hh,mm){var h12=hh%12||12,nx=(hh+1)%12||12;var H=function(x){return x===1?'eins':U[x]||w99(x);};var out=[];
-  if(mm===0)out.push((h12===1?'ein':H(h12))+' Uhr',H(h12));
+  if(mm===0){out.push((h12===1?'ein':H(h12))+' Uhr',H(h12));if(hh===0)out.push('Mitternacht');}
   else if(mm===15)out.push('Viertel nach '+H(h12));
   else if(mm===30)out.push('halb '+H(nx));
   else if(mm===45)out.push('Viertel vor '+H(nx),'drei viertel '+H(nx));

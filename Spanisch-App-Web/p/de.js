@@ -15,7 +15,8 @@ defineLang('de',{name:'Deutsch',flag:'🇩🇪',native:'Deutsch',into:'ins Deuts
   accentNote:'Quase! Atenção ao trema (ä, ö, ü) e ao ß – eles mudam a pronúncia e às vezes o sentido (schon ≠ schön).',
   articles:/^(der|die|das|ein|eine)\s+/i,
   artColor:{der:'m',die:'f',das:'n'}, /* Vokabeln: der blau, die rot, das grün, Plural (Pl.) lila */
-  norm:s=>s.replace(/ß/g,'ss').replace(/ae/g,'ä').replace(/oe/g,'ö').replace(/ue/g,'ü'), /* Antwortprüfung: ss = ß, ae/oe/ue = ä/ö/ü (ohne deutsche Tastatur) */
+  norm:s=>s.replace(/ß/g,'ss').replace(/ae/g,'ä').replace(/oe/g,'ö').replace(/ue/g,'ü').replace(/[’‘'`´]/g,'')
+    .replace(/\bgerne\b/g,'gern').replace(/\btschüs\b/g,'tschüss').replace(/\b(zu|nach)hause\b/g,'$1 hause').replace(/\bemail/g,'e-mail').replace(/\bok\b(?![a-zäöüß])|\bo\.k\./g,'okay'), /* Antwortprüfung: ss = ß, ae/oe/ue = ä/ö/ü (ohne deutsche Tastatur), geht’s = geht's = gehts; gleichwertige Schreibungen: gern/gerne, Tschüs/Tschüss, zu Hause/zuhause, E-Mail/Email, okay/OK */
   mark:/[äöüßÄÖÜ]|^(der|die|das|ein|eine)\s/i, /* erkennt beim Import von Wortlisten, welche Seite Deutsch ist */
   sampleWords:[['der Tisch',{pt:'a mesa',en:'the table',de:'der Tisch'}],['die Katze',{pt:'o gato',en:'the cat',de:'die Katze'}]],
   roleNote:'No curso você faz um papel: você acabou de se mudar para Frankfurt para trabalhar. Nas tarefas livres, escreva simplesmente sobre você.',
@@ -69,7 +70,7 @@ function word(n){if(n<100)return w99(n);
   var k=Math.floor(n/1000),rest=n%1000;return(k===1?'':word(k).replace(/eins$/,'ein'))+'tausend'+(rest?word(rest):'');}
 /* Uhrzeit → Liste richtiger Antworten (erste = umgangssprachlich, zum Vorlesen), auch offiziell (15:30 = fünfzehn Uhr dreißig) */
 function time(hh,mm){var h12=hh%12||12,nx=(hh+1)%12||12;var H=function(x){return x===1?'eins':U[x]||w99(x);};var out=[];
-  if(mm===0)out.push((h12===1?'ein':H(h12))+' Uhr',H(h12));
+  if(mm===0){out.push((h12===1?'ein':H(h12))+' Uhr',H(h12));if(hh===0)out.push('Mitternacht');}
   else if(mm===15)out.push('Viertel nach '+H(h12));
   else if(mm===30)out.push('halb '+H(nx));
   else if(mm===45)out.push('Viertel vor '+H(nx),'drei viertel '+H(nx));
@@ -90,39 +91,54 @@ defineLang('de',{numbers:{word:word,time:time,date:date,price:price,
 ;
 /* Deutsch: Präsens-Konjugation nach Regel + Listen der Unregelmäßigen (für den Verben-Trainer).
    LANGS.de.conjugate(infinitiv) → {forms:[ich,du,er/sie/es,wir,ihr,sie/Sie], why:'Muster-Hinweis'} oder null (= lieber nicht üben).
-   Trennbare Verben (anrufen → ich rufe an) werden mit Präfix am Ende gebildet. Neue Verben in den Vokabellisten: Unregelmäßige hier eintragen! */
+   Trennbare Verben (anrufen → ich rufe an) werden mit Präfix am Ende gebildet, untrennbare Präfixe (be-, ver-, er- …) übernehmen den
+   Vokalwechsel des Grundverbs (verlassen → du verlässt). Neue Verben in den Vokabellisten: Unregelmäßige hier eintragen! */
 (function(){
 var FIX={sein:['bin','bist','ist','sind','seid','sind'],haben:['habe','hast','hat','haben','habt','haben'],werden:['werde','wirst','wird','werden','werdet','werden'],
  wissen:['weiß','weißt','weiß','wissen','wisst','wissen'],tun:['tue','tust','tut','tun','tut','tun'],
  können:['kann','kannst','kann','können','könnt','können'],wollen:['will','willst','will','wollen','wollt','wollen'],müssen:['muss','musst','muss','müssen','müsst','müssen'],
  dürfen:['darf','darfst','darf','dürfen','dürft','dürfen'],sollen:['soll','sollst','soll','sollen','sollt','sollen'],mögen:['mag','magst','mag','mögen','mögt','mögen'],
  möchten:['möchte','möchtest','möchte','möchten','möchtet','möchten'],
- nehmen:['nehme','nimmst','nimmt','nehmen','nehmt','nehmen'],treten:['trete','trittst','tritt','treten','tretet','treten'],
- halten:['halte','hältst','hält','halten','haltet','halten'],laden:['lade','lädst','lädt','laden','ladet','laden'],raten:['rate','rätst','rät','raten','ratet','raten']};
-/* Vokalwechsel bei du und er/sie/es */
-var EI=['essen','geben','helfen','sprechen','treffen','vergessen','werfen','sterben','brechen','messen','gelten'];
-var EIE=['sehen','lesen','empfehlen','stehlen','geschehen'];
-var AAE=['fahren','schlafen','tragen','waschen','fallen','gefallen','lassen','fangen','backen','wachsen','schlagen'];
-var AU=['laufen'];
-var SEP=['zurück','fern','statt','weiter','mit','auf','aus','ein','an','ab','zu','vor','weg','los','her','hin','um','nach'];
-var NOT=['übernachten','überweisen','unterschreiben','umarmen','verstehen','bekommen','besuchen','bezahlen','erklären','erlauben','empfehlen','entschuldigen','gehören','gefallen','beginnen','vergessen'];
+ nehmen:['nehme','nimmst','nimmt','nehmen','nehmt','nehmen'],treten:['trete','trittst','tritt','treten','tretet','treten']};
+/* Vokalwechsel bei du und er/sie/es (gilt auch mit untrennbarem Präfix: versprechen, betreffen, vergeben …) */
+var EI=['essen','fressen','messen','vergessen','geben','helfen','sprechen','treffen','werfen','sterben','brechen','gelten','stechen','bergen','verderben','werben','schmelzen'];
+var EIE=['sehen','lesen','empfehlen','befehlen','stehlen','geschehen'];
+var AAE=['fahren','schlafen','tragen','waschen','fallen','gefallen','lassen','fangen','backen','wachsen','schlagen','halten','raten','laden','braten','graben','blasen'];
+var AU=['laufen','saufen'],OE=['stoßen'];
+var SEP=['zusammen','zurecht','zurück','heraus','herunter','herein','herum','hervor','hinaus','vorbei','weiter','kaputt','pleite','statt','krank','fern','fest','hoch','rein','raus','durch','teil','dar','bei','los','weg','mit','auf','aus','ein','an','ab','zu','vor','her','hin','um','nach'];
+var INSEP=['hinter','wider','unter','über','miss','voll','emp','ent','ver','zer','be','er','ge'];
+/* beginnen mit einem trennbaren Präfix, sind aber nicht trennbar (oder gar keine Zusammensetzung) */
+var NOT=['übernachten','überweisen','unterschreiben','umarmen','verstehen','bekommen','besuchen','bezahlen','erklären','erlauben','empfehlen','entschuldigen','gehören','gefallen','beginnen','vergessen',
+ 'antworten','arbeiten','atmen','angeln','ändern','achten','ahnen','eignen','eilen','einigen','umgeben','wiederholen','durchsuchen','hindern','herrschen','mitteln','zucken','zweifeln','zählen','zahlen','zeigen','zeichnen','zielen','ziehen','zittern','zögern','ordnen','reinigen','rauschen','abonnieren','herzen','heiraten','beichten'];
+/* Rest nach einem trennbaren Präfix, der mit Vokal anfängt (sonst: antworten, analysieren, abonnieren …) */
+var VREST=['atmen','essen','ändern','erkennen','ordnen','arbeiten','üben','eilen'];
+/* unpersönlich, Bedeutung nur mit es/Dativ oder gar kein Verb – nicht im Verben-Trainer üben */
+var SKIP=['geschehen','stattfinden','einfallen','angehen','überwiegen','aussterben','passieren','regnen','schneien','klappen','schmecken','kaputtgehen','erfordern','deswegen','sozusagen','meinetwegen','gegen','wegen'];
+/* zwei richtige Formen */
+var ALT={staubsaugen:['staubsauge|sauge Staub','staubsaugst|saugst Staub','staubsaugt|saugt Staub','staubsaugen|saugen Staub','staubsaugt|saugt Staub','staubsaugen|saugen Staub'],
+ erschrecken:['erschrecke','erschrickst|erschreckst','erschrickt|erschreckt','erschrecken','erschreckt','erschrecken']};
+var has=function(a,v){return a.indexOf(v)>=0;};
 function core(v){
   if(FIX[v])return{forms:FIX[v].slice(),why:'unregelmäßig – auswendig lernen'};
+  /* untrennbares Präfix + Grundverb mit Vokalwechsel / unregelmäßig */
+  for(var i=0;i<INSEP.length;i++){var p=INSEP[i];if(v.indexOf(p)===0&&v.length>p.length+2&&!has(EI.concat(EIE,AAE),v)){var b=v.slice(p.length);
+    if(FIX[b]||has(EI,b)||has(EIE,b)||has(AAE,b)||has(AU,b)||has(OE,b)){var r=core(b);r.forms=r.forms.map(function(x){return p+x;});return r;}}}
   var m=v.match(/^(.*?)(eln|ern|en|n)$/);if(!m)return null;var st=m[1],end=m[2];
-  if(end==='eln')return{forms:[st+'le',st+'elst',st+'elt',st+'eln',st+'elt',st+'eln'],why:'Verben auf -eln: ich '+st+'le, wir '+st+'eln'};
+  if(end==='eln')return{forms:[st+'le|'+st+'ele',st+'elst',st+'elt',st+'eln',st+'elt',st+'eln'],why:'Verben auf -eln: ich '+st+'le, wir '+st+'eln'};
   if(end==='ern')return{forms:[st+'ere',st+'erst',st+'ert',st+'ern',st+'ert',st+'ern'],why:'Verben auf -ern: wir/sie nur -n'};
   if(end==='n')return{forms:[st+'e',st+'st',st+'t',st+'n',st+'t',st+'n'],why:'regelmäßig: -e, -st, -t, -n, -t, -n'};
-  var e=/(t|d|[^aeioulrhmnäöü][mn])$/.test(st)?'e':'';      /* arbeiten, finden, öffnen → arbeitest */
-  var s2=/(s|ß|z|x)$/.test(st)?'t':'st';                   /* heißen, tanzen → du heißt, du tanzt */
-  var f=[st+'e',st+e+(s2==='t'?'t':'st'),st+e+'t',st+'en',st+e+'t',st+'en'],why='regelmäßig: -e, -st, -t, -en, -t, -en'+(e?' (mit -e- nach t/d: du '+f[1]+')':'');
+  var e=/(t|d|(?:[^aeioulrhmnäöüy]|ch)[mn])$/.test(st)?'e':'';  /* arbeiten, finden, öffnen, rechnen → du arbeitest */
+  var sz=function(s){return /(s|ß|z|x)$/.test(s);};           /* heißen, tanzen → du heißt, du tanzt */
+  var f=[st+'e',st+e+(sz(st)?'t':'st'),st+e+'t',st+'en',st+e+'t',st+'en'],why='regelmäßig: -e, -st, -t, -en, -t, -en'+(e?' (mit -e- nach t/d: du '+f[1]+')':'');
   var ch=function(a,b,lbl){var i=st.lastIndexOf(a);if(i<0)return;var s=st.slice(0,i)+b+st.slice(i+a.length);
-    f[1]=s+(/(s|ß|z)$/.test(s)?'t':(/(t|d)$/.test(s)&&b!=='ä'?'':'st'));f[2]=s+(/(t|d)$/.test(s)?'':'t');why='Vokalwechsel '+lbl+' nur bei du und er/sie/es';};
-  if(EI.indexOf(v)>=0)ch('e','i','e → i');else if(EIE.indexOf(v)>=0)ch('e','ie','e → ie');else if(AAE.indexOf(v)>=0)ch('a','ä','a → ä');else if(AU.indexOf(v)>=0)ch('au','äu','au → äu');
-  if(v==='essen')f[1]='isst';if(v==='vergessen')f[1]='vergisst';if(v==='messen')f[1]='misst';if(v==='lassen')f[1]='lässt';
+    f[1]=s+(sz(s)?'t':'st');f[2]=s+(/t$/.test(s)?'':'t');why='Vokalwechsel '+lbl+' nur bei du und er/sie/es';};  /* hältst/hält, lädst/lädt, giltst/gilt */
+  if(has(EI,v))ch('e','i','e → i');else if(has(EIE,v))ch('e','ie','e → ie');else if(has(AAE,v))ch('a','ä','a → ä');else if(has(AU,v))ch('au','äu','au → äu');else if(has(OE,v))ch('o','ö','o → ö');
   return{forms:f,why:why};}
-function conjugate(inf){var v=String(inf||'').trim();if(!/^[a-zäöüß]+$/.test(v)||/^sich /.test(v))return null;
-  if(NOT.indexOf(v)<0&&!FIX[v])for(var i=0;i<SEP.length;i++){var p=SEP[i];if(v.indexOf(p)===0&&v.length>p.length+3){var rest=v.slice(p.length),r=core(rest);
-    if(r&&/(en|ern|eln)$/.test(rest)){r.forms=r.forms.map(function(x){return x+' '+p;});r.why='trennbar: '+p+' steht am Ende (ich '+r.forms[0]+') · '+r.why;return r;}}}
+function conjugate(inf){var v=String(inf||'').trim();if(!/^[a-zäöüß]+$/.test(v)||has(SKIP,v))return null;
+  if(ALT[v])return{forms:ALT[v].slice(),why:'regelmäßig: -e, -st, -t, -en, -t, -en'};
+  var insep=INSEP.some(function(p){return p.length>=4&&v.indexOf(p)===0;}); /* hinterlassen, unterbrechen, widersprechen: nicht „hin“/„um“ abtrennen */
+  if(!has(NOT,v)&&!FIX[v]&&!insep)for(var i=0;i<SEP.length;i++){var p=SEP[i];if(v.indexOf(p)===0&&v.length>p.length+3){var rest=v.slice(p.length);if(/^[aeiouäöü]/.test(rest)&&!has(VREST,rest))continue;var r=core(rest);
+    if(r&&/(en|ern|eln)$/.test(rest)){r.forms=r.forms.map(function(x){return x.split('|').map(function(y){return y+' '+p;}).join('|');});r.why='trennbar: '+p+' steht am Ende (ich '+r.forms[0].split('|')[0]+') · '+r.why;return r;}}}
   return core(v);}
 /* Textbausteine der Hinweise – die Engine übersetzt sie einzeln (ui_tr.js) */
 var WHY_PARTS=['unregelmäßig – auswendig lernen','regelmäßig: -e, -st, -t, -en, -t, -en','regelmäßig: -e, -st, -t, -n, -t, -n','(mit -e- nach t/d: du ','Vokalwechsel ',' nur bei du und er/sie/es','trennbar: ',' steht am Ende (ich ','Verben auf -eln: ich ','Verben auf -ern: wir/sie nur -n'];
@@ -198,7 +214,7 @@ lessons:[
   {n:'Verkäuferin',es:'Bitte schön. Schönen Tag noch!',de:'Aqui está. Tenha um bom dia!'},
   {you:true,opts:[{es:'Danke, Ihnen auch! Auf Wiedersehen!',ok:true},{es:'Freut mich! Wie heißen Sie?',ok:false,why:'Ela está se despedindo – despeça-se também.'}]}]},
  {t:'tr',de:'Como a senhora está?',a:['Wie geht es Ihnen?'],why:'Formal: <i>Wie geht es Ihnen?</i>'},
- {t:'tr',de:'Bem, obrigado. E você?',a:['Gut, danke. Und dir?','Gut, danke, und dir?','Danke, gut. Und dir?'],hint:'„e você?“ aqui = Und dir?'},
+ {t:'tr',de:'Bem, obrigado. E você?',a:['Gut, danke. Und dir?','Danke, gut. Und dir?','Mir geht es gut, danke. Und dir?','Mir geht’s gut, danke. Und dir?'],hint:'„e você?“ aqui = Und dir?'},
  {t:'listen',es:'Bis später!',de:'Até mais tarde!'},
  {t:'listen',es:'Sehr gut, danke.',de:'Muito bem, obrigado.'}
 ]},
@@ -225,7 +241,7 @@ lessons:[
  {t:'gap',q:'Ich ___ Brasilianer. (sein)',a:['bin']},
  {t:'gap',q:'___ du Englisch? (sprechen)',a:['Sprichst|sprichst'],why:'<i>sprechen</i>: e → i com <b>du</b>: <i>du sprichst</i>.'},
  {t:'mc',q:'Qual frase está correta?',opts:['Ich wohne in Frankfurt.','Wohne in Frankfurt.','Ich wohnst in Frankfurt.'],a:0,why:'O pronome <i>ich</i> é obrigatório, e com <i>ich</i> o verbo termina em <b>-e</b>.'},
- {t:'order',es:'Ich komme aus Brasilien',de:'Eu sou do Brasil.'},
+ {t:'order',es:'Ich komme aus Brasilien',alt:['Aus Brasilien komme ich'],de:'Eu sou do Brasil.'},
  {t:'dialog',place:'WG-Küche',title:'Na república (WG)',scene:'Você mora numa <b>WG</b> (república de estudantes/jovens). Um novo colega de casa chega.',lines:[
   {n:'Tom',es:'Hi! Ich bin Tom. Du bist neu hier, oder? Woher kommst du?',de:'Oi! Eu sou o Tom. Você é novo aqui, né? De onde você é?'},
   {you:true,opts:[{es:'Ich komme aus Brasilien, aus São Paulo.',ok:true},{es:'Ich wohne in Frankfurt.',ok:false,why:'Ele perguntou <b>de onde</b> você é (woher), não onde você mora.'},{es:'Ich heiße Brasilien.',ok:false,why:'😄 <i>heißen</i> é para o nome.'}]},
@@ -239,7 +255,7 @@ lessons:[
  {t:'mc',q:'Wo wohnt Tom?',opts:['in Frankfurt','in Köln','in Hamburg'],a:0},
  {t:'tr',de:'Eu moro em Frankfurt.',a:['Ich wohne in Frankfurt.']},
  {t:'tr',de:'Você fala alemão?',a:['Sprichst du Deutsch?']},
- {t:'tr',de:'De onde a senhora é?',a:['Woher kommen Sie?']},
+ {t:'tr',de:'De onde a senhora é?',a:['Woher kommen Sie?','Woher sind Sie?']},
  {t:'free',task:'Apresente-se em 3–5 frases: nome, de onde você é, onde mora, que línguas fala.',hint:'Ich heiße … Ich komme aus … Ich wohne in … Ich spreche …',focus:'heißen, kommen aus, wohnen in, sprechen, sein',model:'Hallo! Ich heiße Lucas. Ich komme aus Brasilien, aus São Paulo. Jetzt wohne ich in Frankfurt. Ich spreche Portugiesisch, Englisch und ein bisschen Deutsch.'}
 ]},
 {id:'l4',title:'Alfabeto e pronúncia',desc:'ä, ö, ü, ß, ei, ie, ch, sch, w, z – soletrar',steps:[
@@ -309,7 +325,7 @@ lessons:[
  {t:'listen',es:'null eins sieben zwei',de:'0172'},
  {t:'listen',es:'achtzehn',de:'18'},
  {t:'gap',q:'Meine ___ ist 0171 234 56 78. (número de celular)',a:['Handynummer|Telefonnummer|Nummer']},
- {t:'tr',de:'Qual é o seu telefone? (informal)',a:['Wie ist deine Telefonnummer?','Wie ist deine Handynummer?','Wie ist deine Nummer?']},
+ {t:'tr',de:'Qual é o seu telefone? (informal)',a:['Wie ist deine Telefonnummer?','Wie ist deine Handynummer?','Wie ist deine Nummer?','Was ist deine Telefonnummer?','Was ist deine Handynummer?','Was ist deine Nummer?']},
  {t:'speak',es:'Meine Handynummer ist null eins sieben zwei, drei vier fünf, sechs sieben acht.',de:'Meu celular é 0172 345 678.',tip:'Diga os números de um em um ou em pares – ninguém espera que você diga números longos de uma vez.'}
 ]},
 {id:'l2',title:'Até 100 e mais · idade',desc:'einundzwanzig · Wie alt bist du?',steps:[
@@ -356,7 +372,7 @@ lessons:[
   {n:'Herr Becker',es:'Und wo wohnen Sie jetzt?',de:'E onde o senhor mora agora?'},
   {you:true,opts:[{es:'In der Bergerstraße 12, in Frankfurt.',ok:true},{es:'Ich komme aus Brasilien.',ok:false,why:'Ele perguntou onde você <b>mora</b> (wo wohnen), não de onde você é.'}]},
   {n:'Herr Becker',es:'Gut. Bitte unterschreiben Sie hier.',de:'Bem. Por favor, assine aqui.'}]},
- {t:'tr',de:'Qual é o seu endereço? (formal)',a:['Wie ist Ihre Adresse?']},
+ {t:'tr',de:'Qual é o seu endereço? (formal)',a:['Wie ist Ihre Adresse?','Was ist Ihre Adresse?']},
  {t:'tr',de:'Eu moro na Bergerstraße 12.',a:['Ich wohne in der Bergerstraße 12.']},
  {t:'free',task:'Preencha um formulário com os seus dados, em frases: Vorname, Familienname, Alter, Wohnort, Telefonnummer, Familienstand.',hint:'Mein Vorname ist … Mein Familienname ist … Ich bin … Jahre alt. Ich wohne in … Meine Telefonnummer ist … Ich bin ledig / verheiratet.',focus:'persönliche Daten, sein, wohnen, Zahlen',model:'Mein Vorname ist Lucas, mein Familienname ist Souza. Ich bin 28 Jahre alt. Ich wohne in Frankfurt, in der Bergerstraße 12. Meine Telefonnummer ist 0172 345 678. Ich bin ledig.'}
 ]},
@@ -382,7 +398,7 @@ lessons:[
  {t:'mc',q:'Qual frase está correta?',opts:['Heute arbeite ich nicht.','Heute ich arbeite nicht.','Heute ich nicht arbeite.'],a:0,why:'O verbo fica na <b>posição 2</b>, mesmo quando a frase começa com <i>heute</i>.'},
  {t:'mc',q:'Pergunta de sim/não: „Você tem celular?“',opts:['Hast du ein Handy?','Du hast ein Handy?','Ein Handy hast du?'],a:0},
  {t:'order',es:'Wo arbeitet Jana',de:'Onde a Jana trabalha?'},
- {t:'order',es:'Jetzt wohnen wir in Frankfurt',de:'Agora nós moramos em Frankfurt.'},
+ {t:'order',es:'Jetzt wohnen wir in Frankfurt',alt:['Wir wohnen jetzt in Frankfurt', 'In Frankfurt wohnen wir jetzt'],de:'Agora nós moramos em Frankfurt.'},
  {t:'gap',q:'___ kommt Tom? – Aus Köln.',a:['Woher']},
  {t:'gap',q:'Wir ___ in Frankfurt. Und wo ___ ihr? (wohnen)',a:['wohnen','wohnt']},
  {t:'gap',q:'Jana ___ ein Auto. (haben)',a:['hat']},
@@ -391,7 +407,7 @@ lessons:[
  {t:'mc',q:'Wie ist Janas Handynummer?',opts:['0176 283 941','0167 283 914','0176 382 941'],a:0},
  {t:'mc',q:'Das Meeting ist um …',opts:['10 Uhr','12 Uhr','2 Uhr'],a:0},
  {t:'tr',de:'Vocês moram em Frankfurt? (informal)',a:['Wohnt ihr in Frankfurt?']},
- {t:'tr',de:'De onde o senhor é?',a:['Woher kommen Sie?']}
+ {t:'tr',de:'De onde o senhor é?',a:['Woher kommen Sie?','Woher sind Sie?']}
 ]}],
 resumen:`<h3>Números</h3><p class="es-t">null · eins · zwei · drei · vier · fünf · sechs · sieben · acht · neun · zehn · elf · zwölf · dreizehn … sechzehn · siebzehn … zwanzig</p><p>21 = <span class="es-t">einundzwanzig</span> (unidade + und + dezena) · 30 = <span class="es-t">dreißig</span> · 100 = <span class="es-t">hundert</span> · 1000 = <span class="es-t">tausend</span></p>
 <h3>Idade</h3><table><tr><td class="es-t">Wie alt bist du? / Wie alt sind Sie?</td><td class="es-t">Ich bin 28 Jahre alt.</td></tr></table><p>Nunca “Ich habe 28 Jahre”.</p>
@@ -539,7 +555,7 @@ lessons:[
  {t:'match',q:'Ligue.',pairs:[['das Obst','as frutas'],['das Gemüse','os legumes'],['der Saft','o suco'],['das Brötchen','o pãozinho'],['die Wurst','os frios']]},
  {t:'gap',q:'Tom ___ gern Pizza. (essen)',a:['isst']},
  {t:'gap',q:'Ich ___ keinen Fisch. (mögen)',a:['mag']},
- {t:'tr',de:'Eu gosto de tomar chá.',a:['Ich trinke gern Tee.']},
+ {t:'tr',de:'Eu gosto de tomar chá.',a:['Ich trinke gern Tee.','Ich trinke gerne Tee.']},
  {t:'tr',de:'Ela não gosta de carne.',a:['Sie isst nicht gern Fleisch.','Sie mag kein Fleisch.','Sie mag Fleisch nicht.']},
  {t:'listen',es:'Ich trinke gern Orangensaft.',de:'Eu gosto de tomar suco de laranja.'},
  {t:'vocab',title:'Mais palavras: comer',items:[['der Schinken', 'o presunto'], ['die Pommes frites (Pl.)', 'as batatas fritas'], ['das Lokal', 'o bar / o restaurante'], ['das Café', 'o café (lugar)'], ['bitter', 'amargo'], ['süß', 'doce'], ['riechen', 'cheirar'], ['empfehlen', 'recomendar'], ['anbieten', 'oferecer'], ['wenig', 'pouco'], ['wunderbar', 'maravilhoso']]},
@@ -569,7 +585,7 @@ lessons:[
  {t:'gap',q:'Lucas sucht ___ Käse. (der Käse – o)',a:['den']},
  {t:'gap',q:'Was ___ du? – Ich nehme den Fisch. (nehmen)',a:['nimmst']},
  {t:'gap',q:'Jana ___ einen Tee. (möchten)',a:['möchte']},
- {t:'order',es:'Ich möchte einen Apfelsaft',de:'Eu gostaria de um suco de maçã.'},
+ {t:'order',es:'Ich möchte einen Apfelsaft',alt:['Einen Apfelsaft möchte ich'],de:'Eu gostaria de um suco de maçã.'},
  {t:'tr',de:'Eu preciso de um ovo.',a:['Ich brauche ein Ei.']},
  {t:'tr',de:'Você toma o café? (informal)',a:['Nimmst du den Kaffee?','Trinkst du den Kaffee?']}
 ]},
@@ -591,7 +607,7 @@ lessons:[
   {n:'Verkäufer',es:'Zusammen macht das sechs Euro dreißig.',de:'Tudo junto dá seis euros e trinta.'},
   {you:true,opts:[{es:'Hier, bitte. Zehn Euro.',ok:true},{es:'Das ist sehr billig. Tschüss!',ok:false,why:'Primeiro é preciso pagar!'}]},
   {n:'Verkäufer',es:'Und drei Euro siebzig zurück. Danke schön!',de:'E três euros e setenta de troco. Muito obrigado!'}]},
- {t:'read',hideText:true,title:'Aviso no supermercado',intro:'Ouça o aviso pelo alto-falante.',text:`Liebe Kundinnen und Kunden! Heute im Angebot: ein Kilo Bananen für nur ein Euro neunundzwanzig. Und frische Brötchen von unserer Bäckerei: zehn Stück für zwei Euro fünfzig. Unser Supermarkt schließt heute um zwanzig Uhr. Vielen Dank für Ihren Einkauf!`,de:`Queridos clientes! Hoje em promoção: um quilo de bananas por apenas 1,29 €. E pãezinhos frescos da nossa padaria: dez unidades por 2,50 €. Nosso supermercado fecha hoje às 20 horas. Muito obrigado pela sua compra!`},
+ {t:'read',hideText:true,title:'Aviso no supermercado',intro:'Ouça o aviso pelo alto-falante.',text:`Liebe Kundinnen und Kunden! Heute im Angebot: ein Kilo Bananen für nur einen Euro neunundzwanzig. Und frische Brötchen von unserer Bäckerei: zehn Stück für zwei Euro fünfzig. Unser Supermarkt schließt heute um zwanzig Uhr. Vielen Dank für Ihren Einkauf!`,de:`Queridos clientes! Hoje em promoção: um quilo de bananas por apenas 1,29 €. E pãezinhos frescos da nossa padaria: dez unidades por 2,50 €. Nosso supermercado fecha hoje às 20 horas. Muito obrigado pela sua compra!`},
  {t:'mc',q:'Richtig oder falsch? Bananen sind heute im Angebot.',opts:['richtig','falsch'],a:0},
  {t:'mc',q:'Was kosten zehn Brötchen?',opts:['2,50 €','1,29 €','10,00 €'],a:0},
  {t:'mc',q:'Richtig oder falsch? Der Supermarkt schließt um 22 Uhr.',opts:['falsch','richtig'],a:0},
@@ -669,7 +685,7 @@ lessons:[
  {t:'gap',q:'Leider gibt es ___ Balkon. (nenhum – der Balkon)',a:['keinen']},
  {t:'mc',q:'Qual artigo? ___ Bett',opts:['das','der','die'],a:0},
  {t:'mc',q:'Qual artigo? ___ Lampe',opts:['die','der','das'],a:0},
- {t:'order',es:'Im Wohnzimmer gibt es ein Sofa',de:'Na sala tem um sofá.'},
+ {t:'order',es:'Im Wohnzimmer gibt es ein Sofa',alt:['Es gibt ein Sofa im Wohnzimmer', 'Ein Sofa gibt es im Wohnzimmer'],de:'Na sala tem um sofá.'},
  {t:'tr',de:'Tem elevador?',a:['Gibt es einen Aufzug?']},
  {t:'tr',de:'O sofá é cinza.',a:['Das Sofa ist grau.']},
  {t:'vocab',title:'Mais palavras: em casa',items:[['das Apartment', 'o apartamento (pequeno)'], ['der Raum', 'o espaço / a sala'], ['anmachen', 'ligar (luz, aparelho)'], ['ausmachen', 'desligar'], ['legen', 'colocar (deitado)'], ['liegen', 'estar (deitado)'], ['stellen', 'colocar (em pé)'], ['sitzen', 'estar sentado'], ['kaputt', 'quebrado'], ['reparieren', 'consertar'], ['die Maschine', 'a máquina'], ['die Ordnung', 'a ordem / a arrumação'], ['holen', 'buscar / pegar'], ['draußen', 'lá fora'], ['daneben', 'ao lado'], ['breit', 'largo'], ['hoch', 'alto'], ['leise', 'baixo (som) / silencioso'], ['der Baum', 'a árvore'], ['sich kümmern um', 'cuidar de']]},
@@ -759,7 +775,7 @@ lessons:[
  {t:'listen',es:'Der Zug kommt um siebzehn Uhr fünfundvierzig.',de:'O trem chega às 17:45.'},
  {t:'gap',q:'Wie ___ ist es? – Es ist halb zwölf.',a:['spät']},
  {t:'gap',q:'Das Meeting ist ___ zehn Uhr. (às)',a:['um']},
- {t:'tr',de:'São três e quinze. (informal)',a:['Es ist Viertel nach drei.']}
+ {t:'tr',de:'São três e quinze. (informal)',a:['Es ist Viertel nach drei.','Viertel nach drei.','Es ist fünfzehn nach drei.']}
 ]},
 {id:'l2',title:'Dias, meses, datas',desc:'Montag … Sonntag · Januar … Dezember · am ersten Mai',steps:[
  {t:'vocab',title:'Dias da semana',items:[['der Montag','a segunda-feira'],['der Dienstag','a terça-feira'],['der Mittwoch','a quarta-feira'],['der Donnerstag','a quinta-feira'],['der Freitag','a sexta-feira'],['der Samstag','o sábado'],['der Sonntag','o domingo'],['das Wochenende','o fim de semana'],['die Woche','a semana'],['heute','hoje'],['morgen','amanhã'],['gestern','ontem']]},
@@ -797,7 +813,7 @@ lessons:[
  {t:'gap',q:'Wann ___ der Film ___? (anfangen)',a:['fängt','an'],why:'<i>anfangen</i>: a → ä com du/er (<i>du fängst an, er fängt an</i>).'},
  {t:'gap',q:'Am Samstag ___ ich im Supermarkt ___. (einkaufen)',a:['kaufe','ein']},
  {t:'gap',q:'Tom ___ abends oft ___. (fernsehen)',a:['sieht','fern'],why:'<i>sehen</i> muda: <i>du siehst, er sieht</i>.'},
- {t:'order',es:'Ich rufe dich morgen an',de:'Eu te ligo amanhã.'},
+ {t:'order',es:'Ich rufe dich morgen an',alt:['Morgen rufe ich dich an'],de:'Eu te ligo amanhã.'},
  {t:'order',es:'Kommst du mit',de:'Você vem junto?'},
  {t:'read',title:'Leitura: Ein Tag von Lucas',text:`Ich stehe {meistens|na maioria das vezes} um halb sieben auf. Zuerst dusche ich, dann frühstücke ich: Kaffee und ein Brötchen. Um acht Uhr fahre ich mit der U-Bahn zur Arbeit. Die Arbeit fängt um halb neun an. Mittags esse ich mit Jana in der {Kantine|cantina}. Um siebzehn Uhr höre ich auf. Montags und donnerstags habe ich Deutschkurs. Abends kaufe ich manchmal ein oder ich koche mit Tom. Ich sehe nie fern – ich lese lieber. Um elf Uhr gehe ich ins Bett.`,de:`Na maioria das vezes eu me levanto às seis e meia. Primeiro tomo banho, depois tomo café: café e um pãozinho. Às oito vou de metrô para o trabalho. O trabalho começa às oito e meia. Ao meio-dia como com a Jana na cantina. Às 17h eu paro de trabalhar. Às segundas e quintas tenho curso de alemão. À noite às vezes faço compras ou cozinho com o Tom. Nunca vejo televisão – prefiro ler. Às onze vou para a cama.`},
  {t:'mc',q:'Wann fängt die Arbeit an?',opts:['um 8:30 Uhr','um 6:30 Uhr','um 8 Uhr'],a:0},
@@ -877,7 +893,7 @@ lessons:[
  {t:'gap',q:'Wir ___ am Wochenende nach Berlin fahren. (wollen)',a:['wollen']},
  {t:'gap',q:'___ ihr Deutsch sprechen? (können)',a:['Könnt']},
  {t:'order',es:'Willst du am Samstag mitkommen',de:'Você quer vir junto no sábado?'},
- {t:'order',es:'Ich kann leider nicht schwimmen',de:'Infelizmente eu não sei nadar.'},
+ {t:'order',es:'Ich kann leider nicht schwimmen',alt:['Leider kann ich nicht schwimmen'],de:'Infelizmente eu não sei nadar.'},
  {t:'tr',de:'Você sabe tocar violão? (informal)',a:['Kannst du Gitarre spielen?']},
  {t:'tr',de:'Ela quer viajar.',a:['Sie will reisen.']}
 ]},
@@ -887,7 +903,7 @@ lessons:[
  <tr><td class="es-t">Es ist schön / kalt / warm.</td><td>Está bonito / frio / quente.</td></tr>
  <tr><td class="es-t">Es regnet. Es schneit.</td><td>Está chovendo. Está nevando.</td></tr>
  <tr><td class="es-t">Es sind 25 Grad.</td><td>Faz 25 graus.</td></tr>
- <tr><td class="es-t">Es ist minus fünf Grad.</td><td>Faz cinco graus abaixo de zero.</td></tr></table>
+ <tr><td class="es-t">Es sind minus fünf Grad.</td><td>Faz cinco graus abaixo de zero.</td></tr></table>
  <div class="ex">Sempre com <b>es</b> – como “está” em português, mas o <b>es</b> é obrigatório.</div>
  <div class="ojo">Para quem vem de um país quente, 15 graus é frio 🥶 – para um alemão, <span class="es-t">15 Grad</span> no verão já é <span class="es-t">kühl</span>, mas na primavera é <span class="es-t">schön warm</span>!</div>`},
  {t:'mc',q:'„Está nevando.“',opts:['Es schneit.','Es ist Schnee.','Schneit.'],a:0},
@@ -896,7 +912,7 @@ lessons:[
  {t:'mc',q:'Wie ist das Wetter am Samstag?',opts:['Die Sonne scheint.','Es regnet.','Es schneit.'],a:0},
  {t:'mc',q:'Wie warm ist es heute?',opts:['8 Grad','18 Grad','80 Grad'],a:0},
  {t:'mc',q:'Wann ist das Wetter gut zum Wandern?',opts:['am Samstag','heute','am Sonntag'],a:0},
- {t:'tr',de:'Hoje está frio e está chovendo.',a:['Heute ist es kalt und es regnet.','Heute ist es kalt und regnet es.']}
+ {t:'tr',de:'Hoje está frio e está chovendo.',a:['Heute ist es kalt und es regnet.','Es ist heute kalt und es regnet.']}
 ]},
 {id:'l4',title:'Convites e festas',desc:'Einladung · Geburtstag · zusagen, absagen',steps:[
  {t:'vocab',title:'Festas',items:[['die Party','a festa'],['das Fest','a festa / a festividade'],['feiern','comemorar'],['einladen','convidar'],['die Einladung','o convite'],['der Geburtstag','o aniversário'],['Herzlichen Glückwunsch!','Parabéns!'],['Alles Gute zum Geburtstag!','Feliz aniversário!'],['gratulieren','dar os parabéns'],['das Geschenk','o presente'],['mitbringen','levar (junto)'],['der Gast, die Gäste','o convidado, os convidados'],['zusagen','confirmar (que vai)'],['absagen','cancelar / recusar'],['Ich komme gern!','Vou com prazer!'],['Leider kann ich nicht kommen.','Infelizmente não posso ir.']]},
@@ -954,7 +970,7 @@ lessons:[
  {t:'gap',q:'Der Bus hält ___ der Haltestelle „Römer“. (em – an + dativo, feminino)',a:['an']},
  {t:'gap',q:'Tom ist ___ Park. (no)',a:['im']},
  {t:'match',q:'Ligue.',pairs:[['die Haltestelle','o ponto de ônibus'],['das Krankenhaus','o hospital'],['das Rathaus','a prefeitura'],['in der Nähe','perto'],['die Ecke','a esquina / o canto']]},
- {t:'tr',de:'A farmácia é perto.',a:['Die Apotheke ist in der Nähe.']}
+ {t:'tr',de:'A farmácia é perto.',a:['Die Apotheke ist in der Nähe.','Die Apotheke ist nah.','Die Apotheke ist nicht weit.']}
 ]},
 {id:'l2',title:'Transporte',desc:'mit dem Bus · Fahrkarte · umsteigen',steps:[
  {t:'vocab',title:'Meios de transporte',items:[['der Bus','o ônibus'],['die U-Bahn','o metrô'],['die S-Bahn','o trem urbano'],['die Straßenbahn','o bonde'],['der Zug','o trem'],['das Auto','o carro'],['das Fahrrad','a bicicleta'],['das Taxi','o táxi'],['das Flugzeug','o avião'],['zu Fuß','a pé'],['fahren','ir (de veículo)'],['fliegen','voar'],['die Fahrkarte','a passagem / o bilhete'],['das Ticket','o ingresso / a passagem'],['der Fahrplan','o horário (de transporte)'],['abfahren','partir'],['ankommen','chegar'],['einsteigen','embarcar / entrar'],['aussteigen','descer / sair'],['umsteigen','fazer baldeação'],['das Gleis','a plataforma (número)'],['die Verspätung','o atraso']]},
@@ -1010,7 +1026,7 @@ lessons:[
   {n:'Mann',es:'Nein, nur fünf Minuten zu Fuß.',de:'Não, só cinco minutos a pé.'},
   {you:true,opts:[{es:'Vielen Dank!',ok:true},{es:'Bitte schön!',ok:false,why:'Quem agradece é você: <i>Vielen Dank!</i>'}]}]},
  {t:'tr',de:'Com licença, como chego ao museu?',a:['Entschuldigung, wie komme ich zum Museum?']},
- {t:'tr',de:'Vire à direita! (formal)',a:['Gehen Sie rechts!','Gehen Sie nach rechts!','Biegen Sie rechts ab!']}
+ {t:'tr',de:'Vire à direita! (formal)',a:['Gehen Sie rechts!','Gehen Sie nach rechts!','Biegen Sie rechts ab!','Biegen Sie nach rechts ab!']}
 ]},
 {id:'l4',title:'Regras e placas',desc:'müssen, dürfen · Schilder · Post und Bank',steps:[
  {t:'info',title:'müssen e dürfen',html:`<table><tr><th></th><th>müssen <span class="muted">(ter que)</span></th><th>dürfen <span class="muted">(poder – ter permissão)</span></th></tr>
@@ -1027,7 +1043,7 @@ lessons:[
  {t:'mc',q:'Placa na loja: „Wegen Urlaub geschlossen bis 15.8.“',opts:['A loja está fechada até 15/8 por férias.','A loja abre só em agosto pela manhã.','A loja tem promoção de férias.'],a:0},
  {t:'gap',q:'Du ___ hier nicht parken. Das ist verboten. (dürfen)',a:['darfst']},
  {t:'gap',q:'Wir ___ morgen früh aufstehen. (müssen)',a:['müssen']},
- {t:'order',es:'Hier darf man nicht rauchen',de:'Aqui não se pode fumar.'},
+ {t:'order',es:'Hier darf man nicht rauchen',alt:['Man darf hier nicht rauchen', 'Rauchen darf man hier nicht'],de:'Aqui não se pode fumar.'},
  {t:'dialog',place:'Post',title:'Nos correios',scene:'Você quer mandar um pacote para a sua família no seu país.',lines:[
   {n:'Mitarbeiterin',es:'Guten Tag! Bitte schön?',de:'Bom dia! Pois não?'},
   {you:true,opts:[{es:'Ich möchte dieses Paket nach Brasilien schicken.',ok:true},{es:'Ich möchte dieses Paket in Brasilien schicken.',ok:false,why:'Destino (país): <b>nach</b> Brasilien.'}]},
@@ -1073,7 +1089,7 @@ lessons:[
  {t:'speak',es:'Ich bin Programmierer und arbeite bei einer Softwarefirma in Frankfurt.',de:'Sou programador e trabalho numa empresa de software em Frankfurt.',tip:'Lembre: profissão <b>sem</b> artigo.'}
 ]},
 {id:'l2',title:'No trabalho',desc:'Büro, Pause, Urlaub · am Telefon · und, aber, oder, denn',steps:[
- {t:'vocab',title:'No escritório',items:[['das Büro','o escritório'],['der Arbeitsplatz','o local de trabalho'],['der Computer','o computador'],['der Drucker','a impressora'],['drucken','imprimir'],['die E-Mail','o e-mail'],['das Meeting','a reunião'],['die Besprechung','a reunião'],['die Pause','o intervalo'],['der Urlaub','as férias'],['frei haben','estar de folga'],['krank','doente'],['Feierabend','fim do expediente'],['Kann ich bitte … sprechen?','Posso falar com …, por favor?'],['Einen Moment, bitte.','Um momento, por favor.'],['Er / Sie ist nicht da.','Ele / ela não está.'],['zurückrufen','ligar de volta'],['die Nachricht','a mensagem / o recado']]},
+ {t:'vocab',title:'No escritório',items:[['das Büro','o escritório'],['der Arbeitsplatz','o local de trabalho'],['der Computer','o computador'],['der Drucker','a impressora'],['drucken','imprimir'],['die E-Mail','o e-mail'],['das Meeting','a reunião'],['die Besprechung','a reunião'],['die Pause','o intervalo'],['der Urlaub','as férias'],['frei haben','estar de folga'],['krank','doente'],['der Feierabend','o fim do expediente'],['Kann ich bitte … sprechen?','Posso falar com …, por favor?'],['Einen Moment, bitte.','Um momento, por favor.'],['Er / Sie ist nicht da.','Ele / ela não está.'],['zurückrufen','ligar de volta'],['die Nachricht','a mensagem / o recado']]},
  {t:'info',title:'und, aber, oder, denn',html:`<p>Esses conectores <b>não mudam</b> a ordem da frase – o verbo continua na posição 2:</p>
  <table><tr><td class="es-t">und</td><td>e</td><td class="es-t">Ich arbeite im Büro <b>und</b> Jana arbeitet zu Hause.</td></tr>
  <tr><td class="es-t">aber</td><td>mas</td><td class="es-t">Der Job ist toll, <b>aber</b> ich verdiene nicht viel.</td></tr>
@@ -1113,7 +1129,7 @@ lessons:[
  {t:'gap',q:'Tom hat zu viel Bier ___. (trinken)',a:['getrunken']},
  {t:'gap',q:'Ich ___ am Samstag zu Hause geblieben. (sein)',a:['bin']},
  {t:'gap',q:'Gestern ___ ich keine Zeit. (haben – passado)',a:['hatte']},
- {t:'order',es:'Ich habe den Film nicht verstanden',de:'Eu não entendi o filme.'},
+ {t:'order',es:'Ich habe den Film nicht verstanden',alt:['Den Film habe ich nicht verstanden'],de:'Eu não entendi o filme.'},
  {t:'read',title:'Leitura: Mein Wochenende',text:`Am Samstag habe ich lange geschlafen – bis elf Uhr! Dann habe ich mit Tom gefrühstückt. Am Nachmittag sind wir mit dem Fahrrad zum Main gefahren. Das Wetter war super. Abends haben wir Pizza gegessen und einen Film gesehen. Am Sonntag hatte ich keine Lust auf Sport. Ich bin zu Hause geblieben und habe Deutsch gelernt.`,de:`No sábado dormi até tarde – até as onze! Depois tomei café da manhã com o Tom. À tarde fomos de bicicleta até o rio Meno. O tempo estava ótimo. À noite comemos pizza e vimos um filme. No domingo eu não estava com vontade de fazer esporte. Fiquei em casa e estudei alemão.`},
  {t:'mc',q:'Wie sind Lucas und Tom zum Main gefahren?',opts:['mit dem Fahrrad','mit dem Bus','mit dem Auto'],a:0},
  {t:'mc',q:'Richtig oder falsch? Am Sonntag hat Lucas Sport gemacht.',opts:['falsch','richtig'],a:0},
@@ -1130,7 +1146,7 @@ B) O supermercado Preisfuchs procura vendedor(a), de segunda a sexta, das 8h às
  {t:'mc',q:'Was verdient man im Café Sonne?',opts:['13 € pro Stunde','13 € pro Tag','18 € pro Stunde'],a:0},
  {t:'mc',q:'Richtig oder falsch? Für Stelle B muss man anrufen.',opts:['falsch','richtig'],a:0},
  {t:'info',title:'E-mail formal: doente',html:`<div class="ex es-t">Sehr geehrte Frau Hoffmann,<br>leider kann ich heute nicht zur Arbeit kommen. Ich bin krank und gehe heute zum Arzt. Ich schicke Ihnen morgen die Krankmeldung. Das Meeting um zehn Uhr kann vielleicht Jana machen.<br>Mit freundlichen Grüßen<br>Lucas Souza</div>
- <div class="ojo">Na Alemanha, a partir do 3º dia doente (às vezes já no 1º) é preciso um atestado do médico: <span class="es-t">die Krankmeldung</span>. Avise o trabalho <b>antes</b> do expediente começar.</div>`},
+ <div class="ojo">Na Alemanha, a partir do 4º dia doente (às vezes já no 1º) é preciso um atestado do médico: <span class="es-t">die Krankmeldung</span>. Avise o trabalho <b>antes</b> do expediente começar.</div>`},
  {t:'free',task:'Escreva um e-mail formal (~30 palavras) para a sua chefe, a Sra. Hoffmann: 1) você não pode ir trabalhar hoje, 2) o motivo, 3) quando você volta / o que acontece com o seu trabalho.',hint:'Sehr geehrte Frau Hoffmann, leider kann ich heute nicht … Ich bin … / Ich muss … Morgen bin ich wieder … Mit freundlichen Grüßen',focus:'formelle E-Mail (Anrede/Gruß, Sie), können, denn, Zeitangaben',model:'Sehr geehrte Frau Hoffmann,\nleider kann ich heute nicht ins Büro kommen, denn ich habe Fieber. Ich gehe heute zum Arzt. Ich hoffe, ich bin am Donnerstag wieder da.\nMit freundlichen Grüßen\nLucas Souza'}
 ]}],
 resumen:`<h3>Profissão</h3><p class="es-t">Was sind Sie von Beruf? – Ich bin Lehrerin. (sem artigo) · Ich arbeite als Koch bei … / in …</p>
@@ -1452,7 +1468,7 @@ Um abraço, Lucas`},
  {t:'gap',q:'Ich stelle die Blumen auf ___ Balkon. (der)',a:['den']},
  {t:'gap',q:'Die Katze schläft unter ___ Bett. (das)',a:['dem']},
  {t:'gap',q:'Wir gehen heute Abend ___ Kino. (in + das)',a:['ins']},
- {t:'order',es:'Das Regal steht zwischen dem Fenster und der Tür',de:'A estante fica entre a janela e a porta.'},
+ {t:'order',es:'Das Regal steht zwischen dem Fenster und der Tür',alt:['Zwischen dem Fenster und der Tür steht das Regal', 'Das Regal steht zwischen der Tür und dem Fenster', 'Zwischen der Tür und dem Fenster steht das Regal'],de:'A estante fica entre a janela e a porta.'},
  {t:'dialog',place:'Neue Wohnung',title:'Onde fica o quê?',scene:'O Tom ajuda você a arrumar o apartamento novo.',lines:[
   {n:'Tom',es:'So, wohin stellen wir das Regal?',de:'E aí, onde a gente coloca a estante?'},
   {you:true,opts:[{es:'Stell es bitte in die Ecke, neben das Fenster.',ok:true},{es:'Stell es bitte in der Ecke, neben dem Fenster.',ok:false,why:'<i>stellen</i> = movimento → Wohin? → acusativo: <b>in die</b> Ecke, <b>neben das</b> Fenster.'}]},
@@ -1477,7 +1493,7 @@ Um abraço, Lucas`},
  {t:'mc',q:'Frau Becker sagt, dass man den Müll trennen ___.',opts:['muss','muss man','müssen'],a:0},
  {t:'mc',q:'Ich weiß, ___',opts:['dass du am Samstag eine Party machst.','dass du machst am Samstag eine Party.','dass machst du am Samstag eine Party.'],a:0},
  {t:'gap',q:'Es ist wichtig, dass man im Treppenhaus leise ___. (sein)',a:['ist']},
- {t:'order',es:'Ich glaube dass der Hausmeister im Erdgeschoss wohnt',de:'Eu acho que o zelador mora no térreo.'},
+ {t:'order',es:'Ich glaube dass der Hausmeister im Erdgeschoss wohnt',alt:['Dass der Hausmeister im Erdgeschoss wohnt glaube ich'],de:'Eu acho que o zelador mora no térreo.'},
  {t:'match',q:'Onde vai o lixo?',pairs:[['die Zeitung','das Altpapier'],['die Bananenschale','der Biomüll'],['die Weinflasche','das Altglas'],['der Joghurtbecher','die Gelbe Tonne']]},
  {t:'read',title:'Leitura: Hausordnung (trecho)',text:`HAUSORDNUNG – Bornheimer Straße 12
 1. Ruhezeiten: Bitte seien Sie von 22 bis 7 Uhr und am Sonntag leise.
@@ -1535,7 +1551,7 @@ lessons:[
  {t:'gap',q:'Kannst du mir das Dokument per E-Mail schicken? Dann ___ ich es ___. (ausdrucken)',a:['drucke','aus']},
  {t:'match',q:'Ligue.',pairs:[['speichern','salvar'],['löschen','apagar'],['herunterladen','baixar'],['der Bildschirm','a tela'],['die Datei','o arquivo']]},
  {t:'gap',q:'Oh nein! Ich habe die Datei nicht ___. (speichern – Perfekt)',a:['gespeichert']},
- {t:'order',es:'Klick bitte auf den Link und lade die Datei herunter',de:'Clique no link, por favor, e baixe o arquivo.'},
+ {t:'order',es:'Klick bitte auf den Link und lade die Datei herunter',alt:['Bitte klick auf den Link und lade die Datei herunter', 'Klick auf den Link und lade bitte die Datei herunter', 'Klick auf den Link und lade die Datei bitte herunter'],de:'Clique no link, por favor, e baixe o arquivo.'},
  {t:'tr',de:'O Wi-Fi não funciona.',a:['Das WLAN funktioniert nicht.']},
  {t:'tr',de:'Eu apaguei o arquivo.',a:['Ich habe die Datei gelöscht.']}
 ]},
@@ -1551,7 +1567,7 @@ lessons:[
  {t:'mc',q:'Ich arbeite heute im Homeoffice, denn ___',opts:['meine Tochter ist krank.','meine Tochter krank ist.','krank ist meine Tochter.'],a:0},
  {t:'gap',q:'Lucas lernt viel, weil er die Prüfung bestehen ___. (wollen)',a:['will']},
  {t:'gap',q:'Ich bin zu spät, weil ich den Bus verpasst ___. (haben)',a:['habe']},
- {t:'order',es:'Weil das Wetter schön ist gehen wir in den Park',de:'Como o tempo está bonito, vamos ao parque.'},
+ {t:'order',es:'Weil das Wetter schön ist gehen wir in den Park',alt:['Wir gehen in den Park weil das Wetter schön ist'],de:'Como o tempo está bonito, vamos ao parque.'},
  {t:'mc',q:'Warum lernst du Deutsch? – ___',opts:['Weil ich in Frankfurt wohne.','Weil ich wohne in Frankfurt.','Denn ich in Frankfurt wohne.'],a:0},
  {t:'tr',de:'Eu não vou à festa porque tenho que trabalhar. (weil)',a:['Ich gehe nicht zur Party, weil ich arbeiten muss.','Ich komme nicht zur Party, weil ich arbeiten muss.']},
  {t:'speak',es:'Ich lerne Deutsch, weil ich in Frankfurt arbeite und neue Freunde finden möchte.',de:'Eu estudo alemão porque trabalho em Frankfurt e quero fazer novos amigos.',tip:'Depois de <b>weil</b>: verbo no final – <i>arbeite</i>, <i>möchte</i>.'}
@@ -1633,7 +1649,7 @@ lessons:[
  {t:'gap',q:'Beim Fußball hat Lucas ___ am Knie verletzt.',a:['sich']},
  {t:'gap',q:'Ihr müsst ___ beeilen, der Zug fährt gleich!',a:['euch']},
  {t:'mc',q:'„Interessiert ihr euch für Sport?“ – ___',opts:['Ja, wir interessieren uns sehr für Fußball.','Ja, wir interessieren sich für Fußball.','Ja, wir interessieren für Fußball.'],a:0},
- {t:'order',es:'Nach dem Training ruhe ich mich aus',de:'Depois do treino eu descanso.'},
+ {t:'order',es:'Nach dem Training ruhe ich mich aus',alt:['Ich ruhe mich nach dem Training aus'],de:'Depois do treino eu descanso.'},
  {t:'tr',de:'Estou ansioso pelo fim de semana. (sich freuen auf)',a:['Ich freue mich auf das Wochenende.','Ich freue mich aufs Wochenende.']},
  {t:'tr',de:'Ele se irrita com o chefe.',a:['Er ärgert sich über den Chef.','Er ärgert sich über seinen Chef.']},
  {t:'speak',es:'Ich bewege mich zu wenig. Ab Montag gehe ich zweimal pro Woche joggen.',de:'Eu me movimento pouco. A partir de segunda vou correr duas vezes por semana.',tip:'<i>ich bewege <b>mich</b></i> – o pronome vem logo depois do verbo.'}
@@ -1706,7 +1722,7 @@ lessons:[
  {t:'gap',q:'Wir ___ den Zug nicht nehmen, er war voll. (können)',a:['konnten']},
  {t:'gap',q:'___ du nicht zum Arzt gehen? (sollen – Präteritum, du)',a:['Solltest']},
  {t:'gap',q:'Lucas ___ eigentlich nach Berlin fahren, aber es gab keine Tickets mehr. (wollen)',a:['wollte']},
- {t:'order',es:'Im Urlaub konnten wir jeden Tag schwimmen',de:'Nas férias pudemos nadar todo dia.'},
+ {t:'order',es:'Im Urlaub konnten wir jeden Tag schwimmen',alt:['Wir konnten im Urlaub jeden Tag schwimmen', 'Jeden Tag konnten wir im Urlaub schwimmen', 'Wir konnten jeden Tag im Urlaub schwimmen'],de:'Nas férias pudemos nadar todo dia.'},
  {t:'tr',de:'Ontem eu não pude dormir.',a:['Gestern konnte ich nicht schlafen.','Ich konnte gestern nicht schlafen.']},
  {t:'tr',de:'Nós tivemos que esperar duas horas.',a:['Wir mussten zwei Stunden warten.']},
  {t:'speak',es:'Letztes Jahr wollte ich nach Italien fahren, aber ich musste arbeiten.',de:'No ano passado eu queria ir para a Itália, mas tive que trabalhar.',tip:'<i>wollte</i>, <i>musste</i> – sem trema no passado.'}
@@ -1779,7 +1795,7 @@ lessons:[
  {t:'gap',q:'Ich kaufe einen ___ Schirm. (groß)',a:['großen']},
  {t:'gap',q:'Die ___ Stiefel sind sehr bequem. (schwarz)',a:['schwarzen']},
  {t:'gap',q:'Mein Bruder trägt immer ein ___ T-Shirt. (bunt)',a:['buntes']},
- {t:'order',es:'Ich suche eine warme Jacke für den Winter',de:'Procuro um casaco quente para o inverno.'},
+ {t:'order',es:'Ich suche eine warme Jacke für den Winter',alt:['Für den Winter suche ich eine warme Jacke', 'Ich suche für den Winter eine warme Jacke'],de:'Procuro um casaco quente para o inverno.'},
  {t:'tr',de:'Eu gosto do vestido azul.',a:['Mir gefällt das blaue Kleid.','Das blaue Kleid gefällt mir.']}
 ]},
 {id:'l3',title:'Comparar',desc:'billiger als · so teuer wie · am günstigsten',steps:[
@@ -1868,7 +1884,7 @@ lessons:[
  {t:'gap',q:'Ich danke ___ für die Einladung! (Sie – formal)',a:['Ihnen']},
  {t:'gap',q:'Wem gehört der Rucksack? – Er gehört ___. (eu)',a:['mir']},
  {t:'gap',q:'Ich zeige ___ Eltern die Fotos. (meine – dativo plural)',a:['meinen']},
- {t:'order',es:'Kannst du mir bitte das Salz geben',de:'Você pode me passar o sal, por favor?'},
+ {t:'order',es:'Kannst du mir bitte das Salz geben',alt:['Kannst du mir das Salz bitte geben'],de:'Você pode me passar o sal, por favor?'},
  {t:'tr',de:'Eu dou um livro para o meu pai.',a:['Ich schenke meinem Vater ein Buch.','Ich gebe meinem Vater ein Buch.']},
  {t:'tr',de:'A sopa está gostosa para você? (informal)',a:['Schmeckt dir die Suppe?']}
 ]},
@@ -2040,7 +2056,7 @@ lessons:[
  {t:'gap',q:'Ich freue mich ___ deinen Besuch nächste Woche! (futuro)',a:['auf']},
  {t:'gap',q:'Wer kümmert sich ___ die Pflanzen, wenn du im Urlaub bist?',a:['um']},
  {t:'gap',q:'Ein Tourist hat ___ dem Weg zum Bahnhof gefragt.',a:['nach']},
- {t:'order',es:'Im Meeting haben wir über das neue Projekt gesprochen',de:'Na reunião falamos sobre o novo projeto.'},
+ {t:'order',es:'Im Meeting haben wir über das neue Projekt gesprochen',alt:['Wir haben im Meeting über das neue Projekt gesprochen', 'Über das neue Projekt haben wir im Meeting gesprochen'],de:'Na reunião falamos sobre o novo projeto.'},
  {t:'tr',de:'Eu penso muito na minha família.',a:['Ich denke oft an meine Familie.','Ich denke viel an meine Familie.']},
  {t:'tr',de:'Ela cuida da mãe dela.',a:['Sie kümmert sich um ihre Mutter.']}
 ]},
@@ -2231,7 +2247,7 @@ lessons:[
  {t:'mc',q:'Ich werde dich morgen ___.',opts:['anrufen','anrufe','angerufen'],a:0},
  {t:'gap',q:'___ du am Wochenende arbeiten? (werden)',a:['Wirst']},
  {t:'gap',q:'Jana ___ im Herbst eine Ausbildung zur Grafikerin anfangen. (werden)',a:['wird']},
- {t:'order',es:'Ich werde übermorgen die Hausaufgaben machen',de:'Vou fazer o dever de casa depois de amanhã.'},
+ {t:'order',es:'Ich werde übermorgen die Hausaufgaben machen',alt:['Übermorgen werde ich die Hausaufgaben machen', 'Die Hausaufgaben werde ich übermorgen machen'],de:'Vou fazer o dever de casa depois de amanhã.'},
  {t:'tr',de:'Amanhã vai fazer sol.',a:['Morgen wird die Sonne scheinen.','Morgen scheint die Sonne.']},
  {t:'tr',de:'Nós vamos nos mudar no ano que vem.',a:['Wir werden nächstes Jahr umziehen.','Nächstes Jahr werden wir umziehen.','Nächstes Jahr ziehen wir um.']},
  {t:'speak',es:'Nächstes Jahr werde ich einen B1-Kurs machen und vielleicht die Prüfung schreiben.',de:'No ano que vem vou fazer um curso B1 e talvez fazer a prova.',tip:'<i>werde</i> na posição 2, os infinitivos no final.'}
@@ -2407,7 +2423,7 @@ lessons:[
  {t:'gap',q:'Wir ___ den ganzen Tag am Strand. (bleiben)',a:['blieben']},
  {t:'gap',q:'Ich ___ nicht, dass du Geburtstag hast. (wissen)',a:['wusste']},
  {t:'gap',q:'Sie ___ einen Brief an ihre Familie. (schreiben)',a:['schrieb']},
- {t:'order',es:'Nach dem Essen gingen wir im Park spazieren',de:'Depois do almoço fomos passear no parque.'},
+ {t:'order',es:'Nach dem Essen gingen wir im Park spazieren',alt:['Wir gingen nach dem Essen im Park spazieren', 'Im Park gingen wir nach dem Essen spazieren'],de:'Depois do almoço fomos passear no parque.'},
  {t:'tr',de:'Ontem eu encontrei uma amiga antiga. (Präteritum)',a:['Gestern traf ich eine alte Freundin.','Ich traf gestern eine alte Freundin.']}
 ]},
 {id:'l3',title:'als, wenn ou wann?',desc:'als (uma vez) · wenn (sempre que) · wann (pergunta)',steps:[
@@ -2473,7 +2489,7 @@ lessons:[
  {t:'gap',q:'Das Problem ___ gestern gelöst. (werden – Präteritum)',a:['wurde']},
  {t:'gap',q:'Die neuen Computer werden morgen ___. (liefern)',a:['geliefert']},
  {t:'gap',q:'Die Fabrik wurde 1950 ___. (bauen)',a:['gebaut']},
- {t:'order',es:'Die Bewerbungen werden von der Personalabteilung geprüft',de:'As candidaturas são analisadas pelo departamento de pessoal.'},
+ {t:'order',es:'Die Bewerbungen werden von der Personalabteilung geprüft',alt:['Von der Personalabteilung werden die Bewerbungen geprüft'],de:'As candidaturas são analisadas pelo departamento de pessoal.'},
  {t:'tr',de:'O escritório é limpo toda noite.',a:['Das Büro wird jeden Abend geputzt.','Das Büro wird jeden Abend gereinigt.']},
  {t:'tr',de:'O contrato foi assinado ontem.',a:['Der Vertrag wurde gestern unterschrieben.']}
 ]},
@@ -2618,7 +2634,7 @@ lessons:[
  {t:'gap',q:'Es ist gesund, viel Obst ___ essen.',a:['zu']},
  {t:'gap',q:'Ich habe vergessen, Brot ___. (einkaufen + zu)',a:['einzukaufen']},
  {t:'gap',q:'Hör endlich auf, so viel ___! (rauchen + zu)',a:['zu rauchen']},
- {t:'order',es:'Ich habe vor nächste Woche mit dem Rauchen aufzuhören',de:'Pretendo parar de fumar na semana que vem.'},
+ {t:'order',es:'Ich habe vor nächste Woche mit dem Rauchen aufzuhören',alt:['Ich habe vor mit dem Rauchen nächste Woche aufzuhören'],de:'Pretendo parar de fumar na semana que vem.'},
  {t:'tr',de:'Não é fácil acordar cedo.',a:['Es ist nicht leicht, früh aufzustehen.','Es ist nicht einfach, früh aufzustehen.']},
  {t:'speak',es:'Ich habe mir vorgenommen, weniger Süßigkeiten zu essen und öfter Rad zu fahren.',de:'Decidi comer menos doces e andar de bicicleta com mais frequência.',tip:'<i>zu essen</i>, <i>Rad zu fahren</i> – o zu vem antes do infinitivo.'}
 ]},
@@ -2679,7 +2695,7 @@ lessons:[
  {t:'gap',q:'Nachdem wir das Auto ___ hatten, fuhren wir los. (tanken)',a:['getankt']},
  {t:'gap',q:'___ wir abfahren, müssen wir die Koffer packen. (antes que)',a:['Bevor']},
  {t:'gap',q:'___ Tom fuhr, las ich die Karte. (enquanto)',a:['Während']},
- {t:'order',es:'Nachdem wir zwei Stunden im Stau gestanden hatten machten wir eine Pause',de:'Depois de ficarmos duas horas no engarrafamento, fizemos uma pausa.'},
+ {t:'order',es:'Nachdem wir zwei Stunden im Stau gestanden hatten machten wir eine Pause',alt:['Wir machten eine Pause nachdem wir zwei Stunden im Stau gestanden hatten'],de:'Depois de ficarmos duas horas no engarrafamento, fizemos uma pausa.'},
  {t:'tr',de:'Quando cheguei, o show já tinha começado.',a:['Als ich ankam, hatte das Konzert schon angefangen.','Als ich ankam, hatte das Konzert schon begonnen.']},
  {t:'tr',de:'Antes de viajarmos, compramos um mapa.',a:['Bevor wir losfuhren, kauften wir eine Karte.','Bevor wir losgefahren sind, haben wir eine Karte gekauft.','Bevor wir abfuhren, kauften wir eine Karte.']}
 ]},
@@ -2737,7 +2753,7 @@ lessons:[
  {t:'mc',q:'___ du mir bitte das Passwort sagen?',opts:['Könntest','Kannst gewesen','Konntest'],a:0},
  {t:'gap',q:'Wenn ich ein neues Laptop ___, ___ ich schneller arbeiten. (haben / können)',a:['hätte','könnte']},
  {t:'gap',q:'Ich ___ gern eine Woche ohne Internet leben – aber nur im Urlaub! (werden – Konjunktiv II)',a:['würde']},
- {t:'order',es:'Wenn ich mehr Geld hätte würde ich ein neues Handy kaufen',de:'Se eu tivesse mais dinheiro, compraria um celular novo.'},
+ {t:'order',es:'Wenn ich mehr Geld hätte würde ich ein neues Handy kaufen',alt:['Ich würde ein neues Handy kaufen wenn ich mehr Geld hätte'],de:'Se eu tivesse mais dinheiro, compraria um celular novo.'},
  {t:'tr',de:'Seria ótimo se você pudesse vir.',a:['Es wäre toll, wenn du kommen könntest.','Es wäre super, wenn du kommen könntest.','Es wäre schön, wenn du kommen könntest.']},
  {t:'speak',es:'Wenn ich Lehrer wäre, würde ich Handys im Unterricht verbieten.',de:'Se eu fosse professor(a), proibiria celulares na aula.',tip:'<i>wäre</i> (ser) e <i>würde … verbieten</i>.'}
 ]},
@@ -2798,7 +2814,7 @@ lessons:[
  {t:'mc',q:'Lucas vermisst seine Familie. ___ möchte er in Deutschland bleiben.',opts:['Trotzdem','Obwohl','Weil'],a:0},
  {t:'gap',q:'Sie haben sich versöhnt, ___ der Streit sehr schlimm war.',a:['obwohl']},
  {t:'gap',q:'Ich hatte keine Zeit. ___ habe ich dir geholfen.',a:['Trotzdem']},
- {t:'order',es:'Obwohl sie in verschiedenen Städten wohnen sehen sie sich jedes Wochenende',de:'Embora morem em cidades diferentes, eles se veem todo fim de semana.'},
+ {t:'order',es:'Obwohl sie in verschiedenen Städten wohnen sehen sie sich jedes Wochenende',alt:['Sie sehen sich jedes Wochenende obwohl sie in verschiedenen Städten wohnen'],de:'Embora morem em cidades diferentes, eles se veem todo fim de semana.'},
  {t:'tr',de:'Embora eu esteja cansado, vou à festa.',a:['Obwohl ich müde bin, gehe ich zur Party.','Obwohl ich müde bin, komme ich zur Party.']},
  {t:'speak',es:'Obwohl wir uns manchmal streiten, verstehen wir uns sehr gut.',de:'Embora às vezes a gente brigue, nos entendemos muito bem.',tip:'Depois de <i>obwohl</i> o verbo vai para o final: <i>streiten</i>.'}
 ]},
@@ -2860,7 +2876,7 @@ lessons:[
  {t:'mc',q:'Plastikflaschen ___ recycelt werden.',opts:['können','kann','werden'],a:0},
  {t:'gap',q:'Das Licht muss am Abend ausgeschaltet ___.',a:['werden']},
  {t:'gap',q:'Alte Medikamente sollten in der Apotheke ___ werden. (entsorgen)',a:['entsorgt']},
- {t:'order',es:'Im Büro sollte mehr Strom gespart werden',de:'No escritório, mais energia deveria ser economizada.'},
+ {t:'order',es:'Im Büro sollte mehr Strom gespart werden',alt:['Mehr Strom sollte im Büro gespart werden'],de:'No escritório, mais energia deveria ser economizada.'},
  {t:'tr',de:'O lixo tem que ser separado.',a:['Der Müll muss getrennt werden.']},
  {t:'tr',de:'Plástico deveria ser evitado.',a:['Plastik sollte vermieden werden.']}
 ]},
@@ -3007,7 +3023,7 @@ lessons:[
  {t:'gap',q:'Trotz ___ Kälte waren viele Menschen auf der Straße. (die Kälte)',a:['der']},
  {t:'gap',q:'Wegen ___ Streiks fällt mein Flug aus. (ein Streik)',a:['eines']},
  {t:'gap',q:'Sie müssen das Formular ___ einer Woche abgeben. (dentro de)',a:['innerhalb']},
- {t:'order',es:'Wegen der Baustelle ist die Straße bis Freitag gesperrt',de:'Por causa da obra, a rua está fechada até sexta.'},
+ {t:'order',es:'Wegen der Baustelle ist die Straße bis Freitag gesperrt',alt:['Die Straße ist wegen der Baustelle bis Freitag gesperrt', 'Die Straße ist bis Freitag wegen der Baustelle gesperrt', 'Bis Freitag ist die Straße wegen der Baustelle gesperrt'],de:'Por causa da obra, a rua está fechada até sexta.'},
  {t:'tr',de:'Apesar do mau tempo, muitas pessoas foram votar.',a:['Trotz des schlechten Wetters sind viele Menschen wählen gegangen.','Trotz des schlechten Wetters gingen viele Menschen wählen.','Trotz des schlechten Wetters sind viele Leute wählen gegangen.','Trotz des schlechten Wetters gingen viele Leute wählen.']},
  {t:'tr',de:'Durante a reunião, ele não disse nada.',a:['Während der Versammlung hat er nichts gesagt.','Während der Besprechung hat er nichts gesagt.','Während der Sitzung hat er nichts gesagt.','Während der Versammlung sagte er nichts.','Während der Besprechung sagte er nichts.']}
 ]},
@@ -3023,7 +3039,7 @@ lessons:[
  {t:'gap',q:'Wenn ich mehr gelernt ___, hätte ich die Prüfung bestanden.',a:['hätte']},
  {t:'gap',q:'Ohne den Stau ___ wir pünktlich angekommen.',a:['wären']},
  {t:'gap',q:'Ich hätte dich gern ___. (besuchen – particípio)',a:['besucht']},
- {t:'order',es:'Wenn ich das gewusst hätte wäre ich mitgekommen',de:'Se eu tivesse sabido disso, teria ido junto.'},
+ {t:'order',es:'Wenn ich das gewusst hätte wäre ich mitgekommen',alt:['Ich wäre mitgekommen wenn ich das gewusst hätte'],de:'Se eu tivesse sabido disso, teria ido junto.'},
  {t:'tr',de:'Eu teria votado, mas eu não tinha passaporte alemão.',a:['Ich hätte gewählt, aber ich hatte keinen deutschen Pass.','Ich hätte gern gewählt, aber ich hatte keinen deutschen Pass.']},
  {t:'tr',de:'Nós teríamos ficado mais tempo.',a:['Wir wären länger geblieben.']},
  {t:'dialog',place:'Bürgerversammlung',title:'Depois da assembleia',scene:'O Sr. Wagner, da associação de moradores, conversa com você depois da assembleia sobre a zona de pedestres.',lines:[
@@ -3140,7 +3156,7 @@ lessons:[
  {t:'gap',q:'Ich esse gern ___ Kartoffeln. (braten – Partizip II)',a:['gebratene']},
  {t:'gap',q:'Bitte beantworten Sie die ___ Fragen. (folgen – Partizip I)',a:['folgenden']},
  {t:'tr',de:'O museu renovado é muito bonito.',a:['Das renovierte Museum ist sehr schön.']},
- {t:'order',es:'Das gestern gekaufte Ticket ist leider nicht mehr gültig',de:'O ingresso comprado ontem infelizmente não é mais válido.'}
+ {t:'order',es:'Das gestern gekaufte Ticket ist leider nicht mehr gültig',alt:['Leider ist das gestern gekaufte Ticket nicht mehr gültig'],de:'O ingresso comprado ontem infelizmente não é mais válido.'}
 ]},
 {id:'l5',title:'Festas, esporte e tempo livre',desc:'der Karneval, das Stadion, faulenzen …',steps:[
  {t:'vocab',title:'Tempo livre',items:[['der Feiertag','o feriado'],['der Karneval / der Fasching','o carnaval'],['das Kostüm','a fantasia; o tailleur'],['sich verkleiden','fantasiar-se'],['faulenzen','ficar à toa'],['die Langeweile','o tédio'],['die Sportart','a modalidade esportiva'],['das Stadion','o estádio'],['der Gegner / die Gegnerin','o adversário / a adversária'],['das Tor','o gol; o portão'],['unentschieden','empatado'],['jubeln','comemorar (gritando de alegria)']]},
@@ -3342,7 +3358,7 @@ lessons:[
  {t:'gap',q:'Ein Umzug nach München kommt für mich leider nicht in ___.',a:['Frage']},
  {t:'gap',q:'Die Regierung muss endlich Maßnahmen ___. (tomar)',a:['ergreifen']},
  {t:'match',q:'Qual verbo combina?',pairs:[['eine Entscheidung','treffen'],['einen Antrag','stellen'],['einen Beitrag','leisten'],['Rücksicht','nehmen'],['in Kontakt','treten']]},
- {t:'order',es:'Ich möchte das Thema Homeoffice in der nächsten Besprechung zur Sprache bringen',de:'Eu gostaria de trazer o tema home office à tona na próxima reunião.'},
+ {t:'order',es:'Ich möchte das Thema Homeoffice in der nächsten Besprechung zur Sprache bringen',alt:['In der nächsten Besprechung möchte ich das Thema Homeoffice zur Sprache bringen', 'Ich möchte in der nächsten Besprechung das Thema Homeoffice zur Sprache bringen'],de:'Eu gostaria de trazer o tema home office à tona na próxima reunião.'},
  {t:'tr',de:'A reunião vai tomar muito tempo.',a:['Die Besprechung wird viel Zeit in Anspruch nehmen.','Das Meeting wird viel Zeit in Anspruch nehmen.']},
  {t:'tr',de:'Quem assume a responsabilidade pelo projeto?',a:['Wer übernimmt die Verantwortung für das Projekt?']}
 ]},
@@ -3426,7 +3442,7 @@ lessons:[
  {t:'gap',q:'Deine Argumente sind gut ___. (dá para entender o raciocínio)',a:['nachvollziehbar']},
  {t:'gap',q:'Das Projekt ___ sich in drei Monaten umsetzen.',a:['lässt']},
  {t:'gap',q:'Die Rechnung ist innerhalb von 14 Tagen zu ___. (bezahlen)',a:['bezahlen']},
- {t:'order',es:'Die Folgen dieser Technologie sind heute noch nicht vorhersehbar',de:'As consequências dessa tecnologia ainda não são previsíveis hoje.'},
+ {t:'order',es:'Die Folgen dieser Technologie sind heute noch nicht vorhersehbar',alt:['Heute sind die Folgen dieser Technologie noch nicht vorhersehbar'],de:'As consequências dessa tecnologia ainda não são previsíveis hoje.'},
  {t:'tr',de:'Isso não dá para explicar facilmente. (sich lassen)',a:['Das lässt sich nicht leicht erklären.','Das lässt sich nicht einfach erklären.']},
  {t:'tr',de:'O formulário deve ser preenchido completamente. (sein + zu)',a:['Das Formular ist vollständig auszufüllen.']}
 ]},
@@ -3504,7 +3520,7 @@ lessons:[
  {t:'gap',q:'Die Ärztin sagt, man ___ mehr Sport machen. (sollen – Konj. I)',a:['solle']},
  {t:'gap',q:'Er behauptet, er ___ davon nichts gewusst. (haben – Konj. I)',a:['habe']},
  {t:'gap',q:'Die Polizei teilte mit, es ___ keine Verletzten. (geben – Konj. I)',a:['gebe']},
- {t:'order',es:'Die Forscherin betonte es gebe noch viele offene Fragen',de:'A pesquisadora enfatizou que ainda haveria muitas questões em aberto.'},
+ {t:'order',es:'Die Forscherin betonte es gebe noch viele offene Fragen',alt:['Es gebe noch viele offene Fragen betonte die Forscherin'],de:'A pesquisadora enfatizou que ainda haveria muitas questões em aberto.'},
  {t:'tr',de:'O ministro diz que a situação é difícil. (Konjunktiv I)',a:['Der Minister sagt, die Situation sei schwierig.','Der Minister sagt, die Lage sei schwierig.']},
  {t:'tr',de:'Ela disse que tinha estado doente. (Konjunktiv I)',a:['Sie sagte, sie sei krank gewesen.','Sie hat gesagt, sie sei krank gewesen.']}
 ]},
@@ -3641,7 +3657,7 @@ lessons:[
  {t:'mc',q:'„Wahrscheinlich ist sie schon zu Hause.“ =',opts:['Sie dürfte schon zu Hause sein.','Sie will schon zu Hause sein.','Sie soll schon zu Hause sein.'],a:0},
  {t:'gap',q:'Der Kollege fehlt schon wieder. Er ___ wirklich überlastet sein. (quase certeza)',a:['muss']},
  {t:'gap',q:'Sie ___ den Termin vergessen haben. (possivelmente – könnte)',a:['könnte']},
- {t:'order',es:'Die Ärztin soll schon lange in dieser Praxis arbeiten',de:'Dizem que a médica trabalha há muito tempo neste consultório.'},
+ {t:'order',es:'Die Ärztin soll schon lange in dieser Praxis arbeiten',alt:['Die Ärztin soll in dieser Praxis schon lange arbeiten', 'In dieser Praxis soll die Ärztin schon lange arbeiten'],de:'Dizem que a médica trabalha há muito tempo neste consultório.'},
  {t:'tr',de:'Ele deve ter perdido o ônibus. (quase certeza)',a:['Er muss den Bus verpasst haben.']}
 ]},
 {id:'l3',title:'Sistema de saúde – Futur II',desc:'die Diagnose, die Nebenwirkung · Er wird es vergessen haben.',steps:[
@@ -3709,7 +3725,7 @@ lessons:[
  {t:'gap',q:'Wenn Sie Fragen haben, … → ___ Fragen wenden Sie sich bitte an …',a:['Bei']},
  {t:'gap',q:'Weil die Nachfrage gestiegen ist → wegen der gestiegenen ___',a:['Nachfrage']},
  {t:'gap',q:'damit die Arbeit erleichtert wird → zur ___ der Arbeit',a:['Erleichterung']},
- {t:'order',es:'Nach Abschluss der Recherche wurde der Artikel veröffentlicht',de:'Depois de concluída a apuração, o artigo foi publicado.'},
+ {t:'order',es:'Nach Abschluss der Recherche wurde der Artikel veröffentlicht',alt:['Der Artikel wurde nach Abschluss der Recherche veröffentlicht'],de:'Depois de concluída a apuração, o artigo foi publicado.'},
  {t:'tr',de:'Durante a reunião, os celulares devem estar desligados. (während + genitivo)',a:['Während der Besprechung müssen die Handys ausgeschaltet sein.','Während des Meetings müssen die Handys ausgeschaltet sein.','Während der Sitzung müssen die Handys ausgeschaltet sein.']}
 ]},
 {id:'l3',title:'Fazer uma apresentação',desc:'Mein Vortrag gliedert sich in … · Damit komme ich zu …',steps:[
@@ -3778,7 +3794,7 @@ lessons:[
  {t:'gap',q:'Mithilfe ___ Satelliten kann man Waldbrände früh erkennen. (artigo genitivo plural)',a:['der']},
  {t:'gap',q:'Aufgrund ___ Hitzewelle sind die Schwimmbäder voll. (die Hitzewelle)',a:['der']},
  {t:'gap',q:'Wir wohnen ___ der Stadt, auf dem Land. (fora de)',a:['außerhalb']},
- {t:'order',es:'Angesichts der Klimakrise müssen wir unseren Lebensstil ändern',de:'Diante da crise climática, precisamos mudar o nosso estilo de vida.'},
+ {t:'order',es:'Angesichts der Klimakrise müssen wir unseren Lebensstil ändern',alt:['Wir müssen angesichts der Klimakrise unseren Lebensstil ändern'],de:'Diante da crise climática, precisamos mudar o nosso estilo de vida.'},
  {t:'tr',de:'Por causa da seca, a colheita foi ruim. (aufgrund)',a:['Aufgrund der Dürre war die Ernte schlecht.']}
 ]},
 {id:'l3',title:'Natureza e biodiversidade',desc:'die Artenvielfalt, aussterben, schützen …',steps:[
@@ -3917,7 +3933,7 @@ lessons:[
  {t:'mc',q:'___ selbst zu kochen, bestellt er jeden Abend Pizza.',opts:['Anstatt','Ohne dass','Indem'],a:0},
  {t:'gap',q:'Man kann die Frist verlängern, ___ man einen Antrag stellt.',a:['indem']},
  {t:'gap',q:'Er hat die Strafe bezahlt, ohne Widerspruch ___. (einlegen)',a:['einzulegen']},
- {t:'order',es:'Anstatt sich zu beschweren sollten die Bürger selbst aktiv werden',de:'Em vez de reclamar, os cidadãos deveriam agir eles mesmos.'},
+ {t:'order',es:'Anstatt sich zu beschweren sollten die Bürger selbst aktiv werden',alt:['Die Bürger sollten selbst aktiv werden anstatt sich zu beschweren', 'Die Bürger sollten anstatt sich zu beschweren selbst aktiv werden'],de:'Em vez de reclamar, os cidadãos deveriam agir eles mesmos.'},
  {t:'tr',de:'Ele saiu sem pagar.',a:['Er ist gegangen, ohne zu bezahlen.','Er ist gegangen, ohne zu zahlen.']},
  {t:'tr',de:'Aprende-se uma língua falando muito. (indem)',a:['Man lernt eine Sprache, indem man viel spricht.']}
 ]},
@@ -4057,7 +4073,7 @@ lessons:[
  {t:'mc',q:'Ich weiß, dass ich mehr ___.',opts:['hätte üben sollen','üben sollen hätte','hätte geübt sollen'],a:0},
  {t:'gap',q:'Wir hätten die Wohnung nicht nehmen ___. (dever – modal)',a:['sollen']},
  {t:'gap',q:'Sie hätte länger bleiben ___, aber sie wollte nicht. (poder – modal)',a:['können']},
- {t:'order',es:'Im Nachhinein hätte ich mich besser auf den Winter vorbereiten sollen',de:'Em retrospecto, eu deveria ter me preparado melhor para o inverno.'},
+ {t:'order',es:'Im Nachhinein hätte ich mich besser auf den Winter vorbereiten sollen',alt:['Ich hätte mich im Nachhinein besser auf den Winter vorbereiten sollen'],de:'Em retrospecto, eu deveria ter me preparado melhor para o inverno.'},
  {t:'tr',de:'Você deveria ter me contado isso.',a:['Du hättest mir das sagen sollen.','Das hättest du mir sagen sollen.','Du hättest mir das erzählen sollen.']},
  {t:'speak',es:'Im Nachhinein hätte ich mir mehr Zeit für die Wohnungssuche nehmen sollen.',de:'Olhando para trás, eu deveria ter tirado mais tempo para procurar apartamento.',tip:'<i>sich Zeit nehmen für</i> = tirar tempo para.'}
 ]},
