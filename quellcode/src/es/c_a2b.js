@@ -32,7 +32,7 @@ lessons:[
  {t:'mc',q:'„Ich habe Fieber.“',opts:['Tengo fiebre.','Estoy fiebre.','Me duele fiebre.'],a:0},
  {t:'gap',q:'Tengo tos ___ ___ tres días.',a:['desde','hace']},
  {t:'gap',q:'No puedo ir a clase, ___ (yo, estar) muy cansado y ___ (tener) fiebre.',a:['estoy','tengo']},
- {t:'tr',de:'Ich habe seit gestern Kopfschmerzen.',a:['Me duele la cabeza desde ayer.','Desde ayer me duele la cabeza.','Tengo dolor de cabeza desde ayer.']},
+ {t:'tr',de:'Ich habe seit gestern Kopfschmerzen.',a:['Me duele la cabeza desde ayer.','Desde ayer me duele la cabeza.','Tengo dolor de cabeza desde ayer.','Desde ayer tengo dolor de cabeza.']},
  {t:'dialog',place:'Por WhatsApp',title:'Laia fragt nach',scene:'Du warst heute nicht im Kurs. Laia schreibt dir.',lines:[
   {n:'Laia',es:'¡Hola! Hoy no has venido a clase. ¿Qué te pasa?',de:'Hi! Du warst heute nicht im Kurs. Was ist los?'},
   {you:true,opts:[{es:'Estoy resfriado y me duele mucho la garganta.',ok:true},{es:'Tengo resfriado y me duelen mucho la garganta.',ok:false,why:'<i>estar resfriado</i>; und <i>la garganta</i> ist Einzahl → <b>duele</b>.'}]},
@@ -73,7 +73,7 @@ lessons:[
  {t:'mc',q:'Zu deinem Freund: „Komm her!“',opts:['¡Ven aquí!','¡Viene aquí!','¡Venga aquí!'],a:0},
  {t:'gap',q:'(tú) ___ (beber) mucha agua y ___ (descansar).',a:['bebe','descansa']},
  {t:'gap',q:'(usted) ___ (abrir) la boca, por favor.',a:['abra']},
- {t:'gap',q:'(tú) ___ (hacer) los deberes y luego ___ (ir) a la cama.',a:['haz','ve']},
+ {t:'gap',q:'(tú) ___ (hacer) los deberes y luego ___ (ir) a la cama.',a:['haz','ve|vete']},
  {t:'match',q:'Infinitiv → Imperativ (tú)',pairs:[['tener','ten'],['poner','pon'],['salir','sal'],['decir','di'],['venir','ven']]},
  {t:'listen',es:'Tome una pastilla cada ocho horas.',de:'Nehmen Sie alle acht Stunden eine Tablette.'},
  {t:'read',title:'Consejos para el estrés de los exámenes',text:`Los exámenes son estresantes para todos. Aquí tienes cinco consejos. Primero, {organiza|organisiere} tu tiempo: haz un plan para cada día. Segundo, {duerme|schlafe} siete u ocho horas. Sin descanso no puedes aprender. Tercero, {come|iss} bien y bebe mucha agua; el café no es la solución. Cuarto, haz deporte: un {paseo|Spaziergang} de veinte minutos ayuda mucho. Y por último, {habla|sprich} con tus compañeros: no estás solo.`,de:'Prüfungen sind für alle stressig. Hier hast du fünf Tipps. Erstens: Organisiere deine Zeit, mach einen Plan für jeden Tag. Zweitens: Schlaf sieben oder acht Stunden. Ohne Erholung kannst du nicht lernen. Drittens: Iss gut und trink viel Wasser; Kaffee ist nicht die Lösung. Viertens: Mach Sport, ein Spaziergang von zwanzig Minuten hilft viel. Und zuletzt: Sprich mit deinen Kommilitonen, du bist nicht allein.'},
@@ -134,7 +134,7 @@ lessons:[
  <table><tr><td>estaba</td><td>estábamos</td></tr><tr><td>estabas</td><td>estabais</td></tr><tr><td>estaba</td><td>estaban</td></tr></table>
  <p>+ Gerundium: <span class="es-t">-ar → -ando, -er/-ir → -iendo</span> · <span class="es-t">leer → leyendo, dormir → durmiendo</span></p>`},
  {t:'mc',q:'___ por el centro cuando empezó a llover.',opts:['Estábamos paseando','Paseamos','Estuvimos paseando'],a:0},
- {t:'gap',q:'Cuando me llamaste, ___ ___ (yo, estar + ducharse).',a:['me estaba','duchando'],hint:'Reflexivpronomen davor: <i>me estaba duchando</i> (oder: <i>estaba duchándome</i>).'},
+ {t:'gap',q:'Cuando me llamaste, ___ (yo, estar + ducharse).',a:['me estaba duchando','estaba duchándome'],hint:'Reflexivpronomen davor: <i>me estaba duchando</i> (oder: <i>estaba duchándome</i>).'},
  {t:'gap',q:'Los niños ___ ___ (estar + jugar) en la playa cuando vieron los delfines.',a:['estaban','jugando']},
  {t:'vocab',title:'Erzählen',items:[['aquel día','an jenem Tag','📅'],['al día siguiente','am nächsten Tag','➡️'],['de repente','plötzlich','⚡'],['entonces','dann / da','👉'],['al final','am Ende','🏁'],['por suerte','zum Glück','🍀'],['por desgracia','leider','😞'],['¡Qué bien!','Wie schön!','😀'],['¡Qué mala suerte!','So ein Pech!','😩'],['¿De verdad?','Wirklich?','😮'],['¡No me digas!','Was du nicht sagst!','😲']]},
  {t:'mc',q:'Dein Freund: „Perdí el móvil en el tren.“ – Du reagierst:',opts:['¡Qué mala suerte!','¡Qué bien!','¡Enhorabuena!'],a:0},
@@ -218,7 +218,7 @@ Primero se corta el pan en {rebanadas|Scheiben} y se {tuesta|röstet} un poco. D
  {t:'gap',q:'– ¿Dónde echo las patatas? – ___ (echar + las) en la sartén.',a:['Échalas']},
  {t:'gap',q:'– ¿Y el aceite? – ___ (añadir + lo) al final.',a:['Añádelo']},
  {t:'gap',q:'– ¿Ya has batido los huevos? – Sí, ya ___ he batido.',a:['los']},
- {t:'tr',de:'Die Tortilla? Dreh sie jetzt um!',a:['¿La tortilla? ¡Dale la vuelta ahora!','¿La tortilla? Dale la vuelta ahora.']},
+ {t:'tr',de:'Die Tortilla? Dreh sie jetzt um!',a:['¿La tortilla? ¡Dale la vuelta ahora!','¿La tortilla? ¡Ahora dale la vuelta!']},
  {t:'listen',es:'Pela las patatas y córtalas en trozos pequeños.',de:'Schäl die Kartoffeln und schneide sie in kleine Stücke.'},
  {t:'speak',es:'¿La cebolla? Córtala muy fina.',de:'Die Zwiebel? Schneide sie ganz fein.'}]},
 {id:'l4',title:'Dein Lieblingsrezept',desc:'Rezept verstehen & schreiben',steps:[
@@ -304,7 +304,7 @@ lessons:[
   {you:true,opts:[{es:'Gracias. Te lo devuelvo mañana.',ok:true},{es:'Gracias. Lo te devuelvo mañana.',ok:false,why:'Reihenfolge: erst <i>te</i> (wem), dann <i>lo</i> (was): <b>te lo</b>.'}]},
   {n:'Nuria',es:'Vale. Oye, ¿te importa bajar la basura?',de:'Okay. Hör mal, macht es dir was aus, den Müll runterzubringen?'},
   {you:true,opts:[{es:'No, no me importa. La bajo ahora.',ok:true},{es:'No, no me importa. Lo bajo ahora.',ok:false,why:'<i>la basura</i> ist weiblich → <b>la</b> bajo.'}]}]},
- {t:'tr',de:'Kannst du mir dein Buch leihen? – Ja klar, ich leihe es dir.',a:['¿Me prestas tu libro? – Sí, claro, te lo presto.','¿Puedes prestarme tu libro? – Sí, claro, te lo presto.','¿Me puedes prestar tu libro? – Sí, claro, te lo presto.']},
+ {t:'tr',de:'Kannst du mir dein Buch leihen? – Ja klar, ich leihe es dir.',a:['¿Me prestas tu libro? – Sí, claro, te lo presto.','¿Puedes prestarme tu libro? – Sí, claro, te lo presto.','¿Me puedes prestar tu libro? – Sí, claro, te lo presto.','¿Me dejas tu libro? – Sí, claro, te lo dejo.']},
  {t:'free',task:'Schreib eine WhatsApp an Marc: Du organisierst eine Überraschungsparty für Laia. Bitte ihn um zwei Gefallen und sag, was ihr ihr schenkt.',hint:'¡Hola Marc! El sábado … · ¿Puedes …? · ¿Te importa …? · Le regalamos … · ¿Se lo das tú?',focus:'le / se lo, ¿Puedes …? / ¿Te importa …?',model:'¡Hola Marc! El sábado hacemos una fiesta sorpresa para Laia en mi piso. ¿Puedes traer música? Y ¿te importa comprar la tarta? Le regalamos un libro de fotografía, porque le encanta. Lo tengo yo, pero ¿se lo das tú? ¡Gracias!'},
  {t:'speak',es:'¿Te importa si cierro la ventana? Tengo un poco de frío.',de:'Stört es dich, wenn ich das Fenster zumache? Mir ist ein bisschen kalt.'}]}
 ],

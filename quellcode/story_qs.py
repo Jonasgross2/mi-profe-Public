@@ -18,7 +18,7 @@ QS={
 's6':[MC('¿Qué desayuna Ben normalmente?',['café con leche y una tostada','nada','zumo y cereales']),MC('Hoy, ¿qué no ha hecho Ben?',['No ha desayunado.','No se ha vestido.','No ha ido a clase.']),
   TF('Normalmente, Quim llega puntual.',False),TF('Hoy Ben se ha vestido muy rápido.',True),GAP('Ben tiene clase a las ___.','nueve|9'),GAP('Hoy el que llega tarde es ___.','Ben')],
 's7':[MC('¿Qué va a hacer Rocío en el puente?',['visitar a su familia','ir a un festival','ir a los Pirineos']),MC('¿Qué van a llevar Ben y Aina por el mal tiempo?',['chaquetas y botas','paraguas','nada especial']),
-  TF('El viernes del puente muchos catalanes trabajan.',False),TF('Puigcerdà está en la montaña.',True),GAP('Iker va a ir a un ___ de música.','festival'),GAP('El domingo van a volver por la ___.','costa')],
+  TF('El viernes del puente muchos catalanes trabajan.',False),TF('Puigcerdà está en la montaña.',True),GAP('Iker va a ir a un ___ de música.','festival'),GAP('El domingo, antes de volver, van a pasear por el ___.','lago')],
 's8':[MC('¿Quién es la señora Vilaró?',['la casera de Ben y Rocío','la abuela de Rocío','un profesor de la universidad']),MC('Según la señora Vilaró, ¿cómo era el Clot antes?',['Había menos coches.','Había más turistas.','Era más grande.']),
   TF('Antes los vecinos no se conocían.',False),TF('Los jóvenes iban a bailar a una plaza.',True),GAP('La señora Vilaró tiene ___ años.','ochenta|80'),GAP('Antes, ___ llegaba tarde a las citas.','nadie')],
 's9':[MC('¿Qué tipo de empresa es?',['un estudio de arquitectura','una empresa de tecnología','un banco']),MC('¿Qué hizo Quim la mañana de la entrevista?',['Leyó su currículum varias veces.','Durmió hasta tarde.','Llamó a la empresa.']),

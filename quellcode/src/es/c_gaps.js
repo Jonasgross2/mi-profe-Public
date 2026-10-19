@@ -18,8 +18,8 @@ lessons:[
  {t:'mc',q:'„Noch einen Kaffee, bitte.“',opts:['Otro café, por favor.','Un otro café, por favor.','Uno más otro café, por favor.'],a:0},
  {t:'gap',q:'___ sabe dónde están las llaves. (niemand)',a:['Nadie']},
  {t:'gap',q:'No he comido ___ en todo el día. (nichts)',a:['nada']},
- {t:'tr',de:'Ich sehe niemanden.',a:['No veo a nadie.','No veo nadie.']},
- {t:'tr',de:'Hat jemand angerufen?',a:['¿Ha llamado alguien?','¿Alguien ha llamado?']},
+ {t:'tr',de:'Ich sehe niemanden.',a:['No veo a nadie.']},
+ {t:'tr',de:'Hat jemand angerufen?',a:['¿Ha llamado alguien?','¿Alguien ha llamado?','¿Llamó alguien?','¿Alguien llamó?']},
  {t:'listen',es:'No hay nadie en la recepción.',de:'Es ist niemand am Empfang.'}]},
 {id:'l2',title:'algún & ningún',desc:'¿Hay algún banco cerca? – No, ninguno.',steps:[
  {t:'info',title:'alguno / ninguno – vor Nomen verkürzt',html:`<table><tr><th></th><th>männlich</th><th>weiblich</th></tr>
@@ -30,8 +30,8 @@ lessons:[
  {t:'mc',q:'¿Hay ___ supermercado cerca de aquí?',opts:['algún','alguno','alguna'],a:0},
  {t:'mc',q:'No hay ___ problema.',opts:['ningún','ninguno','ninguna'],a:0},
  {t:'gap',q:'– ¿Tienes alguna pregunta? – No, no tengo ___.',a:['ninguna']},
- {t:'gap',q:'___ día quiero vivir en Barcelona. (irgendwann)',a:['Algún']},
- {t:'tr',de:'Ich habe keine Idee.',a:['No tengo ninguna idea.','No tengo ni idea.']},
+ {t:'gap',q:'___ día quiero viajar a México. (irgendwann)',a:['Algún']},
+ {t:'tr',de:'Ich habe keine Idee.',a:['No tengo ninguna idea.','No tengo ni idea.','No tengo idea.']},
  {t:'dialog',place:'Coworking en Poblenou',title:'Verlorene Sachen',scene:'Du suchst deine Jacke und dein Ladekabel.',lines:[
   {n:'Sonia',es:'¡Hola! ¿Necesitas algo?',de:'Hallo! Brauchst du etwas?'},
   {you:true,opts:[{es:'Sí, ayer dejé mi chaqueta aquí. ¿Alguien ha traído una chaqueta negra?',ok:true},{es:'Sí, ayer dejé mi chaqueta aquí. ¿Nadie ha traído una chaqueta negra?',ok:false,why:'Bei einer offenen Frage: <b>alguien</b> (jemand).'}]},
@@ -54,7 +54,7 @@ lessons:[
  <p>Unregelmäßig: <span class="es-t">el mejor (beste) · el peor (schlechteste) · el mayor (älteste) · el menor (jüngste)</span></p>
  <p><b>Sehr, sehr …</b>: <span class="es-t">-ísimo</span> → <span class="es-t">caro → carísimo · bueno → buenísimo · fácil → facilísimo · rico → riquísimo</span></p>`},
  {t:'mc',q:'Es el restaurante ___ caro ___ la ciudad.',opts:['más … de','más … que','muy … de'],a:0},
- {t:'gap',q:'Mi hermano es el ___ de la familia. (der Jüngste)',a:['menor|más joven']},
+ {t:'gap',q:'Mi hermano es el ___ de la familia. (der Jüngste)',a:['menor|más joven|pequeño|más pequeño']},
  {t:'gap',q:'Este piso es muy, muy caro: es ___. (-ísimo)',a:['carísimo']},
  {t:'tr',de:'Das ist das beste Café des Viertels.',a:['Es el mejor café del barrio.','Este es el mejor café del barrio.','Es la mejor cafetería del barrio.']},
  {t:'listen',es:'La paella de mi abuela está buenísima.',de:'Die Paella meiner Oma ist superlecker.'}]},
@@ -74,7 +74,7 @@ lessons:[
  {t:'mc',q:'¿___ películas te gustan?',opts:['Qué','Cuál'],a:0,keep:true},
  {t:'mc',q:'Hay dos camisetas. ¿___ te gusta más?',opts:['Cuál','Qué'],a:0,keep:true},
  {t:'gap',q:'¿___ es una „calçotada“? – Es una fiesta catalana con cebollas a la brasa.',a:['Qué']},
- {t:'tr',de:'Was ist deine E-Mail-Adresse?',a:['¿Cuál es tu correo electrónico?','¿Cuál es tu dirección de correo electrónico?','¿Cuál es tu email?','¿Cuál es tu e-mail?']}]}
+ {t:'tr',de:'Was ist deine E-Mail-Adresse?',a:['¿Cuál es tu correo electrónico?','¿Cuál es tu dirección de correo electrónico?','¿Cuál es tu email?','¿Cuál es tu e-mail?','¿Cuál es tu correo?','¿Cuál es tu dirección de correo?','¿Cuál es tu dirección de email?']}]}
 ],
 placement:[
  {t:'mc',q:'– ¿Hay alguien en casa? – No, no hay ___.',opts:['nadie','alguien','nada'],a:0},
@@ -105,7 +105,7 @@ lessons:[
  <div class="ex">Monate schreibt man <b>klein</b>: <i>octubre</i>, nicht <i>Octubre</i>. Und Datum ohne Punkt-Zahl: <span class="es-t">el 5 de octubre</span>, nicht „el 5. de octubre“.</div>`},
  {t:'mc',q:'„am 12. Oktober“',opts:['el doce de octubre','en doce octubre','el doceavo de octubre'],a:0},
  {t:'mc',q:'2026 =',opts:['dos mil veintiséis','veinte veintiséis','dos mil y veintiséis'],a:0},
- {t:'gap',q:'Mi cumpleaños es ___ ___ de marzo. (am 3.)',a:['el','tres']},
+ {t:'gap',q:'Mi cumpleaños es ___ ___ de marzo. (am 3.)',a:['el','tres|3']},
  {t:'gap',q:'En España las vacaciones de verano son en julio y ___. (August)',a:['agosto']},
  {t:'tr',de:'Ich bin am 7. Juni geboren.',a:['Nací el siete de junio.','Nací el 7 de junio.']},
  {t:'listen',es:'El curso empieza el quince de enero.',de:'Der Kurs beginnt am 15. Januar.'},
@@ -148,7 +148,7 @@ lessons:[
  {t:'gap',q:'Mi hermana ___ (seguir) trabajando en el mismo banco.',a:['sigue']},
  {t:'gap',q:'¿Cuánto tiempo ___ (tú, llevar) esperando?',a:['llevas']},
  {t:'tr',de:'Ich wohne seit einem Monat in Barcelona.',a:['Llevo un mes viviendo en Barcelona.','Vivo en Barcelona desde hace un mes.','Hace un mes que vivo en Barcelona.','Llevo un mes en Barcelona.']},
- {t:'free',task:'Stell dich der Sekretärin im Sprachenzentrum vor (4–5 Sätze): Geburtsdatum, seit wann du in Barcelona bist, seit wann du Spanisch lernst, was du gerade erst gemacht hast.',hint:'Nací el … · Llevo … en Barcelona · Llevo … estudiando español · Acabo de …',focus:'Datum, llevar + Gerundium, acabar de',model:'Me llamo Jonas Gross y nací el … de … de … . Llevo un mes viviendo en Barcelona. Empecé a estudiar español en la universidad en Alemania, así que llevo unos dos años estudiándolo. Acabo de terminar el curso A2 y ahora quiero seguir aprendiendo.'}]}
+ {t:'free',task:'Stell dich der Sekretärin im Sprachenzentrum vor (4–5 Sätze): Geburtsdatum, seit wann du in Barcelona bist, seit wann du Spanisch lernst, was du gerade erst gemacht hast.',hint:'Nací el … · Llevo … en Barcelona · Llevo … estudiando español · Acabo de …',focus:'Datum, llevar + Gerundium, acabar de',model:'Me llamo Jonas Gross y nací el … de … de … . Llevo un mes viviendo en Barcelona. Empecé a estudiar español en 2024 con un curso de tarde en Alemania, así que llevo unos dos años estudiándolo. Acabo de terminar el curso A2 y ahora quiero seguir aprendiendo.'}]}
 ],
 placement:[
  {t:'mc',q:'„am 12. Oktober“',opts:['el doce de octubre','en doce octubre','el doceavo de octubre'],a:0},

@@ -2,7 +2,7 @@
 
 /* ================= UNIDAD 16 · OJALÁ ================= */
 COURSE.units.push({id:'u16',n:'18',level:'B1',title:'Ojalá',sub:'Subjuntivo Präsens: Formen · Wünsche (quiero que, espero que, ojalá) · Ratschläge (te recomiendo que) · verneinter Imperativ',
-goals:['Wann braucht man den Subjuntivo? (WEIRDO-Idee)','Formen: regelmäßig (hable, coma, viva)','Formen: unregelmäßig (tenga, haga, sea, vaya, esté)','quiero que / espero que / ojalá','te recomiendo que / es importante que','Verneinter Imperativ: no hables, no vayas'],
+goals:['Wann braucht man den Subjuntivo? (Wunsch, Rat, Zweifel, Gefühl)','Formen: regelmäßig (hable, coma, viva)','Formen: unregelmäßig (tenga, haga, sea, vaya, esté)','quiero que / espero que / ojalá','te recomiendo que / es importante que','Verneinter Imperativ: no hables, no vayas'],
 situacion:{title:'Ein Freund kommt nach Barcelona',npc:'Lukas',scene:'Dein Freund Lukas aus Mannheim (er lernt auch Spanisch) besucht dich nächste Woche zum ersten Mal in Barcelona. Ihr telefoniert auf Spanisch zum Üben.',role:'Du bist Lukas, ein Freund von Jonas aus Mannheim, Spanisch-Niveau A2, neugierig, etwas chaotisch. Ihr duzt euch. Frag Jonas nach Tipps für Barcelona (¿Qué me recomiendas? ¿Qué no debo hacer?). Mach selbst einfache Fehler, damit Jonas dich korrigieren kann. Benutze ab und zu Subjuntivo-Sätze (Espero que haga buen tiempo, Ojalá podamos ir a la playa).',goal:'Gib Lukas Tipps mit te recomiendo que / es importante que + Subjuntivo, sag, was er nicht tun soll (No vayas…, No dejes…), und äußere Wünsche (Espero que…, Ojalá…).'},
 lessons:[
 {id:'l1',title:'Was ist der Subjuntivo?',desc:'hable · coma · viva',steps:[
@@ -55,7 +55,7 @@ lessons:[
  {t:'gap',q:'Te aconsejo que ___ (llevar) una chaqueta, por la noche hace fresco.',a:['lleves']},
  {t:'gap',q:'Mis padres prefieren que ___ (yo, volver) a Alemania después del máster.',a:['vuelva']},
  {t:'tr',de:'Hoffentlich regnet es morgen nicht.',a:['Ojalá no llueva mañana.','Ojalá mañana no llueva.']},
- {t:'tr',de:'Ich empfehle dir, die Metro zu nehmen.',a:['Te recomiendo que tomes el metro.','Te recomiendo que cojas el metro.']},
+ {t:'tr',de:'Ich empfehle dir, die Metro zu nehmen.',a:['Te recomiendo que tomes el metro.','Te recomiendo que cojas el metro.','Te recomiendo tomar el metro.','Te recomiendo coger el metro.']},
  {t:'speak',es:'Espero que te guste Barcelona tanto como a mí.',de:'Ich hoffe, dass dir Barcelona so gut gefällt wie mir.'}]},
 {id:'l4',title:'Mach das nicht!',desc:'no vayas · no dejes · no te preocupes',steps:[
  {t:'info',title:'Verneinter Imperativ = no + Subjuntivo',html:`<table><tr><th></th><th>bejahend</th><th>verneint</th></tr>
@@ -114,10 +114,10 @@ lessons:[
  <tr><td>Imperfekt</td><td>Beschreibung, Gewohnheit, Hintergrund</td><td class="es-t">Hacía frío. Antes iba a pie.</td></tr>
  <tr><td>Plusquamperfekt</td><td>noch früher als ein anderes Ereignis</td><td class="es-t">Ya había comido.</td></tr></table>`},
  {t:'mc',q:'Esta mañana ___ un café con Laia.',opts:['he tomado','tomaba','había tomado'],a:0,keep:true},
- {t:'mc',q:'En 2019 ___ un intercambio en Lyon.',opts:['hice','he hecho','hacía'],a:0,keep:true},
+ {t:'mc',q:'En 2019 ___ un viaje a Lyon con mi clase.',opts:['hice','he hecho','hacía'],a:0,keep:true},
  {t:'mc',q:'De pequeño ___ al fútbol todos los domingos.',opts:['jugaba','jugué','he jugado'],a:0,keep:true},
  {t:'mc',q:'No tenía hambre porque ya ___.',opts:['había comido','comí','he comido'],a:0,keep:true},
- {t:'gap',q:'Ayer ___ (yo, ir) a un concierto. ___ (haber) mucha gente y la música ___ (ser) genial.',a:['fui','había','era']},
+ {t:'gap',q:'Ayer ___ (yo, ir) a un concierto. ___ (haber) mucha gente y la música ___ (ser) genial.',a:['fui','había','era|fue']},
  {t:'gap',q:'Cuando ___ (yo, llegar) a la fiesta, Marc ya se ___ ___ (ir).',a:['llegué','había','ido']},
  {t:'order',es:'Cuando sonó la alarma, yo ya me había levantado.',de:'Als der Wecker klingelte, war ich schon aufgestanden.'},
  {t:'tr',de:'Heute habe ich nichts gegessen, weil ich gestern zu viel gegessen hatte.',a:['Hoy no he comido nada porque ayer había comido demasiado.','Hoy no he comido nada porque ayer comí demasiado.']}]},
@@ -142,7 +142,7 @@ Lo intentó una y otra vez. De repente, la puerta se abrió y apareció un seño
  {t:'mc',q:'¿Por qué no funcionaba la llave?',opts:['Paula se había equivocado de edificio.','La llave estaba rota.','El señor había cambiado la puerta.'],a:0},
  {t:'mc',q:'„Era medianoche y llovía mucho“ – warum Imperfekt?',opts:['Es la descripción de la situación.','Son acciones nuevas en la historia.','Pasó antes de otra acción.'],a:0},
  {t:'mc',q:'„se había equivocado“ – warum Plusquamperfekt?',opts:['Pasó antes del momento de la historia.','Es una costumbre.','Es una descripción del tiempo.'],a:0},
- {t:'free',task:'Erzähl eine kleine Anekdote (lustig oder peinlich, 6–8 Sätze). Benutze Imperfekt, Indefinido und mindestens einmal das Plusquamperfekt, dazu 3 Konnektoren.',hint:'Resulta que … · Era … / Hacía … · Un día … · De repente … · Ya había … · Al final …',focus:'4 Vergangenheitszeiten, Konnektoren',model:'Resulta que el año pasado tenía un examen muy importante en la universidad. Era invierno y hacía mucho frío. Aquella mañana salí de casa tarde porque no había oído la alarma. Mientras corría a la estación, empezó a nevar. Cuando llegué, el tren ya había salido, así que tomé un taxi. Al final llegué a tiempo, pero de repente me di cuenta de que había olvidado mi bolígrafo. ¡Qué vergüenza! Por suerte, una compañera me prestó uno.'},
+ {t:'free',task:'Erzähl eine kleine Anekdote (lustig oder peinlich, 6–8 Sätze). Benutze Imperfekt, Indefinido und mindestens einmal das Plusquamperfekt, dazu 3 Konnektoren.',hint:'Resulta que … · Era … / Hacía … · Un día … · De repente … · Ya había … · Al final …',focus:'4 Vergangenheitszeiten, Konnektoren',model:'Resulta que hace unos años tenía un examen muy importante en la universidad. Era invierno y hacía mucho frío. Aquella mañana salí de casa tarde porque no había oído la alarma. Mientras corría a la estación, empezó a nevar. Cuando llegué, el tren ya había salido, así que tomé un taxi. Al final llegué a tiempo, pero de repente me di cuenta de que había olvidado mi bolígrafo. ¡Qué vergüenza! Por suerte, una compañera me prestó uno.'},
  {t:'speak',es:'Cuando llegué a la estación, el tren ya había salido.',de:'Als ich am Bahnhof ankam, war der Zug schon abgefahren.'}]}
 ],
 placement:[
@@ -193,7 +193,7 @@ lessons:[
  {t:'info',title:'Ratschläge mit Konditional',html:`<p class="es-t">Yo en tu lugar hablaría con él. · Yo que tú no diría nada.</p>
  <p class="es-t">Podrías hacer un plan de limpieza. · Sería mejor llegar a un acuerdo.</p>
  <div class="ex">Das ist weicher als <i>tienes que</i> und weniger direkt als der Imperativ. Perfekt für heikle Themen.</div>`},
- {t:'mc',q:'Mein Mitbewohner macht nachts Lärm. – Yo en tu lugar ___ con él.',opts:['hablaría','hablaré','hable'],a:0},
+ {t:'mc',q:'Ein Freund: „Mi compañero de piso hace ruido por la noche.“ – Du: Yo en tu lugar ___ con él.',opts:['hablaría','hablaré','hable'],a:0},
  {t:'mc',q:'„Was würdest du tun?“',opts:['¿Tú qué harías?','¿Tú qué harás?','¿Tú qué hacías?'],a:0},
  {t:'gap',q:'Yo que tú no ___ (decir) nada todavía.',a:['diría']},
  {t:'gap',q:'___ (tú, poder) hacer un plan para las tareas de casa.',a:['Podrías']},
@@ -204,7 +204,7 @@ lessons:[
   {you:true,opts:[{es:'Yo en tu lugar hablaría con él directamente.',ok:true},{es:'Yo en tu lugar hablaré con él directamente.',ok:false,why:'„An deiner Stelle würde ich …“ → Konditional <b>hablaría</b>.'}]},
   {n:'Nuria',es:'¿Y si no cambia nada?',de:'Und wenn sich nichts ändert?'},
   {you:true,opts:[{es:'Si no cambia nada, hablaremos con el casero.',ok:true},{es:'Si no cambiará nada, hablaremos con el casero.',ok:false,why:'Nach <b>si</b> kein Futur: <i>si no cambia</i>.'}]}]},
- {t:'tr',de:'An deiner Stelle würde ich den Müll rausbringen.',a:['Yo en tu lugar sacaría la basura.','Yo que tú sacaría la basura.']},
+ {t:'tr',de:'An deiner Stelle würde ich den Müll rausbringen.',a:['Yo en tu lugar sacaría la basura.','Yo que tú sacaría la basura.','Yo en tu lugar bajaría la basura.','Yo que tú bajaría la basura.']},
  {t:'speak',es:'Yo en tu lugar hablaría con él. Seguro que llegáis a un acuerdo.',de:'Ich an deiner Stelle würde mit ihm reden. Bestimmt einigt ihr euch.'}]},
 {id:'l4',title:'Consultorio',desc:'Ratgeber-Kolumne lesen & antworten',steps:[
  {t:'read',title:'Consultorio: «Mi compañera de piso no limpia nunca»',text:`Hola, me llamo Andrea, tengo 23 años y vivo en Madrid con otras dos chicas. Mi problema es Carla: nunca limpia, deja la ropa por todas partes y {encima|obendrein} usa mis cosas sin preguntar. Ya le he dicho dos veces que me molesta, pero no cambia nada. ¿Qué haría usted?
