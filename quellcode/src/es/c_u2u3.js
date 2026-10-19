@@ -24,7 +24,8 @@ lessons:[
  {t:'mc',q:'Wie buchstabiert man „G“ auf Spanisch?',say:'ge',opts:['ge','je','gue'],a:0,why:'G = <i>ge</i> (gesprochen wie „che“), J = <i>jota</i>.'},
  {t:'mc',q:'„Gross“ – du sagst, dass man das Doppel-S mit zwei S schreibt. Wie heißt der Buchstabe S?',opts:['ese','es','sé'],a:0},
  {t:'tr',de:'Wie schreibt man deinen Nachnamen?',a:['¿Cómo se escribe tu apellido?']},
- {t:'speak',es:'Gross: ge, erre, o, ese, ese.',de:'Deinen Nachnamen buchstabieren'}
+ {t:'speak',es:'Gross: ge, erre, o, ese, ese.',de:'Deinen Nachnamen buchstabieren'},
+ {t:'gap',q:'___ son Clara y Laia, unas amigas.',a:['Estas'],why:'Zwei Frauen → <i>estas</i>.'}
 ]},
 {id:'l2',title:'Berufe',desc:'ingeniero, ingeniera, analista …',steps:[
  {t:'info',title:'Berufsbezeichnungen: männlich & weiblich',html:`<table><tr><th>Regel</th><th>männlich</th><th>weiblich</th></tr>
@@ -39,7 +40,9 @@ lessons:[
  {t:'mc',q:'Wie sagst du „Ich bin Student“?',opts:['Soy estudiante.','Soy un estudiante.','Estoy estudiante.'],a:0,why:'Beruf: <b>ser</b> ohne Artikel.'},
  {t:'match',q:'Wer macht was?',pairs:[['el programador','escribe código'],['la profesora','trabaja en una universidad'],['el auditor','revisa las cuentas'],['la recepcionista','trabaja en un hotel'],['el médico','trabaja en un hospital']]},
  {t:'tr',de:'Laia ist Ingenieurin.',a:['Laia es ingeniera.']},
- {t:'tr',de:'Ich bin Informatiker.',a:['Soy informático.']}
+ {t:'tr',de:'Ich bin Informatiker.',a:['Soy informático.']},
+ {t:'mc',q:'Óscar schreibt jeden Tag Code für eine Firma. Er ist …',opts:['programador','auditor','recepcionista'],a:0},
+ {t:'listen',es:'Mi madre es profesora y mi padre es ingeniero.',de:'Meine Mutter ist Lehrerin und mein Vater ist Ingenieur.'}
 ]},
 {id:'l3',title:'Zahlen, Telefon, E-Mail & Alter',desc:'once … mil · arroba · ¿Cuántos años tienes?',steps:[
  {t:'vocab',title:'Zahlen 11–20',items:[['once','11'],['doce','12'],['trece','13'],['catorce','14'],['quince','15'],['dieciséis','16'],['diecisiete','17'],['dieciocho','18'],['diecinueve','19'],['veinte','20']]},
@@ -67,7 +70,8 @@ lessons:[
  {t:'gap',q:'– ¿Cuántos años ___? – ___ 24 años.',a:['tienes','tengo']},
  {t:'mc',q:'Wie liest man „laia_p@gmail.com“?',opts:['laia guion bajo pe arroba gmail punto com','laia guion pe a gmail punto com','laia guion bajo pe arroba gmail coma com'],a:0},
  {t:'tr',de:'Ich bin 24 Jahre alt.',a:['Tengo 24 años.','Tengo veinticuatro años.']},
- {t:'tr',de:'Wie ist deine Handynummer?',a:['¿Cuál es tu móvil?','¿Cuál es tu número de móvil?','¿Cuál es tu número de teléfono?','¿Cuál es tu teléfono?']}
+ {t:'tr',de:'Wie ist deine Handynummer?',a:['¿Cuál es tu móvil?','¿Cuál es tu número de móvil?','¿Cuál es tu número de teléfono?','¿Cuál es tu teléfono?']},
+ {t:'mc',q:'Hör zu: Welche Handynummer ist es?',say:'seis cinco cero, doce, treinta y cuatro, cincuenta y seis',autoSay:true,opts:['650 12 34 56','650 21 43 65','560 12 34 56'],a:0}
 ]},
 {id:'l4',title:'Verben auf -er/-ir · Studium & Beruf',desc:'aprender, vivir · ¿Qué haces? · ¿Dónde trabajas?',steps:[
  {t:'info',title:'Regelmäßige Verben auf -er und -ir',html:`<table><tr><th></th><th>aprender (lernen)</th><th>vivir (leben, wohnen)</th></tr>
@@ -102,7 +106,8 @@ lessons:[
   {you:true,opts:[{es:'Jonas arroba correo punto com.',ok:true},{es:'Jonas a correo coma com.',ok:false,why:'„.“ = <i>punto</i>, „@“ = <i>arroba</i>.'}]},
   {n:'Recepción',es:'Muy bien. ¡Bienvenido!',de:'Sehr gut. Willkommen!'}]},
  {t:'tr',de:'Wo wohnst du?',a:['¿Dónde vives?']},
- {t:'tr',de:'Ich studiere Informatik in Barcelona.',a:['Estudio Informática en Barcelona.','Estudio informática en Barcelona.']}
+ {t:'tr',de:'Ich studiere Informatik in Barcelona.',a:['Estudio Informática en Barcelona.','Estudio informática en Barcelona.']},
+ {t:'mc',q:'„Wir wohnen in Sants.“',opts:['Vivimos en Sants.','Vivemos en Sants.','Vivís en Sants.'],a:0,why:'-ir, nosotros → <b>-imos</b>.'}
 ]},
 {id:'l5',title:'Tätigkeiten beschreiben',desc:'Llevo la agenda · Soy responsable de …',steps:[
  {t:'vocab',title:'Tätigkeiten im Job',items:[['llevar la contabilidad','die Buchhaltung führen'],['llevar la agenda','den Terminkalender führen'],['organizar seminarios','Seminare organisieren'],['asistir a ferias y congresos','Messen und Kongresse besuchen'],['responder a los correos','die E-Mails beantworten'],['ser responsable de …','verantwortlich sein für …'],['contactar con clientes','Kunden kontaktieren'],['el cliente / la clienta','der Kunde / die Kundin'],['el departamento','die Abteilung'],['revisar','prüfen, überprüfen']]},
@@ -118,7 +123,9 @@ lessons:[
  {t:'gap',q:'Yo ___ (responder) a los correos de los clientes.',a:['respondo']},
  {t:'mc',q:'Was macht jemand, der „lleva la contabilidad“?',opts:['die Buchhaltung','den Terminkalender','die Webseite'],a:0},
  {t:'tr',de:'Ich bin verantwortlich für den Kontakt mit Kunden.',a:['Soy responsable del contacto con clientes.','Soy responsable del contacto con los clientes.']},
- {t:'free',task:'Beschreibe in 4–6 Sätzen deine Arbeit (oder einen Job, den du dir wünschst): Was machst du, wo, wofür bist du verantwortlich, mit wem sprichst du?',hint:'Trabajo como … en … · Soy responsable de/del … · Reviso … · Hablo con clientes · Escribo …',focus:'Verben auf -ar/-er/-ir, Berufe, ser responsable de, del',model:'Trabajo como analista en una empresa internacional en Mannheim. Reviso los sistemas informáticos de los clientes. Soy responsable del contacto con algunos clientes. Escribo informes y respondo a muchos correos. A veces asisto a reuniones con el equipo.'}
+ {t:'free',task:'Beschreibe in 4–6 Sätzen deine Arbeit (oder einen Job, den du dir wünschst): Was machst du, wo, wofür bist du verantwortlich, mit wem sprichst du?',hint:'Trabajo como … en … · Soy responsable de/del … · Reviso … · Hablo con clientes · Escribo …',focus:'Verben auf -ar/-er/-ir, Berufe, ser responsable de, del',model:'Trabajo como analista en una empresa internacional en Mannheim. Reviso los sistemas informáticos de los clientes. Soy responsable del contacto con algunos clientes. Escribo informes y respondo a muchos correos. A veces asisto a reuniones con el equipo.'},
+ {t:'mc',q:'Was macht jemand, der die Agenda des Chefs führt („lleva la agenda“)?',opts:['Er/Sie organisiert die Termine.','Er/Sie schreibt Programme.','Er/Sie prüft die Konten.'],a:0},
+ {t:'tr',de:'Meine Chefin besucht viele Messen.',a:['Mi jefa asiste a muchas ferias.','Mi jefa va a muchas ferias.'],hint:'asistir a'}
 ]}],
 resumen:`<h3>Jemanden vorstellen</h3><table><tr><td class="es-t">Este es Marc. / Esta es la profesora Serra.</td><td class="es-t">Encantado / Encantada / Mucho gusto.</td></tr><tr><td class="es-t">Estos son Óscar y Marc. / Estas son Laia y Clara.</td><td></td></tr></table>
 <h3>Buchstabieren</h3><p class="es-t">¿Cómo se escribe …? · ¿Con hache? · ¿Con acento o sin acento? · ¿Con mayúscula?</p>
@@ -146,14 +153,15 @@ lessons:[
  <tr><td>euer</td><td class="es-t">vuestro tío / vuestra tía</td><td class="es-t">vuestros tíos / vuestras tías</td></tr>
  <tr><td>ihr (Pl.) / Ihr</td><td class="es-t">su tío / tía</td><td class="es-t">sus tíos / tías</td></tr></table>
  <div class="ojo">Der Begleiter richtet sich nach dem <b>Besitz</b>, nicht nach dem Besitzer: <span class="es-t">mis padres</span> (Plural, weil Eltern Plural). <b>su/sus</b> kann sein / ihr / Ihr / ihr (Pl.) heißen – der Kontext entscheidet.</div>`},
- {t:'gap',q:'Me llamo Jonas. ___ hermano se llama Lukas y ___ padres viven en Alemania.',a:['mi','mis']},
+ {t:'gap',q:'Me llamo Jonas. ___ hermano se llama Tim y ___ padres viven en Alemania.',a:['mi','mis']},
  {t:'gap',q:'Clara, ¿cómo se llama ___ hermana?',a:['tu']},
  {t:'gap',q:'Nosotros vivimos con ___ abuela.',a:['nuestra'],why:'abuela ist weiblich → <i>nuestra</i>.'},
  {t:'mc',q:'Der Vater meiner Mutter ist mein …',opts:['abuelo','tío','primo'],a:0},
  {t:'mc',q:'Die Tochter meines Onkels ist meine …',opts:['prima','tía','nieta'],a:0},
  {t:'mc',q:'„Marta y su hermano“ – wessen Bruder?',opts:['Martas Bruder','dein Bruder','unser Bruder'],a:0,why:'<i>su</i> bezieht sich hier auf Marta.'},
  {t:'tr',de:'Ich habe einen Bruder und zwei Cousinen.',a:['Tengo un hermano y dos primas.']},
- {t:'tr',de:'Hast du Geschwister?',a:['¿Tienes hermanos?']}
+ {t:'tr',de:'Hast du Geschwister?',a:['¿Tienes hermanos?']},
+ {t:'listen',es:'Mis padres viven en Mannheim y mi hermano también.',de:'Meine Eltern wohnen in Mannheim und mein Bruder auch.'}
 ]},
 {id:'l2',title:'Aussehen & Charakter',desc:'alto, simpático, trabajadora …',steps:[
  {t:'info',title:'Adjektive passen sich an',html:`<table><tr><th></th><th>männlich</th><th>weiblich</th></tr>
@@ -172,7 +180,8 @@ lessons:[
  {t:'mc',q:'Was klingt höflicher, wenn jemand faul ist?',opts:['Es un poco vago.','Es muy vago.','Es bastante vago.'],a:0,why:'<i>un poco</i> schwächt negative Eigenschaften ab.'},
  {t:'tr',de:'Mein Vater ist groß und ein bisschen chaotisch.',a:['Mi padre es alto y un poco caótico.']},
  {t:'tr',de:'Meine Schwestern sind sehr sympathisch.',a:['Mis hermanas son muy simpáticas.']},
- {t:'listen',es:'Mi madre es baja, morena y muy alegre.',de:'Meine Mutter ist klein, dunkelhaarig und sehr fröhlich.'}
+ {t:'listen',es:'Mi madre es baja, morena y muy alegre.',de:'Meine Mutter ist klein, dunkelhaarig und sehr fröhlich.'},
+ {t:'order',es:'Mi hermano es alto, rubio y muy simpático.',de:'Mein Bruder ist groß, blond und sehr sympathisch.'}
 ]},
 {id:'l3',title:'estar · ser oder estar?',desc:'Estoy en Barcelona · Es de Valencia',steps:[
  {t:'info',title:'Das Verb estar',html:`<table><tr><th></th><th>estar</th></tr><tr><td>yo</td><td class="es-t">estoy</td></tr><tr><td>tú</td><td class="es-t">estás</td></tr><tr><td>él / ella / usted</td><td class="es-t">está</td></tr><tr><td>nosotros/-as</td><td class="es-t">estamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">estáis</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">están</td></tr></table>`},
@@ -233,7 +242,9 @@ lessons:[
  {t:'listen',es:'La empresa tiene más de sesenta años de historia.',de:'Das Unternehmen hat mehr als sechzig Jahre Geschichte.'},
  {t:'order',es:'Es una empresa familiar del sector del café.',de:'Es ist ein Familienunternehmen aus der Kaffeebranche.'},
  {t:'tr',de:'Wie viele Geschwister hast du?',a:['¿Cuántos hermanos tienes?']},
- {t:'free',task:'Beschreibe deine Familie in 5–7 Sätzen: Wer gehört dazu? Wie alt sind sie, wo wohnen sie, wie sind sie (Aussehen/Charakter), was gefällt ihnen?',hint:'Tengo un hermano, se llama … · Tiene … años · Vive en … · Es alto y muy … · Le gusta/n …',focus:'Familie, Possessivbegleiter, Adjektivangleichung, ser/estar, gustar',model:'Mi familia no es muy grande. Mis padres viven en Alemania, cerca de Mannheim. Mi madre es profesora y es muy alegre. Mi padre es alto y un poco caótico. Tengo un hermano. Es muy simpático y le gusta mucho el deporte. Ahora yo estoy en Barcelona, pero hablo con mi familia todas las semanas.'}
+ {t:'free',task:'Beschreibe deine Familie in 5–7 Sätzen: Wer gehört dazu? Wie alt sind sie, wo wohnen sie, wie sind sie (Aussehen/Charakter), was gefällt ihnen?',hint:'Tengo un hermano, se llama … · Tiene … años · Vive en … · Es alto y muy … · Le gusta/n …',focus:'Familie, Possessivbegleiter, Adjektivangleichung, ser/estar, gustar',model:'Mi familia no es muy grande. Mis padres viven en Alemania, cerca de Mannheim. Mi madre es profesora y es muy alegre. Mi padre es alto y un poco caótico. Tengo un hermano. Es muy simpático y le gusta mucho el deporte. Ahora yo estoy en Barcelona, pero hablo con mi familia todas las semanas.'},
+ {t:'mc',q:'¿___ tiempo trabajas en la empresa? – Dos años.',opts:['Cuánto','Cuánta','Cuántos'],a:0,why:'<i>el tiempo</i> ist männlich Singular → <i>cuánto</i>.'},
+ {t:'tr',de:'Die Firma verkauft ihre Produkte in ganz Europa.',a:['La empresa vende sus productos en toda Europa.']}
 ]}],
 resumen:`<h3>Familie</h3><p class="es-t">el padre · la madre · los padres · el hermano · la hermana · el hijo · la hija · el abuelo · la abuela · el tío · la tía · el primo · la prima</p>
 <h3>Possessivbegleiter</h3><table><tr><td>mi / mis</td><td>tu / tus</td><td>su / sus</td></tr><tr><td>nuestro/-a/-os/-as</td><td>vuestro/-a/-os/-as</td><td>su / sus</td></tr></table>

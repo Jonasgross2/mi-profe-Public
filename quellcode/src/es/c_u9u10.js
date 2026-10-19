@@ -17,7 +17,10 @@ lessons:[
  {t:'mc',q:'La oficina ___ cerca de la estación.',opts:['está','es','hay'],a:0,keep:true},
  {t:'gap',q:'Mi habitación ___ exterior y ___ amueblada.',a:['es','está']},
  {t:'match',q:'Wohin gehört das?',pairs:[['la cama','la habitación'],['el escritorio','el despacho'],['la ducha','el baño'],['el sofá','el salón'],['la nevera','la cocina']]},
- {t:'tr',de:'Die Wohnung ist im dritten Stock und hat einen Balkon.',a:['El piso está en la tercera planta y tiene un balcón.','El piso está en el tercer piso y tiene un balcón.','El piso está en la tercera planta y tiene balcón.','El piso está en el tercer piso y tiene balcón.','El apartamento está en la tercera planta y tiene un balcón.']}
+ {t:'tr',de:'Die Wohnung ist im dritten Stock und hat einen Balkon.',a:['El piso está en la tercera planta y tiene un balcón.','El piso está en el tercer piso y tiene un balcón.','El piso está en la tercera planta y tiene balcón.','El piso está en el tercer piso y tiene balcón.','El apartamento está en la tercera planta y tiene un balcón.']},
+ {t:'listen',es:'El piso es muy luminoso y está cerca del metro.',de:'Die Wohnung ist sehr hell und liegt nah an der Metro.'},
+ {t:'gap',q:'La cocina ___ pequeña, pero ___ reformada.',a:['es','está'],why:'Eigenschaft → <i>es</i>, Zustand → <i>está</i>.'},
+ {t:'tr',de:'Mein Zimmer ist möbliert und hat einen Schreibtisch.',a:['Mi habitación está amueblada y tiene un escritorio.','Mi habitación está amueblada y tiene escritorio.']}
 ]},
 {id:'l2',title:'Das Imperfekt',desc:'buscaba · tenía · era · iba · veía',steps:[
  {t:'info',title:'Imperfekt: Formen',html:`<table><tr><th></th><th>-ar (buscar)</th><th>-er / -ir (tener, vivir)</th></tr>
@@ -35,7 +38,10 @@ lessons:[
  {t:'gap',q:'En mi barrio antes ___ (haber) muchas tiendas pequeñas.',a:['había'],why:'hay → <b>había</b>.'},
  {t:'gap',q:'Mis abuelos ___ (ver) la tele todas las noches.',a:['veían']},
  {t:'mc',q:'Imperfekt von „poder“ (yo):',opts:['podía','puedía','pudía'],a:0,why:'Kein Stammwechsel im Imperfekt.'},
- {t:'tr',de:'Früher hatte ich keine Zeit.',a:['Antes no tenía tiempo.','Antes yo no tenía tiempo.']}
+ {t:'tr',de:'Früher hatte ich keine Zeit.',a:['Antes no tenía tiempo.','Antes yo no tenía tiempo.']},
+ {t:'gap',q:'Antes nosotros ___ (comer) los domingos en casa de mis abuelos.',a:['comíamos']},
+ {t:'mc',q:'Imperfekt von „ver“ (ellos):',opts:['veían','vían','veyan'],a:0},
+ {t:'listen',es:'Mi abuela vivía en un pueblo pequeño y tenía tres hijos.',de:'Meine Großmutter wohnte in einem kleinen Dorf und hatte drei Kinder.'}
 ]},
 {id:'l3',title:'Früher & heute',desc:'Antes … ahora · Cuando era joven …',steps:[
  {t:'info',title:'Gewohnheiten in der Vergangenheit',html:`<p>Das Imperfekt beschreibt, <b>wie etwas früher war</b> und was man <b>regelmäßig</b> gemacht hat – nicht einzelne, abgeschlossene Ereignisse.</p>
@@ -57,7 +63,10 @@ lessons:[
   {you:true,opts:[{es:'Sí, me encanta. Antes vivía en una ciudad más tranquila, pero ahora prefiero Barcelona.',ok:true},{es:'Sí, me encanta. Antes viví en una ciudad más tranquila.',ok:false,why:'Ein Zustand über längere Zeit → Imperfekt <i>vivía</i>.'}]},
   {n:'Montse',es:'¡Qué bien! Bienvenido al barrio.',de:'Wie schön! Willkommen im Viertel.'}]},
  {t:'tr',de:'Als ich 15 war, spielte ich Fußball.',a:['Cuando tenía 15 años, jugaba al fútbol.','A los 15 años jugaba al fútbol.','Cuando tenía quince años, jugaba al fútbol.']},
- {t:'tr',de:'Früher wohnte ich in Mannheim, jetzt wohne ich in Barcelona.',a:['Antes vivía en Mannheim, ahora vivo en Barcelona.','Antes vivía en Mannheim y ahora vivo en Barcelona.','Antes yo vivía en Mannheim, ahora vivo en Barcelona.']}
+ {t:'tr',de:'Früher wohnte ich in Mannheim, jetzt wohne ich in Barcelona.',a:['Antes vivía en Mannheim, ahora vivo en Barcelona.','Antes vivía en Mannheim y ahora vivo en Barcelona.','Antes yo vivía en Mannheim, ahora vivo en Barcelona.']},
+ {t:'mc',q:'Welcher Satz ist richtig?',opts:['Antes trabajaba en Mannheim; ahora estudio en Barcelona.','Antes trabajo en Mannheim; ahora estudiaba en Barcelona.','Antes trabajaré en Mannheim; ahora estudio en Barcelona.'],a:0,why:'Früher (Gewohnheit) → Imperfekt, jetzt → Präsens.'},
+ {t:'gap',q:'De pequeña, Laia ___ (tocar) el piano y ___ (ir) a clases de baile.',a:['tocaba','iba']},
+ {t:'listen',es:'Antes no había tantos turistas en el barrio.',de:'Früher gab es nicht so viele Touristen im Viertel.'}
 ]},
 {id:'l4',title:'Mengen, Ordnungszahlen & hay que',desc:'la mayoría · un tercio · primer piso · hay que pagar',steps:[
  {t:'info',title:'Über Mengen sprechen',html:`<p>Beispiele aus einer Umfrage unter den Studierenden in Jonas’ Master:</p>
@@ -76,7 +85,10 @@ lessons:[
  {t:'gap',q:'Para alquilar un piso ___ ___ pagar una fianza. (man muss)',a:['hay','que']},
  {t:'mc',q:'„Die meisten Studierenden wohnen in einer WG.“',opts:['La mayoría de los estudiantes vive en un piso compartido.','La mayoría de estudiantes viven en un piso compartido mucho.','Mayoría de los estudiantes vive en un piso compartido.'],a:0},
  {t:'tr',de:'Man muss die Kaution bezahlen.',a:['Hay que pagar la fianza.','Se tiene que pagar la fianza.','Hay que pagar el depósito.']},
- {t:'listen',es:'Más de la mitad de los estudiantes trabaja los fines de semana.',de:'Mehr als die Hälfte der Studierenden arbeitet am Wochenende.'}
+ {t:'listen',es:'Más de la mitad de los estudiantes trabaja los fines de semana.',de:'Mehr als die Hälfte der Studierenden arbeitet am Wochenende.'},
+ {t:'mc',q:'„Man muss die Kaution vor dem Umzug bezahlen.“',opts:['Hay que pagar la fianza antes de la mudanza.','Hay pagar la fianza antes de la mudanza.','Tiene que hay pagar la fianza antes de la mudanza.'],a:0},
+ {t:'gap',q:'Nuria vive en el ___ (5.) piso y su oficina está en la ___ (2.) planta.',a:['quinto','segunda']},
+ {t:'tr',de:'Die Hälfte der Studierenden wohnt in Gràcia.',a:['La mitad de los estudiantes vive en Gràcia.','La mitad de los estudiantes viven en Gràcia.']}
 ]},
 {id:'l5',title:'Lesen: La agencia de Nuria',desc:'Text · früher vs. heute',steps:[
  {t:'read',title:'La agencia de Nuria, antes y ahora',intro:'Deine neue Mitbewohnerin Nuria erzählt von ihrer Werbeagentur.',text:`Nuria trabaja en una agencia de publicidad en el Poblenou. Su jefa, Mercè, trabaja allí desde hace veinte años y a veces le cuenta cómo era la agencia antes.
@@ -90,7 +102,8 @@ Pero no todo es mejor: Nuria a veces no puede {desconectar|abschalten} y lee cor
  {t:'mc',q:'¿Cómo eran las reuniones antes?',opts:['Siempre presenciales.','Por videollamada.','No había reuniones.'],a:0},
  {t:'mc',q:'¿Qué problema tiene Nuria cuando trabaja en casa?',opts:['A veces no puede desconectar.','Su ordenador es muy viejo.','Su jefa no lo permite.'],a:0},
  {t:'gap',q:'Antes cada persona ___ (tener) su propio escritorio.',a:['tenía']},
- {t:'free',task:'Vergleiche in 5–7 Sätzen dein Leben früher (Wohnort, Schule oder Studium, Arbeit) mit heute. Benutze das Imperfekt für früher und das Präsens für jetzt.',hint:'Antes vivía en … · Cuando trabajaba en …, … · Normalmente iba … · Ahora … · Actualmente …',focus:'Imperfekt (Gewohnheiten früher) vs. Präsens',model:'Antes vivía en Mannheim y estudiaba en la universidad. Cuando trabajaba en una consultora, me levantaba muy temprano e iba a la oficina en tren. Los fines de semana visitaba a mi familia. Ahora vivo en Barcelona y estudio un máster. Actualmente tengo más tiempo libre y voy mucho a la playa. Antes hablaba poco español, pero ahora lo hablo todos los días.'}
+ {t:'free',task:'Vergleiche in 5–7 Sätzen dein Leben früher (Wohnort, Schule oder Studium, Arbeit) mit heute. Benutze das Imperfekt für früher und das Präsens für jetzt.',hint:'Antes vivía en … · Cuando trabajaba en …, … · Normalmente iba … · Ahora … · Actualmente …',focus:'Imperfekt (Gewohnheiten früher) vs. Präsens',model:'Antes vivía en Mannheim y estudiaba en la universidad. Cuando trabajaba en una consultora, me levantaba muy temprano e iba a la oficina en tren. Los fines de semana visitaba a mi familia. Ahora vivo en Barcelona y estudio un máster. Actualmente tengo más tiempo libre y voy mucho a la playa. Antes hablaba poco español, pero ahora lo hablo todos los días.'},
+ {t:'order',es:'Antes las reuniones eran siempre presenciales.',de:'Früher waren die Besprechungen immer vor Ort.'}
 ]},
 {id:'lr',title:'Hören: Die Wohnungsbesichtigung',desc:'Eine Besichtigung verstehen · früher & heute',steps:[
  {t:'read',hideText:true,title:'Un piso en Gràcia',intro:'Sr. Puig zeigt Jonas ein Zimmer in einer WG in Gràcia. Hör zuerst nur zu.',text:`Sr. Puig: Pase, pase. Este es el piso. Está en la tercera planta. No hay ascensor, pero el edificio es muy tranquilo.
@@ -138,7 +151,10 @@ lessons:[
  {t:'gap',q:'¿Cuándo ___ (tú, terminar) tus estudios?',a:['terminaste']},
  {t:'gap',q:'En 2023 ___ (yo, empezar) a trabajar en una consultora.',a:['empecé'],why:'empezar → <b>empecé</b> (z → c vor e).'},
  {t:'mc',q:'„Er lernte Spanisch in Granada.“',opts:['Aprendió español en Granada.','Aprendío español en Granada.','Aprendo español en Granada.'],a:0},
- {t:'tr',de:'Ich wohnte drei Monate in London.',a:['Viví tres meses en Londres.','Yo viví tres meses en Londres.','Viví en Londres tres meses.']}
+ {t:'tr',de:'Ich wohnte drei Monate in London.',a:['Viví tres meses en Londres.','Yo viví tres meses en Londres.','Viví en Londres tres meses.']},
+ {t:'listen',es:'Ayer trabajé hasta tarde y cené en casa.',de:'Gestern habe ich bis spät gearbeitet und zu Hause zu Abend gegessen.'},
+ {t:'gap',q:'Ayer ___ (yo, llegar) tarde a clase y ___ (buscar) mi libro una hora.',a:['llegué','busqué'],why:'llegar → <b>llegué</b>, buscar → <b>busqué</b>.'},
+ {t:'mc',q:'„Letztes Jahr haben wir viel gelernt.“',opts:['El año pasado aprendimos mucho.','El año pasado aprendemos mucho.','El año pasado aprendió mucho.'],a:0,why:'Abgeschlossener Zeitraum → Indefinido, nosotros: <i>aprendimos</i>.'}
 ]},
 {id:'l2',title:'Indefinido: unregelmäßig',desc:'fui · estuve · hice · tuve · pude',steps:[
  {t:'info',title:'Die wichtigsten unregelmäßigen Formen',html:`<table><tr><th>ser / ir</th><th>estar</th><th>tener</th><th>hacer</th></tr>
@@ -160,7 +176,9 @@ lessons:[
  {t:'gap',q:'Mis amigos ___ (venir) a Barcelona en octubre.',a:['vinieron']},
  {t:'mc',q:'Indefinido von „decir“ (ellos):',opts:['dijeron','dijieron','decieron'],a:0,why:'Nach <b>j</b> fällt das i weg: <i>dijeron, produjeron</i>.'},
  {t:'match',q:'Infinitiv und Form (yo)',pairs:[['poner','puse'],['querer','quise'],['dar','di'],['ver','vi'],['venir','vine'],['decir','dije']]},
- {t:'tr',de:'Es war ein sehr schöner Tag.',a:['Fue un día muy bonito.','Fue un día precioso.']}
+ {t:'tr',de:'Es war ein sehr schöner Tag.',a:['Fue un día muy bonito.','Fue un día precioso.']},
+ {t:'listen',es:'El verano pasado fuimos a Granada y estuvimos tres días allí.',de:'Letzten Sommer sind wir nach Granada gefahren und waren drei Tage dort.'},
+ {t:'tr',de:'Gestern hatte ich keine Zeit.',a:['Ayer no tuve tiempo.','Ayer yo no tuve tiempo.']}
 ]},
 {id:'l3',title:'Eine Biografie erzählen',desc:'Nací en … · A los 10 años … · Hace un mes …',steps:[
  {t:'vocab',title:'Biografie',items:[['nacer (nací)','geboren werden (ich wurde geboren)'],['mudarse (nos mudamos)','umziehen (wir zogen um)'],['ir a la escuela / al colegio','zur Schule gehen'],['terminar el instituto','das Abitur machen / die Schule beenden'],['hacer un intercambio','einen Austausch machen'],['estudiar … en …','… in … studieren'],['empezar a trabajar','anfangen zu arbeiten'],['hace dos años','vor zwei Jahren'],['dos años después','zwei Jahre später'],['desde 2023','seit 2023']]},
@@ -176,7 +194,11 @@ En 1979 Teresa dejó la empresa a su hija Pilar. Pilar llevó la fábrica a las 
  {t:'gap',q:'Teresa ___ (abrir) un taller y ___ (reparar) las bicis de los vecinos.',a:['abrió','reparó']},
  {t:'order',es:'Hace tres años empecé a trabajar en una consultora.',de:'Vor drei Jahren habe ich angefangen, in einer Beratung zu arbeiten.'},
  {t:'tr',de:'Ich wurde in Deutschland geboren.',a:['Nací en Alemania.','Yo nací en Alemania.']},
- {t:'tr',de:'Vor einem Monat bin ich nach Barcelona gezogen.',a:['Hace un mes me mudé a Barcelona.','Me mudé a Barcelona hace un mes.']}
+ {t:'tr',de:'Vor ein paar Monaten bin ich nach Barcelona gezogen.',a:['Hace unos meses me mudé a Barcelona.','Me mudé a Barcelona hace unos meses.','Hace algunos meses me mudé a Barcelona.']},
+ {t:'mc',q:'„vor zwei Jahren“ heißt …',opts:['hace dos años','desde dos años','dos años después'],a:0},
+ {t:'gap',q:'Pablo nació en Sevilla y a los 18 años ___ (terminar) el instituto.',a:['terminó']},
+ {t:'listen',es:'En 2023 empecé a trabajar en una consultora.',de:'2023 habe ich angefangen, in einer Beratungsfirma zu arbeiten.'},
+ {t:'speak',es:'Nací en Mannheim. Estudié Informática y trabajé tres años en una consultora.',de:'Ich bin in Mannheim geboren. Ich habe Informatik studiert und drei Jahre in einer Beratungsfirma gearbeitet.'}
 ]},
 {id:'l4',title:'Perfekt oder Indefinido?',desc:'He hecho … / Hice …',steps:[
  {t:'info',title:'Perfekt oder Indefinido?',html:`<table><tr><th>Perfekt (he hecho)</th><th>Indefinido (hice)</th></tr>
@@ -192,7 +214,8 @@ En 1979 Teresa dejó la empresa a su hija Pilar. Pilar llevó la fábrica a las 
  {t:'mc',q:'La semana pasada ___ una película muy buena.',opts:['vi','he visto'],a:0,keep:true},
  {t:'gap',q:'– ¿Has hecho prácticas alguna vez? – Sí, ___ (hacer) unas prácticas en una empresa hace tres años.',a:['hice']},
  {t:'gap',q:'Todavía no ___ ___ (yo, ver) el Camp Nou.',a:['he','visto']},
- {t:'tr',de:'Letztes Jahr habe ich meinen Bachelor abgeschlossen.',a:['El año pasado terminé mi grado.','El año pasado terminé el grado.','El año pasado terminé mis estudios.','El año pasado terminé mi bachelor.','El año pasado terminé la carrera.','El año pasado terminé mi carrera.']}
+ {t:'tr',de:'Vor drei Jahren habe ich meinen Bachelor abgeschlossen.',a:['Hace tres años terminé mi grado.','Hace tres años terminé el grado.','Hace tres años terminé mis estudios.','Hace tres años terminé mi bachelor.','Hace tres años terminé la carrera.','Hace tres años terminé mi carrera.','Terminé mi grado hace tres años.','Terminé la carrera hace tres años.']},
+ {t:'listen',es:'Este año he viajado mucho, pero el año pasado no viajé nada.',de:'Dieses Jahr bin ich viel gereist, aber letztes Jahr bin ich gar nicht gereist.'}
 ]},
 {id:'l5',title:'Bewerbung & Vorstellungsgespräch',desc:'Soy organizado · Tengo experiencia en … · Sé trabajar en equipo',steps:[
  {t:'vocab',title:'Bewerbung',items:[['el currículum (CV)','der Lebenslauf'],['la carta de presentación','das Anschreiben'],['el puesto','die Stelle'],['las prácticas','das Praktikum'],['la oferta de trabajo','das Stellenangebot'],['el proceso de selección','das Auswahlverfahren'],['la entrevista','das Vorstellungsgespräch'],['los puntos fuertes','die Stärken'],['estar acostumbrado/-a a …','an … gewöhnt sein'],['estar dispuesto/-a a …','bereit sein zu …'],['tener conocimientos de …','Kenntnisse in … haben'],['saber trabajar en equipo','im Team arbeiten können']]},
@@ -205,7 +228,7 @@ En 1979 Teresa dejó la empresa a su hija Pilar. Pilar llevó la fábrica a las 
  {t:'gap',q:'___ una persona muy organizada y ___ acostumbrado a trabajar en equipo.',a:['Soy','estoy']},
  {t:'dialog',place:'Entrevista online',title:'Das Vorstellungsgespräch',scene:'Videointerview für ein Praktikum im Bereich IT-Audit in Barcelona.',lines:[
   {n:'Sra. Ferrer',es:'Buenos días, señor Gross. Cuénteme un poco sobre su formación.',de:'Guten Morgen, Herr Gross. Erzählen Sie mir ein wenig über Ihre Ausbildung.'},
-  {you:true,opts:[{es:'Estudié Informática en Mannheim y terminé el grado en 2026.',ok:true},{es:'Estudio Informática en Mannheim y terminé el grado en 2026 hace.',ok:false,why:'Abgeschlossenes Studium → Indefinido <i>estudié</i>; „hace“ passt hier nicht.'},{es:'He estudiado Informática en Mannheim en 2023.',ok:false,why:'Mit Jahreszahl (abgeschlossen) → Indefinido.'}]},
+  {you:true,opts:[{es:'Estudié Informática en Mannheim y terminé el grado en 2023.',ok:true},{es:'Estudio Informática en Mannheim y terminé el grado en 2023 hace.',ok:false,why:'Abgeschlossenes Studium → Indefinido <i>estudié</i>; „hace“ passt hier nicht.'},{es:'He estudiado Informática en Mannheim en 2023.',ok:false,why:'Mit Jahreszahl (abgeschlossen) → Indefinido.'}]},
   {n:'Sra. Ferrer',es:'¿Y tiene experiencia profesional?',de:'Und haben Sie Berufserfahrung?'},
   {you:true,opts:[{es:'Sí, trabajé tres años en una consultora como analista. En 2025 estuve tres meses en Londres.',ok:true},{es:'Sí, trabajaba tres años en una consultora. En 2025 estaba tres meses en Londres.',ok:false,why:'Abgeschlossener Zeitraum mit Dauer (tres años, tres meses) → Indefinido: <i>trabajé, estuve</i>.'}]},
   {n:'Sra. Ferrer',es:'Muy interesante. ¿Cuáles son sus puntos fuertes?',de:'Sehr interessant. Was sind Ihre Stärken?'},
@@ -213,7 +236,10 @@ En 1979 Teresa dejó la empresa a su hija Pilar. Pilar llevó la fábrica a las 
   {n:'Sra. Ferrer',es:'¿Y por qué quiere hacer las prácticas con nosotros?',de:'Und warum möchten Sie das Praktikum bei uns machen?'},
   {you:true,opts:[{es:'Porque me interesa mucho la ciberseguridad y quiero ser parte de un buen equipo.',ok:true},{es:'Porque me interesan mucho la ciberseguridad.',ok:false,why:'<i>la ciberseguridad</i> ist Singular → <i>me interesa</i>.'}]},
   {n:'Sra. Ferrer',es:'Perfecto. Le escribiremos la próxima semana. ¡Muchas gracias!',de:'Perfekt. Wir schreiben Ihnen nächste Woche. Vielen Dank!'}]},
- {t:'free',task:'Schreib eine kurze Bewerbung (6–8 Sätze) für ein Praktikum bei einer Tech-Firma in Barcelona: wer du bist, was du studiert und gearbeitet hast (Indefinido), deine Stärken und warum du dich bewirbst.',hint:'Estimados señores: · En relación con la oferta publicada en … · Estudié … · De 2023 a 2026 trabajé … · Soy … / Estoy acostumbrado a … / Tengo conocimientos de … · Quedo a su disposición … · Atentamente, Jonas Gross',focus:'Indefinido, Fähigkeiten mit ser/estar/tener/saber, formelles Anschreiben',model:'Estimados señores: En relación con la oferta de prácticas publicada en su página web, les envío mi currículum. Estudié Informática en la Universidad de Mannheim y terminé el grado en septiembre de 2026. De 2023 a 2026 trabajé en una consultora como analista de sistemas y en 2025 estuve tres meses en Londres. Ahora estudio un máster en Barcelona. Soy una persona organizada y comunicativa, sé trabajar en equipo y tengo conocimientos de redes y ciberseguridad. Considero que mi experiencia es adecuada para el puesto. Quedo a su disposición para una entrevista. Atentamente, Jonas Gross'}
+ {t:'free',task:'Schreib eine kurze Bewerbung (6–8 Sätze) für ein Praktikum bei einer Tech-Firma in Barcelona: wer du bist, was du studiert und gearbeitet hast (Indefinido), deine Stärken und warum du dich bewirbst.',hint:'Estimados señores: · En relación con la oferta publicada en … · Estudié … · De 2023 a 2026 trabajé … · Soy … / Estoy acostumbrado a … / Tengo conocimientos de … · Quedo a su disposición … · Atentamente, Jonas Gross',focus:'Indefinido, Fähigkeiten mit ser/estar/tener/saber, formelles Anschreiben',model:'Estimados señores: En relación con la oferta de prácticas publicada en su página web, les envío mi currículum. Estudié Informática en Mannheim y terminé el grado en 2023. De 2023 a 2026 trabajé en una consultora como analista de sistemas y en 2025 estuve tres meses en Londres. Ahora estudio un máster en Barcelona. Soy una persona organizada y comunicativa, sé trabajar en equipo y tengo conocimientos de redes y ciberseguridad. Considero que mi experiencia es adecuada para el puesto. Quedo a su disposición para una entrevista. Atentamente, Jonas Gross'},
+ {t:'mc',q:'Im Vorstellungsgespräch: „¿Cuáles son sus puntos fuertes?“ Welche Antwort passt?',opts:['Soy una persona comunicativa y sé trabajar en equipo.','Mis puntos fuertes son el lunes y el martes.','Tengo un hermano y dos primos.'],a:0},
+ {t:'order',es:'Tengo conocimientos de redes y ciberseguridad.',de:'Ich habe Kenntnisse in Netzwerken und Cybersicherheit.'},
+ {t:'tr',de:'Ich bin bereit, im Ausland zu arbeiten.',a:['Estoy dispuesto a trabajar en el extranjero.','Estoy dispuesta a trabajar en el extranjero.']}
 ]},
 {id:'lr',title:'Hören: Nurias Lebenslauf',desc:'Eine Biografie im Indefinido verstehen',steps:[
  {t:'read',hideText:true,title:'¿Cómo llegaste a Barcelona?',intro:'Jonas fragt Nuria, wie sie nach Barcelona gekommen ist. Hör zuerst nur zu.',text:`Jonas: Nuria, ¿y tú cómo llegaste a Barcelona?

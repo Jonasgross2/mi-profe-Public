@@ -1,5 +1,5 @@
-const CACHE='mi-profe-20261019-1513';
-const FILES=["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./p/es.js?v=20261019-1513", "./p/de.js?v=20261019-1513", "./p/tr-es-en.js?v=20261019-1513"];
+const CACHE='mi-profe-20261019-2231';
+const FILES=["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./apple-touch-icon.png", "./p/es.js?v=20261019-2231", "./p/de.js?v=20261019-2231", "./p/tr-es-en.js?v=20261019-2231"];
 /* Cache zuerst: App startet sofort aus dem Speicher. Neue Versionen kommen über ein neues sw.js (install lädt frisch), die Seite zeigt dann „Neue Version – tippen“. */
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES.map(f=>new Request(f,{cache:'reload'})))).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE&&k!=='mi-profe-look').map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});

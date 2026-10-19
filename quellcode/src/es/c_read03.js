@@ -24,7 +24,8 @@ Hablo castellano, catalán, inglés y un poco de alemán. Ahora aprendo más ale
  {t:'mc',q:'¿Cuántos años tiene Sofía?',opts:['31','21','41'],a:0},
  {t:'mc',q:'¿De qué es responsable Sofía?',opts:['Del contacto con las agencias de viajes.','De la contabilidad.','De la recepción del hotel.'],a:0},
  {t:'gap',task:'Schreib Sofías E-Mail-Adresse.',q:'___',a:['sofia.ibanez@hotelesmar.com']},
- {t:'mc',q:'¿Por qué aprende alemán?',opts:['Porque muchos clientes son de Alemania y de Austria.','Porque vive en Alemania.','Porque su jefa es alemana.'],a:0}
+ {t:'mc',q:'¿Por qué aprende alemán?',opts:['Porque muchos clientes son de Alemania y de Austria.','Porque vive en Alemania.','Porque su jefa es alemana.'],a:0},
+ {t:'mc',q:'¿Dónde vive Sofía?',opts:['En Barcelona, en Sant Martí.','En Tarragona.','En Alemania.'],a:0}
 ]});
 U('u3').lessons.push({id:'lr',title:'Lesen: Una empresa familiar',desc:'Über eine Firma & eine Familie lesen',steps:[
  {t:'read',title:'Cafés Bosch: una empresa familiar',text:`Cafés Bosch es una empresa familiar de Sabadell, una ciudad cerca de Barcelona. Su {fundador|Gründer} es Josep Bosch y tiene más de sesenta años de historia. La empresa {tuesta|röstet} café de Colombia, de Brasil y de Etiopía y lo vende en bares, hoteles y tiendas.
@@ -36,6 +37,7 @@ En la empresa trabajan 85 personas. Venden café en toda España y exportan a Fr
  {t:'mc',q:'¿Quién es Marina?',opts:['La nieta del fundador.','La hija del fundador.','La hermana del fundador.'],a:0},
  {t:'mc',q:'¿Cómo es Àlex?',opts:['Alegre, abierto y un poco caótico.','Muy ordenado y exigente.','Tímido y trabajador.'],a:0},
  {t:'mc',q:'¿Qué le molesta a Marina?',opts:['Las reuniones largas de los lunes.','Su hermano.','Exportar a Alemania.'],a:0},
- {t:'gap',q:'En la empresa ___ (arbeiten) 85 personas y ___ (sie verkaufen) café en toda España.',a:['trabajan','venden']}
+ {t:'gap',q:'En la empresa ___ (arbeiten) 85 personas y ___ (sie verkaufen) café en toda España.',a:['trabajan','venden']},
+ {t:'order',es:'Marina es la nieta del fundador.',de:'Marina ist die Enkelin des Gründers.'}
 ]});
 })();

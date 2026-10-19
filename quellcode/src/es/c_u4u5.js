@@ -22,7 +22,9 @@ lessons:[
  {t:'gap',q:'En España la gente ___ (cenar) muy tarde, a las diez.',a:['cena']},
  {t:'tr',de:'Ich esse nie Fleisch.',a:['Nunca como carne.','No como nunca carne.','No como carne nunca.']},
  {t:'tr',de:'Ich trinke manchmal Wein.',a:['A veces tomo vino.','A veces bebo vino.','Tomo vino a veces.','Bebo vino a veces.']},
- {t:'listen',es:'Desayuno todos los días a las ocho.',de:'Ich frühstücke jeden Tag um acht.'}
+ {t:'listen',es:'Desayuno todos los días a las ocho.',de:'Ich frühstücke jeden Tag um acht.'},
+ {t:'mc',q:'Welcher Satz ist richtig?',opts:['No como nunca carne.','Como nunca carne.','Nunca no como carne.'],a:0,why:'Steht <i>nunca</i> nach dem Verb, braucht man <i>no</i> davor.'},
+ {t:'gap',q:'Voy al gimnasio dos ___ a la semana.',a:['veces'],why:'<i>dos veces a la semana</i> = zweimal pro Woche.'}
 ]},
 {id:'l2',title:'poder, querer, preferir',desc:'Stammwechsel o→ue und e→ie',steps:[
  {t:'info',title:'Verben mit Stammwechsel',html:`<p>Bei manchen Verben ändert sich der betonte Stammvokal – aber <b>nicht</b> bei nosotros und vosotros:</p>
@@ -43,7 +45,9 @@ lessons:[
  {t:'gap',q:'¿Cuánto ___ (costar) el menú?',a:['cuesta']},
  {t:'mc',q:'Nosotros ___ comer a las dos.',opts:['queremos','quieremos','quiremos'],a:0},
  {t:'tr',de:'Willst du Wasser oder Wein?',a:['¿Quieres agua o vino?']},
- {t:'tr',de:'Ich bin allergisch gegen Milch.',a:['Soy alérgico a la leche.','Soy alérgica a la leche.']}
+ {t:'tr',de:'Ich bin allergisch gegen Milch.',a:['Soy alérgico a la leche.','Soy alérgica a la leche.']},
+ {t:'listen',es:'¿Podemos pagar con tarjeta?',de:'Können wir mit Karte zahlen?'},
+ {t:'order',es:'Prefiero el agua sin gas.',de:'Ich nehme lieber stilles Wasser.'}
 ]},
 {id:'l3',title:'Die Uhrzeit',desc:'¿Qué hora es? · ¿A qué hora …?',steps:[
  {t:'info',title:'¿Qué hora es?',html:`<table><tr><td>13:00</td><td class="es-t">Es la una.</td></tr><tr><td>14:00</td><td class="es-t">Son las dos.</td></tr><tr><td>14:15</td><td class="es-t">Son las dos y cuarto.</td></tr><tr><td>14:30</td><td class="es-t">Son las dos y media.</td></tr><tr><td>14:45</td><td class="es-t">Son las tres menos cuarto.</td></tr><tr><td>14:50</td><td class="es-t">Son las tres menos diez.</td></tr><tr><td>14:10</td><td class="es-t">Son las dos y diez.</td></tr></table>
@@ -57,7 +61,8 @@ lessons:[
  {t:'gap',task:'Schreib die Uhrzeit aus: 10:20',q:'Son las ___.',a:['diez y veinte']},
  {t:'listen',es:'Son las cinco menos diez.',task:'Hör zu und schreib den Satz.',alt:['las cinco menos diez','cinco menos diez'],de:'16:50 / 4:50'},
  {t:'listen',es:'La reunión es a las once y media.',de:'Die Besprechung ist um halb zwölf.'},
- {t:'tr',de:'Am Montagmorgen habe ich eine Besprechung.',a:['El lunes por la mañana tengo una reunión.','Tengo una reunión el lunes por la mañana.']}
+ {t:'tr',de:'Am Montagmorgen habe ich eine Besprechung.',a:['El lunes por la mañana tengo una reunión.','Tengo una reunión el lunes por la mañana.']},
+ {t:'mc',q:'Hör zu: Wie spät ist es?',say:'Son las siete y cuarto.',autoSay:true,opts:['7:15','7:45','6:45'],a:0}
 ]},
 {id:'l4',title:'Reservieren & bestellen',desc:'¿Para cuántas personas? · De primero, …',steps:[
  {t:'vocab',title:'Im Restaurant',items:[['reservar una mesa','einen Tisch reservieren'],['¿Para cuántas personas?','Für wie viele Personen?'],['¿A nombre de quién?','Auf welchen Namen?'],['está lleno','es ist voll'],['el menú del día','das Tagesmenü'],['de primero / de segundo','als Vorspeise / als Hauptgericht'],['el postre','der Nachtisch'],['¿Y para beber?','Und zu trinken?'],['la cuenta, por favor','die Rechnung, bitte'],['pagar con tarjeta','mit Karte zahlen'],['el camarero / la camarera','Kellner/in'],['¿Qué lleva …?','Was ist in … drin?']]},
@@ -91,7 +96,8 @@ lessons:[
  {t:'info',title:'Mengenangaben',html:`<table><tr><td>1 kg</td><td class="es-t">un kilo de patatas</td></tr><tr><td>100 g</td><td class="es-t">cien gramos de jamón</td></tr><tr><td>½ l</td><td class="es-t">medio litro de zumo</td></tr><tr><td>1½ kg</td><td class="es-t">un kilo y medio de carne</td></tr><tr><td></td><td class="es-t">una botella de agua · una lata de cerveza · un paquete de café</td></tr></table>
  <div class="ojo">Zwischen Menge und Produkt steht immer <b>de</b>.</div>`},
  {t:'tr',de:'ein halber Liter Milch',a:['medio litro de leche']},
- {t:'tr',de:'Die Rechnung, bitte.',a:['La cuenta, por favor.','¿Me trae la cuenta, por favor?','La cuenta, por favor']}
+ {t:'tr',de:'Die Rechnung, bitte.',a:['La cuenta, por favor.','¿Me trae la cuenta, por favor?','La cuenta, por favor']},
+ {t:'listen',es:'¿Me trae la cuenta, por favor?',de:'Bringen Sie mir bitte die Rechnung?'}
 ]},
 {id:'l5',title:'Lesen: El menú del día',desc:'Text verstehen · Nationalitäten · eigene Gewohnheiten',steps:[
  {t:'read',title:'Un correo a Tim',intro:'Jonas schreibt seinem Bruder Tim in Mannheim.',text:`¡Hola, Tim!
@@ -171,7 +177,8 @@ lessons:[
  {t:'gap',q:'En el centro hay ___ (viel) gente y ___ (viele) turistas.',a:['mucha','muchos']},
  {t:'gap',q:'El metro es ___ (sehr) rápido y trabajo ___ (viel).',a:['muy','mucho']},
  {t:'tr',de:'In meinem Viertel gibt es viele Parks.',a:['En mi barrio hay muchos parques.']},
- {t:'tr',de:'Die Universität ist sehr weit weg.',a:['La universidad está muy lejos.','La uni está muy lejos.']}
+ {t:'tr',de:'Die Universität ist sehr weit weg.',a:['La universidad está muy lejos.','La uni está muy lejos.']},
+ {t:'listen',es:'En mi barrio hay un mercado y muchos bares.',de:'In meinem Viertel gibt es einen Markt und viele Bars.'}
 ]},
 {id:'l2',title:'Verkehrsmittel',desc:'Voy en metro · ir a / ir en',steps:[
  {t:'info',title:'Das Verb ir (gehen, fahren)',html:`<table><tr><td>yo</td><td class="es-t">voy</td></tr><tr><td>tú</td><td class="es-t">vas</td></tr><tr><td>él / ella / usted</td><td class="es-t">va</td></tr><tr><td>nosotros/-as</td><td class="es-t">vamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">vais</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">van</td></tr></table>
@@ -188,7 +195,9 @@ lessons:[
  <p><b>tener que + Infinitiv</b> = müssen: <span class="es-t">Tienes que tomar el autobús. Tenéis que bajar en la próxima parada.</span></p>`},
  {t:'gap',q:'Para ir a la feria ___ ___ tomar la línea 1. (du musst)',a:['tienes','que']},
  {t:'tr',de:'Du musst in Plaça Catalunya umsteigen.',a:['Tienes que cambiar en Plaça Catalunya.','Tienes que cambiar en Plaza Cataluña.','Tienes que cambiar de línea en Plaça Catalunya.']},
- {t:'listen',es:'Toma el metro número tres y baja en Liceu.',de:'Nimm die Metro Linie 3 und steig am Liceu aus.'}
+ {t:'listen',es:'Toma la línea tres del metro y baja en Liceu.',de:'Nimm die Metro Linie 3 und steig am Liceu aus.'},
+ {t:'mc',q:'„Ich steige an der Plaça de Catalunya aus.“',opts:['Bajo en Plaça de Catalunya.','Cambio en Plaça de Catalunya.','Tomo en Plaça de Catalunya.'],a:0},
+ {t:'gap',q:'Para ir a la universidad ___ (yo, seguir) todo recto y luego ___ (tener) que tomar el autobús.',a:['sigo','tengo']}
 ]},
 {id:'l3',title:'Den Weg beschreiben',desc:'Sigue todo recto · Gira a la izquierda',steps:[
  {t:'vocab',title:'Wegbeschreibung',items:[['¿Sabe dónde está …?','Wissen Sie, wo … ist?'],['¿Hay un … cerca de aquí?','Gibt es ein … hier in der Nähe?'],['seguir todo recto','geradeaus gehen'],['girar a la derecha','rechts abbiegen'],['girar a la izquierda','links abbiegen'],['cruzar la calle','die Straße überqueren'],['hasta el final','bis zum Ende'],['la primera / segunda calle','die erste / zweite Straße'],['cerca (de)','in der Nähe (von)'],['lejos (de)','weit weg (von)'],['enfrente (de)','gegenüber (von)'],['al lado (de)','neben'],['delante (de) / detrás (de)','vor / hinter'],['entre … y …','zwischen … und …']]},
@@ -209,7 +218,8 @@ lessons:[
   {n:'Señor',es:'De nada. ¡Que vaya bien!',de:'Gern geschehen. Alles Gute!'}]},
  {t:'listen',es:'Gira a la derecha y sigue hasta el final de la calle.',de:'Bieg rechts ab und geh bis zum Ende der Straße.'},
  {t:'tr',de:'Zuerst geradeaus, dann links abbiegen.',a:['Primero todo recto, después gira a la izquierda.','Primero sigue todo recto y después gira a la izquierda.','Primero todo recto y luego a la izquierda.','Primero todo recto, luego gira a la izquierda.','Primero sigue todo recto, luego gira a la izquierda.']},
- {t:'tr',de:'Das Hotel ist neben dem Museum.',a:['El hotel está al lado del museo.','El hotel está junto al museo.']}
+ {t:'tr',de:'Das Hotel ist neben dem Museum.',a:['El hotel está al lado del museo.','El hotel está junto al museo.']},
+ {t:'order',es:'La farmacia está enfrente del banco.',de:'Die Apotheke ist gegenüber der Bank.'}
 ]},
 {id:'l4',title:'Lesen: Vivir en Barcelona',desc:'porque · pero · por eso',steps:[
  {t:'read',title:'Vivir en Barcelona',intro:'Aus der Willkommensbroschüre der Uni für internationale Studierende.',text:`Barcelona es una ciudad muy {atractiva|attraktiv} para estudiar: tiene varias universidades, muchos estudiantes {extranjeros|ausländisch} y un ambiente muy internacional. Está entre el mar y la montaña y tiene un {puerto|Hafen} con mucha historia. Además, el clima es suave: en invierno casi nunca hace mucho frío. Por eso muchas personas de otros países quieren vivir aquí.

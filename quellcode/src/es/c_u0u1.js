@@ -161,7 +161,9 @@ lessons:[
  {t:'vocab',title:'Sätze für den Unterricht',items:[['¿Qué significa …?','Was bedeutet …?'],['creo que significa …','ich glaube, es bedeutet …'],['no sé','ich weiß nicht'],['¿Cómo se dice … en español?','Wie sagt man … auf Spanisch?'],['¿Puedes repetir, por favor?','Kannst du das wiederholen, bitte?'],['más despacio, por favor','langsamer, bitte']]},
  {t:'mc',q:'Du verstehst das Wort „sostenibilidad“ nicht. Was fragst du?',opts:['¿Qué significa «sostenibilidad»?','¿Cómo te llamas «sostenibilidad»?','¿Qué tal «sostenibilidad»?'],a:0},
  {t:'tr',de:'Wie sagt man „Werbung“ auf Spanisch?',a:['¿Cómo se dice «Werbung» en español?','¿Cómo se dice Werbung en español?']},
- {t:'tr',de:'Ich weiß nicht.',a:['No sé','Yo no sé']}
+ {t:'tr',de:'Ich weiß nicht.',a:['No sé','Yo no sé']},
+ {t:'mc',q:'Laia spricht sehr schnell. Was sagst du?',opts:['Más despacio, por favor.','Más rápido, por favor.','No sé, por favor.'],a:0},
+ {t:'listen',es:'¿Puedes repetir, por favor?',de:'Kannst du das wiederholen, bitte?'}
 ]},
 {id:'l3',title:'ser & Herkunft',desc:'¿De dónde eres? – Soy de Alemania.',steps:[
  {t:'info',title:'Das Verb ser (sein)',html:`<table><tr><th>Pronomen</th><th>ser</th></tr>
@@ -185,7 +187,9 @@ lessons:[
  {t:'order',es:'¿De dónde es usted?',de:'Woher kommen Sie?'},
  {t:'tr',de:'Ich bin aus Deutschland, aus Mannheim.',a:['Soy de Alemania, de Mannheim.']},
  {t:'tr',de:'Seid ihr aus Spanien?',a:['¿Sois de España?','¿Vosotros sois de España?']},
- {t:'tr',de:'Nein, ich bin nicht aus Madrid.',a:['No, no soy de Madrid.','No, yo no soy de Madrid.','No soy de Madrid.']}
+ {t:'tr',de:'Nein, ich bin nicht aus Madrid.',a:['No, no soy de Madrid.','No, yo no soy de Madrid.','No soy de Madrid.']},
+ {t:'mc',q:'– ¿De dónde sois? – ___ de Italia.',opts:['Somos','Sois','Son'],a:0,why:'Die Frage geht an <i>vosotros</i> → Antwort mit <i>nosotros</i>: <i>somos</i>.'},
+ {t:'listen',es:'Soy de Alemania y Laia es de Girona.',de:'Ich komme aus Deutschland und Laia kommt aus Girona.'}
 ]},
 {id:'l4',title:'Verben auf -ar & Fragewörter',desc:'hablar, estudiar, trabajar · ¿Quién? ¿Dónde? ¿Para qué?',steps:[
  {t:'info',title:'Regelmäßige Verben auf -ar',html:`<p>Man streicht <b>-ar</b> und hängt die Endungen an:</p>
@@ -238,7 +242,8 @@ lessons:[
   {n:'Carla',es:'¡Qué bien! Bienvenido a Barcelona.',de:'Super! Willkommen in Barcelona.'}]},
  {t:'tr',de:'Ich spreche kein Französisch. – Ich auch nicht.',a:['No hablo francés. – Yo tampoco.','No hablo francés. Yo tampoco.','Yo no hablo francés. Yo tampoco.']},
  {t:'tr',de:'Sie arbeiten, aber ich nicht.',a:['Ellos trabajan, pero yo no.','Trabajan, pero yo no.','Ellas trabajan, pero yo no.']},
- {t:'free',task:'Stell dich in 4–6 Sätzen vor: Name, Herkunft, Wohnort, Sprachen, wozu du Spanisch lernst, was du (nicht) machst.',hint:'Me llamo … Soy de … Hablo … Estudio español para … No practico … pero …',focus:'ser, Verben auf -ar, para + Infinitiv, no/también/tampoco',model:'Hola, me llamo Jonas. Soy de Alemania, pero ahora vivo en Barcelona. Hablo alemán, inglés y un poco de español. Estudio un máster en la universidad. Estudio español para hablar con mis compañeros y para trabajar en España. Practico deporte, pero no toco un instrumento.'}
+ {t:'free',task:'Stell dich in 4–6 Sätzen vor: Name, Herkunft, Wohnort, Sprachen, wozu du Spanisch lernst, was du (nicht) machst.',hint:'Me llamo … Soy de … Hablo … Estudio español para … No practico … pero …',focus:'ser, Verben auf -ar, para + Infinitiv, no/también/tampoco',model:'Hola, me llamo Jonas. Soy de Alemania, pero ahora vivo en Barcelona. Hablo alemán, inglés y un poco de español. Estudio un máster en la universidad. Estudio español para hablar con mis compañeros y para trabajar en España. Practico deporte, pero no toco un instrumento.'},
+ {t:'listen',es:'No hablo francés, pero Laia sí.',de:'Ich spreche kein Französisch, aber Laia schon.'}
 ]}],
 resumen:`<h3>Substantive & Artikel</h3><table><tr><th></th><th>männlich</th><th>weiblich</th></tr><tr><td>Sg.</td><td class="es-t">el / un producto</td><td class="es-t">la / una empresa</td></tr><tr><td>Pl.</td><td class="es-t">los / unos productos</td><td class="es-t">las / unas empresas</td></tr></table>
 <p>-o → meist m · -a, -dad, -ción → meist w · Ausnahmen: el día, el programa, la foto. Plural: Vokal + s, Konsonant + es.</p>
