@@ -663,7 +663,7 @@ function vLearnPick(){const bt=document.getElementById('boot');document.body.inn
     UI_LANGS.length>1?h('div',{class:'uisel'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',title:n,onclick:()=>{if(c!==UI)setUI(c,true);}},f))):null,
     h('div',{class:'muted small',style:'margin-bottom:6px'},T('Schritt 1 von 2')),h('div',{style:'font-size:44px;margin-bottom:6px'},'🌍'),
     h('h1',{style:'margin:0 0 6px'},T('Was möchtest du lernen?')),h('p',{class:'muted',style:'margin:0 0 18px'},T('Du kannst später jederzeit wechseln – jede Sprache hat ihren eigenen Fortschritt.')),
-    h('div',{class:'learngrid'},...avail.map(L=>h('button',{class:'learntile',onclick:()=>pick(L.code)},h('span',{class:'lf'},L.flag),h('b',{},T(L.name)),L.stufen?h('span',{class:'muted small'},L.stufen[0]===L.stufen[1]?L.stufen[0]:T('{A} bis {B}').replace('{A}',L.stufen[0]).replace('{B}',L.stufen[1])):null)),
+    h('div',{class:'learngrid'},...avail.map(L=>h('button',{class:'learntile',onclick:()=>pick(L.code)},h('span',{class:'lf'},L.flag),h('b',{},T(L.name)),L.stufen?h('span',{class:'muted small'},L.stufen[0]===L.stufen[1]?L.stufen[0]:T('{A} bis {B}').replace('{A}',L.stufen[0]).replace('{B}',L.stufen[1])):null,exNote(L.code)?h('span',{class:'muted small',style:'font-style:italic'},exNote(L.code)):null)),
       ...planned.map(([c,n,f])=>h('button',{class:'learntile soon',onclick:()=>betaTry(c,n,pick)},h('span',{class:'lf'},f),h('b',{},T(n)),h('span',{class:'muted small'},T('bald'))))))));}
 function vWelcome(again){if(!again&&canInstall()&&!installSeen())return vInstall();if(!again&&!learnChosen())return vLearnPick();const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}const inp=h('input',{class:'inp',placeholder:T('Dein Vorname'),value:S.name||'',autocomplete:'given-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:20px'});
   const inp2=h('input',{class:'inp',placeholder:T('Nachname (optional)'),value:S.surname||'',autocomplete:'family-name',autocapitalize:'words',spellcheck:'false',style:'text-align:center;font-size:16px;margin-top:8px'});
@@ -688,7 +688,7 @@ function route(){if(window.speechSynthesis)speechSynthesis.cancel();READING=fals
   {const om=document.querySelector('.main');if(LASTR)SCROLLPOS[LASTR]=Math.max(window.scrollY||0,om?om.scrollTop:0);}
   trackNav(curRoute());const RT=curRoute();LASTR=RT;const parts=curRoute().split('/');
   if(!S.name||!S.gender&&S.name!==T('Jonas')&&LANG.genderEx||parts[0]==='name')return vWelcome(!!S.name&&parts[0]==='name');const m=shell();
-  const v={home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum,reading:vReading}[parts[0]]||vHome;
+  const v={privacy:vPrivacy,home:vHome,units:vUnits,unit:vUnit,lesson:vLesson,vocab:vVocab,placement:vPlacement,settings:vSettings,mistakes:vMistakes,resumen:vResumen,lang:vLang,origin:vOrigin,check:vCheck,round:vRound,ref:vRef,verbs:vVerbs,story:vStory,chat:vChat,words:vWords,shadow:vShadow,mix:vMix,num:vNum,reading:vReading}[parts[0]]||vHome;
   v(m,...parts.slice(1));autoHead(m,parts[0]);const y=NAVBACK&&SCROLLPOS[RT]||0;window.scrollTo(0,y);m.scrollTop=y;
   if(y)requestAnimationFrame(()=>{if(curRoute()===RT){m.scrollTop=y;window.scrollTo(0,y);}});hideBoot();}
 
@@ -742,7 +742,29 @@ function vocabPick(){const pv=pauseGet('vocab');if(pv)return resumeVocab(Object.
     h('div',{class:'picklist'},opt('🃏',T('Karten'),T('Aufdecken & selbst bewerten – am schnellsten'),8,'flip'),opt('✍️',T('Tippen'),T('Wort schreiben – am gründlichsten'),18,'type'),opt('🎧',T('Hören'),T('Hören & schreiben'),15,'listen')),
     h('button',{class:'btn ghost',style:'width:100%;margin-top:8px',onclick:close},T('Abbrechen'))));
   ov.onclick=e=>{if(e.target===ov)close();};document.body.append(ov);}
+/* Datenschutz & Info (Mehr → Knopf unten): was wo gespeichert wird, Quellen & Lizenzen. Gilt für alle Kurse. */
+function vPrivacy(m){const P=(t,x)=>h('div',{class:'card',style:'margin-bottom:12px'},h('h2',{style:'margin-top:0'},t),...x.map(y=>h('p',{class:'small',style:'margin:0 0 8px'},y)));
+  m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Datenschutz & Info')),
+    h('p',{class:'sub'},T('Kein Konto, keine Werbung, kein Tracking, keine Cookies. Hier steht, welche Daten wo landen.')),
+    P(T('📱 Auf deinem Gerät'),[T('Lernfortschritt, Name, Ansprache, Herkunft und Einstellungen liegen im Speicher deines Browsers bzw. der installierten App. Sie verlassen das Gerät nur, wenn du unten genannte Funktionen einschaltest.'),T('Löschen: Browserdaten dieser Seite löschen bzw. die App entfernen. Vorher sichern, wenn du den Fortschritt behalten willst (Mehr → Sync & Backup).')]),
+    P(T('☁️ Sync (nur wenn du ihn einschaltest)'),[T('Mit Sync-Code: Fortschritt, Name und Einstellungen werden auf dem Mi-profe-Server gespeichert (Cloudflare; Rechenzentren auch außerhalb der EU). Abrufbar nur mit deinem Sync-Code – gib ihn nur an eigene Geräte.'),T('Mit GitHub: dieselben Daten in einem privaten Gist in deinem eigenen GitHub-Konto.')]),
+    P(T('🤖 KI-Lehrer (nur wenn du ihn nutzt)'),[T('Deine Texte und Antworten (mit deinem Vornamen) gehen an Google Gemini – über den Mi-profe-Server, wenn du eine Einladung hast, sonst direkt mit deinem eigenen Schlüssel. Es gelten die Bedingungen von Google.')]),
+    P(T('🌐 Hosting & Vorlesen'),[T('Die App liegt bei GitHub Pages; GitHub verarbeitet beim Aufruf technisch nötige Daten wie die IP-Adresse. Vorlesen und Aufnahmen laufen über dein Gerät – Aufnahmen werden nicht hochgeladen.')]),
+    P(T('✉️ Fragen & Löschen'),[T('Fragen, Fehler oder der Wunsch, deine Sync-Daten auf dem Server zu löschen: wende dich an Jonas.')]),
+    P(T('📚 Quellen & Lizenzen'),[T('Alle Lerntexte sind eigene Texte. Orientierung: Plan Curricular des Instituto Cervantes, Wortlisten des Goethe-Instituts und Prüfungsformate (DELE, Goethe-Zertifikat) – ohne übernommene Aufgaben.'),T('Häufige Wörter: FrequencyWords (OpenSubtitles) und WikDict/Wiktionary, Lizenz CC BY-SA 4.0.')]));}
+/* Sicherungs-Erinnerung: ohne Sync nach 3 erledigten Lektionen einmal, danach alle 14 Tage (Safari am iPhone löscht Seiten nach 7 Tagen ohne Besuch) */
+function backupAsk(){if(IN_ARTIFACT||syncOn())return;const st=S.settings,n=Object.values(S.lessons).filter(x=>x.done).length;if(n<3||st.bkAsk&&Date.now()-st.bkAsk<14*864e5)return;
+  st.bkAsk=Date.now();save();setTimeout(()=>{if(document.querySelector('.overlay'))return;const ov=h('div',{class:'overlay'});const close=()=>ov.remove();
+    ov.append(h('div',{class:'card',style:'max-width:400px;width:100%;text-align:center'},h('div',{style:'font-size:40px'},'💾'),h('h2',{style:'margin:4px 0 6px'},T('Fortschritt sichern?')),
+      h('p',{class:'muted',style:'margin:0 0 14px'},T('Dein Fortschritt liegt bisher nur in diesem Browser. Werden die Daten gelöscht oder du wechselst das Handy, ist alles weg – Safari am iPhone löscht Seiten sogar nach 7 Tagen ohne Besuch.')),
+      h('div',{class:'stack'},h('button',{class:'btn primary',onclick:()=>{close();go('settings/sync');}},T('☁️ Sicherung einrichten')),
+        canInstall()?h('button',{class:'btn',onclick:()=>{close();vInstall(true);}},T('📲 Als App installieren')):null,h('button',{class:'btn ghost',onclick:close},T('Später')))));
+    ov.onclick=e=>{if(e.target===ov)close();};document.body.append(ov);},700);}
+/* Kursauswahl: passt keine Erklärsprache des Kurses zur App-Sprache → „Erklärungen auf …“ */
+function exNote(code){const P=window.PACKS;if(!P||!P.base)return null;const ex=[P.base[code]||'de'].concat(P.ex&&P.ex[code]||[]);if(ex.indexOf(UI)>=0)return null;
+  const NM={de:T('Deutsch'),en:T('Englisch'),es:T('Spanisch'),pt:T('Portugiesisch')};return T('Erklärungen auf {X}').replace('{X}',ex.map(x=>NM[x]||x).join(' / '));}
 function vHome(m){
+  backupAsk();
   const nx=nextLesson();const due=dueCards().length;const done=Object.values(S.lessons).filter(x=>x.done).length;
   const acc=S.stats.answers?Math.round(100*S.stats.correct/S.stats.answers):0;const td=today();
   const hr=new Date().getHours();const greet=LANG.greet[hr<14?0:hr<20?1:2];
@@ -840,8 +862,8 @@ function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
         /* freiwillige Zusatzlektionen (plus:true, ab:true): zählen nicht für Fortschritt/Tagesplan, z. B. „Vocabulario A1“ nach dem Plan Curricular */
         ...PL.map(l=>mtile(l.icon||'📗',l.title,l.desc||'',()=>go('lesson/'+u.id+'/'+l.id),S.lessons[u.id+'.'+l.id]?.done?'✓':null)),
         u.situacion?mtile('💬',T('Gespräch'),u.situacion.title+(hasAI()?'':T(' · braucht KI')),()=>go('chat/'+u.id)):null,
-        AB.length?mtile('📎',T('Übungsblätter'),AB.length+T(' aus deinem DHBW-Kurs'),()=>go('unit/'+u.id+'/ab')):null));return;}
-  if(tab==='ab'){m.innerHTML='';m.append(backTo(''+UW+' '+u.n,'unit/'+u.id),h('h1',{},T('Übungsblätter')),h('p',{class:'sub'},T('Deine Arbeitsblätter aus dem DHBW-Kurs – freiwillig, zum Vertiefen.')),
+        AB.length?mtile('📎',T('Übungsblätter'),AB.length+T(' aus deinem Kurs'),()=>go('unit/'+u.id+'/ab')):null));return;}
+  if(tab==='ab'){m.innerHTML='';m.append(backTo(''+UW+' '+u.n,'unit/'+u.id),h('h1',{},T('Übungsblätter')),h('p',{class:'sub'},T('Deine Arbeitsblätter aus dem Kurs – freiwillig, zum Vertiefen.')),
     h('div',{class:'grid',style:'gap:8px'},AB.map(l=>{const r=S.lessons[u.id+'.'+l.id];return h('div',{class:'lesson'+(r?.done?' done':''),onclick:()=>go('lesson/'+u.id+'/'+l.id)},h('div',{class:'ic'},r?.done?'✓':'📎'),
       h('div',{style:'flex:1'},h('div',{class:'lt'},l.title),h('div',{class:'ld'},l.desc)),r?.done?h('span',{class:'pill ok'},Math.round(r.best*100)+'%'):null);})));return;}
   if(st&&!ck?.pass)m.append(h('p',{class:'muted small',style:'margin:12px 0 0'},T('Einstufung: ')+(st==='sicher'?T('sitzt – mach direkt den Abschlusstest.'):st===T('auffrischen')?T('auffrischen – Erklärungen kannst du überfliegen.'):T('neu lernen – nimm dir Zeit.'))));
@@ -1907,7 +1929,7 @@ function vLang(m){m.append(backTo(T('Mehr'),'settings'),h('h1',{},T('Sprache & P
   const avail=learnPacks();const planned=LANG_PLANNED.filter(([c])=>!avail.some(L=>L.code===c));
   const pick=code=>{if(code===LANG.code)return go('home');save(true);try{localStorage.setItem(SHARED,JSON.stringify({lang:code,ui:UI,ex:EX_SET,name:S.name,surname:S.surname,gender:S.gender,settings:S.settings}));}catch(e){}if(IN_ARTIFACT){toast(T('Sprachwechsel nur in der installierten App'));return;}location.hash='home';reloadApp();};
   m.append(h('div',{class:'kind',style:'margin-top:8px'},T('Ich lerne')),h('div',{class:'chips'},
-    ...avail.map(L=>h('button',{class:'chip'+(L.code===LANG.code?' on':''),onclick:()=>pick(L.code)},h('span',{},L.flag),h('span',{},T(L.name)))),
+    ...avail.map(L=>h('button',{class:'chip'+(L.code===LANG.code?' on':''),onclick:()=>pick(L.code)},h('span',{},L.flag),h('span',{},T(L.name)+(exNote(L.code)?' ('+exNote(L.code)+')':'')))),
     ...planned.map(([c,n,f])=>h('button',{class:'chip soon',onclick:()=>betaTry(c,n,pick)},h('span',{},f),h('span',{},T(n)+T(' · bald'))))),
     h('p',{class:'muted small',style:'margin:6px 0 0'},T('Jede Sprache hat ihren eigenen Fortschritt.')));
   m.append(h('div',{class:'kind',style:'margin-top:20px'},T('Sprache der App')),h('div',{class:'seg'},UI_LANGS.map(([c,f,n])=>h('button',{class:c===UI?'on':'',onclick:()=>{if(c!==UI)setUI(c);}},h('b',{},f),h('span',{},n)))),
@@ -1957,7 +1979,7 @@ function vSettings(m,sec){
   const ver=window.APP_VERSION?window.APP_VERSION.replace(/^(\d{4})(\d\d)(\d\d)-(\d\d)(\d\d)$/,'$3.$2.$1, $4:$5'):T('Offline-Datei');
   m.append(h('h1',{},T('Mehr')),tiles(mtile('🌍',T('Sprache & Profil'),LANG.flag+' '+T(LANG.name)+' · '+S.name,()=>go('lang')),mtile('📅',T('Mein Tagesplan'),T('Was täglich dran ist'),()=>go('settings/plan')),
     ...SETSEC.map(x=>mtile(x[1],x[2],x[3],()=>go('settings/'+x[0])))),
-    h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),canInstall()?h('button',{class:'btn small ghost',onclick:()=>vInstall(true)},T('📲 Als App installieren')):null,window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
+    h('div',{class:'row verline'},h('span',{class:'muted small'},T('Version ')+ver),h('button',{class:'btn small ghost',onclick:()=>go('privacy')},'🔒 '+T('Datenschutz & Info')),canInstall()?h('button',{class:'btn small ghost',onclick:()=>vInstall(true)},T('📲 Als App installieren')):null,window.PWA?h('button',{class:'btn small ghost',onclick:upd},'🔄 '+T('Nach Update suchen')):null));}
 
 /* ---------- Sync über GitHub Gist ---------- */
 const GIST_FILE=LANG.gist,GIST_DESC=T('Mi profe – Lernfortschritt (Sync)');

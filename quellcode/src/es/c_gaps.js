@@ -1,4 +1,4 @@
-/* ================= A2 · TEIL 2: Lücken aus der „Systematischen Grammatik“ des Kursbuchs schließen ================= */
+/* ================= A2 · TEIL 2: Grammatik-Lücken schließen ================= */
 
 /* ================= UNIDAD 11 · PEQUEÑAS PALABRAS ================= */
 COURSE.units.push({id:'g1',n:'11',level:'A2b',title:'Pequeñas palabras',sub:'Kleine Wörter, große Wirkung: alguien/nadie, algo/nada, algún/ningún · Kurzformen (buen, gran, primer) · Superlativ · conmigo/contigo · qué oder cuál',

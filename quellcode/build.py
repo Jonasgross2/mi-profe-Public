@@ -7,7 +7,7 @@ SERVER_URL='https://mi-profe.miprofe-app.workers.dev'
 # ===== Pakete: die Web-App lädt nur, was gebraucht wird (Lernsprache + ggf. Erklärsprache); die Mac-Einzeldateien enthalten alles =====
 # Ordner: src/core/ = gemeinsam (Logik, Design, Register, Oberflächentexte) · src/<lern>/ = Inhalte einer Lernsprache · src/<lern>/tr_<ex>.js = Erklärsprache
 # Neue Lernsprache: Ordner src/<code>/ + Eintrag hier (Dateien in Ladereihenfolge, Definition defineLang zuletzt). Erklärsprachen: automatisch aus src/<lern>/tr_<ex>.js
-PACKS={'es': {'name': 'Spanisch', 'flag': '🇪🇸', 'files': ['es/c_u0u1.js', 'es/c_u2u3.js', 'es/c_read03.js', 'es/c_u4u5.js', 'es/c_u6u8.js', 'es/c_u9u10.js', 'es/c_extra.js', 'es/c_a1plus.js', 'es/c_gaps.js', 'es/c_a2b.js', 'es/c_a2plus.js', 'es/c_b1.js', 'es/c_b1b.js', 'es/c_b1plus.js', 'es/c_b2.js', 'es/c_b2b.js', 'es/c_b2plus.js', 'es/c_c1.js', 'es/c_c1b.js', 'es/c_c1plus.js', 'es/c_c2.js', 'es/c_c2plus.js', 'es/c_vocab_plus.js', 'es/c_vocab_freq.js', 'es/c_info_tr.js', 'es/c_stories.js', 'es/c_reading.js', 'es/placement.js', 'es/levels.js', 'es/lang_es.js', 'es/conj_es.js', 'es/num_es.js', 'es/fem_es.js', 'es/pers_es.js', 'es/origin_es.js'], 'base': 'de', 'stufen': ['A1', 'C2'], 'app': 'Mi profe', 'farbe': '#c4472b'}, 'de': {'name': 'Deutsch', 'flag': '🇩🇪', 'files': ['de/lang_de.js', 'de/fem_de.js', 'de/pers_de.js', 'de/num_de.js', 'de/conj_de.js', 'de/c_a1.js', 'de/c_a2.js', 'de/c_b1.js', 'de/c_b2.js', 'de/c_stories.js', 'de/c_freq.js', 'de/c_info_tr.js'], 'base': 'pt', 'stufen': ['A1', 'B2'], 'app': 'Mein Lehrer', 'farbe': '#b3202a'}}
+PACKS={'es': {'name': 'Spanisch', 'flag': '🇪🇸', 'files': ['es/c_u0u1.js', 'es/c_u2u3.js', 'es/c_read03.js', 'es/c_u4u5.js', 'es/c_u6u8.js', 'es/c_u9u10.js', 'es/c_a1plus.js', 'es/c_gaps.js', 'es/c_a2b.js', 'es/c_a2plus.js', 'es/c_b1.js', 'es/c_b1b.js', 'es/c_b1plus.js', 'es/c_b2.js', 'es/c_b2b.js', 'es/c_b2plus.js', 'es/c_c1.js', 'es/c_c1b.js', 'es/c_c1plus.js', 'es/c_c2.js', 'es/c_c2plus.js', 'es/c_vocab_plus.js', 'es/c_vocab_freq.js', 'es/c_info_tr.js', 'es/c_stories.js', 'es/c_reading.js', 'es/placement.js', 'es/levels.js', 'es/lang_es.js', 'es/conj_es.js', 'es/num_es.js', 'es/fem_es.js', 'es/pers_es.js', 'es/origin_es.js'], 'base': 'de', 'stufen': ['A1', 'C2'], 'app': 'Mi profe', 'farbe': '#c4472b'}, 'de': {'name': 'Deutsch', 'flag': '🇩🇪', 'files': ['de/lang_de.js', 'de/fem_de.js', 'de/pers_de.js', 'de/num_de.js', 'de/conj_de.js', 'de/c_a1.js', 'de/c_a2.js', 'de/c_b1.js', 'de/c_b2.js', 'de/c_stories.js', 'de/c_freq.js', 'de/c_info_tr.js'], 'base': 'pt', 'stufen': ['A1', 'B2'], 'app': 'Mein Lehrer', 'farbe': '#b3202a'}}
 # Farbschemata (Mehr → Stimme & Darstellung): 'flag' = Farbe der Lernsprache (PACKS[..]['farbe'], aus der Flagge), sonst eine Akzentfarbe – Rest leitet die App ab
 THEMES={'ozean':'#1f6fa8','wald':'#2f7d4f','lavendel':'#6d4fb8','sonne':'#a85d08','graphit':'#3d4652','rose':'#b83a6b','terra':'#c4472b','tuerkis':'#0e8a8a','koralle':'#d9534a','beere':'#7b2d5e','oliv':'#6b7a26','indigo':'#3f4fb5'}
 TRS=[]   # (Pfad, Lernsprache, Erklärsprache) – src/es/tr_en.js → Erklärsprache en für Lernsprache es
@@ -16,17 +16,27 @@ for k in PACKS:
 EXMAP={}
 for _,ln,ex in TRS:EXMAP.setdefault(ln,[]).append(ex)
 ALL=['core/lang.js']+[f for k in PACKS for f in PACKS[k]['files']]+['core/ui_tr.js']+[t[0] for t in TRS]+['core/engine.js']
+# Private Inhalte (nicht im öffentlichen Repo, Ordner quellcode/privat/ ist gitignored): nur in der Offline-Datei dist/Spanisch-Lehrer.html,
+# z. B. Jonas' Kurs-Übungsblätter (privat/es/c_extra.js). Fehlt der Ordner, wird ohne sie gebaut.
+PRIVATE={'es':('es/c_u9u10.js',['../privat/es/c_extra.js'])}   # Kurs: (nach welcher Datei, [private Dateien])
+def _dist(k):
+    out=[]
+    for f in PACKS[k]['files']:
+        out.append(f)
+        if k in PRIVATE and f==PRIVATE[k][0]: out+=[p for p in PRIVATE[k][1] if (s/p).exists()]
+    return out
+ALL_DIST=['core/lang.js']+[f for k in PACKS for f in _dist(k)]+['core/ui_tr.js']+[t[0] for t in TRS]+['core/engine.js']
 # ===== iPhone-Schutz: Syntax, die ältere iOS-Safari nicht kennen → App bliebe schwarz. Build bricht ab und nennt die Stelle. =====
 import re as _re, sys as _sys
 _BAD=[(r'\(\?<[=!]','Regex-Lookbehind (?<= / (?<!'),(r'\\p\{','Regex \\p{…}'),(r'\.at\(-?\d','Array.at()'),(r'\.findLast(Index)?\(','findLast'),
   (r'structuredClone\(','structuredClone'),(r'Object\.hasOwn\(','Object.hasOwn'),(r'\.(toSorted|toReversed|toSpliced)\(','toSorted/toReversed'),
   (r'(\?\?|\|\||&&)=(?!=)','logische Zuweisung ??= ||= &&='),(r'^\s*static\s*\{','static-Block'),(r'\.replaceAll\(','replaceAll (erst iOS 13.4)')]
 _errs=[]
-for _f in ALL:
+for _f in ALL_DIST:
   for _n,_line in enumerate((s/_f).read_text(encoding='utf-8').splitlines(),1):
     for _rx,_what in _BAD:
       if _re.search(_rx,_line):_errs.append(f'  {_f}:{_n}: {_what}  →  {_line.strip()[:90]}')
-for _f in ALL:
+for _f in ALL_DIST:
   _t=(s/_f).read_text(encoding='utf-8')
   for _n,_line in enumerate(_t.splitlines(),1):
     if any(ord(_c)<32 and _c not in '\t\r' for _c in _line):_errs.append(f'  {_f}:{_n}: unsichtbares Steuerzeichen (z. B. kaputtes \\b)  →  {_line.strip()[:60]!r}')
@@ -67,7 +77,7 @@ def page(pwa):
 <link rel="icon" href="icon-192.png">
 <script>window.PWA=true;window.APP_VERSION="'''+VERSION+'''";window.MP_SERVER="'''+SERVER_URL+'''";</script>''' if pwa else '''<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🇪🇸</text></svg>">'''
     inl=lambda fs:'\n'.join(f'<script>{(s/f).read_text()}</script>' for f in fs)
-    scripts=inl(['core/lang.js'])+'\n'+LOADER+inl(['core/ui_tr.js','core/engine.js']) if pwa else inl(ALL)
+    scripts=inl(['core/lang.js'])+'\n'+LOADER+inl(['core/ui_tr.js','core/engine.js']) if pwa else inl(ALL_DIST)
     return f'''<!doctype html>
 <html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <title>Mi profe</title>

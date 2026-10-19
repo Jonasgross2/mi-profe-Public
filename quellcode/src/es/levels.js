@@ -1,9 +1,9 @@
 /* ===== Stufen (A1 → C2) & Bilder zu Vokabeln ===== */
 /* Abschnitte des Kurses. Der Einstufungstest läuft in dieser Reihenfolge, Etappe für Etappe. */
 window.LEVELS=[
-  {id:'A1',label:'A1',title:'A1 · Einstieg',sub:'Kursbuch Meta profesional, Unidad 0–5: dich vorstellen, Familie, Essen, Stadt, Freizeit.'},
-  {id:'A2a',label:'A2',title:'A2 · Teil 1',sub:'Kursbuch Meta profesional, Unidad 6–10: Perfekt, Alltag, Pläne, Imperfekt, Indefinido.'},
-  {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Grammatik-Lücken aus dem Kursbuch schließen, dann Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
+  {id:'A1',label:'A1',title:'A1 · Einstieg',sub:'Unidad 0–5: dich vorstellen, Familie, Essen, Stadt, Freizeit.'},
+  {id:'A2a',label:'A2',title:'A2 · Teil 1',sub:'Unidad 6–10: Perfekt, Alltag, Pläne, Imperfekt, Indefinido.'},
+  {id:'A2b',label:'A2',title:'A2 · Teil 2',sub:'Grammatik-Lücken schließen, dann Gesundheit, Reisen erzählen, Kochen, Gefallen & Geschenke, Zukunft – A2 komplett.'},
   {id:'B1',label:'B1',title:'B1 · Teil 1',sub:'Subjuntivo, Geschichten erzählen, Bedingungen, Meinung & Zweifel.'},
   {id:'B1b',label:'B1',title:'B1 · Teil 2',sub:'Zeit- und Zwecksätze, indirekte Rede, Relativsätze, Gefühle & Bewertungen – B1 komplett.'},
   {id:'B2',label:'B2',title:'B2 · Teil 1',sub:'Imperfecto de subjuntivo, irreale Bedingungen, Zeitenfolge, Konzessivsätze, Passiv & Nachrichten.'},
