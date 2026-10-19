@@ -520,6 +520,7 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "die Frist · spätestens · die Unterlagen · beantragen · verlängern · fällig · falls · möglichst · zunächst · endgültig · zurechtkommen": "o prazo · o mais tardar · os documentos · solicitar · prorrogar · vencido · caso · o mais … possível · primeiro · definitivo · se virar",
 "eine Frage stellen → in Frage stellen": "fazer uma pergunta → questionar",
 "zur Diskussion stellen → zur Diskussion stehen": "pôr em discussão → estar em discussão",
+"zur Verfügung stellen → zur Verfügung stehen": "pôr à disposição → estar à disposição",
 "Bewerbung als Teamleiter Softwareentwicklung": "Candidatura para líder de equipe de desenvolvimento de software",
 "Sehr geehrte Damen und Herren, mit großem Interesse habe ich Ihre Stellenausschreibung gelesen.": "Prezados senhores e senhoras, li o seu anúncio de vaga com grande interesse.",
 "Derzeit arbeite ich als … bei … und bin dort verantwortlich für …": "Atualmente trabalho como … na … e lá sou responsável por …",
