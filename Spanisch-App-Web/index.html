@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="icon-512.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261019-1325";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
+<script>window.PWA=true;window.APP_VERSION="20261019-1327";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -467,6 +467,8 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .instn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:14px}
 .swatches{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px}.swatch{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;padding:4px 2px;cursor:pointer;color:var(--ink);font:inherit;width:66px}
 .swc{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.08)}.swatch.on .swc{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--ink)}.swatch.on{font-weight:600}
+.swc{position:relative}.swcustom{background:conic-gradient(#e2574c,#e0a526,#4caf50,#1f9bd1,#6d4fb8,#e2574c);color:#fff;font-size:20px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.swpick{position:absolute;inset:0;opacity:0;width:100%;height:100%;cursor:pointer;border:0;padding:0}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <div id="boot"><div class="bootlogo">🇪🇸</div><div class="bootspin"></div></div>
@@ -501,7 +503,7 @@ window.selectLang=function(){let code='es';try{code=(JSON.parse(localStorage.get
   if(L.code!=='es')for(const u of L.course.units)for(const q of u.placement||[])L.placement.push(Object.assign({u:u.id},q));
   window.COURSE=L.course;window.PLACEMENT=L.placement;window.STORIES=L.stories;window.LEVELS=L.levels;window.LEVEL_OF=L.levelOf;window.EMOJI=L.emoji;};
 </script>
-<script>window.PACKS={"learn": [{"code": "es", "name": "Spanisch", "flag": "🇪🇸", "stufen": ["A1", "C2"], "app": "Mi profe", "akzent": "#c4472b"}, {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "stufen": ["A1", "B2"], "app": "Mein Lehrer", "akzent": "#b3202a"}], "ex": {"es": ["en"]}, "base": {"es": "de", "de": "pt"}};window.THEMES={"ozean": "#1f6fa8", "wald": "#2f7d4f", "lavendel": "#6d4fb8", "sonne": "#a85d08", "graphit": "#3d4652", "rose": "#b83a6b", "terra": "#c4472b"};
+<script>window.PACKS={"learn": [{"code": "es", "name": "Spanisch", "flag": "🇪🇸", "stufen": ["A1", "C2"], "app": "Mi profe", "akzent": "#c4472b"}, {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "stufen": ["A1", "B2"], "app": "Mein Lehrer", "akzent": "#b3202a"}], "ex": {"es": ["en"]}, "base": {"es": "de", "de": "pt"}};window.THEMES={"ozean": "#1f6fa8", "wald": "#2f7d4f", "lavendel": "#6d4fb8", "sonne": "#a85d08", "graphit": "#3d4652", "rose": "#b83a6b", "terra": "#c4472b", "tuerkis": "#0e8a8a", "koralle": "#d9534a", "beere": "#7b2d5e", "oliv": "#6b7a26", "indigo": "#3f4fb5"};
 /* Lader (ES5): gleiche Logik wie engine.js (App-Sprache → Erklärsprache), lädt das Lernsprachen-Paket und ggf. das Erklärsprachen-Paket synchron */
 (function(){var sh=null;try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');}catch(e){}
 var nav=(navigator.language||'de').toLowerCase(),ui=sh&&sh.ui||(sh?'de':nav.indexOf('de')===0?'de':nav.indexOf('es')===0?'es':nav.indexOf('pt')===0?'pt':'en');
@@ -976,6 +978,12 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Türkis": "Turquoise",
+"Koralle": "Coral",
+"Beere": "Berry",
+"Oliv": "Olive",
+"Indigo": "Indigo",
+"Eigene": "Custom",
 "Farben": "Colours",
 "Flagge": "Flag",
 "Ozean": "Ocean",
@@ -2029,6 +2037,12 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Türkis": "Turquesa",
+"Koralle": "Coral",
+"Beere": "Frutos rojos",
+"Oliv": "Oliva",
+"Indigo": "Índigo",
+"Eigene": "Propio",
 "Farben": "Colores",
 "Flagge": "Bandera",
 "Ozean": "Océano",
@@ -3082,6 +3096,12 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Türkis": "Turquesa",
+"Koralle": "Coral",
+"Beere": "Frutas vermelhas",
+"Oliv": "Oliva",
+"Indigo": "Índigo",
+"Eigene": "Personalizada",
 "Farben": "Cores",
 "Flagge": "Bandeira",
 "Ozean": "Oceano",
@@ -3737,19 +3757,22 @@ function save(noSync){S.updated=Date.now();const js=JSON.stringify(S);try{localS
 load();
 document.title=fmt(T('Mi profe · {L} lernen'));
 /* Farbschema: S.settings.color gilt für alle Kurse; leer/'flag' = Farbe der Lernsprache (PACKS[..].farbe → akzent). Hell/Dunkel wird aus der einen Farbe abgeleitet. Ein App-Symbol für alle. */
-const THEMES_UI=[['flag','Flagge'],['ozean','Ozean'],['wald','Wald'],['lavendel','Lavendel'],['sonne','Sonne'],['graphit','Graphit'],['rose','Rosé'],['terra','Terrakotta']];
-function colorId(){const c=S.settings.color;return c&&window.THEMES&&THEMES[c]?c:'flag';}
-function accentOf(id){return id==='flag'?(PK_CUR.akzent||'#c4472b'):THEMES[id];}
+const THEMES_UI=[['flag','Flagge'],['ozean','Ozean'],['wald','Wald'],['lavendel','Lavendel'],['sonne','Sonne'],['graphit','Graphit'],['rose','Rosé'],['terra','Terrakotta'],['tuerkis','Türkis'],['koralle','Koralle'],['beere','Beere'],['oliv','Oliv'],['indigo','Indigo']];
+/* eigene Farbe: S.settings.color = '#rrggbb' */
+function colorId(){const c=S.settings.color;return c&&/^#[0-9a-f]{6}$/i.test(c)?'custom':c&&window.THEMES&&THEMES[c]?c:'flag';}
+function accentOf(id){return id==='flag'?(PK_CUR.akzent||'#c4472b'):id==='custom'?S.settings.color:THEMES[id];}
 function hx(c){const v=parseInt(c.slice(1),16);return[v>>16&255,v>>8&255,v&255];}
 function mixC(a,b,t){const B=hx(b);return '#'+hx(a).map((x,i)=>('0'+Math.round(x*(1-t)+B[i]*t).toString(16)).slice(-2)).join('');}
 function lum(c){const v=hx(c).map(x=>{x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);});return .2126*v[0]+.7152*v[1]+.0722*v[2];}
-function applyLook(){const id=colorId(),a=accentOf(id),old=document.getElementById('lookcss');if(old)old.remove();
+function applyLook(){const id=colorId();let a=accentOf(id);const old=document.getElementById('lookcss');if(old)old.remove();
   const set=(sel,attr,v)=>{const e=document.querySelector(sel);if(e)e.setAttribute(attr,v);};set('meta[name=theme-color]','content',a);
   if(window.PWA){/* Manifest bleibt manifest.webmanifest; der Service Worker liefert darunter das des Kurses (Name; Chrome/Edge übernehmen ihn selbst) */
     if(window.caches)fetch('manifest-'+LANG.code+'.webmanifest').then(r=>r.ok?caches.open('mi-profe-look').then(c=>c.put('manifest.webmanifest',r)):0).catch(()=>{});
     set('meta[name=apple-mobile-web-app-title]','content',APP);}
   if(a.toLowerCase()==='#c4472b')return;/* Terrakotta = Grundfarben aus app.css */
-  const a2=mixC(a,'#ffffff',.3),dbg=mixC('#161616',a2,.05);
+  /* lesbar halten (vor allem eigene Farben): zu hell → abdunkeln, im Dunkelmodus zu dunkel → aufhellen */
+  for(let k=0;k<12&&lum(a)>.22;k++)a=mixC(a,'#000000',.12);
+  let a2=mixC(a,'#ffffff',.3);for(let k=0;k<12&&lum(a2)<.16;k++)a2=mixC(a2,'#ffffff',.15);const dbg=mixC('#161616',a2,.05);
   const L='--bg:'+mixC('#fbfaf8',a,.035)+';--surface2:'+mixC('#f2f0ed',a,.06)+';--line:'+mixC('#e3dfdb',a,.09)+';--accent:'+a+';--accent-ink:'+(lum(a)>.4?'#1b1714':'#ffffff')+';--accent-soft:'+mixC('#ffffff',a,.15)+';--accent-strong:'+mixC(a,'#000000',.18)+';';
   const D='--bg:'+dbg+';--surface:'+mixC('#1f1f1f',a2,.06)+';--surface2:'+mixC('#282828',a2,.07)+';--line:'+mixC('#383838',a2,.09)+';--accent:'+a2+';--accent-ink:'+dbg+';--accent-soft:'+mixC('#1d1d1d',a2,.2)+';--accent-strong:'+mixC(a2,'#ffffff',.25)+';';
   const st=document.createElement('style');st.id='lookcss';st.textContent=':root{'+L+'}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){'+D+'}}:root[data-theme="dark"]{'+D+'}';document.head.appendChild(st);}
@@ -5517,7 +5540,11 @@ function vSettingsAll(m){const st=S.settings;
     h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Farben')),
       h('div',{class:'swatches'},THEMES_UI.filter(([id])=>id==='flag'||window.THEMES&&THEMES[id]).map(([id,l])=>h('button',{class:'swatch'+(colorId()===id?' on':''),onclick:()=>{
         if(id==='flag')delete st.color;else st.color=id;save();applyLook();installPrep();route();}},
-        h('span',{class:'swc',style:'background:'+accentOf(id)},id==='flag'?LANG.flag:''),h('span',{class:'small'},T(l))))),
+        h('span',{class:'swc',style:'background:'+accentOf(id)},id==='flag'?LANG.flag:''),h('span',{class:'small'},T(l)))),
+        /* ＋ Eigene: Farbwähler des Geräts; beim Ziehen sofort Vorschau, gespeichert beim Schließen */
+        (()=>{const cur=colorId()==='custom'?st.color:'#3a86c8',inp=h('input',{type:'color',value:cur,class:'swpick'});
+          inp.oninput=()=>{st.color=inp.value;applyLook();};inp.onchange=()=>{st.color=inp.value;save();applyLook();installPrep();route();};
+          return h('label',{class:'swatch'+(colorId()==='custom'?' on':'')},h('span',{class:'swc swcustom',style:colorId()==='custom'?'background:'+st.color:''},colorId()==='custom'?'':'＋',inp),h('span',{class:'small'},T('Eigene')));})()),
       h('span',{class:'muted small'},T('„Flagge“ = Farben der Lernsprache (Standard). Eine andere Farbe bleibt auch beim Kurswechsel.')))));
   if(SRV()){m.append(srvSyncCard(),srvAICard());}
   const key=h('input',{class:'inp',type:'password',value:st.geminiKey,placeholder:T('AIza…'),style:'font-size:15px'});

@@ -60,19 +60,22 @@ function save(noSync){S.updated=Date.now();const js=JSON.stringify(S);try{localS
 load();
 document.title=fmt(T('Mi profe · {L} lernen'));
 /* Farbschema: S.settings.color gilt für alle Kurse; leer/'flag' = Farbe der Lernsprache (PACKS[..].farbe → akzent). Hell/Dunkel wird aus der einen Farbe abgeleitet. Ein App-Symbol für alle. */
-const THEMES_UI=[['flag','Flagge'],['ozean','Ozean'],['wald','Wald'],['lavendel','Lavendel'],['sonne','Sonne'],['graphit','Graphit'],['rose','Rosé'],['terra','Terrakotta']];
-function colorId(){const c=S.settings.color;return c&&window.THEMES&&THEMES[c]?c:'flag';}
-function accentOf(id){return id==='flag'?(PK_CUR.akzent||'#c4472b'):THEMES[id];}
+const THEMES_UI=[['flag','Flagge'],['ozean','Ozean'],['wald','Wald'],['lavendel','Lavendel'],['sonne','Sonne'],['graphit','Graphit'],['rose','Rosé'],['terra','Terrakotta'],['tuerkis','Türkis'],['koralle','Koralle'],['beere','Beere'],['oliv','Oliv'],['indigo','Indigo']];
+/* eigene Farbe: S.settings.color = '#rrggbb' */
+function colorId(){const c=S.settings.color;return c&&/^#[0-9a-f]{6}$/i.test(c)?'custom':c&&window.THEMES&&THEMES[c]?c:'flag';}
+function accentOf(id){return id==='flag'?(PK_CUR.akzent||'#c4472b'):id==='custom'?S.settings.color:THEMES[id];}
 function hx(c){const v=parseInt(c.slice(1),16);return[v>>16&255,v>>8&255,v&255];}
 function mixC(a,b,t){const B=hx(b);return '#'+hx(a).map((x,i)=>('0'+Math.round(x*(1-t)+B[i]*t).toString(16)).slice(-2)).join('');}
 function lum(c){const v=hx(c).map(x=>{x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);});return .2126*v[0]+.7152*v[1]+.0722*v[2];}
-function applyLook(){const id=colorId(),a=accentOf(id),old=document.getElementById('lookcss');if(old)old.remove();
+function applyLook(){const id=colorId();let a=accentOf(id);const old=document.getElementById('lookcss');if(old)old.remove();
   const set=(sel,attr,v)=>{const e=document.querySelector(sel);if(e)e.setAttribute(attr,v);};set('meta[name=theme-color]','content',a);
   if(window.PWA){/* Manifest bleibt manifest.webmanifest; der Service Worker liefert darunter das des Kurses (Name; Chrome/Edge übernehmen ihn selbst) */
     if(window.caches)fetch('manifest-'+LANG.code+'.webmanifest').then(r=>r.ok?caches.open('mi-profe-look').then(c=>c.put('manifest.webmanifest',r)):0).catch(()=>{});
     set('meta[name=apple-mobile-web-app-title]','content',APP);}
   if(a.toLowerCase()==='#c4472b')return;/* Terrakotta = Grundfarben aus app.css */
-  const a2=mixC(a,'#ffffff',.3),dbg=mixC('#161616',a2,.05);
+  /* lesbar halten (vor allem eigene Farben): zu hell → abdunkeln, im Dunkelmodus zu dunkel → aufhellen */
+  for(let k=0;k<12&&lum(a)>.22;k++)a=mixC(a,'#000000',.12);
+  let a2=mixC(a,'#ffffff',.3);for(let k=0;k<12&&lum(a2)<.16;k++)a2=mixC(a2,'#ffffff',.15);const dbg=mixC('#161616',a2,.05);
   const L='--bg:'+mixC('#fbfaf8',a,.035)+';--surface2:'+mixC('#f2f0ed',a,.06)+';--line:'+mixC('#e3dfdb',a,.09)+';--accent:'+a+';--accent-ink:'+(lum(a)>.4?'#1b1714':'#ffffff')+';--accent-soft:'+mixC('#ffffff',a,.15)+';--accent-strong:'+mixC(a,'#000000',.18)+';';
   const D='--bg:'+dbg+';--surface:'+mixC('#1f1f1f',a2,.06)+';--surface2:'+mixC('#282828',a2,.07)+';--line:'+mixC('#383838',a2,.09)+';--accent:'+a2+';--accent-ink:'+dbg+';--accent-soft:'+mixC('#1d1d1d',a2,.2)+';--accent-strong:'+mixC(a2,'#ffffff',.25)+';';
   const st=document.createElement('style');st.id='lookcss';st.textContent=':root{'+L+'}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){'+D+'}}:root[data-theme="dark"]{'+D+'}';document.head.appendChild(st);}
@@ -1840,7 +1843,11 @@ function vSettingsAll(m){const st=S.settings;
     h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Farben')),
       h('div',{class:'swatches'},THEMES_UI.filter(([id])=>id==='flag'||window.THEMES&&THEMES[id]).map(([id,l])=>h('button',{class:'swatch'+(colorId()===id?' on':''),onclick:()=>{
         if(id==='flag')delete st.color;else st.color=id;save();applyLook();installPrep();route();}},
-        h('span',{class:'swc',style:'background:'+accentOf(id)},id==='flag'?LANG.flag:''),h('span',{class:'small'},T(l))))),
+        h('span',{class:'swc',style:'background:'+accentOf(id)},id==='flag'?LANG.flag:''),h('span',{class:'small'},T(l)))),
+        /* ＋ Eigene: Farbwähler des Geräts; beim Ziehen sofort Vorschau, gespeichert beim Schließen */
+        (()=>{const cur=colorId()==='custom'?st.color:'#3a86c8',inp=h('input',{type:'color',value:cur,class:'swpick'});
+          inp.oninput=()=>{st.color=inp.value;applyLook();};inp.onchange=()=>{st.color=inp.value;save();applyLook();installPrep();route();};
+          return h('label',{class:'swatch'+(colorId()==='custom'?' on':'')},h('span',{class:'swc swcustom',style:colorId()==='custom'?'background:'+st.color:''},colorId()==='custom'?'':'＋',inp),h('span',{class:'small'},T('Eigene')));})()),
       h('span',{class:'muted small'},T('„Flagge“ = Farben der Lernsprache (Standard). Eine andere Farbe bleibt auch beim Kurswechsel.')))));
   if(SRV()){m.append(srvSyncCard(),srvAICard());}
   const key=h('input',{class:'inp',type:'password',value:st.geminiKey,placeholder:T('AIza…'),style:'font-size:15px'});
