@@ -1,7 +1,7 @@
 /* ================= UNIDAD 9 · MOMENTO DE CAMBIOS ================= */
 COURSE.units.push({id:'u9',n:'9',title:'Antes y ahora',sub:'Häuser & Büros beschreiben · Notwendigkeit ausdrücken · über Gewohnheiten in der Vergangenheit sprechen · Veränderungen · Mengen',
 goals:['Wohnung & Büro: Räume, Möbel, Stockwerke','Zustand & Lage beschreiben','Imperfekt (buscaba, tenía)','ser, ir, ver im Imperfekt','antes / cuando era … / a los … años','Mengenangaben (la mitad, la mayoría …)','Ordnungszahlen','hay que / tener que + Infinitiv'],
-situacion:{title:'Wohnungsbesichtigung in Gràcia',npc:'Sr. Puig',scene:'Du besichtigst ein Zimmer bzw. eine kleine Wohnung in Gràcia. Der Vermieter, Sr. Puig, zeigt dir alles.',role:'Du bist Sr. Puig, ein älterer Vermieter aus Barcelona, freundlich und gesprächig. Du siezt Jonas. Du beschreibst die Wohnung (3. Stock, kein Aufzug, hell, renoviert, Küche ausgestattet, Balkon, nah an der Metro Fontana, 850 € + Nebenkosten, 2 Monatsmieten Kaution). Erzähl auch nostalgisch, wie das Viertel früher war (Imperfekt: antes había…, la gente…, yo vivía…).',goal:'Frag nach Lage, Stockwerk, Zustand, Preis und Kaution (¿Hay que pagar fianza?), und reagiere auf seine Erzählung über früher, indem du erzählst, wie es früher bei dir war (Imperfekt).'},
+situacion:{title:'Wohnungsbesichtigung in Gràcia',npc:'Sr. Puig',scene:'Du besichtigst ein WG-Zimmer in Gràcia. Der Vermieter, Sr. Puig, zeigt dir alles.',role:'Du bist Sr. Puig, ein älterer Vermieter aus Barcelona, freundlich und gesprächig. Du siezt Jonas. Du beschreibst die WG-Wohnung und das freie Zimmer (3. Stock, kein Aufzug, hell, renoviert, Küche ausgestattet, Balkon, nah an der Metro Fontana, Zimmer möbliert, 450 € im Monat mit Nebenkosten, eine Monatsmiete Kaution). Erzähl auch nostalgisch, wie das Viertel früher war (Imperfekt: antes había…, la gente…, yo vivía…).',goal:'Frag nach Lage, Stockwerk, Zustand, Preis und Kaution (¿Hay que pagar fianza?), und reagiere auf seine Erzählung über früher, indem du erzählst, wie es früher bei dir war (Imperfekt).'},
 lessons:[
 {id:'l1',title:'Wohnung & Büro beschreiben',desc:'la planta baja · está reformado · es luminoso',steps:[
  {t:'vocab',title:'Räume & Teile',items:[['la habitación','das Zimmer'],['el despacho','das Büro (Raum)'],['la cocina','die Küche'],['el baño / el servicio','das Bad / die Toilette'],['la recepción','die Rezeption, der Empfang'],['la puerta','die Tür'],['la ventana','das Fenster'],['la pared','die Wand'],['la terraza','die Terrasse'],['el balcón','der Balkon'],['el ascensor','der Aufzug'],['la planta baja','das Erdgeschoss'],['la primera / segunda planta','der erste / zweite Stock']]},
@@ -87,7 +87,7 @@ lessons:[
  {t:'tr',de:'Man muss die Kaution bezahlen.',a:['Hay que pagar la fianza.','Se tiene que pagar la fianza.','Hay que pagar el depósito.']},
  {t:'listen',es:'Más de la mitad de los estudiantes trabaja los fines de semana.',de:'Mehr als die Hälfte der Studierenden arbeitet am Wochenende.'},
  {t:'mc',q:'„Man muss die Kaution vor dem Umzug bezahlen.“',opts:['Hay que pagar la fianza antes de la mudanza.','Hay pagar la fianza antes de la mudanza.','Tiene que hay pagar la fianza antes de la mudanza.'],a:0},
- {t:'gap',q:'Nuria vive en el ___ (5.) piso y su oficina está en la ___ (2.) planta.',a:['quinto','segunda']},
+ {t:'gap',q:'Mercè vive en el ___ (5.) piso y su oficina está en la ___ (2.) planta.',a:['quinto','segunda']},
  {t:'tr',de:'Die Hälfte der Studierenden wohnt in Gràcia.',a:['La mitad de los estudiantes vive en Gràcia.','La mitad de los estudiantes viven en Gràcia.']}
 ]},
 {id:'l5',title:'Lesen: La agencia de Nuria',desc:'Text · früher vs. heute',steps:[
@@ -170,7 +170,7 @@ lessons:[
  {t:'conj',verb:'ser / ir',de:'sein / gehen',tense:'Indefinido',forms:['fui','fuiste','fue','fuimos','fuisteis','fueron']},
  {t:'conj',verb:'tener',de:'haben',tense:'Indefinido',forms:['tuve','tuviste','tuvo','tuvimos','tuvisteis','tuvieron']},
  {t:'conj',verb:'hacer',de:'machen',tense:'Indefinido',forms:['hice','hiciste','hizo','hicimos','hicisteis','hicieron']},
- {t:'gap',q:'El verano pasado ___ (yo, estar) en Londres y ___ (hacer) unas prácticas.',a:['estuve','hice']},
+ {t:'gap',q:'El año pasado ___ (yo, estar) tres meses en Londres y ___ (hacer) un proyecto para mi empresa.',a:['estuve','hice']},
  {t:'gap',q:'¿Qué ___ (tú, hacer) ayer? – ___ (ir) al cine con Laia.',a:['hiciste','Fui']},
  {t:'gap',q:'No ___ (yo, poder) ir a la reunión porque ___ (tener) un problema.',a:['pude','tuve']},
  {t:'gap',q:'Mis amigos ___ (venir) a Barcelona en octubre.',a:['vinieron']},
@@ -245,18 +245,18 @@ En 1979 Teresa dejó la empresa a su hija Pilar. Pilar llevó la fábrica a las 
  {t:'read',hideText:true,title:'¿Cómo llegaste a Barcelona?',intro:'Jonas fragt Nuria, wie sie nach Barcelona gekommen ist. Hör zuerst nur zu.',text:`Jonas: Nuria, ¿y tú cómo llegaste a Barcelona?
 Nuria: Uf, es una historia larga. Nací en Valencia, en el barrio de Benimaclet. A los dieciséis años hice un intercambio en Irlanda: estuve tres meses en Dublín y aprendí mucho inglés.
 Jonas: ¿Y después?
-Nuria: Después estudié Publicidad en Valencia. Terminé la carrera en 2020 y empecé a trabajar en una agencia pequeña. Fue una época difícil, pero aprendí muchísimo.
+Nuria: Después estudié Publicidad en Valencia. Terminé la carrera en 2023 y empecé a trabajar en una agencia pequeña. Fue una época difícil, pero aprendí muchísimo.
 Jonas: ¿Y cuándo viniste a Barcelona?
-Nuria: Hace tres años vi una oferta de trabajo de mi agencia actual. Hice la entrevista por videollamada y me dieron el puesto. ¡Me mudé en dos semanas!
+Nuria: Hace un año vi una oferta de trabajo de mi agencia actual. Hice la entrevista por videollamada y me dieron el puesto. ¡Me mudé en dos semanas!
 Jonas: ¿Y te gusta más Barcelona que Valencia?
 Nuria: Me encanta Barcelona, pero a veces pienso en la playa de Valencia… y en la paella de mi madre.`,
- de:`Jonas: Nuria, und wie bist du nach Barcelona gekommen?\nNuria: Puh, das ist eine lange Geschichte. Ich bin in Valencia geboren, im Viertel Benimaclet. Mit sechzehn habe ich einen Austausch in Irland gemacht: Ich war drei Monate in Dublin und habe viel Englisch gelernt.\nJonas: Und danach?\nNuria: Danach habe ich in Valencia Werbung studiert. 2020 habe ich das Studium abgeschlossen und angefangen, in einer kleinen Agentur zu arbeiten. Es war eine schwierige Zeit, aber ich habe sehr viel gelernt.\nJonas: Und wann bist du nach Barcelona gekommen?\nNuria: Vor drei Jahren habe ich ein Stellenangebot meiner jetzigen Agentur gesehen. Ich habe das Vorstellungsgespräch per Videocall gemacht und sie haben mir die Stelle gegeben. Ich bin in zwei Wochen umgezogen!\nJonas: Und gefällt dir Barcelona besser als Valencia?\nNuria: Ich liebe Barcelona, aber manchmal denke ich an den Strand von Valencia … und an die Paella meiner Mutter.`},
+ de:`Jonas: Nuria, und wie bist du nach Barcelona gekommen?\nNuria: Puh, das ist eine lange Geschichte. Ich bin in Valencia geboren, im Viertel Benimaclet. Mit sechzehn habe ich einen Austausch in Irland gemacht: Ich war drei Monate in Dublin und habe viel Englisch gelernt.\nJonas: Und danach?\nNuria: Danach habe ich in Valencia Werbung studiert. 2023 habe ich das Studium abgeschlossen und angefangen, in einer kleinen Agentur zu arbeiten. Es war eine schwierige Zeit, aber ich habe sehr viel gelernt.\nJonas: Und wann bist du nach Barcelona gekommen?\nNuria: Vor einem Jahr habe ich ein Stellenangebot meiner jetzigen Agentur gesehen. Ich habe das Vorstellungsgespräch per Videocall gemacht und sie haben mir die Stelle gegeben. Ich bin in zwei Wochen umgezogen!\nJonas: Und gefällt dir Barcelona besser als Valencia?\nNuria: Ich liebe Barcelona, aber manchmal denke ich an den Strand von Valencia … und an die Paella meiner Mutter.`},
  {t:'mc',q:'¿Dónde nació Nuria?',opts:['En Valencia.','En Barcelona.','En Dublín.'],a:0},
  {t:'mc',q:'¿Qué hizo Nuria a los dieciséis años?',opts:['Hizo un intercambio en Irlanda.','Empezó a trabajar en una agencia.','Se mudó a Barcelona.'],a:0},
- {t:'mc',q:'¿Cuándo terminó la carrera?',opts:['En 2020.','Hace tres años.','En 2016.'],a:0},
+ {t:'mc',q:'¿Cuándo terminó la carrera?',opts:['En 2023.','Hace un año.','En 2019.'],a:0},
  {t:'mc',q:'¿Cómo consiguió Nuria el puesto en Barcelona?',opts:['Vio una oferta e hizo la entrevista por videollamada.','Su madre trabaja en la agencia.','Hizo unas prácticas en la agencia.'],a:0},
- {t:'listen',es:'Terminé la carrera en 2020.',de:'2020 habe ich das Studium abgeschlossen.'},
- {t:'listen',es:'Hace tres años vi una oferta de trabajo.',de:'Vor drei Jahren habe ich ein Stellenangebot gesehen.'},
+ {t:'listen',es:'Terminé la carrera en 2023.',de:'2023 habe ich das Studium abgeschlossen.'},
+ {t:'listen',es:'Hace un año vi una oferta de trabajo.',de:'Vor einem Jahr habe ich ein Stellenangebot gesehen.'},
  {t:'speak',es:'Nací en Alemania y hace unos meses me mudé a Barcelona.',de:'Ich bin in Deutschland geboren und vor ein paar Monaten nach Barcelona gezogen.'}
 ]}],
 resumen:`<h3>Biografie</h3><p class="es-t">Nací en … · A los 8 años nos mudamos a … · Fui al colegio de … a … · En 2015 hice un intercambio. · Terminé el instituto dos años después. · Hace un mes empecé a trabajar.</p>

@@ -45,7 +45,7 @@ lessons:[
  {t:'gap',q:'¿Cuánto ___ (costar) el menú?',a:['cuesta']},
  {t:'mc',q:'Nosotros ___ comer a las dos.',opts:['queremos','quieremos','quiremos'],a:0},
  {t:'tr',de:'Willst du Wasser oder Wein?',a:['¿Quieres agua o vino?']},
- {t:'tr',de:'Ich bin allergisch gegen Milch.',a:['Soy alérgico a la leche.','Soy alérgica a la leche.']},
+ {t:'tr',de:'Ich bin allergisch gegen Milch.',a:['Soy alérgico a la leche.','Soy alérgica a la leche.','Tengo alergia a la leche.']},
  {t:'listen',es:'¿Podemos pagar con tarjeta?',de:'Können wir mit Karte zahlen?'},
  {t:'order',es:'Prefiero el agua sin gas.',de:'Ich nehme lieber stilles Wasser.'}
 ]},
@@ -120,8 +120,8 @@ Jonas`,
  <tr><td class="es-t">italiano / italiana</td><td class="es-t">inglés / inglesa</td><td class="es-t">estadounidense</td></tr>
  <tr><td class="es-t">austriaco / austriaca</td><td class="es-t">francés / francesa</td><td class="es-t">canadiense</td></tr></table>
  <div class="ojo">Nationalitäten werden klein geschrieben. Der Akzent fällt bei der weiblichen Form weg: <span class="es-t">alemán → alemana</span>.</div>`},
- {t:'gap',q:'Laia es ___ (spanisch) y su novio es ___ (französisch).',a:['española','francés']},
- {t:'gap',q:'Mi compañera de piso es ___ (deutsch).',a:['alemana']},
+ {t:'gap',q:'Mi profesor es ___ (spanisch) y su mujer es ___ (französisch).',a:['español','francesa']},
+ {t:'gap',q:'La novia de Óscar es ___ (deutsch).',a:['alemana']},
  {t:'free',task:'Beschreibe deine Essgewohnheiten in 5–6 Sätzen: Wann und was isst du? Was isst du nie / oft? Was kannst du nicht essen? Was isst man in Deutschland anders als in Spanien?',hint:'Desayuno a las … · Normalmente como … · Nunca tomo … · Prefiero … · En Alemania se cena …',focus:'Häufigkeit, poder/querer/preferir, Uhrzeit, se + 3. Person',model:'Normalmente desayuno a las ocho: tomo un café con leche y pan con queso. Como a la una y media en la universidad. Muchas veces como pasta o arroz. Nunca tomo pescado porque no me gusta. En Alemania se cena muy pronto, a las seis o las siete, pero aquí en Barcelona prefiero cenar a las nueve.'}
 ]},
 {id:'lr',title:'Hören: En el restaurante',desc:'Ein Gespräch im Restaurant verstehen',steps:[
@@ -209,7 +209,7 @@ lessons:[
  {t:'gap',q:'El banco está al lado ___ supermercado.',a:['del']},
  {t:'gap',q:'La farmacia está ___ el banco ___ la panadería. (zwischen … und …)',a:['entre','y']},
  {t:'mc',q:'Höflich nach dem Weg fragen:',opts:['Perdone, ¿sabe dónde está la estación?','Oye, ¿dónde hay la estación?','Perdone, ¿dónde es la estación?'],a:0},
- {t:'dialog',place:'Plaça de Catalunya',title:'Wo ist der Bahnhof?',scene:'Du suchst den Weg zur Metro. Du sprichst einen Passanten an.',lines:[
+ {t:'dialog',place:'Plaça de Catalunya',title:'Wo ist die Metro?',scene:'Du suchst den Weg zur Metro. Du sprichst einen Passanten an.',lines:[
   {you:true,prompt:'Sprich den Passanten höflich an.',opts:[{es:'Perdone, ¿hay una estación de metro cerca de aquí?',ok:true},{es:'Perdone, ¿está una estación de metro cerca de aquí?',ok:false,why:'Unbestimmt (eine Station) → <b>hay</b>.'}]},
   {n:'Señor',es:'Sí, está muy cerca. Sigue todo recto y toma la segunda calle a la izquierda.',de:'Ja, ganz nah. Geh geradeaus und bieg in die zweite Straße links ab.'},
   {you:true,prompt:'Wiederhole zur Sicherheit.',opts:[{es:'Todo recto y la segunda a la izquierda, ¿no?',ok:true},{es:'Todo recto y la segunda a la derecha, ¿no?',ok:false,why:'Er hat <i>izquierda</i> (links) gesagt.'}]},

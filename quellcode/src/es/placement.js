@@ -42,7 +42,7 @@ window.PLACEMENT=[
 /* u8 */
 {u:'u8',t:'gap',q:'El lunes ___ ___ visitar a un cliente. (ir a + Inf., yo)',a:['voy','a']},
 {u:'u8',t:'mc',q:'Wetter: „Es ist heiß.“',opts:['Hace calor.','Es calor.','Está calor.'],a:0},
-{u:'u8',t:'mc',q:'¿Te parece si quedamos a las diez? – Zusagen:',opts:['Vale, de acuerdo.','Lo siento, no puedo.','Mejor el viernes.'],a:0},
+{u:'u8',t:'mc',q:'¿Qué te parece si quedamos a las diez? – Zusagen:',opts:['Vale, de acuerdo.','Lo siento, no puedo.','Mejor el viernes.'],a:0},
 {u:'u8',t:'mc',q:'Ich kenne die Gründerin:',opts:['Conozco a la fundadora.','Conozco la fundadora.','Sé a la fundadora.'],a:0}
 ,
 /* zusätzliche Fragen (Pool) – pro Test werden je Unidad 4 zufällig gezogen */

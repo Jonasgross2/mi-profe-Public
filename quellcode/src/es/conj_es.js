@@ -2,10 +2,10 @@
    LANGS.es.conjugate(infinitiv) → {forms:[yo,tú,él,nosotros,vosotros,ellos], why:'Muster-Hinweis'} oder null (= lieber nicht üben).
    Reflexiv (-arse/-erse/-irse): me/te/se/nos/os/se + Form. Neue Verben in den Vokabellisten: unregelmäßige hier eintragen! */
 (function(){
-var IE=['advertir','arrepentir','ascender','atender','comenzar','confesar','defender','despertar','desmentir','encender','encerrar','enterrar','herir','hervir','invertir','mentir','negar','quebrar','sobrentender','perder','pensar','empezar','entender','cerrar','preferir','querer','sentir','recomendar','divertir','convertir','sugerir','calentar','merendar','nevar','despedir_no'];
-var UE=['absolver','acostar','apostar','colgar','comprobar','conmover','contar','devolver','encontrar','reencontrar','morder','morir','mostrar','mover','recordar','renovar','resolver','soltar','soñar','volar','volver','poder','dormir','costar','almorzar','probar','llover','doler','envolver','demostrar'];
+var IE=['advertir','arrepentir','ascender','atender','comenzar','confesar','defender','despertar','desmentir','encender','encerrar','enterrar','herir','hervir','invertir','mentir','negar','quebrar','sobrentender','perder','pensar','empezar','entender','cerrar','preferir','querer','sentir','recomendar','divertir','convertir','sugerir','calentar','merendar','nevar','fregar','regar','tender','atravesar','gobernar','sentar','temblar','despedir_no'];
+var UE=['absolver','acostar','apostar','colgar','comprobar','conmover','contar','devolver','encontrar','reencontrar','morder','morir','mostrar','mover','recordar','renovar','resolver','soltar','soñar','volar','volver','poder','dormir','costar','almorzar','probar','llover','doler','envolver','demostrar','aprobar','acordar','rogar','sonar'];
 var EI=['despedir','pedir','servir','vestir','repetir','medir','competir','impedir'];
-var ZCO=['agradecer','aparecer','conocer','reconocer','crecer','desaparecer','enaltecer','enloquecer','establecer','fallecer','nacer','permanecer','pertenecer','producir','traducir','aducir','conducir','lucir','ofrecer','parecer','merecer','obedecer'];
+var ZCO=['agradecer','aparecer','conocer','reconocer','crecer','desaparecer','enaltecer','enloquecer','establecer','fallecer','nacer','permanecer','pertenecer','envejecer','producir','traducir','aducir','conducir','lucir','ofrecer','parecer','merecer','obedecer'];
 var UIR=['concluir','construir','destruir','incluir','contribuir','distribuir','sustituir'];
 var JO=['escoger','proteger','recoger','coger','dirigir','fingir','surgir','exigir','corregir_no'];
 var ZO=['vencer','convencer','torcer_no'];
@@ -18,7 +18,7 @@ var FIX={
  traer:['traigo','traes','trae','traemos','traéis','traen'],caer:['caigo','caes','cae','caemos','caéis','caen'],atraer:['atraigo','atraes','atrae','atraemos','atraéis','atraen'],
  valer:['valgo','vales','vale','valemos','valéis','valen'],oler:['huelo','hueles','huele','olemos','oléis','huelen'],jugar:['juego','juegas','juega','jugamos','jugáis','juegan'],
  seguir:['sigo','sigues','sigue','seguimos','seguís','siguen'],conseguir:['consigo','consigues','consigue','conseguimos','conseguís','consiguen'],elegir:['elijo','eliges','elige','elegimos','elegís','eligen'],
- huir:['huyo','huyes','huye','huimos','huis','huyen'],haber:['he','has','ha','hemos','habéis','han']};
+ huir:['huyo','huyes','huye','huimos','huis','huyen'],corregir:['corrijo','corriges','corrige','corregimos','corregís','corrigen'],cocer:['cuezo','cueces','cuece','cocemos','cocéis','cuecen'],haber:['he','has','ha','hemos','habéis','han']};
 /* Ableitungen mit Präfix: tener (detener, mantener, obtener, sostener …), poner (proponer, suponer …), venir, hacer, decir */
 var PRE=['tener','poner','venir','hacer','decir','traer'];
 var SKIP=['nuclear','particular','similar','militar','solar','regular','amanecer','entrever','freír','criar','paliar'];

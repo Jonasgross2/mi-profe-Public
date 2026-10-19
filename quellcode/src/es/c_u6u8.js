@@ -47,7 +47,7 @@ lessons:[
   {n:'Recepción',es:'Perfecto. ¿A nombre de quién?',de:'Perfekt. Auf welchen Namen?'},
   {you:true,opts:[{es:'A nombre de Jonas Gross.',ok:true}]}]},
  {t:'gap',q:'Quería una habitación ___ (Doppel-) con ___ (Dusche).',a:['doble','ducha']},
- {t:'tr',de:'Ich hätte gern ein ruhiges Einzelzimmer.',a:['Quería una habitación individual tranquila.','Quería una habitación individual y tranquila.']},
+ {t:'tr',de:'Ich hätte gern ein ruhiges Einzelzimmer.',a:['Quería una habitación individual tranquila.','Quería una habitación individual y tranquila.','Me gustaría una habitación individual tranquila.','Querría una habitación individual tranquila.']},
  {t:'tr',de:'vom 5. bis 8. Juni',a:['del cinco al ocho de junio','del 5 al 8 de junio']},
  {t:'listen',es:'¿Está incluido el desayuno en el precio?',de:'Ist das Frühstück im Preis inbegriffen?'},
  {t:'mc',q:'Du möchtest kein Zimmer zur lauten Straße. Was sagst du?',opts:['Prefiero una habitación interior.','Prefiero una habitación exterior.','Quería una habitación ruidosa.'],a:0},
@@ -112,14 +112,14 @@ Todavía no he visto el Alcázar. Por eso quiero volver pronto. ¿Habéis estado
  {t:'free',task:'Erzähl im Perfekt in 5–7 Sätzen, was du diese Woche gemacht hast (Uni, Freizeit, Barcelona) – und was du noch nicht gemacht hast.',hint:'Esta semana he … · El martes he ido … · He conocido a … · Todavía no he … · Me ha encantado …',focus:'Perfekt (haber + Partizip), unregelmäßige Partizipien, encantar/gustar',model:'Esta semana ha sido muy intensa. He tenido muchas clases en la universidad y he escrito un informe para la asignatura de redes. El miércoles he ido al gimnasio con un compañero. El sábado hemos visitado el Park Güell y me ha encantado. Todavía no he visto el Camp Nou, pero quiero ir pronto.'}
 ]},
 {id:'lr',title:'Hören: Ein Audio aus Granada',desc:'Eine Sprachnachricht im Perfekt verstehen',steps:[
- {t:'read',hideText:true,title:'Un audio de Marc',intro:'Marc schickt dir eine Sprachnachricht. Hör zuerst nur zu.',text:`¡Hola, Jonas! Soy Marc. Te mando un audio desde Granada. Laia y yo hemos llegado esta mañana en autobús: ¡ocho horas de viaje!
+ {t:'read',hideText:true,title:'Un audio de Marc',intro:'Marc schickt dir eine Sprachnachricht. Hör zuerst nur zu.',text:`¡Hola, Jonas! Soy Marc. Te mando un audio desde Granada. Laia y yo hemos llegado esta mañana en autobús: ¡doce horas de viaje!
 
 El hotel está muy bien: la habitación es exterior y tiene un balcón con vistas a la Alhambra. Pero hay un problema: no funciona la ducha y en el baño faltan toallas. He hablado con la recepción y me han dicho que el técnico viene esta tarde.
 
 Esta tarde hemos visitado el Albaicín y hemos comido tapas en un bar muy pequeño. ¡Me encanta Granada! Todavía no hemos visto la Alhambra porque no hemos podido comprar entradas para hoy. Mañana vamos a las nueve.
 
 ¿Y tú? ¿Qué has hecho este fin de semana? ¡Un abrazo!`,
- de:`Hallo, Jonas! Hier ist Marc. Ich schicke dir eine Sprachnachricht aus Granada. Laia und ich sind heute Morgen mit dem Bus angekommen: acht Stunden Fahrt!\n\nDas Hotel ist sehr gut: Das Zimmer liegt zur Straße und hat einen Balkon mit Blick auf die Alhambra. Aber es gibt ein Problem: Die Dusche funktioniert nicht und im Bad fehlen Handtücher. Ich habe mit der Rezeption gesprochen und sie haben mir gesagt, dass der Techniker heute Nachmittag kommt.\n\nHeute Nachmittag haben wir das Albaicín besichtigt und in einer ganz kleinen Bar Tapas gegessen. Ich liebe Granada! Die Alhambra haben wir noch nicht gesehen, weil wir keine Eintrittskarten für heute kaufen konnten. Morgen gehen wir um neun hin.\n\nUnd du? Was hast du dieses Wochenende gemacht? Liebe Grüße!`},
+ de:`Hallo, Jonas! Hier ist Marc. Ich schicke dir eine Sprachnachricht aus Granada. Laia und ich sind heute Morgen mit dem Bus angekommen: zwölf Stunden Fahrt!\n\nDas Hotel ist sehr gut: Das Zimmer liegt zur Straße und hat einen Balkon mit Blick auf die Alhambra. Aber es gibt ein Problem: Die Dusche funktioniert nicht und im Bad fehlen Handtücher. Ich habe mit der Rezeption gesprochen und sie haben mir gesagt, dass der Techniker heute Nachmittag kommt.\n\nHeute Nachmittag haben wir das Albaicín besichtigt und in einer ganz kleinen Bar Tapas gegessen. Ich liebe Granada! Die Alhambra haben wir noch nicht gesehen, weil wir keine Eintrittskarten für heute kaufen konnten. Morgen gehen wir um neun hin.\n\nUnd du? Was hast du dieses Wochenende gemacht? Liebe Grüße!`},
  {t:'mc',q:'¿Cómo han viajado Marc y Laia a Granada?',opts:['En autobús.','En tren.','En avión.'],a:0},
  {t:'mc',q:'¿Qué problema hay en la habitación?',opts:['No funciona la ducha y faltan toallas.','No funciona el aire acondicionado.','La habitación es muy ruidosa.'],a:0},
  {t:'mc',q:'¿Qué han hecho esta tarde?',opts:['Han visitado el Albaicín y han comido tapas.','Han visto la Alhambra.','Han estado en el hotel.'],a:0},
@@ -329,7 +329,7 @@ lessons:[
  <tr><td class="es-t">Hay niebla.</td><td>Es ist neblig.</td></tr>
  <tr><td class="es-t">Estamos a 25 grados.</td><td>Wir haben 25 Grad.</td></tr></table>
  <h3>Ausrufe</h3><table><tr><td class="es-t">¡Qué calor hace!</td><td class="es-t">¡Qué camiseta tan original!</td><td class="es-t">¡Qué simpático es!</td></tr><tr><td class="es-t">¡Cómo llueve!</td><td class="es-t">¡Cuánto lo siento!</td><td></td></tr></table>`},
- {t:'vocab',title:'Wetter',items:[['hace calor','es ist heiß'],['hace frío','es ist kalt'],['hace sol','die Sonne scheint'],['hace viento','es ist windig'],['llueve','es regnet'],['nieva','es schneit'],['hay niebla','es ist neblig'],['el tiempo','das Wetter / die Zeit'],['el grado','das Grad'],['¿Verdad?','Nicht wahr?']]},
+ {t:'vocab',title:'Wetter',items:[['hace calor','es ist heiß'],['hace frío','es ist kalt'],['hace sol','die Sonne scheint'],['hace viento','es ist windig'],['llueve','es regnet'],['nieva','es schneit'],['hay niebla','es ist neblig'],['el tiempo','das Wetter / die Zeit'],['el grado','der Grad'],['¿Verdad?','Nicht wahr?']]},
  {t:'mc',q:'„Es ist kalt.“',opts:['Hace frío.','Es frío.','Está frío.'],a:0},
  {t:'mc',q:'„Es regnet.“',opts:['Llueve.','Hace lluvia.','Es lluvia.'],a:0},
  {t:'gap',q:'¡Qué calor ___! Estamos ___ 35 grados.',a:['hace','a']},
@@ -350,7 +350,7 @@ lessons:[
  {t:'listen',es:'¡Qué frío hace hoy!',de:'Wie kalt es heute ist!'}
 ]},
 {id:'l5',title:'Lesen: La agenda de Laia',desc:'Pläne lesen · eigenes Wochenende planen',steps:[
- {t:'read',title:'Un mensaje de Laia',text:`¡Hola, Jonas! ¿Qué tal la semana? Te escribo porque este fin de semana va a hacer muy buen tiempo: el sábado van a estar a 24 grados y va a hacer sol. ¿Tienes ganas de hacer algo?
+ {t:'read',title:'Un mensaje de Laia',text:`¡Hola, Jonas! ¿Qué tal la semana? Te escribo porque este fin de semana va a hacer muy buen tiempo: el sábado vamos a estar a 24 grados y va a hacer sol. ¿Tienes ganas de hacer algo?
 
 Yo el sábado por la mañana voy a ir al mercado de Sant Antoni con mi hermana. Por la tarde estoy libre. ¿Qué te parece si subimos a los {Bunkers del Carmel|Aussichtspunkt in Barcelona} para ver la {puesta de sol|Sonnenuntergang}? Desde allí se ve toda la ciudad. Después podemos cenar en Gràcia, conozco un sitio muy bueno y no muy caro.
 

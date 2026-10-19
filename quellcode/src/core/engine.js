@@ -926,9 +926,16 @@ function artW(es){const A=LANG.artColor;const m=A&&String(es).match(/^(\S+)(\s+)
 const cleanWord=es=>es.length<=28&&!/[…\/(]/.test(es);
 function lessonWords(l){const w=[];for(const s of l.steps)if(s.t==='vocab')w.push(...s.items);return w.filter(x=>cleanWord(x[0]));}
 /* Vokabeln mit „/“ in einzelne richtige Formen auflösen: „el / la estudiante“, „el/la becario/a“, „encantado / encantada“, „el ingeniero / la ingeniera“ */
-function vocabForms(es){es=String(es).trim().replace(/\s*\(Pl\.?\)$/,'');/* „die Eltern (Pl.)“: Hinweis gehört nicht zur Antwort */if(es.indexOf('/')<0)return[es];const out=[];
+function vocabForms(es){es=String(es).trim().replace(/\s*\(Pl\.?\)$/,'');/* „die Eltern (Pl.)“: Hinweis gehört nicht zur Antwort */
   /* „el agua (con / sin gas)“ → el agua · el agua con gas · el agua sin gas */
   const pm=es.match(/^(.*?)\s*\(([^()]*\s\/\s[^()]*)\)\s*(.*)$/);if(pm){const base=(pm[1]+' '+pm[3]).trim();return[base].concat(vocabForms(pm[2]).slice(0,-1).map(x=>base+' '+x),[es]);}
+  /* Klammern = optional: „la bici(cleta)“ → la bicicleta · la bici; „quejarse (de)“ → quejarse de · quejarse */
+  if(es.indexOf('(')>=0){const sh=es.replace(/\s*\([^()]*\)/g,'').replace(/\s+/g,' ').trim();
+    /* „nacer (nací)“, „el currículum (CV)“: Klammer = Beispielform/Abkürzung, nicht Teil der Antwort */
+    const ex=/(\S+)\s+\(([^()]*)\)/.exec(es),hint=ex&&(/^[A-ZÁÉÍÓÚÑ]+$/.test(ex[2])||ex[2].split(' ').some(w=>w.length>2&&ex[1].length>2&&w.slice(0,3).toLowerCase()===ex[1].slice(0,3).toLowerCase()));
+    const lg=hint?sh:es.replace(/\(([^()]*)\)/g,'$1');
+    if(sh&&sh!==es){const r=[];[lg,sh].forEach(x=>vocabForms(x).slice(0,x.indexOf('/')>=0?-1:undefined).forEach(y=>{if(r.indexOf(y)<0&&!/\s\/\s/.test(y))r.push(y);}));if(r.indexOf(es)<0)r.push(es);return r;}}
+  if(es.indexOf('/')<0)return[es];const out=[];
   let m=es.match(/^(el|un)\s*\/\s*(la|una)\s+(.+)$/i);if(m){const rest=m[3];const g=rest.match(/^(\S+?)(o|or|e)?\/(a|ora)(\b.*)$/);
     const x=g?null:genderPair(rest);if(g){out.push(m[1]+' '+g[1]+(g[2]||'')+g[4],m[2]+' '+g[1]+(g[3]==='ora'&&!g[2]?'ora':g[2]==='or'?'ora':g[3])+g[4]);}else if(x)out.push(m[1]+' '+x[0],m[2]+' '+x[1]);else out.push(m[1]+' '+rest,m[2]+' '+rest);}
   else if(/\s\/\s/.test(es)){const ps=es.split(/\s\/\s/).map(p=>p.trim());
@@ -936,7 +943,9 @@ function vocabForms(es){es=String(es).trim().replace(/\s*\(Pl\.?\)$/,'');/* „d
     const f=ps[0].split(' '),fill=f.length>1&&!/^(a|al|con|de|del|en|por|para|sin)$/i.test(f[0]);
     ps.forEach((p,i)=>out.push(i&&fill&&p.indexOf(' ')<0&&p!=='…'?f.slice(0,-1).concat(p).join(' '):p));
     /* „con / sin acento“, „este / esta es …“: Rest des letzten Teils gilt für alle → „con acento“, „este es …“ */
-    const L=ps[ps.length-1].split(' ');if(f.length===1&&L.length>1&&/^(con|sin|este|esta|ese|esa|el|la|un|una)$/i.test(f[0])&&ps.slice(0,-1).every(p=>p.indexOf(' ')<0))ps.slice(0,-1).forEach((p,i)=>{out[i]=p+' '+L.slice(1).join(' ');});}
+    const L=ps[ps.length-1].split(' ');if(f.length===1&&L.length>1&&/^(con|sin|este|esta|ese|esa|el|la|un|una)$/i.test(f[0])&&ps.slice(0,-1).every(p=>p.indexOf(' ')<0))ps.slice(0,-1).forEach((p,i)=>{out[i]=p+' '+L.slice(1).join(' ');});
+    /* „la primera / segunda planta“ → la primera planta · la segunda planta */
+    const AR=/^(el|la|los|las|un|una)$/i;if(ps.length===2&&f.length===2&&L.length===2&&AR.test(f[0])&&!AR.test(L[0])){out[0]=ps[0]+' '+L[1];out[1]=f[0]+' '+ps[1];}}
   else{const x=genderPair(es),w=es.match(/^(.*?)(\S+?)(o|or)\/(a|ora)\b(.*)$/);if(x)out.push(x[0],x[1]);else if(w)out.push(w[1]+w[2]+w[3]+w[5],w[1]+w[2]+(w[3]==='or'?'ora':'a')+w[5]);}
   return out.length?out.concat([es]):[es];}
 /* „acostumbrado/-a a …“, „peatón/peatona“, „turístico/a“, „un/a cachondo/a“ → [männlich, weiblich] (alle Schrägstrich-Wörter gleichzeitig) */

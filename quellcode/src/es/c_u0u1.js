@@ -43,7 +43,7 @@ lessons:[
  {t:'vocab',title:'Verabschieden',items:[['adiós','tschüss / auf Wiedersehen'],['hasta luego','bis später / tschüss'],['hasta pronto','bis bald'],['hasta mañana','bis morgen'],['hasta la próxima','bis zum nächsten Mal'],['hasta la vista','auf Wiedersehen'],['chao','ciao (umgangssprachlich)']]},
  {t:'match',q:'Begrüßung oder Verabschiedung? Ordne die Bedeutung zu.',pairs:[['Hasta luego','bis später'],['¿Qué tal?','wie geht’s?'],['Hasta mañana','bis morgen'],['Encantada','freut mich (w)'],['Buenas noches','guten Abend']]},
  {t:'mc',q:'Pablo trifft Laia. Er sagt: „Encantado“. Laia antwortet:',opts:['Encantada.','Encantado.','Encantados.'],a:0,why:'Laia ist eine Frau → <i>encantada</i>. Die Form richtet sich nach der Person, die spricht.'},
- {t:'gap',q:'– ¿Qué tal? – Muy ___, gracias. ¿Y ___?',a:['bien','tú|tu'],why:'<i>bien</i> = gut; <i>¿y tú?</i> = und du?'},
+ {t:'gap',q:'– ¿Qué tal? – Muy ___, gracias. ¿Y ___?',a:['bien','tú'],why:'<i>bien</i> = gut; <i>¿y tú?</i> = und du?'},
  {t:'mc',q:'Du gehst um 18 Uhr aus der Uni und siehst deine Kommilitonen morgen wieder. Was sagst du?',opts:['¡Hasta mañana!','¡Buenos días!','¡Mucho gusto!'],a:0},
  {t:'dialog',place:'Secretaría de la facultad',title:'Im Studierendensekretariat',scene:'Du gehst zur Secretaría, um deine Unterlagen abzugeben. Eine ältere Mitarbeiterin begrüßt dich. Hier ist <b>usted</b> angebracht.',lines:[
   {n:'Sra. Pujol',es:'Buenos días. ¿Cómo se llama usted?',de:'Guten Morgen. Wie heißen Sie?'},
@@ -132,7 +132,7 @@ lessons:[
  <tr><td>unbestimmt Sg.</td><td class="es-t">un producto</td><td class="es-t">una página</td></tr>
  <tr><td>unbestimmt Pl.</td><td class="es-t">unos productos</td><td class="es-t">unas páginas</td></tr></table>
  <p><b>Plural:</b> Vokal + <b>-s</b> (<span class="es-t">equipo → equipos</span>), Konsonant + <b>-es</b> (<span class="es-t">hotel → hoteles</span>, <span class="es-t">ciudad → ciudades</span>).</p>
- <div class="ojo">Akzent auf der letzten Silbe fällt im Plural weg: <span class="es-t">exposición → exposiciones</span>, <span class="es-t">jamón → jamones</span>.</div>
+ <div class="ojo">Akzent auf der letzten Silbe fällt im Plural weg: <span class="es-t">exposición → exposiciones</span>, <span class="es-t">jamón → jamones</span>. (Aber: <span class="es-t">país → países</span> – hier bleibt er.)</div>
  <p><span class="es-t">unos / unas</span> heißt „einige“.</p>`},
  {t:'vocab',title:'Wichtige Wörter',items:[['la empresa','das Unternehmen'],['el producto','das Produkt'],['el hotel','das Hotel'],['la ciudad','die Stadt'],['el país','das Land'],['la comida','das Essen'],['el deporte','der Sport'],['la tecnología','die Technologie'],['la red social','das soziale Netzwerk'],['la publicidad','die Werbung'],['el éxito','der Erfolg'],['la feria','die Messe'],['el turismo','der Tourismus'],['la fiesta','das Fest / die Party']]},
  {t:'mc',q:'Welcher Artikel? ___ ciudad',opts:['la','el'],a:0,keep:true,why:'Wörter auf <b>-dad</b> sind weiblich.'},
@@ -241,7 +241,7 @@ lessons:[
   {you:true,opts:[{es:'Para estudiar un máster en la universidad.',ok:true},{es:'Porque estudiar un máster.',ok:false,why:'„Um zu“ = <b>para</b> + Infinitiv.'},{es:'Para estudio un máster.',ok:false,why:'Nach <b>para</b> kommt der Infinitiv: <i>para estudiar</i>.'}]},
   {n:'Carla',es:'¡Qué bien! Bienvenido a Barcelona.',de:'Super! Willkommen in Barcelona.'}]},
  {t:'tr',de:'Ich spreche kein Französisch. – Ich auch nicht.',a:['No hablo francés. – Yo tampoco.','No hablo francés. Yo tampoco.','Yo no hablo francés. Yo tampoco.']},
- {t:'tr',de:'Sie arbeiten, aber ich nicht.',a:['Ellos trabajan, pero yo no.','Trabajan, pero yo no.','Ellas trabajan, pero yo no.']},
+ {t:'tr',de:'Sie arbeiten, aber ich nicht.',a:['Ellos trabajan, pero yo no.','Trabajan, pero yo no.','Ellas trabajan, pero yo no.','Usted trabaja, pero yo no.','Ustedes trabajan, pero yo no.']},
  {t:'free',task:'Stell dich in 4–6 Sätzen vor: Name, Herkunft, Wohnort, Sprachen, wozu du Spanisch lernst, was du (nicht) machst.',hint:'Me llamo … Soy de … Hablo … Estudio español para … No practico … pero …',focus:'ser, Verben auf -ar, para + Infinitiv, no/también/tampoco',model:'Hola, me llamo Jonas. Soy de Alemania, pero ahora vivo en Barcelona. Hablo alemán, inglés y un poco de español. Estudio un máster en la universidad. Estudio español para hablar con mis compañeros y para trabajar en España. Practico deporte, pero no toco un instrumento.'},
  {t:'listen',es:'No hablo francés, pero Laia sí.',de:'Ich spreche kein Französisch, aber Laia schon.'}
 ]}],
