@@ -4661,6 +4661,8 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "hotel → hoteles": "Hotel → Hotels",
 "ciudad → ciudades": "Stadt → Städte",
 "exposición → exposiciones": "Ausstellung → Ausstellungen",
+"país → países": "Land → Länder",
+"Me dijo que está enferma.": "Sie hat mir gesagt, dass sie krank ist.",
 "jamón → jamones": "Schinken → Schinken (Pl.)",
 "unos / unas": "einige (m / f)",
 "¿Qué significa «red social»?": "Was bedeutet „red social“?",

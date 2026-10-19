@@ -27,7 +27,7 @@ EN = [
 "wanted",
 "live in a shared flat",
 "room facing the street",
-"to go out into (the street)",
+"to face onto (the street)",
 "bright, light",
 "furnished",
 "bills included",

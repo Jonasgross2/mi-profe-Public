@@ -4,7 +4,7 @@
 window.SMOKE = async function (profiles) {
   profiles = profiles || [{lang:'es',ex:'de',ui:'de',g:'m'},{lang:'es',ex:'en',ui:'en',g:'f'},{lang:'de',ex:'pt',ui:'pt',g:'f'},{lang:'de',ex:'pt',ui:'de',g:'x'},{lang:'es',ex:'de',ui:'es',g:'x'}];
   const out = window.SMOKE_RES = [];
-  const fr = document.getElementById('fr') || document.body.appendChild(Object.assign(document.createElement('iframe'), {id:'fr', style:'width:390px;height:844px'}));
+  const fr = document.getElementById('fr') || document.documentElement.appendChild(Object.assign(document.createElement('iframe'), {id:'fr', style:'width:390px;height:844px'}));
   for (const p of profiles) {
     const key = p.lang === 'es' ? 'espanol-lehrer-v1' : null;
     localStorage.clear();
