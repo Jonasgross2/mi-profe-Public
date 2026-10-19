@@ -14,7 +14,7 @@ EN = [
 "Feelings + subjunctive",
 "<p>For feelings about something that <b>someone else</b> does, use the subjunctive:</p>\n <table><tr><th>Feeling</th><th>Example</th></tr>\n <tr><td class=\"es-t\">me alegra que</td><td class=\"es-t\">Me alegra que <b>vengas</b>.</td></tr>\n <tr><td class=\"es-t\">me molesta que</td><td class=\"es-t\">Me molesta que la gente <b>tire</b> basura.</td></tr>\n <tr><td class=\"es-t\">me preocupa que</td><td class=\"es-t\">Me preocupa que no <b>llueva</b>.</td></tr>\n <tr><td class=\"es-t\">me encanta / odio que</td><td class=\"es-t\">Me encanta que <b>haga</b> sol.</td></tr></table>\n <div class=\"ex\">Same person → infinitive: <span class=\"es-t\">Me alegra <b>verte</b>.</span> (I'm happy – I see you.) But: <span class=\"es-t\">Me alegra que <b>me veas</b>.</span></div>",
 "It bothers me that they don't recycle in the office.",
-"I'm glad you came. (that you're coming)",
+"I'm glad you're coming.",
 "I love that there are so many bikes in Barcelona.",
 "It's important that …",
 "es importante que · es una pena que",

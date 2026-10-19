@@ -9,7 +9,7 @@ EN = [
 "Ordinal numbers",
 "hay que / tener que + infinitive",
 "Viewing a flat in Gràcia",
-"You're viewing a room / a small flat in Gràcia. The landlord, Sr. Puig, shows you round.",
+"You're viewing a room in a shared flat in Gràcia. The landlord, Sr. Puig, shows you around.",
 "Ask about the location, floor, condition, price and deposit (¿Hay que pagar fianza?), and react to his stories about the past by telling him how things used to be for you (imperfect).",
 "Describing a flat & an office",
 "la planta baja · está reformado · es luminoso",

@@ -1,6 +1,6 @@
 EN = [
 "Present subjunctive: forms · wishes (quiero que, espero que, ojalá) · advice (te recomiendo que) · negative imperative",
-"When do you need the subjunctive? (the WEIRDO idea)",
+"When do you need the subjunctive? (wish, advice, doubt, feeling)",
 "Forms: regular (hable, coma, viva)",
 "Forms: irregular (tenga, haga, sea, vaya, esté)",
 "quiero que / espero que / ojalá",

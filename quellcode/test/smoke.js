@@ -23,7 +23,7 @@ window.SMOKE = async function (profiles) {
     (w.READINGS || []).forEach(r => routes.push('reading/' + r.id));
     const bad = [];
     for (const r of routes) { const b = errs.length; try { w.history.replaceState(null, '', '#' + r); A.route(); } catch (e) { bad.push(r + ': ' + e.message); }
-      await new Promise(x => setTimeout(x, 0)); if (errs.length > b) bad.push(r + ': ' + errs.slice(b).join(' | '));
+      await new Promise(x => { const c = new MessageChannel(); c.port1.onmessage = () => x(); c.port2.postMessage(0); }); /* statt setTimeout(0): wird im verdeckten Browserfenster nicht gedrosselt */ if (errs.length > b) bad.push(r + ': ' + errs.slice(b).join(' | '));
       const txt = (w.document.querySelector('main') || w.document.body).innerText; if (/undefined|NaN|\[object Object\]/.test(txt)) bad.push(r + ': Text enthält ' + txt.match(/.{0,30}(undefined|NaN|\[object Object\]).{0,30}/)[0]); }
     const eb = []; let steps = 0;
     for (const u of w.COURSE.units) for (const l of u.lessons) for (const s of l.steps) { steps++; const el = w.document.createElement('div'); w.document.body.append(el);

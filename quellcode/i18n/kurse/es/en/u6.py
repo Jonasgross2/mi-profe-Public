@@ -110,7 +110,7 @@ EN = [
 "Listening: A voice message from Granada",
 "Understanding a voice message in the present perfect",
 "Marc sends you a voice message. Just listen first.",
-"Hi, Jonas! It's Marc. I'm sending you a voice message from Granada. Laia and I arrived this morning by bus: an eight-hour journey!\n\nThe hotel is very good: the room faces the street and has a balcony with a view of the Alhambra. But there's a problem: the shower doesn't work and there are no towels in the bathroom. I've spoken to reception and they've told me the technician is coming this afternoon.\n\nThis afternoon we visited the Albaicín and had tapas in a tiny bar. I love Granada! We haven't seen the Alhambra yet because we couldn't buy tickets for today. We're going tomorrow at nine.\n\nAnd you? What have you done this weekend? Big hug!",
+"Hi, Jonas! It's Marc. I'm sending you a voice message from Granada. Laia and I arrived this morning by bus: a twelve-hour journey!\n\nThe hotel is very good: the room faces the street and has a balcony with a view of the Alhambra. But there's a problem: the shower doesn't work and there are no towels in the bathroom. I've spoken to reception and they've told me the technician is coming this afternoon.\n\nThis afternoon we visited the Albaicín and had tapas in a tiny bar. I love Granada! We haven't seen the Alhambra yet because we couldn't buy tickets for today. We're going tomorrow at nine.\n\nAnd you? What have you done this weekend? Big hug!",
 "I've spoken to reception.",
 "We haven't seen the Alhambra yet.",
 "This weekend I've studied a lot, but on Sunday I went to the beach.",

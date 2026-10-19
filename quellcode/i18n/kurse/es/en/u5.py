@@ -72,7 +72,7 @@ EN = [
 "between … and …",
 "La farmacia está ___ el banco ___ la panadería. (between … and …)",
 "Asking for directions politely:",
-"Where is the station?",
+"Where is the metro?",
 "You're looking for the way to the metro. You speak to a passer-by.",
 "Address the passer-by politely.",
 "Indefinite (a station) → <b>hay</b>.",

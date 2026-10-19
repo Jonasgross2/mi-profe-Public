@@ -181,7 +181,6 @@ EN = [
 "quality",
 "frequency",
 "secretary",
-"the belt; the seat belt",
 "nephew",
 "cow",
 "stop",

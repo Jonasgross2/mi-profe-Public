@@ -181,7 +181,7 @@ EN = [
 "“¿A qué te dedicas?” means …",
 "What do you do for a living?",
 "Who are you giving that to?",
-"My sister is a lawyer.",
+"My cousin is a lawyer.",
 "simple, easy",
 "hard",
 "matter, affair",
