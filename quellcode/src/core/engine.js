@@ -591,11 +591,15 @@ async function betaTry(c,n,pick){const B=window.PACKS&&PACKS.learn.find(L=>L.cod
    iPhone: Anleitung; die installierte App hat dort einen eigenen Speicher → Einladung/Sync-Code/beta kommen über die Adresse und ein eigenes Manifest (start_url) mit (installPrep). */
 const STANDALONE=(()=>{try{return matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;}catch(e){return false;}})();
 let INSTALL_EV=null;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();INSTALL_EV=e;});
+/* Browser fürs Installieren: Safari, Chrome/Edge/Firefox auf dem iPhone (Teilen sitzt woanders), eingebaute Browser anderer Apps (Instagram, Facebook … – dort geht es gar nicht) */
+function instBrowser(){const u=navigator.userAgent;if(/FBAN|FBAV|Instagram|Line\/|Snapchat|TikTok|musical_ly|LinkedInApp|Pinterest|; wv\)/.test(u))return 'inapp';
+  if(IS_IOS)return /CriOS/.test(u)?'ioschrome':/EdgiOS|FxiOS|OPiOS/.test(u)?'iosother':/GSA\//.test(u)?'inapp':'safari';return /SamsungBrowser/.test(u)?'samsung':'android';}
 function canInstall(){return !!window.PWA&&!STANDALONE&&!IN_ARTIFACT&&(IS_IOS||/Android/.test(navigator.userAgent));}
 function installSeen(){try{return !!localStorage.getItem('mi-profe-inst');}catch(e){return true;}}
-function installPrep(){if(!canInstall()||!IS_IOS)return;const st=S.settings,q=[];
+function installUrl(){const st=S.settings,q=[];
   if(st.invite)q.push('einladung='+encodeURIComponent(st.invite));if(st.syncCode)q.push('sync='+encodeURIComponent(st.syncCode));try{if(localStorage.getItem('mi-profe-beta')==='1')q.push('beta=1');}catch(e){}
-  if(!q.length)return;const base=location.origin+location.pathname,u=base+'?'+q.join('&');
+  return location.origin+location.pathname+(q.length?'?'+q.join('&'):'');}
+function installPrep(){if(!canInstall()||!IS_IOS)return;const base=location.origin+location.pathname,u=installUrl();if(u===base)return;
   try{history.replaceState(history.state,'',u+location.hash);}catch(e){}
   const l=document.querySelector('link[rel=manifest]');if(!l)return;
   const man={name:'Mi profe – Sprachen lernen',short_name:'Mi profe',start_url:u,scope:base,display:'standalone',background_color:'#faf6f1',theme_color:'#c4472b',icons:[192,512].map(n=>({src:base+'icon-'+n+'.png',sizes:n+'x'+n,type:'image/png'}))};
@@ -603,15 +607,26 @@ function installPrep(){if(!canInstall()||!IS_IOS)return;const st=S.settings,q=[]
 function vInstall(fromMenu){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}installPrep();
   const done=()=>{try{localStorage.setItem('mi-profe-inst','1');}catch(e){}if(fromMenu)go('settings');else route();};
   const out=h('div');const step=(n,t)=>h('div',{style:'display:flex;gap:10px;align-items:flex-start;text-align:left;margin:0 0 12px'},h('b',{class:'instn'},n),h('span',{style:'flex:1;min-width:0'},t));
+  const br=instBrowser(),home=IS_IOS?T('Öffne Mi profe ab jetzt über das neue Symbol auf deinem Home-Bildschirm.'):T('Öffne Mi profe ab jetzt über das neue Symbol auf deinem Startbildschirm.');
+  const addIOS=T('Wähle „Zum Home-Bildschirm“ (eventuell etwas nach unten scrollen) und tippe auf „Hinzufügen“.');
   let body;
   if(INSTALL_EV){const b=h('button',{class:'btn primary',style:'width:100%'},T('📲 Jetzt installieren'));
     b.onclick=async()=>{const ev=INSTALL_EV;INSTALL_EV=null;try{ev.prompt();const c=await ev.userChoice;if(c&&c.outcome==='accepted'){b.remove();out.append(h('div',{class:'fb ok'},T('✓ Installiert – öffne Mi profe jetzt über das Symbol auf deinem Startbildschirm.')));}}catch(e){}};
     body=h('div',{},b,out);}
-  else if(IS_IOS)body=h('div',{},step('1',T('Tippe in Safari auf „Teilen“ (Quadrat mit Pfeil nach oben – bei neueren iPhones zuerst auf „…“).')),
-    step('2',T('Wähle „Zum Home-Bildschirm“ (eventuell etwas nach unten scrollen) und tippe auf „Hinzufügen“.')),
-    step('3',T('Öffne Mi profe ab jetzt über das neue Symbol auf deinem Home-Bildschirm.')));
-  else body=h('div',{},step('1',T('Tippe oben rechts auf das Browser-Menü ⋮.')),step('2',T('Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.')),
-    step('3',T('Öffne Mi profe ab jetzt über das neue Symbol auf deinem Startbildschirm.')));
+  else if(br==='inapp')body=h('div',{},h('p',{class:'fb bad',style:'text-align:left;margin:0 0 12px'},T('Du bist im Browser einer anderen App – von hier aus lässt sich Mi profe nicht installieren.')),
+    step('1',IS_IOS?T('Tippe auf ••• oder das Kompass-Symbol und wähle „In Safari öffnen“ (oder „Im Browser öffnen“).'):T('Tippe auf ⋮ und wähle „Im Browser öffnen“ (oder „In Chrome öffnen“).')),
+    step('2',T('Dort erscheint diese Anleitung noch einmal – einfach den Schritten folgen.')),
+    step('3',T('Klappt das nicht: Link kopieren und in Safari bzw. Chrome einfügen.')));
+  else if(br==='ioschrome')body=h('div',{},step('1',T('Tippe in Chrome oben in der Adresszeile auf „Teilen“ (Quadrat mit Pfeil nach oben).')),step('2',addIOS),step('3',home));
+  else if(br==='iosother')body=h('div',{},step('1',T('Öffne das Menü deines Browsers (≡ oder …) und tippe auf „Teilen“.')),step('2',addIOS),step('3',home),
+    h('p',{class:'muted small',style:'text-align:left;margin:4px 0 0'},T('Fehlt „Zum Home-Bildschirm“? Dann den Link kopieren und in Safari öffnen.')));
+  else if(br==='safari')body=h('div',{},step('1',T('Tippe in Safari auf „Teilen“ (Quadrat mit Pfeil nach oben – bei neueren iPhones zuerst auf „…“).')),step('2',addIOS),step('3',home));
+  else if(br==='samsung')body=h('div',{},step('1',T('Tippe unten auf das Menü ≡.')),step('2',T('Wähle „Seite hinzufügen zu“ → „Startbildschirm“ (oder „App installieren“).')),step('3',home));
+  else body=h('div',{},step('1',T('Tippe oben rechts auf das Browser-Menü ⋮.')),step('2',T('Wähle „App installieren“ oder „Zum Startbildschirm hinzufügen“.')),step('3',home));
+  /* Ausweg für jeden Browser: Link (mit Einladung) kopieren */
+  const cp=h('button',{class:'btn small ghost',style:'margin-top:10px'},T('🔗 Link kopieren'));
+  cp.onclick=async()=>{const u=installUrl();try{await navigator.clipboard.writeText(u);toast(T('Link kopiert ✓'));}catch(e){prompt(T('Link kopieren:'),u);}};
+  body.append(cp);
   document.body.append(h('div',{class:'welcome'},h('div',{class:'card',style:'max-width:420px;width:100%;text-align:center;padding:32px 24px'},
     h('div',{style:'font-size:48px;margin-bottom:6px'},'📲'),h('h1',{style:'margin:0 0 6px'},T('Als App installieren')),
     h('p',{class:'muted',style:'margin:0 0 18px'},T('Dann startet Mi profe wie eine normale App: mit eigenem Symbol, ohne Browserleiste und auch ohne Internet.')),
