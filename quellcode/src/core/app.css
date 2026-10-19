@@ -453,3 +453,6 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .nolisten{margin-top:14px}.nolisten>.btn{color:var(--muted)}.nolisten .chips{display:flex;flex-wrap:wrap;gap:8px}
 
 .instn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:14px}
+.swatches{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px}.swatch{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;padding:4px 2px;cursor:pointer;color:var(--ink);font:inherit;width:66px}
+.swc{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.08)}.swatch.on .swc{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--ink)}.swatch.on{font-weight:600}
+.icprev{width:44px;height:44px;border-radius:10px;flex:none}

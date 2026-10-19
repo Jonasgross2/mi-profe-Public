@@ -465,6 +465,9 @@ html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}
 .nolisten{margin-top:14px}.nolisten>.btn{color:var(--muted)}.nolisten .chips{display:flex;flex-wrap:wrap;gap:8px}
 
 .instn{flex:none;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:14px}
+.swatches{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 6px}.swatch{display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;padding:4px 2px;cursor:pointer;color:var(--ink);font:inherit;width:66px}
+.swc{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:18px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.08)}.swatch.on .swc{box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--ink)}.swatch.on{font-weight:600}
+.icprev{width:44px;height:44px;border-radius:10px;flex:none}
 </style></head>
 <body><noscript>Bitte JavaScript aktivieren.</noscript>
 <div id="boot"><div class="bootlogo">🇪🇸</div><div class="bootspin"></div></div>
@@ -499,7 +502,7 @@ window.selectLang=function(){let code='es';try{code=(JSON.parse(localStorage.get
   if(L.code!=='es')for(const u of L.course.units)for(const q of u.placement||[])L.placement.push(Object.assign({u:u.id},q));
   window.COURSE=L.course;window.PLACEMENT=L.placement;window.STORIES=L.stories;window.LEVELS=L.levels;window.LEVEL_OF=L.levelOf;window.EMOJI=L.emoji;};
 </script>
-<script>window.PACKS={"learn": [{"code": "es", "name": "Spanisch", "flag": "🇪🇸", "stufen": ["A1", "C2"]}, {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "stufen": ["A1", "B2"]}], "ex": {"es": ["en"]}, "base": {"es": "de", "de": "pt"}};
+<script>window.PACKS={"learn": [{"code": "es", "name": "Spanisch", "flag": "🇪🇸", "stufen": ["A1", "C2"], "app": "Mi profe", "akzent": "#c4472b"}, {"code": "de", "name": "Deutsch", "flag": "🇩🇪", "stufen": ["A1", "B2"], "app": "Mein Lehrer", "akzent": "#b3202a"}], "ex": {"es": ["en"]}, "base": {"es": "de", "de": "pt"}};window.THEMES={"ozean": "#1f6fa8", "wald": "#2f7d4f", "lavendel": "#6d4fb8", "sonne": "#a85d08", "graphit": "#3d4652", "rose": "#b83a6b", "terra": "#c4472b"};
 /* Lader (ES5): gleiche Logik wie engine.js (App-Sprache → Erklärsprache), lädt das Lernsprachen-Paket und ggf. das Erklärsprachen-Paket synchron */
 (function(){var sh=null;try{sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');}catch(e){}
 var nav=(navigator.language||'de').toLowerCase(),ui=sh&&sh.ui||(sh?'de':nav.indexOf('de')===0?'de':nav.indexOf('es')===0?'es':nav.indexOf('pt')===0?'pt':'en');
@@ -974,6 +977,18 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Farben": "Colours",
+"Flagge": "Flag",
+"Ozean": "Ocean",
+"Wald": "Forest",
+"Lavendel": "Lavender",
+"Sonne": "Sun",
+"Graphit": "Graphite",
+"Rosé": "Rosé",
+"Terrakotta": "Terracotta",
+"Neues App-Symbol? Dafür die App einmal neu zum Home-Bildschirm hinzufügen.": "New app icon? Add the app to your home screen once more.",
+"„Flagge“ = Farben der Lernsprache (Standard). Eine andere Farbe bleibt auch beim Kurswechsel.": "“Flag” = colours of the language you're learning (default). Any other colour stays when you switch courses.",
+"App-Symbol – wird beim Installieren übernommen.": "App icon – applied when you install the app.",
 "Du bist im Browser einer anderen App – von hier aus lässt sich Mi profe nicht installieren.": "You're in another app's built-in browser – Mi profe can't be installed from here.",
 "Tippe auf ••• oder das Kompass-Symbol und wähle „In Safari öffnen“ (oder „Im Browser öffnen“).": "Tap ••• or the compass icon and choose “Open in Safari” (or “Open in browser”).",
 "Tippe auf ⋮ und wähle „Im Browser öffnen“ (oder „In Chrome öffnen“).": "Tap ⋮ and choose “Open in browser” (or “Open in Chrome”).",
@@ -2017,6 +2032,18 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Farben": "Colores",
+"Flagge": "Bandera",
+"Ozean": "Océano",
+"Wald": "Bosque",
+"Lavendel": "Lavanda",
+"Sonne": "Sol",
+"Graphit": "Grafito",
+"Rosé": "Rosa",
+"Terrakotta": "Terracota",
+"Neues App-Symbol? Dafür die App einmal neu zum Home-Bildschirm hinzufügen.": "¿Nuevo icono? Añade la app otra vez a la pantalla de inicio.",
+"„Flagge“ = Farben der Lernsprache (Standard). Eine andere Farbe bleibt auch beim Kurswechsel.": "«Bandera» = colores del idioma que aprendes (predeterminado). Otro color se mantiene al cambiar de curso.",
+"App-Symbol – wird beim Installieren übernommen.": "Icono de la app: se aplica al instalarla.",
 "Du bist im Browser einer anderen App – von hier aus lässt sich Mi profe nicht installieren.": "Estás en el navegador de otra app: desde aquí no se puede instalar Mi profe.",
 "Tippe auf ••• oder das Kompass-Symbol und wähle „In Safari öffnen“ (oder „Im Browser öffnen“).": "Toca ••• o el icono de la brújula y elige «Abrir en Safari» (o «Abrir en el navegador»).",
 "Tippe auf ⋮ und wähle „Im Browser öffnen“ (oder „In Chrome öffnen“).": "Toca ⋮ y elige «Abrir en el navegador» (o «Abrir en Chrome»).",
@@ -3060,6 +3087,18 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Farben": "Cores",
+"Flagge": "Bandeira",
+"Ozean": "Oceano",
+"Wald": "Floresta",
+"Lavendel": "Lavanda",
+"Sonne": "Sol",
+"Graphit": "Grafite",
+"Rosé": "Rosé",
+"Terrakotta": "Terracota",
+"Neues App-Symbol? Dafür die App einmal neu zum Home-Bildschirm hinzufügen.": "Novo ícone? Adicione o app de novo à tela de início.",
+"„Flagge“ = Farben der Lernsprache (Standard). Eine andere Farbe bleibt auch beim Kurswechsel.": "“Bandeira” = cores do idioma que você aprende (padrão). Outra cor continua ao trocar de curso.",
+"App-Symbol – wird beim Installieren übernommen.": "Ícone do app – é usado ao instalar.",
 "Du bist im Browser einer anderen App – von hier aus lässt sich Mi profe nicht installieren.": "Você está no navegador de outro app – daqui não dá para instalar o Mi profe.",
 "Tippe auf ••• oder das Kompass-Symbol und wähle „In Safari öffnen“ (oder „Im Browser öffnen“).": "Toque em ••• ou no ícone da bússola e escolha “Abrir no Safari” (ou “Abrir no navegador”).",
 "Tippe auf ⋮ und wähle „Im Browser öffnen“ (oder „In Chrome öffnen“).": "Toque em ⋮ e escolha “Abrir no navegador” (ou “Abrir no Chrome”).",
@@ -3661,7 +3700,9 @@ selectLang();
 let UI='de';try{const sh=JSON.parse(localStorage.getItem('mi-profe-shared')||'null');const nav=(navigator.language||'de').toLowerCase();
   UI=sh&&sh.ui||(sh?'de':nav.startsWith('de')?'de':nav.startsWith('es')?'es':nav.startsWith('pt')?'pt':'en');}catch(e){}
 if(UI!=='de'&&!(window.UI_TR&&UI_TR[UI]))UI='de';document.documentElement.lang=UI;
-const TR=UI==='de'?null:UI_TR[UI];const T=s=>TR&&TR[s]!=null?TR[s]:s;
+/* Name der App je Kurs (PACKS[..].app in build.py, z. B. „Mein Lehrer“): ersetzt „Mi profe“ in allen Oberflächentexten */
+const PK_CUR=(window.PACKS&&PACKS.learn||[]).find(x=>x.code===LANG.code)||{},APP=PK_CUR.app||LANG.appName||'Mi profe';
+const TR=UI==='de'?null:UI_TR[UI];const T=s=>{const r=TR&&TR[s]!=null?TR[s]:s;return APP==='Mi profe'||typeof r!=='string'?r:r.split('Mi profe').join(APP);};
 /* Lob in der Lernsprache (¡Muy bien!, ¡Hola! …): Texte enthalten die spanischen Wendungen; ein anderes Paket ersetzt sie über LANG.praise {'¡Muy bien!':'Sehr gut!', …} */
 const TP=k=>{let r=T(k);const P=LANG.praise;if(P)for(const a in P)r=r.split(a).join(P[a]);return r;};
 /* Hinweiskästen (.ojo) beginnen mit „¡OJO!“ – in anderen Lernsprachen aus LANG.praise (z. B. 'ACHTUNG!') */
@@ -3702,6 +3743,24 @@ function save(noSync){S.updated=Date.now();const js=JSON.stringify(S);try{localS
   saveShared();if(!noSync&&window.__sync)window.__sync.schedule();}
 load();
 document.title=fmt(T('Mi profe · {L} lernen'));
+/* Farbschema & App-Symbol: S.settings.color gilt für alle Kurse; leer/'flag' = Flaggenfarben der Lernsprache (PACKS[..].akzent). Hell/Dunkel wird aus der einen Farbe abgeleitet.
+   Symbol/Manifest: icons/<kurs>-<schema>-*.png, manifest-<kurs>-<schema>.webmanifest (build.py) – das Handy übernimmt sie beim Installieren. */
+const THEMES_UI=[['flag','Flagge'],['ozean','Ozean'],['wald','Wald'],['lavendel','Lavendel'],['sonne','Sonne'],['graphit','Graphit'],['rose','Rosé'],['terra','Terrakotta']];
+function colorId(){const c=S.settings.color;return c&&window.THEMES&&THEMES[c]?c:'flag';}
+function accentOf(id){return id==='flag'?(PK_CUR.akzent||'#c4472b'):THEMES[id];}
+function hx(c){const v=parseInt(c.slice(1),16);return[v>>16&255,v>>8&255,v&255];}
+function mixC(a,b,t){const B=hx(b);return '#'+hx(a).map((x,i)=>('0'+Math.round(x*(1-t)+B[i]*t).toString(16)).slice(-2)).join('');}
+function lum(c){const v=hx(c).map(x=>{x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);});return .2126*v[0]+.7152*v[1]+.0722*v[2];}
+function applyLook(){const id=colorId(),a=accentOf(id),old=document.getElementById('lookcss');if(old)old.remove();
+  const set=(sel,attr,v)=>{const e=document.querySelector(sel);if(e)e.setAttribute(attr,v);};set('meta[name=theme-color]','content',a);
+  if(window.PWA){const n=LANG.code+'-'+id;set('link[rel=manifest]','href','manifest-'+n+'.webmanifest');set('link[rel=apple-touch-icon]','href','icons/'+n+'-180.png');
+    set('link[rel=icon]','href','icons/'+n+'-192.png');set('meta[name=apple-mobile-web-app-title]','content',APP);}
+  if(a.toLowerCase()==='#c4472b')return;/* Terrakotta = Grundfarben aus app.css */
+  const a2=mixC(a,'#ffffff',.3),dbg=mixC('#161616',a2,.05);
+  const L='--bg:'+mixC('#fbfaf8',a,.035)+';--surface2:'+mixC('#f2f0ed',a,.06)+';--line:'+mixC('#e3dfdb',a,.09)+';--accent:'+a+';--accent-ink:'+(lum(a)>.4?'#1b1714':'#ffffff')+';--accent-soft:'+mixC('#ffffff',a,.15)+';--accent-strong:'+mixC(a,'#000000',.18)+';';
+  const D='--bg:'+dbg+';--surface:'+mixC('#1f1f1f',a2,.06)+';--surface2:'+mixC('#282828',a2,.07)+';--line:'+mixC('#383838',a2,.09)+';--accent:'+a2+';--accent-ink:'+dbg+';--accent-soft:'+mixC('#1d1d1d',a2,.2)+';--accent-strong:'+mixC(a2,'#ffffff',.25)+';';
+  const st=document.createElement('style');st.id='lookcss';st.textContent=':root{'+L+'}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){'+D+'}}:root[data-theme="dark"]{'+D+'}';document.head.appendChild(st);}
+applyLook();
 /* Name: wird beim ersten Öffnen abgefragt. Die Inhalte sind für „Jonas“ geschrieben – für andere Namen wird er überall ersetzt. */
 const NAME=()=>S.name||'';
 /* Nachname: steht nie fest im Kurs. Inhalte sind für die Kurs-Person LANG.persona (z. B. „Jonas Gross“) geschrieben: Vor-/Nachname werden aus
@@ -4247,7 +4306,7 @@ function installUrl(){const st=S.settings,q=[];
 function installPrep(){if(!canInstall()||!IS_IOS)return;const base=location.origin+location.pathname,u=installUrl();if(u===base)return;
   try{history.replaceState(history.state,'',u+location.hash);}catch(e){}
   const l=document.querySelector('link[rel=manifest]');if(!l)return;
-  const man={name:'Mi profe – Sprachen lernen',short_name:'Mi profe',start_url:u,scope:base,display:'standalone',background_color:'#faf6f1',theme_color:'#c4472b',icons:[192,512].map(n=>({src:base+'icon-'+n+'.png',sizes:n+'x'+n,type:'image/png'}))};
+  const ic=LANG.code+'-'+colorId(),man={name:APP,short_name:APP,start_url:u,scope:base,display:'standalone',background_color:'#ffffff',theme_color:accentOf(colorId()),icons:[192,512].map(n=>({src:base+'icons/'+ic+'-'+n+'.png',sizes:n+'x'+n,type:'image/png'}))};
   try{l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'}));}catch(e){}}
 function vInstall(fromMenu){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}installPrep();
   const done=()=>{try{localStorage.setItem('mi-profe-inst','1');}catch(e){}if(fromMenu)go('settings');else route();};
@@ -5461,7 +5520,13 @@ function vSettingsAll(m){const st=S.settings;
     h('label',{class:'row'},tr,T('Übersetzungen in Dialogen sofort zeigen')),
     IS_IOS?h('label',{class:'row',style:'margin-top:8px'},mix,T('Musik anderer Apps nie unterbrechen')):null,
     IS_IOS?h('span',{class:'muted small'},T('Aus (Standard): App immer hörbar, auch stumm geschaltet – andere Musik wird dabei pausiert. An: Musik läuft immer weiter, die App ist dann nur mit Ton-Schalter hörbar.')):null,
-    h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Darstellung')),theme)));
+    h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Darstellung')),theme),
+    h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Farben')),
+      h('div',{class:'swatches'},THEMES_UI.filter(([id])=>id==='flag'||window.THEMES&&THEMES[id]).map(([id,l])=>h('button',{class:'swatch'+(colorId()===id?' on':''),onclick:()=>{
+        if(id==='flag')delete st.color;else st.color=id;save();applyLook();installPrep();route();if(STANDALONE)toast(T('Neues App-Symbol? Dafür die App einmal neu zum Home-Bildschirm hinzufügen.'));}},
+        h('span',{class:'swc',style:'background:'+accentOf(id)},id==='flag'?LANG.flag:''),h('span',{class:'small'},T(l))))),
+      h('span',{class:'muted small'},T('„Flagge“ = Farben der Lernsprache (Standard). Eine andere Farbe bleibt auch beim Kurswechsel.')),
+      window.PWA?h('div',{class:'row',style:'margin-top:8px;gap:10px'},h('img',{class:'icprev',src:'icons/'+LANG.code+'-'+colorId()+'-192.png',alt:''}),h('span',{class:'muted small',style:'flex:1;min-width:0'},T('App-Symbol – wird beim Installieren übernommen.'))):null)));
   if(SRV()){m.append(srvSyncCard(),srvAICard());}
   const key=h('input',{class:'inp',type:'password',value:st.geminiKey,placeholder:T('AIza…'),style:'font-size:15px'});
   const model=h('input',{class:'inp',value:st.geminiModel,style:'font-size:15px'});const out=h('div');
