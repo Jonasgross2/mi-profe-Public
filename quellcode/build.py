@@ -92,6 +92,7 @@ for k,v in PACKS.items():
 for f,ln,ex in TRS:
     (pk/f'tr-{ln}-{ex}.js').write_text((s/f).read_text());PACKFILES.append(f'p/tr-{ln}-{ex}.js')
 (w/'manifest.webmanifest').write_text('''{
+  "id": "./",
   "name": "Mi profe – Sprachen lernen",
   "short_name": "Mi profe",
   "lang": "de",
@@ -126,15 +127,17 @@ if _todo:
         _stamp.write_text(_json.dumps(_old,ensure_ascii=False,indent=0))
 for n in _want:
     k=n.split('-')[0];v=PACKS[k];acc=_want[n][1]
-    (w/f'manifest-{n}.webmanifest').write_text(_json.dumps({'name':v.get('app','Mi profe'),'short_name':v.get('app','Mi profe'),'lang':v.get('base','de'),'start_url':'./','scope':'./','display':'standalone',
+    (w/f'manifest-{n}.webmanifest').write_text(_json.dumps({'id':'./','name':v.get('app','Mi profe'),'short_name':v.get('app','Mi profe'),'lang':v.get('base','de'),'start_url':'./','scope':'./','display':'standalone',
       'background_color':'#ffffff','theme_color':acc,'icons':[{'src':f'icons/{n}-192.png','sizes':'192x192','type':'image/png'},{'src':f'icons/{n}-512.png','sizes':'512x512','type':'image/png'},
       {'src':f'icons/{n}-512.png','sizes':'512x512','type':'image/png','purpose':'maskable'}]},ensure_ascii=False,indent=1))
 (w/'sw.js').write_text('''const CACHE='mi-profe-'''+VERSION+'''';
 const FILES='''+_json.dumps(['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./apple-touch-icon.png']+['./'+f+'?v='+VERSION for f in PACKFILES])+''';
 /* Cache zuerst: App startet sofort aus dem Speicher. Neue Versionen kommen über ein neues sw.js (install lädt frisch), die Seite zeigt dann „Neue Version – tippen“. */
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(FILES.map(f=>new Request(f,{cache:'reload'})))).then(()=>self.skipWaiting()));});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE&&k!=='mi-profe-look').map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
 self.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==location.origin)return;
+  /* Manifest = Name/Symbol des gewählten Kurses und Farbschemas (legt die Seite in den Cache „mi-profe-look“) – feste Adresse, damit Chrome Symbol-Änderungen übernimmt */
+  if(/manifest\\.webmanifest$/.test(u.pathname)){e.respondWith(caches.open('mi-profe-look').then(c=>c.match(e.request,{ignoreSearch:true})).then(r=>r||caches.match(e.request)).then(r=>r||fetch(e.request)));return;}
   if(e.request.mode==='navigate'){e.respondWith(caches.match('./index.html').then(r=>r||fetch(e.request)));return;}
   e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request)));});
 ''')

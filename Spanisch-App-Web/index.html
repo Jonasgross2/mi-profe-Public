@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-title" content="Mi profe">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" href="icon-192.png">
-<script>window.PWA=true;window.APP_VERSION="20261019-1305";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
+<script>window.PWA=true;window.APP_VERSION="20261019-1312";window.MP_SERVER="https://mi-profe.miprofe-app.workers.dev";</script>
 <style>:root{
   --bg:#faf6f1; --surface:#ffffff; --surface2:#f3ece3; --ink:#2a211c; --muted:#76685e;
   --line:#e6dbcf; --accent:#c4472b; --accent-ink:#ffffff; --accent-soft:#f8e3dc; --accent-strong:#a3361c;
@@ -977,6 +977,10 @@ window.UI_TR={
 "kommt bald": "coming soon",
 " ist noch in Arbeit": " is still in progress",
 "Sprache der App": "App language",
+"Das App-Symbol zeigt noch Kurs/Farbe von der Installation. Für das neue: App vom Home-Bildschirm entfernen und neu hinzufügen (vorher Sync einschalten, sonst ist der Fortschritt weg).": "The app icon still shows the course/colour from when you installed it. For the new one: remove the app from your home screen and add it again (turn on sync first, otherwise your progress is lost).",
+"Das App-Symbol wird beim nächsten Start aktualisiert.": "The app icon will update the next time you open the app.",
+"App-Symbol – auf diesem Gerät nur beim Installieren übernommen.": "App icon – on this device it's only applied when you install the app.",
+"App-Symbol – passt sich beim nächsten Start an.": "App icon – updates the next time you open the app.",
 "Farben": "Colours",
 "Flagge": "Flag",
 "Ozean": "Ocean",
@@ -2032,6 +2036,10 @@ window.UI_TR={
 "kommt bald": "próximamente",
 " ist noch in Arbeit": " aún está en preparación",
 "Sprache der App": "Idioma de la app",
+"Das App-Symbol zeigt noch Kurs/Farbe von der Installation. Für das neue: App vom Home-Bildschirm entfernen und neu hinzufügen (vorher Sync einschalten, sonst ist der Fortschritt weg).": "El icono de la app aún muestra el curso/color de la instalación. Para el nuevo: quita la app de la pantalla de inicio y añádela de nuevo (activa antes la sincronización, si no se pierde el progreso).",
+"Das App-Symbol wird beim nächsten Start aktualisiert.": "El icono de la app se actualizará la próxima vez que la abras.",
+"App-Symbol – auf diesem Gerät nur beim Installieren übernommen.": "Icono de la app: en este dispositivo solo se aplica al instalarla.",
+"App-Symbol – passt sich beim nächsten Start an.": "Icono de la app: se actualiza la próxima vez que la abras.",
 "Farben": "Colores",
 "Flagge": "Bandera",
 "Ozean": "Océano",
@@ -3087,6 +3095,10 @@ window.UI_TR={
 "kommt bald": "em breve",
 " ist noch in Arbeit": " ainda está em preparação",
 "Sprache der App": "Idioma do app",
+"Das App-Symbol zeigt noch Kurs/Farbe von der Installation. Für das neue: App vom Home-Bildschirm entfernen und neu hinzufügen (vorher Sync einschalten, sonst ist der Fortschritt weg).": "O ícone do app ainda mostra o curso/a cor da instalação. Para o novo: remova o app da tela de início e adicione de novo (ative a sincronização antes, senão o progresso se perde).",
+"Das App-Symbol wird beim nächsten Start aktualisiert.": "O ícone do app será atualizado na próxima vez que você abrir.",
+"App-Symbol – auf diesem Gerät nur beim Installieren übernommen.": "Ícone do app – neste aparelho só é usado ao instalar.",
+"App-Symbol – passt sich beim nächsten Start an.": "Ícone do app – é atualizado na próxima vez que você abrir.",
 "Farben": "Cores",
 "Flagge": "Bandeira",
 "Ozean": "Oceano",
@@ -3753,7 +3765,9 @@ function mixC(a,b,t){const B=hx(b);return '#'+hx(a).map((x,i)=>('0'+Math.round(x
 function lum(c){const v=hx(c).map(x=>{x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4);});return .2126*v[0]+.7152*v[1]+.0722*v[2];}
 function applyLook(){const id=colorId(),a=accentOf(id),old=document.getElementById('lookcss');if(old)old.remove();
   const set=(sel,attr,v)=>{const e=document.querySelector(sel);if(e)e.setAttribute(attr,v);};set('meta[name=theme-color]','content',a);
-  if(window.PWA){const n=LANG.code+'-'+id;set('link[rel=manifest]','href','manifest-'+n+'.webmanifest');set('link[rel=apple-touch-icon]','href','icons/'+n+'-180.png');
+  if(window.PWA){const n=LANG.code+'-'+id;set('link[rel=apple-touch-icon]','href','icons/'+n+'-180.png');
+    /* Manifest bleibt manifest.webmanifest; der Service Worker liefert darunter dieses hier (Chrome/Edge übernehmen neues Symbol + Namen dann selbst, mit kurzer Rückfrage) */
+    if(window.caches)fetch('manifest-'+n+'.webmanifest').then(r=>r.ok?caches.open('mi-profe-look').then(c=>c.put('manifest.webmanifest',r)):0).catch(()=>{});
     set('link[rel=icon]','href','icons/'+n+'-192.png');set('meta[name=apple-mobile-web-app-title]','content',APP);}
   if(a.toLowerCase()==='#c4472b')return;/* Terrakotta = Grundfarben aus app.css */
   const a2=mixC(a,'#ffffff',.3),dbg=mixC('#161616',a2,.05);
@@ -3940,7 +3954,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const addDays=(ds,n)=>{const d=new Date(ds+'T12:00:00');d.setDate(d.getDate()+n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');};
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-function toast(t){const e=h('div',{class:'toast'},t);document.body.append(e);setTimeout(()=>e.remove(),2200);}
+function toast(t,ms){const e=h('div',{class:'toast'},t);document.body.append(e);setTimeout(()=>e.remove(),ms||2200);}
 
 /* ---------- answer checking ---------- */
 const PRON=LANG.pron||/(?!)/;
@@ -4308,6 +4322,11 @@ function installPrep(){if(!canInstall()||!IS_IOS)return;const base=location.orig
   const l=document.querySelector('link[rel=manifest]');if(!l)return;
   const ic=LANG.code+'-'+colorId(),man={name:APP,short_name:APP,start_url:u,scope:base,display:'standalone',background_color:'#ffffff',theme_color:accentOf(colorId()),icons:[192,512].map(n=>({src:base+'icons/'+ic+'-'+n+'.png',sizes:n+'x'+n,type:'image/png'}))};
   try{l.href=URL.createObjectURL(new Blob([JSON.stringify(man)],{type:'application/manifest+json'}));}catch(e){}}
+/* Symbol aktualisiert sich nur in Chrome/Edge von selbst; iPhone/iPad und Safari behalten das beim Installieren übernommene → einmal pro Änderung Hinweis */
+const ICON_FIXED=STANDALONE&&(IS_IOS||!window.chrome);
+function iconHint(){if(!ICON_FIXED)return;const n=LANG.code+'-'+colorId();let inst=null;try{inst=localStorage.getItem('mi-profe-icon');if(!inst){localStorage.setItem('mi-profe-icon',n);return;}}catch(e){return;}
+  if(inst===n||sessionStorage.getItem('mp-icon-told')===n)return;try{sessionStorage.setItem('mp-icon-told',n);}catch(e){}
+  setTimeout(()=>toast(T('Das App-Symbol zeigt noch Kurs/Farbe von der Installation. Für das neue: App vom Home-Bildschirm entfernen und neu hinzufügen (vorher Sync einschalten, sonst ist der Fortschritt weg).'),9000),1500);}
 function vInstall(fromMenu){const bt=document.getElementById('boot');document.body.innerHTML='';if(bt){document.body.append(bt);hideBoot();}installPrep();
   const done=()=>{try{localStorage.setItem('mi-profe-inst','1');}catch(e){}if(fromMenu)go('settings');else route();};
   const out=h('div');const step=(n,t)=>h('div',{style:'display:flex;gap:10px;align-items:flex-start;text-align:left;margin:0 0 12px'},h('b',{class:'instn'},n),h('span',{style:'flex:1;min-width:0'},t));
@@ -5523,10 +5542,10 @@ function vSettingsAll(m){const st=S.settings;
     h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Darstellung')),theme),
     h('div',{class:'field',style:'margin-top:12px'},h('label',{},T('Farben')),
       h('div',{class:'swatches'},THEMES_UI.filter(([id])=>id==='flag'||window.THEMES&&THEMES[id]).map(([id,l])=>h('button',{class:'swatch'+(colorId()===id?' on':''),onclick:()=>{
-        if(id==='flag')delete st.color;else st.color=id;save();applyLook();installPrep();route();if(STANDALONE)toast(T('Neues App-Symbol? Dafür die App einmal neu zum Home-Bildschirm hinzufügen.'));}},
+        if(id==='flag')delete st.color;else st.color=id;save();applyLook();installPrep();route();if(ICON_FIXED)toast(T('Neues App-Symbol? Dafür die App einmal neu zum Home-Bildschirm hinzufügen.'));else if(STANDALONE)toast(T('Das App-Symbol wird beim nächsten Start aktualisiert.'));}},
         h('span',{class:'swc',style:'background:'+accentOf(id)},id==='flag'?LANG.flag:''),h('span',{class:'small'},T(l))))),
       h('span',{class:'muted small'},T('„Flagge“ = Farben der Lernsprache (Standard). Eine andere Farbe bleibt auch beim Kurswechsel.')),
-      window.PWA?h('div',{class:'row',style:'margin-top:8px;gap:10px'},h('img',{class:'icprev',src:'icons/'+LANG.code+'-'+colorId()+'-192.png',alt:''}),h('span',{class:'muted small',style:'flex:1;min-width:0'},T('App-Symbol – wird beim Installieren übernommen.'))):null)));
+      window.PWA?h('div',{class:'row',style:'margin-top:8px;gap:10px'},h('img',{class:'icprev',src:'icons/'+LANG.code+'-'+colorId()+'-192.png',alt:''}),h('span',{class:'muted small',style:'flex:1;min-width:0'},ICON_FIXED?T('App-Symbol – auf diesem Gerät nur beim Installieren übernommen.'):T('App-Symbol – passt sich beim nächsten Start an.'))):null)));
   if(SRV()){m.append(srvSyncCard(),srvAICard());}
   const key=h('input',{class:'inp',type:'password',value:st.geminiKey,placeholder:T('AIza…'),style:'font-size:15px'});
   const model=h('input',{class:'inp',value:st.geminiModel,style:'font-size:15px'});const out=h('div');
@@ -5712,6 +5731,7 @@ if('serviceWorker' in navigator&&/^https?:/.test(location.protocol)&&window.PWA)
   navigator.serviceWorker.register('sw.js').then(r=>{const chk=()=>r.update().catch(()=>{});setTimeout(chk,3000);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')chk();});}).catch(()=>{});
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!hadCtl||document.getElementById('updbar'))return;
     document.body.append(h('button',{id:'updbar',class:'updbar',onclick:()=>reloadApp()},T('✨ Neue Version – tippen zum Laden')));});}
+iconHint();
 route();
 })();
 </script>
