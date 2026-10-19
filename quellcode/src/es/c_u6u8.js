@@ -99,6 +99,23 @@ Todavía no he visto el Alcázar. Por eso quiero volver pronto. ¿Habéis estado
  {t:'mc',q:'¿Por qué quiere volver?',opts:['Porque todavía no ha visto el Alcázar.','Porque el hotel ha sido muy barato.','Porque no le gusta Barcelona.'],a:0},
  {t:'order',es:'Este fin de semana hemos visitado la catedral.',de:'Dieses Wochenende haben wir die Kathedrale besichtigt.'},
  {t:'free',task:'Erzähl im Perfekt in 5–7 Sätzen, was du diese Woche gemacht hast (Uni, Freizeit, Barcelona) – und was du noch nicht gemacht hast.',hint:'Esta semana he … · El martes he ido … · He conocido a … · Todavía no he … · Me ha encantado …',focus:'Perfekt (haber + Partizip), unregelmäßige Partizipien, encantar/gustar',model:'Esta semana ha sido muy intensa. He tenido muchas clases en la universidad y he escrito un informe para la asignatura de redes. El miércoles he ido al gimnasio con un compañero. El sábado hemos visitado el Park Güell y me ha encantado. Todavía no he visto el Camp Nou, pero quiero ir pronto.'}
+]},
+{id:'lr',title:'Hören: Ein Audio aus Granada',desc:'Eine Sprachnachricht im Perfekt verstehen',steps:[
+ {t:'read',hideText:true,title:'Un audio de Marc',intro:'Marc schickt dir eine Sprachnachricht. Hör zuerst nur zu.',text:`¡Hola, Jonas! Soy Marc. Te mando un audio desde Granada. Laia y yo hemos llegado esta mañana en autobús: ¡ocho horas de viaje!
+
+El hotel está muy bien: la habitación es exterior y tiene un balcón con vistas a la Alhambra. Pero hay un problema: no funciona la ducha y en el baño faltan toallas. He hablado con la recepción y me han dicho que el técnico viene esta tarde.
+
+Esta tarde hemos visitado el Albaicín y hemos comido tapas en un bar muy pequeño. ¡Me encanta Granada! Todavía no hemos visto la Alhambra porque no hemos podido comprar entradas para hoy. Mañana vamos a las nueve.
+
+¿Y tú? ¿Qué has hecho este fin de semana? ¡Un abrazo!`,
+ de:`Hallo, Jonas! Hier ist Marc. Ich schicke dir eine Sprachnachricht aus Granada. Laia und ich sind heute Morgen mit dem Bus angekommen: acht Stunden Fahrt!\n\nDas Hotel ist sehr gut: Das Zimmer liegt zur Straße und hat einen Balkon mit Blick auf die Alhambra. Aber es gibt ein Problem: Die Dusche funktioniert nicht und im Bad fehlen Handtücher. Ich habe mit der Rezeption gesprochen und sie haben mir gesagt, dass der Techniker heute Nachmittag kommt.\n\nHeute Nachmittag haben wir das Albaicín besichtigt und in einer ganz kleinen Bar Tapas gegessen. Ich liebe Granada! Die Alhambra haben wir noch nicht gesehen, weil wir keine Eintrittskarten für heute kaufen konnten. Morgen gehen wir um neun hin.\n\nUnd du? Was hast du dieses Wochenende gemacht? Liebe Grüße!`},
+ {t:'mc',q:'¿Cómo han viajado Marc y Laia a Granada?',opts:['En autobús.','En tren.','En avión.'],a:0},
+ {t:'mc',q:'¿Qué problema hay en la habitación?',opts:['No funciona la ducha y faltan toallas.','No funciona el aire acondicionado.','La habitación es muy ruidosa.'],a:0},
+ {t:'mc',q:'¿Qué han hecho esta tarde?',opts:['Han visitado el Albaicín y han comido tapas.','Han visto la Alhambra.','Han estado en el hotel.'],a:0},
+ {t:'mc',q:'¿Por qué no han visto todavía la Alhambra?',opts:['Porque no han podido comprar entradas para hoy.','Porque no les interesa.','Porque está cerrada los sábados.'],a:0},
+ {t:'listen',es:'He hablado con la recepción.',de:'Ich habe mit der Rezeption gesprochen.'},
+ {t:'listen',es:'Todavía no hemos visto la Alhambra.',de:'Die Alhambra haben wir noch nicht gesehen.'},
+ {t:'speak',es:'Este fin de semana he estudiado mucho, pero el domingo he ido a la playa.',de:'Dieses Wochenende habe ich viel gelernt, aber am Sonntag bin ich an den Strand gegangen.'}
 ]}],
 resumen:`<h3>Vorlieben</h3><table><tr><td class="es-t">(A mí) me encanta / gusta / interesa / molesta + Sg.</td><td class="es-t">… encantan / gustan + Pl.</td></tr><tr><td colspan="2" class="es-t">A él le gustan los bares, pero a mí me molesta el ruido.</td></tr></table>
 <h3>Zustimmung (gustar-Verben)</h3><table><tr><td class="es-t">Me gusta nadar.</td><td class="es-t">A mí también. / A mí no.</td></tr><tr><td class="es-t">No me gusta la playa.</td><td class="es-t">A mí tampoco. / A mí sí.</td></tr></table>
@@ -108,7 +125,7 @@ resumen:`<h3>Vorlieben</h3><table><tr><td class="es-t">(A mí) me encanta / gust
 <h3>Perfekt</h3><table><tr><td>he, has, ha, hemos, habéis, han + -ado / -ido</td></tr><tr><td>hoy, esta semana, ya, todavía no, alguna vez, nunca, últimamente</td></tr><tr><td class="es-t">dicho · hecho · ido · abierto · escrito · puesto · visto · vuelto</td></tr></table>`});
 
 /* ================= UNIDAD 7 · ENTORNO LABORAL ================= */
-COURSE.units.push({id:'u7',n:'7',title:'Entorno laboral',sub:'Arbeitsbedingungen · Fähigkeiten · Vergleiche · Tagesablauf · etwas zeitlich einordnen · einen Vorgang beschreiben · sich rechtfertigen',
+COURSE.units.push({id:'u7',n:'7',title:'Trabajo y rutina',sub:'Arbeitsbedingungen · Fähigkeiten · Vergleiche · Tagesablauf · etwas zeitlich einordnen · einen Vorgang beschreiben · sich rechtfertigen',
 goals:['Arbeitsbedingungen','saber vs. poder','Vergleiche (más/menos … que, tan … como)','mejor, peor, mayor, menor','reflexive Verben','antes de / después de + Infinitiv','estar + Gerundium','Relativsätze mit que','Lo siento, es que …'],
 situacion:{title:'Bewerbungsgespräch für ein Praktikum',npc:'Marta',scene:'Online-Gespräch mit Marta von einer Cybersecurity-Firma in Barcelona (22@-Viertel). Sie suchen eine/n Praktikant/in für IT-Audit.',role:'Du bist Marta, Teamleiterin bei einer Firma in Barcelona. Du duzt Jonas. Frag ihn nach seinen Fähigkeiten (¿Sabes …? Sprachen, Programme, Tools), seinem typischen Arbeits- oder Unitag, was ihm an einem Job wichtig ist (horarios flexibles, teletrabajo, salario) und vergleiche (¿Qué prefieres: trabajar en equipo o solo?). Benutze Gegenwart und Perfekt, keine komplizierten Zeiten.',goal:'Sag, was du kannst (sé / no sé …), beschreibe deinen typischen Arbeitstag (reflexive Verben, antes de / después de) und vergleiche zwei Arbeitsweisen.'},
 lessons:[
@@ -126,9 +143,9 @@ lessons:[
  {t:'tr',de:'Weißt du, wie man dieses Programm benutzt?',a:['¿Sabes usar este programa?','¿Sabes cómo se usa este programa?','¿Sabes cómo usar este programa?']}
 ]},
 {id:'l2',title:'Vergleiche',desc:'más … que · tan … como · el más …',steps:[
- {t:'info',title:'Vergleichen',html:`<table><tr><td>+</td><td class="es-t">Lucas es más joven que Carlos.</td></tr><tr><td>–</td><td class="es-t">Valentina gana menos que Lucas.</td></tr>
- <tr><td>= (Adjektiv)</td><td class="es-t">Lucas es tan joven como Valentina.</td></tr><tr><td>= (Verb)</td><td class="es-t">Lucas trabaja tanto como Carlos.</td></tr>
- <tr><td>= (Substantiv)</td><td class="es-t">Lucas trabaja tantas horas como Carlos.</td></tr><tr><td>++</td><td class="es-t">Jan es el más deportista de la clase.</td></tr></table>
+ {t:'info',title:'Vergleichen',html:`<table><tr><td>+</td><td class="es-t">Laia es más joven que Clara.</td></tr><tr><td>–</td><td class="es-t">Óscar gana menos que Clara.</td></tr>
+ <tr><td>= (Adjektiv)</td><td class="es-t">Marc es tan alto como Óscar.</td></tr><tr><td>= (Verb)</td><td class="es-t">Clara trabaja tanto como Óscar.</td></tr>
+ <tr><td>= (Substantiv)</td><td class="es-t">Clara trabaja tantas horas como Óscar.</td></tr><tr><td>++</td><td class="es-t">Marc es el más deportista de la clase.</td></tr></table>
  <h3>Unregelmäßig</h3><table><tr><td class="es-t">bueno → mejor</td><td>besser</td></tr><tr><td class="es-t">malo → peor</td><td>schlechter</td></tr><tr><td class="es-t">grande → mayor / más grande</td><td>älter / größer</td></tr><tr><td class="es-t">pequeño → menor / más pequeño</td><td>jünger / kleiner</td></tr></table>
  <div class="ojo">Bei Zahlen: <b>más de / menos de</b>: <span class="es-t">Gano más de 2000 €.</span> · <b>tanto</b> passt sich an: tanto trabajo, tanta gente, tantos días, tantas horas.</div>`},
  {t:'gap',q:'El metro es ___ rápido ___ el autobús. (schneller als)',a:['más','que']},
@@ -165,28 +182,46 @@ lessons:[
  {t:'gap',q:'Ahora mismo ___ ___ (nosotros, comer).',a:['estamos','comiendo']},
  {t:'mc',q:'„Sie telefoniert gerade.“',opts:['Está hablando por teléfono.','Es hablando por teléfono.','Está hablado por teléfono.'],a:0},
  {t:'info',title:'Relativsätze mit que & sich rechtfertigen',html:`<p><b>que</b> (der, die, das) ist unveränderlich – für Personen und Sachen:</p>
- <table><tr><td class="es-t">Ana es la chica morena que está pagando.</td></tr><tr><td class="es-t">Es la traducción que me has pedido.</td></tr></table>
+ <table><tr><td class="es-t">Laia es la chica morena que está hablando con el profesor.</td></tr><tr><td class="es-t">Es el libro que me has recomendado.</td></tr></table>
  <h3>Sich rechtfertigen / absagen</h3><table><tr><td class="es-t">Lo siento (mucho), es que …</td><td>Es tut mir (sehr) leid, aber …</td></tr><tr><td class="es-t">Perdón, pero ahora no puedo.</td><td>Entschuldigung, aber jetzt kann ich nicht.</td></tr><tr><td class="es-t">Gracias, pero (es que) …</td><td>Danke, aber …</td></tr></table>`},
  {t:'gap',q:'El señor ___ está a la derecha es mi jefe.',a:['que']},
- {t:'dialog',place:'Oficina',title:'Hast du kurz Zeit?',scene:'Eine Kollegin kommt an deinen Schreibtisch.',lines:[
-  {n:'Núria',es:'Jonas, ¿tienes un momento? ¿Qué estás haciendo?',de:'Jonas, hast du kurz Zeit? Was machst du gerade?'},
-  {you:true,opts:[{es:'Estoy terminando un informe para un cliente.',ok:true},{es:'Soy terminando un informe para un cliente.',ok:false,why:'Verlaufsform: <b>estar</b> + Gerundium.'},{es:'Estoy terminado un informe para un cliente.',ok:false,why:'Gerundium: <i>terminando</i> (nicht Partizip <i>terminado</i>).'}]},
-  {n:'Núria',es:'¿Puedes venir a la reunión de las once?',de:'Kannst du zur Besprechung um elf kommen?'},
+ {t:'dialog',place:'Biblioteca de la universidad',title:'Hast du kurz Zeit?',scene:'Laia kommt in der Bibliothek an deinen Tisch.',lines:[
+  {n:'Laia',es:'Jonas, ¿tienes un momento? ¿Qué estás haciendo?',de:'Jonas, hast du kurz Zeit? Was machst du gerade?'},
+  {you:true,opts:[{es:'Estoy terminando un informe para la clase de redes.',ok:true},{es:'Soy terminando un informe para la clase de redes.',ok:false,why:'Verlaufsform: <b>estar</b> + Gerundium.'},{es:'Estoy terminado un informe para la clase de redes.',ok:false,why:'Gerundium: <i>terminando</i> (nicht Partizip <i>terminado</i>).'}]},
+  {n:'Laia',es:'¿Puedes venir a la reunión de las once?',de:'Kannst du zum Gruppentreffen um elf kommen?'},
   {you:true,prompt:'Sag höflich ab und begründe.',opts:[{es:'Lo siento, es que tengo que enviar el informe antes de las doce.',ok:true},{es:'No sé, es que tengo que enviar el informe.',ok:false,why:'Es geht um Möglichkeit, nicht Wissen. Höflich absagen: <i>Lo siento, es que …</i>'}]},
-  {n:'Núria',es:'Vale, no pasa nada. Después te cuento.',de:'Okay, kein Problem. Ich erzähl dir später davon.'}]},
+  {n:'Laia',es:'Vale, no pasa nada. Después te cuento.',de:'Okay, kein Problem. Ich erzähl dir später davon.'}]},
  {t:'tr',de:'Was machst du gerade?',a:['¿Qué estás haciendo?','¿Qué haces ahora?']}
 ]},
-{id:'l5',title:'Lesen: Teletrabajo en Barcelona',desc:'Text · eigener Tagesablauf',steps:[
- {t:'read',title:'Un día de teletrabajo',text:`Sergi tiene 31 años y es programador en una {start-up|Start-up} del distrito 22@ de Barcelona. Trabaja tres días en casa y dos en la oficina.
+{id:'l5',title:'Lesen: Óscar trabaja en casa',desc:'Text · eigener Tagesablauf',steps:[
+ {t:'read',title:'Óscar trabaja en casa',text:`Óscar, el compañero de piso de Jonas, tiene 29 años y es programador en una {start-up|Start-up} de Barcelona. Trabaja cuatro días en casa y solo los viernes va a la oficina.
 
-«Los días de teletrabajo me levanto más tarde que los días de oficina, a las ocho. Antes de empezar a trabajar, salgo a correr por la playa. Me ducho, desayuno y a las nueve y media me conecto. Por la mañana normalmente estoy programando y a las once me reúno con mi equipo por videollamada.
+«Los días de teletrabajo me levanto más tarde que los días de oficina, a las ocho y cuarto. Antes de empezar a trabajar, voy a la panadería y compro pan para el desayuno. A las nueve me conecto en mi habitación. Por la mañana normalmente estoy programando y a las diez me reúno con mi equipo por videollamada.
 
-Para mí, el teletrabajo es mejor que trabajar en la oficina: no pierdo tiempo en el metro y mis horarios son más {flexibles|flexibel}. Pero también tiene {desventajas|Nachteile}: a veces me siento solo y trabajo más horas que en la oficina. Por eso los martes y los jueves voy a la oficina: allí veo a mis compañeros y comemos juntos.»`,
- de:`Sergi ist 31 Jahre alt und Programmierer bei einem Start-up im Viertel 22@ in Barcelona. Er arbeitet drei Tage zu Hause und zwei im Büro.\n\n„An Homeoffice-Tagen stehe ich später auf als an Bürotagen, um acht. Bevor ich anfange zu arbeiten, gehe ich am Strand joggen. Ich dusche, frühstücke und um halb zehn logge ich mich ein. Vormittags programmiere ich normalerweise und um elf treffe ich mich per Videocall mit meinem Team.\n\nFür mich ist Homeoffice besser als im Büro zu arbeiten: Ich verliere keine Zeit in der Metro und meine Arbeitszeiten sind flexibler. Aber es hat auch Nachteile: Manchmal fühle ich mich allein und arbeite mehr Stunden als im Büro. Deshalb gehe ich dienstags und donnerstags ins Büro: Dort sehe ich meine Kollegen und wir essen zusammen.“`},
- {t:'mc',q:'¿Qué hace Sergi antes de empezar a trabajar?',opts:['Sale a correr.','Va a la oficina.','Se reúne con su equipo.'],a:0},
- {t:'mc',q:'¿Qué desventaja tiene el teletrabajo para Sergi?',opts:['A veces se siente solo.','Pierde mucho tiempo en el metro.','Sus horarios no son flexibles.'],a:0},
- {t:'mc',q:'¿Cuántos días va Sergi a la oficina?',opts:['dos','tres','cinco'],a:0},
+Para mí, el teletrabajo tiene muchas ventajas: no pierdo tiempo en el transporte y mis horarios son más {flexibles|flexibel}. Pero también tiene {desventajas|Nachteile}: a veces no hablo con nadie en todo el día y trabajo más horas que en la oficina. Por eso los viernes voy a la oficina muy contento: allí veo a mis compañeros y comemos juntos.»`,
+ de:`Óscar, Jonas’ Mitbewohner, ist 29 Jahre alt und Programmierer bei einem Start-up in Barcelona. Er arbeitet vier Tage zu Hause und geht nur freitags ins Büro.\n\n„An Homeoffice-Tagen stehe ich später auf als an Bürotagen, um Viertel nach acht. Bevor ich anfange zu arbeiten, gehe ich zur Bäckerei und kaufe Brot fürs Frühstück. Um neun logge ich mich in meinem Zimmer ein. Vormittags programmiere ich normalerweise und um zehn treffe ich mich per Videocall mit meinem Team.\n\nFür mich hat Homeoffice viele Vorteile: Ich verliere keine Zeit mit dem Weg zur Arbeit und meine Arbeitszeiten sind flexibler. Aber es hat auch Nachteile: Manchmal spreche ich den ganzen Tag mit niemandem und ich arbeite mehr Stunden als im Büro. Deshalb gehe ich freitags sehr gern ins Büro: Dort sehe ich meine Kollegen und wir essen zusammen.“`},
+ {t:'mc',q:'¿Qué hace Óscar antes de empezar a trabajar?',opts:['Va a la panadería.','Va a la oficina.','Se reúne con su equipo.'],a:0},
+ {t:'mc',q:'¿Qué desventaja tiene el teletrabajo para Óscar?',opts:['A veces no habla con nadie en todo el día.','Pierde mucho tiempo en el transporte.','Sus horarios no son flexibles.'],a:0},
+ {t:'mc',q:'¿Cuántos días va Óscar a la oficina?',opts:['uno','dos','cuatro'],a:0},
  {t:'free',task:'Beschreibe deinen typischen Tag an der Uni (oder einen Arbeitstag) in 6–8 Sätzen. Vergleiche am Ende: Was ist besser – Uni oder Arbeit?',hint:'Me levanto a las … · Antes de … · Después de … · Por la tarde … · Me acuesto … · La universidad es más … que …',focus:'reflexive Verben, antes de/después de + Infinitiv, Vergleiche, saber/poder',model:'Normalmente me levanto a las siete y media. Me ducho y desayuno en casa antes de ir a la universidad. Voy en metro y llego a la facultad a las nueve. Por la mañana tengo clases y a las dos como con mis compañeros. Después de comer estudio en la biblioteca. Por la noche ceno tarde y me acuesto a las doce. La vida de estudiante es más flexible que el trabajo en una oficina, pero también es más estresante antes de los exámenes.'}
+]},
+{id:'lr',title:'Hören: Clara und der Nachtdienst',desc:'Ein Interview über den Tagesablauf verstehen',steps:[
+ {t:'read',hideText:true,title:'Una semana de noches',intro:'Ein Kommilitone macht für einen Uni-Podcast ein Interview mit deiner Mitbewohnerin Clara. Hör zuerst nur zu.',text:`– Clara, eres enfermera. ¿Cómo es un día normal para ti?
+– Depende. Esta semana trabajo de noche. Me levanto a las dos de la tarde, como algo y después de comer salgo a correr. Antes de ir al hospital me ducho y preparo la cena.
+– ¿A qué hora empiezas?
+– A las diez de la noche y termino a las ocho de la mañana. Por la noche hay menos gente que por el día, pero el trabajo es tan estresante como por el día.
+– ¿Qué es lo más difícil?
+– Dormir de día. Mis compañeros de piso son muy simpáticos, pero a veces hacen ruido.
+– ¿Y te gusta tu trabajo?
+– Sí, mucho. El sueldo no es muy alto, pero es un trabajo muy bonito y mis compañeras del hospital son las mejores.`,
+ de:`– Clara, du bist Krankenpflegerin. Wie sieht ein normaler Tag für dich aus?\n– Kommt darauf an. Diese Woche arbeite ich nachts. Ich stehe um zwei Uhr nachmittags auf, esse etwas und nach dem Essen gehe ich joggen. Bevor ich ins Krankenhaus gehe, dusche ich und mache mir das Abendessen.\n– Um wie viel Uhr fängst du an?\n– Um zehn Uhr abends und ich höre um acht Uhr morgens auf. Nachts sind weniger Leute da als tagsüber, aber die Arbeit ist genauso stressig wie tagsüber.\n– Was ist das Schwierigste?\n– Tagsüber zu schlafen. Meine Mitbewohner sind sehr nett, aber manchmal machen sie Lärm.\n– Und gefällt dir deine Arbeit?\n– Ja, sehr. Das Gehalt ist nicht sehr hoch, aber es ist eine sehr schöne Arbeit und meine Kolleginnen im Krankenhaus sind die besten.`},
+ {t:'mc',q:'¿A qué hora se levanta Clara esta semana?',opts:['A las dos de la tarde.','A las ocho de la mañana.','A las diez de la noche.'],a:0},
+ {t:'mc',q:'¿Qué hace Clara antes de ir al hospital?',opts:['Se ducha y prepara la cena.','Sale a correr con sus compañeras.','Duerme dos horas.'],a:0},
+ {t:'mc',q:'¿Qué es lo más difícil para Clara?',opts:['Dormir de día.','Hablar con los pacientes.','Levantarse temprano.'],a:0},
+ {t:'mc',q:'¿Cómo es el trabajo por la noche?',opts:['Tan estresante como por el día.','Más fácil que por el día.','Muy aburrido.'],a:0},
+ {t:'listen',es:'Después de comer salgo a correr.',de:'Nach dem Essen gehe ich joggen.'},
+ {t:'listen',es:'Por la noche hay menos gente que por el día.',de:'Nachts sind weniger Leute da als tagsüber.'},
+ {t:'speak',es:'Normalmente me levanto a las siete y me ducho antes de desayunar.',de:'Normalerweise stehe ich um sieben auf und dusche vor dem Frühstück.'}
 ]}],
 resumen:`<h3>Arbeitsbedingungen</h3><p class="es-t">Es un trabajo creativo. · Mis horarios son flexibles. · Tengo un salario alto / bajo.</p>
 <h3>saber / poder</h3><table><tr><td><b>saber</b>: Fähigkeit, Wissen</td><td class="es-t">¿Sabes chino? · No sé usar este programa.</td></tr><tr><td><b>poder</b>: Möglichkeit / Erlaubnis</td><td class="es-t">Puedo ir a pie. · ¿Puedo abrir la ventana?</td></tr></table>
@@ -197,7 +232,7 @@ resumen:`<h3>Arbeitsbedingungen</h3><p class="es-t">Es un trabajo creativo. · M
 <h3>Relativsatz & Rechtfertigen</h3><p class="es-t">La mujer que está hablando es mi compañera. · Lo siento, es que … · Perdón, pero ahora no puedo.</p>`});
 
 /* ================= UNIDAD 8 · MI AGENDA ================= */
-COURSE.units.push({id:'u8',n:'8',title:'Mi agenda',sub:'Einen Termin vereinbaren · über Pläne sprechen · Kleidung & Farben · Ratschläge · Wetter · Smalltalk',
+COURSE.units.push({id:'u8',n:'8',title:'Planes y citas',sub:'Einen Termin vereinbaren · über Pläne sprechen · Kleidung & Farben · Ratschläge · Wetter · Smalltalk',
 goals:['Vorschlagen, annehmen, ablehnen','ir a + Infinitiv','Kleidung, Muster, Material','Farben (Angleichung)','este / ese / aquel','conocer, ofrecer (-zc-)','direktes Objekt mit a (Personen)','Wetter','Ausrufe: ¡Qué …! ¡Cómo …!'],
 situacion:{title:'Planes para el fin de semana',npc:'Laia',scene:'Freitagmittag in der Mensa der Uni. Laia, deine Kommilitonin, will am Wochenende etwas mit dir unternehmen.',role:'Du bist Laia, Kommilitonin aus Girona. Du duzt Jonas. Schlag Aktivitäten fürs Wochenende vor (Bunkers del Carmel bei Sonnenuntergang, Montjuïc, Strand, Mercat de Sant Antoni am Sonntag, ein Konzert). Erzähl vom Wetter (am Samstag Sonne, am Sonntag soll es regnen). Lehne einen Termin ab und schlag einen anderen vor, damit Jonas verhandeln muss. Benutze ir a + Infinitiv.',goal:'Vereinbare einen Treffpunkt und eine Uhrzeit fürs Wochenende: Mach selbst einen Vorschlag, lehne einen Vorschlag höflich ab, sprich übers Wetter und darüber, was du anziehst.'},
 lessons:[
@@ -213,26 +248,26 @@ lessons:[
  {t:'mc',q:'Du willst eine Freundin auf einen Kaffee einladen:',opts:['¿Tienes ganas de tomar un café?','¿Tienes hambre de tomar un café?','¿Quedas un café?'],a:0},
  {t:'mc',q:'Höflich ablehnen:',opts:['Lo siento, es que tengo otra cita.','Vale, de acuerdo.','No, no quiero.'],a:0},
  {t:'gap',q:'¿Qué te ___ si ___ (nosotros, quedar) a las ocho?',a:['parece','quedamos']},
- {t:'dialog',place:'Teléfono',title:'Einen Termin finden',scene:'Ein Kunde ruft dich an, um einen Termin zu vereinbaren.',lines:[
-  {n:'Sr. Torres',es:'Hola, Jonas, soy Luis Torres. ¿Cuándo podemos vernos para hablar del proyecto?',de:'Hallo Jonas, hier ist Luis Torres. Wann können wir uns treffen, um über das Projekt zu sprechen?'},
+ {t:'dialog',place:'Teléfono',title:'Einen Termin finden',scene:'Deine Professorin ruft dich an, um einen Termin für dein Projekt zu vereinbaren. Du siezt sie.',lines:[
+  {n:'Prof. Serra',es:'Hola, Jonas, soy Elena Serra. ¿Cuándo podemos vernos para hablar de tu proyecto?',de:'Hallo Jonas, hier ist Elena Serra. Wann können wir uns treffen, um über dein Projekt zu sprechen?'},
   {you:true,opts:[{es:'¿Qué le parece el martes a las diez?',ok:true},{es:'¿Qué le parece en el martes en las diez?',ok:false,why:'Wochentag mit <i>el</i>, Uhrzeit mit <i>a las</i>.'}]},
-  {n:'Sr. Torres',es:'Justo el martes no puedo, tengo un viaje. ¿El miércoles?',de:'Ausgerechnet Dienstag kann ich nicht, ich bin auf Reisen. Mittwoch?'},
+  {n:'Prof. Serra',es:'Justo el martes no puedo, tengo un congreso en Valencia. ¿El miércoles?',de:'Ausgerechnet Dienstag kann ich nicht, ich habe einen Kongress in Valencia. Mittwoch?'},
   {you:true,opts:[{es:'El miércoles por la mañana es posible. ¿A las once?',ok:true},{es:'El miércoles por la mañana es posible. ¿En las once?',ok:false,why:'Uhrzeit: <b>a</b> las once.'}]},
-  {n:'Sr. Torres',es:'Perfecto. ¿Dónde quedamos?',de:'Perfekt. Wo treffen wir uns?'},
-  {you:true,opts:[{es:'En nuestra oficina, si le parece bien.',ok:true},{es:'En nuestra oficina, si te parezco bien.',ok:false,why:'Er siezt dich → <i>si le parece bien</i>.'}]}]},
+  {n:'Prof. Serra',es:'Perfecto. ¿Dónde quedamos?',de:'Perfekt. Wo treffen wir uns?'},
+  {you:true,opts:[{es:'En su despacho, si le parece bien.',ok:true},{es:'En su despacho, si te parezco bien.',ok:false,why:'Du siezt die Professorin → <i>si le parece bien</i>.'}]}]},
  {t:'tr',de:'Wie wäre es, wenn wir uns am Freitag treffen?',a:['¿Qué tal si quedamos el viernes?','¿Qué te parece si quedamos el viernes?','¿Por qué no quedamos el viernes?','¿Qué tal si nos vemos el viernes?','¿Qué te parece si nos vemos el viernes?']},
  {t:'tr',de:'Ausgerechnet am Samstag kann ich nicht.',a:['Justo el sábado no puedo.','Precisamente el sábado no puedo.']}
 ]},
-{id:'l2',title:'Pläne: ir a + Infinitiv',desc:'Voy a visitar a un cliente',steps:[
+{id:'l2',title:'Pläne: ir a + Infinitiv',desc:'Voy a visitar a mis abuelos',steps:[
  {t:'info',title:'Das „futuro próximo“',html:`<p>Für Pläne und nahe Zukunft: <b>ir</b> (konjugiert) + <b>a</b> + Infinitiv.</p>
  <table><tr><td class="es-t">voy</td><td rowspan="6" class="es-t">a</td><td rowspan="6" class="es-t">comer con una amiga.<br>quedar con Pablo a las 3.<br>ir al gimnasio el lunes.<br>hacer un viaje mañana.</td></tr><tr><td class="es-t">vas</td></tr><tr><td class="es-t">va</td></tr><tr><td class="es-t">vamos</td></tr><tr><td class="es-t">vais</td></tr><tr><td class="es-t">van</td></tr></table>
  <p>Zeitangaben: <span class="es-t">mañana, pasado mañana, el próximo lunes, la semana que viene, este fin de semana, el 22 de octubre</span>.</p>`},
- {t:'gap',q:'El lunes ___ ___ ver a un cliente.',a:['voy','a']},
- {t:'gap',q:'Carlos ___ ___ estar en Valencia el día 22.',a:['va','a']},
+ {t:'gap',q:'El lunes ___ ___ ver a mi profesora.',a:['voy','a']},
+ {t:'gap',q:'Laia ___ ___ estar en Girona el día 22.',a:['va','a']},
  {t:'gap',q:'¿Qué ___ ___ hacer (vosotros) este fin de semana?',a:['vais','a']},
  {t:'mc',q:'„Morgen werden wir ins Museum gehen.“',opts:['Mañana vamos a ir al museo.','Mañana vamos ir al museo.','Mañana vamos a el museo ir.'],a:0},
  {t:'info',title:'Das direkte Objekt mit a',html:`<p>Ist das direkte Objekt eine <b>Person</b>, steht davor ein <b>a</b>:</p>
- <table><tr><td class="es-t">¿Conoces a la fundadora de la empresa?</td><td>Person → a</td></tr><tr><td class="es-t">Voy a ver a María el martes.</td><td>Person → a</td></tr><tr><td class="es-t">¿Conoces una tienda de segunda mano?</td><td>Sache → kein a</td></tr></table>
+ <table><tr><td class="es-t">¿Conoces a la hermana de Laia?</td><td>Person → a</td></tr><tr><td class="es-t">Voy a ver a Marc el martes.</td><td>Person → a</td></tr><tr><td class="es-t">¿Conoces un bar bueno en Gràcia?</td><td>Sache → kein a</td></tr></table>
  <div class="ojo">Bei <i>tener</i> kein a: <span class="es-t">Tengo un hermano.</span></div>
  <p><b>conocer</b> (kennen) & <b>ofrecer</b> (anbieten): <span class="es-t">conozco, conoces, conoce … · ofrezco, ofreces, ofrece …</span></p>`},
  {t:'mc',q:'¿Conoces ___ mi compañera de piso?',opts:['a','—','en'],a:0,keep:true},
@@ -270,7 +305,7 @@ lessons:[
  {t:'mc',q:'„Es ist kalt.“',opts:['Hace frío.','Es frío.','Está frío.'],a:0},
  {t:'mc',q:'„Es regnet.“',opts:['Llueve.','Hace lluvia.','Es lluvia.'],a:0},
  {t:'gap',q:'¡Qué calor ___! Estamos ___ 35 grados.',a:['hace','a']},
- {t:'info',title:'Smalltalk',html:`<table><tr><td class="es-t">¡Qué agradable es este hotel! ¿Verdad?</td></tr><tr><td class="es-t">¡Qué simpático es el profesor del curso! ¿No?</td></tr><tr><td class="es-t">¿Ha visto el último partido del Barça?</td></tr><tr><td class="es-t">¿Ha leído algún libro interesante últimamente?</td></tr><tr><td class="es-t">¿Qué puedo comprar como recuerdo de aquí?</td></tr></table>
+ {t:'info',title:'Smalltalk',html:`<table><tr><td class="es-t">¡Qué bonita es esta sala! ¿Verdad?</td></tr><tr><td class="es-t">¡Qué interesante es la charla! ¿No?</td></tr><tr><td class="es-t">¿Has visto el partido del Barça?</td></tr><tr><td class="es-t">¿Has probado ya la crema catalana?</td></tr><tr><td class="es-t">¿Qué me recomiendas visitar en la ciudad?</td></tr></table>
  <div class="ex">Smalltalk-Themen in Spanien: Wetter, Essen, Fußball, Reisen. Lieber nicht: Politik, Geld – und in Barcelona vorsichtig beim Thema Unabhängigkeit.</div>`},
  {t:'dialog',place:'Pausa del café',title:'Smalltalk in der Kaffeepause',scene:'Auf einer Konferenz im CCIB. Du stehst neben einer Teilnehmerin an der Kaffeemaschine.',lines:[
   {n:'Teresa',es:'¡Qué calor hace hoy! ¿Verdad?',de:'Wie heiß es heute ist! Oder?'},
@@ -296,12 +331,25 @@ El domingo dicen que va a llover, así que mejor no hacemos planes al aire libre
  {t:'mc',q:'¿Qué tiempo va a hacer el domingo?',opts:['Va a llover.','Va a hacer sol.','Va a nevar.'],a:0},
  {t:'mc',q:'¿Por qué Jonas tiene que llevar una chaqueta?',opts:['Porque por la noche hace viento y puede hacer frío.','Porque van a un restaurante elegante.','Porque va a llover el sábado.'],a:0},
  {t:'free',task:'Antworte Laia (5–7 Sätze): Nimm den Vorschlag an oder schlag eine andere Uhrzeit vor, erzähl, was du am Wochenende sonst noch vorhast (ir a + Infinitiv), und was du anziehen wirst.',hint:'¡Hola, Laia! ¡Qué buena idea! · El sábado por la mañana voy a … · ¿Qué tal si quedamos a las …? · Voy a llevar …',focus:'ir a + Infinitiv, Termine vereinbaren, Wetter, Kleidung',model:'¡Hola, Laia! ¡Qué buena idea! El sábado por la mañana voy a estudiar un poco para el examen de redes, pero por la tarde estoy libre. ¿Qué tal si quedamos a las seis y media? Es que antes voy a ir al gimnasio. Voy a llevar unos vaqueros y una chaqueta, porque no me gusta tener frío. Y el domingo, si llueve, ¿por qué no vamos al cine? ¡Hasta el sábado!'}
+]},
+{id:'lr',title:'Hören: Wetter & eine Einladung',desc:'Wetterbericht und Sprachnachricht verstehen',steps:[
+ {t:'read',hideText:true,title:'El tiempo del fin de semana',intro:'Der Wetterbericht im Radio. Hör zuerst nur zu.',text:`Y ahora, el tiempo para el fin de semana. El sábado va a hacer sol en toda Cataluña. En Barcelona vamos a estar a veintidós grados. Por la noche va a hacer un poco de frío en la montaña. El domingo por la mañana va a llover y va a hacer mucho viento en la costa. Por la tarde va a volver el sol.`,
+ de:`Und jetzt das Wetter fürs Wochenende. Am Samstag scheint in ganz Katalonien die Sonne. In Barcelona haben wir zweiundzwanzig Grad. Nachts wird es in den Bergen etwas kalt. Am Sonntagvormittag regnet es und an der Küste ist es sehr windig. Am Nachmittag kommt die Sonne zurück.`},
+ {t:'mc',q:'¿Qué tiempo va a hacer el sábado en Barcelona?',opts:['Va a hacer sol, a 22 grados.','Va a llover.','Va a hacer mucho frío.'],a:0},
+ {t:'mc',q:'¿Cuándo va a llover?',opts:['El domingo por la mañana.','El sábado por la noche.','El domingo por la tarde.'],a:0},
+ {t:'read',hideText:true,title:'Un mensaje de Óscar',intro:'Dein Mitbewohner Óscar hinterlässt dir eine Nachricht.',text:`¡Hola, Jonas! Soy Óscar. Oye, el sábado es el cumpleaños de mi hermana y vamos a hacer una cena en casa de mis padres, en Sant Cugat. ¿Tienes ganas de venir? Vamos a ir en tren. ¿Qué te parece si quedamos a las siete en Plaça de Catalunya? No es una cena elegante: puedes llevar unos vaqueros y una camiseta. Pero lleva una chaqueta, porque en Sant Cugat por la noche hace más frío que en Barcelona. ¡Llámame!`,
+ de:`Hallo, Jonas! Hier ist Óscar. Hör mal, am Samstag hat meine Schwester Geburtstag und wir machen ein Abendessen bei meinen Eltern in Sant Cugat. Hast du Lust zu kommen? Wir fahren mit dem Zug. Was hältst du davon, wenn wir uns um sieben an der Plaça de Catalunya treffen? Es ist kein schickes Abendessen: Du kannst Jeans und ein T-Shirt anziehen. Aber nimm eine Jacke mit, denn in Sant Cugat ist es abends kälter als in Barcelona. Ruf mich an!`},
+ {t:'mc',q:'¿Por qué hay una cena el sábado?',opts:['Es el cumpleaños de la hermana de Óscar.','Es el cumpleaños de Óscar.','Los padres de Óscar tienen una fiesta del trabajo.'],a:0},
+ {t:'mc',q:'¿Dónde y cuándo quedan?',opts:['A las siete en Plaça de Catalunya.','A las siete en Sant Cugat.','A las nueve en la estación.'],a:0},
+ {t:'mc',q:'¿Qué ropa puede llevar Jonas?',opts:['Unos vaqueros, una camiseta y una chaqueta.','Un traje y zapatos elegantes.','Solo una camiseta: hace mucho calor.'],a:0},
+ {t:'listen',es:'El domingo por la mañana va a llover.',de:'Am Sonntagvormittag wird es regnen.'},
+ {t:'speak',es:'¡Qué buena idea! El sábado voy a llevar unos vaqueros y una chaqueta.',de:'Was für eine gute Idee! Am Samstag ziehe ich Jeans und eine Jacke an.'}
 ]}],
 resumen:`<h3>Termin vereinbaren</h3><table><tr><th>vorschlagen</th><th>annehmen</th><th>ablehnen</th></tr><tr><td class="es-t">¿Tienes ganas de …? · ¿Por qué no quedamos …? · ¿Qué te parece si …? · ¿Qué tal si …?</td><td class="es-t">Vale. · De acuerdo. · Perfecto. · A las 10 es posible.</td><td class="es-t">Justo el sábado no puedo. · Es que … · Mejor el viernes.</td></tr></table>
-<h3>ir a + Infinitiv</h3><p class="es-t">voy / vas / va / vamos / vais / van + a + Infinitiv: El lunes voy a ver a un cliente.</p>
+<h3>ir a + Infinitiv</h3><p class="es-t">voy / vas / va / vamos / vais / van + a + Infinitiv: El lunes voy a ver a mi profesora.</p>
 <h3>Kleidung & Farben</h3><p class="es-t">la camiseta, la camisa, el jersey, los pantalones, la falda, la chaqueta, el traje, los zapatos · a rayas, a cuadros · de algodón, de lana, de cuero</p><p>blanco/-a, negro/-a, rojo/-a, amarillo/-a · azul, verde, gris, marrón (+es) · rosa, naranja</p>
 <h3>Demonstrativ</h3><p class="es-t">este/esta/estos/estas · ese/esa/esos/esas · aquel/aquella/aquellos/aquellas · esto, eso, aquello</p>
-<h3>Direktes Objekt mit a</h3><p class="es-t">¿Conoces a la fundadora? — aber: ¿Conoces una tienda …? · Tengo un hermano.</p>
+<h3>Direktes Objekt mit a</h3><p class="es-t">¿Conoces a la hermana de Laia? — aber: ¿Conoces un bar …? · Tengo un hermano.</p>
 <h3>Wetter</h3><p class="es-t">Hace calor / frío / sol / viento / buen tiempo / mal tiempo · Llueve · Nieva · Hay niebla · Estamos a 25 grados</p>
 <h3>Ausrufe</h3><p class="es-t">¡Qué calor hace! · ¡Qué camiseta tan original! · ¡Cómo llueve! · ¡Cuánto lo siento!</p>`});
 

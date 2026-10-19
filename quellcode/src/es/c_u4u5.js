@@ -1,5 +1,5 @@
 /* ================= UNIDAD 4 · COMIDA DE TRABAJO ================= */
-COURSE.units.push({id:'u4',n:'4',title:'Comida de trabajo',sub:'Essgewohnheiten · Häufigkeit · Uhrzeit · Tisch reservieren · im Restaurant bestellen · einen Vorschlag machen',
+COURSE.units.push({id:'u4',n:'4',title:'A la mesa',sub:'Essgewohnheiten · Häufigkeit · Uhrzeit · Tisch reservieren · im Restaurant bestellen · einen Vorschlag machen',
 goals:['Lebensmittel & Mahlzeiten','Wochentage','Häufigkeit (siempre, a veces, nunca …)','poder, querer, preferir (o→ue, e→ie)','Uhrzeit','direkte Objektpronomen lo/la/los/las','se + 3. Person','Mengenangaben','Nationalitäten'],
 situacion:{title:'Menú del día in der Barceloneta',npc:'Camarero',scene:'Mittagspause mit einer Kollegin in einem kleinen Restaurant in der Barceloneta. Es gibt ein Menú del día für 14 €: drei Vorspeisen, drei Hauptgerichte, Dessert, Getränk.',role:'Du bist Toni, Kellner in einem traditionellen Restaurant in der Barceloneta. Du siezt Jonas höflich (oder duzt ihn, wenn er dich duzt). Du stellst das Menú del día vor (primeros: ensalada mixta, sopa de pescado, gazpacho; segundos: paella de marisco, pollo al ajillo, merluza a la plancha; postres: crema catalana, fruta, flan) und fragst nach Getränken. Am Ende fragst du, ob er mit Karte zahlen will.',goal:'Bestelle ein komplettes Menú del día (primero, segundo, postre, bebida), frag nach, was in einem Gericht drin ist, und bitte um die Rechnung.'},
 lessons:[
@@ -70,8 +70,8 @@ lessons:[
  {t:'gap',q:'– ¿Tomas las tapas aquí? – Sí, ___ tomo aquí.',a:['las']},
  {t:'mc',q:'„Man kann hier mit Karte zahlen.“',opts:['Aquí se puede pagar con tarjeta.','Aquí puede pagar con tarjeta se.','Aquí se pueden pagar con tarjeta.'],a:0},
  {t:'gap',q:'En Cataluña ___ ___ (comer) mucho pan con tomate.',a:['se','come']},
- {t:'dialog',place:'Teléfono',title:'Einen Tisch reservieren',scene:'Du rufst im Restaurant „Can Solé“ an, um für Freitag einen Tisch für ein Teamessen zu reservieren.',lines:[
-  {n:'Restaurante',es:'Can Solé, buenas tardes. ¿Dígame?',de:'Can Solé, guten Tag. Ja, bitte?'},
+ {t:'dialog',place:'Teléfono',title:'Einen Tisch reservieren',scene:'Du rufst im Restaurant „Can Ribas“ an, um für Freitag einen Tisch für ein Teamessen zu reservieren.',lines:[
+  {n:'Restaurante',es:'Can Ribas, buenas tardes. ¿Dígame?',de:'Can Ribas, guten Tag. Ja, bitte?'},
   {you:true,opts:[{es:'Buenas tardes. ¿Hay mesas libres para el viernes?',ok:true},{es:'Buenas tardes. ¿Están mesas libres para el viernes?',ok:false,why:'„Gibt es …?“ = <b>hay</b>.'}]},
   {n:'Restaurante',es:'Sí. ¿Para cuántas personas?',de:'Ja. Für wie viele Personen?'},
   {you:true,opts:[{es:'Para seis personas, a las dos y media.',ok:true},{es:'Para seis personas, en las dos y media.',ok:false,why:'Uhrzeit: <b>a</b> las …'}]},
@@ -94,15 +94,20 @@ lessons:[
  {t:'tr',de:'Die Rechnung, bitte.',a:['La cuenta, por favor.','¿Me trae la cuenta, por favor?','La cuenta, por favor']}
 ]},
 {id:'l5',title:'Lesen: El menú del día',desc:'Text verstehen · Nationalitäten · eigene Gewohnheiten',steps:[
- {t:'read',title:'El menú del día',text:`En España, muchas personas que {trabajan|arbeiten} en la oficina comen fuera de casa. Una opción muy {popular|beliebt} es el «menú del día». Por un {precio fijo|Festpreis} – normalmente entre 12 y 16 euros – tienes un primer plato, un segundo plato, el postre o un café, pan y una {bebida|Getränk}.
+ {t:'read',title:'Un correo a Tim',intro:'Jonas schreibt seinem Bruder Tim in Mannheim.',text:`¡Hola, Tim!
 
-Los primeros platos son muchas veces {ensaladas|Salate}, sopas o verduras. De segundo hay carne o pescado. En Barcelona, por ejemplo, es típico el {arroz|Reis} negro o la {butifarra|katalanische Bratwurst} con judías.
+¿Qué tal por Mannheim? Aquí todo va muy bien. Hoy te escribo sobre una cosa que me encanta de España: el «menú del día». Al mediodía, muchas personas que {trabajan|arbeiten} o estudian comen en un bar o en un restaurante. El menú es muy {popular|beliebt}, porque por un {precio fijo|Festpreis} – en mi barrio, entre 12 y 15 euros – tienes un primer plato, un segundo plato, pan, una {bebida|Getränk} y postre o café.
 
-La comida es la {comida principal|Hauptmahlzeit} del día y la gente no come {deprisa|schnell}: una comida de trabajo puede {durar|dauern} dos horas. Por eso, la cena es más {ligera|leicht} y muy tarde, a las nueve o a las diez de la noche.`,
- de:`In Spanien essen viele Menschen, die im Büro arbeiten, außer Haus. Eine sehr beliebte Option ist das „Tagesmenü“. Zu einem Festpreis – normalerweise zwischen 12 und 16 Euro – bekommst du eine Vorspeise, ein Hauptgericht, Nachtisch oder Kaffee, Brot und ein Getränk.\n\nDie Vorspeisen sind oft Salate, Suppen oder Gemüse. Als Hauptgericht gibt es Fleisch oder Fisch. In Barcelona ist z. B. schwarzer Reis oder Butifarra mit Bohnen typisch.\n\nDas Mittagessen ist die Hauptmahlzeit des Tages und man isst nicht schnell: Ein Geschäftsessen kann zwei Stunden dauern. Deshalb ist das Abendessen leichter und sehr spät, um neun oder zehn Uhr abends.`},
- {t:'mc',q:'¿Qué incluye normalmente el menú del día?',opts:['Primero, segundo, postre o café, pan y bebida','Solo un plato y una bebida','Tapas y vino'],a:0},
- {t:'mc',q:'¿Por qué la cena es ligera?',opts:['Porque la comida es la comida principal.','Porque es muy cara.','Porque la gente no cena.'],a:0},
- {t:'mc',q:'¿Cuánto cuesta normalmente un menú del día, según el texto?',opts:['entre 12 y 16 euros','entre 2 y 6 euros','más de 30 euros'],a:0},
+De primero hay normalmente {ensaladas|Salate}, sopas o pasta. De segundo hay carne o pescado. Mi plato favorito es el {arroz|Reis} negro, y Laia siempre pide {butifarra|katalanische Bratwurst} con judías.
+
+Aquí la comida es la {comida principal|Hauptmahlzeit} del día y nadie come {deprisa|schnell}: con mis compañeros del máster, la comida puede {durar|dauern} una hora y media. Por eso por la noche ceno algo {ligero|leicht}, y muy tarde: ¡a las nueve y media! ¿Y tú? ¿Todavía cenas a las seis? 😉
+
+Un abrazo,
+Jonas`,
+ de:`Hallo Tim!\n\nWie läuft’s in Mannheim? Hier läuft alles sehr gut. Heute schreibe ich dir über etwas, das ich an Spanien liebe: das „Tagesmenü“. Mittags essen viele Leute, die arbeiten oder studieren, in einer Bar oder einem Restaurant. Das Menü ist sehr beliebt, weil du zu einem Festpreis – in meinem Viertel zwischen 12 und 15 Euro – eine Vorspeise, ein Hauptgericht, Brot, ein Getränk und Nachtisch oder Kaffee bekommst.\n\nAls Vorspeise gibt es normalerweise Salate, Suppen oder Nudeln. Als Hauptgericht gibt es Fleisch oder Fisch. Mein Lieblingsgericht ist schwarzer Reis, und Laia bestellt immer Butifarra mit Bohnen.\n\nHier ist das Mittagessen die Hauptmahlzeit des Tages und niemand isst schnell: Mit meinen Kommilitonen kann das Mittagessen anderthalb Stunden dauern. Deshalb esse ich abends etwas Leichtes, und sehr spät: um halb zehn! Und du? Isst du immer noch um sechs zu Abend? 😉\n\nLiebe Grüße\nJonas`},
+ {t:'mc',q:'¿Qué incluye el menú del día, según Jonas?',opts:['Primero, segundo, pan, bebida y postre o café','Solo un plato y una bebida','Tapas y vino'],a:0},
+ {t:'mc',q:'¿Por qué Jonas cena algo ligero?',opts:['Porque la comida es la comida principal.','Porque la cena es muy cara.','Porque no le gusta cenar.'],a:0},
+ {t:'mc',q:'¿Cuánto cuesta un menú del día en el barrio de Jonas?',opts:['entre 12 y 15 euros','entre 2 y 6 euros','más de 30 euros'],a:0},
  {t:'info',title:'Nationalitäten',html:`<table><tr><th>-o / -a</th><th>Konsonant + -a</th><th>eine Form</th></tr>
  <tr><td class="es-t">suizo / suiza</td><td class="es-t">español / española</td><td class="es-t">belga</td></tr>
  <tr><td class="es-t">argentino / argentina</td><td class="es-t">alemán / alemana</td><td class="es-t">marroquí</td></tr>
@@ -112,6 +117,27 @@ La comida es la {comida principal|Hauptmahlzeit} del día y la gente no come {de
  {t:'gap',q:'Laia es ___ (spanisch) y su novio es ___ (französisch).',a:['española','francés']},
  {t:'gap',q:'Mi compañera de piso es ___ (deutsch).',a:['alemana']},
  {t:'free',task:'Beschreibe deine Essgewohnheiten in 5–6 Sätzen: Wann und was isst du? Was isst du nie / oft? Was kannst du nicht essen? Was isst man in Deutschland anders als in Spanien?',hint:'Desayuno a las … · Normalmente como … · Nunca tomo … · Prefiero … · En Alemania se cena …',focus:'Häufigkeit, poder/querer/preferir, Uhrzeit, se + 3. Person',model:'Normalmente desayuno a las ocho: tomo un café con leche y pan con queso. Como a la una y media en la universidad. Muchas veces como pasta o arroz. Nunca tomo pescado porque no me gusta. En Alemania se cena muy pronto, a las seis o las siete, pero aquí en Barcelona prefiero cenar a las nueve.'}
+]},
+{id:'lr',title:'Hören: En el restaurante',desc:'Ein Gespräch im Restaurant verstehen',steps:[
+ {t:'read',hideText:true,title:'Menú del día',intro:'Jonas und Laia essen zu Mittag. Hör zuerst nur zu.',text:`Jonas: Hola, buenas tardes. ¿Tienen mesa para dos?
+Camarero: Sí, claro. ¿Dentro o en la terraza?
+Jonas: En la terraza, por favor.
+Camarero: Hoy de primero tenemos ensalada, sopa de verduras y macarrones. De segundo, pollo asado, merluza a la plancha o hamburguesa vegetal.
+Jonas: Para mí, la sopa y la merluza.
+Laia: Yo, de primero, la ensalada. ¿Qué lleva la hamburguesa vegetal?
+Camarero: Lleva garbanzos, verduras y queso.
+Laia: Uy, no puedo tomar queso. Entonces, el pollo, por favor.
+Camarero: Muy bien. ¿Y para beber?
+Jonas: Agua sin gas para los dos.
+Camarero: De postre hay flan, fruta o helado. El menú cuesta trece euros cincuenta, con postre o café.`,
+ de:`Jonas: Hallo, guten Tag. Haben Sie einen Tisch für zwei?\nKellner: Ja, natürlich. Drinnen oder auf der Terrasse?\nJonas: Auf der Terrasse, bitte.\nKellner: Heute haben wir als Vorspeise Salat, Gemüsesuppe und Makkaroni. Als Hauptgericht Brathähnchen, gegrillten Seehecht oder einen vegetarischen Burger.\nJonas: Für mich die Suppe und den Seehecht.\nLaia: Ich nehme als Vorspeise den Salat. Was ist im vegetarischen Burger drin?\nKellner: Kichererbsen, Gemüse und Käse.\nLaia: Oh, ich darf keinen Käse essen. Dann das Hähnchen, bitte.\nKellner: Sehr gut. Und zu trinken?\nJonas: Stilles Wasser für beide.\nKellner: Als Nachtisch gibt es Flan, Obst oder Eis. Das Menü kostet dreizehn Euro fünfzig, mit Nachtisch oder Kaffee.`},
+ {t:'mc',q:'¿Dónde comen Jonas y Laia?',opts:['En la terraza.','Dentro del restaurante.','En casa.'],a:0},
+ {t:'mc',q:'¿Qué toma Jonas de segundo?',opts:['La merluza.','El pollo.','La hamburguesa vegetal.'],a:0},
+ {t:'mc',q:'¿Por qué no toma Laia la hamburguesa vegetal?',opts:['Porque lleva queso y no puede tomar queso.','Porque no le gustan las verduras.','Porque es muy cara.'],a:0},
+ {t:'mc',q:'¿Cuánto cuesta el menú?',opts:['13,50 €','15,30 €','3,50 €'],a:0,why:'<i>trece euros cincuenta</i> = 13,50 €.'},
+ {t:'listen',es:'¿Qué lleva la hamburguesa vegetal?',de:'Was ist im vegetarischen Burger drin?'},
+ {t:'listen',es:'Agua sin gas para los dos.',de:'Stilles Wasser für beide.'},
+ {t:'speak',es:'Para mí, de primero la sopa y de segundo la merluza, por favor.',de:'Für mich als Vorspeise die Suppe und als Hauptgericht den Seehecht, bitte.'}
 ]}],
 resumen:`<h3>Essgewohnheiten</h3><p class="es-t">Desayuno todos los días. · Como de todo. · Soy vegetariano/-a. · No puedo beber alcohol. · Prefiero el café sin leche.</p>
 <h3>Häufigkeit</h3><p class="es-t">siempre · todos los días · muchas veces · a veces · pocas veces · nunca · dos veces a la semana</p>
@@ -123,7 +149,7 @@ resumen:`<h3>Essgewohnheiten</h3><p class="es-t">Desayuno todos los días. · Co
 <h3>Mengen</h3><p class="es-t">un kilo de · cien gramos de · medio litro de · una botella de</p>`});
 
 /* ================= UNIDAD 5 · POR LA CIUDAD ================= */
-COURSE.units.push({id:'u5',n:'5',title:'Por la ciudad',sub:'Eine Stadt beschreiben · Verkehrsmittel · den Weg beschreiben · Reihenfolge · Ortsangaben',
+COURSE.units.push({id:'u5',n:'5',title:'Moverse por Barcelona',sub:'Eine Stadt beschreiben · Verkehrsmittel · den Weg beschreiben · Reihenfolge · Ortsangaben',
 goals:['hay vs. estar','muy vs. mucho','ir & a + el = al','Verkehrsmittel (en metro, a pie)','tener que + Infinitiv','seguir (e→i)','Weg beschreiben','Ortsangaben (cerca de, al lado de …)','porque · pero · por eso'],
 situacion:{title:'Verlaufen in der Ciutat Vella',npc:'Señora',scene:'Du kommst am Liceu aus der Metro (L3) und willst zum Mercado de Santa Caterina, wo du einen Freund triffst. Du fragst eine ältere Dame nach dem Weg.',role:'Du bist eine freundliche ältere Barcelonesa. Du erklärst den Weg vom Liceu zum Mercado de Santa Caterina: Las Ramblas hinunter? Nein – erst die Calle Ferran bis Plaça Sant Jaume, dann geradeaus durch die Calle Jaume I bis zur Via Laietana, über die Straße, dann links, die Avenida Francesc Cambó, der Markt ist rechts, ca. 15 Minuten zu Fuß. Benutze einfache Wegbeschreibungen (sigue todo recto, gira a la derecha, cruza la calle). Siez ihn erst, dann duz ihn, wenn er dich duzt.',goal:'Frag höflich nach dem Weg, frag, ob es weit ist und ob man zu Fuß gehen kann, wiederhole die Beschreibung und bedanke dich.'},
 lessons:[
@@ -132,7 +158,7 @@ lessons:[
  {t:'info',title:'hay oder estar?',html:`<table><tr><th>hay = es gibt</th><th>estar = sich befinden</th></tr>
  <tr><td class="es-t">En Barcelona hay una catedral famosa.</td><td class="es-t">La Sagrada Família está en el Eixample.</td></tr>
  <tr><td class="es-t">Hay muchos bares y restaurantes.</td><td class="es-t">Mi hotel está en el casco antiguo.</td></tr>
- <tr><td class="es-t">Hay más de 300 ferias al año.</td><td class="es-t">Los servicios están al lado del restaurante.</td></tr></table>
+ <tr><td class="es-t">Hay playas muy bonitas.</td><td class="es-t">Los servicios están al lado del restaurante.</td></tr></table>
  <div class="ex"><b>hay</b> + unbestimmter Artikel / Zahl / Menge / ohne Artikel (etwas Unbekanntes).<br><b>está/están</b> + bestimmter Artikel / Name (etwas Bestimmtes – wo ist es?).</div>
  <div class="ojo"><b>hay</b> hat nur eine Form – auch im Plural: <span class="es-t">hay dos parques</span>.</div>`},
  {t:'mc',q:'En mi barrio ___ un mercado muy bonito.',opts:['hay','está','es'],a:0,keep:true},
@@ -140,7 +166,7 @@ lessons:[
  {t:'mc',q:'¿Dónde ___ los servicios, por favor?',opts:['están','hay','son'],a:0,keep:true},
  {t:'gap',q:'En Barcelona ___ mucho turismo y la playa ___ muy cerca del centro.',a:['hay','está']},
  {t:'info',title:'muy oder mucho?',html:`<table><tr><th>mucho/-a/-os/-as + Substantiv (veränderlich)</th><th>muy + Adjektiv/Adverb</th></tr>
- <tr><td class="es-t">mucho tráfico · mucha gente · muchos trenes · muchas obras</td><td class="es-t">Es muy difícil llegar. · Está muy cerca.</td></tr></table>
+ <tr><td class="es-t">mucho tráfico · mucha gente · muchos trenes · muchas obras</td><td class="es-t">Es muy difícil aparcar. · Está muy cerca.</td></tr></table>
  <p>Nach dem Verb: <span class="es-t">mucho</span> (unveränderlich): <span class="es-t">No uso mucho la bicicleta. ¿Te gusta? – Sí, mucho.</span></p>`},
  {t:'gap',q:'En el centro hay ___ (viel) gente y ___ (viele) turistas.',a:['mucha','muchos']},
  {t:'gap',q:'El metro es ___ (sehr) rápido y trabajo ___ (viel).',a:['muy','mucho']},
@@ -149,7 +175,7 @@ lessons:[
 ]},
 {id:'l2',title:'Verkehrsmittel',desc:'Voy en metro · ir a / ir en',steps:[
  {t:'info',title:'Das Verb ir (gehen, fahren)',html:`<table><tr><td>yo</td><td class="es-t">voy</td></tr><tr><td>tú</td><td class="es-t">vas</td></tr><tr><td>él / ella / usted</td><td class="es-t">va</td></tr><tr><td>nosotros/-as</td><td class="es-t">vamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">vais</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">van</td></tr></table>
- <table><tr><td><b>a</b> = Richtung (wohin?)</td><td class="es-t">Voy a Guadalajara. · Vamos a la oficina.</td></tr><tr><td><b>en</b> = Verkehrsmittel</td><td class="es-t">Voy en metro / en tren / en coche / en bici / en avión</td></tr><tr><td>zu Fuß</td><td class="es-t">Voy a pie / andando.</td></tr></table>
+ <table><tr><td><b>a</b> = Richtung (wohin?)</td><td class="es-t">Voy a Girona. · Vamos a la universidad.</td></tr><tr><td><b>en</b> = Verkehrsmittel</td><td class="es-t">Voy en metro / en tren / en coche / en bici / en avión</td></tr><tr><td>zu Fuß</td><td class="es-t">Voy a pie / andando.</td></tr></table>
  <div class="ojo"><b>a + el = al</b>: <span class="es-t">Voy al aeropuerto.</span> (aber: <span class="es-t">a la estación</span>)</div>`},
  {t:'conj',verb:'ir',de:'gehen, fahren',forms:['voy','vas','va','vamos','vais','van']},
  {t:'vocab',title:'Verkehrsmittel',items:[['el metro','die U-Bahn'],['el autobús','der Bus'],['el tren','der Zug'],['el coche','das Auto'],['la bici(cleta)','das Fahrrad'],['el avión','das Flugzeug'],['a pie / andando','zu Fuß'],['la línea','die Linie'],['la parada','die Haltestelle'],['la estación','der Bahnhof / die Station'],['cambiar (de línea)','umsteigen'],['bajar (del metro)','aussteigen'],['tomar / coger','nehmen (Verkehrsmittel)']]},
@@ -185,17 +211,17 @@ lessons:[
  {t:'tr',de:'Zuerst geradeaus, dann links abbiegen.',a:['Primero todo recto, después gira a la izquierda.','Primero sigue todo recto y después gira a la izquierda.','Primero todo recto y luego a la izquierda.','Primero todo recto, luego gira a la izquierda.','Primero sigue todo recto, luego gira a la izquierda.']},
  {t:'tr',de:'Das Hotel ist neben dem Museum.',a:['El hotel está al lado del museo.','El hotel está junto al museo.']}
 ]},
-{id:'l4',title:'Lesen: Barcelona & Konnektoren',desc:'porque · pero · por eso',steps:[
- {t:'read',title:'Barcelona, ciudad de negocios',text:`Barcelona es una ciudad muy {atractiva|attraktiv} para hacer negocios. Tiene un {puerto|Hafen} muy importante, un aeropuerto internacional y más de 300 {ferias|Messen} y congresos al año, como el Mobile World Congress.
+{id:'l4',title:'Lesen: Vivir en Barcelona',desc:'porque · pero · por eso',steps:[
+ {t:'read',title:'Vivir en Barcelona',intro:'Aus der Willkommensbroschüre der Uni für internationale Studierende.',text:`Barcelona es una ciudad muy {atractiva|attraktiv} para estudiar: tiene varias universidades, muchos estudiantes {extranjeros|ausländisch} y un ambiente muy internacional. Está entre el mar y la montaña y tiene un {puerto|Hafen} con mucha historia. Además, el clima es suave: en invierno casi nunca hace mucho frío. Por eso muchas personas de otros países quieren vivir aquí.
 
-La ciudad tiene unas 2500 horas de sol al año. Por eso muchas personas {extranjeras|ausländisch} quieren vivir aquí. En el centro hay edificios de todos los estilos: {góticos|gotisch} en el Barri Gòtic y {modernistas|im Jugendstil} en el Eixample, como la Casa Batlló.
+En el centro hay mucho que ver: calles {góticas|gotisch} en el Barri Gòtic y edificios {modernistas|im Jugendstil} en el Eixample, como la Casa Milà. En la ciudad también hay muchas {ferias|Messen} y congresos. Por eso, algunas semanas los hoteles están llenos y son muy caros.
 
-Moverse por la ciudad es fácil porque el metro es rápido y barato. Pero en {hora punta|Stoßzeit} hay mucha gente y mucho tráfico. Muchos barceloneses prefieren ir en bici: hay más de 300 kilómetros de {carril bici|Radweg}.`,
- de:`Barcelona ist eine sehr attraktive Stadt, um Geschäfte zu machen. Sie hat einen sehr wichtigen Hafen, einen internationalen Flughafen und mehr als 300 Messen und Kongresse pro Jahr, wie den Mobile World Congress.\n\nDie Stadt hat etwa 2500 Sonnenstunden im Jahr. Deshalb wollen viele Ausländer hier leben. Im Zentrum gibt es Gebäude aller Stilrichtungen: gotische im Barri Gòtic und Jugendstil-Bauten im Eixample, wie die Casa Batlló.\n\nSich in der Stadt fortzubewegen ist einfach, weil die Metro schnell und günstig ist. Aber zur Stoßzeit gibt es viele Leute und viel Verkehr. Viele Barcelonesen fahren lieber Fahrrad: Es gibt mehr als 300 Kilometer Radwege.`},
- {t:'mc',q:'¿Por qué quieren vivir en Barcelona muchos extranjeros, según el texto?',opts:['Porque hay mucho sol.','Porque el metro es caro.','Porque hay poco tráfico.'],a:0},
- {t:'mc',q:'¿Qué problema tiene el metro?',opts:['En hora punta hay mucha gente.','Es muy lento.','Es muy caro.'],a:0},
- {t:'info',title:'Konnektoren',html:`<table><tr><td class="es-t">porque</td><td>weil (Grund)</td><td class="es-t">Es fácil llegar porque está cerca del aeropuerto.</td></tr>
- <tr><td class="es-t">por eso</td><td>deshalb (Folge)</td><td class="es-t">Está cerca del aeropuerto, por eso es fácil llegar.</td></tr>
+Para moverse, lo mejor es el transporte público: el metro es rápido y para los jóvenes hay billetes baratos. Pero en {hora punta|Stoßzeit} los trenes van llenos. Otra opción es la bici: hay muchos kilómetros de {carril bici|Radweg} y es una forma barata y rápida de ir a clase.`,
+ de:`Barcelona ist eine sehr attraktive Stadt zum Studieren: Sie hat mehrere Universitäten, viele ausländische Studierende und eine sehr internationale Atmosphäre. Sie liegt zwischen Meer und Bergen und hat einen Hafen mit viel Geschichte. Außerdem ist das Klima mild: Im Winter ist es fast nie sehr kalt. Deshalb wollen viele Menschen aus anderen Ländern hier leben.\n\nIm Zentrum gibt es viel zu sehen: gotische Gassen im Barri Gòtic und Jugendstil-Gebäude im Eixample, wie die Casa Milà. In der Stadt gibt es auch viele Messen und Kongresse. Deshalb sind die Hotels in manchen Wochen voll und sehr teuer.\n\nUm sich fortzubewegen, sind öffentliche Verkehrsmittel am besten: Die Metro ist schnell und für junge Leute gibt es günstige Fahrkarten. Aber zur Stoßzeit sind die Züge voll. Eine andere Möglichkeit ist das Fahrrad: Es gibt viele Kilometer Radwege und es ist eine günstige und schnelle Art, zur Uni zu kommen.`},
+ {t:'mc',q:'¿Por qué quieren vivir en Barcelona muchas personas de otros países, según el texto?',opts:['Porque el clima es suave y el ambiente es internacional.','Porque los hoteles son baratos.','Porque hay poco turismo.'],a:0},
+ {t:'mc',q:'¿Qué problema tiene el metro?',opts:['En hora punta los trenes van llenos.','Es muy lento.','Es muy caro para los jóvenes.'],a:0},
+ {t:'info',title:'Konnektoren',html:`<table><tr><td class="es-t">porque</td><td>weil (Grund)</td><td class="es-t">Voy a pie porque la universidad está cerca.</td></tr>
+ <tr><td class="es-t">por eso</td><td>deshalb (Folge)</td><td class="es-t">La universidad está cerca, por eso voy a pie.</td></tr>
  <tr><td class="es-t">pero</td><td>aber</td><td class="es-t">El metro es rápido, pero hay mucha gente.</td></tr>
  <tr><td class="es-t">y / también</td><td>und / auch</td><td class="es-t">Hay parques y también playas.</td></tr></table>
  <div class="ojo"><b>¿Por qué?</b> (warum?, getrennt + Akzent) – <b>porque</b> (weil, zusammen).</div>`},

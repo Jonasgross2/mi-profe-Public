@@ -61,15 +61,15 @@ lessons:[
 {id:'l3',title:'Aussprache',desc:'Die Buchstaben, die anders klingen als im Deutschen',steps:[
  {t:'info',title:'So klingt Spanisch',html:`<table><tr><th>Buchstabe</th><th>Beispiel</th><th>Aussprache</th></tr>
  <tr><td><b>c</b> + a, o, u</td><td class="es-t">Cataluña</td><td>wie <b>k</b></td></tr>
- <tr><td><b>c</b> + e, i / <b>z</b></td><td class="es-t">cinco, Zara</td><td>gelispelt wie engl. <i>th</i> (in Lateinamerika wie <b>s</b>)</td></tr>
- <tr><td><b>ch</b></td><td class="es-t">Chupa Chups</td><td>wie <b>tsch</b></td></tr>
+ <tr><td><b>c</b> + e, i / <b>z</b></td><td class="es-t">cinco, zapato</td><td>gelispelt wie engl. <i>th</i> (in Lateinamerika wie <b>s</b>)</td></tr>
+ <tr><td><b>ch</b></td><td class="es-t">chocolate</td><td>wie <b>tsch</b></td></tr>
  <tr><td><b>g</b> + a, o, u</td><td class="es-t">gracias, gol</td><td>wie <b>g</b> – bei <b>gue, gui</b> ist das u stumm: <span class="es-t">Miguel</span></td></tr>
  <tr><td><b>g</b> + e, i / <b>j</b></td><td class="es-t">Argentina, jamón</td><td>wie <b>ch</b> in „Sache“</td></tr>
  <tr><td><b>h</b></td><td class="es-t">hotel, hola</td><td>stumm!</td></tr>
  <tr><td><b>ll</b> / <b>y</b></td><td class="es-t">llamo, playa</td><td>wie <b>j</b> in „Junge“ – <b>y</b> am Wortende wie <b>i</b>: <span class="es-t">Uruguay</span></td></tr>
  <tr><td><b>ñ</b></td><td class="es-t">España</td><td>wie <b>gn</b> in „Champagner“</td></tr>
  <tr><td><b>qu</b></td><td class="es-t">queso</td><td>wie <b>k</b>, das u ist stumm</td></tr>
- <tr><td><b>r</b> / <b>rr</b></td><td class="es-t">Barcelona / Renfe, perro</td><td>einfach gerollt / am Wortanfang & <b>rr</b> stark gerollt</td></tr>
+ <tr><td><b>r</b> / <b>rr</b></td><td class="es-t">pero / rojo, perro</td><td>einfach gerollt / am Wortanfang & <b>rr</b> stark gerollt</td></tr>
  <tr><td><b>v</b></td><td class="es-t">Valencia</td><td>wie <b>b</b> – kein Unterschied zu b</td></tr></table>
  <div class="ojo">In Barcelona hörst du auch Katalanisch – das klingt anders (z. B. <i>Bon dia</i>). Hier lernen wir castellano.</div>`},
  {t:'mc',q:'Wie spricht man das <b>h</b> in <span class="es-t">hotel</span>?',say:'hotel',opts:['gar nicht','wie deutsches h','wie ch in Sache'],a:0},
@@ -79,9 +79,34 @@ lessons:[
  {t:'listen',es:'España',why:'Das <b>ñ</b> – auf dem Mac: <span class="kbd">⌥ n</span>, dann <span class="kbd">n</span>. Oder die Taste unter dem Eingabefeld.'},
  {t:'listen',es:'gracias'},
  {t:'listen',es:'Valencia',why:'v klingt wie b, c vor e/i gelispelt.'},
- {t:'speak',es:'Erre que erre ruedan las ruedas de Renfe.',de:'Zungenbrecher mit rr (Renfe = spanische Bahn)',tip:'r am Wortanfang und rr stark rollen!'},
- {t:'speak',es:'Jamás comerás un jamón como el jamón de Jabugo.',de:'Zungenbrecher mit j',tip:'j = ch wie in „Sache“.'},
- {t:'speak',es:'Zapatos Zapata para el cine, la cena y la plaza.',de:'Zungenbrecher mit z/c',tip:'z und c vor e/i: Zungenspitze zwischen die Zähne (wie engl. th).'}
+ {t:'speak',es:'Ramón corre rápido con el perro de Rosa.',de:'Ramón rennt schnell mit Rosas Hund. (Übungssatz mit r/rr)',tip:'r am Wortanfang und rr stark rollen!'},
+ {t:'speak',es:'Jorge, el hijo de Julia, juega en el jardín.',de:'Jorge, Julias Sohn, spielt im Garten. (Übungssatz mit j)',tip:'j = ch wie in „Sache“.'},
+ {t:'speak',es:'Cecilia cena cerezas en la plaza a las once y cinco.',de:'Cecilia isst um fünf nach elf auf dem Platz Kirschen zu Abend. (Übungssatz mit z/c)',tip:'z und c vor e/i: Zungenspitze zwischen die Zähne (wie engl. th).'}
+]},
+{id:'lr',title:'Hören: Der erste Tag',desc:'Kurze Gespräche verstehen',steps:[
+ {t:'read',hideText:true,title:'Vor dem Seminarraum',intro:'Hör das Gespräch zuerst ohne Text. Danach kannst du den Text lesen.',text:`– ¡Hola! ¿Es tu primer día?
+– Sí, hoy es mi primer día. Me llamo Jonas. ¿Y tú? ¿Cómo te llamas?
+– Yo me llamo Laia. Y él es Marc.
+– ¡Hola, Jonas! ¿Qué tal?
+– Muy bien, gracias. ¿Y tú, Marc?
+– Regular… ¡Es lunes! ¿Y tú, Laia?
+– Bien, gracias.
+– Hola, buenos días a todos. Me llamo Ramón y soy el profesor.
+– ¡Buenos días!`,
+ de:`– Hallo! Ist das dein erster Tag?\n– Ja, heute ist mein erster Tag. Ich heiße Jonas. Und du? Wie heißt du?\n– Ich heiße Laia. Und das ist Marc.\n– Hallo, Jonas! Wie geht’s?\n– Sehr gut, danke. Und dir, Marc?\n– Geht so … Es ist Montag! Und dir, Laia?\n– Gut, danke.\n– Hallo, guten Morgen allerseits. Ich heiße Ramón und bin der Dozent.\n– Guten Morgen!`},
+ {t:'mc',q:'¿Cómo se llama la chica?',opts:['Laia','Clara','Marta'],a:0},
+ {t:'mc',q:'¿Qué tal está Marc?',opts:['Regular.','Muy bien.','Mal.'],a:0,why:'Marc sagt <i>regular</i> = geht so.'},
+ {t:'mc',q:'Der Dozent sagt „buenos días“. Wann ist das Gespräch?',opts:['am Vormittag','am Abend','in der Nacht'],a:0},
+ {t:'read',hideText:true,title:'Am Abend',intro:'Hör zu: Jonas und Laia verabschieden sich.',text:`– Bueno, Laia, ¿qué tal el primer día?
+– ¡Muy bien! Los compañeros son muy simpáticos.
+– Sí, Marc es muy simpático.
+– Bueno, Jonas, ¡hasta mañana!
+– ¡Adiós, Laia! ¡Buenas noches!`,
+ de:`– Na, Laia, wie war der erste Tag?\n– Sehr gut! Die Kommilitonen sind sehr nett.\n– Ja, Marc ist sehr nett.\n– Also, Jonas, bis morgen!\n– Tschüss, Laia! Gute Nacht!`},
+ {t:'mc',q:'Wann sehen sich Jonas und Laia wieder?',opts:['morgen','heute Nachmittag','nächste Woche'],a:0,why:'<i>¡Hasta mañana!</i> = Bis morgen!'},
+ {t:'listen',es:'¡Hasta mañana!',de:'Bis morgen!'},
+ {t:'listen',es:'¿Cómo te llamas?',de:'Wie heißt du?'},
+ {t:'speak',es:'Hola, me llamo Jonas. ¿Y tú? ¿Cómo te llamas?',de:'Hallo, ich heiße Jonas. Und du? Wie heißt du?'}
 ]}],
 resumen:`<h3>Begrüßen</h3><table><tr><td class="es-t">Hola</td><td>Hallo</td></tr><tr><td class="es-t">Buenos días</td><td>bis ca. 14 Uhr</td></tr><tr><td class="es-t">Buenas tardes</td><td>14–20 Uhr</td></tr><tr><td class="es-t">Buenas noches</td><td>ab 20 Uhr</td></tr></table>
 <h3>Sich vorstellen</h3><table><tr><th>informell (tú)</th><th>formell (usted)</th></tr><tr><td class="es-t">¿Cómo te llamas?</td><td class="es-t">¿Cómo se llama usted?</td></tr><tr><td class="es-t">Soy … / Me llamo … ¿Y tú?</td><td class="es-t">Soy … / Me llamo … ¿Y usted?</td></tr></table>
@@ -90,7 +115,7 @@ resumen:`<h3>Begrüßen</h3><table><tr><td class="es-t">Hola</td><td>Hallo</td><
 <h3>Aussprache</h3><p>h stumm · j / ge, gi = ch (Sache) · ll, y = j · ñ = gn · qu = k · c (e, i), z = th · v = b · rr gerollt</p>`});
 
 /* ================= UNIDAD 1 · MIS METAS ================= */
-COURSE.units.push({id:'u1',n:'1',title:'Mis metas',sub:'Nach der Bedeutung fragen · Zahlen bis 10 · Herkunft · Fragen stellen · warum man Spanisch lernt · Zustimmung & Widerspruch',
+COURSE.units.push({id:'u1',n:'1',title:'¿Por qué español?',sub:'Nach der Bedeutung fragen · Zahlen bis 10 · Herkunft · Fragen stellen · warum man Spanisch lernt · Zustimmung & Widerspruch',
 goals:['Substantive: Genus & Plural','el/la/los/las · un/una','Zahlen 0–10','¿Qué significa …?','ser + Subjektpronomen','¿De dónde eres?','Verben auf -ar','Fragewörter','no · también · tampoco'],
 situacion:{title:'Intercambio de idiomas in Gràcia',npc:'Pau',scene:'Ein Sprach-Tandem-Abend in einer Bar in Gràcia. Ein Spanier setzt sich zu dir an den Tisch.',role:'Du bist Pau, 27, aus Barcelona, arbeitest in einer Tech-Firma und lernst Deutsch. Du duzt Jonas.',goal:'Stell dich vor, sag, woher du kommst, welche Sprachen du sprichst und warum du Spanisch lernst. Frag Pau dasselbe.'},
 lessons:[
@@ -115,7 +140,7 @@ lessons:[
  {t:'mc',q:'Welcher Artikel? ___ información',opts:['la','el'],a:0,keep:true,why:'Wörter auf <b>-ción</b> sind weiblich.'},
  {t:'gap',task:'Setz den Plural ein.',q:'el hotel → los ___',a:['hoteles'],why:'Konsonant + -es.'},
  {t:'gap',task:'Setz den Plural ein.',q:'la exposición → las ___',a:['exposiciones'],why:'Konsonant + -es, und der Akzent fällt weg.'},
- {t:'gap',task:'Ergänze den unbestimmten Artikel (un / una).',q:'Zara es ___ empresa y la paella es ___ comida.',a:['una','una']},
+ {t:'gap',task:'Ergänze den unbestimmten Artikel (un / una).',q:'Barcelona es ___ ciudad y la paella es ___ comida.',a:['una','una']},
  {t:'match',q:'Singular und Plural',pairs:[['el equipo','los equipos'],['la ciudad','las ciudades'],['el jamón','los jamones'],['la red','las redes'],['el país','los países']]},
  {t:'tr',de:'die Unternehmen (Plural)',a:['las empresas']},
  {t:'tr',de:'ein Hotel',a:['un hotel']}
@@ -147,16 +172,16 @@ lessons:[
  {t:'conj',verb:'ser',de:'sein',forms:['soy','eres','es','somos','sois','son']},
  {t:'info',title:'Woher kommst du?',html:`<table><tr><th>Frage</th><th>Antwort</th></tr>
  <tr><td class="es-t">¿De dónde eres?</td><td class="es-t">Soy de Alemania.</td></tr>
- <tr><td class="es-t">¿De dónde es usted?</td><td class="es-t">Soy de Holanda.</td></tr>
- <tr><td class="es-t">¿Eres de España?</td><td class="es-t">No, soy de Chile.</td></tr>
- <tr><td class="es-t">¿Sois de Colombia?</td><td class="es-t">Sí, de Bogotá.</td></tr>
- <tr><td class="es-t">¿Son ustedes de Madrid?</td><td class="es-t">No, somos de Vigo.</td></tr></table>
- <p><b>Verneinung:</b> <span class="es-t">no</span> steht immer <b>vor dem Verb</b>: <span class="es-t">Messi no es de Barcelona.</span> In der Antwort oft doppelt: <span class="es-t">No, no soy de Madrid.</span></p>`},
+ <tr><td class="es-t">¿De dónde es usted?</td><td class="es-t">Soy de Austria, de Viena.</td></tr>
+ <tr><td class="es-t">¿Eres de España?</td><td class="es-t">No, soy de México.</td></tr>
+ <tr><td class="es-t">¿Sois de Italia?</td><td class="es-t">Sí, de Roma.</td></tr>
+ <tr><td class="es-t">¿Son ustedes de Madrid?</td><td class="es-t">No, somos de Sevilla.</td></tr></table>
+ <p><b>Verneinung:</b> <span class="es-t">no</span> steht immer <b>vor dem Verb</b>: <span class="es-t">Pablo no es de Barcelona.</span> In der Antwort oft doppelt: <span class="es-t">No, no soy de Madrid.</span></p>`},
  {t:'vocab',title:'Länder',items:[['Alemania','Deutschland'],['España','Spanien'],['Austria','Österreich'],['Suiza','die Schweiz'],['Holanda','die Niederlande'],['Francia','Frankreich'],['Italia','Italien'],['Inglaterra','England'],['Estados Unidos','die USA'],['México','Mexiko'],['Argentina','Argentinien'],['Colombia','Kolumbien'],['Perú','Peru'],['Chile','Chile']]},
  {t:'gap',q:'– ¿De dónde ___? – ___ de Alemania, de Mannheim.',a:['eres','soy'],why:'tú → <i>eres</i>, yo → <i>soy</i>.'},
  {t:'gap',q:'Laia y Marc ___ de Cataluña.',a:['son']},
  {t:'gap',q:'Nosotros ___ estudiantes de la universidad.',a:['somos']},
- {t:'mc',q:'Wähle den richtigen Satz:',opts:['Messi no es de Barcelona, es de Argentina.','Messi es no de Barcelona, es de Argentina.','No Messi es de Barcelona.'],a:0,why:'<b>no</b> steht direkt vor dem Verb.'},
+ {t:'mc',q:'Wähle den richtigen Satz:',opts:['Pablo no es de Barcelona, es de Sevilla.','Pablo es no de Barcelona, es de Sevilla.','No Pablo es de Barcelona.'],a:0,why:'<b>no</b> steht direkt vor dem Verb.'},
  {t:'order',es:'¿De dónde es usted?',de:'Woher kommen Sie?'},
  {t:'tr',de:'Ich bin aus Deutschland, aus Mannheim.',a:['Soy de Alemania, de Mannheim.']},
  {t:'tr',de:'Seid ihr aus Spanien?',a:['¿Sois de España?','¿Vosotros sois de España?']},
@@ -176,7 +201,7 @@ lessons:[
  {t:'info',title:'Fragewörter',html:`<table><tr><td class="es-t">¿Qué?</td><td>Was? / Welche?</td><td class="es-t">¿Qué idiomas hablas?</td></tr>
  <tr><td class="es-t">¿Quién? / ¿Quiénes?</td><td>Wer? (Sg. / Pl.)</td><td class="es-t">¿Quiénes estudian chino?</td></tr>
  <tr><td class="es-t">¿Dónde?</td><td>Wo?</td><td class="es-t">¿Dónde trabajas?</td></tr>
- <tr><td class="es-t">¿De dónde?</td><td>Woher?</td><td class="es-t">¿De dónde es Marco?</td></tr>
+ <tr><td class="es-t">¿De dónde?</td><td>Woher?</td><td class="es-t">¿De dónde es Laia?</td></tr>
  <tr><td class="es-t">¿Para qué?</td><td>Wozu?</td><td class="es-t">¿Para qué estudias español?</td></tr>
  <tr><td class="es-t">¿Cómo?</td><td>Wie?</td><td class="es-t">¿Cómo te llamas?</td></tr></table>
  <div class="ojo">Fragewörter tragen <b>immer</b> einen Akzent. Und Fragen beginnen mit <b>¿</b> (Mac: <span class="kbd">⌥ ⇧ ß</span>).</div>`},
@@ -196,7 +221,7 @@ lessons:[
  <tr><td class="es-t">Hablo español.</td><td class="es-t">Yo también.</td><td class="es-t">Yo no.</td></tr>
  <tr><td class="es-t">No hablo francés.</td><td class="es-t">Yo tampoco.</td><td class="es-t">Yo sí.</td></tr></table>
  <div class="ex">Trick: Bei einer <b>positiven</b> Aussage → <i>también / no</i>. Bei einer <b>negativen</b> Aussage → <i>tampoco / sí</i>.</div>
- <p>Im Satz: <span class="es-t">Lucas y Sarah no practican deporte, pero yo sí.</span></p>`},
+ <p>Im Satz: <span class="es-t">Marc y Laia no practican deporte, pero yo sí.</span></p>`},
  {t:'mc',q:'– Trabajo en una empresa. – (Du arbeitest auch.)',opts:['Yo también.','Yo tampoco.','Yo sí.'],a:0},
  {t:'mc',q:'– No hablo chino. – (Du sprichst auch kein Chinesisch.)',opts:['Yo tampoco.','Yo también.','Yo no.'],a:0,why:'Negative Aussage + gleiche Meinung → <i>tampoco</i>.'},
  {t:'mc',q:'– No practico deporte. – (Du schon!)',opts:['Yo sí.','Yo también.','Yo no.'],a:0},
@@ -219,7 +244,7 @@ resumen:`<h3>Substantive & Artikel</h3><table><tr><th></th><th>männlich</th><th
 <p>-o → meist m · -a, -dad, -ción → meist w · Ausnahmen: el día, el programa, la foto. Plural: Vokal + s, Konsonant + es.</p>
 <h3>ser</h3><table><tr><td>soy · eres · es</td><td>somos · sois · son</td></tr></table>
 <h3>Verben auf -ar (hablar)</h3><table><tr><td>hablo · hablas · habla</td><td>hablamos · habláis · hablan</td></tr></table>
-<h3>Herkunft</h3><table><tr><td class="es-t">¿De dónde eres?</td><td class="es-t">Soy de Alemania.</td></tr><tr><td class="es-t">¿Eres de España?</td><td class="es-t">No, soy de Chile.</td></tr></table>
+<h3>Herkunft</h3><table><tr><td class="es-t">¿De dónde eres?</td><td class="es-t">Soy de Alemania.</td></tr><tr><td class="es-t">¿Eres de España?</td><td class="es-t">No, soy de México.</td></tr></table>
 <h3>Fragewörter</h3><p class="es-t">¿Qué? · ¿Quién/es? · ¿Dónde? · ¿De dónde? · ¿Para qué? · ¿Cómo?</p>
 <h3>Zustimmung & Widerspruch</h3><table><tr><td class="es-t">Hablo español.</td><td class="es-t">Yo también. / Yo no.</td></tr><tr><td class="es-t">No hablo francés.</td><td class="es-t">Yo tampoco. / Yo sí.</td></tr></table>
 <h3>Zahlen 0–10</h3><p class="es-t">cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez</p>`});

@@ -1,18 +1,18 @@
 /* ================= UNIDAD 2 · METAS PROFESIONALES ================= */
-COURSE.units.push({id:'u2',n:'2',title:'Metas profesionales',sub:'Jemanden vorstellen · buchstabieren · Alter · Telefon & E-Mail · Studium & Beruf · Tätigkeiten beschreiben',
+COURSE.units.push({id:'u2',n:'2',title:'Estudios y trabajo',sub:'Jemanden vorstellen · buchstabieren · Alter · Telefon & E-Mail · Studium & Beruf · Tätigkeiten beschreiben',
 goals:['este / esta / estos / estas','encantado/-a','Alphabet & buchstabieren','Berufe (m/w)','Zahlen ab 11','tener + Alter','Telefon, E-Mail, Adresse','Verben auf -er / -ir','de + el = del'],
 situacion:{title:'Networking auf einer Tech-Messe',npc:'Sra. Ruiz',scene:'Du bist auf einer Tech-Messe in der Fira de Barcelona (Montjuïc) und suchst ein Praktikum. Am Stand einer Firma spricht dich eine Recruiterin an.',role:'Du bist Elena Ruiz, Recruiterin bei einer Software-Firma in Barcelona (Poblenou). Du siezt Jonas zuerst, bietest dann aber das Du an. Du fragst nach Studium, Alter, Erfahrung, Sprachen und Kontaktdaten (móvil, correo).',goal:'Stell dich vor, sag, was du studierst oder arbeitest, und gib deine Handynummer und E-Mail-Adresse (buchstabieren!) an.'},
 lessons:[
 {id:'l1',title:'Jemanden vorstellen',desc:'Este es Marc · Encantado · Mucho gusto',steps:[
  {t:'info',title:'Este, esta, estos, estas',html:`<p>Um jemanden vorzustellen, benutzt man <b>Demonstrativpronomen</b> (dies/das ist …):</p>
  <table><tr><th></th><th>männlich</th><th>weiblich</th></tr>
- <tr><td>Singular</td><td class="es-t">Este es el señor Vega.</td><td class="es-t">Esta es Paula Díaz.</td></tr>
- <tr><td>Plural</td><td class="es-t">Estos son Andrés y Pablo.</td><td class="es-t">Estas son Ana y Elena.</td></tr></table>
+ <tr><td>Singular</td><td class="es-t">Este es Marc.</td><td class="es-t">Esta es la profesora Serra.</td></tr>
+ <tr><td>Plural</td><td class="es-t">Estos son Óscar y Marc.</td><td class="es-t">Estas son Laia y Clara.</td></tr></table>
  <p>Antwort: <span class="es-t">Encantado</span> (Mann spricht) / <span class="es-t">Encantada</span> (Frau spricht) / <span class="es-t">Mucho gusto</span> (alle).</p>
  <div class="ojo">Gemischte Gruppe → männliche Form: <span class="es-t">Estos son Laia y Marc.</span></div>`},
- {t:'mc',q:'Du stellst deine Mitbewohnerin Núria vor:',opts:['Esta es Núria.','Este es Núria.','Estas son Núria.'],a:0},
+ {t:'mc',q:'Du stellst deine Mitbewohnerin Clara vor:',opts:['Esta es Clara.','Este es Clara.','Estas son Clara.'],a:0},
  {t:'mc',q:'Du stellst zwei Kommilitonen vor, Marc und Laia:',opts:['Estos son Marc y Laia.','Estas son Marc y Laia.','Este es Marc y Laia.'],a:0,why:'Gemischte Gruppe → <i>estos</i>.'},
- {t:'gap',q:'– Marta, ___ es Pablo, un compañero del máster. – Encantad___.',a:['este','a'],why:'Pablo ist ein Mann → <i>este</i>. Marta spricht → <i>encantada</i>.'},
+ {t:'gap',q:'– Laia, ___ es Marc, un compañero del máster. – Encantad___.',a:['este','a'],why:'Marc ist ein Mann → <i>este</i>. Laia spricht → <i>encantada</i>.'},
  {t:'info',title:'Das Alphabet & buchstabieren',html:`<table><tr><td>a <span class="es-t">a</span></td><td>b <span class="es-t">be</span></td><td>c <span class="es-t">ce</span></td><td>d <span class="es-t">de</span></td><td>e <span class="es-t">e</span></td><td>f <span class="es-t">efe</span></td><td>g <span class="es-t">ge</span></td></tr>
  <tr><td>h <span class="es-t">hache</span></td><td>i <span class="es-t">i</span></td><td>j <span class="es-t">jota</span></td><td>k <span class="es-t">ka</span></td><td>l <span class="es-t">ele</span></td><td>m <span class="es-t">eme</span></td><td>n <span class="es-t">ene</span></td></tr>
  <tr><td>ñ <span class="es-t">eñe</span></td><td>o <span class="es-t">o</span></td><td>p <span class="es-t">pe</span></td><td>q <span class="es-t">cu</span></td><td>r <span class="es-t">erre</span></td><td>s <span class="es-t">ese</span></td><td>t <span class="es-t">te</span></td></tr>
@@ -120,7 +120,7 @@ lessons:[
  {t:'tr',de:'Ich bin verantwortlich für den Kontakt mit Kunden.',a:['Soy responsable del contacto con clientes.','Soy responsable del contacto con los clientes.']},
  {t:'free',task:'Beschreibe in 4–6 Sätzen deine Arbeit (oder einen Job, den du dir wünschst): Was machst du, wo, wofür bist du verantwortlich, mit wem sprichst du?',hint:'Trabajo como … en … · Soy responsable de/del … · Reviso … · Hablo con clientes · Escribo …',focus:'Verben auf -ar/-er/-ir, Berufe, ser responsable de, del',model:'Trabajo como analista en una empresa internacional en Mannheim. Reviso los sistemas informáticos de los clientes. Soy responsable del contacto con algunos clientes. Escribo informes y respondo a muchos correos. A veces asisto a reuniones con el equipo.'}
 ]}],
-resumen:`<h3>Jemanden vorstellen</h3><table><tr><td class="es-t">Este es el señor Vega. / Esta es Paula.</td><td class="es-t">Encantado / Encantada / Mucho gusto.</td></tr><tr><td class="es-t">Estos son Andrés y Pablo. / Estas son Ana y Elena.</td><td></td></tr></table>
+resumen:`<h3>Jemanden vorstellen</h3><table><tr><td class="es-t">Este es Marc. / Esta es la profesora Serra.</td><td class="es-t">Encantado / Encantada / Mucho gusto.</td></tr><tr><td class="es-t">Estos son Óscar y Marc. / Estas son Laia y Clara.</td><td></td></tr></table>
 <h3>Buchstabieren</h3><p class="es-t">¿Cómo se escribe …? · ¿Con hache? · ¿Con acento o sin acento? · ¿Con mayúscula?</p>
 <h3>Beruf & Studium</h3><table><tr><td class="es-t">¿Qué haces?</td><td class="es-t">Soy ingeniera. / Trabajo como analista.</td></tr><tr><td class="es-t">¿Dónde trabajas?</td><td class="es-t">En un banco.</td></tr><tr><td class="es-t">¿Qué estudias? ¿Dónde?</td><td class="es-t">Informática, en la UPC.</td></tr></table>
 <h3>Berufe</h3><p>-o/-a (ingeniero/-a) · -or/-ora (profesor/-a) · gleich: -e, -ista (estudiante, analista) · el jefe / la jefa · <b>kein Artikel</b>: Soy estudiante.</p>
@@ -130,7 +130,7 @@ resumen:`<h3>Jemanden vorstellen</h3><table><tr><td class="es-t">Este es el señ
 <h3>Zahlen</h3><p>11 once · 12 doce · 15 quince · 16 dieciséis · 20 veinte · 21 veintiuno · 30 treinta · 31 treinta y uno · 100 cien · 101 ciento uno · 1000 mil</p>`});
 
 /* ================= UNIDAD 3 · FAMILIA Y COMPAÑÍA ================= */
-COURSE.units.push({id:'u3',n:'3',title:'Familia y compañía',sub:'Familie · Aussehen & Charakter · nach der Anzahl fragen · über eine Firma sprechen · Gefallen & Interesse',
+COURSE.units.push({id:'u3',n:'3',title:'Familia y empresa',sub:'Familie · Aussehen & Charakter · nach der Anzahl fragen · über eine Firma sprechen · Gefallen & Interesse',
 goals:['Familie','mi / tu / su …','Adjektive & Angleichung','muy · bastante · un poco','estar','ser oder estar?','gustar, interesar, molestar','¿Cuánto/-a/-os/-as?'],
 situacion:{title:'Abendessen mit den Mitbewohnern',npc:'Clara',scene:'Erster Abend in deiner WG in Sants. Deine Mitbewohnerin Clara kocht und fragt dich über deine Familie und deine Interessen aus.',role:'Du bist Clara, 26, aus Valencia, Krankenpflegerin, lebst seit 2 Jahren in der WG. Du duzt Jonas, bist herzlich und erzählst auch von deiner eigenen Familie (zwei Schwestern, Eltern in Valencia).',goal:'Erzähl von deiner Familie (wer, wie alt, wie sie sind, wo sie wohnen) und sag, was dir gefällt und was dich stört. Frag Clara auch nach ihrer Familie.'},
 lessons:[
@@ -174,14 +174,14 @@ lessons:[
  {t:'tr',de:'Meine Schwestern sind sehr sympathisch.',a:['Mis hermanas son muy simpáticas.']},
  {t:'listen',es:'Mi madre es baja, morena y muy alegre.',de:'Meine Mutter ist klein, dunkelhaarig und sehr fröhlich.'}
 ]},
-{id:'l3',title:'estar · ser oder estar?',desc:'Estoy en Barcelona · Es de Cádiz',steps:[
+{id:'l3',title:'estar · ser oder estar?',desc:'Estoy en Barcelona · Es de Valencia',steps:[
  {t:'info',title:'Das Verb estar',html:`<table><tr><th></th><th>estar</th></tr><tr><td>yo</td><td class="es-t">estoy</td></tr><tr><td>tú</td><td class="es-t">estás</td></tr><tr><td>él / ella / usted</td><td class="es-t">está</td></tr><tr><td>nosotros/-as</td><td class="es-t">estamos</td></tr><tr><td>vosotros/-as</td><td class="es-t">estáis</td></tr><tr><td>ellos / ellas / ustedes</td><td class="es-t">están</td></tr></table>`},
  {t:'conj',verb:'estar',de:'sein (Ort, Befinden)',forms:['estoy','estás','está','estamos','estáis','están']},
  {t:'info',title:'ser oder estar?',html:`<p>Beide heißen „sein“ – aber:</p>
  <table><tr><th>ser – Wer/Was ist es?</th><th>estar – Wo? Wie geht’s?</th></tr>
- <tr><td class="es-t">Es Juan. <span class="muted">(Name)</span></td><td class="es-t">Estoy en Barcelona. <span class="muted">(Ort)</span></td></tr>
+ <tr><td class="es-t">Es Clara. <span class="muted">(Name)</span></td><td class="es-t">Estoy en Barcelona. <span class="muted">(Ort)</span></td></tr>
  <tr><td class="es-t">Es ingeniera. <span class="muted">(Beruf)</span></td><td class="es-t">La facultad está en el campus. <span class="muted">(Ort)</span></td></tr>
- <tr><td class="es-t">Es de Cádiz. <span class="muted">(Herkunft)</span></td><td class="es-t">¿Cómo estás? – Estoy bien. <span class="muted">(Befinden)</span></td></tr>
+ <tr><td class="es-t">Es de Valencia. <span class="muted">(Herkunft)</span></td><td class="es-t">¿Cómo estás? – Estoy bien. <span class="muted">(Befinden)</span></td></tr>
  <tr><td class="es-t">Es alto y simpático. <span class="muted">(Eigenschaft)</span></td><td class="es-t">Estoy cansado. <span class="muted">(Zustand gerade)</span></td></tr></table>
  <div class="ex">Merkhilfe: <b>ser</b> = was jemand/etwas <b>ist</b> (Identität). <b>estar</b> = wo/wie jemand <b>sich befindet</b>.</div>`},
  {t:'mc',q:'Barcelona ___ en Cataluña.',opts:['está','es'],a:0,keep:true,why:'Ort → <b>estar</b>.'},
@@ -195,14 +195,14 @@ lessons:[
  {t:'tr',de:'Meine Eltern sind in Mannheim.',a:['Mis padres están en Mannheim.']},
  {t:'tr',de:'Wie geht es euch?',a:['¿Cómo estáis?','¿Qué tal estáis?','¿Qué tal?']}
 ]},
-{id:'l4',title:'gustar, interesar, molestar',desc:'Me gusta la rutina · Le interesan los idiomas',steps:[
+{id:'l4',title:'gustar, interesar, molestar',desc:'Me gusta cocinar · Le interesan los idiomas',steps:[
  {t:'info',title:'Me gusta … – „es gefällt mir“',html:`<p><b>gustar</b> funktioniert anders als im Deutschen: Wörtlich heißt es „etwas gefällt mir“. Das Verb richtet sich nach der Sache, die gefällt:</p>
  <table><tr><th>Person</th><th>Singular / Infinitiv</th><th>Plural</th></tr>
  <tr><td>(a mí) <b>me</b></td><td rowspan="6" class="es-t">gusta la música<br>gusta viajar</td><td rowspan="6" class="es-t">gustan los idiomas<br>gustan las fiestas</td></tr>
  <tr><td>(a ti) <b>te</b></td></tr><tr><td>(a él / ella / usted) <b>le</b></td></tr><tr><td>(a nosotros/-as) <b>nos</b></td></tr><tr><td>(a vosotros/-as) <b>os</b></td></tr><tr><td>(a ellos / ellas / ustedes) <b>les</b></td></tr></table>
  <p>Genauso: <span class="es-t">interesar</span>, <span class="es-t">molestar</span>.</p>
  <div class="ojo">Nach diesen Verben steht der Artikel: <span class="es-t">Me gusta <b>la</b> música</span> (nicht „me gusta música“).</div>
- <table><tr><td class="es-t">¿Te gusta la rutina?</td><td class="es-t">Sí, mucho. / Sí, bastante. / No, nada.</td></tr><tr><td class="es-t">¿Le interesa viajar?</td><td class="es-t">No mucho.</td></tr><tr><td class="es-t">¿Te molestan las discusiones?</td><td class="es-t">Un poco.</td></tr></table>`},
+ <table><tr><td class="es-t">¿Te gusta cocinar?</td><td class="es-t">Sí, mucho. / Sí, bastante. / No, nada.</td></tr><tr><td class="es-t">¿Le interesa el arte?</td><td class="es-t">No mucho.</td></tr><tr><td class="es-t">¿Te molestan los perros?</td><td class="es-t">Un poco.</td></tr></table>`},
  {t:'mc',q:'Me ___ los idiomas.',opts:['gustan','gusta','gusto'],a:0,keep:true,why:'<i>los idiomas</i> ist Plural → <i>gustan</i>.'},
  {t:'mc',q:'Me ___ trabajar en equipo.',opts:['gusta','gustan','gusto'],a:0,keep:true,why:'Infinitiv → immer Singular: <i>gusta</i>.'},
  {t:'mc',q:'A mi hermano ___ interesa la política.',opts:['le','me','te'],a:0,keep:true},
@@ -230,8 +230,8 @@ lessons:[
  {t:'gap',q:'¿___ empleados tiene la empresa?',a:['Cuántos']},
  {t:'gap',q:'¿___ horas trabajas al día?',a:['Cuántas']},
  {t:'gap',q:'¿___ gente vive en Barcelona?',a:['Cuánta'],why:'<i>la gente</i> ist weiblich Singular.'},
- {t:'listen',es:'La empresa tiene casi cien años de historia.',de:'Das Unternehmen hat fast hundert Jahre Geschichte.'},
- {t:'order',es:'Es una empresa familiar del sector de la moda.',de:'Es ist ein Familienunternehmen aus der Modebranche.'},
+ {t:'listen',es:'La empresa tiene más de sesenta años de historia.',de:'Das Unternehmen hat mehr als sechzig Jahre Geschichte.'},
+ {t:'order',es:'Es una empresa familiar del sector del café.',de:'Es ist ein Familienunternehmen aus der Kaffeebranche.'},
  {t:'tr',de:'Wie viele Geschwister hast du?',a:['¿Cuántos hermanos tienes?']},
  {t:'free',task:'Beschreibe deine Familie in 5–7 Sätzen: Wer gehört dazu? Wie alt sind sie, wo wohnen sie, wie sind sie (Aussehen/Charakter), was gefällt ihnen?',hint:'Tengo un hermano, se llama … · Tiene … años · Vive en … · Es alto y muy … · Le gusta/n …',focus:'Familie, Possessivbegleiter, Adjektivangleichung, ser/estar, gustar',model:'Mi familia no es muy grande. Mis padres viven en Alemania, cerca de Mannheim. Mi madre es profesora y es muy alegre. Mi padre es alto y un poco caótico. Tengo un hermano. Es muy simpático y le gusta mucho el deporte. Ahora yo estoy en Barcelona, pero hablo con mi familia todas las semanas.'}
 ]}],
@@ -239,10 +239,10 @@ resumen:`<h3>Familie</h3><p class="es-t">el padre · la madre · los padres · e
 <h3>Possessivbegleiter</h3><table><tr><td>mi / mis</td><td>tu / tus</td><td>su / sus</td></tr><tr><td>nuestro/-a/-os/-as</td><td>vuestro/-a/-os/-as</td><td>su / sus</td></tr></table>
 <h3>Adjektive</h3><p>-o/-a: alto/alta · -e & Konsonant gleich: alegre, especial · Plural +s/+es · <b>muy</b> (sehr), <b>bastante</b> (ziemlich), <b>un poco</b> (ein bisschen) bleiben gleich.</p>
 <h3>estar</h3><p>estoy · estás · está · estamos · estáis · están</p>
-<h3>ser oder estar?</h3><table><tr><th>ser</th><th>estar</th></tr><tr><td>Name, Beruf, Herkunft, Eigenschaft</td><td>Ort, Befinden, momentaner Zustand</td></tr><tr><td class="es-t">Es cocinero. Es de Cádiz.</td><td class="es-t">Está en Novelda. ¿Cómo estás?</td></tr></table>
-<h3>gustar & Co.</h3><table><tr><td>me · te · le · nos · os · les</td><td class="es-t">gusta + Sg. / Infinitiv · gustan + Pl.</td></tr><tr><td colspan="2" class="es-t">Me gusta la rutina. Te molesta trabajar con estrés. Le interesan las discusiones.</td></tr></table>
+<h3>ser oder estar?</h3><table><tr><th>ser</th><th>estar</th></tr><tr><td>Name, Beruf, Herkunft, Eigenschaft</td><td>Ort, Befinden, momentaner Zustand</td></tr><tr><td class="es-t">Es enfermera. Es de Valencia.</td><td class="es-t">Está en Barcelona. ¿Cómo estás?</td></tr></table>
+<h3>gustar & Co.</h3><table><tr><td>me · te · le · nos · os · les</td><td class="es-t">gusta + Sg. / Infinitiv · gustan + Pl.</td></tr><tr><td colspan="2" class="es-t">Me gusta la música. Te molesta trabajar de noche. Le interesan los idiomas.</td></tr></table>
 <h3>¿Cuánto?</h3><p class="es-t">¿Cuánto tiempo? · ¿Cuánta gente? · ¿Cuántos años? · ¿Cuántas horas?</p>`});
 
 /* ================= Kommende Unidades (werden in c_u9u10 ersetzt) ================= */
-window.SOON=[['u9','9','Momento de cambios','Wohnung & Büro beschreiben · Imperfekt · über Veränderungen sprechen'],
- ['u10','10','Llegar a la meta','Biografie · Indefinido · Bewerbung & Vorstellungsgespräch']];
+window.SOON=[['u9','9','Antes y ahora','Wohnung & Büro beschreiben · Imperfekt · über Veränderungen sprechen'],
+ ['u10','10','Mi currículum','Biografie · Indefinido · Bewerbung & Vorstellungsgespräch']];
