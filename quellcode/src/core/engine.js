@@ -113,8 +113,26 @@ const LESEN=EX_BASE==='de'?{en:'Reading: ',pt:'Leitura: ',es:'Lectura: '}[EX]:nu
 const trc=s=>!CT||s==null?s:CT[s]!=null?CT[s]:LESEN&&typeof s==='string'&&s.startsWith('Lesen: ')?LESEN+s.slice(7):s;
 function trContent(o){if(typeof o==='string')return trc(o);if(Array.isArray(o)){for(let i=0;i<o.length;i++)o[i]=trContent(o[i]);return o;}
   if(o&&typeof o==='object'){for(const k of Object.keys(o))if(k!=='role'&&k!=='id')o[k]=trContent(o[k]);}return o;}
+/* Gleiches Wort in zwei Schreibweisen = eine Karte: ein späterer Vokabel-Eintrag, der eine Form eines früheren „/“-Eintrags ist (oder umgekehrt),
+   übernimmt dessen Schreibung und Bedeutung (z. B. „el bombero“ in Häufige Wörter → „el bombero / la bombera“). Nur echte Formenpaare:
+   gleich viele Wörter je Teil und letztes Wort mit gemeinsamem Anfang (≥ 3) oder Ende (≥ 4) – „caer bien / mal“, „el sueldo / el salario“ bleiben getrennt. */
+const VMERGE={};{const ac=x=>x.normalize('NFD').replace(/[̀-ͯ]/g,''),lw=x=>ac(x.split(' ').pop().toLowerCase()),pre=(a,b)=>{let i=0;while(i<a.length&&a[i]===b[i])i++;return i;},suf=(a,b)=>pre(a.split('').reverse().join(''),b.split('').reverse().join(''));
+  /* Formenpaar (gleicher Wortstamm: bombero/bombera, feo/fea, derselbe/dasselbe) → in beide Richtungen; Synonympaar (sueldo/salario) → nur ein späteres Einzelwort auf den früheren „/“-Eintrag */
+  const split=k=>{const p=String(k).split(/\s*\/\s*/).map(x=>x.replace(/\s*\(Pl\.\)\s*/,'').trim());if(p.length<2||p.some(x=>!x))return null;const n=p[0].split(' ').length;return p.every(x=>x.split(' ').length===n)?p:null;};
+  const isForm=p=>{const a=lw(p[0]);return p.every(x=>{const b=lw(x);return pre(b,a)>=Math.min(3,Math.min(a.length,b.length)-1)||suf(b,a)>=4;});};
+  const first={},grp={},syn={};COURSE.units.forEach(u=>(u.lessons||[]).forEach(l=>(l.steps||[]).forEach(s=>{if(s.t!=='vocab')return;(s.items||[]).forEach(w=>{const k=w[0],p=split(k),form=p&&isForm(p),forms=(form?p:[]).concat([k]);
+    let g=null;for(const f of forms)if(grp[f]!=null){g=grp[f];break;}if(g==null&&!p&&syn[k]!=null)g=syn[k];
+    if(g!=null&&g!==k){VMERGE[k]=g;w[0]=g;w[1]=first[g];}else{if(first[k]==null)first[k]=w[1];forms.forEach(f=>{if(grp[f]==null)grp[f]=k;});if(p&&!form)p.forEach(f=>{if(syn[f]==null&&grp[f]==null)syn[f]=k;});}});})));}
 /* deutsche Originalbedeutung jeder Kursvokabel (vor der Übersetzung gemerkt): Karten speichern immer Deutsch, angezeigt wird über trc() in der Erklärsprache */
 const VOC_DE={};COURSE.units.forEach(u=>(u.lessons||[]).forEach(l=>l.steps.forEach(s=>{if(s.t==='vocab')(s.items||[]).forEach(w=>{if(VOC_DE[w[0]]==null)VOC_DE[w[0]]=w[1];});})));
+/* Englische Vokabelbedeutungen einheitlich: Substantive mit „the“ (wenn das Deutsche einen Artikel hat), Verben der Lernsprache mit „to“ */
+if(CT&&EX==='en'){COURSE.units.forEach(u=>(u.lessons||[]).forEach(l=>(l.steps||[]).forEach(s=>{if(s.t==='vocab')(s.items||[]).forEach(w=>{const de=w[1],en=CT[de];
+  if(typeof en!=='string'||/ \/ /.test(de)||/\//.test(w[0]))return;
+  if(/^(der|die|das) /.test(de)&&LANG.articles&&LANG.articles.test(w[0])&&!/^(the|a|an|to) /i.test(en)&&/^[a-z]/.test(en))CT[de]='the '+en;
+  else if(LANG.infinitive&&LANG.infinitive.test(w[0])&&!/^to /i.test(en)&&/^[a-z]/.test(en))CT[de]='to '+en;});})));}
+/* zusammengeführte Schreibweisen (VMERGE): Lernstand der alten Karte auf die gemeinsame übertragen, alte als gelöscht markieren (del + t, damit der Sync es übernimmt) */
+{let ch=0;const now=Date.now();Object.keys(VMERGE).forEach(k=>{const o=S.srs&&S.srs[k],g=VMERGE[k];if(!o||o.del)return;
+  if(!S.srs[g]||S.srs[g].del)S.srs[g]=Object.assign({},o,{es:g,de:VOC_DE[g]!=null?VOC_DE[g]:o.de,t:now});o.del=true;o.t=now;ch++;});if(ch)try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 /* alte Karten, die in einer anderen Erklärsprache angelegt wurden: wieder auf die deutsche Bedeutung (bei jedem Start, auch nach Sync) */
 {let ch=0;Object.values(S.srs||{}).forEach(c=>{if(c&&!String(c.unit).startsWith('my:')&&VOC_DE[c.es]!=null&&c.de!==VOC_DE[c.es]){c.de=VOC_DE[c.es];ch++;}});if(ch)try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 if(CT){trContent(COURSE);trContent(PLACEMENT);trContent(STORIES);if(window.READINGS)trContent(window.READINGS);}

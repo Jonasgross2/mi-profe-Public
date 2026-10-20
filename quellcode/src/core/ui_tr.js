@@ -2885,7 +2885,7 @@ window.UI_TR={
 "Woher kommst du? Übungen wie „{A}“ und „{B}“ passen sich daran an.": "De onde você é? Exercícios como “{A}” e “{B}” se adaptam.",
 "Woher kommst du? Übungen zur Herkunft passen sich daran an.": "De onde você é? Os exercícios sobre sua origem se adaptam.",
 "Fast! Achte auf die Schreibung (Akzente, Sonderzeichen).": "Quase! Atenção à escrita (acentos, caracteres especiais).",
-"unregelmäßig – auswendig lernen": "irregular – decore",
+"unregelmäßig – auswendig lernen": "irregular – aprenda de cor",
 "regelmäßig auf -": "regular em -",
 "Stammwechsel ": "mudança de raiz ",
 "(nicht bei nosotros/vosotros)": "(não com nosotros/vosotros)",

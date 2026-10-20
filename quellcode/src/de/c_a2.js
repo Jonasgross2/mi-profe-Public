@@ -99,7 +99,7 @@ Um abraço, Lucas`},
 {id:'l4',title:'Ler e escrever: festa de inauguração',desc:'Einladung zur Einweihungsparty · Antwort',steps:[
  {t:'vocab',title:'Convites',items:[['die Einweihungsparty','a festa de inauguração (da casa)'],['einladen','convidar'],['die Einladung','o convite'],['feiern','comemorar'],['Bescheid sagen','avisar'],['sich freuen auf','estar ansioso por'],['leider','infelizmente']]},
  {t:'read',title:'Leitura: Einladung',text:`Liebe Nachbarinnen und Nachbarn,
-ich bin der Neue im 3. Stock! Ich heiße Lucas und komme aus São Paulo. Am Samstag, den 14. Mai, mache ich ab 19 Uhr eine kleine Einweihungsparty und lade Sie herzlich ein. Es gibt brasilianisches Essen und Musik – aber keine Angst, um 22 Uhr machen wir die Musik leise! Bitte sagen Sie mir bis Donnerstag Bescheid, ob Sie kommen.
+ich bin der Neue im 3. Stock! Ich heiße Lucas und komme aus São Paulo. Am Samstag, den 14. Mai, mache ich ab 19 Uhr eine kleine Einweihungsparty und lade Sie herzlich ein. Es gibt Essen aus Brasilien und Musik – aber keine Angst, um 22 Uhr machen wir die Musik leise! Bitte sagen Sie mir bis Donnerstag Bescheid, ob Sie kommen.
 Viele Grüße
 Lucas Souza (Wohnung 5)`,de:`Queridas vizinhas e queridos vizinhos,
 sou o novo morador do 3º andar! Meu nome é Lucas e venho de São Paulo. No sábado, 14 de maio, a partir das 19h, vou dar uma pequena festa de inauguração e convido vocês de coração. Vai ter comida brasileira e música – mas não se preocupem, às 22h a gente abaixa a música! Por favor, me avisem até quinta-feira se vêm.
@@ -212,7 +212,7 @@ placement:[
  {t:'gap',q:'Du musst dich mehr ___. (bewegen)',a:['bewegen']}],
 lessons:[
 {id:'l1',title:'Esporte e movimento',desc:'joggen, trainieren, der Verein …',steps:[
- {t:'vocab',title:'Esporte',items:[['joggen','correr (cooper)'],['trainieren','treinar'],['das Training','o treino'],['das Fitnessstudio','a academia'],['der Verein','o clube / a associação'],['die Mannschaft','o time'],['das Spiel','o jogo'],['der Ball','a bola'],['Fußball spielen','jogar futebol'],['Rad fahren','andar de bicicleta'],['der Berg','a montanha'],['fit','em forma'],['die Bewegung','o movimento / a atividade física'],['gesund','saudável'],['ungesund','não saudável'],['das Gewicht','o peso'],['abnehmen','emagrecer; diminuir'],['zunehmen','engordar; aumentar']]},
+ {t:'vocab',title:'Esporte',items:[['laufen / joggen','correr'],['trainieren','treinar'],['das Training','o treino'],['das Fitnessstudio','a academia'],['der Verein','o clube / a associação'],['die Mannschaft','o time'],['das Spiel','o jogo'],['der Ball','a bola'],['Fußball spielen','jogar futebol'],['Rad fahren','andar de bicicleta'],['der Berg','a montanha'],['fit','em forma'],['die Bewegung','o movimento / a atividade física'],['gesund','saudável'],['ungesund','não saudável'],['das Gewicht','o peso'],['abnehmen','emagrecer; diminuir'],['zunehmen','engordar; aumentar']]},
  {t:'mc',q:'Lucas spielt jeden Dienstag Fußball. Er ist in einem ___.',opts:['Verein','Fitnessstudio','Berg'],a:0},
  {t:'mc',q:'Unsere Mannschaft hat 3:1 ___. Super!',opts:['gewonnen','verloren','trainiert'],a:0},
  {t:'gap',q:'Ich esse zu viel Schokolade. Ich habe zwei Kilo ___. (zunehmen – Perfekt)',a:['zugenommen']},
@@ -478,7 +478,7 @@ lessons:[
 {id:'l3',title:'Na cozinha – wenn',desc:'der Topf, das Messer, scharf · Nebensätze mit wenn',steps:[
  {t:'vocab',title:'Cozinha e louça',items:[['das Gericht','o prato (comida); o tribunal'],['die Portion','a porção'],['scharf','apimentado / afiado'],['das Rindfleisch','a carne de boi'],['die Bohne','o feijão'],['die Zitrone','o limão'],['das Eis','o sorvete / o gelo'],['der Teller','o prato (louça)'],['die Gabel','o garfo'],['das Messer','a faca'],['der Löffel','a colher'],['der Topf','a panela'],['die Pfanne','a frigideira'],['das Geschirr','a louça'],['abwaschen','lavar a louça'],['probieren','provar'],['schneiden','cortar'],]},
  {t:'info',title:'wenn',html:`<p><b>wenn</b> = quando (algo que se repete) / se (condição). O verbo vai para o <b>final</b>:</p>
- <div class="ex"><span class="es-t">Ich koche brasilianisch, <b>wenn</b> Freunde zu Besuch <b>kommen</b>.</span></div>
+ <div class="ex"><span class="es-t">Ich koche Gerichte aus Brasilien, <b>wenn</b> Freunde zu Besuch <b>kommen</b>.</span></div>
  <div class="ex"><span class="es-t"><b>Wenn</b> du Zeit <b>hast</b>, <b>kannst</b> du mir helfen.</span> – começando com <b>wenn</b>, a segunda parte começa com o verbo.</div>
  <div class="ojo">Para uma vez só no passado se usa <b>als</b> (B1). No A2 basta <b>wenn</b> para o presente e para „sempre que“.</div>`},
  {t:'mc',q:'___ es regnet, bleiben wir zu Hause.',opts:['Wenn','Weil','Dass'],a:0},
@@ -502,7 +502,7 @@ Beijos, Jana`},
  {t:'mc',q:'Was soll man mitbringen?',opts:['etwas zu trinken','ein Geschenk','etwas zu essen'],a:0},
  {t:'mc',q:'Was möchte Jana statt Geschenken?',opts:['Geld für das Tierheim','Blumen','Konzertkarten'],a:0},
  {t:'mc',q:'Bis wann soll man Bescheid sagen?',opts:['bis Mittwoch','bis Samstag','bis zum 12. Oktober'],a:0},
- {t:'free',task:'Responda ao convite da Jana (~30–40 palavras): 1) dê os parabéns e agradeça, 2) diga se você vai e com quem / ou por que não pode, 3) diga o que você leva.',hint:'Liebe Jana, vielen Dank für die Einladung! Ich komme gern / Leider kann ich nicht, weil … Ich bringe … mit. Wenn du Hilfe brauchst, … Bis Samstag! / Alles Gute!',focus:'Dativ (dir, ihr), wenn, weil, Glückwünsche',model:'Liebe Jana,\nvielen Dank für die Einladung! Natürlich komme ich gern – ich bringe Tom mit, wenn das okay ist. Wir bringen eine Flasche Wein und brasilianische Süßigkeiten mit. Wenn du Hilfe brauchst, sag Bescheid!\nBis Samstag,\nLucas'}
+ {t:'free',task:'Responda ao convite da Jana (~30–40 palavras): 1) dê os parabéns e agradeça, 2) diga se você vai e com quem / ou por que não pode, 3) diga o que você leva.',hint:'Liebe Jana, vielen Dank für die Einladung! Ich komme gern / Leider kann ich nicht, weil … Ich bringe … mit. Wenn du Hilfe brauchst, … Bis Samstag! / Alles Gute!',focus:'Dativ (dir, ihr), wenn, weil, Glückwünsche',model:'Liebe Jana,\nvielen Dank für die Einladung! Natürlich komme ich gern – ich bringe Tom mit, wenn das okay ist. Wir bringen eine Flasche Wein und Süßigkeiten aus Brasilien mit. Wenn du Hilfe brauchst, sag Bescheid!\nBis Samstag,\nLucas'}
 ]}],
 resumen:`<h3>Dativo (Wem?)</h3><table><tr><td>masc./neutro</td><td class="es-t">dem / einem / meinem – ihm</td></tr><tr><td>fem.</td><td class="es-t">der / einer / meiner – ihr</td></tr><tr><td>plural</td><td class="es-t">den / meinen …-n – ihnen</td></tr></table>
 <p class="es-t">Ich schenke meiner Mutter einen Schal. · mir, dir, ihm, ihr, uns, euch, ihnen, Ihnen</p>

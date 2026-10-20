@@ -47,5 +47,9 @@ function conjugate(inf){var v=String(inf||'').trim().toLowerCase(),refl=false;
   return r;}
 /* Textbausteine der Hinweise – die Engine übersetzt sie einzeln (ui_tr.js) */
 var WHY_PARTS=['unregelmäßig – auswendig lernen','regelmäßig auf -','Stammwechsel ','(nicht bei nosotros/vosotros)','1. Person auf -zco (sonst regelmäßig)','y vor o/e','g → j vor o','c → z vor o','sonst regelmäßig','Akzent auf ','(außer nosotros/vosotros)','reflexiv: ','wie '];
-defineLang('es',{conjugate:conjugate,whyParts:WHY_PARTS,infinitive:/^[a-záéíóúñü]+(ar|er|ir|ír)(se)?$/});
+/* Antwortprüfung (LANG.norm, wirkt auf Eingabe UND Lösung): Imperfecto de subjuntivo auf -se gilt wie auf -ra (tuviese = tuviera, fuésemos = fuéramos).
+   Nur Endungen echter Formen: -ara/-iera/-yera/-jera/fuera (+ s, n, mos, is); „para, ahora, cara …“ und „era“ bleiben unberührt. */
+const RA_KEEP=/^(para|paras|ahora|cara|caras|clara|claras|rara|raras|vara|mira|tiara|cámara|cámaras|lámpara|lámparas|cualquiera|quienquiera|siquiera|fiera|fieras|sara|clara|lara|zara)$/;
+function subjSe(s){const E='(?=[^a-záéíóúñü]*$)';return s.split(' ').map(w=>RA_KEEP.test(w.replace(/[^a-záéíóúñü]/g,''))?w:w.replace(new RegExp('(a|ie|ye|je|fue)ra(s|n)?'+E),'$1se$2').replace(new RegExp('(a|á|ie|ié|ye|yé|je|jé|fue|fué)ramos'+E),'$1semos').replace(new RegExp('(a|ie|ye|je|fue)rais'+E),'$1seis')).join(' ');}
+defineLang('es',{conjugate:conjugate,whyParts:WHY_PARTS,infinitive:/^[a-záéíóúñü]+(ar|er|ir|ír)(se)?$/,norm:subjSe});
 })();

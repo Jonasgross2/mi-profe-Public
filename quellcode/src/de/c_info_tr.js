@@ -349,7 +349,7 @@ window.INFO_TR=Object.assign(window.INFO_TR||{},{
 "Kannst du mir helfen?": "Você pode me ajudar?",
 "Das Buch gehört ihm.": "O livro é dele.",
 "Wir gratulieren dir!": "Parabéns para você!",
-"Ich koche brasilianisch, wenn Freunde zu Besuch kommen.": "Cozinho comida brasileira quando os amigos vêm me visitar.",
+"Ich koche Gerichte aus Brasilien, wenn Freunde zu Besuch kommen.": "Cozinho pratos do Brasil quando os amigos vêm me visitar.",
 "Wenn du Zeit hast, kannst du mir helfen.": "Se você tiver tempo, pode me ajudar.",
 "von … bis … · seit 2023 · ab 1. März · nach dem Studium · vor der Ausbildung · während des Studiums": "de … até … · desde 2023 · a partir de 1º de março · depois da faculdade · antes da formação · durante a faculdade",
 "Können Sie mir sagen, wann die Arbeit beginnt?": "O senhor pode me dizer quando começa o trabalho?",
