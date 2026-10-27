@@ -523,7 +523,15 @@ const r3ready=k=>rnd(k)>=2&&!(S.lessons[k].d2&&S.lessons[k].d2>=today());
 const shortLesson=l=>l.steps.filter(s=>['gap','tr','conj','order','listen'].includes(s.t)).length+l.steps.filter(s=>s.t==='vocab').length<3;
 function setRound(k,n,score){const p=S.lessons[k]||{};S.lessons[k]=Object.assign(p,{done:true,r:Math.max(rnd(k),n),best:Math.max(p.best||0,score||0),date:today()});if(n===2)S.lessons[k].d2=today();save();}
 function lessonPct(u){if(S.checks[u.id]?.pass)return 1;/* Abschlusstest bestanden = Unidad gemeistert */const L=(u.lessons||[]).filter(l=>!l.ab);if(!L.length)return 0;return L.reduce((a,l)=>a+Math.min(3,rnd(u.id+'.'+l.id)),0)/(3*L.length);}
-function unitStatus(u){const p=S.placement?.results?.[u.id];if(p==null)return null;return p>=0.8?'sicher':p>=0.5?T('auffrischen'):T('neu');}
+/* Einstufung roh ('sicher' | 'auf' | 'neu'): sitzt → nur Abschlusstest; auffrischen → je Lektion nur „Lernen“ (Üben/Festigen erst unter 90 %) */
+function placeSt(u){const p=S.placement?.results?.[u.id];return p==null?null:p>=0.8?'sicher':p>=0.5?'auf':'neu';}
+function unitStatus(u){const p=placeSt(u);return p==null?null:p==='sicher'?'sicher':p==='auf'?T('auffrischen'):T('neu');}
+/* per Einstufung gemeisterte Unidad: alle Wörter als „schon bekannt“ in den Trainer, verteilt auf die nächsten Wochen (höchstens 8 solcher Karten pro Tag) */
+function seedKnown(u){const td=today();const cnt={};for(const c of srsCards())if(c.known)cnt[c.due]=(cnt[c.due]||0)+1;let n=0;
+  for(const[es,de,em]of shuffle(allUnitWords(u).filter(x=>cleanWord(x[0])))){const k=vkey(es);if(S.srs[k])continue;
+    let d=3;while((cnt[addDays(td,d)]||0)>=8)d++;const due=addDays(td,d);cnt[due]=(cnt[due]||0)+1;
+    S.srs[k]={es,de:VOC_DE[es]!=null?VOC_DE[es]:de,unit:u.id,box:d>=21?5:d>=7?3:1,ease:2.5,ivl:d,reps:1,due,t:Date.now(),known:1};if(em)S.srs[k].em=em;n++;}
+  if(S.checks[u.id])S.checks[u.id].seeded=1;save();return n;}
 /* Kachel-Menüs (jede Kachel öffnet eine eigene Seite) */
 const mtile=(ic,t,d,fn,badge)=>h('button',{class:'mtile',onclick:fn},h('span',{class:'mi2'},ic),h('span',{class:'mt'},t),d?h('span',{class:'md'},d):null,badge?h('span',{class:'mb'},badge):null);
 const tiles=(...k)=>h('div',{class:'mtiles'},...k);
@@ -575,8 +583,8 @@ const picEl=(es,em,cls)=>{const p=pic(es,em);return p?h('span',{class:cls||'pic'
    damit man nie an den Anfang zurückgeschickt wird. Wer neu anfängt, merkt davon nichts (frontier = 0). */
 function nextIn(units,behind){for(const u of units){if(u.status==='soon')continue;const passed=!!S.checks[u.id]?.pass;
   const L=u.lessons.filter(l=>!l.ab);const K=l=>u.id+'.'+l.id;
-  if(passed){if(behind)for(const l of L)if(rnd(K(l))<1)return{u,l,n:1};continue;}
-  if(S.placement&&unitStatus(u)==='sicher'&&lessonPct(u)<1&&!S.checks[u.id])return{u,check:true};
+  if(passed){if(behind&&placeSt(u)!=='sicher')for(const l of L)if(rnd(K(l))<1)return{u,l,n:1};continue;}
+  if(S.placement&&placeSt(u)==='sicher'&&lessonPct(u)<1&&!S.checks[u.id])return{u,check:true};
   for(const l of L){const r=rnd(K(l));if(r<1)return{u,l,n:1};if(r<2)return{u,l,n:2};}
   for(const l of L)if(rnd(K(l))<3&&r3ready(K(l)))return{u,l,n:3};
   if(L.every(l=>rnd(K(l))>=3)&&!passed)return{u,test:true};}
@@ -584,7 +592,7 @@ function nextIn(units,behind){for(const u of units){if(u.status==='soon')continu
 function frontier(){let f=0;COURSE.units.forEach((u,i)=>{if(S.checks[u.id]||u.lessons.some(l=>!l.ab&&rnd(u.id+'.'+l.id)>=1))f=i;});return f;}
 function nextLesson(){return nextIn(COURSE.units.slice(frontier()),false);}
 function catchUp(){const B=COURSE.units.slice(0,frontier());const nx=nextIn(B,true);if(!nx)return null;
-  let n=0;B.forEach(u=>{if(u.status==='soon')return;const passed=!!S.checks[u.id]?.pass;u.lessons.filter(l=>!l.ab).forEach(l=>{const r=rnd(u.id+'.'+l.id);if(passed?r<1:r<3)n++;});});
+  let n=0;B.forEach(u=>{if(u.status==='soon')return;const passed=!!S.checks[u.id]?.pass;if(passed&&placeSt(u)==='sicher')return;u.lessons.filter(l=>!l.ab).forEach(l=>{const r=rnd(u.id+'.'+l.id);if(passed?r<1:r<3)n++;});});
   return Object.assign(nx,{count:Math.max(1,n),ids:new Set(B.map(u=>u.id))});}
 const nxTitle=nx=>nx.check?''+UW+' '+nx.u.n+T(' · Abschlusstest'):nx.test?''+UW+' '+nx.u.n+T(' · Abschlusstest'):''+UW+' '+nx.u.n+' · '+nx.l.title+(nx.n>1?' · '+RN[nx.n]:'');
 const nxDesc=nx=>nx.check?T('Laut Test sitzt ')+nx.u.title+T(' – mit bestandenem Abschlusstest ist das erledigt.'):nx.test?T('Alle Lektionen gefestigt – zeig im Abschlusstest, was du kannst (ab 80 % bestanden).'):nx.n===2?T('Runde 2 von 3: dieselben Inhalte, neu gemischt und mit Vokabelübungen.'):nx.n===3?T('Runde 3 von 3: nur selbst schreiben & hören – mit einem Tag Abstand.'):nx.l.desc;
@@ -900,7 +908,7 @@ function vUnit(m,id,tab){const u=unitById(id);if(!u)return vUnits(m);
   if(tab==='ab'){m.innerHTML='';m.append(backTo(''+UW+' '+u.n,'unit/'+u.id),h('h1',{},T('Übungsblätter')),h('p',{class:'sub'},T('Deine Arbeitsblätter aus dem Kurs – freiwillig, zum Vertiefen.')),
     h('div',{class:'grid',style:'gap:8px'},AB.map(l=>{const r=S.lessons[u.id+'.'+l.id];return h('div',{class:'lesson'+(r?.done?' done':''),onclick:()=>go('lesson/'+u.id+'/'+l.id)},h('div',{class:'ic'},r?.done?'✓':'📎'),
       h('div',{style:'flex:1'},h('div',{class:'lt'},l.title),h('div',{class:'ld'},l.desc)),r?.done?h('span',{class:'pill ok'},Math.round(r.best*100)+'%'):null);})));return;}
-  if(st&&!ck?.pass)m.append(h('p',{class:'muted small',style:'margin:12px 0 0'},T('Einstufung: ')+(st==='sicher'?T('sitzt – mach direkt den Abschlusstest.'):st===T('auffrischen')?T('auffrischen – Erklärungen kannst du überfliegen.'):T('neu lernen – nimm dir Zeit.'))));
+  if(st&&!ck?.pass)m.append(h('p',{class:'muted small',style:'margin:12px 0 0'},T('Einstufung: ')+(st==='sicher'?T('sitzt – mach direkt den Abschlusstest. Bestanden heißt: Lektionen erledigt, die Wörter kommen als „schon bekannt“ in den Trainer.'):st===T('auffrischen')?T('auffrischen – je Lektion reicht „Lernen“. Üben und Festigen kommen nur unter 90 % dazu, danach der Abschlusstest.'):T('neu lernen – nimm dir Zeit.'))));
   const L=h('div',{class:'grid',style:'gap:8px;margin-top:12px'});
   /* Zwischenüberschriften, wenn es mehrere Arten gibt: Lektionen · Wortschatz (lx/ly/lw) · Prüfungstraining (lz) */
   const kindOf=l=>l.id==='lz'?'z':/^l[vxyw]$/.test(l.id)?'w':'l';const KN={l:T('Lektionen'),w:T('Wortschatz'),z:T('Prüfungstraining')};
@@ -1007,18 +1015,22 @@ function vCheck(m,id){const u=unitById(id);if(!u)return vUnits(m);
     return shuffle(c.filter(x=>PROD.includes(x.s.t))).concat(shuffle(c.filter(x=>x.s.t==='mc')));});
   const steps=per.map(a=>a[0]).filter(Boolean);for(const a of per)if(steps.length<11&&a[1])steps.push(a[1]);for(const a of per)if(steps.length<11&&a[2])steps.push(a[2]);
   const words=shuffle(u.lessons.filter(l=>!l.ab).flatMap(lessonWords)).slice(0,4);
-  const res={};let weak=[],score=0,pass=false;
+  const res={};let weak=[],score=0,pass=false,seeded=0;const viaPl=placeSt(u)==='sicher';
   play(m,{title:T('Abschlusstest · ')+UW+' '+u.n+' · '+u.title,steps:shuffle(steps.concat(words.map(w=>vocabItem(u,w,'tr')))),unit:u,noRetry:true,onBack:()=>goBack('unit/'+u.id),
     onAnswer:(it,st)=>{if(it.lid)res[it.lid]=(res[it.lid]??true)&&st!=='bad';},
     onDone:(r)=>{score=r.score;pass=score>=0.8;weak=[];
-      for(const l of u.lessons){if(l.ab)continue;const k=u.id+'.'+l.id;if(res[l.id]===false){weak.push(l);if(!pass&&rnd(k)>=3){S.lessons[k].r=2;S.lessons[k].d2=today();}}else if(pass)setRound(k,3,1);}
+      for(const l of u.lessons){if(l.ab)continue;const k=u.id+'.'+l.id;if(res[l.id]===false){weak.push(l);if(!pass&&rnd(k)>=3){S.lessons[k].r=2;S.lessons[k].d2=today();}else if(pass&&viaPl)setRound(k,3,0);}else if(pass)setRound(k,3,1);}
       const prev=S.checks[u.id];S.checks[u.id]={date:today(),score,pass:pass||!!prev?.pass};save();
+      /* laut Einstufung „sitzt“ + bestanden: Lektionen gelten als erledigt, Wörter kommen als bekannt in den Trainer */
+      if(pass&&viaPl)seeded=seedKnown(u);
       if(weak.length)return{label:T('Lektion „')+weak[0].title+T('“ üben →'),fn:()=>go((rnd(u.id+'.'+weak[0].id)>=1?'round/':'lesson/')+u.id+'/'+weak[0].id+(rnd(u.id+'.'+weak[0].id)>=1?'/2':''))};
       const st=pass&&STORIES.find(x=>x.after===u.id&&!S.stories?.[x.id]);if(st)return{label:T('Belohnung: Geschichte „')+st.title+'“ →',fn:()=>go('story/'+st.id)};
       return{label:T('Weiter →'),fn:()=>go('home')};},
     extraEnd:()=>h('div',{class:'fb '+(pass?'ok':'warn'),style:'text-align:left'},
       h('b',{class:'h'},pass?T('Bestanden – ')+UW+' '+u.n+T(' gemeistert 🏆'):T('Noch nicht bestanden (ab 80 %)')),
       weak.length?h('div',{},(pass?T('Trotzdem noch mal anschauen: '):T('Hier hakt es noch: '))+weak.map(l=>l.title).join(' · ')):null,
+      seeded?h('div',{class:'small',style:'margin-top:4px'},'🗂️ '+seeded+T(' Wörter sind als „schon bekannt“ im Vokabeltrainer – sie kommen verteilt über die nächsten Wochen zur Wiederholung.')):null,
+      !pass&&viaPl?h('div',{class:'small muted',style:'margin-top:4px'},T('Kein Problem – mach die Lektionen einfach ganz normal.')):
       !pass?h('div',{class:'small muted',style:'margin-top:4px'},T('Mach bei diesen Lektionen die Runden „Üben“ und „Festigen“ und versuch es dann noch mal.')):null)});}
 
 /* ---------- lesson player ---------- */
@@ -1034,10 +1046,11 @@ function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.i
   play(m,{title:''+UW+' '+u.n+' · '+l.title,steps,unit:u,pk:'lesson/'+uid+'/'+lid,onBack:()=>goBack('unit/'+uid),
     onDone:(res)=>{const k=uid+'.'+lid;if(l.ab){const prev=S.lessons[k];S.lessons[k]={done:true,best:Math.max(prev?.best||0,res.score),date:today()};if(l.freq)S.lessons[k].freqL=1;save();return{label:UW+' '+u.n+' →',fn:()=>go('unit/'+uid)};}
       const was=rnd(k);setRound(k,1,res.score);
-      if(was<2&&(res.score>=0.9||shortLesson(l))){setRound(k,shortLesson(l)?3:2,res.score);}
+      /* über 90 %: „Üben“ fällt weg; bei Einstufung „auffrischen“ auch „Festigen“ */
+      if(was<2&&(res.score>=0.9||shortLesson(l))){setRound(k,shortLesson(l)||placeSt(u)==='auf'?3:2,res.score);}
       const nx=nextLesson();const r=rnd(k);
       return r>=2?(nx?{label:T('Weiter: ')+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:UW+' '+u.n+' →',fn:()=>go('unit/'+uid)}):{label:T('Runde 2: Üben →'),fn:()=>go('round/'+uid+'/'+lid+'/2')};},
-    extraEnd:(res)=>{const r=rnd(uid+'.'+lid);return l.ab?null:shortLesson(l)?h('div',{class:'fb ok'},T('Diese Lektion braucht keine Extra-Runden – erledigt ✓')):res.score>=0.9&&r===2&&S.lessons[uid+'.'+lid].d2===today()?h('div',{class:'fb ok'},T('Stark! Über 90 % – „Üben“ überspringst du. „Festigen“ wird morgen frei.')):null;}});}
+    extraEnd:(res)=>{const r=rnd(uid+'.'+lid);return l.ab?null:shortLesson(l)?h('div',{class:'fb ok'},T('Diese Lektion braucht keine Extra-Runden – erledigt ✓')):res.score>=0.9&&r>=3&&placeSt(u)==='auf'?h('div',{class:'fb ok'},T('Über 90 % – sitzt! Üben und Festigen fallen weg ✓')):res.score>=0.9&&r===2&&S.lessons[uid+'.'+lid].d2===today()?h('div',{class:'fb ok'},T('Stark! Über 90 % – „Üben“ überspringst du. „Festigen“ wird morgen frei.')):null;}});}
 function roundSteps(u,l,n){const G=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+i}));const words=shuffle(lessonWords(l));
   if(n===2){const ex=shuffle(G.filter(x=>['mc','gap','tr','conj','order','match','listen'].includes(x.s.t))).slice(0,8);
     return shuffle(ex.concat(words.slice(0,6).map((w,i)=>vocabItem(u,w,['mc','tr','listen'][i%3]))));}
@@ -1223,16 +1236,32 @@ function trHint(your,s){const answers=[].concat(s.a).flatMap(a=>a.split('|'));
 /* Vorleser für längere Texte: Satz für Satz, Pause/Weiter an derselben Stelle, Langsam ab der aktuellen Stelle, Zurücksetzen */
 let READING=false; /* Vorleser läuft → angetippte Wörter nur übersetzen, nicht vorlesen (sonst bricht das Vorlesen ab) */
 function reader(text){const sent=(String(text).replace(/\s+/g,' ').match(/[^.!?…]+(?:[.!?…]+[»"”]?)?/g)||[String(text)]).map(x=>x.trim()).filter(Boolean);
-  let i=0,playing=false,slow=false,tok=0;const info=h('span',{class:'muted small'},'');
-  const upd=()=>{pb.textContent=playing?T('⏸ Pause'):(i>0&&i<sent.length?T('▶ Weiter'):T('🔊 Vorlesen'));sb.classList.toggle('on',slow);info.textContent=i>0||playing?(Math.min(i+1,sent.length)+' / '+sent.length):'';};
-  const step=my=>{if(my!==tok||!playing)return;if(!document.body.contains(pb)){playing=READING=false;return;}if(i>=sent.length){playing=READING=false;i=0;upd();return;}upd();
-    const u=mkUtt(sent[i],slow?(IS_IOS?0.5:0.65):S.settings.rate);u.onend=()=>{if(my!==tok)return;i++;step(my);};speechSynthesis.speak(u);};
-  const start=()=>{if(!window.speechSynthesis)return toast(T('Sprachausgabe wird von diesem Browser nicht unterstützt'));unlockAudio();speechSynthesis.cancel();playing=READING=true;tok++;const my=tok;setTimeout(()=>step(my),60);};
+  /* „Am Stück“: alle Sätze kommen sofort in die Warteschlange (iOS feuert onend oft nicht → früher Hänger nach dem ersten Satz); onstart zeigt, wo wir sind.
+     „Satz für Satz“ (S.settings.readOne): jeder Tipp liest genau einen Satz, ↻ wiederholt ihn. */
+  let i=0,playing=false,slow=false,tok=0;const info=h('span',{class:'muted small'},'');const one=()=>!!S.settings.readOne,n=sent.length;
+  const rate=()=>slow?(IS_IOS?0.5:0.65):S.settings.rate;
+  const upd=()=>{if(one()){pb.textContent=i>0&&i<n?T('Nächster Satz →'):T('🔊 Satz 1');rb.textContent='↻';rb.title=T('Satz wiederholen');}
+    else{pb.textContent=playing?T('⏸ Pause'):(i>0&&i<n?T('▶ Weiter'):T('🔊 Vorlesen'));rb.textContent='⏮';rb.title=T('Von vorn');}
+    ma.classList.toggle('on',!one());mo.classList.toggle('on',one());sb.classList.toggle('on',slow);
+    info.textContent=one()?(i>0?Math.min(i,n)+' / '+n:''):(i>0||playing?(Math.min(i+1,n)+' / '+n):'');};
+  const done=()=>{playing=READING=false;i=0;upd();};
+  const start=()=>{if(!window.speechSynthesis)return toast(T('Sprachausgabe wird von diesem Browser nicht unterstützt'));unlockAudio();speechSynthesis.cancel();playing=READING=true;tok++;const my=tok;
+    if(i>=n)i=0;const from=i;upd();
+    setTimeout(()=>{if(my!==tok)return;window.__rdq=[];/* Referenzen halten, sonst räumt Safari die Sätze weg */
+      for(let j=from;j<n;j++){const u=mkUtt(sent[j],rate());u.onstart=()=>{if(my===tok){i=j;upd();}};u.onend=()=>{if(my===tok&&j===n-1)done();};window.__rdq.push(u);speechSynthesis.speak(u);}
+      /* Wächter: falls auch das letzte onend ausbleibt */
+      const w=setInterval(()=>{if(my!==tok||!document.body.contains(pb)){clearInterval(w);if(my===tok)playing=READING=false;return;}
+        if(!speechSynthesis.speaking&&!speechSynthesis.pending){clearInterval(w);done();}},700);},60);};
   const stop=()=>{playing=READING=false;tok++;speechSynthesis.cancel();upd();};
-  const pb=h('button',{class:'btn small',onclick:()=>playing?stop():start()});
+  const sayOne=j=>{if(!window.speechSynthesis)return toast(T('Sprachausgabe wird von diesem Browser nicht unterstützt'));unlockAudio();speechSynthesis.cancel();tok++;const my=tok;READING=true;
+    setTimeout(()=>{if(my!==tok)return;const u=mkUtt(sent[j],rate());u.onend=()=>{if(my===tok)READING=false;};window.__rdq=[u];speechSynthesis.speak(u);},60);};
+  const pb=h('button',{class:'btn small',onclick:()=>{if(!one())return playing?stop():start();if(i>=n)i=0;sayOne(i);i++;upd();}});
   const sb=h('button',{class:'btn small tog',onclick:()=>{slow=!slow;if(playing)start();else upd();}},T('🐢 Langsam'));
-  const rb=h('button',{class:'btn small',title:T('Von vorn'),onclick:()=>{const was=playing;stop();i=0;if(was)start();else upd();}},'⏮');
-  upd();return[pb,sb,rb,info];}
+  const rb=h('button',{class:'btn small',onclick:()=>{if(one()){sayOne(Math.max(0,i-1));if(!i)i=1;upd();return;}const was=playing;stop();i=0;if(was)start();else upd();}});
+  const setOne=v=>{if(v===one())return;stop();i=0;S.settings.readOne=v;save();upd();};
+  const ma=h('button',{class:'btn small tog',onclick:()=>setOne(false)},T('Am Stück')),mo=h('button',{class:'btn small tog',onclick:()=>setOne(true)},T('Satz für Satz'));
+  const mb=h('div',{class:'row',style:'flex-basis:100%;gap:6px'},ma,mo);
+  upd();return[pb,sb,rb,info,mb];}
 const RENDER={
 info(el,s,ctx){const box=h('div',{class:'info',html:s.html});const tb=trToggle(box);
   el.append(kind(s.kind||T('Erklärung')),h('div',{class:'row',style:'justify-content:space-between;flex-wrap:nowrap;align-items:flex-start'},h('h2',{style:'margin-top:0'},s.title),tb),box);
@@ -1319,14 +1348,21 @@ read(el,s,ctx){const plain=s.text.replace(/\{([^|}]+)\|[^}]+\}/g,'$1');
   const html=esc(s.text).replace(/\{([^|}]+)\|([^}]+)\}/g,(m,w,t)=>'<span class="gl" data-t="'+t+'">'+w+'</span>').replace(/\n\n/g,'</p><p>');
   const tr=h('div',{class:'fb ai hide',style:'margin-top:12px'},h('b',{class:'h'},T('Übersetzung')),h('div',{html:esc(s.de||'').replace(/\n\n/g,'<br><br>')}));
   const pop=h('div',{class:'glpop hide'});
-  if(s.hideText){el.append(kind(s.kind||T('Hören')),h('h2',{style:'margin-top:0'},s.title),s.intro?h('p',{class:'muted'},s.intro):null,
-      h('div',{class:'row',style:'margin-bottom:10px'},...reader(plain)),h('div',{class:'card reading hidetext'},h('div',{style:'font-size:40px'},'🎧'),h('div',{class:'muted'},T('Text versteckt – erst nur zuhören.'))));
+  const trb=()=>s.de?h('button',{class:'btn small ghost',onclick:()=>tr.classList.toggle('hide')},T('Übersetzung')):null;
+  const body=()=>[h('div',{class:'card reading es-t',html:'<p>'+html+'</p>'}),h('p',{class:'muted small'},T('Tipp: Tippe auf unterstrichene Wörter für die Bedeutung. Lies erst ohne Übersetzung – du verstehst mehr, als du denkst.')),tr,pop];
+  const wire=()=>el.querySelectorAll('.gl').forEach(g=>g.onclick=e=>{e.stopPropagation();pop.textContent=g.textContent+' = '+g.dataset.t;pop.classList.remove('hide');const r=g.getBoundingClientRect();pop.style.left=Math.max(8,r.left)+'px';pop.style.top=(r.bottom+6)+'px';if(!READING)say(g.textContent);});
+  if(s.hideText){const row=h('div',{class:'row',style:'margin-bottom:10px'},...reader(plain));
+    /* Text erst versteckt – auf Wunsch einblenden (zum Mitlesen oder Nachschauen) */
+    const hid=h('div',{class:'card reading hidetext'},h('div',{style:'font-size:40px'},'🎧'),h('div',{class:'muted'},T('Text versteckt – erst nur zuhören.')),
+      h('button',{class:'btn small',style:'margin-top:10px',onclick:()=>{hid.replaceWith(...body());const b=trb();if(b)row.lastChild.append(b);wire();}},T('📄 Text anzeigen')));
+    el.append(kind(s.kind||T('Hören')),h('h2',{style:'margin-top:0'},s.title),s.intro?h('p',{class:'muted'},s.intro):null,row,hid);
+    if(!window.__glh){window.__glh=1;document.addEventListener('click',()=>document.querySelectorAll('.glpop').forEach(p=>p.classList.add('hide')));}
     el.append(actionBar(()=>{speechSynthesis.cancel();ctx.next();return false;},ctx,{label:T('Weiter zu den Fragen →')}));return;}
+  /* Übersetzung kommt in die zweite Zeile zu „Am Stück | Satz für Satz“ */
+  const rd=reader(plain),tb=trb();if(tb)rd[rd.length-1].append(tb);
   el.append(kind(s.kind||T('Lesen & Hören')),h('h2',{style:'margin-top:0'},s.title),s.intro?h('p',{class:'muted'},s.intro):null,
-    h('div',{class:'row',style:'margin-bottom:10px'},...reader(plain),
-      s.de?h('button',{class:'btn small ghost',onclick:()=>tr.classList.toggle('hide')},T('Übersetzung')):null),
-    h('div',{class:'card reading es-t',html:'<p>'+html+'</p>'}),h('p',{class:'muted small'},T('Tipp: Tippe auf unterstrichene Wörter für die Bedeutung. Lies erst ohne Übersetzung – du verstehst mehr, als du denkst.')),tr,pop);
-  el.querySelectorAll('.gl').forEach(g=>g.onclick=e=>{e.stopPropagation();pop.textContent=g.textContent+' = '+g.dataset.t;pop.classList.remove('hide');const r=g.getBoundingClientRect();pop.style.left=Math.max(8,r.left)+'px';pop.style.top=(r.bottom+6)+'px';if(!READING)say(g.textContent);});
+    h('div',{class:'row',style:'margin-bottom:10px'},...rd),...body());
+  wire();
   if(!window.__glh){window.__glh=1;document.addEventListener('click',()=>document.querySelectorAll('.glpop').forEach(p=>p.classList.add('hide')));}
   el.append(actionBar(()=>{speechSynthesis.cancel();ctx.next();return false;},ctx,{label:T('Weiter zu den Fragen →')}));},
 listen(el,s,ctx){el.append(kind(T('Hören & schreiben')),h('p',{class:'q'},s.task||T('Hör zu und schreib, was du hörst.')));
@@ -2118,7 +2154,9 @@ window.__sync={schedule(){if(!syncOn())return;clearTimeout(syncTimer);syncTimer=
 window.addEventListener('focus',()=>{if(syncOn())syncNow();});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&syncOn()){clearTimeout(syncTimer);syncNow({quiet:true});}});
 
-window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,numItems};
+window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,numItems,nextLesson,catchUp,seedKnown};
+/* einmalig nachholen: per Einstufung gemeisterte Unidades von vor diesem Update bekommen ihre Wörter auch */
+setTimeout(()=>{for(const u of COURSE.units){const c=S.checks[u.id];if(c?.pass&&!c.seeded&&placeSt(u)==='sicher')seedKnown(u);}},0);
 /* Barrierefreiheit (alle Kurse, ohne jede Ansicht einzeln anzufassen): neue Elemente bekommen Namen für VoiceOver/Screenreader –
    Knöpfe nur mit Symbol (✕, 🔊, ⚑, ⏮, Flaggen …) den title bzw. eine Bezeichnung, Eingabefelder ohne Beschriftung den Platzhalter
    (Lücken „Lücke n“), Leisten aria-current; Fenster (.overlay) sind Dialoge, Esc schließt sie wie ein Tipp daneben. */
