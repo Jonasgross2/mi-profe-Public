@@ -64,6 +64,10 @@ Live: https://jonasgross2.github.io/mi-profe-Public/Spanisch-App-Web/ (GitHub Pa
 - Fortschritt liegt im Browser (localStorage, Key `espanol-lehrer-v1`) und wird optional per GitHub-Gist synchronisiert – Datenformat abwärtskompatibel halten.
 - KI: optionaler Gemini-Free-Tier-Key des Nutzers, nur im Browser gespeichert. Keine Keys ins Repo.
 - Sprache der Oberfläche: Deutsch; Erklärungen auf A1/A2-Niveau.
+- Regeln für Aufgaben (alle Kurse, aus Jonas' Fehlermeldungen):
+  - Hängt die Antwort davon ab, **wer spricht** (encantado/-a, Person des Verbs …), müssen die Sprecher in der Aufgabe stehen (`task` mit der Situation + „Tú: … – Laia: …“). Die lernende Person selbst regelt die Engine über `LANG.gender`.
+  - Jede Aufgabe muss **ohne vorherige Schritte** lösbar sein (Abschlusstest, Runden 2/3 und Fehlerheft mischen einzeln). Fragen zu einem Text nur direkt nach einem `read`-Schritt – die Engine (`textBound`) hält mc/Lücken nach `read` sowie Geschichten-/Lesetext-Fragen automatisch aus Test, Runden und Fehlerheft heraus. Hörfragen bringen ihren Text in `say` mit.
+  - Bei Fehlermeldungen immer alle Kurse per Skript nach derselben Fehlerart durchsuchen, nicht nur die gemeldete Stelle.
 
 ## Weitere Bereiche
 - Leiste (Mac & Handy gleich, 6 Punkte): Start, Kurs, Vokabeln, Bibliothek, Fehler, Mehr. Einstufungstest über die Kurs-Seite/Einstellungen.
