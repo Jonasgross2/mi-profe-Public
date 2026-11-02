@@ -597,7 +597,12 @@ function catchUp(){const B=COURSE.units.slice(0,frontier());const nx=nextIn(B,tr
 const nxTitle=nx=>nx.check?''+UW+' '+nx.u.n+T(' · Abschlusstest'):nx.test?''+UW+' '+nx.u.n+T(' · Abschlusstest'):''+UW+' '+nx.u.n+' · '+nx.l.title+(nx.n>1?' · '+RN[nx.n]:'');
 const nxDesc=nx=>nx.check?T('Laut Test sitzt ')+nx.u.title+T(' – mit bestandenem Abschlusstest ist das erledigt.'):nx.test?T('Alle Lektionen gefestigt – zeig im Abschlusstest, was du kannst (ab 80 % bestanden).'):nx.n===2?T('Runde 2 von 3: dieselben Inhalte, neu gemischt und mit Vokabelübungen.'):nx.n===3?T('Runde 3 von 3: nur selbst schreiben & hören – mit einem Tag Abstand.'):nx.l.desc;
 const nxRoute=nx=>nx.check||nx.test?'check/'+nx.u.id:nx.n>1?'round/'+nx.u.id+'/'+nx.l.id+'/'+nx.n:'lesson/'+nx.u.id+'/'+nx.l.id;
-function logMistake(ref,your){if(!ref)return;S.mistakes=S.mistakes.filter(m=>m.ref!==ref);S.mistakes.unshift({ref,your:String(your||'').slice(0,200),date:today()});S.mistakes=S.mistakes.slice(0,150);save();}
+/* Fragen zu einem Lesetext (mc/Lücke nach einem read-Schritt) sowie Geschichten-/Lesetext-Fragen ergeben ohne den Text keinen Sinn →
+   nicht im Abschlusstest, in Runde 2/3 oder im Fehlerheft */
+function textBound(ref){if(!ref)return false;if(/^[SR]\|/.test(ref))return true;if(/^[A-Z]\|/.test(ref))return false;
+  const[uid,lid,i]=ref.split('|');const l=unitById(uid)?.lessons.find(x=>x.id===lid);const s=l?.steps[+i];if(!s||!['mc','gap'].includes(s.t))return false;
+  const ri=l.steps.findIndex(x=>x.t==='read');return ri>=0&&+i>ri;}
+function logMistake(ref,your){if(!ref||textBound(ref))return;S.mistakes=S.mistakes.filter(m=>m.ref!==ref);S.mistakes.unshift({ref,your:String(your||'').slice(0,200),date:today()});S.mistakes=S.mistakes.slice(0,150);save();}
 /* Verständnisfrage einer Geschichte → Aufgabe (mc / richtig-falsch / Lücke) */
 function storyQ(q){if(q.t==='tf')return{t:'mc',kind:T('Richtig oder falsch?'),q:q.q,opts:['Verdadero','Falso'],a:q.a?0:1,keep:true};
   if(q.t==='gap')return{t:'gap',kind:T('Ergänze'),q:q.q,a:q.a};
@@ -1011,7 +1016,7 @@ function vWords(m,id){const u=unitById(id);const w=allUnitWords(u);
 /* ---------- Abschlusstest (statt ganzer Einheit) ---------- */
 function vCheck(m,id){const u=unitById(id);if(!u)return vUnits(m);
   const PROD=['gap','tr','conj','order','listen'];
-  const per=u.lessons.filter(l=>!l.ab).map(l=>{const c=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+i,lid:l.id})).filter(x=>PROD.concat('mc').includes(x.s.t));
+  const per=u.lessons.filter(l=>!l.ab).map(l=>{const c=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+i,lid:l.id})).filter(x=>PROD.concat('mc').includes(x.s.t)&&!textBound(x.ref));
     return shuffle(c.filter(x=>PROD.includes(x.s.t))).concat(shuffle(c.filter(x=>x.s.t==='mc')));});
   const steps=per.map(a=>a[0]).filter(Boolean);for(const a of per)if(steps.length<11&&a[1])steps.push(a[1]);for(const a of per)if(steps.length<11&&a[2])steps.push(a[2]);
   const words=shuffle(u.lessons.filter(l=>!l.ab).flatMap(lessonWords)).slice(0,4);
@@ -1051,7 +1056,7 @@ function vLesson(m,uid,lid){const u=unitById(uid);const l=u?.lessons.find(x=>x.i
       const nx=nextLesson();const r=rnd(k);
       return r>=2?(nx?{label:T('Weiter: ')+nxTitle(nx)+' →',fn:()=>go(nxRoute(nx))}:{label:UW+' '+u.n+' →',fn:()=>go('unit/'+uid)}):{label:T('Runde 2: Üben →'),fn:()=>go('round/'+uid+'/'+lid+'/2')};},
     extraEnd:(res)=>{const r=rnd(uid+'.'+lid);return l.ab?null:shortLesson(l)?h('div',{class:'fb ok'},T('Diese Lektion braucht keine Extra-Runden – erledigt ✓')):res.score>=0.9&&r>=3&&placeSt(u)==='auf'?h('div',{class:'fb ok'},T('Über 90 % – sitzt! Üben und Festigen fallen weg ✓')):res.score>=0.9&&r===2&&S.lessons[uid+'.'+lid].d2===today()?h('div',{class:'fb ok'},T('Stark! Über 90 % – „Üben“ überspringst du. „Festigen“ wird morgen frei.')):null;}});}
-function roundSteps(u,l,n){const G=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+i}));const words=shuffle(lessonWords(l));
+function roundSteps(u,l,n){const G=l.steps.map((s,i)=>({s,ref:u.id+'|'+l.id+'|'+i})).filter(x=>!textBound(x.ref));const words=shuffle(lessonWords(l));
   if(n===2){const ex=shuffle(G.filter(x=>['mc','gap','tr','conj','order','match','listen'].includes(x.s.t))).slice(0,8);
     return shuffle(ex.concat(words.slice(0,6).map((w,i)=>vocabItem(u,w,['mc','tr','listen'][i%3]))));}
   const ex=shuffle(G.filter(x=>['gap','tr','conj','order','listen'].includes(x.s.t))).slice(0,7);
@@ -1885,7 +1890,7 @@ function rightOf(s){const first=a=>String([].concat(a)[0]||'').split('|')[0];
   if(s.t==='tr')return first(s.a);if(s.t==='conj')return s.verb+': '+(s.forms||[]).join(', ');if(s.t==='order'||s.t==='listen')return s.es||'';
   if(s.t==='match')return(s.pairs||[]).map(p=>p[0]+' = '+p[1]).join(' · ');return '';}
 function vMistakes(m){m.append(h('h1',{},T('Fehlerheft')));
-  const list=S.mistakes.map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
+  const list=S.mistakes.filter(x=>!textBound(x.ref)).map(x=>({x,s:resolveRef(x.ref)})).filter(y=>y.s);
   /* direct = von woanders gestartet (Startseite) → Zurück dorthin, sonst zurück zum Fehlerheft */
   function goM(direct){m.innerHTML='';play(m,{title:T('Fehler üben'),mistakeMode:true,noRetry:false,pk:'mistakes',steps:shuffle(list).slice(0,20).map(y=>({s:y.s,ref:y.x.ref})),onBack:()=>direct?goBack('home'):go('mistakes'),onDone:()=>{markDay('mistakes');return{label:T('Zum Fehlerheft'),fn:()=>go('mistakes')};}});}
   if(RESUME==='mistakes'){RESUME=null;if(list.length)return goM(true);}
@@ -2154,9 +2159,9 @@ window.__sync={schedule(){if(!syncOn())return;clearTimeout(syncTimer);syncTimer=
 window.addEventListener('focus',()=>{if(syncOn())syncNow();});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&syncOn()){clearTimeout(syncTimer);syncNow({quiet:true});}});
 
-window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,numItems,nextLesson,catchUp,seedKnown};
+window.__app={S:()=>S,compare,route,mergeState,RENDER,resolveRef,numEs,horaEs,numItems,nextLesson,catchUp,seedKnown,textBound};
 /* einmalig nachholen: per Einstufung gemeisterte Unidades von vor diesem Update bekommen ihre Wörter auch */
-setTimeout(()=>{for(const u of COURSE.units){const c=S.checks[u.id];if(c?.pass&&!c.seeded&&placeSt(u)==='sicher')seedKnown(u);}},0);
+setTimeout(()=>{const nm=S.mistakes.filter(x=>!textBound(x.ref));if(nm.length!==S.mistakes.length){S.mistakes=nm;save();}for(const u of COURSE.units){const c=S.checks[u.id];if(c?.pass&&!c.seeded&&placeSt(u)==='sicher')seedKnown(u);}},0);
 /* Barrierefreiheit (alle Kurse, ohne jede Ansicht einzeln anzufassen): neue Elemente bekommen Namen für VoiceOver/Screenreader –
    Knöpfe nur mit Symbol (✕, 🔊, ⚑, ⏮, Flaggen …) den title bzw. eine Bezeichnung, Eingabefelder ohne Beschriftung den Platzhalter
    (Lücken „Lücke n“), Leisten aria-current; Fenster (.overlay) sind Dialoge, Esc schließt sie wie ein Tipp daneben. */
